@@ -1,5 +1,6 @@
 package drawing;
 
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -23,6 +24,14 @@ import utilities.utility;
 // The actual canvas the game is drawn on.
 public class gameCanvas extends JComponent {
 	
+	////////////////////
+	///// DEFAULTS /////
+	////////////////////
+	private String DEFAULT_GAME_NAME = "Game";
+	
+	//////////////////
+	///// FIELDS /////
+	//////////////////
 	// The game canvas. Only one.
 	private static gameCanvas gameCanvas;
 	
@@ -65,13 +74,14 @@ public class gameCanvas extends JComponent {
 		this.addKeyListener(new KeyListener() {
 			@Override
 			public void keyPressed(KeyEvent k) {
-				player.getMainPlayer().keyPressed(k);
+				if(player.getCurrentPlayer()!=null) player.getCurrentPlayer().keyPressed(k);
 			}
 
 			@Override
 			public void keyReleased(KeyEvent k) {
-				player.getMainPlayer().keyReleased(k);
+				if(player.getCurrentPlayer()!=null) player.getCurrentPlayer().keyReleased(k);
 			}
+			
 
 			@Override
 			public void keyTyped(KeyEvent k) {
@@ -104,11 +114,12 @@ public class gameCanvas extends JComponent {
 		});
 		
 		// Create the actual game frame on the computer screen.
-		JFrame frame = new JFrame("Miserable");
+		JFrame frame = new JFrame(DEFAULT_GAME_NAME);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(getDefaultWidth(), getDefaultHeight());
 		frame.setContentPane(getGameCanvas());
 		frame.setVisible(true);
+		frame.setResizable(false);
 	}
 
 	// Paint the game canvas.
@@ -119,7 +130,14 @@ public class gameCanvas extends JComponent {
 		super.paintComponent(g2);
 
 		// Paint the background.
-		background.paintBackground(g2, this.getWidth(), this.getHeight());
+		background.paintBackground(g2, getDefaultWidth(), getDefaultHeight());
+		
+		// TODO: for testing, Draw a 250 length red line crosshair
+		/*g.setColor(Color.red);
+		g.drawLine(this.getDefaultHeight()/2, this.getDefaultHeight()/2, 0, this.getDefaultHeight()/2);
+		g.drawLine(this.getDefaultHeight()/2, this.getDefaultHeight()/2, this.getDefaultHeight()/2, 0);
+		g.drawLine(this.getDefaultHeight()/2, this.getDefaultHeight()/2, this.getDefaultHeight(), this.getDefaultHeight()/2);
+		g.drawLine(this.getDefaultHeight()/2, this.getDefaultHeight()/2, this.getDefaultHeight()/2, this.getDefaultHeight());*/
 
 		// Paint all drawable things.
 		drawnObject.drawObjects(g);

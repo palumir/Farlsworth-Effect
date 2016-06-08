@@ -1,0 +1,2 @@
+http://gaurav.munjal.us/Universal-LPC-Spritesheet-Character-Generator/#?sex=female&nose=button&eyes=green&body=tanned&legs=pants_magenta&clothes=sleeveless_maroon&hair=ponytail_brunette&=shoes_brown&belt=leather
+http://gaurav.munjal.us/Universal-LPC-Spritesheet-Character-Generator/#?sex=male&nose=button&eyes=green&body=tanned&legs=pants_magenta&clothes=longsleeve_maroon&hair=plain_brunette&=shoes_brown&belt=leather&weapon=none

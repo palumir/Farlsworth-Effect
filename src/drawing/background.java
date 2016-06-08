@@ -7,7 +7,7 @@ import java.util.Random;
 
 public class background {
 	// Defaults
-	private static Color defaultBackgroundColor = Color.GREEN;
+	private static Color defaultBackgroundColor = Color.BLACK;
 	
 	// Paint the background
 	public static void paintBackground(Graphics2D g2, int width, int height) {

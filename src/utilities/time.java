@@ -17,7 +17,7 @@ public class time extends utility {
 	static void initiate() {
 		// Set the start time so we can figure
 		// out what the current game time is.
-		startTime = getCurrentUnixTime();
+		if(startTime == 0l) startTime = getCurrentUnixTime();
 	}
 	
 	// Get the system Unix time.
@@ -37,12 +37,12 @@ public class time extends utility {
 	// Get the current game time in milliseconds.
 	public static Long getTime() {
 		Long currentTime = getCurrentUnixTime();
+		if(startTime == 0l) startTime = getCurrentUnixTime(); 
 		return currentTime - startTime;
 	}
 	
 	// Get the current game time in seconds.
 	public static Long getTimeInSeconds() {
-		Long currentTime = getCurrentUnixTime()/1000;
-		return currentTime - startTime/1000;
+		return getTime()*1000;
 	}
 }

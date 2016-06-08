@@ -19,6 +19,7 @@ public abstract class mode {
 	}
 
 	public static String getCurrentMode() {
+		if(currentMode==null) return "Error: No Current Mode";
 		return currentMode;
 	}
 

@@ -1,0 +1,14 @@
+Item upgrades
+- Items level 1, 2, 3.
+- Start at one, level to 3.
+- Pack-a-punch like mechanics. Upgrades are ridiculous
+(not sure if you need to find a shrine to upgrade weapons or something)
+(not sure if it will cost exp or if there will be a currency [upgrade stones?])
+
+Ally/Enemy bonuses
+- Once you beat a boss's encounter, you will get an ally bonus (+exp, +move speed, soemthing like that)
+or an enemy bonus if the boss is evil. 
+- Doesn't change progression of the game, 
+- Shit talking an evil boss makes him/her hate you.
+- Helping a friendly boss will make him/her like you.
+- Forces player to decide whether or not someone is good or evil and interact with them in that way.

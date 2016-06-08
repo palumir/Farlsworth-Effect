@@ -1,0 +1,28 @@
+-> Spawn in front of bridge/river
+-> Walk to farmer who has a quest
+-> Farmer asks you to retrieve wool from his prize beautiful sheep, Chris.
+-> Find chris in a pen, cornered, he refuses to give you his wool because he doesn't
+want to be a slave anymore
+-> Chris escapes pen, you chase him into forest
+-> wolves in forst
+-> see blood on ground + wool + wolf hair
+-> trace blood to find dead wolf chris win!
+-> trace wool into spider cave.
+-> Enter platformer mode in cave 
+
+(not sure of mechanics yet in the cave)
+
+-> Exit cave
+-> River with boat, see Chris enter a boat and travel down the river
+-> Enter river pursuit
+-> Get off at the bottom, find Chris cornered off, boss fight begins.
+
+(not sure boss fight mechanics)
+
+-> Get Chris's wool.
+-> Chris misguided, get a chance to speak to him to gain ally bonus.
+-> If fail or success, Chris still takes you on shortcut back to farm.
+-> Farmer tells you that damn sheep always makes him do a boss fight before you get his wool
+-> hahaha im so funny
+
+(not sure what happens next)
