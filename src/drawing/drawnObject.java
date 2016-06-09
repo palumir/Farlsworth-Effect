@@ -80,6 +80,22 @@ public abstract class drawnObject {
 		addObject(this);
 	}
 	
+	// Get units in box.
+	public static ArrayList<drawnObject> getObjectsInBox(int x1, int y1, int x2, int y2) {
+		ArrayList<drawnObject> returnList = new ArrayList<drawnObject>();
+		for(int i = 0; i < objects.size(); i++) {
+			drawnObject o = objects.get(i);
+			if(o.getX() < x2 && 
+					 o.getX() + o.width > x1 && 
+					 o.getY() < y2 && 
+					 o.getY() + o.height > y1) {
+				returnList.add(o);
+			}
+		}
+		if(returnList.size()==0) return null;
+		return returnList;
+	}
+	
 	// Every thing needs to update itself in some way.
 	public void update() {
 		// Do nothing for basic objects.
@@ -107,7 +123,11 @@ public abstract class drawnObject {
 				 d.drawX += - (d.getObjectSpriteSheet().getSpriteWidth()/2 - d.width/2) - d.getHitBoxAdjustmentX();
 				 d.drawY += - (d.getObjectSpriteSheet().getSpriteHeight()/2 - d.height/2) - d.getHitBoxAdjustmentY();
 				
-				// Draw the object.
+				// Draw the object if it's on the screen.
+				if(d.drawX + d.objectSpriteSheet.getSpriteWidth() > 0 && 
+				   d.drawY + d.objectSpriteSheet.getSpriteHeight() > 0 && 
+				   d.drawX < gameCanvas.getDefaultWidth() && 
+				   d.drawY < gameCanvas.getDefaultHeight())
 				d.drawObject(g);
 			}
 		}

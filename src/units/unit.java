@@ -2,6 +2,7 @@ package units;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.util.ArrayList;
 
 import drawing.camera;
 import drawing.drawnObject;
@@ -9,9 +10,11 @@ import drawing.sprites.animation;
 import drawing.sprites.animationPack;
 import drawing.sprites.spriteSheet;
 import modes.mode;
+import sounds.sound;
 import terrain.chunk;
 import terrain.doodads.general.questMark;
 import utilities.intTuple;
+import utilities.time;
 import utilities.utility;
 
 public abstract class unit extends drawnObject  { // shape for now sprite later
@@ -32,6 +35,18 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 	// Animation defaults.
 	private String DEFAULT_FACING_DIRECTION = "Down";
 	
+	// Combat defaults.
+	private int DEFAULT_HP = 10;
+	private int DEFAULT_ATTACK_DAMAGE = 1;
+	private float DEFAULT_BAT = 1f;
+	private float DEFAULT_ATTACK_TIME = 1.5f;
+	private int DEFAULT_ATTACK_RANGE = 0;
+	protected boolean showAttackRange = false;
+	
+	// Sounds
+	protected static int DEFAULT_ATTACK_SOUND_RADIUS = 1000;
+	protected static float DEFAULT_OUCH_VOLUME = 0.8f;
+	
 	///////////////
 	/// GLOBALS ///
 	///////////////
@@ -43,6 +58,22 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 	
 	// The actual unit type.
 	private unitType typeOfUnit;
+	
+	// Combat
+	private int healthPoints = DEFAULT_HP;
+	private int attackDamage = DEFAULT_ATTACK_DAMAGE;
+	private float baseAttackTime = DEFAULT_BAT;
+	private float attackTime = DEFAULT_ATTACK_TIME;
+	private int attackWidth = DEFAULT_ATTACK_RANGE;
+	private int attackLength = DEFAULT_ATTACK_RANGE;
+	private boolean attackable = false;
+	private boolean attacking = false;
+	private boolean alreadyAttacked = false;
+	private double startAttackTime = 0;
+	
+	// Combat sounds
+	protected sound attackSound = null;
+	protected sound getHitSound = new sound("sounds/effects/combat/splatter.wav");
 	
 	// Gravity
 	private float jumpSpeed = DEFAULT_JUMPSPEED;
@@ -75,7 +106,7 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 	// Constructor
 	public unit(unitType u, int newX, int newY) {
 		super(u.getUnitTypeSpriteSheet(), newX, newY, u.getWidth(), u.getHeight());	
-		animations = u.getAnimations();
+		setAnimations(u.getAnimations());
 		moveSpeed = u.getMoveSpeed();
 		jumpSpeed = u.getJumpSpeed();
 		typeOfUnit = u;
@@ -88,6 +119,7 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 		gravity();
 		jump();
 		moveUnit();
+		combat();
 		AI();
 	}
 	
@@ -109,6 +141,112 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 			}
 			
 			move(0,(int)fallSpeed);
+		}
+	}
+	
+	// Do combat mechanics.
+	public void combat() {
+		
+		// Attack if we are attacking.
+		if(attacking) {
+			// Do the attack if our BAT is over.
+			if(!alreadyAttacked && time.getTime() - startAttackTime > baseAttackTime*1000) {
+				int x1 = 0;
+				int x2 = 0;
+				int y1 = 0;
+				int y2 = 0;
+				
+				// Get the box we will attack in if facing left.
+				if(facingDirection == "Left") {
+					int heightMidPoint = getY() + height/2;
+					y1 = heightMidPoint - getAttackWidth()/2;
+					y2 = heightMidPoint + getAttackWidth()/2;
+					x1 = getX() - getAttackLength();
+					x2 = getX() + width;
+				}
+				
+				// Get the box we will attack in if facing right.
+				if(facingDirection == "Right") {
+					int heightMidPoint = getY() + height/2;
+					y1 = heightMidPoint - getAttackWidth()/2;
+					y2 = heightMidPoint + getAttackWidth()/2;
+					x1 = getX();
+					x2 = getX() + width + getAttackLength();
+				}
+				
+				// Get the box we will attack in facing up.
+				if(facingDirection == "Up") {
+					int widthMidPoint = getX() + width/2;
+					x1 = widthMidPoint - getAttackWidth()/2;
+					x2 = widthMidPoint + getAttackWidth()/2;
+					y1 = getY() - getAttackLength();
+					y2 = getY() + height;
+				}
+				
+				// Get the box we will attack in facing down.
+				if(facingDirection == "Down") {
+					int widthMidPoint = getX() + width/2;
+					x1 = widthMidPoint - getAttackWidth()/2;
+					x2 = widthMidPoint + getAttackWidth()/2;
+					y1 = getY();
+					y2 = getY() + height + getAttackLength();
+				}
+				attackUnits(getUnitsInBox(x1,y1,x2,y2));
+				alreadyAttacked = true;
+			}
+			if(time.getTime() - startAttackTime > getAttackTime()*1000) {
+				alreadyAttacked = false;
+				attacking = false;
+			}
+		}
+	}
+	
+	// Get units in box.
+	public static ArrayList<unit> getUnitsInBox(int x1, int y1, int x2, int y2) {
+		ArrayList<unit> returnList = new ArrayList<unit>();
+		ArrayList<drawnObject> d = drawnObject.getObjectsInBox(x1,y1,x2,y2);
+		if(d!=null) {
+			for(int i = 0; i < d.size(); i++) {
+				if(d.get(i) instanceof unit) returnList.add((unit) d.get(i));
+			}
+		}
+		return returnList;
+	}
+	
+	// Attack units
+	public void attackUnits(ArrayList<unit> unitsToAttack) {
+		if(unitsToAttack!=null) {
+			for(int i = 0; i < unitsToAttack.size(); i++) {
+				unit currentUnit = unitsToAttack.get(i);
+				
+				// Don't hit yourself.
+				if(this!=currentUnit) currentUnit.hurt(this.getAttackDamage());
+			}
+		}
+	}
+	
+	// Take damage. Ouch!
+	public void hurt(int damage) {
+		if(attackable) {
+			healthPoints -= damage;
+		}
+		getHitSound.playSound(getX(), getY(), DEFAULT_ATTACK_SOUND_RADIUS, DEFAULT_OUCH_VOLUME);
+		reactToPain();
+	}
+	
+	// React to pain.
+	public void reactToPain() {
+		// Does nothing for general units. Should be overridden.
+	}
+	
+	// Start attacking.
+	public void attack() {
+		if(!attacking) {
+			
+			// We are attacking of course.
+			if(attackSound != null) attackSound.playSound(getX(), getY(), DEFAULT_ATTACK_SOUND_RADIUS);
+			attacking = true;
+			startAttackTime = time.getTime();
 		}
 	}
 	
@@ -340,7 +478,11 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 		
 		// topDown mode movement animations.
 		if(mode.getCurrentMode() == "topDown") {
-			if(moveX != 0 || moveY != 0) {
+			if(attacking && !alreadyAttacked) {
+				// Play animation.
+				animate("attacking" + facingDirection);
+			}
+			else if(moveX != 0 || moveY != 0) {
 				animate("running" + getFacingDirection());
 			}
 			else {
@@ -365,10 +507,20 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 	
 	// Cause unit to perform an animation.
 	public void animate(String animationName) {
-		currentAnimation = animations.getAnimation(animationName);
+		animation a = getAnimations().getAnimation(animationName);
+		if(a != null) {
+			
+			// Reset the frame if it's a new animation.
+			if(currentAnimation != null && currentAnimation != a) {
+				currentAnimation.setCurrentSprite(0);
+			}
+			
+			// Set the animation.
+			currentAnimation = a;
+		}
 	}
 	
-	// Draw the unit. TODO: JUST DRAWS ONE SPRITE LOL
+	// Draw the unit. 
 	@Override
 	public void drawObject(Graphics g) {
 		// Of course only draw if the animation is not null.
@@ -406,6 +558,56 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 					   drawX,
 					   drawY);
 		}
+		
+		// Show attack range.
+		if(showAttackRange) {
+			int x1 = 0;
+			int x2 = 0;
+			int y1 = 0;
+			int y2 = 0;
+			
+			// Get the x and y of hitbox.
+			int hitBoxX = drawX - (- (getObjectSpriteSheet().getSpriteWidth()/2 - width/2) - getHitBoxAdjustmentX());
+			int hitBoxY = drawY - (- (getObjectSpriteSheet().getSpriteHeight()/2 - height/2) - getHitBoxAdjustmentY());
+			
+			// Get the box we will attack in if facing left.
+			if(facingDirection == "Left") {
+				int heightMidPoint = hitBoxY + height/2;
+				y1 = heightMidPoint - getAttackWidth()/2;
+				y2 = heightMidPoint + getAttackWidth()/2;
+				x1 = hitBoxX - getAttackLength();
+				x2 = hitBoxX + width;
+			}
+			
+			// Get the box we will attack in if facing right.
+			if(facingDirection == "Right") {
+				int heightMidPoint = hitBoxY + height/2;
+				y1 = heightMidPoint - getAttackWidth()/2;
+				y2 = heightMidPoint + getAttackWidth()/2;
+				x1 = hitBoxX;
+				x2 = hitBoxX + width + getAttackLength();
+			}
+			
+			// Get the box we will attack in facing up.
+			if(facingDirection == "Up") {
+				int widthMidPoint = hitBoxX + width/2;
+				x1 = widthMidPoint - getAttackWidth()/2;
+				x2 = widthMidPoint + getAttackWidth()/2;
+				y1 = hitBoxY - getAttackLength();
+				y2 = hitBoxY + height;
+			}
+			
+			// Get the box we will attack in facing down.
+			if(facingDirection == "Down") {
+				int widthMidPoint = hitBoxX + width/2;
+				x1 = widthMidPoint - getAttackWidth()/2;
+				x2 = widthMidPoint + getAttackWidth()/2;
+				y1 = hitBoxY;
+				y2 = hitBoxY + height + getAttackLength();
+			}
+			g.setColor(Color.blue);
+			g.drawRect(x1,y1,x2-x1,y2-y1);
+		}
 	}
 	
 	// Set a unit to have a quest.
@@ -438,6 +640,74 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 			if(r==3) facingDirection = "Left";
 		}
 		this.facingDirection = facingDirection;
+	}
+
+	public animationPack getAnimations() {
+		return animations;
+	}
+
+	public void setAnimations(animationPack animations) {
+		this.animations = animations;
+	}
+
+	public boolean isAttackable() {
+		return attackable;
+	}
+
+	public void setAttackable(boolean attackable) {
+		this.attackable = attackable;
+	}
+
+	public int getHealthPoints() {
+		return healthPoints;
+	}
+
+	public void setHealthPoints(int healthPoints) {
+		this.healthPoints = healthPoints;
+	}
+
+	public int getAttackDamage() {
+		return attackDamage;
+	}
+
+	public void setAttackDamage(int attackDamage) {
+		this.attackDamage = attackDamage;
+	}
+
+	public float getBaseAttackTime() {
+		return baseAttackTime;
+	}
+
+	public void setBaseAttackTime(float baseAttackTime) {
+		this.baseAttackTime = baseAttackTime;
+	}
+	
+	public void showAttackRange() {
+		showAttackRange = true;
+	}
+
+	public float getAttackTime() {
+		return attackTime;
+	}
+
+	public void setAttackTime(float attackTime) {
+		this.attackTime = attackTime;
+	}
+
+	public int getAttackWidth() {
+		return attackWidth;
+	}
+
+	public void setAttackWidth(int attackWidth) {
+		this.attackWidth = attackWidth;
+	}
+
+	public int getAttackLength() {
+		return attackLength;
+	}
+
+	public void setAttackLength(int attackLength) {
+		this.attackLength = attackLength;
 	}
 	
 }

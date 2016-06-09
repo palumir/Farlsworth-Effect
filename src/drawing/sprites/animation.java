@@ -25,8 +25,6 @@ public class animation {
 	
 	// Where are we in the animation?
 	private int currentSprite;
-	private boolean animationComplete = false;
-	private boolean repeatAnimation = false;
 	
 	///////////////
 	/// METHODS ///
@@ -45,32 +43,21 @@ public class animation {
 	}
 	
 	// Play animation.
-	public void playAnimation() {
+	public void playAnimation() { 
+			
+		// Advance animation if the correct amount of time has elapsed.
+		if(currentFrameTime == 0) currentFrameTime = time.getTime();
+		else if(time.getTime() - currentFrameTime >= timeToComplete*1000/(endFrame - startFrame + 1)) {
+			
+			// Advance the timer and the sprite.
+			currentFrameTime = time.getTime();
 		
-		// Only play if the animation isn't complete yet.
-		if(!animationComplete) {
-			
-			// Advance animation if the correct amount of time has elapsed.
-			if(currentFrameTime == 0) currentFrameTime = time.getTime();
-			else if(time.getTime() - currentFrameTime > timeToComplete*1000/(endFrame - startFrame + 1)) {
-				
-				// Advance the timer and the sprite.
-				currentFrameTime = time.getTime();
+			// Have we reached the end?
+			if(getCurrentSprite() + 1 > endFrame) {
+					setCurrentSprite(startFrame);
+			}
+			else {
 				setCurrentSprite(getCurrentSprite() + 1);
-			
-				// Have we reached the end?
-				if(getCurrentSprite() >= sprites.size() || getCurrentSprite() >= endFrame) {
-				
-					// Do we want to repeat?
-					if(doesRepeat()) {
-						setCurrentSprite(startFrame);
-					}
-				
-					// No? End it.
-					else {
-						animationComplete = true;
-					}
-				}
 			}
 		}
 	}
@@ -90,14 +77,6 @@ public class animation {
 		this.name = name;
 	}
 
-	public boolean doesRepeat() {
-		return repeatAnimation;
-	}
-
-	public void repeat(boolean repeatAnimation) {
-		this.repeatAnimation = repeatAnimation;
-	}
-
 	public int getCurrentSprite() {
 		return currentSprite;
 	}
@@ -105,5 +84,4 @@ public class animation {
 	public void setCurrentSprite(int currentSprite) {
 		this.currentSprite = currentSprite;
 	}
-	
 }

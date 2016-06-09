@@ -23,6 +23,6 @@ public class main {
 		utility.initiateAll();
 		
 		// Create the player.
-		player p = player.loadPlayer(null);
+		player p = player.loadPlayer(null,0,0,"Up");
 	}
 }

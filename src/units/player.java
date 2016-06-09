@@ -1,15 +1,19 @@
 package units;
 
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 
 import drawing.camera;
 import drawing.sprites.animation;
 import drawing.sprites.animationPack;
 import drawing.sprites.spriteSheet;
 import drawing.sprites.spriteSheet.spriteSheetInfo;
+import items.weapon;
+import items.weapons.dagger;
 import modes.mode;
 import modes.platformer;
 import modes.topDown;
+import sounds.sound;
 import utilities.saveState;
 import utilities.utility;
 import zones.zone;
@@ -33,13 +37,14 @@ public class player extends unit {
 	private static String DEFAULT_PLAYER_NAME = "IanRetard";
 	
 	// Default gender.
-	private static String DEFAULT_PLAYER_GENDER = "female";
+	public static String DEFAULT_PLAYER_GENDER = "female";
 	
 	// Default zone.
 	private static zone DEFAULT_ZONE = null;
 	
-	// Default movespeed.
+	// Default movespeed. 
 	private static int DEFAULT_PLAYER_MOVESPEED = 3;
+	// 3 is default
 	
 	// Default jump speed
 	private static int DEFAULT_PLAYER_JUMPSPEED = 10;
@@ -47,14 +52,15 @@ public class player extends unit {
 	// Player sprite stuff.
 	private static String DEFAULT_PLAYER_SPRITESHEET = "images/units/player/" + DEFAULT_PLAYER_GENDER + "/noItems.png";
 	
-	// 
-	
 	///////////////
 	/// GLOBALS ///
 	///////////////
 	
 	// Main player global.
 	private static player currentPlayer = null;
+	
+	// Keys being pressed.
+	private ArrayList<KeyEvent> keysPressed = new ArrayList<KeyEvent>();
 	
 	// Player unitType.
 	public static unitType
@@ -73,6 +79,10 @@ public class player extends unit {
 	// Player specific fields.
 	private String playerName = DEFAULT_PLAYER_NAME;
 	private zone playerZone = DEFAULT_ZONE;
+	
+	// Combat
+	private weapon equippedWeapon = null;
+	private int playerLevel = 1;
 
 	///////////////
 	/// METHODS ///
@@ -86,6 +96,10 @@ public class player extends unit {
 		showUnitPosition();
 		showHitBox();
 		setCollision(false);
+		showAttackRange();
+		
+		// Set sounds.
+		attackSound = new sound("sounds/effects/player/swingWeapon.wav");
 		
 		// Set-up the camera.
 		camera c = new camera(this, 1);
@@ -105,7 +119,12 @@ public class player extends unit {
 		if(z != null) {
 			playerZone = z;
 		}
+
+		// Combat.
+		setAttackable(true);
+		dagger.getWeapon().equip();
 		
+		// Load the player into the zone.
 		playerZone.loadZone();
 		
 		// Make adjustments on hitbox if we're in topDown.
@@ -123,7 +142,7 @@ public class player extends unit {
 	public void AI() {}
 	
 	// Load player from save state.
-	public static player loadPlayer(zone z) {
+	public static player loadPlayer(zone z, int spawnX, int spawnY, String direction) {
 		
 		// Initiate all.
 		utility.initiateAll();
@@ -140,14 +159,19 @@ public class player extends unit {
 		int playerY = 0;
 		String newFacingDirection = null;
 		
+		// If no zone is given, AKA the game is booted up.
 		if(z == null) {
 			s = saveState.loadSaveState();
+			
+			// If we have the savestate.
 			if(s != null) {
 				z = zone.getZoneByName(s.getZoneName());
 				playerX = s.getPlayerX();
 				playerY = s.getPlayerY();
 				newFacingDirection = s.getFacingDirection();
 			}
+			
+			// If there is no savestate.
 			else {
 				z = zone.getStartZone();
 				playerX = z.getDefaultLocation().x;
@@ -155,10 +179,12 @@ public class player extends unit {
 				newFacingDirection = "Up";
 			}
 		}
+		
+		// If the zone, z, is given, we should have all of these details.
 		else {
-			playerX = z.getDefaultLocation().x;
-			playerY = z.getDefaultLocation().y;
-			newFacingDirection = "Up";
+			playerX = spawnX;
+			playerY = spawnY;
+			newFacingDirection = direction;
 		}
 		
 		// If we didn't load any save data and z is still null.
@@ -169,7 +195,7 @@ public class player extends unit {
 		// Create the player in the zone. Start zone if no zone was loaded from the save.
 		thePlayer = new player(playerX, playerY, z);
 		
-		// Set our fields.
+		// Set our fields
 		thePlayer.setFacingDirection(newFacingDirection);
 		
 		return thePlayer;
@@ -212,6 +238,12 @@ public class player extends unit {
 				startMove("down");
 			}
 		}
+		
+		// Player presses key
+		if(k.getKeyCode() == KeyEvent.VK_SPACE) {
+			System.out.println("pressed");
+			attack();
+		}
 		//////////////////////////////////////////
 		// TODO: TESTING STUFF.
 		//////////////////////////////////////
@@ -220,13 +252,13 @@ public class player extends unit {
 			// Switch from zone 1 to 2
 			if(playerZone.getName() == spiderCave.getZone().getName()) {
 				System.out.println("Switching from zone 1 to 2");
-				zone.switchZones(this, playerZone, sheepFarm.getZone());
+				zone.switchZones(this, playerZone, sheepFarm.getZone(), sheepFarm.DEFAULT_SPAWN_TUPLE.x, sheepFarm.DEFAULT_SPAWN_TUPLE.y, "Up");
 			}
 			
 			// Switch from zone 2 to 1
 			else if(playerZone.getName() == sheepFarm.getZone().getName()) {
 				System.out.println("Switching from zone 2 to 1");
-				zone.switchZones(this, playerZone, spiderCave.getZone());
+				zone.switchZones(this, playerZone, spiderCave.getZone(), spiderCave.DEFAULT_SPAWN_TUPLE.x, spiderCave.DEFAULT_SPAWN_TUPLE.y, "Right");
 			}
 		}
 	}
@@ -294,5 +326,13 @@ public class player extends unit {
 
 	public void setPlayerName(String playerName) {
 		this.playerName = playerName;
+	}
+
+	public weapon getEquippedWeapon() {
+		return equippedWeapon;
+	}
+
+	public void setEquippedWeapon(weapon equippedWeapon) {
+		this.equippedWeapon = equippedWeapon;
 	}
 }

@@ -40,9 +40,9 @@ public abstract class zone {
 	public abstract void loadZone();
 	
 	// Switch zones.
-	public static void switchZones(player p, zone a, zone b) {	
+	public static void switchZones(player p, zone a, zone b, int x, int y, String direction) {	
 		// Re-create the player in the new zone.
-		player.loadPlayer(b);
+		player.loadPlayer(b, x, y, direction);
 		
 		// Save the player in the new zone.
 		saveState.createSaveState();

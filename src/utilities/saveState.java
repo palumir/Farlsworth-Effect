@@ -29,16 +29,24 @@ public class saveState implements Serializable {
 	////// FIELDS /////////
 	///////////////////////
 	
-	// Zone name
+	/////////////////////////////////
+	////// GLOBAL SAVE ITEMS/////////
+	/////////////////////////////////
+	
+	// Current zone name
 	private String zoneName;
 	
-	// Position in zone.
+	// Position in current zone.
 	private int playerX;
 	private int playerY;
 	
 	// Facing position
 	private String facingDirection;
-
+	
+	//////////////////////////////////////////
+	////// INDIVIDUAL ZONE SAVE DATA /////////
+	//////////////////////////////////////////
+	private boolean forestGateOpen; // TODO: doesn't work, but is an example.
 	
 	////////////////////////
 	////// METHODS /////////

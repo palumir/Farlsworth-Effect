@@ -17,8 +17,8 @@ public class sheep extends unit {
 	
 	// Default dimensions.
 	private static int DEFAULT_PLATFORMER_HEIGHT = 32;
-	private static int DEFAULT_WIDTH = 32;
-	private static int DEFAULT_TOPDOWN_HEIGHT = 7;
+	private static int DEFAULT_WIDTH = 28;
+	private static int DEFAULT_TOPDOWN_HEIGHT = 15;
 	
 	// Platformer and topdown default adjustment
 	private static int DEFAULT_PLATFORMER_ADJUSTMENT_Y = 0;
@@ -26,6 +26,9 @@ public class sheep extends unit {
 	
 	// How far do the sheep patrol
 	private static int DEFAULT_PATROL_RADIUS = 100;
+	
+	// Sheep volume.
+	private static float DEFAULT_BLEET_VOLUME = 0.8f;
 	
 	////////////////
 	/// DEFAULTS ///
@@ -52,24 +55,25 @@ public class sheep extends unit {
 						);	
 	
 	// Sounds
-	private sound bleet1 = new sound("C:/Users/Andrew Jenkins/Desktop/Games/No Bullshit/sounds/effects/animals/sheep1.wav");
-	private sound bleet2 = new sound("C:/Users/Andrew Jenkins/Desktop/Games/No Bullshit/sounds/effects/animals/sheep2.wav");
+	private sound bleet1 = new sound("sounds/effects/animals/sheep1.wav");
+	private sound bleet2 = new sound("sounds/effects/animals/sheep2.wav");
+	private int bleetRadius = 1200;
 	
 	//////////////
 	/// FIELDS ///
 	//////////////
 	
 	// AI movement.
-	private Long AILastCheck = 0l; // milliseconds
-	private Float randomMove = 1f; // seconds
-	private Float randomStop = 0.5f;
+	private long AILastCheck = 0l; // milliseconds
+	private float randomMove = 1f; // seconds
+	private float randomStop = 0.5f;
 	private int startX = 0;
 	private int startY = 0;
 	private int patrolRadius = DEFAULT_PATROL_RADIUS;
 	
 	// AI sounds.
-	private Float randomBleet = 0f;
-	private Float lastBleet = 0f;
+	private float randomBleet = 0f;
+	private float lastBleet = 0f;
 	
 	///////////////
 	/// METHODS ///
@@ -104,13 +108,42 @@ public class sheep extends unit {
 			else moveUnit(direction);
 	}
 	
+	// React to pain.
+	public void reactToPain() {
+		// Play a random baaaah
+		int random = utility.RNG.nextInt(2);
+		if(random==0) {
+			bleet1.playSound(this.getX(), this.getY(), bleetRadius, DEFAULT_BLEET_VOLUME);
+		}
+		if(random==1) {
+			bleet2.playSound(this.getX(), this.getY(), bleetRadius, DEFAULT_BLEET_VOLUME);
+		}
+	}
+	
 	// SHEEP AI moves SHEEP around for now.
 	public void AI() {
 		
+		// Create a new random bleet interval
+		float newRandomBleetInterval = 2.5f + utility.RNG.nextInt(16);
+		
 		// Sheep make sounds
-		if(randomBleet == 0f) randomBleet = 0.5f + utility.RNG.nextInt(8)*0.25f;
-		if(time.getTime() - lastBleet > randomBleet) {
-			bleet1.playSound();
+		if(randomBleet == 0f) {
+			randomBleet = newRandomBleetInterval;
+		}
+		if(time.getTime() - lastBleet > randomBleet*1000) {
+			
+			// Set the last time they bleeted.
+			lastBleet = time.getTime();
+			randomBleet = newRandomBleetInterval;
+			
+			// Play a random baaaah
+			int random = utility.RNG.nextInt(2);
+			if(random==0) {
+				bleet1.playSound(this.getX(), this.getY(), bleetRadius, DEFAULT_BLEET_VOLUME);
+			}
+			if(random==1) {
+				bleet2.playSound(this.getX(), this.getY(), bleetRadius, DEFAULT_BLEET_VOLUME);
+			}
 		}
 		
 		// Move SHEEP in a random direction every interval.

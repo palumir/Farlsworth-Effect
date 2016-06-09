@@ -27,8 +27,8 @@ public class cave extends groundTile {
 	private static String DEFAULT_CHUNK_SPRITESHEET = "images/terrain/cave.png";
 	
 	// Dimensions
-	private static int DEFAULT_CHUNK_WIDTH = 32;
-	private static int DEFAULT_CHUNK_HEIGHT = 32;
+	public static int DEFAULT_CHUNK_WIDTH = 32;
+	public static int DEFAULT_CHUNK_HEIGHT = 32;
 	
 	// The actual type.
 	private static generalChunkType typeReference = new generalChunkType(DEFAULT_CHUNK_NAME, DEFAULT_CHUNK_SPRITESHEET, DEFAULT_CHUNK_WIDTH, DEFAULT_CHUNK_HEIGHT);  

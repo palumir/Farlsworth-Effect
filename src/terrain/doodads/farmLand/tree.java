@@ -26,8 +26,8 @@ public class tree extends chunk {
 	private static String DEFAULT_CHUNK_SPRITESHEET = "images/doodads/farmLand/"+ DEFAULT_CHUNK_NAME + ".png";
 	
 	// Dimensions
-	private static int DEFAULT_CHUNK_WIDTH = 125;
-	private static int DEFAULT_CHUNK_HEIGHT = 133;
+	public static int DEFAULT_CHUNK_WIDTH = 125;
+	public static int DEFAULT_CHUNK_HEIGHT = 133;
 	
 	// The actual type.
 	private static generalChunkType typeReference = new generalChunkType(DEFAULT_CHUNK_NAME, DEFAULT_CHUNK_SPRITESHEET, DEFAULT_CHUNK_WIDTH, DEFAULT_CHUNK_HEIGHT);  

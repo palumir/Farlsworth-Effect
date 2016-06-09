@@ -131,16 +131,12 @@ public class gameCanvas extends JComponent {
 
 		// Paint the background.
 		background.paintBackground(g2, getDefaultWidth(), getDefaultHeight());
-		
-		// TODO: for testing, Draw a 250 length red line crosshair
-		/*g.setColor(Color.red);
-		g.drawLine(this.getDefaultHeight()/2, this.getDefaultHeight()/2, 0, this.getDefaultHeight()/2);
-		g.drawLine(this.getDefaultHeight()/2, this.getDefaultHeight()/2, this.getDefaultHeight()/2, 0);
-		g.drawLine(this.getDefaultHeight()/2, this.getDefaultHeight()/2, this.getDefaultHeight(), this.getDefaultHeight()/2);
-		g.drawLine(this.getDefaultHeight()/2, this.getDefaultHeight()/2, this.getDefaultHeight()/2, this.getDefaultHeight());*/
 
 		// Paint all drawable things.
 		drawnObject.drawObjects(g);
+		
+		// Paint the fog TODO: not done
+		//fog.paintFog(g2);
 	}
 
 	// ************************************

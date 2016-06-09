@@ -12,6 +12,7 @@ import terrain.chunkTypes.grass;
 import terrain.chunkTypes.water;
 import terrain.chunkTypes.wood;
 import terrain.doodads.farmLand.bush;
+import terrain.doodads.farmLand.caveEnterance;
 import terrain.doodads.farmLand.fenceBars;
 import terrain.doodads.farmLand.fenceBarsSmall;
 import terrain.doodads.farmLand.fencePost;
@@ -82,7 +83,7 @@ public class spiderCave extends zone {
 		// Spawn Area //
 		////////////////
 		
-		u = new knight(120, -100);
+		caveEnterance spiderCaveEnterance = new caveEnterance(30,-15,0, sheepFarm.getZone(),-1762+52,-4070+90,"Down");
 		
 		// First platform
 		
