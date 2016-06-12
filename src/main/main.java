@@ -19,6 +19,13 @@ public class main {
 		// Create the game canvas.
 		gameCanvas gameCanvas = new gameCanvas();
 		
+		// Start the game for the first time.
+		restartGame();
+		
+	}
+	
+	// Restart game
+	public static void restartGame() {
 		// Initiate.
 		utility.initiateAll();
 		

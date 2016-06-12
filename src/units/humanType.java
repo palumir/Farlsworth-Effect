@@ -1,9 +1,9 @@
 package units;
 
-import drawing.sprites.animation;
-import drawing.sprites.animationPack;
-import drawing.sprites.spriteSheet;
-import drawing.sprites.spriteSheet.spriteSheetInfo;
+import animation.animation;
+import animation.animationPack;
+import drawing.spriteSheet;
+import drawing.spriteSheet.spriteSheetInfo;
 import modes.mode;
 
 public class humanType extends unitType {

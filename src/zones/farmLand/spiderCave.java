@@ -23,7 +23,6 @@ import terrain.doodads.farmLand.verticalFence;
 import units.player;
 import units.unit;
 import units.unitType;
-import units.unitTypes.farmLand.knight;
 import utilities.intTuple;
 import utilities.utility;
 import zones.zone;

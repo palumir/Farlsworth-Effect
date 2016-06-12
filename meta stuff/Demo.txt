@@ -1,6 +1,8 @@
 -> Spawn in front of bridge/river
 -> Walk to farmer who has a quest
 -> Farmer asks you to retrieve wool from his prize beautiful sheep, Chris.
+-> Farmer tells you to pick up the dagger and fill your bottle for the journey, and that
+filling your bottle saves the game and drinking it gives you HP
 -> Find chris in a pen, cornered, he refuses to give you his wool because he doesn't
 want to be a slave anymore
 -> Chris escapes pen, you chase him into forest

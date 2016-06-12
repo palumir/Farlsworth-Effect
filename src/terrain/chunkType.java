@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.awt.image.BufferedImage;
 
 import drawing.drawnObject;
-import drawing.sprites.spriteSheet;
+import drawing.spriteSheet;
 
 public abstract class chunkType {
 	

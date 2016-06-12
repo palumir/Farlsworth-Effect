@@ -1,4 +1,4 @@
-package drawing.sprites;
+package drawing;
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;
@@ -76,11 +76,11 @@ public class spriteSheet {
 			setSheetWidth(sheet.getWidth());
 			int rows = sheet.getHeight()/getSpriteHeight();
 			int cols = sheet.getWidth()/getSpriteWidth();
-			sprites = new ArrayList<ArrayList<BufferedImage>>();
+			setSprites(new ArrayList<ArrayList<BufferedImage>>());
 			for (int i = 0; i < rows; i++){
-				sprites.add(new ArrayList<BufferedImage>());
+				getSprites().add(new ArrayList<BufferedImage>());
 			    for (int j = 0; j < cols; j++){
-			        sprites.get(i).add(sheet.getSubimage(
+			        getSprites().get(i).add(sheet.getSubimage(
 			            j * getSpriteWidth(),
 			            i * getSpriteHeight(),
 			            getSpriteWidth(),
@@ -98,14 +98,32 @@ public class spriteSheet {
 	//// GETTERS AND SETTERS ////
 	/////////////////////////////
 	
+	// For returning an individual sprite from a file.
+	public static BufferedImage getSpriteFromFilePath(String s) {
+		
+		try {
+			// Set the sheet to be the image at the filename.
+			BufferedImage retIMG = ImageIO.read(new File(s));
+			
+			// Add transparency to image.
+			retIMG = imageUtils.makeColorTransparent(retIMG, DEFAULT_COLOR_TO_TRANSPARENT);
+			return retIMG;
+		}
+		catch(Exception e) {
+			
+		}
+		
+		return null;
+	}
+	
 	// Get an image in the xth and yth position the sheet.
 	public BufferedImage getSprite(int x, int y) { 
-		return sprites.get(y).get(x);
+		return getSprites().get(y).get(x);
 	}
 	
 	// Get animation
 	public ArrayList<BufferedImage> getAnimation(int y) {
-		return sprites.get(y);
+		return getSprites().get(y);
 	}
 
 	public int getSpriteWidth() {
@@ -138,5 +156,13 @@ public class spriteSheet {
 
 	public void setSheetWidth(int sheetWidth) {
 		this.sheetWidth = sheetWidth;
+	}
+
+	public ArrayList<ArrayList<BufferedImage>> getSprites() {
+		return sprites;
+	}
+
+	public void setSprites(ArrayList<ArrayList<BufferedImage>> sprites) {
+		this.sprites = sprites;
 	}
 }

@@ -2,9 +2,9 @@ package units;
 
 import java.awt.Color;
 
-import drawing.sprites.animationPack;
-import drawing.sprites.spriteSheet;
-import drawing.sprites.spriteSheet.spriteSheetInfo;
+import animation.animationPack;
+import drawing.spriteSheet;
+import drawing.spriteSheet.spriteSheetInfo;
 
 public class unitType {
 	

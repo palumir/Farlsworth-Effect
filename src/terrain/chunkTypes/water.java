@@ -9,8 +9,10 @@ import terrain.chunkType;
 import terrain.generalChunkType;
 import terrain.groundTile;
 import units.humanType;
+import units.player;
 import units.unit;
 import units.unitType;
+import utilities.saveState;
 import utilities.time;
 import zones.zone;
 
@@ -39,6 +41,14 @@ public class water extends groundTile {
 	// Constructor
 	public water(int newX, int newY) {
 		super(typeReference, newX, newY);
+		interactable = true;
 		this.setPassable(false);
+	}
+	
+	// Interacting with heals you and saves.
+	@Override
+	public void interactWith() {
+		player.getCurrentPlayer().setHealthPoints(player.getCurrentPlayer().getMaxHealthPoints());
+		saveState.createSaveState();
 	}
 }

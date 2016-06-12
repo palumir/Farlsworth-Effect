@@ -1,12 +1,16 @@
 package items.weapons;
 
-import drawing.sprites.animation;
-import drawing.sprites.animationPack;
-import drawing.sprites.spriteSheet;
-import drawing.sprites.spriteSheet.spriteSheetInfo;
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+
+import animation.animation;
+import animation.animationPack;
+import drawing.spriteSheet;
+import drawing.spriteSheet.spriteSheetInfo;
 import items.item;
 import items.weapon;
 import units.player;
+import utilities.saveState;
 
 public class dagger extends weapon {
 	////////////////
@@ -25,6 +29,7 @@ public class dagger extends weapon {
 	//////////////
 	/// FIELDS ///
 	//////////////
+	public static BufferedImage itemImage = spriteSheet.getSpriteFromFilePath("images/doodads/items/"+ DEFAULT_WEAPON_NAME + ".png");
 	public static spriteSheet weaponSpriteSheet = new spriteSheet(new spriteSheetInfo(
 			"images/units/player/" + player.DEFAULT_PLAYER_GENDER + "/"+ DEFAULT_WEAPON_NAME + ".png", 
 			weapon.DEFAULT_SPRITE_WIDTH, 
@@ -33,15 +38,57 @@ public class dagger extends weapon {
 			weapon.DEFAULT_SPRITE_ADJUSTMENT_Y
 			));
 	
-	public static weapon weaponRef = new dagger();
+	public static weapon weaponRef;
 	
 	///////////////
 	/// METHODS ///
 	///////////////
 	
-	// Constructor
+	// In inventory.
 	public dagger() {
 		super(DEFAULT_WEAPON_NAME,weaponSpriteSheet);
+		
+		// Weapon stats.
+		setStats();
+	}
+	
+	// On floor.
+	public dagger(int x, int y) {
+		super(DEFAULT_WEAPON_NAME,x,y);
+		
+		// Weapon stats.
+		setStats();
+	}
+	
+	// Set stats
+	public void setStats() {
+		// Weapon stats.
+		attackDamage = DEFAULT_ATTACK_DAMAGE;
+		attackTime = DEFAULT_ATTACK_TIME;
+		baseAttackTime = DEFAULT_BAT;
+		attackWidth = DEFAULT_ATTACK_WIDTH;
+		attackLength = DEFAULT_ATTACK_LENGTH;
+		range = "short";
+		speed = "fast";
+	}
+	
+	// Pickup item.
+	public void pickUp() {
+		if(player.getCurrentPlayer() != null) {
+			// Equip the item if it's a weapon and we don't have one equipped.
+			if(player.getCurrentPlayer().getEquippedWeapon() == null
+					&& this instanceof weapon) {
+				equip();
+			}
+		
+			// At least add the item to the player's inventory.
+			player.getCurrentPlayer().getPlayerInventory().pickUp(this);
+			
+		}
+		
+		// Stop drawing the weapon on the ground.
+		setDrawObject(false);
+		inInventory = true;
 	}
 	
 	// Equip item
@@ -119,6 +166,11 @@ public class dagger extends weapon {
 		
 		// Set animations.
 		player.getCurrentPlayer().setAnimations(unitTypeAnimations);
+	}
+	
+	// Get the item image.
+	public BufferedImage getImage() {
+		return itemImage;
 	}
 	
 	// Get weapon reference.

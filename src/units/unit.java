@@ -4,11 +4,13 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
 
+import animation.animation;
+import animation.animationPack;
 import drawing.camera;
 import drawing.drawnObject;
-import drawing.sprites.animation;
-import drawing.sprites.animationPack;
-import drawing.sprites.spriteSheet;
+import drawing.spriteSheet;
+import effects.effect;
+import effects.effectTypes.bloodSquirt;
 import modes.mode;
 import sounds.sound;
 import terrain.chunk;
@@ -45,7 +47,6 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 	
 	// Sounds
 	protected static int DEFAULT_ATTACK_SOUND_RADIUS = 1000;
-	protected static float DEFAULT_OUCH_VOLUME = 0.8f;
 	
 	///////////////
 	/// GLOBALS ///
@@ -57,9 +58,10 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 	////////////////
 	
 	// The actual unit type.
-	private unitType typeOfUnit;
+	protected unitType typeOfUnit;
 	
 	// Combat
+	private int maxHealthPoints = DEFAULT_HP;
 	private int healthPoints = DEFAULT_HP;
 	private int attackDamage = DEFAULT_ATTACK_DAMAGE;
 	private float baseAttackTime = DEFAULT_BAT;
@@ -73,7 +75,6 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 	
 	// Combat sounds
 	protected sound attackSound = null;
-	protected sound getHitSound = new sound("sounds/effects/combat/splatter.wav");
 	
 	// Gravity
 	private float jumpSpeed = DEFAULT_JUMPSPEED;
@@ -120,11 +121,11 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 		jump();
 		moveUnit();
 		combat();
-		AI();
+		updateUnit();
 	}
 	
 	// Require units to have some sort of AI.
-	public abstract void AI();
+	public abstract void updateUnit();
 	
 	// Set gravity on or off.
 	public static void setGravity(boolean b) {
@@ -230,21 +231,18 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 		if(attackable) {
 			healthPoints -= damage;
 		}
-		getHitSound.playSound(getX(), getY(), DEFAULT_ATTACK_SOUND_RADIUS, DEFAULT_OUCH_VOLUME);
 		reactToPain();
 	}
 	
 	// React to pain.
-	public void reactToPain() {
-		// Does nothing for general units. Should be overridden.
-	}
+	public abstract void reactToPain();
 	
 	// Start attacking.
 	public void attack() {
 		if(!attacking) {
 			
 			// We are attacking of course.
-			if(attackSound != null) attackSound.playSound(getX(), getY(), DEFAULT_ATTACK_SOUND_RADIUS);
+			if(attackSound != null) attackSound.playSound(getX(), getY(), DEFAULT_ATTACK_SOUND_RADIUS, 1f);
 			attacking = true;
 			startAttackTime = time.getTime();
 		}
@@ -403,7 +401,7 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 			}
 			
 			// Deal with animations.
-			movementAnimation(actualMoveX,actualMoveY);
+			dealWithAnimations(actualMoveX,actualMoveY);
 	
 			// Move the camera if it's there.
 			if(attachedCamera != null) {
@@ -474,7 +472,7 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 	}
 	
 	// Deal with movement animations.
-	public void movementAnimation(int moveX, int moveY) {
+	public void dealWithAnimations(int moveX, int moveY) {
 		
 		// topDown mode movement animations.
 		if(mode.getCurrentMode() == "topDown") {
@@ -482,7 +480,7 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 				// Play animation.
 				animate("attacking" + facingDirection);
 			}
-			else if(moveX != 0 || moveY != 0) {
+			else if(isMoving()) {
 				animate("running" + getFacingDirection());
 			}
 			else {
@@ -492,15 +490,19 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 		
 		// platformer movement animations.
 		if(mode.getCurrentMode() == "platformer") {
-			if(inAir) {
+			if(attacking && !alreadyAttacked) {
+				// Play animation.
+				animate("attacking" + facingDirection);
+			}
+			else if(inAir) {
 				animate("jumping" + getFacingDirection());
 			}
-			else if(moveX != 0 || moveY != 0) {
+			else if(isMoving()) {
 				// If we are running.
 				animate("running" + getFacingDirection());
 			}
-			else if(moveX == 0 && moveY == 0){
-				animate("standing" + getFacingDirection());
+			else {
+			    animate("standing" + getFacingDirection());
 			}
 		}
 	}
@@ -512,7 +514,7 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 			
 			// Reset the frame if it's a new animation.
 			if(currentAnimation != null && currentAnimation != a) {
-				currentAnimation.setCurrentSprite(0);
+				currentAnimation.setCurrentSprite(currentAnimation.getStartFrame());
 			}
 			
 			// Set the animation.
@@ -617,11 +619,20 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 		questIcon = new questMark(spawnX, spawnY, 0);
 	}
 	
+	// Set a unit to have a quest.
+	public void noQuest() {
+		if(questIcon != null) questIcon.destroy();
+	}
+	
 	/////////////////////////
 	// Getters and setters //
 	/////////////////////////
 	public boolean isMoving() {
-		return movingLeft || movingRight || movingUp || movingDown;
+		boolean movingLeftAndRight = movingLeft && movingRight;
+		boolean movingUpAndDown = movingUp && movingDown;
+		boolean movingHorizontally = (movingLeft || movingRight) && !movingLeftAndRight;
+		boolean movingVertically = (movingUp || movingDown) && !movingUpAndDown;
+		return movingVertically || movingHorizontally;
 	}
 	
 	public void setCollision(boolean b) {
@@ -708,6 +719,14 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 
 	public void setAttackLength(int attackLength) {
 		this.attackLength = attackLength;
+	}
+
+	public int getMaxHealthPoints() {
+		return maxHealthPoints;
+	}
+
+	public void setMaxHealthPoints(int maxHealthPoints) {
+		this.maxHealthPoints = maxHealthPoints;
 	}
 	
 }

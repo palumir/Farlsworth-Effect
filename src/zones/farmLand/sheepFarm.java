@@ -1,4 +1,6 @@
 package zones.farmLand;
+import items.item;
+import items.weapons.dagger;
 import modes.topDown;
 import terrain.chunk;
 import terrain.chunkTypes.cave;
@@ -792,7 +794,8 @@ public class sheepFarm extends zone {
 		spawnFence(-1038-6,-436,-1038-6,200+50); // Vertical, far left
 		farmer theFarmer = new farmer(-711,-267);
 		theFarmer.hasQuest(); 
-		u.setFacingDirection("Down");
+		theFarmer.noQuest();
+		theFarmer.setFacingDirection("Down");
 		c = new tree(-1017, -414, 1);
 		c = new tree(-1011, 0, 0);
 		c = new hay(-960,-351,1);
@@ -815,6 +818,9 @@ public class sheepFarm extends zone {
 		c = new tree(-90,380,1);
 		c = new tree(-65,410,2);
 		c = new tree(-40,450,1);
+		
+		// Dagger.
+		item daggerSpawn = new dagger(-516,387);
 		
 		// Corner
 		c = new tree(-60,480,2);

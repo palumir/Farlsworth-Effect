@@ -28,6 +28,27 @@ public class sound {
 		}
 	}
 	
+	// Play sound anywhere
+	public void playSound(float v) {
+		  // The wrapper thread is unnecessary, unless it blocks on the
+		  // Clip finishing; see comments.
+		   try {
+			   // Adjust volume based on radius.
+			   FloatControl control = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+		       float max = control.getMaximum();
+		       float min = control.getMinimum(); // negative values all seem to be zero?
+		       float range = max - min;
+		       control.setValue(min + (range*v));
+				   
+			   // Play the clip.
+			   clip.setFramePosition(0);
+			   clip.stop();
+			   clip.start();
+		   }
+		   catch (Exception e) {
+		   }
+	}
+	
 	// Play sound at a volume
 	public void playSound(int x, int y, int radius, float v) {
 		  // The wrapper thread is unnecessary, unless it blocks on the
@@ -49,39 +70,6 @@ public class sound {
 			       float range = max - min;
 			       if(howClosePercentage>0) {
 			    	   control.setValue(min + (range * howClosePercentage*v));
-					   
-					   // Play the clip.
-					   clip.setFramePosition(0);
-					   clip.stop();
-					   clip.start();
-			       }
-			   }
-		   } 
-		   catch (Exception e) {
-		   }
-	}
-	
-	// Play sound
-	public void playSound(int x, int y, int radius) {
-		  // The wrapper thread is unnecessary, unless it blocks on the
-		  // Clip finishing; see comments.
-		   try {
-			   if(player.getCurrentPlayer()!=null) {
-				   // Get player position
-				   int playerX = player.getCurrentPlayer().getX();
-				   int playerY = player.getCurrentPlayer().getY();
-				   
-				   // Calculate how close we are.
-				   float howClose = (float) Math.sqrt((playerX - x)*(playerX - x) + (playerY - y)*(playerY - y));
-				   float howClosePercentage = (radius - howClose)/radius;
-				   
-				   // Adjust volume based on radius.
-				   FloatControl control = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-			       float max = control.getMaximum();
-			       float min = control.getMinimum(); // negative values all seem to be zero?
-			       float range = max - min;
-			       if(howClosePercentage>0) {
-			    	   control.setValue(min + (range * howClosePercentage));
 					   
 					   // Play the clip.
 					   clip.setFramePosition(0);

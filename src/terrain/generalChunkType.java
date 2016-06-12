@@ -2,8 +2,8 @@ package terrain;
 
 import java.awt.image.BufferedImage;
 
-import drawing.sprites.spriteSheet;
-import drawing.sprites.spriteSheet.spriteSheetInfo;
+import drawing.spriteSheet;
+import drawing.spriteSheet.spriteSheetInfo;
 import modes.mode;
 import utilities.utility;
 

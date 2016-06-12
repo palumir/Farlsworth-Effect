@@ -1,6 +1,8 @@
-package drawing.sprites;
+package animation;
 
 import java.util.ArrayList;
+
+import utilities.utility;
 
 public class animationPack {
 	////////////////
@@ -24,6 +26,12 @@ public class animationPack {
 	///////////////////////////
 	public void addAnimation(animation a) {
 		animations.add(a);
+	}
+	
+	// Select random animation
+	public animation selectRandomAnimation() {
+		int randomNum = utility.RNG.nextInt(animations.size());
+		return animations.get(randomNum);
 	}
 	
 	public animation getAnimation(String name) {

@@ -6,7 +6,7 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 import drawing.drawnObject;
-import drawing.sprites.spriteSheet;
+import drawing.spriteSheet;
 import utilities.intTuple;
 
 public class chunk extends drawnObject {

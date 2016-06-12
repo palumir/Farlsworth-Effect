@@ -1,15 +1,16 @@
 package drawing;
 
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import drawing.sprites.spriteSheet;
+import effects.effect;
 import units.player;
 import units.unit;
-
+import userInterface.interfaceObject;
 import modes.mode;
 import terrain.chunk;
 import terrain.groundTile;
@@ -26,6 +27,14 @@ public abstract class drawnObject {
 	private static Comparator<drawnObject> yComparator = new Comparator<drawnObject>() {
 	    @Override
 	    public int compare(drawnObject d1, drawnObject d2) {
+	    	
+	    	// Draw interface objects over anything.
+	    	if(d1 instanceof interfaceObject) return 1;
+	    	if(d2 instanceof interfaceObject) return -1;
+	    	
+	    	// Different comparator for drawing effects over things.
+	    	if(d1 instanceof effect && (d1.y + d1.height > d2.y)) return 1;
+	    	if(d2 instanceof effect && (d1.y < d2.y + d2.height)) return -1;
 	    	
 	    	// Prioritize units walking over chunks
 	    	// and units walking in front of other units.
@@ -49,6 +58,12 @@ public abstract class drawnObject {
 	protected int width;
 	protected int height;
 	
+	// Do we actually draw the object?
+	private boolean drawObject = true;
+	
+	// Can we interact with the object?
+	protected boolean interactable = false;
+	
 	// Developer stuff
 	protected boolean showHitBox = false;
 	protected boolean showSpriteBox = false;
@@ -56,6 +71,7 @@ public abstract class drawnObject {
 	
 	// Sprite stuff.
 	private spriteSheet objectSpriteSheet;
+	private BufferedImage objectImage;
 	private int hitBoxAdjustmentX;
 	private int hitBoxAdjustmentY;
 	
@@ -71,8 +87,10 @@ public abstract class drawnObject {
 	// drawnObject constructor
 	public drawnObject(spriteSheet newSpriteSheet, int newX, int newY, int newWidth, int newHeight) {
 		objectSpriteSheet = newSpriteSheet;
-		setHitBoxAdjustmentX(objectSpriteSheet.getHitBoxAdjustmentX());
-		setHitBoxAdjustmentY(objectSpriteSheet.getHitBoxAdjustmentY());
+		if(objectSpriteSheet!=null) {
+			setHitBoxAdjustmentX(objectSpriteSheet.getHitBoxAdjustmentX());
+			setHitBoxAdjustmentY(objectSpriteSheet.getHitBoxAdjustmentY());
+		}
 		setX(newX);
 		setY(newY);
 		width = newWidth;
@@ -108,27 +126,42 @@ public abstract class drawnObject {
 			for(int i = 0; i < objects.size(); i++) {
 				drawnObject d = objects.get(i);
 				
-				// If there's a camera, adjust units drawn to the camera pos.
-				if(camera.getCurrent() != null) {
-					// TODO: possible issues with the screen being resized.
-					d.drawX = d.getX() - camera.getCurrent().getX() - camera.getCurrent().getAttachedUnit().width/2 + gameCanvas.getDefaultWidth()/2;
-					d.drawY = d.getY() - camera.getCurrent().getY() - camera.getCurrent().getAttachedUnit().height/2 + gameCanvas.getDefaultHeight()/2;
+				if(d.isDrawObject()) {
+					// If there's a camera, adjust units drawn to the camera pos.
+					if(camera.getCurrent() != null) {
+						// TODO: possible issues with the screen being resized.
+						d.drawX = d.getX() - camera.getCurrent().getX() - camera.getCurrent().getAttachedUnit().width/2 + gameCanvas.getDefaultWidth()/2;
+						d.drawY = d.getY() - camera.getCurrent().getY() - camera.getCurrent().getAttachedUnit().height/2 + gameCanvas.getDefaultHeight()/2;
+					}
+					else {
+						d.drawX = d.getX();
+						d.drawY = d.getY();
+					}
+					
+					// Get the correct sprite width and height.
+					int spriteWidth = 0;
+					int spriteHeight = 0;
+					if(d.getObjectSpriteSheet() != null) {
+						spriteWidth = d.getObjectSpriteSheet().getSpriteWidth();
+						spriteHeight = d.getObjectSpriteSheet().getSpriteHeight();
+					}
+					else if(d.getObjectImage() != null) {
+						spriteWidth = d.getObjectImage().getWidth();
+						spriteHeight = d.getObjectImage().getHeight();
+					}
+					
+					// Adjust for hitboxes.
+					 d.drawX += - (spriteWidth/2 - d.width/2) - d.getHitBoxAdjustmentX();
+					 d.drawY += - (spriteHeight/2 - d.height/2) - d.getHitBoxAdjustmentY();
+					
+					// Draw the object if it's on the screen.
+					if(d instanceof interfaceObject ||
+					   (d.drawX + spriteWidth > 0 && 
+					   d.drawY + spriteHeight > 0 && 
+					   d.drawX < gameCanvas.getDefaultWidth() && 
+					   d.drawY < gameCanvas.getDefaultHeight()))
+					d.drawObject(g);
 				}
-				else {
-					d.drawX = d.getX();
-					d.drawY = d.getY();
-				}
-				
-				// Adjust for hitboxes.
-				 d.drawX += - (d.getObjectSpriteSheet().getSpriteWidth()/2 - d.width/2) - d.getHitBoxAdjustmentX();
-				 d.drawY += - (d.getObjectSpriteSheet().getSpriteHeight()/2 - d.height/2) - d.getHitBoxAdjustmentY();
-				
-				// Draw the object if it's on the screen.
-				if(d.drawX + d.objectSpriteSheet.getSpriteWidth() > 0 && 
-				   d.drawY + d.objectSpriteSheet.getSpriteHeight() > 0 && 
-				   d.drawX < gameCanvas.getDefaultWidth() && 
-				   d.drawY < gameCanvas.getDefaultHeight())
-				d.drawObject(g);
 			}
 		}
 	}
@@ -152,9 +185,23 @@ public abstract class drawnObject {
 	// Draw object.
 	public abstract void drawObject(Graphics g);
 	
+	// Destroy an object.
+	public void destroy() {
+		drawnObject.removeObject(this);
+	}
+	
+	// Interact with object. Should be over-ridden.
+	public void interactWith() {
+		
+	}
+	
 	///////////////////////////
 	/// Getters and Setters ///
 	///////////////////////////
+	public boolean canInteract() {
+		return interactable;
+	}
+	
 	public void showHitBox() {
 		showHitBox = true;
 	}
@@ -217,6 +264,22 @@ public abstract class drawnObject {
 
 	public void setHitBoxAdjustmentX(int hitBoxAdjustmentX) {
 		this.hitBoxAdjustmentX = hitBoxAdjustmentX;
+	}
+
+	public boolean isDrawObject() {
+		return drawObject;
+	}
+
+	public void setDrawObject(boolean drawObject) {
+		this.drawObject = drawObject;
+	}
+
+	public BufferedImage getObjectImage() {
+		return objectImage;
+	}
+
+	public void setObjectImage(BufferedImage objectImage) {
+		this.objectImage = objectImage;
 	}
 	
 }

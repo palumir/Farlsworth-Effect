@@ -3,6 +3,7 @@ package utilities;
 import java.util.Random;
 
 import drawing.drawnObject;
+import items.item;
 import terrain.chunk;
 import units.player;
 import units.unit;
@@ -26,7 +27,6 @@ public abstract class utility {
 				d.update();
 			}
 		}
-		saveState.saveGame();
 	}
 	
 	// Initiate the utility. Does nothing
@@ -42,6 +42,7 @@ public abstract class utility {
 		drawnObject.initiate();
 		unitType.initiate();
 		chunk.initiate();
+		item.initiate();
 		zone.initiate(); 
 	}
 }

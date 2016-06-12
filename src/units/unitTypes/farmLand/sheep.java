@@ -3,6 +3,8 @@ package units.unitTypes.farmLand;
 import java.util.Random;
 
 import drawing.camera;
+import effects.effect;
+import effects.effectTypes.bloodSquirt;
 import modes.mode;
 import sounds.sound;
 import units.animalType;
@@ -15,14 +17,15 @@ import zones.zone;
 
 public class sheep extends unit {
 	
-	// Default dimensions.
-	private static int DEFAULT_PLATFORMER_HEIGHT = 32;
-	private static int DEFAULT_WIDTH = 28;
-	private static int DEFAULT_TOPDOWN_HEIGHT = 15;
+	// Platformer real dimensions
+	public static int DEFAULT_PLATFORMER_HEIGHT = 32;
+	public static int DEFAULT_PLATFORMER_WIDTH = 32;
+	public static int DEFAULT_PLATFORMER_ADJUSTMENT_Y = 0;
 	
-	// Platformer and topdown default adjustment
-	private static int DEFAULT_PLATFORMER_ADJUSTMENT_Y = 0;
-	private static int DEFAULT_TOPDOWN_ADJUSTMENT_Y = 8;
+	// TopDown real dimensions
+	public static int DEFAULT_TOPDOWN_HEIGHT = 15;
+	public static int DEFAULT_TOPDOWN_WIDTH = 20;
+	public static int DEFAULT_TOPDOWN_ADJUSTMENT_Y = 4;
 	
 	// How far do the sheep patrol
 	private static int DEFAULT_PATROL_RADIUS = 100;
@@ -86,17 +89,11 @@ public class sheep extends unit {
 		startX = newX;
 		startY = newY;
 		
-		// Make adjustments on hitbox if we're in topDown.
-		if(mode.getCurrentMode().equals("topDown")) {
-			height = DEFAULT_TOPDOWN_HEIGHT;
-			width = DEFAULT_WIDTH;
-			setHitBoxAdjustmentY(DEFAULT_TOPDOWN_ADJUSTMENT_Y);
-		}
-		else {
-			height = DEFAULT_PLATFORMER_HEIGHT;
-			width = DEFAULT_WIDTH;
-			setHitBoxAdjustmentY(DEFAULT_PLATFORMER_ADJUSTMENT_Y);
-		}
+		// Set dimensions
+		height = getDefaultHeight();
+		width = getDefaultWidth();
+		setHitBoxAdjustmentY(getDefaultHitBoxAdjustmentY());
+
 	}
 	
 	// Make sure the movement is within a certain radius.
@@ -118,10 +115,16 @@ public class sheep extends unit {
 		if(random==1) {
 			bleet2.playSound(this.getX(), this.getY(), bleetRadius, DEFAULT_BLEET_VOLUME);
 		}
+		
+		// Squirt blood
+		int randomX = -width/3 + utility.RNG.nextInt(width/3);
+		int randomY = height/3 + utility.RNG.nextInt(height/2);
+		effect e = new bloodSquirt(getX() - bloodSquirt.getDefaultWidth()/2 + width/2 + randomX,
+				   getY() - bloodSquirt.getDefaultHeight()/2 + height/2 + randomY);
 	}
 	
 	// SHEEP AI moves SHEEP around for now.
-	public void AI() {
+	public void updateUnit() {
 		
 		// Create a new random bleet interval
 		float newRandomBleetInterval = 2.5f + utility.RNG.nextInt(16);
@@ -162,6 +165,40 @@ public class sheep extends unit {
 			randomMove = 2f + utility.RNG.nextInt(9)*0.5f;
 			AILastCheck = time.getTime();
 			stopMove("all");
+		}
+	}
+	
+	///////////////////////////
+	/// GETTERS AND SETTERS ///
+	///////////////////////////
+	
+	// Get default width.
+	public static int getDefaultWidth() {
+		if(mode.getCurrentMode().equals("topDown")) {
+			return DEFAULT_TOPDOWN_WIDTH;
+		}
+		else {
+			return DEFAULT_PLATFORMER_WIDTH;
+		}
+	}
+	
+	// Get default height.
+	public static int getDefaultHeight() {
+		if(mode.getCurrentMode().equals("topDown")) {
+			return DEFAULT_TOPDOWN_HEIGHT;
+		}
+		else {
+			return DEFAULT_PLATFORMER_HEIGHT;
+		}
+	}
+	
+	// Get default hitbox adjustment Y.
+	public static int getDefaultHitBoxAdjustmentY() {
+		if(mode.getCurrentMode().equals("topDown")) {
+			return DEFAULT_TOPDOWN_ADJUSTMENT_Y;
+		}
+		else {
+			return DEFAULT_PLATFORMER_ADJUSTMENT_Y;
 		}
 	}
 }

@@ -3,6 +3,8 @@ package units.unitTypes.farmLand;
 import java.util.Random;
 
 import drawing.camera;
+import effects.effect;
+import effects.effectTypes.bloodSquirt;
 import modes.mode;
 import units.humanType;
 import units.unit;
@@ -60,6 +62,9 @@ public class farmer extends unit {
 	public farmer(int newX, int newY) {
 		super(farmerType, newX, newY);
 		
+		// Interactable.
+		interactable = true;
+		
 		// Make adjustments on hitbox if we're in topDown.
 		if(mode.getCurrentMode().equals("topDown")) {
 			height = DEFAULT_TOPDOWN_HEIGHT;
@@ -72,7 +77,21 @@ public class farmer extends unit {
 		setFacingDirection("Down");
 	}
 	
-	// farmer AI moves farmer around for now.
-	public void AI() {
+	// Interact with object. Should be over-ridden.
+	public void interactWith() {
+		System.out.println("Hello I'm farmer fart");
+	}
+	
+	// React to pain.
+	public void reactToPain() {
+		// Squirt blood
+		int randomX = -width/3 + utility.RNG.nextInt(width/3);
+		int randomY = -height/2 + utility.RNG.nextInt(height/2);
+		effect e = new bloodSquirt(getX() - bloodSquirt.getDefaultWidth()/2 + width/2 + randomX,
+				   getY() - bloodSquirt.getDefaultHeight()/2 + height/2 + randomY);
+	}
+	
+	// Does nothing yet.
+	public void updateUnit() {
 	}
 }

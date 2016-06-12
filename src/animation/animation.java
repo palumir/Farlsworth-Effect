@@ -1,4 +1,4 @@
-package drawing.sprites;
+package animation;
 
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -36,7 +36,7 @@ public class animation {
 		// Set the fields.
 		currentSprite = newStartFrame;
 		timeToComplete = newTimeToComplete;
-		startFrame = newStartFrame;
+		setStartFrame(newStartFrame);
 		endFrame = newEndFrame;
 		setName(newName);
 		sprites = newSprites;
@@ -47,14 +47,14 @@ public class animation {
 			
 		// Advance animation if the correct amount of time has elapsed.
 		if(currentFrameTime == 0) currentFrameTime = time.getTime();
-		else if(time.getTime() - currentFrameTime >= timeToComplete*1000/(endFrame - startFrame + 1)) {
+		else if(time.getTime() - currentFrameTime >= timeToComplete*1000/(endFrame - getStartFrame() + 1)) {
 			
 			// Advance the timer and the sprite.
 			currentFrameTime = time.getTime();
 		
 			// Have we reached the end?
 			if(getCurrentSprite() + 1 > endFrame) {
-					setCurrentSprite(startFrame);
+					setCurrentSprite(getStartFrame());
 			}
 			else {
 				setCurrentSprite(getCurrentSprite() + 1);
@@ -83,5 +83,13 @@ public class animation {
 
 	public void setCurrentSprite(int currentSprite) {
 		this.currentSprite = currentSprite;
+	}
+
+	public int getStartFrame() {
+		return startFrame;
+	}
+
+	public void setStartFrame(int startFrame) {
+		this.startFrame = startFrame;
 	}
 }
