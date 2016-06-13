@@ -92,6 +92,10 @@ public class sheep extends unit {
 		// Set dimensions
 		height = getDefaultHeight();
 		width = getDefaultWidth();
+		platformerHeight = DEFAULT_PLATFORMER_HEIGHT;
+		platformerWidth = DEFAULT_PLATFORMER_WIDTH;
+		topDownHeight = DEFAULT_TOPDOWN_HEIGHT;
+		topDownWidth = DEFAULT_TOPDOWN_WIDTH;
 		setHitBoxAdjustmentY(getDefaultHitBoxAdjustmentY());
 
 	}
@@ -115,12 +119,6 @@ public class sheep extends unit {
 		if(random==1) {
 			bleet2.playSound(this.getX(), this.getY(), bleetRadius, DEFAULT_BLEET_VOLUME);
 		}
-		
-		// Squirt blood
-		int randomX = -width/3 + utility.RNG.nextInt(width/3);
-		int randomY = height/3 + utility.RNG.nextInt(height/2);
-		effect e = new bloodSquirt(getX() - bloodSquirt.getDefaultWidth()/2 + width/2 + randomX,
-				   getY() - bloodSquirt.getDefaultHeight()/2 + height/2 + randomY);
 	}
 	
 	// SHEEP AI moves SHEEP around for now.

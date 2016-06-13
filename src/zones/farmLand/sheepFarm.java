@@ -793,8 +793,6 @@ public class sheepFarm extends zone {
 		c = new barn(-950,-420,0);
 		spawnFence(-1038-6,-436,-1038-6,200+50); // Vertical, far left
 		farmer theFarmer = new farmer(-711,-267);
-		theFarmer.hasQuest(); 
-		theFarmer.noQuest();
 		theFarmer.setFacingDirection("Down");
 		c = new tree(-1017, -414, 1);
 		c = new tree(-1011, 0, 0);

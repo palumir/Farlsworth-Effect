@@ -17,11 +17,11 @@ import utilities.time;
 import utilities.utility;
 import zones.zone;
 
-public class bloodSquirt extends effect {
+public class critBloodSquirt extends effect {
 	
 	// Default dimensions.
-	public static int DEFAULT_SPRITE_WIDTH = 24;
-	public static int DEFAULT_SPRITE_HEIGHT = 24;
+	public static int DEFAULT_SPRITE_WIDTH = 47;
+	public static int DEFAULT_SPRITE_HEIGHT = 47;
 	
 	// Platformer real dimensions
 	public static int DEFAULT_PLATFORMER_HEIGHT = DEFAULT_SPRITE_WIDTH;
@@ -29,24 +29,25 @@ public class bloodSquirt extends effect {
 	public static int DEFAULT_PLATFORMER_ADJUSTMENT_Y = 0;
 	
 	// TopDown real dimensions
-	public static int DEFAULT_TOPDOWN_HEIGHT = 10;
-	public static int DEFAULT_TOPDOWN_WIDTH = 10;
-	public static int DEFAULT_TOPDOWN_ADJUSTMENT_Y = 15;
+	public static int DEFAULT_TOPDOWN_HEIGHT = DEFAULT_SPRITE_HEIGHT;
+	public static int DEFAULT_TOPDOWN_WIDTH = DEFAULT_SPRITE_WIDTH;
+	public static int DEFAULT_TOPDOWN_ADJUSTMENT_Y = 0;
 	
 	////////////////
 	/// DEFAULTS ///
 	////////////////
 	
 	// Default name.
-	private static String DEFAULT_EFFECT_NAME = "bloodSquirt";
+	private static String DEFAULT_EFFECT_NAME = "critBloodSquirt";
 	
 	// Effect sprite stuff.
 	private static String DEFAULT_EFFECT_SPRITESHEET = "images/effects/" + DEFAULT_EFFECT_NAME + ".png";
 	
 	// Duration
-	private static float DEFAULT_ANIMATION_DURATION = 0.3f;
+	private static float DEFAULT_ANIMATION_DURATION = 0.35f;
 	
 	// Effect sound
+	protected sound effectSound1 = new sound("sounds/effects/combat/splatter1.wav");
 	protected sound effectSound2 = new sound("sounds/effects/combat/splatter2.wav");
 	protected static float DEFAULT_VOLUME = 0.8f;
 	protected static int DEFAULT_SOUND_RADIUS = 1000;
@@ -73,11 +74,11 @@ public class bloodSquirt extends effect {
 	/// METHODS ///
 	///////////////
 	// Constructor
-	public bloodSquirt(int newX, int newY) {
+	public critBloodSquirt(int newX, int newY) {
 		super(theEffectType, newX, newY);
 		
 		// Set sound.
-		effectSound2.playSound(getX(), getY(), DEFAULT_SOUND_RADIUS, DEFAULT_VOLUME);
+		effectSound1.playSound(getX(), getY(), DEFAULT_SOUND_RADIUS, DEFAULT_VOLUME);
 		
 		// Make adjustments on hitbox if we're in topDown.
 		height = getDefaultHeight();

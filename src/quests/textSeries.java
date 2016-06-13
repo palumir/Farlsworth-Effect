@@ -1,0 +1,73 @@
+package quests;
+
+import java.util.ArrayList;
+
+public class textSeries {
+
+	/////////////////////
+	////// FIELDS ///////
+	/////////////////////
+	private String buttonText; // If there's no button, just display textOnPress and go next.
+	private String textOnPress;
+	private textSeries parent = null;
+	private ArrayList<textSeries> children;
+	private boolean isEnd = false;
+	
+	/////////////////////
+	////// METHODS //////
+	/////////////////////
+	
+	// Constructor
+	public textSeries(String newButtonText, String newTextOnPress) {
+		setButtonText(newButtonText);
+		setTextOnPress(newTextOnPress);
+		setChildren(new ArrayList<textSeries>());
+	}
+	
+	// Add child.
+	public textSeries addChild(String newButtonText, String newTextOnPress) {
+		textSeries child = new textSeries(newButtonText, newTextOnPress);
+		getChildren().add(child);
+		child.parent = this;
+		return child;
+	}
+	
+	// Add child.
+	public textSeries addChild(textSeries newChild) {
+		getChildren().add(newChild);
+		newChild.parent = this;
+		return newChild;
+	}
+	
+	public String getTextOnPress() {
+		return textOnPress;
+	}
+	
+	public void setEnd() {
+		isEnd = true;
+	}
+	
+	public boolean isEnd() {
+		return isEnd;
+	}
+
+	public void setTextOnPress(String textOnPress) {
+		this.textOnPress = textOnPress;
+	}
+
+	public String getButtonText() {
+		return buttonText;
+	}
+
+	public void setButtonText(String buttonText) {
+		this.buttonText = buttonText;
+	}
+
+	public ArrayList<textSeries> getChildren() {
+		return children;
+	}
+
+	public void setChildren(ArrayList<textSeries> children) {
+		this.children = children;
+	}
+}

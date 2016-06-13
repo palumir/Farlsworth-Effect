@@ -22,40 +22,42 @@ public class playerHealthBar extends interfaceObject  {
 	private int DEFAULT_HEALTHBAR_HEIGHT = 15;
 	
 	// Colors
-	private Color DEFAULT_HEALTH_COLOR = Color.green;
+	private Color DEFAULT_HEALTH_COLOR = new Color(6,228,1);
 	private Color DEFAULT_LOST_HEALTH_COLOR = Color.red;
 	private Color DEFAULT_BORDER_COLOR = new Color(85,58,30);
-	private Color DEFAULT_EXP_COLOR = Color.yellow;
-	private Color DEFAULT_LOST_EXP_COLOR = Color.black;
-	private Color DEFAULT_LEVEL_COLOR = Color.black;
-	private Color DEFAULT_OUTOF_COLOR = new Color(151,75,0);
+	private Color DEFAULT_EXP_COLOR = new Color(239,255,40);
+	private Color DEFAULT_LOST_EXP_COLOR = new Color(15,15,0);
+	private Color DEFAULT_LEVEL_COLOR = new Color(64,48,38);
+	private Color DEFAULT_OUTOF_COLOR = new Color(100,48,38);
 	
 	///////////////////////
 	////// FIELDS /////////
 	///////////////////////
-	private int maxHealth;
-	private int health;
 	
 	///////////////
 	/// METHODS ///
 	///////////////
 
 	// Constructor
-	public playerHealthBar(int newHealth, int newMaxHealth, int newX, int newY) {
+	public playerHealthBar(int newX, int newY) {
 		super(null, newX, newY, 1, 1);	
-		
-		// Set fields.
-		setHealth(newHealth);
-		setMaxHealth(newMaxHealth);
 	}
 	
 	// Draw the unit. 
 	@Override
 	public void drawObject(Graphics g) {
 		
+		// Set font.
+		g.setFont(drawnObject.DEFAULT_FONT);
+		
 		// Chunk width
-		int healthChunkSize = DEFAULT_HEALTHBAR_WIDTH/getMaxHealth();
-		int expChunkSize = DEFAULT_HEALTHBAR_WIDTH/player.expRequiredForLevel();
+		int healthChunkSize = 1;
+		int expChunkSize = 1;
+		if(player.getCurrentPlayer()!=null) {
+			healthChunkSize = (int)((float)player.getCurrentPlayer().getHealthPoints()/player.getCurrentPlayer().getMaxHealthPoints())*DEFAULT_HEALTHBAR_WIDTH;
+			expChunkSize = (int)((float)player.getCurrentPlayer().getExpIntoLevel()/(float)player.expRequiredForLevel()*DEFAULT_HEALTHBAR_WIDTH);
+		}
+
 		
 		// Draw the background.
 		g.drawImage(background, 
@@ -67,12 +69,12 @@ public class playerHealthBar extends interfaceObject  {
 		
 		// Draw player level.
 		int levelAdjustX = 9;
-		int levelAdjustY = 24;
+		int levelAdjustY = 22;
 		g.setColor(DEFAULT_LEVEL_COLOR);
-		g.drawString("Level", getX()+levelAdjustX, getY()+levelAdjustY);
+		g.drawString("Level", getX()+16+levelAdjustX-g.getFontMetrics().stringWidth("Level")/2, getY()+levelAdjustY+1);
 		
 		String levelText = "" + player.getCurrentPlayer().getPlayerLevel();
-		g.drawString(levelText, getX()+levelAdjustX + 16 - g.getFontMetrics().stringWidth(levelText)/2, getY()+levelAdjustY+15);
+		g.drawString(levelText, getX()+levelAdjustX + 16 - g.getFontMetrics().stringWidth(levelText)/2, getY()+levelAdjustY+14);
 		
 		// Adjustment
 		int hpAdjustX = 71;
@@ -80,7 +82,7 @@ public class playerHealthBar extends interfaceObject  {
 		
 		// HP
 		g.setColor(DEFAULT_HEALTH_COLOR);
-		g.drawString("HP", getX()+47, getY() + hpAdjustY+12);
+		g.drawString("HP", getX()+55, getY() + hpAdjustY+12);
 		
 		// Draw the red.
 		g.setColor(DEFAULT_LOST_HEALTH_COLOR);
@@ -90,13 +92,11 @@ public class playerHealthBar extends interfaceObject  {
 				   DEFAULT_HEALTHBAR_HEIGHT);
 		
 		// Draw the green chunks.
-		for(int i = 0; i < getHealth(); i++) {
-			g.setColor(DEFAULT_HEALTH_COLOR);
-			g.fillRect(getX() + healthChunkSize*i + hpAdjustX,
-					   getY() + hpAdjustY,
-					   healthChunkSize,
-					   DEFAULT_HEALTHBAR_HEIGHT);
-		}
+		g.setColor(DEFAULT_HEALTH_COLOR);
+		g.fillRect(getX()+ hpAdjustX,
+				   getY() + hpAdjustY,
+				   healthChunkSize,
+				   DEFAULT_HEALTHBAR_HEIGHT);
 		
 		// Draw health number
 		g.setColor(DEFAULT_OUTOF_COLOR);
@@ -118,7 +118,7 @@ public class playerHealthBar extends interfaceObject  {
 		
 		// Exp
 		g.setColor(DEFAULT_EXP_COLOR);
-		g.drawString("EXP", getX()+47, getY() + expAdjustY+12);
+		g.drawString("EXP", getX()+48, getY() + expAdjustY+12);
 		
 		// Draw the red.
 		g.setColor(DEFAULT_LOST_EXP_COLOR);
@@ -128,13 +128,11 @@ public class playerHealthBar extends interfaceObject  {
 				   DEFAULT_HEALTHBAR_HEIGHT);
 		
 		// Draw the yellow chunks.
-		for(int i = 0; i < player.getCurrentPlayer().getExpIntoLevel(); i++) {
-			g.setColor(DEFAULT_EXP_COLOR);
-			g.fillRect(getX() + expChunkSize*i + expAdjustX,
+		g.setColor(DEFAULT_EXP_COLOR);
+		g.fillRect(getX() + expAdjustX,
 					   getY() + expAdjustY,
 					   expChunkSize,
 					   DEFAULT_HEALTHBAR_HEIGHT);
-		}
 		
 		// Draw health number
 				g.setColor(DEFAULT_OUTOF_COLOR);
@@ -154,22 +152,6 @@ public class playerHealthBar extends interfaceObject  {
 	// Update unit
 	@Override
 	public void update() {
-	}
-
-	public int getHealth() {
-		return health;
-	}
-
-	public void setHealth(int health) {
-		this.health = health;
-	}
-
-	public int getMaxHealth() {
-		return maxHealth;
-	}
-
-	public void setMaxHealth(int maxHealth) {
-		this.maxHealth = maxHealth;
 	}
 	
 }

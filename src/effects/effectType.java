@@ -61,8 +61,14 @@ public class effectType {
 		// Set specifications.
 		setAnimationDuration(newDuration);
 		setName(newName);
-		setWidth(newSpriteSheet.getSpriteWidth());
-		setHeight(newSpriteSheet.getSpriteHeight());
+		if(newSpriteSheet == null) {
+			setWidth(1);
+			setHeight(1);
+		}
+		else {
+			setWidth(newSpriteSheet.getSpriteWidth());
+			setHeight(newSpriteSheet.getSpriteHeight());
+		}
 	}
 
 	/////////////////////////

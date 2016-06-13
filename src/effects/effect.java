@@ -57,22 +57,25 @@ public abstract class effect extends drawnObject  {
 		timeStarted = time.getTime();
 		animationDuration = e.getAnimationDuration();
 		
-		// Set-up animations.
-		animationPack newAnimationPack =  new animationPack();
-		
-		// Set each animation in the spritesheet to be +1 of eachother.
-		for(int i = 0; i < e.getEffectTypeSpriteSheet().getSprites().size(); i++) {
-			animation newAnimation = new animation(e.getName() + i, 
-					e.getEffectTypeSpriteSheet().getAnimation(i), 
-					0, 
-					e.getEffectTypeSpriteSheet().getSprites().get(i).size()-1, 
-					e.getAnimationDuration()); //TODO: plays over 1 second by defualt
-			newAnimationPack.addAnimation(newAnimation);
+		if(e.getEffectTypeSpriteSheet() != null) {
+			// Set-up animations.
+			animationPack newAnimationPack =  new animationPack();
+			
+			// Set each animation in the spritesheet to be +1 of eachother.
+			for(int i = 0; i < e.getEffectTypeSpriteSheet().getSprites().size(); i++) {
+				animation newAnimation = new animation(e.getName() + i, 
+						e.getEffectTypeSpriteSheet().getAnimation(i), 
+						0, 
+						e.getEffectTypeSpriteSheet().getSprites().get(i).size()-1, 
+						e.getAnimationDuration()); //TODO: plays over 1 second by defualt
+				newAnimationPack.addAnimation(newAnimation);
+			}
+			animations = newAnimationPack;
+			animation a = animations.selectRandomAnimation();
+			
+			// Set the animation.
+			currentAnimation = a;
 		}
-		animations = newAnimationPack;
-		animation a = animations.selectRandomAnimation();
-		// Set the animation.
-		currentAnimation = a;
 		typeOfEffect = e;
 	}
 	
@@ -89,7 +92,7 @@ public abstract class effect extends drawnObject  {
 	public void dealWithAnimations(int moveX, int moveY) {
 	}
 
-	// Draw the unit. 
+	// Draw the effect
 	@Override
 	public void drawObject(Graphics g) {
 		// Of course only draw if the animation is not null.

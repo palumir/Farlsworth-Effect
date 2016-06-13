@@ -1,5 +1,6 @@
 package drawing;
 
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -8,6 +9,7 @@ import java.util.Comparator;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import effects.effect;
+import effects.effectTypes.floatingNumber;
 import units.player;
 import units.unit;
 import userInterface.interfaceObject;
@@ -24,27 +26,38 @@ public abstract class drawnObject {
 	////////////////
 	/// DEFAULTS ///
 	////////////////
+
+	// Font
+	public static String DEFAULT_FONT_NAME = "TimesRoman";
+	public static int DEFAULT_FONT_SIZE = 12;
+	protected static Font DEFAULT_FONT = null;
+	
+	// Comparator
 	private static Comparator<drawnObject> yComparator = new Comparator<drawnObject>() {
 	    @Override
 	    public int compare(drawnObject d1, drawnObject d2) {
 	    	
-	    	// Draw interface objects over anything.
-	    	if(d1 instanceof interfaceObject) return 1;
-	    	if(d2 instanceof interfaceObject) return -1;
+	    	// Draw floating numbers over...
+	    	if(d1 instanceof floatingNumber && !(d2 instanceof floatingNumber)) return 10;
+	    	else if(d2 instanceof floatingNumber && !(d1 instanceof floatingNumber)) return -10;
 	    	
-	    	// Different comparator for drawing effects over things.
-	    	if(d1 instanceof effect && (d1.y + d1.height > d2.y)) return 1;
-	    	if(d2 instanceof effect && (d1.y < d2.y + d2.height)) return -1;
+	    	// Draw interface objects over...
+	    	else if(d1 instanceof interfaceObject && !(d2 instanceof interfaceObject)) return 9;
+	    	else if(d2 instanceof interfaceObject && !(d1 instanceof interfaceObject)) return -9;
+	    	
+	    	// Different comparator for drawing effects over...
+	    	else if(d1 instanceof effect && (d1.y + d1.height > d2.y) && !(d2 instanceof effect)) return 8;
+	    	else if(d2 instanceof effect && (d1.y < d2.y + d2.height) && !(d1 instanceof effect)) return -8;
 	    	
 	    	// Prioritize units walking over chunks
 	    	// and units walking in front of other units.
-	    	if(!(d1 instanceof groundTile) && d2 instanceof groundTile) return 1;
-	    	if(d1 instanceof groundTile && !(d2 instanceof groundTile)) return -1;
+	    	else if(!(d1 instanceof groundTile) && d2 instanceof groundTile) return 7;
+	    	else if(d1 instanceof groundTile && !(d2 instanceof groundTile)) return -7;
 	        	
 	        // Draw units closer to the camera first.
-	    	if(d1.y + d1.height > d2.y + d2.height) return 1;
-	    	if(d1.y + d1.height < d2.y + d2.height) return -1;
-	    	return 0;
+	    	else if(d1.y + d1.height > d2.y + d2.height) return 6;
+	    	else if(d1.y + d1.height < d2.y + d2.height) return -6;
+	    	else return 0;
 	    }
 	};
 	
@@ -121,6 +134,12 @@ public abstract class drawnObject {
 	
 	// Draw all objects.
 	public static void drawObjects(Graphics g) {
+		
+		// Set default font.
+		DEFAULT_FONT = new Font(DEFAULT_FONT_NAME, Font.PLAIN, DEFAULT_FONT_SIZE);
+		if(DEFAULT_FONT == null) 
+		g.setFont(DEFAULT_FONT); 
+		
 		if(objects != null) {
 			sortObjects();
 			for(int i = 0; i < objects.size(); i++) {

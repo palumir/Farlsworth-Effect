@@ -1,6 +1,7 @@
 package userInterface;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 
 import drawing.drawnObject;
@@ -11,7 +12,7 @@ public class text extends interfaceObject  {
 	////// FIELDS /////////
 	///////////////////////
 	private String theText;
-	private Color theColor;
+	protected Color theColor;
 	
 	///////////////
 	/// METHODS ///
@@ -29,6 +30,10 @@ public class text extends interfaceObject  {
 	// Draw the unit. 
 	@Override
 	public void drawObject(Graphics g) {
+		// Set font.
+		g.setFont(drawnObject.DEFAULT_FONT);
+		
+		// Color and string.
 		g.setColor(theColor);
 		g.drawString(getTheText(),
 				   getX(),

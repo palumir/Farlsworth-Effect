@@ -44,6 +44,10 @@ public class saveState implements Serializable {
 	private inventory playerInventory;
 	private weapon equippedWeapon;
 	
+	// Level and exp
+	private int playerLevel;
+	private int expIntoLevel;
+	
 	//////////////////////////////////////////
 	////// INDIVIDUAL ZONE SAVE DATA /////////
 	//////////////////////////////////////////
@@ -73,6 +77,8 @@ public class saveState implements Serializable {
 				s.setFacingDirection(currPlayer.getFacingDirection());
 				s.setPlayerInventory(currPlayer.getPlayerInventory());
 				s.setEquippedWeapon(currPlayer.getEquippedWeapon());
+				s.setPlayerLevel(currPlayer.getPlayerLevel());
+				s.setExpIntoLevel(currPlayer.getExpIntoLevel());
 				
 				// Open the streams.
 				FileOutputStream fileStream = new FileOutputStream(DEFAULT_SAVE_FILENAME);   
@@ -95,6 +101,10 @@ public class saveState implements Serializable {
 				// Write the equipped items to save file.
 				if(s.getEquippedWeapon() == null) objectStream.writeObject("None!");
 				else objectStream.writeObject(s.getEquippedWeapon().name);
+				
+				// Write the level and exp into level.
+				objectStream.writeObject(s.getPlayerLevel());
+				objectStream.writeObject(s.getExpIntoLevel());
 				
 				// Close the streams.
 			    objectStream.close();   
@@ -141,6 +151,10 @@ public class saveState implements Serializable {
 			// Write the equipped items to save file.
 			String equippedWeaponName = (String)objectStream.readObject();
 			s.setEquippedWeapon((weapon)item.getItemByName(equippedWeaponName));
+			
+			// Get level and exp
+			s.setPlayerLevel((int)objectStream.readObject());
+			s.setExpIntoLevel((int)objectStream.readObject());
 			
 			// Close the streams.
 		    objectStream.close();   
@@ -201,6 +215,22 @@ public class saveState implements Serializable {
 
 	public void setPlayerInventory(inventory playerInventory) {
 		this.playerInventory = playerInventory;
+	}
+
+	public int getPlayerLevel() {
+		return playerLevel;
+	}
+
+	public void setPlayerLevel(int playerLevel) {
+		this.playerLevel = playerLevel;
+	}
+
+	public int getExpIntoLevel() {
+		return expIntoLevel;
+	}
+
+	public void setExpIntoLevel(int expIntoLevel) {
+		this.expIntoLevel = expIntoLevel;
 	}
 	
 }

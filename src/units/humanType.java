@@ -13,8 +13,8 @@ public class humanType extends unitType {
 	/////////////////////////
 	
 	// Default dimensions.
-	private static int DEFAULT_UNIT_WIDTH = 24;
-	private static int DEFAULT_UNIT_HEIGHT = 20;
+	public static int DEFAULT_UNIT_WIDTH = 24;
+	public static int DEFAULT_UNIT_HEIGHT = 20;
 	
 	// Default sprite stuff
 	public static int DEFAULT_SPRITE_WIDTH = 64;

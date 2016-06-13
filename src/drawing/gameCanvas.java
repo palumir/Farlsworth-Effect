@@ -2,6 +2,7 @@ package drawing;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
@@ -27,6 +28,8 @@ public class gameCanvas extends JComponent {
 	////////////////////
 	///// DEFAULTS /////
 	////////////////////
+	
+	// Screen title.
 	private String DEFAULT_GAME_NAME = "Game";
 	
 	//////////////////

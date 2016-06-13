@@ -11,6 +11,8 @@ import drawing.drawnObject;
 import drawing.spriteSheet;
 import effects.effect;
 import effects.effectTypes.bloodSquirt;
+import effects.effectTypes.critBloodSquirt;
+import effects.effectTypes.floatingNumber;
 import modes.mode;
 import sounds.sound;
 import terrain.chunk;
@@ -43,7 +45,14 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 	private float DEFAULT_BAT = 1f;
 	private float DEFAULT_ATTACK_TIME = 1.5f;
 	private int DEFAULT_ATTACK_RANGE = 0;
+	private float DEFAULT_ATTACK_VARIABILITY = 0.2f; // How much the range of hits is. 20% both ways.
+	private float DEFAULT_CRIT_CHANCE = .10f;
+	private float DEFAULT_CRIT_DAMAGE = 2f;
 	protected boolean showAttackRange = false;
+	
+	// Colors for combat.
+	private Color DEFAULT_DAMAGE_COLOR = Color.white;
+	private Color DEFAULT_CRIT_COLOR = Color.yellow;
 	
 	// Sounds
 	protected static int DEFAULT_ATTACK_SOUND_RADIUS = 1000;
@@ -60,14 +69,36 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 	// The actual unit type.
 	protected unitType typeOfUnit;
 	
+	// Width and height for topDown and platformer
+	protected int topDownWidth = 0;
+	protected int topDownHeight = 0;
+	protected int platformerWidth = 0;
+	protected int platformerHeight = 0;
+
+	
 	// Combat
-	private int maxHealthPoints = DEFAULT_HP;
-	private int healthPoints = DEFAULT_HP;
+	// Health points
+	protected int maxHealthPoints = DEFAULT_HP;
+	protected int healthPoints = DEFAULT_HP;
+	
+	// Damage
 	private int attackDamage = DEFAULT_ATTACK_DAMAGE;
+	
+	// Attack time.
 	private float baseAttackTime = DEFAULT_BAT;
 	private float attackTime = DEFAULT_ATTACK_TIME;
+	
+	// Attack range.
 	private int attackWidth = DEFAULT_ATTACK_RANGE;
 	private int attackLength = DEFAULT_ATTACK_RANGE;
+	
+	// Unit stats.
+	protected float attackMultiplier = 1f;
+	protected float attackVariability = DEFAULT_ATTACK_VARIABILITY; // Percentage
+	protected float critChance = DEFAULT_CRIT_CHANCE;
+	protected float critDamage = DEFAULT_CRIT_DAMAGE;
+	
+	// Attacking/getting attacked mechanics
 	private boolean attackable = false;
 	private boolean attacking = false;
 	private boolean alreadyAttacked = false;
@@ -221,15 +252,40 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 				unit currentUnit = unitsToAttack.get(i);
 				
 				// Don't hit yourself.
-				if(this!=currentUnit) currentUnit.hurt(this.getAttackDamage());
+				if(this!=currentUnit) {
+					
+					// Hit for their damage times their multiplier.
+					float variabilityMult = 1f + attackVariability - ((float)utility.RNG.nextInt((int)(2*attackVariability*100))/100f);
+					int actualDamageDone = (int) (this.getAttackDamage()*attackMultiplier*variabilityMult);
+					
+					// Did we crit?
+					float crit = 1f;
+					if(critChance*100 >= utility.RNG.nextInt(100)) crit = critDamage;
+					currentUnit.hurt(actualDamageDone, crit);
+				}
 			}
 		}
 	}
 	
 	// Take damage. Ouch!
-	public void hurt(int damage) {
+	public void hurt(int damage, float crit) {
 		if(attackable) {
-			healthPoints -= damage;
+			healthPoints -= crit*damage;
+		}
+		
+		// Determine if crit or not and do damage.
+		if(crit != 1f) {
+			effect e = new floatingNumber((int) (crit*damage), DEFAULT_CRIT_COLOR, getX() + width/2, getY() + height/2);
+			effect blood = new critBloodSquirt(getX() - critBloodSquirt.getDefaultWidth()/2 + platformerWidth/2,
+					   getY() - critBloodSquirt.getDefaultHeight()/2);
+		}
+		else {
+			effect e = new floatingNumber(damage, DEFAULT_DAMAGE_COLOR, getX() + width/2, getY() + height/2);
+			// Squirt blood
+			int randomX = 0;
+			int randomY = -platformerHeight/3 + utility.RNG.nextInt(platformerHeight/3);
+			effect blood = new bloodSquirt(getX() - bloodSquirt.getDefaultWidth()/2 + platformerWidth/2 + randomX ,
+					   getY() - bloodSquirt.getDefaultHeight()/2 + platformerHeight/2 + randomY);
 		}
 		reactToPain();
 	}

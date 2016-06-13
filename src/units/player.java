@@ -18,6 +18,7 @@ import modes.mode;
 import modes.platformer;
 import modes.topDown;
 import sounds.sound;
+import userInterface.interactBox;
 import userInterface.playerHealthBar;
 import userInterface.text;
 import utilities.saveState;
@@ -32,7 +33,9 @@ public class player extends unit {
 	
 	// Default dimensions.
 	private static int DEFAULT_PLATFORMER_HEIGHT = 46;
+	private static int DEFAULT_PLATFORMER_WIDTH = humanType.DEFAULT_UNIT_WIDTH;
 	private static int DEFAULT_TOPDOWN_HEIGHT = 20;
+	private static int DEFAULT_TOPDOWN_WIDTH = humanType.DEFAULT_UNIT_WIDTH;
 	
 	// Platformer and topDown default adjustment
 	private static int DEFAULT_PLATFORMER_ADJUSTMENT_Y = 6;
@@ -118,7 +121,7 @@ public class player extends unit {
 	}
 	
 	// Player interface
-	private playerHealthBar healthBar = new playerHealthBar(getHealthPoints(),getMaxHealthPoints(),5,5);
+	private playerHealthBar healthBar = new playerHealthBar(5,5);
 
 	///////////////
 	/// METHODS ///
@@ -158,6 +161,15 @@ public class player extends unit {
 
 		// Combat.
 		setAttackable(true);
+		
+		// Set dimensions
+		height = getDefaultHeight();
+		width = getDefaultWidth();
+		platformerHeight = DEFAULT_PLATFORMER_HEIGHT;
+		platformerWidth = DEFAULT_PLATFORMER_WIDTH;
+		topDownHeight = DEFAULT_TOPDOWN_HEIGHT;
+		topDownWidth = DEFAULT_TOPDOWN_WIDTH;
+		setHitBoxAdjustmentY(getDefaultHitBoxAdjustmentY());
 	}
 	
 	// React to pain.
@@ -172,6 +184,7 @@ public class player extends unit {
 	// Player AI controls the interface
 	public void updateUnit() {
 		aliveOrDead();
+		levelUp();
 		updateInterface();
 	}
 	
@@ -191,10 +204,6 @@ public class player extends unit {
 	
 	// Update interface.
 	public void updateInterface() {
-		if(playerLoaded) {
-			healthBar.setHealth(getHealthPoints());
-			healthBar.setMaxHealth(getMaxHealthPoints());
-		}
 	}
 	
 	// Load player from save state.
@@ -214,6 +223,8 @@ public class player extends unit {
 		zone loadZone = null;
 		int playerX = 0;
 		int playerY = 0;
+		int newPlayerLevel = 1;
+		int newPlayerExpIntoLevel = 0;
 		String newFacingDirection = null;
 		inventory loadedInventory = new inventory(); // empty inventory
 		weapon loadedEquippedWeapon = null;
@@ -237,6 +248,8 @@ public class player extends unit {
 			newFacingDirection = s.getFacingDirection();
 			loadedInventory = s.getPlayerInventory();
 			loadedEquippedWeapon = s.getEquippedWeapon();
+			newPlayerLevel = s.getPlayerLevel();
+			newPlayerExpIntoLevel = s.getExpIntoLevel();
 		}
 		
 		// If the zone, z, is given, we should have all of these details.
@@ -253,7 +266,12 @@ public class player extends unit {
 		// Set our fields
 		thePlayer.setFacingDirection(newFacingDirection);
 		thePlayer.setPlayerInventory(loadedInventory);
+		thePlayer.setPlayerLevel(newPlayerLevel);
+		thePlayer.setExpIntoLevel(newPlayerExpIntoLevel);
 		if(loadedEquippedWeapon!=null) loadedEquippedWeapon.equip();
+		
+		// Update our player stats to match our level.
+		thePlayer.updateStats();
 		
 		// Set that we have loaded the player once.
 		playerLoaded = true;
@@ -282,42 +300,22 @@ public class player extends unit {
 	// Responding to key presses.
 	public void keyPressed(KeyEvent k) {
 		
+		// Respond to dialogue/interact presses.
+		if(interactBox.getCurrentDisplay() != null) {
+			interactBox.getCurrentDisplay().respondToKeyPress(k);
+		}
+		
 		// Player presses i (inventory) key.
-		if(k.getKeyCode() == KeyEvent.VK_I) { 
+		else if(k.getKeyCode() == KeyEvent.VK_I) { 
 			playerInventory.toggleDisplay();
 		}
 		
-		if(playerInventory.isDisplayOn()) {
-			// Player presses i (inventory) key.
-			if(k.getKeyCode() == KeyEvent.VK_ESCAPE) { 
-				playerInventory.toggleDisplay();
-			}
-			
-			// Player presses left key.
-			if(k.getKeyCode() == KeyEvent.VK_LEFT || k.getKeyCode() == KeyEvent.VK_A) { 
-				playerInventory.moveSelect("left");
-			}
-			
-			// Player presses right key.
-			if(k.getKeyCode() == KeyEvent.VK_RIGHT || k.getKeyCode() == KeyEvent.VK_D) { 
-				playerInventory.moveSelect("right");
-			}
-			
-			// Player presses up key
-			if(k.getKeyCode() == KeyEvent.VK_UP || k.getKeyCode() == KeyEvent.VK_W) { 
-				playerInventory.moveSelect("up");
-			}
-			
-			// Player presses down key
-			if(k.getKeyCode() == KeyEvent.VK_DOWN || k.getKeyCode() == KeyEvent.VK_S) { 
-				playerInventory.moveSelect("down");
-			}
-			
-			// Player presses e key.
-			if(k.getKeyCode() == KeyEvent.VK_E || k.getKeyCode() == KeyEvent.VK_SPACE) { 
-				playerInventory.equipSelectedItem();
-			}
+		// Respond to inventory presses.
+		else if(playerInventory.isDisplayOn()) {
+			playerInventory.respondToKeyPress(k);
 		}
+		
+		// Respond to other presses (movement)
 		else {
 			// Player presses left key.
 			if(k.getKeyCode() == KeyEvent.VK_LEFT || k.getKeyCode() == KeyEvent.VK_A) { 
@@ -363,9 +361,49 @@ public class player extends unit {
 			// TODO: TESTING STUFF.
 			//////////////////////////////////////
 			if(k.getKeyCode() == KeyEvent.VK_P) {
-				setHealthPoints(getHealthPoints() - 1);
+				giveExp(20);
 			}
 		}
+	}
+	
+	// Give exp
+	public void giveExp(int i) {
+		int expToNextLevel = expRequiredForLevel() - expIntoLevel;
+		
+		// If it will level us up.
+		if(i - expToNextLevel > 0) {
+			expIntoLevel = expRequiredForLevel();
+			levelUp();
+			giveExp(expToNextLevel - i);
+		}
+		
+		// Give exp
+		expIntoLevel += i;
+	}
+	
+	// Level up
+	public void levelUp() {
+		
+		// Level up if we have max exp
+		if(expIntoLevel >= expRequiredForLevel()) {
+			// TODO: play animation and noise?
+			expIntoLevel = 0;
+			playerLevel++;
+			updateStats();
+		}
+	}
+	
+	// Update stats.
+	public void updateStats() {
+		
+		// TODO: Formula for how much their attack increases per level.
+		attackMultiplier = 1f + 14*((float)(playerLevel - 1)/10f);
+		maxHealthPoints = 10 + (playerLevel - 1)*3;
+		
+		// Update health.
+		healthPoints = maxHealthPoints;
+		
+		// Change the healthbar.
 	}
 	
 	// Remove the weapon.
@@ -587,5 +625,35 @@ public class player extends unit {
 
 	public void setPlayerLevel(int playerLevel) {
 		this.playerLevel = playerLevel;
+	}
+	
+	// Get default width.
+	public static int getDefaultWidth() {
+		if(mode.getCurrentMode().equals("topDown")) {
+			return DEFAULT_TOPDOWN_WIDTH;
+		}
+		else {
+			return DEFAULT_PLATFORMER_WIDTH;
+		}
+	}
+	
+	// Get default height.
+	public static int getDefaultHeight() {
+		if(mode.getCurrentMode().equals("topDown")) {
+			return DEFAULT_TOPDOWN_HEIGHT;
+		}
+		else {
+			return DEFAULT_PLATFORMER_HEIGHT;
+		}
+	}
+	
+	// Get default hitbox adjustment Y.
+	public static int getDefaultHitBoxAdjustmentY() {
+		if(mode.getCurrentMode().equals("topDown")) {
+			return DEFAULT_TOPDOWN_ADJUSTMENT_Y;
+		}
+		else {
+			return DEFAULT_PLATFORMER_ADJUSTMENT_Y;
+		}
 	}
 }

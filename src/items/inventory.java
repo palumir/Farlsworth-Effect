@@ -2,9 +2,11 @@ package items;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
+import drawing.drawnObject;
 import drawing.gameCanvas;
 import drawing.spriteSheet;
 import sounds.sound;
@@ -33,10 +35,11 @@ public class inventory extends interfaceObject {
 	public static String DEFAULT_BOTTOM_TEXT = "Press \'e\' to equip";
 	
 	// Colors
-	public static Color DEFAULT_SLOT_COLOR = new Color(85,58,30);
-	public static Color DEFAULT_SLOT_BACKGROUND_COLOR = new Color(133,94,46);
+	public static Color DEFAULT_SLOT_COLOR = new Color(52,41,36);
+	public static Color DEFAULT_SLOT_BACKGROUND_COLOR = new Color(64,48,38);
 	public static Color DEFAULT_TEXT_COLOR = Color.white;
-	public static Color DEFAULT_SELECTED_SLOT_COLOR = new Color(73,58,7);
+	public static Color DEFAULT_SELECTED_SLOT_COLOR = new Color(122,96,84);
+	public static Color DEFAULT_DESC_COLOR = Color.black;
 	
 	//////////////
 	/// FIELDS ///
@@ -175,11 +178,46 @@ public class inventory extends interfaceObject {
 			}
 		}
 	}
+	
+	// Respond to key press.
+	public void respondToKeyPress(KeyEvent k) {
+		// Player presses i (inventory) key.
+		if(k.getKeyCode() == KeyEvent.VK_ESCAPE) { 
+			toggleDisplay();
+		}
+		
+		// Player presses left key.
+		if(k.getKeyCode() == KeyEvent.VK_LEFT || k.getKeyCode() == KeyEvent.VK_A) { 
+			moveSelect("left");
+		}
+		
+		// Player presses right key.
+		if(k.getKeyCode() == KeyEvent.VK_RIGHT || k.getKeyCode() == KeyEvent.VK_D) { 
+			moveSelect("right");
+		}
+		
+		// Player presses up key
+		if(k.getKeyCode() == KeyEvent.VK_UP || k.getKeyCode() == KeyEvent.VK_W) { 
+			moveSelect("up");
+		}
+		
+		// Player presses down key
+		if(k.getKeyCode() == KeyEvent.VK_DOWN || k.getKeyCode() == KeyEvent.VK_S) { 
+			moveSelect("down");
+		}
+		
+		// Player presses e key.
+		if(k.getKeyCode() == KeyEvent.VK_E || k.getKeyCode() == KeyEvent.VK_SPACE) { 
+			equipSelectedItem();
+		}
+	}
 
 	// Draw the inventory.
 	@Override
 	public void drawObject(Graphics g) {
 		if(isDisplayOn()) {
+			// Set font.
+			g.setFont(drawnObject.DEFAULT_FONT);
 			
 			// Draw the inventory background.
 			g.drawImage(inventoryBackground, 
@@ -238,7 +276,7 @@ public class inventory extends interfaceObject {
 								null);
 						
 						// Set color
-						g.setColor(DEFAULT_SELECTED_SLOT_COLOR);
+						g.setColor(DEFAULT_SLOT_COLOR);
 						
 						// Get parameters.
 						
@@ -246,24 +284,28 @@ public class inventory extends interfaceObject {
 						if(selectedSlot == i*Math.sqrt(DEFAULT_INVENTORY_SIZE) + j) {
 
 							// Draw the item information on the right
-							g.drawString(stringUtils.toTitleCase(currentItem.name), getX() + (int) (Math.sqrt(DEFAULT_INVENTORY_SIZE)*DEFAULT_SLOT_SIZE) + 10 + adjustX, getY()+ 34 + adjustY);
+							String weaponName = stringUtils.toTitleCase(currentItem.name);
+							g.drawString(weaponName, getX() + (int) (Math.sqrt(DEFAULT_INVENTORY_SIZE)*DEFAULT_SLOT_SIZE) + 38 + adjustX - g.getFontMetrics().stringWidth(weaponName)/2, getY()+ 34 + adjustY);
 							
 							// Draw weapon information.
 							if(currentItem instanceof weapon) {
+								g.setColor(DEFAULT_DESC_COLOR);
 								weapon currentWeapon = (weapon)currentItem;
-								g.drawString("Damage: " + currentWeapon.attackDamage, getX() + (int) (Math.sqrt(DEFAULT_INVENTORY_SIZE)*DEFAULT_SLOT_SIZE) + 10 + adjustX, getY()+ 34 + adjustY + 20);
-								g.drawString("Speed: " + currentWeapon.speed, getX() + (int) (Math.sqrt(DEFAULT_INVENTORY_SIZE)*DEFAULT_SLOT_SIZE) + 10 + adjustX, getY()+ 34 + adjustY + 34);
-								g.drawString("Range: " + currentWeapon.range, getX() + (int) (Math.sqrt(DEFAULT_INVENTORY_SIZE)*DEFAULT_SLOT_SIZE) + 10 + adjustX, getY()+ 34 + adjustY + 48);
+								g.drawString("Damage: " + currentWeapon.attackDamage, getX() + (int) (Math.sqrt(DEFAULT_INVENTORY_SIZE)*DEFAULT_SLOT_SIZE) + 38 + adjustX - g.getFontMetrics().stringWidth("Damage: " + currentWeapon.attackDamage)/2, getY()+ 34 + adjustY + 20);
+								g.drawString("Speed: " + currentWeapon.speed, getX() + (int) (Math.sqrt(DEFAULT_INVENTORY_SIZE)*DEFAULT_SLOT_SIZE) + 38 + adjustX - g.getFontMetrics().stringWidth("Speed: " + currentWeapon.speed)/2, getY()+ 34 + adjustY + 34);
+								g.drawString("Range: " + currentWeapon.range, getX() + (int) (Math.sqrt(DEFAULT_INVENTORY_SIZE)*DEFAULT_SLOT_SIZE) + 38 + adjustX - g.getFontMetrics().stringWidth("Range: " + currentWeapon.range)/2, getY()+ 34 + adjustY + 48);
 								
 								// Press e to equip.
-								g.drawString(DEFAULT_BOTTOM_TEXT, getX() - 7 + (int) (Math.sqrt(DEFAULT_INVENTORY_SIZE)*DEFAULT_SLOT_SIZE) + adjustX, getY()+ 34 + adjustY + 140);
+								g.drawString(DEFAULT_BOTTOM_TEXT, getX() + 38 - g.getFontMetrics().stringWidth(DEFAULT_BOTTOM_TEXT)/2 + (int) (Math.sqrt(DEFAULT_INVENTORY_SIZE)*DEFAULT_SLOT_SIZE) + adjustX, getY()+ 34 + adjustY + 140);
 							}
 						
 						}
 						else {
 							
 							// Draw empty slot.
-							g.drawString(stringUtils.toTitleCase(DEFAULT_EMPTY_SLOT), getX() + (int) (Math.sqrt(DEFAULT_INVENTORY_SIZE)*DEFAULT_SLOT_SIZE) + 10 + adjustX, getY()+ 34  + adjustY);
+							g.setColor(DEFAULT_DESC_COLOR);
+							String emptySlot = stringUtils.toTitleCase(DEFAULT_EMPTY_SLOT);
+							g.drawString(emptySlot, getX() + (int) (Math.sqrt(DEFAULT_INVENTORY_SIZE)*DEFAULT_SLOT_SIZE) + 38 + adjustX - g.getFontMetrics().stringWidth(emptySlot)/2, getY()+ 34  + adjustY);
 						}
 						x++;
 					}

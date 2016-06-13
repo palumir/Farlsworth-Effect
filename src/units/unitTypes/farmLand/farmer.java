@@ -6,9 +6,13 @@ import drawing.camera;
 import effects.effect;
 import effects.effectTypes.bloodSquirt;
 import modes.mode;
+import quests.quest;
+import quests.textSeries;
 import units.humanType;
 import units.unit;
 import units.unitType;
+import userInterface.interactBox;
+import utilities.stringUtils;
 import utilities.time;
 import utilities.utility;
 import zones.zone;
@@ -17,7 +21,9 @@ public class farmer extends unit {
 	
 	// Default dimensions.
 	private static int DEFAULT_PLATFORMER_HEIGHT = 46;
+	private static int DEFAULT_PLATFORMER_WIDTH = humanType.DEFAULT_UNIT_WIDTH;
 	private static int DEFAULT_TOPDOWN_HEIGHT = 20;
+	private static int DEFAULT_TOPDOWN_WIDTH = humanType.DEFAULT_UNIT_WIDTH;
 	
 	// Platformer and topdown default adjustment
 	private static int DEFAULT_PLATFORMER_ADJUSTMENT_Y = 6;
@@ -28,7 +34,7 @@ public class farmer extends unit {
 	////////////////
 	
 	// Default name.
-	private static String FARMER = "farmer";
+	private static String unitName = "farmer";
 	
 	// Default movespeed.
 	private static int DEFAULT_FARMER_MOVESPEED = 1;
@@ -51,9 +57,8 @@ public class farmer extends unit {
 	/// FIELDS ///
 	//////////////
 	
-	// AI stuff.
-	private Long AILastCheck = 0l; // milliseconds
-	private Float AICheckInterval = 1f; // seconds
+	// Interacting with farmer.
+	public quest farlsworthQuest;
 	
 	///////////////
 	/// METHODS ///
@@ -66,32 +71,173 @@ public class farmer extends unit {
 		interactable = true;
 		
 		// Make adjustments on hitbox if we're in topDown.
-		if(mode.getCurrentMode().equals("topDown")) {
-			height = DEFAULT_TOPDOWN_HEIGHT;
-			setHitBoxAdjustmentY(DEFAULT_TOPDOWN_ADJUSTMENT_Y);
-		}
-		else {
-			height = DEFAULT_PLATFORMER_HEIGHT;
-			setHitBoxAdjustmentY(DEFAULT_PLATFORMER_ADJUSTMENT_Y);
-		}
+		// Set dimensions
+		height = getDefaultHeight();
+		width = getDefaultWidth();
+		platformerHeight = DEFAULT_PLATFORMER_HEIGHT;
+		platformerWidth = DEFAULT_PLATFORMER_WIDTH;
+		topDownHeight = DEFAULT_TOPDOWN_HEIGHT;
+		topDownWidth = DEFAULT_TOPDOWN_WIDTH;
+		setHitBoxAdjustmentY(getDefaultHitBoxAdjustmentY());
 		setFacingDirection("Down");
+		
+		// Create quest.
+		farlsworthQuest = makeQuest();
+		hasQuest();
+	}
+	
+	// Create conversation
+	public quest makeQuest() {
+		
+		// Description
+		String DEFAULT_QUEST_DESC = "Retrieve Farlsworth's wool";
+		
+		// Placeholder for each individual textSeries.
+		textSeries s;
+		
+		// Start of conversation.
+		textSeries startOfConversation = new textSeries(null, "For flock's sake ...");
+		s = startOfConversation.addChild(null, "These sheep wool be the death of me.");
+		s = s.addChild(null, "The shear thought of collecting more wool pains me.");
+		s = s.addChild(null, "If only there was someone conveniently looking for a quest ...");
+		textSeries firstSpeakToFarmer = s.addChild(null, "... who wool-d help me.");
+		
+		
+		// Path 1
+		textSeries noPuns = firstSpeakToFarmer.addChild("Stop the puns.", " Sorry. It gets pretty boring around here.");
+		s = noPuns.addChild(null, "When I was young I wanted to be a marine biologist.");
+		s = s.addChild(null, "But life happens, things change.");
+		s = s.addChild(null,"Anyway, about that wool...");
+		s = s.addChild(null, "I require wool from a particular sheep.");
+		s = s.addChild(null, "He never makes it easy.");
+		s = s.addChild(null, "But he needs to be sheared.");
+		s = s.addChild(null, "You'll find him in the pen to the far East.");
+		s = s.addChild(null, "Can you collect his wool?");
+		
+		// Saying yes.
+		textSeries yes = s.addChild("Yes.","Great. Good luck!");
+		
+		// Saying no to path 1.
+		textSeries noHelp = s.addChild("No.","Please?");
+		
+		// Keep saying no like an asshole.
+		noHelp.addChild(yes);
+		s = noHelp.addChild("No.","I'll make it worth your while.");
+		s.addChild(yes);
+		s = s.addChild("No.","Come on...");
+		s.addChild(yes);
+		s = s.addChild("No.","Well, why not?");
+		s.addChild(yes);
+		s = s.addChild("No.","That doesn't even make any sense.");
+		s.addChild(yes);
+		s = s.addChild("No.","I'll get somebody else to do the quest then.");
+		s.addChild(yes);
+		s = s.addChild("No.","What are you even doing here anymore?");
+		s.addChild(yes);
+		s = s.addChild("No.","Go away.");
+		s.addChild(yes);
+		s = s.addChild("No.","What's your problem?");
+		s.addChild(yes);
+		s = s.addChild("No.","I just don't understand.");
+		s.addChild(yes);
+		s = s.addChild("No.","Madam, you are harassing me.");
+		s.addChild(yes);
+		s = s.addChild("No.","Leave me alone.");
+		s.addChild(yes);
+		s = s.addChild("No.","Can you please just take the quest?");
+		s.addChild(yes);
+		s = s.addChild("No.","Can you please just take the quest?");
+		s.addChild(yes);
+		s = s.addChild("No.","Can you please just take the quest?");
+		s.addChild(yes);
+		s = s.addChild("No.","Can you please just take the quest?");
+		s.addChild(yes);
+		s = s.addChild("No.","Can you please just take the quest?");
+		s.addChild(yes);
+		s = s.addChild("No.","Oh, COME ON. How can you STILL possibly be saying no?");
+		s.addChild(yes);
+		s = s.addChild("No.","Go see a therapist.");
+		s.addChild(yes);
+		s = s.addChild("No.","At what point does this end?");
+		s.addChild(yes);
+		s = s.addChild("No.","You can't say no forever.");
+		s.addChild(yes);
+		s = s.addChild("No.","Actually, you can.");
+		s.addChild(yes);
+		s.addChild(s);
+		
+		// Path 2
+		textSeries morePuns = firstSpeakToFarmer.addChild("I can collect your wool.", "Well ...");
+		s = morePuns.addChild(null, "I require wool from a particular sheep.");
+		s = s.addChild(null, "He's quite ...");
+		s = s.addChild(null, "... sheepish, to say the least.");
+		s = s.addChild(null, "Wait, is that even a pun?");
+		s = s.addChild(null, "Whatever, man. Coming up with puns isn't easy.");
+		s = s.addChild(null, "Anyway, this particular sheep is difficult.");
+		s = s.addChild(null, "But he needs to be sheared.");
+		s = s.addChild(null, "You'll find him in the pen to the far East.");
+		s = s.addChild(null, "Can you collect his wool?");
+		s.addChild(yes);
+		s.addChild(noHelp);
+		yes.setEnd();
+		
+		return new quest(DEFAULT_QUEST_DESC, this, new interactBox(startOfConversation, stringUtils.toTitleCase(unitName)));
+	}
+	
+	// Quest stuff.
+	public void doQuestStuff() {
+
+		// If we have reached the end of our quest conversation (and they clicked yes, of course, since it's all they can do.)
+		if(!farlsworthQuest.completed() && farlsworthQuest.getInteractBox().getTheText().isEnd()) {
+			farlsworthQuest.startQuest();
+		}
 	}
 	
 	// Interact with object. Should be over-ridden.
 	public void interactWith() {
-		System.out.println("Hello I'm farmer fart");
+		if(!farlsworthQuest.completed()) farlsworthQuest.getInteractBox().toggleDisplay();
 	}
 	
 	// React to pain.
 	public void reactToPain() {
-		// Squirt blood
-		int randomX = -width/3 + utility.RNG.nextInt(width/3);
-		int randomY = -height/2 + utility.RNG.nextInt(height/2);
-		effect e = new bloodSquirt(getX() - bloodSquirt.getDefaultWidth()/2 + width/2 + randomX,
-				   getY() - bloodSquirt.getDefaultHeight()/2 + height/2 + randomY);
 	}
 	
 	// Does nothing yet.
 	public void updateUnit() {
+		doQuestStuff();
+	}
+	
+	///////////////////////////
+	/// GETTERS AND SETTERS ///
+	///////////////////////////
+	
+	// Get default width.
+	public static int getDefaultWidth() {
+		if(mode.getCurrentMode().equals("topDown")) {
+			return DEFAULT_TOPDOWN_WIDTH;
+		}
+		else {
+			return DEFAULT_PLATFORMER_WIDTH;
+		}
+	}
+	
+	// Get default height.
+	public static int getDefaultHeight() {
+		if(mode.getCurrentMode().equals("topDown")) {
+			return DEFAULT_TOPDOWN_HEIGHT;
+		}
+		else {
+			return DEFAULT_PLATFORMER_HEIGHT;
+		}
+	}
+	
+	// Get default hitbox adjustment Y.
+	public static int getDefaultHitBoxAdjustmentY() {
+		if(mode.getCurrentMode().equals("topDown")) {
+			return DEFAULT_TOPDOWN_ADJUSTMENT_Y;
+		}
+		else {
+			return DEFAULT_PLATFORMER_ADJUSTMENT_Y;
+		}
 	}
 }
