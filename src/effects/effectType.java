@@ -2,9 +2,9 @@ package effects;
 
 import java.awt.Color;
 
-import animation.animation;
-import animation.animationPack;
 import drawing.spriteSheet;
+import drawing.animation.animation;
+import drawing.animation.animationPack;
 import drawing.spriteSheet.spriteSheetInfo;
 
 public class effectType {

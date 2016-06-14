@@ -1,4 +1,4 @@
-package animation;
+package drawing.animation;
 
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;

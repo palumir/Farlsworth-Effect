@@ -3,6 +3,8 @@ package terrain.doodads.farmLand;
 import java.util.Random;
 
 import drawing.camera;
+import drawing.userInterface.interactBox;
+import interactions.textSeries;
 import modes.mode;
 import terrain.chunk;
 import terrain.chunkType;
@@ -10,6 +12,7 @@ import terrain.generalChunkType;
 import units.humanType;
 import units.unit;
 import units.unitType;
+import utilities.stringUtils;
 import utilities.time;
 import zones.zone;
 
@@ -24,6 +27,9 @@ public class horizontalGate extends chunk {
 	
 	// Sprite stuff.
 	private static String DEFAULT_CHUNK_SPRITESHEET = "images/doodads/farmLand/"+ DEFAULT_CHUNK_NAME + ".png";
+	
+	// Sequence for fences.
+	private interactBox interactSequence;
 	
 	// Dimensions
 	public static int DEFAULT_CHUNK_WIDTH = 46;
@@ -49,6 +55,40 @@ public class horizontalGate extends chunk {
 		}
 		setPassable(false);
 		if(i==1) setPassable(true);
+		interactable = true;
+	}
+	
+	// Create interact sequence
+	public interactBox makeNormalInteractSequence() {
+		
+		// Placeholder for each individual textSeries.
+		textSeries s;
+					
+		// Start of conversation.
+		textSeries startOfConversation = null;
+			
+		// Start of conversation.
+		startOfConversation = new textSeries("StartWithButtons", "StartWithButtons");
+		s = startOfConversation.addChild("Open", "You don't have the key.");
+		s.setEnd();
+		
+		return new interactBox(startOfConversation, "Gate");
+	}
+	
+	// Interact stuff.
+	public void doInteractStuff() {
+	}
+	
+	// Update
+	@Override
+	public void update() {
+		doInteractStuff();
+	}
+	
+	// Interact with object. Should be over-ridden.
+	public void interactWith() { 
+		interactSequence = makeNormalInteractSequence();
+		interactSequence.toggleDisplay();
 	}
 	
 	// Open the gate

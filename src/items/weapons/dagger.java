@@ -3,9 +3,9 @@ package items.weapons;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
-import animation.animation;
-import animation.animationPack;
 import drawing.spriteSheet;
+import drawing.animation.animation;
+import drawing.animation.animationPack;
 import drawing.spriteSheet.spriteSheetInfo;
 import items.item;
 import items.weapon;

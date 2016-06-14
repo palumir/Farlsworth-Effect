@@ -4,11 +4,11 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
 
-import animation.animation;
-import animation.animationPack;
 import drawing.camera;
 import drawing.drawnObject;
 import drawing.spriteSheet;
+import drawing.animation.animation;
+import drawing.animation.animationPack;
 import effects.effect;
 import effects.effectTypes.bloodSquirt;
 import effects.effectTypes.critBloodSquirt;
@@ -138,7 +138,7 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 	public unit(unitType u, int newX, int newY) {
 		super(u.getUnitTypeSpriteSheet(), newX, newY, u.getWidth(), u.getHeight());	
 		setAnimations(u.getAnimations());
-		moveSpeed = u.getMoveSpeed();
+		setMoveSpeed(u.getMoveSpeed());
 		jumpSpeed = u.getJumpSpeed();
 		typeOfUnit = u;
 	}
@@ -272,18 +272,19 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 			healthPoints -= crit*damage;
 		}
 		
-		// Determine if crit or not and do damage.
+		// Crit
 		if(crit != 1f) {
 			effect e = new floatingNumber((int) (crit*damage), DEFAULT_CRIT_COLOR, getX() + width/2, getY() + height/2);
-			effect blood = new critBloodSquirt(getX() - critBloodSquirt.getDefaultWidth()/2 + platformerWidth/2,
+			effect blood = new critBloodSquirt(getX() - critBloodSquirt.getDefaultWidth()/2 + topDownWidth/2,
 					   getY() - critBloodSquirt.getDefaultHeight()/2);
 		}
+		// Non crit.
 		else {
 			effect e = new floatingNumber(damage, DEFAULT_DAMAGE_COLOR, getX() + width/2, getY() + height/2);
 			// Squirt blood
 			int randomX = 0;
 			int randomY = -platformerHeight/3 + utility.RNG.nextInt(platformerHeight/3);
-			effect blood = new bloodSquirt(getX() - bloodSquirt.getDefaultWidth()/2 + platformerWidth/2 + randomX ,
+			effect blood = new bloodSquirt(getX() - bloodSquirt.getDefaultWidth()/2 + topDownWidth/2 + randomX ,
 					   getY() - bloodSquirt.getDefaultHeight()/2 + platformerHeight/2 + randomY);
 		}
 		reactToPain();
@@ -328,13 +329,13 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 		int moveY = 0;
 		
 		// Actual movement.
-		if(movingLeft) moveX -= moveSpeed;
-		if(movingRight) moveX += moveSpeed;
+		if(movingLeft) moveX -= getMoveSpeed();
+		if(movingRight) moveX += getMoveSpeed();
 		
 		// Only do these ones if we're in topDown mode.
 		if(mode.getCurrentMode() == "topDown") {
-			if(movingUp) moveY -= moveSpeed;
-			if(movingDown) moveY += moveSpeed;
+			if(movingUp) moveY -= getMoveSpeed();
+			if(movingDown) moveY += getMoveSpeed();
 		}
 		
 		// Deal with direction facing.
@@ -450,7 +451,7 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 				}
 				
 				// Are we entering the air (by a significant amount?)
-				if(Math.abs(actualMoveY) > moveSpeed) {
+				if(Math.abs(actualMoveY) > getMoveSpeed()) {
 					inAir = true;
 				}
 			}
@@ -782,6 +783,14 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 
 	public void setMaxHealthPoints(int maxHealthPoints) {
 		this.maxHealthPoints = maxHealthPoints;
+	}
+
+	public int getMoveSpeed() {
+		return moveSpeed;
+	}
+
+	public void setMoveSpeed(int moveSpeed) {
+		this.moveSpeed = moveSpeed;
 	}
 	
 }

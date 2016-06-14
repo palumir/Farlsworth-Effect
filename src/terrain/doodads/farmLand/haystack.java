@@ -3,15 +3,16 @@ package terrain.doodads.farmLand;
 import java.util.Random;
 
 import drawing.camera;
+import drawing.userInterface.interactBox;
+import interactions.gag;
+import interactions.textSeries;
 import modes.mode;
-import quests.textSeries;
 import terrain.chunk;
 import terrain.chunkType;
 import terrain.generalChunkType;
 import units.humanType;
 import units.unit;
 import units.unitType;
-import userInterface.interactBox;
 import utilities.stringUtils;
 import utilities.time;
 import zones.zone;
@@ -39,14 +40,14 @@ public class haystack extends chunk {
 	/// FIELDS /////
 	////////////////
 	
-	// Sequence for all haystacks.
+	// Sequence for haystacks.
 	private interactBox interactSequence;
 	
 	// For the needle interaction.
 	private int timesSearched = 0;
 	private boolean setNextSearch = false;
 	private boolean strange = false;
-	private static boolean hayChanged = false; // Needle joke experienced.
+	private static gag needleJoke;
 	
 	///////////////
 	/// METHODS ///
@@ -62,7 +63,7 @@ public class haystack extends chunk {
 		textSeries startOfConversation = null;
 		
 		// Hay not changed.
-		if(!isHayChanged()) {
+		if(needleJoke != null && !needleJoke.isCompleted()) {
 			
 			// Start of conversation.
 			startOfConversation = new textSeries("StartWithButtons", "StartWithButtons");
@@ -86,6 +87,9 @@ public class haystack extends chunk {
 	
 	// Create interact sequence
 	public interactBox makeStrangeInteractSequence() {
+		
+		// Load the gag.
+		if(needleJoke == null) needleJoke = new gag("needleJoke"); // Needle joke experienced.
 		
 		// Placeholder for each individual textSeries.
 		textSeries s;
@@ -135,11 +139,11 @@ public class haystack extends chunk {
 		}
 
 		// If we are the strange haystack and have searched 6 times, destroy it.
-		if(strange && timesSearched >= 6) {
+		if(strange && (needleJoke.isCompleted() || timesSearched >= 6)) {
 			
 			// Spawn a needleStack.
 			needlestack n = new needlestack(getX(), getY(), 0);
-			setHayChanged(true);
+			needleJoke.setCompleted(true);
 			
 			// Destroy this.
 			this.destroy();
@@ -186,13 +190,5 @@ public class haystack extends chunk {
 		
 		// Passable.
 		setPassable(false);
-	}
-
-	public static boolean isHayChanged() {
-		return hayChanged;
-	}
-
-	public static void setHayChanged(boolean hayChanged) {
-		haystack.hayChanged = hayChanged;
 	}
 }

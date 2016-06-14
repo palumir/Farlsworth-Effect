@@ -1,4 +1,4 @@
-package userInterface;
+package drawing.userInterface;
 
 import java.awt.image.BufferedImage;
 

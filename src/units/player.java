@@ -4,24 +4,25 @@ import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
-import animation.animation;
-import animation.animationPack;
 import drawing.camera;
 import drawing.drawnObject;
+import drawing.animation.animation;
+import drawing.animation.animationPack;
+import drawing.userInterface.interactBox;
+import drawing.userInterface.inventory;
+import drawing.userInterface.playerHealthBar;
+import drawing.userInterface.text;
 import effects.effect;
 import effects.effectTypes.bloodSquirt;
+import interactions.gag;
+import interactions.quest;
 import items.item;
 import items.weapon;
 import main.main;
 import modes.mode;
 import modes.platformer;
 import modes.topDown;
-import quests.quest;
 import sounds.sound;
-import userInterface.interactBox;
-import userInterface.inventory;
-import userInterface.playerHealthBar;
-import userInterface.text;
 import utilities.saveState;
 import utilities.utility;
 import zones.zone;
@@ -130,7 +131,7 @@ public class player extends unit {
 	///////////////
 	/// METHODS ///
 	///////////////
-	
+
 	// Constructor
 	public player(int newX, int newY, zone z) {
 		super(playerType, newX, newY);
@@ -139,6 +140,7 @@ public class player extends unit {
 		//showUnitPosition();
 		//showHitBox();
 		//setCollision(false);
+		//setMoveSpeed(10);
 		//showAttackRange(); 
 		
 		// Set sounds.
@@ -223,7 +225,7 @@ public class player extends unit {
 		quest.loadQuestData();
 		
 		// Load jokes.
-		//loadJokeData();
+		gag.loadGagData();
 		
 		// Load the player into the zone.
 		thePlayer.playerZone.loadZone();

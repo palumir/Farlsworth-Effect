@@ -1,4 +1,4 @@
-package userInterface;
+package drawing.userInterface;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -9,7 +9,7 @@ import java.awt.image.BufferedImage;
 import drawing.drawnObject;
 import drawing.gameCanvas;
 import drawing.spriteSheet;
-import quests.textSeries;
+import interactions.textSeries;
 import sounds.sound;
 
 public class interactBox extends interfaceObject  {

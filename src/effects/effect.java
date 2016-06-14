@@ -4,11 +4,11 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
 
-import animation.animation;
-import animation.animationPack;
 import drawing.camera;
 import drawing.drawnObject;
 import drawing.spriteSheet;
+import drawing.animation.animation;
+import drawing.animation.animationPack;
 import modes.mode;
 import sounds.sound;
 import terrain.chunk;

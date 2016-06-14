@@ -3,8 +3,9 @@ package terrain.chunkTypes;
 import java.util.Random;
 
 import drawing.camera;
+import drawing.userInterface.interactBox;
+import interactions.textSeries;
 import modes.mode;
-import quests.textSeries;
 import terrain.chunk;
 import terrain.chunkType;
 import terrain.generalChunkType;
@@ -14,7 +15,6 @@ import units.humanType;
 import units.player;
 import units.unit;
 import units.unitType;
-import userInterface.interactBox;
 import utilities.saveState;
 import utilities.stringUtils;
 import utilities.time;

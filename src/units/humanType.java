@@ -1,8 +1,8 @@
 package units;
 
-import animation.animation;
-import animation.animationPack;
 import drawing.spriteSheet;
+import drawing.animation.animation;
+import drawing.animation.animationPack;
 import drawing.spriteSheet.spriteSheetInfo;
 import modes.mode;
 

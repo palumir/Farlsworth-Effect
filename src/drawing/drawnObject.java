@@ -8,11 +8,11 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import drawing.userInterface.interfaceObject;
 import effects.effect;
 import effects.effectTypes.floatingNumber;
 import units.player;
 import units.unit;
-import userInterface.interfaceObject;
 import modes.mode;
 import terrain.chunk;
 import terrain.groundTile;

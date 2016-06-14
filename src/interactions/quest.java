@@ -1,4 +1,4 @@
-package quests;
+package interactions;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -7,11 +7,11 @@ import java.util.ArrayList;
 
 import drawing.drawnObject;
 import drawing.gameCanvas;
+import drawing.userInterface.interactBox;
+import drawing.userInterface.interfaceObject;
+import drawing.userInterface.text;
 import units.player;
 import units.unit;
-import userInterface.interactBox;
-import userInterface.interfaceObject;
-import userInterface.text;
 import utilities.saveState;
 
 public class quest extends text {
@@ -25,8 +25,8 @@ public class quest extends text {
 	
 	// Dimensions and color.
 	public static Color DEFAULT_QUEST_COLOR = Color.white;
-	public static int DEFAULT_X = gameCanvas.getDefaultWidth()/2;
-	public static int DEFAULT_Y = gameCanvas.getDefaultHeight()/2;
+	public static int DEFAULT_X = gameCanvas.getDefaultWidth()/35;
+	public static int DEFAULT_Y = gameCanvas.getDefaultHeight()/6;
 
 	/////////////////////
 	////// FIELDS ///////
@@ -69,9 +69,6 @@ public class quest extends text {
 			}
 		}
 		
-		// If the quest is started, move to the end of the dialogue.
-		
-		
 		// Add the loaded quest the list.
 		loadedQuests.add(this);
 	}
@@ -84,7 +81,7 @@ public class quest extends text {
 		if(isStarted() && !isCompleted()) {
 			// Color and string.
 			g.setColor(theColor);
-			g.drawString(getTheText(),
+			g.drawString("Quest: " + getTheText(),
 					   getX(),
 					   getY());
 		}

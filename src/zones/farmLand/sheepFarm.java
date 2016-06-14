@@ -41,7 +41,7 @@ public class sheepFarm extends zone {
 	chunk c;
 	
 	// Defaults
-	public static intTuple DEFAULT_SPAWN_TUPLE = new intTuple(-3,33);
+	public static intTuple DEFAULT_SPAWN_TUPLE = new intTuple(-9,11);
 	
 	// Constructor
 	public sheepFarm() {
@@ -745,7 +745,7 @@ public class sheepFarm extends zone {
 		int fenceAdjustX = -6;
 		spawnFence(-30+fenceAdjustX,-435,-30+fenceAdjustX,200); // Vertical, right
 		spawnFence(-1050+fenceAdjustX+17,-462,10+fenceAdjustX,-462); // Horizontal, top of field
-		spawnFence(-168-3+28,17,20-3,17); // Horizontal, right of bridge.
+		spawnFence(-168+40,17,70,17); // Horizontal, right of bridge.
 		spawnFence(-1050+fenceAdjustX+17,17,-150,17); // Horizontal, left of bridge.
 		spawnFence(-450+fenceAdjustX,-436,-450+fenceAdjustX,200); // Vertical, far left
 		u = new sheep(-378,-369);
@@ -757,19 +757,18 @@ public class sheepFarm extends zone {
 		c = new haystack(-195,-165,0);
 		
 		// Draw the bridge.
-		spawnWoodRect(-180-5,56,-140,200);
+		spawnWoodRect(-170-6,56,-165+32,200);
 		
 		// Draw the water to left of bridge spawn.
-		spawnWaterRect(-2000-9,56,-170,200);	
+		spawnWaterRect(-2100+10-6,56,-167,200);	
 		
 		// Draw the water to right of bridge spawn.
-		spawnWaterRect(-168+20-5,56,2032,200);
+		spawnWaterRect(-168+20+15-5-6,56,2032,200);
 		
-		// Draw fence on the right.
-		spawnFence(40,-462,500,-462); // Horizontal, top of field
-		spawnFence(40,17,500,17); // Horizontal, bottom
-		spawnFence(35,-436,35,200); // Vertical, left
-		spawnFence(455,-436,455,300); // Vertical, right
+		// Draw rocks behind spawn.
+		c = new rock(-24,75,0);
+		c = new rock(21,111,1);
+		c = new rock(-6,147,0);
 		
 		// Draw the fence gate above the fields.
 		// Fencebars to left of gate.
@@ -785,6 +784,24 @@ public class sheepFarm extends zone {
 		c = new fenceBarsSmall(37,-436,0);
 		horizontalGate forestGate = new horizontalGate(-13+fenceAdjustX/2,-434,0);
 		forestGate.open();
+		
+		///////////////////////////////
+		//// FARLSWORTH'S AREA  ///////
+		///////////////////////////////
+		spawnFence(40,-462,500,-462); // Horizontal, top of field
+		spawnFence(40,17,500,17); // Horizontal, bottom
+		spawnFence(35,-435,35,200); // Vertical, left
+		spawnFence(455,-436,455,300); // Vertical, right
+		spawnFence(40,-43,440,-43); // Bottom middle area.
+		
+		// Left of gate.
+		c = new fenceBarsSmall(409,-17,0); 
+		
+		// Gate.
+		horizontalGate farlsworthGate = new horizontalGate(412,-15,0);
+		
+		// Right of gate
+		c = new fenceBarsSmall(457,-17,0); 
 		
 		////////////////////////////
 		//// FARMHOUSE AREA  ///////

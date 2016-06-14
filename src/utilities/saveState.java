@@ -7,12 +7,13 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import drawing.userInterface.inventory;
+import interactions.gag;
+import interactions.quest;
 import items.item;
 import items.weapon;
-import quests.quest;
 import terrain.doodads.farmLand.haystack;
 import units.player;
-import userInterface.inventory;
 import zones.zone;
 
 public class saveState implements Serializable {
@@ -52,6 +53,9 @@ public class saveState implements Serializable {
 	
 	// Quests
 	private ArrayList<quest> allQuests;
+	
+	// Gags
+	private ArrayList<gag> allGags;
 
 	////////////////////////
 	////// METHODS /////////
@@ -84,6 +88,7 @@ public class saveState implements Serializable {
 				s.setAllQuests(quest.loadedQuests);
 				
 				// Save jokes.
+				s.setAllGags(gag.loadedGags);
 				
 				// Open the streams.
 				FileOutputStream fileStream = new FileOutputStream(DEFAULT_SAVE_FILENAME);   
@@ -127,6 +132,20 @@ public class saveState implements Serializable {
 					objectStream.writeObject(s.getAllQuests().get(i).getTheText());
 					objectStream.writeObject(s.getAllQuests().get(i).isStarted());
 					objectStream.writeObject(s.getAllQuests().get(i).isCompleted());
+				}
+				
+				//////////////
+				/// GAGS   ///
+				//////////////
+				// Write the length of the coming array.
+				int gagsSize = 0;
+				if(s.getAllGags() != null) gagsSize = s.getAllGags().size();
+				objectStream.writeObject(gagsSize); 
+				
+				// Write the inventory (names of items) to save file.
+				for(int i = 0; i < gagsSize; i++) {
+					objectStream.writeObject(s.getAllGags().get(i).getName());
+					objectStream.writeObject(s.getAllGags().get(i).isCompleted());
 				}
 				
 				// Close the streams.
@@ -191,7 +210,7 @@ public class saveState implements Serializable {
 			// Create new array.
 			ArrayList<quest> newQuests = new ArrayList<quest>();
 			
-			// Write the inventory (names of items) to save file.
+			// Load the quests from save file.
 			for(int i = 0; i < questsSize; i++) {
 				String theText = (String)objectStream.readObject();
 				boolean started = (boolean)objectStream.readObject();
@@ -204,6 +223,27 @@ public class saveState implements Serializable {
 			
 			// Load the quests.
 			s.setAllQuests(newQuests);
+			
+			//////////////
+			/// GAGS ///
+			//////////////
+			// Write the length of the coming array.
+			int gagsSize = (int)objectStream.readObject(); 
+			
+			// Create new array.
+			ArrayList<gag> newGags = new ArrayList<gag>();
+			
+			// Read the gags from save file.
+			for(int i = 0; i < gagsSize; i++) {
+				String theName = (String)objectStream.readObject();
+				boolean completed = (boolean)objectStream.readObject();
+				gag g = new gag(theName);
+				g.setCompleted(completed);
+				newGags.add(g);
+			}
+			
+			// Load the gags
+			s.setAllGags(newGags);
 			
 			// Close the streams.
 		    objectStream.close();   
@@ -288,6 +328,14 @@ public class saveState implements Serializable {
 
 	public void setAllQuests(ArrayList<quest> allQuests) {
 		this.allQuests = allQuests;
+	}
+
+	public ArrayList<gag> getAllGags() {
+		return allGags;
+	}
+
+	public void setAllGags(ArrayList<gag> allGags) {
+		this.allGags = allGags;
 	}
 	
 }

@@ -3,15 +3,15 @@ package units.unitTypes.farmLand;
 import java.util.Random;
 
 import drawing.camera;
+import drawing.userInterface.interactBox;
 import effects.effect;
 import effects.effectTypes.bloodSquirt;
+import interactions.quest;
+import interactions.textSeries;
 import modes.mode;
-import quests.quest;
-import quests.textSeries;
 import units.humanType;
 import units.unit;
 import units.unitType;
-import userInterface.interactBox;
 import utilities.stringUtils;
 import utilities.time;
 import utilities.utility;

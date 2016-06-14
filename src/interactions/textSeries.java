@@ -1,4 +1,4 @@
-package quests;
+package interactions;
 
 import java.util.ArrayList;
 
