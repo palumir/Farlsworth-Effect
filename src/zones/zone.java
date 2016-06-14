@@ -41,6 +41,9 @@ public abstract class zone {
 	
 	// Switch zones.
 	public static void switchZones(player p, zone a, zone b, int x, int y, String direction) {	
+		// Save the player's progress before switching zones..
+		saveState.createSaveState();
+		
 		// Re-create the player in the new zone.
 		player.loadPlayer(b, x, y, direction);
 		

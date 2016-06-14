@@ -34,18 +34,19 @@ public abstract class drawnObject {
 	
 	// Comparator
 	private static Comparator<drawnObject> yComparator = new Comparator<drawnObject>() {
+		
 	    @Override
 	    public int compare(drawnObject d1, drawnObject d2) {
 	    	
-	    	// Draw floating numbers over...
+	    	// Draw floating numbers over ...
 	    	if(d1 instanceof floatingNumber && !(d2 instanceof floatingNumber)) return 10;
 	    	else if(d2 instanceof floatingNumber && !(d1 instanceof floatingNumber)) return -10;
 	    	
-	    	// Draw interface objects over...
+	    	// Draw interface objects over ...
 	    	else if(d1 instanceof interfaceObject && !(d2 instanceof interfaceObject)) return 9;
 	    	else if(d2 instanceof interfaceObject && !(d1 instanceof interfaceObject)) return -9;
 	    	
-	    	// Different comparator for drawing effects over...
+	    	// Different comparator for drawing effects over ...
 	    	else if(d1 instanceof effect && (d1.y + d1.height > d2.y) && !(d2 instanceof effect)) return 8;
 	    	else if(d2 instanceof effect && (d1.y < d2.y + d2.height) && !(d1 instanceof effect)) return -8;
 	    	
@@ -58,6 +59,7 @@ public abstract class drawnObject {
 	    	else if(d1.y + d1.height > d2.y + d2.height) return 6;
 	    	else if(d1.y + d1.height < d2.y + d2.height) return -6;
 	    	else return 0;
+	    	
 	    }
 	};
 	

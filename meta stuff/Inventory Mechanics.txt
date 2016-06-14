@@ -1,5 +1,0 @@
-Inventory:
-- as it currnetly is but change slot colors to brown
-- create brown backpack image to put behind the inventory.
-- on right, put scroll where the informational text is (info text doesn't even work yet)
-- add sounds

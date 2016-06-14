@@ -96,18 +96,17 @@ public class farmer extends unit {
 		textSeries s;
 		
 		// Start of conversation.
-		textSeries startOfConversation = new textSeries(null, "For flock's sake ...");
+		textSeries startOfConversation = new textSeries(null, "For flock's sake!");
 		s = startOfConversation.addChild(null, "These sheep wool be the death of me.");
 		s = s.addChild(null, "The shear thought of collecting more wool pains me.");
-		s = s.addChild(null, "If only there was someone conveniently looking for a quest ...");
+		s = s.addChild(null, "If only somebody were conveniently looking for a quest ...");
 		textSeries firstSpeakToFarmer = s.addChild(null, "... who wool-d help me.");
 		
-		
 		// Path 1
-		textSeries noPuns = firstSpeakToFarmer.addChild("Stop the puns.", " Sorry. It gets pretty boring around here.");
-		s = noPuns.addChild(null, "When I was young I wanted to be a marine biologist.");
-		s = s.addChild(null, "But life happens, things change.");
-		s = s.addChild(null,"Anyway, about that wool...");
+		textSeries noPuns = firstSpeakToFarmer.addChild("Stop making puns.", "Sorry. It gets pretty boring around here.");
+		s = noPuns.addChild(null, "When I was a boy I wanted to be a marine biologist.");
+		s = s.addChild(null, "But life happens, and things change.");
+		s = s.addChild(null, "Anyway, about that wool...");
 		s = s.addChild(null, "I require wool from a particular sheep.");
 		s = s.addChild(null, "He never makes it easy.");
 		s = s.addChild(null, "But he needs to be sheared.");
@@ -124,17 +123,17 @@ public class farmer extends unit {
 		noHelp.addChild(yes);
 		s = noHelp.addChild("No.","I'll make it worth your while.");
 		s.addChild(yes);
-		s = s.addChild("No.","Come on...");
+		s = s.addChild("No.","Come on ... ");
 		s.addChild(yes);
 		s = s.addChild("No.","Well, why not?");
 		s.addChild(yes);
-		s = s.addChild("No.","That doesn't even make any sense.");
+		s = s.addChild("No.","That doesn't even make sense.");
 		s.addChild(yes);
-		s = s.addChild("No.","I'll get somebody else to do the quest then.");
+		s = s.addChild("No.","I'll just get somebody else to do the quest then.");
 		s.addChild(yes);
-		s = s.addChild("No.","What are you even doing here anymore?");
+		s = s.addChild("No.","What are you even doing here then?");
 		s.addChild(yes);
-		s = s.addChild("No.","Go away.");
+		s = s.addChild("No.","Please go away.");
 		s.addChild(yes);
 		s = s.addChild("No.","What's your problem?");
 		s.addChild(yes);
@@ -156,7 +155,11 @@ public class farmer extends unit {
 		s.addChild(yes);
 		s = s.addChild("No.","Oh, COME ON. How can you STILL possibly be saying no?");
 		s.addChild(yes);
-		s = s.addChild("No.","Go see a therapist.");
+		s = s.addChild("No.","You're relentless.");
+		s.addChild(yes);
+		s = s.addChild("No.","That's not a compliment, by the way.");
+		s.addChild(yes);
+		s = s.addChild("No.","You need counselling.");
 		s.addChild(yes);
 		s = s.addChild("No.","At what point does this end?");
 		s.addChild(yes);
@@ -167,7 +170,7 @@ public class farmer extends unit {
 		s.addChild(s);
 		
 		// Path 2
-		textSeries morePuns = firstSpeakToFarmer.addChild("I can collect your wool.", "Well ...");
+		textSeries morePuns = firstSpeakToFarmer.addChild("I can help.", "Well ...");
 		s = morePuns.addChild(null, "I require wool from a particular sheep.");
 		s = s.addChild(null, "He's quite ...");
 		s = s.addChild(null, "... sheepish, to say the least.");
@@ -181,20 +184,28 @@ public class farmer extends unit {
 		s.addChild(noHelp);
 		yes.setEnd();
 		
-		return new quest(DEFAULT_QUEST_DESC, this, new interactBox(startOfConversation, stringUtils.toTitleCase(unitName)));
+		// Create the whole quest and add dialogue.
+		quest q = new quest(DEFAULT_QUEST_DESC, this, new interactBox(startOfConversation, stringUtils.toTitleCase(unitName)));
+		
+		// If the quest is started, don't allow the person to do the whole dialogue.
+		if(q.isStarted()) {
+			q.getDialogue().setTheText(q.getDialogue().getTheText().getEnd());
+		}
+		
+		return q;
 	}
 	
 	// Quest stuff.
 	public void doQuestStuff() {
 
 		// If we have reached the end of our quest conversation (and they clicked yes, of course, since it's all they can do.)
-		if(!farlsworthQuest.completed() && farlsworthQuest.getInteractBox().getTheText().isEnd()) {
+		if(farlsworthQuest != null && !farlsworthQuest.completed() && farlsworthQuest.getInteractBox().getTheText().isEnd()) {
 			farlsworthQuest.startQuest();
 		}
 	}
 	
 	// Interact with object. Should be over-ridden.
-	public void interactWith() {
+	public void interactWith() { 
 		if(!farlsworthQuest.completed()) farlsworthQuest.getInteractBox().toggleDisplay();
 	}
 	

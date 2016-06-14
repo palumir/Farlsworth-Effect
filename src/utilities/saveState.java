@@ -7,10 +7,12 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import items.inventory;
 import items.item;
 import items.weapon;
+import quests.quest;
+import terrain.doodads.farmLand.haystack;
 import units.player;
+import userInterface.inventory;
 import zones.zone;
 
 public class saveState implements Serializable {
@@ -48,11 +50,9 @@ public class saveState implements Serializable {
 	private int playerLevel;
 	private int expIntoLevel;
 	
-	//////////////////////////////////////////
-	////// INDIVIDUAL ZONE SAVE DATA /////////
-	//////////////////////////////////////////
-	private boolean forestGateOpen; // TODO: doesn't work, but is an example.
-	
+	// Quests
+	private ArrayList<quest> allQuests;
+
 	////////////////////////
 	////// METHODS /////////
 	////////////////////////
@@ -79,6 +79,11 @@ public class saveState implements Serializable {
 				s.setEquippedWeapon(currPlayer.getEquippedWeapon());
 				s.setPlayerLevel(currPlayer.getPlayerLevel());
 				s.setExpIntoLevel(currPlayer.getExpIntoLevel());
+			
+				// Save quests.
+				s.setAllQuests(quest.loadedQuests);
+				
+				// Save jokes.
 				
 				// Open the streams.
 				FileOutputStream fileStream = new FileOutputStream(DEFAULT_SAVE_FILENAME);   
@@ -90,6 +95,9 @@ public class saveState implements Serializable {
 				objectStream.writeObject(s.getPlayerY());
 				objectStream.writeObject(s.getFacingDirection());
 				
+				/////////////////
+				/// INVENTORY ///
+				/////////////////
 				// Write the length of the coming array.
 				int inventorySize = 0;
 				if(s.getPlayerInventory() != null) inventorySize = s.getPlayerInventory().size();
@@ -105,6 +113,21 @@ public class saveState implements Serializable {
 				// Write the level and exp into level.
 				objectStream.writeObject(s.getPlayerLevel());
 				objectStream.writeObject(s.getExpIntoLevel());
+				
+				//////////////
+				/// QUESTS ///
+				//////////////
+				// Write the length of the coming array.
+				int questsSize = 0;
+				if(s.getAllQuests() != null) questsSize = s.getAllQuests().size();
+				objectStream.writeObject(questsSize); 
+				
+				// Write the inventory (names of items) to save file.
+				for(int i = 0; i < questsSize; i++) {
+					objectStream.writeObject(s.getAllQuests().get(i).getTheText());
+					objectStream.writeObject(s.getAllQuests().get(i).isStarted());
+					objectStream.writeObject(s.getAllQuests().get(i).isCompleted());
+				}
 				
 				// Close the streams.
 			    objectStream.close();   
@@ -132,6 +155,9 @@ public class saveState implements Serializable {
 			s.setPlayerY((int) objectStream.readObject());
 			s.setFacingDirection((String)objectStream.readObject());
 			
+			//////////////////
+			/// INVENTORTY ///
+			//////////////////
 			// Read the length of the coming array.
 			int j = (int)objectStream.readObject();
 			
@@ -155,6 +181,29 @@ public class saveState implements Serializable {
 			// Get level and exp
 			s.setPlayerLevel((int)objectStream.readObject());
 			s.setExpIntoLevel((int)objectStream.readObject());
+			
+			//////////////
+			/// QUESTS ///
+			//////////////
+			// Write the length of the coming array.
+			int questsSize = (int)objectStream.readObject(); 
+			
+			// Create new array.
+			ArrayList<quest> newQuests = new ArrayList<quest>();
+			
+			// Write the inventory (names of items) to save file.
+			for(int i = 0; i < questsSize; i++) {
+				String theText = (String)objectStream.readObject();
+				boolean started = (boolean)objectStream.readObject();
+				boolean completed = (boolean)objectStream.readObject();
+				quest q = new quest(theText, null, null);
+				q.setStarted(started);
+				q.setCompleted(completed);
+				newQuests.add(q);
+			}
+			
+			// Load the quests.
+			s.setAllQuests(newQuests);
 			
 			// Close the streams.
 		    objectStream.close();   
@@ -231,6 +280,14 @@ public class saveState implements Serializable {
 
 	public void setExpIntoLevel(int expIntoLevel) {
 		this.expIntoLevel = expIntoLevel;
+	}
+
+	public ArrayList<quest> getAllQuests() {
+		return allQuests;
+	}
+
+	public void setAllQuests(ArrayList<quest> allQuests) {
+		this.allQuests = allQuests;
 	}
 	
 }

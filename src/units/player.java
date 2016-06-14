@@ -10,15 +10,16 @@ import drawing.camera;
 import drawing.drawnObject;
 import effects.effect;
 import effects.effectTypes.bloodSquirt;
-import items.inventory;
 import items.item;
 import items.weapon;
 import main.main;
 import modes.mode;
 import modes.platformer;
 import modes.topDown;
+import quests.quest;
 import sounds.sound;
 import userInterface.interactBox;
+import userInterface.inventory;
 import userInterface.playerHealthBar;
 import userInterface.text;
 import utilities.saveState;
@@ -91,6 +92,9 @@ public class player extends unit {
 	// Player specific fields.
 	private String playerName = DEFAULT_PLAYER_NAME;
 	private zone playerZone = DEFAULT_ZONE;
+	
+	// Savestate we loaded from
+	public saveState playerSaveState;
 	
 	// Player inventory
 	private inventory playerInventory = new inventory();
@@ -206,12 +210,39 @@ public class player extends unit {
 	public void updateInterface() {
 	}
 	
-	// Load player from save state.
+	// Load player.
 	public static player loadPlayer(zone z, int spawnX, int spawnY, String direction) {
 		
 		// Initiate all.
 		utility.initiateAll();
 		
+		// The player, depending on whether or not we have a save file.
+		player thePlayer = loadPlayerSaveData(z, spawnX, spawnY, direction);
+		
+		// Load quests.
+		quest.loadQuestData();
+		
+		// Load jokes.
+		//loadJokeData();
+		
+		// Load the player into the zone.
+		thePlayer.playerZone.loadZone();
+		
+		// Make adjustments on hitbox if we're in topDown.
+		if(mode.getCurrentMode().equals("topDown")) {
+			thePlayer.height = DEFAULT_TOPDOWN_HEIGHT;
+			thePlayer.setHitBoxAdjustmentY(DEFAULT_TOPDOWN_ADJUSTMENT_Y);
+		}
+		else {
+			thePlayer.height = DEFAULT_PLATFORMER_HEIGHT;
+			thePlayer.setHitBoxAdjustmentY(DEFAULT_PLATFORMER_ADJUSTMENT_Y);
+		}
+		
+		return thePlayer;
+	}
+	
+	public static player loadPlayerSaveData(zone z, int spawnX, int spawnY, String direction) {
+		// Get player data from saveState.
 		// The player, depending on whether or not we have a save file.
 		player thePlayer;
 		
@@ -276,18 +307,8 @@ public class player extends unit {
 		// Set that we have loaded the player once.
 		playerLoaded = true;
 		
-		// Load the player into the zone.
-		thePlayer.playerZone.loadZone();
-		
-		// Make adjustments on hitbox if we're in topDown.
-		if(mode.getCurrentMode().equals("topDown")) {
-			thePlayer.height = DEFAULT_TOPDOWN_HEIGHT;
-			thePlayer.setHitBoxAdjustmentY(DEFAULT_TOPDOWN_ADJUSTMENT_Y);
-		}
-		else {
-			thePlayer.height = DEFAULT_PLATFORMER_HEIGHT;
-			thePlayer.setHitBoxAdjustmentY(DEFAULT_PLATFORMER_ADJUSTMENT_Y);
-		}
+		// Set the player saveState so it can be used in zone loading.
+		thePlayer.playerSaveState = s;
 		
 		return thePlayer;
 	}
@@ -506,7 +527,7 @@ public class player extends unit {
 		int y2 = 0;
 		
 		// Get the box we will attack in if facing left.
-		if(getFacingDirection() == "Left") {
+		if(getFacingDirection().equals("Left")) {
 			int heightMidPoint = getY() + height/2;
 			y1 = heightMidPoint - DEFAULT_INTERACT_WIDTH/2;
 			y2 = heightMidPoint + DEFAULT_INTERACT_WIDTH/2;
@@ -515,7 +536,7 @@ public class player extends unit {
 		}
 		
 		// Get the box we will attack in if facing right.
-		if(getFacingDirection() == "Right") {
+		if(getFacingDirection().equals("Right")) {
 			int heightMidPoint = getY() + height/2;
 			y1 = heightMidPoint - DEFAULT_INTERACT_WIDTH/2;
 			y2 = heightMidPoint + DEFAULT_INTERACT_WIDTH/2;
@@ -524,7 +545,7 @@ public class player extends unit {
 		}
 		
 		// Get the box we will attack in facing up.
-		if(getFacingDirection() == "Up") {
+		if(getFacingDirection().equals("Up")) {
 			int widthMidPoint = getX() + width/2;
 			x1 = widthMidPoint - DEFAULT_INTERACT_WIDTH/2;
 			x2 = widthMidPoint + DEFAULT_INTERACT_WIDTH/2;
@@ -533,7 +554,7 @@ public class player extends unit {
 		}
 		
 		// Get the box we will attack in facing down.
-		if(getFacingDirection() == "Down") {
+		if(getFacingDirection().equals("Down")) {
 			int widthMidPoint = getX() + width/2;
 			x1 = widthMidPoint - DEFAULT_INTERACT_WIDTH/2;
 			x2 = widthMidPoint + DEFAULT_INTERACT_WIDTH/2;

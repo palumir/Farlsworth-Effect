@@ -24,7 +24,7 @@ public class interactBox extends interfaceObject  {
     
     // Color
 	private Color DEFAULT_TEXT_COLOR = Color.black;
-	private Color DEFAULT_SELECTED_COLOR = new Color(122,96,84);
+	private Color DEFAULT_SELECTED_COLOR = new Color(100,48,38);
 	
 	// Position
 	private static int DEFAULT_X = gameCanvas.getDefaultWidth()/40;
@@ -50,7 +50,7 @@ public class interactBox extends interfaceObject  {
 	
 	// Display
 	private boolean buttonMode = false;
-	private boolean textMode = true;
+	private boolean textMode = false;
 	private boolean displayOn = false;
 	private static interactBox currentDisplay = null;
 	private boolean isEnd = false;
@@ -67,6 +67,8 @@ public class interactBox extends interfaceObject  {
 		super(null, DEFAULT_X, DEFAULT_Y, background.getWidth(), background.getHeight());	
 		
 		// Set fields.
+		if(newText.getButtonText() != null) buttonMode = true;
+		else textMode = true;
 		whoIsTalking = newWhoIsTalking;
 		setTheText(newText);
 	}
@@ -195,7 +197,7 @@ public class interactBox extends interfaceObject  {
 		}
 		
 		// It's the end of an interaction. Exit. Caller should deal with the end.
-		if(theText.isEnd()) {
+		else if(theText.isEnd()) {
 			toggleDisplay();
 		}
 	}

@@ -28,13 +28,13 @@ public abstract class weapon extends item {
 	public static boolean inInventory = false;
 	
 	// Weapon stats
-	protected int attackDamage = 0;
+	private int attackDamage = 0;
 	protected float attackTime = 0f;
 	protected float baseAttackTime = 0f;
 	protected int attackWidth = 0;
 	protected int attackLength = 0;
-	protected String range = "short";
-	protected String speed = "fast";
+	private String range = "short";
+	private String speed = "fast";
 	
 	///////////////
 	/// METHODS ///
@@ -91,5 +91,29 @@ public abstract class weapon extends item {
 				getImage().getWidth(), 
 				getImage().getHeight(), 
 				null);
+	}
+
+	public String getSpeed() {
+		return speed;
+	}
+
+	public void setSpeed(String speed) {
+		this.speed = speed;
+	}
+
+	public String getRange() {
+		return range;
+	}
+
+	public void setRange(String range) {
+		this.range = range;
+	}
+
+	public int getAttackDamage() {
+		return attackDamage;
+	}
+
+	public void setAttackDamage(int attackDamage) {
+		this.attackDamage = attackDamage;
 	}
 }

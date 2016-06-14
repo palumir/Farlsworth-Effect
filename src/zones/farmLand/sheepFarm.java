@@ -15,7 +15,7 @@ import terrain.doodads.farmLand.farmHouse;
 import terrain.doodads.farmLand.fenceBars;
 import terrain.doodads.farmLand.fenceBarsSmall;
 import terrain.doodads.farmLand.fencePost;
-import terrain.doodads.farmLand.hay;
+import terrain.doodads.farmLand.haystack;
 import terrain.doodads.farmLand.horizontalGate;
 import terrain.doodads.farmLand.rock;
 import terrain.doodads.farmLand.tree;
@@ -752,8 +752,9 @@ public class sheepFarm extends zone {
 		u = new sheep(-150,-372);
 		u = new sheep(-129,-60);
 		u = new sheep(-372,-36);
-		c = new hay(-294,-315,0);
-		c = new hay(-195,-165,0);
+		c = new haystack(-294,-315,0);
+		((haystack)c).setStrange(); // Add the funny interact sequence.
+		c = new haystack(-195,-165,0);
 		
 		// Draw the bridge.
 		spawnWoodRect(-180-5,56,-140,200);
@@ -796,8 +797,8 @@ public class sheepFarm extends zone {
 		theFarmer.setFacingDirection("Down");
 		c = new tree(-1017, -414, 1);
 		c = new tree(-1011, 0, 0);
-		c = new hay(-960,-351,1);
-		c = new hay(-875,-351,1);
+		c = new haystack(-960,-351,1);
+		c = new haystack(-875,-351,1);
 		c = new bush(-1025,-130,0);
 		c = new bush(-909,-9,1);
 		c = new bush(-510,-330,1);

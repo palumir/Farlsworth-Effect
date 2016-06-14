@@ -20,7 +20,7 @@ public class dagger extends weapon {
 	public static String DEFAULT_WEAPON_NAME = "dagger";
 	
 	// Weapon stats.
-	private int DEFAULT_ATTACK_DAMAGE = 2;
+	private int DEFAULT_ATTACK_DAMAGE = 6;
 	private float DEFAULT_BAT = 0.3f;
 	private float DEFAULT_ATTACK_TIME = 0.4f;
 	private int DEFAULT_ATTACK_WIDTH = 50;
@@ -63,13 +63,13 @@ public class dagger extends weapon {
 	// Set stats
 	public void setStats() {
 		// Weapon stats.
-		attackDamage = DEFAULT_ATTACK_DAMAGE;
+		setAttackDamage(DEFAULT_ATTACK_DAMAGE);
 		attackTime = DEFAULT_ATTACK_TIME;
 		baseAttackTime = DEFAULT_BAT;
 		attackWidth = DEFAULT_ATTACK_WIDTH;
 		attackLength = DEFAULT_ATTACK_LENGTH;
-		range = "short";
-		speed = "fast";
+		setRange("short");
+		setSpeed("fast");
 	}
 	
 	// Pickup item.

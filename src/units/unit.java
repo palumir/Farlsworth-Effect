@@ -74,7 +74,6 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 	protected int topDownHeight = 0;
 	protected int platformerWidth = 0;
 	protected int platformerHeight = 0;
-
 	
 	// Combat
 	// Health points
@@ -189,7 +188,7 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 				int y2 = 0;
 				
 				// Get the box we will attack in if facing left.
-				if(facingDirection == "Left") {
+				if(facingDirection.equals("Left")) {
 					int heightMidPoint = getY() + height/2;
 					y1 = heightMidPoint - getAttackWidth()/2;
 					y2 = heightMidPoint + getAttackWidth()/2;
@@ -198,7 +197,7 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 				}
 				
 				// Get the box we will attack in if facing right.
-				if(facingDirection == "Right") {
+				if(facingDirection.equals("Right")) {
 					int heightMidPoint = getY() + height/2;
 					y1 = heightMidPoint - getAttackWidth()/2;
 					y2 = heightMidPoint + getAttackWidth()/2;
@@ -207,7 +206,7 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 				}
 				
 				// Get the box we will attack in facing up.
-				if(facingDirection == "Up") {
+				if(facingDirection.equals("Up")) {
 					int widthMidPoint = getX() + width/2;
 					x1 = widthMidPoint - getAttackWidth()/2;
 					x2 = widthMidPoint + getAttackWidth()/2;
@@ -216,7 +215,7 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 				}
 				
 				// Get the box we will attack in facing down.
-				if(facingDirection == "Down") {
+				if(facingDirection.equals("Down")) {
 					int widthMidPoint = getX() + width/2;
 					x1 = widthMidPoint - getAttackWidth()/2;
 					x2 = widthMidPoint + getAttackWidth()/2;
@@ -629,7 +628,7 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 			int hitBoxY = drawY - (- (getObjectSpriteSheet().getSpriteHeight()/2 - height/2) - getHitBoxAdjustmentY());
 			
 			// Get the box we will attack in if facing left.
-			if(facingDirection == "Left") {
+			if(facingDirection.equals("Left")) {
 				int heightMidPoint = hitBoxY + height/2;
 				y1 = heightMidPoint - getAttackWidth()/2;
 				y2 = heightMidPoint + getAttackWidth()/2;
@@ -638,7 +637,7 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 			}
 			
 			// Get the box we will attack in if facing right.
-			if(facingDirection == "Right") {
+			if(facingDirection.equals("Right")) {
 				int heightMidPoint = hitBoxY + height/2;
 				y1 = heightMidPoint - getAttackWidth()/2;
 				y2 = heightMidPoint + getAttackWidth()/2;
@@ -647,7 +646,7 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 			}
 			
 			// Get the box we will attack in facing up.
-			if(facingDirection == "Up") {
+			if(facingDirection.equals("Up")) {
 				int widthMidPoint = hitBoxX + width/2;
 				x1 = widthMidPoint - getAttackWidth()/2;
 				x2 = widthMidPoint + getAttackWidth()/2;
@@ -656,7 +655,7 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 			}
 			
 			// Get the box we will attack in facing down.
-			if(facingDirection == "Down") {
+			if(facingDirection.equals("Down")) {
 				int widthMidPoint = hitBoxX + width/2;
 				x1 = widthMidPoint - getAttackWidth()/2;
 				x2 = widthMidPoint + getAttackWidth()/2;

@@ -11,6 +11,7 @@ public class textSeries {
 	private String textOnPress;
 	private textSeries parent = null;
 	private ArrayList<textSeries> children;
+	private textSeries end = null;
 	private boolean isEnd = false;
 	
 	/////////////////////
@@ -45,6 +46,13 @@ public class textSeries {
 	
 	public void setEnd() {
 		isEnd = true;
+		
+		// Tell the top parent where the end is.
+		textSeries currSeries = this.parent;
+		while(currSeries.parent != null) {
+			currSeries = currSeries.parent;
+		}
+		currSeries.end = this;
 	}
 	
 	public boolean isEnd() {
@@ -69,5 +77,13 @@ public class textSeries {
 
 	public void setChildren(ArrayList<textSeries> children) {
 		this.children = children;
+	}
+
+	public textSeries getEnd() {
+		return end;
+	}
+
+	public void setEnd(textSeries end) {
+		this.end = end;
 	}
 }

@@ -12,16 +12,22 @@ want to be a slave anymore
 -> trace wool into spider cave.
 -> Enter platformer mode in cave 
 
-(not sure of mechanics yet in the cave)
+-> Broodmother follows you entire time.
+-> Middle of cave there is farmer's wife trapped in webs.
+-> If you have torch, you can fight the boss.
+-> Otherwise, she's fuckin daed
 
 -> Exit cave
--> River with boat, see Chris enter a boat and travel down the river
--> Enter river pursuit
--> Get off at the bottom, find Chris cornered off, boss fight begins.
+-> See river, two boats.
+-> River with boat, see Farlsworth jumps in river and not boat.
+-> Enter boat
+-> Enter cut scene driving to exact same boat.
+-> Enter chase scene.
+-> Get off at the bottom, find Farlsworth cornered off, boss fight begins.
 
 (not sure boss fight mechanics)
 
--> Get Chris's wool.
+-> Get Farlsworth's wool.
 -> Chris misguided, get a chance to speak to him to gain ally bonus.
 -> If fail or success, Chris still takes you on shortcut back to farm.
 -> Farmer tells you that damn sheep always makes him do a boss fight before you get his wool

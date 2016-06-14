@@ -1,4 +1,4 @@
-package items;
+package userInterface;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -9,9 +9,10 @@ import java.util.ArrayList;
 import drawing.drawnObject;
 import drawing.gameCanvas;
 import drawing.spriteSheet;
+import items.item;
+import items.weapon;
 import sounds.sound;
 import units.player;
-import userInterface.interfaceObject;
 import utilities.stringUtils;
 
 public class inventory extends interfaceObject {
@@ -291,9 +292,9 @@ public class inventory extends interfaceObject {
 							if(currentItem instanceof weapon) {
 								g.setColor(DEFAULT_DESC_COLOR);
 								weapon currentWeapon = (weapon)currentItem;
-								g.drawString("Damage: " + currentWeapon.attackDamage, getX() + (int) (Math.sqrt(DEFAULT_INVENTORY_SIZE)*DEFAULT_SLOT_SIZE) + 38 + adjustX - g.getFontMetrics().stringWidth("Damage: " + currentWeapon.attackDamage)/2, getY()+ 34 + adjustY + 20);
-								g.drawString("Speed: " + currentWeapon.speed, getX() + (int) (Math.sqrt(DEFAULT_INVENTORY_SIZE)*DEFAULT_SLOT_SIZE) + 38 + adjustX - g.getFontMetrics().stringWidth("Speed: " + currentWeapon.speed)/2, getY()+ 34 + adjustY + 34);
-								g.drawString("Range: " + currentWeapon.range, getX() + (int) (Math.sqrt(DEFAULT_INVENTORY_SIZE)*DEFAULT_SLOT_SIZE) + 38 + adjustX - g.getFontMetrics().stringWidth("Range: " + currentWeapon.range)/2, getY()+ 34 + adjustY + 48);
+								g.drawString("Damage: " + currentWeapon.getAttackDamage(), getX() + (int) (Math.sqrt(DEFAULT_INVENTORY_SIZE)*DEFAULT_SLOT_SIZE) + 38 + adjustX - g.getFontMetrics().stringWidth("Damage: " + currentWeapon.getAttackDamage())/2, getY()+ 34 + adjustY + 20);
+								g.drawString("Speed: " + currentWeapon.getSpeed(), getX() + (int) (Math.sqrt(DEFAULT_INVENTORY_SIZE)*DEFAULT_SLOT_SIZE) + 38 + adjustX - g.getFontMetrics().stringWidth("Speed: " + currentWeapon.getSpeed())/2, getY()+ 34 + adjustY + 34);
+								g.drawString("Range: " + currentWeapon.getRange(), getX() + (int) (Math.sqrt(DEFAULT_INVENTORY_SIZE)*DEFAULT_SLOT_SIZE) + 38 + adjustX - g.getFontMetrics().stringWidth("Range: " + currentWeapon.getRange())/2, getY()+ 34 + adjustY + 48);
 								
 								// Press e to equip.
 								g.drawString(DEFAULT_BOTTOM_TEXT, getX() + 38 - g.getFontMetrics().stringWidth(DEFAULT_BOTTOM_TEXT)/2 + (int) (Math.sqrt(DEFAULT_INVENTORY_SIZE)*DEFAULT_SLOT_SIZE) + adjustX, getY()+ 34 + adjustY + 140);
