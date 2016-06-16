@@ -40,13 +40,13 @@ public class blackSmith extends chunk {
 		super(typeReference, newX, newY, i, 0);
 		if(mode.getCurrentMode().equals("topDown")) {
 			setHitBoxAdjustmentY(70);
-			height = 60;
-			width = 180;
+			setHeight(60);
+			setWidth(180);
 		}
 		else {
 			setHitBoxAdjustmentY(0);
-			height = DEFAULT_CHUNK_HEIGHT;
-			width = DEFAULT_CHUNK_WIDTH;
+			setHeight(DEFAULT_CHUNK_HEIGHT);
+			setWidth(DEFAULT_CHUNK_WIDTH);
 		}
 		setPassable(false);
 	}

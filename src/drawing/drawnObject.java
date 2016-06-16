@@ -41,25 +41,31 @@ public abstract class drawnObject {
 	    	// Draw floating numbers over ...
 	    	if(d1 instanceof floatingNumber && !(d2 instanceof floatingNumber)) return 10;
 	    	else if(d2 instanceof floatingNumber && !(d1 instanceof floatingNumber)) return -10;
+	    	else {
 	    	
-	    	// Draw interface objects over ...
-	    	else if(d1 instanceof interfaceObject && !(d2 instanceof interfaceObject)) return 9;
-	    	else if(d2 instanceof interfaceObject && !(d1 instanceof interfaceObject)) return -9;
-	    	
-	    	// Different comparator for drawing effects over ...
-	    	else if(d1 instanceof effect && (d1.y + d1.height > d2.y) && !(d2 instanceof effect)) return 8;
-	    	else if(d2 instanceof effect && (d1.y < d2.y + d2.height) && !(d1 instanceof effect)) return -8;
-	    	
-	    	// Prioritize units walking over chunks
-	    	// and units walking in front of other units.
-	    	else if(!(d1 instanceof groundTile) && d2 instanceof groundTile) return 7;
-	    	else if(d1 instanceof groundTile && !(d2 instanceof groundTile)) return -7;
-	        	
-	        // Draw units closer to the camera first.
-	    	else if(d1.y + d1.height > d2.y + d2.height) return 6;
-	    	else if(d1.y + d1.height < d2.y + d2.height) return -6;
-	    	else return 0;
-	    	
+		    	// Draw interface objects over ...
+		    	if(d1 instanceof interfaceObject && !(d2 instanceof interfaceObject)) return 9;
+		    	else if(d2 instanceof interfaceObject && !(d1 instanceof interfaceObject)) return -9;
+		    	else {
+		    	
+			    	// Different comparator for drawing effects over ...
+			    	if(d1 instanceof effect && !(d2 instanceof effect) && d1.getY()+d1.getHeight() <= d2.getY()) return 8;
+			    	else if(d2 instanceof effect && !(d1 instanceof effect) && d2.getY()+d2.getHeight() <= d1.getY()) return -8;
+			    	
+			    	else {
+				    	// Prioritize units walking over chunks
+				    	// and units walking in front of other units.
+				    	if(!(d1 instanceof groundTile) && d2 instanceof groundTile) return 7;
+				    	else if(d1 instanceof groundTile && !(d2 instanceof groundTile)) return -7;
+					    else {	
+					        // Draw units closer to the camera first.
+					    	if(d1.y + d1.getHeight() > d2.y + d2.getHeight()) return 6;
+					    	else if(d1.y + d1.getHeight() < d2.y + d2.getHeight()) return -6;
+					    	else return 0;
+					    }
+			    	}
+		    	}
+	    	}
 	    }
 	};
 	
@@ -70,8 +76,8 @@ public abstract class drawnObject {
 	private int y;
 	protected int drawX;
 	protected int drawY;
-	protected int width;
-	protected int height;
+	private int width;
+	private int height;
 	
 	// Do we actually draw the object?
 	private boolean drawObject = true;
@@ -108,8 +114,8 @@ public abstract class drawnObject {
 		}
 		setX(newX);
 		setY(newY);
-		width = newWidth;
-		height = newHeight;
+		setWidth(newWidth);
+		setHeight(newHeight);
 		addObject(this);
 	}
 	
@@ -119,9 +125,9 @@ public abstract class drawnObject {
 		for(int i = 0; i < objects.size(); i++) {
 			drawnObject o = objects.get(i);
 			if(o.getX() < x2 && 
-					 o.getX() + o.width > x1 && 
+					 o.getX() + o.getWidth() > x1 && 
 					 o.getY() < y2 && 
-					 o.getY() + o.height > y1) {
+					 o.getY() + o.getHeight() > y1) {
 				returnList.add(o);
 			}
 		}
@@ -138,9 +144,11 @@ public abstract class drawnObject {
 	public static void drawObjects(Graphics g) {
 		
 		// Set default font.
-		DEFAULT_FONT = new Font(DEFAULT_FONT_NAME, Font.PLAIN, DEFAULT_FONT_SIZE);
-		if(DEFAULT_FONT == null) 
-		g.setFont(DEFAULT_FONT); 
+		if(DEFAULT_FONT == null) {
+			DEFAULT_FONT = new Font(DEFAULT_FONT_NAME, Font.PLAIN, DEFAULT_FONT_SIZE);
+			g.setFont(DEFAULT_FONT); 
+		}
+
 		
 		if(objects != null) {
 			sortObjects();
@@ -151,8 +159,8 @@ public abstract class drawnObject {
 					// If there's a camera, adjust units drawn to the camera pos.
 					if(camera.getCurrent() != null) {
 						// TODO: possible issues with the screen being resized.
-						d.drawX = d.getX() - camera.getCurrent().getX() - camera.getCurrent().getAttachedUnit().width/2 + gameCanvas.getDefaultWidth()/2;
-						d.drawY = d.getY() - camera.getCurrent().getY() - camera.getCurrent().getAttachedUnit().height/2 + gameCanvas.getDefaultHeight()/2;
+						d.drawX = d.getX() - camera.getCurrent().getX() - camera.getCurrent().getAttachedUnit().getWidth()/2 + gameCanvas.getDefaultWidth()/2;
+						d.drawY = d.getY() - camera.getCurrent().getY() - camera.getCurrent().getAttachedUnit().getHeight()/2 + gameCanvas.getDefaultHeight()/2;
 					}
 					else {
 						d.drawX = d.getX();
@@ -172,16 +180,17 @@ public abstract class drawnObject {
 					}
 					
 					// Adjust for hitboxes.
-					 d.drawX += - (spriteWidth/2 - d.width/2) - d.getHitBoxAdjustmentX();
-					 d.drawY += - (spriteHeight/2 - d.height/2) - d.getHitBoxAdjustmentY();
+					 d.drawX += - (spriteWidth/2 - d.getWidth()/2) - d.getHitBoxAdjustmentX();
+					 d.drawY += - (spriteHeight/2 - d.getHeight()/2) - d.getHitBoxAdjustmentY();
 					
 					// Draw the object if it's on the screen.
 					if(d instanceof interfaceObject ||
 					   (d.drawX + spriteWidth > 0 && 
 					   d.drawY + spriteHeight > 0 && 
 					   d.drawX < gameCanvas.getDefaultWidth() && 
-					   d.drawY < gameCanvas.getDefaultHeight()))
-					d.drawObject(g);
+					   d.drawY < gameCanvas.getDefaultHeight())) {
+						d.drawObject(g);
+					}
 				}
 			}
 		}
@@ -191,10 +200,10 @@ public abstract class drawnObject {
 	// be inside checkObject if moved to newX and newY. 0,0 otherwise.
 	public boolean collides(int newX, int newY, drawnObject checkObject) {
 		// Check each side.
-		boolean intercepts = newX < checkObject.getX() + checkObject.width && 
-							 newX + width > checkObject.getX() && 
-							 newY < checkObject.getY() + checkObject.height && 
-							 newY + height > checkObject.getY();
+		boolean intercepts = newX < checkObject.getX() + checkObject.getWidth() && 
+							 newX + getWidth() > checkObject.getX() && 
+							 newY < checkObject.getY() + checkObject.getHeight() && 
+							 newY + getHeight() > checkObject.getY();
 		return intercepts;
 	}
 	
@@ -301,6 +310,22 @@ public abstract class drawnObject {
 
 	public void setObjectImage(BufferedImage objectImage) {
 		this.objectImage = objectImage;
+	}
+
+	public int getWidth() {
+		return width;
+	}
+
+	public void setWidth(int width) {
+		this.width = width;
+	}
+
+	public int getHeight() {
+		return height;
+	}
+
+	public void setHeight(int height) {
+		this.height = height;
 	}
 	
 }

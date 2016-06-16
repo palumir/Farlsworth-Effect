@@ -46,12 +46,12 @@ public class horizontalGate extends chunk {
 		super(typeReference, newX, newY, i, 0);
 		if(mode.getCurrentMode().equals("topDown")) {
 			setHitBoxAdjustmentY(14);
-			height = 6;
+			setHeight(6);
 		}
 		else {
 			setHitBoxAdjustmentY(0);
-			height = DEFAULT_CHUNK_HEIGHT;
-			width = DEFAULT_CHUNK_WIDTH;
+			setHeight(DEFAULT_CHUNK_HEIGHT);
+			setWidth(DEFAULT_CHUNK_WIDTH);
 		}
 		setPassable(false);
 		if(i==1) setPassable(true);

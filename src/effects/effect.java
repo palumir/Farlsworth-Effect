@@ -108,10 +108,10 @@ public abstract class effect extends drawnObject  {
 		// Draw the hitbox of the image in green.
 		if(showHitBox) {
 			g.setColor(Color.green);
-			g.drawRect(drawX - (- (getObjectSpriteSheet().getSpriteWidth()/2 - width/2) - getHitBoxAdjustmentX()),
-					   drawY - (- (getObjectSpriteSheet().getSpriteHeight()/2 - height/2) - getHitBoxAdjustmentY()), 
-				       width, 
-				       height);
+			g.drawRect(drawX - (- (getObjectSpriteSheet().getSpriteWidth()/2 - getWidth()/2) - getHitBoxAdjustmentX()),
+					   drawY - (- (getObjectSpriteSheet().getSpriteHeight()/2 - getHeight()/2) - getHitBoxAdjustmentY()), 
+				       getWidth(), 
+				       getHeight());
 		}
 	}
 	

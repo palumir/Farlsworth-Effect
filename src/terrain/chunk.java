@@ -4,17 +4,43 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
 
 import drawing.drawnObject;
 import drawing.spriteSheet;
+import drawing.userInterface.interfaceObject;
+import effects.effect;
+import effects.effectTypes.floatingNumber;
+import modes.mode;
+import units.player;
+import units.unit;
 import utilities.intTuple;
 
 public class chunk extends drawnObject {
 	////////////////
 	/// DEFAULTS ///
 	////////////////
-	// All chunks
+
+	private static Comparator<chunk> chunkComparator = new Comparator<chunk>() {
+	       public int compare(chunk c1, chunk c2) {
+	         int result = Double.compare(c1.getX(), c2.getX());
+	         if ( result == 0 ) {
+	           // both X are equal -> compare Y too
+	           result = Double.compare(c1.getY(), c2.getY());
+	         } 
+	         return result;
+	      }
+	};
+
+	// All chunks.
 	public static ArrayList<chunk> allChunks;
+	public static ArrayList<chunk> impassableChunks;
+	
+	// Largest chunk size.
+	private static int largestChunkWidth = 0;
+	private static int largestChunkHeight = 0;
 	
 	// Default passable boolean
 	private boolean DEFAULT_PASSABLE = true;
@@ -43,6 +69,11 @@ public class chunk extends drawnObject {
 		
 		// Remember our chunks.
 		allChunks.add(this);
+		if(!passable) impassableChunks.add(this);
+		
+		// Set largest.
+		if(c.getWidth() > largestChunkWidth) largestChunkWidth = c.getWidth();
+		if(c.getHeight() > largestChunkHeight) largestChunkHeight = c.getHeight();
 	}
 	
 	// Constructor for choosing a given variation of the chunk.
@@ -57,6 +88,10 @@ public class chunk extends drawnObject {
 		
 		// Remember our chunks.
 		allChunks.add(this);
+		
+		// Set largest.
+		if(c.getWidth() > largestChunkWidth) largestChunkWidth = c.getWidth();
+		if(c.getHeight() > largestChunkHeight) largestChunkHeight = c.getHeight();
 	}
 	
 	// Check if a unit collides with any chunk. Returns by how much.
@@ -66,17 +101,29 @@ public class chunk extends drawnObject {
 		boolean tX = false;
 		boolean tY = false;
 		
-		if(allChunks != null) {
-			
-			// Scan all chunks.
-			for(int i = 0; i < allChunks.size(); i++) {
-				
-				// If the chunk is passable, just ignore it. 
-				if(!allChunks.get(i).isPassable()) {
-					
+		// Phase 1 TODO: make it binary search? This is faster, but binary search is very fast.
+		boolean phaseOneOver = false;
+		
+		if(allChunks != null && impassableChunks.size() > 0) {
+			int i = 0;
+			int jump = (int) (impassableChunks.size()*0.10f); // Jump by 15%
+			while(i < impassableChunks.size()) {
+				chunk currChunk = impassableChunks.get(i);
+				if(phaseOneOver) {
 					// If we collide with one, return the tuple containing by how much.
-					if(u.collides(newX, u.getY(), allChunks.get(i))) tX = true;
-					if(u.collides(u.getX(), newY, allChunks.get(i))) tY = true;
+					if(u.collides(newX, u.getY(),currChunk)) tX = true;
+					if(u.collides(u.getX(), newY,currChunk)) tY = true;
+					i++;
+				}
+				else {
+					if(currChunk.getX() + largestChunkWidth >= u.getX()) {
+						phaseOneOver = true;
+						if(i - jump < 0) i = 0;
+						else i -= jump;
+					}
+					else {
+						i += jump;
+					}
 				}
 			}
 		}
@@ -94,6 +141,7 @@ public class chunk extends drawnObject {
 	// Draw the chunk. 
 	@Override
 	public void drawObject(Graphics g) {
+		
 		// Draw it. 
 		if(chunkImage != null) {
 			g.drawImage(chunkImage, 
@@ -115,10 +163,10 @@ public class chunk extends drawnObject {
 			// Draw the hitbox of the image in green.
 			if(showHitBox) {
 				g.setColor(Color.green);
-				g.drawRect(drawX - (- (getObjectSpriteSheet().getSpriteWidth()/2 - width/2) - getHitBoxAdjustmentX()),
-						   drawY - (- (getObjectSpriteSheet().getSpriteHeight()/2 - height/2) - getHitBoxAdjustmentY()), 
-					       width, 
-					       height);
+				g.drawRect(drawX - (- (getObjectSpriteSheet().getSpriteWidth()/2 - getWidth()/2) - getHitBoxAdjustmentX()),
+						   drawY - (- (getObjectSpriteSheet().getSpriteHeight()/2 - getHeight()/2) - getHitBoxAdjustmentY()), 
+					       getWidth(), 
+					       getHeight());
 			}
 			
 			// Draw the x,y coordinates of the unit.
@@ -134,6 +182,12 @@ public class chunk extends drawnObject {
 	// Initiate chunks
 	public static void initiate() {
 		allChunks = new ArrayList<chunk>();
+		impassableChunks = new ArrayList<chunk>();
+	}
+	
+	// Sort chunks.
+	public static void sortChunks() {
+		Collections.sort(impassableChunks, chunkComparator);
 	}
 	
 	////////////////////////////////////
@@ -144,6 +198,14 @@ public class chunk extends drawnObject {
 	}
 	
 	public void setPassable(boolean b) {
+		
+		// Add to unpassable blocks.
+		if(b == false) {
+			impassableChunks.add(this);
+		}
+		if(b == true && impassableChunks.contains(this)) {
+			impassableChunks.remove(this);
+		}
 		passable = b;
 	}
 	

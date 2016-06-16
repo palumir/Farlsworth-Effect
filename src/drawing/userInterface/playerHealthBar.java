@@ -22,13 +22,13 @@ public class playerHealthBar extends interfaceObject  {
 	private int DEFAULT_HEALTHBAR_HEIGHT = 15;
 	
 	// Colors
-	private Color DEFAULT_HEALTH_COLOR = new Color(6,228,1);
-	private Color DEFAULT_LOST_HEALTH_COLOR = Color.red;
-	private Color DEFAULT_BORDER_COLOR = new Color(85,58,30);
-	private Color DEFAULT_EXP_COLOR = new Color(239,255,40);
-	private Color DEFAULT_LOST_EXP_COLOR = new Color(15,15,0);
-	private Color DEFAULT_LEVEL_COLOR = new Color(64,48,38);
-	private Color DEFAULT_OUTOF_COLOR = new Color(100,48,38);
+	public static Color DEFAULT_HEALTH_COLOR = new Color(6,228,1);
+	public static Color DEFAULT_LOST_HEALTH_COLOR = Color.red;
+	public static Color DEFAULT_BORDER_COLOR = new Color(85,58,30);
+	public static Color DEFAULT_EXP_COLOR = new Color(239,255,40);
+	public static Color DEFAULT_LOST_EXP_COLOR = new Color(15,15,0);
+	public static Color DEFAULT_LEVEL_COLOR = new Color(64,48,38);
+	public static Color DEFAULT_OUTOF_COLOR = new Color(100,48,38);
 	
 	///////////////////////
 	////// FIELDS /////////
@@ -54,11 +54,10 @@ public class playerHealthBar extends interfaceObject  {
 		int healthChunkSize = 1;
 		int expChunkSize = 1;
 		if(player.getCurrentPlayer()!=null) {
-			healthChunkSize = (int)((float)player.getCurrentPlayer().getHealthPoints()/player.getCurrentPlayer().getMaxHealthPoints())*DEFAULT_HEALTHBAR_WIDTH;
+			healthChunkSize = (int)(((float)player.getCurrentPlayer().getHealthPoints()/(float)player.getCurrentPlayer().getMaxHealthPoints())*DEFAULT_HEALTHBAR_WIDTH);
 			expChunkSize = (int)((float)player.getCurrentPlayer().getExpIntoLevel()/(float)player.expRequiredForLevel()*DEFAULT_HEALTHBAR_WIDTH);
 		}
 
-		
 		// Draw the background.
 		g.drawImage(background, 
 				getX(), 

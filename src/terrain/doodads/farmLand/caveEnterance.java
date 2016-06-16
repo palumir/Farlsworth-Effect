@@ -55,13 +55,13 @@ public class caveEnterance extends chunk {
 		spawnY = newSpawnY;
 		if(mode.getCurrentMode().equals("topDown")) {
 			setHitBoxAdjustmentY(12);
-			height = 55;
-			width = 20;
+			setHeight(55);
+			setWidth(20);
 		}
 		else {
 			setHitBoxAdjustmentY(12);
-			height = 55;
-			width = 20;
+			setHeight(55);
+			setWidth(20);
 		}
 		setPassable(true);
 	}

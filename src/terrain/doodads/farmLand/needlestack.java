@@ -71,13 +71,13 @@ public class needlestack extends chunk {
 		super(typeReference, newX, newY, i, 0);
 		if(mode.getCurrentMode().equals("topDown")) {
 			setHitBoxAdjustmentY(10);
-			width = 44;
-			height = 20;
+			setWidth(44);
+			setHeight(20);
 		}
 		else {
 			setHitBoxAdjustmentY(0);
-			height = DEFAULT_CHUNK_HEIGHT;
-			width = DEFAULT_CHUNK_WIDTH;
+			setHeight(DEFAULT_CHUNK_HEIGHT);
+			setWidth(DEFAULT_CHUNK_WIDTH);
 		}
 		
 		// Interactable.

@@ -40,13 +40,13 @@ public class bush extends chunk {
 		super(typeReference, newX, newY, i, 0);
 		if(mode.getCurrentMode().equals("topDown")) {
 			setHitBoxAdjustmentY(5);
-			width = 50;
-			height = 15;
+			setWidth(50);
+			setHeight(15);
 		}
 		else {
 			setHitBoxAdjustmentY(0);
-			height = DEFAULT_CHUNK_HEIGHT;
-			width = DEFAULT_CHUNK_WIDTH;
+			setHeight(DEFAULT_CHUNK_HEIGHT);
+			setWidth(DEFAULT_CHUNK_WIDTH);
 		}
 		setPassable(false);
 	}

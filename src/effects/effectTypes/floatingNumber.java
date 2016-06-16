@@ -58,15 +58,15 @@ public class floatingNumber extends effect {
 		color = newColor;
 		
 		// So it displays over everything.
-		height = 100;
-		width = 1;
+		setHeight(100);
+		setWidth(1);
 	}
 	
 	// Draw the unit. 
 	@Override
 	public void drawObject(Graphics g) {
 		g.setColor(color);
-		g.drawString("" + number,drawX - g.getFontMetrics().stringWidth(number+"")/2, drawY - height/2);
+		g.drawString("" + number,drawX - g.getFontMetrics().stringWidth(number+"")/2, drawY - getHeight()/2);
 		setY(getY() - 1);
 	}
 

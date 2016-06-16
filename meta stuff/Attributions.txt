@@ -7,3 +7,19 @@ Sword_Sheath.wav by Q.K.
 SwordDraw01 by 32cheeseman32
 Knife Stab.wav by Mixedupmoviestuff
 click_01-fast.wav by Qat
+Swipe Woosh by qubodup
+wolf voice 41 by y89312
+wolf-growl.wav by newagesoup
+Dog bark 3 by jorickhoofd
+Dog bark 1 by jorickhoofd
+
+Art Attributions:
+Character: universal LPC spritesheet by jrconway3 on github.
+Spider: landofshadows
+Sheep: RPGMaker VX and Birdzilla
+Wolf: RPGMaker
+
+
+WolfMother SpriteSheet = 
+Attribute Stephen "Redshrike" Challener as graphic artist 
+William Thompsonj as contributor. 

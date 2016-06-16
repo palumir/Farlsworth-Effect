@@ -90,8 +90,8 @@ public class sheep extends unit {
 		startY = newY;
 		
 		// Set dimensions
-		height = getDefaultHeight();
-		width = getDefaultWidth();
+		setHeight(getDefaultHeight());
+		setWidth(getDefaultWidth());
 		platformerHeight = DEFAULT_PLATFORMER_HEIGHT;
 		platformerWidth = DEFAULT_PLATFORMER_WIDTH;
 		topDownHeight = DEFAULT_TOPDOWN_HEIGHT;
@@ -103,29 +103,21 @@ public class sheep extends unit {
 	// Make sure the movement is within a certain radius.
 	public void checkMovement(String direction) {
 			if(getX() < startX - patrolRadius) moveUnit("right");
-			else if(getX() + width > startX + patrolRadius)  moveUnit("left");
+			else if(getX() + getWidth() > startX + patrolRadius)  moveUnit("left");
 			else if(getY() < startY - patrolRadius) moveUnit("down");
-			else if(getY() + height > startY + patrolRadius) moveUnit("up");
+			else if(getY() + getHeight() > startY + patrolRadius) moveUnit("up");
 			else moveUnit(direction);
 	}
 	
 	// React to pain.
 	public void reactToPain() {
-		// Play a random baaaah
-		int random = utility.RNG.nextInt(2);
-		if(random==0) {
-			bleet1.playSound(this.getX(), this.getY(), bleetRadius, DEFAULT_BLEET_VOLUME);
-		}
-		if(random==1) {
-			bleet2.playSound(this.getX(), this.getY(), bleetRadius, DEFAULT_BLEET_VOLUME);
-		}
 	}
 	
 	// SHEEP AI moves SHEEP around for now.
 	public void updateUnit() {
 		
 		// Create a new random bleet interval
-		float newRandomBleetInterval = 2.5f + utility.RNG.nextInt(16);
+		float newRandomBleetInterval = 2.5f + utility.RNG.nextInt(18);
 		
 		// Sheep make sounds
 		if(randomBleet == 0f) {

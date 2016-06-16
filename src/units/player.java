@@ -62,6 +62,9 @@ public class player extends unit {
 	// Player sprite stuff.
 	private static String DEFAULT_PLAYER_SPRITESHEET = "images/units/player/" + DEFAULT_PLAYER_GENDER + "/noItems.png";
 	
+	// Combat defaults
+	private static int DEFAULT_BASE_HP = 20;
+	
 	// Default interact range.
 	private static int DEFAULT_INTERACT_RANGE = 20;
 	private static int DEFAULT_INTERACT_WIDTH = 40;
@@ -137,7 +140,7 @@ public class player extends unit {
 		super(playerType, newX, newY);
 		
 		/// TODO: Dev stuff
-		//showUnitPosition();
+		showUnitPosition();
 		//showHitBox();
 		//setCollision(false);
 		//setMoveSpeed(10);
@@ -169,8 +172,8 @@ public class player extends unit {
 		setAttackable(true);
 		
 		// Set dimensions
-		height = getDefaultHeight();
-		width = getDefaultWidth();
+		setHeight(getDefaultHeight());
+		setWidth(getDefaultWidth());
 		platformerHeight = DEFAULT_PLATFORMER_HEIGHT;
 		platformerWidth = DEFAULT_PLATFORMER_WIDTH;
 		topDownHeight = DEFAULT_TOPDOWN_HEIGHT;
@@ -181,20 +184,20 @@ public class player extends unit {
 	// React to pain.
 	public void reactToPain() {
 		// Squirt blood
-		int randomX = -width/3 + utility.RNG.nextInt(width/3);
-		int randomY = -height/2 + utility.RNG.nextInt(height/2);
-		effect e = new bloodSquirt(getX() - bloodSquirt.getDefaultWidth()/2 + width/2 + randomX,
-				   getY() - bloodSquirt.getDefaultHeight()/2 + height/2 + randomY);
+		int randomX = -getWidth()/3 + utility.RNG.nextInt(getWidth()/3);
+		int randomY = -getHeight()/2 + utility.RNG.nextInt(getHeight()/2);
+		effect e = new bloodSquirt(getX() - bloodSquirt.getDefaultWidth()/2 + getWidth()/2 + randomX,
+				   getY() - bloodSquirt.getDefaultHeight()/2 + getHeight()/2 + randomY);
 	}
 	
 	// Player AI controls the interface
 	public void updateUnit() {
-		aliveOrDead();
 		levelUp();
 		updateInterface();
 	}
 	
 	// Deal with player being alive or dead.
+	@Override
 	public void aliveOrDead() {
 		
 		// Dead
@@ -232,11 +235,11 @@ public class player extends unit {
 		
 		// Make adjustments on hitbox if we're in topDown.
 		if(mode.getCurrentMode().equals("topDown")) {
-			thePlayer.height = DEFAULT_TOPDOWN_HEIGHT;
+			thePlayer.setHeight(DEFAULT_TOPDOWN_HEIGHT);
 			thePlayer.setHitBoxAdjustmentY(DEFAULT_TOPDOWN_ADJUSTMENT_Y);
 		}
 		else {
-			thePlayer.height = DEFAULT_PLATFORMER_HEIGHT;
+			thePlayer.setHeight(DEFAULT_PLATFORMER_HEIGHT);
 			thePlayer.setHitBoxAdjustmentY(DEFAULT_PLATFORMER_ADJUSTMENT_Y);
 		}
 		
@@ -384,6 +387,7 @@ public class player extends unit {
 			// TODO: TESTING STUFF.
 			//////////////////////////////////////
 			if(k.getKeyCode() == KeyEvent.VK_P) {
+				healthPoints--;
 				giveExp(20);
 			}
 		}
@@ -421,7 +425,7 @@ public class player extends unit {
 		
 		// TODO: Formula for how much their attack increases per level.
 		attackMultiplier = 1f + 14*((float)(playerLevel - 1)/10f);
-		maxHealthPoints = 10 + (playerLevel - 1)*3;
+		maxHealthPoints = DEFAULT_BASE_HP + (playerLevel - 1)*3;
 		
 		// Update health.
 		healthPoints = maxHealthPoints;
@@ -530,38 +534,38 @@ public class player extends unit {
 		
 		// Get the box we will attack in if facing left.
 		if(getFacingDirection().equals("Left")) {
-			int heightMidPoint = getY() + height/2;
+			int heightMidPoint = getY() + getHeight()/2;
 			y1 = heightMidPoint - DEFAULT_INTERACT_WIDTH/2;
 			y2 = heightMidPoint + DEFAULT_INTERACT_WIDTH/2;
 			x1 = getX() - DEFAULT_INTERACT_RANGE;
-			x2 = getX() + width;
+			x2 = getX() + getWidth();
 		}
 		
 		// Get the box we will attack in if facing right.
 		if(getFacingDirection().equals("Right")) {
-			int heightMidPoint = getY() + height/2;
+			int heightMidPoint = getY() + getHeight()/2;
 			y1 = heightMidPoint - DEFAULT_INTERACT_WIDTH/2;
 			y2 = heightMidPoint + DEFAULT_INTERACT_WIDTH/2;
 			x1 = getX();
-			x2 = getX() + width + DEFAULT_INTERACT_RANGE;
+			x2 = getX() + getWidth() + DEFAULT_INTERACT_RANGE;
 		}
 		
 		// Get the box we will attack in facing up.
 		if(getFacingDirection().equals("Up")) {
-			int widthMidPoint = getX() + width/2;
+			int widthMidPoint = getX() + getWidth()/2;
 			x1 = widthMidPoint - DEFAULT_INTERACT_WIDTH/2;
 			x2 = widthMidPoint + DEFAULT_INTERACT_WIDTH/2;
 			y1 = getY() - DEFAULT_INTERACT_RANGE;
-			y2 = getY() + height;
+			y2 = getY() + getHeight();
 		}
 		
 		// Get the box we will attack in facing down.
 		if(getFacingDirection().equals("Down")) {
-			int widthMidPoint = getX() + width/2;
+			int widthMidPoint = getX() + getWidth()/2;
 			x1 = widthMidPoint - DEFAULT_INTERACT_WIDTH/2;
 			x2 = widthMidPoint + DEFAULT_INTERACT_WIDTH/2;
 			y1 = getY();
-			y2 = getY() + height + DEFAULT_INTERACT_RANGE;
+			y2 = getY() + getHeight() + DEFAULT_INTERACT_RANGE;
 		}
 		
 		// Get the units in the box around the front of the player.

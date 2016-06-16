@@ -23,6 +23,7 @@ import terrain.doodads.farmLand.verticalFence;
 import units.unit;
 import units.unitTypes.farmLand.farmer;
 import units.unitTypes.farmLand.sheep;
+import units.unitTypes.farmLand.wolf;
 import utilities.intTuple;
 import utilities.utility;
 import zones.zone;
@@ -164,9 +165,11 @@ public class sheepFarm extends zone {
 		// Create forest above spawn
 		createForest();
 		
+		// Sort chunks.
+		chunk.sortChunks();
+		
 		// Zone is loaded.
 		setZoneLoaded(true);
-		
 	}
 	
 	//////////////////////
@@ -196,6 +199,9 @@ public class sheepFarm extends zone {
 		
 		// Cave to top left.
 		caveEnterance spiderCaveEnterance = new caveEnterance(-1762+20+30,-4070+6+14,0, spiderCave.getZone(),100,-6,"Right");
+		
+		// Spawn wolf.
+		u = new wolf(-200,-589);
 		
 		// Spawn forest trees.
 		c = new tree(-2000,-3946,0);

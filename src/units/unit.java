@@ -9,6 +9,7 @@ import drawing.drawnObject;
 import drawing.spriteSheet;
 import drawing.animation.animation;
 import drawing.animation.animationPack;
+import drawing.userInterface.playerHealthBar;
 import effects.effect;
 import effects.effectTypes.bloodSquirt;
 import effects.effectTypes.critBloodSquirt;
@@ -27,8 +28,12 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 	////// DEFAULTS /////////
 	/////////////////////////
 	
+	// List of all units
+	private static ArrayList<unit> allUnits = new ArrayList<unit>();
+	
 	// Default movespeed.
-	private int DEFAULT_UNIT_MOVESPEED = 1;
+	private static int DEFAULT_UNIT_MOVESPEED = 1;
+	public static int DEFAULT_MAX_MOVESPEED = 10;
 	
 	// Gravity defaults.
 	private static boolean DEFAULT_GRAVITY_STATE = false;
@@ -46,9 +51,13 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 	private float DEFAULT_ATTACK_TIME = 1.5f;
 	private int DEFAULT_ATTACK_RANGE = 0;
 	private float DEFAULT_ATTACK_VARIABILITY = 0.2f; // How much the range of hits is. 20% both ways.
-	private float DEFAULT_CRIT_CHANCE = .10f;
-	private float DEFAULT_CRIT_DAMAGE = 2f;
+	private float DEFAULT_CRIT_CHANCE = .15f;
+	private float DEFAULT_CRIT_DAMAGE = 1.5f;
 	protected boolean showAttackRange = false;
+	
+	// Default healthbarsize
+	private int DEFAULT_HEALTHBAR_HEIGHT = 6;
+	private int DEFAULT_HEALTHBAR_WIDTH = 40;
 	
 	// Colors for combat.
 	private Color DEFAULT_DAMAGE_COLOR = Color.white;
@@ -141,6 +150,9 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 		setMoveSpeed(u.getMoveSpeed());
 		jumpSpeed = u.getJumpSpeed();
 		typeOfUnit = u;
+		
+		// Add to list
+		allUnits.add(this);
 	}
 	
 	// Update unit
@@ -151,7 +163,31 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 		jump();
 		moveUnit();
 		combat();
+		aliveOrDead();
 		updateUnit();
+	}
+	
+	// Is the unit alive or dead
+	public void aliveOrDead() {
+		
+		// Kill unit if we're dead.
+		if(healthPoints <= 0) {
+			die();
+		}
+	}
+	
+	// Kill unit
+	public void die() {
+		
+		// Remove from game.
+		destroy();
+		
+		// Remove from units list.
+		allUnits.remove(this);
+		
+		// Do a huge blood squirt.
+		effect blood = new critBloodSquirt(getX() - critBloodSquirt.getDefaultWidth()/2 + topDownWidth/2,
+				   getY() - critBloodSquirt.getDefaultHeight()/2);
 	}
 	
 	// Require units to have some sort of AI.
@@ -189,38 +225,38 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 				
 				// Get the box we will attack in if facing left.
 				if(facingDirection.equals("Left")) {
-					int heightMidPoint = getY() + height/2;
+					int heightMidPoint = getY() + getHeight()/2;
 					y1 = heightMidPoint - getAttackWidth()/2;
 					y2 = heightMidPoint + getAttackWidth()/2;
 					x1 = getX() - getAttackLength();
-					x2 = getX() + width;
+					x2 = getX() + getWidth();
 				}
 				
 				// Get the box we will attack in if facing right.
 				if(facingDirection.equals("Right")) {
-					int heightMidPoint = getY() + height/2;
+					int heightMidPoint = getY() + getHeight()/2;
 					y1 = heightMidPoint - getAttackWidth()/2;
 					y2 = heightMidPoint + getAttackWidth()/2;
 					x1 = getX();
-					x2 = getX() + width + getAttackLength();
+					x2 = getX() + getWidth() + getAttackLength();
 				}
 				
 				// Get the box we will attack in facing up.
 				if(facingDirection.equals("Up")) {
-					int widthMidPoint = getX() + width/2;
+					int widthMidPoint = getX() + getWidth()/2;
 					x1 = widthMidPoint - getAttackWidth()/2;
 					x2 = widthMidPoint + getAttackWidth()/2;
 					y1 = getY() - getAttackLength();
-					y2 = getY() + height;
+					y2 = getY() + getHeight();
 				}
 				
 				// Get the box we will attack in facing down.
 				if(facingDirection.equals("Down")) {
-					int widthMidPoint = getX() + width/2;
+					int widthMidPoint = getX() + getWidth()/2;
 					x1 = widthMidPoint - getAttackWidth()/2;
 					x2 = widthMidPoint + getAttackWidth()/2;
 					y1 = getY();
-					y2 = getY() + height + getAttackLength();
+					y2 = getY() + getHeight() + getAttackLength();
 				}
 				attackUnits(getUnitsInBox(x1,y1,x2,y2));
 				alreadyAttacked = true;
@@ -232,15 +268,67 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 		}
 	}
 	
+	// Is in attack range?
+	public boolean isInAttackRange(unit u, int differential) {
+		int x1 = 0;
+		int x2 = 0;
+		int y1 = 0;
+		int y2 = 0;
+		
+		// Get the box we will attack in if facing left.
+		if(facingDirection.equals("Left")) {
+			int heightMidPoint = getY() + getHeight()/2;
+			y1 = heightMidPoint - getAttackWidth()/2 + differential/2;
+			y2 = heightMidPoint + getAttackWidth()/2 - differential/2;
+			x1 = getX() - getAttackLength() + differential;
+			x2 = getX() + getWidth();
+		}
+		
+		// Get the box we will attack in if facing right.
+		if(facingDirection.equals("Right")) {
+			int heightMidPoint = getY() + getHeight()/2;
+			y1 = heightMidPoint - getAttackWidth()/2 + differential/2;
+			y2 = heightMidPoint + getAttackWidth()/2 - differential/2;
+			x1 = getX();
+			x2 = getX() + getWidth() + getAttackLength() - differential;
+		}
+		
+		// Get the box we will attack in facing up.
+		if(facingDirection.equals("Up")) {
+			int widthMidPoint = getX() + getWidth()/2;
+			x1 = widthMidPoint - getAttackWidth()/2 + differential/2;
+			x2 = widthMidPoint + getAttackWidth()/2 - differential/2;
+			y1 = getY() - getAttackLength() + differential;
+			y2 = getY() + getHeight();
+		}
+		
+		// Get the box we will attack in facing down.
+		if(facingDirection.equals("Down")) {
+			int widthMidPoint = getX() + getWidth()/2;
+			x1 = widthMidPoint - getAttackWidth()/2 + differential/2;
+			x2 = widthMidPoint + getAttackWidth()/2 - differential/2;
+			y1 = getY();
+			y2 = getY() + getHeight() + getAttackLength() - differential;
+		}
+		
+		ArrayList<unit> unitsInBox = getUnitsInBox(x1,y1,x2,y2);
+		if(unitsInBox == null) return false;
+		return unitsInBox.contains(u);
+	}
+	
 	// Get units in box.
 	public static ArrayList<unit> getUnitsInBox(int x1, int y1, int x2, int y2) {
 		ArrayList<unit> returnList = new ArrayList<unit>();
-		ArrayList<drawnObject> d = drawnObject.getObjectsInBox(x1,y1,x2,y2);
-		if(d!=null) {
-			for(int i = 0; i < d.size(); i++) {
-				if(d.get(i) instanceof unit) returnList.add((unit) d.get(i));
+		for(int i = 0; i < allUnits.size(); i++) {
+			unit u = allUnits.get(i);
+			if(u.getX() < x2 && 
+					 u.getX() + u.getWidth() > x1 && 
+					 u.getY() < y2 && 
+					 u.getY() + u.getHeight() > y1) {
+				returnList.add(u);
 			}
 		}
+		if(returnList.size()==0) return null;
 		return returnList;
 	}
 	
@@ -260,7 +348,16 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 					// Did we crit?
 					float crit = 1f;
 					if(critChance*100 >= utility.RNG.nextInt(100)) crit = critDamage;
-					currentUnit.hurt(actualDamageDone, crit);
+					
+					// Players can hit anything.
+					if(this instanceof player) {
+						currentUnit.hurt(actualDamageDone, crit);
+					}
+					
+					// Enemies can't hit eachother.
+					else if(!(this instanceof player) && currentUnit instanceof player) {
+						currentUnit.hurt(actualDamageDone, crit);
+					}
 				}
 			}
 		}
@@ -274,19 +371,18 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 		
 		// Crit
 		if(crit != 1f) {
-			effect e = new floatingNumber((int) (crit*damage), DEFAULT_CRIT_COLOR, getX() + width/2, getY() + height/2);
-			effect blood = new critBloodSquirt(getX() - critBloodSquirt.getDefaultWidth()/2 + topDownWidth/2,
-					   getY() - critBloodSquirt.getDefaultHeight()/2);
+			effect e = new floatingNumber((int) (crit*damage), DEFAULT_CRIT_COLOR, getX() + getWidth()/2, getY() + getHeight()/2);
 		}
 		// Non crit.
 		else {
-			effect e = new floatingNumber(damage, DEFAULT_DAMAGE_COLOR, getX() + width/2, getY() + height/2);
-			// Squirt blood
-			int randomX = 0;
-			int randomY = -platformerHeight/3 + utility.RNG.nextInt(platformerHeight/3);
-			effect blood = new bloodSquirt(getX() - bloodSquirt.getDefaultWidth()/2 + topDownWidth/2 + randomX ,
-					   getY() - bloodSquirt.getDefaultHeight()/2 + platformerHeight/2 + randomY);
+			effect e = new floatingNumber(damage, DEFAULT_DAMAGE_COLOR, getX() + getWidth()/2, getY() + getHeight()/2);
 		}
+		
+		// Squirt blood
+		int randomX = 0;
+		int randomY = -platformerHeight/3 + utility.RNG.nextInt(platformerHeight/3);
+		effect blood = new bloodSquirt(getX() - bloodSquirt.getDefaultWidth()/2 + topDownWidth/2 + randomX ,
+				   getY() - bloodSquirt.getDefaultHeight()/2 + platformerHeight/2 + randomY);
 		reactToPain();
 	}
 	
@@ -298,7 +394,7 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 		if(!attacking) {
 			
 			// We are attacking of course.
-			if(attackSound != null) attackSound.playSound(getX(), getY(), DEFAULT_ATTACK_SOUND_RADIUS, 1f);
+			if(attackSound != null) attackSound.playSound(getX(), getY(), DEFAULT_ATTACK_SOUND_RADIUS, 0.8f);
 			attacking = true;
 			startAttackTime = time.getTime();
 		}
@@ -320,6 +416,30 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 			// Accelerate upward.
 			jumping = true;
 			fallSpeed = -jumpSpeed;
+		}
+	}
+	
+	// Follow a unit.
+	public void follow(unit u) {
+		moveTowards(u.getX(), u.getY());
+	}
+	
+	// Move towards a spot.
+	public void moveTowards(int moveX, int moveY) {
+		
+		// Reset movement.
+		stopMove("all");
+		
+		// If we are there, stop.
+		if(Math.abs(getX() - moveX) <= 3*moveSpeed &&  Math.abs(getY() - moveY) <= moveSpeed + 1) {
+			// Don't move.
+		}
+		else {
+			// Move towards unit.
+			if(getX() - moveX < 0 && Math.abs(getX() - moveX) > 3*moveSpeed) movingRight = true;
+			if(getX() - moveX > 0 && Math.abs(getX() - moveX) > 3*moveSpeed) movingLeft = true;
+			if(getY() - moveY < 0 && Math.abs(getY() - moveY) > 3*moveSpeed) movingDown = true;
+			if(getY() - moveY > 0 && Math.abs(getY() - moveY) > 3*moveSpeed) movingUp = true;
 		}
 	}
 	
@@ -591,6 +711,38 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 					null);
 		}
 		
+		// Draw healthbar is hp is low.
+		if(healthPoints < maxHealthPoints && !(this instanceof player)) {
+			
+			// % of HP left.
+			int healthChunkSize = (int)(((float)getHealthPoints()/(float)getMaxHealthPoints())*DEFAULT_HEALTHBAR_WIDTH);
+			
+			// Adjustment
+			int hpAdjustX = -DEFAULT_HEALTHBAR_WIDTH/2+getWidth()/2 ;
+			int hpAdjustY = 0;
+			
+			// Draw the red.
+			g.setColor(playerHealthBar.DEFAULT_LOST_HEALTH_COLOR);
+			g.fillRect(drawX + hpAdjustX,
+					   drawY + hpAdjustY,
+					   DEFAULT_HEALTHBAR_WIDTH,
+					   DEFAULT_HEALTHBAR_HEIGHT);
+			
+			// Draw the green chunks.
+			g.setColor(playerHealthBar.DEFAULT_HEALTH_COLOR);
+			g.fillRect(drawX + hpAdjustX,
+					   drawY + hpAdjustY,
+					   healthChunkSize,
+					  DEFAULT_HEALTHBAR_HEIGHT);
+
+			// Draw border.
+			g.setColor(playerHealthBar.DEFAULT_BORDER_COLOR);
+			g.drawRect(drawX + hpAdjustX,
+					   drawY + hpAdjustY,
+					   DEFAULT_HEALTHBAR_WIDTH,
+					   DEFAULT_HEALTHBAR_HEIGHT);
+		}
+		
 		// Draw the outskirts of the sprite.
 		if(showSpriteBox) {
 			g.setColor(Color.red);
@@ -598,15 +750,6 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 					   drawY, 
 					   getObjectSpriteSheet().getSpriteWidth(), 
 					   getObjectSpriteSheet().getSpriteHeight());
-		}
-		
-		// Draw the hitbox of the image in green.
-		if(showHitBox) {
-			g.setColor(Color.green);
-			g.drawRect(drawX - (- (getObjectSpriteSheet().getSpriteWidth()/2 - width/2) - getHitBoxAdjustmentX()),
-					   drawY - (- (getObjectSpriteSheet().getSpriteHeight()/2 - height/2) - getHitBoxAdjustmentY()), 
-				       width, 
-				       height);
 		}
 		
 		// Draw the x,y coordinates of the unit.
@@ -625,52 +768,61 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 			int y2 = 0;
 			
 			// Get the x and y of hitbox.
-			int hitBoxX = drawX - (- (getObjectSpriteSheet().getSpriteWidth()/2 - width/2) - getHitBoxAdjustmentX());
-			int hitBoxY = drawY - (- (getObjectSpriteSheet().getSpriteHeight()/2 - height/2) - getHitBoxAdjustmentY());
+			int hitBoxX = drawX - (- (getObjectSpriteSheet().getSpriteWidth()/2 - getWidth()/2) - getHitBoxAdjustmentX());
+			int hitBoxY = drawY - (- (getObjectSpriteSheet().getSpriteHeight()/2 - getHeight()/2) - getHitBoxAdjustmentY());
 			
 			// Get the box we will attack in if facing left.
 			if(facingDirection.equals("Left")) {
-				int heightMidPoint = hitBoxY + height/2;
+				int heightMidPoint = hitBoxY + getHeight()/2;
 				y1 = heightMidPoint - getAttackWidth()/2;
 				y2 = heightMidPoint + getAttackWidth()/2;
 				x1 = hitBoxX - getAttackLength();
-				x2 = hitBoxX + width;
+				x2 = hitBoxX + getWidth();
 			}
 			
 			// Get the box we will attack in if facing right.
 			if(facingDirection.equals("Right")) {
-				int heightMidPoint = hitBoxY + height/2;
+				int heightMidPoint = hitBoxY + getHeight()/2;
 				y1 = heightMidPoint - getAttackWidth()/2;
 				y2 = heightMidPoint + getAttackWidth()/2;
 				x1 = hitBoxX;
-				x2 = hitBoxX + width + getAttackLength();
+				x2 = hitBoxX + getWidth() + getAttackLength();
 			}
 			
 			// Get the box we will attack in facing up.
 			if(facingDirection.equals("Up")) {
-				int widthMidPoint = hitBoxX + width/2;
+				int widthMidPoint = hitBoxX + getWidth()/2;
 				x1 = widthMidPoint - getAttackWidth()/2;
 				x2 = widthMidPoint + getAttackWidth()/2;
 				y1 = hitBoxY - getAttackLength();
-				y2 = hitBoxY + height;
+				y2 = hitBoxY + getHeight();
 			}
 			
 			// Get the box we will attack in facing down.
 			if(facingDirection.equals("Down")) {
-				int widthMidPoint = hitBoxX + width/2;
+				int widthMidPoint = hitBoxX + getWidth()/2;
 				x1 = widthMidPoint - getAttackWidth()/2;
 				x2 = widthMidPoint + getAttackWidth()/2;
 				y1 = hitBoxY;
-				y2 = hitBoxY + height + getAttackLength();
+				y2 = hitBoxY + getHeight() + getAttackLength();
 			}
 			g.setColor(Color.blue);
 			g.drawRect(x1,y1,x2-x1,y2-y1);
+		}
+		
+		// Draw the hitbox of the image in green.
+		if(showHitBox) {
+			g.setColor(Color.green);
+			g.drawRect(drawX - (- (getObjectSpriteSheet().getSpriteWidth()/2 - getWidth()/2) - getHitBoxAdjustmentX()),
+					   drawY - (- (getObjectSpriteSheet().getSpriteHeight()/2 - getHeight()/2) - getHitBoxAdjustmentY()), 
+				       getWidth(), 
+				       getHeight());
 		}
 	}
 	
 	// Set a unit to have a quest.
 	public void hasQuest() {
-		int spawnX = (getX() + width/2) - questMark.DEFAULT_CHUNK_WIDTH/2;
+		int spawnX = (getX() + getWidth()/2) - questMark.DEFAULT_CHUNK_WIDTH/2;
 		int spawnY = (int)(getY() - 2.5f*questMark.DEFAULT_CHUNK_HEIGHT);
 		questIcon = new questMark(spawnX, spawnY, 0);
 	}

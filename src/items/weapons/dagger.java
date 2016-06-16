@@ -20,8 +20,8 @@ public class dagger extends weapon {
 	public static String DEFAULT_WEAPON_NAME = "dagger";
 	
 	// Weapon stats.
-	private int DEFAULT_ATTACK_DAMAGE = 6;
-	private float DEFAULT_BAT = 0.3f;
+	private int DEFAULT_ATTACK_DAMAGE = 5;
+	private float DEFAULT_BAT = 0.25f;
 	private float DEFAULT_ATTACK_TIME = 0.4f;
 	private int DEFAULT_ATTACK_WIDTH = 50;
 	private int DEFAULT_ATTACK_LENGTH = 20;

@@ -60,35 +60,35 @@ public class animalType extends unitType {
 		unitTypeAnimations.addAnimation(jumpingRight);
 		
 		// Standing left animation.
-		animation standingLeft = new animation("standingLeft", getUnitTypeSpriteSheet().getAnimation(1), 1, 1, 1);
+		animation standingLeft = new animation("standingLeft", getUnitTypeSpriteSheet().getAnimation(1), 2, 2, 1);
 		unitTypeAnimations.addAnimation(standingLeft);
 		
 		// Standing up animation.
-		animation standingUp = new animation("standingUp", getUnitTypeSpriteSheet().getAnimation(3), 1, 1, 1);
+		animation standingUp = new animation("standingUp", getUnitTypeSpriteSheet().getAnimation(3), 2, 2, 1);
 		unitTypeAnimations.addAnimation(standingUp);
 		
 		// Standing right animation.
-		animation standingRight = new animation("standingRight", getUnitTypeSpriteSheet().getAnimation(2), 1, 1, 1);
+		animation standingRight = new animation("standingRight", getUnitTypeSpriteSheet().getAnimation(2), 2, 2, 1);
 		unitTypeAnimations.addAnimation(standingRight);
 		
 		// Standing down animation.
-		animation standingDown = new animation("standingDown", getUnitTypeSpriteSheet().getAnimation(0), 1, 1, 1);
+		animation standingDown = new animation("standingDown", getUnitTypeSpriteSheet().getAnimation(0), 2, 2, 1);
 		unitTypeAnimations.addAnimation(standingDown);
 		
 		// Running left animation.
-		animation runningLeft = new animation("runningLeft", getUnitTypeSpriteSheet().getAnimation(1), 0, 2, 0.75f);
+		animation runningLeft = new animation("runningLeft", getUnitTypeSpriteSheet().getAnimation(1), 0, 7, 2f);
 		unitTypeAnimations.addAnimation(runningLeft);		
 		
 		// Running up animation.
-		animation runningUp = new animation("runningUp", getUnitTypeSpriteSheet().getAnimation(3), 0, 2, 0.75f);
+		animation runningUp = new animation("runningUp", getUnitTypeSpriteSheet().getAnimation(3), 0, 7, 2f);
 		unitTypeAnimations.addAnimation(runningUp);
 		
 		// Running right animation.
-		animation runningRight = new animation("runningRight", getUnitTypeSpriteSheet().getAnimation(2), 0, 2, 0.75f);
+		animation runningRight = new animation("runningRight", getUnitTypeSpriteSheet().getAnimation(2), 0, 7, 2f);
 		unitTypeAnimations.addAnimation(runningRight);
 		
 		// Running down animation.
-		animation runningDown = new animation("runningDown", getUnitTypeSpriteSheet().getAnimation(0), 0, 2, 0.75f);
+		animation runningDown = new animation("runningDown", getUnitTypeSpriteSheet().getAnimation(0), 0, 7, 2f);
 		unitTypeAnimations.addAnimation(runningDown);
 		
 		// Set animations.

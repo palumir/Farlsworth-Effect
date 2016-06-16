@@ -72,8 +72,8 @@ public class farmer extends unit {
 		
 		// Make adjustments on hitbox if we're in topDown.
 		// Set dimensions
-		height = getDefaultHeight();
-		width = getDefaultWidth();
+		setHeight(getDefaultHeight());
+		setWidth(getDefaultWidth());
 		platformerHeight = DEFAULT_PLATFORMER_HEIGHT;
 		platformerWidth = DEFAULT_PLATFORMER_WIDTH;
 		topDownHeight = DEFAULT_TOPDOWN_HEIGHT;
@@ -99,19 +99,19 @@ public class farmer extends unit {
 		textSeries startOfConversation = new textSeries(null, "For flock's sake!");
 		s = startOfConversation.addChild(null, "These sheep wool be the death of me.");
 		s = s.addChild(null, "The shear thought of collecting more wool pains me.");
-		s = s.addChild(null, "If only somebody were conveniently looking for a quest ...");
-		textSeries firstSpeakToFarmer = s.addChild(null, "... who wool-d help me.");
+		s = s.addChild(null, "If only ewe were looking for a quest ...");
+		textSeries firstSpeakToFarmer = s.addChild(null, "... that wool-d be quite convenient for me.");
 		
 		// Path 1
-		textSeries noPuns = firstSpeakToFarmer.addChild("Stop making puns.", "Sorry. It gets pretty boring around here.");
+		textSeries noPuns = firstSpeakToFarmer.addChild("Quit making puns.", "Sorry. It gets pretty boring around here.");
 		s = noPuns.addChild(null, "When I was a boy I wanted to be a marine biologist.");
 		s = s.addChild(null, "But life happens, and things change.");
-		s = s.addChild(null, "Anyway, about that wool...");
+		s = s.addChild(null, "Anyway ...");
 		s = s.addChild(null, "I require wool from a particular sheep.");
 		s = s.addChild(null, "He never makes it easy.");
 		s = s.addChild(null, "But he needs to be sheared.");
 		s = s.addChild(null, "You'll find him in the pen to the far East.");
-		s = s.addChild(null, "Can you collect his wool?");
+		s = s.addChild(null, "Can you collect his wool for me?");
 		
 		// Saying yes.
 		textSeries yes = s.addChild("Yes.","Great. Good luck!");
@@ -129,15 +129,13 @@ public class farmer extends unit {
 		s.addChild(yes);
 		s = s.addChild("No.","That doesn't even make sense.");
 		s.addChild(yes);
-		s = s.addChild("No.","I'll just get somebody else to do the quest then.");
+		s = s.addChild("No.","Well, you can always just sheep on it.");
 		s.addChild(yes);
-		s = s.addChild("No.","What are you even doing here then?");
+		s = s.addChild("No.","Come on, that was a good one.");
 		s.addChild(yes);
-		s = s.addChild("No.","Please go away.");
+		s = s.addChild("No.","Why won't you take the quest?");
 		s.addChild(yes);
-		s = s.addChild("No.","What's your problem?");
-		s.addChild(yes);
-		s = s.addChild("No.","I just don't understand.");
+		s = s.addChild("No.","What's your issue?");
 		s.addChild(yes);
 		s = s.addChild("No.","Madam, you are harassing me.");
 		s.addChild(yes);
@@ -155,13 +153,11 @@ public class farmer extends unit {
 		s.addChild(yes);
 		s = s.addChild("No.","Oh, COME ON. How can you STILL possibly be saying no?");
 		s.addChild(yes);
-		s = s.addChild("No.","You're relentless.");
+		s = s.addChild("No.","You're relentless, really.");
 		s.addChild(yes);
 		s = s.addChild("No.","That's not a compliment, by the way.");
 		s.addChild(yes);
 		s = s.addChild("No.","You need counselling.");
-		s.addChild(yes);
-		s = s.addChild("No.","At what point does this end?");
 		s.addChild(yes);
 		s = s.addChild("No.","You can't say no forever.");
 		s.addChild(yes);
@@ -175,11 +171,11 @@ public class farmer extends unit {
 		s = s.addChild(null, "He's quite ...");
 		s = s.addChild(null, "... sheepish, to say the least.");
 		s = s.addChild(null, "Wait, is that even a pun?");
-		s = s.addChild(null, "Whatever, man. Coming up with puns isn't easy.");
+		s = s.addChild(null, "Whatever ...");
 		s = s.addChild(null, "Anyway, this particular sheep is difficult.");
 		s = s.addChild(null, "But he needs to be sheared.");
 		s = s.addChild(null, "You'll find him in the pen to the far East.");
-		s = s.addChild(null, "Can you collect his wool?");
+		s = s.addChild(null, "Can you collect his wool for me?");
 		s.addChild(yes);
 		s.addChild(noHelp);
 		yes.setEnd();

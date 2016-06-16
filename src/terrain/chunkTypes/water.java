@@ -5,6 +5,7 @@ import java.util.Random;
 import drawing.camera;
 import drawing.userInterface.interactBox;
 import interactions.textSeries;
+import main.main;
 import modes.mode;
 import terrain.chunk;
 import terrain.chunkType;
@@ -45,6 +46,9 @@ public class water extends groundTile {
 	// Have saved?
 	private boolean haveSaved = true;
 	
+	// Have healed?
+	private boolean haveHealed = true;
+	
 	///////////////
 	/// METHODS ///
 	///////////////
@@ -63,18 +67,46 @@ public class water extends groundTile {
 		
 		// Start of conversation.
 		textSeries startOfConversation = new textSeries("StartWithButtons", "StartWithButtons");
-		s = startOfConversation.addChild("Save game and heal.", "Game saved, potion filled, and healed to full health.");
+		
+		// Save and reset.
+		textSeries saveGame = startOfConversation.addChild("Save game", "Saving the game will reset mobs. Are you sure?");
+		
+		// Warning
+		s = saveGame.addChild("Yes", "Game saved and mobs reset.");
 		s.setEnd();
 		
+		s = saveGame.addChild("No", "Game has not been saved.");
+		s.setEnd();
+		
+		// Heal.
+		s = startOfConversation.addChild("Heal", "Potions filled and health restored.");
+		s.setEnd();
+
 		return new interactBox(startOfConversation, stringUtils.toTitleCase(DEFAULT_CHUNK_NAME));
 	}
 	
 	// Interact stuff.
 	public void doInteractStuff() {
-		// If we have reached the end of our quest conversation (and they clicked yes, of course, since it's all they can do.)
-		if(!haveSaved && interactSequence != null && interactSequence.getTheText().isEnd()) {
-			saveState.createSaveState();
-			haveSaved = true;
+		
+		if(interactSequence != null) {
+			// Save
+			if(!haveSaved && interactSequence.getTheText().getButtonText().equals("Yes")) {
+				saveState.createSaveState();
+				haveSaved = true;
+				interactSequence.toggleDisplay();
+				main.restartGame();
+			}
+			
+			// Don't save.
+			if(interactSequence.getTheText().getButtonText().equals("No")) {
+				
+			}
+			
+			// Heal
+			if(!haveHealed && interactSequence.getTheText().getButtonText().equals("Heal")) {
+				player.getCurrentPlayer().setHealthPoints(player.getCurrentPlayer().getMaxHealthPoints());
+				haveHealed = true;
+			}
 		}
 	}
 	
@@ -87,10 +119,15 @@ public class water extends groundTile {
 	// Interacting with heals you and saves.
 	@Override
 	public void interactWith() {
-		if(interactSequence == null || interactSequence.getTheText().isEnd()) {
-			haveSaved = false;
-			interactSequence = makeInteractSequence();
-		}
+		
+		// Restart sequence.
+		interactSequence = makeInteractSequence();
+		
+		// Reset booleans
+		haveSaved = false;
+		haveHealed = false;
+		
+		// Toggle display.
 		interactSequence.toggleDisplay();
 	}
 }

@@ -80,8 +80,8 @@ public class bloodSquirt extends effect {
 		effectSound2.playSound(getX(), getY(), DEFAULT_SOUND_RADIUS, DEFAULT_VOLUME);
 		
 		// Make adjustments on hitbox if we're in topDown.
-		height = getDefaultHeight();
-		width = getDefaultWidth();
+		setHeight(getDefaultHeight());
+		setWidth(getDefaultWidth());
 		setHitBoxAdjustmentY(getDefaultHitBoxAdjustmentY());
 
 	}

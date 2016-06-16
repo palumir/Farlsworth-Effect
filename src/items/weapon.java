@@ -58,8 +58,8 @@ public abstract class weapon extends item {
 		super(newName, null,x,y,0,0);
 		
 		// Set the width and height.
-		width = getImage().getWidth();
-		height = getImage().getHeight();
+		setWidth(getImage().getWidth());
+		setHeight(getImage().getHeight());
 		
 		// It is, of course, equippable.
 		equippable = true;

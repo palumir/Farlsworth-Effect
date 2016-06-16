@@ -41,13 +41,13 @@ public class rock extends chunk {
 		setPassable(false);
 		if(mode.getCurrentMode().equals("topDown")) {
 			setHitBoxAdjustmentY(0);
-			height = DEFAULT_CHUNK_HEIGHT;
-			width = DEFAULT_CHUNK_WIDTH;
+			setHeight(DEFAULT_CHUNK_HEIGHT);
+			setWidth(DEFAULT_CHUNK_WIDTH);
 		}
 		else {
 			setHitBoxAdjustmentY(0);
-			height = DEFAULT_CHUNK_HEIGHT;
-			width = DEFAULT_CHUNK_WIDTH;
+			setHeight(DEFAULT_CHUNK_HEIGHT);
+			setWidth(DEFAULT_CHUNK_WIDTH);
 		}
 	}
 }
