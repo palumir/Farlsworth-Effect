@@ -424,7 +424,7 @@ public class player extends unit {
 	public void updateStats() {
 		
 		// TODO: Formula for how much their attack increases per level.
-		attackMultiplier = 1f + 14*((float)(playerLevel - 1)/10f);
+		attackMultiplier = 1f + 3*((float)(playerLevel - 1)/10f);
 		maxHealthPoints = DEFAULT_BASE_HP + (playerLevel - 1)*3;
 		
 		// Update health.

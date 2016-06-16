@@ -1,0 +1,1 @@
+- pack leader mob spawns multiple wolves until you kill.

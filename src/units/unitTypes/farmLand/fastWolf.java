@@ -17,14 +17,14 @@ import utilities.time;
 import utilities.utility;
 import zones.zone;
 
-public class spiderling extends unit {
+public class fastWolf extends unit {
 	
 	////////////////
 	/// DEFAULTS ///
 	////////////////
 	
 	// Default name.
-	private static String DEFAULT_spiderling_NAME = "spiderling";
+	private static String DEFAULT_WOLF_NAME = "fastWolf";
 	
 	// Platformer real dimensions
 	public static int DEFAULT_PLATFORMER_HEIGHT = 32;
@@ -42,35 +42,40 @@ public class spiderling extends unit {
 	
 	// Damage stats
 	private int DEFAULT_ATTACK_DIFFERENTIAL = 6; // the range within the attackrange the unit will attack.
-	private int DEFAULT_ATTACK_DAMAGE = 4;
-	private float DEFAULT_BAT = 0.35f;
-	private float DEFAULT_ATTACK_TIME = 0.9f;
+	private int DEFAULT_ATTACK_DAMAGE = 1;
+	private float DEFAULT_BAT = 0.2f;
+	private float DEFAULT_ATTACK_TIME = .2f;
 	private int DEFAULT_ATTACK_WIDTH = 30;
 	private int DEFAULT_ATTACK_LENGTH = 15;
+	private float DEFAULT_CRIT_CHANCE = 0f;
+	private float DEFAULT_ATTACK_VARIABILITY = 0f;
 	
 	// Health.
-	private int DEFAULT_HP = 15;
+	private int DEFAULT_HP = 6;
 	
 	// Default movespeed.
-	private static int DEFAULT_spiderling_MOVESPEED = 2;
+	private static int DEFAULT_WOLF_MOVESPEED = 4;
 	
 	// Default jump speed
-	private static int DEFAULT_spiderling_JUMPSPEED = 10;
+	private static int DEFAULT_WOLF_JUMPSPEED = 10;
 	
-	// spiderling sprite stuff.
-	private static String DEFAULT_spiderling_SPRITESHEET = "images/units/animals/spiderling.png";
+	// wolf sprite stuff.
+	private static String DEFAULT_WOLF_SPRITESHEET = "images/units/animals/fastWolf.png";
 	
 	// The actual type.
-	private static unitType spiderlingType =
-			new animalType( "spiderling",  // Name of unitType 
-						 DEFAULT_spiderling_SPRITESHEET,
-					     DEFAULT_spiderling_MOVESPEED, // Movespeed
-					     DEFAULT_spiderling_JUMPSPEED // Jump speed
+	private static unitType wolfType =
+			new animalType( "wolf",  // Name of unitType 
+						 DEFAULT_WOLF_SPRITESHEET,
+					     DEFAULT_WOLF_MOVESPEED, // Movespeed
+					     DEFAULT_WOLF_JUMPSPEED // Jump speed
 						);	
 	
 	// Sounds
-	//private sound howl = new sound("sounds/effects/animals/spiderlingHowl.wav");
-	private sound spiderlingAttack = new sound("sounds/effects/player/combat/swingWeapon.wav");
+	private sound howl = new sound("sounds/effects/animals/wolfHowl.wav");
+	private sound growl = new sound("sounds/effects/animals/wolfGrowl.wav");
+	private sound bark1 = new sound("sounds/effects/animals/wolfBark1.wav");
+	private sound bark2 = new sound("sounds/effects/animals/wolfBark2.wav");
+	private sound wolfAttack = new sound("sounds/effects/player/combat/swingWeapon.wav");
 	private int lastBarkSound = 0;
 	private long lastHowl = 0;
 	private float randomHowl = 0;
@@ -90,29 +95,29 @@ public class spiderling extends unit {
 	/// METHODS ///
 	///////////////
 	// Constructor
-	public spiderling(int newX, int newY) {
-		super(spiderlingType, newX, newY);
+	public fastWolf(int newX, int newY) {
+		super(wolfType, newX, newY);
 		
 		//showAttackRange();
-		// Set spiderling combat stuff.
+		// Set wolf combat stuff.
 		setCombatStuff();
-		attackSound = spiderlingAttack;
+		attackSound = wolfAttack;
 		
 		// Add attack animations.
 		// Attacking left animation.
-		animation attackingLeft = new animation("attackingLeft", spiderlingType.getUnitTypeSpriteSheet().getAnimation(5), 0, 5, DEFAULT_BAT);
+		animation attackingLeft = new animation("attackingLeft", wolfType.getUnitTypeSpriteSheet().getAnimation(5), 0, 5, DEFAULT_BAT);
 		getAnimations().addAnimation(attackingLeft);
 		
 		// Attacking left animation.
-		animation attackingRight = new animation("attackingRight", spiderlingType.getUnitTypeSpriteSheet().getAnimation(6), 0, 5, DEFAULT_BAT);
+		animation attackingRight = new animation("attackingRight", wolfType.getUnitTypeSpriteSheet().getAnimation(6), 0, 5, DEFAULT_BAT);
 		getAnimations().addAnimation(attackingRight);
 		
 		// Attacking left animation.
-		animation attackingUp = new animation("attackingUp", spiderlingType.getUnitTypeSpriteSheet().getAnimation(7), 0, 5, DEFAULT_BAT);
+		animation attackingUp = new animation("attackingUp", wolfType.getUnitTypeSpriteSheet().getAnimation(7), 0, 5, DEFAULT_BAT);
 		getAnimations().addAnimation(attackingUp);
 		
 		// Attacking left animation.
-		animation attackingDown = new animation("attackingDown", spiderlingType.getUnitTypeSpriteSheet().getAnimation(4), 0, 5, DEFAULT_BAT);
+		animation attackingDown = new animation("attackingDown", wolfType.getUnitTypeSpriteSheet().getAnimation(4), 0, 5, DEFAULT_BAT);
 		getAnimations().addAnimation(attackingDown);
 		
 		// Set dimensions
@@ -130,12 +135,14 @@ public class spiderling extends unit {
 		// Set to be attackable.
 		this.setAttackable(true);
 		
-		// spiderling damage.
+		// Wolf damage.
 		setAttackDamage(DEFAULT_ATTACK_DAMAGE);
 		setAttackTime(DEFAULT_ATTACK_TIME);
 		setBaseAttackTime(DEFAULT_BAT);
 		setAttackWidth(DEFAULT_ATTACK_WIDTH);
 		setAttackLength(DEFAULT_ATTACK_LENGTH);
+		critChance = DEFAULT_CRIT_CHANCE;
+		attackVariability = DEFAULT_ATTACK_VARIABILITY;
 		
 		// HP
 		setMaxHealthPoints(DEFAULT_HP);
@@ -148,21 +155,21 @@ public class spiderling extends unit {
 		// Play a bark on pain.
 		if(lastBarkSound == 0) {
 			lastBarkSound = 1;
-			//bark1.playSound(this.getX(), this.getY(), soundRadius, DEFAULT_BARK_VOLUME);
+			bark1.playSound(this.getX(), this.getY(), soundRadius, DEFAULT_BARK_VOLUME);
 		}
 		else if(lastBarkSound == 1) {
 			lastBarkSound = 0;
-			//bark2.playSound(this.getX(), this.getY(), soundRadius, DEFAULT_BARK_VOLUME);
+			bark2.playSound(this.getX(), this.getY(), soundRadius, DEFAULT_BARK_VOLUME);
 		}
 	}
 	
-	// spiderling random noises
+	// Wolf random noises
 	public void makeSounds() {
 		
 			// Create a new random growl interval
 			float newRandomHowlInterval = 10f + utility.RNG.nextInt(10);
 			
-			// Make the spiderling howl
+			// Make the wolf howl
 			if(randomHowl == 0f) {
 				randomHowl = newRandomHowlInterval;
 			}
@@ -171,11 +178,11 @@ public class spiderling extends unit {
 				// Set the last time they howled
 				lastHowl = time.getTime();
 				randomHowl = newRandomHowlInterval;
-				//howl.playSound(this.getX(), this.getY(), soundRadius, DEFAULT_HOWL_VOLUME);
+				howl.playSound(this.getX(), this.getY(), soundRadius, DEFAULT_HOWL_VOLUME);
 			}
 	}
 	
-	// spiderling AI moves spiderling around for now.
+	// wolf AI moves wolf around for now.
 	public void updateUnit() {
 		
 		// If player is in radius, follow player, attacking.
@@ -196,7 +203,7 @@ public class spiderling extends unit {
 				attack();
 			}
 			else {
-				if(!aggrod) //growl.playSound(this.getX(), this.getY(), soundRadius, DEFAULT_GROWL_VOLUME);
+				if(!aggrod) growl.playSound(this.getX(), this.getY(), soundRadius, DEFAULT_GROWL_VOLUME);
 				aggrod = true;
 				follow(currPlayer);
 			}

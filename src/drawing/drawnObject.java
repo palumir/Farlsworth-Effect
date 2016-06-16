@@ -218,6 +218,11 @@ public abstract class drawnObject {
 	// Destroy an object.
 	public void destroy() {
 		drawnObject.removeObject(this);
+		
+		// If it's a unit, remove it from list.
+		if(this instanceof unit) {
+			unit.getAllUnits().remove(this);
+		}
 	}
 	
 	// Interact with object. Should be over-ridden.

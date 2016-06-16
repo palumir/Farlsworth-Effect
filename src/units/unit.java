@@ -152,7 +152,7 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 		typeOfUnit = u;
 		
 		// Add to list
-		allUnits.add(this);
+		getAllUnits().add(this);
 	}
 	
 	// Update unit
@@ -181,9 +181,6 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 		
 		// Remove from game.
 		destroy();
-		
-		// Remove from units list.
-		allUnits.remove(this);
 		
 		// Do a huge blood squirt.
 		effect blood = new critBloodSquirt(getX() - critBloodSquirt.getDefaultWidth()/2 + topDownWidth/2,
@@ -319,8 +316,8 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 	// Get units in box.
 	public static ArrayList<unit> getUnitsInBox(int x1, int y1, int x2, int y2) {
 		ArrayList<unit> returnList = new ArrayList<unit>();
-		for(int i = 0; i < allUnits.size(); i++) {
-			unit u = allUnits.get(i);
+		for(int i = 0; i < getAllUnits().size(); i++) {
+			unit u = getAllUnits().get(i);
 			if(u.getX() < x2 && 
 					 u.getX() + u.getWidth() > x1 && 
 					 u.getY() < y2 && 
@@ -342,7 +339,9 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 				if(this!=currentUnit) {
 					
 					// Hit for their damage times their multiplier.
-					float variabilityMult = 1f + attackVariability - ((float)utility.RNG.nextInt((int)(2*attackVariability*100))/100f);
+					float variabilityMult = 1;
+					if(attackVariability == 0) variabilityMult = 1;
+					else variabilityMult = 1f + attackVariability - ((float)utility.RNG.nextInt((int)(2*attackVariability*100))/100f);
 					int actualDamageDone = (int) (this.getAttackDamage()*attackMultiplier*variabilityMult);
 					
 					// Did we crit?
@@ -943,6 +942,14 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 
 	public void setMoveSpeed(int moveSpeed) {
 		this.moveSpeed = moveSpeed;
+	}
+
+	public static ArrayList<unit> getAllUnits() {
+		return allUnits;
+	}
+
+	public static void setAllUnits(ArrayList<unit> allUnits) {
+		unit.allUnits = allUnits;
 	}
 	
 }

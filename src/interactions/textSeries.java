@@ -49,10 +49,12 @@ public class textSeries {
 		
 		// Tell the top parent where the end is.
 		textSeries currSeries = this.parent;
-		while(currSeries.parent != null) {
-			currSeries = currSeries.parent;
+		if(currSeries !=null) {
+			while(currSeries.parent != null) {
+				currSeries = currSeries.parent;
+			}
+			currSeries.end = this;
 		}
-		currSeries.end = this;
 	}
 	
 	public boolean isEnd() {

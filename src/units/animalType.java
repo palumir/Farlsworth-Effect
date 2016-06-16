@@ -76,19 +76,19 @@ public class animalType extends unitType {
 		unitTypeAnimations.addAnimation(standingDown);
 		
 		// Running left animation.
-		animation runningLeft = new animation("runningLeft", getUnitTypeSpriteSheet().getAnimation(1), 0, 7, 2f);
+		animation runningLeft = new animation("runningLeft", getUnitTypeSpriteSheet().getAnimation(1), 0, 3, 1f);
 		unitTypeAnimations.addAnimation(runningLeft);		
 		
 		// Running up animation.
-		animation runningUp = new animation("runningUp", getUnitTypeSpriteSheet().getAnimation(3), 0, 7, 2f);
+		animation runningUp = new animation("runningUp", getUnitTypeSpriteSheet().getAnimation(3), 0, 3, 1f);
 		unitTypeAnimations.addAnimation(runningUp);
 		
 		// Running right animation.
-		animation runningRight = new animation("runningRight", getUnitTypeSpriteSheet().getAnimation(2), 0, 7, 2f);
+		animation runningRight = new animation("runningRight", getUnitTypeSpriteSheet().getAnimation(2), 0, 3, 1f);
 		unitTypeAnimations.addAnimation(runningRight);
 		
 		// Running down animation.
-		animation runningDown = new animation("runningDown", getUnitTypeSpriteSheet().getAnimation(0), 0, 7, 2f);
+		animation runningDown = new animation("runningDown", getUnitTypeSpriteSheet().getAnimation(0), 0, 3, 1f);
 		unitTypeAnimations.addAnimation(runningDown);
 		
 		// Set animations.

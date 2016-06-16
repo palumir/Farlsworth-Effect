@@ -20,9 +20,13 @@ import terrain.doodads.farmLand.horizontalGate;
 import terrain.doodads.farmLand.rock;
 import terrain.doodads.farmLand.tree;
 import terrain.doodads.farmLand.verticalFence;
+import terrain.doodads.farmLand.well;
+import terrain.doodads.farmLand.woolPiece;
 import units.unit;
 import units.unitTypes.farmLand.farmer;
+import units.unitTypes.farmLand.fastWolf;
 import units.unitTypes.farmLand.sheep;
+import units.unitTypes.farmLand.spiderling;
 import units.unitTypes.farmLand.wolf;
 import utilities.intTuple;
 import utilities.utility;
@@ -201,7 +205,17 @@ public class sheepFarm extends zone {
 		caveEnterance spiderCaveEnterance = new caveEnterance(-1762+20+30,-4070+6+14,0, spiderCave.getZone(),100,-6,"Right");
 		
 		// Spawn wolf.
-		u = new wolf(-200,-589);
+		u = new fastWolf(-200,-589);
+		
+		// Spawn the well.
+		c = new well(-775,-1830,0);
+		
+		// Wool trail.
+		c = new woolPiece(-249,-794,0);
+		c = new woolPiece(-327,-1010,0);
+		c = new woolPiece(-477,-1211,0);
+		c = new woolPiece(-534,-1424,0);
+		c = new woolPiece(-711,-1634,0);
 		
 		// Spawn forest trees.
 		c = new tree(-2000,-3946,0);
