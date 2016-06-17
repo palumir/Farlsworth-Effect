@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import drawing.camera;
 import drawing.drawnObject;
+import drawing.gameCanvas;
 import drawing.spriteSheet;
 import drawing.animation.animation;
 import drawing.animation.animationPack;
@@ -381,7 +382,7 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 		
 		// Crit
 		if(crit != 1f) {
-			effect e = new floatingString("" + (crit*damage), DEFAULT_CRIT_COLOR, getX() + getWidth()/2, getY() + getHeight()/2);
+			effect e = new floatingString("" + (int)(crit*damage), DEFAULT_CRIT_COLOR, getX() + getWidth()/2, getY() + getHeight()/2);
 		}
 		// Non crit.
 		else {
@@ -716,8 +717,8 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 			g.drawImage(currentAnimation.getCurrentFrame(), 
 					drawX, 
 					drawY, 
-					getObjectSpriteSheet().getSpriteWidth(), 
-					getObjectSpriteSheet().getSpriteHeight(), 
+					(int)(gameCanvas.getScaleX()*getObjectSpriteSheet().getSpriteWidth()), 
+					(int)(gameCanvas.getScaleY()*getObjectSpriteSheet().getSpriteHeight()), 
 					null);
 		}
 		
@@ -728,29 +729,29 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 			int healthChunkSize = (int)(((float)getHealthPoints()/(float)getMaxHealthPoints())*DEFAULT_HEALTHBAR_WIDTH);
 			
 			// Adjustment
-			int hpAdjustX = -DEFAULT_HEALTHBAR_WIDTH/2+getWidth()/2 ;
+			int hpAdjustX = (int)(gameCanvas.getScaleX()*(-DEFAULT_HEALTHBAR_WIDTH/2+getWidth()/2)) ;
 			int hpAdjustY = 0;
 			
 			// Draw the red.
 			g.setColor(playerHealthBar.DEFAULT_LOST_HEALTH_COLOR);
 			g.fillRect(drawX + hpAdjustX,
 					   drawY + hpAdjustY,
-					   DEFAULT_HEALTHBAR_WIDTH,
-					   DEFAULT_HEALTHBAR_HEIGHT);
+					   (int)(gameCanvas.getScaleX()*DEFAULT_HEALTHBAR_WIDTH),
+					   (int)(gameCanvas.getScaleY()*DEFAULT_HEALTHBAR_HEIGHT));
 			
 			// Draw the green chunks.
 			g.setColor(playerHealthBar.DEFAULT_HEALTH_COLOR);
 			g.fillRect(drawX + hpAdjustX,
 					   drawY + hpAdjustY,
-					   healthChunkSize,
-					  DEFAULT_HEALTHBAR_HEIGHT);
+					   (int)(gameCanvas.getScaleX()*healthChunkSize),
+					   (int)(gameCanvas.getScaleY()*DEFAULT_HEALTHBAR_HEIGHT));
 
 			// Draw border.
 			g.setColor(playerHealthBar.DEFAULT_BORDER_COLOR);
 			g.drawRect(drawX + hpAdjustX,
 					   drawY + hpAdjustY,
-					   DEFAULT_HEALTHBAR_WIDTH,
-					   DEFAULT_HEALTHBAR_HEIGHT);
+					   (int)(gameCanvas.getScaleX()*DEFAULT_HEALTHBAR_WIDTH),
+					   (int)(gameCanvas.getScaleY()*DEFAULT_HEALTHBAR_HEIGHT));
 		}
 		
 		// Draw the outskirts of the sprite.
@@ -758,8 +759,8 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 			g.setColor(Color.red);
 			g.drawRect(drawX,
 					   drawY, 
-					   getObjectSpriteSheet().getSpriteWidth(), 
-					   getObjectSpriteSheet().getSpriteHeight());
+					   (int)(gameCanvas.getScaleX()*getObjectSpriteSheet().getSpriteWidth()), 
+					   (int)(gameCanvas.getScaleY()*getObjectSpriteSheet().getSpriteHeight()));
 		}
 		
 		// Draw the x,y coordinates of the unit.
@@ -817,16 +818,16 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 				y2 = hitBoxY + getHeight() + getAttackLength();
 			}
 			g.setColor(Color.blue);
-			g.drawRect(x1,y1,x2-x1,y2-y1);
+			g.drawRect((int)(gameCanvas.getScaleX()*x1),(int)(gameCanvas.getScaleY()*y1),(int)(gameCanvas.getScaleX()*x2-x1),(int)(gameCanvas.getScaleY()*y2-y1));
 		}
 		
 		// Draw the hitbox of the image in green.
 		if(showHitBox) {
 			g.setColor(Color.green);
-			g.drawRect(drawX - (- (getObjectSpriteSheet().getSpriteWidth()/2 - getWidth()/2) - getHitBoxAdjustmentX()),
-					   drawY - (- (getObjectSpriteSheet().getSpriteHeight()/2 - getHeight()/2) - getHitBoxAdjustmentY()), 
-				       getWidth(), 
-				       getHeight());
+			g.drawRect(drawX - (int)(gameCanvas.getScaleX()*(- (getObjectSpriteSheet().getSpriteWidth()/2 - getWidth()/2) - getHitBoxAdjustmentX())),
+					   drawY - (int)(gameCanvas.getScaleY()*(- (getObjectSpriteSheet().getSpriteHeight()/2 - getHeight()/2) - getHitBoxAdjustmentY())), 
+					   (int)(gameCanvas.getScaleX()*getWidth()), 
+					   (int)(gameCanvas.getScaleY()*getHeight()));
 		}
 	}
 	

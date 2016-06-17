@@ -145,9 +145,9 @@ public abstract class drawnObject {
 		
 		// Set default font.
 		if(DEFAULT_FONT == null) {
-			DEFAULT_FONT = new Font(DEFAULT_FONT_NAME, Font.PLAIN, DEFAULT_FONT_SIZE);
-			g.setFont(DEFAULT_FONT); 
+			DEFAULT_FONT = new Font(DEFAULT_FONT_NAME, Font.PLAIN, DEFAULT_FONT_SIZE); 
 		}
+		g.setFont(DEFAULT_FONT);
 
 		
 		if(objects != null) {
@@ -159,8 +159,14 @@ public abstract class drawnObject {
 					// If there's a camera, adjust units drawn to the camera pos.
 					if(camera.getCurrent() != null) {
 						// TODO: possible issues with the screen being resized.
-						d.drawX = d.getX() - camera.getCurrent().getX() - camera.getCurrent().getAttachedUnit().getWidth()/2 + gameCanvas.getDefaultWidth()/2;
-						d.drawY = d.getY() - camera.getCurrent().getY() - camera.getCurrent().getAttachedUnit().getHeight()/2 + gameCanvas.getDefaultHeight()/2;
+						d.drawX = d.getX() - 
+								camera.getCurrent().getX() - 
+								camera.getCurrent().getAttachedUnit().getWidth()/2 + 
+								gameCanvas.getDefaultWidth()/2;
+						d.drawY = d.getY() - 
+								camera.getCurrent().getY() - 
+								camera.getCurrent().getAttachedUnit().getHeight()/2 + 
+								gameCanvas.getDefaultHeight()/2;
 					}
 					else {
 						d.drawX = d.getX();
@@ -182,13 +188,17 @@ public abstract class drawnObject {
 					// Adjust for hitboxes.
 					 d.drawX += - (spriteWidth/2 - d.getWidth()/2) - d.getHitBoxAdjustmentX();
 					 d.drawY += - (spriteHeight/2 - d.getHeight()/2) - d.getHitBoxAdjustmentY();
+					 
+					 // Adjust for scaling.
+					 d.drawX = (int) (gameCanvas.getScaleX()*d.drawX);
+					 d.drawY = (int) (gameCanvas.getScaleY()*d.drawY);
 					
 					// Draw the object if it's on the screen.
 					if(d instanceof interfaceObject ||
-					   (d.drawX + spriteWidth > 0 && 
-					   d.drawY + spriteHeight > 0 && 
-					   d.drawX < gameCanvas.getDefaultWidth() && 
-					   d.drawY < gameCanvas.getDefaultHeight())) {
+					   (d.drawX + gameCanvas.getScaleX()*spriteWidth > 0 && 
+					   d.drawY + gameCanvas.getScaleY()*spriteHeight > 0 && 
+					   d.drawX < gameCanvas.getActualWidth() && 
+					   d.drawY < gameCanvas.getActualHeight())) {
 						d.drawObject(g);
 					}
 				}

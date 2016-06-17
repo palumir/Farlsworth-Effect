@@ -67,6 +67,10 @@ public class water extends groundTile {
 		
 		// Start of conversation.
 		textSeries startOfConversation = new textSeries("StartWithButtons", "StartWithButtons");
+
+		// Heal.
+		s = startOfConversation.addChild("Refill bottle and heal", "Equipped bottle filled and health restored.");
+		s.setEnd();
 		
 		// Save and reset.
 		textSeries saveGame = startOfConversation.addChild("Save game", "Saving the game will reset mobs. Are you sure?");
@@ -76,10 +80,6 @@ public class water extends groundTile {
 		s.setEnd();
 		
 		s = saveGame.addChild("No", "Game has not been saved.");
-		s.setEnd();
-		
-		// Heal.
-		s = startOfConversation.addChild("Refill bottle and heal", "Equipped bottle filled and health restored.");
 		s.setEnd();
 
 		return new interactBox(startOfConversation, stringUtils.toTitleCase(DEFAULT_CHUNK_NAME));

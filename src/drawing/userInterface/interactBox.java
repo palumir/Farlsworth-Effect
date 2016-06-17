@@ -27,8 +27,8 @@ public class interactBox extends interfaceObject  {
 	private Color DEFAULT_SELECTED_COLOR = new Color(100,48,38);
 	
 	// Position
-	private static int DEFAULT_X = gameCanvas.getDefaultWidth()/40;
-	private static int DEFAULT_Y = (int) (gameCanvas.getDefaultHeight()/1.5f);
+	private static int DEFAULT_X = 8;
+	private static int DEFAULT_Y = 330;
 	
 	// Text font.
 	private static Font DEFAULT_FONT = null;
@@ -80,14 +80,18 @@ public class interactBox extends interfaceObject  {
 			
 			// Set default font.
 			Font currentFont = g.getFont();
-			if(DEFAULT_FONT == null) DEFAULT_FONT = currentFont.deriveFont(currentFont.getSize() * 1.4F);
-			if(DEFAULT_FONT_TITLE == null) DEFAULT_FONT_TITLE = currentFont.deriveFont(currentFont.getSize() * 1.5F);
+			DEFAULT_FONT = currentFont.deriveFont(currentFont.getSize() * 1.4F);
+			DEFAULT_FONT_TITLE = currentFont.deriveFont(currentFont.getSize() * 1.5F);
 			
 			// Set color.
 			g.setColor(DEFAULT_TEXT_COLOR);
 			
 			// Background
-			g.drawImage(background, getX(), getY(),background.getWidth(),background.getHeight(),null);
+			g.drawImage(background, (int)(gameCanvas.getScaleX()*getX()), 
+					(int)(gameCanvas.getScaleY()*getY()),
+					(int)(gameCanvas.getScaleX()*background.getWidth()),
+					(int)(gameCanvas.getScaleY()*background.getHeight())
+					,null);
 			
 			// Text
 			if(textMode) {
@@ -96,8 +100,12 @@ public class interactBox extends interfaceObject  {
 				
 				// Display the name of the person or thing talking/interacting
 				g.drawString(whoIsTalking,
-						   getX() + background.getWidth()/2 - g.getFontMetrics().stringWidth(whoIsTalking)/2,
-						   getY() + background.getHeight()/5 + 4);
+						(int)(gameCanvas.getScaleX()*getX()) + 
+						(int)(gameCanvas.getScaleX()*background.getWidth()/2) - 
+						g.getFontMetrics().stringWidth(whoIsTalking)/2,
+						(int)(gameCanvas.getScaleY()*getY()) + 
+						(int)(gameCanvas.getScaleY()*background.getHeight()/5) + 
+						(int)(gameCanvas.getScaleY()*4));
 				
 				// Set font.
 				g.setFont(DEFAULT_FONT);
@@ -113,8 +121,8 @@ public class interactBox extends interfaceObject  {
 				
 				// Draw the text.
 				g.drawString(displayedText,
-					   getX() + background.getWidth()/2 - g.getFontMetrics().stringWidth(displayedText)/2,
-					   getY() + background.getHeight()/2 + 4);
+						(int)(gameCanvas.getScaleX()*getX()) + (int)(gameCanvas.getScaleX()*background.getWidth()/2) - g.getFontMetrics().stringWidth(displayedText)/2,
+					   (int)(gameCanvas.getScaleY()*(getY() + background.getHeight()/2 + 4)));
 			}
 			
 			// Button
@@ -133,8 +141,12 @@ public class interactBox extends interfaceObject  {
 							g.setColor(DEFAULT_SELECTED_COLOR);
 							
 							// Draw arrow
-							g.drawImage(arrow, (int) (getX() + (2*(i+1))*percent*background.getWidth()/2 - 2 - arrow.getWidth() - g.getFontMetrics().stringWidth(buttText)/2),
-									   getY() + background.getHeight()/2 - 2 - arrow.getHeight()/2, arrow.getWidth(), arrow.getHeight(), null);
+							g.drawImage(arrow, (int) ((int)(gameCanvas.getScaleX()*getX())
+									+ (int)(gameCanvas.getScaleX()*((2*(i+1))*percent*background.getWidth()/2 - 2 - arrow.getWidth()))
+									- g.getFontMetrics().stringWidth(buttText)/2),
+									(int)(gameCanvas.getScaleY()*(getY() + background.getHeight()/2 - 2 - arrow.getHeight()/2)), 
+									(int)(gameCanvas.getScaleX()*arrow.getWidth()), 
+									(int)(gameCanvas.getScaleY()*arrow.getHeight()), null);
 						}
 						else {
 							g.setColor(DEFAULT_TEXT_COLOR);
@@ -142,8 +154,8 @@ public class interactBox extends interfaceObject  {
 						
 						// Draw text
 						g.drawString(buttText,
-							   (int) (getX() + (2*(i+1))*percent*background.getWidth()/2 - g.getFontMetrics().stringWidth(buttText)/2),
-							   getY() + background.getHeight()/2 + 4);
+							   (int) ((int)(gameCanvas.getScaleX()*(getX() + (2*(i+1))*percent*background.getWidth()/2)) - g.getFontMetrics().stringWidth(buttText)/2),
+							   (int)(gameCanvas.getScaleY()*(getY() + background.getHeight()/2 + 4)));
 					}
 			}
 		}

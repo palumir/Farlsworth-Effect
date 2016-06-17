@@ -25,8 +25,8 @@ public class quest extends text {
 	
 	// Dimensions and color.
 	public static Color DEFAULT_QUEST_COLOR = Color.white;
-	public static int DEFAULT_X = gameCanvas.getDefaultWidth()/35;
-	public static int DEFAULT_Y = gameCanvas.getDefaultHeight()/6;
+	public static int DEFAULT_X = 15;
+	public static int DEFAULT_Y = 102;
 
 	/////////////////////
 	////// FIELDS ///////
@@ -82,8 +82,8 @@ public class quest extends text {
 			// Color and string.
 			g.setColor(theColor);
 			g.drawString("Quest: " + getTheText(),
-					   getX(),
-					   getY());
+					   (int)(gameCanvas.getScaleX()*getX()),
+					   (int)(gameCanvas.getScaleY()*getY()));
 		}
 	}
 	

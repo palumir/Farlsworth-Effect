@@ -2,9 +2,11 @@ package drawing;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
@@ -43,21 +45,30 @@ public class gameCanvas extends JComponent {
 	private static int maxFPS = 80; 
 	
 	// Screen information
-	private static int defaultWidth = 500;
-	private static int defaultHeight = 500;
-	private static int actualWidth = 500;
-	private static int actualHeight = 500;
+	private static int DEFAULT_START_WIDTH = 500;
+	private static int DEFAULT_START_HEIGHT = 500;
+	private static int defaultWidth;
+	private static int defaultHeight;
+	private static int actualWidth;
+	private static int actualHeight;
 	private static float scaleX = 1f;
 	private static float scaleY = 1f;
+	
+	// Frame size
+	private static boolean changeFrameSize = false;
 
 	// The thing that performs the tasks every time the timer ticks.
 	ActionListener taskPerformer = new ActionListener() {
 		public void actionPerformed(ActionEvent evt) {
+			/*if(changeFrameSize == true) {
+				Component c = SwingUtilities.getRoot(gameCanvas);
+			    float W = (float)defaultWidth;  
+			    float H = (float)defaultHeight;  
+			    Rectangle b2 = c.getBounds();
+			    c.setBounds(b2.x,b2.y,(int)b2.width,(int)(b2.width*H/W));
+			    changeFrameSize = false;
+			}*/
 			utility.updateGame();
-			actualWidth = SwingUtilities.getRoot(gameCanvas).getWidth();
-			actualHeight = SwingUtilities.getRoot(gameCanvas).getHeight();
-			scaleX = actualWidth/(float)defaultWidth;
-			scaleY = actualHeight/(float)defaultHeight;
 			repaint();
 		}
 	};
@@ -76,8 +87,22 @@ public class gameCanvas extends JComponent {
 		requestFocus(); 
 		
 		this.addComponentListener(new ComponentAdapter() {
+			@Override
 	        public void componentResized(ComponentEvent evt) {
-	            Component c = (Component)evt.getSource();
+	            Component c = SwingUtilities.getRoot(gameCanvas);
+				setActualWidth(gameCanvas.getWidth());
+				setActualHeight(gameCanvas.getHeight());
+				setScaleX(getActualWidth()/(float)defaultWidth);
+				setScaleY(getActualHeight()/(float)defaultHeight);
+			  /*  float W = (float)defaultWidth;  
+			    float H = (float)defaultHeight;  
+			    Rectangle b = gameCanvas.getBounds();
+			    gameCanvas.setBounds(b.x, b.y, (int)b.width, (int)(b.width*H/W));
+			    changeFrameSize = true;
+				*/
+				// Change the font.
+				drawnObject.DEFAULT_FONT = new Font(drawnObject.DEFAULT_FONT_NAME, Font.PLAIN, (int)(drawnObject.DEFAULT_FONT_SIZE*scaleX));
+				
 	            repaint();
 	        }
 		});
@@ -92,7 +117,7 @@ public class gameCanvas extends JComponent {
 			@Override
 			public void keyReleased(KeyEvent k) {
 				if(player.getCurrentPlayer()!=null) player.getCurrentPlayer().keyReleased(k);
-			}
+			} 
 
 			@Override
 			public void keyTyped(KeyEvent k) {
@@ -127,10 +152,14 @@ public class gameCanvas extends JComponent {
 		// Create the actual game frame on the computer screen.
 		JFrame frame = new JFrame(DEFAULT_GAME_NAME);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setSize(getDefaultWidth(), getDefaultHeight());
+		frame.setSize(DEFAULT_START_WIDTH, DEFAULT_START_HEIGHT);
 		frame.setContentPane(getGameCanvas());
 		frame.setVisible(true);
 	//	frame.setResizable(false);
+		
+		// Set width.
+        defaultWidth = this.getWidth();
+        defaultHeight = this.getHeight();
 	}
 
 	// Paint the game canvas.
@@ -166,16 +195,8 @@ public class gameCanvas extends JComponent {
 		return defaultWidth;
 	}
 
-	public static void setDefaultWidth(int defaultWidth) {
-		gameCanvas.defaultWidth = defaultWidth;
-	}
-
 	public static int getDefaultHeight() {
 		return defaultHeight;
-	}
-
-	public static void setDefaultHeight(int defaultHeight) {
-		gameCanvas.defaultHeight = defaultHeight;
 	}
 
 	public static int getFPS() {
@@ -184,6 +205,38 @@ public class gameCanvas extends JComponent {
 
 	public static void setFPS(int FPS) {
 		maxFPS = FPS;
+	}
+
+	public static int getActualWidth() {
+		return actualWidth;
+	}
+
+	public static void setActualWidth(int actualWidth) {
+		gameCanvas.actualWidth = actualWidth;
+	}
+
+	public static int getActualHeight() {
+		return actualHeight;
+	}
+
+	public static void setActualHeight(int actualHeight) {
+		gameCanvas.actualHeight = actualHeight;
+	}
+
+	public static float getScaleX() {
+		return scaleX;
+	}
+
+	public static void setScaleX(float scaleX) {
+		gameCanvas.scaleX = scaleX;
+	}
+
+	public static float getScaleY() {
+		return scaleY;
+	}
+
+	public static void setScaleY(float scaleY) {
+		gameCanvas.scaleY = scaleY;
 	}
 
 }

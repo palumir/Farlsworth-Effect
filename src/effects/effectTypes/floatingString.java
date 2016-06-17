@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import java.util.Random;
 
 import drawing.camera;
+import drawing.gameCanvas;
 import drawing.spriteSheet;
 import drawing.spriteSheet.spriteSheetInfo;
 import effects.effect;
@@ -66,7 +67,7 @@ public class floatingString extends effect {
 	@Override
 	public void drawObject(Graphics g) {
 		g.setColor(color);
-		g.drawString(text,drawX - g.getFontMetrics().stringWidth(text)/2, drawY - getHeight()/2);
+		g.drawString(text,drawX - g.getFontMetrics().stringWidth(text)/2, drawY - (int)(gameCanvas.getScaleY()*getHeight()/2));
 		setY(getY() - 1);
 	}
 

@@ -9,6 +9,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 
 import drawing.drawnObject;
+import drawing.gameCanvas;
 import drawing.spriteSheet;
 import drawing.userInterface.interfaceObject;
 import effects.effect;
@@ -141,14 +142,15 @@ public class chunk extends drawnObject {
 	// Draw the chunk. 
 	@Override
 	public void drawObject(Graphics g) {
+		//showHitBox();
 		
 		// Draw it. 
 		if(chunkImage != null) {
 			g.drawImage(chunkImage, 
 					drawX, 
 					drawY, 
-					chunkImage.getWidth(), 
-					chunkImage.getHeight(), 
+					(int)(gameCanvas.getScaleX()*chunkImage.getWidth() + 1), 
+					(int)(gameCanvas.getScaleY()*chunkImage.getHeight() + 1), 
 					null);
 			
 			// Draw the outskirts of the sprite.
@@ -156,23 +158,23 @@ public class chunk extends drawnObject {
 				g.setColor(Color.red);
 				g.drawRect(drawX,
 						   drawY, 
-						   getObjectSpriteSheet().getSpriteWidth(), 
-						   getObjectSpriteSheet().getSpriteHeight());
+						   (int)(gameCanvas.getScaleX()*getObjectSpriteSheet().getSpriteWidth()), 
+						   (int)(gameCanvas.getScaleY()*getObjectSpriteSheet().getSpriteHeight()));
 			}
 			
 			// Draw the hitbox of the image in green.
 			if(showHitBox) {
 				g.setColor(Color.green);
-				g.drawRect(drawX - (- (getObjectSpriteSheet().getSpriteWidth()/2 - getWidth()/2) - getHitBoxAdjustmentX()),
-						   drawY - (- (getObjectSpriteSheet().getSpriteHeight()/2 - getHeight()/2) - getHitBoxAdjustmentY()), 
-					       getWidth(), 
-					       getHeight());
+				g.drawRect(drawX - (int)(gameCanvas.getScaleX()*(- (getObjectSpriteSheet().getSpriteWidth()/2 - getWidth()/2) - getHitBoxAdjustmentX())),
+						   drawY - (int)(gameCanvas.getScaleY()*(- (getObjectSpriteSheet().getSpriteHeight()/2 - getHeight()/2) - getHitBoxAdjustmentY())), 
+						   (int)(gameCanvas.getScaleX()*getWidth()), 
+						   (int)(gameCanvas.getScaleY()*getHeight()));
 			}
 			
 			// Draw the x,y coordinates of the unit.
 			if(showUnitPosition) {
 				g.setColor(Color.white);
-				g.drawString(getX() + "," + getY(),
+				g.drawString((int)(gameCanvas.getScaleX()*getX()) + "," + (int)(gameCanvas.getScaleX()*getY()),
 						   drawX,
 						   drawY);
 			}

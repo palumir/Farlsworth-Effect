@@ -3,6 +3,7 @@ package terrain.doodads.farmLand;
 import java.util.Random;
 
 import drawing.camera;
+import drawing.gameCanvas;
 import modes.mode;
 import terrain.chunk;
 import terrain.chunkType;

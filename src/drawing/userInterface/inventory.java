@@ -25,8 +25,8 @@ public class inventory extends interfaceObject {
 	public static BufferedImage inventoryBackground = spriteSheet.getSpriteFromFilePath("images/interface/inventory.png");
 	
 	// Draw position
-	public static int DEFAULT_INVENTORY_START_X = 20;
-	public static int DEFAULT_INVENTORY_START_Y = gameCanvas.getDefaultHeight()-320;
+	public static int DEFAULT_INVENTORY_START_X = (int)(gameCanvas.getScaleX()*20);
+	public static int DEFAULT_INVENTORY_START_Y = (int)(gameCanvas.getScaleY()*gameCanvas.getDefaultHeight()-320);
 	
 	// Inventory size.
 	public static int DEFAULT_INVENTORY_SIZE = 16; // total number of slots. must be a perfect root of 2
@@ -245,10 +245,10 @@ public class inventory extends interfaceObject {
 			
 			// Draw the inventory background.
 			g.drawImage(inventoryBackground, 
-					getX(), 
-					getY(), 
-					inventoryBackground.getWidth(), 
-					inventoryBackground.getHeight(), 
+					(int)(gameCanvas.getScaleX()*getX()), 
+					(int)(gameCanvas.getScaleY()*getY()), 
+					(int)(gameCanvas.getScaleX()*inventoryBackground.getWidth()), 
+					(int)(gameCanvas.getScaleY()*inventoryBackground.getHeight()), 
 					null);
 			
 			// Adjustment for inventory background.
@@ -262,27 +262,27 @@ public class inventory extends interfaceObject {
 					
 					// Draw the slot.
 					g.setColor(DEFAULT_SLOT_COLOR);
-					g.drawRect(getX() + i*DEFAULT_SLOT_SIZE + adjustX, 
-							getY() + j*DEFAULT_SLOT_SIZE + adjustY, 
-							   DEFAULT_SLOT_SIZE, 
-							   DEFAULT_SLOT_SIZE);
+					g.drawRect((int)(gameCanvas.getScaleX()*(getX() + i*DEFAULT_SLOT_SIZE + adjustX)), 
+							(int)(gameCanvas.getScaleY()*(getY() + j*DEFAULT_SLOT_SIZE + adjustY)), 
+							(int)(gameCanvas.getScaleX()*DEFAULT_SLOT_SIZE), 
+							(int)(gameCanvas.getScaleY()*DEFAULT_SLOT_SIZE));
 					
 					// Draw the slot background.
 					g.setColor(DEFAULT_SLOT_BACKGROUND_COLOR);
-					g.fillRect(getX() + j*DEFAULT_SLOT_SIZE+1 + adjustX, 
-							   getY() + i*DEFAULT_SLOT_SIZE+1 + adjustY, 
-							   DEFAULT_SLOT_SIZE-1, 
-							   DEFAULT_SLOT_SIZE-1);
+					g.fillRect((int)(gameCanvas.getScaleX()*(getX() + j*DEFAULT_SLOT_SIZE + adjustX) + 1), 
+							(int)(gameCanvas.getScaleY()*(getY() + i*DEFAULT_SLOT_SIZE + adjustY) + 1), 
+							(int)(gameCanvas.getScaleX()*(DEFAULT_SLOT_SIZE)-1), 
+							(int)(gameCanvas.getScaleY()*(DEFAULT_SLOT_SIZE))-1);
 					
 					// If the slot is selected, then mark it.
 					if(selectedSlot == i*Math.sqrt(DEFAULT_INVENTORY_SIZE) + j) {
 						
 						// Draw the yellow background for the selected slot.
 						g.setColor(DEFAULT_SELECTED_SLOT_COLOR);
-						g.fillRect(getX() + j*DEFAULT_SLOT_SIZE+1 + adjustX, 
-								   getY() + i*DEFAULT_SLOT_SIZE+1 + adjustY, 
-								   DEFAULT_SLOT_SIZE-1, 
-								   DEFAULT_SLOT_SIZE-1);
+						g.fillRect((int)(gameCanvas.getScaleX()*(getX() + j*DEFAULT_SLOT_SIZE + adjustX) +1), 
+								(int)(gameCanvas.getScaleY()*(getY() + i*DEFAULT_SLOT_SIZE + adjustY) +1), 
+								(int)(gameCanvas.getScaleX()*(DEFAULT_SLOT_SIZE)-1), 
+								(int)(gameCanvas.getScaleY()*(DEFAULT_SLOT_SIZE)-1));
 						
 					}
 					
@@ -293,10 +293,10 @@ public class inventory extends interfaceObject {
 						item currentItem = items.get(x);
 						g.setColor(DEFAULT_TEXT_COLOR);
 						g.drawImage(currentItem.getImage(), 
-								getX() + j*DEFAULT_SLOT_SIZE + DEFAULT_SLOT_SIZE/2 - currentItem.getImage().getWidth()/2 + adjustX, 
-								getY() + i*DEFAULT_SLOT_SIZE + DEFAULT_SLOT_SIZE/2 - currentItem.getImage().getHeight()/2 + adjustY, 
-								currentItem.getImage().getWidth(), 
-								currentItem.getImage().getHeight(), 
+								(int)(gameCanvas.getScaleX()*(getX() + j*DEFAULT_SLOT_SIZE + DEFAULT_SLOT_SIZE/2 - currentItem.getImage().getWidth()/2 + adjustX)), 
+								(int)(gameCanvas.getScaleY()*(getY() + i*DEFAULT_SLOT_SIZE + DEFAULT_SLOT_SIZE/2 - currentItem.getImage().getHeight()/2 + adjustY)), 
+								(int)(gameCanvas.getScaleX()*(currentItem.getImage().getWidth())), 
+								(int)(gameCanvas.getScaleY()*(currentItem.getImage().getHeight())), 
 								null);
 						
 						// Set color
@@ -306,31 +306,43 @@ public class inventory extends interfaceObject {
 						if(selectedSlot == i*Math.sqrt(DEFAULT_INVENTORY_SIZE) + j) {
 
 							// Draw the item information on the right
-							String weaponName = stringUtils.toTitleCase(currentItem.name);
-							g.drawString(weaponName, getX() + (int) (Math.sqrt(DEFAULT_INVENTORY_SIZE)*DEFAULT_SLOT_SIZE) + 38 + adjustX - g.getFontMetrics().stringWidth(weaponName)/2, getY()+ 34 + adjustY);
+							String itemName = stringUtils.toTitleCase(currentItem.name);
+							g.drawString(itemName, (int)(gameCanvas.getScaleX()*(getX() + (int) (Math.sqrt(DEFAULT_INVENTORY_SIZE)*DEFAULT_SLOT_SIZE) + 38 + adjustX)) - g.getFontMetrics().stringWidth(itemName)/2, 
+									(int)(gameCanvas.getScaleY()*(getY()+ 34 + adjustY)));
 							
 							// Draw weapon information.
 							if(currentItem instanceof weapon) {
 								g.setColor(DEFAULT_DESC_COLOR);
 								weapon currentWeapon = (weapon)currentItem;
-								g.drawString("Damage: " + currentWeapon.getAttackDamage(), getX() + (int) (Math.sqrt(DEFAULT_INVENTORY_SIZE)*DEFAULT_SLOT_SIZE) + 38 + adjustX - g.getFontMetrics().stringWidth("Damage: " + currentWeapon.getAttackDamage())/2, getY()+ 34 + adjustY + 20);
-								g.drawString("Speed: " + currentWeapon.getSpeed(), getX() + (int) (Math.sqrt(DEFAULT_INVENTORY_SIZE)*DEFAULT_SLOT_SIZE) + 38 + adjustX - g.getFontMetrics().stringWidth("Speed: " + currentWeapon.getSpeed())/2, getY()+ 34 + adjustY + 34);
-								g.drawString("Range: " + currentWeapon.getRange(), getX() + (int) (Math.sqrt(DEFAULT_INVENTORY_SIZE)*DEFAULT_SLOT_SIZE) + 38 + adjustX - g.getFontMetrics().stringWidth("Range: " + currentWeapon.getRange())/2, getY()+ 34 + adjustY + 48);
+								g.drawString("Damage: " + currentWeapon.getAttackDamage(), (int)(gameCanvas.getScaleX()*(getX() + (int) (Math.sqrt(DEFAULT_INVENTORY_SIZE)*DEFAULT_SLOT_SIZE) + 38 + adjustX)) - g.getFontMetrics().stringWidth("Damage: " + currentWeapon.getAttackDamage())/2, 
+										(int)(gameCanvas.getScaleY()*(getY()+ 34 + adjustY + 20)));
+								g.drawString("Speed: " + currentWeapon.getSpeed(), (int)(gameCanvas.getScaleX()*(getX() + (int) (Math.sqrt(DEFAULT_INVENTORY_SIZE)*DEFAULT_SLOT_SIZE) + 38 + adjustX)) - g.getFontMetrics().stringWidth("Speed: " + currentWeapon.getSpeed())/2, 
+										(int)(gameCanvas.getScaleY()*(getY()+ 34 + adjustY + 34)));
+								g.drawString("Range: " + currentWeapon.getRange(), (int)(gameCanvas.getScaleX()*(getX() + (int) (Math.sqrt(DEFAULT_INVENTORY_SIZE)*DEFAULT_SLOT_SIZE) + 38 + adjustX)) - g.getFontMetrics().stringWidth("Range: " + currentWeapon.getRange())/2, 
+										(int)(gameCanvas.getScaleY()*(getY()+ 34 + adjustY + 48)));
 								
 								// Press e to equip.
-								g.drawString(DEFAULT_BOTTOM_TEXT, getX() + 38 - g.getFontMetrics().stringWidth(DEFAULT_BOTTOM_TEXT)/2 + (int) (Math.sqrt(DEFAULT_INVENTORY_SIZE)*DEFAULT_SLOT_SIZE) + adjustX, getY()+ 34 + adjustY + 140);
+								g.drawString(DEFAULT_BOTTOM_TEXT, (int)(gameCanvas.getScaleX()*(getX() + 38 + (int)(Math.sqrt(DEFAULT_INVENTORY_SIZE)*DEFAULT_SLOT_SIZE) + adjustX) - g.getFontMetrics().stringWidth(DEFAULT_BOTTOM_TEXT)/2), 
+										(int)(gameCanvas.getScaleY()*(getY()+ 34 + adjustY + 140)));
 							}
 							
 							// Draw bottle information.
 							if(currentItem instanceof bottle) {
-								g.setColor(DEFAULT_DESC_COLOR);
 								bottle currentBottle = (bottle)currentItem;
-								g.drawString("Charges: " + currentBottle.getChargesLeft(), getX() + (int) (Math.sqrt(DEFAULT_INVENTORY_SIZE)*DEFAULT_SLOT_SIZE) + 38 + adjustX - g.getFontMetrics().stringWidth("Charges: " + currentBottle.getChargesLeft())/2, getY()+ 34 + adjustY + 20);
-								g.drawString("Max Charges: " + currentBottle.getMaxCharges(), getX() + (int) (Math.sqrt(DEFAULT_INVENTORY_SIZE)*DEFAULT_SLOT_SIZE) + 38 + adjustX - g.getFontMetrics().stringWidth("Max Charges: " + currentBottle.getMaxCharges())/2, getY()+ 34 + adjustY + 34);
-								g.drawString("Heal: " + (int)(currentBottle.getHealPercent()*100) + "%", getX() + (int) (Math.sqrt(DEFAULT_INVENTORY_SIZE)*DEFAULT_SLOT_SIZE) + 38 + adjustX - g.getFontMetrics().stringWidth("Heal: " + (int)(currentBottle.getHealPercent()*100) + "%")/2, getY()+ 34 + adjustY + 48);
+								g.drawString("Charges: " + currentBottle.getChargesLeft(), 
+										(int)(gameCanvas.getScaleX()*(getX() + (int) (Math.sqrt(DEFAULT_INVENTORY_SIZE)*DEFAULT_SLOT_SIZE) + 38 + adjustX)) - g.getFontMetrics().stringWidth("Charges: " + currentBottle.getChargesLeft())/2, 
+										(int)(gameCanvas.getScaleY()*(getY()+ 34 + adjustY + 20)));
+								g.drawString("Max Charges: " + currentBottle.getMaxCharges(), 
+										(int)(gameCanvas.getScaleX()*(getX() + (int) (Math.sqrt(DEFAULT_INVENTORY_SIZE)*DEFAULT_SLOT_SIZE) + 38 + adjustX)) - g.getFontMetrics().stringWidth("Max Charges: " + currentBottle.getMaxCharges())/2, 
+										(int)(gameCanvas.getScaleY()*(getY()+ 34 + adjustY + 34)));
+								g.drawString("Heal: " + (int)(currentBottle.getHealPercent()*100) + "%", 
+										(int)(gameCanvas.getScaleX()*(getX() + (int) (Math.sqrt(DEFAULT_INVENTORY_SIZE)*DEFAULT_SLOT_SIZE) + 38 + adjustX)) - g.getFontMetrics().stringWidth("Heal: " + (int)(currentBottle.getHealPercent()*100) + "%")/2, 
+										(int)(gameCanvas.getScaleY()*(getY()+ 34 + adjustY + 48)));
 								
 								// Press e to equip.
-								g.drawString(DEFAULT_BOTTOM_TEXT, getX() + 38 - g.getFontMetrics().stringWidth(DEFAULT_BOTTOM_TEXT)/2 + (int) (Math.sqrt(DEFAULT_INVENTORY_SIZE)*DEFAULT_SLOT_SIZE) + adjustX, getY()+ 34 + adjustY + 140);
+								g.drawString(DEFAULT_BOTTOM_TEXT, 
+										(int)(gameCanvas.getScaleX()*(getX() + 38 + (int) (Math.sqrt(DEFAULT_INVENTORY_SIZE)*DEFAULT_SLOT_SIZE) + adjustX)) - g.getFontMetrics().stringWidth(DEFAULT_BOTTOM_TEXT)/2, 
+										(int)(gameCanvas.getScaleY()*(getY()+ 34 + adjustY + 140)));
 							}
 						
 						}
@@ -342,60 +354,60 @@ public class inventory extends interfaceObject {
 			// Draw the equipped weapon.
 			g.setColor(DEFAULT_TEXT_COLOR);
 			g.drawString("Weapon",
-					   getX() + adjustX,
-					   getY()  + adjustY + (int) (DEFAULT_SLOT_SIZE*Math.sqrt(DEFAULT_INVENTORY_SIZE)+23));
+					(int)(gameCanvas.getScaleX()*(getX() + adjustX)),
+					(int)(gameCanvas.getScaleY()*(getY()  + adjustY + (int) (DEFAULT_SLOT_SIZE*Math.sqrt(DEFAULT_INVENTORY_SIZE)) +23)));
 			
 			// Draw the slot.
 			g.setColor(DEFAULT_SLOT_COLOR);
-			g.drawRect(getX() + DEFAULT_SLOT_SIZE/2 + 35 + adjustX, 
-					   getY() + (int) (DEFAULT_SLOT_SIZE*Math.sqrt(DEFAULT_INVENTORY_SIZE)+19 - DEFAULT_SLOT_SIZE/2) + adjustY, 
-					   DEFAULT_SLOT_SIZE, 
-					   DEFAULT_SLOT_SIZE);
+			g.drawRect((int)(gameCanvas.getScaleX()*(getX() + DEFAULT_SLOT_SIZE/2 + 35 + adjustX)), 
+					   (int)(gameCanvas.getScaleY()*(getY() + (int) (DEFAULT_SLOT_SIZE*Math.sqrt(DEFAULT_INVENTORY_SIZE)+19 - DEFAULT_SLOT_SIZE/2) + adjustY)), 
+					   (int)(gameCanvas.getScaleX()*(DEFAULT_SLOT_SIZE)), 
+					   (int)(gameCanvas.getScaleY()*(DEFAULT_SLOT_SIZE)));
 			
 			// Draw slot background.
 			g.setColor(DEFAULT_SLOT_BACKGROUND_COLOR);
-			g.fillRect(getX() + DEFAULT_SLOT_SIZE/2 + 35 + adjustX+1, 
-						getY() + (int) (DEFAULT_SLOT_SIZE*Math.sqrt(DEFAULT_INVENTORY_SIZE)+19 - DEFAULT_SLOT_SIZE/2) + adjustY + 1, 
-					   DEFAULT_SLOT_SIZE-1, 
-					   DEFAULT_SLOT_SIZE-1);
+			g.fillRect((int)(gameCanvas.getScaleX()*(getX() + DEFAULT_SLOT_SIZE/2 + 35 + adjustX)+1), 
+					   (int)(gameCanvas.getScaleY()*(getY() + (int) (DEFAULT_SLOT_SIZE*Math.sqrt(DEFAULT_INVENTORY_SIZE)+19 - DEFAULT_SLOT_SIZE/2) + adjustY)+1), 
+					   (int)(gameCanvas.getScaleX()*(DEFAULT_SLOT_SIZE)-1), 
+					   (int)(gameCanvas.getScaleY()*(DEFAULT_SLOT_SIZE)-1));
 			
 			// Draw the weapon.
 			if(player.getCurrentPlayer().getEquippedWeapon() != null) {
 				g.drawImage(player.getCurrentPlayer().getEquippedWeapon().getImage(), 
-						getX() + DEFAULT_SLOT_SIZE + 35 - player.getCurrentPlayer().getEquippedWeapon().getImage().getWidth()/2 + adjustX, 
-						getY() + (int) (DEFAULT_SLOT_SIZE*Math.sqrt(DEFAULT_INVENTORY_SIZE)+19) - player.getCurrentPlayer().getEquippedWeapon().getImage().getHeight()/2 + adjustY, 
-						player.getCurrentPlayer().getEquippedWeapon().getImage().getWidth(), 
-						player.getCurrentPlayer().getEquippedWeapon().getImage().getHeight(), 
+						(int)(gameCanvas.getScaleX()*(getX() + DEFAULT_SLOT_SIZE + 35 - player.getCurrentPlayer().getEquippedWeapon().getImage().getWidth()/2 + adjustX)), 
+						(int)(gameCanvas.getScaleY()*(getY() + (int) (DEFAULT_SLOT_SIZE*Math.sqrt(DEFAULT_INVENTORY_SIZE)+19) - player.getCurrentPlayer().getEquippedWeapon().getImage().getHeight()/2 + adjustY)), 
+						(int)(gameCanvas.getScaleX()*(player.getCurrentPlayer().getEquippedWeapon().getImage().getWidth())), 
+						(int)(gameCanvas.getScaleY()*(player.getCurrentPlayer().getEquippedWeapon().getImage().getHeight())), 
 						null);
 			}
 			
 			// Draw the equipped potion.
 			g.setColor(DEFAULT_TEXT_COLOR);
 			g.drawString("Bottle",
-					   getX() + adjustX,
-					   getY() + (int) (DEFAULT_SLOT_SIZE*Math.sqrt(DEFAULT_INVENTORY_SIZE)+56) + adjustY);
+					   (int)(gameCanvas.getScaleX()*(getX() + adjustX)),
+					   (int)(gameCanvas.getScaleY()*(getY() + 56 + adjustY + (int) (DEFAULT_SLOT_SIZE*Math.sqrt(DEFAULT_INVENTORY_SIZE)))));
 			
 			// Draw the slot.
 			g.setColor(DEFAULT_SLOT_COLOR);
-			g.drawRect(getX() + DEFAULT_SLOT_SIZE/2 + 35 + adjustX, 
-					   getY() + (int) (DEFAULT_SLOT_SIZE*Math.sqrt(DEFAULT_INVENTORY_SIZE)+53 - DEFAULT_SLOT_SIZE/2) + adjustY, 
-					   DEFAULT_SLOT_SIZE, 
-					   DEFAULT_SLOT_SIZE);
+			g.drawRect((int)(gameCanvas.getScaleX()*(getX() + DEFAULT_SLOT_SIZE/2 + 35 + adjustX)), 
+					   (int)(gameCanvas.getScaleY()*(getY() + (int) (DEFAULT_SLOT_SIZE*Math.sqrt(DEFAULT_INVENTORY_SIZE)+53 - DEFAULT_SLOT_SIZE/2) + adjustY)), 
+					   (int)(gameCanvas.getScaleX()*(DEFAULT_SLOT_SIZE)), 
+					   (int)(gameCanvas.getScaleY()*(DEFAULT_SLOT_SIZE)));
 			
 			// Draw slot background.
 			g.setColor(DEFAULT_SLOT_BACKGROUND_COLOR);
-			g.fillRect(getX() + DEFAULT_SLOT_SIZE/2 + 35 + adjustX+1, 
-						getY() + (int) (DEFAULT_SLOT_SIZE*Math.sqrt(DEFAULT_INVENTORY_SIZE)+53 - DEFAULT_SLOT_SIZE/2) + adjustY + 1, 
-					   DEFAULT_SLOT_SIZE-1, 
-					   DEFAULT_SLOT_SIZE-1);
+			g.fillRect((int)(gameCanvas.getScaleX()*(getX() + DEFAULT_SLOT_SIZE/2 + 35 + adjustX)+1), 
+					   (int)(gameCanvas.getScaleY()*(getY() + (int) (DEFAULT_SLOT_SIZE*Math.sqrt(DEFAULT_INVENTORY_SIZE)+53 - DEFAULT_SLOT_SIZE/2) + adjustY)+1), 
+					   (int)(gameCanvas.getScaleX()*(DEFAULT_SLOT_SIZE)-1), 
+					   (int)(gameCanvas.getScaleY()*(DEFAULT_SLOT_SIZE)-1));
 			
 			// Draw the potion
 			if(player.getCurrentPlayer().getEquippedBottle() != null) {
 				g.drawImage(player.getCurrentPlayer().getEquippedBottle().getImage(), 
-						getX() + DEFAULT_SLOT_SIZE + 35 - player.getCurrentPlayer().getEquippedBottle().getImage().getWidth()/2 + adjustX, 
-						getY() + (int) (DEFAULT_SLOT_SIZE*Math.sqrt(DEFAULT_INVENTORY_SIZE)+53) - player.getCurrentPlayer().getEquippedBottle().getImage().getHeight()/2 + adjustY, 
-						player.getCurrentPlayer().getEquippedBottle().getImage().getWidth(), 
-						player.getCurrentPlayer().getEquippedBottle().getImage().getHeight(), 
+						(int)(gameCanvas.getScaleX()*(getX() + DEFAULT_SLOT_SIZE + 35 - player.getCurrentPlayer().getEquippedBottle().getImage().getWidth()/2 + adjustX)), 
+						(int)(gameCanvas.getScaleY()*(getY() + (int) (DEFAULT_SLOT_SIZE*Math.sqrt(DEFAULT_INVENTORY_SIZE)+53) - player.getCurrentPlayer().getEquippedBottle().getImage().getHeight()/2 + adjustY)), 
+						(int)(gameCanvas.getScaleX()*(player.getCurrentPlayer().getEquippedBottle().getImage().getWidth())), 
+						(int)(gameCanvas.getScaleY()*(player.getCurrentPlayer().getEquippedBottle().getImage().getHeight())), 
 						null);
 			}
 		}

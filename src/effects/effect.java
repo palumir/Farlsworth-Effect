@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import drawing.camera;
 import drawing.drawnObject;
+import drawing.gameCanvas;
 import drawing.spriteSheet;
 import drawing.animation.animation;
 import drawing.animation.animationPack;
@@ -100,18 +101,18 @@ public abstract class effect extends drawnObject  {
 			g.drawImage(currentAnimation.getCurrentFrame(), 
 					drawX, 
 					drawY, 
-					getObjectSpriteSheet().getSpriteWidth(), 
-					getObjectSpriteSheet().getSpriteHeight(), 
+					(int)(gameCanvas.getScaleX()*getObjectSpriteSheet().getSpriteWidth() + 1), 
+					(int)(gameCanvas.getScaleY()*getObjectSpriteSheet().getSpriteHeight() + 1), 
 					null);
 		}
 		
 		// Draw the hitbox of the image in green.
 		if(showHitBox) {
 			g.setColor(Color.green);
-			g.drawRect(drawX - (- (getObjectSpriteSheet().getSpriteWidth()/2 - getWidth()/2) - getHitBoxAdjustmentX()),
-					   drawY - (- (getObjectSpriteSheet().getSpriteHeight()/2 - getHeight()/2) - getHitBoxAdjustmentY()), 
-				       getWidth(), 
-				       getHeight());
+			g.drawRect(drawX - (int)(gameCanvas.getScaleX()*(- (getObjectSpriteSheet().getSpriteWidth()/2 - getWidth()/2) - getHitBoxAdjustmentX())),
+					   drawY - (int)(gameCanvas.getScaleY()*(- (getObjectSpriteSheet().getSpriteHeight()/2 - getHeight()/2) - getHitBoxAdjustmentY())), 
+					   (int)(gameCanvas.getScaleX()*getWidth() + 1), 
+					   (int)(gameCanvas.getScaleY()*getHeight() + 1));
 		}
 	}
 	
