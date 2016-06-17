@@ -12,7 +12,7 @@ import drawing.drawnObject;
 import drawing.spriteSheet;
 import drawing.userInterface.interfaceObject;
 import effects.effect;
-import effects.effectTypes.floatingNumber;
+import effects.effectTypes.floatingString;
 import modes.mode;
 import units.player;
 import units.unit;

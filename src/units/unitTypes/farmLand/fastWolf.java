@@ -42,9 +42,9 @@ public class fastWolf extends unit {
 	
 	// Damage stats
 	private int DEFAULT_ATTACK_DIFFERENTIAL = 6; // the range within the attackrange the unit will attack.
-	private int DEFAULT_ATTACK_DAMAGE = 1;
-	private float DEFAULT_BAT = 0.2f;
-	private float DEFAULT_ATTACK_TIME = .2f;
+	private int DEFAULT_ATTACK_DAMAGE = 2;
+	private float DEFAULT_BAT = 0.4f;
+	private float DEFAULT_ATTACK_TIME = .45f;
 	private int DEFAULT_ATTACK_WIDTH = 30;
 	private int DEFAULT_ATTACK_LENGTH = 15;
 	private float DEFAULT_CRIT_CHANCE = 0f;

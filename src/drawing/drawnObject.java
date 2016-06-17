@@ -10,7 +10,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 import drawing.userInterface.interfaceObject;
 import effects.effect;
-import effects.effectTypes.floatingNumber;
+import effects.effectTypes.floatingString;
 import units.player;
 import units.unit;
 import modes.mode;
@@ -39,8 +39,8 @@ public abstract class drawnObject {
 	    public int compare(drawnObject d1, drawnObject d2) {
 	    	
 	    	// Draw floating numbers over ...
-	    	if(d1 instanceof floatingNumber && !(d2 instanceof floatingNumber)) return 10;
-	    	else if(d2 instanceof floatingNumber && !(d1 instanceof floatingNumber)) return -10;
+	    	if(d1 instanceof floatingString && !(d2 instanceof floatingString)) return 10;
+	    	else if(d2 instanceof floatingString && !(d1 instanceof floatingString)) return -10;
 	    	else {
 	    	
 		    	// Draw interface objects over ...
@@ -200,10 +200,13 @@ public abstract class drawnObject {
 	// be inside checkObject if moved to newX and newY. 0,0 otherwise.
 	public boolean collides(int newX, int newY, drawnObject checkObject) {
 		// Check each side.
-		boolean intercepts = newX < checkObject.getX() + checkObject.getWidth() && 
-							 newX + getWidth() > checkObject.getX() && 
-							 newY < checkObject.getY() + checkObject.getHeight() && 
-							 newY + getHeight() > checkObject.getY();
+		boolean intercepts = false;
+		if(checkObject !=null) {
+			intercepts = newX < checkObject.getX() + checkObject.getWidth() && 
+								 newX + getWidth() > checkObject.getX() && 
+								 newY < checkObject.getY() + checkObject.getHeight() && 
+								 newY + getHeight() > checkObject.getY();
+		}
 		return intercepts;
 	}
 	

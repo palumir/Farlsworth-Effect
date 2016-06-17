@@ -6,6 +6,7 @@ import java.awt.image.BufferedImage;
 
 import drawing.drawnObject;
 import drawing.spriteSheet;
+import items.bottle;
 import units.player;
 
 public class playerHealthBar extends interfaceObject  {
@@ -29,6 +30,7 @@ public class playerHealthBar extends interfaceObject  {
 	public static Color DEFAULT_LOST_EXP_COLOR = new Color(15,15,0);
 	public static Color DEFAULT_LEVEL_COLOR = new Color(64,48,38);
 	public static Color DEFAULT_OUTOF_COLOR = new Color(100,48,38);
+	public static Color DEFAULT_BOTTLE_COLOR = Color.white;
 	
 	///////////////////////
 	////// FIELDS /////////
@@ -146,6 +148,24 @@ public class playerHealthBar extends interfaceObject  {
 				   getY() + expAdjustY,
 				   DEFAULT_HEALTHBAR_WIDTH,
 				   DEFAULT_HEALTHBAR_HEIGHT);
+		
+		// Draw bottle UI.
+		if(player.getCurrentPlayer().getEquippedBottle() != null) {
+			int bottleAdjustX = 10;
+			int bottleAdjustY = 52;
+			
+			bottle b = player.getCurrentPlayer().getEquippedBottle();
+			g.setColor(DEFAULT_BOTTLE_COLOR);
+			g.drawImage(b.getImage(), 
+					getX() + bottleAdjustX, 
+					getY() + bottleAdjustY, 
+					b.getImage().getWidth(), 
+					b.getImage().getHeight(), 
+					null);
+			g.drawString(b.getChargesLeft() + "/" + b.getMaxCharges(),
+					getX() + bottleAdjustX + 25,
+					getY() + bottleAdjustY + b.getImage().getHeight()/2 + 5);
+		}
 	}
 	
 	// Update unit

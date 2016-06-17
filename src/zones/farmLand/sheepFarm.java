@@ -1,5 +1,7 @@
 package zones.farmLand;
+import items.bottle;
 import items.item;
+import items.bottles.normalBottle;
 import items.weapons.dagger;
 import modes.topDown;
 import terrain.chunk;
@@ -205,10 +207,13 @@ public class sheepFarm extends zone {
 		caveEnterance spiderCaveEnterance = new caveEnterance(-1762+20+30,-4070+6+14,0, spiderCave.getZone(),100,-6,"Right");
 		
 		// Spawn wolf.
-		u = new fastWolf(-200,-589);
+		u = new wolf(-200,-589);
 		
 		// Spawn the well.
 		c = new well(-775,-1830,0);
+		
+		// Spawn potion.
+		bottle b = new normalBottle(-771,-1776);
 		
 		// Wool trail.
 		c = new woolPiece(-249,-794,0);

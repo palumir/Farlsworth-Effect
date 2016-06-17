@@ -60,7 +60,7 @@ public class water extends groundTile {
 	}
 	
 	// Create interact sequence
-	public interactBox makeInteractSequence() {
+	public static interactBox makeInteractSequence() {
 		
 		// Placeholder for each individual textSeries.
 		textSeries s;
@@ -79,7 +79,7 @@ public class water extends groundTile {
 		s.setEnd();
 		
 		// Heal.
-		s = startOfConversation.addChild("Heal", "Potions filled and health restored.");
+		s = startOfConversation.addChild("Refill bottle and heal", "Equipped bottle filled and health restored.");
 		s.setEnd();
 
 		return new interactBox(startOfConversation, stringUtils.toTitleCase(DEFAULT_CHUNK_NAME));
@@ -91,6 +91,7 @@ public class water extends groundTile {
 		if(interactSequence != null) {
 			// Save
 			if(!haveSaved && interactSequence.getTheText().getButtonText().equals("Yes")) {
+				if(player.getCurrentPlayer().getEquippedBottle()!=null) player.getCurrentPlayer().getEquippedBottle().refill();
 				saveState.createSaveState();
 				haveSaved = true;
 				interactSequence.toggleDisplay();
@@ -103,8 +104,9 @@ public class water extends groundTile {
 			}
 			
 			// Heal
-			if(!haveHealed && interactSequence.getTheText().getButtonText().equals("Heal")) {
+			if(!haveHealed && interactSequence.getTheText().getButtonText().equals("Refill bottle and heal")) {
 				player.getCurrentPlayer().setHealthPoints(player.getCurrentPlayer().getMaxHealthPoints());
+				if(player.getCurrentPlayer().getEquippedBottle()!=null) player.getCurrentPlayer().getEquippedBottle().refill();
 				haveHealed = true;
 			}
 		}

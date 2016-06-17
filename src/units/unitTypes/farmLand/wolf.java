@@ -42,11 +42,11 @@ public class wolf extends unit {
 	
 	// Damage stats
 	private int DEFAULT_ATTACK_DIFFERENTIAL = 6; // the range within the attackrange the unit will attack.
-	private int DEFAULT_ATTACK_DAMAGE = 4;
-	private float DEFAULT_BAT = 0.35f;
+	private int DEFAULT_ATTACK_DAMAGE = 5;
+	private float DEFAULT_BAT = 0.30f;
 	private float DEFAULT_ATTACK_TIME = 0.9f;
 	private int DEFAULT_ATTACK_WIDTH = 30;
-	private int DEFAULT_ATTACK_LENGTH = 15;
+	private int DEFAULT_ATTACK_LENGTH = 17;
 	
 	// Health.
 	private int DEFAULT_HP = 15;

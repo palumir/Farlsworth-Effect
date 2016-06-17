@@ -16,6 +16,7 @@ import java.awt.event.MouseListener;
 
 import javax.swing.JComponent;
 import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
 
 import units.player;
 import units.unit;
@@ -44,11 +45,19 @@ public class gameCanvas extends JComponent {
 	// Screen information
 	private static int defaultWidth = 500;
 	private static int defaultHeight = 500;
+	private static int actualWidth = 500;
+	private static int actualHeight = 500;
+	private static float scaleX = 1f;
+	private static float scaleY = 1f;
 
 	// The thing that performs the tasks every time the timer ticks.
 	ActionListener taskPerformer = new ActionListener() {
 		public void actionPerformed(ActionEvent evt) {
 			utility.updateGame();
+			actualWidth = SwingUtilities.getRoot(gameCanvas).getWidth();
+			actualHeight = SwingUtilities.getRoot(gameCanvas).getHeight();
+			scaleX = actualWidth/(float)defaultWidth;
+			scaleY = actualHeight/(float)defaultHeight;
 			repaint();
 		}
 	};
@@ -84,7 +93,6 @@ public class gameCanvas extends JComponent {
 			public void keyReleased(KeyEvent k) {
 				if(player.getCurrentPlayer()!=null) player.getCurrentPlayer().keyReleased(k);
 			}
-			
 
 			@Override
 			public void keyTyped(KeyEvent k) {
@@ -122,7 +130,7 @@ public class gameCanvas extends JComponent {
 		frame.setSize(getDefaultWidth(), getDefaultHeight());
 		frame.setContentPane(getGameCanvas());
 		frame.setVisible(true);
-		frame.setResizable(false);
+	//	frame.setResizable(false);
 	}
 
 	// Paint the game canvas.

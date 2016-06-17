@@ -13,7 +13,7 @@ import drawing.userInterface.playerHealthBar;
 import effects.effect;
 import effects.effectTypes.bloodSquirt;
 import effects.effectTypes.critBloodSquirt;
-import effects.effectTypes.floatingNumber;
+import effects.effectTypes.floatingString;
 import modes.mode;
 import sounds.sound;
 import terrain.chunk;
@@ -185,6 +185,16 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 		// Do a huge blood squirt.
 		effect blood = new critBloodSquirt(getX() - critBloodSquirt.getDefaultWidth()/2 + topDownWidth/2,
 				   getY() - critBloodSquirt.getDefaultHeight()/2);
+	}
+	
+	// Heal unit.
+	public void heal(int i) {
+		if(healthPoints + i > maxHealthPoints) {
+			i = maxHealthPoints - healthPoints;
+			healthPoints = maxHealthPoints;
+		}
+		else healthPoints = healthPoints + i;
+		effect e = new floatingString("+" + i, playerHealthBar.DEFAULT_HEALTH_COLOR, getX() + getWidth()/2, getY() + getHeight()/2);
 	}
 	
 	// Require units to have some sort of AI.
@@ -365,16 +375,17 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 	// Take damage. Ouch!
 	public void hurt(int damage, float crit) {
 		if(attackable) {
-			healthPoints -= crit*damage;
+			if(healthPoints - crit*damage < 0) healthPoints = 0;
+			else healthPoints -= crit*damage;
 		}
 		
 		// Crit
 		if(crit != 1f) {
-			effect e = new floatingNumber((int) (crit*damage), DEFAULT_CRIT_COLOR, getX() + getWidth()/2, getY() + getHeight()/2);
+			effect e = new floatingString("" + (crit*damage), DEFAULT_CRIT_COLOR, getX() + getWidth()/2, getY() + getHeight()/2);
 		}
 		// Non crit.
 		else {
-			effect e = new floatingNumber(damage, DEFAULT_DAMAGE_COLOR, getX() + getWidth()/2, getY() + getHeight()/2);
+			effect e = new floatingString("" + damage, DEFAULT_DAMAGE_COLOR, getX() + getWidth()/2, getY() + getHeight()/2);
 		}
 		
 		// Squirt blood

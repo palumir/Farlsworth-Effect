@@ -12,6 +12,7 @@ wolf voice 41 by y89312
 wolf-growl.wav by newagesoup
 Dog bark 3 by jorickhoofd
 Dog bark 1 by jorickhoofd
+bottle_drink.wav by nanashco3
 
 Art Attributions:
 Character: universal LPC spritesheet by jrconway3 on github.

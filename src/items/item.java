@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import drawing.drawnObject;
 import drawing.spriteSheet;
+import items.bottles.normalBottle;
 import items.weapons.dagger;
 import zones.farmLand.sheepFarm;
 import zones.farmLand.spiderCave;
@@ -51,6 +52,12 @@ public abstract class item extends drawnObject {
 	
 	// Initiate so we actually have a list of items.
 	public static void initiate() {
+		
+		// Weapons,
 		dagger.weaponRef = new dagger();
+		
+		// Bottles.
+		normalBottle.bottleRef = new normalBottle();
+		
 	}
 }

@@ -16,6 +16,7 @@ import effects.effect;
 import effects.effectTypes.bloodSquirt;
 import interactions.gag;
 import interactions.quest;
+import items.bottle;
 import items.item;
 import items.weapon;
 import main.main;
@@ -104,8 +105,8 @@ public class player extends unit {
 	private inventory playerInventory = new inventory();
 	
 	// Combat
-	private item equippedWeapon = null;
-	private item equippedPotion = null;
+	private weapon equippedWeapon = null;
+	private bottle equippedBottle = null;
 	
 	// Levels
 	private int playerLevel = 1;
@@ -264,6 +265,7 @@ public class player extends unit {
 		String newFacingDirection = null;
 		inventory loadedInventory = new inventory(); // empty inventory
 		weapon loadedEquippedWeapon = null;
+		bottle loadedEquippedBottle = null;
 		
 		// Load save state.
 		s = saveState.loadSaveState();
@@ -284,6 +286,7 @@ public class player extends unit {
 			newFacingDirection = s.getFacingDirection();
 			loadedInventory = s.getPlayerInventory();
 			loadedEquippedWeapon = s.getEquippedWeapon();
+			loadedEquippedBottle = s.getEquippedBottle();
 			newPlayerLevel = s.getPlayerLevel();
 			newPlayerExpIntoLevel = s.getExpIntoLevel();
 		}
@@ -305,6 +308,7 @@ public class player extends unit {
 		thePlayer.setPlayerLevel(newPlayerLevel);
 		thePlayer.setExpIntoLevel(newPlayerExpIntoLevel);
 		if(loadedEquippedWeapon!=null) loadedEquippedWeapon.equip();
+		if(loadedEquippedBottle!=null) loadedEquippedBottle.equip();
 		
 		// Update our player stats to match our level.
 		thePlayer.updateStats();
@@ -378,6 +382,12 @@ public class player extends unit {
 				if(equippedWeapon!=null) attack();
 			}
 			
+			// Player presses bar key
+			if(k.getKeyCode() == KeyEvent.VK_Q) {
+				if(equippedBottle!=null) equippedBottle.useCharge();
+			}
+			
+			
 			// Player presses e key
 			if(k.getKeyCode() == KeyEvent.VK_E) {
 				interact();
@@ -429,8 +439,17 @@ public class player extends unit {
 		
 		// Update health.
 		healthPoints = maxHealthPoints;
+
+	}
+	
+	// Remove the weapon.
+	public void unequipBottle() {
 		
-		// Change the healthbar.
+		// Set the charges to be 0, we can only fill equipped bottles.
+		equippedBottle.setChargesLeft(0);
+		
+		// Dequip the bottle.
+		setEquippedBottle(null);
 	}
 	
 	// Remove the weapon.
@@ -630,12 +649,12 @@ public class player extends unit {
 		this.playerInventory = playerInventory;
 	}
 
-	public item getEquippedPotion() {
-		return equippedPotion;
+	public bottle getEquippedBottle() {
+		return equippedBottle;
 	}
 
-	public void setEquippedPotion(item equippedPotion) {
-		this.equippedPotion = equippedPotion;
+	public void setEquippedBottle(bottle equippedBottle) {
+		this.equippedBottle = equippedBottle;
 	}
 
 	public int getExpIntoLevel() {

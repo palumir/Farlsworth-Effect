@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import drawing.userInterface.inventory;
 import interactions.gag;
 import interactions.quest;
+import items.bottle;
 import items.item;
 import items.weapon;
 import terrain.doodads.farmLand.haystack;
@@ -46,6 +47,7 @@ public class saveState implements Serializable {
 	// Player inventory
 	private inventory playerInventory;
 	private weapon equippedWeapon;
+	private bottle equippedBottle;
 	
 	// Level and exp
 	private int playerLevel;
@@ -83,6 +85,7 @@ public class saveState implements Serializable {
 				s.setEquippedWeapon(currPlayer.getEquippedWeapon());
 				s.setPlayerLevel(currPlayer.getPlayerLevel());
 				s.setExpIntoLevel(currPlayer.getExpIntoLevel());
+				s.setEquippedBottle(currPlayer.getEquippedBottle());
 			
 				// Save quests.
 				s.setAllQuests(quest.loadedQuests);
@@ -114,6 +117,16 @@ public class saveState implements Serializable {
 				// Write the equipped items to save file.
 				if(s.getEquippedWeapon() == null) objectStream.writeObject("None!");
 				else objectStream.writeObject(s.getEquippedWeapon().name);
+				
+				// Write equipped bottle to file.
+				if(s.getEquippedBottle() == null) {
+					objectStream.writeObject("None!");
+					objectStream.writeObject(0);
+				}
+				else {
+					objectStream.writeObject(s.getEquippedBottle().name);
+					objectStream.writeObject(s.getEquippedBottle().getChargesLeft());
+				}
 				
 				// Write the level and exp into level.
 				objectStream.writeObject(s.getPlayerLevel());
@@ -196,6 +209,16 @@ public class saveState implements Serializable {
 			// Write the equipped items to save file.
 			String equippedWeaponName = (String)objectStream.readObject();
 			s.setEquippedWeapon((weapon)item.getItemByName(equippedWeaponName));
+			
+			// Write equipped bottle to file.
+			String equippedBottleName = (String)objectStream.readObject();
+			s.setEquippedBottle(((bottle)item.getItemByName(equippedBottleName)));
+			
+			// Set charges.
+			if(s.getEquippedBottle() != null) s.getEquippedBottle().setChargesLeft((int)objectStream.readObject());
+			else {
+				int placeHolder = (int)objectStream.readObject();
+			}
 			
 			// Get level and exp
 			s.setPlayerLevel((int)objectStream.readObject());
@@ -336,6 +359,14 @@ public class saveState implements Serializable {
 
 	public void setAllGags(ArrayList<gag> allGags) {
 		this.allGags = allGags;
+	}
+
+	public bottle getEquippedBottle() {
+		return equippedBottle;
+	}
+
+	public void setEquippedBottle(bottle equippedBottle) {
+		this.equippedBottle = equippedBottle;
 	}
 	
 }

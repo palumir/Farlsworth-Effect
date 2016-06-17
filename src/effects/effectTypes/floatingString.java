@@ -19,7 +19,7 @@ import utilities.time;
 import utilities.utility;
 import zones.zone;
 
-public class floatingNumber extends effect {
+public class floatingString extends effect {
 	
 	// Default dimensions.
 	public static int DEFAULT_SPRITE_WIDTH = 24;
@@ -45,16 +45,16 @@ public class floatingNumber extends effect {
 	//////////////
 	/// FIELDS ///
 	//////////////
-	public int number = 0;
+	public String text;
 	public Color color;
 	
 	///////////////
 	/// METHODS ///
 	///////////////
 	// Constructor
-	public floatingNumber(int newNumber, Color newColor, int newX, int newY) {
+	public floatingString(String newText, Color newColor, int newX, int newY) {
 		super(theEffectType, newX, newY);
-		number = newNumber;
+		text = newText;
 		color = newColor;
 		
 		// So it displays over everything.
@@ -66,7 +66,7 @@ public class floatingNumber extends effect {
 	@Override
 	public void drawObject(Graphics g) {
 		g.setColor(color);
-		g.drawString("" + number,drawX - g.getFontMetrics().stringWidth(number+"")/2, drawY - getHeight()/2);
+		g.drawString(text,drawX - g.getFontMetrics().stringWidth(text)/2, drawY - getHeight()/2);
 		setY(getY() - 1);
 	}
 

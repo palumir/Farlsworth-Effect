@@ -11,6 +11,7 @@ import modes.mode;
 import terrain.chunk;
 import terrain.chunkType;
 import terrain.generalChunkType;
+import terrain.chunkTypes.water;
 import units.humanType;
 import units.player;
 import units.unit;
@@ -55,39 +56,14 @@ public class well extends chunk {
 	///////////////
 	/// METHODS ///
 	///////////////
-	
-	// Create interact sequence
-		public interactBox makeInteractSequence() {
-			
-			// Placeholder for each individual textSeries.
-			textSeries s;
-			
-			// Start of conversation.
-			textSeries startOfConversation = new textSeries("StartWithButtons", "StartWithButtons");
-			
-			// Save and reset.
-			textSeries saveGame = startOfConversation.addChild("Save game", "Saving the game will reset mobs. Are you sure?");
-			
-			// Warning
-			s = saveGame.addChild("Yes", "Game saved and mobs reset.");
-			s.setEnd();
-			
-			s = saveGame.addChild("No", "Game has not been saved.");
-			s.setEnd();
-			
-			// Heal.
-			s = startOfConversation.addChild("Heal", "Potions filled and health restored.");
-			s.setEnd();
-
-			return new interactBox(startOfConversation, stringUtils.toTitleCase(DEFAULT_CHUNK_NAME));
-		}
 		
-		// Interact stuff.
+	// Interact stuff.
 		public void doInteractStuff() {
 			
 			if(interactSequence != null) {
 				// Save
 				if(!haveSaved && interactSequence.getTheText().getButtonText().equals("Yes")) {
+					if(player.getCurrentPlayer().getEquippedBottle()!=null) player.getCurrentPlayer().getEquippedBottle().refill();
 					saveState.createSaveState();
 					haveSaved = true;
 					interactSequence.toggleDisplay();
@@ -100,8 +76,9 @@ public class well extends chunk {
 				}
 				
 				// Heal
-				if(!haveHealed && interactSequence.getTheText().getButtonText().equals("Heal")) {
+				if(!haveHealed && interactSequence.getTheText().getButtonText().equals("Refill bottle and heal")) {
 					player.getCurrentPlayer().setHealthPoints(player.getCurrentPlayer().getMaxHealthPoints());
+					if(player.getCurrentPlayer().getEquippedBottle()!=null) player.getCurrentPlayer().getEquippedBottle().refill();
 					haveHealed = true;
 				}
 			}
@@ -118,7 +95,7 @@ public class well extends chunk {
 		public void interactWith() {
 			
 			// Restart sequence.
-			interactSequence = makeInteractSequence();
+			interactSequence = water.makeInteractSequence();
 			
 			// Reset booleans
 			haveSaved = false;
@@ -144,7 +121,7 @@ public class well extends chunk {
 		
 		// Interactable.
 		interactable = true;
-		interactSequence = makeInteractSequence();
+		interactSequence = water.makeInteractSequence();
 		
 		// Passable.
 		setPassable(false);

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import drawing.drawnObject;
 import drawing.gameCanvas;
 import drawing.spriteSheet;
+import items.bottle;
 import items.item;
 import items.weapon;
 import sounds.sound;
@@ -93,8 +94,10 @@ public class inventory extends interfaceObject {
 	
 	// Check if inventory has item with the same name.
 	public boolean hasItem(item i) {
-		for(int j = 0; j < items.size(); j++) {
-			if(items.get(j).name.equals(i.name)) return true;
+		if(items != null) {
+			for(int j = 0; j < items.size(); j++) {
+				if(items.get(j) != null  && items.get(j).name.equals(i.name)) return true;
+			}
 		}
 		return false;
 	}
@@ -119,6 +122,26 @@ public class inventory extends interfaceObject {
 					if(currPlayer.getEquippedWeapon() != null && currPlayer.getEquippedWeapon().name.equals(i.name)) {
 						// Unequip item
 						currPlayer.unequipWeapon();
+						
+						// Play equip sound.
+						unequipWeapon.playSound(0.7f);
+					}
+					else {
+						// Equip item
+						i.equip();
+						
+						// Play equip sound.
+						equipWeapon.playSound(0.7f);
+					}
+				}
+				
+				// Deal with bottles.
+				if(i instanceof bottle) {
+					
+					// If the weapon is currently equipped, unequip it.
+					if(currPlayer.getEquippedBottle() != null && currPlayer.getEquippedBottle().name.equals(i.name)) {
+						// Unequip item
+						currPlayer.unequipBottle();
 						
 						// Play equip sound.
 						unequipWeapon.playSound(0.7f);
@@ -279,8 +302,6 @@ public class inventory extends interfaceObject {
 						// Set color
 						g.setColor(DEFAULT_SLOT_COLOR);
 						
-						// Get parameters.
-						
 						
 						if(selectedSlot == i*Math.sqrt(DEFAULT_INVENTORY_SIZE) + j) {
 
@@ -299,14 +320,19 @@ public class inventory extends interfaceObject {
 								// Press e to equip.
 								g.drawString(DEFAULT_BOTTOM_TEXT, getX() + 38 - g.getFontMetrics().stringWidth(DEFAULT_BOTTOM_TEXT)/2 + (int) (Math.sqrt(DEFAULT_INVENTORY_SIZE)*DEFAULT_SLOT_SIZE) + adjustX, getY()+ 34 + adjustY + 140);
 							}
-						
-						}
-						else {
 							
-							// Draw empty slot.
-							g.setColor(DEFAULT_DESC_COLOR);
-							String emptySlot = stringUtils.toTitleCase(DEFAULT_EMPTY_SLOT);
-							g.drawString(emptySlot, getX() + (int) (Math.sqrt(DEFAULT_INVENTORY_SIZE)*DEFAULT_SLOT_SIZE) + 38 + adjustX - g.getFontMetrics().stringWidth(emptySlot)/2, getY()+ 34  + adjustY);
+							// Draw bottle information.
+							if(currentItem instanceof bottle) {
+								g.setColor(DEFAULT_DESC_COLOR);
+								bottle currentBottle = (bottle)currentItem;
+								g.drawString("Charges: " + currentBottle.getChargesLeft(), getX() + (int) (Math.sqrt(DEFAULT_INVENTORY_SIZE)*DEFAULT_SLOT_SIZE) + 38 + adjustX - g.getFontMetrics().stringWidth("Charges: " + currentBottle.getChargesLeft())/2, getY()+ 34 + adjustY + 20);
+								g.drawString("Max Charges: " + currentBottle.getMaxCharges(), getX() + (int) (Math.sqrt(DEFAULT_INVENTORY_SIZE)*DEFAULT_SLOT_SIZE) + 38 + adjustX - g.getFontMetrics().stringWidth("Max Charges: " + currentBottle.getMaxCharges())/2, getY()+ 34 + adjustY + 34);
+								g.drawString("Heal: " + (int)(currentBottle.getHealPercent()*100) + "%", getX() + (int) (Math.sqrt(DEFAULT_INVENTORY_SIZE)*DEFAULT_SLOT_SIZE) + 38 + adjustX - g.getFontMetrics().stringWidth("Heal: " + (int)(currentBottle.getHealPercent()*100) + "%")/2, getY()+ 34 + adjustY + 48);
+								
+								// Press e to equip.
+								g.drawString(DEFAULT_BOTTOM_TEXT, getX() + 38 - g.getFontMetrics().stringWidth(DEFAULT_BOTTOM_TEXT)/2 + (int) (Math.sqrt(DEFAULT_INVENTORY_SIZE)*DEFAULT_SLOT_SIZE) + adjustX, getY()+ 34 + adjustY + 140);
+							}
+						
 						}
 						x++;
 					}
@@ -345,7 +371,7 @@ public class inventory extends interfaceObject {
 			
 			// Draw the equipped potion.
 			g.setColor(DEFAULT_TEXT_COLOR);
-			g.drawString("Potion",
+			g.drawString("Bottle",
 					   getX() + adjustX,
 					   getY() + (int) (DEFAULT_SLOT_SIZE*Math.sqrt(DEFAULT_INVENTORY_SIZE)+56) + adjustY);
 			
@@ -364,12 +390,12 @@ public class inventory extends interfaceObject {
 					   DEFAULT_SLOT_SIZE-1);
 			
 			// Draw the potion
-			if(player.getCurrentPlayer().getEquippedPotion() != null) {
-				g.drawImage(player.getCurrentPlayer().getEquippedWeapon().getImage(), 
-						getX() + DEFAULT_SLOT_SIZE + 35 - player.getCurrentPlayer().getEquippedWeapon().getImage().getWidth()/2 + adjustX, 
-						getY() + (int) (DEFAULT_SLOT_SIZE*Math.sqrt(DEFAULT_INVENTORY_SIZE)+53) - player.getCurrentPlayer().getEquippedWeapon().getImage().getHeight()/2 + adjustY, 
-						player.getCurrentPlayer().getEquippedWeapon().getImage().getWidth(), 
-						player.getCurrentPlayer().getEquippedWeapon().getImage().getHeight(), 
+			if(player.getCurrentPlayer().getEquippedBottle() != null) {
+				g.drawImage(player.getCurrentPlayer().getEquippedBottle().getImage(), 
+						getX() + DEFAULT_SLOT_SIZE + 35 - player.getCurrentPlayer().getEquippedBottle().getImage().getWidth()/2 + adjustX, 
+						getY() + (int) (DEFAULT_SLOT_SIZE*Math.sqrt(DEFAULT_INVENTORY_SIZE)+53) - player.getCurrentPlayer().getEquippedBottle().getImage().getHeight()/2 + adjustY, 
+						player.getCurrentPlayer().getEquippedBottle().getImage().getWidth(), 
+						player.getCurrentPlayer().getEquippedBottle().getImage().getHeight(), 
 						null);
 			}
 		}
