@@ -30,7 +30,7 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 	/////////////////////////
 	
 	// List of all units
-	private static ArrayList<unit> allUnits = new ArrayList<unit>();
+	private static ArrayList<unit> allUnits;
 	
 	// Default movespeed.
 	private static int DEFAULT_UNIT_MOVESPEED = 1;
@@ -195,7 +195,7 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 			healthPoints = maxHealthPoints;
 		}
 		else healthPoints = healthPoints + i;
-		effect e = new floatingString("+" + i, playerHealthBar.DEFAULT_HEALTH_COLOR, getX() + getWidth()/2, getY() + getHeight()/2);
+		effect e = new floatingString("+" + i, playerHealthBar.DEFAULT_HEALTH_COLOR, getX() + getWidth()/2, getY() + getHeight()/2, 1f);
 	}
 	
 	// Require units to have some sort of AI.
@@ -276,6 +276,11 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 		}
 	}
 	
+	// Initiate
+	public static void initiate() {
+		allUnits = new ArrayList<unit>();
+	}
+	
 	// Is in attack range?
 	public boolean isInAttackRange(unit u, int differential) {
 		int x1 = 0;
@@ -324,15 +329,20 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 		return unitsInBox.contains(u);
 	}
 	
+	// Check if a unit is within 
+	public boolean isWithin(int x1, int y1, int x2, int y2) {
+		return getX() < x2 && 
+		 getX() + getWidth() > x1 && 
+		 getY() < y2 && 
+		 getY() + getHeight() > y1;
+	}
+	
 	// Get units in box.
 	public static ArrayList<unit> getUnitsInBox(int x1, int y1, int x2, int y2) {
 		ArrayList<unit> returnList = new ArrayList<unit>();
 		for(int i = 0; i < getAllUnits().size(); i++) {
 			unit u = getAllUnits().get(i);
-			if(u.getX() < x2 && 
-					 u.getX() + u.getWidth() > x1 && 
-					 u.getY() < y2 && 
-					 u.getY() + u.getHeight() > y1) {
+			if(u.isWithin(x1, y1, x2, y2)) {
 				returnList.add(u);
 			}
 		}
@@ -382,11 +392,12 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 		
 		// Crit
 		if(crit != 1f) {
-			effect e = new floatingString("" + (int)(crit*damage), DEFAULT_CRIT_COLOR, getX() + getWidth()/2, getY() + getHeight()/2);
+			effect e = new floatingString("" + (int)(crit*damage), DEFAULT_CRIT_COLOR, getX() + getWidth()/2, getY() + getHeight()/2, 1f, 3f);
 		}
+		
 		// Non crit.
 		else {
-			effect e = new floatingString("" + damage, DEFAULT_DAMAGE_COLOR, getX() + getWidth()/2, getY() + getHeight()/2);
+			effect e = new floatingString("" + damage, DEFAULT_DAMAGE_COLOR, getX() + getWidth()/2, getY() + getHeight()/2, 1f);
 		}
 		
 		// Squirt blood

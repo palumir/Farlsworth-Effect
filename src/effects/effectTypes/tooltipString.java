@@ -25,17 +25,27 @@ import utilities.time;
 import utilities.utility;
 import zones.zone;
 
-public class floatingString extends effect {
+public class tooltipString extends effect {
 	
 	////////////////
 	/// DEFAULTS ///
 	////////////////
 	
 	// Default name.
-	private static String DEFAULT_EFFECT_NAME = "floatingString";
+	private static String DEFAULT_EFFECT_NAME = "tooltipString";
 	 
 	// Duration
-	private static float DEFAULT_ANIMATION_DURATION = 2.2f;
+	private static float DEFAULT_ANIMATION_DURATION = 5f;
+	
+	// Size
+	private static float DEFAULT_TEXT_SIZE = 1.7f;
+	
+	// Color 
+	private static Color DEFAULT_COLOR = Color.white;
+	
+	// Default X and Y
+	private static int DEFAULT_X = 275;
+	private static int DEFAULT_Y = 350;
 	
 	// The actual type.
 	private static effectType theEffectType =
@@ -47,68 +57,45 @@ public class floatingString extends effect {
 	//////////////
 	public String text;
 	public Color color;
-	public float startSize;
-	public float currSize;
-	public float endSize;
 	
 	///////////////
 	/// METHODS ///
 	///////////////
 	// Constructor
-	public floatingString(String newText, Color newColor, int newX, int newY, float newSize) {
-		super(theEffectType, newX, newY);
+	public tooltipString(String newText) {
+		super(theEffectType, DEFAULT_X, DEFAULT_Y);
 		text = newText;
-		color = newColor;
-		startSize = newSize;
-		endSize = newSize;
-		currSize = newSize;
+		color = DEFAULT_COLOR;
 		
 		// So it displays over everything.
-		setHeight(100);
+		setHeight(1);
 		setWidth(1);
 	}
 	
-	// Constructor
-	public floatingString(String newText, Color newColor, int newX, int newY, float newSize, float newEndSize) {
-		super(theEffectType, newX, newY);
-		text = newText;
-		color = newColor;
-		startSize = newSize;
-		endSize = newEndSize;
-		currSize = newSize;
-		
-		// So it displays over everything.
-		setHeight(100);
-		setWidth(1);
-	}
-	
-	// Draw the unit. 
+	// Draw the object.
 	@Override
 	public void drawObject(Graphics g2) {
 		
 		BufferedImage img = new BufferedImage(gameCanvas.getDefaultWidth(),gameCanvas.getDefaultHeight(), BufferedImage.TYPE_INT_ARGB);
 		Graphics2D g = img.createGraphics();
 		
-		// Make font
-		Font font = drawnObject.DEFAULT_FONT.deriveFont(drawnObject.DEFAULT_FONT.getSize()*currSize);
-		if(currSize < endSize) {
-			currSize += (endSize - startSize)/(DEFAULT_ANIMATION_DURATION*gameCanvas.getFPS());
-		}
-		
 		// Set the alpha depending on how close the animation is to over.
 		float timeThatHasPassed = (time.getTime() - timeStarted)/1000f; // in seconds
-		float alpha = 1f - timeThatHasPassed/animationDuration;
+		float alpha = 1f;
+		if(timeThatHasPassed/animationDuration > 0.75f) {
+			alpha = 4f*(1f - (timeThatHasPassed/animationDuration));
+		}
 		if(alpha < 0) alpha = 0;
 		if(alpha > 1) alpha = 1;
-		Color newColor = new Color(color.getRed()/255f, color.getGreen()/255f, color.getBlue()/255f, alpha); //Black 
+		Color newColor = new Color(DEFAULT_COLOR.getRed()/255f, DEFAULT_COLOR.getGreen()/255f, DEFAULT_COLOR.getBlue()/255f, alpha); //Black 
+		Font font = drawnObject.DEFAULT_FONT.deriveFont(drawnObject.DEFAULT_FONT.getSize()*DEFAULT_TEXT_SIZE);
 		g.setFont(font);
 		g.setComposite(AlphaComposite.Src);
 		g.setPaint(newColor);
-		
+	
 		// Draw.
-		g.drawString(text,drawX - g.getFontMetrics().stringWidth(text)/2, drawY - (int)(gameCanvas.getScaleY()*getHeight()/2));
+		g.drawString(text,getX() - g.getFontMetrics().stringWidth(text)/2, getY());
 		g2.drawImage(img,0,0,null);
-		setY(getY() - 1);
 	}
 
 }

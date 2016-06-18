@@ -24,9 +24,6 @@ public abstract class weapon extends item {
 	// The actual animation
 	protected spriteSheet weaponSpriteSheet;
 	
-	// Does the player actually own the item?
-	public static boolean inInventory = false;
-	
 	// Weapon stats
 	private int attackDamage = 0;
 	protected float attackTime = 0f;
@@ -80,17 +77,6 @@ public abstract class weapon extends item {
 		if(this.isDrawObject() && this.collides(this.getX(), this.getY(), player.getCurrentPlayer())) {
 			pickUp();
 		}
-	}
-	
-	// Draw the weapon.
-	@Override
-	public void drawObject(Graphics g) {
-		g.drawImage(getImage(), 
-				drawX, 
-				drawY, 
-				getImage().getWidth(), 
-				getImage().getHeight(), 
-				null);
 	}
 
 	public String getSpeed() {

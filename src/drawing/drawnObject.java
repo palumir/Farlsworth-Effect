@@ -11,6 +11,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import drawing.userInterface.interfaceObject;
 import effects.effect;
 import effects.effectTypes.floatingString;
+import effects.effectTypes.tooltipString;
 import units.player;
 import units.unit;
 import modes.mode;
@@ -49,8 +50,8 @@ public abstract class drawnObject {
 		    	else {
 		    	
 			    	// Different comparator for drawing effects over ...
-			    	if(d1 instanceof effect && !(d2 instanceof effect) && d1.getY()+d1.getHeight() <= d2.getY()) return 8;
-			    	else if(d2 instanceof effect && !(d1 instanceof effect) && d2.getY()+d2.getHeight() <= d1.getY()) return -8;
+			    	if(d1 instanceof effect && !(d2 instanceof effect) /*&& d1.getY()+d1.getHeight() <= d2.getY()*/) return 8;
+			    	else if(d2 instanceof effect && !(d1 instanceof effect) /*&& d2.getY()+d2.getHeight() <= d1.getY()*/) return -8;
 			    	
 			    	else {
 				    	// Prioritize units walking over chunks
@@ -194,7 +195,8 @@ public abstract class drawnObject {
 					 d.drawY = (int) (gameCanvas.getScaleY()*d.drawY);
 					
 					// Draw the object if it's on the screen.
-					if(d instanceof interfaceObject ||
+					if(d instanceof tooltipString ||
+						d instanceof interfaceObject ||
 					   (d.drawX + gameCanvas.getScaleX()*spriteWidth > 0 && 
 					   d.drawY + gameCanvas.getScaleY()*spriteHeight > 0 && 
 					   d.drawX < gameCanvas.getActualWidth() && 
@@ -234,7 +236,7 @@ public abstract class drawnObject {
 		
 		// If it's a unit, remove it from list.
 		if(this instanceof unit) {
-			unit.getAllUnits().remove(this);
+			unit.getAllUnits().remove((unit)this);
 		}
 	}
 	

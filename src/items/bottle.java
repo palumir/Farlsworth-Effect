@@ -78,25 +78,6 @@ public abstract class bottle extends item {
 		inInventory = false;
 	}
 	
-	// Pickup item.
-	public void pickUp() {
-		if(player.getCurrentPlayer() != null) {
-			// Equip the item if it's a weapon and we don't have one equipped.
-			if(player.getCurrentPlayer().getEquippedWeapon() == null
-					&& this instanceof bottle) {
-				equip();
-			}
-		
-			// At least add the item to the player's inventory.
-			player.getCurrentPlayer().getPlayerInventory().pickUp(this);
-			
-		}
-		
-		// Stop drawing the weapon on the ground.
-		setDrawObject(false);
-		inInventory = true;
-	}
-	
 	// Equip item
 	public void equip() {
 		
@@ -130,19 +111,6 @@ public abstract class bottle extends item {
 	// Refill
 	public void refill() {
 		setChargesLeft(getMaxCharges());
-	}
-	
-	// Draw the weapon.
-	@Override
-	public void drawObject(Graphics g) {
-		if(getImage() != null) {
-			g.drawImage(getImage(), 
-					drawX, 
-					drawY, 
-					getImage().getWidth(), 
-					getImage().getHeight(), 
-					null);
-		}
 	}
 
 	public int getChargesLeft() {

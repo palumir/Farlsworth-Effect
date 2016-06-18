@@ -45,8 +45,8 @@ public class gameCanvas extends JComponent {
 	private static int maxFPS = 80; 
 	
 	// Screen information
-	private static int DEFAULT_START_WIDTH = 500;
-	private static int DEFAULT_START_HEIGHT = 500;
+	private static int DEFAULT_START_WIDTH = 550;
+	private static int DEFAULT_START_HEIGHT = 550;
 	private static int defaultWidth;
 	private static int defaultHeight;
 	private static int actualWidth;
@@ -55,7 +55,7 @@ public class gameCanvas extends JComponent {
 	private static float scaleY = 1f;
 	
 	// Frame size
-	private static boolean changeFrameSize = false;
+	//private static boolean changeFrameSize = false;
 
 	// The thing that performs the tasks every time the timer ticks.
 	ActionListener taskPerformer = new ActionListener() {
@@ -92,9 +92,9 @@ public class gameCanvas extends JComponent {
 	            Component c = SwingUtilities.getRoot(gameCanvas);
 				setActualWidth(gameCanvas.getWidth());
 				setActualHeight(gameCanvas.getHeight());
-				setScaleX(getActualWidth()/(float)defaultWidth);
-				setScaleY(getActualHeight()/(float)defaultHeight);
-			  /*  float W = (float)defaultWidth;  
+				if(getActualWidth()/(float)defaultWidth != Float.POSITIVE_INFINITY) setScaleX(getActualWidth()/(float)defaultWidth);
+				if(getActualHeight()/(float)defaultHeight != Float.POSITIVE_INFINITY) setScaleY(getActualHeight()/(float)defaultHeight);
+			    /* float W = (float)defaultWidth;  
 			    float H = (float)defaultHeight;  
 			    Rectangle b = gameCanvas.getBounds();
 			    gameCanvas.setBounds(b.x, b.y, (int)b.width, (int)(b.width*H/W));

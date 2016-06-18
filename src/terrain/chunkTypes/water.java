@@ -28,10 +28,10 @@ public class water extends groundTile {
 	////////////////
 	
 	// Default name.
-	private static String DEFAULT_CHUNK_NAME = "water";
+	private static String DEFAULT_CHUNK_NAME = "water source";
 	
 	// Tile sprite stuff
-	private static String DEFAULT_CHUNK_SPRITESHEET = "images/terrain/" + DEFAULT_CHUNK_NAME + ".png";
+	private static String DEFAULT_CHUNK_SPRITESHEET = "images/terrain/water.png";
 	
 	// Dimensions
 	public static int DEFAULT_CHUNK_WIDTH = 32;

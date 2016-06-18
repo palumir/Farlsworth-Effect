@@ -146,11 +146,13 @@ public class chunk extends drawnObject {
 		
 		// Draw it. 
 		if(chunkImage != null) {
+			int changeFactor = 0;
+			if(gameCanvas.getScaleX() != 1f || gameCanvas.getScaleY() != 1f) changeFactor = 1;
 			g.drawImage(chunkImage, 
 					drawX, 
 					drawY, 
-					(int)(gameCanvas.getScaleX()*chunkImage.getWidth() + 1), 
-					(int)(gameCanvas.getScaleY()*chunkImage.getHeight() + 1), 
+					(int)(gameCanvas.getScaleX()*chunkImage.getWidth() + changeFactor), 
+					(int)(gameCanvas.getScaleY()*chunkImage.getHeight() + changeFactor), 
 					null);
 			
 			// Draw the outskirts of the sprite.

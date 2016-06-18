@@ -103,11 +103,11 @@ public class haystack extends chunk {
 		}
 		else if(timesSearched == 1) {
 			s = startOfConversation.addChild("Search", "You search the haystack ...");
-			s = s.addChild(null, "You find another needle. Is this the same one?");
+			s = s.addChild(null, "You find another needle. Wait ... is this the same one?");
 		}
 		else if(timesSearched == 2) {
 			s = startOfConversation.addChild("Search", "You search the haystack ...");
-			s = s.addChild(null, "You find two needles. Good lord, what are the chances?");
+			s = s.addChild(null, "You find two needles. Wow, what are the chances?");
 		}
 		else if(timesSearched == 3) {
 			s = startOfConversation.addChild("Search", "You shove your fist into the haystack ...");
@@ -120,7 +120,7 @@ public class haystack extends chunk {
 		}
 		else {
 			s = startOfConversation.addChild("Brush off hay", "You brush off the hay ...");
-			s = s.addChild(null, "It's just a stack of needles under some hay. Why?");
+			s = s.addChild(null, "It's a stack of needles under some hay.");
 		}
 
 		// Set each to the end.

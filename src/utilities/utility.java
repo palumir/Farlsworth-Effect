@@ -40,6 +40,7 @@ public abstract class utility {
 	public static void initiateAll() {
 		time.initiate();
 		drawnObject.initiate();
+		unit.initiate();
 		unitType.initiate();
 		chunk.initiate();
 		item.initiate();

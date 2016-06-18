@@ -27,8 +27,8 @@ public class interactBox extends interfaceObject  {
 	private Color DEFAULT_SELECTED_COLOR = new Color(100,48,38);
 	
 	// Position
-	private static int DEFAULT_X = 8;
-	private static int DEFAULT_Y = 330;
+	private static int DEFAULT_X = 27;
+	private static int DEFAULT_Y = 360;
 	
 	// Text font.
 	private static Font DEFAULT_FONT = null;
@@ -127,9 +127,22 @@ public class interactBox extends interfaceObject  {
 			
 			// Button
 			if(buttonMode) {
+				
+				// Set font.
+				g.setFont(DEFAULT_FONT_TITLE);
+				
+				// Display the name of the person or thing talking/interacting
+				g.drawString(whoIsTalking,
+						(int)(gameCanvas.getScaleX()*getX()) + 
+						(int)(gameCanvas.getScaleX()*background.getWidth()/2) - 
+						g.getFontMetrics().stringWidth(whoIsTalking)/2,
+						(int)(gameCanvas.getScaleY()*getY()) + 
+						(int)(gameCanvas.getScaleY()*background.getHeight()/5) + 
+						(int)(gameCanvas.getScaleY()*4));
+				
+				
 				// Set font.
 				g.setFont(DEFAULT_FONT);
-				
 				float percent = 1;
 				if(getTheText().getChildren().size()!=0) percent = 1f/((float)getTheText().getChildren().size() + 1);
 					for(int i = 0; i < getTheText().getChildren().size(); i++) {

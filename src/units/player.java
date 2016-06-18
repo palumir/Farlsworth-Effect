@@ -14,6 +14,7 @@ import drawing.userInterface.playerHealthBar;
 import drawing.userInterface.text;
 import effects.effect;
 import effects.effectTypes.bloodSquirt;
+import effects.effectTypes.tooltipString;
 import interactions.gag;
 import interactions.quest;
 import items.bottle;
@@ -141,7 +142,7 @@ public class player extends unit {
 		super(playerType, newX, newY);
 		
 		/// TODO: Dev stuff
-		showUnitPosition();
+		//showUnitPosition();
 		//showHitBox();
 		//setCollision(false);
 		//setMoveSpeed(10);
@@ -276,6 +277,7 @@ public class player extends unit {
 			playerX = loadZone.getDefaultLocation().x;
 			playerY = loadZone.getDefaultLocation().y;
 			newFacingDirection = "Up";
+			tooltipString t = new tooltipString("Use 'wasd' or arrow keys to move.");
 		}
 		
 		// If we have the savestate.

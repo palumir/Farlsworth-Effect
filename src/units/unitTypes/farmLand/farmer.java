@@ -6,10 +6,12 @@ import drawing.camera;
 import drawing.userInterface.interactBox;
 import effects.effect;
 import effects.effectTypes.bloodSquirt;
+import effects.effectTypes.tooltipString;
 import interactions.quest;
 import interactions.textSeries;
 import modes.mode;
 import units.humanType;
+import units.player;
 import units.unit;
 import units.unitType;
 import utilities.stringUtils;
@@ -60,6 +62,9 @@ public class farmer extends unit {
 	// Interacting with farmer.
 	public quest farlsworthQuest;
 	
+	// Tooltip help
+	private boolean tooltipShown = false;
+	
 	///////////////
 	/// METHODS ///
 	///////////////
@@ -96,11 +101,11 @@ public class farmer extends unit {
 		textSeries s;
 		
 		// Start of conversation.
-		textSeries startOfConversation = new textSeries(null, "For flock's sake!");
+		textSeries startOfConversation = new textSeries(null, "For flock's sake ...");
 		s = startOfConversation.addChild(null, "These sheep wool be the death of me.");
 		s = s.addChild(null, "The shear thought of collecting more wool pains me.");
-		s = s.addChild(null, "If only ewe were looking for a quest ...");
-		textSeries firstSpeakToFarmer = s.addChild(null, "... that wool-d be quite convenient for me.");
+		s = s.addChild(null, "If ewe were conveniently looking for a quest ...");
+		textSeries firstSpeakToFarmer = s.addChild(null, "... that wool-d be quite ... convenient.");
 		
 		// Path 1
 		textSeries noPuns = firstSpeakToFarmer.addChild("Quit making puns.", "Sorry. It gets pretty boring around here.");
@@ -170,12 +175,11 @@ public class farmer extends unit {
 		s = morePuns.addChild(null, "I require wool from a particular sheep.");
 		s = s.addChild(null, "He's quite ...");
 		s = s.addChild(null, "... sheepish, to say the least.");
-		s = s.addChild(null, "Wait, is that even a pun?");
-		s = s.addChild(null, "Whatever ...");
+		s = s.addChild(null, "Wait, is that even a pun? Whatever ...");
 		s = s.addChild(null, "Anyway, this particular sheep is difficult.");
 		s = s.addChild(null, "But he needs to be sheared.");
 		s = s.addChild(null, "You'll find him in the pen to the far East.");
-		s = s.addChild(null, "Can you collect his wool for me?");
+		s = s.addChild(null, "Be a lamb and go grab his wool for me?");
 		s.addChild(yes);
 		s.addChild(noHelp);
 		yes.setEnd();
@@ -209,8 +213,18 @@ public class farmer extends unit {
 	public void reactToPain() {
 	}
 	
+	// Tutorial stuff.
+	public void doTutorialStuff() {
+		player currPlayer = player.getCurrentPlayer();
+		if(!tooltipShown && !farlsworthQuest.isStarted() && currPlayer != null && currPlayer.isWithin(-1017,-283,-450,25)) {
+			tooltipShown = true;
+			tooltipString t = new tooltipString("Press 'e' to interact with something.");
+		}
+	}
+	
 	// Does nothing yet.
 	public void updateUnit() {
+		doTutorialStuff();
 		doQuestStuff();
 	}
 	

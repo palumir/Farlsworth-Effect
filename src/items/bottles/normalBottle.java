@@ -7,6 +7,7 @@ import drawing.spriteSheet;
 import drawing.animation.animation;
 import drawing.animation.animationPack;
 import drawing.spriteSheet.spriteSheetInfo;
+import effects.effectTypes.tooltipString;
 import items.bottle;
 import items.item;
 import items.weapon;
@@ -69,6 +70,15 @@ public class normalBottle extends bottle {
 		
 		// Heal percent.
 		setHealPercent(DEFAULT_HEAL_PERCENT);
+	}
+	
+	// React to being picked up.
+	@Override
+	public void reactToPickup() {
+		player currPlayer = player.getCurrentPlayer();
+		if(currPlayer != null) {
+			tooltipString t = new tooltipString("Fill the bottle, then press 'q' to use.");
+		}
 	}
 
 	// Get the item ground image.

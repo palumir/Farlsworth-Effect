@@ -7,6 +7,7 @@ import drawing.spriteSheet;
 import drawing.animation.animation;
 import drawing.animation.animationPack;
 import drawing.spriteSheet.spriteSheetInfo;
+import effects.effectTypes.tooltipString;
 import items.item;
 import items.weapon;
 import units.player;
@@ -60,6 +61,15 @@ public class dagger extends weapon {
 		setStats();
 	}
 	
+	// React to being picked up.
+	@Override
+	public void reactToPickup() {
+		player currPlayer = player.getCurrentPlayer();
+		if(currPlayer != null) {
+			tooltipString t = new tooltipString("Press 'space' to attack.");
+		}
+	}
+	
 	// Set stats
 	public void setStats() {
 		// Weapon stats.
@@ -70,25 +80,6 @@ public class dagger extends weapon {
 		attackLength = DEFAULT_ATTACK_LENGTH;
 		setRange("short");
 		setSpeed("fast");
-	}
-	
-	// Pickup item.
-	public void pickUp() {
-		if(player.getCurrentPlayer() != null) {
-			// Equip the item if it's a weapon and we don't have one equipped.
-			if(player.getCurrentPlayer().getEquippedWeapon() == null
-					&& this instanceof weapon) {
-				equip();
-			}
-		
-			// At least add the item to the player's inventory.
-			player.getCurrentPlayer().getPlayerInventory().pickUp(this);
-			
-		}
-		
-		// Stop drawing the weapon on the ground.
-		setDrawObject(false);
-		inInventory = true;
 	}
 	
 	// Equip item

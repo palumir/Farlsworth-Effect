@@ -43,8 +43,8 @@ public abstract class effect extends drawnObject  {
 	private animation currentAnimation = null;
 	
 	// Animation duration
-	private long timeStarted = 0;
-	private float animationDuration = 0;
+	protected long timeStarted = 0;
+	protected float animationDuration = 0;
 	
 	///////////////
 	/// METHODS ///
@@ -90,12 +90,12 @@ public abstract class effect extends drawnObject  {
 	}
 	
 	// Deal with movement animations.
-	public void dealWithAnimations(int moveX, int moveY) {
-	}
+	public void dealWithAnimations(int moveX, int moveY) {}
 
 	// Draw the effect
 	@Override
 	public void drawObject(Graphics g) {
+		
 		// Of course only draw if the animation is not null.
 		if(currentAnimation != null) {
 			g.drawImage(currentAnimation.getCurrentFrame(), 

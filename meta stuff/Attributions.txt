@@ -14,13 +14,14 @@ Dog bark 3 by jorickhoofd
 Dog bark 1 by jorickhoofd
 bottle_drink.wav by nanashco3
 
+Writer contributors:
+Paul Tallion
+
 Art Attributions:
 Character: universal LPC spritesheet by jrconway3 on github.
 Spider: landofshadows
 Sheep: RPGMaker VX and Birdzilla
 Wolf: RPGMaker
-
-
-WolfMother SpriteSheet = 
-Attribute Stephen "Redshrike" Challener as graphic artist 
-William Thompsonj as contributor. 
+WolfMother SpriteSheet:
+Stephen "Redshrike" Challener as graphic artist 
+William Thompsonj contributor. 
