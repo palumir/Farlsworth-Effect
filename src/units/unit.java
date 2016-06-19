@@ -132,7 +132,7 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 	protected boolean movingRight = false;
 	protected boolean movingDown = false;
 	protected boolean movingUp = false;
-	private String facingDirection = DEFAULT_FACING_DIRECTION;
+	protected String facingDirection = DEFAULT_FACING_DIRECTION;
 	private boolean collisionOn = true;
 	
 	// Quests
