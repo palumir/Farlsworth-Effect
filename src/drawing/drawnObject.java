@@ -177,7 +177,11 @@ public abstract class drawnObject {
 					// Get the correct sprite width and height.
 					int spriteWidth = 0;
 					int spriteHeight = 0;
-					if(d.getObjectSpriteSheet() != null) {
+					if(d instanceof unit && ((unit)d).getCurrentAnimation() != null) {
+						spriteWidth = ((unit)d).getCurrentAnimation().getCurrentFrame().getWidth();
+						spriteHeight = ((unit)d).getCurrentAnimation().getCurrentFrame().getHeight();
+					}
+					else if(d.getObjectSpriteSheet() != null) {
 						spriteWidth = d.getObjectSpriteSheet().getSpriteWidth();
 						spriteHeight = d.getObjectSpriteSheet().getSpriteHeight();
 					}

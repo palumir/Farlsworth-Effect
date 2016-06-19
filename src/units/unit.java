@@ -18,7 +18,9 @@ import effects.effectTypes.floatingString;
 import modes.mode;
 import sounds.sound;
 import terrain.chunk;
+import terrain.region;
 import terrain.doodads.general.questMark;
+import units.bosses.denmother;
 import utilities.intTuple;
 import utilities.time;
 import utilities.utility;
@@ -43,7 +45,7 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 	private static float DEFAULT_JUMPSPEED = 8;
 	
 	// Animation defaults.
-	private String DEFAULT_FACING_DIRECTION = "Down";
+	private String DEFAULT_FACING_DIRECTION = "Right";
 	
 	// Combat defaults.
 	private int DEFAULT_HP = 10;
@@ -140,6 +142,9 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 	private animationPack animations;
 	private animation currentAnimation = null;
 	
+	// Collision on or off.
+	private boolean ignoreCollision = false;
+	
 	///////////////
 	/// METHODS ///
 	///////////////
@@ -147,6 +152,9 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 	// Constructor
 	public unit(unitType u, int newX, int newY) {
 		super(u.getUnitTypeSpriteSheet(), newX, newY, u.getWidth(), u.getHeight());	
+		//showUnitPosition();
+		//showHitBox();
+		//showSpriteBox();
 		setAnimations(u.getAnimations());
 		setMoveSpeed(u.getMoveSpeed());
 		jumpSpeed = u.getJumpSpeed();
@@ -159,7 +167,7 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 	// Update unit
 	@Override
 	public void update() {
-		if(currentAnimation != null) currentAnimation.playAnimation();
+		if(getCurrentAnimation() != null) getCurrentAnimation().playAnimation();
 		gravity();
 		jump();
 		moveUnit();
@@ -457,9 +465,12 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 			// Don't move.
 		}
 		else {
-			// Move towards unit.
+			
+			// Horizontal
 			if(getX() - moveX < 0 && Math.abs(getX() - moveX) > 3*moveSpeed) movingRight = true;
 			if(getX() - moveX > 0 && Math.abs(getX() - moveX) > 3*moveSpeed) movingLeft = true;
+			
+			// Vertical
 			if(getY() - moveY < 0 && Math.abs(getY() - moveY) > 3*moveSpeed) movingDown = true;
 			if(getY() - moveY > 0 && Math.abs(getY() - moveY) > 3*moveSpeed) movingUp = true;
 		}
@@ -564,10 +575,11 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 			if(collisionOn) {
 				// Check if it collides with a chunk in the x or y plane.
 				intTuple xyCollide = chunk.collidesWith(this, getX() + moveX, getY() + moveY);
-				if(xyCollide.x == 1) actualMoveX = 0;
+				intTuple leftRegion = region.leftRegion(this, getX() + moveX, getY() + moveY);
+				if(!ignoreCollision && (xyCollide.x == 1 || leftRegion.x == 1)) actualMoveX = 0;
 				
 				// Lots more to check for platformer mode.
-				if(xyCollide.y == 1) {
+				if(!ignoreCollision && (xyCollide.y == 1 || leftRegion.y == 1)) {
 				
 					// If gravity is on
 					if (gravity) { 
@@ -711,12 +723,12 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 		if(a != null) {
 			
 			// Reset the frame if it's a new animation.
-			if(currentAnimation != null && currentAnimation != a) {
-				currentAnimation.setCurrentSprite(currentAnimation.getStartFrame());
+			if(getCurrentAnimation() != null && getCurrentAnimation() != a) {
+				getCurrentAnimation().setCurrentSprite(getCurrentAnimation().getStartFrame());
 			}
 			
 			// Set the animation.
-			currentAnimation = a;
+			setCurrentAnimation(a);
 		}
 	}
 	
@@ -724,24 +736,23 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 	@Override
 	public void drawObject(Graphics g) {
 		// Of course only draw if the animation is not null.
-		if(currentAnimation != null) {
-			g.drawImage(currentAnimation.getCurrentFrame(), 
+		if(getCurrentAnimation() != null) {
+			g.drawImage(getCurrentAnimation().getCurrentFrame(), 
 					drawX, 
 					drawY, 
-					(int)(gameCanvas.getScaleX()*getObjectSpriteSheet().getSpriteWidth()), 
-					(int)(gameCanvas.getScaleY()*getObjectSpriteSheet().getSpriteHeight()), 
+					(int)(gameCanvas.getScaleX()*getCurrentAnimation().getCurrentFrame().getWidth()), 
+					(int)(gameCanvas.getScaleY()*getCurrentAnimation().getCurrentFrame().getHeight()), 
 					null);
 		}
 		
 		// Draw healthbar is hp is low.
 		if(healthPoints < maxHealthPoints && !(this instanceof player)) {
-			
 			// % of HP left.
 			int healthChunkSize = (int)(((float)getHealthPoints()/(float)getMaxHealthPoints())*DEFAULT_HEALTHBAR_WIDTH);
 			
 			// Adjustment
-			int hpAdjustX = (int)(gameCanvas.getScaleX()*(-DEFAULT_HEALTHBAR_WIDTH/2+getWidth()/2)) ;
-			int hpAdjustY = 0;
+			int hpAdjustX = (int) (gameCanvas.getScaleX()*getCurrentAnimation().getCurrentFrame().getWidth()/2 - DEFAULT_HEALTHBAR_WIDTH/2);
+			int hpAdjustY = -(int)(gameCanvas.getScaleY()*getCurrentAnimation().getCurrentFrame().getHeight()/3);
 			
 			// Draw the red.
 			g.setColor(playerHealthBar.DEFAULT_LOST_HEALTH_COLOR);
@@ -766,12 +777,12 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 		}
 		
 		// Draw the outskirts of the sprite.
-		if(showSpriteBox) {
+		if(showSpriteBox && getCurrentAnimation() != null) {
 			g.setColor(Color.red);
 			g.drawRect(drawX,
 					   drawY, 
-					   (int)(gameCanvas.getScaleX()*getObjectSpriteSheet().getSpriteWidth()), 
-					   (int)(gameCanvas.getScaleY()*getObjectSpriteSheet().getSpriteHeight()));
+					   (int)(gameCanvas.getScaleX()*getCurrentAnimation().getCurrentFrame().getWidth()), 
+					   (int)(gameCanvas.getScaleY()*getCurrentAnimation().getCurrentFrame().getHeight()));
 		}
 		
 		// Draw the x,y coordinates of the unit.
@@ -783,15 +794,15 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 		}
 		
 		// Show attack range.
-		if(showAttackRange) {
+		if(showAttackRange && getCurrentAnimation() != null) {
 			int x1 = 0;
 			int x2 = 0;
 			int y1 = 0;
 			int y2 = 0;
 			
 			// Get the x and y of hitbox.
-			int hitBoxX = drawX - (- (getObjectSpriteSheet().getSpriteWidth()/2 - getWidth()/2) - getHitBoxAdjustmentX());
-			int hitBoxY = drawY - (- (getObjectSpriteSheet().getSpriteHeight()/2 - getHeight()/2) - getHitBoxAdjustmentY());
+			int hitBoxX = drawX - (- (getCurrentAnimation().getCurrentFrame().getWidth()/2 - getWidth()/2) - getHitBoxAdjustmentX());
+			int hitBoxY = drawY - (- (getCurrentAnimation().getCurrentFrame().getHeight()/2 - getHeight()/2) - getHitBoxAdjustmentY());
 			
 			// Get the box we will attack in if facing left.
 			if(facingDirection.equals("Left")) {
@@ -833,10 +844,10 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 		}
 		
 		// Draw the hitbox of the image in green.
-		if(showHitBox) {
+		if(showHitBox && getCurrentAnimation() != null) {
 			g.setColor(Color.green);
-			g.drawRect(drawX - (int)(gameCanvas.getScaleX()*(- (getObjectSpriteSheet().getSpriteWidth()/2 - getWidth()/2) - getHitBoxAdjustmentX())),
-					   drawY - (int)(gameCanvas.getScaleY()*(- (getObjectSpriteSheet().getSpriteHeight()/2 - getHeight()/2) - getHitBoxAdjustmentY())), 
+			g.drawRect(drawX - (int)(gameCanvas.getScaleX()*(- (getCurrentAnimation().getCurrentFrame().getWidth()/2 - getWidth()/2) - getHitBoxAdjustmentX())),
+					   drawY - (int)(gameCanvas.getScaleY()*(- (getCurrentAnimation().getCurrentFrame().getHeight()/2 - getHeight()/2) - getHitBoxAdjustmentY())), 
 					   (int)(gameCanvas.getScaleX()*getWidth()), 
 					   (int)(gameCanvas.getScaleY()*getHeight()));
 		}
@@ -923,6 +934,10 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 		this.baseAttackTime = baseAttackTime;
 	}
 	
+	public void ignoreCollision() {
+		ignoreCollision = true;
+	}
+	
 	public void showAttackRange() {
 		showAttackRange = true;
 	}
@@ -973,6 +988,14 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 
 	public static void setAllUnits(ArrayList<unit> allUnits) {
 		unit.allUnits = allUnits;
+	}
+
+	public animation getCurrentAnimation() {
+		return currentAnimation;
+	}
+
+	public void setCurrentAnimation(animation currentAnimation) {
+		this.currentAnimation = currentAnimation;
 	}
 	
 }

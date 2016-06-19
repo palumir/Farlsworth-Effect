@@ -15,7 +15,7 @@ public class fog {
 	public static void paintFog(Graphics2D g2) {
 		BufferedImage img = new BufferedImage(gameCanvas.getDefaultWidth(),gameCanvas.getDefaultHeight(), BufferedImage.TYPE_INT_ARGB);
 		Graphics2D g = img.createGraphics();
-		float alpha = 0.5f;
+		float alpha = 0.3f;
 		Color color = new Color(0, 0, 0, alpha); //Black 
 		g.setComposite(AlphaComposite.Src);
 		g.setPaint(color);

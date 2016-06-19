@@ -12,6 +12,7 @@ import effects.effect;
 import effects.effectTypes.floatingString;
 import items.bottles.normalBottle;
 import items.weapons.dagger;
+import sounds.sound;
 import units.player;
 import utilities.stringUtils;
 import zones.farmLand.sheepFarm;
@@ -27,6 +28,10 @@ public abstract class item extends drawnObject {
 	
 	// Display
 	public static Color DEFAULT_PICKUP_COLOR = new Color(103,238,245);
+	
+	// Volume and sound
+	public static sound pickUpSound = new sound("sounds/effects/player/items/itemPickup.wav");
+	private static float volume = .7f;
 	
 	//////////////
 	/// FIELDS ///
@@ -81,6 +86,11 @@ public abstract class item extends drawnObject {
 			player.getCurrentPlayer().getPlayerInventory().pickUp(this);
 			
 		}
+		
+		// Play sound.
+		pickUpSound.playSound(volume);
+		
+		// React to pick-up
 		reactToPickup();
 		
 		// Stop drawing the weapon on the ground.

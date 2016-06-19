@@ -140,19 +140,19 @@ public class dagger extends weapon {
 		unitTypeAnimations.addAnimation(standingDown);
 		
 		// Running left animation.
-		animation runningLeft = new animation("runningLeft", weaponSpriteSheet.getAnimation(9), 0, 8, 1);
+		animation runningLeft = new animation("runningLeft", weaponSpriteSheet.getAnimation(9), 1, 8, 0.75f);
 		unitTypeAnimations.addAnimation(runningLeft);		
 		
 		// Running up animation.
-		animation runningUp = new animation("runningUp", weaponSpriteSheet.getAnimation(8), 0, 8, 1);
+		animation runningUp = new animation("runningUp", weaponSpriteSheet.getAnimation(8), 1, 8, 0.75f);
 		unitTypeAnimations.addAnimation(runningUp);
 		
 		// Running right animation.
-		animation runningRight = new animation("runningRight", weaponSpriteSheet.getAnimation(11), 0, 8, 1);
+		animation runningRight = new animation("runningRight", weaponSpriteSheet.getAnimation(11), 1, 8, 0.75f);
 		unitTypeAnimations.addAnimation(runningRight);
 		
 		// Running down animation.
-		animation runningDown = new animation("runningDown", weaponSpriteSheet.getAnimation(10), 0, 8, 1);
+		animation runningDown = new animation("runningDown", weaponSpriteSheet.getAnimation(10), 1, 8, 0.75f);
 		unitTypeAnimations.addAnimation(runningDown);
 		
 		// Set animations.

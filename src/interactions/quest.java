@@ -61,6 +61,7 @@ public class quest extends text {
 				if(loadedQuests.get(i).getTheText().equals(newText)) {
 					completed = loadedQuests.get(i).isCompleted();
 					started = loadedQuests.get(i).isStarted();
+					loadedQuests.get(i).destroy();
 					loadedQuests.remove(i);
 				}
 				else {

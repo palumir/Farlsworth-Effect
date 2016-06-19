@@ -20,8 +20,8 @@ public class sound {
 		try {
 			File f = new File("./" + soundFile);
 			audioIn = AudioSystem.getAudioInputStream(f.toURI().toURL());
-			clip = AudioSystem.getClip();
-			clip.open(audioIn);
+			setClip(AudioSystem.getClip());
+			getClip().open(audioIn);
 		}
 		catch(Exception e) {
 			e.printStackTrace();
@@ -34,18 +34,19 @@ public class sound {
 		  // Clip finishing; see comments.
 		   try {
 			   // Adjust volume based on radius.
-			   FloatControl control = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+			   FloatControl control = (FloatControl) getClip().getControl(FloatControl.Type.MASTER_GAIN);
 		       float max = control.getMaximum();
 		       float min = control.getMinimum(); // negative values all seem to be zero?
 		       float range = max - min;
 		       control.setValue(min + (range*v));
 				   
 			   // Play the clip.
-			   clip.setFramePosition(0);
-			   clip.stop();
-			   clip.start();
+			   getClip().stop();
+			   getClip().setMicrosecondPosition(0l);
+			   getClip().start();
 		   }
 		   catch (Exception e) {
+			   e.printStackTrace();
 		   }
 	}
 	
@@ -64,7 +65,7 @@ public class sound {
 				   float howClosePercentage = (radius - howClose)/radius;
 				   
 				   // Adjust volume based on radius.
-				   FloatControl control = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+				   FloatControl control = (FloatControl) getClip().getControl(FloatControl.Type.MASTER_GAIN);
 			       float max = control.getMaximum();
 			       float min = control.getMinimum(); // negative values all seem to be zero?
 			       float range = max - min;
@@ -72,13 +73,21 @@ public class sound {
 			    	   control.setValue(min + (range * howClosePercentage*v));
 					   
 					   // Play the clip.
-					   clip.setFramePosition(0);
-					   clip.stop();
-					   clip.start();
+					   getClip().setFramePosition(0);
+					   getClip().stop();
+					   getClip().start();
 			       }
 			   }
 		   } 
 		   catch (Exception e) {
 		   }
+	}
+
+	public Clip getClip() {
+		return clip;
+	}
+
+	public void setClip(Clip clip) {
+		this.clip = clip;
 	}
 }

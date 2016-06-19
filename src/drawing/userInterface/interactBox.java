@@ -57,6 +57,8 @@ public class interactBox extends interfaceObject  {
 	
 	// Sounds.
 	private static sound UIMove = new sound("sounds/effects/player/UI/UIMove.wav");
+	private static sound typing = new sound("sounds/effects/player/UI/typing.wav");
+	private static float typingVolume = 0.7f;
 	
 	///////////////
 	/// METHODS ///
@@ -116,6 +118,7 @@ public class interactBox extends interfaceObject  {
 					if(displayIterator == DEFAULT_DISPLAY_FOR) {
 						displayIterator = 0;
 						displayedText += getTheText().getTextOnPress().charAt(displayedText.length());
+						if(!typing.getClip().isActive()) typing.playSound(typingVolume);
 					}
 				}
 				

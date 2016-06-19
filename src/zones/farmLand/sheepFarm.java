@@ -25,6 +25,7 @@ import terrain.doodads.farmLand.verticalFence;
 import terrain.doodads.farmLand.well;
 import terrain.doodads.farmLand.woolPiece;
 import units.unit;
+import units.bosses.denmother;
 import units.unitTypes.farmLand.farmer;
 import units.unitTypes.farmLand.fastWolf;
 import units.unitTypes.farmLand.sheep;
@@ -221,6 +222,18 @@ public class sheepFarm extends zone {
 		c = new woolPiece(-477,-1211,0);
 		c = new woolPiece(-534,-1424,0);
 		c = new woolPiece(-711,-1634,0);
+		c = new woolPiece(-849,-1981,0);
+		c = new woolPiece(-1023,-2200,0);
+		c = new woolPiece(-1209,-2437,0);
+		c = new woolPiece(-1368,-2677,0);
+		c = new woolPiece(-1587,-2923,0);
+		c = new woolPiece(-1770,-3136,0);
+		c = new woolPiece(-1752,-3412,0);
+		c = new woolPiece(-1731,-3721,0);
+		c = new woolPiece(-1713,-3982,0);
+		
+		// Denmother.
+		u = new denmother(1450, -3281);
 		
 		// Spawn forest trees.
 		c = new tree(-2000,-3946,0);
@@ -410,7 +423,6 @@ public class sheepFarm extends zone {
 		c = new tree(-607,-2130,0);
 		c = new bush(-589,-1706,2);
 		c = new tree(-621,-1444,2);
-		c = new tree(-581,-1282,1);
 		c = new bush(-604,-1158,0);
 		c = new tree(-592,-891,1);
 		c = new tree(-583,-788,0);
@@ -656,8 +668,6 @@ public class sheepFarm extends zone {
 		c = new tree(1282,-3681,0);
 		c = new tree(1270,-3585,1);
 		c = new tree(1282,-3432,0);
-		c = new tree(1255,-3185,1);
-		c = new tree(1277,-3047,1);
 		c = new tree(1263,-2878,1);
 		c = new tree(1272,-2489,1);
 		c = new tree(1300,-2254,0);
@@ -691,9 +701,6 @@ public class sheepFarm extends zone {
 		c = new tree(1541,-3987,1);
 		c = new tree(1549,-3703,0);
 		c = new bush(1539,-3594,1);
-		c = new tree(1511,-3411,1);
-		c = new bush(1527,-3335,0);
-		c = new tree(1503,-2931,2);
 		c = new tree(1525,-2622,1);
 		c = new tree(1512,-2485,0);
 		c = new tree(1526,-2249,0);
@@ -702,8 +709,6 @@ public class sheepFarm extends zone {
 		c = new tree(1540,-1291,1);
 		c = new tree(1535,-669,0);
 		c = new bush(1652,-3826,0);
-		c = new tree(1658,-3157,1);
-		c = new tree(1673,-3011,0);
 		c = new tree(1668,-2907,0);
 		c = new bush(1652,-2779,2);
 		c = new tree(1635,-2525,0);
@@ -717,9 +722,6 @@ public class sheepFarm extends zone {
 		c = new tree(1640,-757,2);
 		c = new tree(1633,-636,2);
 		c = new tree(1762,-3998,0);
-		c = new bush(1781,-3325,0);
-		c = new tree(1755,-3175,0);
-		c = new tree(1791,-3048,1);
 		c = new bush(1765,-2766,1);
 		c = new tree(1779,-2533,0);
 		c = new tree(1801,-2372,0);
@@ -735,7 +737,6 @@ public class sheepFarm extends zone {
 		c = new bush(1904,-3996,0);
 		c = new bush(1927,-3849,1);
 		c = new tree(1899,-3707,0);
-		c = new tree(1907,-3430,1);
 		c = new tree(1928,-3013,0);
 		c = new tree(1896,-2761,0);
 		c = new bush(1905,-2263,0);

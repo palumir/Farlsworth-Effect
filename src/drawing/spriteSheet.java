@@ -24,8 +24,8 @@ public class spriteSheet {
 		// Dimensions.
 		private int spriteWidth;
 		private int spriteHeight;
-		private int hitBoxAdjustmentX;
-		private int hitBoxAdjustmentY;
+		private int hitBoxAdjustmentX = 0;
+		private int hitBoxAdjustmentY = 0;
 		
 		// The actual file location.
 		public String sheetFile;
@@ -90,6 +90,7 @@ public class spriteSheet {
 			}
 		} 
 		catch (IOException e) {
+			e.printStackTrace();
 			// Do nothing, but an error happened.
 		}
 	}

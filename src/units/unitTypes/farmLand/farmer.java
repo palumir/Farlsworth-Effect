@@ -206,7 +206,10 @@ public class farmer extends unit {
 	
 	// Interact with object. Should be over-ridden.
 	public void interactWith() { 
-		if(!farlsworthQuest.completed()) farlsworthQuest.getInteractBox().toggleDisplay();
+		if(!farlsworthQuest.completed())  {
+			farlsworthQuest = makeQuest();
+			farlsworthQuest.getInteractBox().toggleDisplay();
+		}
 	}
 	
 	// React to pain.

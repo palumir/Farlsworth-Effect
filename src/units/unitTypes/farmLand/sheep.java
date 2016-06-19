@@ -3,14 +3,17 @@ package units.unitTypes.farmLand;
 import java.util.Random;
 
 import drawing.camera;
+import drawing.userInterface.interactBox;
 import effects.effect;
 import effects.effectTypes.bloodSquirt;
+import interactions.textSeries;
 import modes.mode;
 import sounds.sound;
 import units.animalType;
 import units.humanType;
 import units.unit;
 import units.unitType;
+import utilities.stringUtils;
 import utilities.time;
 import utilities.utility;
 import zones.zone;
@@ -23,7 +26,7 @@ public class sheep extends unit {
 	public static int DEFAULT_PLATFORMER_ADJUSTMENT_Y = 0;
 	
 	// TopDown real dimensions
-	public static int DEFAULT_TOPDOWN_HEIGHT = 15;
+	public static int DEFAULT_TOPDOWN_HEIGHT = 18;
 	public static int DEFAULT_TOPDOWN_WIDTH = 20;
 	public static int DEFAULT_TOPDOWN_ADJUSTMENT_Y = 4;
 	
@@ -58,8 +61,8 @@ public class sheep extends unit {
 						);	
 	
 	// Sounds
-	private sound bleet1 = new sound("sounds/effects/animals/sheep1.wav");
-	private sound bleet2 = new sound("sounds/effects/animals/sheep2.wav");
+	private static sound bleet1 = new sound("sounds/effects/animals/sheep1.wav");
+	private static sound bleet2 = new sound("sounds/effects/animals/sheep2.wav");
 	private int bleetRadius = 1200;
 	
 	//////////////
@@ -78,6 +81,32 @@ public class sheep extends unit {
 	private float randomBleet = 0f;
 	private float lastBleet = 0f;
 	
+	// Interaction
+	private interactBox interactSequence;
+	
+	///////////////
+	/// METHODS ///
+	///////////////
+	
+	// Create interact sequence
+	public interactBox makeNormalInteractSequence() {
+	
+		// Placeholder for each individual textSeries.
+		textSeries s;
+		
+		// Start of conversation.
+		textSeries startOfConversation = new textSeries(null, "Bah.");
+		startOfConversation.setEnd();
+		
+		return new interactBox(startOfConversation, stringUtils.toTitleCase(DEFAULT_SHEEP_NAME));
+	}
+	
+	// Interact with object. 
+	public void interactWith() { 
+		interactSequence = makeNormalInteractSequence();
+		interactSequence.toggleDisplay();
+	}
+
 	///////////////
 	/// METHODS ///
 	///////////////
@@ -88,6 +117,9 @@ public class sheep extends unit {
 		// Set AI start X and Y
 		startX = newX;
 		startY = newY;
+		
+		// Set interactable.
+		interactable = true;
 		
 		// Set dimensions
 		setHeight(getDefaultHeight());

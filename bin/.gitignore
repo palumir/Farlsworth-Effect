@@ -1,8 +1,7 @@
-/items/
-/zones/
-/units/
 /drawing/
+/sounds/
+/units/
 /terrain/
 /interactions/
-/utilities/
-/effects/
+/zones/
+/items/

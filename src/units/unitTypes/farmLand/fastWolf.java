@@ -89,6 +89,7 @@ public class fastWolf extends unit {
 	//////////////
 	/// FIELDS ///
 	//////////////
+	private boolean dosile = false;
 	private boolean aggrod = false;
 	
 	///////////////
@@ -173,7 +174,7 @@ public class fastWolf extends unit {
 			if(randomHowl == 0f) {
 				randomHowl = newRandomHowlInterval;
 			}
-			if(!aggrod && time.getTime() - lastHowl > randomHowl*1000) {
+			if(!dosile && !aggrod && time.getTime() - lastHowl > randomHowl*1000) {
 				
 				// Set the last time they howled
 				lastHowl = time.getTime();
@@ -195,7 +196,7 @@ public class fastWolf extends unit {
 		makeSounds();
 		
 		// Attack if we're in radius.
-		if(howClose < DEFAULT_ATTACK_RADIUS) {
+		if(!dosile && howClose < DEFAULT_ATTACK_RADIUS) {
 			
 			// If we're in attack range, attack.
 			if(isInAttackRange(currPlayer, DEFAULT_ATTACK_DIFFERENTIAL)) {

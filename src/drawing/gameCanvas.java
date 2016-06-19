@@ -20,6 +20,7 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
+import terrain.atmosphericEffects.fog;
 import units.player;
 import units.unit;
 import utilities.time;

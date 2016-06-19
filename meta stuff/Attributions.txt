@@ -13,6 +13,7 @@ wolf-growl.wav by newagesoup
 Dog bark 3 by jorickhoofd
 Dog bark 1 by jorickhoofd
 bottle_drink.wav by nanashco3
+Item Pickup by TreasureSounds
 
 Writer contributors:
 Paul Tallion
@@ -23,5 +24,5 @@ Spider: landofshadows
 Sheep: RPGMaker VX and Birdzilla
 Wolf: RPGMaker
 WolfMother SpriteSheet:
-Stephen "Redshrike" Challener as graphic artist 
-William Thompsonj contributor. 
+-Stephen "Redshrike" Challener as graphic artist 
+-William Thompsonj contributor. 

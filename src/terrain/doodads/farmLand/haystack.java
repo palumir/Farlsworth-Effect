@@ -77,8 +77,9 @@ public class haystack extends chunk {
 			
 			// Start of conversation.
 			startOfConversation = new textSeries("StartWithButtons", "StartWithButtons");
-			s = startOfConversation.addChild("Search", "You search through the haystack ...");
-			s = s.addChild(null, "... you expect to find a needle, but find nothing.");
+			
+			s = startOfConversation.addChild("Brush off hay", "You brush off the hay ...");
+			s = s.addChild(null, "... it's more hay under the hay you brushed off.");
 			s.setEnd();
 		}
 		
