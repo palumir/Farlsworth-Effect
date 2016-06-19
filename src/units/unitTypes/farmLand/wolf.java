@@ -91,6 +91,9 @@ public class wolf extends unit {
 	/// FIELDS ///
 	//////////////
 	private boolean aggrod = false;
+	private float movementSlope = 0.0f;
+	private float recentSlope = 0.0f;
+	private String fixedFacingDirection = "None"; 
 	
 	///////////////
 	/// METHODS ///
@@ -251,6 +254,64 @@ public class wolf extends unit {
 		}
 	}
 
+	public void moveTowards(int moveX, int moveY) {
+		//using 0.0f as not initialed
+		if(movementSlope == 0.0f){
+			movementSlope = ((float) (getY() - moveY)) / ((float) (getX() - moveX));
+			movementSlope = Math.abs(movementSlope);
+			setFixedFacingDirection(moveX, moveY);
+		}
+		super.moveTowards(moveX, moveY);
+
+ 		
+ 		if(movementSlope > 1){
+ 			recentSlope += 1/movementSlope;
+ 			if (recentSlope < 1) {
+ 				stopMove("horizontal");
+ 			} else {
+ 				recentSlope -= 1;
+ 			}
+ 		} else {// movementSlope < 1
+ 			recentSlope += movementSlope;
+ 			if (recentSlope < 1) {
+ 				stopMove("vertical");
+ 			} else {
+ 				recentSlope -= 1;
+ 			}
+ 		}
+		
+ 		if(Math.abs(getX() - moveX) <= 3*moveSpeed &&  Math.abs(getY() - moveY) <= moveSpeed + 1) {
+			// If we've reached our goal, recent the slope so we move better later
+ 			movementSlope = 0.0f;
+ 			recentSlope = 0.0f;
+ 			fixedFacingDirection = "None";
+		}
+	}
+	
+	public String getFacingDirection() {
+		if(fixedFacingDirection == "None"){
+			return facingDirection;
+		} else {
+			return fixedFacingDirection;
+		}
+	}
+	
+	private void setFixedFacingDirection(int moveX, int moveY){
+		if(movementSlope < 1){
+			if(moveX < getX()){
+				fixedFacingDirection = "Left";
+			} else {
+				fixedFacingDirection = "Right";
+			}
+		} else {
+			if(moveY < getY()){
+				fixedFacingDirection = "Up";
+			} else {
+				fixedFacingDirection = "Down";
+			}
+		}
+	}
+	
 	public boolean isDosile() {
 		return dosile;
 	}
