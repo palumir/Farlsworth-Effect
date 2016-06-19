@@ -71,11 +71,11 @@ public class fastWolf extends unit {
 						);	
 	
 	// Sounds
-	private sound howl = new sound("sounds/effects/animals/wolfHowl.wav");
-	private sound growl = new sound("sounds/effects/animals/wolfGrowl.wav");
-	private sound bark1 = new sound("sounds/effects/animals/wolfBark1.wav");
-	private sound bark2 = new sound("sounds/effects/animals/wolfBark2.wav");
-	private sound wolfAttack = new sound("sounds/effects/player/combat/swingWeapon.wav");
+	private static sound howl = new sound("sounds/effects/animals/wolfHowl.wav");
+	private static sound growl = new sound("sounds/effects/animals/wolfGrowl.wav");
+	private static  sound bark1 = new sound("sounds/effects/animals/wolfBark1.wav");
+	private static sound bark2 = new sound("sounds/effects/animals/wolfBark2.wav");
+	private static sound wolfAttack = new sound("sounds/effects/player/combat/swingWeapon.wav");
 	private int lastBarkSound = 0;
 	private long lastHowl = 0;
 	private float randomHowl = 0;
@@ -174,7 +174,7 @@ public class fastWolf extends unit {
 			if(randomHowl == 0f) {
 				randomHowl = newRandomHowlInterval;
 			}
-			if(!dosile && !aggrod && time.getTime() - lastHowl > randomHowl*1000) {
+			if(!isDosile() && !aggrod && time.getTime() - lastHowl > randomHowl*1000) {
 				
 				// Set the last time they howled
 				lastHowl = time.getTime();
@@ -196,7 +196,7 @@ public class fastWolf extends unit {
 		makeSounds();
 		
 		// Attack if we're in radius.
-		if(!dosile && howClose < DEFAULT_ATTACK_RADIUS) {
+		if(!isDosile() && howClose < DEFAULT_ATTACK_RADIUS) {
 			
 			// If we're in attack range, attack.
 			if(isInAttackRange(currPlayer, DEFAULT_ATTACK_DIFFERENTIAL)) {
@@ -211,6 +211,11 @@ public class fastWolf extends unit {
 		}
 		else if(aggrod && howClose > DEFAULT_DEAGGRO_RADIUS) {
 			stopMove("all");
+		}
+		
+		// Even dosile wolves attack if provoked.
+		if(dosile && isInAttackRange(currPlayer, DEFAULT_ATTACK_DIFFERENTIAL)) {
+			attack();
 		}
 	}
 	
@@ -246,5 +251,13 @@ public class fastWolf extends unit {
 		else {
 			return DEFAULT_PLATFORMER_ADJUSTMENT_Y;
 		}
+	}
+
+	public boolean isDosile() {
+		return dosile;
+	}
+
+	public void setDosile(boolean dosile) {
+		this.dosile = dosile;
 	}
 }

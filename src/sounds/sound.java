@@ -50,6 +50,15 @@ public class sound {
 		   }
 	}
 	
+	// Set volume
+	public void setVolume(float newVol) {
+		 FloatControl control = (FloatControl) getClip().getControl(FloatControl.Type.MASTER_GAIN);
+	     float max = control.getMaximum();
+	     float min = control.getMinimum(); // negative values all seem to be zero?
+	     float range = max - min;
+	     control.setValue(min + (range *newVol));
+	}
+	
 	// Play sound at a volume
 	public void playSound(int x, int y, int radius, float v) {
 		  // The wrapper thread is unnecessary, unless it blocks on the

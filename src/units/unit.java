@@ -59,8 +59,8 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 	protected boolean showAttackRange = false;
 	
 	// Default healthbarsize
-	private int DEFAULT_HEALTHBAR_HEIGHT = 6;
-	private int DEFAULT_HEALTHBAR_WIDTH = 40;
+	protected int DEFAULT_HEALTHBAR_HEIGHT = 6;
+	protected int DEFAULT_HEALTHBAR_WIDTH = 40;
 	
 	// Colors for combat.
 	private Color DEFAULT_DAMAGE_COLOR = Color.white;
@@ -231,9 +231,9 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 	public void combat() {
 		
 		// Attack if we are attacking.
-		if(attacking) {
+		if(isAttacking()) {
 			// Do the attack if our BAT is over.
-			if(!alreadyAttacked && time.getTime() - startAttackTime > baseAttackTime*1000) {
+			if(!isAlreadyAttacked() && time.getTime() - startAttackTime > baseAttackTime*1000) {
 				int x1 = 0;
 				int x2 = 0;
 				int y1 = 0;
@@ -275,11 +275,11 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 					y2 = getY() + getHeight() + getAttackLength();
 				}
 				attackUnits(getUnitsInBox(x1,y1,x2,y2));
-				alreadyAttacked = true;
+				setAlreadyAttacked(true);
 			}
 			if(time.getTime() - startAttackTime > getAttackTime()*1000) {
-				alreadyAttacked = false;
-				attacking = false;
+				setAlreadyAttacked(false);
+				setAttacking(false);
 			}
 		}
 	}
@@ -421,11 +421,11 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 	
 	// Start attacking.
 	public void attack() {
-		if(!attacking) {
+		if(!isAttacking()) {
 			
 			// We are attacking of course.
 			if(attackSound != null) attackSound.playSound(getX(), getY(), DEFAULT_ATTACK_SOUND_RADIUS, 0.8f);
-			attacking = true;
+			setAttacking(true);
 			startAttackTime = time.getTime();
 		}
 	}
@@ -461,7 +461,7 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 		stopMove("all");
 		
 		// If we are there, stop.
-		if(Math.abs(getX() - moveX) <= 3*moveSpeed &&  Math.abs(getY() - moveY) <= moveSpeed + 1) {
+		if(Math.abs(getX() - moveX) <= moveSpeed &&  Math.abs(getY() - moveY) <= moveSpeed + 1) {
 			// Don't move.
 		}
 		else {
@@ -489,6 +489,14 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 		if(mode.getCurrentMode() == "topDown") {
 			if(movingUp) moveY -= getMoveSpeed();
 			if(movingDown) moveY += getMoveSpeed();
+		}
+		
+		// Adjust so they don't go SUPER fast diagonally
+		if(Math.sqrt(moveY*moveY + moveX*moveX) > getMoveSpeed()) {
+			if(moveX > 0) moveX--;
+			else if(moveX < 0) moveX++;
+			else if(moveY > 0) moveY--;
+			else if(moveY< 0) moveY++;
 		}
 		
 		// Deal with direction facing.
@@ -686,7 +694,7 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 		
 		// topDown mode movement animations.
 		if(mode.getCurrentMode() == "topDown") {
-			if(attacking && !alreadyAttacked) {
+			if(isAttacking() && !isAlreadyAttacked()) {
 				// Play animation.
 				animate("attacking" + facingDirection);
 			}
@@ -700,7 +708,7 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 		
 		// platformer movement animations.
 		if(mode.getCurrentMode() == "platformer") {
-			if(attacking && !alreadyAttacked) {
+			if(isAttacking() && !isAlreadyAttacked()) {
 				// Play animation.
 				animate("attacking" + facingDirection);
 			}
@@ -996,6 +1004,22 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 
 	public void setCurrentAnimation(animation currentAnimation) {
 		this.currentAnimation = currentAnimation;
+	}
+
+	public boolean isAttacking() {
+		return attacking;
+	}
+
+	public void setAttacking(boolean attacking) {
+		this.attacking = attacking;
+	}
+
+	public boolean isAlreadyAttacked() {
+		return alreadyAttacked;
+	}
+
+	public void setAlreadyAttacked(boolean alreadyAttacked) {
+		this.alreadyAttacked = alreadyAttacked;
 	}
 	
 }

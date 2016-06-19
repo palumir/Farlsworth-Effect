@@ -233,7 +233,7 @@ public class sheepFarm extends zone {
 		c = new woolPiece(-1713,-3982,0);
 		
 		// Denmother.
-		u = new denmother(1450, -3281);
+		u = new denmother(1500, -3281);
 		
 		// Spawn forest trees.
 		c = new tree(-2000,-3946,0);

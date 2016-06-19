@@ -5,6 +5,8 @@ import java.util.Random;
 import drawing.drawnObject;
 import items.item;
 import terrain.chunk;
+import terrain.region;
+import terrain.atmosphericEffects.fog;
 import units.player;
 import units.unit;
 import units.unitType;
@@ -27,6 +29,9 @@ public abstract class utility {
 				d.update();
 			}
 		}
+		
+		// Update fog.
+		fog.update();
 	}
 	
 	// Initiate the utility. Does nothing
@@ -40,6 +45,8 @@ public abstract class utility {
 	public static void initiateAll() {
 		time.initiate();
 		drawnObject.initiate();
+		region.initiate();
+		fog.initiate();
 		unit.initiate();
 		unitType.initiate();
 		chunk.initiate();

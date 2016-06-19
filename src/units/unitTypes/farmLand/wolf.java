@@ -210,6 +210,11 @@ public class wolf extends unit {
 		else if(aggrod && howClose > DEFAULT_DEAGGRO_RADIUS) {
 			stopMove("all");
 		}
+		
+		// Even dosile wolves attack if provoked.
+		if(dosile && isInAttackRange(currPlayer, DEFAULT_ATTACK_DIFFERENTIAL)) {
+			attack();
+		}
 	}
 	
 	///////////////////////////

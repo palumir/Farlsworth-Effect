@@ -8,18 +8,49 @@ import java.awt.image.BufferedImage;
 import java.util.Random;
 
 import drawing.gameCanvas;
+import utilities.time;
 
 public class fog {
 	
-	// Paint the background
+	// Fog percentage.
+	public static float fogLevel = 0; // between 0.0 and 1.0
+	public static float fogLevelMax = 0;
+	
+	// Timer stuff.
+	private static long startFade = 0;
+	private static float fadeTime = 0;
+	
+	// Paint the fog
 	public static void paintFog(Graphics2D g2) {
-		BufferedImage img = new BufferedImage(gameCanvas.getDefaultWidth(),gameCanvas.getDefaultHeight(), BufferedImage.TYPE_INT_ARGB);
-		Graphics2D g = img.createGraphics();
-		float alpha = 0.3f;
-		Color color = new Color(0, 0, 0, alpha); //Black 
-		g.setComposite(AlphaComposite.Src);
-		g.setPaint(color);
-		g.fillRect(0,0,gameCanvas.getDefaultWidth(),gameCanvas.getDefaultHeight());
-		g2.drawImage(img,0,0,null);
+		if(fogLevel != 0f) {
+			BufferedImage img = new BufferedImage(gameCanvas.getDefaultWidth(),gameCanvas.getDefaultHeight(), BufferedImage.TYPE_INT_ARGB);
+			Graphics2D g = img.createGraphics();
+			float alpha = fogLevel;
+			Color color = new Color(0, 0, 0, alpha); //Black 
+			g.setComposite(AlphaComposite.Src);
+			g.setPaint(color);
+			g.fillRect(0,0,gameCanvas.getDefaultWidth(),gameCanvas.getDefaultHeight());
+			g2.drawImage(img,0,0,null);
+		}
+	}
+	
+	// Update.
+	public static void update() {
+		if(fogLevel < fogLevelMax) {
+			fogLevel = fogLevelMax*((time.getTime() - startFade)/(fadeTime*1000));
+			if(fogLevel > 1) fogLevel = 1;
+		}
+	}
+	
+	// Fade to a certain alpha over time.
+	public static void fadeTo(float level, float newTime) {
+		startFade = time.getTime();
+		fadeTime = newTime;
+		fogLevelMax = level;
+	}
+
+	public static void initiate() {
+		fogLevelMax = 0;
+		fogLevel = 0;
 	}
 }
