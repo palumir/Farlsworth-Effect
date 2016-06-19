@@ -127,11 +127,11 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 	private boolean inAir = true;
 	
 	// Movement
-	private int moveSpeed = DEFAULT_UNIT_MOVESPEED;
-	private boolean movingLeft = false;
-	private boolean movingRight = false;
-	private boolean movingDown = false;
-	private boolean movingUp = false;
+	protected int moveSpeed = DEFAULT_UNIT_MOVESPEED;
+	protected boolean movingLeft = false;
+	protected boolean movingRight = false;
+	protected boolean movingDown = false;
+	protected boolean movingUp = false;
 	private String facingDirection = DEFAULT_FACING_DIRECTION;
 	private boolean collisionOn = true;
 	
@@ -678,6 +678,16 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 		// Stop moving down.
 		if(direction=="down") {
 			movingDown=false;
+		}
+		
+		if(direction=="horizontal"){
+			movingLeft = false;
+			movingRight = false;
+		}
+		
+		if(direction=="vertical"){
+			movingUp = false;
+			movingDown = false;
 		}
 	}
 	
