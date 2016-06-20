@@ -21,6 +21,8 @@ import modes.mode;
 import sounds.sound;
 import terrain.region;
 import terrain.atmosphericEffects.fog;
+import terrain.doodads.farmLand.bush;
+import terrain.doodads.farmLand.claw;
 import units.animalType;
 import units.humanType;
 import units.player;
@@ -178,6 +180,7 @@ public class denmother extends unit {
 		super(unitTypeRef, newX, newY);
 		
 		// Set interactable.
+		setCollisionOn(false);
 		interactable = true;
 		
 		// Spritesheets.
@@ -226,8 +229,6 @@ public class denmother extends unit {
 	
 	// Set combat stuff.
 	public void setCombatStuff() {
-		// Set to be attackable.
-		this.setAttackable(true);
 		
 		// Wolf damage.
 		setAttackDamage(DEFAULT_ATTACK_DAMAGE);
@@ -322,24 +323,64 @@ public class denmother extends unit {
 		potentiallyStartMusic();
 		potentiallyMoveWolves();
 		potentiallyStartCombat();
+		
+		// Stop music if player dies.
+		if(player.getCurrentPlayer().getHealthPoints() <= 0) {
+			music.getClip().stop();
+		}
 	}
+	
+	// Wolf movespeed.
+	private int wolfMoveSpeed = 1;
 	
 	// Set phases,
 	public void setPhase() {
+		
+		///////////////
+		/// PHASE 1 ///
+		///////////////
 		if((float)this.getHealthPoints()/(float)this.getMaxHealthPoints() >= .75f) {
+			clawDelay = .60f;
+			clawAttackEvery = 3f;
 			phase = 1;
 		}
+		
+		///////////////
+		/// PHASE 2 ///
+		///////////////
 		else if(phase < 2 && (float)this.getHealthPoints()/(float)this.getMaxHealthPoints() <= .75f) {
-			howl.playSound(.8f);
+			fightRegion.untrapPlayer();
+			moveSpeed += 1;
+			howl.playSound(.9f);
+			clawDelay = .50f;
+			jumpSpeed = jumpSpeed + 3;
 			phase = 2;
+			wolfMoveSpeed = phase - 1;
+			clawAttackEvery = 2f;
 		}
+		
+		///////////////
+		/// PHASE 3 ///
+		///////////////
 		else if(phase < 3 && (float)this.getHealthPoints()/(float)this.getMaxHealthPoints() <= .50f) {
-			howl.playSound(.8f);
+			moveSpeed += 1;
+			howl.playSound(.9f);
+			clawDelay = .40f;
+			jumpSpeed = jumpSpeed + 3;
 			phase = 3;
+			wolfMoveSpeed = phase - 1;
+			clawAttackEvery = 2f;
 		}
+		
+		///////////////
+		/// PHASE 4 ///
+		///////////////
 		else if(phase < 4 && (float)this.getHealthPoints()/(float)this.getMaxHealthPoints() <= .25f) {
-			howl.playSound(.8f);
-			phase = 4 ;
+			howl.playSound(.9f);
+			clawAttackEvery = 2f;
+			clawDelay = .2f;
+			jumpSpeed = jumpSpeed + 6;
+			phase = 4;
 		}
 	}
 	
@@ -447,11 +488,13 @@ public class denmother extends unit {
 					((fastWolf)u).setDosile(true);
 				}
 				randomInt = 2 + utility.RNG.nextInt(2);
-				u.setBaseAttackTime(.2f);
-				u.setAttackTime(.3f);
-				u.setAttackDamage(5);
+				u.setBaseAttackTime(.1f);
+				u.setAttackTime(.2f);
+				u.setAttackDamage(6);
 				u.setMoveSpeed(randomInt);
+				u.setAttackLength(u.getAttackLength()-10);
 				u.setAttackable(false);
+				u.setTargetable(false);
 				u.ignoreCollision();
 				wolfPack.add(u);
 			}
@@ -529,7 +572,7 @@ public class denmother extends unit {
 					
 					// Set new position.	
 					for(int i = 0; i < wolfPack.size(); i++) {
-							wolfPack.get(i).setMoveSpeed(phase - 1);
+							wolfPack.get(i).setMoveSpeed(wolfMoveSpeed);
 							
 							// Move in the direction.
 							if(moveDir.equals("left")) {
@@ -575,6 +618,14 @@ public class denmother extends unit {
 				fightRegion.setX(fightRegion.getX() + xMove*wolfPack.get(0).getMoveSpeed());
 				fightRegion.setY(fightRegion.getY() + yMove*wolfPack.get(0).getMoveSpeed());
 				
+				// Move claws.
+				if(claws != null) {
+					for(int i = 0; i < claws.size(); i++) {
+						claws.get(i).setX(claws.get(i).getX() + xMove*wolfPack.get(0).getMoveSpeed());
+						claws.get(i).setY(claws.get(i).getY() + yMove*wolfPack.get(0).getMoveSpeed());
+					}
+				}
+				
 				// Move wolves.
 				for(int i = 0; i < wolfPack.size(); i++) {
 					wolfPack.get(i).moveTowards(wolfPackPoints.get(i).x, wolfPackPoints.get(i).y);
@@ -586,7 +637,7 @@ public class denmother extends unit {
 	// Potentially start music.
 	public void potentiallyStartMusic() {
 		if(fightInProgress && !musicStarted && time.getTime() - fightStartTime > startMusicTime*1000) {
-			music.setVolume(0.7f);
+			music.setVolume(0.9f);
 			music.getClip().setFramePosition(0);
 			music.getClip().loop(-1);
 			musicStarted = true;
@@ -597,6 +648,7 @@ public class denmother extends unit {
 	public void potentiallyStartCombat() {
 		if(fightInProgress && !combatStarted && time.getTime() - fightStartTime > startCombatTime*1000) {
 			combatStarted = true;
+			setAttackable(true);
 		}
 	}
 	
@@ -606,6 +658,10 @@ public class denmother extends unit {
 	
 	// Phase.
 	private int phase = 1;
+	
+	// Region stuff.
+	private long outOfRegionStart = 0;
+	private float outOfRegionKillTimer = 1f;
 	
 	// Jumping.
 	private boolean jumping = false;
@@ -618,79 +674,73 @@ public class denmother extends unit {
 	private double currentDegree = 0;
 	
 	// Slash attack.
-	private long lastClawAttackTime = 0;
-	private float clawAttackEvery = 3f;
-	private int SLASH_DAMAGE = 5;
 	private boolean slashing = false;
+	private float clawAttackEvery = 4f;
+	private int SLASH_DAMAGE = 4;
 	
 	// Dog border movement below 50% hp
 	private long lastMove = 0;
 	private float moveEvery = 1f;
 	
+	// Are we doing a special attack?
+	private boolean doingSpecialAttack = false;
+
+	
 	// Deal with jumping.
 	public void dealWithJumping() {
-		// Get current player.
-		player currPlayer = player.getCurrentPlayer();
 		
-		// Reset rise and run if we're close.
-		if(Math.abs(jumpingToX - getX()) < 5) {
-			run = 0;
-		}
-		if(Math.abs(jumpingToY - getY()) < 5) {
-			rise = 0;
-		}
-		
-		// Jump to the location.
-		if(jumping && (Math.abs(jumpingToX - getX()) > 5 || Math.abs(jumpingToY - getY()) > 5)) {
+		if(doingSpecialAttack) {
+			// Get current player.
+			player currPlayer = player.getCurrentPlayer();
 			
-			// set rise/run
-			if(!riseRunSet) {
-				riseRunSet = true;
-				float yDistance = (jumpingToY - getY());
-				float xDistance = (jumpingToX - getX());
-				float distanceXY = (float) Math.sqrt(yDistance * yDistance
-						+ xDistance * xDistance);
-				rise = (int) ((yDistance/distanceXY)*jumpSpeed);
-				run = (int) ((xDistance/distanceXY)*jumpSpeed);
+			// Reset rise and run if we're close.
+			if(Math.abs(jumpingToX - getX()) < jumpSpeed) {
+				run = 0;
+			}
+			if(Math.abs(jumpingToY - getY()) < jumpSpeed) {
+				rise = 0;
 			}
 			
-			setX(getX() + run);
-			setY(getY() + rise);
-			
-			// Don't let him not move at all or leave region.
-			if(run == 0 && rise == 0) {
-				jumping = false;
-			}
-			
-			// Don't let him move out of region.
-			if(phase == 1 && !fightRegion.contains(this)) {
-				setX(getX() - run);
-				setY(getY() - rise);
-				jumping = false;
-			}
-			
-			// If slashing, hurt the player.
-			if(slashing && currPlayer.isWithin(getX(), getY(), getX()+getWidth(), getY() + getHeight())) {
-				currPlayer.hurt(SLASH_DAMAGE, 2f);
+			// Jump to the location.
+			if(jumping && (Math.abs(jumpingToX - getX()) > jumpSpeed || Math.abs(jumpingToY - getY()) > jumpSpeed)) {
 				
-				// Stop music if player dies.
-				if(player.getCurrentPlayer().getHealthPoints() <= 0) {
-					music.getClip().stop();
+				// set rise/run
+				if(!riseRunSet) {
+					riseRunSet = true;
+					float yDistance = (jumpingToY - getY());
+					float xDistance = (jumpingToX - getX());
+					float distanceXY = (float) Math.sqrt(yDistance * yDistance
+							+ xDistance * xDistance);
+					rise = (int) ((yDistance/distanceXY)*jumpSpeed);
+					run = (int) ((xDistance/distanceXY)*jumpSpeed);
 				}
+				
+				setX(getX() + run);
+				setY(getY() + rise);
+				
+				// Don't let him not move at all or leave region.
+				if(run == 0 && rise == 0) {
+					jumping = false;
+				}
+				
+				// If slashing, hurt the player.
+				if(slashing && currPlayer.isWithin(getX(), getY(), getX()+getWidth(), getY() + getHeight())) {
+					currPlayer.hurt(SLASH_DAMAGE, 2f);
+					slashing = false;
+				}
+			}
+			else {
+				stopMove("all");
+				jumping = false;
 				slashing = false;
 			}
-		}
-		else {
-			stopMove("all");
-			jumping = false;
-			slashing = false;
 		}
 	}
 	
 	// Jump
 	public void jumpTo(int newX, int newY) {
 		stopMove("all");
-		bark1.playSound(0.8f);
+		bark1.playSound(0.9f);
 		
 		// Set facing direction.
 		if(this.getX() - newX < 0) {
@@ -701,6 +751,7 @@ public class denmother extends unit {
 		}
 		
 		// Jump there
+		slashing = false;
 		jumpingToX = newX;
 		jumpingToY = newY;
 		jumping = true;
@@ -710,7 +761,7 @@ public class denmother extends unit {
 	// Jump
 	public void slashTo(int newX, int newY) {
 		stopMove("all");
-		bark2.playSound(0.8f);
+		bark2.playSound(0.9f);
 		
 		// Set facing direction.
 		if(this.getX() - newX < 0) {
@@ -728,25 +779,116 @@ public class denmother extends unit {
 		riseRunSet = false;
 	}
 	
+	// Claw attack.
+	public void launchClawAttack() {
+		currentDegree += 90 + utility.RNG.nextInt(90);
+		int newX = (int) (fightRegion.getX() + (fightRegion.getRadius())*Math.cos(Math.toRadians(currentDegree))); 
+		int newY = (int) (fightRegion.getY() + (fightRegion.getRadius())*Math.sin(Math.toRadians(currentDegree)));
+		if(phase > 1) {
+			newX = (int) (fightRegion.getX() + (utility.RNG.nextInt(fightRegion.getRadius()))*Math.cos(Math.toRadians(currentDegree))); 
+			newY = (int) (fightRegion.getY() + (utility.RNG.nextInt(fightRegion.getRadius()))*Math.sin(Math.toRadians(currentDegree)));
+		}
+		jumpTo(newX, newY);
+		
+		// Start slash attack.
+		doingSpecialAttack = true;
+		clawStart = time.getTime();
+		clawsNum = phase*2 + 1;
+		clawAttacking = true;
+		spawnClaws(clawsNum);
+	}
+	
+	// Clawattack stuff
+	private long lastClawAttackTime = 0;
+	private boolean clawAttacking = false;
+	private long clawStart = 0;
+	private long lastClaw = 0;
+	private int clawsNum = 0;
+	private float clawDelay = 0.75f;
+	private float initialClawDelay = 1f;
+	
+	// Potentially claw attack.
+	public void potentiallyClawAttack() {
+		if(clawAttacking) {
+			if(claws.size() > 0 && time.getTime() - clawStart > initialClawDelay*1000) {
+				if(time.getTime() - lastClaw > clawDelay*1000) {
+					lastClaw = time.getTime();
+					slashTo(claws.get(0).getX(),claws.get(0).getY());
+					claws.get(0).destroy();
+					claws.remove(claws.get(0));
+				}
+			}
+			else if(claws.size() <= 0 && time.getTime() - lastClaw > clawDelay*1000) {
+				clawAttacking = false;
+				jumping = false;
+				slashing = false;
+				doingSpecialAttack = false;
+				lastClawAttackTime = time.getTime();
+			}
+		}
+	}
+	
+	// List of claws.
+	private ArrayList<claw> claws;
+	private ArrayList<intTuple> clawsMoveToward;
+	
+	// Spawn claws.
+	public void spawnClaws(int i) {
+		claws = new ArrayList<claw>();
+		clawsMoveToward = new ArrayList<intTuple>();
+		for(int j = 0; j < i; j++) {
+			currentDegree += 90 + utility.RNG.nextInt(150);
+			int newX = (int) (fightRegion.getX() + (fightRegion.getRadius()+10)*Math.cos(Math.toRadians(currentDegree))); 
+			int newY = (int) (fightRegion.getY() + (fightRegion.getRadius()+10)*Math.sin(Math.toRadians(currentDegree)));
+			if(phase > 1) {
+				newX = (int) (fightRegion.getX() + (utility.RNG.nextInt(fightRegion.getRadius() + 10))*Math.cos(Math.toRadians(currentDegree))); 
+				newY = (int) (fightRegion.getY() + (utility.RNG.nextInt(fightRegion.getRadius() + 10))*Math.sin(Math.toRadians(currentDegree)));
+			}
+			int r = utility.RNG.nextInt(5);
+			clawsMoveToward.add(new intTuple(newX, newY));
+			claws.add(new claw(newX-32, newY-32, r));
+		}
+	}
+	
+	// AI movement.
+	private long lastMoveTime = 0l; // milliseconds
+	private float moveTime = 1f; // seconds
+	
+	// Kill player if out of region.
+	public void killPlayerIfOutOfRegion() {
+		if(!fightRegion.contains(player.getCurrentPlayer()) && outOfRegionStart == 0) {
+			outOfRegionStart = time.getTime();
+		}
+		else if(fightRegion.contains(player.getCurrentPlayer())) {
+			outOfRegionStart = 0;
+		}
+		else if(outOfRegionStart != 0 && time.getTime() - outOfRegionStart > outOfRegionKillTimer*1000) {
+			player.getCurrentPlayer().hurt(player.getCurrentPlayer().getHealthPoints(), 1f);
+		}
+		
+	}
+	
 	// Combat
 	public void combat() {
 		
 		if(combatStarted) {
 		
 			// Update stuff contantly.
+			potentiallyClawAttack();
 			dealWithJumping();
+			killPlayerIfOutOfRegion();
 			
 			// Launch claw attack.
-			if(time.getTime() - lastClawAttackTime > clawAttackEvery*1000) {
-				currentDegree += 90 + utility.RNG.nextInt(90);
-				lastClawAttackTime = time.getTime();
-				int newX = (int) (fightRegion.getX() + (fightRegion.getRadius())*Math.cos(Math.toRadians(currentDegree))); 
-				int newY = (int) (fightRegion.getY() + (fightRegion.getRadius())*Math.sin(Math.toRadians(currentDegree)));
-				if(phase > 1) {
-					newX = (int) (fightRegion.getX() + (utility.RNG.nextInt(fightRegion.getRadius()))*Math.cos(Math.toRadians(currentDegree))); 
-					newY = (int) (fightRegion.getY() + (utility.RNG.nextInt(fightRegion.getRadius()))*Math.sin(Math.toRadians(currentDegree)));
+			if(!doingSpecialAttack) {
+				if(time.getTime() - lastClawAttackTime > clawAttackEvery*1000) {
+					currentDegree += 90 + utility.RNG.nextInt(90);
+					launchClawAttack();
 				}
-				slashTo(newX, newY);
+				
+				// Meander
+				else {
+					moveTowards(fightRegion.getX(), fightRegion.getY());
+				}
 			}
 		}
 	}
@@ -758,8 +900,13 @@ public class denmother extends unit {
 		// No hitboxadjustment.
 		setHitBoxAdjustmentY(DEFAULT_PLATFORMER_ADJUSTMENT_Y);
 		setHitBoxAdjustmentX(0);
-		if(jumping) {
-			animate("jumping" + getFacingDirection());
+		if(jumping || clawAttacking) {
+			if(clawAttacking && !jumping) {
+				animate("standing" + getFacingDirection());
+			}
+			else {
+				animate("jumping" + getFacingDirection());
+			}
 		}
 		else if(startHowl) {
 			setHitBoxAdjustmentY(DEFAULT_PLATFORMER_ADJUSTMENT_Y+6);
@@ -776,10 +923,7 @@ public class denmother extends unit {
 			setHitBoxAdjustmentX(1);
 			animate("howlingEndLeft");
 		}
-		else if(isAttacking() && !isAlreadyAttacked()) {
-			animate("attacking" + getFacingDirection());
-		}
-		else if(isMoving()) {
+		else if(isMoving() || phase > 1) {
 			animate("running" + getFacingDirection());
 		}
 		else {

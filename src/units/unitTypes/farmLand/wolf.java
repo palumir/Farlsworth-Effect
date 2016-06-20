@@ -254,7 +254,7 @@ public class wolf extends unit {
 		}
 	}
 
-	public void moveTowards(int moveX, int moveY) {
+	/*public void moveTowards(int moveX, int moveY) {
 		//using 0.0f as not initialed
 		if(movementSlope == 0.0f){
 			movementSlope = ((float) (getY() - moveY)) / ((float) (getX() - moveX));
@@ -286,15 +286,15 @@ public class wolf extends unit {
  			recentSlope = 0.0f;
  			fixedFacingDirection = "None";
 		}
-	}
+	}*/
 	
-	public String getFacingDirection() {
+	/*public String getFacingDirection() {
 		if(fixedFacingDirection == "None"){
 			return facingDirection;
 		} else {
 			return fixedFacingDirection;
 		}
-	}
+	}*/
 	
 	private void setFixedFacingDirection(int moveX, int moveY){
 		if(movementSlope < 1){

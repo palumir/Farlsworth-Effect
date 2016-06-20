@@ -111,6 +111,7 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 	
 	// Attacking/getting attacked mechanics
 	private boolean attackable = false;
+	private boolean targetable = true;
 	private boolean attacking = false;
 	private boolean alreadyAttacked = false;
 	private double startAttackTime = 0;
@@ -379,12 +380,12 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 					
 					// Players can hit anything.
 					if(this instanceof player) {
-						currentUnit.hurt(actualDamageDone, crit);
+						if(currentUnit.isTargetable()) currentUnit.hurt(actualDamageDone, crit);
 					}
 					
 					// Enemies can't hit eachother.
 					else if(!(this instanceof player) && currentUnit instanceof player) {
-						currentUnit.hurt(actualDamageDone, crit);
+						if(currentUnit.isTargetable()) currentUnit.hurt(actualDamageDone, crit);
 					}
 				}
 			}
@@ -580,7 +581,7 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 			int actualMoveX = moveX;
 			int actualMoveY = moveY;
 	
-			if(collisionOn) {
+			if(isCollisionOn()) {
 				// Check if it collides with a chunk in the x or y plane.
 				intTuple xyCollide = chunk.collidesWith(this, getX() + moveX, getY() + moveY);
 				intTuple leftRegion = region.leftRegion(this, getX() + moveX, getY() + moveY);
@@ -895,7 +896,7 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 	}
 	
 	public void setCollision(boolean b) {
-		collisionOn = b;
+		setCollisionOn(b);
 	}
 	public String getFacingDirection() {
 		return facingDirection;
@@ -1030,6 +1031,22 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 
 	public void setAlreadyAttacked(boolean alreadyAttacked) {
 		this.alreadyAttacked = alreadyAttacked;
+	}
+
+	public boolean isTargetable() {
+		return targetable;
+	}
+
+	public void setTargetable(boolean targetable) {
+		this.targetable = targetable;
+	}
+
+	public boolean isCollisionOn() {
+		return collisionOn;
+	}
+
+	public void setCollisionOn(boolean collisionOn) {
+		this.collisionOn = collisionOn;
 	}
 	
 }

@@ -50,6 +50,11 @@ public class region extends drawnObject {
 		playerTrappedWithin = this;
 	}
 	
+	// Trap player within region.
+	public void untrapPlayer() {
+		if(this == playerTrappedWithin) playerTrappedWithin = null;
+	}
+	
 	// Initiate
 	public static void initiate() {
 		playerTrappedWithin = null;
