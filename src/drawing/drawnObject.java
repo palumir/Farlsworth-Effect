@@ -141,6 +141,75 @@ public abstract class drawnObject {
 		// Do nothing for basic objects.
 	}
 	
+	// Calculate drawX
+	public static int calculateDrawX(drawnObject d, int getX) {
+		int newDrawX = 0;
+		// If there's a camera, adjust units drawn to the camera pos.
+		if(camera.getCurrent() != null) {
+			// TODO: possible issues with the screen being resized.
+			newDrawX = getX - 
+					camera.getCurrent().getX() - 
+					camera.getCurrent().getAttachedUnit().getWidth()/2 + 
+					gameCanvas.getDefaultWidth()/2;
+		}
+		else {
+			newDrawX = getX;
+		}
+		
+		// Get the correct sprite width and height.
+		int spriteWidth = 0;
+		if(d instanceof unit && ((unit)d).getCurrentAnimation() != null) {
+			spriteWidth = ((unit)d).getCurrentAnimation().getCurrentFrame().getWidth();
+		}
+		else if(d.getObjectSpriteSheet() != null) {
+			spriteWidth = d.getObjectSpriteSheet().getSpriteWidth();
+		}
+		else if(d.getObjectImage() != null) {
+			spriteWidth = d.getObjectImage().getWidth();
+		}
+		
+		// Adjust for hitboxes.
+		 newDrawX += - (spriteWidth/2 - d.getWidth()/2) - d.getHitBoxAdjustmentX();
+		 
+		 // Adjust for scaling.
+		 newDrawX = (int) (gameCanvas.getScaleX()*newDrawX);
+		 return newDrawX;
+	}
+	
+	// Calculate drawY
+	public static int calculateDrawY(drawnObject d, int getY) {
+		int newDrawY = 0;
+		// If there's a camera, adjust units drawn to the camera pos.
+		if(camera.getCurrent() != null) {
+			newDrawY = getY - 
+					camera.getCurrent().getY() - 
+					camera.getCurrent().getAttachedUnit().getHeight()/2 + 
+					gameCanvas.getDefaultHeight()/2;
+		}
+		else {
+			newDrawY = getY;
+		}
+		
+		// Get the correct sprite width and height.
+		int spriteHeight = 0;
+		if(d instanceof unit && ((unit)d).getCurrentAnimation() != null) {
+			spriteHeight = ((unit)d).getCurrentAnimation().getCurrentFrame().getHeight();
+		}
+		else if(d.getObjectSpriteSheet() != null) {
+			spriteHeight = d.getObjectSpriteSheet().getSpriteHeight();
+		}
+		else if(d.getObjectImage() != null) {
+			spriteHeight = d.getObjectImage().getHeight();
+		}
+		
+		// Adjust for hitboxes.
+		 newDrawY += - (spriteHeight/2 - d.getHeight()/2) - d.getHitBoxAdjustmentY();
+		 
+		 // Adjust for scaling.
+		newDrawY = (int) (gameCanvas.getScaleY()*newDrawY);
+		return newDrawY;
+	}
+	
 	// Draw all objects.
 	public static void drawObjects(Graphics g) {
 		
@@ -157,22 +226,6 @@ public abstract class drawnObject {
 				drawnObject d = objects.get(i);
 				
 				if(d.isDrawObject()) {
-					// If there's a camera, adjust units drawn to the camera pos.
-					if(camera.getCurrent() != null) {
-						// TODO: possible issues with the screen being resized.
-						d.drawX = d.getX() - 
-								camera.getCurrent().getX() - 
-								camera.getCurrent().getAttachedUnit().getWidth()/2 + 
-								gameCanvas.getDefaultWidth()/2;
-						d.drawY = d.getY() - 
-								camera.getCurrent().getY() - 
-								camera.getCurrent().getAttachedUnit().getHeight()/2 + 
-								gameCanvas.getDefaultHeight()/2;
-					}
-					else {
-						d.drawX = d.getX();
-						d.drawY = d.getY();
-					}
 					
 					// Get the correct sprite width and height.
 					int spriteWidth = 0;
@@ -190,13 +243,9 @@ public abstract class drawnObject {
 						spriteHeight = d.getObjectImage().getHeight();
 					}
 					
-					// Adjust for hitboxes.
-					 d.drawX += - (spriteWidth/2 - d.getWidth()/2) - d.getHitBoxAdjustmentX();
-					 d.drawY += - (spriteHeight/2 - d.getHeight()/2) - d.getHitBoxAdjustmentY();
-					 
-					 // Adjust for scaling.
-					 d.drawX = (int) (gameCanvas.getScaleX()*d.drawX);
-					 d.drawY = (int) (gameCanvas.getScaleY()*d.drawY);
+					 // Adjust.
+					 d.drawX = calculateDrawX(d, d.getX());
+					 d.drawY = calculateDrawY(d, d.getY());
 					
 					// Draw the object if it's on the screen.
 					if(d instanceof tooltipString ||

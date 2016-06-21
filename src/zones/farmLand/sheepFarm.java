@@ -527,7 +527,6 @@ public class sheepFarm extends zone {
 		c = new tree(173,-1551,1);
 		c = new tree(137,-1446,1);
 		c = new tree(154,-1284,0);
-		c = new tree(177,-1180,0);
 		c = new bush(158,-1065,0);
 		c = new tree(166,-930,1);
 		c = new bush(132,-794,1);
@@ -635,7 +634,6 @@ public class sheepFarm extends zone {
 		c = new tree(925,-490,0);
 		c = new bush(1001,-3822,0);
 		c = new tree(1035,-3691,2);
-		c = new tree(1012,-3467,0);
 		c = new tree(1031,-3184,2);
 		c = new tree(1035,-2930,0);
 		c = new bush(1020,-2792,0);
@@ -651,9 +649,6 @@ public class sheepFarm extends zone {
 		c = new tree(1045,-491,1);
 		c = new bush(1162,-3728,2);
 		c = new tree(1180,-3549,0);
-		c = new tree(1154,-3457,1);
-		c = new tree(1140,-3326,0);
-		c = new tree(1128,-3036,0);
 		c = new tree(1143,-2527,1);
 		c = new tree(1161,-2352,1);
 		c = new tree(1160,-2229,1);
@@ -666,9 +661,6 @@ public class sheepFarm extends zone {
 		c = new tree(1168,-640,1);
 		c = new tree(1267,-3844,1);
 		c = new tree(1282,-3681,0);
-		c = new tree(1270,-3585,1);
-		c = new tree(1282,-3432,0);
-		c = new tree(1263,-2878,1);
 		c = new tree(1272,-2489,1);
 		c = new tree(1300,-2254,0);
 		c = new tree(1303,-1979,2);
@@ -684,8 +676,6 @@ public class sheepFarm extends zone {
 		c = new tree(1405,-3943,2);
 		c = new bush(1402,-3842,0);
 		c = new tree(1399,-3727,0);
-		c = new tree(1420,-2878,2);
-		c = new tree(1434,-2800,2);
 		c = new bush(1406,-2627,2);
 		c = new bush(1421,-2388,2);
 		c = new tree(1390,-2136,1);
@@ -700,7 +690,6 @@ public class sheepFarm extends zone {
 		c = new tree(1434,-498,0);
 		c = new tree(1541,-3987,1);
 		c = new tree(1549,-3703,0);
-		c = new bush(1539,-3594,1);
 		c = new tree(1525,-2622,1);
 		c = new tree(1512,-2485,0);
 		c = new tree(1526,-2249,0);
@@ -708,8 +697,6 @@ public class sheepFarm extends zone {
 		c = new tree(1545,-1583,1);
 		c = new tree(1540,-1291,1);
 		c = new tree(1535,-669,0);
-		c = new bush(1652,-3826,0);
-		c = new tree(1668,-2907,0);
 		c = new bush(1652,-2779,2);
 		c = new tree(1635,-2525,0);
 		c = new tree(1652,-2095,1);
@@ -737,7 +724,6 @@ public class sheepFarm extends zone {
 		c = new bush(1904,-3996,0);
 		c = new bush(1927,-3849,1);
 		c = new tree(1899,-3707,0);
-		c = new tree(1928,-3013,0);
 		c = new tree(1896,-2761,0);
 		c = new bush(1905,-2263,0);
 		c = new bush(1911,-2092,0);

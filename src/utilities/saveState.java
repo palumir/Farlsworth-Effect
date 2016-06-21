@@ -14,7 +14,9 @@ import items.bottle;
 import items.item;
 import items.weapon;
 import terrain.doodads.farmLand.haystack;
+import units.boss;
 import units.player;
+import units.unitType;
 import zones.zone;
 
 public class saveState implements Serializable {
@@ -58,6 +60,9 @@ public class saveState implements Serializable {
 	
 	// Gags
 	private ArrayList<gag> allGags;
+	
+	// Bosses
+	private ArrayList<boss> allBosses;
 
 	////////////////////////
 	////// METHODS /////////
@@ -92,6 +97,9 @@ public class saveState implements Serializable {
 				
 				// Save jokes.
 				s.setAllGags(gag.loadedGags);
+				
+				// Save bosses.
+				s.setAllBosses(boss.loadedBosses);
 				
 				// Open the streams.
 				FileOutputStream fileStream = new FileOutputStream(DEFAULT_SAVE_FILENAME);   
@@ -159,6 +167,20 @@ public class saveState implements Serializable {
 				for(int i = 0; i < gagsSize; i++) {
 					objectStream.writeObject(s.getAllGags().get(i).getName());
 					objectStream.writeObject(s.getAllGags().get(i).isCompleted());
+				}
+				
+				//////////////
+				/// BOSSES ///
+				//////////////
+				// Write the length of the coming array.
+				int bossesSize = 0;
+				if(s.getAllBosses() != null) bossesSize = s.getAllBosses().size();
+				objectStream.writeObject(bossesSize); 
+				
+				// Write the inventory (names of items) to save file.
+				for(int i = 0; i < bossesSize; i++) {
+					objectStream.writeObject(s.getAllBosses().get(i).getTypeOfUnit().getName());
+					objectStream.writeObject(s.getAllBosses().get(i).isCompleted());
 				}
 				
 				// Close the streams.
@@ -268,6 +290,37 @@ public class saveState implements Serializable {
 			// Load the gags
 			s.setAllGags(newGags);
 			
+			//////////////
+			/// BOSSES ///
+			//////////////
+			// Read the length of the coming array.
+			int bossesSize = (int)objectStream.readObject(); 
+			
+			// Create new array.
+			ArrayList<boss> newBosses = new ArrayList<boss>();
+			
+			// Read the gags from save file.
+			for(int i = 0; i < bossesSize; i++) {
+				String theName = (String)objectStream.readObject();
+				boolean completed = (boolean)objectStream.readObject();
+				unitType unitTypeRef =
+						new unitType(theName,  // Name of unitType 
+								     null,
+								     null,
+								     0,
+								     0,
+								     0, // Movespeed
+								     0 // Jump speed
+									);	
+				boss b = new boss(unitTypeRef, 0,0);
+				b.setDrawObject(false);
+				b.setCompleted(completed);
+				newBosses.add(b);
+			}
+			
+			// Load the gags
+			s.setAllBosses(newBosses);
+			
 			// Close the streams.
 		    objectStream.close();   
 		    fileStream.close();   
@@ -367,6 +420,14 @@ public class saveState implements Serializable {
 
 	public void setEquippedBottle(bottle equippedBottle) {
 		this.equippedBottle = equippedBottle;
+	}
+
+	public ArrayList<boss> getAllBosses() {
+		return allBosses;
+	}
+
+	public void setAllBosses(ArrayList<boss> allBosses) {
+		this.allBosses = allBosses;
 	}
 	
 }

@@ -139,6 +139,9 @@ public class wolf extends unit {
 		// Set to be attackable.
 		this.setAttackable(true);
 		
+		// Set exp given.
+		exp = 20;
+		
 		// Wolf damage.
 		setAttackDamage(DEFAULT_ATTACK_DAMAGE);
 		setAttackTime(DEFAULT_ATTACK_TIME);

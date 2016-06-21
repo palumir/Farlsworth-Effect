@@ -4,6 +4,7 @@ import java.util.Random;
 
 import drawing.drawnObject;
 import items.item;
+import sounds.music;
 import terrain.chunk;
 import terrain.region;
 import terrain.atmosphericEffects.fog;

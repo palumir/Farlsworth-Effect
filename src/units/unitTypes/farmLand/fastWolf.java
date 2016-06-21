@@ -133,6 +133,9 @@ public class fastWolf extends unit {
 	
 	// Combat defaults.
 	public void setCombatStuff() {
+		// Set exp
+		exp = 12;
+		
 		// Set to be attackable.
 		this.setAttackable(true);
 		

@@ -33,16 +33,14 @@ public class sound {
 		  // The wrapper thread is unnecessary, unless it blocks on the
 		  // Clip finishing; see comments.
 		   try {
-			   // Adjust volume based on radius.
+			   // Adjust volume
 			   FloatControl control = (FloatControl) getClip().getControl(FloatControl.Type.MASTER_GAIN);
 		       float max = control.getMaximum();
 		       float min = control.getMinimum(); // negative values all seem to be zero?
 		       float range = max - min;
 		       control.setValue(min + (range*v));
-				   
-			   // Play the clip.
-			   getClip().stop();
-			   getClip().setMicrosecondPosition(0l);
+		       getClip().stop();
+	    	   getClip().setFramePosition(0);
 			   getClip().start();
 		   }
 		   catch (Exception e) {
@@ -80,13 +78,11 @@ public class sound {
 			       float range = max - min;
 			       if(howClosePercentage>0) {
 			    	   control.setValue(min + (range * howClosePercentage*v));
-					   
-					   // Play the clip.
-					   getClip().setFramePosition(0);
-					   getClip().stop();
-					   getClip().start();
+						   getClip().stop();
+				    	   getClip().setFramePosition(0);
+						   getClip().start();
+				       }
 			       }
-			   }
 		   } 
 		   catch (Exception e) {
 		   }

@@ -66,6 +66,9 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 	private Color DEFAULT_DAMAGE_COLOR = Color.white;
 	private Color DEFAULT_CRIT_COLOR = Color.yellow;
 	
+	// Default exp
+	private int DEFAULT_EXP = 0;
+	
 	// Sounds
 	protected static int DEFAULT_ATTACK_SOUND_RADIUS = 1000;
 	
@@ -79,7 +82,7 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 	////////////////
 	
 	// The actual unit type.
-	protected unitType typeOfUnit;
+	private unitType typeOfUnit;
 	
 	// Width and height for topDown and platformer
 	protected int topDownWidth = 0;
@@ -108,6 +111,9 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 	protected float attackVariability = DEFAULT_ATTACK_VARIABILITY; // Percentage
 	protected float critChance = DEFAULT_CRIT_CHANCE;
 	protected float critDamage = DEFAULT_CRIT_DAMAGE;
+	
+	// Exp given
+	protected int exp = 0;
 	
 	// Attacking/getting attacked mechanics
 	private boolean attackable = false;
@@ -159,7 +165,7 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 		setAnimations(u.getAnimations());
 		setMoveSpeed(u.getMoveSpeed());
 		jumpSpeed = u.getJumpSpeed();
-		typeOfUnit = u;
+		setTypeOfUnit(u);
 		
 		// Add to list
 		getAllUnits().add(this);
@@ -191,6 +197,11 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 		
 		// Remove from game.
 		destroy();
+		
+		// Give exp
+		if(!(this instanceof player)) {
+			if(player.getCurrentPlayer()!=null) player.getCurrentPlayer().giveExp(exp);
+		}
 		
 		// Do a huge blood squirt.
 		effect blood = new critBloodSquirt(getX() - critBloodSquirt.getDefaultWidth()/2 + topDownWidth/2,
@@ -738,16 +749,18 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 	
 	// Cause unit to perform an animation.
 	public void animate(String animationName) {
-		animation a = getAnimations().getAnimation(animationName);
-		if(a != null) {
-			
-			// Reset the frame if it's a new animation.
-			if(getCurrentAnimation() != null && getCurrentAnimation() != a) {
-				getCurrentAnimation().setCurrentSprite(getCurrentAnimation().getStartFrame());
+		if(getAnimations()!=null) {
+			animation a = getAnimations().getAnimation(animationName);
+			if(a != null) {
+				
+				// Reset the frame if it's a new animation.
+				if(getCurrentAnimation() != null && getCurrentAnimation() != a) {
+					getCurrentAnimation().setCurrentSprite(getCurrentAnimation().getStartFrame());
+				}
+				
+				// Set the animation.
+				setCurrentAnimation(a);
 			}
-			
-			// Set the animation.
-			setCurrentAnimation(a);
 		}
 	}
 	
@@ -1047,6 +1060,14 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 
 	public void setCollisionOn(boolean collisionOn) {
 		this.collisionOn = collisionOn;
+	}
+
+	public unitType getTypeOfUnit() {
+		return typeOfUnit;
+	}
+
+	public void setTypeOfUnit(unitType typeOfUnit) {
+		this.typeOfUnit = typeOfUnit;
 	}
 	
 }

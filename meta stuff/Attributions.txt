@@ -14,6 +14,10 @@ Dog bark 3 by jorickhoofd
 Dog bark 1 by jorickhoofd
 bottle_drink.wav by nanashco3
 Item Pickup by TreasureSounds
+1_Knife_Slash_A.wav by lmbubec
+
+Music: 
+Elidia McFaggot
 
 Writer contributors:
 Paul Tallion

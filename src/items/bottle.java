@@ -19,7 +19,7 @@ public abstract class bottle extends item {
 	protected static int DEFAULT_SPRITE_ADJUSTMENT_Y = 0;
 	
 	// Sounds
-	public static float DEFAULT_BOTTLE_DRINK_VOLUME = 0.7f;
+	public static float DEFAULT_BOTTLE_DRINK_VOLUME = 1f;
 	
 	//////////////
 	/// FIELDS ///

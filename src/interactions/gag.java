@@ -41,7 +41,7 @@ public class gag {
 		loadedGags.add(this);
 	}
 	
-	// Load quest data.
+	// Load gag data.
 	public static void loadGagData() {
 		
 		// Load the savestate

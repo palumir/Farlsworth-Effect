@@ -1,11 +1,11 @@
 package units.bosses;
 
+import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import java.util.Random;
-
-import drawing.camera;
 import drawing.drawnObject;
 import drawing.gameCanvas;
 import drawing.spriteSheet;
@@ -15,29 +15,26 @@ import drawing.spriteSheet.spriteSheetInfo;
 import drawing.userInterface.interactBox;
 import drawing.userInterface.playerHealthBar;
 import effects.effect;
-import effects.effectTypes.bloodSquirt;
+import effects.effectTypes.critBloodSquirt;
 import interactions.textSeries;
 import modes.mode;
+import sounds.music;
 import sounds.sound;
 import terrain.region;
 import terrain.atmosphericEffects.fog;
-import terrain.doodads.farmLand.bush;
 import terrain.doodads.farmLand.claw;
-import units.animalType;
-import units.humanType;
+import units.boss;
 import units.player;
 import units.unit;
 import units.unitType;
-import units.unitTypes.farmLand.farmer;
 import units.unitTypes.farmLand.fastWolf;
 import units.unitTypes.farmLand.wolf;
 import utilities.stringUtils;
 import utilities.time;
 import utilities.intTuple;
 import utilities.utility;
-import zones.zone;
 
-public class denmother extends unit {
+public class denmother extends boss {
 	
 	// Platformer real dimensions
 	public static int DEFAULT_PLATFORMER_HEIGHT = 32;
@@ -51,7 +48,6 @@ public class denmother extends unit {
 	public static int DEFAULT_TOPDOWN_ADJUSTMENT_Y = 0;
 
 	// Damage stats
-	private int DEFAULT_ATTACK_DIFFERENTIAL = 6; // the range within the attackrange the unit will attack.
 	private int DEFAULT_ATTACK_DAMAGE = 5;
 	private float DEFAULT_BAT = 0.30f;
 	private float DEFAULT_ATTACK_TIME = 0.9f;
@@ -59,7 +55,7 @@ public class denmother extends unit {
 	private int DEFAULT_ATTACK_LENGTH = 17;
 	
 	// Health
-	private int DEFAULT_HP = 500;
+	private int DEFAULT_HP = 100; // 600-800
 	
 	////////////////
 	/// DEFAULTS ///
@@ -100,7 +96,8 @@ public class denmother extends unit {
 	private static sound bark2 = new sound("sounds/effects/animals/wolfBark2.wav");
 	
 	// Music
-	private static sound music = new sound("sounds/music/fightOn.wav");
+	private static music bossMusic = new music("sounds/music/farmLand/denmother/fight.wav");
+	private static music bossIntro = new music("sounds/music/farmLand/denmother/intro.wav");
 	
 	//////////////
 	/// FIELDS ///
@@ -133,15 +130,81 @@ public class denmother extends unit {
 	// Order of events of starting boss fight:
 	private boolean fightInProgress = false;
 	private boolean spawnedWolves = false;
-	private boolean musicStarted = false;
 	private boolean combatStarted = false;
 	
 	// Breakpoints
-	private float wakeUpTime = 0f;
-	private float howlTime = wakeUpTime + 0f;
+	private float howlTime = 0f;
 	private float spawnWolvesTime = howlTime + 2f;
 	private float startMusicTime = spawnWolvesTime + 1f;
-	private float startCombatTime = startMusicTime + 3f;
+	private float startCombatTime = startMusicTime + 4f;
+	
+	// How long after getting hit do we wake howl?
+	private long wakeUpTime = 0;
+	private float growlLength = 2.5f;
+	
+	/////////////////////////
+	///// COMBAT FIELDS /////
+	/////////////////////////
+	
+	// Phase.
+	private int phase = 1;
+	
+	// Region stuff.
+	private long outOfRegionStart = 0;
+	private float outOfRegionKillTimer = 1f;
+	
+	// Jumping.
+	private boolean jumping = false;
+	private int jumpingToX = 0;
+	private int jumpingToY = 0;
+	private int jumpSpeed = 10;
+	private int rise = 0;
+	private int run = 0;
+	private boolean riseRunSet = false;
+	private double currentDegree = 0;
+	
+	// Slash attack.
+	private boolean slashing = false;
+	private boolean hasSlashed = false;
+	private float clawAttackEvery = 4f;
+	private int SLASH_DAMAGE = 10;
+	
+	// Dog border movement below 50% hp
+	private long lastMove = 0;
+	private float moveEvery = 1f;
+	
+	// Are we doing a special attack?
+	private boolean doingSpecialAttack = false;
+	
+	// Dying?
+	private boolean dying = false;
+	private long dieStart = 0;
+	private float dieTime = 4f;
+	
+	// Wolf movespeed.
+	private int wolfMoveSpeed = 1;
+	
+	// Clawattack stuff
+	private long lastClawAttackTime = 0;
+	private boolean clawAttacking = false;
+	private long clawStart = 0;
+	private long lastClaw = 0;
+	private long lastClawSpawn = 0;
+	private float clawSpawnTime = 1f;
+	private int numClaws = 0;
+	private float clawDelay = 0.75f;
+	private float initialClawDelay = 0.5f;
+	private int numClawsToSpawn = 4;
+	
+	// Moved
+	private boolean movedUp = false;
+	private boolean movedDown = false;
+	private boolean movedRight = false;
+	private boolean movedLeft = false;
+	
+	// List of claws.
+	private ArrayList<claw> claws;
+	private ArrayList<intTuple> clawsMoveToward;
 	
 	// Pack of wolves
 	private ArrayList<unit> wolfPack = null;
@@ -230,6 +293,9 @@ public class denmother extends unit {
 	// Set combat stuff.
 	public void setCombatStuff() {
 		
+		// Exp given.
+		exp = 600;
+		
 		// Wolf damage.
 		setAttackDamage(DEFAULT_ATTACK_DAMAGE);
 		setAttackTime(DEFAULT_ATTACK_TIME);
@@ -272,19 +338,19 @@ public class denmother extends unit {
 		unitTypeAnimations.addAnimation(runningRight);
 		
 		// Standing up animation.
-		animation standingUp = new animation("standingUp", upDownSpriteSheet.getAnimation(4), 5, 5, 1);
+		animation standingUp = new animation("standingUp", upDownSpriteSheet.getAnimation(2), 5, 5, 1);
 		unitTypeAnimations.addAnimation(standingUp);
 		
 		// Standing down animation.
-		animation standingDown = new animation("standingDown", upDownSpriteSheet.getAnimation(4), 0, 0, 1);
+		animation standingDown = new animation("standingDown", upDownSpriteSheet.getAnimation(2), 0, 0, 1);
 		unitTypeAnimations.addAnimation(standingDown);
 		
 		// Running up animation.
-		animation runningUp = new animation("runningUp", upDownSpriteSheet.getAnimation(4), 5, 8, 1f);
+		animation runningUp = new animation("runningUp", upDownSpriteSheet.getAnimation(2), 5, 8, 1f);
 		unitTypeAnimations.addAnimation(runningUp);
 		
 		// Running down animation.
-		animation runningDown = new animation("runningDown", upDownSpriteSheet.getAnimation(4), 0, 3, 1f);
+		animation runningDown = new animation("runningDown", upDownSpriteSheet.getAnimation(2), 0, 3, 1f);
 		unitTypeAnimations.addAnimation(runningDown);
 		
 		// Howling starting left.
@@ -296,8 +362,24 @@ public class denmother extends unit {
 		unitTypeAnimations.addAnimation(howlingLeft);
 		
 		// Howling end animation
-		animation howlingEndLeft = new animation("howlingEndLeft", howlSpriteSheet.getAnimation(0), 4, 6, 1f);
+		animation howlingEndLeft = new animation("howlingEndLeft", howlSpriteSheet.getAnimation(0), 4, 6, 0.5f);
 		unitTypeAnimations.addAnimation(howlingEndLeft);
+		
+		// Howling starting right
+		animation howlingStartRight = new animation("howlingStartRight", howlSpriteSheet.getAnimation(1), 0, 2, 1f);
+		unitTypeAnimations.addAnimation(howlingStartRight);
+		
+		// Howling middle left.
+		animation howlingRight = new animation("howlingRight", howlSpriteSheet.getAnimation(1), 3, 3, 4f);
+		unitTypeAnimations.addAnimation(howlingRight);
+		
+		// Howling end animation
+		animation howlingEndRight = new animation("howlingEndRight", howlSpriteSheet.getAnimation(1), 4, 6, 0.5f);
+		unitTypeAnimations.addAnimation(howlingEndRight);
+		
+		// Sleeping animation
+		animation sleepingLeft = new animation("sleepingLeft", leftRightSpriteSheet.getAnimation(4), 3, 3, 0.5f);
+		unitTypeAnimations.addAnimation(sleepingLeft);
 		
 		// Set animations.
 		setAnimations(unitTypeAnimations);
@@ -306,32 +388,122 @@ public class denmother extends unit {
 		setFacingDirection("Left");
 	}
 	
+	// Drop loot.
+	public void dropLoot() {
+		
+	}
+	
+	// What to do when we are dyign?
+	public void potentiallyDie() {
+		if(dying == true) {
+			// Run wolves away.
+			for(int i = 0; i < wolfPack.size(); i++) {
+				wolfPack.get(i).moveTowards(originalPoints.get(i).x,originalPoints.get(i).y);
+			}
+			
+			// Remove claws.
+			if(claws != null) {
+				for(int i = 0; i < claws.size(); i++) {
+					claws.get(i).destroy();
+				}
+				claws = null;
+			}
+			
+			// Fade back
+			// TODO:
+			music.endAll();
+			
+			// Destroy the fight region.
+			fightRegion.destroy();
+			
+			// Remove wolves.
+			if(time.getTime() - dieStart > dieTime*1000) {
+				
+				// Remove wolves
+				for(int i = 0; i < wolfPack.size(); i++) {
+					wolfPack.get(i).destroy();
+				}
+				wolfPack = null;
+				
+				// Do a huge blood squirt.
+				effect blood = new critBloodSquirt(getX() - critBloodSquirt.getDefaultWidth()/2 + topDownWidth/2,
+						   getY() - critBloodSquirt.getDefaultHeight()/2);
+				
+				// Give exp.
+				if(player.getCurrentPlayer()!=null) player.getCurrentPlayer().giveExp(exp);
+				
+				// Drop loot.
+				dropLoot();
+				
+				// Remove from game.
+				destroy();
+				
+				// Complete the boss fight.
+				setCompleted(true);
+			}
+		}
+	}
+	
+	
+	// Kill unit
+	@Override
+	public void die() {
+		
+		if(!dying) {
+			// Dying = true.
+			dying = true;
+			combatStarted = false;
+			clawAttacking = false;
+			jumping = false;
+			slashing = false;
+			dieStart = time.getTime();
+			stopMove("all");
+			
+			// Howl.
+			getAnimations().getAnimation("howlingStartLeft").setCurrentSprite(0);
+			getAnimations().getAnimation("howlingStartRight").setCurrentSprite(0);
+			startHowl();
+		}
+	}
+	
 	// React to pain.
 	public void reactToPain() {
+		if(sleeping) {
+			wakeUp();
+		}
+	}
+	
+	// Wakeup
+	public void wakeUp() {
+		sleeping = false;
+		growl.playSound(.8f);
+		wakeUpTime = time.getTime();
 	}
 	
 	// AI
 	public void updateUnit() {
 		
-		// Setphase
-		setPhase();
-		
-		// Order of events.
-		potentiallyStartFight();
-		potentiallyHowl();
-		potentiallySpawnWolves();
-		potentiallyStartMusic();
-		potentiallyMoveWolves();
-		potentiallyStartCombat();
-		
-		// Stop music if player dies.
-		if(player.getCurrentPlayer().getHealthPoints() <= 0) {
-			music.getClip().stop();
+		if(!sleeping && time.getTime() - wakeUpTime > growlLength*1000) {
+			
+			// Potentially die.
+			potentiallyDie();
+			potentiallyHowl();
+			
+			if(!dying) {
+				// Setphase
+				setPhase();
+				
+				// Order of events.
+				potentiallyStartFight();
+				potentiallySpawnWolves();
+				potentiallyMoveWolves();
+				potentiallyStartCombat();
+			}
+		}
+		else {
+			
 		}
 	}
-	
-	// Wolf movespeed.
-	private int wolfMoveSpeed = 1;
 	
 	// Set phases,
 	public void setPhase() {
@@ -340,47 +512,55 @@ public class denmother extends unit {
 		/// PHASE 1 ///
 		///////////////
 		if((float)this.getHealthPoints()/(float)this.getMaxHealthPoints() >= .75f) {
-			clawDelay = .60f;
-			clawAttackEvery = 3f;
 			phase = 1;
+			clawDelay = .60f;
+			clawAttackEvery = 2.5f;
+			numClawsToSpawn = 4;
+			clawSpawnTime = 0.5f;
 		}
 		
 		///////////////
 		/// PHASE 2 ///
 		///////////////
 		else if(phase < 2 && (float)this.getHealthPoints()/(float)this.getMaxHealthPoints() <= .75f) {
+			phase = 2;
 			fightRegion.untrapPlayer();
 			moveSpeed += 1;
+			numClawsToSpawn = 4;
 			howl.playSound(.9f);
 			clawDelay = .50f;
 			jumpSpeed = jumpSpeed + 3;
-			phase = 2;
 			wolfMoveSpeed = phase - 1;
-			clawAttackEvery = 2f;
+			clawAttackEvery = 2.5f;
+			clawSpawnTime = 0.3f;
 		}
 		
 		///////////////
 		/// PHASE 3 ///
 		///////////////
 		else if(phase < 3 && (float)this.getHealthPoints()/(float)this.getMaxHealthPoints() <= .50f) {
+			phase = 3;
 			moveSpeed += 1;
 			howl.playSound(.9f);
+			numClawsToSpawn = 6;
 			clawDelay = .40f;
 			jumpSpeed = jumpSpeed + 3;
-			phase = 3;
 			wolfMoveSpeed = phase - 1;
-			clawAttackEvery = 2f;
+			clawAttackEvery = 2.5f;
+			clawSpawnTime = 0.2f;
 		}
 		
 		///////////////
 		/// PHASE 4 ///
 		///////////////
 		else if(phase < 4 && (float)this.getHealthPoints()/(float)this.getMaxHealthPoints() <= .25f) {
-			howl.playSound(.9f);
-			clawAttackEvery = 2f;
-			clawDelay = .2f;
-			jumpSpeed = jumpSpeed + 6;
 			phase = 4;
+			numClawsToSpawn = 14;
+			howl.playSound(.9f);
+			clawAttackEvery = 2.5f;
+			clawDelay = .15f;
+			jumpSpeed = jumpSpeed + 6;
+			clawSpawnTime = 0.05f;
 		}
 	}
 	
@@ -398,9 +578,12 @@ public class denmother extends unit {
 	
 	// Start fight.
 	public void startFight() {
+		bossIntro.getClip().setFramePosition(0);
+		bossIntro.playSound(0.7f);
 		fightInProgress = true;
 		fightStartTime = time.getTime();
 		fightRegion.trapPlayerWithin();
+		fog.fadeTo(0.3f,2f);
 		startHowl();
 	}
 	
@@ -409,31 +592,29 @@ public class denmother extends unit {
 		// Howl.
 		howling = true;
 		startOfHowl = time.getTime();
-		fog.fadeTo(0.3f,2f);
 	}
 	
 	// Howl.
 	public void potentiallyHowl() {
 		if(howling) {
-			//System.out.println(time.getTime() - startOfHowl);
 			// Start howl animation.
-			if(!startHowl && time.getTime() - startOfHowl < 1f*1000) {
+			if(!startHowl && time.getTime() - startOfHowl < 0.5f*1000) {
 				howl.playSound(0.8f);
 				startHowl = true;
 			}
 			
 			// Middle of howl.
-			else if(!middleHowl && time.getTime() - startOfHowl > 1f*1000 && time.getTime() - startOfHowl < (1f + 4f)*1000) {
+			else if(!middleHowl && time.getTime() - startOfHowl >= 0.5f*1000 && time.getTime() - startOfHowl < (1f + 4f)*1000) {
 				startHowl = false;
 				middleHowl = true;
 			}
 			
-			else if(middleHowl && time.getTime() - startOfHowl > (1f + 4f)*1000 && time.getTime() - startOfHowl < (1f + 5f)*1000){
+			else if(middleHowl && time.getTime() - startOfHowl > (1f + 4f)*1000 && time.getTime() - startOfHowl < (0.5f + 5f)*1000){
 				middleHowl = false;
 				endHowl = true;
 			}
 			
-			else if(endHowl && time.getTime() - startOfHowl >= (1f + 5f)*1000){
+			else if(endHowl && time.getTime() - startOfHowl >= (0.5f + 5f)*1000){
 				endHowl = false;
 				howling = false;
 			}
@@ -448,12 +629,16 @@ public class denmother extends unit {
 		}
 	}
 	
+	// Original points wolves move from
+	private ArrayList<intTuple> originalPoints;
+	
 	// Spawn trap wolves.
 	public void spawnTrapWolves(int n) {
 			
 			// Initiate
 			wolfPack = new ArrayList<unit>();
 			wolfPackPoints = new ArrayList<intTuple>();
+			originalPoints = new ArrayList<intTuple>();
 			
 			// Spawn points the wolves will walk to.
 			int radius = (int) (fightRegion.getRadius());
@@ -463,8 +648,7 @@ public class denmother extends unit {
 				int newX = (int) (getX() + radius*Math.cos(Math.toRadians(currentDegree))); 
 				int newY = (int) (getY() + radius*Math.sin(Math.toRadians(currentDegree)));
 				currentDegree += degreeChange;
-				intTuple t = new intTuple(newX, newY);
-				wolfPackPoints.add(t);
+				wolfPackPoints.add(new intTuple(newX, newY));
 			}
 			
 			// Spawn wolves.
@@ -476,6 +660,7 @@ public class denmother extends unit {
 				int randomX = utility.RNG.nextInt(72);
 				int newX = (int) (getX() + (randomX + radius)*Math.cos(Math.toRadians(currentDegree))); 
 				int newY = (int) (getY() + (randomY + radius)*Math.sin(Math.toRadians(currentDegree)));
+				originalPoints.add(new intTuple(newX, newY));
 				currentDegree += degreeChange;
 				int randomInt = utility.RNG.nextInt(2);
 				unit u;
@@ -499,12 +684,6 @@ public class denmother extends unit {
 				wolfPack.add(u);
 			}
 	}
-	
-	// Moved
-	private boolean movedUp = false;
-	private boolean movedDown = false;
-	private boolean movedRight = false;
-	private boolean movedLeft = false;
 	
 	// Move wolfpack.
 	public void potentiallyMoveWolves() {
@@ -634,57 +813,17 @@ public class denmother extends unit {
 		}
 	}
 	
-	// Potentially start music.
-	public void potentiallyStartMusic() {
-		if(fightInProgress && !musicStarted && time.getTime() - fightStartTime > startMusicTime*1000) {
-			music.setVolume(0.9f);
-			music.getClip().setFramePosition(0);
-			music.getClip().loop(-1);
-			musicStarted = true;
-		}
-	}
-	
 	// Potentially start combat
 	public void potentiallyStartCombat() {
 		if(fightInProgress && !combatStarted && time.getTime() - fightStartTime > startCombatTime*1000) {
+			bossIntro.getClip().stop();
+			bossMusic.setVolume(0.7f);
+			bossMusic.getClip().setFramePosition(0);
+			bossMusic.getClip().loop(-1);
 			combatStarted = true;
 			setAttackable(true);
 		}
 	}
-	
-	/////////////////////////
-	///// COMBAT FIELDS /////
-	/////////////////////////
-	
-	// Phase.
-	private int phase = 1;
-	
-	// Region stuff.
-	private long outOfRegionStart = 0;
-	private float outOfRegionKillTimer = 1f;
-	
-	// Jumping.
-	private boolean jumping = false;
-	private int jumpingToX = 0;
-	private int jumpingToY = 0;
-	private int jumpSpeed = 10;
-	private int rise = 0;
-	private int run = 0;
-	private boolean riseRunSet = false;
-	private double currentDegree = 0;
-	
-	// Slash attack.
-	private boolean slashing = false;
-	private float clawAttackEvery = 4f;
-	private int SLASH_DAMAGE = 4;
-	
-	// Dog border movement below 50% hp
-	private long lastMove = 0;
-	private float moveEvery = 1f;
-	
-	// Are we doing a special attack?
-	private boolean doingSpecialAttack = false;
-
 	
 	// Deal with jumping.
 	public void dealWithJumping() {
@@ -724,9 +863,9 @@ public class denmother extends unit {
 				}
 				
 				// If slashing, hurt the player.
-				if(slashing && currPlayer.isWithin(getX(), getY(), getX()+getWidth(), getY() + getHeight())) {
-					currPlayer.hurt(SLASH_DAMAGE, 2f);
-					slashing = false;
+				if(slashing && !hasSlashed && currPlayer.isWithin(getX(), getY(), getX()+getWidth(), getY() + getHeight())) {
+					currPlayer.hurt(SLASH_DAMAGE, 1f);
+					hasSlashed = true;
 				}
 			}
 			else {
@@ -776,41 +915,46 @@ public class denmother extends unit {
 		jumpingToY = newY;
 		jumping = true;
 		slashing = true;
+		hasSlashed = false;
 		riseRunSet = false;
 	}
 	
 	// Claw attack.
 	public void launchClawAttack() {
 		currentDegree += 90 + utility.RNG.nextInt(90);
-		int newX = (int) (fightRegion.getX() + (fightRegion.getRadius())*Math.cos(Math.toRadians(currentDegree))); 
-		int newY = (int) (fightRegion.getY() + (fightRegion.getRadius())*Math.sin(Math.toRadians(currentDegree)));
-		if(phase > 1) {
-			newX = (int) (fightRegion.getX() + (utility.RNG.nextInt(fightRegion.getRadius()))*Math.cos(Math.toRadians(currentDegree))); 
-			newY = (int) (fightRegion.getY() + (utility.RNG.nextInt(fightRegion.getRadius()))*Math.sin(Math.toRadians(currentDegree)));
-		}
+		int newX = (int) (fightRegion.getX() + (fightRegion.getRadius()-10)*Math.cos(Math.toRadians(currentDegree))); 
+		int newY = (int) (fightRegion.getY() + (fightRegion.getRadius()-10)*Math.sin(Math.toRadians(currentDegree)));
 		jumpTo(newX, newY);
 		
 		// Start slash attack.
 		doingSpecialAttack = true;
 		clawStart = time.getTime();
-		clawsNum = phase*2 + 1;
 		clawAttacking = true;
-		spawnClaws(clawsNum);
+		spawnClaws(numClawsToSpawn);
 	}
-	
-	// Clawattack stuff
-	private long lastClawAttackTime = 0;
-	private boolean clawAttacking = false;
-	private long clawStart = 0;
-	private long lastClaw = 0;
-	private int clawsNum = 0;
-	private float clawDelay = 0.75f;
-	private float initialClawDelay = 1f;
 	
 	// Potentially claw attack.
 	public void potentiallyClawAttack() {
 		if(clawAttacking) {
-			if(claws.size() > 0 && time.getTime() - clawStart > initialClawDelay*1000) {
+			if(numClaws > 0 && time.getTime() - lastClawSpawn > clawSpawnTime*1000 && time.getTime() - clawStart > initialClawDelay*1000) {
+					currentDegree += 90 + utility.RNG.nextInt(150);
+					int newX = (int) (fightRegion.getX() + (fightRegion.getRadius()-10)*Math.cos(Math.toRadians(currentDegree))); 
+					int newY = (int) (fightRegion.getY() + (fightRegion.getRadius()-10)*Math.sin(Math.toRadians(currentDegree)));
+					if(phase > 1) {
+						newX = (int) (fightRegion.getX() + (fightRegion.getRadius() - utility.RNG.nextInt(fightRegion.getRadius()/2))*Math.cos(Math.toRadians(currentDegree))); 
+						newY = (int) (fightRegion.getY() + (fightRegion.getRadius() - utility.RNG.nextInt(fightRegion.getRadius()/2))*Math.sin(Math.toRadians(currentDegree)));
+					}
+					if(phase == 4) {
+						newX = (int) (fightRegion.getX() + (fightRegion.getRadius() - utility.RNG.nextInt(fightRegion.getRadius()))*Math.cos(Math.toRadians(currentDegree))); 
+						newY = (int) (fightRegion.getY() + (fightRegion.getRadius() - utility.RNG.nextInt(fightRegion.getRadius()))*Math.sin(Math.toRadians(currentDegree)));
+					}
+					int r = utility.RNG.nextInt(5);
+					clawsMoveToward.add(new intTuple(newX, newY));
+					claws.add(new claw(newX-32, newY-32, r));
+					lastClawSpawn = time.getTime();
+					numClaws--;
+			}
+			else if(time.getTime() - lastClawSpawn > clawSpawnTime*1000 && numClaws <= 0 && time.getTime() - clawStart > initialClawDelay*1000 && claws.size() > 0) {
 				if(time.getTime() - lastClaw > clawDelay*1000) {
 					lastClaw = time.getTime();
 					slashTo(claws.get(0).getX(),claws.get(0).getY());
@@ -818,7 +962,7 @@ public class denmother extends unit {
 					claws.remove(claws.get(0));
 				}
 			}
-			else if(claws.size() <= 0 && time.getTime() - lastClaw > clawDelay*1000) {
+			else if(numClaws <= 0 && claws.size() <= 0 && time.getTime() - lastClaw > clawDelay*1000) {
 				clawAttacking = false;
 				jumping = false;
 				slashing = false;
@@ -828,31 +972,12 @@ public class denmother extends unit {
 		}
 	}
 	
-	// List of claws.
-	private ArrayList<claw> claws;
-	private ArrayList<intTuple> clawsMoveToward;
-	
 	// Spawn claws.
 	public void spawnClaws(int i) {
 		claws = new ArrayList<claw>();
 		clawsMoveToward = new ArrayList<intTuple>();
-		for(int j = 0; j < i; j++) {
-			currentDegree += 90 + utility.RNG.nextInt(150);
-			int newX = (int) (fightRegion.getX() + (fightRegion.getRadius()+10)*Math.cos(Math.toRadians(currentDegree))); 
-			int newY = (int) (fightRegion.getY() + (fightRegion.getRadius()+10)*Math.sin(Math.toRadians(currentDegree)));
-			if(phase > 1) {
-				newX = (int) (fightRegion.getX() + (utility.RNG.nextInt(fightRegion.getRadius() + 10))*Math.cos(Math.toRadians(currentDegree))); 
-				newY = (int) (fightRegion.getY() + (utility.RNG.nextInt(fightRegion.getRadius() + 10))*Math.sin(Math.toRadians(currentDegree)));
-			}
-			int r = utility.RNG.nextInt(5);
-			clawsMoveToward.add(new intTuple(newX, newY));
-			claws.add(new claw(newX-32, newY-32, r));
-		}
+		numClaws = i;
 	}
-	
-	// AI movement.
-	private long lastMoveTime = 0l; // milliseconds
-	private float moveTime = 1f; // seconds
 	
 	// Kill player if out of region.
 	public void killPlayerIfOutOfRegion() {
@@ -900,7 +1025,10 @@ public class denmother extends unit {
 		// No hitboxadjustment.
 		setHitBoxAdjustmentY(DEFAULT_PLATFORMER_ADJUSTMENT_Y);
 		setHitBoxAdjustmentX(0);
-		if(jumping || clawAttacking) {
+		if(sleeping) {
+			animate("sleepingLeft");
+		}
+		else if(jumping || clawAttacking) {
 			if(clawAttacking && !jumping) {
 				animate("standing" + getFacingDirection());
 			}
@@ -910,18 +1038,18 @@ public class denmother extends unit {
 		}
 		else if(startHowl) {
 			setHitBoxAdjustmentY(DEFAULT_PLATFORMER_ADJUSTMENT_Y+6);
-			setHitBoxAdjustmentX(1);
-			animate("howlingStartLeft");
+			setHitBoxAdjustmentX(0);
+			animate("howlingStart" + facingDirection);
 		}
 		else if(middleHowl) {
 			setHitBoxAdjustmentY(DEFAULT_PLATFORMER_ADJUSTMENT_Y+6);
-			setHitBoxAdjustmentX(1);
-			animate("howlingLeft");
+			setHitBoxAdjustmentX(0);
+			animate("howling" + facingDirection);
 		}
 		else if(endHowl) {
 			setHitBoxAdjustmentY(DEFAULT_PLATFORMER_ADJUSTMENT_Y+6);
-			setHitBoxAdjustmentX(1);
-			animate("howlingEndLeft");
+			setHitBoxAdjustmentX(0);
+			animate("howlingEnd" + facingDirection);
 		}
 		else if(isMoving() || phase > 1) {
 			animate("running" + getFacingDirection());
@@ -965,16 +1093,86 @@ public class denmother extends unit {
 		}
 	}
 	
+	// Trail stuff.
+	private float trailInterval = 0.0125f;
+	private long lastTrail = 0;
+	private int trailLength = 15;
+	private ArrayList<intTuple> trail;
+	private ArrayList<BufferedImage> trailImage;
+	
 	@Override
 	public void drawObject(Graphics g) {
 		// Of course only draw if the animation is not null.
 		if(getCurrentAnimation() != null) {
-			g.drawImage(getCurrentAnimation().getCurrentFrame(), 
-					drawX, 
-					drawY, 
-					(int)(gameCanvas.getScaleX()*getCurrentAnimation().getCurrentFrame().getWidth()), 
-					(int)(gameCanvas.getScaleY()*getCurrentAnimation().getCurrentFrame().getHeight()), 
-					null);
+			if(slashing) {
+				
+				// If it's empty, make it.
+				if(trail == null) trail = new ArrayList<intTuple>();
+				if(trailImage == null) trailImage = new ArrayList<BufferedImage>();
+				
+				// If we've passed trailInterval seconds. Add a new intTuple to trail and remove oldest one.
+				if(time.getTime() - lastTrail > trailInterval*1000) {
+					lastTrail = time.getTime();
+					if(trail.size() >= trailLength) {
+						trailImage.remove(0);
+						trail.remove(0);
+					}
+					trailImage.add(getCurrentAnimation().getCurrentFrame());
+					trail.add(new intTuple(getX(),getY()));
+				}
+				
+				g.drawImage(getCurrentAnimation().getCurrentFrame(), 
+						drawX, 
+						drawY, 
+						(int)(gameCanvas.getScaleX()*getCurrentAnimation().getCurrentFrame().getWidth()), 
+						(int)(gameCanvas.getScaleY()*getCurrentAnimation().getCurrentFrame().getHeight()), 
+						null);
+				
+				// Draw trail.
+				for(int i = 0; i < trail.size(); i++) {
+					float alpha = ((float)i)/(float)trail.size();
+					Graphics2D g2d = (Graphics2D) g.create();
+					g2d.setComposite(AlphaComposite.SrcOver.derive(alpha));
+					g2d.drawImage(trailImage.get(i), 
+							drawnObject.calculateDrawX(this, trail.get(i).x), 
+							drawnObject.calculateDrawY(this, trail.get(i).y), 
+							(int)(gameCanvas.getScaleX()*trailImage.get(i).getWidth()), 
+							(int)(gameCanvas.getScaleY()*trailImage.get(i).getHeight()), 
+							null);
+				}
+			}
+			else {
+				if(trail != null) {
+					
+					// If we've passed trailInterval seconds. Add a new intTuple to trail and remove oldest one.
+					if(time.getTime() - lastTrail > trailInterval*1000 && trail.size() > 0) {
+						lastTrail = time.getTime();
+						trail.remove(0);
+						trailImage.remove(0);
+					}
+				}
+				g.drawImage(getCurrentAnimation().getCurrentFrame(), 
+						drawX, 
+						drawY, 
+						(int)(gameCanvas.getScaleX()*getCurrentAnimation().getCurrentFrame().getWidth()), 
+						(int)(gameCanvas.getScaleY()*getCurrentAnimation().getCurrentFrame().getHeight()), 
+						null);
+				
+				if(trail != null) {
+					// Draw trail.
+					for(int i = 0; i < trail.size(); i++) {
+						float alpha = ((float)i)/(float)trail.size();
+						Graphics2D g2d = (Graphics2D) g.create();
+						g2d.setComposite(AlphaComposite.SrcOver.derive(alpha));
+						g2d.drawImage(trailImage.get(i), 
+								drawnObject.calculateDrawX(this, trail.get(i).x), 
+								drawnObject.calculateDrawY(this, trail.get(i).y), 
+								(int)(gameCanvas.getScaleX()*trailImage.get(i).getWidth()), 
+								(int)(gameCanvas.getScaleY()*trailImage.get(i).getHeight()), 
+								null);
+					}
+				}
+			}
 		}
 		
 		// Draw healthbar is hp is low.

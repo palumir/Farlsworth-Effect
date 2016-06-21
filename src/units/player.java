@@ -24,6 +24,7 @@ import main.main;
 import modes.mode;
 import modes.platformer;
 import modes.topDown;
+import sounds.music;
 import sounds.sound;
 import utilities.saveState;
 import utilities.utility;
@@ -109,6 +110,9 @@ public class player extends unit {
 	private weapon equippedWeapon = null;
 	private bottle equippedBottle = null;
 	
+	// Holding space to attack?
+	private boolean holdingSpace = false;
+	
 	// Levels
 	private int playerLevel = 1;
 	private int expIntoLevel = 20;
@@ -142,7 +146,7 @@ public class player extends unit {
 		super(playerType, newX, newY);
 		
 		/// TODO: Dev stuff
-		showUnitPosition();
+		//showUnitPosition();
 		//showHitBox();
 		//setCollision(false);
 		//setMoveSpeed(10);
@@ -194,8 +198,14 @@ public class player extends unit {
 	
 	// Player AI controls the interface
 	public void updateUnit() {
+		potentiallyAttack();
 		levelUp();
 		updateInterface();
+	}
+	
+	// Attack?
+	public void potentiallyAttack() {
+		if(equippedWeapon!=null && holdingSpace) attack();
 	}
 	
 	// Deal with player being alive or dead.
@@ -204,6 +214,7 @@ public class player extends unit {
 		
 		// Dead
 		if(getHealthPoints() <= 0) {
+			music.endAll();
 			killPlayer();
 		}
 	}
@@ -231,6 +242,9 @@ public class player extends unit {
 		
 		// Load jokes.
 		gag.loadGagData();
+		
+		// Load bosses.
+		boss.loadBossData();
 		
 		// Load the player into the zone.
 		thePlayer.playerZone.loadZone();
@@ -381,7 +395,7 @@ public class player extends unit {
 		
 			// Player presses bar key
 			if(k.getKeyCode() == KeyEvent.VK_SPACE) {
-				if(equippedWeapon!=null) attack();
+				startAttack();
 			}
 			
 			// Player presses bar key
@@ -413,11 +427,12 @@ public class player extends unit {
 		if(i - expToNextLevel > 0) {
 			expIntoLevel = expRequiredForLevel();
 			levelUp();
-			giveExp(expToNextLevel - i);
+			giveExp(i - expToNextLevel);
 		}
 		
-		// Give exp
-		expIntoLevel += i;
+		else {// Give exp
+			expIntoLevel += i;
+		}
 	}
 	
 	// Level up
@@ -430,6 +445,16 @@ public class player extends unit {
 			playerLevel++;
 			updateStats();
 		}
+	}
+	
+	// Start attack
+	public void startAttack() {
+		holdingSpace = true;
+	}
+	
+	// Stop attack.
+	public void stopAttack() {
+		holdingSpace = false;
 	}
 	
 	// Update stats.
@@ -470,43 +495,43 @@ public class player extends unit {
 		animationPack unitTypeAnimations = new animationPack();
 		
 		// Jumping left animation.
-		animation jumpingLeft = new animation("jumpingLeft", typeOfUnit.getUnitTypeSpriteSheet().getAnimation(1), 5, 5, 1);
+		animation jumpingLeft = new animation("jumpingLeft", getTypeOfUnit().getUnitTypeSpriteSheet().getAnimation(1), 5, 5, 1);
 		unitTypeAnimations.addAnimation(jumpingLeft);
 		
 		// Jumping right animation.
-		animation jumpingRight = new animation("jumpingRight", typeOfUnit.getUnitTypeSpriteSheet().getAnimation(3), 5, 5, 1);
+		animation jumpingRight = new animation("jumpingRight", getTypeOfUnit().getUnitTypeSpriteSheet().getAnimation(3), 5, 5, 1);
 		unitTypeAnimations.addAnimation(jumpingRight);
 		
 		// Standing left animation.
-		animation standingLeft = new animation("standingLeft", typeOfUnit.getUnitTypeSpriteSheet().getAnimation(9), 0, 0, 1);
+		animation standingLeft = new animation("standingLeft", getTypeOfUnit().getUnitTypeSpriteSheet().getAnimation(9), 0, 0, 1);
 		unitTypeAnimations.addAnimation(standingLeft);
 		
 		// Standing up animation.
-		animation standingUp = new animation("standingUp", typeOfUnit.getUnitTypeSpriteSheet().getAnimation(8), 0, 0, 1);
+		animation standingUp = new animation("standingUp", getTypeOfUnit().getUnitTypeSpriteSheet().getAnimation(8), 0, 0, 1);
 		unitTypeAnimations.addAnimation(standingUp);
 		
 		// Standing right animation.
-		animation standingRight = new animation("standingRight", typeOfUnit.getUnitTypeSpriteSheet().getAnimation(11), 0, 0, 1);
+		animation standingRight = new animation("standingRight", getTypeOfUnit().getUnitTypeSpriteSheet().getAnimation(11), 0, 0, 1);
 		unitTypeAnimations.addAnimation(standingRight);
 		
 		// Standing down animation.
-		animation standingDown = new animation("standingDown", typeOfUnit.getUnitTypeSpriteSheet().getAnimation(10), 0, 0, 1);
+		animation standingDown = new animation("standingDown", getTypeOfUnit().getUnitTypeSpriteSheet().getAnimation(10), 0, 0, 1);
 		unitTypeAnimations.addAnimation(standingDown);
 		
 		// Running left animation.
-		animation runningLeft = new animation("runningLeft", typeOfUnit.getUnitTypeSpriteSheet().getAnimation(9), 0, 8, 1);
+		animation runningLeft = new animation("runningLeft", getTypeOfUnit().getUnitTypeSpriteSheet().getAnimation(9), 0, 8, 1);
 		unitTypeAnimations.addAnimation(runningLeft);		
 		
 		// Running up animation.
-		animation runningUp = new animation("runningUp", typeOfUnit.getUnitTypeSpriteSheet().getAnimation(8), 0, 8, 1);
+		animation runningUp = new animation("runningUp", getTypeOfUnit().getUnitTypeSpriteSheet().getAnimation(8), 0, 8, 1);
 		unitTypeAnimations.addAnimation(runningUp);
 		
 		// Running right animation.
-		animation runningRight = new animation("runningRight", typeOfUnit.getUnitTypeSpriteSheet().getAnimation(11), 0, 8, 1);
+		animation runningRight = new animation("runningRight", getTypeOfUnit().getUnitTypeSpriteSheet().getAnimation(11), 0, 8, 1);
 		unitTypeAnimations.addAnimation(runningRight);
 		
 		// Running down animation.
-		animation runningDown = new animation("runningDown", typeOfUnit.getUnitTypeSpriteSheet().getAnimation(10), 0, 8, 1);
+		animation runningDown = new animation("runningDown", getTypeOfUnit().getUnitTypeSpriteSheet().getAnimation(10), 0, 8, 1);
 		unitTypeAnimations.addAnimation(runningDown);
 		
 		// Set animations.
@@ -523,6 +548,11 @@ public class player extends unit {
 		// Player presses right key.
 		if(k.getKeyCode() == KeyEvent.VK_RIGHT || k.getKeyCode() == KeyEvent.VK_D) { 
 			stopMove("right");
+		}
+		
+		// Player presses right key.
+		if(k.getKeyCode() == KeyEvent.VK_SPACE) { 
+			stopAttack();
 		}
 		
 		// Player presses up key, presumably to jump!
