@@ -83,9 +83,9 @@ public class woolPiece extends chunk {
 	public woolPiece(int newX, int newY, int i) {
 		super(typeReference, newX, newY, i, 0);
 		if(mode.getCurrentMode().equals("topDown")) {
-			setHitBoxAdjustmentY(10);
+			setHitBoxAdjustmentY(0);
 			setWidth(31);
-			setHeight(11);
+			setHeight(5);
 		}
 		else {
 			setHitBoxAdjustmentY(0);

@@ -26,6 +26,7 @@ import modes.platformer;
 import modes.topDown;
 import sounds.music;
 import sounds.sound;
+import terrain.doodads.farmLand.bone;
 import utilities.saveState;
 import utilities.utility;
 import zones.zone;
@@ -121,7 +122,7 @@ public class player extends unit {
 	public static int expRequiredForLevel() {
 		int i = 0;
 		if(currentPlayer != null) 
-		i = currentPlayer.getCurrentPlayer().getPlayerLevel() + 1;
+		i = player.getCurrentPlayer().getPlayerLevel() + 1;
 		if(i==2) return 100;
 		if(i==3) return 150;
 		if(i==4) return 250;
@@ -146,8 +147,8 @@ public class player extends unit {
 		super(playerType, newX, newY);
 		
 		/// TODO: Dev stuff
-		//showUnitPosition();
-		//showHitBox();
+		showUnitPosition();
+		showHitBox();
 		//setCollision(false);
 		//setMoveSpeed(10);
 		//showAttackRange(); 
@@ -413,8 +414,9 @@ public class player extends unit {
 			// TODO: TESTING STUFF.
 			//////////////////////////////////////
 			if(k.getKeyCode() == KeyEvent.VK_P) {
-				healthPoints--;
+				//healthPoints--;
 				giveExp(20);
+				System.out.println("c = new bone(" + getX() + "," + getY() + ",3);");
 			}
 		}
 	}
@@ -733,5 +735,13 @@ public class player extends unit {
 		else {
 			return DEFAULT_PLATFORMER_ADJUSTMENT_Y;
 		}
+	}
+
+	public playerHealthBar getHealthBar() {
+		return healthBar;
+	}
+
+	public void setHealthBar(playerHealthBar healthBar) {
+		this.healthBar = healthBar;
 	}
 }

@@ -55,7 +55,7 @@ public class denmother extends boss {
 	private int DEFAULT_ATTACK_LENGTH = 17;
 	
 	// Health
-	private int DEFAULT_HP = 100; // 600-800
+	private int DEFAULT_HP = 400; // 600-800
 	
 	////////////////
 	/// DEFAULTS ///
@@ -222,7 +222,14 @@ public class denmother extends boss {
 		
 		// Start of conversation.
 		textSeries startOfConversation = new textSeries(null, "Zzzzzz ...");
-		startOfConversation.setEnd();
+		s = startOfConversation.addChild("Shake violently", "You shake the dog violently ...");
+		s = s.addChild(null, "It's fast asleep.");
+		s = s.addChild("Pet", "You pet the dog ...");
+		startOfConversation.addChild(s);
+		textSeries warning = s.addChild(null, "It growls in it's sleep. Boy, better not do that again.");
+		s = warning.addChild("Give belly rub", "Doesn't seem like the best idea. Are you sure?");
+		s = s.addChild("Give belly rub", "Alright, here goes ...");
+		s.setEnd();
 		
 		return new interactBox(startOfConversation, stringUtils.toTitleCase(DEFAULT_UNIT_NAME));
 	}
@@ -501,7 +508,9 @@ public class denmother extends boss {
 			}
 		}
 		else {
-			
+			if(interactSequence != null  && interactSequence.getTheText().isEnd() && sleeping) {
+				wakeUp();
+			}
 		}
 	}
 	
@@ -514,7 +523,7 @@ public class denmother extends boss {
 		if((float)this.getHealthPoints()/(float)this.getMaxHealthPoints() >= .75f) {
 			phase = 1;
 			clawDelay = .60f;
-			clawAttackEvery = 2.5f;
+			clawAttackEvery = 2f;
 			numClawsToSpawn = 4;
 			clawSpawnTime = 0.5f;
 		}
@@ -526,12 +535,12 @@ public class denmother extends boss {
 			phase = 2;
 			fightRegion.untrapPlayer();
 			moveSpeed += 1;
-			numClawsToSpawn = 4;
+			numClawsToSpawn = 5;
 			howl.playSound(.9f);
 			clawDelay = .50f;
 			jumpSpeed = jumpSpeed + 3;
 			wolfMoveSpeed = phase - 1;
-			clawAttackEvery = 2.5f;
+			clawAttackEvery = 1.9f;
 			clawSpawnTime = 0.3f;
 		}
 		
@@ -542,11 +551,11 @@ public class denmother extends boss {
 			phase = 3;
 			moveSpeed += 1;
 			howl.playSound(.9f);
-			numClawsToSpawn = 6;
+			numClawsToSpawn = 7;
 			clawDelay = .40f;
 			jumpSpeed = jumpSpeed + 3;
 			wolfMoveSpeed = phase - 1;
-			clawAttackEvery = 2.5f;
+			clawAttackEvery = 1.8f;
 			clawSpawnTime = 0.2f;
 		}
 		
@@ -557,9 +566,9 @@ public class denmother extends boss {
 			phase = 4;
 			numClawsToSpawn = 14;
 			howl.playSound(.9f);
-			clawAttackEvery = 2.5f;
-			clawDelay = .15f;
-			jumpSpeed = jumpSpeed + 6;
+			clawAttackEvery = 1.7f;
+			clawDelay = .13f;
+			jumpSpeed = jumpSpeed + 7;
 			clawSpawnTime = 0.05f;
 		}
 	}
@@ -675,7 +684,7 @@ public class denmother extends boss {
 				randomInt = 2 + utility.RNG.nextInt(2);
 				u.setBaseAttackTime(.1f);
 				u.setAttackTime(.2f);
-				u.setAttackDamage(6);
+				u.setAttackDamage(5);
 				u.setMoveSpeed(randomInt);
 				u.setAttackLength(u.getAttackLength()-10);
 				u.setAttackable(false);
@@ -1012,7 +1021,7 @@ public class denmother extends boss {
 				
 				// Meander
 				else {
-					moveTowards(fightRegion.getX(), fightRegion.getY());
+					moveTowards(fightRegion.getX()-getWidth()/2, fightRegion.getY()-getHeight()/2);
 				}
 			}
 		}
