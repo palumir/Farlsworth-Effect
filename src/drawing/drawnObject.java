@@ -8,16 +8,16 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import doodads.general.questMark;
 import drawing.userInterface.interfaceObject;
+import drawing.userInterface.tooltipString;
 import effects.effect;
 import effects.effectTypes.floatingString;
-import effects.effectTypes.tooltipString;
 import units.player;
 import units.unit;
 import modes.mode;
 import terrain.chunk;
 import terrain.groundTile;
-import terrain.doodads.general.questMark;
 import utilities.intTuple;
 
 // A class for any object that is drawn in the
@@ -59,10 +59,14 @@ public abstract class drawnObject {
 				    	if(!(d1 instanceof groundTile) && d2 instanceof groundTile) return 7;
 				    	else if(d1 instanceof groundTile && !(d2 instanceof groundTile)) return -7;
 					    else {	
-					        // Draw units closer to the camera first.
-					    	if(d1.y + d1.getHeight() > d2.y + d2.getHeight()) return 6;
-					    	else if(d1.y + d1.getHeight() < d2.y + d2.getHeight()) return -6;
-					    	else return 0;
+					    	if(d1.isBackgroundDoodad() && !d2.isBackgroundDoodad()) return -6;
+					    	else if(!d1.isBackgroundDoodad() && d2.isBackgroundDoodad()) return 6;
+					    	else {
+						        // Draw units closer to the camera first.
+						    	if(d1.y + d1.getHeight() > d2.y + d2.getHeight()) return 5;
+						    	else if(d1.y + d1.getHeight() < d2.y + d2.getHeight()) return -5;
+						    	else return 0;
+					    	}
 					    }
 			    	}
 		    	}
@@ -82,6 +86,9 @@ public abstract class drawnObject {
 	
 	// Do we actually draw the object?
 	private boolean drawObject = true;
+	
+	// Is it drawn in the background? But above text tiles.
+	private boolean backgroundDoodad = false;
 	
 	// Can we interact with the object?
 	protected boolean interactable = false;
@@ -399,6 +406,14 @@ public abstract class drawnObject {
 
 	public void setHeight(int height) {
 		this.height = height;
+	}
+
+	public boolean isBackgroundDoodad() {
+		return backgroundDoodad;
+	}
+
+	public void setBackgroundDoodad(boolean backgroundDoodad) {
+		this.backgroundDoodad = backgroundDoodad;
 	}
 	
 }

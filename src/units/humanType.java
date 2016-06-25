@@ -45,6 +45,22 @@ public class humanType extends unitType {
 		// Deal with animations
 		animationPack unitTypeAnimations = new animationPack();
 		
+		// Attacking left animation.
+		animation attackingLeft = new animation("attackingLeft", getUnitTypeSpriteSheet().getAnimation(13), 0, 5, unit.DEFAULT_ATTACK_TIME);
+		unitTypeAnimations.addAnimation(attackingLeft);
+		
+		// Attacking left animation.
+		animation attackingRight = new animation("attackingRight", getUnitTypeSpriteSheet().getAnimation(15), 0, 5, unit.DEFAULT_ATTACK_TIME);
+		unitTypeAnimations.addAnimation(attackingRight);
+		
+		// Attacking left animation.
+		animation attackingUp = new animation("attackingUp", getUnitTypeSpriteSheet().getAnimation(12), 0, 5, unit.DEFAULT_ATTACK_TIME);
+		unitTypeAnimations.addAnimation(attackingUp);
+		
+		// Attacking left animation.
+		animation attackingDown = new animation("attackingDown", getUnitTypeSpriteSheet().getAnimation(14), 0, 5, unit.DEFAULT_ATTACK_TIME);
+		unitTypeAnimations.addAnimation(attackingDown);
+		
 		// Jumping left animation.
 		animation jumpingLeft = new animation("jumpingLeft", getUnitTypeSpriteSheet().getAnimation(1), 5, 5, 1);
 		unitTypeAnimations.addAnimation(jumpingLeft);

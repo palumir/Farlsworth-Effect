@@ -12,5 +12,13 @@ public class stringUtils {
 	            .append(arr[i].substring(1)).append(" ");
 	    }          
 	    return sb.toString().trim();
-	}  
+	}
+	
+	// Convert to opposite direction.
+	public static String oppositeDir(String dir) {
+		if(dir.equals("Up")) return "Down";
+		else if(dir.equals("Down")) return "Up";
+		else if(dir.equals("Left")) return "Right";
+		else return "Left";
+	}
 }

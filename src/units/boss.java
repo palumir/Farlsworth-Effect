@@ -2,6 +2,7 @@ package units;
 
 import java.util.ArrayList;
 
+import interactions.event;
 import utilities.saveState;
 
 public class boss extends unit {
@@ -10,50 +11,37 @@ public class boss extends unit {
 	public static ArrayList<boss> loadedBosses = new ArrayList<boss>();
 	
 	// Is the boss done?
-	private boolean completed = false;
+	private event bossCompleted;
+	
+	// Name to display on healthbar
+	private String displayName;
 
 	// Don't load boss if it's dead (and saved).
-	public boss(unitType u, int newX, int newY) {
+	public boss(unitType u, String newDisplayName, int newX, int newY) {
 		super(u, newX, newY);
 		
-		// If the boss is loaded, set it's data.
-		int i = 0;
-		if(loadedBosses != null) {
-			// Go through the list and return the gag with the same name.
-			while(i < loadedBosses.size()) {
-				if(loadedBosses.get(i).getTypeOfUnit().getName().equals(u.getName())) {
-					completed = loadedBosses.get(i).completed;
-					loadedBosses.remove(i);
-				}
-				else {
-					i++;
-				}
-			}
-		}
-		loadedBosses.add(this);
+		// Set display name.
+		setDisplayName(newDisplayName);
 		
-		if(isCompleted()) this.destroy();
+		// Load the event
+		bossCompleted = new event(newDisplayName + "bossCompleted");
+		
+		if(bossCompleted.isCompleted()) this.destroy();
 	}
 	
-	// Load boss data.
-	public static void loadBossData() {
-		
-		// Load the savestate
-		saveState s = player.getCurrentPlayer().playerSaveState;
-		
-		// Populate allGags with quests from the saveState.
-		if(s != null) {
-			loadedBosses = s.getAllBosses();
-		}
+	// Defeat
+	public void defeat() {
+		setCompleted(true);
+		saveState.createSaveState();
 	}
 
 
 	public boolean isCompleted() {
-		return completed;
+		return bossCompleted.isCompleted();
 	}
 
 	public void setCompleted(boolean completed) {
-		this.completed = completed;
+		bossCompleted.setCompleted(completed);
 	}
 
 	@Override
@@ -62,6 +50,14 @@ public class boss extends unit {
 
 	@Override
 	public void reactToPain() {	
+	}
+
+	public String getDisplayName() {
+		return displayName;
+	}
+
+	public void setDisplayName(String displayName) {
+		this.displayName = displayName;
 	}
 	
 }

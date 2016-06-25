@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
 
+import doodads.general.questMark;
 import drawing.camera;
 import drawing.drawnObject;
 import drawing.gameCanvas;
@@ -16,16 +17,16 @@ import effects.effectTypes.bloodSquirt;
 import effects.effectTypes.critBloodSquirt;
 import effects.effectTypes.floatingString;
 import modes.mode;
+import sounds.AePlayWave;
 import sounds.sound;
 import terrain.chunk;
 import terrain.region;
-import terrain.doodads.general.questMark;
 import units.bosses.denmother;
 import utilities.intTuple;
 import utilities.time;
 import utilities.utility;
 
-public abstract class unit extends drawnObject  { // shape for now sprite later
+public abstract class unit extends drawnObject  { 
 	
 	/////////////////////////
 	////// DEFAULTS /////////
@@ -47,16 +48,20 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 	// Animation defaults.
 	private String DEFAULT_FACING_DIRECTION = "Right";
 	
+	// Fist defaults.
+	static private int DEFAULT_ATTACK_DAMAGE = 3;
+	static float DEFAULT_BAT = 0.30f;
+	static float DEFAULT_ATTACK_TIME = 0.35f;
+	static int DEFAULT_ATTACK_WIDTH = 35;
+	static int DEFAULT_ATTACK_LENGTH = 11;
+	static float DEFAULT_BACKSWING = 0f;
+	protected static float DEFAULT_CRIT_CHANCE = 0f;
+	protected float DEFAULT_CRIT_DAMAGE = 1.6f;
+	
 	// Combat defaults.
-	private int DEFAULT_HP = 10;
-	private int DEFAULT_ATTACK_DAMAGE = 1;
-	private float DEFAULT_BAT = 1f;
-	private float DEFAULT_ATTACK_TIME = 1.5f;
-	private int DEFAULT_ATTACK_RANGE = 0;
-	private float DEFAULT_ATTACK_VARIABILITY = 0.2f; // How much the range of hits is. 20% both ways.
-	private float DEFAULT_CRIT_CHANCE = .15f;
-	private float DEFAULT_CRIT_DAMAGE = 1.5f;
-	protected boolean showAttackRange = false;
+	static private int DEFAULT_HP = 10;
+	static private float DEFAULT_ATTACK_VARIABILITY = 0.2f; // How much the range of hits is. 20% both ways.
+	static protected boolean showAttackRange = false;
 	
 	// Default healthbarsize
 	protected int DEFAULT_HEALTHBAR_HEIGHT = 6;
@@ -101,21 +106,23 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 	// Attack time.
 	private float baseAttackTime = DEFAULT_BAT;
 	private float attackTime = DEFAULT_ATTACK_TIME;
+	private float backSwing = DEFAULT_BACKSWING;
 	
 	// Attack range.
-	private int attackWidth = DEFAULT_ATTACK_RANGE;
-	private int attackLength = DEFAULT_ATTACK_RANGE;
+	private int attackWidth = DEFAULT_ATTACK_WIDTH;
+	private int attackLength = DEFAULT_ATTACK_LENGTH;
 	
 	// Unit stats.
 	protected float attackMultiplier = 1f;
 	protected float attackVariability = DEFAULT_ATTACK_VARIABILITY; // Percentage
-	protected float critChance = DEFAULT_CRIT_CHANCE;
-	protected float critDamage = DEFAULT_CRIT_DAMAGE;
+	private float critChance = DEFAULT_CRIT_CHANCE;
+	private float critDamage = DEFAULT_CRIT_DAMAGE;
 	
 	// Exp given
 	protected int exp = 0;
 	
 	// Attacking/getting attacked mechanics
+	private boolean canAttack = true; // backswing stuff.
 	private boolean attackable = false;
 	private boolean targetable = true;
 	private boolean attacking = false;
@@ -126,9 +133,9 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 	protected sound attackSound = null;
 	
 	// Gravity
-	private float jumpSpeed = DEFAULT_JUMPSPEED;
+	protected float jumpSpeed = DEFAULT_JUMPSPEED;
 	private float fallSpeed = 0;
-	private boolean jumping = false;
+	protected boolean jumping = false;
 	private boolean tryJump = false;
 	private boolean touchingGround = false;
 	private boolean inAir = true;
@@ -142,6 +149,10 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 	protected String facingDirection = DEFAULT_FACING_DIRECTION;
 	private boolean collisionOn = true;
 	
+	// How close is close enough (to a point)?
+	private int closeEnoughFactor = 3;
+	protected int closeEnough = closeEnoughFactor*moveSpeed;
+	
 	// Quests
 	private chunk questIcon = null;
 	
@@ -151,6 +162,25 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 	
 	// Collision on or off.
 	private boolean ignoreCollision = false;
+	
+	// Where are we moving to?
+	private int moveToX = 0;
+	private int moveToY = 0;
+	
+	// Moving to a point?
+	private boolean movingToAPoint = false;
+	
+	// Following a path?
+	private boolean followingAPath = false;
+	
+	// Units in attack range.
+	private ArrayList<unit> unitsInAttackRange;
+	
+	// Path to follow
+	private ArrayList<intTuple> path;
+	
+	// Next point.
+	private intTuple currPoint;
 	
 	///////////////
 	/// METHODS ///
@@ -178,6 +208,7 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 		gravity();
 		jump();
 		moveUnit();
+		dealWithMetaMovement();
 		combat();
 		aliveOrDead();
 		updateUnit();
@@ -206,6 +237,13 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 		// Do a huge blood squirt.
 		effect blood = new critBloodSquirt(getX() - critBloodSquirt.getDefaultWidth()/2 + topDownWidth/2,
 				   getY() - critBloodSquirt.getDefaultHeight()/2);
+		
+		// React to death.
+		reactToDeath();
+	}
+	
+	// React to death.
+	public void reactToDeath() {
 	}
 	
 	// Heal unit.
@@ -239,13 +277,16 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 		}
 	}
 	
+	// Already attacked units
+	private ArrayList<unit> alreadyAttackedUnits = new ArrayList<unit>();
+	
 	// Do combat mechanics.
 	public void combat() {
 		
 		// Attack if we are attacking.
 		if(isAttacking()) {
 			// Do the attack if our BAT is over.
-			if(!isAlreadyAttacked() && time.getTime() - startAttackTime > baseAttackTime*1000) {
+			if(time.getTime() - startAttackTime > baseAttackTime*1000) {
 				int x1 = 0;
 				int x2 = 0;
 				int y1 = 0;
@@ -257,7 +298,7 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 					y1 = heightMidPoint - getAttackWidth()/2;
 					y2 = heightMidPoint + getAttackWidth()/2;
 					x1 = getX() - getAttackLength();
-					x2 = getX() + getWidth();
+					x2 = getX() + getWidth() + 5;
 				}
 				
 				// Get the box we will attack in if facing right.
@@ -265,7 +306,7 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 					int heightMidPoint = getY() + getHeight()/2;
 					y1 = heightMidPoint - getAttackWidth()/2;
 					y2 = heightMidPoint + getAttackWidth()/2;
-					x1 = getX();
+					x1 = getX() - 5;
 					x2 = getX() + getWidth() + getAttackLength();
 				}
 				
@@ -275,7 +316,7 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 					x1 = widthMidPoint - getAttackWidth()/2;
 					x2 = widthMidPoint + getAttackWidth()/2;
 					y1 = getY() - getAttackLength();
-					y2 = getY() + getHeight();
+					y2 = getY() + getHeight() + 5;
 				}
 				
 				// Get the box we will attack in facing down.
@@ -283,17 +324,28 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 					int widthMidPoint = getX() + getWidth()/2;
 					x1 = widthMidPoint - getAttackWidth()/2;
 					x2 = widthMidPoint + getAttackWidth()/2;
-					y1 = getY();
+					y1 = getY() - 5;
 					y2 = getY() + getHeight() + getAttackLength();
 				}
-				attackUnits(getUnitsInBox(x1,y1,x2,y2));
-				setAlreadyAttacked(true);
+				
+				// Attack units in array.
+				unitsInAttackRange = getUnitsInBox(x1,y1,x2,y2);
+				attackUnits();
 			}
-			if(time.getTime() - startAttackTime > getAttackTime()*1000) {
-				setAlreadyAttacked(false);
+			if(time.getTime() - startAttackTime > (getAttackTime())*1000) {
+				attackOver();
 				setAttacking(false);
+				canAttack = false;
 			}
 		}
+		else if(time.getTime() - startAttackTime > (getAttackTime() + backSwing)*1000) {
+			canAttack = true;
+		}
+	}
+	
+	// Attack is over
+	public void attackOver() {
+		alreadyAttackedUnits = new ArrayList<unit>();
 	}
 	
 	// Initiate
@@ -371,32 +423,45 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 	}
 	
 	// Attack units
-	public void attackUnits(ArrayList<unit> unitsToAttack) {
+	public void attackUnits() {
+		ArrayList<unit> unitsToAttack = unitsInAttackRange;
 		if(unitsToAttack!=null) {
 			for(int i = 0; i < unitsToAttack.size(); i++) {
 				unit currentUnit = unitsToAttack.get(i);
 				
-				// Don't hit yourself.
-				if(this!=currentUnit) {
+				// Don't hit something we already have.
+				if(alreadyAttackedUnits.contains(currentUnit)) {
 					
-					// Hit for their damage times their multiplier.
-					float variabilityMult = 1;
-					if(attackVariability == 0) variabilityMult = 1;
-					else variabilityMult = 1f + attackVariability - ((float)utility.RNG.nextInt((int)(2*attackVariability*100))/100f);
-					int actualDamageDone = (int) (this.getAttackDamage()*attackMultiplier*variabilityMult);
+				}
+				else {
+					// Don't hit yourself.
+					if(this!=currentUnit) {
 					
-					// Did we crit?
-					float crit = 1f;
-					if(critChance*100 >= utility.RNG.nextInt(100)) crit = critDamage;
-					
-					// Players can hit anything.
-					if(this instanceof player) {
-						if(currentUnit.isTargetable()) currentUnit.hurt(actualDamageDone, crit);
-					}
-					
-					// Enemies can't hit eachother.
-					else if(!(this instanceof player) && currentUnit instanceof player) {
-						if(currentUnit.isTargetable()) currentUnit.hurt(actualDamageDone, crit);
+						// Hit for their damage times their multiplier.
+						float variabilityMult = 1;
+						if(attackVariability == 0) variabilityMult = 1;
+						else variabilityMult = 1f + attackVariability - ((float)utility.RNG.nextInt((int)(2*attackVariability*100))/100f);
+						int actualDamageDone = (int) (this.getAttackDamage()*attackMultiplier*variabilityMult);
+						
+						// Did we crit?
+						float crit = 1f;
+						if(getCritChance()*100 >= utility.RNG.nextInt(100)) crit = getCritDamage();
+						
+						// Players can hit anything.
+						if(this instanceof player) {
+							if(currentUnit.isTargetable()) {
+								alreadyAttackedUnits.add(currentUnit);
+								currentUnit.hurt(actualDamageDone, crit);
+							}
+						}
+						
+						// Enemies can't hit eachother.
+						else if(!(this instanceof player) && currentUnit instanceof player) {
+							if(currentUnit.isTargetable()) {
+								alreadyAttackedUnits.add(currentUnit);
+								currentUnit.hurt(actualDamageDone, crit);
+							}
+						}
 					}
 				}
 			}
@@ -422,7 +487,7 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 		
 		// Squirt blood
 		int randomX = 0;
-		int randomY = -platformerHeight/3 + utility.RNG.nextInt(platformerHeight/3);
+		int randomY = -platformerHeight/3 + utility.RNG.nextInt(platformerHeight/3 + 1);
 		effect blood = new bloodSquirt(getX() - bloodSquirt.getDefaultWidth()/2 + topDownWidth/2 + randomX ,
 				   getY() - bloodSquirt.getDefaultHeight()/2 + platformerHeight/2 + randomY);
 		reactToPain();
@@ -433,10 +498,13 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 	
 	// Start attacking.
 	public void attack() {
-		if(!isAttacking()) {
+		if(!isAttacking() && canAttack) {
 			
 			// We are attacking of course.
-			if(attackSound != null) attackSound.playSound(getX(), getY(), DEFAULT_ATTACK_SOUND_RADIUS, 0.8f);
+			//if(attackSound != null) attackSound.playSound(getX(), getY(), DEFAULT_ATTACK_SOUND_RADIUS, 0.8f);
+			// Attack sound.
+			AePlayWave a = new AePlayWave("sounds/effects/player/combat/swingWeapon.wav");
+			a.start();
 			setAttacking(true);
 			startAttackTime = time.getTime();
 		}
@@ -466,6 +534,13 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 		moveTowards(u.getX(), u.getY());
 	}
 	
+	// Move to
+	public void moveTo(int newX, int newY) {
+		movingToAPoint = true;
+		moveToX = newX;
+		moveToY = newY;
+	}
+	
 	// Move towards a spot.
 	public void moveTowards(int moveX, int moveY) {
 		
@@ -479,50 +554,119 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 		else {
 			
 			// Horizontal
-			if(getX() - moveX < 0 && Math.abs(getX() - moveX) > 3*moveSpeed) movingRight = true;
-			if(getX() - moveX > 0 && Math.abs(getX() - moveX) > 3*moveSpeed) movingLeft = true;
+			if(getX() - moveX < 0 && Math.abs(getX() - moveX) > closeEnough) movingRight = true;
+			if(getX() - moveX > 0 && Math.abs(getX() - moveX) > closeEnough) movingLeft = true;
 			
 			// Vertical
-			if(getY() - moveY < 0 && Math.abs(getY() - moveY) > 3*moveSpeed) movingDown = true;
-			if(getY() - moveY > 0 && Math.abs(getY() - moveY) > 3*moveSpeed) movingUp = true;
+			if(getY() - moveY < 0 && Math.abs(getY() - moveY) > closeEnough) movingDown = true;
+			if(getY() - moveY > 0 && Math.abs(getY() - moveY) > closeEnough) movingUp = true;
 		}
 	}
 	
+	// Deal with meta movement. Moving toward a point, following, pathing, etc.
+	public void dealWithMetaMovement() {
+		
+		///////////////////////////////
+		/// MOVEMENT TOWARD A POINT ///
+		///////////////////////////////	
+		if(movingToAPoint) {
+			// Moving toward a point?
+			if((Math.abs(moveToX - getX()) > closeEnough || Math.abs(moveToY - getY()) > closeEnough)) {
+				moveTowards(moveToX, moveToY);
+			}
+			
+			// We have reached our point
+			if(!(Math.abs(moveToX - getX()) > closeEnough || Math.abs(moveToY - getY()) > closeEnough)) {
+				stopMove("all");
+				movingToAPoint = false;
+			}
+		}
+		
+		///////////////////////////////
+		/// FOLLOWING A PATH        ///
+		///////////////////////////////	
+		if(followingAPath) {
+			if(path != null && path.size() > 0) {
+				if(currPoint == null) {
+					moveTo(path.get(0).x, path.get(0).y);
+					currPoint = path.get(0);
+					path.remove(0);
+				}
+				else if(!(Math.abs(currPoint.x - getX()) > closeEnough || Math.abs(currPoint.y - getY()) > closeEnough)) {
+					moveTo(path.get(0).x, path.get(0).y);
+					currPoint = path.get(0);
+					path.remove(0);
+				}
+			}
+			else {
+				currPoint = null;
+				path = null;
+				followingAPath = false;
+			}
+		}
+	}
+	
+	// Follow path.
+	public void followPath(ArrayList<intTuple> p) {
+		path = p;
+		followingAPath = true;
+	}
+	
+	
+	private int lastMoveFrame = 0;
+	
 	// Move unit
 	public void moveUnit() {
-		int moveX = 0;
-		int moveY = 0;
 		
-		// Actual movement.
-		if(movingLeft) moveX -= getMoveSpeed();
-		if(movingRight) moveX += getMoveSpeed();
+		// How many frames have passed?
+		/*int passedFrames = (int) (time.getTime()/(1000/gameCanvas.getFPS()));
 		
-		// Only do these ones if we're in topDown mode.
-		if(mode.getCurrentMode() == "topDown") {
-			if(movingUp) moveY -= getMoveSpeed();
-			if(movingDown) moveY += getMoveSpeed();
-		}
+		int framesDiag = 3;
+		int framesNorm = 2;
 		
-		// Adjust so they don't go SUPER fast diagonally
-		if(Math.sqrt(moveY*moveY + moveX*moveX) > getMoveSpeed()) {
-			if(moveX > 0) moveX--;
-			else if(moveX < 0) moveX++;
-			else if(moveY > 0) moveY--;
-			else if(moveY< 0) moveY++;
-		}
-		
-		// Deal with direction facing.
-		if(movingLeft && movingUp) setFacingDirection("Left");
-		else if(movingRight && movingUp) setFacingDirection("Right");
-		else if(movingLeft && movingDown) setFacingDirection("Left");
-		else if(movingRight && movingDown) setFacingDirection("Right");
-		else if(movingDown && mode.getCurrentMode() != "platformer") setFacingDirection("Down");
-		else if(movingUp && mode.getCurrentMode() != "platformer") setFacingDirection("Up");
-		else if(movingRight) setFacingDirection("Right");
-		else if(movingLeft) setFacingDirection("Left");
-		
-		// Actually move the unit.
-		move(moveX, moveY);
+		// Only move every X.
+		if((movingDiagonally() && passedFrames - lastMoveFrame  > framesDiag)
+		|| (!movingDiagonally() && passedFrames - lastMoveFrame  > framesNorm)) {
+			
+			// Set timer.
+			lastMoveFrame = passedFrames;*/
+			
+			// Basic movement.
+			int moveX = 0;
+			int moveY = 0;
+			
+			// Actual movement.
+			if(movingLeft) moveX -= moveSpeed;
+			if(movingRight) moveX += moveSpeed;
+			
+			// Only do these ones if we're in topDown mode.
+			if(mode.getCurrentMode() == "topDown") {
+				if(movingUp) moveY -= moveSpeed;
+				if(movingDown) moveY += moveSpeed;
+			}
+			
+			// Deal with direction facing.
+			if(movingLeft && movingUp) setFacingDirection("Left");
+			else if(movingRight && movingUp) setFacingDirection("Right");
+			else if(movingLeft && movingDown) setFacingDirection("Left");
+			else if(movingRight && movingDown) setFacingDirection("Right");
+			else if(movingDown && mode.getCurrentMode() != "platformer") setFacingDirection("Down");
+			else if(movingUp && mode.getCurrentMode() != "platformer") setFacingDirection("Up");
+			else if(movingRight) setFacingDirection("Right");
+			else if(movingLeft) setFacingDirection("Left");
+			
+			// Actually move the unit.
+			move(moveX, moveY);
+		//}
+	}
+	
+	// Moving diagonally?
+	public boolean movingDiagonally() {
+		boolean movingLeftAndRight = movingLeft && movingRight;
+		boolean movingUpAndDown = movingUp && movingDown;
+		boolean movingHorizontally = (movingLeft || movingRight) && !movingLeftAndRight;
+		boolean movingVertically = (movingUp || movingDown) && !movingUpAndDown;
+		return movingVertically && movingHorizontally;
 	}
 	
 	// Move the unit in a specific direction.
@@ -586,8 +730,8 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 	public void move(int moveX, int moveY) {
 		
 		if(player.getCurrentPlayer() != null && 
-			player.getCurrentPlayer().getPlayerZone()!=null && 
-			player.getCurrentPlayer().getPlayerZone().isZoneLoaded()) {
+			player.getCurrentPlayer().getCurrentZone()!=null && 
+			player.getCurrentPlayer().getCurrentZone().isZoneLoaded()) {
 			// Actual move x and y when all is said and done.
 			int actualMoveX = moveX;
 			int actualMoveY = moveY;
@@ -842,7 +986,7 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 				y1 = heightMidPoint - getAttackWidth()/2;
 				y2 = heightMidPoint + getAttackWidth()/2;
 				x1 = hitBoxX - getAttackLength();
-				x2 = hitBoxX + getWidth();
+				x2 = hitBoxX + getWidth() + 5;
 			}
 			
 			// Get the box we will attack in if facing right.
@@ -850,7 +994,7 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 				int heightMidPoint = hitBoxY + getHeight()/2;
 				y1 = heightMidPoint - getAttackWidth()/2;
 				y2 = heightMidPoint + getAttackWidth()/2;
-				x1 = hitBoxX;
+				x1 = hitBoxX - 5;
 				x2 = hitBoxX + getWidth() + getAttackLength();
 			}
 			
@@ -860,7 +1004,7 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 				x1 = widthMidPoint - getAttackWidth()/2;
 				x2 = widthMidPoint + getAttackWidth()/2;
 				y1 = hitBoxY - getAttackLength();
-				y2 = hitBoxY + getHeight();
+				y2 = hitBoxY + getHeight() + 5;
 			}
 			
 			// Get the box we will attack in facing down.
@@ -868,7 +1012,7 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 				int widthMidPoint = hitBoxX + getWidth()/2;
 				x1 = widthMidPoint - getAttackWidth()/2;
 				x2 = widthMidPoint + getAttackWidth()/2;
-				y1 = hitBoxY;
+				y1 = hitBoxY - 5;
 				y2 = hitBoxY + getHeight() + getAttackLength();
 			}
 			g.setColor(Color.blue);
@@ -1012,6 +1156,7 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 
 	public void setMoveSpeed(int moveSpeed) {
 		this.moveSpeed = moveSpeed;
+		closeEnough = closeEnoughFactor*moveSpeed;
 	}
 
 	public static ArrayList<unit> getAllUnits() {
@@ -1068,6 +1213,30 @@ public abstract class unit extends drawnObject  { // shape for now sprite later
 
 	public void setTypeOfUnit(unitType typeOfUnit) {
 		this.typeOfUnit = typeOfUnit;
+	}
+
+	public float getBackSwing() {
+		return backSwing;
+	}
+
+	public void setBackSwing(float backSwing) {
+		this.backSwing = backSwing;
+	}
+
+	public float getCritChance() {
+		return critChance;
+	}
+
+	public void setCritChance(float critChance) {
+		this.critChance = critChance;
+	}
+
+	public float getCritDamage() {
+		return critDamage;
+	}
+
+	public void setCritDamage(float critDamage) {
+		this.critDamage = critDamage;
 	}
 	
 }

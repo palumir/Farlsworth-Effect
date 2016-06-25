@@ -1,14 +1,10 @@
 package main;
 
 import drawing.gameCanvas;
-import modes.mode;
-import modes.platformer;
-import modes.topDown;
+import drawing.userInterface.tooltipString;
 import units.player;
-import units.unit;
-import units.unitType;
+import utilities.saveState;
 import utilities.utility;
-import zones.*;
 
 // The class that initiates the program.
 public class main {
@@ -20,16 +16,31 @@ public class main {
 		gameCanvas gameCanvas = new gameCanvas();
 		
 		// Start the game for the first time.
-		restartGame();
+		restartGame(null);
 		
 	}
 	
 	// Restart game
-	public static void restartGame() {
-		// Initiate.
-		utility.initiateAll();
+	public static void restartGame(String s) {
 		
 		// Create the player.
 		player p = player.loadPlayer(null,0,0,"Up");
+		
+		// Saved game?
+		if(s!=null) {
+			
+			// Initiate.
+			//utility.initiateAll();
+			
+			// Restart due to saving.
+			if(s.equals("Save")) {
+				tooltipString t = new tooltipString(saveState.DEFAULT_GAME_SAVED_TEXT);
+			}
+			
+			// Restart due to death.
+			if(s.equals("Death")) {
+				tooltipString t = new tooltipString("You died.");
+			}
+		}
 	}
 }

@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
+import doodads.farmLand.bone;
 import drawing.camera;
 import drawing.drawnObject;
 import drawing.animation.animation;
@@ -12,10 +13,10 @@ import drawing.userInterface.interactBox;
 import drawing.userInterface.inventory;
 import drawing.userInterface.playerHealthBar;
 import drawing.userInterface.text;
+import drawing.userInterface.tooltipString;
 import effects.effect;
 import effects.effectTypes.bloodSquirt;
-import effects.effectTypes.tooltipString;
-import interactions.gag;
+import interactions.event;
 import interactions.quest;
 import items.bottle;
 import items.item;
@@ -26,7 +27,6 @@ import modes.platformer;
 import modes.topDown;
 import sounds.music;
 import sounds.sound;
-import terrain.doodads.farmLand.bone;
 import utilities.saveState;
 import utilities.utility;
 import zones.zone;
@@ -99,7 +99,7 @@ public class player extends unit {
 	
 	// Player specific fields.
 	private String playerName = DEFAULT_PLAYER_NAME;
-	private zone playerZone = DEFAULT_ZONE;
+	private zone currentZone = DEFAULT_ZONE;
 	
 	// Savestate we loaded from
 	public saveState playerSaveState;
@@ -148,13 +148,13 @@ public class player extends unit {
 		
 		/// TODO: Dev stuff
 		showUnitPosition();
-		showHitBox();
+		//showHitBox();
 		//setCollision(false);
 		//setMoveSpeed(10);
 		//showAttackRange(); 
 		
 		// Set sounds.
-		attackSound = new sound("sounds/effects/player/combat/swingWeapon.wav");
+		//attackSound = new sound("sounds/effects/player/combat/swingWeapon.wav");
 		
 		// Set-up the camera.
 		camera c = new camera(this, 1);
@@ -166,13 +166,13 @@ public class player extends unit {
 		this.makeCurrentPlayer();
 		
 		// Has the player never played before? Put them in the start zone.
-		if(z == null && getPlayerZone()==DEFAULT_ZONE) {
-			playerZone = zone.getStartZone();
+		if(z == null && getCurrentZone() == DEFAULT_ZONE) {
+			currentZone = zone.getStartZone();
 		}
 		
 		// Load the zone, even if it's the default.
 		if(z != null) {
-			playerZone = z;
+			currentZone = z;
 		}
 
 		// Combat.
@@ -206,7 +206,7 @@ public class player extends unit {
 	
 	// Attack?
 	public void potentiallyAttack() {
-		if(equippedWeapon!=null && holdingSpace) attack();
+		if(holdingSpace) attack();
 	}
 	
 	// Deal with player being alive or dead.
@@ -222,7 +222,7 @@ public class player extends unit {
 	
 	// Kill player.
 	public void killPlayer() {
-		main.restartGame();
+		main.restartGame("Death");
 	}
 	
 	// Update interface.
@@ -238,17 +238,11 @@ public class player extends unit {
 		// The player, depending on whether or not we have a save file.
 		player thePlayer = loadPlayerSaveData(z, spawnX, spawnY, direction);
 		
-		// Load quests.
-		quest.loadQuestData();
-		
 		// Load jokes.
-		gag.loadGagData();
-		
-		// Load bosses.
-		boss.loadBossData();
+		event.loadEventData();
 		
 		// Load the player into the zone.
-		thePlayer.playerZone.loadZone();
+		thePlayer.currentZone.loadZone();
 		
 		// Make adjustments on hitbox if we're in topDown.
 		if(mode.getCurrentMode().equals("topDown")) {
@@ -400,13 +394,13 @@ public class player extends unit {
 			}
 			
 			// Player presses bar key
-			if(k.getKeyCode() == KeyEvent.VK_Q) {
+			if(k.getKeyCode() == KeyEvent.VK_Q || k.getKeyCode() == KeyEvent.VK_SHIFT) {
 				if(equippedBottle!=null) equippedBottle.useCharge();
 			}
 			
 			
 			// Player presses e key
-			if(k.getKeyCode() == KeyEvent.VK_E) {
+			if(k.getKeyCode() == KeyEvent.VK_E || k.getKeyCode() == KeyEvent.VK_ENTER) {
 				interact();
 			}
 		
@@ -415,8 +409,8 @@ public class player extends unit {
 			//////////////////////////////////////
 			if(k.getKeyCode() == KeyEvent.VK_P) {
 				//healthPoints--;
-				giveExp(20);
-				System.out.println("c = new bone(" + getX() + "," + getY() + ",3);");
+				giveExp(expRequiredForLevel());
+				System.out.println("u = new wolf(" + getX() + "," + getY() + ");");
 			}
 		}
 	}
@@ -487,14 +481,36 @@ public class player extends unit {
 		setEquippedWeapon(null);
 		
 		// Remove player's damage.
-		setAttackDamage(0);
-		setAttackTime(0);
-		setBaseAttackTime(0);
-		setAttackWidth(0);
-		setAttackLength(0);
+		setBaseAttackTime(DEFAULT_BAT);
+		setAttackTime(DEFAULT_ATTACK_TIME);
+		setBackSwing(DEFAULT_BACKSWING);
 		
+		// Attack range.
+		setAttackWidth(DEFAULT_ATTACK_WIDTH);
+		setAttackLength(DEFAULT_ATTACK_LENGTH);
+		
+		// Crits.
+		player.getCurrentPlayer().setCritChance(DEFAULT_CRIT_CHANCE);
+		player.getCurrentPlayer().setCritDamage(DEFAULT_CRIT_DAMAGE);
+	
 		// Deal with animations
 		animationPack unitTypeAnimations = new animationPack();
+		
+		// Attacking left animation.
+		animation attackingLeft = new animation("attackingLeft", getTypeOfUnit().getUnitTypeSpriteSheet().getAnimation(13), 0, 5, unit.DEFAULT_ATTACK_TIME);
+		unitTypeAnimations.addAnimation(attackingLeft);
+		
+		// Attacking left animation.
+		animation attackingRight = new animation("attackingRight", getTypeOfUnit().getUnitTypeSpriteSheet().getAnimation(15), 0, 5, unit.DEFAULT_ATTACK_TIME);
+		unitTypeAnimations.addAnimation(attackingRight);
+		
+		// Attacking left animation.
+		animation attackingUp = new animation("attackingUp", getTypeOfUnit().getUnitTypeSpriteSheet().getAnimation(12), 0, 5, unit.DEFAULT_ATTACK_TIME);
+		unitTypeAnimations.addAnimation(attackingUp);
+		
+		// Attacking left animation.
+		animation attackingDown = new animation("attackingDown", getTypeOfUnit().getUnitTypeSpriteSheet().getAnimation(14), 0, 5, unit.DEFAULT_ATTACK_TIME);
+		unitTypeAnimations.addAnimation(attackingDown);
 		
 		// Jumping left animation.
 		animation jumpingLeft = new animation("jumpingLeft", getTypeOfUnit().getUnitTypeSpriteSheet().getAnimation(1), 5, 5, 1);
@@ -651,12 +667,12 @@ public class player extends unit {
 		currentPlayer = newCurrentPlayer;
 	}
 
-	public zone getPlayerZone() {
-		return playerZone;
+	public zone getCurrentZone() {
+		return currentZone;
 	}
 
-	public void setPlayerZone(zone playerZone) {
-		this.playerZone = playerZone;
+	public void setCurrentZone(zone playerZone) {
+		this.currentZone = playerZone;
 	}
 
 	public String getPlayerName() {

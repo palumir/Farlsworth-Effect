@@ -1,0 +1,3 @@
+- Faster movespeed bottle
+- Increase damage done
+- Increase defenses

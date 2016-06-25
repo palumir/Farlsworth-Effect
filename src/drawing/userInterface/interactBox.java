@@ -40,6 +40,7 @@ public class interactBox extends interfaceObject  {
     
     // Text to display and the color of the text.
 	private String whoIsTalking;
+	private boolean isUnit = false;
 	private textSeries theText;
 	private String displayedText = "";
 	private int displayIterator = 0;
@@ -65,8 +66,25 @@ public class interactBox extends interfaceObject  {
 	///////////////
 
 	// Constructor
+	public interactBox(textSeries newText, String newWhoIsTalking, boolean newIsUnit) {
+		super(null, DEFAULT_X, DEFAULT_Y, background.getWidth(), background.getHeight());	
+		
+		// Is unit.
+		isUnit = newIsUnit;
+		
+		// Set fields.
+		if(newText.getButtonText() != null) buttonMode = true;
+		else textMode = true;
+		whoIsTalking = newWhoIsTalking;
+		setTheText(newText);
+	}
+	
+	// Constructor
 	public interactBox(textSeries newText, String newWhoIsTalking) {
 		super(null, DEFAULT_X, DEFAULT_Y, background.getWidth(), background.getHeight());	
+		
+		// Is unit.
+		isUnit = false;
 		
 		// Set fields.
 		if(newText.getButtonText() != null) buttonMode = true;
@@ -97,17 +115,21 @@ public class interactBox extends interfaceObject  {
 			
 			// Text
 			if(textMode) {
-				// Set font.
-				g.setFont(DEFAULT_FONT_TITLE);
+	
 				
-				// Display the name of the person or thing talking/interacting
-				g.drawString(whoIsTalking,
-						(int)(gameCanvas.getScaleX()*getX()) + 
-						(int)(gameCanvas.getScaleX()*background.getWidth()/2) - 
-						g.getFontMetrics().stringWidth(whoIsTalking)/2,
-						(int)(gameCanvas.getScaleY()*getY()) + 
-						(int)(gameCanvas.getScaleY()*background.getHeight()/5) + 
-						(int)(gameCanvas.getScaleY()*4));
+				if(isUnit) {
+					// Set font.
+					g.setFont(DEFAULT_FONT_TITLE);
+					
+					// Display the name of the person or thing talking/interacting
+					g.drawString(whoIsTalking,
+							(int)(gameCanvas.getScaleX()*getX()) + 
+							(int)(gameCanvas.getScaleX()*background.getWidth()/2) - 
+							g.getFontMetrics().stringWidth(whoIsTalking)/2,
+							(int)(gameCanvas.getScaleY()*getY()) + 
+							(int)(gameCanvas.getScaleY()*background.getHeight()/5) + 
+							(int)(gameCanvas.getScaleY()*4));
+				}
 				
 				// Set font.
 				g.setFont(DEFAULT_FONT);
@@ -131,17 +153,19 @@ public class interactBox extends interfaceObject  {
 			// Button
 			if(buttonMode) {
 				
-				// Set font.
-				g.setFont(DEFAULT_FONT_TITLE);
-				
-				// Display the name of the person or thing talking/interacting
-				g.drawString(whoIsTalking,
-						(int)(gameCanvas.getScaleX()*getX()) + 
-						(int)(gameCanvas.getScaleX()*background.getWidth()/2) - 
-						g.getFontMetrics().stringWidth(whoIsTalking)/2,
-						(int)(gameCanvas.getScaleY()*getY()) + 
-						(int)(gameCanvas.getScaleY()*background.getHeight()/5) + 
-						(int)(gameCanvas.getScaleY()*4));
+				if(isUnit) {
+					// Set font.
+					g.setFont(DEFAULT_FONT_TITLE);
+					
+					// Display the name of the person or thing talking/interacting
+					g.drawString(whoIsTalking,
+							(int)(gameCanvas.getScaleX()*getX()) + 
+							(int)(gameCanvas.getScaleX()*background.getWidth()/2) - 
+							g.getFontMetrics().stringWidth(whoIsTalking)/2,
+							(int)(gameCanvas.getScaleY()*getY()) + 
+							(int)(gameCanvas.getScaleY()*background.getHeight()/5) + 
+							(int)(gameCanvas.getScaleY()*4));
+				}
 				
 				
 				// Set font.
@@ -174,6 +198,16 @@ public class interactBox extends interfaceObject  {
 							   (int)(gameCanvas.getScaleY()*(getY() + background.getHeight()/2 + 4)));
 					}
 			}
+		}
+	}
+	
+	// Initiate
+	public static void initiate() {
+		
+		// Untoggle current display
+		if(currentDisplay != null && currentDisplay.displayOn) {
+			currentDisplay.toggleDisplay();
+			currentDisplay = null;
 		}
 	}
 	
@@ -280,7 +314,7 @@ public class interactBox extends interfaceObject  {
 		}
 		
 		// Player presses e key.
-		if(k.getKeyCode() == KeyEvent.VK_E || k.getKeyCode() == KeyEvent.VK_SPACE) { 
+		if(k.getKeyCode() == KeyEvent.VK_E || k.getKeyCode() == KeyEvent.VK_SPACE || k.getKeyCode() == KeyEvent.VK_ENTER) { 
 			select();
 		}
 	}

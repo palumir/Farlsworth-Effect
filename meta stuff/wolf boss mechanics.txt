@@ -1,1 +1,0 @@
-- Claw marks appear on ground in specific order -> wolf jumps between each claw mark, damaging entire path.

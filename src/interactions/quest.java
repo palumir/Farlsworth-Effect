@@ -20,9 +20,6 @@ public class quest extends text {
 	////// GLOBALS //////
 	/////////////////////
 	
-	// List of all quests.
-	public static ArrayList<quest> loadedQuests = new ArrayList<quest>();
-	
 	// Dimensions and color.
 	public static Color DEFAULT_QUEST_COLOR = Color.white;
 	public static int DEFAULT_X = 15;
@@ -39,8 +36,8 @@ public class quest extends text {
 	private unit questGiver;
 	
 	// Quest completed?
-	private boolean completed = false;
-	private boolean started = false;
+	private event completed;
+	private event started;
 	
 	/////////////////////
 	////// METHODS //////
@@ -48,30 +45,13 @@ public class quest extends text {
 	public quest(String newText, unit giver, interactBox dialogueFromQuestGiver) {
 		super(newText, DEFAULT_X, DEFAULT_Y, DEFAULT_QUEST_COLOR);
 		
+		// Load events.
+		completed = new event("Quest:" + newText + "completed");
+		started = new event("Quest:" + newText + "started");
+		
 		// Set fields.
 		questGiver = giver;
 		setDialogue(dialogueFromQuestGiver);
-		
-		// If the quest is loaded, set it's data.
-		int i = 0;
-		if(loadedQuests != null) {
-			
-			// Go through the list and return the quest with the same name.
-			while(i < loadedQuests.size()) {
-				if(loadedQuests.get(i).getTheText().equals(newText)) {
-					completed = loadedQuests.get(i).isCompleted();
-					started = loadedQuests.get(i).isStarted();
-					loadedQuests.get(i).destroy();
-					loadedQuests.remove(i);
-				}
-				else {
-					i++;
-				}
-			}
-		}
-		
-		// Add the loaded quest the list.
-		loadedQuests.add(this);
 	}
 	
 	@Override
@@ -85,18 +65,6 @@ public class quest extends text {
 			g.drawString("Quest: " + getTheText(),
 					   (int)(gameCanvas.getScaleX()*getX()),
 					   (int)(gameCanvas.getScaleY()*getY()));
-		}
-	}
-	
-	// Load quest data.
-	public static void loadQuestData() {
-		
-		// Load the savestate
-		saveState s = player.getCurrentPlayer().playerSaveState;
-		
-		// Populate allQuests with quests from the saveState.
-		if(s != null) {
-			loadedQuests = s.getAllQuests();
 		}
 	}
 	
@@ -128,19 +96,19 @@ public class quest extends text {
 	}
 
 	public boolean isStarted() {
-		return started;
+		return started.isCompleted();
 	}
 
-	public void setStarted(boolean started) {
-		this.started = started;
+	public void setStarted(boolean s) {
+		started.setCompleted(s);
 	}
 
 	public boolean isCompleted() {
-		return completed;
+		return completed.isCompleted();
 	}
 
-	public void setCompleted(boolean completed) {
-		this.completed = completed;
+	public void setCompleted(boolean c) {
+		completed.setCompleted(c);
 	}
 
 	public interactBox getDialogue() {

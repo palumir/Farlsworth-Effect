@@ -2,6 +2,7 @@ package terrain.chunkTypes;
 
 import java.util.Random;
 
+import doodads.farmLand.needlestack;
 import drawing.camera;
 import drawing.userInterface.interactBox;
 import interactions.textSeries;
@@ -11,7 +12,6 @@ import terrain.chunk;
 import terrain.chunkType;
 import terrain.generalChunkType;
 import terrain.groundTile;
-import terrain.doodads.farmLand.needlestack;
 import units.humanType;
 import units.player;
 import units.unit;
@@ -28,7 +28,7 @@ public class water extends groundTile {
 	////////////////
 	
 	// Default name.
-	private static String DEFAULT_CHUNK_NAME = "water source";
+	private static String DEFAULT_CHUNK_NAME = "Water";
 	
 	// Tile sprite stuff
 	private static String DEFAULT_CHUNK_SPRITESHEET = "images/terrain/water.png";
@@ -45,9 +45,6 @@ public class water extends groundTile {
 	
 	// Have saved?
 	private boolean haveSaved = true;
-	
-	// Have healed?
-	private boolean haveHealed = true;
 	
 	///////////////
 	/// METHODS ///
@@ -67,19 +64,19 @@ public class water extends groundTile {
 		
 		// Start of conversation.
 		textSeries startOfConversation = new textSeries("StartWithButtons", "StartWithButtons");
-
-		// Heal.
-		s = startOfConversation.addChild("Refill bottle and heal", "Equipped bottle filled and health restored.");
-		s.setEnd();
 		
 		// Save and reset.
 		textSeries saveGame = startOfConversation.addChild("Save game", "Saving the game will reset mobs. Are you sure?");
+		
+		// Cancel
+		textSeries cancel = startOfConversation.addChild("Cancel", "The game was not saved.");
+		cancel.setEnd();
 		
 		// Warning
 		s = saveGame.addChild("Yes", "Game saved and mobs reset.");
 		s.setEnd();
 		
-		s = saveGame.addChild("No", "Game has not been saved.");
+		s = saveGame.addChild("No", "The game was not saved.");
 		s.setEnd();
 
 		return new interactBox(startOfConversation, stringUtils.toTitleCase(DEFAULT_CHUNK_NAME));
@@ -95,19 +92,12 @@ public class water extends groundTile {
 				saveState.createSaveState();
 				haveSaved = true;
 				interactSequence.toggleDisplay();
-				main.restartGame();
+				main.restartGame("Save");
 			}
 			
 			// Don't save.
 			if(interactSequence.getTheText().getButtonText().equals("No")) {
 				
-			}
-			
-			// Heal
-			if(!haveHealed && interactSequence.getTheText().getButtonText().equals("Refill bottle and heal")) {
-				player.getCurrentPlayer().setHealthPoints(player.getCurrentPlayer().getMaxHealthPoints());
-				if(player.getCurrentPlayer().getEquippedBottle()!=null) player.getCurrentPlayer().getEquippedBottle().refill();
-				haveHealed = true;
 			}
 		}
 	}
@@ -127,7 +117,6 @@ public class water extends groundTile {
 		
 		// Reset booleans
 		haveSaved = false;
-		haveHealed = false;
 		
 		// Toggle display.
 		interactSequence.toggleDisplay();

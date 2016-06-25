@@ -15,6 +15,7 @@ Dog bark 1 by jorickhoofd
 bottle_drink.wav by nanashco3
 Item Pickup by TreasureSounds
 1_Knife_Slash_A.wav by lmbubec
+Itemize by Scrampunk
 
 Music: 
 Elidia McFaggot
@@ -30,3 +31,5 @@ Wolf: RPGMaker
 WolfMother SpriteSheet:
 -Stephen "Redshrike" Challener as graphic artist 
 -William Thompsonj contributor. 
+Lever: vxresources
+Houses: Lunerea

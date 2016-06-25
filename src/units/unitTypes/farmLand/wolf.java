@@ -23,9 +23,6 @@ public class wolf extends unit {
 	/// DEFAULTS ///
 	////////////////
 	
-	// Default name.
-	private static String DEFAULT_WOLF_NAME = "wolf";
-	
 	// Platformer real dimensions
 	public static int DEFAULT_PLATFORMER_HEIGHT = 32;
 	public static int DEFAULT_PLATFORMER_WIDTH = 32;
@@ -37,16 +34,22 @@ public class wolf extends unit {
 	public static int DEFAULT_TOPDOWN_ADJUSTMENT_Y = 5;
 	
 	// How close to attack?
-	private int DEFAULT_ATTACK_RADIUS = 200;
+	private int DEFAULT_ATTACK_RADIUS = 220;
 	private int DEFAULT_DEAGGRO_RADIUS = 300;
 	
 	// Damage stats
-	private int DEFAULT_ATTACK_DIFFERENTIAL = 6; // the range within the attackrange the unit will attack.
-	private int DEFAULT_ATTACK_DAMAGE = 5;
-	private float DEFAULT_BAT = 0.30f;
-	private float DEFAULT_ATTACK_TIME = 0.9f;
+	private int DEFAULT_ATTACK_DIFFERENTIAL = 10; // the range within the attackrange the unit will attack.
+	private int DEFAULT_ATTACK_DAMAGE = 4;
+	private float DEFAULT_BAT = 0.4f;
+	private float DEFAULT_ATTACK_TIME = 0.5f;
+	private float DEFAULT_BACKSWING = 0.4f;
 	private int DEFAULT_ATTACK_WIDTH = 30;
 	private int DEFAULT_ATTACK_LENGTH = 17;
+	static private float DEFAULT_CRIT_CHANCE = .15f;
+	static private float DEFAULT_CRIT_DAMAGE = 1.6f;
+	
+	// Default exp given.
+	private int DEFAULT_EXP_GIVEN = 18;
 	
 	// Dosile?
 	private boolean dosile = false;
@@ -78,7 +81,7 @@ public class wolf extends unit {
 	private static sound bark2 = new sound("sounds/effects/animals/wolfBark2.wav");
 	private static sound wolfAttack = new sound("sounds/effects/player/combat/swingWeapon.wav");
 	private int lastBarkSound = 0;
-	private long lastHowl = 0;
+	private static long lastHowl = 0;
 	private float randomHowl = 0;
 	private int soundRadius = 1200;
 	
@@ -91,10 +94,7 @@ public class wolf extends unit {
 	/// FIELDS ///
 	//////////////
 	private boolean aggrod = false;
-	private float movementSlope = 0.0f;
-	private float recentSlope = 0.0f;
-	private String fixedFacingDirection = "None"; 
-	
+
 	///////////////
 	/// METHODS ///
 	///////////////
@@ -109,19 +109,19 @@ public class wolf extends unit {
 		
 		// Add attack animations.
 		// Attacking left animation.
-		animation attackingLeft = new animation("attackingLeft", wolfType.getUnitTypeSpriteSheet().getAnimation(5), 0, 5, DEFAULT_BAT);
+		animation attackingLeft = new animation("attackingLeft", wolfType.getUnitTypeSpriteSheet().getAnimation(5), 0, 5, DEFAULT_ATTACK_TIME);
 		getAnimations().addAnimation(attackingLeft);
 		
 		// Attacking left animation.
-		animation attackingRight = new animation("attackingRight", wolfType.getUnitTypeSpriteSheet().getAnimation(6), 0, 5, DEFAULT_BAT);
+		animation attackingRight = new animation("attackingRight", wolfType.getUnitTypeSpriteSheet().getAnimation(6), 0, 5, DEFAULT_ATTACK_TIME);
 		getAnimations().addAnimation(attackingRight);
 		
 		// Attacking left animation.
-		animation attackingUp = new animation("attackingUp", wolfType.getUnitTypeSpriteSheet().getAnimation(7), 0, 5, DEFAULT_BAT);
+		animation attackingUp = new animation("attackingUp", wolfType.getUnitTypeSpriteSheet().getAnimation(7), 0, 5, DEFAULT_ATTACK_TIME);
 		getAnimations().addAnimation(attackingUp);
 		
 		// Attacking left animation.
-		animation attackingDown = new animation("attackingDown", wolfType.getUnitTypeSpriteSheet().getAnimation(4), 0, 5, DEFAULT_BAT);
+		animation attackingDown = new animation("attackingDown", wolfType.getUnitTypeSpriteSheet().getAnimation(4), 0, 5, DEFAULT_ATTACK_TIME);
 		getAnimations().addAnimation(attackingDown);
 		
 		// Set dimensions
@@ -140,7 +140,7 @@ public class wolf extends unit {
 		this.setAttackable(true);
 		
 		// Set exp given.
-		exp = 20;
+		exp = DEFAULT_EXP_GIVEN;
 		
 		// Wolf damage.
 		setAttackDamage(DEFAULT_ATTACK_DAMAGE);
@@ -148,6 +148,9 @@ public class wolf extends unit {
 		setBaseAttackTime(DEFAULT_BAT);
 		setAttackWidth(DEFAULT_ATTACK_WIDTH);
 		setAttackLength(DEFAULT_ATTACK_LENGTH);
+		setBackSwing(DEFAULT_BACKSWING);
+		setCritChance(DEFAULT_CRIT_CHANCE);
+		setCritDamage(DEFAULT_CRIT_DAMAGE);
 		
 		// HP
 		setMaxHealthPoints(DEFAULT_HP);
@@ -254,64 +257,6 @@ public class wolf extends unit {
 		}
 		else {
 			return DEFAULT_PLATFORMER_ADJUSTMENT_Y;
-		}
-	}
-
-	/*public void moveTowards(int moveX, int moveY) {
-		//using 0.0f as not initialed
-		if(movementSlope == 0.0f){
-			movementSlope = ((float) (getY() - moveY)) / ((float) (getX() - moveX));
-			movementSlope = Math.abs(movementSlope);
-			setFixedFacingDirection(moveX, moveY);
-		}
-		super.moveTowards(moveX, moveY);
-
- 		
- 		if(movementSlope > 1){
- 			recentSlope += 1/movementSlope;
- 			if (recentSlope < 1) {
- 				stopMove("horizontal");
- 			} else {
- 				recentSlope -= 1;
- 			}
- 		} else {// movementSlope < 1
- 			recentSlope += movementSlope;
- 			if (recentSlope < 1) {
- 				stopMove("vertical");
- 			} else {
- 				recentSlope -= 1;
- 			}
- 		}
-		
- 		if(Math.abs(getX() - moveX) <= 3*moveSpeed &&  Math.abs(getY() - moveY) <= moveSpeed + 1) {
-			// If we've reached our goal, recent the slope so we move better later
- 			movementSlope = 0.0f;
- 			recentSlope = 0.0f;
- 			fixedFacingDirection = "None";
-		}
-	}*/
-	
-	/*public String getFacingDirection() {
-		if(fixedFacingDirection == "None"){
-			return facingDirection;
-		} else {
-			return fixedFacingDirection;
-		}
-	}*/
-	
-	private void setFixedFacingDirection(int moveX, int moveY){
-		if(movementSlope < 1){
-			if(moveX < getX()){
-				fixedFacingDirection = "Left";
-			} else {
-				fixedFacingDirection = "Right";
-			}
-		} else {
-			if(moveY < getY()){
-				fixedFacingDirection = "Up";
-			} else {
-				fixedFacingDirection = "Down";
-			}
 		}
 	}
 	

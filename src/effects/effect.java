@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
 
+import doodads.general.questMark;
 import drawing.camera;
 import drawing.drawnObject;
 import drawing.gameCanvas;
@@ -13,7 +14,6 @@ import drawing.animation.animationPack;
 import modes.mode;
 import sounds.sound;
 import terrain.chunk;
-import terrain.doodads.general.questMark;
 import utilities.intTuple;
 import utilities.time;
 import utilities.utility;

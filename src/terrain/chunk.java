@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import drawing.drawnObject;
 import drawing.gameCanvas;
@@ -37,7 +38,7 @@ public class chunk extends drawnObject {
 
 	// All chunks.
 	public static ArrayList<chunk> allChunks;
-	public static ArrayList<chunk> impassableChunks;
+	public static CopyOnWriteArrayList<chunk> impassableChunks;
 	
 	// Largest chunk size.
 	private static int largestChunkWidth = 0;
@@ -186,7 +187,7 @@ public class chunk extends drawnObject {
 	// Initiate chunks
 	public static void initiate() {
 		allChunks = new ArrayList<chunk>();
-		impassableChunks = new ArrayList<chunk>();
+		impassableChunks = new CopyOnWriteArrayList<chunk>();
 	}
 	
 	// Sort chunks.

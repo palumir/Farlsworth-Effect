@@ -11,6 +11,7 @@ import drawing.gameCanvas;
 import drawing.spriteSheet;
 import items.bottle;
 import items.item;
+import items.key;
 import items.weapon;
 import sounds.sound;
 import units.player;
@@ -83,6 +84,18 @@ public class inventory extends interfaceObject {
 		setDisplayOn(!isDisplayOn());
 		if(displayOn) openInventory.playSound(0.7f);
 		else { closeInventory.playSound(0.7f); }
+	}
+	
+	// Search for key.
+	public boolean hasKey(String s) {
+		if(items != null) {
+			for(int j = 0; j < items.size(); j++) {
+				if(items.get(j) != null 
+					&& items.get(j) instanceof key 
+					&& ((key)items.get(j)).name.equals(s)) return true;
+			}
+		}
+		return false;
 	}
 	
 	// Pickup an item into inventory.

@@ -25,11 +25,13 @@ public abstract class weapon extends item {
 	protected spriteSheet weaponSpriteSheet;
 	
 	// Weapon stats
-	private int attackDamage = 0;
+	protected int attackDamage = 0;
 	protected float attackTime = 0f;
 	protected float baseAttackTime = 0f;
 	protected int attackWidth = 0;
 	protected int attackLength = 0;
+	protected float critChance = 0;
+	protected float critDamage = 0;
 	private String range = "short";
 	private String speed = "fast";
 	

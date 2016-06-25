@@ -1,34 +1,43 @@
 package zones.farmLand;
+import doodads.cave.skullSign;
+import doodads.farmLand.barn;
+import doodads.farmLand.blackSmith;
+import doodads.farmLand.bone;
+import doodads.farmLand.bridge;
+import doodads.farmLand.bush;
+import doodads.farmLand.caveEnterance;
+import doodads.farmLand.farmHouse;
+import doodads.farmLand.fenceBars;
+import doodads.farmLand.fenceBarsSmall;
+import doodads.farmLand.fencePost;
+import doodads.farmLand.flower;
+import doodads.farmLand.haystack;
+import doodads.farmLand.horizontalGate;
+import doodads.farmLand.rock;
+import doodads.farmLand.tree;
+import doodads.farmLand.verticalFence;
+import doodads.farmLand.well;
+import doodads.farmLand.woolPiece;
+import drawing.userInterface.tooltipString;
+import interactions.event;
 import items.bottle;
 import items.item;
 import items.bottles.normalBottle;
 import items.weapons.dagger;
 import modes.topDown;
+import sounds.music;
 import terrain.chunk;
 import terrain.chunkTypes.cave;
 import terrain.chunkTypes.grass;
 import terrain.chunkTypes.water;
 import terrain.chunkTypes.wood;
-import terrain.doodads.farmLand.barn;
-import terrain.doodads.farmLand.blackSmith;
-import terrain.doodads.farmLand.bone;
-import terrain.doodads.farmLand.bush;
-import terrain.doodads.farmLand.caveEnterance;
-import terrain.doodads.farmLand.farmHouse;
-import terrain.doodads.farmLand.fenceBars;
-import terrain.doodads.farmLand.fenceBarsSmall;
-import terrain.doodads.farmLand.fencePost;
-import terrain.doodads.farmLand.haystack;
-import terrain.doodads.farmLand.horizontalGate;
-import terrain.doodads.farmLand.rock;
-import terrain.doodads.farmLand.tree;
-import terrain.doodads.farmLand.verticalFence;
-import terrain.doodads.farmLand.well;
-import terrain.doodads.farmLand.woolPiece;
+import units.player;
 import units.unit;
 import units.bosses.denmother;
+import units.bosses.farlsworth;
 import units.unitTypes.farmLand.farmer;
-import units.unitTypes.farmLand.fastWolf;
+import units.unitTypes.farmLand.slowWolf;
+import units.unitTypes.farmLand.jumpingWolf;
 import units.unitTypes.farmLand.sheep;
 import units.unitTypes.farmLand.spiderling;
 import units.unitTypes.farmLand.wolf;
@@ -45,9 +54,21 @@ public class sheepFarm extends zone {
 	// Static caller of the zone.
 	private static zone zoneReference;
 	
+	// Zone music.
+	private static music zoneMusic = new music("sounds/music/farmLand/forest.wav");
+	
+	// Volume
+	private static float DEFAULT_MUSIC_VOLUME = 0.6f;
+	
+	// Global forest gate so Farlsworth can open it.
+	public static horizontalGate forestGate;
+	
 	// References we will use throughout.
 	unit u;
 	chunk c;
+	
+	// Zone events.
+	private event wellTooltipLoaded;
 	
 	// Defaults
 	public static intTuple DEFAULT_SPAWN_TUPLE = new intTuple(-9,11);
@@ -63,22 +84,15 @@ public class sheepFarm extends zone {
 	
 	// Spawn grass from x to y.
 	public void spawnForestMeta(int x1, int y1, int x2, int y2) {	
-		for(int i = x1; i < x2; i = i += tree.DEFAULT_CHUNK_WIDTH) {
-			for(int j = y1; j < y2; j += tree.DEFAULT_CHUNK_HEIGHT) {
-				int spawnTree = utility.RNG.nextInt(100);
+		for(int i = x1; i < x2; i = i += flower.DEFAULT_SPRITE_WIDTH) {
+			for(int j = y1; j < y2; j += flower.DEFAULT_SPRITE_HEIGHT) {
+				int spawnTree = utility.RNG.nextInt(200);
 				int diffX = utility.RNG.nextInt(60);
 				int diffY = utility.RNG.nextInt(60);
-				int t = utility.RNG.nextInt(6);
-				if(t>=3) t = 0;
-				else if(t>=1) t = 1;
-				else t=2;
-				if(spawnTree<50) {
-					System.out.println("c = new tree(" + (i+diffX) + "," + (j+diffY) + "," + t + ");");
-					c = new tree(i+diffX,j+diffY,t);
-				}
-				else if(spawnTree<=60) {
-					System.out.println("c = new bush(" + (i+diffX) + "," + (j+diffY) + "," + t + ");");
-					c = new bush(i+diffX,j+diffY,t);
+				int t = utility.RNG.nextInt(5);
+				if(spawnTree<1) {
+					System.out.println("c = new flower(" + (i+diffX) + "," + (j+diffY) + "," + t + ");");
+					c = new flower(i+diffX,j+diffY,t);
 				}
 			}
 		}
@@ -114,6 +128,18 @@ public class sheepFarm extends zone {
 		for(int i = 0; i < numX; i++) {
 			for(int j = 0; j < numY; j++) {
 				c = new water(i*water.DEFAULT_CHUNK_WIDTH + x1, j*water.DEFAULT_CHUNK_HEIGHT + y1);
+			}
+		}
+	}
+	
+	// Spawn water from x to y.
+	public void spawnPassableWaterRect(int x1, int y1, int x2, int y2) {
+		int numX = (x2 - x1)/water.DEFAULT_CHUNK_WIDTH;
+		int numY = (y2 - y1)/water.DEFAULT_CHUNK_HEIGHT;
+		for(int i = 0; i < numX; i++) {
+			for(int j = 0; j < numY; j++) {
+				c = new water(i*water.DEFAULT_CHUNK_WIDTH + x1, j*water.DEFAULT_CHUNK_HEIGHT + y1);
+				c.setPassable(true);
 			}
 		}
 	}
@@ -167,6 +193,9 @@ public class sheepFarm extends zone {
 		// Set the mode of the zone of course.
 		topDown.setMode();
 		
+		// Load zone events.
+		loadZoneEvents();
+		
 		// Spawn area.
 		createSpawnArea();
 		
@@ -178,6 +207,10 @@ public class sheepFarm extends zone {
 		
 		// Zone is loaded.
 		setZoneLoaded(true);
+		
+		// Play zone music.
+		zoneMusic.loopMusic(DEFAULT_MUSIC_VOLUME);
+		
 	}
 	
 	//////////////////////
@@ -208,30 +241,219 @@ public class sheepFarm extends zone {
 		// Cave to top left.
 		caveEnterance spiderCaveEnterance = new caveEnterance(-1762+20+30,-4070+6+14,0, spiderCave.getZone(),100,-6,"Right");
 		
-		// Spawn wolf.
-		u = new wolf(-200,-589);
+		// Cave warning.
+		c = new skullSign(-1784,-4000, 0);
 		
+		// Spawn wolf.
+		u = new jumpingWolf(-149,-2173);
+		u = new slowWolf(-121,-2752);
+		u = new slowWolf(198,-2584);
+		u = new wolf(535,-2926);
+		u = new wolf(484,-3502);
+		u = new jumpingWolf(592,-3502);
+		u = new jumpingWolf(671,-2281);
+		u = new slowWolf(1176,-2089);
+		u = new jumpingWolf(1273,-2155);
+		u = new slowWolf(1686,-2305);
+
 		// Spawn the well.
 		c = new well(-775,-1830,0);
 		
 		// Spawn potion.
-		bottle b = new normalBottle(-771,-1776);
+		bottle b = new normalBottle(-661,-1939);
 		
 		// Wool trail.
-		c = new woolPiece(-249,-794,0);
-		c = new woolPiece(-327,-1010,0);
+		c = new woolPiece(-249,-794,1);
+		c = new woolPiece(-327,-1010,2);
 		c = new woolPiece(-477,-1211,0);
-		c = new woolPiece(-534,-1424,0);
-		c = new woolPiece(-711,-1634,0);
+		c = new woolPiece(-534,-1424,2);
+		c = new woolPiece(-711,-1634,1);
 		c = new woolPiece(-849,-1981,0);
-		c = new woolPiece(-1023,-2200,0);
-		c = new woolPiece(-1209,-2437,0);
+		c = new woolPiece(-1023,-2200,2);
+		c = new woolPiece(-1209,-2437,1);
 		c = new woolPiece(-1368,-2677,0);
-		c = new woolPiece(-1587,-2923,0);
-		c = new woolPiece(-1770,-3136,0);
-		c = new woolPiece(-1752,-3412,0);
-		c = new woolPiece(-1731,-3721,0);
-		c = new woolPiece(-1713,-3982,0);
+		c = new woolPiece(-1587,-2923,1);
+		c = new woolPiece(-1784,-3120,2);
+		c = new woolPiece(-1752,-3390,0);
+		c = new woolPiece(-1759,-3721,1);
+		c = new woolPiece(-1713,-3982,2);
+		
+		// Flowers in forest
+		c = new flower(-1957,-3192,3);
+		c = new flower(-1982,-3026,1);
+		c = new flower(-1932,-3376,4);
+		c = new flower(-1941,-2995,1);
+		c = new flower(-1962,-1349,0);
+		c = new flower(-1916,-2610,2);
+		c = new flower(-1918,-2259,3);
+		c = new flower(-1857,-1581,3);
+		c = new flower(-1861,-917,4);
+		c = new flower(-1808,-3557,1);
+		c = new flower(-1788,-1432,0);
+		c = new flower(-1761,-2986,4);
+		c = new flower(-1742,-3444,2);
+		c = new flower(-1744,-2322,3);
+		c = new flower(-1735,-1572,4);
+		c = new flower(-1713,-662,3);
+		c = new flower(-1700,-1639,4);
+		c = new flower(-1684,-1177,3);
+		c = new flower(-1639,-3769,3);
+		c = new flower(-1664,-1349,4);
+		c = new flower(-1637,-997,0);
+		c = new flower(-1667,-479,2);
+		c = new flower(-1610,-1427,2);
+		c = new flower(-1640,-1130,3);
+		c = new flower(-1550,-2372,0);
+		c = new flower(-1558,-1392,1);
+		c = new flower(-1523,-1066,3);
+		c = new flower(-1502,-1852,2);
+		c = new flower(-1464,-2540,0);
+		c = new flower(-1441,-1659,0);
+		c = new flower(-1429,-1770,4);
+		c = new flower(-1359,-3873,1);
+		c = new flower(-1350,-2884,1);
+		c = new flower(-1358,-1159,3);
+		c = new flower(-1337,-3690,2);
+		c = new flower(-1293,-1945,3);
+		c = new flower(-1336,-1881,3);
+		c = new flower(-1262,-2013,2);
+		c = new flower(-1239,-1671,4);
+		c = new flower(-1267,-729,2);
+		c = new flower(-1214,-3295,3);
+		c = new flower(-1173,-3392,3);
+		c = new flower(-1179,-3638,0);
+		c = new flower(-1156,-2177,3);
+		c = new flower(-1153,-1491,0);
+		c = new flower(-1124,-3713,1);
+		c = new flower(-1151,-894,3);
+		c = new flower(-1080,-2909,3);
+		c = new flower(-1085,-2754,3);
+		c = new flower(-1081,-2047,1);
+		c = new flower(-1065,-1229,1);
+		c = new flower(-1047,-3057,0);
+		c = new flower(-1049,-3473,1);
+		c = new flower(-1038,-3584,1);
+		c = new flower(-997,-1094,2);
+		c = new flower(-966,-2270,3);
+		c = new flower(-993,-1126,3);
+		c = new flower(-1005,-543,1);
+		c = new flower(-943,-3701,0);
+		c = new flower(-952,-2622,4);
+		c = new flower(-969,-431,0);
+		c = new flower(-938,-704,4);
+		c = new flower(-919,-2146,2);
+		c = new flower(-888,-469,2);
+		c = new flower(-840,-3745,2);
+		c = new flower(-841,-2177,3);
+		c = new flower(-821,-3971,3);
+		c = new flower(-789,-3798,3);
+		c = new flower(-787,-3279,3);
+		c = new flower(-797,-2265,0);
+		c = new flower(-819,-1522,1);
+		c = new flower(-723,-1481,2);
+		c = new flower(-676,-781,1);
+		c = new flower(-660,-2958,4);
+		c = new flower(-643,-2591,4);
+		c = new flower(-604,-2973,3);
+		c = new flower(-588,-3086,2);
+		c = new flower(-549,-1008,4);
+		c = new flower(-557,-3679,4);
+		c = new flower(-547,-1819,3);
+		c = new flower(-433,-1096,4);
+		c = new flower(-398,-3601,1);
+		c = new flower(-309,-1086,4);
+		c = new flower(-293,-2483,3);
+		c = new flower(-268,-1749,2);
+		c = new flower(-231,-667,3);
+		c = new flower(-212,-1640,1);
+		c = new flower(-175,-3374,3);
+		c = new flower(-157,-1563,0);
+		c = new flower(-151,-3077,4);
+		c = new flower(-112,-1758,4);
+		c = new flower(-83,-3054,0);
+		c = new flower(-106,-2501,2);
+		c = new flower(-72,-3322,4);
+		c = new flower(-42,-2451,1);
+		c = new flower(-11,-2406,0);
+		c = new flower(-33,-2441,4);
+		c = new flower(-28,-605,2);
+		c = new flower(32,-2144,2);
+		c = new flower(24,-1875,0);
+		c = new flower(16,-1754,3);
+		c = new flower(53,-3855,0);
+		c = new flower(43,-489,0);
+		c = new flower(100,-1580,2);
+		c = new flower(165,-3305,1);
+		c = new flower(145,-2956,1);
+		c = new flower(227,-1831,3);
+		c = new flower(255,-819,2);
+		c = new flower(234,-703,1);
+		c = new flower(226,-569,3);
+		c = new flower(303,-3172,0);
+		c = new flower(303,-855,1);
+		c = new flower(349,-2142,3);
+		c = new flower(352,-2881,0);
+		c = new flower(348,-2198,0);
+		c = new flower(380,-3343,4);
+		c = new flower(386,-1323,0);
+		c = new flower(388,-1133,3);
+		c = new flower(451,-2928,4);
+		c = new flower(440,-2240,3);
+		c = new flower(471,-2070,0);
+		c = new flower(455,-1795,0);
+		c = new flower(463,-2689,3);
+		c = new flower(530,-2437,1);
+		c = new flower(526,-1472,1);
+		c = new flower(551,-3107,1);
+		c = new flower(590,-1908,1);
+		c = new flower(653,-2393,2);
+		c = new flower(644,-926,4);
+		c = new flower(695,-1386,2);
+		c = new flower(733,-3220,1);
+		c = new flower(720,-1671,3);
+		c = new flower(709,-1436,2);
+		c = new flower(734,-3802,2);
+		c = new flower(739,-3739,3);
+		c = new flower(770,-1959,0);
+		c = new flower(772,-1463,0);
+		c = new flower(787,-1915,3);
+		c = new flower(816,-3448,4);
+		c = new flower(845,-1051,2);
+		c = new flower(885,-2500,1);
+		c = new flower(912,-1964,2);
+		c = new flower(908,-1988,2);
+		c = new flower(952,-1025,4);
+		c = new flower(964,-3265,0);
+		c = new flower(980,-1510,0);
+		c = new flower(1002,-3539,2);
+		c = new flower(1108,-1563,2);
+		c = new flower(1100,-612,1);
+		c = new flower(1167,-3976,3);
+		c = new flower(1168,-2594,4);
+		c = new flower(1181,-2687,1);
+		c = new flower(1177,-448,0);
+		c = new flower(1235,-1824,1);
+		c = new flower(1372,-2662,3);
+		c = new flower(1407,-1106,1);
+		c = new flower(1427,-1728,2);
+		c = new flower(1474,-3690,1);
+		c = new flower(1461,-3858,2);
+		c = new flower(1509,-3597,1);
+		c = new flower(1566,-2348,1);
+		c = new flower(1583,-1661,1);
+		c = new flower(1651,-1438,3);
+		c = new flower(1693,-2598,1);
+		c = new flower(1689,-2182,3);
+		c = new flower(1662,-568,1);
+		c = new flower(1697,-1451,0);
+		c = new flower(1708,-972,1);
+		c = new flower(1746,-991,3);
+		c = new flower(1758,-617,4);
+		c = new flower(1741,-624,3);
+		c = new flower(1846,-2519,1);
+		c = new flower(1915,-3441,2);
+		c = new flower(1906,-1217,3);
+		c = new flower(1955,-1187,3);
 		
 		// Denmother.
 		u = new denmother(1500, -3281);
@@ -241,11 +463,9 @@ public class sheepFarm extends zone {
 		c = new bone(1449,-3472,1);
 		c = new bone(1533,-3571,0);
 		c = new bone(1571,-3415,4);
-		c = new bone(1520,-3322,3);
 		c = new bone(1462,-3220,5);
 		c = new bone(1364,-3154,0);
 		c = new bone(1264,-3205,4);
-		c = new bone(1209,-3298,3);
 		c = new bone(1137,-3361,1);
 		c = new bone(1097,-3214,0);
 		c = new bone(1153,-3106,4);
@@ -259,7 +479,6 @@ public class sheepFarm extends zone {
 		c = new bone(1589,-2956,3);
 		c = new bone(1706,-2884,4);
 		c = new bone(1794,-2944,0);
-		c = new bone(1882,-2977,3);
 		c = new bone(1848,-3079,4);
 		c = new bone(1770,-3160,3);
 		c = new bone(1847,-3235,0);
@@ -267,21 +486,18 @@ public class sheepFarm extends zone {
 		c = new bone(1817,-3412,1);
 		c = new bone(1734,-3505,4);
 		c = new bone(1661,-3601,0);
-		c = new bone(1735,-3676,3);
 		c = new bone(1409,-3031,0);
 		c = new bone(1571,-3118,1);
 		c = new bone(1689,-3298,3);
 		c = new bone(1871,-3154,4);
 		c = new bone(1812,-3028,5);
 		c = new bone(1622,-2896,1);
-		c = new bone(1363,-2887,0);
 		c = new bone(1303,-2866,3);
 		c = new bone(1231,-2950,2);
 		c = new bone(1300,-3022,0);
 		c = new bone(1144,-3193,5);
 		c = new bone(1285,-3400,3);
 		c = new bone(1348,-3538,4);
-		c = new bone(1447,-3619,4);
 		c = new bone(1540,-3493,5);
 		c = new bone(1638,-3577,1);
 		c = new bone(1349,-3289,2);
@@ -289,7 +505,6 @@ public class sheepFarm extends zone {
 		c = new bone(1806,-3619,4);
 		c = new bone(1919,-3640,0);
 		c = new bone(1865,-3532,3);
-		c = new bone(1944,-3469,0);
 		c = new bone(1887,-3424,1);
 		c = new bone(1817,-3343,3);
 		c = new bone(1920,-3226,2);
@@ -299,7 +514,6 @@ public class sheepFarm extends zone {
 		c = new bone(1254,-2644,3);
 		c = new bone(1005,-2566,2);
 		c = new bone(881,-2713,1);
-		c = new bone(715,-2872,4);
 		c = new bone(740,-3088,5);
 		c = new bone(867,-3238,3);
 		c = new bone(742,-3427,4);
@@ -309,9 +523,25 @@ public class sheepFarm extends zone {
 		c = new bone(1078,-3844,0);
 		c = new bone(1325,-3808,3);
 		c = new bone(1500,-3868,0);
-		c = new bone(1643,-3739,1);
 		c = new bone(1768,-3589,2);
 		c = new bone(1898,-3634,5);
+		c = new bone(955,-3091,1);
+		c = new bone(999,-2860,2);
+		c = new bone(1118,-2740,0);
+		c = new bone(806,-2632,0);
+		c = new bone(512,-2767,2);
+		c = new bone(512,-2794,4);
+		c = new bone(463,-3079,3);
+		c = new bone(503,-3310,1);
+		c = new bone(593,-3478,5);
+		c = new bone(843,-3565,4);
+		c = new bone(1013,-3421,3);
+		c = new bone(1203,-3913,2);
+		c = new bone(1641,-3214,1);
+		c = new bone(1829,-2695,4);
+		c = new bone(1682,-2623,3);
+		c = new bone(1445,-2578,5);
+
 		
 		// Spawn forest trees.
 		c = new tree(-2000,-3946,0);
@@ -433,7 +663,7 @@ public class sheepFarm extends zone {
 		c = new tree(-1099,-3022,2);
 		c = new bush(-1091,-2918,1);
 		c = new tree(-1112,-2509,1);
-		c = new tree(-1090,-2223,0);
+		c = new tree(-1090,-2240,0);
 		c = new tree(-1118,-2109,2);
 		c = new bush(-1112,-1835,1);
 		c = new tree(-1074,-1554,0);
@@ -454,7 +684,7 @@ public class sheepFarm extends zone {
 		c = new tree(-980,-2222,1);
 		c = new tree(-947,-1949,0);
 		c = new tree(-964,-1716,1);
-		c = new tree(-972,-1587,1);
+		c = new tree(-972,-1540,1);
 		c = new tree(-950,-1424,0);
 		c = new tree(-987,-1335,1);
 		c = new tree(-964,-1162,0);
@@ -799,7 +1029,13 @@ public class sheepFarm extends zone {
 		c = new tree(1780,-772,0);
 		c = new bush(1806,-636,1);
 		c = new tree(1774,-536,2);
-		c = new bush(1904,-3996,0);
+		
+		// TODO: SECRET PASSAGE BUSH.
+		
+		bush secretBush = new bush(1904,-3996,0);
+		secretBush.setSecretPassage(true);
+		
+		// More trees and bushes.
 		c = new bush(1927,-3849,1);
 		c = new tree(1899,-3707,0);
 		c = new tree(1896,-2761,0);
@@ -847,7 +1083,8 @@ public class sheepFarm extends zone {
 		c = new haystack(-195,-165,0);
 		
 		// Draw the bridge.
-		spawnWoodRect(-170-6,56,-165+32,200);
+		spawnPassableWaterRect(-170-6,56,-165+32,200);
+		c = new bridge(-170-16,56-33,0);
 		
 		// Draw the water to left of bridge spawn.
 		spawnWaterRect(-2100+10-6,56,-167,200);	
@@ -872,8 +1109,7 @@ public class sheepFarm extends zone {
 		c = new fenceBarsSmall(32,-436,0);
 		c = new fenceBarsSmall(35,-436,0);
 		c = new fenceBarsSmall(37,-436,0);
-		horizontalGate forestGate = new horizontalGate(-13+fenceAdjustX/2,-434,0);
-		forestGate.open();
+		forestGate = new horizontalGate("Forest Gate", "Forest Key", -13+fenceAdjustX/2,-434,0);
 		
 		///////////////////////////////
 		//// FARLSWORTH'S AREA  ///////
@@ -883,12 +1119,13 @@ public class sheepFarm extends zone {
 		spawnFence(35,-435,35,200); // Vertical, left
 		spawnFence(455,-436,455,300); // Vertical, right
 		spawnFence(40,-43,440,-43); // Bottom middle area.
+		farlsworth sheepBoss = new farlsworth(411,-394);
 		
 		// Left of gate.
 		c = new fenceBarsSmall(409,-17,0); 
 		
 		// Gate.
-		horizontalGate farlsworthGate = new horizontalGate(412,-15,0);
+		horizontalGate farlsworthGate = new horizontalGate("Sheep Gate", "Sheep Key", 412,-15,0);
 		
 		// Right of gate
 		c = new fenceBarsSmall(457,-17,0); 
@@ -1025,6 +1262,29 @@ public class sheepFarm extends zone {
 		c = new tree(-160,740,1);
 		c = new rock(-612,669,1);
 		c = new bush(-429,636,1);
+	}
+	
+	// Create zone events.
+	public void loadZoneEvents() {
+		
+		// Load well tooltip event.
+		wellTooltipLoaded = new event("wellTooltipLoaded");
+	}
+	
+	// Deal with the first well we encounters.
+	public void dealWithFirstWell() {
+		player currPlayer = player.getCurrentPlayer();
+		if(currPlayer != null && currPlayer.isWithin(-849,-1981,-634,-1696) && wellTooltipLoaded != null && !wellTooltipLoaded.isCompleted()) {
+			wellTooltipLoaded.setCompleted(true);
+			tooltipString t = new tooltipString("Use any water source to save the game and heal.");
+		}
+	}
+	
+	// Do zone specific tasks that aren't monitored by
+	// zone specific units. 
+	@Override
+	public void update() {
+		dealWithFirstWell();
 	}
 
 	// Get the player location in the zone.

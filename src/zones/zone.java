@@ -72,6 +72,11 @@ public abstract class zone {
 	
 	// Get the player location in the zone.
 	public abstract intTuple getDefaultLocation();
+	
+	// Update.
+	public void update() {
+		
+	}
 
 	/////////////////////////
 	// Getters and setters //

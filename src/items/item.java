@@ -11,6 +11,7 @@ import drawing.spriteSheet;
 import effects.effect;
 import effects.effectTypes.floatingString;
 import items.bottles.normalBottle;
+import items.keys.sheepKey;
 import items.weapons.dagger;
 import sounds.sound;
 import units.player;
@@ -72,6 +73,7 @@ public abstract class item extends drawnObject {
 	// Pickup the item.
 	public void pickUp() {
 		if(player.getCurrentPlayer() != null) {
+			
 			// Equip the item if it's a weapon or bottle and we don't have one equipped.
 			if((player.getCurrentPlayer().getEquippedWeapon() == null && this instanceof weapon) ||
 					(player.getCurrentPlayer().getEquippedBottle() == null && this instanceof bottle)) {
@@ -121,6 +123,9 @@ public abstract class item extends drawnObject {
 		
 		// Bottles.
 		normalBottle.bottleRef = new normalBottle();
+		
+		// Keys.
+		sheepKey.keyRef = new sheepKey();
 		
 	}
 }

@@ -7,13 +7,14 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import doodads.farmLand.haystack;
 import drawing.userInterface.inventory;
-import interactions.gag;
+import drawing.userInterface.tooltipString;
+import interactions.event;
 import interactions.quest;
 import items.bottle;
 import items.item;
 import items.weapon;
-import terrain.doodads.farmLand.haystack;
 import units.boss;
 import units.player;
 import units.unitType;
@@ -24,6 +25,9 @@ public class saveState implements Serializable {
 	/////////////////////////
 	////// DEFAULTS /////////
 	/////////////////////////
+	
+	// Game saved text.
+	public static String DEFAULT_GAME_SAVED_TEXT = "Game saved.";
 	
 	// Default saveFile
 	private static String DEFAULT_SAVE_FILENAME = "save/gameData.save";
@@ -55,14 +59,8 @@ public class saveState implements Serializable {
 	private int playerLevel;
 	private int expIntoLevel;
 	
-	// Quests
-	private ArrayList<quest> allQuests;
-	
 	// Gags
-	private ArrayList<gag> allGags;
-	
-	// Bosses
-	private ArrayList<boss> allBosses;
+	private ArrayList<event> allEvents;
 
 	////////////////////////
 	////// METHODS /////////
@@ -77,12 +75,16 @@ public class saveState implements Serializable {
 	public static void createSaveState() {
 		try {
 			if(player.playerLoaded && player.getCurrentPlayer()!= null) {
+				
+				// Display that we made a new savestate.
+				tooltipString t = new tooltipString(DEFAULT_GAME_SAVED_TEXT);
+				
 				// Create new saveState.
 				saveState s = new saveState();
 				
 				// Load our player. 
 				player currPlayer = player.getCurrentPlayer();
-				s.setZoneName(currPlayer.getPlayerZone().getName());
+				s.setZoneName(currPlayer.getCurrentZone().getName());
 				s.setPlayerX(currPlayer.getX());
 				s.setPlayerY(currPlayer.getY());
 				s.setFacingDirection(currPlayer.getFacingDirection());
@@ -91,15 +93,9 @@ public class saveState implements Serializable {
 				s.setPlayerLevel(currPlayer.getPlayerLevel());
 				s.setExpIntoLevel(currPlayer.getExpIntoLevel());
 				s.setEquippedBottle(currPlayer.getEquippedBottle());
-			
-				// Save quests.
-				s.setAllQuests(quest.loadedQuests);
 				
 				// Save jokes.
-				s.setAllGags(gag.loadedGags);
-				
-				// Save bosses.
-				s.setAllBosses(boss.loadedBosses);
+				s.setAllEvents(event.loadedEvents);
 				
 				// Open the streams.
 				FileOutputStream fileStream = new FileOutputStream(DEFAULT_SAVE_FILENAME);   
@@ -140,47 +136,18 @@ public class saveState implements Serializable {
 				objectStream.writeObject(s.getPlayerLevel());
 				objectStream.writeObject(s.getExpIntoLevel());
 				
-				//////////////
-				/// QUESTS ///
-				//////////////
-				// Write the length of the coming array.
-				int questsSize = 0;
-				if(s.getAllQuests() != null) questsSize = s.getAllQuests().size();
-				objectStream.writeObject(questsSize); 
-				
-				// Write the inventory (names of items) to save file.
-				for(int i = 0; i < questsSize; i++) {
-					objectStream.writeObject(s.getAllQuests().get(i).getTheText());
-					objectStream.writeObject(s.getAllQuests().get(i).isStarted());
-					objectStream.writeObject(s.getAllQuests().get(i).isCompleted());
-				}
-				
-				//////////////
-				/// GAGS   ///
-				//////////////
+				////////////////
+				/// EVENTS   ///
+				////////////////
 				// Write the length of the coming array.
 				int gagsSize = 0;
-				if(s.getAllGags() != null) gagsSize = s.getAllGags().size();
+				if(s.getAllEvents() != null) gagsSize = s.getAllEvents().size();
 				objectStream.writeObject(gagsSize); 
 				
 				// Write the inventory (names of items) to save file.
 				for(int i = 0; i < gagsSize; i++) {
-					objectStream.writeObject(s.getAllGags().get(i).getName());
-					objectStream.writeObject(s.getAllGags().get(i).isCompleted());
-				}
-				
-				//////////////
-				/// BOSSES ///
-				//////////////
-				// Write the length of the coming array.
-				int bossesSize = 0;
-				if(s.getAllBosses() != null) bossesSize = s.getAllBosses().size();
-				objectStream.writeObject(bossesSize); 
-				
-				// Write the inventory (names of items) to save file.
-				for(int i = 0; i < bossesSize; i++) {
-					objectStream.writeObject(s.getAllBosses().get(i).getTypeOfUnit().getName());
-					objectStream.writeObject(s.getAllBosses().get(i).isCompleted());
+					objectStream.writeObject(s.getAllEvents().get(i).getName());
+					objectStream.writeObject(s.getAllEvents().get(i).isCompleted());
 				}
 				
 				// Close the streams.
@@ -247,79 +214,25 @@ public class saveState implements Serializable {
 			s.setExpIntoLevel((int)objectStream.readObject());
 			
 			//////////////
-			/// QUESTS ///
+			/// EVENTS ///
 			//////////////
 			// Write the length of the coming array.
-			int questsSize = (int)objectStream.readObject(); 
+			int eventsSize = (int)objectStream.readObject(); 
 			
 			// Create new array.
-			ArrayList<quest> newQuests = new ArrayList<quest>();
-			
-			// Load the quests from save file.
-			for(int i = 0; i < questsSize; i++) {
-				String theText = (String)objectStream.readObject();
-				boolean started = (boolean)objectStream.readObject();
-				boolean completed = (boolean)objectStream.readObject();
-				quest q = new quest(theText, null, null);
-				q.setStarted(started);
-				q.setCompleted(completed);
-				newQuests.add(q);
-			}
-			
-			// Load the quests.
-			s.setAllQuests(newQuests);
-			
-			//////////////
-			/// GAGS ///
-			//////////////
-			// Write the length of the coming array.
-			int gagsSize = (int)objectStream.readObject(); 
-			
-			// Create new array.
-			ArrayList<gag> newGags = new ArrayList<gag>();
+			ArrayList<event> newEvents = new ArrayList<event>();
 			
 			// Read the gags from save file.
-			for(int i = 0; i < gagsSize; i++) {
+			for(int i = 0; i < eventsSize; i++) {
 				String theName = (String)objectStream.readObject();
 				boolean completed = (boolean)objectStream.readObject();
-				gag g = new gag(theName);
+				event g = new event(theName);
 				g.setCompleted(completed);
-				newGags.add(g);
+				newEvents.add(g);
 			}
 			
 			// Load the gags
-			s.setAllGags(newGags);
-			
-			//////////////
-			/// BOSSES ///
-			//////////////
-			// Read the length of the coming array.
-			int bossesSize = (int)objectStream.readObject(); 
-			
-			// Create new array.
-			ArrayList<boss> newBosses = new ArrayList<boss>();
-			
-			// Read the gags from save file.
-			for(int i = 0; i < bossesSize; i++) {
-				String theName = (String)objectStream.readObject();
-				boolean completed = (boolean)objectStream.readObject();
-				unitType unitTypeRef =
-						new unitType(theName,  // Name of unitType 
-								     null,
-								     null,
-								     0,
-								     0,
-								     0, // Movespeed
-								     0 // Jump speed
-									);	
-				boss b = new boss(unitTypeRef, 0,0);
-				b.setDrawObject(false);
-				b.setCompleted(completed);
-				newBosses.add(b);
-			}
-			
-			// Load the gags
-			s.setAllBosses(newBosses);
+			s.setAllEvents(newEvents);
 			
 			// Close the streams.
 		    objectStream.close();   
@@ -398,22 +311,6 @@ public class saveState implements Serializable {
 		this.expIntoLevel = expIntoLevel;
 	}
 
-	public ArrayList<quest> getAllQuests() {
-		return allQuests;
-	}
-
-	public void setAllQuests(ArrayList<quest> allQuests) {
-		this.allQuests = allQuests;
-	}
-
-	public ArrayList<gag> getAllGags() {
-		return allGags;
-	}
-
-	public void setAllGags(ArrayList<gag> allGags) {
-		this.allGags = allGags;
-	}
-
 	public bottle getEquippedBottle() {
 		return equippedBottle;
 	}
@@ -422,12 +319,12 @@ public class saveState implements Serializable {
 		this.equippedBottle = equippedBottle;
 	}
 
-	public ArrayList<boss> getAllBosses() {
-		return allBosses;
+	public ArrayList<event> getAllEvents() {
+		return allEvents;
 	}
 
-	public void setAllBosses(ArrayList<boss> allBosses) {
-		this.allBosses = allBosses;
+	public void setAllEvents(ArrayList<event> allEvents) {
+		this.allEvents = allEvents;
 	}
 	
 }

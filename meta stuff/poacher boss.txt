@@ -1,0 +1,2 @@
+has different animals
+if poacher dies, animal enrages, have to kill animal to finish fight.

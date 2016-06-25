@@ -15,6 +15,7 @@ public class fog {
 	// Fog percentage.
 	public static float fogLevel = 0; // between 0.0 and 1.0
 	public static float fogLevelMax = 0;
+	public static float oldLevel = 0;
 	
 	// Timer stuff.
 	private static long startFade = 0;
@@ -38,7 +39,11 @@ public class fog {
 	public static void update() {
 		if(fogLevel < fogLevelMax) {
 			fogLevel = fogLevelMax*((time.getTime() - startFade)/(fadeTime*1000));
-			if(fogLevel > 1) fogLevel = 1;
+			if((time.getTime() - startFade)/(fadeTime*1000) >= 1) fogLevel = fogLevelMax;
+		}
+		else if(fogLevel > fogLevelMax) {
+			 fogLevel = oldLevel*(1 - ((time.getTime() - startFade)/(fadeTime*1000)));
+			 if((time.getTime() - startFade)/(fadeTime*1000) >= 1) fogLevel = fogLevelMax;
 		}
 	}
 	
@@ -46,6 +51,7 @@ public class fog {
 	public static void fadeTo(float level, float newTime) {
 		startFade = time.getTime();
 		fadeTime = newTime;
+		if(level < fogLevel) oldLevel = fogLevel;
 		fogLevelMax = level;
 	}
 

@@ -3,6 +3,7 @@ package utilities;
 import java.util.Random;
 
 import drawing.drawnObject;
+import drawing.userInterface.interactBox;
 import items.item;
 import sounds.music;
 import terrain.chunk;
@@ -31,6 +32,10 @@ public abstract class utility {
 			}
 		}
 		
+		// Update the current zone.
+		player currPlayer = player.getCurrentPlayer();
+		if(currPlayer != null && currPlayer.getCurrentZone() != null) currPlayer.getCurrentZone().update();
+		
 		// Update fog.
 		fog.update();
 	}
@@ -46,6 +51,7 @@ public abstract class utility {
 	public static void initiateAll() {
 		time.initiate();
 		drawnObject.initiate();
+		interactBox.initiate();
 		region.initiate();
 		fog.initiate();
 		unit.initiate();

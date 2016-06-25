@@ -27,7 +27,7 @@ public class sheep extends unit {
 	
 	// TopDown real dimensions
 	public static int DEFAULT_TOPDOWN_HEIGHT = 18;
-	public static int DEFAULT_TOPDOWN_WIDTH = 20;
+	public static int DEFAULT_TOPDOWN_WIDTH = 24;
 	public static int DEFAULT_TOPDOWN_ADJUSTMENT_Y = 4;
 	
 	// How far do the sheep patrol
@@ -79,7 +79,7 @@ public class sheep extends unit {
 	
 	// AI sounds.
 	private float randomBleet = 0f;
-	private float lastBleet = 0f;
+	private static float lastBleet = 0f;
 	
 	// Interaction
 	private interactBox interactSequence;
@@ -98,7 +98,7 @@ public class sheep extends unit {
 		textSeries startOfConversation = new textSeries(null, "Bah.");
 		startOfConversation.setEnd();
 		
-		return new interactBox(startOfConversation, stringUtils.toTitleCase(DEFAULT_SHEEP_NAME));
+		return new interactBox(startOfConversation, stringUtils.toTitleCase(DEFAULT_SHEEP_NAME), true);
 	}
 	
 	// Interact with object. 

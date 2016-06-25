@@ -7,7 +7,7 @@ import drawing.spriteSheet;
 import drawing.animation.animation;
 import drawing.animation.animationPack;
 import drawing.spriteSheet.spriteSheetInfo;
-import effects.effectTypes.tooltipString;
+import drawing.userInterface.tooltipString;
 import items.bottle;
 import items.item;
 import items.weapon;
@@ -65,7 +65,7 @@ public class normalBottle extends bottle {
 		
 		// Set item's stats
 		// Bottle charges.
-		setChargesLeft(0);
+		setChargesLeft(3);
 		setMaxCharges(DEFAULT_MAX_CHARGES);
 		
 		// Heal percent.
@@ -77,7 +77,7 @@ public class normalBottle extends bottle {
 	public void reactToPickup() {
 		player currPlayer = player.getCurrentPlayer();
 		if(currPlayer != null) {
-			tooltipString t = new tooltipString("Fill the bottle, then press 'q' to use.");
+			tooltipString t = new tooltipString("Press 'q' or 'shift' to use bottle.");
 		}
 	}
 

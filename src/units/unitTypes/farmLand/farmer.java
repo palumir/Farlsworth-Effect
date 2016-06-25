@@ -4,11 +4,12 @@ import java.util.Random;
 
 import drawing.camera;
 import drawing.userInterface.interactBox;
+import drawing.userInterface.tooltipString;
 import effects.effect;
 import effects.effectTypes.bloodSquirt;
-import effects.effectTypes.tooltipString;
 import interactions.quest;
 import interactions.textSeries;
+import items.keys.sheepKey;
 import modes.mode;
 import units.humanType;
 import units.player;
@@ -88,7 +89,7 @@ public class farmer extends unit {
 		
 		// Create quest.
 		farlsworthQuest = makeQuest();
-		hasQuest();
+		if(!farlsworthQuest.isStarted()) hasQuest();
 	}
 	
 	// Create conversation
@@ -185,7 +186,7 @@ public class farmer extends unit {
 		yes.setEnd();
 		
 		// Create the whole quest and add dialogue.
-		quest q = new quest(DEFAULT_QUEST_DESC, this, new interactBox(startOfConversation, stringUtils.toTitleCase(unitName)));
+		quest q = new quest(DEFAULT_QUEST_DESC, this, new interactBox(startOfConversation, stringUtils.toTitleCase(unitName), true));
 		
 		// If the quest is started, don't allow the person to do the whole dialogue.
 		if(q.isStarted()) {
@@ -199,7 +200,8 @@ public class farmer extends unit {
 	public void doQuestStuff() {
 
 		// If we have reached the end of our quest conversation (and they clicked yes, of course, since it's all they can do.)
-		if(farlsworthQuest != null && !farlsworthQuest.completed() && farlsworthQuest.getInteractBox().getTheText().isEnd()) {
+		if(farlsworthQuest != null && !farlsworthQuest.isStarted() && !farlsworthQuest.completed() && farlsworthQuest.getInteractBox().getTheText().isEnd()) {
+			sheepKey.keyRef.pickUp();
 			farlsworthQuest.startQuest();
 		}
 	}
@@ -208,6 +210,7 @@ public class farmer extends unit {
 	public void interactWith() { 
 		if(!farlsworthQuest.completed())  {
 			farlsworthQuest = makeQuest();
+			this.facingDirection = stringUtils.oppositeDir(player.getCurrentPlayer().getFacingDirection());
 			farlsworthQuest.getInteractBox().toggleDisplay();
 		}
 	}
@@ -221,7 +224,7 @@ public class farmer extends unit {
 		player currPlayer = player.getCurrentPlayer();
 		if(!tooltipShown && farlsworthQuest != null && !farlsworthQuest.isStarted() && currPlayer != null && currPlayer.isWithin(-1017,-283,-450,25)) {
 			tooltipShown = true;
-			tooltipString t = new tooltipString("Press 'e' to interact with something.");
+			tooltipString t = new tooltipString("Press 'e' or 'enter' to interact with something.");
 		}
 	}
 	
