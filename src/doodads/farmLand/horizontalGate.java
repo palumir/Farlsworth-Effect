@@ -3,10 +3,11 @@ package doodads.farmLand;
 import java.util.Random;
 
 import drawing.camera;
-import drawing.userInterface.interactBox;
 import interactions.event;
+import interactions.interactBox;
 import interactions.textSeries;
 import modes.mode;
+import sounds.sound;
 import terrain.chunk;
 import terrain.chunkType;
 import terrain.generalChunkType;
@@ -36,6 +37,10 @@ public class horizontalGate extends chunk {
 	// Dimensions
 	public static int DEFAULT_CHUNK_WIDTH = 46;
 	public static int DEFAULT_CHUNK_HEIGHT = 34;
+	
+	// Sounds
+	private String openGate = "sounds/effects/doodads/openGate.wav";
+	private String closeGate = "sounds/effects/doodads/closeGate.wav";
 	
 	// Key name.
 	private String keyName;
@@ -103,7 +108,7 @@ public class horizontalGate extends chunk {
 		if(!open) {
 			startOfConversation = new textSeries("StartWithButtons", "StartWithButtons");
 			
-			if(player.getCurrentPlayer() != null && player.getCurrentPlayer().getPlayerInventory().hasKey(keyName)) {
+			if((player.getCurrentPlayer() != null && player.getCurrentPlayer().getPlayerInventory().hasKey(keyName)) || hasBeenOpened.isCompleted()) {
 				s = startOfConversation.addChild("Open", "You open the gate.");
 			}
 			else {
@@ -160,6 +165,10 @@ public class horizontalGate extends chunk {
 	public void open() {
 		if(hasBeenOpened.isCompleted() || (player.getCurrentPlayer() != null && player.getCurrentPlayer().getPlayerInventory().hasKey(keyName))) {
 			
+			// Play sound
+			sound s = new sound(openGate);
+			s.start();
+			
 			// Open gate.
 			forceOpen();
 		}
@@ -183,6 +192,10 @@ public class horizontalGate extends chunk {
 		
 		// Set that the gate is closed.
 		isOpen.setCompleted(false);
+		
+		// Play sound
+		sound s = new sound(closeGate);
+		s.start();
 		
 		// Close the gate.
 		setPassable(false);

@@ -16,6 +16,13 @@ bottle_drink.wav by nanashco3
 Item Pickup by TreasureSounds
 1_Knife_Slash_A.wav by lmbubec
 Itemize by Scrampunk
+Gate_Open_00.wav by LittleRobotSoundFactory
+GATE: by German1990
+Eat an apple by DjDust
+hit-bush01.wav by JanKoehl
+Noise of a fountain lever by felipeInv
+LevelUp.wav by sepal
+Water splash.wav by speedygonzo
 
 Music: 
 Elidia McFaggot

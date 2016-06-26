@@ -36,7 +36,7 @@ public abstract class bottle extends item {
 	protected static spriteSheet bottleSpriteSheet = null;
 	
 	// Sound.
-	private sound bottleDrink = new sound("sounds/effects/player/UI/bottleDrink.wav");
+	private String bottleDrink = "sounds/effects/player/UI/bottleDrink.wav";
 	
 	// Does the player actually own the item?
 	public static boolean inInventory = false;
@@ -93,7 +93,8 @@ public abstract class bottle extends item {
 	public void useCharge() {
 		player currPlayer = player.getCurrentPlayer();
 		if(getChargesLeft() > 0) {
-			bottleDrink.playSound(DEFAULT_BOTTLE_DRINK_VOLUME);
+			sound s = new sound(bottleDrink);
+			s.start();
 			setChargesLeft(getChargesLeft() - 1);
 			int healHp = (int) (getHealPercent()*currPlayer.getMaxHealthPoints());
 			currPlayer.heal(healHp);

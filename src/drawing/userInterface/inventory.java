@@ -58,11 +58,11 @@ public class inventory extends interfaceObject {
 	private boolean displayOn = false;
 	
 	// Sounds for inventory.
-	private sound openInventory;
-	private sound closeInventory;
-	private sound equipWeapon;
-	private sound unequipWeapon;
-	private sound UIMove;
+	private String openInventory;
+	private String closeInventory;
+	private String equipWeapon;
+	private String unequipWeapon;
+	private String UIMove;
 	
 	///////////////
 	/// METHODS ///
@@ -72,18 +72,24 @@ public class inventory extends interfaceObject {
 		items = new ArrayList<item>();
 		
 		// Set sounds.
-		openInventory = new sound("sounds/effects/player/UI/openInventory.wav");
-		closeInventory = new sound("sounds/effects/player/UI/closeInventory.wav");
-		equipWeapon = new sound("sounds/effects/player/UI/equipItem.wav");
-		unequipWeapon = new sound("sounds/effects/player/UI/unequipItem.wav");
-		UIMove = new sound("sounds/effects/player/UI/UIMove.wav");
+		openInventory = "sounds/effects/player/UI/openInventory.wav";
+		closeInventory = "sounds/effects/player/UI/closeInventory.wav";
+		equipWeapon = "sounds/effects/player/UI/equipItem.wav";
+		unequipWeapon = "sounds/effects/player/UI/unequipItem.wav";
+		UIMove = "sounds/effects/player/UI/UIMove.wav";
 	}
 	
 	// Toggle inventory display.
 	public void toggleDisplay() {
 		setDisplayOn(!isDisplayOn());
-		if(displayOn) openInventory.playSound(0.7f);
-		else { closeInventory.playSound(0.7f); }
+		if(displayOn) {
+			sound s = new sound(openInventory);
+			s.start();
+		}
+		else { 
+			sound s = new sound(closeInventory);
+			s.start();
+		}
 	}
 	
 	// Search for key.
@@ -137,14 +143,16 @@ public class inventory extends interfaceObject {
 						currPlayer.unequipWeapon();
 						
 						// Play equip sound.
-						unequipWeapon.playSound(0.7f);
+						sound s = new sound(unequipWeapon);
+						s.start();
 					}
 					else {
 						// Equip item
 						i.equip();
 						
 						// Play equip sound.
-						equipWeapon.playSound(0.7f);
+						sound s = new sound(equipWeapon);
+						s.start();
 					}
 				}
 				
@@ -157,14 +165,16 @@ public class inventory extends interfaceObject {
 						currPlayer.unequipBottle();
 						
 						// Play equip sound.
-						unequipWeapon.playSound(0.7f);
+						sound s = new sound(unequipWeapon);
+						s.start();
 					}
 					else {
 						// Equip item
 						i.equip();
 						
 						// Play equip sound.
-						equipWeapon.playSound(0.7f);
+						sound s = new sound(equipWeapon);
+						s.start();
 					}
 				}
 				
@@ -183,7 +193,8 @@ public class inventory extends interfaceObject {
 			if(selectedSlot==0 ||
 			(selectedSlot)/Math.sqrt(DEFAULT_INVENTORY_SIZE)==(int)((selectedSlot+1)/Math.sqrt(DEFAULT_INVENTORY_SIZE)));
 			else {
-				UIMove.playSound(0.7f);
+				sound s = new sound(UIMove);
+				s.start();
 				selectedSlot--;
 			}
 		}
@@ -192,7 +203,8 @@ public class inventory extends interfaceObject {
 		if(direction=="right") {
 			if((selectedSlot+1)/Math.sqrt(DEFAULT_INVENTORY_SIZE)==(int)((selectedSlot+1)/Math.sqrt(DEFAULT_INVENTORY_SIZE)));
 			else {
-				UIMove.playSound(0.7f);
+				sound s = new sound(UIMove);
+				s.start();
 				selectedSlot++;
 			}
 		}
@@ -201,7 +213,8 @@ public class inventory extends interfaceObject {
 		if(direction=="up") {
 			if(selectedSlot-Math.sqrt(DEFAULT_INVENTORY_SIZE) < 0);
 			else {
-				UIMove.playSound(0.7f);
+				sound s = new sound(UIMove);
+				s.start();
 				selectedSlot -= Math.sqrt(DEFAULT_INVENTORY_SIZE);
 			}
 		}
@@ -210,7 +223,8 @@ public class inventory extends interfaceObject {
 		if(direction=="down") {
 			if(selectedSlot + Math.sqrt(DEFAULT_INVENTORY_SIZE) >= DEFAULT_INVENTORY_SIZE);
 			else {
-				UIMove.playSound(0.7f);
+				sound s = new sound(UIMove);
+				s.start();
 				selectedSlot += Math.sqrt(DEFAULT_INVENTORY_SIZE);
 			}
 		}

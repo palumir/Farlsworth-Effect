@@ -39,7 +39,6 @@ public class cave extends groundTile {
 	// Constructor
 	public cave(int newX, int newY) {
 		super(typeReference, newX, newY);
-		if(mode.getCurrentMode() == "topDown") this.setPassable(true);
-		else this.setPassable(false);
+		setPassable(false);
 	}
 }

@@ -1,7 +1,7 @@
 package doodads.farmLand;
 
 
-import drawing.userInterface.interactBox;
+import interactions.interactBox;
 import interactions.textSeries;
 import modes.mode;
 import terrain.chunk;

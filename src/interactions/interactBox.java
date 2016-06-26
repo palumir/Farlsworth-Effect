@@ -1,4 +1,4 @@
-package drawing.userInterface;
+package interactions;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -9,7 +9,7 @@ import java.awt.image.BufferedImage;
 import drawing.drawnObject;
 import drawing.gameCanvas;
 import drawing.spriteSheet;
-import interactions.textSeries;
+import drawing.userInterface.interfaceObject;
 import sounds.sound;
 
 public class interactBox extends interfaceObject  {
@@ -54,12 +54,10 @@ public class interactBox extends interfaceObject  {
 	private boolean textMode = false;
 	private boolean displayOn = false;
 	private static interactBox currentDisplay = null;
-	private boolean isEnd = false;
 	
 	// Sounds.
-	private static sound UIMove = new sound("sounds/effects/player/UI/UIMove.wav");
-	private static sound typing = new sound("sounds/effects/player/UI/typing.wav");
-	private static float typingVolume = 0.7f;
+	private static String UIMove = "sounds/effects/player/UI/UIMove.wav";
+	private static String typing = "sounds/effects/player/UI/typing.wav";
 	
 	///////////////
 	/// METHODS ///
@@ -140,7 +138,9 @@ public class interactBox extends interfaceObject  {
 					if(displayIterator == DEFAULT_DISPLAY_FOR) {
 						displayIterator = 0;
 						displayedText += getTheText().getTextOnPress().charAt(displayedText.length());
-						if(!typing.getClip().isActive()) typing.playSound(typingVolume);
+						sound s = new sound(typing);
+						s.setVolume(0.9f);
+						s.start();
 					}
 				}
 				
@@ -225,8 +225,17 @@ public class interactBox extends interfaceObject  {
 	// Select
 	public void select() {
 		
+		// If we are speeding up text.
+		// If we aren't done showing text, show it all.
+		if(textMode && displayedText.length() != getTheText().getTextOnPress().length()) {
+			displayedText = getTheText().getTextOnPress();
+			sound s = new sound(typing);
+			s.setVolume(1f);
+			s.start();
+		}
+		
 		// If there's children.
-		if(theText.getChildren() != null && theText.getChildren().size() > 0) {
+		else if(theText.getChildren() != null && theText.getChildren().size() > 0) {
 			
 			// If we are currently in text mode.
 			if(textMode) {
@@ -272,7 +281,8 @@ public class interactBox extends interfaceObject  {
 			if(direction=="right") {
 				if(selectedButton + 1 < theText.getChildren().size()) {
 					selectedButton++;
-					UIMove.playSound(1f);
+					sound s = new sound(UIMove);
+					s.start();
 				}
 			}
 			
@@ -280,7 +290,8 @@ public class interactBox extends interfaceObject  {
 			if(direction=="left") {
 				if(selectedButton - 1 >= 0) {
 					selectedButton--;
-					UIMove.playSound(1f);
+					sound s = new sound(UIMove);
+					s.start();
 				}
 			}
 		}

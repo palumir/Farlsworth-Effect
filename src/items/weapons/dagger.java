@@ -12,6 +12,7 @@ import items.item;
 import items.weapon;
 import units.player;
 import utilities.saveState;
+import zones.farmLand.sheepFarm;
 
 public class dagger extends weapon {
 	////////////////
@@ -28,6 +29,7 @@ public class dagger extends weapon {
 	static private int DEFAULT_ATTACK_LENGTH = 20;
 	static private float DEFAULT_CRIT_CHANCE = .15f;
 	static private float DEFAULT_CRIT_DAMAGE = 1.6f;
+	static private float DEFAULT_VARIABILITY = 0.2f;
 	
 	//////////////
 	/// FIELDS ///
@@ -68,6 +70,7 @@ public class dagger extends weapon {
 	public void reactToPickup() {
 		player currPlayer = player.getCurrentPlayer();
 		if(currPlayer != null) {
+			if(!sheepFarm.attackTooltipLoaded.isCompleted()) sheepFarm.attackTooltipLoaded.setCompleted(true);
 			tooltipString t = new tooltipString("Press or hold 'space' to attack.");
 		}
 	}
@@ -82,6 +85,7 @@ public class dagger extends weapon {
 		attackLength = DEFAULT_ATTACK_LENGTH;
 		critChance = DEFAULT_CRIT_CHANCE;
 		critDamage = DEFAULT_CRIT_DAMAGE;
+		attackVariability = DEFAULT_VARIABILITY;
 		setRange("short");
 		setSpeed("fast");
 	}
@@ -101,6 +105,7 @@ public class dagger extends weapon {
 		player.getCurrentPlayer().setAttackLength(attackLength);
 		player.getCurrentPlayer().setCritChance(critChance);
 		player.getCurrentPlayer().setCritDamage(critDamage);
+		player.getCurrentPlayer().setAttackVariability(attackVariability);
 		
 		// Deal with animations
 		animationPack unitTypeAnimations = new animationPack();

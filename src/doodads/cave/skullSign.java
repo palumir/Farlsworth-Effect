@@ -3,8 +3,8 @@ package doodads.cave;
 import java.util.Random;
 
 import drawing.camera;
-import drawing.userInterface.interactBox;
 import interactions.event;
+import interactions.interactBox;
 import interactions.textSeries;
 import modes.mode;
 import terrain.chunk;

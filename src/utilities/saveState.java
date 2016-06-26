@@ -59,7 +59,10 @@ public class saveState implements Serializable {
 	private int playerLevel;
 	private int expIntoLevel;
 	
-	// Gags
+	// Save quietly?
+	private static boolean quiet = false;
+	
+	// Events
 	private ArrayList<event> allEvents;
 
 	////////////////////////
@@ -77,7 +80,9 @@ public class saveState implements Serializable {
 			if(player.playerLoaded && player.getCurrentPlayer()!= null) {
 				
 				// Display that we made a new savestate.
-				tooltipString t = new tooltipString(DEFAULT_GAME_SAVED_TEXT);
+				if(!quiet) {
+					tooltipString t = new tooltipString(DEFAULT_GAME_SAVED_TEXT);
+				}
 				
 				// Create new saveState.
 				saveState s = new saveState();
@@ -325,6 +330,14 @@ public class saveState implements Serializable {
 
 	public void setAllEvents(ArrayList<event> allEvents) {
 		this.allEvents = allEvents;
+	}
+
+	public static boolean isQuiet() {
+		return quiet;
+	}
+
+	public static void setQuiet(boolean quiet) {
+		saveState.quiet = quiet;
 	}
 	
 }

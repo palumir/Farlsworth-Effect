@@ -3,9 +3,9 @@ package units.unitTypes.farmLand;
 import java.util.Random;
 
 import drawing.camera;
-import drawing.userInterface.interactBox;
 import effects.effect;
 import effects.effectTypes.bloodSquirt;
+import interactions.interactBox;
 import interactions.textSeries;
 import modes.mode;
 import sounds.sound;
@@ -61,8 +61,8 @@ public class sheep extends unit {
 						);	
 	
 	// Sounds
-	private static sound bleet1 = new sound("sounds/effects/animals/sheep1.wav");
-	private static sound bleet2 = new sound("sounds/effects/animals/sheep2.wav");
+	private static String bleet1 = "sounds/effects/animals/sheep1.wav";
+	private static String bleet2 = "sounds/effects/animals/sheep2.wav";
 	private int bleetRadius = 1200;
 	
 	//////////////
@@ -164,10 +164,14 @@ public class sheep extends unit {
 			// Play a random baaaah
 			int random = utility.RNG.nextInt(2);
 			if(random==0) {
-				bleet1.playSound(this.getX(), this.getY(), bleetRadius, DEFAULT_BLEET_VOLUME);
+				sound s = new sound(bleet1);
+				s.setPosition(getX(), getY(), bleetRadius);
+				s.start();
 			}
 			if(random==1) {
-				bleet2.playSound(this.getX(), this.getY(), bleetRadius, DEFAULT_BLEET_VOLUME);
+				sound s = new sound(bleet2);
+				s.setPosition(getX(), getY(), bleetRadius);
+				s.start();
 			}
 		}
 		

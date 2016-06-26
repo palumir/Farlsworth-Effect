@@ -2,6 +2,7 @@ package zones;
 
 import java.util.ArrayList;
 
+import drawing.userInterface.tooltipString;
 import units.player;
 import utilities.intTuple;
 import utilities.saveState;
@@ -47,8 +48,18 @@ public abstract class zone {
 		// Re-create the player in the new zone.
 		player.loadPlayer(b, x, y, direction);
 		
-		// Save the player in the new zone.
-		saveState.createSaveState();
+		// If we are going into the cave for the first time, display tooltip.
+		if(!spiderCave.enteredSpiderCaveBefore.isCompleted()) {
+			tooltipString t = new tooltipString("In platformer mode, press 'w' or 'up' to jump.");
+			spiderCave.enteredSpiderCaveBefore.setCompleted(true);
+			saveState.setQuiet(true);
+			saveState.createSaveState();
+			saveState.setQuiet(false);
+		}
+		else {
+			// Save the player in the new zone.
+			saveState.createSaveState();
+		}
 	}
 	
 	// Get zone by name.

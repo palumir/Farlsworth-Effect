@@ -1,98 +1,150 @@
 package sounds;
+import java.io.File; 
+import java.io.IOException; 
+import javax.sound.sampled.AudioFormat; 
+import javax.sound.sampled.AudioInputStream; 
+import javax.sound.sampled.AudioSystem; 
+import javax.sound.sampled.DataLine; 
+import javax.sound.sampled.FloatControl; 
+import javax.sound.sampled.LineUnavailableException; 
+import javax.sound.sampled.SourceDataLine; 
+import javax.sound.sampled.UnsupportedAudioFileException;
 
-import java.io.File;
+import units.player; 
 
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import javax.sound.sampled.FloatControl;
+public class sound extends Thread { 
 
-import units.player;
+    private String filename;
 
-public class sound {
-	
-	// Audiostream for the file.
-	private AudioInputStream audioIn;
-	private Clip clip;
-	
-	// Constructor
-	public sound(String soundFile) {
-		try {
-			File f = new File("./" + soundFile);
-			audioIn = AudioSystem.getAudioInputStream(f.toURI().toURL());
-			setClip(AudioSystem.getClip());
-			getClip().open(audioIn);
-		}
-		catch(Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
-	// Play sound anywhere
-	public void playSound(float v) {
-		  // The wrapper thread is unnecessary, unless it blocks on the
-		  // Clip finishing; see comments.
-		   try {
-			   // Adjust volume
-			   FloatControl control = (FloatControl) getClip().getControl(FloatControl.Type.MASTER_GAIN);
-		       float max = control.getMaximum();
-		       float min = control.getMinimum(); // negative values all seem to be zero?
-		       float range = max - min;
-		       control.setValue(min + (range*v));
-		       getClip().stop();
-	    	   getClip().setFramePosition(0);
-			   getClip().start();
-		   }
-		   catch (Exception e) {
-			   e.printStackTrace();
-		   }
-	}
-	
-	// Set volume
-	public void setVolume(float newVol) {
-		 FloatControl control = (FloatControl) getClip().getControl(FloatControl.Type.MASTER_GAIN);
-	     float max = control.getMaximum();
-	     float min = control.getMinimum(); // negative values all seem to be zero?
-	     float range = max - min;
-	     control.setValue(min + (range *newVol));
-	}
-	
-	// Play sound at a volume
-	public void playSound(int x, int y, int radius, float v) {
-		  // The wrapper thread is unnecessary, unless it blocks on the
-		  // Clip finishing; see comments.
-		   try {
-			   if(player.getCurrentPlayer()!=null) {
-				   // Get player position
-				   int playerX = player.getCurrentPlayer().getX();
-				   int playerY = player.getCurrentPlayer().getY();
-				   
-				   // Calculate how close we are.
-				   float howClose = (float) Math.sqrt((playerX - x)*(playerX - x) + (playerY - y)*(playerY - y));
-				   float howClosePercentage = (radius - howClose)/radius;
-				   
-				   // Adjust volume based on radius.
-				   FloatControl control = (FloatControl) getClip().getControl(FloatControl.Type.MASTER_GAIN);
-			       float max = control.getMaximum();
-			       float min = control.getMinimum(); // negative values all seem to be zero?
-			       float range = max - min;
-			       if(howClosePercentage>0) {
-			    	   control.setValue(min + (range * howClosePercentage*v));
-						   getClip().stop();
-				    	   getClip().setFramePosition(0);
-						   getClip().start();
-				       }
-			       }
-		   } 
-		   catch (Exception e) {
-		   }
-	}
+    private Position curPosition;
 
-	public Clip getClip() {
-		return clip;
-	}
+    private final int EXTERNAL_BUFFER_SIZE = 524288; // 128Kb 
+    
+    // Where to play and at what radius.
+    private int radius = 0;
+    private int x = 0;
+    private int y = 0;
+    
+    // Volume
+    public static float DEFAULT_SOUND_VOLUME = 1f;
+    private float soundVolume = DEFAULT_SOUND_VOLUME;
+    private float volume = 1f;
+    
+    // Default sound radius
+    public static int DEFAULT_SOUND_RADIUS = 1200;
 
-	public void setClip(Clip clip) {
-		this.clip = clip;
-	}
+    enum Position { 
+        LEFT, RIGHT, NORMAL
+    };
+
+    public sound(String wavfile) { 
+        filename = wavfile;
+        curPosition = Position.NORMAL;
+    } 
+
+    public sound(String wavfile, Position p) { 
+        filename = wavfile;
+        curPosition = p;
+    } 
+
+    public void run() { 
+
+        File soundFile = new File(filename);
+        if (!soundFile.exists()) { 
+            System.err.println("Wave file not found: " + filename);
+            return;
+        } 
+
+        AudioInputStream audioInputStream = null;
+        try { 
+            audioInputStream = AudioSystem.getAudioInputStream(soundFile);
+        } catch (UnsupportedAudioFileException e1) { 
+            e1.printStackTrace();
+            return;
+        } catch (IOException e1) { 
+            e1.printStackTrace();
+            return;
+        } 
+
+        AudioFormat format = audioInputStream.getFormat();
+        SourceDataLine auline = null;
+        DataLine.Info info = new DataLine.Info(SourceDataLine.class, format);
+
+        try { 
+            auline = (SourceDataLine) AudioSystem.getLine(info);
+            auline.open(format);
+            
+		    // Get player position
+		    int playerX = player.getCurrentPlayer().getX();
+		    int playerY = player.getCurrentPlayer().getY();
+		   
+		    // Calculate how close we are.
+		    float howClose = (float) Math.sqrt((playerX - x)*(playerX - x) + (playerY - y)*(playerY - y));
+		    
+		    // How close are you to the sound?
+		    float howClosePercentage;
+        	if(radius > 0) {
+        		howClosePercentage = ((float)radius - howClose)/(float)radius;
+        	}
+        	else {
+        		howClosePercentage = 1f;
+        	}
+		   
+		    // Adjust volume based on radius.
+		    FloatControl control = (FloatControl) auline.getControl(FloatControl.Type.MASTER_GAIN);
+	        float max = control.getMaximum();
+	        float min = control.getMinimum(); // negative values all seem to be zero?
+	        float range = max - min;
+	        if(howClosePercentage>0) {
+	        	control.setValue(min + (range * howClosePercentage * volume * soundVolume));
+	        }
+	        else { 
+	        	control.setValue(min);
+	        }
+        } catch (LineUnavailableException e) { 
+            e.printStackTrace();
+            return;
+        } catch (Exception e) { 
+            e.printStackTrace();
+            return;
+        } 
+
+        if (auline.isControlSupported(FloatControl.Type.PAN)) { 
+            FloatControl pan = (FloatControl) auline
+                    .getControl(FloatControl.Type.PAN);
+            if (curPosition == Position.RIGHT) 
+                pan.setValue(1.0f);
+            else if (curPosition == Position.LEFT) 
+                pan.setValue(-1.0f);
+        } 
+
+        auline.start();
+        int nBytesRead = 0;
+        byte[] abData = new byte[EXTERNAL_BUFFER_SIZE];
+
+        try { 
+            while (nBytesRead != -1) { 
+                nBytesRead = audioInputStream.read(abData, 0, abData.length);
+                if (nBytesRead >= 0) 
+                    auline.write(abData, 0, nBytesRead);
+            } 
+        } catch (IOException e) { 
+            e.printStackTrace();
+            return;
+        } finally { 
+            auline.drain();
+            auline.close();
+        } 
+
+    }
+    
+    public void setVolume(float v) {
+    	volume = v;
+    }
+    
+    public void setPosition(int newX, int newY, int newRadius) {
+    	radius = newRadius;
+    	x = newX;
+    	y = newY;
+    }
 }

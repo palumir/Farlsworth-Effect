@@ -3,7 +3,7 @@ package doodads.farmLand;
 import java.util.Random;
 
 import drawing.camera;
-import drawing.userInterface.interactBox;
+import interactions.interactBox;
 import interactions.quest;
 import interactions.textSeries;
 import modes.mode;

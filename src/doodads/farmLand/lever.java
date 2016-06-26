@@ -3,9 +3,10 @@ package doodads.farmLand;
 import java.util.Random;
 
 import drawing.camera;
-import drawing.userInterface.interactBox;
+import interactions.interactBox;
 import interactions.textSeries;
 import modes.mode;
+import sounds.sound;
 import terrain.chunk;
 import terrain.chunkType;
 import terrain.generalChunkType;
@@ -29,6 +30,9 @@ public class lever extends chunk {
 	
 	// Sprite stuff.
 	private static String DEFAULT_CHUNK_SPRITESHEET = "images/doodads/farmLand/"+ DEFAULT_CHUNK_NAME + ".png";
+	
+	// Sounds
+	private String leverPull = "sounds/effects/doodads/lever.wav";
 	
 	// Bushtype
 	private int bushType = 0;
@@ -145,12 +149,16 @@ public class lever extends chunk {
 	
 	// Open the gate
 	public void setOn() {
+		sound s = new sound(leverPull);
+		s.start();
 		on = true;
 		chunkImage = typeReference.getChunkImage(1, 0);
 	}
 	
 	// Close the gate
 	public void setOff() {
+		sound s = new sound(leverPull);
+		s.start();
 		on = false;
 		chunkImage = typeReference.getChunkImage(0, 0);
 	}

@@ -17,7 +17,6 @@ import effects.effectTypes.bloodSquirt;
 import effects.effectTypes.critBloodSquirt;
 import effects.effectTypes.floatingString;
 import modes.mode;
-import sounds.AePlayWave;
 import sounds.sound;
 import terrain.chunk;
 import terrain.region;
@@ -49,18 +48,18 @@ public abstract class unit extends drawnObject  {
 	private String DEFAULT_FACING_DIRECTION = "Right";
 	
 	// Fist defaults.
-	static private int DEFAULT_ATTACK_DAMAGE = 3;
+	protected static int DEFAULT_ATTACK_DAMAGE = 4;
 	static float DEFAULT_BAT = 0.30f;
-	static float DEFAULT_ATTACK_TIME = 0.35f;
+	static float DEFAULT_ATTACK_TIME = 0.4f;
 	static int DEFAULT_ATTACK_WIDTH = 35;
 	static int DEFAULT_ATTACK_LENGTH = 11;
 	static float DEFAULT_BACKSWING = 0f;
 	protected static float DEFAULT_CRIT_CHANCE = 0f;
 	protected float DEFAULT_CRIT_DAMAGE = 1.6f;
+	protected static float DEFAULT_ATTACK_VARIABILITY = 0.05f; // How much the range of hits is. 5% both ways.
 	
 	// Combat defaults.
 	static private int DEFAULT_HP = 10;
-	static private float DEFAULT_ATTACK_VARIABILITY = 0.2f; // How much the range of hits is. 20% both ways.
 	static protected boolean showAttackRange = false;
 	
 	// Default healthbarsize
@@ -114,12 +113,12 @@ public abstract class unit extends drawnObject  {
 	
 	// Unit stats.
 	protected float attackMultiplier = 1f;
-	protected float attackVariability = DEFAULT_ATTACK_VARIABILITY; // Percentage
+	private float attackVariability = DEFAULT_ATTACK_VARIABILITY; // Percentage
 	private float critChance = DEFAULT_CRIT_CHANCE;
 	private float critDamage = DEFAULT_CRIT_DAMAGE;
 	
 	// Exp given
-	protected int exp = 0;
+	protected int exp = DEFAULT_EXP;
 	
 	// Attacking/getting attacked mechanics
 	private boolean canAttack = true; // backswing stuff.
@@ -130,7 +129,7 @@ public abstract class unit extends drawnObject  {
 	private double startAttackTime = 0;
 	
 	// Combat sounds
-	protected sound attackSound = null;
+	protected String attackSound;
 	
 	// Gravity
 	protected float jumpSpeed = DEFAULT_JUMPSPEED;
@@ -190,7 +189,7 @@ public abstract class unit extends drawnObject  {
 	public unit(unitType u, int newX, int newY) {
 		super(u.getUnitTypeSpriteSheet(), newX, newY, u.getWidth(), u.getHeight());	
 		//showUnitPosition();
-		//showHitBox();
+		showHitBox();
 		//showSpriteBox();
 		setAnimations(u.getAnimations());
 		setMoveSpeed(u.getMoveSpeed());
@@ -439,8 +438,8 @@ public abstract class unit extends drawnObject  {
 					
 						// Hit for their damage times their multiplier.
 						float variabilityMult = 1;
-						if(attackVariability == 0) variabilityMult = 1;
-						else variabilityMult = 1f + attackVariability - ((float)utility.RNG.nextInt((int)(2*attackVariability*100))/100f);
+						if(getAttackVariability() == 0) variabilityMult = 1;
+						else variabilityMult = 1f + getAttackVariability() - ((float)utility.RNG.nextInt((int)(2*getAttackVariability()*100))/100f);
 						int actualDamageDone = (int) (this.getAttackDamage()*attackMultiplier*variabilityMult);
 						
 						// Did we crit?
@@ -500,11 +499,12 @@ public abstract class unit extends drawnObject  {
 	public void attack() {
 		if(!isAttacking() && canAttack) {
 			
-			// We are attacking of course.
-			//if(attackSound != null) attackSound.playSound(getX(), getY(), DEFAULT_ATTACK_SOUND_RADIUS, 0.8f);
 			// Attack sound.
-			AePlayWave a = new AePlayWave("sounds/effects/player/combat/swingWeapon.wav");
-			a.start();
+			if(attackSound!=null) {
+				sound s = new sound(attackSound);
+				s.setPosition(getX(), getY(), sound.DEFAULT_SOUND_RADIUS);
+				s.start();
+			}
 			setAttacking(true);
 			startAttackTime = time.getTime();
 		}
@@ -1237,6 +1237,14 @@ public abstract class unit extends drawnObject  {
 
 	public void setCritDamage(float critDamage) {
 		this.critDamage = critDamage;
+	}
+
+	public float getAttackVariability() {
+		return attackVariability;
+	}
+
+	public void setAttackVariability(float attackVariability) {
+		this.attackVariability = attackVariability;
 	}
 	
 }

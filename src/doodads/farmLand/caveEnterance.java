@@ -37,7 +37,7 @@ public class caveEnterance extends chunk {
 	//////////////
 	/// FIELDS ///
 	//////////////
-	private zone z;
+	private zone toZone;
 	private int spawnX;
 	private int spawnY;
 	private String spawnDirection;
@@ -49,7 +49,7 @@ public class caveEnterance extends chunk {
 	// Constructor
 	public caveEnterance(int newX, int newY, int i, zone newZone, int newSpawnX, int newSpawnY, String direction) {
 		super(typeReference, newX, newY, i, 0);
-		z = newZone;
+		toZone = newZone;
 		spawnDirection = direction;
 		spawnX = newSpawnX;
 		spawnY = newSpawnY;
@@ -76,6 +76,6 @@ public class caveEnterance extends chunk {
 	
 	// Enter the cave
 	public void enter() {
-		zone.switchZones(player.getCurrentPlayer(), player.getCurrentPlayer().getCurrentZone(), z, spawnX, spawnY, spawnDirection);
+		zone.switchZones(player.getCurrentPlayer(), player.getCurrentPlayer().getCurrentZone(), toZone, spawnX, spawnY, spawnDirection);
 	}
 }

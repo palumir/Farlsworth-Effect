@@ -47,8 +47,7 @@ public class critBloodSquirt extends effect {
 	private static float DEFAULT_ANIMATION_DURATION = 0.35f;
 	
 	// Effect sound
-	protected sound effectSound1 = new sound("sounds/effects/combat/splatter1.wav");
-	protected sound effectSound2 = new sound("sounds/effects/combat/splatter2.wav");
+	protected String effectSound1 = "sounds/effects/combat/splatter1.wav";
 	protected static float DEFAULT_VOLUME = 0.8f;
 	protected static int DEFAULT_SOUND_RADIUS = 1000;
 	
@@ -78,7 +77,8 @@ public class critBloodSquirt extends effect {
 		super(theEffectType, newX, newY);
 		
 		// Set sound.
-		effectSound1.playSound(getX(), getY(), DEFAULT_SOUND_RADIUS, DEFAULT_VOLUME);
+		sound s = new sound(effectSound1);
+		s.start();
 		
 		// Make adjustments on hitbox if we're in topDown.
 		setHeight(getDefaultHeight());

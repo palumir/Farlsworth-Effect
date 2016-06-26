@@ -46,7 +46,7 @@ public class jumpingWolf extends unit {
 	static private int DEFAULT_ATTACK_DAMAGE = 5;
 	static private float DEFAULT_BAT = 0.30f;
 	static private float DEFAULT_ATTACK_TIME = 1f;
-	static private int DEFAULT_ATTACK_WIDTH = 150;
+	static private int DEFAULT_ATTACK_WIDTH = 300;
 	static private int DEFAULT_ATTACK_LENGTH = 300;
 	static private float DEFAULT_CRIT_CHANCE = .15f;
 	static private float DEFAULT_CRIT_DAMAGE = 1.6f;
@@ -78,11 +78,11 @@ public class jumpingWolf extends unit {
 						);	
 	
 	// Sounds
-	private static sound howl = new sound("sounds/effects/animals/wolfHowl.wav");
-	private static sound growl = new sound("sounds/effects/animals/wolfGrowl.wav");
-	private static sound bark1 = new sound("sounds/effects/animals/wolfBark1.wav");
-	private static sound bark2 = new sound("sounds/effects/animals/wolfBark2.wav");
-	private static sound wolfAttack = new sound("sounds/effects/player/combat/swingWeapon.wav");
+	private static String howl = "sounds/effects/animals/wolfHowl.wav";
+	private static String growl = "sounds/effects/animals/wolfGrowl.wav";
+	private static String bark1 = "sounds/effects/animals/wolfBark1.wav";
+	private static String bark2 = "sounds/effects/animals/wolfBark2.wav";
+	private static String wolfAttack = "sounds/effects/player/combat/swingWeapon.wav";
 	private int lastBarkSound = 0;
 	private long lastHowl = 0;
 	private float randomHowl = 0;
@@ -183,7 +183,9 @@ public class jumpingWolf extends unit {
 	// React to pain.
 	public void reactToPain() {
 		// Play a bark on pain.
-		bark1.playSound(this.getX(), this.getY(), soundRadius, DEFAULT_BARK_VOLUME);
+		sound s = new sound(bark1);
+		s.setPosition(getX(), getY(), soundRadius);
+		s.start();
 	}
 	
 	// Wolf random noises
@@ -201,7 +203,9 @@ public class jumpingWolf extends unit {
 				// Set the last time they howled
 				lastHowl = time.getTime();
 				randomHowl = newRandomHowlInterval;
-				howl.playSound(this.getX(), this.getY(), soundRadius, DEFAULT_HOWL_VOLUME);
+				sound s = new sound(howl);
+				s.setPosition(getX(), getY(), soundRadius);
+				s.start();
 			}
 	}
 
@@ -278,7 +282,9 @@ public class jumpingWolf extends unit {
 	// Jump
 	public void slashTo(claw c) {
 		stopMove("all");
-		bark2.playSound(0.8f);
+		sound s = new sound(bark2);
+		s.setPosition(getX(), getY(), soundRadius);
+		s.start();
 		
 		// Set facing direction.
 		if(this.getX() - c.getX() < 0) {
@@ -346,7 +352,11 @@ public class jumpingWolf extends unit {
 				}
 			}
 			else {
-				if(!aggrod) growl.playSound(this.getX(), this.getY(), soundRadius, DEFAULT_GROWL_VOLUME);
+				if(!aggrod) {
+					sound s = new sound(growl);
+					s.setPosition(getX(), getY(), soundRadius);
+					s.start();
+				}
 				aggrod = true;
 				follow(currPlayer);
 			}

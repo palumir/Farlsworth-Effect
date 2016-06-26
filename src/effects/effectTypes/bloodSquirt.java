@@ -47,7 +47,7 @@ public class bloodSquirt extends effect {
 	private static float DEFAULT_ANIMATION_DURATION = 0.3f;
 	
 	// Effect sound
-	protected sound effectSound2 = new sound("sounds/effects/combat/splatter2.wav");
+	protected String effectSound2 = "sounds/effects/combat/splatter2.wav";
 	protected static float DEFAULT_VOLUME = 0.8f;
 	protected static int DEFAULT_SOUND_RADIUS = 1000;
 	
@@ -77,7 +77,8 @@ public class bloodSquirt extends effect {
 		super(theEffectType, newX, newY);
 		
 		// Set sound.
-		effectSound2.playSound(getX(), getY(), DEFAULT_SOUND_RADIUS, DEFAULT_VOLUME);
+		sound s = new sound(effectSound2);
+		s.start();
 		
 		// Make adjustments on hitbox if we're in topDown.
 		setHeight(getDefaultHeight());

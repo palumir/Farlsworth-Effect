@@ -4,10 +4,11 @@ import java.util.Random;
 
 import doodads.farmLand.needlestack;
 import drawing.camera;
-import drawing.userInterface.interactBox;
+import interactions.interactBox;
 import interactions.textSeries;
 import main.main;
 import modes.mode;
+import sounds.sound;
 import terrain.chunk;
 import terrain.chunkType;
 import terrain.generalChunkType;
@@ -32,6 +33,9 @@ public class water extends groundTile {
 	
 	// Tile sprite stuff
 	private static String DEFAULT_CHUNK_SPRITESHEET = "images/terrain/water.png";
+	
+	// Sound
+	public static String waterSplash = "sounds/effects/doodads/waterSplash.wav";
 	
 	// Dimensions
 	public static int DEFAULT_CHUNK_WIDTH = 32;
@@ -111,6 +115,10 @@ public class water extends groundTile {
 	// Interacting with heals you and saves.
 	@Override
 	public void interactWith() {
+		
+		// Play sound
+		sound s = new sound(waterSplash);
+		s.start();
 		
 		// Restart sequence.
 		interactSequence = makeInteractSequence();

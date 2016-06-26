@@ -33,8 +33,28 @@ public abstract class drawnObject {
 	public static int DEFAULT_FONT_SIZE = 12;
 	protected static Font DEFAULT_FONT = null;
 	
-	// Comparator
-	private static Comparator<drawnObject> yComparator = new Comparator<drawnObject>() {
+	// Comparator for platformer.
+	private static Comparator<drawnObject> platformerComparator =  new Comparator<drawnObject>() {
+		@Override
+	    public int compare(drawnObject d1, drawnObject d2) {
+			int z1;
+			int z2;
+			
+			// Get z1, assume 0 if not set.
+			if(d1.getZ() == null) z1 = 0;
+			else z1 = d1.getZ();
+			
+			// Get z2, assume 0 if not set.
+			if(d2.getZ() == null) z2 = 0;
+			else z2 = d2.getZ();
+			
+			// Return the comparison between the two.
+			return z1 - z2;
+		}
+	};
+	
+	// Comparator for topDown
+	private static Comparator<drawnObject> topDownComparator = new Comparator<drawnObject>() {
 		
 	    @Override
 	    public int compare(drawnObject d1, drawnObject d2) {
@@ -77,10 +97,19 @@ public abstract class drawnObject {
 	//////////////
 	/// FIELDS ///
 	//////////////
+	
+	// X and Y
 	private int x;
 	private int y;
+	
+	// Z axis for platformer.
+	private Integer z;
+	
+	// Draw X and Y, different from X and Y.
 	protected int drawX;
 	protected int drawY;
+	
+	// Width and height.
 	private int width;
 	private int height;
 	
@@ -333,7 +362,8 @@ public abstract class drawnObject {
 	}
 	
 	public static void sortObjects() {
-		if(mode.getCurrentMode() == "topDown") Collections.sort(objects, yComparator);
+		if(mode.getCurrentMode() == "topDown") Collections.sort(objects, topDownComparator);
+		if(mode.getCurrentMode() == "platformer") Collections.sort(objects, platformerComparator);
 	}
 
 	public int getY() {
@@ -414,6 +444,14 @@ public abstract class drawnObject {
 
 	public void setBackgroundDoodad(boolean backgroundDoodad) {
 		this.backgroundDoodad = backgroundDoodad;
+	}
+
+	public Integer getZ() {
+		return z;
+	}
+
+	public void setZ(Integer z) {
+		this.z = z;
 	}
 	
 }

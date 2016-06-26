@@ -9,14 +9,15 @@ import drawing.camera;
 import drawing.drawnObject;
 import drawing.animation.animation;
 import drawing.animation.animationPack;
-import drawing.userInterface.interactBox;
 import drawing.userInterface.inventory;
 import drawing.userInterface.playerHealthBar;
 import drawing.userInterface.text;
 import drawing.userInterface.tooltipString;
 import effects.effect;
 import effects.effectTypes.bloodSquirt;
+import effects.effectTypes.floatingString;
 import interactions.event;
+import interactions.interactBox;
 import interactions.quest;
 import items.bottle;
 import items.item;
@@ -118,6 +119,9 @@ public class player extends unit {
 	private int playerLevel = 1;
 	private int expIntoLevel = 20;
 	
+	// Level up sounds
+	private String levelUp = "sounds/effects/player/levelUp.wav";
+	
 	// Exp required
 	public static int expRequiredForLevel() {
 		int i = 0;
@@ -154,7 +158,7 @@ public class player extends unit {
 		//showAttackRange(); 
 		
 		// Set sounds.
-		//attackSound = new sound("sounds/effects/player/combat/swingWeapon.wav");
+		attackSound = "sounds/effects/player/combat/swingWeapon.wav";
 		
 		// Set-up the camera.
 		camera c = new camera(this, 1);
@@ -436,7 +440,15 @@ public class player extends unit {
 		
 		// Level up if we have max exp
 		if(expIntoLevel >= expRequiredForLevel()) {
-			// TODO: play animation and noise?
+			// Play sound
+			sound s = new sound(levelUp);
+			s.setVolume(0.8f);
+			s.start();
+			
+			// Play level-up effect
+			floatingString f = new floatingString("+1 Level",playerHealthBar.DEFAULT_EXP_COLOR,getX() + getWidth()/2, getY()+getHeight()/2, 1f, 3f);
+			
+			// Update stats and level.
 			expIntoLevel = 0;
 			playerLevel++;
 			updateStats();
@@ -480,18 +492,21 @@ public class player extends unit {
 		// Equip the weapon.
 		setEquippedWeapon(null);
 		
-		// Remove player's damage.
+		// Damage
+		setAttackDamage(DEFAULT_ATTACK_DAMAGE);
+		
+		// Attack time.
 		setBaseAttackTime(DEFAULT_BAT);
 		setAttackTime(DEFAULT_ATTACK_TIME);
-		setBackSwing(DEFAULT_BACKSWING);
 		
 		// Attack range.
 		setAttackWidth(DEFAULT_ATTACK_WIDTH);
 		setAttackLength(DEFAULT_ATTACK_LENGTH);
 		
-		// Crits.
-		player.getCurrentPlayer().setCritChance(DEFAULT_CRIT_CHANCE);
-		player.getCurrentPlayer().setCritDamage(DEFAULT_CRIT_DAMAGE);
+		// Unit stats.
+		setAttackVariability(DEFAULT_ATTACK_VARIABILITY); // Percentage
+		setCritChance(DEFAULT_CRIT_CHANCE);
+		setCritDamage(DEFAULT_CRIT_DAMAGE);
 	
 		// Deal with animations
 		animationPack unitTypeAnimations = new animationPack();

@@ -3,10 +3,10 @@ package units.unitTypes.farmLand;
 import java.util.Random;
 
 import drawing.camera;
-import drawing.userInterface.interactBox;
 import drawing.userInterface.tooltipString;
 import effects.effect;
 import effects.effectTypes.bloodSquirt;
+import interactions.interactBox;
 import interactions.quest;
 import interactions.textSeries;
 import items.keys.sheepKey;

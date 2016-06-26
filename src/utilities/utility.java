@@ -3,7 +3,7 @@ package utilities;
 import java.util.Random;
 
 import drawing.drawnObject;
-import drawing.userInterface.interactBox;
+import interactions.interactBox;
 import items.item;
 import sounds.music;
 import terrain.chunk;

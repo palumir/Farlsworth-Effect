@@ -3,10 +3,11 @@ package doodads.farmLand;
 import java.util.Random;
 
 import drawing.camera;
-import drawing.userInterface.interactBox;
 import interactions.event;
+import interactions.interactBox;
 import interactions.textSeries;
 import modes.mode;
+import sounds.sound;
 import terrain.chunk;
 import terrain.chunkType;
 import terrain.generalChunkType;
@@ -30,6 +31,10 @@ public class bush extends chunk {
 	
 	// Sprite stuff.
 	private static String DEFAULT_CHUNK_SPRITESHEET = "images/doodads/farmLand/"+ DEFAULT_CHUNK_NAME + ".png";
+	
+	// Sound
+	private String eating = "sounds/effects/doodads/eating.wav";
+	public static String clearBush = "sounds/effects/doodads/bush.wav";
 	
 	// Bushtype
 	private int bushType = 0;
@@ -123,6 +128,11 @@ public class bush extends chunk {
 				&& interactSequence.getTheText().getButtonText() != null
 				&& interactSequence.getTheText().getButtonText().equals("Eat a berry")) {
 			int randomBetween = 20 - utility.RNG.nextInt(41);
+			
+			// Play sound
+			sound s = new sound(eating);
+			s.start();
+		
 			if(randomBetween < 0) {
 				player.getCurrentPlayer().hurt(randomBetween*(-1), 1);
 			}
@@ -140,7 +150,11 @@ public class bush extends chunk {
 				&& interactSequence.getTheText().getButtonText() != null
 				&& interactSequence.getTheText().getButtonText().equals("Brush off leaves"))) {
 			
-			// Spawn a needleStack.
+			// Play sound
+			sound s = new sound(clearBush);
+			s.start();
+			
+			// Spawn a lever.
 			lever l = new lever(getX(), getY(), 0);
 			l.setBushLever(true);
 			leverRevealed.setCompleted(true);

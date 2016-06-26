@@ -31,7 +31,7 @@ public abstract class item extends drawnObject {
 	public static Color DEFAULT_PICKUP_COLOR = new Color(103,238,245);
 	
 	// Volume and sound
-	public static sound pickUpSound = new sound("sounds/effects/player/items/itemPickup.wav");
+	public static String pickUpSound = "sounds/effects/player/items/itemPickup.wav";
 	private static float volume = .7f;
 	
 	//////////////
@@ -90,7 +90,8 @@ public abstract class item extends drawnObject {
 		}
 		
 		// Play sound.
-		pickUpSound.playSound(volume);
+		sound s = new sound(pickUpSound);
+		s.start();
 		
 		// React to pick-up
 		reactToPickup();

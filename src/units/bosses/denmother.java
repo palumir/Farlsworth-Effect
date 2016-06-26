@@ -15,10 +15,10 @@ import drawing.animation.animation;
 import drawing.animation.animationPack;
 import drawing.spriteSheet.spriteSheetInfo;
 import drawing.userInterface.bossHealthBar;
-import drawing.userInterface.interactBox;
 import drawing.userInterface.playerHealthBar;
 import effects.effect;
 import effects.effectTypes.critBloodSquirt;
+import interactions.interactBox;
 import interactions.textSeries;
 import modes.mode;
 import sounds.music;
@@ -96,10 +96,11 @@ public class denmother extends boss {
 						);	
 	
 	// Sounds
-	private static sound howl = new sound("sounds/effects/animals/wolfHowl.wav");
-	private static sound growl = new sound("sounds/effects/animals/wolfGrowl.wav");
-	private static sound bark1 = new sound("sounds/effects/animals/wolfBark1.wav");
-	private static sound bark2 = new sound("sounds/effects/animals/wolfBark2.wav");
+	private static String howl = "sounds/effects/animals/wolfHowl.wav";
+	private static String growl = "sounds/effects/animals/wolfGrowl.wav";
+	private static String bark1 = "sounds/effects/animals/wolfBark1.wav";
+	private static String bark2 = "sounds/effects/animals/wolfBark2.wav";
+	private static String snore = "sounds/effects/animals/snore.wav";
 	
 	// Music
 	private static music bossMusic = new music("sounds/music/farmLand/denmother/fight.wav");
@@ -204,6 +205,10 @@ public class denmother extends boss {
 	
 	// Has she jumped towards the middle already?
 	private boolean jumpingToMiddle = false;
+	
+	// Snoring
+	private float snoreEvery = 5f;
+	private long lastSnore = 0;
 	
 	// Moved
 	private boolean movedUp = false;
@@ -504,7 +509,8 @@ public class denmother extends boss {
 	public void wakeUp() {
 		music.endAll();
 		sleeping = false;
-		growl.playSound(.8f);
+		sound s = new sound(growl);
+		s.start();
 		wakeUpTime = time.getTime();
 	}
 	
@@ -529,6 +535,16 @@ public class denmother extends boss {
 			}
 		}
 		else {
+			
+			// Play snoring.
+			if(time.getTime() - lastSnore > snoreEvery*1000) {
+				lastSnore = time.getTime();
+				sound s = new sound(snore);
+				s.setPosition(getX(),getY(),sound.DEFAULT_SOUND_RADIUS);
+				s.start();
+			}
+			
+			// Wake up?
 			if(interactSequence != null  && 
 					interactSequence.getTheText().isEnd() && 
 					interactSequence.getTheText().getButtonText().equals("Give belly rub")
@@ -560,11 +576,12 @@ public class denmother extends boss {
 			fightRegion.untrapPlayer();
 			moveSpeed = phase - 1;
 			numClawsToSpawn = 5;
-			howl.playSound(.9f);
+			sound s = new sound(howl);
+			s.start();
 			clawDelay = .50f;
 			jumpSpeed = jumpSpeed + 3;
 			wolfMoveSpeed = moveSpeed;
-			clawAttackEvery = 1.9f;
+			clawAttackEvery = 2f;
 			clawSpawnTime = 0.3f;
 		}
 		
@@ -574,12 +591,13 @@ public class denmother extends boss {
 		else if(phase < 3 && (float)this.getHealthPoints()/(float)this.getMaxHealthPoints() <= .50f) {
 			phase = 3;
 			moveSpeed = phase - 1;
-			howl.playSound(.9f);
-			numClawsToSpawn = 7;
+			sound s = new sound(howl);
+			s.start();
+			numClawsToSpawn = 6;
 			clawDelay = .40f;
 			jumpSpeed = jumpSpeed + 3;
 			wolfMoveSpeed = moveSpeed;
-			clawAttackEvery = 1.8f;
+			clawAttackEvery = 1.9f;
 			clawSpawnTime = 0.2f;
 		}
 		
@@ -588,12 +606,13 @@ public class denmother extends boss {
 		///////////////
 		else if(phase < 4 && (float)this.getHealthPoints()/(float)this.getMaxHealthPoints() <= .25f) {
 			phase = 4;
-			numClawsToSpawn = 14;
-			howl.playSound(.9f);
-			clawAttackEvery = 1.7f;
+			numClawsToSpawn = 12;
+			sound s = new sound(howl);
+			s.start();
+			clawAttackEvery = 1.8f;
 			clawDelay = .13f;
 			jumpSpeed = jumpSpeed + 7;
-			clawSpawnTime = 0.05f;
+			clawSpawnTime = 0.1f;
 		}
 	}
 	
@@ -612,7 +631,7 @@ public class denmother extends boss {
 	// Start fight.
 	public void startFight() {
 		bossIntro.getClip().setFramePosition(0);
-		bossIntro.playSound(0.7f);
+		bossIntro.playSound();
 		fightInProgress = true;
 		fightStartTime = time.getTime();
 		fightRegion.trapPlayerWithin();
@@ -636,7 +655,8 @@ public class denmother extends boss {
 			
 			// Start howl animation.
 			if(!startHowl && time.getTime() - startOfHowl < 0.5f*1000) {
-				howl.playSound(0.8f);
+				sound s = new sound(howl);
+				s.start();
 				startHowl = true;
 			}
 			
@@ -867,7 +887,7 @@ public class denmother extends boss {
 			
 			// Deal with music.
 			bossIntro.getClip().stop();
-			bossMusic.loopMusic(0.7f);
+			bossMusic.loopMusic();
 			
 			// Start combat and make boss attackable.
 			combatStarted = true;
@@ -882,56 +902,42 @@ public class denmother extends boss {
 	
 	// Deal with jumping.
 	public void dealWithJumping() {
-		
 		if(doingSpecialAttack) {
 			// Get current player.
 			player currPlayer = player.getCurrentPlayer();
 			
-			// Reset rise and run if we're close.
-			if(Math.abs(jumpingToX - getX()) < jumpSpeed) {
-				run = 0;
-			}
-			if(Math.abs(jumpingToY - getY()) < jumpSpeed) {
-				rise = 0;
-			}
-			
 			// Jump to the location.
-			if(jumping && (Math.abs(jumpingToX - getX()) > jumpSpeed || Math.abs(jumpingToY - getY()) > jumpSpeed)) {
+			if(jumping) {
 				
 				// set rise/run
-				if(!riseRunSet) {
-					riseRunSet = true;
-					float yDistance = (jumpingToY - getY());
-					float xDistance = (jumpingToX - getX());
-					float distanceXY = (float) Math.sqrt(yDistance * yDistance
-							+ xDistance * xDistance);
-					rise = (int) ((yDistance/distanceXY)*jumpSpeed);
-					run = (int) ((xDistance/distanceXY)*jumpSpeed);
-				}
-				
-				setX(getX() + run);
-				setY(getY() + rise);
+				float yDistance = (jumpingToY - getY());
+				float xDistance = (jumpingToX - getX());
+				float distanceXY = (float) Math.sqrt(yDistance * yDistance
+						+ xDistance * xDistance);
+				rise = (int) ((yDistance/distanceXY)*jumpSpeed);
+				run = (int) ((xDistance/distanceXY)*jumpSpeed);
 				
 				// Don't let him not move at all or leave region.
-				if((run == 0 && rise == 0) || (Math.abs(jumpingToX - getX()) <= jumpSpeed && Math.abs(jumpingToY - getY()) <= jumpSpeed)) {
+				if(Math.abs(jumpingToX - getX()) <= jumpSpeed && Math.abs(jumpingToY - getY()) <= jumpSpeed) {
 					if(claws != null && claws.size() > 0) {
 						claws.get(0).destroy();
 						claws.remove(claws.get(0));
 						clawDeleted = true;
 					}
 					jumping = false;
+					slashing = false;
 				}
 				
-				// If slashing, hurt the player.
-				if(slashing && !hasSlashed && currPlayer.isWithin(getX(), getY(), getX()+getWidth(), getY() + getHeight())) {
-					currPlayer.hurt(SLASH_DAMAGE, 1f);
-					hasSlashed = true;
+				if(jumping) {
+					setX(getX() + run);
+					setY(getY() + rise);
+					
+					// If slashing, hurt the player.
+					if(slashing && !hasSlashed && currPlayer.isWithin(getX(), getY(), getX()+getWidth(), getY() + getHeight())) {
+						currPlayer.hurt(SLASH_DAMAGE, 1f);
+						hasSlashed = true;
+					}
 				}
-			}
-			else {
-				stopMove("all");
-				jumping = false;
-				slashing = false;
 			}
 		}
 	}
@@ -939,7 +945,8 @@ public class denmother extends boss {
 	// Jump
 	public void jumpTo(int newX, int newY) {
 		stopMove("all");
-		bark1.playSound(0.9f);
+		sound s = new sound(bark1);
+		s.start();
 		
 		// Set facing direction.
 		if(this.getX() - newX < 0) {
@@ -960,7 +967,8 @@ public class denmother extends boss {
 	// Jump
 	public void slashTo(claw c) {
 		stopMove("all");
-		bark2.playSound(0.9f);
+		sound s = new sound(bark2);
+		s.start();
 		
 		// Set facing direction.
 		if(this.getX() - c.getX() < 0) {
@@ -1023,6 +1031,10 @@ public class denmother extends boss {
 					lastClaw = time.getTime();
 					clawDeleted = false;
 					slashTo(claws.get(0));
+				}
+				else {
+					jumpingToX = claws.get(0).getX();
+					jumpingToY = claws.get(0).getY();
 				}
 			}
 			

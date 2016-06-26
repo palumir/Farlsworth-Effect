@@ -3,11 +3,12 @@ package doodads.farmLand;
 import java.util.Random;
 
 import drawing.camera;
-import drawing.userInterface.interactBox;
 import interactions.event;
+import interactions.interactBox;
 import interactions.textSeries;
 import main.main;
 import modes.mode;
+import sounds.sound;
 import terrain.chunk;
 import terrain.chunkType;
 import terrain.generalChunkType;
@@ -83,6 +84,10 @@ public class well extends chunk {
 		// Interacting with heals you and saves.
 		@Override
 		public void interactWith() {
+			
+			// Play sound
+			sound s = new sound(water.waterSplash);
+			s.start();
 			
 			// Restart sequence.
 			interactSequence = water.makeInteractSequence();

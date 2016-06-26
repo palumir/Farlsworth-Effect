@@ -3,8 +3,8 @@ package doodads.farmLand;
 import java.util.Random;
 
 import drawing.camera;
-import drawing.userInterface.interactBox;
 import interactions.event;
+import interactions.interactBox;
 import interactions.textSeries;
 import modes.mode;
 import terrain.chunk;
@@ -40,7 +40,7 @@ public class woolPiece extends chunk {
 	/// FIELDS /////
 	////////////////
 	
-	// Sequence for haystacks.
+	// Sequence
 	private interactBox interactSequence;
 	
 	///////////////
@@ -57,7 +57,7 @@ public class woolPiece extends chunk {
 		textSeries startOfConversation = null;
 		
 		// Start of conversation.
-		startOfConversation = new textSeries(null, "The sheep went this way.");
+		startOfConversation = new textSeries(null, "A piece of wool. The sheep went this way.");
 		startOfConversation.setEnd();
 		
 		return new interactBox(startOfConversation, stringUtils.toTitleCase(DEFAULT_CHUNK_NAME));

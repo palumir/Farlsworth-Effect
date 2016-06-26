@@ -7,7 +7,6 @@ import java.util.ArrayList;
 
 import drawing.drawnObject;
 import drawing.gameCanvas;
-import drawing.userInterface.interactBox;
 import drawing.userInterface.interfaceObject;
 import drawing.userInterface.text;
 import units.player;
@@ -70,14 +69,26 @@ public class quest extends text {
 	
 	// Start quest.
 	public void startQuest() {
+		
+		// Start quest.
 		setStarted(true);
 		questGiver.noQuest();
+		
+		// Save game.
+		saveState.setQuiet(true);
+		saveState.createSaveState();
+		saveState.setQuiet(false);
 	}
 	
 	// Completed quest
 	public void completeQuest() {
+		
+		// End quest.
 		setCompleted(true);
 		setDrawObject(false);
+		
+		// Save game.
+		saveState.createSaveState();
 	}
 	
 	// Completed?

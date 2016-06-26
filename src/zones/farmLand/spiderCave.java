@@ -11,8 +11,10 @@ import doodads.farmLand.horizontalGate;
 import doodads.farmLand.rock;
 import doodads.farmLand.tree;
 import doodads.farmLand.verticalFence;
+import interactions.event;
 import modes.platformer;
 import modes.topDown;
+import sounds.music;
 import terrain.chunk;
 import terrain.chunkType;
 import terrain.generalChunkType;
@@ -40,6 +42,12 @@ public class spiderCave extends zone {
 	unit u;
 	chunk c;
 	
+	// Some defaults.
+	public static int BACKGROUND_Z = -100;
+	
+	// Zone events.
+	public static event enteredSpiderCaveBefore;
+	
 	// Defaults
 	public static intTuple DEFAULT_SPAWN_TUPLE = new intTuple(0,-50);
 	
@@ -52,6 +60,30 @@ public class spiderCave extends zone {
 	// SPAWN PATTERNS/GENERATORS //
 	///////////////////////////////
 	
+	// Spawn grass cave x to y.
+	public void spawnCaveRect(int x1, int y1, int x2, int y2) {
+		int numX = (x2 - x1)/cave.DEFAULT_CHUNK_WIDTH;
+		int numY = (y2 - y1)/cave.DEFAULT_CHUNK_HEIGHT;
+		for(int i = 0; i < numX; i++) {
+			for(int j = 0; j < numY; j++) {
+				c = new cave(i*cave.DEFAULT_CHUNK_WIDTH + x1, j*cave.DEFAULT_CHUNK_HEIGHT + y1);
+				c.setPassable(false);
+			}
+		}
+	}
+	
+	// Spawn cave  from x to y.
+	public void spawnPassableCaveRect(int x1, int y1, int x2, int y2) {
+		int numX = (x2 - x1)/cave.DEFAULT_CHUNK_WIDTH;
+		int numY = (y2 - y1)/cave.DEFAULT_CHUNK_HEIGHT;
+		for(int i = 0; i < numX; i++) {
+			for(int j = 0; j < numY; j++) {
+				c = new cave(i*cave.DEFAULT_CHUNK_WIDTH + x1, j*cave.DEFAULT_CHUNK_HEIGHT + y1);
+				c.setPassable(true);
+			}
+		}
+	}
+	
 	/////////////////
 	// ZONE LOADER //
 	/////////////////
@@ -59,80 +91,67 @@ public class spiderCave extends zone {
 	public void loadZone() {
 		
 		// Set the mode of the zone of course.
-		platformer.setMode();
+		topDown.setMode();
+		
+		// Load zone events.
+		loadZoneEvents();
+		
+		// Create surrounding cave.
+		createSurroundingCave();
 		
 		// Spawn area.
 		createSpawnArea();
 		
+		// Sort chunks.
+		chunk.sortChunks();
+		
+		// Zone is loaded.
+		setZoneLoaded(true);
+		
+		// Play zone music.
+		music.endAll();
+		//zoneMusic.loopMusic();
+		
+	}
+	
+	// Load zone events.
+	public void loadZoneEvents() {
+		
+		// Have we entered the cave before?
+		enteredSpiderCaveBefore = new event("enteredSpiderCaveBefore");
 	}
 	
 	//////////////////////
 	// INDIVIDUAL AREAS //
 	//////////////////////
 	
+	// Surrounding cave.
+	public void createSurroundingCave() {
+		// Roof
+		spawnPassableCaveRect(-311, -747, 3000,-220);
+		
+		// Left wall
+		spawnCaveRect(-41,-237,7,486);
+		spawnPassableCaveRect(-338,-235,7,486);
+	}
+	
 	// Spawn area.
 	public void createSpawnArea() {
-		// References we will use throughout.
-		unit u;
-		chunk c;
 		int max = 0;
-		int iteratorX = 0;
 		
 		////////////////
 		// Spawn Area //
 		////////////////
 		
 		caveEnterance spiderCaveEnterance = new caveEnterance(30,-15,0, sheepFarm.getZone(),-1762+52,-4070+90,"Down");
+		spiderCaveEnterance.setZ(BACKGROUND_Z);
 		
 		// First platform
 		
 		max = 10;
-		for(int i = 0; i < max; i++) {
+		for(int i = -1; i < max; i++) {
 			c = new cave(32*i, 40);
 		}		
-		iteratorX += max*32;
-		
-		max = 4;
-		for(int i = 0; i < max; i++) {
-			c = new cave(iteratorX + 32*i, 40+32);
-		}
-		iteratorX += max*32;
-		
-		max = 8;
-		for(int i = 0; i < max; i++) {
-			c = new cave(iteratorX + 32*i, 40+32-32);
-		}
-		iteratorX += max*32;
-		
-		max = 2;
-		for(int i = 0; i < max; i++) {
-			c = new cave(iteratorX + 32*i, 40+32-32+32);
-		}
-		iteratorX += max*32;
-		
-		max = 4;
-		for(int i = 0; i < max; i++) {
-			c = new cave(iteratorX + 32*i, 40+32-32+32+32);
-		}
-		iteratorX += max*32;
-		
-		max = 3;
-		for(int i = 0; i < max; i++) {
-			c = new cave(iteratorX + 32*i, 40+32-32+32+32+32);
-		}
-		iteratorX += max*32;
-		
-		max = 3;
-		for(int i = 0; i < max; i++) {
-			c = new cave(iteratorX + 32*i + 64, 40+32-32+32+32+32-32-32);
-		}
-		iteratorX += max*32 + 64;
-		
-		max = 10;
-		for(int i = 0; i < max; i++) {
-			c = new cave(iteratorX + 32*i + 64, 40+32-32+32+32+32-32-32+32);
-		}
-		iteratorX += max*32 + 64;
 		
 		// Zone loaded.
 		setZoneLoaded(true);

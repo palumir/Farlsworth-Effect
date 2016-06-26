@@ -39,7 +39,6 @@ import units.unitTypes.farmLand.farmer;
 import units.unitTypes.farmLand.slowWolf;
 import units.unitTypes.farmLand.jumpingWolf;
 import units.unitTypes.farmLand.sheep;
-import units.unitTypes.farmLand.spiderling;
 import units.unitTypes.farmLand.wolf;
 import utilities.intTuple;
 import utilities.utility;
@@ -68,7 +67,8 @@ public class sheepFarm extends zone {
 	chunk c;
 	
 	// Zone events.
-	private event wellTooltipLoaded;
+	private static event wellTooltipLoaded;
+	public static event attackTooltipLoaded;
 	
 	// Defaults
 	public static intTuple DEFAULT_SPAWN_TUPLE = new intTuple(-9,11);
@@ -209,7 +209,7 @@ public class sheepFarm extends zone {
 		setZoneLoaded(true);
 		
 		// Play zone music.
-		zoneMusic.loopMusic(DEFAULT_MUSIC_VOLUME);
+		zoneMusic.loopMusic();
 		
 	}
 	
@@ -245,6 +245,7 @@ public class sheepFarm extends zone {
 		c = new skullSign(-1784,-4000, 0);
 		
 		// Spawn wolf.
+		u = new wolf(-273,-868);
 		u = new jumpingWolf(-149,-2173);
 		u = new slowWolf(-121,-2752);
 		u = new slowWolf(198,-2584);
@@ -1269,6 +1270,7 @@ public class sheepFarm extends zone {
 		
 		// Load well tooltip event.
 		wellTooltipLoaded = new event("wellTooltipLoaded");
+		attackTooltipLoaded = new event("attackTooltipLoaded");
 	}
 	
 	// Deal with the first well we encounters.
@@ -1277,6 +1279,11 @@ public class sheepFarm extends zone {
 		if(currPlayer != null && currPlayer.isWithin(-849,-1981,-634,-1696) && wellTooltipLoaded != null && !wellTooltipLoaded.isCompleted()) {
 			wellTooltipLoaded.setCompleted(true);
 			tooltipString t = new tooltipString("Use any water source to save the game and heal.");
+		}
+		
+		if(currPlayer != null && currPlayer.isWithin(-504,-1117,21,-715) && attackTooltipLoaded != null && !attackTooltipLoaded.isCompleted()) {
+			attackTooltipLoaded.setCompleted(true);
+			tooltipString t = new tooltipString("Press or hold 'space' to attack.");
 		}
 	}
 	

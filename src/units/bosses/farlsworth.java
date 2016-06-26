@@ -3,8 +3,8 @@ package units.bosses;
 import java.util.ArrayList;
 
 import doodads.farmLand.woolPiece;
-import drawing.userInterface.interactBox;
 import interactions.event;
+import interactions.interactBox;
 import interactions.textSeries;
 import modes.mode;
 import sounds.sound;
@@ -63,7 +63,7 @@ public class farlsworth extends boss {
 	private ArrayList<intTuple> p;
 	
 	// Sound.
-	private static sound bleet = new sound("sounds/effects/animals/sheep2.wav");
+	private static String bleet = "sounds/effects/animals/sheep2.wav";
 	
 	// Are we in boss fight mode?
 	private boolean bossFight = false;
@@ -125,7 +125,9 @@ public class farlsworth extends boss {
 			interactTimes++;
 			moveTo(74,-58);
 			interactMoved = true;
-			bleet.playSound(0.8f);
+			sound s = new sound(bleet);
+			s.setPosition(getX(), getY(), sound.DEFAULT_SOUND_RADIUS);
+			s.start();
 			
 		}
 		
@@ -134,7 +136,9 @@ public class farlsworth extends boss {
 			interactTimes++;
 			moveTo(74,-406);
 			interactMoved = true;
-			bleet.playSound(0.8f);
+			sound s = new sound(bleet);
+			s.setPosition(getX(), getY(), sound.DEFAULT_SOUND_RADIUS);
+			s.start();
 		}
 		
 		// Pissy Farlsworth runs away third time.
@@ -151,7 +155,9 @@ public class farlsworth extends boss {
 			p.add(new intTuple(-385,-1216));
 			followPath(p);
 			interactMoved = true;
-			bleet.playSound(0.8f);
+			sound s = new sound(bleet);
+			s.setPosition(getX(), getY(), sound.DEFAULT_SOUND_RADIUS);
+			s.start();
 		}
 		
 		// Make him open the gate if he's by the gate.
