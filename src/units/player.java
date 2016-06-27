@@ -414,7 +414,7 @@ public class player extends unit {
 			if(k.getKeyCode() == KeyEvent.VK_P) {
 				//healthPoints--;
 				saveState.createSaveState();
-				///iveExp(expRequiredForLevel());
+				giveExp(expRequiredForLevel());
 				//System.out.println("u = new wolf(" + getX() + "," + getY() + ");");
 			}
 		}

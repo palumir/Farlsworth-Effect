@@ -20,6 +20,7 @@ import doodads.farmLand.verticalFence;
 import doodads.farmLand.well;
 import doodads.farmLand.woolPiece;
 import doodads.general.invisibleDoodad;
+import drawing.background;
 import drawing.userInterface.tooltipString;
 import interactions.event;
 import items.bottle;
@@ -194,6 +195,9 @@ public class sheepFarm extends zone {
 		
 		// Set the mode of the zone of course.
 		topDown.setMode();
+		
+		// Set background
+		background.setGameBackground(null);
 		
 		// Load zone events.
 		loadZoneEvents();

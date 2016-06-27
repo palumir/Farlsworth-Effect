@@ -1,6 +1,7 @@
 package zones.farmLand;
 
 import java.awt.Color;
+import java.awt.image.BufferedImage;
 
 import doodads.farmLand.bush;
 import doodads.farmLand.caveEnterance;
@@ -11,6 +12,8 @@ import doodads.farmLand.horizontalGate;
 import doodads.farmLand.rock;
 import doodads.farmLand.tree;
 import doodads.farmLand.verticalFence;
+import drawing.background;
+import drawing.spriteSheet;
 import interactions.event;
 import modes.platformer;
 import modes.topDown;
@@ -41,6 +44,9 @@ public class spiderCave extends zone {
 	// References we will use throughout.
 	unit u;
 	chunk c;
+	
+	// Default background.
+	private static BufferedImage DEFAULT_ZONE_BACKGROUND = spriteSheet.getSpriteFromFilePath("images/terrain/backgrounds/caveBackground.png");
 	
 	// Some defaults.
 	public static int BACKGROUND_Z = -100;
@@ -94,7 +100,10 @@ public class spiderCave extends zone {
 	public void loadZone() {
 		
 		// Set the mode of the zone of course.
-		topDown.setMode();
+		platformer.setMode();
+		
+		// Background
+		background.setGameBackground(DEFAULT_ZONE_BACKGROUND);
 		
 		// Load zone events.
 		loadZoneEvents();

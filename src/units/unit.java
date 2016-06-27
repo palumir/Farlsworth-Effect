@@ -189,7 +189,7 @@ public abstract class unit extends drawnObject  {
 	public unit(unitType u, int newX, int newY) {
 		super(u.getUnitTypeSpriteSheet(), newX, newY, u.getWidth(), u.getHeight());	
 		//showUnitPosition();
-		showHitBox();
+		//showHitBox();
 		//showSpriteBox();
 		setAnimations(u.getAnimations());
 		setMoveSpeed(u.getMoveSpeed());
@@ -927,7 +927,7 @@ public abstract class unit extends drawnObject  {
 			int healthChunkSize = (int)(((float)getHealthPoints()/(float)getMaxHealthPoints())*DEFAULT_HEALTHBAR_WIDTH);
 			
 			// Adjustment
-			int hpAdjustX = (int) (gameCanvas.getScaleX()*getCurrentAnimation().getCurrentFrame().getWidth()/2 - DEFAULT_HEALTHBAR_WIDTH/2);
+			int hpAdjustX = (int) (gameCanvas.getScaleX()*(getCurrentAnimation().getCurrentFrame().getWidth()/2 - DEFAULT_HEALTHBAR_WIDTH/2));
 			int hpAdjustY = -(int)(gameCanvas.getScaleY()*getCurrentAnimation().getCurrentFrame().getHeight()/3);
 			
 			// Draw the red.
