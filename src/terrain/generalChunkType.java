@@ -31,6 +31,12 @@ public class generalChunkType extends chunkType {
 			    );
 	}	
 	
+	public generalChunkType(String newName, int defaultWidth, int defaultHeight) {
+		super(newName, 
+				null
+			    );
+	}	
+	
 	/////////////////////////
 	// Getters and setters //
 	/////////////////////////

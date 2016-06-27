@@ -83,7 +83,7 @@ public class chunk extends drawnObject {
 		super(c.getChunkTypeSpriteSheet(), newX, newY, c.getWidth(), c.getHeight());
 		
 		// Set our image field.
-		chunkImage = c.getChunkImage(i, j);
+		if(c.getChunkTypeSpriteSheet() != null) chunkImage = c.getChunkImage(i, j);
 		
 		// Set default passable
 		passable = DEFAULT_PASSABLE;

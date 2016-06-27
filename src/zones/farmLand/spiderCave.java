@@ -67,7 +67,10 @@ public class spiderCave extends zone {
 		for(int i = 0; i < numX; i++) {
 			for(int j = 0; j < numY; j++) {
 				c = new cave(i*cave.DEFAULT_CHUNK_WIDTH + x1, j*cave.DEFAULT_CHUNK_HEIGHT + y1);
-				c.setPassable(false);
+				if((i == numX-1 || i == 0 || j == 0 || j == numY-1));
+				else { 
+					 c.setPassable(true);
+				}
 			}
 		}
 	}
@@ -127,12 +130,19 @@ public class spiderCave extends zone {
 	
 	// Surrounding cave.
 	public void createSurroundingCave() {
+		
 		// Roof
-		spawnPassableCaveRect(-311, -747, 3000,-220);
+		spawnCaveRect(-311, -747, 4000,-220);
+	
+		// Floor
+		spawnCaveRect(-311,40,300,40+32*3);
+		//spawnCaveRect(-311,40+32,4000,500);
 		
 		// Left wall
-		spawnCaveRect(-41,-237,7,486);
-		spawnPassableCaveRect(-338,-235,7,486);
+		spawnCaveRect(-338,-235,7,1000);
+		
+		// Right wall
+		spawnCaveRect(3976+32,-750,4300,1000);
 	}
 	
 	// Spawn area.
@@ -145,13 +155,6 @@ public class spiderCave extends zone {
 		
 		caveEnterance spiderCaveEnterance = new caveEnterance(30,-15,0, sheepFarm.getZone(),-1762+52,-4070+90,"Down");
 		spiderCaveEnterance.setZ(BACKGROUND_Z);
-		
-		// First platform
-		
-		max = 10;
-		for(int i = -1; i < max; i++) {
-			c = new cave(32*i, 40);
-		}		
 		
 		// Zone loaded.
 		setZoneLoaded(true);

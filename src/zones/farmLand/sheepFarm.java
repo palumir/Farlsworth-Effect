@@ -4,6 +4,7 @@ import doodads.farmLand.barn;
 import doodads.farmLand.blackSmith;
 import doodads.farmLand.bone;
 import doodads.farmLand.bridge;
+import doodads.farmLand.bridgePole;
 import doodads.farmLand.bush;
 import doodads.farmLand.caveEnterance;
 import doodads.farmLand.farmHouse;
@@ -18,6 +19,7 @@ import doodads.farmLand.tree;
 import doodads.farmLand.verticalFence;
 import doodads.farmLand.well;
 import doodads.farmLand.woolPiece;
+import doodads.general.invisibleDoodad;
 import drawing.userInterface.tooltipString;
 import interactions.event;
 import items.bottle;
@@ -1084,14 +1086,16 @@ public class sheepFarm extends zone {
 		c = new haystack(-195,-165,0);
 		
 		// Draw the bridge.
-		spawnPassableWaterRect(-170-6,56,-165+32,200);
+		spawnPassableWaterRect(-170-6-32,56,-165+32+32,200);
+		c = new bridgePole(-192+6,35-11,0);
+		c = new bridgePole(-140-2,35-10,0);
 		c = new bridge(-170-16,56-33,0);
 		
 		// Draw the water to left of bridge spawn.
-		spawnWaterRect(-2100+10-6,56,-167,200);	
+		spawnWaterRect(-2100+10-6-5,56,-167,200);	
 		
 		// Draw the water to right of bridge spawn.
-		spawnWaterRect(-168+20+15-5-6,56,2032,200);
+		spawnWaterRect(-168+20+15-5-6+5,56,2032,200);
 		
 		// Draw rocks behind spawn.
 		c = new rock(-24,75,0);
@@ -1162,6 +1166,12 @@ public class sheepFarm extends zone {
 		c = new tree(-90,380,1);
 		c = new tree(-65,410,2);
 		c = new tree(-40,450,1);
+		c = new tree(-99,212,0);
+		c = new tree(-120,323,1);
+		c = new tree(-58,425,2);
+		c = new tree(-774,428,2);
+		c = new tree(-693,314,1);
+		c = new tree(-627,260,1);
 		
 		// Dagger.
 		item daggerSpawn = new dagger(-516,387);

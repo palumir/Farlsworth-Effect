@@ -28,8 +28,10 @@ public abstract class chunkType {
 	public chunkType(String newName, spriteSheet newSpriteSheet) {
 		name = newName;
 		setChunkTypeSpriteSheet(newSpriteSheet);
-		setHeight(getChunkTypeSpriteSheet().getSpriteHeight());
-		setWidth(getChunkTypeSpriteSheet().getSpriteWidth());
+		if(newSpriteSheet != null) {
+			setHeight(getChunkTypeSpriteSheet().getSpriteHeight());
+			setWidth(getChunkTypeSpriteSheet().getSpriteWidth());
+		}
 	}
 	
 	/////////////////////////

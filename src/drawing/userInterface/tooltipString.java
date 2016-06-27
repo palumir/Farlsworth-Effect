@@ -83,7 +83,8 @@ public class tooltipString extends effect {
 	@Override
 	public void drawObject(Graphics g2) {
 		
-		BufferedImage img = new BufferedImage(gameCanvas.getDefaultWidth(),gameCanvas.getDefaultHeight(), BufferedImage.TYPE_INT_ARGB);
+		BufferedImage img = new BufferedImage(gameCanvas.getActualWidth(),
+				gameCanvas.getActualHeight(), BufferedImage.TYPE_INT_ARGB);
 		Graphics2D g = img.createGraphics();
 		
 		// Set the alpha depending on how close the animation is to over.
@@ -103,8 +104,8 @@ public class tooltipString extends effect {
 		g.setComposite(AlphaComposite.Src);
 		g.setPaint(newColor);
 	
-		// Draw.
-		g.drawString(text,getX() - g.getFontMetrics().stringWidth(text)/2, getY());
+		// Draw.)
+		g.drawString(text,(int)(gameCanvas.getScaleX()*(getX()) - g.getFontMetrics().stringWidth(text)/2), (int)(gameCanvas.getScaleY()*getY()));
 		g2.drawImage(img,0,0,null);
 	}
 

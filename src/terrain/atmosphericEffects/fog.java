@@ -24,13 +24,13 @@ public class fog {
 	// Paint the fog
 	public static void paintFog(Graphics2D g2) {
 		if(fogLevel != 0f) {
-			BufferedImage img = new BufferedImage(gameCanvas.getDefaultWidth(),gameCanvas.getDefaultHeight(), BufferedImage.TYPE_INT_ARGB);
+			BufferedImage img = new BufferedImage(gameCanvas.getActualWidth(),gameCanvas.getActualHeight(), BufferedImage.TYPE_INT_ARGB);
 			Graphics2D g = img.createGraphics();
 			float alpha = fogLevel;
 			Color color = new Color(0, 0, 0, alpha); //Black 
 			g.setComposite(AlphaComposite.Src);
 			g.setPaint(color);
-			g.fillRect(0,0,gameCanvas.getDefaultWidth(),gameCanvas.getDefaultHeight());
+			g.fillRect(0,0,gameCanvas.getActualWidth(),gameCanvas.getActualHeight());
 			g2.drawImage(img,0,0,null);
 		}
 	}

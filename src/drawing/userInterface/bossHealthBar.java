@@ -72,7 +72,7 @@ public class bossHealthBar extends interfaceObject  {
 		// Draw name.
 		g.setColor(DEFAULT_NAME_COLOR);
 		g.drawString(b.getDisplayName(),
-				   (int)(gameCanvas.getScaleX()*(getX() + hpAdjustX + DEFAULT_HEALTHBAR_WIDTH/2 - g.getFontMetrics().stringWidth(b.getDisplayName())/2)),
+				   (int)(gameCanvas.getScaleX()*(getX() + hpAdjustX + DEFAULT_HEALTHBAR_WIDTH/2) - g.getFontMetrics().stringWidth(b.getDisplayName())/2),
 				   (int)(gameCanvas.getScaleY()*(getY() + hpAdjustY - 5)));
 		
 		// Draw the red.

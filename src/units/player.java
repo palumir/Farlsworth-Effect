@@ -409,12 +409,13 @@ public class player extends unit {
 			}
 		
 			//////////////////////////////////////////
-			// TODO: TESTING STUFF.
+			// TODO: CHEAT BUTTON
 			//////////////////////////////////////
 			if(k.getKeyCode() == KeyEvent.VK_P) {
 				//healthPoints--;
-				giveExp(expRequiredForLevel());
-				System.out.println("u = new wolf(" + getX() + "," + getY() + ");");
+				saveState.createSaveState();
+				///iveExp(expRequiredForLevel());
+				//System.out.println("u = new wolf(" + getX() + "," + getY() + ");");
 			}
 		}
 	}

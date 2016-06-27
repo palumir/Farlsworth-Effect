@@ -40,3 +40,6 @@ WolfMother SpriteSheet:
 -William Thompsonj contributor. 
 Lever: vxresources
 Houses: Lunerea
+Spiders:
+- Stephen "Redshrike" Challener as graphic artist 
+- William.Thompsonj as contributor.
