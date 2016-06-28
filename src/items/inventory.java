@@ -1,4 +1,4 @@
-package drawing.userInterface;
+package items;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -9,10 +9,7 @@ import java.util.ArrayList;
 import drawing.drawnObject;
 import drawing.gameCanvas;
 import drawing.spriteSheet;
-import items.bottle;
-import items.item;
-import items.key;
-import items.weapon;
+import drawing.userInterface.interfaceObject;
 import sounds.sound;
 import units.player;
 import utilities.stringUtils;
@@ -69,7 +66,7 @@ public class inventory extends interfaceObject {
 	///////////////
 	public inventory() {
 		super(null, DEFAULT_INVENTORY_START_X, DEFAULT_INVENTORY_START_Y, 0, 0);
-		items = new ArrayList<item>();
+		setItems(new ArrayList<item>());
 		
 		// Set sounds.
 		openInventory = "sounds/effects/player/UI/openInventory.wav";
@@ -94,11 +91,11 @@ public class inventory extends interfaceObject {
 	
 	// Search for key.
 	public boolean hasKey(String s) {
-		if(items != null) {
-			for(int j = 0; j < items.size(); j++) {
-				if(items.get(j) != null 
-					&& items.get(j) instanceof key 
-					&& ((key)items.get(j)).name.equals(s)) return true;
+		if(getItems() != null) {
+			for(int j = 0; j < getItems().size(); j++) {
+				if(getItems().get(j) != null 
+					&& getItems().get(j) instanceof key 
+					&& ((key)getItems().get(j)).name.equals(s)) return true;
 			}
 		}
 		return false;
@@ -107,15 +104,15 @@ public class inventory extends interfaceObject {
 	// Pickup an item into inventory.
 	public void pickUp(item i) {
 		if(!hasItem(i)) {
-			items.add(i);
+			getItems().add(i);
 		}
 	}
 	
 	// Check if inventory has item with the same name.
 	public boolean hasItem(item i) {
-		if(items != null) {
-			for(int j = 0; j < items.size(); j++) {
-				if(items.get(j) != null  && items.get(j).name.equals(i.name)) return true;
+		if(getItems() != null) {
+			for(int j = 0; j < getItems().size(); j++) {
+				if(getItems().get(j) != null  && getItems().get(j).name.equals(i.name)) return true;
 			}
 		}
 		return false;
@@ -125,13 +122,13 @@ public class inventory extends interfaceObject {
 	public void equipSelectedItem() {
 		
 		// We aren't trying to equip nothing.
-		if(selectedSlot < items.size()) {
+		if(selectedSlot < getItems().size()) {
 			
 			// Make sure it's equippable.
-			if(items.get(selectedSlot).equippable) {
+			if(getItems().get(selectedSlot).equippable) {
 				
 				// Get the item.
-				item i = items.get(selectedSlot);
+				item i = getItems().get(selectedSlot);
 				player currPlayer = player.getCurrentPlayer();
 				
 				// Deal with weapons.
@@ -314,10 +311,10 @@ public class inventory extends interfaceObject {
 					}
 					
 					// Draw the item, if it exists.
-					if(x < items.size()) {
+					if(x < getItems().size()) {
 						
 						// Draw the item, if it exists.
-						item currentItem = items.get(x);
+						item currentItem = getItems().get(x);
 						g.setColor(DEFAULT_TEXT_COLOR);
 						g.drawImage(currentItem.getImage(), 
 								(int)(gameCanvas.getScaleX()*(getX() + j*DEFAULT_SLOT_SIZE + DEFAULT_SLOT_SIZE/2 - currentItem.getImage().getWidth()/2 + adjustX)), 
@@ -453,14 +450,22 @@ public class inventory extends interfaceObject {
 	}
 	
 	public item get(int i) {
-		return items.get(i);
+		return getItems().get(i);
 	}
 	
 	public int size() {
-		return items.size();
+		return getItems().size();
 	}
 	
 	public void add(item i) {
-		items.add(i);
+		getItems().add(i);
+	}
+
+	public ArrayList<item> getItems() {
+		return items;
+	}
+
+	public void setItems(ArrayList<item> items) {
+		this.items = items;
 	}
 }

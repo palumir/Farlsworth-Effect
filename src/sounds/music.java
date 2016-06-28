@@ -13,7 +13,7 @@ import units.player;
 public class music {
 	
 	// Defaults.
-	private static float DEFAULT_MUSIC_VOLUME = 0.8f;
+	private static float DEFAULT_MUSIC_VOLUME = 0.9f;
 	
 	// List of all music.
 	private static ArrayList<music> allMusic = new ArrayList<music>();

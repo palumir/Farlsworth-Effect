@@ -7,6 +7,7 @@ import java.awt.image.BufferedImage;
 import drawing.drawnObject;
 import drawing.gameCanvas;
 import drawing.spriteSheet;
+import interactions.quest;
 import items.bottle;
 import units.player;
 
@@ -32,6 +33,7 @@ public class playerHealthBar extends interfaceObject  {
 	public static Color DEFAULT_LEVEL_COLOR = new Color(64,48,38);
 	public static Color DEFAULT_OUTOF_COLOR = new Color(100,48,38);
 	public static Color DEFAULT_BOTTLE_COLOR = Color.white;
+	public static Color DEFAULT_QUEST_COLOR = Color.white;
 	
 	///////////////////////
 	////// FIELDS /////////
@@ -153,9 +155,11 @@ public class playerHealthBar extends interfaceObject  {
 				   (int)(gameCanvas.getScaleY()*(DEFAULT_HEALTHBAR_HEIGHT)));
 		
 		// Draw bottle UI.
+		int bottleAdjustX = 10;
+		int bottleAdjustY = 25;
 		if(player.getCurrentPlayer().getEquippedBottle() != null) {
-			int bottleAdjustX = 10;
-			int bottleAdjustY = 52;
+			bottleAdjustX += 0;
+			bottleAdjustY += 53-25;
 			
 			bottle b = player.getCurrentPlayer().getEquippedBottle();
 			g.setColor(DEFAULT_BOTTLE_COLOR);
@@ -168,6 +172,20 @@ public class playerHealthBar extends interfaceObject  {
 			g.drawString(b.getChargesLeft() + "/" + b.getMaxCharges(),
 					(int)(gameCanvas.getScaleX()*(getX() + bottleAdjustX + 25)),
 					(int)(gameCanvas.getScaleY()*(getY() + bottleAdjustY + b.getImage().getHeight()/2 + 5)));
+		}
+		
+		// Draw quest UI
+		int questAdjustX = bottleAdjustX;
+		int questAdjustY = bottleAdjustY + 38;
+		
+		g.setColor(DEFAULT_QUEST_COLOR);
+		if(quest.getCurrentQuests()!=null) {
+			for(int i = 0; i < quest.getCurrentQuests().size(); i++) {
+				g.drawString("Quest: " + quest.getCurrentQuests().get(i),
+						(int)(gameCanvas.getScaleX()*(getX() + questAdjustX)),
+						(int)(gameCanvas.getScaleY()*(getY() + questAdjustY + 5)));
+				questAdjustY += 15;
+			}
 		}
 	}
 	

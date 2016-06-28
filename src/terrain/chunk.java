@@ -146,14 +146,14 @@ public class chunk extends drawnObject {
 		//showHitBox();
 		
 		// Draw it. 
-		if(chunkImage != null) {
+		if(getChunkImage() != null) {
 			int changeFactor = 0;
 			if(gameCanvas.getScaleX() != 1f || gameCanvas.getScaleY() != 1f) changeFactor = 1;
-			g.drawImage(chunkImage, 
+			g.drawImage(getChunkImage(), 
 					drawX, 
 					drawY, 
-					(int)(gameCanvas.getScaleX()*chunkImage.getWidth() + changeFactor), 
-					(int)(gameCanvas.getScaleY()*chunkImage.getHeight() + changeFactor), 
+					(int)(gameCanvas.getScaleX()*getChunkImage().getWidth() + changeFactor), 
+					(int)(gameCanvas.getScaleY()*getChunkImage().getHeight() + changeFactor), 
 					null);
 			
 			// Draw the outskirts of the sprite.
@@ -198,6 +198,11 @@ public class chunk extends drawnObject {
 	////////////////////////////////////
 	////// GETTERS AND SETTERS /////////
 	////////////////////////////////////
+	// Get chunk image.
+	public BufferedImage getChunkImage() {
+		return chunkImage;
+	}
+	
 	public boolean isPassable() {
 		return passable;
 	}

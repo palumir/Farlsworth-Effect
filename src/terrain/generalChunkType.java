@@ -50,7 +50,12 @@ public class generalChunkType extends chunkType {
 			return getChunkTypeSpriteSheet().getSprite(randomFirstRow, 0);
 		}
 		else {
-			return getChunkTypeSpriteSheet().getSprite(1, 1);
+			if(getChunkTypeSpriteSheet().getSprites().size() > 1) {
+				return getChunkTypeSpriteSheet().getSprite(1, 1); // It's a platformer tile.
+			}
+			else {
+				return null; // It will be set later.
+			}
 		}
 	}
 	

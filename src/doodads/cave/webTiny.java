@@ -18,31 +18,31 @@ import utilities.stringUtils;
 import utilities.time;
 import zones.zone;
 
-public class webSmall extends chunk {
+public class webTiny extends chunk {
 	
 	////////////////
 	/// DEFAULTS ///
 	////////////////
 	
 	// Default name.
-	private static String DEFAULT_CHUNK_NAME = "Web Small";
+	private static String DEFAULT_CHUNK_NAME = "Web Tiny";
 	
 	// Sprite stuff.
-	private static String DEFAULT_CHUNK_SPRITESHEET = "images/doodads/farmLand/spiderCave/webSmall.png";
+	private static String DEFAULT_CHUNK_SPRITESHEET = "images/doodads/farmLand/spiderCave/webTiny.png";
 	
 	// Dimensions
-	private static int DEFAULT_SPRITE_WIDTH = 118;
-	private static int DEFAULT_SPRITE_HEIGHT = 118;
+	private static int DEFAULT_SPRITE_WIDTH = 59;
+	private static int DEFAULT_SPRITE_HEIGHT = 59;
 
 	// Topdown
 	private static int DEFAULT_TOPDOWN_ADJUSTMENT_Y = 0;
-	private static int DEFAULT_TOPDOWN_HEIGHT = 105;
-	private static int DEFAULT_TOPDOWN_WIDTH = 105;
+	private static int DEFAULT_TOPDOWN_HEIGHT = 53;
+	private static int DEFAULT_TOPDOWN_WIDTH = 53;
 
 	// Platformer.
 	private static int DEFAULT_PLATFORMER_ADJUSTMENT_Y = 0;
-	private static int DEFAULT_PLATFORMER_HEIGHT = 105;
-	private static int DEFAULT_PLATFORMER_WIDTH = 105;
+	private static int DEFAULT_PLATFORMER_HEIGHT = 53;
+	private static int DEFAULT_PLATFORMER_WIDTH = 53;
 	
 	// Default Z
 	private static int DEFAULT_Z = -50;
@@ -111,7 +111,7 @@ public class webSmall extends chunk {
 	}
 	
 	// Constructor
-	public webSmall(int newX, int newY, int i) {
+	public webTiny(int newX, int newY, int i) {
 		super(typeReference, newX, newY, i, 0);
 		if(mode.getCurrentMode().equals("topDown")) {
 			setHitBoxAdjustmentY(DEFAULT_TOPDOWN_ADJUSTMENT_Y);

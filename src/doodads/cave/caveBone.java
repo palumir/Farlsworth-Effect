@@ -1,4 +1,4 @@
-package doodads.sheepFarm;
+package doodads.cave;
 
 
 import interactions.interactBox;
@@ -9,7 +9,7 @@ import terrain.generalChunkType;
 import units.player;
 import utilities.utility;
 
-public class bone extends chunk {
+public class caveBone extends chunk {
 	
 	////////////////
 	/// DEFAULTS ///
@@ -25,9 +25,6 @@ public class bone extends chunk {
 	public static int DEFAULT_CHUNK_WIDTH = 32;
 	public static int DEFAULT_CHUNK_HEIGHT = 32;
 	
-	// RandomNum
-	private int randomNum;
-	
 	// Interactsequence.
 	private interactBox interactSequence;
 	
@@ -38,7 +35,7 @@ public class bone extends chunk {
 	/// METHODS ///
 	///////////////
 	// Constructor
-	public bone(int newX, int newY, int i) {
+	public caveBone(int newX, int newY, int i) {
 		super(typeReference, newX, newY, i, 0);
 		if(mode.getCurrentMode().equals("topDown")) {
 			setHitBoxAdjustmentY(0);
@@ -50,8 +47,6 @@ public class bone extends chunk {
 			setHeight(DEFAULT_CHUNK_HEIGHT);
 			setWidth(DEFAULT_CHUNK_WIDTH);
 		}
-		// Do a random interaction.
-		randomNum = utility.RNG.nextInt(6);
 		interactable = true;
 		setPassable(true);
 	}
@@ -65,38 +60,11 @@ public class bone extends chunk {
 			// Start of conversation.
 			textSeries startOfConversation = null;
 			
-				
-			if(randomNum == 0) {
-				startOfConversation = new textSeries(null, "Bone appetit.");
-				startOfConversation.setEnd();
-			}
+			// TODO:
+			startOfConversation = new textSeries(null, "Bone appetit.");
+			startOfConversation.setEnd();
 			
-			if(randomNum == 1) {
-				startOfConversation = new textSeries(null, "This guy met a ruff end.");
-				startOfConversation.setEnd();
-			}
-			
-			if(randomNum == 2) {
-				startOfConversation = new textSeries(null, "This dude must have barked up the wrong tree.");
-				startOfConversation.setEnd();
-			}
-			
-			if(randomNum == 3) {
-				startOfConversation = new textSeries(null, "A bone. It's bone dry.");
-				startOfConversation.setEnd();
-			}
-			
-			if(randomNum == 4) {
-				startOfConversation = new textSeries(null, "Some bones. That's about it. It's nothing humerus.");
-				startOfConversation.setEnd();
-			}
-			
-			if(randomNum == 5) {
-				startOfConversation = new textSeries(null, "What are you ... Sherlock Bones?");
-				startOfConversation.setEnd();
-			}
-			
-			return new interactBox(startOfConversation, "Gate");
+			return new interactBox(startOfConversation, "Cave Bone");
 		}
 		
 		// Interact with object. Should be over-ridden.

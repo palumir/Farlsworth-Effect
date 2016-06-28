@@ -3,7 +3,10 @@ package items;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.List;
 
 import drawing.drawnObject;
 import drawing.gameCanvas;
@@ -13,6 +16,7 @@ import effects.effectTypes.floatingString;
 import items.bottles.normalBottle;
 import items.keys.sheepKey;
 import items.weapons.dagger;
+import items.weapons.torch;
 import sounds.sound;
 import units.player;
 import utilities.stringUtils;
@@ -64,6 +68,7 @@ public abstract class item extends drawnObject {
 		for(int i = 0; i < allItems.size(); i++) {
 			if(s.equals(allItems.get(i).name)) return allItems.get(i);
 		}
+		System.err.println("Item " + s + " has not been initialized in item.initiate()!");
 		return null;
 	}
 	
@@ -119,8 +124,9 @@ public abstract class item extends drawnObject {
 	// Initiate so we actually have a list of items.
 	public static void initiate() {
 		
-		// Weapons,
+		// Weapons
 		dagger.weaponRef = new dagger();
+		torch.weaponRef = new torch();
 		
 		// Bottles.
 		normalBottle.bottleRef = new normalBottle();

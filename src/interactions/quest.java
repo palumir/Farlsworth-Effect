@@ -27,6 +27,9 @@ public class quest extends text {
 	/////////////////////
 	////// FIELDS ///////
 	/////////////////////
+	
+	// Read the current quests
+	private static ArrayList<String> currentQuests = new ArrayList<String>();
 
 	// Dialogue with quest giver.
 	private interactBox dialogue;
@@ -51,6 +54,9 @@ public class quest extends text {
 		// Set fields.
 		questGiver = giver;
 		setDialogue(dialogueFromQuestGiver);
+		
+		// Don't draw object.
+		setDrawObject(false);
 	}
 	
 	@Override
@@ -74,10 +80,14 @@ public class quest extends text {
 		setStarted(true);
 		questGiver.noQuest();
 		
+		// Set current quests.
+		if(!getCurrentQuests().contains(this.getTheText())) getCurrentQuests().add(this.getTheText());
+		
 		// Save game.
 		saveState.setQuiet(true);
 		saveState.createSaveState();
 		saveState.setQuiet(false);
+		
 	}
 	
 	// Completed quest
@@ -85,10 +95,23 @@ public class quest extends text {
 		
 		// End quest.
 		setCompleted(true);
-		setDrawObject(false);
+		
+		// Set current quests.
+		if(getCurrentQuests().contains(this.getTheText())) getCurrentQuests().remove(this.getTheText());
 		
 		// Save game.
 		saveState.createSaveState();
+	}
+	
+	public static void loadQuestData() {
+		
+		// Load the savestate
+		saveState s = player.getCurrentPlayer().playerSaveState;
+		
+		// Populate quests with quests from the saveState.
+		if(s != null) {
+			currentQuests = s.getCurrentQuests();
+		}
 	}
 	
 	// Completed?
@@ -128,5 +151,13 @@ public class quest extends text {
 
 	public void setDialogue(interactBox dialogue) {
 		this.dialogue = dialogue;
+	}
+
+	public static ArrayList<String> getCurrentQuests() {
+		return currentQuests;
+	}
+
+	public static void setCurrentQuests(ArrayList<String> currentQuests) {
+		quest.currentQuests = currentQuests;
 	}
 }

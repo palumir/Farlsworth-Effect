@@ -735,12 +735,12 @@ public class denmother extends boss {
 				}
 				randomInt = 2 + utility.RNG.nextInt(2);
 				u.setMoveSpeed(randomInt);
-				u.setAttackDamage(5);
+				u.setAttackDamage(3) ;
 				u.setAttackLength(7);
 				u.setAttackWidth(30);
-				u.setBaseAttackTime(0.1f);
-				u.setAttackTime(0.1f);
-				u.setAttackable(false);
+				u.setBaseAttackTime(0.2f);
+				u.setAttackTime(0.25f);
+				u.setKillable(false);
 				u.setTargetable(false);
 				u.ignoreCollision();
 				wolfPack.add(u);
@@ -891,7 +891,7 @@ public class denmother extends boss {
 			
 			// Start combat and make boss attackable.
 			combatStarted = true;
-			setAttackable(true);
+			setKillable(true);
 			
 			// Create healthbar.
 			bossHealth = new bossHealthBar(this);

@@ -48,11 +48,36 @@ public class webDoorDoodad extends chunk {
 	private static int DEFAULT_Z = -50;
 	
 	// The actual type.
-	private static generalChunkType typeReference = new generalChunkType(DEFAULT_CHUNK_NAME, DEFAULT_CHUNK_SPRITESHEET, DEFAULT_SPRITE_WIDTH, DEFAULT_SPRITE_HEIGHT);  
+	private static generalChunkType typeReference = new generalChunkType(DEFAULT_CHUNK_NAME, DEFAULT_CHUNK_SPRITESHEET, DEFAULT_SPRITE_WIDTH, DEFAULT_SPRITE_HEIGHT); 
+	
+	// Interact sequence.
+	private interactBox interactSequence;
 	
 	////////////////
 	/// FIELDS /////
 	////////////////
+	
+	// Create interact sequence
+	public interactBox makeNormalInteractSequence() {
+		
+		// Placeholder for each individual textSeries.
+		textSeries s;
+					
+		// Start of conversation.
+		textSeries startOfConversation = null;
+		startOfConversation = new textSeries(null, "It's some sort of super strong web.");
+		s = startOfConversation .addChild(null, "Hacking and slashing won't get you through this.");
+		s = s .addChild(null, "You'll need something else.");
+		s.setEnd();
+		
+		return new interactBox(startOfConversation, "Web Door");
+	}
+	
+	// Interact with object. Should be over-ridden.
+	public void interactWith() { 
+		interactSequence = makeNormalInteractSequence();
+		interactSequence.toggleDisplay();
+	}
 
 	// Update
 	@Override
@@ -76,7 +101,8 @@ public class webDoorDoodad extends chunk {
 		// Set z.
 		setZ(DEFAULT_Z);
 		
-		// Passable.
+		// Passable and interactable.
+		interactable = true;
 		setPassable(false);
 	}
 }

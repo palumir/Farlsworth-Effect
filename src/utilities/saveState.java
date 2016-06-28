@@ -8,11 +8,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 import doodads.sheepFarm.haystack;
-import drawing.userInterface.inventory;
 import drawing.userInterface.tooltipString;
 import interactions.event;
 import interactions.quest;
 import items.bottle;
+import items.inventory;
 import items.item;
 import items.weapon;
 import units.boss;
@@ -64,6 +64,9 @@ public class saveState implements Serializable {
 	
 	// Events
 	private ArrayList<event> allEvents;
+	
+	// Quests
+	private ArrayList<String> currentQuests;
 
 	////////////////////////
 	////// METHODS /////////
@@ -98,6 +101,7 @@ public class saveState implements Serializable {
 				s.setPlayerLevel(currPlayer.getPlayerLevel());
 				s.setExpIntoLevel(currPlayer.getExpIntoLevel());
 				s.setEquippedBottle(currPlayer.getEquippedBottle());
+				s.setCurrentQuests(quest.getCurrentQuests());
 				
 				// Save jokes.
 				s.setAllEvents(event.loadedEvents);
@@ -121,7 +125,9 @@ public class saveState implements Serializable {
 				objectStream.writeObject(inventorySize); 
 				
 				// Write the inventory (names of items) to save file.
-				for(int i = 0; i < inventorySize; i++) objectStream.writeObject(s.getPlayerInventory().get(i).name);
+				for(int i = 0; i < inventorySize; i++) {
+					objectStream.writeObject(s.getPlayerInventory().get(i).name);
+				}
 				
 				// Write the equipped items to save file.
 				if(s.getEquippedWeapon() == null) objectStream.writeObject("None!");
@@ -155,12 +161,26 @@ public class saveState implements Serializable {
 					objectStream.writeObject(s.getAllEvents().get(i).isCompleted());
 				}
 				
+				//////////////////////
+				/// CURRENT QUESTS ///
+				//////////////////////
+				// Write the length of the coming array.
+				int questsSize = 0;
+				if(s.getCurrentQuests() != null) questsSize = s.getCurrentQuests().size();
+				objectStream.writeObject(questsSize); 
+				
+				// Write the inventory (names of items) to save file.
+				for(int i = 0; i < questsSize; i++) {
+					objectStream.writeObject(s.getCurrentQuests().get(i));
+				}
+				
 				// Close the streams.
 			    objectStream.close();   
 			    fileStream.close(); 
 			}
 		}
 		catch(Exception e) {
+			e.printStackTrace();
 			// Failed to save state.
 		}
 	}
@@ -239,6 +259,24 @@ public class saveState implements Serializable {
 			// Load the gags
 			s.setAllEvents(newEvents);
 			
+			//////////////
+			/// EVENTS ///
+			//////////////
+			// Write the length of the coming array.
+			int questsSize = (int)objectStream.readObject(); 
+			
+			// Create new array.
+			ArrayList<String> newQuests = new ArrayList<String>();
+			
+			// Read the quests from save file.
+			for(int i = 0; i < questsSize; i++) {
+				String theName = (String)objectStream.readObject();
+				newQuests.add(theName);
+			}
+			
+			// Load the gags
+			s.setCurrentQuests(newQuests);
+			
 			// Close the streams.
 		    objectStream.close();   
 		    fileStream.close();   
@@ -247,6 +285,7 @@ public class saveState implements Serializable {
 		    return s;
 		}
 		catch(Exception e) {
+			e.printStackTrace();
 			// Failed to load game.
 			return null;
 		}
@@ -338,6 +377,14 @@ public class saveState implements Serializable {
 
 	public static void setQuiet(boolean quiet) {
 		saveState.quiet = quiet;
+	}
+
+	public ArrayList<String> getCurrentQuests() {
+		return currentQuests;
+	}
+
+	public void setCurrentQuests(ArrayList<String> currentQuests) {
+		this.currentQuests = currentQuests;
 	}
 	
 }

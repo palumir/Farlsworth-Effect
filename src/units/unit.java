@@ -125,7 +125,7 @@ public abstract class unit extends drawnObject  {
 	
 	// Attacking/getting attacked mechanics
 	private boolean canAttack = true; // backswing stuff.
-	private boolean attackable = false;
+	private boolean killable = false;
 	private boolean targetable = true;
 	private boolean attacking = false;
 	private boolean alreadyAttacked = false;
@@ -491,7 +491,7 @@ public abstract class unit extends drawnObject  {
 	
 	// Take damage. Ouch!
 	public void hurt(int damage, float crit) {
-		if(attackable) {
+		if(killable) {
 			if(healthPoints - crit*damage < 0) healthPoints = 0;
 			else healthPoints -= crit*damage;
 		}
@@ -1115,12 +1115,12 @@ public abstract class unit extends drawnObject  {
 		this.animations = animations;
 	}
 
-	public boolean isAttackable() {
-		return attackable;
+	public boolean isKillable() {
+		return killable;
 	}
 
-	public void setAttackable(boolean attackable) {
-		this.attackable = attackable;
+	public void setKillable(boolean killable) {
+		this.killable = killable;
 	}
 
 	public int getHealthPoints() {

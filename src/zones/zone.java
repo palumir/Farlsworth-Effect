@@ -43,13 +43,13 @@ public abstract class zone {
 	// Switch zones.
 	public static void switchZones(player p, zone a, zone b, int x, int y, String direction) {	
 		// Save the player's progress before switching zones..
-		saveState.createSaveState();
+		//saveState.createSaveState();
 		
 		// Re-create the player in the new zone.
-		player.loadPlayer(b, x, y, direction);
+		player.loadPlayer(player.getCurrentPlayer(), b, x, y, direction);
 		
 		// If we are going into the cave for the first time, display tooltip.
-		if(!spiderCave.enteredSpiderCaveBefore.isCompleted()) {
+		if(spiderCave.enteredSpiderCaveBefore != null && !spiderCave.enteredSpiderCaveBefore.isCompleted()) {
 			tooltipString t = new tooltipString("In platformer mode, press 'w' or 'up' to jump.");
 			spiderCave.enteredSpiderCaveBefore.setCompleted(true);
 			saveState.setQuiet(true);

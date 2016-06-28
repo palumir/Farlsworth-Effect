@@ -142,7 +142,7 @@ public class slowWolf extends unit {
 		exp = DEFAULT_EXP_GIVEN;
 		
 		// Set to be attackable.
-		this.setAttackable(true);
+		this.setKillable(true);
 		
 		// Wolf damage.
 		setAttackDamage(DEFAULT_ATTACK_DAMAGE);

@@ -2,12 +2,17 @@ package zones.farmLand;
 
 import java.awt.image.BufferedImage;
 
+import doodads.cave.caveBone;
+import doodads.cave.firePit;
 import doodads.cave.webMedium;
 import doodads.cave.webSmall;
+import doodads.cave.webTiny;
+import doodads.sheepFarm.bone;
 import doodads.sheepFarm.caveEnterance;
 import drawing.background;
 import drawing.spriteSheet;
 import interactions.event;
+import items.weapons.torch;
 import modes.platformer;
 import modes.topDown;
 import sounds.music;
@@ -90,8 +95,8 @@ public class spiderCave extends zone {
 	public void loadZone() {
 		
 		// Set the mode of the zone of course.
-		topDown.setMode();
-		//platformer.setMode();
+		//topDown.setMode();
+		platformer.setMode();
 		
 		// Background
 		background.setGameBackground(DEFAULT_ZONE_BACKGROUND);
@@ -161,8 +166,12 @@ public class spiderCave extends zone {
 		c = new webSmall(c.getX()+110,-81,2);
 		c = new webSmall(200+110,-81+110,0);
 		c = new webMedium(200 + 150, -81+200,0);
-		c = new webMedium(c.getX() + 260, c.getY()+150,0);
-		c = new webSmall(c.getX() - 450, c.getY()+80,0);
+		c = new webMedium(c.getX()+260, c.getY()+150,0);
+		c = new webSmall(c.getX()-450, c.getY()+80,0);
+		c = new webSmall(1000, 620,0);
+		
+		// Spawn the torch.
+		torch t = new torch(1036,-100);
 		
 		// First patch of spiders
 		u = new spider(535,231);
@@ -175,11 +184,35 @@ public class spiderCave extends zone {
 		spawnCaveRect(32,8+500,300,40+32*3+500);
 		
 		// Spawn lower floor
-		spawnCaveRect(32,40+500+32*3,1000,40+32*6+500);
+		spawnCaveRect(32,40+500+32*3,1000,707+180);
 		
 		// Spawn right wall.
-		spawnCaveRect(1000-32,-70+2,1100+32,707+32);
-		spawnCaveRect(1100-4+32,-250,1100+150,707+32);
+		spawnCaveRect(1000-32,-70+2,1100+32,600);
+		spawnCaveRect(1100-4+32,-250-10,1100+600,2200);
+		
+		// Spawn lower room left wall
+		spawnCaveRect(361,860,754,2200);
+		
+		// Spawn lower room floor
+		spawnCaveRect(361,2000,1100+600,2400);
+		
+		// Webs in lower room
+		c = new webTiny(1102,821,0);
+		c = new webTiny(1039, 1769,1);
+		c = new webTiny(868, 1649, 2);
+		c = new webTiny(745, 1526, 2);
+		c = new webTiny(745, 1295, 1);
+		c = new webTiny(856,900,3);
+		c = new webTiny(750,1100,3);
+		c = new webTiny(919,1430,0);
+		c = new webTiny(958, 941, 1);
+		c = new webTiny(946, 1882, 2);
+		
+		// Fire in lower room.
+		c = new firePit(784,1994);
+		c = new caveBone(750,1983,1);
+		c = new caveBone(1102, 1983, 0);
+		c = new caveBone(1017, 1984, 3);
 		
 		// Web door
 		u = new webDoor(-15,485);

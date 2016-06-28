@@ -137,7 +137,7 @@ public class wolf extends unit {
 	// Combat defaults.
 	public void setCombatStuff() {
 		// Set to be attackable.
-		this.setAttackable(true);
+		this.setKillable(true);
 		
 		// Set exp given.
 		exp = DEFAULT_EXP_GIVEN;

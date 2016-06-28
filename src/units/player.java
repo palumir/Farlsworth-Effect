@@ -9,7 +9,6 @@ import drawing.camera;
 import drawing.drawnObject;
 import drawing.animation.animation;
 import drawing.animation.animationPack;
-import drawing.userInterface.inventory;
 import drawing.userInterface.playerHealthBar;
 import drawing.userInterface.text;
 import drawing.userInterface.tooltipString;
@@ -20,6 +19,7 @@ import interactions.event;
 import interactions.interactBox;
 import interactions.quest;
 import items.bottle;
+import items.inventory;
 import items.item;
 import items.weapon;
 import main.main;
@@ -180,7 +180,7 @@ public class player extends unit {
 		}
 
 		// Combat.
-		setAttackable(true);
+		setKillable(true);
 		
 		// Set dimensions
 		setHeight(getDefaultHeight());
@@ -234,16 +234,19 @@ public class player extends unit {
 	}
 	
 	// Load player.
-	public static player loadPlayer(zone z, int spawnX, int spawnY, String direction) {
+	public static player loadPlayer(player alreadyPlayer, zone z, int spawnX, int spawnY, String direction) {
 		
 		// Initiate all.
 		utility.initiateAll();
 		
 		// The player, depending on whether or not we have a save file.
-		player thePlayer = loadPlayerSaveData(z, spawnX, spawnY, direction);
+		player thePlayer = loadPlayerSaveData(alreadyPlayer, z, spawnX, spawnY, direction);
 		
-		// Load jokes.
+		// Load events
 		event.loadEventData();
+		
+		// Load quests.
+		quest.loadQuestData();
 		
 		// Load the player into the zone.
 		thePlayer.currentZone.loadZone();
@@ -261,7 +264,7 @@ public class player extends unit {
 		return thePlayer;
 	}
 	
-	public static player loadPlayerSaveData(zone z, int spawnX, int spawnY, String direction) {
+	public static player loadPlayerSaveData(player alreadyPlayer, zone z, int spawnX, int spawnY, String direction) {
 		// Get player data from saveState.
 		// The player, depending on whether or not we have a save file.
 		player thePlayer;
@@ -285,7 +288,7 @@ public class player extends unit {
 		s = saveState.loadSaveState();
 		
 		// If no zone is given and we don't have the save file. First time running game. 
-		if(z == null && s==null) {
+		if(z == null && s==null && alreadyPlayer == null) {
 			loadZone = zone.getStartZone();
 			playerX = loadZone.getDefaultLocation().x;
 			playerY = loadZone.getDefaultLocation().y;
@@ -294,7 +297,7 @@ public class player extends unit {
 		}
 		
 		// If we have the savestate.
-		if(s != null) {
+		if(s != null && alreadyPlayer == null) {
 			loadZone = zone.getZoneByName(s.getZoneName());
 			playerX = s.getPlayerX();
 			playerY = s.getPlayerY();
@@ -312,6 +315,20 @@ public class player extends unit {
 			playerX = spawnX;
 			playerY = spawnY;
 			newFacingDirection = direction;
+			
+			// If we are given the player, copy new inventory, etc.
+			if(alreadyPlayer != null) {
+				
+				// Draw the carried over inventory.
+				loadedInventory = alreadyPlayer.getPlayerInventory();
+				drawnObject.objects.add(loadedInventory);
+				
+				// These will be carried over.
+				loadedEquippedWeapon = alreadyPlayer.getEquippedWeapon();
+				loadedEquippedBottle = alreadyPlayer.getEquippedBottle();
+				newPlayerLevel = alreadyPlayer.getPlayerLevel();
+				newPlayerExpIntoLevel = alreadyPlayer.getExpIntoLevel();
+			}
 		}
 		
 		// Create the player in the zone. Start zone if no zone was loaded from the save.

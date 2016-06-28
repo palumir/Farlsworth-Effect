@@ -86,6 +86,9 @@ public class webDoor extends unit {
 		
 		// Set webDoor Doodad
 		doodad = new webDoorDoodad(newX,newY,0);
+		
+		// Set unkillable.
+		setKillable(false);
 
 		// Set dimensions
 		setHeight(getDefaultHeight());
@@ -99,8 +102,6 @@ public class webDoor extends unit {
 	
 	// Combat defaults.
 	public void setCombatStuff() {
-		// Set to be attackable.
-		this.setAttackable(true);
 		
 		// Set exp given.
 		exp = DEFAULT_EXP_GIVEN;

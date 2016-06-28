@@ -24,7 +24,7 @@ public class main {
 	public static void restartGame(String s) {
 		
 		// Create the player.
-		player p = player.loadPlayer(null,0,0,"Up");
+		player p = player.loadPlayer(null, null,0,0,"Up");
 		
 		// Saved game?
 		if(s!=null) {
