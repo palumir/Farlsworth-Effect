@@ -359,6 +359,12 @@ public abstract class drawnObject {
 		if(this instanceof unit) {
 			unit.getAllUnits().remove((unit)this);
 		}
+		
+		// If it's a chunk
+		if(this instanceof chunk) {
+			chunk.allChunks.remove((chunk)this);
+			if(!((chunk)this).isPassable()) chunk.impassableChunks.remove((chunk)this);
+		}
 	}
 	
 	// Interact with object. Should be over-ridden.

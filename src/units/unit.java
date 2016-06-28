@@ -956,8 +956,16 @@ public abstract class unit extends drawnObject  {
 			int healthChunkSize = (int)(((float)getHealthPoints()/(float)getMaxHealthPoints())*DEFAULT_HEALTHBAR_WIDTH);
 			
 			// Adjustment
-			int hpAdjustX = (int) (gameCanvas.getScaleX()*(getCurrentAnimation().getCurrentFrame().getWidth()/2 - DEFAULT_HEALTHBAR_WIDTH/2));
-			int hpAdjustY = -(int)(gameCanvas.getScaleY()*getCurrentAnimation().getCurrentFrame().getHeight()/3);
+			int hpAdjustX;
+			int hpAdjustY;
+			if(getCurrentAnimation()!=null) {
+				hpAdjustX = (int) (gameCanvas.getScaleX()*(getCurrentAnimation().getCurrentFrame().getWidth()/2 - DEFAULT_HEALTHBAR_WIDTH/2));
+				hpAdjustY = -(int)(gameCanvas.getScaleY()*getCurrentAnimation().getCurrentFrame().getHeight()/2/3);
+			}
+			else {
+				hpAdjustX = (int) (gameCanvas.getScaleX()*(getObjectSpriteSheet().getSpriteWidth()/2 - DEFAULT_HEALTHBAR_WIDTH/2));
+				hpAdjustY = -(int)(gameCanvas.getScaleY()*getHeight()/3);
+			}
 			
 			// Draw the red.
 			g.setColor(playerHealthBar.DEFAULT_LOST_HEALTH_COLOR);

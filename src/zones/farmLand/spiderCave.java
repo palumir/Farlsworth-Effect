@@ -15,6 +15,7 @@ import terrain.chunk;
 import terrain.chunkTypes.cave;
 import units.unit;
 import units.unitTypes.farmLand.spiderCave.spider;
+import units.unitTypes.farmLand.spiderCave.webDoor;
 import utilities.intTuple;
 import zones.zone;
 
@@ -89,8 +90,8 @@ public class spiderCave extends zone {
 	public void loadZone() {
 		
 		// Set the mode of the zone of course.
-		// topDown.setMode();
-		platformer.setMode();
+		topDown.setMode();
+		//platformer.setMode();
 		
 		// Background
 		background.setGameBackground(DEFAULT_ZONE_BACKGROUND);
@@ -154,13 +155,12 @@ public class spiderCave extends zone {
 		spiderCaveEnterance.setZ(BACKGROUND_Z);
 		
 		// First patch of webs.
-		webSmall w = new webSmall(200,-81,1);
-		c = new webSmall(w.getX()+110,w.getY(),0);
+		c = new webSmall(200+110,-81,0);
 		c = new webSmall(c.getX()+220,-290,1);
 		c = new webSmall(c.getX()+230,-81,3);
 		c = new webSmall(c.getX()+110,-81,2);
-		c = new webSmall(w.getX()+110,w.getY()+110,0);
-		c = new webMedium(w.getX() + 150, w.getY()+200,0);
+		c = new webSmall(200+110,-81+110,0);
+		c = new webMedium(200 + 150, -81+200,0);
 		c = new webMedium(c.getX() + 260, c.getY()+150,0);
 		c = new webSmall(c.getX() - 450, c.getY()+80,0);
 		
@@ -172,17 +172,18 @@ public class spiderCave extends zone {
 		u.setMoveSpeed(3);
 		
 		// Floor below entrance
-		spawnCaveRect(-311,8+500,300,40+32*3+500);
+		spawnCaveRect(32,8+500,300,40+32*3+500);
 		
 		// Spawn lower floor
-		spawnCaveRect(-311,40+500+32*3,1000,40+32*6+500);
+		spawnCaveRect(32,40+500+32*3,1000,40+32*6+500);
 		
 		// Spawn right wall.
 		spawnCaveRect(1000-32,-70+2,1100+32,707+32);
 		spawnCaveRect(1100-4+32,-250,1100+150,707+32);
 		
-		// Zone loaded.
-		setZoneLoaded(true);
+		// Web door
+		u = new webDoor(-15,485);
+		
 	}
 
 	// Get the player location in the zone.
