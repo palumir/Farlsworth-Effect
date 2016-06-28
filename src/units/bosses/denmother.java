@@ -7,7 +7,7 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-import doodads.farmLand.claw;
+import doodads.sheepFarm.claw;
 import drawing.drawnObject;
 import drawing.gameCanvas;
 import drawing.spriteSheet;
@@ -29,9 +29,9 @@ import units.boss;
 import units.player;
 import units.unit;
 import units.unitType;
-import units.unitTypes.farmLand.slowWolf;
-import units.unitTypes.farmLand.jumpingWolf;
-import units.unitTypes.farmLand.wolf;
+import units.unitTypes.farmLand.sheepFarm.jumpingWolf;
+import units.unitTypes.farmLand.sheepFarm.slowWolf;
+import units.unitTypes.farmLand.sheepFarm.wolf;
 import utilities.stringUtils;
 import utilities.time;
 import utilities.intTuple;
@@ -103,8 +103,8 @@ public class denmother extends boss {
 	private static String snore = "sounds/effects/animals/snore.wav";
 	
 	// Music
-	private static music bossMusic = new music("sounds/music/farmLand/denmother/fight.wav");
-	private static music bossIntro = new music("sounds/music/farmLand/denmother/intro.wav");
+	private static music bossMusic = new music("sounds/music/farmLand/sheepFarm/denmother/fight.wav");
+	private static music bossIntro = new music("sounds/music/farmLand/sheepFarm/denmother/intro.wav");
 	
 	//////////////
 	/// FIELDS ///

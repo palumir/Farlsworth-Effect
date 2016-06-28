@@ -94,6 +94,9 @@ public abstract class unit extends drawnObject  {
 	protected int platformerWidth = 0;
 	protected int platformerHeight = 0;
 	
+	// Are we stuck in something sticky?
+	private boolean stuck = false;
+	
 	// Combat
 	// Health points
 	protected int maxHealthPoints = DEFAULT_HP;
@@ -265,7 +268,7 @@ public abstract class unit extends drawnObject  {
 	
 	// Provide gravity
 	public void gravity() {
-		if(gravity) {
+		if(gravity && !stuck) {
 			
 			// Accelerate
 			if(fallSpeed < DEFAULT_GRAVITY_MAX_VELOCITY){
@@ -421,6 +424,25 @@ public abstract class unit extends drawnObject  {
 		return returnList;
 	}
 	
+	// Get units in box.
+	public static ArrayList<unit> getUnitsInRadius(int x, int y, int radius) {
+		ArrayList<unit> returnList = new ArrayList<unit>();
+		for(int i = 0; i < getAllUnits().size(); i++) {
+			unit u = getAllUnits().get(i);
+			if(u.isWithinRadius(x, y, radius)) {
+				returnList.add(u);
+			}
+		}
+		if(returnList.size()==0) return null;
+		return returnList;
+	}
+	
+	// Get whether a unit is within radius
+	public boolean isWithinRadius(int x, int y, int radius) {
+		float howClose = (float) Math.sqrt((this.getX() + this.getWidth()/2 - x)*(this.getX() + this.getWidth()/2 - x) + (this.getY() + this.getHeight()/2 - y)*(this.getY() + this.getHeight()/2 - y));
+		return howClose < radius;
+	}
+	
 	// Attack units
 	public void attackUnits() {
 		ArrayList<unit> unitsToAttack = unitsInAttackRange;
@@ -522,7 +544,7 @@ public abstract class unit extends drawnObject  {
 	
 	// Jump unit
 	public void jump() {
-		if(gravity && !jumping && tryJump && touchingGround) {
+		if(!stuck && gravity && !jumping && tryJump && touchingGround) {
 			// Accelerate upward.
 			jumping = true;
 			fallSpeed = -jumpSpeed;
@@ -640,7 +662,7 @@ public abstract class unit extends drawnObject  {
 			if(movingRight) moveX += moveSpeed;
 			
 			// Only do these ones if we're in topDown mode.
-			if(mode.getCurrentMode() == "topDown") {
+			if(mode.getCurrentMode() == "topDown" || stuck) {
 				if(movingUp) moveY -= moveSpeed;
 				if(movingDown) moveY += moveSpeed;
 			}
@@ -650,8 +672,8 @@ public abstract class unit extends drawnObject  {
 			else if(movingRight && movingUp) setFacingDirection("Right");
 			else if(movingLeft && movingDown) setFacingDirection("Left");
 			else if(movingRight && movingDown) setFacingDirection("Right");
-			else if(movingDown && mode.getCurrentMode() != "platformer") setFacingDirection("Down");
-			else if(movingUp && mode.getCurrentMode() != "platformer") setFacingDirection("Up");
+			else if(movingDown && (mode.getCurrentMode() != "platformer" || stuck)) setFacingDirection("Down");
+			else if(movingUp && (mode.getCurrentMode() != "platformer" || stuck)) setFacingDirection("Up");
 			else if(movingRight) setFacingDirection("Right");
 			else if(movingLeft) setFacingDirection("Left");
 			
@@ -878,8 +900,15 @@ public abstract class unit extends drawnObject  {
 				// Play animation.
 				animate("attacking" + facingDirection);
 			}
-			else if(inAir) {
-				animate("jumping" + getFacingDirection());
+			else if(inAir && !stuck) {
+				String face;
+				if(getFacingDirection().equals("Up") || getFacingDirection().equals("Down")) {
+					face = "Right";
+				}
+				else {
+					face = getFacingDirection();
+				}
+				animate("jumping" + face);
 			}
 			else if(isMoving()) {
 				// If we are running.
@@ -1245,6 +1274,14 @@ public abstract class unit extends drawnObject  {
 
 	public void setAttackVariability(float attackVariability) {
 		this.attackVariability = attackVariability;
+	}
+
+	public boolean isStuck() {
+		return stuck;
+	}
+
+	public void setStuck(boolean stuck) {
+		this.stuck = stuck;
 	}
 	
 }

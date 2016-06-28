@@ -37,19 +37,51 @@ public abstract class drawnObject {
 	private static Comparator<drawnObject> platformerComparator =  new Comparator<drawnObject>() {
 		@Override
 	    public int compare(drawnObject d1, drawnObject d2) {
-			int z1;
-			int z2;
-			
-			// Get z1, assume 0 if not set.
-			if(d1.getZ() == null) z1 = 0;
-			else z1 = d1.getZ();
-			
-			// Get z2, assume 0 if not set.
-			if(d2.getZ() == null) z2 = 0;
-			else z2 = d2.getZ();
-			
-			// Return the comparison between the two.
-			return z1 - z2;
+	    	
+	    	// Draw floating numbers over ...
+	    	if(d1 instanceof floatingString && !(d2 instanceof floatingString)) return 10;
+	    	else if(d2 instanceof floatingString && !(d1 instanceof floatingString)) return -10;
+	    	else {
+	    	
+		    	// Draw interface objects over ...
+		    	if(d1 instanceof interfaceObject && !(d2 instanceof interfaceObject)) return 9;
+		    	else if(d2 instanceof interfaceObject && !(d1 instanceof interfaceObject)) return -9;
+		    	else {
+		    	
+			    	// Different comparator for drawing effects over ...
+			    	if(d1 instanceof effect && !(d2 instanceof effect) /*&& d1.getY()+d1.getHeight() <= d2.getY()*/) return 8;
+			    	else if(d2 instanceof effect && !(d1 instanceof effect) /*&& d2.getY()+d2.getHeight() <= d1.getY()*/) return -8;
+			    	
+			    	else {
+				    	// Prioritize units walking over chunks
+				    	// and units walking in front of other units.
+				    	if(!(d1 instanceof groundTile) && d2 instanceof groundTile) return 7;
+				    	else if(d1 instanceof groundTile && !(d2 instanceof groundTile)) return -7;
+					    else {	
+					    	if(d1.isBackgroundDoodad() && !d2.isBackgroundDoodad()) return -6;
+					    	else if(!d1.isBackgroundDoodad() && d2.isBackgroundDoodad()) return 6;
+					    	else {
+								int z1;
+								int z2;
+								
+								// Get z1, assume 0 if not set.
+								if(d1.getZ() == null) z1 = 0;
+								else z1 = d1.getZ();
+								
+								// Get z2, assume 0 if not set.
+								if(d2.getZ() == null) z2 = 0;
+								else z2 = d2.getZ();
+								
+								// Return the comparison between the two.
+								if(z1 - z2 > 0) return 1;
+								if(z1 - z2 < 0) return -1;
+								else return 0;
+					    	}
+					    }
+			    	}
+		    
+		    	}
+	    	}
 		}
 	};
 	

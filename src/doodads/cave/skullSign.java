@@ -27,7 +27,7 @@ public class skullSign extends chunk {
 	private static String DEFAULT_CHUNK_NAME = "Danger Sign";
 	
 	// Sprite stuff.
-	private static String DEFAULT_CHUNK_SPRITESHEET = "images/doodads/farmLand/skullSign.png";
+	private static String DEFAULT_CHUNK_SPRITESHEET = "images/doodads/farmLand/sheepFarm/skullSign.png";
 	
 	// Dimensions
 	private static int DEFAULT_SPRITE_WIDTH = 33;

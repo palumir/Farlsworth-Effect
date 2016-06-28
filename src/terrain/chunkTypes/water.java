@@ -2,7 +2,7 @@ package terrain.chunkTypes;
 
 import java.util.Random;
 
-import doodads.farmLand.needlestack;
+import doodads.sheepFarm.needlestack;
 import drawing.camera;
 import interactions.interactBox;
 import interactions.textSeries;

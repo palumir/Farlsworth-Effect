@@ -2,7 +2,7 @@ package units.bosses;
 
 import java.util.ArrayList;
 
-import doodads.farmLand.woolPiece;
+import doodads.sheepFarm.woolPiece;
 import interactions.event;
 import interactions.interactBox;
 import interactions.textSeries;

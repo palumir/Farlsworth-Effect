@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
-import doodads.farmLand.bone;
+import doodads.sheepFarm.bone;
 import drawing.camera;
 import drawing.drawnObject;
 import drawing.animation.animation;
@@ -375,6 +375,7 @@ public class player extends unit {
 			// Player presses up key, presumably to jump!
 			if(k.getKeyCode() == KeyEvent.VK_UP || k.getKeyCode() == KeyEvent.VK_W) { 
 				if(mode.getCurrentMode() == platformer.name) {
+					startMove("up");
 					startJump();
 				}
 				else if(mode.getCurrentMode() == topDown.name) {
@@ -386,6 +387,7 @@ public class player extends unit {
 			if(k.getKeyCode() == KeyEvent.VK_DOWN || k.getKeyCode() == KeyEvent.VK_S) { 
 				if(mode.getCurrentMode() == platformer.name) {
 					//crouch(true);
+					startMove("down");
 				}
 				else if(mode.getCurrentMode() == topDown.name) {
 					startMove("down");
@@ -591,22 +593,14 @@ public class player extends unit {
 		
 		// Player presses up key, presumably to jump!
 		if(k.getKeyCode() == KeyEvent.VK_UP || k.getKeyCode() == KeyEvent.VK_W) { 
-			if(mode.getCurrentMode() == platformer.name) {
-				stopJump();
-			}
-			else if(mode.getCurrentMode() == topDown.name) {
-				stopMove("up");
-			}
+			stopJump();
+			stopMove("up");
+			
 		}
 		
 		// Player presses down key
 		if(k.getKeyCode() == KeyEvent.VK_DOWN || k.getKeyCode() == KeyEvent.VK_S) { 
-			if(mode.getCurrentMode() == platformer.name) {
-				//crouch(true);
-			}
-			else if(mode.getCurrentMode() == topDown.name) {
-				stopMove("down");
-			}
+			stopMove("down");
 		}
 	}
 	

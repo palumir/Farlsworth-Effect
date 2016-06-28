@@ -7,7 +7,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import doodads.farmLand.haystack;
+import doodads.sheepFarm.haystack;
 import drawing.userInterface.inventory;
 import drawing.userInterface.tooltipString;
 import interactions.event;

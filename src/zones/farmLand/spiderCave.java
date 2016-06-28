@@ -1,17 +1,10 @@
 package zones.farmLand;
 
-import java.awt.Color;
 import java.awt.image.BufferedImage;
 
-import doodads.farmLand.bush;
-import doodads.farmLand.caveEnterance;
-import doodads.farmLand.fenceBars;
-import doodads.farmLand.fenceBarsSmall;
-import doodads.farmLand.fencePost;
-import doodads.farmLand.horizontalGate;
-import doodads.farmLand.rock;
-import doodads.farmLand.tree;
-import doodads.farmLand.verticalFence;
+import doodads.cave.webMedium;
+import doodads.cave.webSmall;
+import doodads.sheepFarm.caveEnterance;
 import drawing.background;
 import drawing.spriteSheet;
 import interactions.event;
@@ -19,17 +12,10 @@ import modes.platformer;
 import modes.topDown;
 import sounds.music;
 import terrain.chunk;
-import terrain.chunkType;
-import terrain.generalChunkType;
 import terrain.chunkTypes.cave;
-import terrain.chunkTypes.grass;
-import terrain.chunkTypes.water;
-import terrain.chunkTypes.wood;
-import units.player;
 import units.unit;
-import units.unitType;
+import units.unitTypes.farmLand.spiderCave.spider;
 import utilities.intTuple;
-import utilities.utility;
 import zones.zone;
 
 public class spiderCave extends zone {
@@ -56,6 +42,9 @@ public class spiderCave extends zone {
 	
 	// Defaults
 	public static intTuple DEFAULT_SPAWN_TUPLE = new intTuple(0,-50);
+	
+	// Zone music.
+	private static music zoneMusic = new music("sounds/music/farmLand/spiderCave/spiderCave.wav");
 	
 	// Constructor
 	public spiderCave() {
@@ -100,6 +89,7 @@ public class spiderCave extends zone {
 	public void loadZone() {
 		
 		// Set the mode of the zone of course.
+		// topDown.setMode();
 		platformer.setMode();
 		
 		// Background
@@ -121,9 +111,7 @@ public class spiderCave extends zone {
 		setZoneLoaded(true);
 		
 		// Play zone music.
-		music.endAll();
-		//zoneMusic.loopMusic();
-		
+		zoneMusic.loopMusic();
 	}
 	
 	// Load zone events.
@@ -145,7 +133,6 @@ public class spiderCave extends zone {
 	
 		// Floor
 		spawnCaveRect(-311,40,300,40+32*3);
-		//spawnCaveRect(-311,40+32,4000,500);
 		
 		// Left wall
 		spawnCaveRect(-338,-235,7,1000);
@@ -159,11 +146,40 @@ public class spiderCave extends zone {
 		int max = 0;
 		
 		////////////////
-		// Spawn Area //
+		// FIRST Area //
 		////////////////
 		
+		// Entrance
 		caveEnterance spiderCaveEnterance = new caveEnterance(30,-15,0, sheepFarm.getZone(),-1762+52,-4070+90,"Down");
 		spiderCaveEnterance.setZ(BACKGROUND_Z);
+		
+		// First patch of webs.
+		webSmall w = new webSmall(200,-81,1);
+		c = new webSmall(w.getX()+110,w.getY(),0);
+		c = new webSmall(c.getX()+220,-290,1);
+		c = new webSmall(c.getX()+230,-81,3);
+		c = new webSmall(c.getX()+110,-81,2);
+		c = new webSmall(w.getX()+110,w.getY()+110,0);
+		c = new webMedium(w.getX() + 150, w.getY()+200,0);
+		c = new webMedium(c.getX() + 260, c.getY()+150,0);
+		c = new webSmall(c.getX() - 450, c.getY()+80,0);
+		
+		// First patch of spiders
+		u = new spider(535,231);
+		u = new spider(535+50,231+50);
+		u.setMoveSpeed(2);
+		u = new spider(397,339);
+		u.setMoveSpeed(3);
+		
+		// Floor below entrance
+		spawnCaveRect(-311,8+500,300,40+32*3+500);
+		
+		// Spawn lower floor
+		spawnCaveRect(-311,40+500+32*3,1000,40+32*6+500);
+		
+		// Spawn right wall.
+		spawnCaveRect(1000-32,-70+2,1100+32,707+32);
+		spawnCaveRect(1100-4+32,-250,1100+150,707+32);
 		
 		// Zone loaded.
 		setZoneLoaded(true);

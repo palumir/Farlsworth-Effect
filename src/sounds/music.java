@@ -35,7 +35,7 @@ public class music {
 			getClip().open(audioIn);
 		}
 		catch(Exception e) {
-			
+			e.printStackTrace();
 		}
 		allMusic.add(this);
 	}
