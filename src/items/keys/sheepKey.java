@@ -44,6 +44,11 @@ public class sheepKey extends key {
 		super(DEFAULT_KEY_NAME);
 	}
 	
+	// Get item ref.
+	public item getItemRef() {
+		return keyRef;
+	}
+	
 	// On floor.
 	public sheepKey(int x, int y) {
 		super(DEFAULT_KEY_NAME,x,y);

@@ -95,8 +95,8 @@ public class spiderCave extends zone {
 	public void loadZone() {
 		
 		// Set the mode of the zone of course.
-		//topDown.setMode();
-		platformer.setMode();
+		topDown.setMode();
+		//platformer.setMode();
 		
 		// Background
 		background.setGameBackground(DEFAULT_ZONE_BACKGROUND);

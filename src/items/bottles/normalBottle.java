@@ -60,6 +60,11 @@ public class normalBottle extends bottle {
 		setStats();
 	}
 	
+	// Get item ref.
+	public item getItemRef() {
+		return bottleRef;
+	}
+	
 	// Set stats
 	public void setStats() {
 		

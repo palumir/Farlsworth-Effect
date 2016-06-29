@@ -66,7 +66,7 @@ public abstract class item extends drawnObject {
 	// Get item by name.
 	public static item getItemByName(String s) {
 		for(int i = 0; i < allItems.size(); i++) {
-			if(s.equals(allItems.get(i).name)) return allItems.get(i);
+			if(s.equals(allItems.get(i).name)) return allItems.get(i).getItemRef();
 		}
 		System.err.println("Item " + s + " has not been initialized in item.initiate()!");
 		return null;
@@ -82,7 +82,7 @@ public abstract class item extends drawnObject {
 			// Equip the item if it's a weapon or bottle and we don't have one equipped.
 			if((player.getCurrentPlayer().getEquippedWeapon() == null && this instanceof weapon) ||
 					(player.getCurrentPlayer().getEquippedBottle() == null && this instanceof bottle)) {
-				equip();
+				this.getItemRef().equip();
 			}
 		
 			// Display text. 
@@ -90,7 +90,7 @@ public abstract class item extends drawnObject {
 			effect e = new floatingString("+" + stringUtils.toTitleCase(name), DEFAULT_PICKUP_COLOR, currPlayer.getX() + currPlayer.getWidth()/2, currPlayer.getY() + currPlayer.getHeight()/2, 1.2f);
 			
 			// At least add the item to the player's inventory.
-			player.getCurrentPlayer().getPlayerInventory().pickUp(this);
+			player.getCurrentPlayer().getPlayerInventory().pickUp(this.getItemRef());
 			
 		}
 		
@@ -104,7 +104,11 @@ public abstract class item extends drawnObject {
 		// Stop drawing the weapon on the ground.
 		setDrawObject(false);
 		inInventory = true;
+		destroy();
 	}
+	
+	// Get item ref.
+	public abstract item getItemRef();
 	
 	// React to pickup
 	public void reactToPickup() {
@@ -121,18 +125,24 @@ public abstract class item extends drawnObject {
 				null);
 	}
 	
+	// Initiate events.
+	public static void initiateEvents() {
+	}
+	
 	// Initiate so we actually have a list of items.
 	public static void initiate() {
 		
 		// Weapons
-		dagger.weaponRef = new dagger();
-		torch.weaponRef = new torch();
+		if(dagger.weaponRef == null) dagger.weaponRef = new dagger();
+		if(torch.weaponRef == null) {
+			torch.weaponRef = new torch();
+		}
 		
 		// Bottles.
-		normalBottle.bottleRef = new normalBottle();
+		if(normalBottle.bottleRef == null) normalBottle.bottleRef = new normalBottle();
 		
 		// Keys.
-		sheepKey.keyRef = new sheepKey();
+		if(sheepKey.keyRef == null) sheepKey.keyRef = new sheepKey();
 		
 	}
 }

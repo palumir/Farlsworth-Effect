@@ -61,7 +61,7 @@ public class caveBone extends chunk {
 			textSeries startOfConversation = null;
 			
 			// TODO:
-			startOfConversation = new textSeries(null, "Bone appetit.");
+			startOfConversation = new textSeries(null, "Looks like these people couldn't find their way out.");
 			startOfConversation.setEnd();
 			
 			return new interactBox(startOfConversation, "Cave Bone");

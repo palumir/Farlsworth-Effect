@@ -23,6 +23,7 @@ hit-bush01.wav by JanKoehl
 Noise of a fountain lever by felipeInv
 LevelUp.wav by sepal
 Water splash.wav by speedygonzo
+FIREPLACE by leosalom
 
 Music: 
 Elidia McFaggot

@@ -37,20 +37,17 @@ public class event {
 				}
 			}
 		}
-		
 		loadedEvents.add(this);
 	}
 	
-	// Load gag data.
-	public static void loadEventData() {
-		
-		// Load the savestate
-		saveState s = player.getCurrentPlayer().playerSaveState;
-		
-		// Populate allGags with quests from the saveState.
-		if(s != null) {
-			loadedEvents = s.getAllEvents();
+	public static void printAllEvents() {
+		if(loadedEvents != null)
+		System.out.println("=====================================================");
+		for(int i = 0; i < loadedEvents.size(); i++) {
+			if(loadedEvents.get(i).name.contains("torch"))
+			System.out.println("Event: " + loadedEvents.get(i).getName() + " is set to: " + loadedEvents.get(i).completed);
 		}
+		System.out.println("=====================================================");
 	}
 
 	public String getName() {

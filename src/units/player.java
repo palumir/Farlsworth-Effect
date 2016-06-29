@@ -58,7 +58,7 @@ public class player extends unit {
 	private static zone DEFAULT_ZONE = null;
 	
 	// Default movespeed. 
-	private static int DEFAULT_PLAYER_MOVESPEED = 3;
+	private static int DEFAULT_PLAYER_MOVESPEED = 10;//3;
 	// 3 is default
 	
 	// Default jump speed
@@ -205,7 +205,6 @@ public class player extends unit {
 	public void updateUnit() {
 		potentiallyAttack();
 		levelUp();
-		updateInterface();
 	}
 	
 	// Attack?
@@ -229,24 +228,14 @@ public class player extends unit {
 		main.restartGame("Death");
 	}
 	
-	// Update interface.
-	public void updateInterface() {
-	}
-	
 	// Load player.
 	public static player loadPlayer(player alreadyPlayer, zone z, int spawnX, int spawnY, String direction) {
 		
 		// Initiate all.
-		utility.initiateAll();
+		saveState s = utility.initiateAll();
 		
 		// The player, depending on whether or not we have a save file.
-		player thePlayer = loadPlayerSaveData(alreadyPlayer, z, spawnX, spawnY, direction);
-		
-		// Load events
-		event.loadEventData();
-		
-		// Load quests.
-		quest.loadQuestData();
+		player thePlayer = loadPlayerSaveData(alreadyPlayer, s, z, spawnX, spawnY, direction);
 		
 		// Load the player into the zone.
 		thePlayer.currentZone.loadZone();
@@ -264,7 +253,7 @@ public class player extends unit {
 		return thePlayer;
 	}
 	
-	public static player loadPlayerSaveData(player alreadyPlayer, zone z, int spawnX, int spawnY, String direction) {
+	public static player loadPlayerSaveData(player alreadyPlayer, saveState s, zone z, int spawnX, int spawnY, String direction) {
 		// Get player data from saveState.
 		// The player, depending on whether or not we have a save file.
 		player thePlayer;
@@ -273,7 +262,6 @@ public class player extends unit {
 		// If we don't have a savefile, load them into the starting zone.
 		
 		// The fields we will try to load.
-		saveState s = null;
 		zone loadZone = null;
 		int playerX = 0;
 		int playerY = 0;
@@ -283,9 +271,6 @@ public class player extends unit {
 		inventory loadedInventory = new inventory(); // empty inventory
 		weapon loadedEquippedWeapon = null;
 		bottle loadedEquippedBottle = null;
-		
-		// Load save state.
-		s = saveState.loadSaveState();
 		
 		// If no zone is given and we don't have the save file. First time running game. 
 		if(z == null && s==null && alreadyPlayer == null) {
@@ -324,8 +309,10 @@ public class player extends unit {
 				drawnObject.objects.add(loadedInventory);
 				
 				// These will be carried over.
-				loadedEquippedWeapon = alreadyPlayer.getEquippedWeapon();
-				loadedEquippedBottle = alreadyPlayer.getEquippedBottle();
+				if(alreadyPlayer.getEquippedWeapon() != null)
+				loadedEquippedWeapon = (weapon) alreadyPlayer.getEquippedWeapon().getItemRef();
+				if(alreadyPlayer.getEquippedBottle() != null)
+				loadedEquippedBottle = (bottle) alreadyPlayer.getEquippedBottle().getItemRef();
 				newPlayerLevel = alreadyPlayer.getPlayerLevel();
 				newPlayerExpIntoLevel = alreadyPlayer.getExpIntoLevel();
 			}

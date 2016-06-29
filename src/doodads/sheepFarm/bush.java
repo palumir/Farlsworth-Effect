@@ -152,6 +152,7 @@ public class bush extends chunk {
 			
 			// Play sound
 			sound s = new sound(clearBush);
+			s.setPosition(getX(), getY(), sound.DEFAULT_SOUND_RADIUS);
 			s.start();
 			
 			// Spawn a lever.

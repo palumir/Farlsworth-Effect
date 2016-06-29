@@ -103,17 +103,6 @@ public class quest extends text {
 		saveState.createSaveState();
 	}
 	
-	public static void loadQuestData() {
-		
-		// Load the savestate
-		saveState s = player.getCurrentPlayer().playerSaveState;
-		
-		// Populate quests with quests from the saveState.
-		if(s != null) {
-			currentQuests = s.getCurrentQuests();
-		}
-	}
-	
 	// Completed?
 	public boolean completed() {
 		return isCompleted();

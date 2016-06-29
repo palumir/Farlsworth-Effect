@@ -10,6 +10,7 @@ import interactions.interactBox;
 import interactions.textSeries;
 import items.weapons.torch;
 import modes.mode;
+import sounds.sound;
 import terrain.chunk;
 import terrain.chunkType;
 import terrain.generalChunkType;
@@ -50,6 +51,11 @@ public class firePit extends chunk {
 	// The actual type.
 	private static generalChunkType typeReference = new generalChunkType(DEFAULT_CHUNK_NAME, DEFAULT_CHUNK_SPRITESHEET, DEFAULT_SPRITE_WIDTH, DEFAULT_SPRITE_HEIGHT);  
 	
+	// Firepit sound
+	private static String firePitSound = "sounds/effects/doodads/firePit.wav";
+	private static long lastFireSound = 0;
+	private static float playEvery = 28.6f;
+	
 	////////////////
 	/// FIELDS /////
 	////////////////
@@ -83,7 +89,7 @@ public class firePit extends chunk {
 		else {
 			s = startOfConversation.addChild("Light torch", "You light the torch on fire.");
 			s.setEnd();
-			s = startOfConversation.addChild("Walk away", "You light nothing on fire. Probably a good idea.");
+			s = startOfConversation.addChild("Walk away", "You'd probably just light yourself on fire anyway.");
 			s.setEnd();
 		}
 			
@@ -96,8 +102,9 @@ public class firePit extends chunk {
 				&& interactSequence.getTheText().getButtonText() != null
 				&& interactSequence.getTheText().getButtonText().equals("Light torch")
 				&& interactSequence.getTheText().isEnd()
-				&& interactSequence.isDisplayOn()) {
-			System.out.println("Light torch");
+				&& interactSequence.isDisplayOn()
+				&& !((torch)torch.weaponRef).isLit()) {
+			((torch)torch.weaponRef).light();
 		}
 	}
 	
@@ -106,6 +113,23 @@ public class firePit extends chunk {
 	public void update() {
 		doInteractStuff();
 		fireAnimation.playAnimation();
+		playFireSound();
+	}
+	
+	// Play fire sound
+	public void playFireSound() {
+		if(lastFireSound == 0) {
+			lastFireSound = time.getTime();
+			sound s = new sound(firePitSound);
+			s.setPosition(getX(),getY(), sound.DEFAULT_SOUND_RADIUS);
+			s.start();
+		}
+		else if(time.getTime() - lastFireSound > playEvery*1000) {
+			lastFireSound = time.getTime();
+			sound s = new sound(firePitSound);
+			s.setPosition(getX(),getY(), sound.DEFAULT_SOUND_RADIUS);
+			s.start();
+		}
 	}
 	
 	// Interact with object. Should be over-ridden.

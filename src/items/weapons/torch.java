@@ -8,6 +8,7 @@ import drawing.animation.animation;
 import drawing.animation.animationPack;
 import drawing.spriteSheet.spriteSheetInfo;
 import drawing.userInterface.tooltipString;
+import interactions.event;
 import items.item;
 import items.weapon;
 import units.player;
@@ -22,7 +23,7 @@ public class torch extends weapon {
 	public static String DEFAULT_WEAPON_NAME = "torch";
 	
 	// Weapon stats.
-	static private int DEFAULT_ATTACK_DAMAGE = 7;
+	static private int DEFAULT_ATTACK_DAMAGE = 5;
 	static private float DEFAULT_BAT = 0.35f;
 	static private float DEFAULT_ATTACK_TIME = 0.45f;
 	static private int DEFAULT_ATTACK_WIDTH = 55;
@@ -35,6 +36,7 @@ public class torch extends weapon {
 	/// FIELDS ///
 	//////////////
 	public static BufferedImage itemImage = spriteSheet.getSpriteFromFilePath("images/doodads/items/"+ DEFAULT_WEAPON_NAME + ".png");
+	public static BufferedImage itemImageLit = spriteSheet.getSpriteFromFilePath("images/doodads/items/"+ DEFAULT_WEAPON_NAME + "Lit.png");
 	public static spriteSheet weaponSpriteSheet = new spriteSheet(new spriteSheetInfo(
 			"images/units/player/" + player.DEFAULT_PLAYER_GENDER + "/"+ DEFAULT_WEAPON_NAME + ".png", 
 			weapon.DEFAULT_SPRITE_WIDTH, 
@@ -42,11 +44,19 @@ public class torch extends weapon {
 			weapon.DEFAULT_SPRITE_ADJUSTMENT_X,
 			weapon.DEFAULT_SPRITE_ADJUSTMENT_Y
 			));
-	
+	public static spriteSheet weaponSpriteSheetLit = new spriteSheet(new spriteSheetInfo(
+			"images/units/player/" + player.DEFAULT_PLAYER_GENDER + "/"+ DEFAULT_WEAPON_NAME + "Lit.png", 
+			weapon.DEFAULT_SPRITE_WIDTH, 
+			weapon.DEFAULT_SPRITE_HEIGHT,
+			weapon.DEFAULT_SPRITE_ADJUSTMENT_X,
+			weapon.DEFAULT_SPRITE_ADJUSTMENT_Y
+			));
 	public static weapon weaponRef;
 	
 	// Is the torch lit?
-	private boolean lit = false;
+	private event lit;
+	
+	private int numTorches = 0;
 	
 	///////////////
 	/// METHODS ///
@@ -56,6 +66,9 @@ public class torch extends weapon {
 	public torch() {
 		super(DEFAULT_WEAPON_NAME,weaponSpriteSheet);
 		
+		// Torch lit?
+		lit = new event("Item: " + DEFAULT_WEAPON_NAME + "lit");
+		
 		// Weapon stats.
 		setStats();
 	}
@@ -64,10 +77,13 @@ public class torch extends weapon {
 	public torch(int x, int y) {
 		super(DEFAULT_WEAPON_NAME,x,y);
 		
+		// Torch lit?
+		//lit = new event("Item: " + DEFAULT_WEAPON_NAME + "lit");
+		
 		// Weapon stats.
 		setStats();
 	}
-	
+
 	// React to being picked up.
 	@Override
 	public void reactToPickup() {
@@ -81,8 +97,27 @@ public class torch extends weapon {
 	
 	// Set stats
 	public void setStats() {
+		
+		if(lit != null && lit.isCompleted()) setStatsLit();
+		else {
+			// Weapon stats.
+			setAttackDamage(DEFAULT_ATTACK_DAMAGE);
+			attackTime = DEFAULT_ATTACK_TIME;
+			baseAttackTime = DEFAULT_BAT;
+			attackWidth = DEFAULT_ATTACK_WIDTH;
+			attackLength = DEFAULT_ATTACK_LENGTH;
+			critChance = DEFAULT_CRIT_CHANCE;
+			critDamage = DEFAULT_CRIT_DAMAGE;
+			attackVariability = DEFAULT_VARIABILITY;
+			setRange("medium");
+			setSpeed("medium");
+		}
+	}
+	
+	// Set stats
+	public void setStatsLit() {
 		// Weapon stats.
-		setAttackDamage(DEFAULT_ATTACK_DAMAGE);
+		setAttackDamage(DEFAULT_ATTACK_DAMAGE + 4);
 		attackTime = DEFAULT_ATTACK_TIME;
 		baseAttackTime = DEFAULT_BAT;
 		attackWidth = DEFAULT_ATTACK_WIDTH;
@@ -100,6 +135,10 @@ public class torch extends weapon {
 		// Equip the weapon.
 		player.getCurrentPlayer().setEquippedWeapon(this);
 		
+		// Set animations
+		if(lit != null && isLit()) addLitAnimations();
+		else addUnlitAnimations();
+		
 		// Change the player's stats based on the weapon's strength and their
 		// level.
 		player.getCurrentPlayer().setAttackDamage(attackDamage);
@@ -111,86 +150,174 @@ public class torch extends weapon {
 		player.getCurrentPlayer().setCritDamage(critDamage);
 		player.getCurrentPlayer().setAttackVariability(attackVariability);
 		
-		// Deal with animations
-		animationPack unitTypeAnimations = new animationPack();
+	}
+	
+	// Add lit animations
+	public void addLitAnimations() {
 		
-		// Attacking left animation.
-		animation attackingLeft = new animation("attackingLeft", weaponSpriteSheet.getAnimation(13), 0, 5, DEFAULT_ATTACK_TIME);
-		unitTypeAnimations.addAnimation(attackingLeft);
-		
-		// Attacking left animation.
-		animation attackingRight = new animation("attackingRight", weaponSpriteSheet.getAnimation(15), 0, 5, DEFAULT_ATTACK_TIME);
-		unitTypeAnimations.addAnimation(attackingRight);
-		
-		// Attacking left animation.
-		animation attackingUp = new animation("attackingUp", weaponSpriteSheet.getAnimation(12), 0, 5, DEFAULT_ATTACK_TIME);
-		unitTypeAnimations.addAnimation(attackingUp);
-		
-		// Attacking left animation.
-		animation attackingDown = new animation("attackingDown", weaponSpriteSheet.getAnimation(14), 0, 5, DEFAULT_ATTACK_TIME);
-		unitTypeAnimations.addAnimation(attackingDown);
-		
-		// Jumping left animation.
-		animation jumpingLeft = new animation("jumpingLeft", weaponSpriteSheet.getAnimation(1), 5, 5, 1);
-		unitTypeAnimations.addAnimation(jumpingLeft);
-		
-		// Jumping right animation.
-		animation jumpingRight = new animation("jumpingRight", weaponSpriteSheet.getAnimation(3), 5, 5, 1);
-		unitTypeAnimations.addAnimation(jumpingRight);
-		
-		// Standing left animation.
-		animation standingLeft = new animation("standingLeft", weaponSpriteSheet.getAnimation(9), 0, 0, 1);
-		unitTypeAnimations.addAnimation(standingLeft);
-		
-		// Standing up animation.
-		animation standingUp = new animation("standingUp", weaponSpriteSheet.getAnimation(8), 0, 0, 1);
-		unitTypeAnimations.addAnimation(standingUp);
-		
-		// Standing right animation.
-		animation standingRight = new animation("standingRight", weaponSpriteSheet.getAnimation(11), 0, 0, 1);
-		unitTypeAnimations.addAnimation(standingRight);
-		
-		// Standing down animation.
-		animation standingDown = new animation("standingDown", weaponSpriteSheet.getAnimation(10), 0, 0, 1);
-		unitTypeAnimations.addAnimation(standingDown);
-		
-		// Running left animation.
-		animation runningLeft = new animation("runningLeft", weaponSpriteSheet.getAnimation(9), 1, 8, 0.75f);
-		unitTypeAnimations.addAnimation(runningLeft);		
-		
-		// Running up animation.
-		animation runningUp = new animation("runningUp", weaponSpriteSheet.getAnimation(8), 1, 8, 0.75f);
-		unitTypeAnimations.addAnimation(runningUp);
-		
-		// Running right animation.
-		animation runningRight = new animation("runningRight", weaponSpriteSheet.getAnimation(11), 1, 8, 0.75f);
-		unitTypeAnimations.addAnimation(runningRight);
-		
-		// Running down animation.
-		animation runningDown = new animation("runningDown", weaponSpriteSheet.getAnimation(10), 1, 8, 0.75f);
-		unitTypeAnimations.addAnimation(runningDown);
-		
-		// Set animations.
-		player.getCurrentPlayer().setAnimations(unitTypeAnimations);
+		if(player.getCurrentPlayer().getEquippedWeapon() == this && isLit()) {
+			// Deal with animations
+			animationPack unitTypeAnimations = new animationPack();
+			
+			// Attacking left animation.
+			animation attackingLeft = new animation("attackingLeft", weaponSpriteSheetLit.getAnimation(13), 0, 5, DEFAULT_ATTACK_TIME);
+			unitTypeAnimations.addAnimation(attackingLeft);
+			
+			// Attacking left animation.
+			animation attackingRight = new animation("attackingRight", weaponSpriteSheetLit.getAnimation(15), 0, 5, DEFAULT_ATTACK_TIME);
+			unitTypeAnimations.addAnimation(attackingRight);
+			
+			// Attacking left animation.
+			animation attackingUp = new animation("attackingUp", weaponSpriteSheetLit.getAnimation(12), 0, 5, DEFAULT_ATTACK_TIME);
+			unitTypeAnimations.addAnimation(attackingUp);
+			
+			// Attacking left animation.
+			animation attackingDown = new animation("attackingDown", weaponSpriteSheetLit.getAnimation(14), 0, 5, DEFAULT_ATTACK_TIME);
+			unitTypeAnimations.addAnimation(attackingDown);
+			
+			// Jumping left animation.
+			animation jumpingLeft = new animation("jumpingLeft", weaponSpriteSheetLit.getAnimation(1), 5, 5, 1);
+			unitTypeAnimations.addAnimation(jumpingLeft);
+			
+			// Jumping right animation.
+			animation jumpingRight = new animation("jumpingRight", weaponSpriteSheetLit.getAnimation(3), 5, 5, 1);
+			unitTypeAnimations.addAnimation(jumpingRight);
+			
+			// Standing left animation.
+			animation standingLeft = new animation("standingLeft", weaponSpriteSheetLit.getAnimation(9), 0, 0, 1);
+			unitTypeAnimations.addAnimation(standingLeft);
+			
+			// Standing up animation.
+			animation standingUp = new animation("standingUp", weaponSpriteSheetLit.getAnimation(8), 0, 0, 1);
+			unitTypeAnimations.addAnimation(standingUp);
+			
+			// Standing right animation.
+			animation standingRight = new animation("standingRight", weaponSpriteSheetLit.getAnimation(11), 0, 0, 1);
+			unitTypeAnimations.addAnimation(standingRight);
+			
+			// Standing down animation.
+			animation standingDown = new animation("standingDown", weaponSpriteSheetLit.getAnimation(10), 0, 0, 1);
+			unitTypeAnimations.addAnimation(standingDown);
+			
+			// Running left animation.
+			animation runningLeft = new animation("runningLeft", weaponSpriteSheetLit.getAnimation(9), 1, 8, 0.75f);
+			unitTypeAnimations.addAnimation(runningLeft);		
+			
+			// Running up animation.
+			animation runningUp = new animation("runningUp", weaponSpriteSheetLit.getAnimation(8), 1, 8, 0.75f);
+			unitTypeAnimations.addAnimation(runningUp);
+			
+			// Running right animation.
+			animation runningRight = new animation("runningRight", weaponSpriteSheetLit.getAnimation(11), 1, 8, 0.75f);
+			unitTypeAnimations.addAnimation(runningRight);
+			
+			// Running down animation.
+			animation runningDown = new animation("runningDown", weaponSpriteSheetLit.getAnimation(10), 1, 8, 0.75f);
+			unitTypeAnimations.addAnimation(runningDown);
+			
+			// Set animations.
+			player.getCurrentPlayer().setAnimations(unitTypeAnimations);
+		}
+	}
+	
+	// Add unlit animations
+	public void addUnlitAnimations() {
+		if(player.getCurrentPlayer().getEquippedWeapon() == this) {
+			// Deal with animations
+			animationPack unitTypeAnimations = new animationPack();
+			
+			// Attacking left animation.
+			animation attackingLeft = new animation("attackingLeft", weaponSpriteSheet.getAnimation(13), 0, 5, DEFAULT_ATTACK_TIME);
+			unitTypeAnimations.addAnimation(attackingLeft);
+			
+			// Attacking left animation.
+			animation attackingRight = new animation("attackingRight", weaponSpriteSheet.getAnimation(15), 0, 5, DEFAULT_ATTACK_TIME);
+			unitTypeAnimations.addAnimation(attackingRight);
+			
+			// Attacking left animation.
+			animation attackingUp = new animation("attackingUp", weaponSpriteSheet.getAnimation(12), 0, 5, DEFAULT_ATTACK_TIME);
+			unitTypeAnimations.addAnimation(attackingUp);
+			
+			// Attacking left animation.
+			animation attackingDown = new animation("attackingDown", weaponSpriteSheet.getAnimation(14), 0, 5, DEFAULT_ATTACK_TIME);
+			unitTypeAnimations.addAnimation(attackingDown);
+			
+			// Jumping left animation.
+			animation jumpingLeft = new animation("jumpingLeft", weaponSpriteSheet.getAnimation(1), 5, 5, 1);
+			unitTypeAnimations.addAnimation(jumpingLeft);
+			
+			// Jumping right animation.
+			animation jumpingRight = new animation("jumpingRight", weaponSpriteSheet.getAnimation(3), 5, 5, 1);
+			unitTypeAnimations.addAnimation(jumpingRight);
+			
+			// Standing left animation.
+			animation standingLeft = new animation("standingLeft", weaponSpriteSheet.getAnimation(9), 0, 0, 1);
+			unitTypeAnimations.addAnimation(standingLeft);
+			
+			// Standing up animation.
+			animation standingUp = new animation("standingUp", weaponSpriteSheet.getAnimation(8), 0, 0, 1);
+			unitTypeAnimations.addAnimation(standingUp);
+			
+			// Standing right animation.
+			animation standingRight = new animation("standingRight", weaponSpriteSheet.getAnimation(11), 0, 0, 1);
+			unitTypeAnimations.addAnimation(standingRight);
+			
+			// Standing down animation.
+			animation standingDown = new animation("standingDown", weaponSpriteSheet.getAnimation(10), 0, 0, 1);
+			unitTypeAnimations.addAnimation(standingDown);
+			
+			// Running left animation.
+			animation runningLeft = new animation("runningLeft", weaponSpriteSheet.getAnimation(9), 1, 8, 0.75f);
+			unitTypeAnimations.addAnimation(runningLeft);		
+			
+			// Running up animation.
+			animation runningUp = new animation("runningUp", weaponSpriteSheet.getAnimation(8), 1, 8, 0.75f);
+			unitTypeAnimations.addAnimation(runningUp);
+			
+			// Running right animation.
+			animation runningRight = new animation("runningRight", weaponSpriteSheet.getAnimation(11), 1, 8, 0.75f);
+			unitTypeAnimations.addAnimation(runningRight);
+			
+			// Running down animation.
+			animation runningDown = new animation("runningDown", weaponSpriteSheet.getAnimation(10), 1, 8, 0.75f);
+			unitTypeAnimations.addAnimation(runningDown);
+			
+			// Set animations.
+			player.getCurrentPlayer().setAnimations(unitTypeAnimations);
+		}
+	}
+	
+	// Get item ref.
+	public item getItemRef() {
+		return weaponRef;
 	}
 	
 	// Light torch
 	public void light() {
-		lit = true;
-	}
-	
-	// Unlight torch
-	public void goOut() {
-		lit = false;
+		setLit(true);
+		addLitAnimations();
 	}
 	
 	// Get the item image.
 	public BufferedImage getImage() {
+		if(lit != null && isLit()) {
+			return itemImageLit;
+		}
 		return itemImage;
 	}
 	
 	// Get weapon reference.
 	public static weapon getWeapon() {
 		return weaponRef;
+	}
+
+	public boolean isLit() {
+		return ((torch)getItemRef()).lit.isCompleted();
+	}
+
+	// Not entirely sure why I need to create a new event here, but it works.
+	public void setLit(boolean newLit) {
+		lit = new event("Item: " + DEFAULT_WEAPON_NAME + "lit");
+		lit.setCompleted(true);
 	}
 }

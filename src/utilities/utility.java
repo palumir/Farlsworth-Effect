@@ -3,7 +3,9 @@ package utilities;
 import java.util.Random;
 
 import drawing.drawnObject;
+import interactions.event;
 import interactions.interactBox;
+import interactions.quest;
 import items.item;
 import sounds.music;
 import terrain.chunk;
@@ -48,7 +50,9 @@ public abstract class utility {
 	}
 	
 	// Set-up all the utilities.
-	public static void initiateAll() {
+	public static saveState initiateAll() {
+		
+		// Initiate everything
 		time.initiate();
 		drawnObject.initiate();
 		interactBox.initiate();
@@ -57,7 +61,11 @@ public abstract class utility {
 		unit.initiate();
 		unitType.initiate();
 		chunk.initiate();
-		item.initiate();
 		zone.initiate(); 
+		
+		// Load save state and return
+		saveState s = saveState.loadSaveState();
+		
+		return s;
 	}
 }

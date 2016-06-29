@@ -18,7 +18,7 @@ public class sound extends Thread {
 
     private Position curPosition;
 
-    private final int EXTERNAL_BUFFER_SIZE = 524288; // 128Kb 
+    private final int EXTERNAL_BUFFER_SIZE = 524288/10; // 128Kb DEFAULT
     
     // Where to play and at what radius.
     private int radius = 0;
@@ -73,34 +73,6 @@ public class sound extends Thread {
         try { 
             auline = (SourceDataLine) AudioSystem.getLine(info);
             auline.open(format);
-            
-		    // Get player position
-		    int playerX = player.getCurrentPlayer().getX();
-		    int playerY = player.getCurrentPlayer().getY();
-		   
-		    // Calculate how close we are.
-		    float howClose = (float) Math.sqrt((playerX - x)*(playerX - x) + (playerY - y)*(playerY - y));
-		    
-		    // How close are you to the sound?
-		    float howClosePercentage;
-        	if(radius > 0) {
-        		howClosePercentage = ((float)radius - howClose)/(float)radius;
-        	}
-        	else {
-        		howClosePercentage = 1f;
-        	}
-		   
-		    // Adjust volume based on radius.
-		    FloatControl control = (FloatControl) auline.getControl(FloatControl.Type.MASTER_GAIN);
-	        float max = control.getMaximum();
-	        float min = control.getMinimum(); // negative values all seem to be zero?
-	        float range = max - min;
-	        if(howClosePercentage>0) {
-	        	control.setValue(min + (range * howClosePercentage * volume * soundVolume));
-	        }
-	        else { 
-	        	control.setValue(min);
-	        }
         } catch (LineUnavailableException e) { 
             e.printStackTrace();
             return;
@@ -124,6 +96,34 @@ public class sound extends Thread {
 
         try { 
             while (nBytesRead != -1) { 
+            	
+    		    // Get player position
+    		    int playerX = player.getCurrentPlayer().getX();
+    		    int playerY = player.getCurrentPlayer().getY();
+    		   
+    		    // Calculate how close we are.
+    		    float howClose = (float) Math.sqrt((playerX - x)*(playerX - x) + (playerY - y)*(playerY - y));
+    		    
+    		    // How close are you to the sound?
+    		    float howClosePercentage;
+            	if(radius > 0) {
+            		howClosePercentage = ((float)radius - howClose)/(float)radius;
+            	}
+            	else {
+            		howClosePercentage = 1f;
+            	}
+    		   
+    		    // Adjust volume based on radius.
+    		    FloatControl control = (FloatControl) auline.getControl(FloatControl.Type.MASTER_GAIN);
+    	        float max = control.getMaximum();
+    	        float min = control.getMinimum(); // negative values all seem to be zero?
+    	        float range = max - min;
+    	        if(howClosePercentage>0) {
+    	        	control.setValue(min + (range * howClosePercentage * volume * soundVolume));
+    	        }
+    	        else { 
+    	        	control.setValue(min);
+    	        }
                 nBytesRead = audioInputStream.read(abData, 0, abData.length);
                 if (nBytesRead >= 0) 
                     auline.write(abData, 0, nBytesRead);

@@ -90,6 +90,11 @@ public class dagger extends weapon {
 		setSpeed("fast");
 	}
 	
+	// Get item ref.
+	public item getItemRef() {
+		return weaponRef;
+	}
+	
 	// Equip item
 	public void equip() {
 		

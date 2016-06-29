@@ -145,7 +145,7 @@ public class inventory extends interfaceObject {
 					}
 					else {
 						// Equip item
-						i.equip();
+						i.getItemRef().equip();
 						
 						// Play equip sound.
 						sound s = new sound(equipWeapon);
@@ -167,7 +167,7 @@ public class inventory extends interfaceObject {
 					}
 					else {
 						// Equip item
-						i.equip();
+						i.getItemRef().equip();
 						
 						// Play equip sound.
 						sound s = new sound(equipWeapon);
@@ -314,7 +314,7 @@ public class inventory extends interfaceObject {
 					if(x < getItems().size()) {
 						
 						// Draw the item, if it exists.
-						item currentItem = getItems().get(x);
+						item currentItem = getItems().get(x).getItemRef();
 						g.setColor(DEFAULT_TEXT_COLOR);
 						g.drawImage(currentItem.getImage(), 
 								(int)(gameCanvas.getScaleX()*(getX() + j*DEFAULT_SLOT_SIZE + DEFAULT_SLOT_SIZE/2 - currentItem.getImage().getWidth()/2 + adjustX)), 
@@ -450,7 +450,7 @@ public class inventory extends interfaceObject {
 	}
 	
 	public item get(int i) {
-		return getItems().get(i);
+		return getItems().get(i).getItemRef();
 	}
 	
 	public int size() {

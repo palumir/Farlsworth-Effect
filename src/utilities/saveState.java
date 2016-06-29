@@ -116,6 +116,20 @@ public class saveState implements Serializable {
 				objectStream.writeObject(s.getPlayerY());
 				objectStream.writeObject(s.getFacingDirection());
 				
+				////////////////
+				/// EVENTS   ///
+				////////////////
+				// Write the length of the coming array.
+				int gagsSize = 0;
+				if(s.getAllEvents() != null) gagsSize = s.getAllEvents().size();
+				objectStream.writeObject(gagsSize); 
+				
+				// Write the inventory (names of items) to save file.
+				for(int i = 0; i < gagsSize; i++) {
+					objectStream.writeObject(s.getAllEvents().get(i).getName());
+					objectStream.writeObject(s.getAllEvents().get(i).isCompleted());
+				}
+				
 				/////////////////
 				/// INVENTORY ///
 				/////////////////
@@ -146,20 +160,6 @@ public class saveState implements Serializable {
 				// Write the level and exp into level.
 				objectStream.writeObject(s.getPlayerLevel());
 				objectStream.writeObject(s.getExpIntoLevel());
-				
-				////////////////
-				/// EVENTS   ///
-				////////////////
-				// Write the length of the coming array.
-				int gagsSize = 0;
-				if(s.getAllEvents() != null) gagsSize = s.getAllEvents().size();
-				objectStream.writeObject(gagsSize); 
-				
-				// Write the inventory (names of items) to save file.
-				for(int i = 0; i < gagsSize; i++) {
-					objectStream.writeObject(s.getAllEvents().get(i).getName());
-					objectStream.writeObject(s.getAllEvents().get(i).isCompleted());
-				}
 				
 				//////////////////////
 				/// CURRENT QUESTS ///
@@ -201,8 +201,29 @@ public class saveState implements Serializable {
 			s.setPlayerY((int) objectStream.readObject());
 			s.setFacingDirection((String)objectStream.readObject());
 			
+			//////////////
+			/// EVENTS ///
+			//////////////
+			// Write the length of the coming array.
+			int eventsSize = (int)objectStream.readObject(); 
+			
+			// Create new array.
+			ArrayList<event> newEvents = new ArrayList<event>();
+			
+			// Read the gags from save file.
+			for(int i = 0; i < eventsSize; i++) {
+				String theName = (String)objectStream.readObject();
+				boolean completed = (boolean)objectStream.readObject();
+				event g = new event(theName);
+				g.setCompleted(completed);
+				newEvents.add(g);
+			}
+			
+			// Initiate items
+			item.initiate();
+			
 			//////////////////
-			/// INVENTORTY ///
+			/// INVENTORY ///
 			//////////////////
 			// Read the length of the coming array.
 			int j = (int)objectStream.readObject();
@@ -239,28 +260,7 @@ public class saveState implements Serializable {
 			s.setExpIntoLevel((int)objectStream.readObject());
 			
 			//////////////
-			/// EVENTS ///
-			//////////////
-			// Write the length of the coming array.
-			int eventsSize = (int)objectStream.readObject(); 
-			
-			// Create new array.
-			ArrayList<event> newEvents = new ArrayList<event>();
-			
-			// Read the gags from save file.
-			for(int i = 0; i < eventsSize; i++) {
-				String theName = (String)objectStream.readObject();
-				boolean completed = (boolean)objectStream.readObject();
-				event g = new event(theName);
-				g.setCompleted(completed);
-				newEvents.add(g);
-			}
-			
-			// Load the gags
-			s.setAllEvents(newEvents);
-			
-			//////////////
-			/// EVENTS ///
+			/// QUESTS ///
 			//////////////
 			// Write the length of the coming array.
 			int questsSize = (int)objectStream.readObject(); 
@@ -274,8 +274,9 @@ public class saveState implements Serializable {
 				newQuests.add(theName);
 			}
 			
-			// Load the gags
+			// Load the quests
 			s.setCurrentQuests(newQuests);
+			quest.setCurrentQuests(s.getCurrentQuests());
 			
 			// Close the streams.
 		    objectStream.close();   
@@ -285,6 +286,9 @@ public class saveState implements Serializable {
 		    return s;
 		}
 		catch(Exception e) {
+			// Initiate items
+			item.initiate();
+			
 			e.printStackTrace();
 			// Failed to load game.
 			return null;
