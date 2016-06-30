@@ -10,6 +10,7 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.SourceDataLine; 
 import javax.sound.sampled.UnsupportedAudioFileException;
 
+import drawing.gameCanvas;
 import units.player; 
 
 public class sound extends Thread { 
@@ -18,7 +19,7 @@ public class sound extends Thread {
 
     private Position curPosition;
 
-    private final int EXTERNAL_BUFFER_SIZE = 524288/10; // 128Kb DEFAULT
+    private final int EXTERNAL_BUFFER_SIZE = 524288/100; // 128Kb DEFAULT
     
     // Where to play and at what radius.
     private int radius = 0;
@@ -31,7 +32,7 @@ public class sound extends Thread {
     private float volume = 1f;
     
     // Default sound radius
-    public static int DEFAULT_SOUND_RADIUS = 1200;
+    public static int DEFAULT_SOUND_RADIUS = 1800;
 
     enum Position { 
         LEFT, RIGHT, NORMAL
@@ -106,7 +107,7 @@ public class sound extends Thread {
     		    
     		    // How close are you to the sound?
     		    float howClosePercentage;
-            	if(radius > 0) {
+            	if(/*howClose > gameCanvas.getDefaultWidth()/3 &&*/ radius > 0) {
             		howClosePercentage = ((float)radius - howClose)/(float)radius;
             	}
             	else {

@@ -85,6 +85,7 @@ public class firePit extends chunk {
 		// If player doesn't have torch.
 		if(!player.getCurrentPlayer().getPlayerInventory().hasItem(torch.weaponRef)) {
 			s = startOfConversation.addChild(null, "If only you had something to light.");
+			s.setEnd();
 		}
 		else {
 			s = startOfConversation.addChild("Light torch", "You light the torch on fire.");

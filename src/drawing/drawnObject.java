@@ -12,6 +12,7 @@ import doodads.general.questMark;
 import drawing.userInterface.interfaceObject;
 import drawing.userInterface.tooltipString;
 import effects.effect;
+import effects.projectile;
 import effects.effectTypes.floatingString;
 import units.player;
 import units.unit;
@@ -358,6 +359,11 @@ public abstract class drawnObject {
 		// If it's a unit, remove it from list.
 		if(this instanceof unit) {
 			unit.getAllUnits().remove((unit)this);
+		}
+		
+		// If it's a projectile, remove it from proj list.
+		if(this instanceof projectile) {
+			projectile.allProjectiles.remove((projectile)this);
 		}
 		
 		// If it's a chunk

@@ -34,18 +34,21 @@ public class spider extends unit {
 	public static int DEFAULT_SPRITE_WIDTH = 64;
 	
 	// Platformer real dimensions
-	public static int DEFAULT_PLATFORMER_HEIGHT = 32;
-	public static int DEFAULT_PLATFORMER_WIDTH = 32;
+	public static int DEFAULT_PLATFORMER_HEIGHT = 25;
+	public static int DEFAULT_PLATFORMER_WIDTH = 25;
 	public static int DEFAULT_PLATFORMER_ADJUSTMENT_Y = 0;
 	
 	// TopDown real dimensions
-	public static int DEFAULT_TOPDOWN_HEIGHT = 32;
-	public static int DEFAULT_TOPDOWN_WIDTH = 32;
+	public static int DEFAULT_TOPDOWN_HEIGHT = 25;
+	public static int DEFAULT_TOPDOWN_WIDTH = 25;
 	public static int DEFAULT_TOPDOWN_ADJUSTMENT_Y = 0;
+	
+	// Default patrol radius
+	private int DEFAULT_PATROL_RADIUS = 10;
 	
 	// How close to attack?
 	private int DEFAULT_ATTACK_RADIUS = 220;
-	private int DEFAULT_DEAGGRO_RADIUS = 300;
+	private int DEFAULT_DEAGGRO_RADIUS = 350;
 	
 	// Damage stats
 	private int DEFAULT_ATTACK_DIFFERENTIAL = 7; // the range within the attackrange the unit will attack.
@@ -55,14 +58,22 @@ public class spider extends unit {
 	private float DEFAULT_BACKSWING = 0.5f;
 	private int DEFAULT_ATTACK_WIDTH = 20;
 	private int DEFAULT_ATTACK_LENGTH = 12;
-	static private float DEFAULT_CRIT_CHANCE = .05f;
+	static private float DEFAULT_CRIT_CHANCE = .15f;
 	static private float DEFAULT_CRIT_DAMAGE = 1.9f;
+	
+	// AI movement.
+	private long AILastCheck = 0l; // milliseconds
+	private float randomMove = 1f; // seconds
+	private float randomStop = 0.5f;
+	private int startX = 0;
+	private int startY = 0;
+	private int patrolRadius = DEFAULT_PATROL_RADIUS;
 	
 	// Default exp given.
 	private int DEFAULT_EXP_GIVEN = 25;
 	
 	// Health.
-	private int DEFAULT_HP = 25;
+	private int DEFAULT_HP = 55;
 	
 	// Default movespeed.
 	private static int DEFAULT_UNIT_MOVESPEED = 1;
@@ -91,10 +102,9 @@ public class spider extends unit {
 					);	
 	
 	// Sounds
-	private static String spiderSound1 = "sounds/effects/animals/wolfBark1.wav";
-	private static String spiderSound2 = "sounds/effects/animals/wolfBark2.wav";
-	private static String unitAttack = "sounds/effects/player/combat/swingWeapon.wav";
-	private int lastSpiderSound = 0;
+	private static String spiderHurt = "sounds/effects/animals/spider1.wav";
+	private static String spiderAttack = "sounds/effects/animals/spider2.wav";
+	private static String spiderAggro= "sounds/effects/animals/spider3.wav";
 	private int soundRadius = 1200;
 	
 	//////////////
@@ -112,7 +122,7 @@ public class spider extends unit {
 		//showAttackRange();
 		// Set combat stuff.
 		setCombatStuff();
-		attackSound = unitAttack;
+		attackSound = spiderAttack;
 		
 		
 		// Deal with animations
@@ -185,6 +195,9 @@ public class spider extends unit {
 		topDownHeight = DEFAULT_TOPDOWN_HEIGHT;
 		topDownWidth = DEFAULT_TOPDOWN_WIDTH;
 		setHitBoxAdjustmentY(getDefaultHitBoxAdjustmentY());
+		
+		// Set facing direction
+		this.setFacingDirection("random");
 	}
 	
 	// Combat defaults.
@@ -211,11 +224,19 @@ public class spider extends unit {
 		
 	}
 	
+	// Make sure the movement is within a certain radius.
+	public void checkMovement(String direction) {
+		if(getX() < startX - patrolRadius) moveUnit("right");
+		else if(getX() + getWidth() > startX + patrolRadius)  moveUnit("left");
+		else if(getY() < startY - patrolRadius) moveUnit("down");
+		else if(getY() + getHeight() > startY + patrolRadius) moveUnit("up");
+		else moveUnit(direction);
+	}
+	
 	// React to pain.
 	public void reactToPain() {
 		// Play a bark on pain.
-		lastSpiderSound = 1;
-		sound s = new sound(spiderSound1);
+		sound s = new sound(spiderHurt);
 		s.setPosition(getX(), getY(), soundRadius);
 		s.start();
 	}
@@ -237,16 +258,17 @@ public class spider extends unit {
 		makeSounds();
 		
 		// Attack if we're in radius.
-		if(howClose < DEFAULT_ATTACK_RADIUS) {
+		if(howClose < DEFAULT_ATTACK_RADIUS || aggrod) {
 			
 			// If we're in attack range, attack.
 			if(isInAttackRange(currPlayer, DEFAULT_ATTACK_DIFFERENTIAL)) {
 				stopMove("all");
 				attack();
+				aggrod = true;
 			}
 			else {
 				if(!aggrod) {
-					sound s = new sound(spiderSound2);
+					sound s = new sound(spiderAggro);
 					s.setPosition(getX(), getY(), soundRadius);
 					s.start();
 				}
@@ -254,8 +276,31 @@ public class spider extends unit {
 				follow(currPlayer);
 			}
 		}
-		else if(aggrod && howClose > DEFAULT_DEAGGRO_RADIUS) {
-			stopMove("all");
+		
+		// Deagro
+		if(howClose > DEFAULT_DEAGGRO_RADIUS) {
+			aggrod = false;
+		}
+		
+		// Do movement if we're not aggrod.
+		if(!aggrod) {
+			// Move in a random direction every interval.
+			if(time.getTime() - AILastCheck > randomMove*1000) {
+				AILastCheck = time.getTime();
+				int random = utility.RNG.nextInt(4);
+				if(random==0) checkMovement("left");
+				if(random==1) checkMovement("right");
+				if(random==2) checkMovement("down");
+				if(random==3) checkMovement("up");
+				randomStop = 0.35f + utility.RNG.nextInt(4)*0.125f;
+			}
+			
+			// Stop after a fraction of a second
+			if(isMoving() && time.getTime() - AILastCheck > randomStop*1000) {
+				randomMove = 2.4f + utility.RNG.nextInt(9)*0.2f;
+				AILastCheck = time.getTime();
+				stopMove("all");
+			}
 		}
 	}
 	

@@ -1,16 +1,22 @@
 package items.weapons;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import drawing.spriteSheet;
 import drawing.animation.animation;
 import drawing.animation.animationPack;
 import drawing.spriteSheet.spriteSheetInfo;
 import drawing.userInterface.tooltipString;
+import effects.effect;
+import effects.effectTypes.floatingString;
 import interactions.event;
 import items.item;
 import items.weapon;
+import sounds.sound;
 import units.player;
 import utilities.saveState;
 import zones.farmLand.sheepFarm;
@@ -20,14 +26,20 @@ public class torch extends weapon {
 	/// DEFAULTS ///
 	////////////////
 	// Weapon name
-	public static String DEFAULT_WEAPON_NAME = "torch";
+	public static String DEFAULT_WEAPON_NAME = "Torch";
+	
+	// Sounds
+	private static String torchLightSound = "sounds/effects/doodads/startFire.wav";
+	
+	// Fire color
+	private Color DEFAULT_FIRE_COLOR = Color.orange;
 	
 	// Weapon stats.
 	static private int DEFAULT_ATTACK_DAMAGE = 5;
-	static private float DEFAULT_BAT = 0.35f;
+	static private float DEFAULT_BAT = 0.25f;
 	static private float DEFAULT_ATTACK_TIME = 0.45f;
 	static private int DEFAULT_ATTACK_WIDTH = 55;
-	static private int DEFAULT_ATTACK_LENGTH = 30;
+	static private int DEFAULT_ATTACK_LENGTH = 26;
 	static private float DEFAULT_CRIT_CHANCE = .17f;
 	static private float DEFAULT_CRIT_DAMAGE = 1.5f;
 	static private float DEFAULT_VARIABILITY = 0.1f;
@@ -53,11 +65,6 @@ public class torch extends weapon {
 			));
 	public static weapon weaponRef;
 	
-	// Is the torch lit?
-	private event lit;
-	
-	private int numTorches = 0;
-	
 	///////////////
 	/// METHODS ///
 	///////////////
@@ -65,9 +72,6 @@ public class torch extends weapon {
 	// In inventory.
 	public torch() {
 		super(DEFAULT_WEAPON_NAME,weaponSpriteSheet);
-		
-		// Torch lit?
-		lit = new event("Item: " + DEFAULT_WEAPON_NAME + "lit");
 		
 		// Weapon stats.
 		setStats();
@@ -77,11 +81,14 @@ public class torch extends weapon {
 	public torch(int x, int y) {
 		super(DEFAULT_WEAPON_NAME,x,y);
 		
-		// Torch lit?
-		//lit = new event("Item: " + DEFAULT_WEAPON_NAME + "lit");
-		
 		// Weapon stats.
 		setStats();
+	}
+	
+	// Set up item
+	@Override 
+	public void setUpItem() {
+		if(isLit()) setStatsLit();
 	}
 
 	// React to being picked up.
@@ -98,7 +105,15 @@ public class torch extends weapon {
 	// Set stats
 	public void setStats() {
 		
-		if(lit != null && lit.isCompleted()) setStatsLit();
+		// Add properties list.
+		String[] propertiesArray = {
+				"+5 dmg when",
+				"lit but can",
+				"lose flame on hit."
+			};
+		properties = new ArrayList<String>(Arrays.asList(propertiesArray));
+		
+		if(isLit()) setStatsLit();
 		else {
 			// Weapon stats.
 			setAttackDamage(DEFAULT_ATTACK_DAMAGE);
@@ -136,7 +151,7 @@ public class torch extends weapon {
 		player.getCurrentPlayer().setEquippedWeapon(this);
 		
 		// Set animations
-		if(lit != null && isLit()) addLitAnimations();
+		if(isLit()) addLitAnimations();
 		else addUnlitAnimations();
 		
 		// Change the player's stats based on the weapon's strength and their
@@ -292,15 +307,31 @@ public class torch extends weapon {
 		return weaponRef;
 	}
 	
+	// Unlight torch
+	public void unLight() {
+		effect e = new floatingString("-Fire", DEFAULT_FIRE_COLOR,
+				player.getCurrentPlayer().getX() + player.getCurrentPlayer().getWidth()/2, 
+				player.getCurrentPlayer().getY() + player.getCurrentPlayer().getHeight()/2, 1.2f);
+		setLit(false);
+		setStats();
+		addUnlitAnimations();
+	}
+	
 	// Light torch
 	public void light() {
+		sound s = new sound(torchLightSound);
+		s.start();
+		effect e = new floatingString("+Fire", DEFAULT_FIRE_COLOR,
+				player.getCurrentPlayer().getX() + player.getCurrentPlayer().getWidth()/2, 
+				player.getCurrentPlayer().getY() + player.getCurrentPlayer().getHeight()/2, 1.2f);
 		setLit(true);
+		setStats();
 		addLitAnimations();
 	}
 	
 	// Get the item image.
 	public BufferedImage getImage() {
-		if(lit != null && isLit()) {
+		if(isLit()) {
 			return itemImageLit;
 		}
 		return itemImage;
@@ -312,12 +343,11 @@ public class torch extends weapon {
 	}
 
 	public boolean isLit() {
-		return ((torch)getItemRef()).lit.isCompleted();
+		return getSaveBooleans().get("Lit");
 	}
 
 	// Not entirely sure why I need to create a new event here, but it works.
 	public void setLit(boolean newLit) {
-		lit = new event("Item: " + DEFAULT_WEAPON_NAME + "lit");
-		lit.setCompleted(true);
+		getSaveBooleans().set("Lit", newLit);
 	}
 }

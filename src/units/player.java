@@ -58,7 +58,7 @@ public class player extends unit {
 	private static zone DEFAULT_ZONE = null;
 	
 	// Default movespeed. 
-	private static int DEFAULT_PLAYER_MOVESPEED = 10;//3;
+	private static int DEFAULT_PLAYER_MOVESPEED = 3;
 	// 3 is default
 	
 	// Default jump speed
@@ -420,8 +420,8 @@ public class player extends unit {
 			if(k.getKeyCode() == KeyEvent.VK_P) {
 				//healthPoints--;
 				saveState.createSaveState();
-				giveExp(expRequiredForLevel());
-				//System.out.println("u = new wolf(" + getX() + "," + getY() + ");");
+				//giveExp(expRequiredForLevel());
+				System.out.println("u = new spider(" + getX() + "," + getY() + ");");
 			}
 		}
 	}

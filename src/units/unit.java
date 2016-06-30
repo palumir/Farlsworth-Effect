@@ -13,6 +13,7 @@ import drawing.animation.animation;
 import drawing.animation.animationPack;
 import drawing.userInterface.playerHealthBar;
 import effects.effect;
+import effects.projectile;
 import effects.effectTypes.bloodSquirt;
 import effects.effectTypes.critBloodSquirt;
 import effects.effectTypes.floatingString;
@@ -22,6 +23,7 @@ import terrain.chunk;
 import terrain.region;
 import units.bosses.denmother;
 import utilities.intTuple;
+import utilities.mathUtils;
 import utilities.time;
 import utilities.utility;
 
@@ -49,7 +51,7 @@ public abstract class unit extends drawnObject  {
 	
 	// Fist defaults.
 	protected static int DEFAULT_ATTACK_DAMAGE = 4;
-	static float DEFAULT_BAT = 0.30f;
+	static float DEFAULT_BAT = 0.25f;
 	static float DEFAULT_ATTACK_TIME = 0.4f;
 	static int DEFAULT_ATTACK_WIDTH = 35;
 	static int DEFAULT_ATTACK_LENGTH = 11;
@@ -67,8 +69,8 @@ public abstract class unit extends drawnObject  {
 	protected int DEFAULT_HEALTHBAR_WIDTH = 40;
 	
 	// Colors for combat.
-	private Color DEFAULT_DAMAGE_COLOR = Color.white;
-	private Color DEFAULT_CRIT_COLOR = Color.yellow;
+	protected Color DEFAULT_DAMAGE_COLOR = Color.white;
+	protected Color DEFAULT_CRIT_COLOR = Color.yellow;
 	
 	// Default exp
 	private int DEFAULT_EXP = 0;
@@ -106,9 +108,9 @@ public abstract class unit extends drawnObject  {
 	private int attackDamage = DEFAULT_ATTACK_DAMAGE;
 	
 	// Attack time.
-	private float baseAttackTime = DEFAULT_BAT;
+	protected float baseAttackTime = DEFAULT_BAT;
 	private float attackTime = DEFAULT_ATTACK_TIME;
-	private float backSwing = DEFAULT_BACKSWING;
+	protected float backSwing = DEFAULT_BACKSWING;
 	
 	// Attack range.
 	private int attackWidth = DEFAULT_ATTACK_WIDTH;
@@ -124,12 +126,12 @@ public abstract class unit extends drawnObject  {
 	protected int exp = DEFAULT_EXP;
 	
 	// Attacking/getting attacked mechanics
-	private boolean canAttack = true; // backswing stuff.
+	protected boolean canAttack = true; // backswing stuff.
 	private boolean killable = false;
 	private boolean targetable = true;
 	private boolean attacking = false;
 	private boolean alreadyAttacked = false;
-	private double startAttackTime = 0;
+	protected double startAttackTime = 0;
 	
 	// Combat sounds
 	protected String attackSound;
@@ -176,13 +178,27 @@ public abstract class unit extends drawnObject  {
 	private boolean followingAPath = false;
 	
 	// Units in attack range.
-	private ArrayList<unit> unitsInAttackRange;
+	protected ArrayList<unit> unitsInAttackRange;
 	
 	// Path to follow
 	private ArrayList<intTuple> path;
 	
 	// Next point.
 	private intTuple currPoint;
+	
+	// Knockbacks
+	private long knockBackStart = 0;
+	private boolean gettingKnockedBack = false;
+	private int knockToX;
+	private int knockToY;
+	private int knockSpeed;
+	private float knockTime;
+	
+	// What we are stuck on?
+	private drawnObject stuckOn = null;
+	
+	// If unit is locked, prohibit movement.
+	private boolean unitLocked = false;
 	
 	///////////////
 	/// METHODS ///
@@ -279,11 +295,61 @@ public abstract class unit extends drawnObject  {
 		}
 	}
 	
+	// Knockback.
+	public void knockBack(int knockX, int knockY, int knockRadius, float overTime, int knockSpeed) {
+		if(!gettingKnockedBack) {
+			unitLocked = true;
+			knockBackStart = time.getTime();
+			gettingKnockedBack = true;
+			this.knockTime = overTime;	
+			this.knockSpeed = knockSpeed;
+			
+			// Calculate the new X and Y we need to knock them to, based off radius.
+			double currentDegree = mathUtils.angleBetweenTwoPointsWithFixedPoint(getX()+getWidth()/2, getY() + getHeight()/2, knockX, knockY, knockX, knockY);
+			knockToX = (int) (getX() + (knockSpeed*overTime*1000)*Math.cos(Math.toRadians(currentDegree))); 
+			knockToY = (int) (getY() + (knockSpeed*overTime*1000)*Math.sin(Math.toRadians(currentDegree)));
+		}
+	}
+	
+	// Deal with knockbacks
+	public void dealWithKnockBacks() {
+		if(gettingKnockedBack) {
+			
+			// Knock them there over the duration.
+			float yDistance = (knockToY - getY());
+			float xDistance = (knockToX - getX());
+			float distanceXY = (float) Math.sqrt(yDistance * yDistance
+						+ xDistance * xDistance);
+			int rise = (int) ((yDistance/distanceXY)*knockSpeed);
+			int run = (int) ((xDistance/distanceXY)*knockSpeed);
+			
+			// Reset rise and run if we're close.
+			if(Math.abs(moveToX - getX()) <  run) {
+				run = 0;
+			}
+			if(Math.abs(moveToY - getY()) < rise) {
+				rise = 0;
+			}
+			
+			// Move
+			move(run,rise);
+			
+			// If we are done, stop being knocked back.
+			if(time.getTime() - knockBackStart > knockTime*1000) {
+				gettingKnockedBack = false;
+				unitLocked = false;
+			}
+		}
+		
+	}
+	
 	// Already attacked units
 	private ArrayList<unit> alreadyAttackedUnits = new ArrayList<unit>();
 	
 	// Do combat mechanics.
 	public void combat() {
+		// Deal with knock backs
+		dealWithKnockBacks();
 		
 		// Attack if we are attacking.
 		if(isAttacking()) {
@@ -333,6 +399,19 @@ public abstract class unit extends drawnObject  {
 				// Attack units in array.
 				unitsInAttackRange = getUnitsInBox(x1,y1,x2,y2);
 				attackUnits();
+				
+				// Knock back projectiles for player.
+				if(this instanceof player) {
+
+					ArrayList<projectile> projs = projectile.getProjectilesInBox(x1, y1, x2, y2);
+					if(projs != null) {
+						for(int i = 0; i < projs.size(); i++) {
+							if(!projs.get(i).isAllied()) {
+								projs.get(i).sendBack();
+							}
+						}
+					}
+				}
 			}
 			if(time.getTime() - startAttackTime > (getAttackTime())*1000) {
 				attackOver();
@@ -403,14 +482,6 @@ public abstract class unit extends drawnObject  {
 		return unitsInBox.contains(u);
 	}
 	
-	// Check if a unit is within 
-	public boolean isWithin(int x1, int y1, int x2, int y2) {
-		return getX() < x2 && 
-		 getX() + getWidth() > x1 && 
-		 getY() < y2 && 
-		 getY() + getHeight() > y1;
-	}
-	
 	// Get units in box.
 	public static ArrayList<unit> getUnitsInBox(int x1, int y1, int x2, int y2) {
 		ArrayList<unit> returnList = new ArrayList<unit>();
@@ -437,10 +508,29 @@ public abstract class unit extends drawnObject  {
 		return returnList;
 	}
 	
+	// Check if a unit is within 
+	public boolean isWithin(int x1, int y1, int x2, int y2) {
+		return getX() < x2 && 
+		 getX() + getWidth() > x1 && 
+		 getY() < y2 && 
+		 getY() + getHeight() > y1;
+	}
+	
 	// Get whether a unit is within radius
 	public boolean isWithinRadius(int x, int y, int radius) {
-		float howClose = (float) Math.sqrt((this.getX() + this.getWidth()/2 - x)*(this.getX() + this.getWidth()/2 - x) + (this.getY() + this.getHeight()/2 - y)*(this.getY() + this.getHeight()/2 - y));
-		return howClose < radius;
+	    int circleDistanceX = Math.abs(x - (this.getX() + this.getWidth()/2));
+	    int circleDistanceY = Math.abs(y - (this.getY() + this.getHeight()/2));
+
+	    if (circleDistanceX > (this.getWidth()/2 + radius)) { return false; }
+	    if (circleDistanceY > (this.getHeight()/2 + radius)) { return false; }
+
+	    if (circleDistanceX <= (this.getWidth()/2)) { return true; } 
+	    if (circleDistanceY <= (this.getHeight()/2)) { return true; }
+
+	    int cornerDistanceSQ = (int) (Math.pow(circleDistanceX - this.getWidth()/2,2) +
+	                         Math.pow(circleDistanceY - this.getHeight()/2,2));
+
+	    return (cornerDistanceSQ <= Math.pow(radius,2));
 	}
 	
 	// Attack units
@@ -677,8 +767,9 @@ public abstract class unit extends drawnObject  {
 			else if(movingRight) setFacingDirection("Right");
 			else if(movingLeft) setFacingDirection("Left");
 			
-			// Actually move the unit.
+			// Move the unit
 			move(moveX, moveY);
+
 		//}
 	}
 	
@@ -700,34 +791,36 @@ public abstract class unit extends drawnObject  {
 		movingUp = false;
 		movingDown = false;
 		
-		// Move them in said direction.
-		if(direction.equals("upLeft")) {
-			movingLeft = true;
-			movingUp = true;
-		}
-		if(direction.equals("upRight")) {
-			movingRight = true;
-			movingUp = true;
-		}
-		if(direction.equals("downLeft")) {
-			movingLeft = true;
-			movingDown = true;
-		}
-		if(direction.equals("downRight")) {
-			movingRight = true;
-			movingDown = true;
-		}
-		if(direction.equals("left")) {
-			movingLeft = true;
-		}
-		if(direction.equals("right")) {
-			movingRight = true;
-		}
-		if(direction.equals("up")) {
-			movingUp = true;
-		}
-		if(direction.equals("down")) {
-			movingDown = true;
+		if(!unitLocked) {
+			// Move them in said direction.
+			if(direction.equals("upLeft")) {
+				movingLeft = true;
+				movingUp = true;
+			}
+			if(direction.equals("upRight")) {
+				movingRight = true;
+				movingUp = true;
+			}
+			if(direction.equals("downLeft")) {
+				movingLeft = true;
+				movingDown = true;
+			}
+			if(direction.equals("downRight")) {
+				movingRight = true;
+				movingDown = true;
+			}
+			if(direction.equals("left")) {
+				movingLeft = true;
+			}
+			if(direction.equals("right")) {
+				movingRight = true;
+			}
+			if(direction.equals("up")) {
+				movingUp = true;
+			}
+			if(direction.equals("down")) {
+				movingDown = true;
+			}
 		}
 	}
 	
@@ -910,7 +1003,7 @@ public abstract class unit extends drawnObject  {
 				}
 				animate("jumping" + face);
 			}
-			else if(isMoving()) {
+			else if((isMoving() && stuck) || (!stuck && (!movingDown || (movingLeft || movingRight)) && isMoving())) {
 				// If we are running.
 				animate("running" + getFacingDirection());
 			}
@@ -1288,8 +1381,19 @@ public abstract class unit extends drawnObject  {
 		return stuck;
 	}
 
-	public void setStuck(boolean stuck) {
-		this.stuck = stuck;
+	public void setStuck(boolean b, drawnObject d) {
+		this.stuck = b;
+		if(b==true) {
+			setStuckOn(d);
+		}
+	}
+
+	public drawnObject getStuckOn() {
+		return stuckOn;
+	}
+
+	public void setStuckOn(drawnObject stuckOn) {
+		this.stuckOn = stuckOn;
 	}
 	
 }

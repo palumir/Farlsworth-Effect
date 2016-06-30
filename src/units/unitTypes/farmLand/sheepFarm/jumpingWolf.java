@@ -38,14 +38,14 @@ public class jumpingWolf extends unit {
 	public static int DEFAULT_TOPDOWN_ADJUSTMENT_Y = 5;
 	
 	// How close to attack?
-	static private int DEFAULT_ATTACK_RADIUS = 300;
+	static private int DEFAULT_ATTACK_RADIUS = 240;
 	static private int DEFAULT_DEAGGRO_RADIUS = 300;
 	
 	// Damage stats
 	static private int DEFAULT_ATTACK_DIFFERENTIAL = 6; // the range within the attackrange the unit will attack.
 	static private int DEFAULT_ATTACK_DAMAGE = 5;
 	static private float DEFAULT_BAT = 0.30f;
-	static private float DEFAULT_ATTACK_TIME = 1f;
+	static private float DEFAULT_ATTACK_TIME = 2f;
 	static private int DEFAULT_ATTACK_WIDTH = 300;
 	static private int DEFAULT_ATTACK_LENGTH = 300;
 	static private float DEFAULT_CRIT_CHANCE = .15f;
@@ -104,7 +104,7 @@ public class jumpingWolf extends unit {
 	private boolean slashing = false;
 	private long startOfClawAttack = 0;
 	private float spawnClawPhaseTime = 0.35f;
-	private float clawAttackEvery = 0.8f;
+	private float clawAttackEvery = 1.2f;
 	private long lastClawAttack = 0;
 	
 	// Claw

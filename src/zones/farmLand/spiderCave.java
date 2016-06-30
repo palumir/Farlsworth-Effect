@@ -19,6 +19,8 @@ import sounds.music;
 import terrain.chunk;
 import terrain.chunkTypes.cave;
 import units.unit;
+import units.unitTypes.farmLand.spiderCave.bloodSpider;
+import units.unitTypes.farmLand.spiderCave.poisonSpider;
 import units.unitTypes.farmLand.spiderCave.spider;
 import units.unitTypes.farmLand.spiderCave.webDoor;
 import utilities.intTuple;
@@ -95,8 +97,8 @@ public class spiderCave extends zone {
 	public void loadZone() {
 		
 		// Set the mode of the zone of course.
-		topDown.setMode();
-		//platformer.setMode();
+		//topDown.setMode();
+		platformer.setMode();
 		
 		// Background
 		background.setGameBackground(DEFAULT_ZONE_BACKGROUND);
@@ -149,7 +151,6 @@ public class spiderCave extends zone {
 	
 	// Spawn area.
 	public void createSpawnArea() {
-		int max = 0;
 		
 		////////////////
 		// FIRST Area //
@@ -161,24 +162,21 @@ public class spiderCave extends zone {
 		
 		// First patch of webs.
 		c = new webSmall(200+110,-81,0);
-		c = new webSmall(c.getX()+220,-290,1);
-		c = new webSmall(c.getX()+230,-81,3);
-		c = new webSmall(c.getX()+110,-81,2);
-		c = new webSmall(200+110,-81+110,0);
-		c = new webMedium(200 + 150, -81+200,0);
-		c = new webMedium(c.getX()+260, c.getY()+150,0);
-		c = new webSmall(c.getX()-450, c.getY()+80,0);
-		c = new webSmall(1000, 620,0);
+		c = new webMedium(493,-186,0);
+		c = new webSmall(826,-27,2);
+		c = new webTiny(360,140,2);
+		c = new webMedium(511,456,0);
+		c = new webSmall(472,273,2);
+		c = new webSmall(640,225,1);
+		c = new webSmall(727,402,3);
 		
 		// Spawn the torch.
 		torch t = new torch(1036,-100);
 		
 		// First patch of spiders
-		u = new spider(535,231);
-		u = new spider(535+50,231+50);
-		u.setMoveSpeed(2);
-		u = new spider(397,339);
-		u.setMoveSpeed(3);
+		//u = new poisonSpider(601,-99);
+		u = new bloodSpider(676,237);
+		//u = new poisonSpider(589,530);
 		
 		// Floor below entrance
 		spawnCaveRect(32,8+500,300,40+32*3+500);
@@ -197,6 +195,7 @@ public class spiderCave extends zone {
 		spawnCaveRect(361,2000,1100+600,2400);
 		
 		// Webs in lower room
+		c = new webTiny(1050,700,0);
 		c = new webTiny(1102,821,0);
 		c = new webTiny(1039, 1769,1);
 		c = new webTiny(868, 1649, 2);
@@ -207,6 +206,14 @@ public class spiderCave extends zone {
 		c = new webTiny(919,1430,0);
 		c = new webTiny(958, 941, 1);
 		c = new webTiny(946, 1882, 2);
+		
+		// Spiders in lower room
+		c = new webTiny(979,1187,2);
+		u = new poisonSpider(979,1187);
+		u.setFacingDirection("Left");
+		c = new webTiny(1078,1580,2);
+		u = new poisonSpider(1078,1580);
+		u.setFacingDirection("Left");
 		
 		// Fire in lower room.
 		c = new firePit(784,1994);

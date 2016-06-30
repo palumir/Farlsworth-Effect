@@ -64,12 +64,12 @@ public class webTiny extends chunk {
 	public void beSticky() {
 		
 		// Add units walking into the web into the stuck units array.
-		ArrayList<unit> stuckUnits = unit.getUnitsInBox(getX(),getY(), getX() + getWidth(), getY() + getHeight());
+		ArrayList<unit> stuckUnits = unit.getUnitsInRadius(getX()+getWidth()/2,getY()+getHeight()/2,getWidth()/2);
 		
 		// Stick each unit
 		if(stuckUnits != null) {
 			for(int i = 0; i < stuckUnits.size(); i++) {
-				stuckUnits.get(i).setStuck(true);
+				stuckUnits.get(i).setStuck(true, this);
 				if(!currentlyStuckUnits.contains(stuckUnits.get(i))) {
 					currentlyStuckUnits.add(stuckUnits.get(i));
 				}
@@ -78,8 +78,8 @@ public class webTiny extends chunk {
 		
 		// Remove units who aren't stuck anymore.
 		for(int i = 0; i < currentlyStuckUnits.size();) {
-			if(!currentlyStuckUnits.get(i).isWithin(getX(),getY(), getX() + getWidth(), getY() + getHeight())) {
-				currentlyStuckUnits.get(i).setStuck(false);
+			if(!currentlyStuckUnits.get(i).isWithinRadius(getX()+getWidth()/2,getY()+getHeight()/2,getWidth()/2)) {
+				currentlyStuckUnits.get(i).setStuck(false, null);
 				recentlyUnstuckUnits.add(currentlyStuckUnits.get(i));
 				whenUnitsWereUnstuck.add(time.getTime());
 				currentlyStuckUnits.remove(i);
@@ -93,7 +93,7 @@ public class webTiny extends chunk {
 		for(int i = 0; i < recentlyUnstuckUnits.size(); i++) {
 			if(time.getTime() - whenUnitsWereUnstuck.get(i) > howLongBeforeUnstuck*1000) {
 				whenUnitsWereUnstuck.remove(i);
-				recentlyUnstuckUnits.get(i).setStuck(false);
+				recentlyUnstuckUnits.get(i).setStuck(false, null);
 				recentlyUnstuckUnits.remove(i);
 			}
 			else {

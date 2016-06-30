@@ -24,6 +24,9 @@ Noise of a fountain lever by felipeInv
 LevelUp.wav by sepal
 Water splash.wav by speedygonzo
 FIREPLACE by leosalom
+Basic Fire Whoosh 2 by Niedec
+insectSpiderWaterScreamsSounds.flac by qubodup
+gush sink by mr_marcello
 
 Music: 
 Elidia McFaggot

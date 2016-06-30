@@ -86,28 +86,30 @@ public class floatingString extends effect {
 	@Override
 	public void drawObject(Graphics g2) {
 		
-		BufferedImage img = new BufferedImage(gameCanvas.getActualWidth(),gameCanvas.getActualHeight(), BufferedImage.TYPE_INT_ARGB);
-		Graphics2D g = img.createGraphics();
-		
 		// Make font
 		Font font = drawnObject.DEFAULT_FONT.deriveFont(drawnObject.DEFAULT_FONT.getSize()*currSize);
 		if(currSize < endSize) {
 			currSize += (endSize - startSize)/(DEFAULT_ANIMATION_DURATION*gameCanvas.getFPS());
 		}
+		g2.setFont(font);
+		
+		BufferedImage img = new BufferedImage(g2.getFontMetrics().stringWidth(text),g2.getFontMetrics().getHeight(), BufferedImage.TYPE_INT_ARGB);
+		Graphics2D g = img.createGraphics();
 		
 		// Set the alpha depending on how close the animation is to over.
 		float timeThatHasPassed = (time.getTime() - timeStarted)/1000f; // in seconds
 		float alpha = 1f - timeThatHasPassed/animationDuration;
 		if(alpha < 0) alpha = 0;
 		if(alpha > 1) alpha = 1;
-		Color newColor = new Color(color.getRed()/255f, color.getGreen()/255f, color.getBlue()/255f, alpha); //Black 
-		g.setFont(font);
+		Color newColor = new Color(color.getRed()/255f, color.getGreen()/255f, color.getBlue()/255f, alpha); 
 		g.setComposite(AlphaComposite.Src);
 		g.setPaint(newColor);
 		
-		// Draw.
-		g.drawString(text,drawX - g.getFontMetrics().stringWidth(text)/2, drawY - (int)(gameCanvas.getScaleY()*getHeight()/2));
-		g2.drawImage(img,0,0,null);
+		// Draw.*/
+
+		g.setFont(font);
+		g.drawString(text,0, g2.getFontMetrics().getHeight());
+		g2.drawImage(img,drawX - g2.getFontMetrics().stringWidth(text)/2,drawY - (int)(gameCanvas.getScaleY()*getHeight()*2/3),null);
 		setY(getY() - 1);
 	}
 

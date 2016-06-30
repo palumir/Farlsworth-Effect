@@ -43,14 +43,14 @@ public class slowWolf extends unit {
 	// Damage stats
 	private int DEFAULT_ATTACK_DIFFERENTIAL = 11; // the range within the attackrange the unit will attack.
 	private int DEFAULT_ATTACK_DAMAGE = 15;
-	private float DEFAULT_BAT = 0.3f;
-	private float DEFAULT_ATTACK_TIME = 0.4f;
+	private float DEFAULT_BAT = 0.4f;
+	private float DEFAULT_ATTACK_TIME = 0.5f;
 	private int DEFAULT_ATTACK_WIDTH = 30;
-	private int DEFAULT_ATTACK_LENGTH = 22;
+	private int DEFAULT_ATTACK_LENGTH = 15;
 	private float DEFAULT_CRIT_CHANCE = 0.15f;
 	private float DEFAULT_CRIT_DAMAGE = 2f;
 	private float DEFAULT_ATTACK_VARIABILITY = 0.15f;
-	private float DEFAULT_BACKSWING = 0.2f;
+	private float DEFAULT_BACKSWING = 1f;
 	
 	// Default exp given.
 	private int DEFAULT_EXP_GIVEN = 18;

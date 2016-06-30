@@ -42,7 +42,7 @@ public class wolf extends unit {
 	private int DEFAULT_ATTACK_DAMAGE = 4;
 	private float DEFAULT_BAT = 0.4f;
 	private float DEFAULT_ATTACK_TIME = 0.5f;
-	private float DEFAULT_BACKSWING = 0.4f;
+	private float DEFAULT_BACKSWING = 0.9f;
 	private int DEFAULT_ATTACK_WIDTH = 30;
 	private int DEFAULT_ATTACK_LENGTH = 15;
 	static private float DEFAULT_CRIT_CHANCE = .15f;

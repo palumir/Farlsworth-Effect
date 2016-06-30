@@ -140,7 +140,21 @@ public class saveState implements Serializable {
 				
 				// Write the inventory (names of items) to save file.
 				for(int i = 0; i < inventorySize; i++) {
-					objectStream.writeObject(s.getPlayerInventory().get(i).name);
+					item currItem = s.getPlayerInventory().get(i);
+					
+					// Write the item name.
+					objectStream.writeObject(currItem.name);
+					
+					// For each item, save a list of booleans.
+					
+					// Write the length.
+					objectStream.writeObject(currItem.getSaveBooleans().size());
+					
+					// Write each boolean name and the boolean.
+					for(int j = 0; j < currItem.getSaveBooleans().size(); j++) {
+						objectStream.writeObject(currItem.getSaveBooleans().getName(j));
+						objectStream.writeObject(currItem.getSaveBooleans().getBool(j));
+					}
 				}
 				
 				// Write the equipped items to save file.
@@ -230,14 +244,27 @@ public class saveState implements Serializable {
 			
 			// Read the inventory (names of items) to save file.
 			ArrayList<String> itemNames = new ArrayList<String>();
+			ArrayList<saveBooleanList> newList = new ArrayList<saveBooleanList>();
 			for(int i = 0; i < j; i++) {
 				itemNames.add((String)objectStream.readObject());
+				
+				// Read length of the saveBooleans list.
+				int newListSize = (int)objectStream.readObject();
+				saveBooleanList l = new saveBooleanList();
+				for(int n = 0; n < newListSize; n++) {
+					String getName = (String)objectStream.readObject();
+					boolean getBool = (boolean)objectStream.readObject();
+					l.add(getName, getBool);
+				}
+				newList.add(l);
 			}
 			
 			// Get the item pertaining to each name and add it to an array list.
 			inventory newInventory = new inventory();
 			for(int i = 0; i < itemNames.size(); i++) {
+				item.getItemByName(itemNames.get(i)).setSaveBooleans(newList.get(i));
 				newInventory.add(item.getItemByName(itemNames.get(i)));
+				
 			}
 			s.setPlayerInventory(newInventory);
 			

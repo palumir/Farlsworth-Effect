@@ -6,6 +6,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import drawing.drawnObject;
@@ -19,6 +20,7 @@ import items.weapons.dagger;
 import items.weapons.torch;
 import sounds.sound;
 import units.player;
+import utilities.saveBooleanList;
 import utilities.stringUtils;
 import zones.farmLand.sheepFarm;
 import zones.farmLand.spiderCave;
@@ -42,8 +44,14 @@ public abstract class item extends drawnObject {
 	/// FIELDS ///
 	//////////////
 	
+	// List of booleans we will save for the item.
+	private saveBooleanList saveBooleans = new saveBooleanList();
+	
 	// Item name
 	public String name;
+	
+	// Properties
+	public ArrayList<String> properties;
 	
 	// Does the player actually own the item?
 	public static boolean inInventory = false;
@@ -134,15 +142,24 @@ public abstract class item extends drawnObject {
 		
 		// Weapons
 		if(dagger.weaponRef == null) dagger.weaponRef = new dagger();
-		if(torch.weaponRef == null) {
-			torch.weaponRef = new torch();
-		}
-		
+		if(torch.weaponRef == null) torch.weaponRef = new torch();
+
 		// Bottles.
 		if(normalBottle.bottleRef == null) normalBottle.bottleRef = new normalBottle();
 		
 		// Keys.
 		if(sheepKey.keyRef == null) sheepKey.keyRef = new sheepKey();
 		
+	}
+
+	public saveBooleanList getSaveBooleans() {
+		return saveBooleans;
+	}
+
+	public void setSaveBooleans(saveBooleanList saveBooleans) {
+		this.saveBooleans = saveBooleans;
+	}
+
+	public void setUpItem() {
 	}
 }

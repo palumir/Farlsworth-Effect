@@ -1,4 +1,5 @@
 package zones.farmLand;
+import doodads.cave.firePit;
 import doodads.cave.skullSign;
 import doodads.general.invisibleDoodad;
 import doodads.sheepFarm.barn;
@@ -43,6 +44,7 @@ import units.unitTypes.farmLand.sheepFarm.jumpingWolf;
 import units.unitTypes.farmLand.sheepFarm.sheep;
 import units.unitTypes.farmLand.sheepFarm.slowWolf;
 import units.unitTypes.farmLand.sheepFarm.wolf;
+import units.unitTypes.farmLand.spiderCave.poisonSpider;
 import utilities.intTuple;
 import utilities.utility;
 import zones.zone;
@@ -262,12 +264,20 @@ public class sheepFarm extends zone {
 		u = new slowWolf(1176,-2089);
 		u = new jumpingWolf(1273,-2155);
 		u = new slowWolf(1686,-2305);
+		u = new jumpingWolf(-1599,-2660);
+		u = new wolf(-1866,-3308);
+		u = new poisonSpider(-1716,-3860);
+		u = new wolf(-955,-2153);
+		u = new slowWolf(-1171,-2477);
 
 		// Spawn the well.
 		c = new well(-775,-1830,0);
 		
 		// Spawn potion.
 		bottle b = new normalBottle(-661,-1939);
+		
+		// Fire place
+		c = new firePit(-1605,-2606);
 		
 		// Wool trail.
 		c = new woolPiece(-249,-794,1);

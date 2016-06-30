@@ -1,9 +1,12 @@
 package doodads.cave;
 
+import java.awt.Color;
+import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.Random;
 
 import drawing.camera;
+import drawing.gameCanvas;
 import interactions.event;
 import interactions.interactBox;
 import interactions.textSeries;
@@ -41,8 +44,8 @@ public class webMedium extends chunk {
 
 	// Platformer.
 	private static int DEFAULT_PLATFORMER_ADJUSTMENT_Y = 0;
-	private static int DEFAULT_PLATFORMER_HEIGHT = 250;
-	private static int DEFAULT_PLATFORMER_WIDTH = 250;
+	private static int DEFAULT_PLATFORMER_HEIGHT = 270;
+	private static int DEFAULT_PLATFORMER_WIDTH = 270;
 	
 	// Default Z
 	private static int DEFAULT_Z = -50;
@@ -63,12 +66,12 @@ public class webMedium extends chunk {
 	// Make the web actually sticky.
 	public void beSticky() {
 		// Add units walking into the web into the stuck units array.
-		ArrayList<unit> stuckUnits = unit.getUnitsInBox(getX(),getY(), getX() + getWidth(), getY() + getHeight());
+		ArrayList<unit> stuckUnits = unit.getUnitsInRadius(getX()+getWidth()/2,getY()+getHeight()/2,getWidth()/2);
 		
 		// Stick each unit
 		if(stuckUnits != null) {
 			for(int i = 0; i < stuckUnits.size(); i++) {
-				stuckUnits.get(i).setStuck(true);
+				stuckUnits.get(i).setStuck(true, this);
 				if(!currentlyStuckUnits.contains(stuckUnits.get(i))) {
 					currentlyStuckUnits.add(stuckUnits.get(i));
 				}
@@ -77,8 +80,8 @@ public class webMedium extends chunk {
 		
 		// Remove units who aren't stuck anymore.
 		for(int i = 0; i < currentlyStuckUnits.size();) {
-			if(!currentlyStuckUnits.get(i).isWithin(getX(),getY(), getX() + getWidth(), getY() + getHeight())) {
-				currentlyStuckUnits.get(i).setStuck(false);
+			if(!currentlyStuckUnits.get(i).isWithinRadius(getX()+getWidth()/2,getY()+getHeight()/2,getWidth()/2)) {
+				currentlyStuckUnits.get(i).setStuck(false, null);
 				recentlyUnstuckUnits.add(currentlyStuckUnits.get(i));
 				whenUnitsWereUnstuck.add(time.getTime());
 				currentlyStuckUnits.remove(i);
@@ -92,7 +95,7 @@ public class webMedium extends chunk {
 		for(int i = 0; i < recentlyUnstuckUnits.size(); i++) {
 			if(time.getTime() - whenUnitsWereUnstuck.get(i) > howLongBeforeUnstuck*1000) {
 				whenUnitsWereUnstuck.remove(i);
-				recentlyUnstuckUnits.get(i).setStuck(false);
+				recentlyUnstuckUnits.get(i).setStuck(false, null);
 				recentlyUnstuckUnits.remove(i);
 			}
 			else {

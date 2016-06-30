@@ -75,7 +75,7 @@ public abstract class effect extends drawnObject  {
 			animation a = animations.selectRandomAnimation();
 			
 			// Set the animation.
-			currentAnimation = a;
+			setCurrentAnimation(a);
 		}
 		typeOfEffect = e;
 	}
@@ -83,10 +83,19 @@ public abstract class effect extends drawnObject  {
 	// Update unit
 	@Override
 	public void update() {
-		if(currentAnimation != null) currentAnimation.playAnimation();
+		if(getCurrentAnimation() != null) { 
+			getCurrentAnimation().playAnimation();
+			respondToFrame(getCurrentAnimation().getCurrentSprite());
+		}
 		if(time.getTime() - timeStarted >= animationDuration*1000) {
 			this.destroy();
 		}
+	}
+
+	
+	// Respond to ending
+	public void respondToFrame(int j) {
+		
 	}
 	
 	// Deal with movement animations.
@@ -97,8 +106,8 @@ public abstract class effect extends drawnObject  {
 	public void drawObject(Graphics g) {
 		
 		// Of course only draw if the animation is not null.
-		if(currentAnimation != null) {
-			g.drawImage(currentAnimation.getCurrentFrame(), 
+		if(getCurrentAnimation() != null) {
+			g.drawImage(getCurrentAnimation().getCurrentFrame(), 
 					drawX, 
 					drawY, 
 					(int)(gameCanvas.getScaleX()*getObjectSpriteSheet().getSpriteWidth() + 1), 
@@ -130,5 +139,13 @@ public abstract class effect extends drawnObject  {
 
 	public void setAnimations(animationPack animations) {
 		this.animations = animations;
+	}
+
+	public animation getCurrentAnimation() {
+		return currentAnimation;
+	}
+
+	public void setCurrentAnimation(animation currentAnimation) {
+		this.currentAnimation = currentAnimation;
 	}
 }
