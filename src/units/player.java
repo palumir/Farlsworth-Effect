@@ -151,7 +151,7 @@ public class player extends unit {
 		super(playerType, newX, newY);
 		
 		/// TODO: Dev stuff
-		showUnitPosition();
+		//showUnitPosition();
 		//showHitBox();
 		//setCollision(false);
 		//setMoveSpeed(10);
@@ -421,7 +421,8 @@ public class player extends unit {
 				//healthPoints--;
 				saveState.createSaveState();
 				//giveExp(expRequiredForLevel());
-				System.out.println("u = new spider(" + getX() + "," + getY() + ");");
+				int random = utility.RNG.nextInt(3);
+				System.out.println("u = new wolf(" + getX() + "," + getY() + ");");
 			}
 		}
 	}
@@ -437,7 +438,8 @@ public class player extends unit {
 			giveExp(i - expToNextLevel);
 		}
 		
-		else {// Give exp
+		// Give exp
+		else {
 			expIntoLevel += i;
 		}
 	}

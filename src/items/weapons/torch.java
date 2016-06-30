@@ -36,7 +36,7 @@ public class torch extends weapon {
 	
 	// Weapon stats.
 	static private int DEFAULT_ATTACK_DAMAGE = 5;
-	static private float DEFAULT_BAT = 0.25f;
+	static private float DEFAULT_BAT = 0.15f;
 	static private float DEFAULT_ATTACK_TIME = 0.45f;
 	static private int DEFAULT_ATTACK_WIDTH = 55;
 	static private int DEFAULT_ATTACK_LENGTH = 26;

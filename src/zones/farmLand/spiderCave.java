@@ -174,9 +174,9 @@ public class spiderCave extends zone {
 		torch t = new torch(1036,-100);
 		
 		// First patch of spiders
-		//u = new poisonSpider(601,-99);
-		u = new bloodSpider(676,237);
-		//u = new poisonSpider(589,530);
+		u = new poisonSpider(601,-99);
+		u = new spider(676,237);
+		u = new poisonSpider(589,530);
 		
 		// Floor below entrance
 		spawnCaveRect(32,8+500,300,40+32*3+500);

@@ -83,6 +83,8 @@ public class tree extends chunk {
 	// Constructor
 	public tree(int newX, int newY, int i) {
 		super(typeReference, newX, newY, i, 0);
+		//showUnitPosition();
+		//showHitBox();
 		if(mode.getCurrentMode().equals("topDown")) {
 			setHitBoxAdjustmentY(58);
 			setWidth(30);
