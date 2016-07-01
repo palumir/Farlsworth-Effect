@@ -47,6 +47,7 @@ import units.unitTypes.farmLand.sheepFarm.wolf;
 import units.unitTypes.farmLand.spiderCave.poisonSpider;
 import units.unitTypes.farmLand.spiderCave.spider;
 import utilities.intTuple;
+import utilities.saveState;
 import utilities.utility;
 import zones.zone;
 
@@ -75,6 +76,8 @@ public class sheepFarm extends zone {
 	// Zone events.
 	private static event wellTooltipLoaded;
 	public static event attackTooltipLoaded;
+	public static event gameSavedForIdiots;
+	public static event gameSavedForIdiots2;
 	
 	// Defaults
 	public static intTuple DEFAULT_SPAWN_TUPLE = new intTuple(-9,11);
@@ -275,13 +278,13 @@ public class sheepFarm extends zone {
 		u.setFacingDirection("Left");
 		u = new slowWolf(1518,-1681);
 		u.setFacingDirection("Left");
-		u = new jumpingWolf(1785,-2200);
+		u = new jumpingWolf(1785,-2200+200);
 		u.setFacingDirection("Down");
-		u = new jumpingWolf(1956,-2362);
+		u = new jumpingWolf(1956,-2362+200);
 		u.setFacingDirection("Down");
-		u = new wolf(1839,-2863);
+		u = new wolf(1839,-2750+200);
 		u.setFacingDirection("Down");
-		u = new jumpingWolf(1959,-2803);
+		u = new jumpingWolf(1959,-2700+200);
 		u.setFacingDirection("Down");
 		
 		// After Denmother
@@ -319,7 +322,7 @@ public class sheepFarm extends zone {
 		u = new poisonSpider(-1980,-3409-100);
 		((poisonSpider)u).setWanders(false);
 		u.setFacingDirection("Right");
-		u = new jumpingWolf(-1749,-3475-100);
+		u = new jumpingWolf(-1749,-3350);
 		u.setFacingDirection("Down");
 		
 		// Spawn the well.
@@ -331,12 +334,6 @@ public class sheepFarm extends zone {
 		// Fire place
 		c = new firePit(-1605,-2606);
 		c = new firePit(-543,-2021);
-		
-		// Wool trail.
-		c = new woolPiece(-249,-794,1);
-		c = new woolPiece(-327,-1010,2);
-		c = new woolPiece(-477,-1211,0);
-		c = new woolPiece(-534,-1424,2);
 		
 		// Flowers in forest
 		c = new flower(-1957,-3192,3);
@@ -3427,8 +3424,10 @@ public class sheepFarm extends zone {
 	public void loadZoneEvents() {
 		
 		// Load well tooltip event.
-		wellTooltipLoaded = new event("wellTooltipLoaded");
-		attackTooltipLoaded = new event("attackTooltipLoaded");
+		wellTooltipLoaded = new event("sheepFarmWellTooltipLoaded");
+		attackTooltipLoaded = new event("sheepFarmWttackTooltipLoaded");
+		gameSavedForIdiots = new event("sheepFarmGameSavedForIdiots");
+		gameSavedForIdiots2 = new event("sheepFarmGameSavedForIdiots2");
 	}
 	
 	// Deal with the first well we encounters.
@@ -3436,12 +3435,19 @@ public class sheepFarm extends zone {
 		player currPlayer = player.getCurrentPlayer();
 		if(currPlayer != null && currPlayer.isWithin(-849,-1981,-634,-1696) && wellTooltipLoaded != null && !wellTooltipLoaded.isCompleted()) {
 			wellTooltipLoaded.setCompleted(true);
-			tooltipString t = new tooltipString("Use any water source to save the game and heal.");
+			tooltipString t = new tooltipString("Use any water source to save and heal, including rivers.");
 		}
-		
 		if(currPlayer != null && currPlayer.isWithin(-504,-1117,21,-715) && attackTooltipLoaded != null && !attackTooltipLoaded.isCompleted()) {
 			attackTooltipLoaded.setCompleted(true);
 			tooltipString t = new tooltipString("Press or hold 'space' to attack.");
+		}
+		if(currPlayer != null && currPlayer.isWithin(-324,-684,69,-456) && gameSavedForIdiots != null && !gameSavedForIdiots.isCompleted()) {
+			gameSavedForIdiots.setCompleted(true);
+			saveState.createSaveState();
+		}
+		if(currPlayer != null && currPlayer.isWithin(-1717,-3087,1976,-2926) && gameSavedForIdiots2 != null && !gameSavedForIdiots2.isCompleted()) {
+			gameSavedForIdiots2.setCompleted(true);
+			saveState.createSaveState();
 		}
 	}
 	

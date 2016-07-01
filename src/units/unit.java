@@ -62,7 +62,7 @@ public abstract class unit extends drawnObject  {
 	
 	// Combat defaults.
 	static private int DEFAULT_HP = 10;
-	static protected boolean showAttackRange = false;
+	protected boolean showAttackRange = false;
 	
 	// Default healthbarsize
 	protected int DEFAULT_HEALTHBAR_HEIGHT = 6;
@@ -152,6 +152,10 @@ public abstract class unit extends drawnObject  {
 	protected boolean movingUp = false;
 	protected String facingDirection = DEFAULT_FACING_DIRECTION;
 	private boolean collisionOn = true;
+	
+	// For diagonal movement
+	private static int maxMoveDiag = 4;
+	private int lastMoveDiag = 0;
 	
 	// How close is close enough (to a point)?
 	private int closeEnoughFactor = 3;
@@ -724,53 +728,58 @@ public abstract class unit extends drawnObject  {
 		followingAPath = true;
 	}
 	
-	
-	private int lastMoveFrame = 0;
-	
 	// Move unit
 	public void moveUnit() {
 		
-		// How many frames have passed?
-		/*int passedFrames = (int) (time.getTime()/(1000/gameCanvas.getFPS()));
+		// How many frames do we drop speed by -1;
+		int maxMoveTimesSpeed = maxMoveDiag*moveSpeed; // *2 for x and y
+		int moveByX = moveSpeed;
+		int moveByY = moveSpeed;
 		
-		int framesDiag = 3;
-		int framesNorm = 2;
+		// Are we moving diagonally?
+		if(!movingDiagonally()) lastMoveDiag = 0;
+		else {
+			lastMoveDiag++;
+		}
 		
-		// Only move every X.
-		if((movingDiagonally() && passedFrames - lastMoveFrame  > framesDiag)
-		|| (!movingDiagonally() && passedFrames - lastMoveFrame  > framesNorm)) {
-			
-			// Set timer.
-			lastMoveFrame = passedFrames;*/
-			
-			// Basic movement.
-			int moveX = 0;
-			int moveY = 0;
-			
-			// Actual movement.
-			if(movingLeft) moveX -= moveSpeed;
-			if(movingRight) moveX += moveSpeed;
-			
-			// Only do these ones if we're in topDown mode.
-			if(mode.getCurrentMode() == "topDown" || stuck) {
-				if(movingUp) moveY -= moveSpeed;
-				if(movingDown) moveY += moveSpeed;
-			}
-			
-			// Deal with direction facing.
-			if(movingLeft && movingUp) setFacingDirection("Left");
-			else if(movingRight && movingUp) setFacingDirection("Right");
-			else if(movingLeft && movingDown) setFacingDirection("Left");
-			else if(movingRight && movingDown) setFacingDirection("Right");
-			else if(movingDown && (mode.getCurrentMode() != "platformer" || stuck)) setFacingDirection("Down");
-			else if(movingUp && (mode.getCurrentMode() != "platformer" || stuck)) setFacingDirection("Up");
-			else if(movingRight) setFacingDirection("Right");
-			else if(movingLeft) setFacingDirection("Left");
-			
-			// Move the unit
-			move(moveX, moveY);
+		// If we need to drop this frame down a movespeed.
+		if(movingDiagonally() && lastMoveDiag%(maxMoveDiag/2) == 0) {
+				moveByX = moveSpeed - 1;
+				moveByY = moveSpeed - 1;
+		}
+		
+		// Final frame to drop one movespeed., reset.
+		if(movingDiagonally() && lastMoveDiag >= maxMoveTimesSpeed) {
+			lastMoveDiag = 0;
+		}
+	
+		// Basic movement.
+		int moveX = 0;
+		int moveY = 0;
+		
+		// Actual movement.
+		if(movingLeft) moveX -= moveByX;
+		if(movingRight) moveX += moveByX;
+		
+		// Only do these ones if we're in topDown mode.
+		if(mode.getCurrentMode() == "topDown" || stuck) {
+			if(movingUp) moveY -= moveByY;
+			if(movingDown) moveY += moveByY;
+		}
+		
+		// Deal with direction facing.
+		if(movingLeft && movingUp) setFacingDirection("Left");
+		else if(movingRight && movingUp) setFacingDirection("Right");
+		else if(movingLeft && movingDown) setFacingDirection("Left");
+		else if(movingRight && movingDown) setFacingDirection("Right");
+		else if(movingDown && (mode.getCurrentMode() != "platformer" || stuck)) setFacingDirection("Down");
+		else if(movingUp && (mode.getCurrentMode() != "platformer" || stuck)) setFacingDirection("Up");
+		else if(movingRight) setFacingDirection("Right");
+		else if(movingLeft) setFacingDirection("Left");
 
-		//}
+		// Move the unit
+		move(moveX, moveY);
+
 	}
 	
 	// Moving diagonally?

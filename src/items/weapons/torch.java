@@ -35,13 +35,13 @@ public class torch extends weapon {
 	private Color DEFAULT_FIRE_COLOR = Color.orange;
 	
 	// Weapon stats.
-	static private int DEFAULT_ATTACK_DAMAGE = 5;
-	static private float DEFAULT_BAT = 0.15f;
-	static private float DEFAULT_ATTACK_TIME = 0.45f;
+	static private int DEFAULT_ATTACK_DAMAGE = 6;
+	static private float DEFAULT_BAT = 0.22f;
+	static private float DEFAULT_ATTACK_TIME = 0.47f;
 	static private int DEFAULT_ATTACK_WIDTH = 55;
-	static private int DEFAULT_ATTACK_LENGTH = 26;
-	static private float DEFAULT_CRIT_CHANCE = .17f;
-	static private float DEFAULT_CRIT_DAMAGE = 1.5f;
+	static private int DEFAULT_ATTACK_LENGTH = 28;
+	static private float DEFAULT_CRIT_CHANCE = .2f;
+	static private float DEFAULT_CRIT_DAMAGE = 2f;
 	static private float DEFAULT_VARIABILITY = 0.1f;
 	
 	//////////////
@@ -107,7 +107,7 @@ public class torch extends weapon {
 		
 		// Add properties list.
 		String[] propertiesArray = {
-				"+5 dmg when",
+				"+4 dmg when",
 				"lit but can",
 				"lose flame on hit."
 			};

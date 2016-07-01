@@ -209,10 +209,14 @@ public class spiderCave extends zone {
 		
 		// Spiders in lower room
 		c = new webTiny(979,1187,2);
-		u = new poisonSpider(979,1187);
+		u = new poisonSpider(979+20,1187+15);
+		((poisonSpider)u).setWanders(false);
+		((poisonSpider)u).setFollows(false);
 		u.setFacingDirection("Left");
 		c = new webTiny(1078,1580,2);
-		u = new poisonSpider(1078,1580);
+		u = new poisonSpider(1078+20,1580+15);
+		((poisonSpider)u).setWanders(false);
+		((poisonSpider)u).setFollows(false);
 		u.setFacingDirection("Left");
 		
 		// Fire in lower room.

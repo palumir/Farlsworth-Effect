@@ -56,7 +56,7 @@ public class poisonExplode extends effect {
 	protected static float DEFAULT_VOLUME = 0.8f;
 	
 	// Damage
-	protected int DEFAULT_DAMAGE = 7;
+	protected int DEFAULT_DAMAGE = 8;
 	
 	// The actual type.
 	private static effectType theEffectType =

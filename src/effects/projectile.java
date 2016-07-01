@@ -1,5 +1,7 @@
 package effects;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -17,6 +19,7 @@ import units.player;
 import units.unit;
 import units.unitType;
 import utilities.intTuple;
+import utilities.mathUtils;
 import utilities.time;
 import utilities.utility;
 import zones.zone;
@@ -153,30 +156,104 @@ public abstract class projectile extends effect {
 		setRiseRun();
 	}
 	
-	// Set rise run
+	// Set rise run. Optimized to make projectiles kinda accurate.
 	public void setRiseRun() {
 		float yDistance = (moveToY - getY());
 		float xDistance = (moveToX - getX());
 		float distanceXY = (float) Math.sqrt(yDistance * yDistance
 					+ xDistance * xDistance);
-		rise = (int) ((yDistance/distanceXY)*getMoveSpeed());
-		run = (int) ((xDistance/distanceXY)*getMoveSpeed());
+		
+		// Calculate rise values.
+		float floatRise = ((yDistance/distanceXY)*getMoveSpeed());
+		float absFloatRise = Math.abs((float) (Math.round(floatRise * 10d) / 10d));
+		float riseDecimal = absFloatRise - (int)absFloatRise;
+		int i = 0;
+		float wholeRiseNum = 0;
+		while(wholeRiseNum%1 != 0) {
+			wholeRiseNum += riseDecimal;
+			i++;
+		}
+		
+		// Every i we add wholeRiseNum (makes up what we're missing.
+		// But let's see if they have a gcd so we can make it smoother.
+		int gcdRise = mathUtils.gcd(i, (int)wholeRiseNum);
+		if(gcdRise!=0) {
+			wholeRiseNum = wholeRiseNum/gcdRise;
+			i = i/gcdRise;
+		}
+		
+		// Set our values.
+		addRiseEvery = (int) (i/wholeRiseNum);
+		rise = (int)floatRise;
+		
+		// Calculate run values.
+		float floatRun = ((xDistance/distanceXY)*getMoveSpeed());
+		float absfloatRun = Math.abs((float) (Math.round(floatRun * 10d) / 10d));
+		float runDecimal = absfloatRun - (int)absfloatRun;
+		i = 0;
+		float wholeRunNum = 0;
+		while(wholeRunNum%1 != 0) {
+			wholeRunNum += runDecimal;
+			i++;
+		}
+		
+		// Every i we add wholeRiseNum (makes up what we're missing.
+		// But let's see if they have a gcd so we can make it smoother.
+		int gcdRun = mathUtils.gcd(i, (int)wholeRunNum);
+		if(gcdRun != 0) {
+			wholeRunNum = wholeRunNum/gcdRun;
+			i = i/gcdRun;
+		}
+		
+		// Set our values.
+		addRunEvery = (int) (i/wholeRunNum);
+		run = (int)floatRun;
+		
 	}
 	
+	// Every rise/run we add.
+	private int addRiseEvery;
+	private int riseCounter = 0;
+	private int addRunEvery;
+	private int runCounter = 0;
 	
 	// Update unit
 	@Override
 	public void update() {
-		//System.out.println(rise);
-		/*if(Math.abs(moveToX - getX()) < 3*moveSpeed && Math.abs(moveToY - getY()) < 3*moveSpeed) {
-			pastPoint = true;
+		
+		// What our rise/run actually will be.
+		int actualRun = run;
+		int actualRise = rise;
+		
+		// Check if we need to add anything to run.
+		if(addRunEvery != 0 && runCounter >= addRunEvery) {
+			runCounter = 0;
+			if(run < 0) {
+				actualRun -= 1;
+			}
+			else {
+				actualRun += 1;
+			}
 		}
-		*/
-		setRiseRun();
+		
+		// Update rise/run counters
+		riseCounter++;
+		runCounter++;
+		
+		// Check if we need to add anything to rise.
+		if(addRiseEvery != 0 && riseCounter >= addRiseEvery) {
+			riseCounter = 0;
+			if(rise < 0) {
+				actualRise -= 1;
+			}
+			else {
+				actualRise += 1;
+			}
+		}
 		
 		// Set new X and Y.
-		setX(getX() + run);
-		setY(getY() + rise);
+		setX(getX() + actualRun);
+		setY(getY() + actualRise);
 		
 		player currPlayer = player.getCurrentPlayer();
 		

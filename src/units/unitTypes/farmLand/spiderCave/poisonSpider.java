@@ -66,10 +66,10 @@ public class poisonSpider extends unit {
 	private int DEFAULT_EXP_GIVEN = 25;
 	
 	// Health.
-	private int DEFAULT_HP = 45;
+	private int DEFAULT_HP = 35;
 	
 	// Event for tooltip
-	private static event projectileToolTipDisplayed;
+	private event projectileToolTipDisplayed;
 	
 	// Default movespeed.
 	private static int DEFAULT_UNIT_MOVESPEED = 2;
@@ -114,6 +114,9 @@ public class poisonSpider extends unit {
 	
 	// Wanders?
 	private boolean wanders = true;
+	
+	// Follows?
+	private boolean follows = true;
 	
 	// AI movement.
 	private long AILastCheck = 0l; // milliseconds
@@ -251,20 +254,10 @@ public class poisonSpider extends unit {
 	
 	// Shoot poison.
 	public void shootPoison() {
-		// Calculate the new X and Y we need to knock them to, based off radius.
-		double currentDegree = mathUtils.angleBetweenTwoPointsWithFixedPoint(player.getCurrentPlayer().getX()+player.getCurrentPlayer().getWidth()/2,
-				player.getCurrentPlayer().getY()+player.getCurrentPlayer().getHeight()/2, 
-				getX()+getWidth()/2, 
-				getY()+getHeight()/2, 
-				getX()+getWidth()/2, 
-				getY()+getHeight()/2);
-		int knockToX = (int) (getX() + (10000)*Math.cos(Math.toRadians(currentDegree))); 
-		int knockToY = (int) (getY() + (10000)*Math.sin(Math.toRadians(currentDegree)));
-		
 		// Spawn the poison ball.
 		poisonBall p = new poisonBall(getX()+getWidth()/2,getY()+getHeight()/2,
-				knockToX,
-				knockToY);
+				player.getCurrentPlayer().getX()+player.getCurrentPlayer().getWidth()/2,
+				player.getCurrentPlayer().getY()+player.getCurrentPlayer().getHeight()/2);
 	}
 	
 	// Start attacking.
@@ -384,7 +377,7 @@ public class poisonSpider extends unit {
 					s.start();
 				}
 				aggrod = true;
-				follow(currPlayer);
+				if(isFollows()) follow(currPlayer);
 			}
 		}
 		else if(howClose > DEFAULT_DEAGGRO_RADIUS) {
@@ -453,6 +446,14 @@ public class poisonSpider extends unit {
 
 	public void setWanders(boolean wanders) {
 		this.wanders = wanders;
+	}
+
+	public boolean isFollows() {
+		return follows;
+	}
+
+	public void setFollows(boolean follows) {
+		this.follows = follows;
 	}
 
 }

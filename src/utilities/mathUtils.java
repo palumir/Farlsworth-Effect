@@ -10,4 +10,6 @@ public class mathUtils {
 
 	    return Math.toDegrees(angle1 - angle2); 
 	}
+	
+	public static int gcd(int a, int b) { return b==0 ? a : gcd(b, a%b); }
 }
