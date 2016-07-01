@@ -102,7 +102,7 @@ public class poisonExplode extends effect {
 	// Respond to ending
 	@Override
 	public void respondToFrame(int j) {
-		if(j >= 2) {
+		if(j >= 1) {
 			// If someone is in the explosion radius, hurt.
 			ArrayList<unit> hurtUnits = unit.getUnitsInBox(getX(), getY(), getX() + getWidth(), getY() + getHeight());
 			if(!alreadyHurt && hurtUnits != null) {

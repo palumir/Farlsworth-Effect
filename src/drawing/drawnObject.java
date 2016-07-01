@@ -14,6 +14,7 @@ import drawing.userInterface.tooltipString;
 import effects.effect;
 import effects.projectile;
 import effects.effectTypes.floatingString;
+import items.item;
 import units.player;
 import units.unit;
 import modes.mode;
@@ -52,7 +53,6 @@ public abstract class drawnObject {
 			    	// Different comparator for drawing effects over ...
 			    	if(d1 instanceof effect && !(d2 instanceof effect) /*&& d1.getY()+d1.getHeight() <= d2.getY()*/) return 8;
 			    	else if(d2 instanceof effect && !(d1 instanceof effect) /*&& d2.getY()+d2.getHeight() <= d1.getY()*/) return -8;
-			    	
 			    	else {
 				    	// Prioritize units walking over chunks
 				    	// and units walking in front of other units.
@@ -80,7 +80,6 @@ public abstract class drawnObject {
 					    	}
 					    }
 			    	}
-		    
 		    	}
 	    	}
 		}
@@ -103,8 +102,8 @@ public abstract class drawnObject {
 		    	else {
 		    	
 			    	// Different comparator for drawing effects over ...
-			    	if(d1 instanceof effect && !(d2 instanceof effect) /*&& d1.getY()+d1.getHeight() <= d2.getY()*/) return 8;
-			    	else if(d2 instanceof effect && !(d1 instanceof effect) /*&& d2.getY()+d2.getHeight() <= d1.getY()*/) return -8;
+			    	if(d1 instanceof effect && !(d1 instanceof projectile) && !(d2 instanceof effect) /*&& d1.getY()+d1.getHeight() <= d2.getY()*/) return 8;
+			    	else if(d2 instanceof effect  && !(d2 instanceof projectile) && !(d1 instanceof effect) /*&& d2.getY()+d2.getHeight() <= d1.getY()*/) return -8;
 			    	
 			    	else {
 				    	// Prioritize units walking over chunks
@@ -236,6 +235,9 @@ public abstract class drawnObject {
 		else if(d.getObjectImage() != null) {
 			spriteWidth = d.getObjectImage().getWidth();
 		}
+		else if(d instanceof item && ((item)d).getImage() != null) {
+			spriteWidth =((item)d).getImage().getWidth();
+		}
 		
 		// Adjust for hitboxes.
 		 newDrawX += - (spriteWidth/2 - d.getWidth()/2) - d.getHitBoxAdjustmentX();
@@ -269,6 +271,9 @@ public abstract class drawnObject {
 		}
 		else if(d.getObjectImage() != null) {
 			spriteHeight = d.getObjectImage().getHeight();
+		}
+		else if(d instanceof item && ((item)d).getImage() != null) {
+			spriteHeight =((item)d).getImage().getHeight();
 		}
 		
 		// Adjust for hitboxes.
@@ -310,6 +315,10 @@ public abstract class drawnObject {
 					else if(d.getObjectImage() != null) {
 						spriteWidth = d.getObjectImage().getWidth();
 						spriteHeight = d.getObjectImage().getHeight();
+					}
+					else if(d instanceof item && ((item)d).getImage() != null) {
+						spriteWidth =((item)d).getImage().getWidth();
+						spriteHeight =((item)d).getImage().getHeight();
 					}
 					
 					 // Adjust.

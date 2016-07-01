@@ -6,10 +6,12 @@ import drawing.camera;
 import drawing.spriteSheet;
 import drawing.animation.animation;
 import drawing.animation.animationPack;
+import drawing.userInterface.tooltipString;
 import drawing.spriteSheet.spriteSheetInfo;
 import effects.effect;
 import effects.effectTypes.bloodSquirt;
 import effects.effectTypes.poisonBall;
+import interactions.event;
 import modes.mode;
 import sounds.sound;
 import units.animalType;
@@ -17,6 +19,7 @@ import units.humanType;
 import units.player;
 import units.unit;
 import units.unitType;
+import utilities.mathUtils;
 import utilities.time;
 import utilities.utility;
 import zones.zone;
@@ -65,6 +68,9 @@ public class poisonSpider extends unit {
 	// Health.
 	private int DEFAULT_HP = 45;
 	
+	// Event for tooltip
+	private static event projectileToolTipDisplayed;
+	
 	// Default movespeed.
 	private static int DEFAULT_UNIT_MOVESPEED = 2;
 	
@@ -102,7 +108,12 @@ public class poisonSpider extends unit {
 	//////////////
 	/// FIELDS ///
 	//////////////
+	
+	// Aggrod?
 	private boolean aggrod = false;
+	
+	// Wanders?
+	private boolean wanders = true;
 	
 	// AI movement.
 	private long AILastCheck = 0l; // milliseconds
@@ -127,6 +138,8 @@ public class poisonSpider extends unit {
 		setCombatStuff();
 		attackSound = spiderAttack;
 		
+		// Event load.
+		if(projectileToolTipDisplayed == null) projectileToolTipDisplayed = new event("Unit: projectileToolTipLoaded");
 		
 		// Deal with animations
 		animationPack unitTypeAnimations = new animationPack();
@@ -238,10 +251,20 @@ public class poisonSpider extends unit {
 	
 	// Shoot poison.
 	public void shootPoison() {
-		// Create poison and move to player location
+		// Calculate the new X and Y we need to knock them to, based off radius.
+		double currentDegree = mathUtils.angleBetweenTwoPointsWithFixedPoint(player.getCurrentPlayer().getX()+player.getCurrentPlayer().getWidth()/2,
+				player.getCurrentPlayer().getY()+player.getCurrentPlayer().getHeight()/2, 
+				getX()+getWidth()/2, 
+				getY()+getHeight()/2, 
+				getX()+getWidth()/2, 
+				getY()+getHeight()/2);
+		int knockToX = (int) (getX() + (10000)*Math.cos(Math.toRadians(currentDegree))); 
+		int knockToY = (int) (getY() + (10000)*Math.sin(Math.toRadians(currentDegree)));
+		
+		// Spawn the poison ball.
 		poisonBall p = new poisonBall(getX()+getWidth()/2,getY()+getHeight()/2,
-				player.getCurrentPlayer().getX()+player.getCurrentPlayer().getWidth()/2,
-				player.getCurrentPlayer().getY()+player.getCurrentPlayer().getHeight()/2);
+				knockToX,
+				knockToY);
 	}
 	
 	// Start attacking.
@@ -342,6 +365,12 @@ public class poisonSpider extends unit {
 		// Attack if we're in radius.
 		if(howClose < DEFAULT_ATTACK_RADIUS || aggrod) {
 			
+			// If we aggro
+			if(aggrod && !projectileToolTipDisplayed.isCompleted()) {
+				tooltipString t = new tooltipString("Time your attacks to reflect projectiles.");
+				projectileToolTipDisplayed.setCompleted(true);
+			}
+			
 			// If we're in attack range, attack.
 			if(isInAttackRange(currPlayer, DEFAULT_ATTACK_DIFFERENTIAL)) {
 				stopMove("all");
@@ -363,7 +392,7 @@ public class poisonSpider extends unit {
 		}
 		
 		// Do movement if we're not aggrod.
-		if(!aggrod) {
+		if(!aggrod && isWanders()) {
 			// Move in a random direction every interval.
 			if(time.getTime() - AILastCheck > randomMove*1000) {
 				AILastCheck = time.getTime();
@@ -416,6 +445,14 @@ public class poisonSpider extends unit {
 		else {
 			return DEFAULT_PLATFORMER_ADJUSTMENT_Y;
 		}
+	}
+
+	public boolean isWanders() {
+		return wanders;
+	}
+
+	public void setWanders(boolean wanders) {
+		this.wanders = wanders;
 	}
 
 }

@@ -51,7 +51,7 @@ public class poisonBall extends projectile {
 	private static float DEFAULT_ANIMATION_DURATION = 10f;
 	
 	// Movespeed
-	private static int DEFAULT_MOVESPEED = 5;
+	public static int DEFAULT_MOVESPEED = 5;
 	
 	// The actual type.
 	private static effectType theEffectType =

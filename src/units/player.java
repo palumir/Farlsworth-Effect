@@ -151,8 +151,8 @@ public class player extends unit {
 		super(playerType, newX, newY);
 		
 		/// TODO: Dev stuff
-		//showUnitPosition();
-		//showHitBox();
+		showUnitPosition();
+		showHitBox();
 		//setCollision(false);
 		//setMoveSpeed(10);
 		//showAttackRange(); 

@@ -24,7 +24,7 @@ public class slowWolf extends unit {
 	////////////////
 	
 	// Default name.
-	private static String DEFAULT_WOLF_NAME = "fastWolf";
+	private static String DEFAULT_WOLF_NAME = "slowWolf";
 	
 	// Platformer real dimensions
 	public static int DEFAULT_PLATFORMER_HEIGHT = 32;
@@ -37,7 +37,7 @@ public class slowWolf extends unit {
 	public static int DEFAULT_TOPDOWN_ADJUSTMENT_Y = 5;
 	
 	// How close to attack?
-	private int DEFAULT_ATTACK_RADIUS = 300;
+	private int DEFAULT_ATTACK_RADIUS = 220;
 	private int DEFAULT_DEAGGRO_RADIUS = 350;
 	
 	// Damage stats

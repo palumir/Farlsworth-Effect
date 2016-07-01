@@ -163,7 +163,6 @@ public abstract class projectile extends effect {
 		run = (int) ((xDistance/distanceXY)*getMoveSpeed());
 	}
 	
-	public boolean pastPoint = false;
 	
 	// Update unit
 	@Override
@@ -172,7 +171,8 @@ public abstract class projectile extends effect {
 		/*if(Math.abs(moveToX - getX()) < 3*moveSpeed && Math.abs(moveToY - getY()) < 3*moveSpeed) {
 			pastPoint = true;
 		}
-		if(!pastPoint) setRiseRun();*/
+		*/
+		setRiseRun();
 		
 		// Set new X and Y.
 		setX(getX() + run);
@@ -183,10 +183,7 @@ public abstract class projectile extends effect {
 		boolean isWithin;
 		if(!isAllied()) {
 			// If we hit the player, explode it.
-			isWithin = getX() + getWidth()/2 > currPlayer.getX() && 
-				 getX() + getWidth()/2 < currPlayer.getX() + currPlayer.getWidth() && 
-				 getY() + getHeight()/2 > currPlayer.getY() && 
-				 getY() + getHeight()/2 < currPlayer.getY() + currPlayer.getHeight();
+			isWithin = currPlayer.isWithinRadius(getX() + getWidth()/2, getY()+getHeight()/2, getWidth()/2);
 		}
 		else {
 			isWithin = unit.getUnitsInBox(getX(), getY(), getX() + getWidth(), getY() + getHeight()) != null;

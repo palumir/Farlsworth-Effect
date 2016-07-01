@@ -59,7 +59,21 @@ public class gameCanvas extends JComponent {
 	//private static boolean changeFrameSize = false;
 
 	// The thing that performs the tasks every time the timer ticks.
-	ActionListener taskPerformer = new ActionListener() {
+	ActionListener drawPerformer = new ActionListener() {
+		public void actionPerformed(ActionEvent evt) {
+			/*if(changeFrameSize == true) {
+				Component c = SwingUtilities.getRoot(gameCanvas);
+			    float W = (float)defaultWidth;  
+			    float H = (float)defaultHeight;  
+			    Rectangle b2 = c.getBounds();
+			    c.setBounds(b2.x,b2.y,(int)b2.width,(int)(b2.width*H/W));
+			    changeFrameSize = false;
+			}*/
+			repaint();
+		}
+	};
+	
+	ActionListener gamePerformer = new ActionListener() {
 		public void actionPerformed(ActionEvent evt) {
 			/*if(changeFrameSize == true) {
 				Component c = SwingUtilities.getRoot(gameCanvas);
@@ -70,7 +84,6 @@ public class gameCanvas extends JComponent {
 			    changeFrameSize = false;
 			}*/
 			utility.updateGame();
-			repaint();
 		}
 	};
 
@@ -82,7 +95,8 @@ public class gameCanvas extends JComponent {
 
 		// Start the game timer.
 		this.setOpaque(true); // we paint every pixel; Java can optimize
-		time.initiateTimer(1000/maxFPS, taskPerformer);
+		time.initiateGameTimer(1000/maxFPS, gamePerformer);
+		time.initiateDrawTimer(1000/maxFPS, drawPerformer);
 		this.setFocusable(true);
 		this.setFocusTraversalKeysEnabled(false);
 		requestFocus(); 
@@ -95,12 +109,7 @@ public class gameCanvas extends JComponent {
 				setActualHeight(gameCanvas.getHeight());
 				if(getActualWidth()/(float)defaultWidth != Float.POSITIVE_INFINITY) setScaleX(getActualWidth()/(float)defaultWidth);
 				if(getActualHeight()/(float)defaultHeight != Float.POSITIVE_INFINITY) setScaleY(getActualHeight()/(float)defaultHeight);
-			    /* float W = (float)defaultWidth;  
-			    float H = (float)defaultHeight;  
-			    Rectangle b = gameCanvas.getBounds();
-			    gameCanvas.setBounds(b.x, b.y, (int)b.width, (int)(b.width*H/W));
-			    changeFrameSize = true;
-				*/
+				
 				// Change the font.
 				drawnObject.DEFAULT_FONT = new Font(drawnObject.DEFAULT_FONT_NAME, Font.PLAIN, (int)(drawnObject.DEFAULT_FONT_SIZE*scaleX));
 				

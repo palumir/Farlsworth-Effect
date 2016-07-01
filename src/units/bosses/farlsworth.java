@@ -14,6 +14,7 @@ import units.player;
 import units.unitType;
 import utilities.intTuple;
 import utilities.stringUtils;
+import utilities.time;
 import zones.farmLand.sheepFarm;
 
 public class farlsworth extends boss {
@@ -72,8 +73,9 @@ public class farlsworth extends boss {
 	private int interactTimes = 0;
 	private boolean interactMoved = false;
 	
-	// Is he lost?
-	private event farlsworthLost;
+	// Events
+	private event farlsworthRan;
+	private event pastDenmother;
 	
 	///////////////
 	/// METHODS ///
@@ -88,30 +90,44 @@ public class farlsworth extends boss {
 		// Start.
 		textSeries startOfConversation;
 		
-		// 0;
-		if(interactTimes == 0) {
+		if(farlsworthRan.isCompleted() && !hittingDenMother) {
 			// Start of conversation.
-			startOfConversation = new textSeries(null, "<insert greeting here>.");
-			s = startOfConversation.addChild(null, "<insert conversation where you piss him off here>.");
-			s.setEnd();
-		} 
+			startOfConversation = new textSeries(null, "Boy, this pup is fast asleep, isn't she?");
+			s = startOfConversation.addChild(null, "She would probably be pretty angry if ... ");
+			textSeries s2 = s.addChild(null, "... somebody rudely woke her up.");
+			s = s2.addChild("You're crazy", "You're the one talking to a sheep.");
+			s.setEnd(); // Hits the dog and runs off.
+			s = s2.addChild("Relax", "You're the one who should relax.");
+			s.setEnd(); // TODO: work on this dialogue
+		}
 		
-		// 1
-		else if(interactTimes == 1) {
-			// Start of conversation.
-			startOfConversation = new textSeries(null, "<insert complaint about being enslaved>");
-			startOfConversation.setEnd();
-		}
-		// 1
-		else if(interactTimes == 2) {
-			// Start of conversation.
-			startOfConversation = new textSeries(null, "<insert some other complaint about not being a slave anymore>");
-			s = startOfConversation.addChild(null, "<some other shit>");
-			s.setEnd();
-		}
+		// Farlsworth in barn.
 		else {
-			startOfConversation = new textSeries(null, "Bah.");
-			startOfConversation.setEnd();
+			// 0;
+			if(interactTimes == 0) {
+				// Start of conversation.
+				startOfConversation = new textSeries(null, "<insert greeting here>.");
+				s = startOfConversation.addChild(null, "<insert conversation where you piss him off here>.");
+				s.setEnd();
+			} 
+			
+			// 1
+			else if(interactTimes == 1) {
+				// Start of conversation.
+				startOfConversation = new textSeries(null, "<insert complaint about being enslaved>");
+				startOfConversation.setEnd();
+			}
+			// 1
+			else if(interactTimes == 2) {
+				// Start of conversation.
+				startOfConversation = new textSeries(null, "<insert some other complaint about not being a slave anymore>");
+				s = startOfConversation.addChild(null, "<some other shit>");
+				s.setEnd();
+			}
+			else {
+				startOfConversation = new textSeries(null, "Bah.");
+				startOfConversation.setEnd();
+			}
 		}
 		
 		return new interactBox(startOfConversation, stringUtils.toTitleCase(DEFAULT_FARLSWORTH_NAME), true);
@@ -120,69 +136,143 @@ public class farlsworth extends boss {
 	// Do interact stuff.
 	public void doInteractStuff() {
 		
-		// Pissy Farlsworth runs away first time.
-		if(!interactMoved && interactSequence != null && interactSequence.getTheText().isEnd() && interactTimes == 0) {
-			interactTimes++;
-			moveTo(74,-58);
-			interactMoved = true;
-			sound s = new sound(bleet);
-			s.setPosition(getX(), getY(), sound.DEFAULT_SOUND_RADIUS);
-			s.start();
+		// Load player.
+		player currPlayer = player.getCurrentPlayer();
+		
+		// If we are in the farm.
+		if(!farlsworthRan.isCompleted()) {
+			// Pissy Farlsworth runs away first time.
+			if(!interactMoved && interactSequence != null && interactSequence.getTheText().isEnd() && interactTimes == 0) {
+				interactTimes++;
+				moveTo(74,-58);
+				interactMoved = true;
+				sound s = new sound(bleet);
+				s.setPosition(getX(), getY(), sound.DEFAULT_SOUND_RADIUS);
+				s.start();
+				
+			}
 			
+			// Pissy Farlsworth runs away second time.
+			if(!interactMoved && interactSequence != null && interactSequence.getTheText().isEnd() && interactTimes == 1) {
+				interactTimes++;
+				moveTo(74,-406);
+				interactMoved = true;
+				sound s = new sound(bleet);
+				s.setPosition(getX(), getY(), sound.DEFAULT_SOUND_RADIUS);
+				s.start();
+			}
+			
+			// Pissy Farlsworth runs away third time.
+			if(!interactMoved && interactSequence != null && interactSequence.getTheText().isEnd() && interactTimes == 2) {
+				interactTimes++;
+				p = new ArrayList<intTuple>();
+				p.add(new intTuple(425,-70));
+				p.add(new intTuple(427,5));
+				p.add(new intTuple(-8,-1));
+				p.add(new intTuple(-8,-400));
+				p.add(new intTuple(-8,-499));
+				p.add(new intTuple(-249,-808));
+				p.add(new intTuple(-329,-1036));
+				p.add(new intTuple(-385,-1216));
+				followPath(p);
+				interactMoved = true;
+				sound s = new sound(bleet);
+				s.setPosition(getX(), getY(), sound.DEFAULT_SOUND_RADIUS);
+				s.start();
+			}
+			
+			// Make him open the gate if he's by the gate.
+			if(!sheepFarm.forestGate.isPassable() && Math.abs(4 - getX()) < closeEnough && Math.abs(-389 - getY()) < closeEnough) {
+				sheepFarm.forestGate.forceOpen();
+			}
+			
+			// Drop a piece of wool.
+			if(Math.abs(-151 - getX()) < closeEnough+40 && Math.abs(-619 - getY()) < closeEnough+40) {
+				woolPiece w = new woolPiece(-151,-619,0);
+			}
+			
+			// Make him teleport to denmother
+			if(p != null && p.size() == 0) {
+				farlsworthRan.setCompleted(true);
+				
+				// Spawn him in front of Denmother.
+				setX(1584);
+				setY(-3217);
+				facingDirection = "Right";
+			}
 		}
 		
-		// Pissy Farlsworth runs away second time.
-		if(!interactMoved && interactSequence != null && interactSequence.getTheText().isEnd() && interactTimes == 1) {
-			interactTimes++;
-			moveTo(74,-406);
-			interactMoved = true;
-			sound s = new sound(bleet);
-			s.setPosition(getX(), getY(), sound.DEFAULT_SOUND_RADIUS);
-			s.start();
-		}
-		
-		// Pissy Farlsworth runs away third time.
-		if(!interactMoved && interactSequence != null && interactSequence.getTheText().isEnd() && interactTimes == 2) {
-			interactTimes++;
-			p = new ArrayList<intTuple>();
-			p.add(new intTuple(425,-70));
-			p.add(new intTuple(427,5));
-			p.add(new intTuple(-8,-1));
-			p.add(new intTuple(-8,-400));
-			p.add(new intTuple(-8,-499));
-			p.add(new intTuple(-249,-808));
-			p.add(new intTuple(-329,-1036));
-			p.add(new intTuple(-385,-1216));
-			followPath(p);
-			interactMoved = true;
-			sound s = new sound(bleet);
-			s.setPosition(getX(), getY(), sound.DEFAULT_SOUND_RADIUS);
-			s.start();
-		}
-		
-		// Make him open the gate if he's by the gate.
-		if(!sheepFarm.forestGate.isPassable() && Math.abs(4 - getX()) < closeEnough && Math.abs(-389 - getY()) < closeEnough) {
-			sheepFarm.forestGate.forceOpen();
-		}
-		
-		// Drop a piece of wool.
-		if(Math.abs(-151 - getX()) < closeEnough+40 && Math.abs(-619 - getY()) < closeEnough+40) {
-			woolPiece w = new woolPiece(-151,-619,0);
-		}
-		
-		// Make him disappear when he runs far enough away.
-		if(p != null && p.size() == 0) {
-			farlsworthLost.setCompleted(true);
-			this.destroy();
+		// At denmother
+		if(!pastDenmother.isCompleted()) {
+			
+			// Start the event if we enter a region.
+			if((interactSequence == null || (interactSequence != null && !interactSequence.isDisplayOn() && runFromDenmotherStart == 0)) && 
+				currPlayer != null && currPlayer.isWithin(1383,-3349,1650,-3180)) {
+				interactSequence = makeNormalInteractSequence();
+				if(interactBox.getCurrentDisplay() != null) {
+					interactBox.getCurrentDisplay().toggleDisplay();
+				}
+				interactSequence.toggleDisplay();
+				interactSequence.setUnescapable(true);
+				currPlayer.stopMove("all");
+			}
+			
+			// If we fuck up the dialogue.
+			if(!hittingDenMother && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().isEnd() && interactSequence.getTheText().getButtonText()!=null) &&
+					(interactSequence.getTheText().getButtonText().equals("You're crazy"))) {
+				hittingDenMother = true;
+				moveTo(1455,-3280);
+			}
+			
+			// If he is hitting Denmother.
+			if(hittingDenMother) {
+				
+				// When he's in front of denmother.
+				if(!isMoving() && bahDenmotherStartTime == 0) {
+					bahDenmotherStartTime = time.getTime();
+				}
+				
+				// Make him face right after a little bit
+				if(!hasBleetedInDenmothersFace && time.getTime() - bahDenmotherStartTime > 0.7f*1000) {
+					hasBleetedInDenmothersFace = true;
+					sound s = new sound(bleet);
+					s.start();
+					facingDirection = "Right";
+				}
+				
+				// After he's bah'd
+				if(runFromDenmotherStart == 0 && bahDenmotherStartTime != 0 && time.getTime() - bahDenmotherStartTime > bahDuration*1000) {
+					moveTo(400,-3280);
+					interactSequence.toggleDisplay();
+					if(denmother.bossRef != null) denmother.bossRef.wakeUp();
+					runFromDenmotherStart = time.getTime();
+				}
+				
+				// Despawn 
+				if(runFromDenmotherStart != 0 && time.getTime() - runFromDenmotherStart > runFromDenmotherDuration*1000) {
+					hittingDenMother = false;
+					pastDenmother.setCompleted(true);
+					this.destroy(); // TODO: Destroy for now, but should move to next location.
+				}
+			}
 		}
 	}
 	
+	private boolean hasBleetedInDenmothersFace = false;
+	private boolean hittingDenMother = false;
+	private long bahDenmotherStartTime = 0;
+	private float bahDuration = 2f;
+	private float runFromDenmotherDuration = 5f;
+	private long runFromDenmotherStart = 0;
+	
 	// Interact with object. 
 	public void interactWith() { 
-		interactMoved = false;
-		this.facingDirection = stringUtils.oppositeDir(player.getCurrentPlayer().getFacingDirection());
-		interactSequence = makeNormalInteractSequence();
-		interactSequence.toggleDisplay();
+		if(interactSequence == null || (interactSequence != null && !interactSequence.isUnescapable())) {
+			interactMoved = false;
+			this.facingDirection = stringUtils.oppositeDir(player.getCurrentPlayer().getFacingDirection());
+			interactSequence = makeNormalInteractSequence();
+			interactSequence.toggleDisplay();
+		}
 	}
 
 	///////////////
@@ -199,12 +289,25 @@ public class farlsworth extends boss {
 		interactable = true;
 		
 		// Get whether or not he's lost.
-		farlsworthLost = new event("farlsworthLost");
+		farlsworthRan = new event("farlsworthRan");
+		pastDenmother = new event("farlsworthPastDenmother");
 		
 		// If he's lost, don't spawn him in the farm.
-		if(farlsworthLost.isCompleted() && 
+		if(farlsworthRan.isCompleted() && 
 		   player.getCurrentPlayer().getCurrentZone().getName().equals("sheepFarm")) {
-			this.destroy();
+			
+			// If we aren't past Denmother, spawn Farlsworth there.
+			if(!pastDenmother.isCompleted()) {
+				// Spawn him in front of Denmother.
+				setX(1584);
+				setY(-3217);
+				facingDirection = "Right";
+			}
+			
+			// Despawn, we've done all the Farlsworth stuff for the zone.
+			else {
+				this.destroy(); // TODO: Destroy for now, but should move to next location.
+			}
 		}
 		
 		// Set dimensions

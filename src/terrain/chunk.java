@@ -139,6 +139,13 @@ public class chunk extends drawnObject {
 		if(tX || tY) return new intTuple(txInt, tyInt);
 		else return intTuple.emptyTuple;
 	}
+	
+	public boolean dontDrawSprite = false;
+	
+	// Testing
+	public void dontDrawSprite() {
+		dontDrawSprite = true;
+	}
 
 	// Draw the chunk. 
 	@Override
@@ -149,7 +156,7 @@ public class chunk extends drawnObject {
 		if(getChunkImage() != null) {
 			int changeFactor = 0;
 			if(gameCanvas.getScaleX() != 1f || gameCanvas.getScaleY() != 1f) changeFactor = 1;
-			g.drawImage(getChunkImage(), 
+			if(!dontDrawSprite) g.drawImage(getChunkImage(), 
 					drawX, 
 					drawY, 
 					(int)(gameCanvas.getScaleX()*getChunkImage().getWidth() + changeFactor), 

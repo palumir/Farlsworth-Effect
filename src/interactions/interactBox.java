@@ -53,6 +53,7 @@ public class interactBox extends interfaceObject  {
 	private boolean buttonMode = false;
 	private boolean textMode = false;
 	private boolean displayOn = false;
+	private boolean unescapable = false;
 	private static interactBox currentDisplay = null;
 	
 	// Sounds.
@@ -269,7 +270,7 @@ public class interactBox extends interfaceObject  {
 		
 		// It's the end of an interaction. Exit. Caller should deal with the end.
 		else if(theText.isEnd()) {
-			toggleDisplay();
+			if(!unescapable) toggleDisplay();
 		}
 	}
 	
@@ -301,7 +302,7 @@ public class interactBox extends interfaceObject  {
 	public void respondToKeyPress(KeyEvent k) {
 		// Player presses esc (inventory) key.
 		if(k.getKeyCode() == KeyEvent.VK_ESCAPE) { 
-			toggleDisplay();
+			if(!unescapable) toggleDisplay();
 		}
 		
 		// Player presses left key.
@@ -357,6 +358,14 @@ public class interactBox extends interfaceObject  {
 
 	public void setDisplayOn(boolean displayOn) {
 		this.displayOn = displayOn;
+	}
+
+	public boolean isUnescapable() {
+		return unescapable;
+	}
+
+	public void setUnescapable(boolean unescapable) {
+		this.unescapable = unescapable;
 	}
 	
 }

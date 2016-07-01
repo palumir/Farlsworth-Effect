@@ -110,7 +110,12 @@ public class spider extends unit {
 	//////////////
 	/// FIELDS ///
 	//////////////
+	
+	// Aggrod?
 	private boolean aggrod = false;
+	
+	// Wanders?
+	private boolean wanders = true;
 
 	///////////////
 	/// METHODS ///
@@ -283,7 +288,7 @@ public class spider extends unit {
 		}
 		
 		// Do movement if we're not aggrod.
-		if(!aggrod) {
+		if(!aggrod && isWanders()) {
 			// Move in a random direction every interval.
 			if(time.getTime() - AILastCheck > randomMove*1000) {
 				AILastCheck = time.getTime();
@@ -336,5 +341,13 @@ public class spider extends unit {
 		else {
 			return DEFAULT_PLATFORMER_ADJUSTMENT_Y;
 		}
+	}
+
+	public boolean isWanders() {
+		return wanders;
+	}
+
+	public void setWanders(boolean wanders) {
+		this.wanders = wanders;
 	}
 }

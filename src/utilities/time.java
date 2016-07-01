@@ -11,7 +11,8 @@ public class time extends utility {
 	private static Long startTime = 0l;
 	
 	// The actual timer we will use.
-	public static Timer timer; 
+	public static Timer gameTimer; 
+	public static Timer drawTimer;
 	
 	// Initiate timer.
 	static void initiate() {
@@ -28,10 +29,17 @@ public class time extends utility {
 	}
 	
 	// Initiate the timer (for repainting)
-	public static void initiateTimer(int fps, ActionListener a) {
-		timer = new Timer(fps, a);
-		timer.setInitialDelay(190);
-		timer.start();
+	public static void initiateDrawTimer(int fps, ActionListener a) {
+		drawTimer = new Timer(fps, a);
+		drawTimer.setInitialDelay(190);
+		drawTimer.start();
+	}
+	
+	// Initiate the timer (for repainting)
+	public static void initiateGameTimer(int fps, ActionListener a) {
+		gameTimer = new Timer(fps, a);
+		gameTimer.setInitialDelay(190);
+		gameTimer.start();
 	}
 	
 	// Get the current game time in milliseconds.
