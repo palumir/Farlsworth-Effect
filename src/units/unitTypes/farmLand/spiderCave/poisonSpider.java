@@ -1,28 +1,19 @@
 package units.unitTypes.farmLand.spiderCave;
 
-import java.util.Random;
-
-import drawing.camera;
 import drawing.spriteSheet;
 import drawing.animation.animation;
 import drawing.animation.animationPack;
 import drawing.userInterface.tooltipString;
 import drawing.spriteSheet.spriteSheetInfo;
-import effects.effect;
-import effects.effectTypes.bloodSquirt;
 import effects.effectTypes.poisonBall;
 import interactions.event;
 import modes.mode;
 import sounds.sound;
-import units.animalType;
-import units.humanType;
 import units.player;
 import units.unit;
 import units.unitType;
-import utilities.mathUtils;
 import utilities.time;
 import utilities.utility;
-import zones.zone;
 
 public class poisonSpider extends unit {
 	
@@ -69,7 +60,7 @@ public class poisonSpider extends unit {
 	private int DEFAULT_HP = 35;
 	
 	// Event for tooltip
-	private event projectileToolTipDisplayed;
+	private static event projectileToolTipDisplayed;
 	
 	// Default movespeed.
 	private static int DEFAULT_UNIT_MOVESPEED = 2;
@@ -142,7 +133,7 @@ public class poisonSpider extends unit {
 		attackSound = spiderAttack;
 		
 		// Event load.
-		if(projectileToolTipDisplayed == null) projectileToolTipDisplayed = new event("Unit: projectileToolTipLoaded");
+		projectileToolTipDisplayed = new event("Unit: projectileToolTipLoaded");
 		
 		// Deal with animations
 		animationPack unitTypeAnimations = new animationPack();
@@ -361,6 +352,7 @@ public class poisonSpider extends unit {
 			// If we aggro
 			if(aggrod && !projectileToolTipDisplayed.isCompleted()) {
 				tooltipString t = new tooltipString("Time your attacks to reflect projectiles.");
+				System.out.println("SET TO TRUE!!");
 				projectileToolTipDisplayed.setCompleted(true);
 			}
 			
@@ -371,11 +363,15 @@ public class poisonSpider extends unit {
 				aggrod = true;
 			}
 			else {
+				
+				// Play aggrod sound on aggro.
 				if(!aggrod) {
 					sound s = new sound(spiderAggro);
 					s.setPosition(getX(), getY(), sound.DEFAULT_SOUND_RADIUS);
 					s.start();
 				}
+				
+				// Follow current player, set to aggro
 				aggrod = true;
 				if(isFollows()) follow(currPlayer);
 			}

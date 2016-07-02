@@ -147,7 +147,7 @@ public class interactBox extends interfaceObject  {
 				
 				// Draw the text.
 				g.drawString(displayedText,
-						(int)(gameCanvas.getScaleX()*getX()) + (int)(gameCanvas.getScaleX()*background.getWidth()/2) - g.getFontMetrics().stringWidth(displayedText)/2,
+						(int)(gameCanvas.getScaleX()*getX()) + (int)(gameCanvas.getScaleX()*background.getWidth()/2) - g.getFontMetrics().stringWidth(getTheText().getTextOnPress())/2,
 					   (int)(gameCanvas.getScaleY()*(getY() + background.getHeight()/2 + 4)));
 			}
 			

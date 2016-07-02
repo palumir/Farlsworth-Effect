@@ -95,7 +95,7 @@ public class gameCanvas extends JComponent {
 
 		// Start the game timer.
 		this.setOpaque(true); // we paint every pixel; Java can optimize
-		time.initiateGameTimer(1000/maxFPS, gamePerformer);
+		time.initiateGameTimer(12, gamePerformer);
 		time.initiateDrawTimer(1000/maxFPS, drawPerformer);
 		this.setFocusable(true);
 		this.setFocusTraversalKeysEnabled(false);

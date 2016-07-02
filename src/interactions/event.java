@@ -44,7 +44,7 @@ public class event {
 		if(loadedEvents != null)
 		System.out.println("=====================================================");
 		for(int i = 0; i < loadedEvents.size(); i++) {
-			if(loadedEvents.get(i).name.contains("torch"))
+			if(loadedEvents.get(i).name.contains("projectile"))
 			System.out.println("Event: " + loadedEvents.get(i).getName() + " is set to: " + loadedEvents.get(i).completed);
 		}
 		System.out.println("=====================================================");

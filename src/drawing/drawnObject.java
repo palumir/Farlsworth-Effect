@@ -14,6 +14,7 @@ import drawing.userInterface.tooltipString;
 import effects.effect;
 import effects.projectile;
 import effects.effectTypes.floatingString;
+import interactions.event;
 import items.item;
 import units.player;
 import units.unit;
@@ -101,9 +102,9 @@ public abstract class drawnObject {
 		    	else if(d2 instanceof interfaceObject && !(d1 instanceof interfaceObject)) return -9;
 		    	else {
 		    	
-			    	// Different comparator for drawing effects over ...
-			    	if(d1 instanceof effect && !(d1 instanceof projectile) && !(d2 instanceof effect) /*&& d1.getY()+d1.getHeight() <= d2.getY()*/) return 8;
-			    	else if(d2 instanceof effect  && !(d2 instanceof projectile) && !(d1 instanceof effect) /*&& d2.getY()+d2.getHeight() <= d1.getY()*/) return -8;
+			    	// Different comparator for drawing effects over ... (but skip projectiles)
+			    	if(d1 instanceof effect && !(d1 instanceof projectile) && !(d2 instanceof effect) && !(d2 instanceof projectile) /*&& d1.getY()+d1.getHeight() <= d2.getY()*/) return 8;
+			    	else if(d2 instanceof effect  && !(d2 instanceof projectile) && !(d1 instanceof effect) && !(d1 instanceof projectile) /*&& d2.getY()+d2.getHeight() <= d1.getY()*/) return -8;
 			    	
 			    	else {
 				    	// Prioritize units walking over chunks
