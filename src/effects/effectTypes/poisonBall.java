@@ -69,8 +69,8 @@ public class poisonBall extends projectile {
 	/// METHODS ///
 	///////////////
 	// Constructor
-	public poisonBall(int newX, int newY, int newMoveToX, int newMoveToY) {
-		super(theEffectType, newX, newY, newMoveToX, newMoveToY);
+	public poisonBall(int newX, int newY, int newMoveToX, int newMoveToY, int damage) {
+		super(theEffectType, newX, newY, newMoveToX, newMoveToY, damage);
 		setMoveSpeed(DEFAULT_MOVESPEED);
 	}
 	
@@ -89,7 +89,7 @@ public class poisonBall extends projectile {
 	}
 	
 	public void explode() {
-		poisonExplode p = new poisonExplode(getX()-poisonExplode.getDefaultWidth()/2,getY()-poisonExplode.getDefaultHeight()/2, isAllied());
+		poisonExplode p = new poisonExplode(getX()-poisonExplode.getDefaultWidth()/2,getY()-poisonExplode.getDefaultHeight()/2, isAllied(), damage);
 		this.destroy();
 	}
 	

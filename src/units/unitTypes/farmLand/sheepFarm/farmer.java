@@ -224,7 +224,7 @@ public class farmer extends unit {
 		player currPlayer = player.getCurrentPlayer();
 		if(!tooltipShown && farlsworthQuest != null && !farlsworthQuest.isStarted() && currPlayer != null && currPlayer.isWithin(-1017,-283,-450,25)) {
 			tooltipShown = true;
-			tooltipString t = new tooltipString("Press 'e' or 'enter' to interact with something.");
+			tooltipString t = new tooltipString("Press 'enter' to interact with something.");
 		}
 	}
 	

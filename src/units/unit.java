@@ -14,6 +14,7 @@ import drawing.animation.animationPack;
 import drawing.userInterface.playerHealthBar;
 import effects.effect;
 import effects.projectile;
+import effects.buffs.movementBuff;
 import effects.effectTypes.bloodSquirt;
 import effects.effectTypes.critBloodSquirt;
 import effects.effectTypes.floatingString;
@@ -51,14 +52,13 @@ public abstract class unit extends drawnObject  {
 	
 	// Fist defaults.
 	protected static int DEFAULT_ATTACK_DAMAGE = 4;
-	static float DEFAULT_BAT = 0.25f;
 	static float DEFAULT_ATTACK_TIME = 0.4f;
 	static int DEFAULT_ATTACK_WIDTH = 35;
 	static int DEFAULT_ATTACK_LENGTH = 11;
 	static float DEFAULT_BACKSWING = 0f;
 	protected static float DEFAULT_CRIT_CHANCE = 0f;
 	protected float DEFAULT_CRIT_DAMAGE = 1.6f;
-	protected static float DEFAULT_ATTACK_VARIABILITY = 0.05f; // How much the range of hits is. 5% both ways.
+	protected static float DEFAULT_ATTACK_VARIABILITY = 0f; // How much the range of hits is. 5% both ways.
 	
 	// Combat defaults.
 	static private int DEFAULT_HP = 10;
@@ -71,9 +71,6 @@ public abstract class unit extends drawnObject  {
 	// Colors for combat.
 	protected Color DEFAULT_DAMAGE_COLOR = Color.white;
 	protected Color DEFAULT_CRIT_COLOR = Color.yellow;
-	
-	// Default exp
-	private int DEFAULT_EXP = 0;
 	
 	// Sounds
 	protected static int DEFAULT_ATTACK_SOUND_RADIUS = 1000;
@@ -107,8 +104,9 @@ public abstract class unit extends drawnObject  {
 	// Damage
 	private int attackDamage = DEFAULT_ATTACK_DAMAGE;
 	
-	// Attack time.
-	protected float baseAttackTime = DEFAULT_BAT;
+	// Attack time
+	private int attackFrameStart = 0;
+	private int attackFrameEnd = 0;
 	private float attackTime = DEFAULT_ATTACK_TIME;
 	protected float backSwing = DEFAULT_BACKSWING;
 	
@@ -121,9 +119,6 @@ public abstract class unit extends drawnObject  {
 	private float attackVariability = DEFAULT_ATTACK_VARIABILITY; // Percentage
 	private float critChance = DEFAULT_CRIT_CHANCE;
 	private float critDamage = DEFAULT_CRIT_DAMAGE;
-	
-	// Exp given
-	protected int exp = DEFAULT_EXP;
 	
 	// Attacking/getting attacked mechanics
 	protected boolean canAttack = true; // backswing stuff.
@@ -143,6 +138,9 @@ public abstract class unit extends drawnObject  {
 	private boolean tryJump = false;
 	private boolean touchingGround = false;
 	private boolean inAir = true;
+	
+	// Movement buffs/debuffs
+	private ArrayList<movementBuff> movementBuffs = new ArrayList<movementBuff>();
 	
 	// Movement
 	protected int moveSpeed = DEFAULT_UNIT_MOVESPEED;
@@ -198,6 +196,9 @@ public abstract class unit extends drawnObject  {
 	private int knockSpeed;
 	private float knockTime;
 	
+	// Shielding?
+	private boolean shielding = false;
+	
 	// What we are stuck on?
 	private drawnObject stuckOn = null;
 	
@@ -251,9 +252,8 @@ public abstract class unit extends drawnObject  {
 		// Remove from game.
 		destroy();
 		
-		// Give exp
 		if(!(this instanceof player)) {
-			if(player.getCurrentPlayer()!=null) player.getCurrentPlayer().giveExp(exp);
+			// Do stuff for player?
 		}
 		
 		// Do a huge blood squirt.
@@ -358,7 +358,8 @@ public abstract class unit extends drawnObject  {
 		// Attack if we are attacking.
 		if(isAttacking()) {
 			// Do the attack if our BAT is over.
-			if(time.getTime() - startAttackTime > baseAttackTime*1000) {
+			if(getCurrentAnimation().getCurrentSprite() >= getAttackFrameStart() &&
+			   getCurrentAnimation().getCurrentSprite() <= getAttackFrameEnd()) {
 				int x1 = 0;
 				int x2 = 0;
 				int y1 = 0;
@@ -583,29 +584,58 @@ public abstract class unit extends drawnObject  {
 		}
 	}
 	
+	// Force to take damage.
+	public boolean forceHurt(int damage, float crit) {
+		if(damage != 0) {
+			
+			if(killable) {
+				if(healthPoints - crit*damage < 0) healthPoints = 0;
+				else healthPoints -= crit*damage;
+			}
+		
+			// Crit
+			if(crit != 1f) {
+				effect e = new floatingString("" + (int)(crit*damage), DEFAULT_CRIT_COLOR, getX() + getWidth()/2, getY() + getHeight()/2, 1f, 3f);
+			}
+			
+			// Non crit.
+			else {
+				effect e = new floatingString("" + damage, DEFAULT_DAMAGE_COLOR, getX() + getWidth()/2, getY() + getHeight()/2, 1f);
+			}
+			
+			// Squirt blood
+			int randomX = 0;
+			int randomY = -platformerHeight/3 + utility.RNG.nextInt(platformerHeight/3 + 1);
+			effect blood = new bloodSquirt(getX() - bloodSquirt.getDefaultWidth()/2 + topDownWidth/2 + randomX ,
+					   getY() - bloodSquirt.getDefaultHeight()/2 + platformerHeight/2 + randomY);
+			reactToPain();
+		}
+		return true;
+	}
+	
 	// Take damage. Ouch!
-	public void hurt(int damage, float crit) {
-		if(killable) {
-			if(healthPoints - crit*damage < 0) healthPoints = 0;
-			else healthPoints -= crit*damage;
+	public boolean hurt(int damage, float crit) {
+		if(shielding && ((player)this).getEnergy() > 0) {
+			if(this instanceof player) {
+				float hitDamage = 1;
+				if(((player)this).getEnergy() <= 0) {
+					return forceHurt(damage,crit);
+				}
+				else if(((player)this).getEnergy() - hitDamage < 0) {
+					float difference = (float) ((hitDamage - ((player)this).getEnergy())/hitDamage);
+					((player)this).setShielding(false);
+					((player)this).setEnergy(0);
+					forceHurt((int) (damage*difference),crit);
+					return false;
+				}
+				else ((player)this).setEnergy((((player)this).getEnergy() - hitDamage));
+				return false;
+			}
+			return false;
 		}
-		
-		// Crit
-		if(crit != 1f) {
-			effect e = new floatingString("" + (int)(crit*damage), DEFAULT_CRIT_COLOR, getX() + getWidth()/2, getY() + getHeight()/2, 1f, 3f);
-		}
-		
-		// Non crit.
 		else {
-			effect e = new floatingString("" + damage, DEFAULT_DAMAGE_COLOR, getX() + getWidth()/2, getY() + getHeight()/2, 1f);
+			return forceHurt(damage,crit);
 		}
-		
-		// Squirt blood
-		int randomX = 0;
-		int randomY = -platformerHeight/3 + utility.RNG.nextInt(platformerHeight/3 + 1);
-		effect blood = new bloodSquirt(getX() - bloodSquirt.getDefaultWidth()/2 + topDownWidth/2 + randomX ,
-				   getY() - bloodSquirt.getDefaultHeight()/2 + platformerHeight/2 + randomY);
-		reactToPain();
 	}
 	
 	// React to pain.
@@ -731,10 +761,16 @@ public abstract class unit extends drawnObject  {
 	// Move unit
 	public void moveUnit() {
 		
+		// Apply movement debuffs/buffs
+		int buffedMoveSpeed = moveSpeed;
+		for(int i = 0; i < movementBuffs.size(); i++) {
+			buffedMoveSpeed *= movementBuffs.get(i).getMovementPercentage();
+		}
+		
 		// How many frames do we drop speed by -1;
-		int maxMoveTimesSpeed = maxMoveDiag*moveSpeed; // *2 for x and y
-		int moveByX = moveSpeed;
-		int moveByY = moveSpeed;
+		int maxMoveTimesSpeed = maxMoveDiag*buffedMoveSpeed; // *2 for x and y
+		int moveByX = buffedMoveSpeed;
+		int moveByY = buffedMoveSpeed;
 		
 		// Are we moving diagonally?
 		if(!movingDiagonally()) lastMoveDiag = 0;
@@ -744,8 +780,8 @@ public abstract class unit extends drawnObject  {
 		
 		// If we need to drop this frame down a movespeed.
 		if(movingDiagonally() && lastMoveDiag%(maxMoveDiag/2) == 0) {
-				moveByX = moveSpeed - 1;
-				moveByY = moveSpeed - 1;
+				moveByX = buffedMoveSpeed - 1;
+				moveByY = buffedMoveSpeed - 1;
 		}
 		
 		// Final frame to drop one movespeed., reset.
@@ -1039,6 +1075,10 @@ public abstract class unit extends drawnObject  {
 		}
 	}
 	
+	// Special case drawing stuff.
+	public void drawUnitSpecialStuff(Graphics g) {
+	}
+	
 	// Draw the unit. 
 	@Override
 	public void drawObject(Graphics g) {
@@ -1166,6 +1206,9 @@ public abstract class unit extends drawnObject  {
 					   (int)(gameCanvas.getScaleX()*getWidth()), 
 					   (int)(gameCanvas.getScaleY()*getHeight()));
 		}
+		
+		// Draw special stuff
+		drawUnitSpecialStuff(g);
 	}
 	
 	// Set a unit to have a quest.
@@ -1239,14 +1282,6 @@ public abstract class unit extends drawnObject  {
 
 	public void setAttackDamage(int attackDamage) {
 		this.attackDamage = attackDamage;
-	}
-
-	public float getBaseAttackTime() {
-		return baseAttackTime;
-	}
-
-	public void setBaseAttackTime(float baseAttackTime) {
-		this.baseAttackTime = baseAttackTime;
 	}
 	
 	public void ignoreCollision() {
@@ -1403,6 +1438,38 @@ public abstract class unit extends drawnObject  {
 
 	public void setStuckOn(drawnObject stuckOn) {
 		this.stuckOn = stuckOn;
+	}
+
+	public boolean isShielding() {
+		return shielding;
+	}
+
+	public void setShielding(boolean shielding) {
+		this.shielding = shielding;
+	}
+
+	public int getAttackFrameEnd() {
+		return attackFrameEnd;
+	}
+
+	public void setAttackFrameEnd(int attackFrameEnd) {
+		this.attackFrameEnd = attackFrameEnd;
+	}
+
+	public int getAttackFrameStart() {
+		return attackFrameStart;
+	}
+
+	public void setAttackFrameStart(int attackFrameStart) {
+		this.attackFrameStart = attackFrameStart;
+	}
+
+	public ArrayList<movementBuff> getMovementBuffs() {
+		return movementBuffs;
+	}
+
+	public void setMovementBuffs(ArrayList<movementBuff> movementBuffs) {
+		this.movementBuffs = movementBuffs;
 	}
 	
 }

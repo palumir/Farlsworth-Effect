@@ -39,7 +39,7 @@ public class animation {
 		setStartFrame(newStartFrame);
 		endFrame = newEndFrame;
 		setName(newName);
-		sprites = newSprites;
+		setSprites(newSprites);
 	}
 	
 	// Play animation.
@@ -66,7 +66,7 @@ public class animation {
 	/// GETTERS AND SETTERS ///
 	///////////////////////////
 	public BufferedImage getCurrentFrame() {
-		return sprites.get(getCurrentSprite());
+		return getSprites().get(getCurrentSprite());
 	}
 
 	public String getName() {
@@ -91,5 +91,13 @@ public class animation {
 
 	public void setStartFrame(int startFrame) {
 		this.startFrame = startFrame;
+	}
+
+	public ArrayList<BufferedImage> getSprites() {
+		return sprites;
+	}
+
+	public void setSprites(ArrayList<BufferedImage> sprites) {
+		this.sprites = sprites;
 	}
 }

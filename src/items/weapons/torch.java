@@ -158,7 +158,8 @@ public class torch extends weapon {
 		// level.
 		player.getCurrentPlayer().setAttackDamage(attackDamage);
 		player.getCurrentPlayer().setAttackTime(attackTime);
-		player.getCurrentPlayer().setBaseAttackTime(baseAttackTime);
+		player.getCurrentPlayer().setAttackFrameStart(3);
+		player.getCurrentPlayer().setAttackFrameEnd(5);
 		player.getCurrentPlayer().setAttackWidth(attackWidth);
 		player.getCurrentPlayer().setAttackLength(attackLength);
 		player.getCurrentPlayer().setCritChance(critChance);

@@ -52,10 +52,10 @@ public class spider extends unit {
 	
 	// Damage stats
 	private int DEFAULT_ATTACK_DIFFERENTIAL = 7; // the range within the attackrange the unit will attack.
-	private int DEFAULT_ATTACK_DAMAGE = 6;
-	private float DEFAULT_BAT = 0.4f;
-	private float DEFAULT_ATTACK_TIME = 0.5f;
-	private float DEFAULT_BACKSWING = 0.5f;
+	private int DEFAULT_ATTACK_DAMAGE = 3;
+	private float DEFAULT_BAT = 0.6f;
+	private float DEFAULT_ATTACK_TIME = 0.7f;
+	private float DEFAULT_BACKSWING = 0.2f;
 	private int DEFAULT_ATTACK_WIDTH = 20;
 	private int DEFAULT_ATTACK_LENGTH = 12;
 	static private float DEFAULT_CRIT_CHANCE = .15f;
@@ -73,10 +73,10 @@ public class spider extends unit {
 	private int DEFAULT_EXP_GIVEN = 25;
 	
 	// Health.
-	private int DEFAULT_HP = 55;
+	private int DEFAULT_HP = 12;
 	
 	// Default movespeed.
-	private static int DEFAULT_UNIT_MOVESPEED = 1;
+	private static int DEFAULT_UNIT_MOVESPEED = 2;
 	
 	// Default jump speed
 	private static int DEFAULT_UNIT_JUMPSPEED = 10;
@@ -134,19 +134,19 @@ public class spider extends unit {
 		animationPack unitTypeAnimations = new animationPack();
 		
 		// Attacking left animation.
-		animation attackingLeft = new animation("attackingLeft", typeRef.getUnitTypeSpriteSheet().getAnimation(1), 0, 4, DEFAULT_ATTACK_TIME);
+		animation attackingLeft = new animation("attackingLeft", typeRef.getUnitTypeSpriteSheet().getAnimation(1), 0, 2, DEFAULT_ATTACK_TIME);
 		unitTypeAnimations.addAnimation(attackingLeft);
 		
 		// Attacking right animation.
-		animation attackingRight = new animation("attackingRight", typeRef.getUnitTypeSpriteSheet().getAnimation(3), 0, 4, DEFAULT_ATTACK_TIME);
+		animation attackingRight = new animation("attackingRight", typeRef.getUnitTypeSpriteSheet().getAnimation(3), 0, 2, DEFAULT_ATTACK_TIME);
 		unitTypeAnimations.addAnimation(attackingRight);
 		
 		// Attacking up animation.
-		animation attackingUp = new animation("attackingUp", typeRef.getUnitTypeSpriteSheet().getAnimation(0), 0, 4, DEFAULT_ATTACK_TIME);
+		animation attackingUp = new animation("attackingUp", typeRef.getUnitTypeSpriteSheet().getAnimation(0), 0, 2, DEFAULT_ATTACK_TIME);
 		unitTypeAnimations.addAnimation(attackingUp);
 		
 		// Attacking right animation.
-		animation attackingDown = new animation("attackingDown", typeRef.getUnitTypeSpriteSheet().getAnimation(2), 0, 4, DEFAULT_ATTACK_TIME);
+		animation attackingDown = new animation("attackingDown", typeRef.getUnitTypeSpriteSheet().getAnimation(2), 0, 2, DEFAULT_ATTACK_TIME);
 		unitTypeAnimations.addAnimation(attackingDown);
 		
 		// Jumping left animation.
@@ -210,13 +210,11 @@ public class spider extends unit {
 		// Set to be attackable.
 		this.setKillable(true);
 		
-		// Set exp given.
-		exp = DEFAULT_EXP_GIVEN;
-		
 		// Wolf damage.
 		setAttackDamage(DEFAULT_ATTACK_DAMAGE);
 		setAttackTime(DEFAULT_ATTACK_TIME);
-		setBaseAttackTime(DEFAULT_BAT);
+		setAttackFrameStart(2);
+		setAttackFrameEnd(2);
 		setAttackWidth(DEFAULT_ATTACK_WIDTH);
 		setAttackLength(DEFAULT_ATTACK_LENGTH);
 		setBackSwing(DEFAULT_BACKSWING);

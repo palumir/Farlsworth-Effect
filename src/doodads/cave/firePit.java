@@ -113,7 +113,7 @@ public class firePit extends chunk {
 	@Override
 	public void update() {
 		doInteractStuff();
-		fireAnimation.playAnimation();
+		if(fireAnimation != null) fireAnimation.playAnimation();
 		playFireSound();
 	}
 	

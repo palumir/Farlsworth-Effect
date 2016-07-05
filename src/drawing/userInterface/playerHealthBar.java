@@ -17,23 +17,20 @@ public class playerHealthBar extends interfaceObject  {
 	////// DEFAULTS /////////
 	/////////////////////////
 	
-	// Background.
-	public static BufferedImage background = spriteSheet.getSpriteFromFilePath("images/interface/healthBar.png");
-	
 	// Width/height.
-	private int DEFAULT_HEALTHBAR_WIDTH = 130;
-	private int DEFAULT_HEALTHBAR_HEIGHT = 15;
+	private int DEFAULT_HEALTHBAR_HEIGHT = 20;
 	
 	// Colors
 	public static Color DEFAULT_HEALTH_COLOR = new Color(6,228,1);
 	public static Color DEFAULT_LOST_HEALTH_COLOR = Color.red;
-	public static Color DEFAULT_BORDER_COLOR = new Color(85,58,30);
+	public static Color DEFAULT_BORDER_COLOR = new Color(45,45,45);
 	public static Color DEFAULT_EXP_COLOR = new Color(239,255,40);
 	public static Color DEFAULT_LOST_EXP_COLOR = new Color(15,15,0);
 	public static Color DEFAULT_LEVEL_COLOR = new Color(64,48,38);
 	public static Color DEFAULT_OUTOF_COLOR = new Color(100,48,38);
 	public static Color DEFAULT_BOTTLE_COLOR = Color.white;
 	public static Color DEFAULT_QUEST_COLOR = Color.white;
+	public static Color DEFAULT_ENERGY_COLOR = Color.cyan;
 	
 	///////////////////////
 	////// FIELDS /////////
@@ -48,6 +45,31 @@ public class playerHealthBar extends interfaceObject  {
 		super(null, newX, newY, 1, 1);	
 	}
 	
+	// Draw a heart.
+	public void drawHeart(Graphics g, int drawAtX, int drawAtY, int drawWidth, int drawHeight) {
+		int triangleXLeft = drawAtX - 2*drawWidth/24;
+		int triangleXRight = drawAtX + drawWidth + 2*drawWidth/20;
+		int[] triangleX = {
+				triangleXLeft,
+				triangleXRight,
+				(triangleXLeft + triangleXRight)/2};
+    	int[] triangleY = { 
+    			drawAtY + drawHeight - 2*drawHeight/3, 
+    			drawAtY + drawHeight - 2*drawHeight/3, 
+    			drawAtY + drawHeight };
+	    g.fillOval(
+	    		drawAtX - drawWidth/12,
+	    		drawAtY, 
+	    		drawWidth/2 + drawWidth/6, 
+	    		drawHeight/2); 
+	    g.fillOval(
+	    		drawAtX + drawWidth/2 - drawWidth/12,
+	    		drawAtY,
+	    		drawWidth/2 + drawWidth/6,
+	    		drawHeight/2);
+	    g.fillPolygon(triangleX, triangleY, triangleX.length);
+	}
+	
 	// Draw the unit. 
 	@Override
 	public void drawObject(Graphics g) {
@@ -56,107 +78,59 @@ public class playerHealthBar extends interfaceObject  {
 		g.setFont(drawnObject.DEFAULT_FONT);
 		
 		// Chunk width
-		int healthChunkSize = 1;
-		int expChunkSize = 1;
-		if(player.getCurrentPlayer()!=null) {
-			healthChunkSize = (int)(((float)player.getCurrentPlayer().getHealthPoints()/(float)player.getCurrentPlayer().getMaxHealthPoints())*DEFAULT_HEALTHBAR_WIDTH);
-			expChunkSize = (int)((float)player.getCurrentPlayer().getExpIntoLevel()/(float)player.expRequiredForLevel()*DEFAULT_HEALTHBAR_WIDTH);
-		}
-
-		// Draw the background.
-		g.drawImage(background, 
-				(int)(gameCanvas.getScaleX()*(getX())), 
-				(int)(gameCanvas.getScaleY()*(getY())), 
-				(int)(gameCanvas.getScaleX()*(background.getWidth())), 
-				(int)(gameCanvas.getScaleY()*(background.getHeight())), 
-				null);
-		
-		// Draw player level.
-		int levelAdjustX = 9;
-		int levelAdjustY = 22;
-		g.setColor(DEFAULT_LEVEL_COLOR);
-		g.drawString("Level", (int)(gameCanvas.getScaleX()*(getX()+16+levelAdjustX))-g.getFontMetrics().stringWidth("Level")/2, 
-				              (int)(gameCanvas.getScaleY()*(getY()+levelAdjustY+1)));
-		
-		String levelText = "" + player.getCurrentPlayer().getPlayerLevel();
-		g.drawString(levelText, (int)(gameCanvas.getScaleX()*(getX()+levelAdjustX + 16)) - g.getFontMetrics().stringWidth(levelText)/2, 
-				(int)(gameCanvas.getScaleY()*(getY()+levelAdjustY+14)));
+		int energyChunkSize = 20;
 		
 		// Adjustment
-		int hpAdjustX = 71;
+		int hpAdjustX = 25;
 		int hpAdjustY = 10;
 		
 		// HP
-		g.setColor(DEFAULT_HEALTH_COLOR);
-		g.drawString("HP", (int)(gameCanvas.getScaleX()*(getX()+55)), (int)(gameCanvas.getScaleY()*(getY() + hpAdjustY+12)));
-		
-		// Draw the red.
 		g.setColor(DEFAULT_LOST_HEALTH_COLOR);
-		g.fillRect((int)(gameCanvas.getScaleX()*(getX() + hpAdjustX)),
-				   (int)(gameCanvas.getScaleY()*(getY() + hpAdjustY)),
-				   (int)(gameCanvas.getScaleX()*(DEFAULT_HEALTHBAR_WIDTH)),
-		           (int)(gameCanvas.getScaleY()*(DEFAULT_HEALTHBAR_HEIGHT)));
-		
-		// Draw the green chunks.
-		g.setColor(DEFAULT_HEALTH_COLOR);
-		g.fillRect((int)(gameCanvas.getScaleX()*(getX()+ hpAdjustX)),
-				   (int)(gameCanvas.getScaleY()*(getY() + hpAdjustY)),
-				   (int)(gameCanvas.getScaleX()*(healthChunkSize)),
-				   (int)(gameCanvas.getScaleY()*(DEFAULT_HEALTHBAR_HEIGHT)));
-		
-		// Draw health number
-		g.setColor(DEFAULT_OUTOF_COLOR);
-		String hpOutOfText = player.getCurrentPlayer().getHealthPoints() + "/" + player.getCurrentPlayer().getMaxHealthPoints(); 
-		g.drawString(hpOutOfText, 
-				(int)(gameCanvas.getScaleX()*(getX() + hpAdjustX  + DEFAULT_HEALTHBAR_WIDTH/2)) - g.getFontMetrics().stringWidth(hpOutOfText)/2, 
-				(int)(gameCanvas.getScaleY()*(getY() + hpAdjustY + 5 + DEFAULT_HEALTHBAR_HEIGHT/2)));
-		
-		// Draw border.
-		g.setColor(DEFAULT_BORDER_COLOR);
-		g.drawRect((int)(gameCanvas.getScaleX()*(getX() + hpAdjustX)),
-				   (int)(gameCanvas.getScaleY()*(getY() + hpAdjustY)),
-				   (int)(gameCanvas.getScaleX()*(DEFAULT_HEALTHBAR_WIDTH)),
-				   (int)(gameCanvas.getScaleY()*(DEFAULT_HEALTHBAR_HEIGHT)));
+		g.drawString("HP", (int)(gameCanvas.getScaleX()*(getX())), (int)(gameCanvas.getScaleY()*(getY() + hpAdjustY+12)));
+
+		// Load every chunk.
+		player currPlayer = player.getCurrentPlayer();
+		int addPerChunk = 0;
+		for(int i = 0; i < currPlayer.getHealthPoints(); i++) {
+			g.setColor(DEFAULT_BORDER_COLOR);
+			drawHeart(g,
+					   (int)(gameCanvas.getScaleX()*(getX() + hpAdjustX + addPerChunk)-1),
+					   (int)(gameCanvas.getScaleY()*(getY() + hpAdjustY)-1),
+					   (int)(gameCanvas.getScaleX()*(energyChunkSize)+2),
+					   (int)(gameCanvas.getScaleY()*(DEFAULT_HEALTHBAR_HEIGHT))+2);
+			
+			g.setColor(DEFAULT_LOST_HEALTH_COLOR);
+			drawHeart(g,
+					   (int)(gameCanvas.getScaleX()*(getX() + hpAdjustX + addPerChunk)),
+					   (int)(gameCanvas.getScaleY()*(getY() + hpAdjustY)),
+					   (int)(gameCanvas.getScaleX()*(energyChunkSize)),
+					   (int)(gameCanvas.getScaleY()*(DEFAULT_HEALTHBAR_HEIGHT)));
+			
+			addPerChunk += energyChunkSize + energyChunkSize/3;
+		}
 		
 		// Adjustment
-		int expAdjustX = 71;
-		int expAdjustY = 28;
+		int energyAdjustX = 25;
+		int energyAdjustY = hpAdjustY + energyChunkSize + energyChunkSize/3;
 		
 		// Exp
-		g.setColor(DEFAULT_EXP_COLOR);
-		g.drawString("EXP", (int)(gameCanvas.getScaleX()*(getX()+48)), (int)(gameCanvas.getScaleY()*(getY() + expAdjustY+12)));
-		
-		// Draw the red.
-		g.setColor(DEFAULT_LOST_EXP_COLOR);
-		g.fillRect((int)(gameCanvas.getScaleX()*(getX() + expAdjustX)),
-				   (int)(gameCanvas.getScaleY()*(getY() + expAdjustY)),
-				   (int)(gameCanvas.getScaleX()*(DEFAULT_HEALTHBAR_WIDTH)),
-				   (int)(gameCanvas.getScaleY()*(DEFAULT_HEALTHBAR_HEIGHT)));
-		
-		// Draw the yellow chunks.
-		g.setColor(DEFAULT_EXP_COLOR);
-		g.fillRect((int)(gameCanvas.getScaleX()*(getX() + expAdjustX)),
-				   (int)(gameCanvas.getScaleY()*(getY() + expAdjustY)),
-				   (int)(gameCanvas.getScaleX()*(expChunkSize)),
-				   (int)(gameCanvas.getScaleY()*(DEFAULT_HEALTHBAR_HEIGHT)));
-		
-		// Draw health number
-		g.setColor(DEFAULT_OUTOF_COLOR);
-		String expOutOfText = player.getCurrentPlayer().getExpIntoLevel() + "/" + player.expRequiredForLevel(); 
-		g.drawString(expOutOfText, 
-						(int)(gameCanvas.getScaleX()*(getX() + expAdjustX + DEFAULT_HEALTHBAR_WIDTH/2)) - g.getFontMetrics().stringWidth(expOutOfText)/2, 
-						(int)(gameCanvas.getScaleY()*(getY() + expAdjustY + 5 + DEFAULT_HEALTHBAR_HEIGHT/2)));
-		
-		// Draw border.
-		g.setColor(DEFAULT_BORDER_COLOR);
-		g.drawRect((int)(gameCanvas.getScaleX()*(getX() + expAdjustX)),
-				   (int)(gameCanvas.getScaleY()*(getY() + expAdjustY)),
-				   (int)(gameCanvas.getScaleX()*(DEFAULT_HEALTHBAR_WIDTH)),
-				   (int)(gameCanvas.getScaleY()*(DEFAULT_HEALTHBAR_HEIGHT)));
-		
+		g.setColor(DEFAULT_ENERGY_COLOR);
+		g.drawString("ENE", (int)(gameCanvas.getScaleX()*(getX())), (int)(gameCanvas.getScaleY()*(getY() + energyAdjustY+12)));
+
+		// Load every chunk.
+		currPlayer = player.getCurrentPlayer();
+		addPerChunk = 0;
+		for(int i = 0; i < currPlayer.getEnergy(); i++) {
+			g.fillRect((int)(gameCanvas.getScaleX()*(getX() + energyAdjustX + addPerChunk)),
+					   (int)(gameCanvas.getScaleY()*(getY() + energyAdjustY)),
+					   (int)(gameCanvas.getScaleX()*(energyChunkSize)),
+					   (int)(gameCanvas.getScaleY()*(DEFAULT_HEALTHBAR_HEIGHT)));
+			addPerChunk += energyChunkSize + energyChunkSize/3;
+		}
+				   
 		// Draw bottle UI.
-		int bottleAdjustX = 10;
-		int bottleAdjustY = 25;
+		int bottleAdjustX = 9;
+		int bottleAdjustY = energyAdjustY + energyChunkSize + energyChunkSize/3;
 		if(player.getCurrentPlayer().getEquippedBottle() != null) {
 			bottleAdjustX += 0;
 			bottleAdjustY += 53-25;
@@ -175,14 +149,14 @@ public class playerHealthBar extends interfaceObject  {
 		}
 		
 		// Draw quest UI
-		int questAdjustX = bottleAdjustX;
-		int questAdjustY = bottleAdjustY + 38;
+		int questAdjustX = gameCanvas.getDefaultWidth() - gameCanvas.getDefaultWidth()/6;
+		int questAdjustY = gameCanvas.getDefaultHeight()/45;
 		
 		g.setColor(DEFAULT_QUEST_COLOR);
 		if(quest.getCurrentQuests()!=null) {
 			for(int i = 0; i < quest.getCurrentQuests().size(); i++) {
 				g.drawString("Quest: " + quest.getCurrentQuests().get(i),
-						(int)(gameCanvas.getScaleX()*(getX() + questAdjustX)),
+						(int)(gameCanvas.getScaleX()*(getX() + questAdjustX - g.getFontMetrics().stringWidth("Quest: " + quest.getCurrentQuests().get(i))/2)),
 						(int)(gameCanvas.getScaleY()*(getY() + questAdjustY + 5)));
 				questAdjustY += 15;
 			}

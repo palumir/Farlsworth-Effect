@@ -119,6 +119,7 @@ public class quest extends text {
 	}
 
 	public boolean isStarted() {
+		if(started == null) return false;
 		return started.isCompleted();
 	}
 

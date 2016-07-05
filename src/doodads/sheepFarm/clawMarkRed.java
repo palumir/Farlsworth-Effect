@@ -19,14 +19,14 @@ import units.unitType;
 import utilities.time;
 import zones.zone;
 
-public class claw extends chunk {
+public class clawMarkRed extends chunk {
 	
 	////////////////
 	/// DEFAULTS ///
 	////////////////
 	
 	// Default name.
-	private static String DEFAULT_CHUNK_NAME = "clawMark";
+	private static String DEFAULT_CHUNK_NAME = "clawMarkRed";
 	
 	// Sprite stuff.
 	private static String DEFAULT_CHUNK_SPRITESHEET = "images/units/bosses/denmother/"+ DEFAULT_CHUNK_NAME + ".png";
@@ -40,13 +40,13 @@ public class claw extends chunk {
 	
 	// Fade the claw in
 	private long clawSpawnStart = 0;
-	private float clawSpawnTime = 0.25f;
+	private float clawSpawnTime = 0.4f;
 	
 	///////////////
 	/// METHODS /// 
 	///////////////
 	// Constructor
-	public claw(int newX, int newY, int i) {
+	public clawMarkRed(int newX, int newY, int i) {
 		super(typeReference, newX, newY, i, 0);
 		
 		// Claw spawned now.

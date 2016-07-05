@@ -27,8 +27,8 @@ public class interactBox extends interfaceObject  {
 	private Color DEFAULT_SELECTED_COLOR = new Color(100,48,38);
 	
 	// Position
-	private static int DEFAULT_X = 27;
-	private static int DEFAULT_Y = 360;
+	private static int DEFAULT_X = (int) (gameCanvas.getDefaultWidth()*0.5f) - background.getWidth()/2;
+	private static int DEFAULT_Y = (int) (gameCanvas.getDefaultHeight()*0.80f) - background.getHeight()/2;
 	
 	// Text font.
 	private static Font DEFAULT_FONT = null;
@@ -306,27 +306,27 @@ public class interactBox extends interfaceObject  {
 		}
 		
 		// Player presses left key.
-		if(k.getKeyCode() == KeyEvent.VK_LEFT || k.getKeyCode() == KeyEvent.VK_A) { 
+		if(k.getKeyCode() == KeyEvent.VK_LEFT) { 
 			moveSelect("left");
 		}
 		
 		// Player presses right key.
-		if(k.getKeyCode() == KeyEvent.VK_RIGHT || k.getKeyCode() == KeyEvent.VK_D) { 
+		if(k.getKeyCode() == KeyEvent.VK_RIGHT) { 
 			moveSelect("right");
 		}
 		
 		// Player presses up key
-		if(k.getKeyCode() == KeyEvent.VK_UP || k.getKeyCode() == KeyEvent.VK_W) { 
+		if(k.getKeyCode() == KeyEvent.VK_UP) { 
 			//moveSelect("up");
 		}
 		
 		// Player presses down key
-		if(k.getKeyCode() == KeyEvent.VK_DOWN || k.getKeyCode() == KeyEvent.VK_S) { 
+		if(k.getKeyCode() == KeyEvent.VK_DOWN) { 
 			//moveSelect("down");
 		}
 		
 		// Player presses e key.
-		if(k.getKeyCode() == KeyEvent.VK_E || k.getKeyCode() == KeyEvent.VK_SPACE || k.getKeyCode() == KeyEvent.VK_ENTER) { 
+		if(k.getKeyCode() == KeyEvent.VK_SPACE || k.getKeyCode() == KeyEvent.VK_ENTER) { 
 			select();
 		}
 	}

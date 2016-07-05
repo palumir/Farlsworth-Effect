@@ -104,10 +104,7 @@ public class webDoor extends unit {
 	
 	// Combat defaults.
 	public void setCombatStuff() {
-		
-		// Set exp given.
-		exp = DEFAULT_EXP_GIVEN;
-		
+	
 		// HP
 		setMaxHealthPoints(DEFAULT_HP);
 		setHealthPoints(DEFAULT_HP);
@@ -116,13 +113,14 @@ public class webDoor extends unit {
 	
 	// Take damage. Ouch!
 	@Override
-	public void hurt(int damage, float crit) {
+	public boolean hurt(int damage, float crit) {
 		if(player.getCurrentPlayer().getEquippedWeapon() != null &&
 				player.getCurrentPlayer().getEquippedWeapon() instanceof torch
 				&& ((torch)player.getCurrentPlayer().getEquippedWeapon()).isLit()) {
 			setKillable(true);
 			damage = damage*3214;
 			((torch)player.getCurrentPlayer().getEquippedWeapon()).unLight();
+			return true;
 		}
 		
 		if(isKillable()) {
@@ -146,6 +144,7 @@ public class webDoor extends unit {
 		effect blood = new bloodSquirt(getX() - bloodSquirt.getDefaultWidth()/2 + topDownWidth/2 + randomX ,
 				   getY() - bloodSquirt.getDefaultHeight()/2 + platformerHeight/2 + randomY);
 		reactToPain();
+		return false;
 	}
 	
 	// React to death.

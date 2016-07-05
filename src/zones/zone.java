@@ -50,7 +50,7 @@ public abstract class zone {
 		
 		// If we are going into the cave for the first time, display tooltip.
 		if(spiderCave.enteredSpiderCaveBefore != null && !spiderCave.enteredSpiderCaveBefore.isCompleted()) {
-			tooltipString t = new tooltipString("In platformer mode, press 'w' or 'up' to jump.");
+			tooltipString t = new tooltipString("In platformer mode, press 'up' to jump.");
 			spiderCave.enteredSpiderCaveBefore.setCompleted(true);
 			saveState.setQuiet(true);
 			saveState.createSaveState();

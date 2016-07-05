@@ -47,7 +47,7 @@ public class poisonSpider extends unit {
 	private int DEFAULT_ATTACK_DAMAGE = 6;
 	private float DEFAULT_BAT = 0.2f;
 	private float DEFAULT_ATTACK_TIME = 0.2f;
-	private float DEFAULT_BACKSWING = 1f;
+	private float DEFAULT_BACKSWING = 1.5f;
 	private int DEFAULT_ATTACK_WIDTH = 300*2;
 	private int DEFAULT_ATTACK_LENGTH = 300;
 	static private float DEFAULT_CRIT_CHANCE = 0f;
@@ -57,7 +57,7 @@ public class poisonSpider extends unit {
 	private int DEFAULT_EXP_GIVEN = 25;
 	
 	// Health.
-	private int DEFAULT_HP = 35;
+	private int DEFAULT_HP = 9;
 	
 	// Event for tooltip
 	private static event projectileToolTipDisplayed;
@@ -100,6 +100,9 @@ public class poisonSpider extends unit {
 	/// FIELDS ///
 	//////////////
 	
+	// Damage
+	public static int DEFAULT_PROJECTILE_DAMAGE = 3;
+	
 	// Aggrod?
 	private boolean aggrod = false;
 	
@@ -139,19 +142,19 @@ public class poisonSpider extends unit {
 		animationPack unitTypeAnimations = new animationPack();
 		
 		// Attacking left animation.
-		animation attackingLeft = new animation("attackingLeft", typeRef.getUnitTypeSpriteSheet().getAnimation(1), 0, 4, DEFAULT_ATTACK_TIME);
+		animation attackingLeft = new animation("attackingLeft", typeRef.getUnitTypeSpriteSheet().getAnimation(1), 0, 3, DEFAULT_ATTACK_TIME);
 		unitTypeAnimations.addAnimation(attackingLeft);
 		
 		// Attacking right animation.
-		animation attackingRight = new animation("attackingRight", typeRef.getUnitTypeSpriteSheet().getAnimation(3), 0, 4, DEFAULT_ATTACK_TIME);
+		animation attackingRight = new animation("attackingRight", typeRef.getUnitTypeSpriteSheet().getAnimation(3), 0, 3, DEFAULT_ATTACK_TIME);
 		unitTypeAnimations.addAnimation(attackingRight);
 		
 		// Attacking up animation.
-		animation attackingUp = new animation("attackingUp", typeRef.getUnitTypeSpriteSheet().getAnimation(0), 0, 4, DEFAULT_ATTACK_TIME);
+		animation attackingUp = new animation("attackingUp", typeRef.getUnitTypeSpriteSheet().getAnimation(0), 0, 3, DEFAULT_ATTACK_TIME);
 		unitTypeAnimations.addAnimation(attackingUp);
 		
 		// Attacking right animation.
-		animation attackingDown = new animation("attackingDown", typeRef.getUnitTypeSpriteSheet().getAnimation(2), 0, 4, DEFAULT_ATTACK_TIME);
+		animation attackingDown = new animation("attackingDown", typeRef.getUnitTypeSpriteSheet().getAnimation(2), 0, 3, DEFAULT_ATTACK_TIME);
 		unitTypeAnimations.addAnimation(attackingDown);
 		
 		// Jumping left animation.
@@ -215,13 +218,11 @@ public class poisonSpider extends unit {
 		// Set to be attackable.
 		this.setKillable(true);
 		
-		// Set exp given.
-		exp = DEFAULT_EXP_GIVEN;
-		
 		// Wolf damage.
 		setAttackDamage(DEFAULT_ATTACK_DAMAGE);
 		setAttackTime(DEFAULT_ATTACK_TIME);
-		setBaseAttackTime(DEFAULT_BAT);
+		setAttackFrameStart(2);
+		setAttackFrameEnd(2);
 		setAttackWidth(DEFAULT_ATTACK_WIDTH);
 		setAttackLength(DEFAULT_ATTACK_LENGTH);
 		setBackSwing(DEFAULT_BACKSWING);
@@ -248,7 +249,8 @@ public class poisonSpider extends unit {
 		// Spawn the poison ball.
 		poisonBall p = new poisonBall(getX()+getWidth()/2,getY()+getHeight()/2,
 				player.getCurrentPlayer().getX()+player.getCurrentPlayer().getWidth()/2,
-				player.getCurrentPlayer().getY()+player.getCurrentPlayer().getHeight()/2);
+				player.getCurrentPlayer().getY()+player.getCurrentPlayer().getHeight()/2,
+				DEFAULT_ATTACK_DAMAGE);
 	}
 	
 	// Start attacking.
@@ -274,7 +276,8 @@ public class poisonSpider extends unit {
 		// Attack if we are attacking.
 		if(isAttacking()) {
 			// Do the attack if our BAT is over.
-			if(time.getTime() - startAttackTime > baseAttackTime*1000) {
+			if(getCurrentAnimation().getCurrentSprite() >= getAttackFrameStart() &&
+					   getCurrentAnimation().getCurrentSprite() <= getAttackFrameEnd()) {
 				shootPoison();
 				attackOver();
 				setAttacking(false);

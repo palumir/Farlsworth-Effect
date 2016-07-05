@@ -1,4 +1,6 @@
 package zones.farmLand;
+import java.util.ArrayList;
+
 import doodads.cave.firePit;
 import doodads.cave.skullSign;
 import doodads.general.invisibleDoodad;
@@ -40,10 +42,10 @@ import units.unit;
 import units.bosses.denmother;
 import units.bosses.farlsworth;
 import units.unitTypes.farmLand.sheepFarm.farmer;
-import units.unitTypes.farmLand.sheepFarm.jumpingWolf;
+import units.unitTypes.farmLand.sheepFarm.redWolf;
 import units.unitTypes.farmLand.sheepFarm.sheep;
-import units.unitTypes.farmLand.sheepFarm.slowWolf;
-import units.unitTypes.farmLand.sheepFarm.wolf;
+import units.unitTypes.farmLand.sheepFarm.blackWolf;
+import units.unitTypes.farmLand.sheepFarm.wolfOld;
 import units.unitTypes.farmLand.spiderCave.poisonSpider;
 import units.unitTypes.farmLand.spiderCave.spider;
 import utilities.intTuple;
@@ -74,7 +76,7 @@ public class sheepFarm extends zone {
 	chunk c;
 	
 	// Zone events.
-	private static event wellTooltipLoaded;
+	public static event wellTooltipLoaded;
 	public static event attackTooltipLoaded;
 	public static event gameSavedForIdiots;
 	public static event gameSavedForIdiots2;
@@ -165,32 +167,48 @@ public class sheepFarm extends zone {
 	}
 	
 	// Spawn wood from x to y. TODO: JUST WORKS FOR VERTICAL
-	public void spawnFence(int x1, int y1, int x2, int y2) {
+	public ArrayList<chunk> spawnFence(ArrayList<chunk> chunkList, int x1, int y1, int x2, int y2) {
+		
+		// Arraylist for return
+		if(chunkList == null) chunkList = new ArrayList<chunk>();
+		
 		// The fence is vertical.
 		if(x2==x1) {
 			int numY = (y2 - y1)/verticalFence.DEFAULT_CHUNK_HEIGHT;
 			for(int j = 0; j < numY; j++) {
 					
 				// Bottom of fence.
-				if(j==numY-1) c = new verticalFence(verticalFence.DEFAULT_CHUNK_WIDTH + x1, j*60 + y1, 1);
+				if(j==numY-1) {
+					c = new verticalFence(verticalFence.DEFAULT_CHUNK_WIDTH + x1, j*60 + y1, 1);
+					chunkList.add(c);
+				}
 					
 				// Anything in between.
-				else c = new verticalFence(verticalFence.DEFAULT_CHUNK_WIDTH + x1, j*60 + y1, 0);
+				else {
+					c = new verticalFence(verticalFence.DEFAULT_CHUNK_WIDTH + x1, j*60 + y1, 0);
+					chunkList.add(c);
+				}
 			}
 		}
 		if(y2==y1) {
 				int numX = (x2 - x1)/(fencePost.DEFAULT_CHUNK_WIDTH + fenceBars.DEFAULT_CHUNK_WIDTH);
 				for(int j = 0; j < numX; j++) {
 					// Far left of fence.
-					if(j==0) c = new fencePost(j*fencePost.DEFAULT_CHUNK_WIDTH + x1, fencePost.DEFAULT_CHUNK_HEIGHT + y1, 0);
+					if(j==0) {
+						c = new fencePost(j*fencePost.DEFAULT_CHUNK_WIDTH + x1, fencePost.DEFAULT_CHUNK_HEIGHT + y1, 0);
+						chunkList.add(c);
+					}
 						
 					// Middle fence
 					else {
 						c = new fenceBars((j-1)*fenceBars.DEFAULT_CHUNK_WIDTH + j*fencePost.DEFAULT_CHUNK_WIDTH + x1,fenceBars.DEFAULT_CHUNK_HEIGHT + y1,0);
+						chunkList.add(c);
 						c = new fencePost(j*fenceBars.DEFAULT_CHUNK_WIDTH + j*fencePost.DEFAULT_CHUNK_WIDTH + x1, fencePost.DEFAULT_CHUNK_HEIGHT + y1, 0);
+						chunkList.add(c);
 					}
 				}
 		}
+		return chunkList;
 	}
 	
 	/////////////////
@@ -258,33 +276,33 @@ public class sheepFarm extends zone {
 		c = new skullSign(-1784,-4000, 0);
 		
 		// Spawn wolf.
-		u = new wolf(-309,-976);
+		u = new wolfOld(-309,-976);
 		u.setFacingDirection("Down");
-		u = new jumpingWolf(-390,-1372);
+		u = new redWolf(-390,-1372);
 		u.setFacingDirection("Left");
-		u = new slowWolf(-819,-1516);
+		u = new blackWolf(-819,-1516);
 		u.setFacingDirection("Right");
-		u = new jumpingWolf(27,-1516);
+		u = new redWolf(27,-1516);
 		u.setFacingDirection("Up");
-		u = new jumpingWolf(711,-1756);
+		u = new redWolf(711,-1756);
 		u.setFacingDirection("Down");
-		u = new slowWolf(588,-1726);
+		u = new blackWolf(588,-1726);
 		u.setFacingDirection("Down");
-		u = new wolf(666,-1180);
+		u = new wolfOld(666,-1180);
 		u.setFacingDirection("Up");
-		u = new jumpingWolf(831,-1204);
+		u = new redWolf(831,-1204);
 		u.setFacingDirection("Up");
-		u = new wolf(1278,-1762);
+		u = new wolfOld(1278,-1762);
 		u.setFacingDirection("Left");
-		u = new slowWolf(1518,-1681);
+		u = new blackWolf(1518,-1681);
 		u.setFacingDirection("Left");
-		u = new jumpingWolf(1785,-2200+200);
+		u = new redWolf(1785,-2200+200);
 		u.setFacingDirection("Down");
-		u = new jumpingWolf(1956,-2362+200);
+		u = new redWolf(1956,-2362+200);
 		u.setFacingDirection("Down");
-		u = new wolf(1839,-2750+200);
+		u = new wolfOld(1839,-2750+200);
 		u.setFacingDirection("Down");
-		u = new jumpingWolf(1959,-2700+200);
+		u = new redWolf(1959,-2700+200);
 		u.setFacingDirection("Down");
 		
 		// After Denmother
@@ -294,7 +312,7 @@ public class sheepFarm extends zone {
 		u = new poisonSpider(-9,-3427);
 		((poisonSpider)u).setWanders(false);
 		u.setFacingDirection("Right");
-		u = new jumpingWolf(3,-3241);
+		u = new redWolf(3,-3241);
 		u.setFacingDirection("Right");
 		u = new poisonSpider(-276,-3427);
 		((poisonSpider)u).setWanders(false);
@@ -304,7 +322,7 @@ public class sheepFarm extends zone {
 		u.setFacingDirection("Up");
 		u = new spider(-693,-3355);
 		u.setFacingDirection("Right");
-		u = new jumpingWolf(-726,-3196);
+		u = new redWolf(-726,-3196);
 		u.setFacingDirection("Right");
 		u = new poisonSpider(-1146,-3223);
 		((poisonSpider)u).setWanders(false);
@@ -312,9 +330,9 @@ public class sheepFarm extends zone {
 		u = new spider(-1287,-2971);
 		((spider)u).setWanders(false);
 		u.setFacingDirection("Right");
-		u = new wolf(-1641,-2725);
+		u = new wolfOld(-1641,-2725);
 		u.setFacingDirection("Up");
-		u = new jumpingWolf(-1572,-2665);
+		u = new redWolf(-1572,-2665);
 		u.setFacingDirection("Up");
 		u = new poisonSpider(-1980,-3274-100);
 		((poisonSpider)u).setWanders(false);
@@ -322,7 +340,7 @@ public class sheepFarm extends zone {
 		u = new poisonSpider(-1980,-3409-100);
 		((poisonSpider)u).setWanders(false);
 		u.setFacingDirection("Right");
-		u = new jumpingWolf(-1749,-3350);
+		u = new redWolf(-1749,-3350);
 		u.setFacingDirection("Down");
 		
 		// Spawn the well.
@@ -3217,11 +3235,12 @@ public class sheepFarm extends zone {
 
 		// Draw field on the left of spawn.
 		int fenceAdjustX = -6;
-		spawnFence(-30+fenceAdjustX,-435,-30+fenceAdjustX,200); // Vertical, right
-		spawnFence(-1050+fenceAdjustX+17,-462,10+fenceAdjustX,-462); // Horizontal, top of field
-		spawnFence(-168+40,17,70,17); // Horizontal, right of bridge.
-		spawnFence(-1050+fenceAdjustX+17,17,-150,17); // Horizontal, left of bridge.
-		spawnFence(-450+fenceAdjustX,-436,-450+fenceAdjustX,200); // Vertical, far left
+		ArrayList<chunk> farlsworthFence = new ArrayList<chunk>();
+		farlsworthFence = spawnFence(farlsworthFence, -30+fenceAdjustX,-435,-30+fenceAdjustX,200); // Vertical, right
+		farlsworthFence = spawnFence(farlsworthFence, -1050+fenceAdjustX+17,-462,10+fenceAdjustX,-462); // Horizontal, top of field
+		farlsworthFence = spawnFence(farlsworthFence, -168+40,17,70,17); // Horizontal, right of bridge.
+		farlsworthFence = spawnFence(farlsworthFence, -1050+fenceAdjustX+17,17,-150,17); // Horizontal, left of bridge.
+		farlsworthFence = spawnFence(farlsworthFence, -450+fenceAdjustX,-436,-450+fenceAdjustX,200); // Vertical, far left
 		u = new sheep(-378,-369);
 		u = new sheep(-150,-372);
 		u = new sheep(-129,-60);
@@ -3250,35 +3269,47 @@ public class sheepFarm extends zone {
 		// Draw the fence gate above the fields.
 		// Fencebars to left of gate.
 		c = new fenceBarsSmall(-21+fenceAdjustX,-436,0);
+		farlsworthFence.add(c);
 		c = new fenceBarsSmall(-18+fenceAdjustX,-436,0);
+		farlsworthFence.add(c);
 		c = new fenceBarsSmall(-15+fenceAdjustX,-436,0);
+		farlsworthFence.add(c);
 		c = new fenceBarsSmall(-15+fenceAdjustX+3,-436,0);
+		farlsworthFence.add(c);
 		
 		// Fencebars to right of gate
 		c = new fenceBarsSmall(32-3,-436,0);
+		farlsworthFence.add(c);
 		c = new fenceBarsSmall(32,-436,0);
+		farlsworthFence.add(c);
 		c = new fenceBarsSmall(35,-436,0);
+		farlsworthFence.add(c);
 		c = new fenceBarsSmall(37,-436,0);
-		forestGate = new horizontalGate("Forest Gate", "Forest Key", -13+fenceAdjustX/2,-434,0);
+		farlsworthFence.add(c);
+		forestGate = new horizontalGate("Forest Gate", "Sheep Key", -13+fenceAdjustX/2,-434,0);
+		farlsworthFence.add(c);
 		
 		///////////////////////////////
 		//// FARLSWORTH'S AREA  ///////
 		///////////////////////////////
-		spawnFence(40,-462,500,-462); // Horizontal, top of field
-		spawnFence(40,17,500,17); // Horizontal, bottom
-		spawnFence(35,-435,35,200); // Vertical, left
-		spawnFence(455,-436,455,300); // Vertical, right
-		spawnFence(40,-43,440,-43); // Bottom middle area.
+		farlsworthFence = spawnFence(farlsworthFence, 40,-462,500,-462); // Horizontal, top of field
+		farlsworthFence = spawnFence(farlsworthFence, 40,17,500,17); // Horizontal, bottom
+		farlsworthFence = spawnFence(farlsworthFence, 35,-435,35,200); // Vertical, left
+		farlsworthFence = spawnFence(farlsworthFence, 455,-436,455,300); // Vertical, right
+		farlsworthFence = spawnFence(farlsworthFence, 40,-43,440,-43); // Bottom middle area.
 		farlsworth sheepBoss = new farlsworth(411,-394);
 		
 		// Left of gate.
 		c = new fenceBarsSmall(409,-17,0); 
+		farlsworthFence.add(c);
 		
 		// Gate.
 		horizontalGate farlsworthGate = new horizontalGate("Sheep Gate", "Sheep Key", 412,-15,0);
+		farlsworthFence.add(farlsworthGate);
 		
 		// Right of gate
 		c = new fenceBarsSmall(457,-17,0); 
+		farlsworthFence.add(c);
 		
 		////////////////////////////
 		//// FARMHOUSE AREA  ///////
@@ -3286,7 +3317,7 @@ public class sheepFarm extends zone {
 		c = new tree(-720,-325,0);
 		c = new farmHouse(-650,-420,0);
 		c = new barn(-950,-420,0);
-		spawnFence(-1038-6,-436,-1038-6,200+50); // Vertical, far left
+		farlsworthFence = spawnFence(farlsworthFence, -1038-6,-436,-1038-6,200+50); // Vertical, far left
 		farmer theFarmer = new farmer(-711,-267);
 		theFarmer.setFacingDirection("Down");
 		c = new tree(-1017, -414, 1);
@@ -3423,9 +3454,11 @@ public class sheepFarm extends zone {
 	// Create zone events.
 	public void loadZoneEvents() {
 		
-		// Load well tooltip event.
+		// Well and attack tooltips.
 		wellTooltipLoaded = new event("sheepFarmWellTooltipLoaded");
 		attackTooltipLoaded = new event("sheepFarmWttackTooltipLoaded");
+		
+		// Load well tooltip event.
 		gameSavedForIdiots = new event("sheepFarmGameSavedForIdiots");
 		gameSavedForIdiots2 = new event("sheepFarmGameSavedForIdiots2");
 	}
@@ -3435,11 +3468,11 @@ public class sheepFarm extends zone {
 		player currPlayer = player.getCurrentPlayer();
 		if(currPlayer != null && currPlayer.isWithin(-849,-1981,-634,-1696) && wellTooltipLoaded != null && !wellTooltipLoaded.isCompleted()) {
 			wellTooltipLoaded.setCompleted(true);
-			tooltipString t = new tooltipString("Use any water source to save and heal, including rivers.");
+			tooltipString t = new tooltipString("Use any water source to save and heal.");
 		}
 		if(currPlayer != null && currPlayer.isWithin(-504,-1117,21,-715) && attackTooltipLoaded != null && !attackTooltipLoaded.isCompleted()) {
 			attackTooltipLoaded.setCompleted(true);
-			tooltipString t = new tooltipString("Press or hold 'space' to attack.");
+			tooltipString t = new tooltipString("Press or hold 'e' to attack.");
 		}
 		if(currPlayer != null && currPlayer.isWithin(-324,-684,69,-456) && gameSavedForIdiots != null && !gameSavedForIdiots.isCompleted()) {
 			gameSavedForIdiots.setCompleted(true);

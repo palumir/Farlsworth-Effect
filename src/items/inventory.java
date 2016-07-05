@@ -33,7 +33,7 @@ public class inventory extends interfaceObject {
 	
 	// Strings.
 	public static String DEFAULT_EMPTY_SLOT = "Empty";
-	public static String DEFAULT_BOTTOM_TEXT = "Press \'e\' to equip";
+	public static String DEFAULT_BOTTOM_TEXT = "Press \'enter\' to equip";
 	
 	// Colors
 	public static Color DEFAULT_SLOT_COLOR = new Color(52,41,36);
@@ -236,27 +236,27 @@ public class inventory extends interfaceObject {
 		}
 		
 		// Player presses left key.
-		if(k.getKeyCode() == KeyEvent.VK_LEFT || k.getKeyCode() == KeyEvent.VK_A) { 
+		if(k.getKeyCode() == KeyEvent.VK_LEFT) { 
 			moveSelect("left");
 		}
 		
 		// Player presses right key.
-		if(k.getKeyCode() == KeyEvent.VK_RIGHT || k.getKeyCode() == KeyEvent.VK_D) { 
+		if(k.getKeyCode() == KeyEvent.VK_RIGHT) { 
 			moveSelect("right");
 		}
 		
 		// Player presses up key
-		if(k.getKeyCode() == KeyEvent.VK_UP || k.getKeyCode() == KeyEvent.VK_W) { 
+		if(k.getKeyCode() == KeyEvent.VK_UP) { 
 			moveSelect("up");
 		}
 		
 		// Player presses down key
-		if(k.getKeyCode() == KeyEvent.VK_DOWN || k.getKeyCode() == KeyEvent.VK_S) { 
+		if(k.getKeyCode() == KeyEvent.VK_DOWN) { 
 			moveSelect("down");
 		}
 		
 		// Player presses e key.
-		if(k.getKeyCode() == KeyEvent.VK_E || k.getKeyCode() == KeyEvent.VK_SPACE) { 
+		if(k.getKeyCode() == KeyEvent.VK_ENTER || k.getKeyCode() == KeyEvent.VK_SPACE) { 
 			equipSelectedItem();
 		}
 	}

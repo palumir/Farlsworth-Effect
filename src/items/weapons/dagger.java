@@ -22,9 +22,10 @@ public class dagger extends weapon {
 	public static String DEFAULT_WEAPON_NAME = "dagger";
 	
 	// Weapon stats.
-	static private int DEFAULT_ATTACK_DAMAGE = 5;
+	static private int DEFAULT_ATTACK_DAMAGE = 3;
 	static private float DEFAULT_BAT = 0.12f;
-	static private float DEFAULT_ATTACK_TIME = 0.30f;
+	static private float DEFAULT_ATTACK_TIME = 0.42f;
+	static private float DEFAULT_BACKSWING = 0.1f;
 	static private int DEFAULT_ATTACK_WIDTH = 50;
 	static private int DEFAULT_ATTACK_LENGTH = 18;
 	static private float DEFAULT_CRIT_CHANCE = .15f;
@@ -71,7 +72,7 @@ public class dagger extends weapon {
 		player currPlayer = player.getCurrentPlayer();
 		if(currPlayer != null) {
 			if(!sheepFarm.attackTooltipLoaded.isCompleted()) sheepFarm.attackTooltipLoaded.setCompleted(true);
-			tooltipString t = new tooltipString("Press or hold 'space' to attack.");
+			tooltipString t = new tooltipString("Press or hold 'e' to attack.");
 		}
 	}
 	
@@ -86,6 +87,7 @@ public class dagger extends weapon {
 		critChance = DEFAULT_CRIT_CHANCE;
 		critDamage = DEFAULT_CRIT_DAMAGE;
 		attackVariability = DEFAULT_VARIABILITY;
+		backSwing = DEFAULT_BACKSWING;
 		setRange("short");
 		setSpeed("fast");
 	}
@@ -105,12 +107,14 @@ public class dagger extends weapon {
 		// level.
 		player.getCurrentPlayer().setAttackDamage(attackDamage);
 		player.getCurrentPlayer().setAttackTime(attackTime);
-		player.getCurrentPlayer().setBaseAttackTime(baseAttackTime);
+		player.getCurrentPlayer().setAttackFrameStart(3);
+		player.getCurrentPlayer().setAttackFrameEnd(5);
 		player.getCurrentPlayer().setAttackWidth(attackWidth);
 		player.getCurrentPlayer().setAttackLength(attackLength);
 		player.getCurrentPlayer().setCritChance(critChance);
 		player.getCurrentPlayer().setCritDamage(critDamage);
 		player.getCurrentPlayer().setAttackVariability(attackVariability);
+		player.getCurrentPlayer().setBackSwing(backSwing);
 		
 		// Deal with animations
 		animationPack unitTypeAnimations = new animationPack();

@@ -43,11 +43,11 @@ public class gameCanvas extends JComponent {
 	private static gameCanvas gameCanvas;
 	
 	// How often we update the animation.
-	private static int maxFPS = 80; 
+	private static int maxFPS = 60; 
 	
 	// Screen information
-	private static int DEFAULT_START_WIDTH = 550;
-	private static int DEFAULT_START_HEIGHT = 550;
+	private static int DEFAULT_START_WIDTH = 650;
+	private static int DEFAULT_START_HEIGHT = 650;
 	private static int defaultWidth;
 	private static int defaultHeight;
 	private static int actualWidth;

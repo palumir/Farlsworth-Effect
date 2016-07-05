@@ -39,7 +39,7 @@ public abstract class effect extends drawnObject  {
 	private boolean collisionOn = false;
 	
 	// Sprite stuff.
-	private animationPack animations;
+	protected animationPack animations;
 	private animation currentAnimation = null;
 	
 	// Animation duration

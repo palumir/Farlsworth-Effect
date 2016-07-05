@@ -7,7 +7,7 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-import doodads.sheepFarm.claw;
+import doodads.sheepFarm.clawMarkRed;
 import drawing.drawnObject;
 import drawing.gameCanvas;
 import drawing.spriteSheet;
@@ -29,9 +29,9 @@ import units.boss;
 import units.player;
 import units.unit;
 import units.unitType;
-import units.unitTypes.farmLand.sheepFarm.jumpingWolf;
-import units.unitTypes.farmLand.sheepFarm.slowWolf;
-import units.unitTypes.farmLand.sheepFarm.wolf;
+import units.unitTypes.farmLand.sheepFarm.redWolf;
+import units.unitTypes.farmLand.sheepFarm.slowWolfOld;
+import units.unitTypes.farmLand.sheepFarm.wolfOld;
 import utilities.stringUtils;
 import utilities.time;
 import utilities.intTuple;
@@ -177,7 +177,7 @@ public class denmother extends boss {
 	private boolean slashing = false;
 	private boolean hasSlashed = false;
 	private float clawAttackEvery = 4f;
-	private int SLASH_DAMAGE = 10;
+	private int SLASH_DAMAGE = 4;
 	
 	// Dog border movement below 50% hp
 	private long lastMove = 0;
@@ -220,7 +220,7 @@ public class denmother extends boss {
 	private boolean movedLeft = false;
 	
 	// List of claws.
-	private ArrayList<claw> claws;
+	private ArrayList<clawMarkRed> claws;
 	private ArrayList<intTuple> clawsMoveToward;
 	
 	// Pack of wolves
@@ -329,13 +329,9 @@ public class denmother extends boss {
 	// Set combat stuff.
 	public void setCombatStuff() {
 		
-		// Exp given.
-		exp = 600;
-		
 		// Wolf damage.
 		setAttackDamage(DEFAULT_ATTACK_DAMAGE);
 		setAttackTime(DEFAULT_ATTACK_TIME);
-		setBaseAttackTime(DEFAULT_BAT);
 		setAttackWidth(DEFAULT_ATTACK_WIDTH);
 		setAttackLength(DEFAULT_ATTACK_LENGTH);
 		
@@ -464,8 +460,6 @@ public class denmother extends boss {
 				effect blood = new critBloodSquirt(getX() - critBloodSquirt.getDefaultWidth()/2 + topDownWidth/2,
 						   getY() - critBloodSquirt.getDefaultHeight()/2);
 				
-				// Give exp.
-				if(player.getCurrentPlayer()!=null) player.getCurrentPlayer().giveExp(exp);
 				
 				// Drop loot.
 				dropLoot();
@@ -728,23 +722,22 @@ public class denmother extends boss {
 				int randomInt = utility.RNG.nextInt(3);
 				unit u;
 				if(randomInt == 1) {
-					u = new wolf(newX, newY);
-					((wolf)u).setDosile(true);
+					u = new wolfOld(newX, newY);
+					((wolfOld)u).setDosile(true);
 				}
 				else if (randomInt == 2){
-					 u = new slowWolf(newX, newY);
-					((slowWolf)u).setDosile(true);
+					 u = new slowWolfOld(newX, newY);
+					((slowWolfOld)u).setDosile(true);
 				}
 				else {
-					u = new jumpingWolf(newX, newY);
-					((jumpingWolf)u).setDosile(true);
+					u = new redWolf(newX, newY);
+					((redWolf)u).setDosile(true);
 				}
 				randomInt = 2 + utility.RNG.nextInt(2);
 				u.setMoveSpeed(randomInt);
 				u.setAttackDamage(3) ;
 				u.setAttackLength(7);
 				u.setAttackWidth(30);
-				u.setBaseAttackTime(0.2f);
 				u.setBackSwing(0f);
 				u.setAttackTime(0.25f);
 				u.setKillable(false);
@@ -972,7 +965,7 @@ public class denmother extends boss {
 	}
 	
 	// Jump
-	public void slashTo(claw c) {
+	public void slashTo(clawMarkRed c) {
 		stopMove("all");
 		sound s = new sound(bark2);
 		s.start();
@@ -1027,7 +1020,7 @@ public class denmother extends boss {
 					}
 					int r = utility.RNG.nextInt(2);
 					clawsMoveToward.add(new intTuple(newX, newY));
-					claws.add(new claw(newX-32, newY-32, r));
+					claws.add(new clawMarkRed(newX-32, newY-32, r));
 					lastClawSpawn = time.getTime();
 					numClaws--;
 			}
@@ -1064,7 +1057,7 @@ public class denmother extends boss {
 	
 	// Spawn claws.
 	public void spawnClaws(int i) {
-		claws = new ArrayList<claw>();
+		claws = new ArrayList<clawMarkRed>();
 		clawsMoveToward = new ArrayList<intTuple>();
 		numClaws = i;
 	}

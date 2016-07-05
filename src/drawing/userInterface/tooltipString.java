@@ -44,8 +44,8 @@ public class tooltipString extends effect {
 	private static Color DEFAULT_COLOR = Color.white;
 	
 	// Default X and Y
-	private static int DEFAULT_X = 275;
-	private static int DEFAULT_Y = 420;
+	private static int DEFAULT_X = (int) (gameCanvas.getDefaultWidth()*0.5f);
+	private static int DEFAULT_Y = (int) (gameCanvas.getDefaultHeight()*0.80f);
 	
 	// Current tooltipstring.
 	private static tooltipString currTooltipString = null;

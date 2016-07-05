@@ -1,8 +1,16 @@
 package units.unitTypes.farmLand.sheepFarm;
 
+import java.awt.AlphaComposite;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import java.util.Random;
 
 import drawing.camera;
+import drawing.drawnObject;
+import drawing.gameCanvas;
 import drawing.animation.animation;
 import effects.effect;
 import effects.effectTypes.bloodSquirt;
@@ -13,11 +21,12 @@ import units.humanType;
 import units.player;
 import units.unit;
 import units.unitType;
+import utilities.intTuple;
 import utilities.time;
 import utilities.utility;
 import zones.zone;
 
-public class wolf extends unit {
+public class wolfOld extends unit {
 	
 	////////////////
 	/// DEFAULTS ///
@@ -38,24 +47,20 @@ public class wolf extends unit {
 	private int DEFAULT_DEAGGRO_RADIUS = 300;
 	
 	// Damage stats
-	private int DEFAULT_ATTACK_DIFFERENTIAL = 10; // the range within the attackrange the unit will attack.
-	private int DEFAULT_ATTACK_DAMAGE = 4;
-	private float DEFAULT_BAT = 0.4f;
-	private float DEFAULT_ATTACK_TIME = 0.5f;
-	private float DEFAULT_BACKSWING = 0.9f;
+	private int DEFAULT_ATTACK_DIFFERENTIAL = 7; // the range within the attackrange the unit will attack.
+	private int DEFAULT_ATTACK_DAMAGE = 1;
+	private float DEFAULT_ATTACK_TIME = 1f;
+	private float DEFAULT_BACKSWING = 0.3f;
 	private int DEFAULT_ATTACK_WIDTH = 30;
 	private int DEFAULT_ATTACK_LENGTH = 15;
 	static private float DEFAULT_CRIT_CHANCE = .15f;
 	static private float DEFAULT_CRIT_DAMAGE = 1.6f;
 	
-	// Default exp given.
-	private int DEFAULT_EXP_GIVEN = 18;
-	
 	// Dosile?
 	private boolean dosile = false;
 	
 	// Health.
-	private int DEFAULT_HP = 15;
+	private int DEFAULT_HP = 10;
 	
 	// Default movespeed.
 	private static int DEFAULT_WOLF_MOVESPEED = 2;
@@ -64,7 +69,7 @@ public class wolf extends unit {
 	private static int DEFAULT_WOLF_JUMPSPEED = 10;
 	
 	// wolf sprite stuff.
-	private static String DEFAULT_WOLF_SPRITESHEET = "images/units/animals/wolf.png";
+	private static String DEFAULT_WOLF_SPRITESHEET = "images/units/animals/yellowWolf.png";
 	
 	// The actual type.
 	private static unitType wolfType =
@@ -85,11 +90,6 @@ public class wolf extends unit {
 	private float randomHowl = 0;
 	private int soundRadius = 1200;
 	
-	// Sound volumes.
-	private static float DEFAULT_HOWL_VOLUME = 0.8f;
-	private static float DEFAULT_GROWL_VOLUME = 0.8f;
-	private static float DEFAULT_BARK_VOLUME = 0.8f;
-	
 	//////////////
 	/// FIELDS ///
 	//////////////
@@ -99,10 +99,9 @@ public class wolf extends unit {
 	/// METHODS ///
 	///////////////
 	// Constructor
-	public wolf(int newX, int newY) {
+	public wolfOld(int newX, int newY) {
 		super(wolfType, newX, newY);
 		
-		//showAttackRange();
 		// Set wolf combat stuff.
 		setCombatStuff();
 		attackSound = wolfAttack;
@@ -139,13 +138,11 @@ public class wolf extends unit {
 		// Set to be attackable.
 		this.setKillable(true);
 		
-		// Set exp given.
-		exp = DEFAULT_EXP_GIVEN;
-		
 		// Wolf damage.
 		setAttackDamage(DEFAULT_ATTACK_DAMAGE);
 		setAttackTime(DEFAULT_ATTACK_TIME);
-		setBaseAttackTime(DEFAULT_BAT);
+		setAttackFrameStart(4);
+		setAttackFrameEnd(4);
 		setAttackWidth(DEFAULT_ATTACK_WIDTH);
 		setAttackLength(DEFAULT_ATTACK_LENGTH);
 		setBackSwing(DEFAULT_BACKSWING);
@@ -235,6 +232,7 @@ public class wolf extends unit {
 			attack();
 		}
 	}
+
 	
 	///////////////////////////
 	/// GETTERS AND SETTERS ///

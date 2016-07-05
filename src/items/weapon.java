@@ -31,6 +31,7 @@ public abstract class weapon extends item {
 	protected int attackWidth = 0;
 	protected int attackLength = 0;
 	protected float critChance = 0;
+	protected float backSwing = 0;
 	protected float critDamage = 0;
 	protected float attackVariability = 0;
 	private String range = "short";

@@ -48,11 +48,13 @@ public abstract class projectile extends effect {
 	public static ArrayList<projectile> allProjectiles = new ArrayList<projectile>();
 
 	// Movespeed
-	protected int DEFAULT_PROJECTILE_MOVESPEED = 5;
+	protected int DEFAULT_PROJECTILE_MOVESPEED = 3;
 	
 	// Effect sound
 	protected static float DEFAULT_VOLUME = 0.8f;
 	protected static int DEFAULT_SOUND_RADIUS = 1000;
+	
+	// Projectile damage.
 	
 	//////////////
 	/// FIELDS ///
@@ -76,11 +78,14 @@ public abstract class projectile extends effect {
 	// Move-speed
 	private int moveSpeed = DEFAULT_PROJECTILE_MOVESPEED;
 	
+	// Damage
+	protected int damage;
+	
 	///////////////
 	/// METHODS ///
 	///////////////
 	// Constructor
-	public projectile(effectType theEffectType, int newX, int newY, int newMoveToX, int newMoveToY) {
+	public projectile(effectType theEffectType, int newX, int newY, int newMoveToX, int newMoveToY, int damage) {
 		super(theEffectType, newX, newY);
 		
 		// Set came from
@@ -90,6 +95,9 @@ public abstract class projectile extends effect {
 		// Set move to
 		moveToX = newMoveToX;
 		moveToY = newMoveToY;
+		
+		// Set damage.
+		this.damage = damage;
 		
 		// Set rise/run
 		setRiseRun();
@@ -263,14 +271,26 @@ public abstract class projectile extends effect {
 			isWithin = currPlayer.isWithinRadius(getX() + getWidth()/2, getY()+getHeight()/2, getWidth()/2);
 		}
 		else {
-			isWithin = unit.getUnitsInBox(getX(), getY(), getX() + getWidth(), getY() + getHeight()) != null;
+			ArrayList<unit> uList = unit.getUnitsInBox(getX(), getY(), getX() + getWidth(), getY() + getHeight());
+			isWithin = (uList != null) && ((uList.contains(currPlayer) && (uList.size() > 1)) || (uList.size() >= 1 && !uList.contains(currPlayer)));
 		}
 				 
 		// If we collide with something, explode it.
 		intTuple tupleXY = chunk.collidesWith(this, getX() + run, getY() + rise);
 		boolean isCollide = tupleXY.x == 1 || tupleXY.y == 1;
 		if(isWithin || isCollide) {
-			explode();
+			if(currPlayer.isWithinRadius(getX() + getWidth()/2, getY()+getHeight()/2, getWidth()/2) &&
+					!isAllied() &&
+					currPlayer.isShielding()) {
+				boolean b = currPlayer.hurt(0, 1);
+				if(!b) sendBack();
+				else {
+					explode();
+				}
+			}
+			else {
+				explode();
+			}
 		}
 		
 		// Run animation.

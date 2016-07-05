@@ -8,6 +8,7 @@ import interactions.interactBox;
 import interactions.textSeries;
 import modes.mode;
 import sounds.sound;
+import terrain.chunk;
 import units.animalType;
 import units.boss;
 import units.player;
@@ -72,10 +73,15 @@ public class farlsworth extends boss {
 	// Interact times.
 	private int interactTimes = 0;
 	private boolean interactMoved = false;
+	private boolean standingInFrontOfFence = false;
+	
+	// Fence attached
+	private static ArrayList<chunk> attachedFence = null;
 	
 	// Events
-	private event farlsworthRan;
-	private event pastDenmother;
+	private static event isFenceAttached;
+	private static event farlsworthRan;
+	private static event pastDenmother;
 	
 	///////////////
 	/// METHODS ///
@@ -125,8 +131,21 @@ public class farlsworth extends boss {
 				s.setEnd();
 			}
 			else {
-				startOfConversation = new textSeries(null, "Bah.");
-				startOfConversation.setEnd();
+				if(standingInFrontOfFence) {
+					startOfConversation = new textSeries(null, "This is pretty awkward ...");
+					s = startOfConversation.addChild(null, "But I was trying to run away.");
+					s = s.addChild(null, "And there appears to be a fence here.");
+					textSeries question = s.addChild(null, "Can you open this for me?");
+					s = question.addChild("Yes", "Thanks ... uh ...");
+					s = s.addChild(null, "Catch me if you can, I guess.");
+					s.setEnd();
+					s = question.addChild("No", "Okay, I guess I'll just stay in the fence then.");
+					s.setEnd();
+				}
+				else {
+					startOfConversation = new textSeries(null, "Bah.");
+					startOfConversation.setEnd();
+				}
 			}
 		}
 		
@@ -169,37 +188,28 @@ public class farlsworth extends boss {
 				p.add(new intTuple(425,-70));
 				p.add(new intTuple(427,5));
 				p.add(new intTuple(-8,-1));
-				p.add(new intTuple(-8,-400));
-				p.add(new intTuple(-8,-499));
-				p.add(new intTuple(-249,-808));
-				p.add(new intTuple(-329,-1036));
-				p.add(new intTuple(-385,-1216));
+				p.add(new intTuple(-8,-420));
 				followPath(p);
 				interactMoved = true;
 				sound s = new sound(bleet);
 				s.setPosition(getX(), getY(), sound.DEFAULT_SOUND_RADIUS);
 				s.start();
+				System.out.println(true);
 			}
 			
-			// Make him open the gate if he's by the gate.
-			if(!sheepFarm.forestGate.isPassable() && Math.abs(4 - getX()) < closeEnough && Math.abs(-389 - getY()) < closeEnough) {
-				sheepFarm.forestGate.forceOpen();
+			// Turn him at the fence.
+			if(!standingInFrontOfFence && interactMoved && p != null && p.size() == 0) {
+				//farlsworthRan.setCompleted(true);
+				standingInFrontOfFence = true;
 			}
 			
-			// Drop a piece of wool.
-			if(Math.abs(-151 - getX()) < closeEnough+40 && Math.abs(-619 - getY()) < closeEnough+40) {
-				woolPiece w = new woolPiece(-151,-619,0);
-			}
-			
-			// Make him teleport to denmother
-			if(p != null && p.size() == 0) {
-				farlsworthRan.setCompleted(true);
+			// Do we attach fence to him?
+			if(!isFenceAttached.isCompleted() && standingInFrontOfFence && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().isEnd() && interactSequence.getTheText().getButtonText()!=null) &&
+					(interactSequence.getTheText().getButtonText().equals("No"))) {
+				isFenceAttached.setCompleted(true);
 				
-				// Spawn him in front of Denmother.
-				setX(1584);
-				setY(-3217);
-				facingDirection = "Right";
 			}
+			
 		}
 		
 		// At denmother
@@ -289,6 +299,7 @@ public class farlsworth extends boss {
 		interactable = true;
 		
 		// Get whether or not he's lost.
+		isFenceAttached = new event("farlsworthFenceAttached");
 		farlsworthRan = new event("farlsworthRan");
 		pastDenmother = new event("farlsworthPastDenmother");
 		

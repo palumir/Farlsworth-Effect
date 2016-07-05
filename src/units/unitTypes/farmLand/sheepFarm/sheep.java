@@ -33,9 +33,6 @@ public class sheep extends unit {
 	// How far do the sheep patrol
 	private static int DEFAULT_PATROL_RADIUS = 100;
 	
-	// Sheep volume.
-	private static float DEFAULT_BLEET_VOLUME = 0.8f;
-	
 	////////////////
 	/// DEFAULTS ///
 	////////////////

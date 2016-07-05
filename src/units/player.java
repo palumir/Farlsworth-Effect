@@ -1,12 +1,14 @@
 package units;
 
 import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 import doodads.sheepFarm.bone;
 import drawing.camera;
 import drawing.drawnObject;
+import drawing.gameCanvas;
 import drawing.animation.animation;
 import drawing.animation.animationPack;
 import drawing.userInterface.playerHealthBar;
@@ -29,6 +31,7 @@ import modes.topDown;
 import sounds.music;
 import sounds.sound;
 import utilities.saveState;
+import utilities.time;
 import utilities.utility;
 import zones.zone;
 
@@ -61,18 +64,21 @@ public class player extends unit {
 	private static int DEFAULT_PLAYER_MOVESPEED = 3;
 	// 3 is default
 	
+	// Default HP
+	private static int DEFAULT_PLAYER_HP = 5;
+	
 	// Default jump speed
 	private static int DEFAULT_PLAYER_JUMPSPEED = 10;
 	
 	// Player sprite stuff.
 	private static String DEFAULT_PLAYER_SPRITESHEET = "images/units/player/" + DEFAULT_PLAYER_GENDER + "/noItems.png";
 	
-	// Combat defaults
-	private static int DEFAULT_BASE_HP = 20;
-	
 	// Default interact range.
 	private static int DEFAULT_INTERACT_RANGE = 20;
 	private static int DEFAULT_INTERACT_WIDTH = 40;
+	
+	// Default shield color
+	private Color DEFAULT_SHIELD_COLOR = Color.blue;
 	
 	///////////////
 	/// GLOBALS ///
@@ -112,32 +118,15 @@ public class player extends unit {
 	private weapon equippedWeapon = null;
 	private bottle equippedBottle = null;
 	
+	// Energy level/shielding
+	private float maxEnergy = 5; 
+	private float energy = 5; 
+	
 	// Holding space to attack?
 	private boolean holdingSpace = false;
-	
-	// Levels
-	private int playerLevel = 1;
-	private int expIntoLevel = 20;
-	
+
 	// Level up sounds
 	private String levelUp = "sounds/effects/player/levelUp.wav";
-	
-	// Exp required
-	public static int expRequiredForLevel() {
-		int i = 0;
-		if(currentPlayer != null) 
-		i = player.getCurrentPlayer().getPlayerLevel() + 1;
-		if(i==2) return 100;
-		if(i==3) return 150;
-		if(i==4) return 250;
-		if(i==5) return 450;
-		if(i==6) return 950;
-		if(i==7) return 1900;
-		if(i==8) return 3000;
-		if(i==9) return 4600;
-		if(i==10) return 10000;
-		else return 25000;
-	}
 	
 	// Player interface
 	private playerHealthBar healthBar = new playerHealthBar(5,5);
@@ -182,6 +171,10 @@ public class player extends unit {
 		// Combat.
 		setKillable(true);
 		
+		// Define HP
+		healthPoints = DEFAULT_PLAYER_HP;
+		maxHealthPoints = DEFAULT_PLAYER_HP;
+		
 		// Set dimensions
 		setHeight(getDefaultHeight());
 		setWidth(getDefaultWidth());
@@ -204,7 +197,27 @@ public class player extends unit {
 	// Player AI controls the interface
 	public void updateUnit() {
 		potentiallyAttack();
-		levelUp();
+		dealWithEnergyStuff();
+	}
+	
+	// Energy
+	public long lastEnergyRefreshTime = 0;
+	public float addOneEnergyEvery = 1f;
+	
+	// Shielding//Energy
+	public void dealWithEnergyStuff() {
+		
+		// Restore energy if not shielding
+		if(!isShielding() && time.getTime() - lastEnergyRefreshTime > addOneEnergyEvery*1000) {
+			lastEnergyRefreshTime = time.getTime();
+			if(getEnergy() >= getMaxEnergy());
+			else setEnergy(getEnergy() + 1);
+		}
+		
+		// If we are shielding, reflect damage etc.
+		if(isShielding()) {
+		}
+		
 	}
 	
 	// Attack?
@@ -226,6 +239,16 @@ public class player extends unit {
 	// Kill player.
 	public void killPlayer() {
 		main.restartGame("Death");
+	}
+	
+	// Shielding
+	public void shield(boolean b) {
+		if(b && !isShielding() && getEnergy() == 0) {
+			// Do nothing
+		}
+		else {
+			setShielding(b);
+		}
 	}
 	
 	// Load player.
@@ -265,8 +288,6 @@ public class player extends unit {
 		zone loadZone = null;
 		int playerX = 0;
 		int playerY = 0;
-		int newPlayerLevel = 1;
-		int newPlayerExpIntoLevel = 0;
 		String newFacingDirection = null;
 		inventory loadedInventory = new inventory(); // empty inventory
 		weapon loadedEquippedWeapon = null;
@@ -278,7 +299,7 @@ public class player extends unit {
 			playerX = loadZone.getDefaultLocation().x;
 			playerY = loadZone.getDefaultLocation().y;
 			newFacingDirection = "Up";
-			tooltipString t = new tooltipString("Use 'wasd' or arrow keys to move.");
+			tooltipString t = new tooltipString("Use the arrow keys to move.");
 		}
 		
 		// If we have the savestate.
@@ -290,8 +311,6 @@ public class player extends unit {
 			loadedInventory = s.getPlayerInventory();
 			loadedEquippedWeapon = s.getEquippedWeapon();
 			loadedEquippedBottle = s.getEquippedBottle();
-			newPlayerLevel = s.getPlayerLevel();
-			newPlayerExpIntoLevel = s.getExpIntoLevel();
 		}
 		
 		// If the zone, z, is given, we should have all of these details.
@@ -313,8 +332,6 @@ public class player extends unit {
 				loadedEquippedWeapon = (weapon) alreadyPlayer.getEquippedWeapon().getItemRef();
 				if(alreadyPlayer.getEquippedBottle() != null)
 				loadedEquippedBottle = (bottle) alreadyPlayer.getEquippedBottle().getItemRef();
-				newPlayerLevel = alreadyPlayer.getPlayerLevel();
-				newPlayerExpIntoLevel = alreadyPlayer.getExpIntoLevel();
 			}
 		}
 		
@@ -324,13 +341,8 @@ public class player extends unit {
 		// Set our fields
 		thePlayer.setFacingDirection(newFacingDirection);
 		thePlayer.setPlayerInventory(loadedInventory);
-		thePlayer.setPlayerLevel(newPlayerLevel);
-		thePlayer.setExpIntoLevel(newPlayerExpIntoLevel);
 		if(loadedEquippedWeapon!=null) loadedEquippedWeapon.equip();
 		if(loadedEquippedBottle!=null) loadedEquippedBottle.equip();
-		
-		// Update our player stats to match our level.
-		thePlayer.updateStats();
 		
 		// Set that we have loaded the player once.
 		playerLoaded = true;
@@ -366,18 +378,23 @@ public class player extends unit {
 		
 		// Respond to other presses (movement)
 		else {
+			// Shield on.
+			if(k.getKeyCode() == KeyEvent.VK_W) {
+				shield(true);
+			}
+			
 			// Player presses left key.
-			if(k.getKeyCode() == KeyEvent.VK_LEFT || k.getKeyCode() == KeyEvent.VK_A) { 
+			if(k.getKeyCode() == KeyEvent.VK_LEFT) { 
 				startMove("left");
 			}
 			
 			// Player presses right key.
-			if(k.getKeyCode() == KeyEvent.VK_RIGHT || k.getKeyCode() == KeyEvent.VK_D) { 
+			if(k.getKeyCode() == KeyEvent.VK_RIGHT) { 
 				startMove("right");
 			}
 			
 			// Player presses up key, presumably to jump!
-			if(k.getKeyCode() == KeyEvent.VK_UP || k.getKeyCode() == KeyEvent.VK_W) { 
+			if(k.getKeyCode() == KeyEvent.VK_UP) { 
 				if(mode.getCurrentMode() == platformer.name) {
 					startMove("up");
 					startJump();
@@ -388,7 +405,7 @@ public class player extends unit {
 			}
 			
 			// Player presses down key
-			if(k.getKeyCode() == KeyEvent.VK_DOWN || k.getKeyCode() == KeyEvent.VK_S) { 
+			if(k.getKeyCode() == KeyEvent.VK_DOWN) { 
 				if(mode.getCurrentMode() == platformer.name) {
 					//crouch(true);
 					startMove("down");
@@ -399,18 +416,18 @@ public class player extends unit {
 			}
 		
 			// Player presses bar key
-			if(k.getKeyCode() == KeyEvent.VK_SPACE) {
+			if(k.getKeyCode() == KeyEvent.VK_E) {
 				startAttack();
 			}
 			
 			// Player presses bar key
-			if(k.getKeyCode() == KeyEvent.VK_Q || k.getKeyCode() == KeyEvent.VK_SHIFT) {
+			if(k.getKeyCode() == KeyEvent.VK_Q) {
 				if(equippedBottle!=null) equippedBottle.useCharge();
 			}
 			
 			
 			// Player presses e key
-			if(k.getKeyCode() == KeyEvent.VK_E || k.getKeyCode() == KeyEvent.VK_ENTER) {
+			if(k.getKeyCode() == KeyEvent.VK_ENTER) {
 				interact();
 			}
 		
@@ -420,47 +437,9 @@ public class player extends unit {
 			if(k.getKeyCode() == KeyEvent.VK_P) {
 				//healthPoints--;
 				saveState.createSaveState();
-				//giveExp(expRequiredForLevel());
 				int random = utility.RNG.nextInt(3);
 				System.out.println("u = new wolf(" + getX() + "," + getY() + ");");
 			}
-		}
-	}
-	
-	// Give exp
-	public void giveExp(int i) {
-		int expToNextLevel = expRequiredForLevel() - expIntoLevel;
-		
-		// If it will level us up.
-		if(i - expToNextLevel > 0) {
-			expIntoLevel = expRequiredForLevel();
-			levelUp();
-			giveExp(i - expToNextLevel);
-		}
-		
-		// Give exp
-		else {
-			expIntoLevel += i;
-		}
-	}
-	
-	// Level up
-	public void levelUp() {
-		
-		// Level up if we have max exp
-		if(expIntoLevel >= expRequiredForLevel()) {
-			// Play sound
-			sound s = new sound(levelUp);
-			s.setVolume(0.8f);
-			s.start();
-			
-			// Play level-up effect
-			floatingString f = new floatingString("+1 Level",playerHealthBar.DEFAULT_EXP_COLOR,getX() + getWidth()/2, getY()+getHeight()/2, 1f, 3f);
-			
-			// Update stats and level.
-			expIntoLevel = 0;
-			playerLevel++;
-			updateStats();
 		}
 	}
 	
@@ -472,18 +451,6 @@ public class player extends unit {
 	// Stop attack.
 	public void stopAttack() {
 		holdingSpace = false;
-	}
-	
-	// Update stats.
-	public void updateStats() {
-		
-		// TODO: Formula for how much their attack increases per level.
-		attackMultiplier = 1f + 3*((float)(playerLevel - 1)/10f);
-		maxHealthPoints = DEFAULT_BASE_HP + (playerLevel - 1)*3;
-		
-		// Update health.
-		healthPoints = maxHealthPoints;
-
 	}
 	
 	// Remove the weapon.
@@ -505,7 +472,8 @@ public class player extends unit {
 		setAttackDamage(DEFAULT_ATTACK_DAMAGE);
 		
 		// Attack time.
-		setBaseAttackTime(DEFAULT_BAT);
+		setAttackFrameStart(3);
+		setAttackFrameEnd(5);
 		setAttackTime(DEFAULT_ATTACK_TIME);
 		
 		// Attack range.
@@ -582,30 +550,37 @@ public class player extends unit {
 	
 	// Responding to key releases.
 	public void keyReleased(KeyEvent k) {
+		
+		// Shield off
+		if(k.getKeyCode() == KeyEvent.VK_W) {
+			shield(false);
+		}
+		
+		
 		// Player releases
-		if(k.getKeyCode() == KeyEvent.VK_LEFT || k.getKeyCode() == KeyEvent.VK_A) { 
+		if(k.getKeyCode() == KeyEvent.VK_LEFT) { 
 			stopMove("left");
 		}
 		
 		// Player presses right key.
-		if(k.getKeyCode() == KeyEvent.VK_RIGHT || k.getKeyCode() == KeyEvent.VK_D) { 
+		if(k.getKeyCode() == KeyEvent.VK_RIGHT) { 
 			stopMove("right");
 		}
 		
 		// Player presses right key.
-		if(k.getKeyCode() == KeyEvent.VK_SPACE) { 
+		if(k.getKeyCode() == KeyEvent.VK_E) { 
 			stopAttack();
 		}
 		
 		// Player presses up key, presumably to jump!
-		if(k.getKeyCode() == KeyEvent.VK_UP || k.getKeyCode() == KeyEvent.VK_W) { 
+		if(k.getKeyCode() == KeyEvent.VK_UP) { 
 			stopJump();
 			stopMove("up");
 			
 		}
 		
 		// Player presses down key
-		if(k.getKeyCode() == KeyEvent.VK_DOWN || k.getKeyCode() == KeyEvent.VK_S) { 
+		if(k.getKeyCode() == KeyEvent.VK_DOWN) { 
 			stopMove("down");
 		}
 	}
@@ -667,6 +642,21 @@ public class player extends unit {
 		if(interactObjects!=null && interactObjects.size() != 0) interactObjects.get(0).interactWith();
 	}
 	
+	// Draw special stuff
+	@Override
+	public void drawUnitSpecialStuff(Graphics g) {
+		
+		// Are we shielding and topDown
+		if(isShielding()) {
+			g.setColor(DEFAULT_SHIELD_COLOR);
+			if(getCurrentAnimation()!=null)
+			g.fillOval(drawX - (int)(gameCanvas.getScaleX()*(- (getCurrentAnimation().getCurrentFrame().getWidth()/2 - getWidth()/2) - getHitBoxAdjustmentX())),
+					   ((drawY + getHitBoxAdjustmentY() + getCurrentAnimation().getCurrentFrame().getHeight()/2 - getHeight()/2) + getHeight() - DEFAULT_PLATFORMER_HEIGHT), 
+					   (int)(gameCanvas.getScaleX()*DEFAULT_PLATFORMER_WIDTH),
+					   (int)(gameCanvas.getScaleY()*DEFAULT_PLATFORMER_HEIGHT));
+		}
+	}
+	
 	// Initiate does nothing.
 	public static void initiate() {
 	}
@@ -722,22 +712,6 @@ public class player extends unit {
 	public void setEquippedBottle(bottle equippedBottle) {
 		this.equippedBottle = equippedBottle;
 	}
-
-	public int getExpIntoLevel() {
-		return expIntoLevel;
-	}
-
-	public void setExpIntoLevel(int expIntoLevel) {
-		this.expIntoLevel = expIntoLevel;
-	}
-
-	public int getPlayerLevel() {
-		return playerLevel;
-	}
-
-	public void setPlayerLevel(int playerLevel) {
-		this.playerLevel = playerLevel;
-	}
 	
 	// Get default width.
 	public static int getDefaultWidth() {
@@ -775,5 +749,21 @@ public class player extends unit {
 
 	public void setHealthBar(playerHealthBar healthBar) {
 		this.healthBar = healthBar;
+	}
+
+	public float getMaxEnergy() {
+		return maxEnergy;
+	}
+
+	public void setMaxEnergy(float maxEnergy) {
+		this.maxEnergy = maxEnergy;
+	}
+
+	public float getEnergy() {
+		return energy;
+	}
+
+	public void setEnergy(float energy) {
+		this.energy = energy;
 	}
 }

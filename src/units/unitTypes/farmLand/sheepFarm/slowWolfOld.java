@@ -17,7 +17,7 @@ import utilities.time;
 import utilities.utility;
 import zones.zone;
 
-public class slowWolf extends unit {
+public class slowWolfOld extends unit {
 	
 	////////////////
 	/// DEFAULTS ///
@@ -42,7 +42,7 @@ public class slowWolf extends unit {
 	
 	// Damage stats
 	private int DEFAULT_ATTACK_DIFFERENTIAL = 11; // the range within the attackrange the unit will attack.
-	private int DEFAULT_ATTACK_DAMAGE = 15;
+	private int DEFAULT_ATTACK_DAMAGE = 5;
 	private float DEFAULT_BAT = 0.4f;
 	private float DEFAULT_ATTACK_TIME = 0.5f;
 	private int DEFAULT_ATTACK_WIDTH = 30;
@@ -52,11 +52,8 @@ public class slowWolf extends unit {
 	private float DEFAULT_ATTACK_VARIABILITY = 0.15f;
 	private float DEFAULT_BACKSWING = 1f;
 	
-	// Default exp given.
-	private int DEFAULT_EXP_GIVEN = 18;
-	
 	// Health.
-	private int DEFAULT_HP = 25;
+	private int DEFAULT_HP = 12;
 	
 	// Default movespeed.
 	private static int DEFAULT_WOLF_MOVESPEED = 1;
@@ -65,7 +62,7 @@ public class slowWolf extends unit {
 	private static int DEFAULT_WOLF_JUMPSPEED = 9;
 	
 	// wolf sprite stuff.
-	private static String DEFAULT_WOLF_SPRITESHEET = "images/units/animals/fastWolf.png";
+	private static String DEFAULT_WOLF_SPRITESHEET = "images/units/animals/blackWolf.png";
 	
 	// The actual type.
 	private static unitType wolfType =
@@ -101,7 +98,7 @@ public class slowWolf extends unit {
 	/// METHODS ///
 	///////////////
 	// Constructor
-	public slowWolf(int newX, int newY) {
+	public slowWolfOld(int newX, int newY) {
 		super(wolfType, newX, newY);
 		
 		//showAttackRange();
@@ -138,8 +135,6 @@ public class slowWolf extends unit {
 	
 	// Combat defaults.
 	public void setCombatStuff() {
-		// Set exp
-		exp = DEFAULT_EXP_GIVEN;
 		
 		// Set to be attackable.
 		this.setKillable(true);
@@ -147,7 +142,8 @@ public class slowWolf extends unit {
 		// Wolf damage.
 		setAttackDamage(DEFAULT_ATTACK_DAMAGE);
 		setAttackTime(DEFAULT_ATTACK_TIME);
-		setBaseAttackTime(DEFAULT_BAT);
+		setAttackFrameStart(3);
+		setAttackFrameEnd(3);
 		setAttackWidth(DEFAULT_ATTACK_WIDTH);
 		setAttackLength(DEFAULT_ATTACK_LENGTH);
 		setCritChance(DEFAULT_CRIT_CHANCE);

@@ -50,18 +50,17 @@ public abstract class drawnObject {
 		    	if(d1 instanceof interfaceObject && !(d2 instanceof interfaceObject)) return 9;
 		    	else if(d2 instanceof interfaceObject && !(d1 instanceof interfaceObject)) return -9;
 		    	else {
-		    	
-			    	// Different comparator for drawing effects over ...
-			    	if(d1 instanceof effect && !(d2 instanceof effect) /*&& d1.getY()+d1.getHeight() <= d2.getY()*/) return 8;
-			    	else if(d2 instanceof effect && !(d1 instanceof effect) /*&& d2.getY()+d2.getHeight() <= d1.getY()*/) return -8;
+			    	if(d1.isBackgroundDoodad() && !d2.isBackgroundDoodad()) return -8;
+			    	else if(!d1.isBackgroundDoodad() && d2.isBackgroundDoodad()) return 8;
 			    	else {
 				    	// Prioritize units walking over chunks
 				    	// and units walking in front of other units.
 				    	if(!(d1 instanceof groundTile) && d2 instanceof groundTile) return 7;
 				    	else if(d1 instanceof groundTile && !(d2 instanceof groundTile)) return -7;
 					    else {	
-					    	if(d1.isBackgroundDoodad() && !d2.isBackgroundDoodad()) return -6;
-					    	else if(!d1.isBackgroundDoodad() && d2.isBackgroundDoodad()) return 6;
+					    	// Different comparator for drawing effects over ...
+					    	if(d1 instanceof effect && !(d2 instanceof effect) /*&& d1.getY()+d1.getHeight() <= d2.getY()*/) return 6;
+					    	else if(d2 instanceof effect && !(d1 instanceof effect) /*&& d2.getY()+d2.getHeight() <= d1.getY()*/) return -6;
 					    	else {
 								int z1;
 								int z2;
@@ -101,19 +100,18 @@ public abstract class drawnObject {
 		    	if(d1 instanceof interfaceObject && !(d2 instanceof interfaceObject)) return 9;
 		    	else if(d2 instanceof interfaceObject && !(d1 instanceof interfaceObject)) return -9;
 		    	else {
-		    	
-			    	// Different comparator for drawing effects over ... (but skip projectiles)
-			    	if(d1 instanceof effect && !(d1 instanceof projectile) && !(d2 instanceof effect) && !(d2 instanceof projectile) /*&& d1.getY()+d1.getHeight() <= d2.getY()*/) return 8;
-			    	else if(d2 instanceof effect  && !(d2 instanceof projectile) && !(d1 instanceof effect) && !(d1 instanceof projectile) /*&& d2.getY()+d2.getHeight() <= d1.getY()*/) return -8;
-			    	
+		    		// Prioritize units walking over chunks
+			    	// and units walking in front of other units.
+			    	if(!(d1 instanceof groundTile) && d2 instanceof groundTile) return 8;
+			    	else if(d1 instanceof groundTile && !(d2 instanceof groundTile)) return -8;
 			    	else {
-				    	// Prioritize units walking over chunks
-				    	// and units walking in front of other units.
-				    	if(!(d1 instanceof groundTile) && d2 instanceof groundTile) return 7;
-				    	else if(d1 instanceof groundTile && !(d2 instanceof groundTile)) return -7;
+				    	if(d1.isBackgroundDoodad() && !d2.isBackgroundDoodad()) return -7;
+				    	else if(!d1.isBackgroundDoodad() && d2.isBackgroundDoodad()) return 7;
 					    else {	
-					    	if(d1.isBackgroundDoodad() && !d2.isBackgroundDoodad()) return -6;
-					    	else if(!d1.isBackgroundDoodad() && d2.isBackgroundDoodad()) return 6;
+					    	// Different comparator for drawing effects over ... (but skip projectiles)
+					    	if(d1 instanceof effect && !(d1 instanceof projectile) && !(d2 instanceof effect) && !(d2 instanceof projectile) /*&& d1.getY()+d1.getHeight() <= d2.getY()*/) return 6;
+					    	else if(d2 instanceof effect  && !(d2 instanceof projectile) && !(d1 instanceof effect) && !(d1 instanceof projectile) /*&& d2.getY()+d2.getHeight() <= d1.getY()*/) return -6;
+					    	
 					    	else {
 						        // Draw units closer to the camera first.
 						    	if(d1.y + d1.getHeight() > d2.y + d2.getHeight()) return 5;
@@ -381,6 +379,14 @@ public abstract class drawnObject {
 			chunk.allChunks.remove((chunk)this);
 			if(!((chunk)this).isPassable()) chunk.impassableChunks.remove((chunk)this);
 		}
+		
+		// Respond to destruction
+		respondToDestroy();
+	}
+	
+	// Respond to destruction
+	public void respondToDestroy() {
+		
 	}
 	
 	// Interact with object. Should be over-ridden.

@@ -1,12 +1,23 @@
 package units.unitTypes.farmLand.sheepFarm;
 
+import java.awt.AlphaComposite;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import java.util.Random;
 
-import doodads.sheepFarm.claw;
+import doodads.sheepFarm.clawMarkBlack;
+import doodads.sheepFarm.clawMarkRed;
 import drawing.camera;
+import drawing.drawnObject;
+import drawing.gameCanvas;
 import drawing.animation.animation;
 import effects.effect;
 import effects.effectTypes.bloodSquirt;
+import effects.effectTypes.darkExplode;
+import effects.effectTypes.poisonExplode;
 import modes.mode;
 import sounds.sound;
 import units.animalType;
@@ -14,18 +25,19 @@ import units.humanType;
 import units.player;
 import units.unit;
 import units.unitType;
+import utilities.intTuple;
 import utilities.time;
 import utilities.utility;
 import zones.zone;
 
-public class jumpingWolf extends unit {
+public class blackWolf extends unit {
 	
 	////////////////
 	/// DEFAULTS ///
 	////////////////
 	
 	// Default name.
-	private static String DEFAULT_WOLF_NAME = "jumpingWolf";
+	private static String DEFAULT_WOLF_NAME = "blackWolf";
 	
 	// Platformer real dimensions
 	public static int DEFAULT_PLATFORMER_HEIGHT = 32;
@@ -37,37 +49,37 @@ public class jumpingWolf extends unit {
 	public static int DEFAULT_TOPDOWN_WIDTH = 30;
 	public static int DEFAULT_TOPDOWN_ADJUSTMENT_Y = 5;
 	
+	// Follow until range
+	static private int followUntilRange = 50;
+	
 	// How close to attack?
-	static private int DEFAULT_ATTACK_RADIUS = 240;
-	static private int DEFAULT_DEAGGRO_RADIUS = 300;
+	static private int DEFAULT_ATTACK_RADIUS = 300;
+	static private int DEFAULT_DEAGGRO_RADIUS = 500;
 	
 	// Damage stats
-	static private int DEFAULT_ATTACK_DIFFERENTIAL = 6; // the range within the attackrange the unit will attack.
-	static private int DEFAULT_ATTACK_DAMAGE = 5;
+	static private int DEFAULT_ATTACK_DIFFERENTIAL = 0; // the range within the attackrange the unit will attack.
+	static private int DEFAULT_ATTACK_DAMAGE = 2;
 	static private float DEFAULT_BAT = 0.30f;
 	static private float DEFAULT_ATTACK_TIME = 2f;
-	static private int DEFAULT_ATTACK_WIDTH = 300;
-	static private int DEFAULT_ATTACK_LENGTH = 300;
+	static private int DEFAULT_ATTACK_WIDTH = 500;
+	static private int DEFAULT_ATTACK_LENGTH = 500;
 	static private float DEFAULT_CRIT_CHANCE = .15f;
 	static private float DEFAULT_CRIT_DAMAGE = 1.6f;
-	
-	// Default exp given.
-	private int DEFAULT_EXP_GIVEN = 18;
 	
 	// Dosile?
 	private boolean dosile = false;
 	
 	// Health.
-	private int DEFAULT_HP = 20;
+	private int DEFAULT_HP = 15;
 	
 	// Default movespeed.
 	private static int DEFAULT_WOLF_MOVESPEED = 2;
 	
 	// Default jump speed
-	private static int DEFAULT_WOLF_JUMPSPEED = 9;
+	private static int DEFAULT_WOLF_JUMPSPEED = 8;
 	
 	// wolf sprite stuff.
-	private static String DEFAULT_WOLF_SPRITESHEET = "images/units/animals/jumpingWolf.png";
+	private static String DEFAULT_WOLF_SPRITESHEET = "images/units/animals/blackWolf.png";
 	
 	// The actual type.
 	private static unitType wolfType =
@@ -98,17 +110,20 @@ public class jumpingWolf extends unit {
 	//////////////
 	private boolean aggrod = false;
 	
+	// Dark attacing
+	private float darkAttackFor = 10f;
+	
 	// Claw attacking?
 	private boolean clawAttacking = false;
 	private boolean hasClawSpawned = false;
 	private boolean slashing = false;
 	private long startOfClawAttack = 0;
-	private float spawnClawPhaseTime = 0.35f;
-	private float clawAttackEvery = 1.2f;
+	private float spawnClawPhaseTime = 0.5f;
+	private float clawAttackEvery = 2f;
 	private long lastClawAttack = 0;
 	
 	// Claw
-	private claw currClaw = null;
+	private clawMarkBlack currClaw = null;
 	private boolean hasStartedJumping = false;
 	
 	// Jumping stuff
@@ -123,7 +138,7 @@ public class jumpingWolf extends unit {
 	/// METHODS ///
 	///////////////
 	// Constructor
-	public jumpingWolf(int newX, int newY) {
+	public blackWolf(int newX, int newY) {
 		super(wolfType, newX, newY);
 		//showAttackRange();
 		// Set wolf combat stuff.
@@ -162,13 +177,11 @@ public class jumpingWolf extends unit {
 		// Set to be attackable.
 		this.setKillable(true);
 		
-		// Set exp given.
-		exp = DEFAULT_EXP_GIVEN;
-		
 		// Wolf damage.
+		setAttackFrameStart(2);
+		setAttackFrameEnd(3);
 		setAttackDamage(DEFAULT_ATTACK_DAMAGE);
 		setAttackTime(DEFAULT_ATTACK_TIME);
-		setBaseAttackTime(DEFAULT_BAT);
 		setAttackWidth(DEFAULT_ATTACK_WIDTH);
 		setAttackLength(DEFAULT_ATTACK_LENGTH);
 		setCritDamage(DEFAULT_CRIT_DAMAGE);
@@ -255,6 +268,11 @@ public class jumpingWolf extends unit {
 					// Don't let him not move at all or leave region.
 					if((run == 0 && rise == 0) || ((Math.abs(jumpingToX - getX()) < 1 && Math.abs(jumpingToY - getY()) < 1))) {
 						if(currClaw != null) {
+							darkExplode b = new darkExplode(currClaw.getX() + currClaw.getWidth()/2 - darkExplode.getDefaultWidth()/2,
+																currClaw.getY() + currClaw.getHeight()/2  - darkExplode.getDefaultHeight()/2,
+																false,
+																1,
+																darkAttackFor);
 							currClaw.destroy();
 						}
 						jumping = false;
@@ -264,7 +282,6 @@ public class jumpingWolf extends unit {
 					
 					// If slashing, hurt the player.
 					if(slashing && !hasSlashed && currPlayer.isWithin(getX(), getY(), getX()+getWidth(), getY() + getHeight())) {
-						currPlayer.hurt(getAttackDamage(), 1f);
 						hasSlashed = true;
 						slashing = false;
 					}
@@ -280,7 +297,7 @@ public class jumpingWolf extends unit {
 	}
 	
 	// Jump
-	public void slashTo(claw c) {
+	public void slashTo(clawMarkBlack c) {
 		stopMove("all");
 		sound s = new sound(bark2);
 		s.setPosition(getX(), getY(), soundRadius);
@@ -310,8 +327,8 @@ public class jumpingWolf extends unit {
 			// Spawn claw phase.
 			if(!hasClawSpawned && time.getTime() - startOfClawAttack < spawnClawPhaseTime*1000) {
 				hasClawSpawned = true;
-				currClaw = new claw(player.getCurrentPlayer().getX()+player.getCurrentPlayer().getWidth()/2-claw.DEFAULT_CHUNK_WIDTH/2, 
-						player.getCurrentPlayer().getY()+player.getCurrentPlayer().getHeight()/2-claw.DEFAULT_CHUNK_HEIGHT/2,0);
+				currClaw = new clawMarkBlack(player.getCurrentPlayer().getX()+player.getCurrentPlayer().getWidth()/2-clawMarkBlack.DEFAULT_CHUNK_WIDTH/2, 
+						player.getCurrentPlayer().getY()+player.getCurrentPlayer().getHeight()/2-clawMarkRed.DEFAULT_CHUNK_HEIGHT/2,0);
 			}
 			
 			
@@ -321,6 +338,10 @@ public class jumpingWolf extends unit {
 				slashTo(currClaw);
 			}
 		}
+	}
+	
+	// Deal with dark attacing
+	public void dealWithDarkAttacking() {
 	}
 	
 	// wolf AI moves wolf around for now.
@@ -336,6 +357,7 @@ public class jumpingWolf extends unit {
 		makeSounds();
 		
 		// Claw attack
+		dealWithDarkAttacking();
 		dealWithClawAttacks();
 		dealWithJumping();
 		
@@ -343,13 +365,11 @@ public class jumpingWolf extends unit {
 		if(!clawAttacking && !isDosile() && howClose < DEFAULT_ATTACK_RADIUS) {
 			
 			// If we're in attack range, attack.
-			if(isInAttackRange(currPlayer, DEFAULT_ATTACK_DIFFERENTIAL)) {
-				if(time.getTime() - lastClawAttack > clawAttackEvery*1000) {
-					clawAttackEvery = 0.8f + 0.1f*(float)utility.RNG.nextInt(3);
+			if(isInAttackRange(currPlayer, DEFAULT_ATTACK_DIFFERENTIAL) && time.getTime() - lastClawAttack > clawAttackEvery*1000) {
+					clawAttackEvery = 3f + 0.1f*(float)utility.RNG.nextInt(5);
 					lastClawAttack = time.getTime();
 					stopMove("all");
 					clawAttack(currPlayer);
-				}
 			}
 			else {
 				if(!aggrod) {
@@ -358,7 +378,10 @@ public class jumpingWolf extends unit {
 					s.start();
 				}
 				aggrod = true;
-				follow(currPlayer);
+				if(howClose > followUntilRange) follow(currPlayer);
+				else {
+					stopMove("all");
+				}
 			}
 		}
 		else if(aggrod && howClose > DEFAULT_DEAGGRO_RADIUS) {
@@ -387,6 +410,11 @@ public class jumpingWolf extends unit {
 			animate("standing" + getFacingDirection());
 		}
 	}
+	
+	@Override
+	public void drawUnitSpecialStuff(Graphics g) {
+	}
+	
 	
 	///////////////////////////
 	/// GETTERS AND SETTERS ///

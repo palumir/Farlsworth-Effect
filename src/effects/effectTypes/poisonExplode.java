@@ -15,6 +15,7 @@ import units.humanType;
 import units.player;
 import units.unit;
 import units.unitType;
+import units.unitTypes.farmLand.spiderCave.poisonSpider;
 import utilities.time;
 import utilities.utility;
 import zones.zone;
@@ -22,7 +23,7 @@ import zones.zone;
 public class poisonExplode extends effect {
 	
 	// Default dimensions.
-	public static int DEFAULT_SPRITE_WIDTH =47;
+	public static int DEFAULT_SPRITE_WIDTH = 47;
 	public static int DEFAULT_SPRITE_HEIGHT = 47;
 	
 	// Platformer real dimensions
@@ -56,7 +57,7 @@ public class poisonExplode extends effect {
 	protected static float DEFAULT_VOLUME = 0.8f;
 	
 	// Damage
-	protected int DEFAULT_DAMAGE = 8;
+	protected int DEFAULT_DAMAGE = 2;
 	
 	// The actual type.
 	private static effectType theEffectType =
@@ -76,16 +77,20 @@ public class poisonExplode extends effect {
 	/// FIELDS ///
 	//////////////
 	private boolean allied = false;
+	private int damage = DEFAULT_DAMAGE;
 	
 	///////////////
 	/// METHODS ///
 	///////////////
 	// Constructor
-	public poisonExplode(int newX, int newY, boolean isAllied) {
+	public poisonExplode(int newX, int newY, boolean isAllied, int damage) {
 		super(theEffectType, newX, newY);
 		
 		// Allied?
 		allied = isAllied;
+		
+		// Damage.
+		this.damage = damage;
 		
 		// Set sound.
 		sound s = new sound(effectSound2);
@@ -110,11 +115,11 @@ public class poisonExplode extends effect {
 				for(int i = 0; i < hurtUnits.size(); i++) {
 					if(hurtUnits.get(i) instanceof player && !allied) {
 						hurtUnits.get(i).knockBack(getX()+getWidth()/2,getY()+getWidth()/2, getWidth()/2, .2f, 5);
-						hurtUnits.get(i).hurt(DEFAULT_DAMAGE, 1f);
+						hurtUnits.get(i).hurt(damage, 1f);
 					}
 					else if(allied) {
 						hurtUnits.get(i).knockBack(getX()+getWidth()/2,getY()+getWidth()/2, getWidth()/2, .2f, 5);
-						hurtUnits.get(i).hurt(DEFAULT_DAMAGE, 1f);
+						hurtUnits.get(i).hurt(damage, 1f);
 					}
 				}
 			}
