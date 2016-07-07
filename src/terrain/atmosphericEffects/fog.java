@@ -49,10 +49,12 @@ public class fog {
 	
 	// Fade to a certain alpha over time.
 	public static void fadeTo(float level, float newTime) {
-		startFade = time.getTime();
-		fadeTime = newTime;
-		if(level < fogLevel) oldLevel = fogLevel;
-		fogLevelMax = level;
+		if(level != fogLevelMax || fadeTime != newTime) {
+			startFade = time.getTime();
+			fadeTime = newTime;
+			if(level < fogLevel) oldLevel = fogLevel;
+			fogLevelMax = level;
+		}
 	}
 
 	public static void initiate() {

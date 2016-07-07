@@ -108,16 +108,10 @@ public abstract class drawnObject {
 				    	if(d1.isBackgroundDoodad() && !d2.isBackgroundDoodad()) return -7;
 				    	else if(!d1.isBackgroundDoodad() && d2.isBackgroundDoodad()) return 7;
 					    else {	
-					    	// Different comparator for drawing effects over ... (but skip projectiles)
-					    	if(d1 instanceof effect && !(d2 instanceof effect) /*&& d1.getY()+d1.getHeight() <= d2.getY()*/) return 6;
-					    	else if(d2 instanceof effect  && !(d1 instanceof effect) /*&& d2.getY()+d2.getHeight() <= d1.getY()*/) return -6;
-					    	
-					    	else {
 						        // Draw units closer to the camera first.
 						    	if(d1.y + d1.getHeight() > d2.y + d2.getHeight()) return 5;
 						    	else if(d1.y + d1.getHeight() < d2.y + d2.getHeight()) return -5;
 						    	else return 0;
-					    	}
 					    }
 			    	}
 		    	}

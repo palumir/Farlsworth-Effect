@@ -52,7 +52,7 @@ public class rockPiece extends projectile {
 	private static float DEFAULT_ANIMATION_DURATION = 10f;
 	
 	// Movespeed
-	public static int DEFAULT_MOVESPEED = 5;
+	public static int DEFAULT_MOVESPEED = 4;
 	
 	// The actual type.
 	private static effectType theEffectType =
@@ -73,6 +73,7 @@ public class rockPiece extends projectile {
 	public rockPiece(int newX, int newY, int newMoveToX, int newMoveToY, int damage) {
 		super(theEffectType, newX, newY, newMoveToX, newMoveToY, damage);
 		setMoveSpeed(DEFAULT_MOVESPEED);
+		collisionOn = false;
 	}
 	
 	///////////////////////////
@@ -89,17 +90,47 @@ public class rockPiece extends projectile {
 		}
 	}
 	
-	public void explode() {
-		ArrayList<unit> hurtUnits = unit.getUnitsInBox(getX(), getY(), getX() + getWidth(), getY() + getHeight());
-		if(hurtUnits!=null)
-		for(int i = 0; i < hurtUnits.size(); i++) {
-			if(hurtUnits.get(i) instanceof player && !allied) {
-				hurtUnits.get(i).hurt(damage, 1f);
-			}
-			else if(allied) {
-				hurtUnits.get(i).hurt(damage, 1f);
+	// Update unit
+	@Override
+	public void update() {
+		
+		// Set floatX and Y
+		floatX += run;
+		floatY += rise;
+		
+		// Set new X and Y.
+		setX((int)floatX);
+		setY((int)floatY);
+		
+		player currPlayer = player.getCurrentPlayer();
+		
+		boolean isWithin;
+		if(!isAllied()) {
+			// If we hit the player, explode it.
+			isWithin = currPlayer.isWithinRadius(getX() + getWidth()/2, getY()+getHeight()/2, getWidth()/2);
+			if(isWithin) { 
+				currPlayer.hurt(0, 1);
+				explode();
 			}
 		}
+		else {
+			ArrayList<unit> uList = unit.getUnitsInBox(getX(), getY(), getX() + getWidth(), getY() + getHeight());
+			isWithin = (uList != null) && ((uList.contains(currPlayer) && (uList.size() > 1)) || (uList.size() >= 1 && !uList.contains(currPlayer)));
+			if(isWithin) {
+				System.out.println("FART");
+				explode();
+			}
+			
+		}
+		
+		// Run animation.
+		if(getCurrentAnimation() != null) getCurrentAnimation().playAnimation();
+		if(time.getTime() - timeStarted >= animationDuration*1000) {
+			explode();
+		}
+	}
+	
+	public void explode() {
 		this.destroy();
 	}
 	

@@ -7,6 +7,7 @@ import java.awt.Graphics2D;
 import java.util.ArrayList;
 
 import doodads.general.questMark;
+import doodads.sheepFarm.clawMarkYellow;
 import drawing.camera;
 import drawing.drawnObject;
 import drawing.gameCanvas;
@@ -55,16 +56,16 @@ public abstract class unit extends drawnObject  {
 	
 	// Fist defaults.
 	protected static int DEFAULT_ATTACK_DAMAGE = 4;
-	static float DEFAULT_ATTACK_TIME = 0.4f;
-	static int DEFAULT_ATTACK_WIDTH = 35;
-	static int DEFAULT_ATTACK_LENGTH = 11;
-	static float DEFAULT_BACKSWING = 0f;
+	protected static float DEFAULT_ATTACK_TIME = 0.4f;
+	protected static int DEFAULT_ATTACK_WIDTH = 35;
+	protected static int DEFAULT_ATTACK_LENGTH = 11;
+	protected static float DEFAULT_BACKSWING = 0f;
 	protected static float DEFAULT_CRIT_CHANCE = 0f;
 	protected float DEFAULT_CRIT_DAMAGE = 1.6f;
 	protected static float DEFAULT_ATTACK_VARIABILITY = 0f; // How much the range of hits is. 5% both ways.
 	
 	// Combat defaults.
-	static private int DEFAULT_HP = 10;
+	protected static int DEFAULT_HP = 10;
 	protected boolean showAttackRange = false;
 	
 	// Default healthbarsize
@@ -243,7 +244,6 @@ public abstract class unit extends drawnObject  {
 	// Update unit
 	@Override
 	public void update() {
-		showUnitPosition();
 		if(getCurrentAnimation() != null) getCurrentAnimation().playAnimation();
 		gravity();
 		jump();
@@ -553,8 +553,8 @@ public abstract class unit extends drawnObject  {
 	public boolean isWithin(int x1, int y1, int x2, int y2) {
 		return getX() < x2 && 
 		 getX() + getWidth() > x1 && 
-		 getY() < y2 && 
-		 getY() + getHeight() > y1;
+		 getY() + getHitBoxAdjustmentY() < y2 && 
+		 getY() + + getHitBoxAdjustmentY() + getHeight() > y1;
 	}
 	
 	// Get whether a unit is within radius
@@ -819,8 +819,12 @@ public abstract class unit extends drawnObject  {
 		
 		// Apply movement debuffs/buffs
 		int buffedMoveSpeed = moveSpeed;
+		ArrayList<Class> appliedEffects = new ArrayList<Class>();
 		for(int i = 0; i < movementBuffs.size(); i++) {
-			buffedMoveSpeed *= movementBuffs.get(i).getMovementPercentage();
+			if(!appliedEffects.contains(movementBuffs.get(i).getClass())) {
+				buffedMoveSpeed *= movementBuffs.get(i).getMovementPercentage();
+				appliedEffects.add(movementBuffs.get(i).getClass());
+			}
 		}
 		
 		// How many frames do we drop speed by -1;

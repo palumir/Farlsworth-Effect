@@ -64,22 +64,31 @@ public abstract class projectile extends effect {
 	protected boolean allied = false;
 	
 	// Projectile rise/run
-	private int rise;
-	private int run;
+	protected float rise;
+	protected float run;
+	protected int intRise;
+	protected int intRun;
 	
 	// Came from
 	private int cameFromX;
 	private int cameFromY;
 	
 	// Travelling to
-	private int moveToX;
-	private int moveToY;
+	protected int moveToX;
+	protected int moveToY;
+	
+	// Float x and Y
+	protected float floatX = 0;
+	protected float floatY = 0;
 	
 	// Move-speed
 	private int moveSpeed = DEFAULT_PROJECTILE_MOVESPEED;
 	
 	// Damage
 	protected int damage;
+	
+	// Collision?
+	protected boolean collisionOn = true;
 	
 	///////////////
 	/// METHODS ///
@@ -91,6 +100,10 @@ public abstract class projectile extends effect {
 		// Set came from
 		cameFromX = newX;
 		cameFromY = newY;
+		
+		// Set floatX and floatY
+		floatX = newX;
+		floatY = newY;
 		
 		// Set move to
 		moveToX = newMoveToX;
@@ -173,95 +186,25 @@ public abstract class projectile extends effect {
 		
 		// Calculate rise values.
 		float floatRise = ((yDistance/distanceXY)*getMoveSpeed());
-		float absFloatRise = Math.abs((float) (Math.round(floatRise * 10d) / 10d));
-		float riseDecimal = absFloatRise - (int)absFloatRise;
-		int i = 0;
-		float wholeRiseNum = 0;
-		while(wholeRiseNum%1 != 0) {
-			wholeRiseNum += riseDecimal;
-			i++;
-		}
-		
-		// Every i we add wholeRiseNum (makes up what we're missing.
-		// But let's see if they have a gcd so we can make it smoother.
-		int gcdRise = mathUtils.gcd(i, (int)wholeRiseNum);
-		if(gcdRise!=0) {
-			wholeRiseNum = wholeRiseNum/gcdRise;
-			i = i/gcdRise;
-		}
-		
-		// Set our values.
-		addRiseEvery = (int) (i/wholeRiseNum);
-		rise = (int)floatRise;
+		rise = floatRise;
 		
 		// Calculate run values.
 		float floatRun = ((xDistance/distanceXY)*getMoveSpeed());
-		float absfloatRun = Math.abs((float) (Math.round(floatRun * 10d) / 10d));
-		float runDecimal = absfloatRun - (int)absfloatRun;
-		i = 0;
-		float wholeRunNum = 0;
-		while(wholeRunNum%1 != 0) {
-			wholeRunNum += runDecimal;
-			i++;
-		}
-		
-		// Every i we add wholeRiseNum (makes up what we're missing.
-		// But let's see if they have a gcd so we can make it smoother.
-		int gcdRun = mathUtils.gcd(i, (int)wholeRunNum);
-		if(gcdRun != 0) {
-			wholeRunNum = wholeRunNum/gcdRun;
-			i = i/gcdRun;
-		}
-		
-		// Set our values.
-		addRunEvery = (int) (i/wholeRunNum);
 		run = (int)floatRun;
 		
 	}
-	
-	// Every rise/run we add.
-	private int addRiseEvery;
-	private int riseCounter = 0;
-	private int addRunEvery;
-	private int runCounter = 0;
 	
 	// Update unit
 	@Override
 	public void update() {
 		
-		// What our rise/run actually will be.
-		int actualRun = run;
-		int actualRise = rise;
-		
-		// Check if we need to add anything to run.
-		if(addRunEvery != 0 && runCounter >= addRunEvery) {
-			runCounter = 0;
-			if(run < 0) {
-				actualRun -= 1;
-			}
-			else {
-				actualRun += 1;
-			}
-		}
-		
-		// Update rise/run counters
-		riseCounter++;
-		runCounter++;
-		
-		// Check if we need to add anything to rise.
-		if(addRiseEvery != 0 && riseCounter >= addRiseEvery) {
-			riseCounter = 0;
-			if(rise < 0) {
-				actualRise -= 1;
-			}
-			else {
-				actualRise += 1;
-			}
-		}
+		// Set floatX and Y
+		floatX += run;
+		floatY += rise;
 		
 		// Set new X and Y.
-		setX(getX() + actualRun);
-		setY(getY() + actualRise);
+		setX((int)floatX);
+		setY((int)floatY);
 		
 		player currPlayer = player.getCurrentPlayer();
 		
@@ -276,8 +219,8 @@ public abstract class projectile extends effect {
 		}
 				 
 		// If we collide with something, explode it.
-		intTuple tupleXY = chunk.collidesWith(this, getX() + run, getY() + rise);
-		boolean isCollide = tupleXY.x == 1 || tupleXY.y == 1;
+		intTuple tupleXY = chunk.collidesWith(this, getX() + (int)run, getY() + (int)rise);
+		boolean isCollide = (tupleXY.x == 1 || tupleXY.y == 1) && collisionOn;
 		if(isWithin || isCollide) {
 			if(currPlayer.isWithinRadius(getX() + getWidth()/2, getY()+getHeight()/2, getWidth()/2) &&
 					!isAllied() &&

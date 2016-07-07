@@ -65,7 +65,7 @@ public class player extends unit {
 	// 3 is default
 	
 	// Default HP
-	private static int DEFAULT_PLAYER_HP = 5;
+	private static int DEFAULT_PLAYER_HP = 6;//6;
 	
 	// Default jump speed
 	private static int DEFAULT_PLAYER_JUMPSPEED = 10;

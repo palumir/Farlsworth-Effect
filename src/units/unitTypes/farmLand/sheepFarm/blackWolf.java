@@ -30,7 +30,7 @@ import utilities.time;
 import utilities.utility;
 import zones.zone;
 
-public class blackWolf extends unit {
+public class blackWolf extends wolf {
 	
 	////////////////
 	/// DEFAULTS ///
@@ -39,100 +39,37 @@ public class blackWolf extends unit {
 	// Default name.
 	private static String DEFAULT_WOLF_NAME = "blackWolf";
 	
-	// Platformer real dimensions
-	public static int DEFAULT_PLATFORMER_HEIGHT = 32;
-	public static int DEFAULT_PLATFORMER_WIDTH = 32;
-	public static int DEFAULT_PLATFORMER_ADJUSTMENT_Y = 0;
-	
-	// TopDown real dimensions
-	public static int DEFAULT_TOPDOWN_HEIGHT = 18;
-	public static int DEFAULT_TOPDOWN_WIDTH = 30;
-	public static int DEFAULT_TOPDOWN_ADJUSTMENT_Y = 5;
-	
-	// Follow until range
-	static private int followUntilRange = 50;
-	
-	// How close to attack?
-	static private int DEFAULT_ATTACK_RADIUS = 300;
-	static private int DEFAULT_DEAGGRO_RADIUS = 500;
-	
-	// Damage stats
-	static private int DEFAULT_ATTACK_DIFFERENTIAL = 0; // the range within the attackrange the unit will attack.
-	static private int DEFAULT_ATTACK_DAMAGE = 2;
-	static private float DEFAULT_BAT = 0.30f;
-	static private float DEFAULT_ATTACK_TIME = 2f;
-	static private int DEFAULT_ATTACK_WIDTH = 500;
-	static private int DEFAULT_ATTACK_LENGTH = 500;
-	static private float DEFAULT_CRIT_CHANCE = .15f;
-	static private float DEFAULT_CRIT_DAMAGE = 1.6f;
-	
-	// Dosile?
-	private boolean dosile = false;
+	// Spawn claw stuff
+	protected float DEFAULT_CLAW_ATTACK_EVERY = 2f;
+	protected float DEFAULT_SPAWN_CLAW_PHASE_TIME = 1f;
 	
 	// Health.
-	private int DEFAULT_HP = 15;
+	private int DEFAULT_HP = 11;
 	
 	// Default movespeed.
 	private static int DEFAULT_WOLF_MOVESPEED = 2;
 	
 	// Default jump speed
-	private static int DEFAULT_WOLF_JUMPSPEED = 8;
+	private static int DEFAULT_WOLF_JUMPSPEED = 9;
 	
 	// wolf sprite stuff.
 	private static String DEFAULT_WOLF_SPRITESHEET = "images/units/animals/blackWolf.png";
 	
 	// The actual type.
 	private static unitType wolfType =
-			new animalType( "jumpingWolf",  // Name of unitType 
+			new animalType( "blackWolf",  // Name of unitType 
 						 DEFAULT_WOLF_SPRITESHEET,
 					     DEFAULT_WOLF_MOVESPEED, // Movespeed
 					     DEFAULT_WOLF_JUMPSPEED // Jump speed
 						);	
 	
-	// Sounds
-	private static String howl = "sounds/effects/animals/wolfHowl.wav";
-	private static String growl = "sounds/effects/animals/wolfGrowl.wav";
-	private static String bark1 = "sounds/effects/animals/wolfBark1.wav";
-	private static String bark2 = "sounds/effects/animals/wolfBark2.wav";
-	private static String wolfAttack = "sounds/effects/player/combat/swingWeapon.wav";
-	private int lastBarkSound = 0;
-	private long lastHowl = 0;
-	private float randomHowl = 0;
-	private int soundRadius = 1200;
-	
-	// Sound volumes.
-	private static float DEFAULT_HOWL_VOLUME = 0.8f;
-	private static float DEFAULT_GROWL_VOLUME = 0.8f;
-	private static float DEFAULT_BARK_VOLUME = 0.8f;
 	
 	//////////////
 	/// FIELDS ///
 	//////////////
-	private boolean aggrod = false;
 	
 	// Dark attacing
 	private float darkAttackFor = 10f;
-	
-	// Claw attacking?
-	private boolean clawAttacking = false;
-	private boolean hasClawSpawned = false;
-	private boolean slashing = false;
-	private long startOfClawAttack = 0;
-	private float spawnClawPhaseTime = 0.5f;
-	private float clawAttackEvery = 2f;
-	private long lastClawAttack = 0;
-	
-	// Claw
-	private clawMarkBlack currClaw = null;
-	private boolean hasStartedJumping = false;
-	
-	// Jumping stuff
-	private int jumpingToX = 0;
-	private int jumpingToY = 0;
-	private boolean hasSlashed = false;
-	private boolean riseRunSet = false;
-	private int rise = 0;
-	private int run = 0;
 	
 	///////////////
 	/// METHODS ///
@@ -140,42 +77,19 @@ public class blackWolf extends unit {
 	// Constructor
 	public blackWolf(int newX, int newY) {
 		super(wolfType, newX, newY);
-		//showAttackRange();
 		// Set wolf combat stuff.
 		setCombatStuff();
-		attackSound = wolfAttack;
-		
-		// Add attack animations.
-		// Attacking left animation.
-		animation slashingLeft = new animation("slashingLeft", wolfType.getUnitTypeSpriteSheet().getAnimation(5), 2, 2, DEFAULT_BAT);
-		getAnimations().addAnimation(slashingLeft);
-		
-		// Attacking left animation.
-		animation slashingRight = new animation("slashingRight", wolfType.getUnitTypeSpriteSheet().getAnimation(6), 2, 2, DEFAULT_BAT);
-		getAnimations().addAnimation(slashingRight);
-		
-		// Attacking left animation.
-		animation attackingLeft = new animation("attackingLeft", wolfType.getUnitTypeSpriteSheet().getAnimation(5), 0, 5, DEFAULT_BAT);
-		getAnimations().addAnimation(attackingLeft);
-		
-		// Attacking left animation.
-		animation attackingRight = new animation("attackingRight", wolfType.getUnitTypeSpriteSheet().getAnimation(6), 0, 5, DEFAULT_BAT);
-		getAnimations().addAnimation(attackingRight);
-		
-		// Set dimensions
-		setHeight(getDefaultHeight());
-		setWidth(getDefaultWidth());
-		platformerHeight = DEFAULT_PLATFORMER_HEIGHT;
-		platformerWidth = DEFAULT_PLATFORMER_WIDTH;
-		topDownHeight = DEFAULT_TOPDOWN_HEIGHT;
-		topDownWidth = DEFAULT_TOPDOWN_WIDTH;
-		setHitBoxAdjustmentY(getDefaultHitBoxAdjustmentY());
 	}
 	
 	// Combat defaults.
+	@Override
 	public void setCombatStuff() {
 		// Set to be attackable.
 		this.setKillable(true);
+		
+		// Claw attack stuff.
+		clawAttackEveryBase = DEFAULT_CLAW_ATTACK_EVERY;
+		spawnClawPhaseTime = DEFAULT_SPAWN_CLAW_PHASE_TIME;
 		
 		// Wolf damage.
 		setAttackFrameStart(2);
@@ -192,228 +106,17 @@ public class blackWolf extends unit {
 		setHealthPoints(DEFAULT_HP);
 		
 	}
-	
-	// React to pain.
-	public void reactToPain() {
-		// Play a bark on pain.
-		sound s = new sound(bark1);
-		s.setPosition(getX(), getY(), soundRadius);
-		s.start();
-	}
-	
-	// Wolf random noises
-	public void makeSounds() {
-		
-			// Create a new random growl interval
-			float newRandomHowlInterval = 10f + utility.RNG.nextInt(10);
-			
-			// Make the wolf howl
-			if(randomHowl == 0f) {
-				randomHowl = newRandomHowlInterval;
-			}
-			if(!dosile && !aggrod && time.getTime() - lastHowl > randomHowl*1000) {
-				
-				// Set the last time they howled
-				lastHowl = time.getTime();
-				randomHowl = newRandomHowlInterval;
-				sound s = new sound(howl);
-				s.setPosition(getX(), getY(), soundRadius);
-				s.start();
-			}
-	}
 
-	// Claw attack.
-	public void clawAttack(unit u) {
-		clawAttacking = true;
-		hasClawSpawned = false;
-		slashing = false;
-		player currPlayer = player.getCurrentPlayer();
-		
-		// Start of claw attack.
-		startOfClawAttack = time.getTime();
-	}
-	
-	// Deal with jumping.
-		public void dealWithJumping() {
-			
-			if(clawAttacking) {
-				// Get current player.
-				player currPlayer = player.getCurrentPlayer();
-				
-				// Reset rise and run if we're close.
-				if(Math.abs(jumpingToX - getX()) < jumpSpeed) {
-					run = 0;
-				}
-				if(Math.abs(jumpingToY - getY()) < jumpSpeed) {
-					rise = 0;
-				}
-				
-				// Jump to the location.
-				if(jumping) {
-					
-					// Set rise/run
-					if(!riseRunSet) {
-						riseRunSet = true;
-						float yDistance = (jumpingToY - getY());
-						float xDistance = (jumpingToX - getX());
-						float distanceXY = (float) Math.sqrt(yDistance * yDistance
-								+ xDistance * xDistance);
-						rise = (int) ((yDistance/distanceXY)*jumpSpeed);
-						run = (int) ((xDistance/distanceXY)*jumpSpeed);
-					}
-					
-					setX(getX() + run);
-					setY(getY() + rise);
-					
-					// Don't let him not move at all or leave region.
-					if((run == 0 && rise == 0) || ((Math.abs(jumpingToX - getX()) < 1 && Math.abs(jumpingToY - getY()) < 1))) {
-						if(currClaw != null) {
-							darkExplode b = new darkExplode(currClaw.getX() + currClaw.getWidth()/2 - darkExplode.getDefaultWidth()/2,
-																currClaw.getY() + currClaw.getHeight()/2  - darkExplode.getDefaultHeight()/2,
-																false,
-																1,
-																darkAttackFor);
-							currClaw.destroy();
-						}
-						jumping = false;
-						clawAttacking = false;
-						hasStartedJumping = false;
-					}
-					
-					// If slashing, hurt the player.
-					if(slashing && !hasSlashed && currPlayer.isWithin(getX(), getY(), getX()+getWidth(), getY() + getHeight())) {
-						hasSlashed = true;
-						slashing = false;
-					}
-				}
-			}
-		}
-		
-
-	// Remove claw.
+	// Claw destroy
 	@Override
-	public void reactToDeath() {
-		if(currClaw != null) currClaw.destroy();
-	}
-	
-	// Jump
-	public void slashTo(clawMarkBlack c) {
-		stopMove("all");
-		sound s = new sound(bark1);
-		s.setPosition(getX(), getY(), soundRadius);
-		s.start();
-		
-		// Set facing direction.
-		if(this.getX() - c.getX() < 0) {
-			setFacingDirection("Right");
-		}
-		else {
-			setFacingDirection("Left");
-		}
-		
-		// Jump there
-		jumpingToX = c.getX() + c.getWidth()/2 - getWidth()/2;
-		jumpingToY = c.getY() + c.getHeight()/2 - getHeight()/2;
-		jumping = true;
-		slashing = true;
-		hasSlashed = false;
-		riseRunSet = false;
-	}
-	
-	// Deal with claw attacks.
-	public void dealWithClawAttacks() {
-		if(clawAttacking) {
-			
-			// Spawn claw phase.
-			if(!hasClawSpawned && time.getTime() - startOfClawAttack < spawnClawPhaseTime*1000) {
-				hasClawSpawned = true;
-				currClaw = new clawMarkBlack(player.getCurrentPlayer().getX()+player.getCurrentPlayer().getWidth()/2-clawMarkBlack.DEFAULT_CHUNK_WIDTH/2, 
-						player.getCurrentPlayer().getY()+player.getCurrentPlayer().getHeight()/2-clawMarkRed.DEFAULT_CHUNK_HEIGHT/2,0);
-			}
-			
-			
-			// Slashing phase.
-			else if(hasClawSpawned && time.getTime() - startOfClawAttack > spawnClawPhaseTime*1000 && !hasStartedJumping) {
-				hasStartedJumping = true;
-				slashTo(currClaw);
-			}
-		}
-	}
-	
-	// Deal with dark attacing
-	public void dealWithDarkAttacking() {
-	}
-	
-	// wolf AI moves wolf around for now.
-	public void updateUnit() {
-		
-		// If player is in radius, follow player, attacking.
-		player currPlayer = player.getCurrentPlayer();
-		int playerX = currPlayer.getX();
-		int playerY = currPlayer.getY();
-		float howClose = (float) Math.sqrt((playerX - getX())*(playerX - getX()) + (playerY - getY())*(playerY - getY()));
-		
-		// Make sounds.
-		makeSounds();
-		
-		// Claw attack
-		dealWithDarkAttacking();
-		dealWithClawAttacks();
-		dealWithJumping();
-		
-		// Attack if we're in radius.
-		if(!clawAttacking && !isDosile() && howClose < DEFAULT_ATTACK_RADIUS) {
-			
-			// If we're in attack range, attack.
-			if(isInAttackRange(currPlayer, DEFAULT_ATTACK_DIFFERENTIAL) && time.getTime() - lastClawAttack > clawAttackEvery*1000) {
-					clawAttackEvery = 3f + 0.1f*(float)utility.RNG.nextInt(5);
-					lastClawAttack = time.getTime();
-					stopMove("all");
-					clawAttack(currPlayer);
-			}
-			else {
-				if(!aggrod) {
-					sound s = new sound(growl);
-					s.setPosition(getX(), getY(), soundRadius);
-					s.start();
-				}
-				aggrod = true;
-				if(howClose > followUntilRange) follow(currPlayer);
-				else {
-					stopMove("all");
-				}
-			}
-		}
-		else if(aggrod && howClose > DEFAULT_DEAGGRO_RADIUS) {
-			stopMove("all");
-		}
-		
-		// Even dosile wolves attack if provoked.
-		if(dosile && isInAttackRange(currPlayer, DEFAULT_ATTACK_DIFFERENTIAL)) {
-			attack();
-		}
-	}
-	
-	// Deal with movement animations.
-	public void dealWithAnimations(int moveX, int moveY) {
-		if(jumping) {
-			animate("slashing" + facingDirection);
-		}
-		else if(isAttacking() && !isAlreadyAttacked()) {
-			// Play animation.
-			animate("attacking" + facingDirection);
-		}
-		else if(isMoving()) {
-			animate("running" + getFacingDirection());
-		}
-		else {
-			animate("standing" + getFacingDirection());
-		}
-	}
-	
-	@Override
-	public void drawUnitSpecialStuff(Graphics g) {
-	}
+	public void clawDestroy() {
+		darkExplode b = new darkExplode(currClaw.getX() + currClaw.getWidth()/2 - darkExplode.getDefaultWidth()/2,
+				currClaw.getY() + currClaw.getHeight()/2  - darkExplode.getDefaultHeight()/2,
+				false,
+				1,
+				darkAttackFor);
+		currClaw.destroy();
+	}		
 	
 	
 	///////////////////////////
@@ -456,5 +159,26 @@ public class blackWolf extends unit {
 
 	public void setDosile(boolean dosile) {
 		this.dosile = dosile;
+	}
+
+	@Override
+	public void chargeUnits() {
+	}
+
+	@Override
+	public void spawnTrail() {	
+	}
+
+	@Override
+	public void jumpingFinished() {
+	}
+
+	@Override
+	public void spawnClaw() {
+		int spawnX = player.getCurrentPlayer().getX()+player.getCurrentPlayer().getWidth()/2;
+		int spawnY = player.getCurrentPlayer().getY()+player.getCurrentPlayer().getHeight()/2;
+		currClaw = new clawMarkBlack(spawnX - clawMarkBlack.DEFAULT_CHUNK_WIDTH/2, 
+									 spawnY - clawMarkBlack.DEFAULT_CHUNK_HEIGHT/2,
+									 0);
 	}
 }

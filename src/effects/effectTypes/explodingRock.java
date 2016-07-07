@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import doodads.sheepFarm.rock;
+import doodads.sheepFarm.sandRock;
 import drawing.camera;
 import drawing.spriteSheet;
 import drawing.animation.animation;
@@ -56,7 +57,8 @@ public class explodingRock extends effect {
 	private static float DEFAULT_ANIMATION_DURATION = 3f; // multiple of 0.25f
 	
 	// Effect sound
-	protected String effectSound2 = "sounds/effects/combat/rockCircleStart.wav";
+	protected String rockSpawn = "sounds/effects/combat/rockSpawn.wav";
+	protected String rockExplode = "sounds/effects/combat/rockExplode.wav";
 	protected static float DEFAULT_VOLUME = 0.8f;
 	
 	// Damage
@@ -92,7 +94,7 @@ public class explodingRock extends effect {
 		this.animationDuration = duration;
 		
 		// Set sound.
-		sound s = new sound(effectSound2);
+		sound s = new sound(rockSpawn);
 		s.setPosition(getX(), getY(), sound.DEFAULT_SOUND_RADIUS);
 		s.start();
 		
@@ -113,7 +115,7 @@ public class explodingRock extends effect {
 		// returnlist
 		ArrayList<chunk> returnList = new ArrayList<chunk>();
 		
-		rock r = new rock(this.getX(), this.getY(), 0);
+		sandRock r = new sandRock(this.getX(), this.getY(), 0);
 		r.setBackgroundDoodad(true);
 		
 		// Check if collides with player.
@@ -133,13 +135,17 @@ public class explodingRock extends effect {
 	@Override
 	public void respondToDestroy() {
 			rock.destroy();
+			// Set sound.
+			sound s = new sound(rockExplode);
+			s.setPosition(getX(), getY(), sound.DEFAULT_SOUND_RADIUS);
+			s.start();
 			makeCircleOfRockPieces();
 	}
 	
 	// Make circle of rock pieces
 	public void makeCircleOfRockPieces() {
 		// How many rock pieces?
-		int n = 6;
+		int n = 12;
 		
 		// Spawn rocks
 		int explodeRadius = 1000;

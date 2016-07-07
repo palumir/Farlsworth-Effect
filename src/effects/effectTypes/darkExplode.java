@@ -54,7 +54,6 @@ public class darkExplode extends effect {
 	
 	// Effect sound
 	protected String effectSound2 = "sounds/effects/combat/darkExplode.wav";
-	protected static float DEFAULT_VOLUME = 0.8f;
 	
 	// Damage
 	protected int DEFAULT_DAMAGE = 1;
@@ -78,7 +77,7 @@ public class darkExplode extends effect {
 	private int damage = DEFAULT_DAMAGE;
 	private boolean playedOnce = false;
 	private long lastHurt = 0;
-	private float hurtEvery = 0.25f;
+	private float hurtEvery = 0.5f;
 	
 	///////////////
 	/// METHODS ///
