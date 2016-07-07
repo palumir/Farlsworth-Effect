@@ -29,9 +29,9 @@ import units.boss;
 import units.player;
 import units.unit;
 import units.unitType;
+import units.unitTypes.farmLand.sheepFarm.blackWolf;
 import units.unitTypes.farmLand.sheepFarm.redWolf;
-import units.unitTypes.farmLand.sheepFarm.slowWolfOld;
-import units.unitTypes.farmLand.sheepFarm.wolfOld;
+import units.unitTypes.farmLand.sheepFarm.yellowWolf;
 import utilities.stringUtils;
 import utilities.time;
 import utilities.intTuple;
@@ -722,12 +722,12 @@ public class denmother extends boss {
 				int randomInt = utility.RNG.nextInt(3);
 				unit u;
 				if(randomInt == 1) {
-					u = new wolfOld(newX, newY);
-					((wolfOld)u).setDosile(true);
+					u = new yellowWolf(newX, newY);
+					((yellowWolf)u).setDosile(true);
 				}
 				else if (randomInt == 2){
-					 u = new slowWolfOld(newX, newY);
-					((slowWolfOld)u).setDosile(true);
+					 u = new blackWolf(newX, newY);
+					((blackWolf)u).setDosile(true);
 				}
 				else {
 					u = new redWolf(newX, newY);

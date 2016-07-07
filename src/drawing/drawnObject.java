@@ -109,8 +109,8 @@ public abstract class drawnObject {
 				    	else if(!d1.isBackgroundDoodad() && d2.isBackgroundDoodad()) return 7;
 					    else {	
 					    	// Different comparator for drawing effects over ... (but skip projectiles)
-					    	if(d1 instanceof effect && !(d1 instanceof projectile) && !(d2 instanceof effect) && !(d2 instanceof projectile) /*&& d1.getY()+d1.getHeight() <= d2.getY()*/) return 6;
-					    	else if(d2 instanceof effect  && !(d2 instanceof projectile) && !(d1 instanceof effect) && !(d1 instanceof projectile) /*&& d2.getY()+d2.getHeight() <= d1.getY()*/) return -6;
+					    	if(d1 instanceof effect && !(d2 instanceof effect) /*&& d1.getY()+d1.getHeight() <= d2.getY()*/) return 6;
+					    	else if(d2 instanceof effect  && !(d1 instanceof effect) /*&& d2.getY()+d2.getHeight() <= d1.getY()*/) return -6;
 					    	
 					    	else {
 						        // Draw units closer to the camera first.

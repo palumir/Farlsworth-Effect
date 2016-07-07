@@ -72,7 +72,7 @@ public class dagger extends weapon {
 		player currPlayer = player.getCurrentPlayer();
 		if(currPlayer != null) {
 			if(!sheepFarm.attackTooltipLoaded.isCompleted()) sheepFarm.attackTooltipLoaded.setCompleted(true);
-			tooltipString t = new tooltipString("Press or hold 'e' to attack.");
+			tooltipString t = new tooltipString("Press or hold 'space' to attack.");
 		}
 	}
 	

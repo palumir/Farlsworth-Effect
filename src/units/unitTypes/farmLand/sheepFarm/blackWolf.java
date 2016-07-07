@@ -299,7 +299,7 @@ public class blackWolf extends unit {
 	// Jump
 	public void slashTo(clawMarkBlack c) {
 		stopMove("all");
-		sound s = new sound(bark2);
+		sound s = new sound(bark1);
 		s.setPosition(getX(), getY(), soundRadius);
 		s.start();
 		

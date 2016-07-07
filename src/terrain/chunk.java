@@ -191,6 +191,27 @@ public class chunk extends drawnObject {
 		}
 	}
 	
+	// Get units in box.
+	public static ArrayList<chunk> getImpassableChunksInBox(int x1, int y1, int x2, int y2) {
+		ArrayList<chunk> returnList = new ArrayList<chunk>();
+		for(int i = 0; i < impassableChunks.size(); i++) {
+			chunk c = impassableChunks.get(i);
+			if(c.isWithin(x1, y1, x2, y2)) {
+				returnList.add(c);
+			}
+		}
+		if(returnList.size()==0) return null;
+		return returnList;
+	}
+	
+	// Check if a chunk is within 
+	public boolean isWithin(int x1, int y1, int x2, int y2) {
+		return getX() < x2 && 
+		 getX() + getWidth() > x1 && 
+		 getY() < y2 && 
+		 getY() + getHeight() > y1;
+	}
+	
 	// Initiate chunks
 	public static void initiate() {
 		allChunks = new ArrayList<chunk>();

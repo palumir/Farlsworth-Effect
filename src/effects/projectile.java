@@ -61,7 +61,7 @@ public abstract class projectile extends effect {
 	//////////////
 	
 	// Enemy or allied projectile
-	private boolean allied = false;
+	protected boolean allied = false;
 	
 	// Projectile rise/run
 	private int rise;

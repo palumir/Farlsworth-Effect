@@ -27,10 +27,20 @@ public abstract class utility {
 	// Update the actual game.
 	// No where else to put this.
 	public static void updateGame() {
+		
+		// Update units.
+		if(unit.getAllUnits() != null) {
+			for(int i = 0; i < unit.getAllUnits().size(); i++) {
+				drawnObject d = unit.getAllUnits().get(i);
+				d.update();
+			}
+		}
+		
+		// Update other drawn objects.
 		if(drawnObject.objects != null) {
 			for(int i = 0; i < drawnObject.objects.size(); i++) {
 				drawnObject d = drawnObject.objects.get(i);
-				d.update();
+				if(!(d instanceof unit)) d.update();
 			}
 		}
 		

@@ -1,7 +1,9 @@
 package units;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.util.ArrayList;
 
 import doodads.general.questMark;
@@ -23,6 +25,7 @@ import sounds.sound;
 import terrain.chunk;
 import terrain.region;
 import units.bosses.denmother;
+import units.unitTypes.farmLand.sheepFarm.yellowWolf;
 import utilities.intTuple;
 import utilities.mathUtils;
 import utilities.time;
@@ -95,6 +98,9 @@ public abstract class unit extends drawnObject  {
 	
 	// Are we stuck in something sticky?
 	private boolean stuck = false;
+	
+	// Check if something is stuck in pathfinding
+	protected boolean pathFindingStuck = false;
 	
 	// Combat
 	// Health points
@@ -169,9 +175,12 @@ public abstract class unit extends drawnObject  {
 	// Collision on or off.
 	private boolean ignoreCollision = false;
 	
+	// Followed unit
+	protected unit followedUnit = null;
+	
 	// Where are we moving to?
-	private int moveToX = 0;
-	private int moveToY = 0;
+	protected int moveToX = 0;
+	protected int moveToY = 0;
 	
 	// Moving to a point?
 	private boolean movingToAPoint = false;
@@ -183,10 +192,14 @@ public abstract class unit extends drawnObject  {
 	protected ArrayList<unit> unitsInAttackRange;
 	
 	// Path to follow
-	private ArrayList<intTuple> path;
+	protected ArrayList<intTuple> path;
 	
 	// Next point.
 	private intTuple currPoint;
+	
+	// Ignore collision start
+	private long ignoreCollisionPeriodStart = 0;
+	private float ignoreCollisionPeriod = 0;
 	
 	// Knockbacks
 	private long knockBackStart = 0;
@@ -195,6 +208,9 @@ public abstract class unit extends drawnObject  {
 	private int knockToY;
 	private int knockSpeed;
 	private float knockTime;
+	
+	// No collision knockback
+	boolean oldCollision = collisionOn;
 	
 	// Shielding?
 	private boolean shielding = false;
@@ -227,6 +243,7 @@ public abstract class unit extends drawnObject  {
 	// Update unit
 	@Override
 	public void update() {
+		showUnitPosition();
 		if(getCurrentAnimation() != null) getCurrentAnimation().playAnimation();
 		gravity();
 		jump();
@@ -300,9 +317,27 @@ public abstract class unit extends drawnObject  {
 	}
 	
 	// Knockback.
+	public void knockBackNoCollision(int knockX, int knockY, int knockRadius, float overTime, int knockSpeed) {
+		if(!gettingKnockedBack) {
+			oldCollision = collisionOn;
+			setCollisionOn(false);
+			setUnitLocked(true);
+			knockBackStart = time.getTime();
+			gettingKnockedBack = true;
+			this.knockTime = overTime;	
+			this.knockSpeed = knockSpeed;
+			
+			// Calculate the new X and Y we need to knock them to, based off radius.
+			double currentDegree = mathUtils.angleBetweenTwoPointsWithFixedPoint(getX()+getWidth()/2, getY() + getHeight()/2, knockX, knockY, knockX, knockY);
+			knockToX = (int) (getX() + (knockSpeed*overTime*1000)*Math.cos(Math.toRadians(currentDegree))); 
+			knockToY = (int) (getY() + (knockSpeed*overTime*1000)*Math.sin(Math.toRadians(currentDegree)));
+		}
+	}
+	
+	// Knockback.
 	public void knockBack(int knockX, int knockY, int knockRadius, float overTime, int knockSpeed) {
 		if(!gettingKnockedBack) {
-			unitLocked = true;
+			setUnitLocked(true);
 			knockBackStart = time.getTime();
 			gettingKnockedBack = true;
 			this.knockTime = overTime;	
@@ -340,8 +375,9 @@ public abstract class unit extends drawnObject  {
 			
 			// If we are done, stop being knocked back.
 			if(time.getTime() - knockBackStart > knockTime*1000) {
+				collisionOn = oldCollision;
 				gettingKnockedBack = false;
-				unitLocked = false;
+				setUnitLocked(false);
 			}
 		}
 		
@@ -677,6 +713,7 @@ public abstract class unit extends drawnObject  {
 	
 	// Follow a unit.
 	public void follow(unit u) {
+		followedUnit = u;
 		moveTowards(u.getX(), u.getY());
 	}
 	
@@ -707,6 +744,25 @@ public abstract class unit extends drawnObject  {
 			if(getY() - moveY < 0 && Math.abs(getY() - moveY) > closeEnough) movingDown = true;
 			if(getY() - moveY > 0 && Math.abs(getY() - moveY) > closeEnough) movingUp = true;
 		}
+	}
+	
+	// Ignore collision
+	public void giveTemporaryIgnoreCollision(float f) {
+		
+		// Start ignoring collison
+		if(ignoreCollisionPeriodStart == 0 && collisionOn) {
+			ignoreCollisionPeriodStart = time.getTime();
+			ignoreCollisionPeriod = f;
+			setCollisionOn(false);
+		}
+		else if(!collisionOn) {
+			if(time.getTime() - ignoreCollisionPeriodStart > ignoreCollisionPeriod*1000) {
+				ignoreCollisionPeriod = 0;
+				ignoreCollisionPeriodStart = 0;
+				setCollisionOn(true);
+			}
+		}
+
 	}
 	
 	// Deal with meta movement. Moving toward a point, following, pathing, etc.
@@ -836,7 +892,7 @@ public abstract class unit extends drawnObject  {
 		movingUp = false;
 		movingDown = false;
 		
-		if(!unitLocked) {
+		if(!isUnitLocked()) {
 			// Move them in said direction.
 			if(direction.equals("upLeft")) {
 				movingLeft = true;
@@ -897,13 +953,23 @@ public abstract class unit extends drawnObject  {
 			int actualMoveY = moveY;
 	
 			if(isCollisionOn()) {
+				
+				// Set to not be stuck.
+				pathFindingStuck = false;
+				
 				// Check if it collides with a chunk in the x or y plane.
 				intTuple xyCollide = chunk.collidesWith(this, getX() + moveX, getY() + moveY);
 				intTuple leftRegion = region.leftRegion(this, getX() + moveX, getY() + moveY);
-				if(!ignoreCollision && (xyCollide.x == 1 || leftRegion.x == 1)) actualMoveX = 0;
+				if(!ignoreCollision && (xyCollide.x == 1 || leftRegion.x == 1)) {
+					pathFindingStuck = true;
+					actualMoveX = 0;
+				}
 				
 				// Lots more to check for platformer mode.
 				if(!ignoreCollision && (xyCollide.y == 1 || leftRegion.y == 1)) {
+					
+					// Yes, we're stuck.
+					pathFindingStuck = true;
 				
 					// If gravity is on
 					if (gravity) { 
@@ -1470,6 +1536,14 @@ public abstract class unit extends drawnObject  {
 
 	public void setMovementBuffs(ArrayList<movementBuff> movementBuffs) {
 		this.movementBuffs = movementBuffs;
+	}
+
+	public boolean isUnitLocked() {
+		return unitLocked;
+	}
+
+	public void setUnitLocked(boolean unitLocked) {
+		this.unitLocked = unitLocked;
 	}
 	
 }

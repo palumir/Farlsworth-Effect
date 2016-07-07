@@ -45,7 +45,7 @@ import units.unitTypes.farmLand.sheepFarm.farmer;
 import units.unitTypes.farmLand.sheepFarm.redWolf;
 import units.unitTypes.farmLand.sheepFarm.sheep;
 import units.unitTypes.farmLand.sheepFarm.blackWolf;
-import units.unitTypes.farmLand.sheepFarm.wolfOld;
+import units.unitTypes.farmLand.sheepFarm.yellowWolf;
 import units.unitTypes.farmLand.spiderCave.poisonSpider;
 import units.unitTypes.farmLand.spiderCave.spider;
 import utilities.intTuple;
@@ -276,7 +276,7 @@ public class sheepFarm extends zone {
 		c = new skullSign(-1784,-4000, 0);
 		
 		// Spawn wolf.
-		u = new wolfOld(-309,-976);
+		u = new yellowWolf(-309,-976);
 		u.setFacingDirection("Down");
 		u = new redWolf(-390,-1372);
 		u.setFacingDirection("Left");
@@ -288,11 +288,11 @@ public class sheepFarm extends zone {
 		u.setFacingDirection("Down");
 		u = new blackWolf(588,-1726);
 		u.setFacingDirection("Down");
-		u = new wolfOld(666,-1180);
+		u = new yellowWolf(666,-1180);
 		u.setFacingDirection("Up");
 		u = new redWolf(831,-1204);
 		u.setFacingDirection("Up");
-		u = new wolfOld(1278,-1762);
+		u = new yellowWolf(1278,-1762);
 		u.setFacingDirection("Left");
 		u = new blackWolf(1518,-1681);
 		u.setFacingDirection("Left");
@@ -300,7 +300,7 @@ public class sheepFarm extends zone {
 		u.setFacingDirection("Down");
 		u = new redWolf(1956,-2362+200);
 		u.setFacingDirection("Down");
-		u = new wolfOld(1839,-2750+200);
+		u = new yellowWolf(1839,-2750+200);
 		u.setFacingDirection("Down");
 		u = new redWolf(1959,-2700+200);
 		u.setFacingDirection("Down");
@@ -330,7 +330,7 @@ public class sheepFarm extends zone {
 		u = new spider(-1287,-2971);
 		((spider)u).setWanders(false);
 		u.setFacingDirection("Right");
-		u = new wolfOld(-1641,-2725);
+		u = new yellowWolf(-1641,-2725);
 		u.setFacingDirection("Up");
 		u = new redWolf(-1572,-2665);
 		u.setFacingDirection("Up");
@@ -3472,7 +3472,7 @@ public class sheepFarm extends zone {
 		}
 		if(currPlayer != null && currPlayer.isWithin(-504,-1117,21,-715) && attackTooltipLoaded != null && !attackTooltipLoaded.isCompleted()) {
 			attackTooltipLoaded.setCompleted(true);
-			tooltipString t = new tooltipString("Press or hold 'e' to attack.");
+			tooltipString t = new tooltipString("Press or hold 'space' to attack.");
 		}
 		if(currPlayer != null && currPlayer.isWithin(-324,-684,69,-456) && gameSavedForIdiots != null && !gameSavedForIdiots.isCompleted()) {
 			gameSavedForIdiots.setCompleted(true);

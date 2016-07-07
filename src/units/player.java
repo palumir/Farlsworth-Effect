@@ -299,7 +299,7 @@ public class player extends unit {
 			playerX = loadZone.getDefaultLocation().x;
 			playerY = loadZone.getDefaultLocation().y;
 			newFacingDirection = "Up";
-			tooltipString t = new tooltipString("Use the arrow keys to move.");
+			tooltipString t = new tooltipString("Use 'wasd' to move.");
 		}
 		
 		// If we have the savestate.
@@ -379,22 +379,22 @@ public class player extends unit {
 		// Respond to other presses (movement)
 		else {
 			// Shield on.
-			if(k.getKeyCode() == KeyEvent.VK_W) {
+			if(k.getKeyCode() == KeyEvent.VK_O) {
 				shield(true);
 			}
 			
 			// Player presses left key.
-			if(k.getKeyCode() == KeyEvent.VK_LEFT) { 
+			if(k.getKeyCode() == KeyEvent.VK_A) { 
 				startMove("left");
 			}
 			
 			// Player presses right key.
-			if(k.getKeyCode() == KeyEvent.VK_RIGHT) { 
+			if(k.getKeyCode() == KeyEvent.VK_D) { 
 				startMove("right");
 			}
 			
 			// Player presses up key, presumably to jump!
-			if(k.getKeyCode() == KeyEvent.VK_UP) { 
+			if(k.getKeyCode() == KeyEvent.VK_W) { 
 				if(mode.getCurrentMode() == platformer.name) {
 					startMove("up");
 					startJump();
@@ -405,7 +405,7 @@ public class player extends unit {
 			}
 			
 			// Player presses down key
-			if(k.getKeyCode() == KeyEvent.VK_DOWN) { 
+			if(k.getKeyCode() == KeyEvent.VK_S) { 
 				if(mode.getCurrentMode() == platformer.name) {
 					//crouch(true);
 					startMove("down");
@@ -416,12 +416,12 @@ public class player extends unit {
 			}
 		
 			// Player presses bar key
-			if(k.getKeyCode() == KeyEvent.VK_E) {
+			if(k.getKeyCode() == KeyEvent.VK_SPACE) {
 				startAttack();
 			}
 			
 			// Player presses bar key
-			if(k.getKeyCode() == KeyEvent.VK_Q) {
+			if(k.getKeyCode() == KeyEvent.VK_P) {
 				if(equippedBottle!=null) equippedBottle.useCharge();
 			}
 			
@@ -434,12 +434,49 @@ public class player extends unit {
 			//////////////////////////////////////////
 			// TODO: CHEAT BUTTON
 			//////////////////////////////////////
-			if(k.getKeyCode() == KeyEvent.VK_P) {
+			if(k.getKeyCode() == KeyEvent.VK_Y) {
 				//healthPoints--;
 				saveState.createSaveState();
 				int random = utility.RNG.nextInt(3);
 				System.out.println("u = new wolf(" + getX() + "," + getY() + ");");
 			}
+		}
+	}
+	
+	// Responding to key releases.
+	public void keyReleased(KeyEvent k) {
+		
+		// Shield off
+		if(k.getKeyCode() == KeyEvent.VK_O) {
+			shield(false);
+		}
+		
+		
+		// Player releases
+		if(k.getKeyCode() == KeyEvent.VK_A) { 
+			stopMove("left");
+		}
+		
+		// Player presses right key.
+		if(k.getKeyCode() == KeyEvent.VK_D) { 
+			stopMove("right");
+		}
+		
+		// Player presses right key.
+		if(k.getKeyCode() == KeyEvent.VK_SPACE) { 
+			stopAttack();
+		}
+		
+		// Player presses up key, presumably to jump!
+		if(k.getKeyCode() == KeyEvent.VK_W) { 
+			stopJump();
+			stopMove("up");
+			
+		}
+		
+		// Player presses down key
+		if(k.getKeyCode() == KeyEvent.VK_S) { 
+			stopMove("down");
 		}
 	}
 	
@@ -546,43 +583,6 @@ public class player extends unit {
 		
 		// Set animations.
 		setAnimations(unitTypeAnimations);
-	}
-	
-	// Responding to key releases.
-	public void keyReleased(KeyEvent k) {
-		
-		// Shield off
-		if(k.getKeyCode() == KeyEvent.VK_W) {
-			shield(false);
-		}
-		
-		
-		// Player releases
-		if(k.getKeyCode() == KeyEvent.VK_LEFT) { 
-			stopMove("left");
-		}
-		
-		// Player presses right key.
-		if(k.getKeyCode() == KeyEvent.VK_RIGHT) { 
-			stopMove("right");
-		}
-		
-		// Player presses right key.
-		if(k.getKeyCode() == KeyEvent.VK_E) { 
-			stopAttack();
-		}
-		
-		// Player presses up key, presumably to jump!
-		if(k.getKeyCode() == KeyEvent.VK_UP) { 
-			stopJump();
-			stopMove("up");
-			
-		}
-		
-		// Player presses down key
-		if(k.getKeyCode() == KeyEvent.VK_DOWN) { 
-			stopMove("down");
-		}
 	}
 	
 	// Interact in front of the player.
