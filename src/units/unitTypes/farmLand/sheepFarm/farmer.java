@@ -9,7 +9,7 @@ import effects.effectTypes.bloodSquirt;
 import interactions.interactBox;
 import interactions.quest;
 import interactions.textSeries;
-import items.keys.sheepKey;
+import items.keys.farmKey;
 import modes.mode;
 import units.humanType;
 import units.player;
@@ -74,7 +74,7 @@ public class farmer extends unit {
 		super(farmerType, newX, newY);
 		
 		// Interactable.
-		interactable = true;
+		setInteractable(true);
 		
 		// Make adjustments on hitbox if we're in topDown.
 		// Set dimensions
@@ -120,32 +120,32 @@ public class farmer extends unit {
 		s = s.addChild(null, "Can you collect his wool for me?");
 		
 		// Saying yes.
-		textSeries yes = s.addChild("Yes.","Great. Good luck!");
+		textSeries yes = s.addChild("\"Yes\"","Great. Good luck!");
 		
 		// Saying no to path 1.
-		textSeries noHelp = s.addChild("No.","Please?");
+		textSeries noHelp = s.addChild("\"No\"","Please?");
 		
 		// Keep saying no like an asshole.
 		noHelp.addChild(yes);
-		s = noHelp.addChild("No.","I'll make it worth your while.");
+		s = noHelp.addChild("\"No\"","I'll make it worth your while.");
 		s.addChild(yes);
-		s = s.addChild("No.","Come on ... ");
+		s = s.addChild("\"No\"","Come on ... ");
 		s.addChild(yes);
-		s = s.addChild("No.","Well, why not?");
+		s = s.addChild("\"No\"","Well, why not?");
 		s.addChild(yes);
-		s = s.addChild("No.","That doesn't even make sense.");
+		s = s.addChild("\"No\"","That doesn't even make sense.");
 		s.addChild(yes);
-		s = s.addChild("No.","Well, you can always just sheep on it.");
+		s = s.addChild("\"No\"","Well, you can always just sheep on it.");
 		s.addChild(yes);
-		s = s.addChild("No.","Come on, that was a good one.");
+		s = s.addChild("\"No\"","Come on, that was a good one.");
 		s.addChild(yes);
-		s = s.addChild("No.","Why won't you take the quest?");
+		s = s.addChild("\"No\"","Why won't you take the quest?");
 		s.addChild(yes);
-		s = s.addChild("No.","What's your issue?");
+		s = s.addChild("\"No\"","What's your issue?");
 		s.addChild(yes);
-		s = s.addChild("No.","Madam, you are harassing me.");
+		s = s.addChild("\"No\"","Madam, you are harassing me.");
 		s.addChild(yes);
-		s = s.addChild("No.","Leave me alone.");
+		s = s.addChild("\"No\"","Leave me alone.");
 		s.addChild(yes);
 		s = s.addChild("No.","Can you please just take the quest?");
 		s.addChild(yes);
@@ -161,13 +161,13 @@ public class farmer extends unit {
 		s.addChild(yes);
 		s = s.addChild("No.","You're relentless, really.");
 		s.addChild(yes);
-		s = s.addChild("No.","That's not a compliment, by the way.");
+		s = s.addChild("\"No\"","That's not a compliment, by the way.");
 		s.addChild(yes);
-		s = s.addChild("No.","You need counselling.");
+		s = s.addChild("\"No\"","You need counselling.");
 		s.addChild(yes);
-		s = s.addChild("No.","You can't say no forever.");
+		s = s.addChild("\"No\"","You can't say no forever.");
 		s.addChild(yes);
-		s = s.addChild("No.","Actually, you can.");
+		s = s.addChild("\"No\"","Actually, you can.");
 		s.addChild(yes);
 		s.addChild(s);
 		
@@ -201,7 +201,7 @@ public class farmer extends unit {
 
 		// If we have reached the end of our quest conversation (and they clicked yes, of course, since it's all they can do.)
 		if(farlsworthQuest != null && !farlsworthQuest.isStarted() && !farlsworthQuest.completed() && farlsworthQuest.getInteractBox().getTheText().isEnd()) {
-			sheepKey.keyRef.pickUp();
+			farmKey.keyRef.pickUp();
 			farlsworthQuest.startQuest();
 		}
 	}
@@ -224,7 +224,7 @@ public class farmer extends unit {
 		player currPlayer = player.getCurrentPlayer();
 		if(!tooltipShown && farlsworthQuest != null && !farlsworthQuest.isStarted() && currPlayer != null && currPlayer.isWithin(-1017,-283,-450,25)) {
 			tooltipShown = true;
-			tooltipString t = new tooltipString("Press 'enter' to interact with something.");
+			tooltipString t = new tooltipString("Press 'e' to interact with something.");
 		}
 	}
 	

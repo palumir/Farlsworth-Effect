@@ -66,7 +66,7 @@ public class webMedium extends chunk {
 	// Make the web actually sticky.
 	public void beSticky() {
 		// Add units walking into the web into the stuck units array.
-		ArrayList<unit> stuckUnits = unit.getUnitsInRadius(getX()+getWidth()/2,getY()+getHeight()/2,getWidth()/2);
+		ArrayList<unit> stuckUnits = unit.getUnitsInRadius(getIntX()+getWidth()/2,getIntY()+getHeight()/2,getWidth()/2);
 		
 		// Stick each unit
 		if(stuckUnits != null) {
@@ -80,7 +80,7 @@ public class webMedium extends chunk {
 		
 		// Remove units who aren't stuck anymore.
 		for(int i = 0; i < currentlyStuckUnits.size();) {
-			if(!currentlyStuckUnits.get(i).isWithinRadius(getX()+getWidth()/2,getY()+getHeight()/2,getWidth()/2)) {
+			if(!currentlyStuckUnits.get(i).isWithinRadius(getIntX()+getWidth()/2,getIntY()+getHeight()/2,getWidth()/2)) {
 				currentlyStuckUnits.get(i).setStuck(false, null);
 				recentlyUnstuckUnits.add(currentlyStuckUnits.get(i));
 				whenUnitsWereUnstuck.add(time.getTime());

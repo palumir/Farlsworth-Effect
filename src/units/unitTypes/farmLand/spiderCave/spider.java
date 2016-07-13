@@ -11,7 +11,6 @@ import effects.effect;
 import effects.effectTypes.bloodSquirt;
 import modes.mode;
 import sounds.sound;
-import units.animalType;
 import units.humanType;
 import units.player;
 import units.unit;
@@ -127,7 +126,7 @@ public class spider extends unit {
 		//showAttackRange();
 		// Set combat stuff.
 		setCombatStuff();
-		attackSound = spiderAttack;
+		setAttackSound(spiderAttack);
 		
 		
 		// Deal with animations
@@ -229,10 +228,10 @@ public class spider extends unit {
 	
 	// Make sure the movement is within a certain radius.
 	public void checkMovement(String direction) {
-		if(getX() < startX - patrolRadius) moveUnit("right");
-		else if(getX() + getWidth() > startX + patrolRadius)  moveUnit("left");
-		else if(getY() < startY - patrolRadius) moveUnit("down");
-		else if(getY() + getHeight() > startY + patrolRadius) moveUnit("up");
+		if(getIntX() < startX - patrolRadius) moveUnit("right");
+		else if(getIntX() + getWidth() > startX + patrolRadius)  moveUnit("left");
+		else if(getIntY() < startY - patrolRadius) moveUnit("down");
+		else if(getIntY() + getHeight() > startY + patrolRadius) moveUnit("up");
 		else moveUnit(direction);
 	}
 	
@@ -240,7 +239,7 @@ public class spider extends unit {
 	public void reactToPain() {
 		// Play a bark on pain.
 		sound s = new sound(spiderHurt);
-		s.setPosition(getX(), getY(), soundRadius);
+		s.setPosition(getIntX(), getIntY(), soundRadius);
 		s.start();
 	}
 	
@@ -253,9 +252,9 @@ public class spider extends unit {
 		
 		// If player is in radius, follow player, attacking.
 		player currPlayer = player.getCurrentPlayer();
-		int playerX = currPlayer.getX();
-		int playerY = currPlayer.getY();
-		float howClose = (float) Math.sqrt((playerX - getX())*(playerX - getX()) + (playerY - getY())*(playerY - getY()));
+		int playerX = currPlayer.getIntX();
+		int playerY = currPlayer.getIntY();
+		float howClose = (float) Math.sqrt((playerX - getIntX())*(playerX - getIntX()) + (playerY - getIntY())*(playerY - getIntY()));
 		
 		// Make sounds.
 		makeSounds();
@@ -272,7 +271,7 @@ public class spider extends unit {
 			else {
 				if(!aggrod) {
 					sound s = new sound(spiderAggro);
-					s.setPosition(getX(), getY(), soundRadius);
+					s.setPosition(getIntX(), getIntY(), soundRadius);
 					s.start();
 				}
 				aggrod = true;

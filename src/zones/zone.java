@@ -9,6 +9,7 @@ import utilities.saveState;
 import utilities.utility;
 import zones.farmLand.sheepFarm;
 import zones.farmLand.spiderCave;
+import zones.farmLand.tombZone;
 
 public abstract class zone {
 	
@@ -79,6 +80,7 @@ public abstract class zone {
 		// Sheep Farms
 		sheepFarm.setZone(new sheepFarm());
 		spiderCave.setZone(new spiderCave());
+		tombZone.setZone(new tombZone());
 	}
 	
 	// Get the player location in the zone.

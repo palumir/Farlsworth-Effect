@@ -23,8 +23,8 @@ public class camera {
 	// Constructor for attaching to player.
 	public camera(unit u, int newZoom) {
 		setAttachedUnit(u);
-		setX(u.getX()); 
-		setY(u.getY());
+		setX(u.getIntX()); 
+		setY(u.getIntY());
 		zoom = newZoom;
 	}
 

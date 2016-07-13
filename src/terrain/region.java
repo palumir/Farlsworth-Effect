@@ -30,8 +30,8 @@ public class region extends drawnObject {
 	public static intTuple leftRegion(unit u, int newX, int newY) {
 		if(playerTrappedWithin != null && u instanceof player) {
 			intTuple i = new intTuple(0,0);
-			float howCloseX = (float) Math.sqrt((newX + u.getWidth()/2 - playerTrappedWithin.getX())*(newX + u.getWidth()/2 - playerTrappedWithin.getX()) + (u.getY() + u.getHeight()/2 - playerTrappedWithin.getY())*(u.getY() + u.getHeight()/2 - playerTrappedWithin.getY()));
-			float howCloseY = (float) Math.sqrt((u.getX() + u.getWidth()/2 - playerTrappedWithin.getX())*(u.getX() + u.getWidth()/2 - playerTrappedWithin.getX()) + (newY + u.getHeight()/2 - playerTrappedWithin.getY())*(newY + u.getHeight()/2 - playerTrappedWithin.getY()));
+			float howCloseX = (float) Math.sqrt((newX + u.getWidth()/2 - playerTrappedWithin.getIntX())*(newX + u.getWidth()/2 - playerTrappedWithin.getIntX()) + (u.getIntY() + u.getHeight()/2 - playerTrappedWithin.getIntY())*(u.getIntY() + u.getHeight()/2 - playerTrappedWithin.getIntY()));
+			float howCloseY = (float) Math.sqrt((u.getIntX() + u.getWidth()/2 - playerTrappedWithin.getIntX())*(u.getIntX() + u.getWidth()/2 - playerTrappedWithin.getIntX()) + (newY + u.getHeight()/2 - playerTrappedWithin.getIntY())*(newY + u.getHeight()/2 - playerTrappedWithin.getIntY()));
 			if(howCloseX > playerTrappedWithin.getRadius()) i.x = 1;
 			if(howCloseY > playerTrappedWithin.getRadius()) i.y = 1;
 			return i;
@@ -41,7 +41,7 @@ public class region extends drawnObject {
 	
 	// Is within
 	public boolean contains(unit u) {
-		float howClose = (float) Math.sqrt((u.getX() + u.getWidth()/2 - getX())*(u.getX() + u.getWidth()/2 - getX()) + (u.getY() + u.getHeight()/2 - getY())*(u.getY() + u.getHeight()/2 - getY()));
+		float howClose = (float) Math.sqrt((u.getIntX() + u.getWidth()/2 - getIntX())*(u.getIntX() + u.getWidth()/2 - getIntX()) + (u.getIntY() + u.getHeight()/2 - getIntY())*(u.getIntY() + u.getHeight()/2 - getIntY()));
 		return howClose < getRadius();
 	}
 	
@@ -73,7 +73,7 @@ public class region extends drawnObject {
 		this.radius = radius;
 	}
 
-	public int getX() {
+	public int getIntX() {
 		return x;
 	}
 
@@ -81,7 +81,7 @@ public class region extends drawnObject {
 		this.x = x;
 	}
 
-	public int getY() {
+	public int getIntY() {
 		return y;
 	}
 

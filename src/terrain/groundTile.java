@@ -8,4 +8,9 @@ public class groundTile extends chunk {
 		super(c, newX, newY);
 	}
 	
+	// Constructor
+	public groundTile(chunkType c, int newX, int newY, int i) {
+		super(c, newX, newY, i, 0);
+	}
+	
 }

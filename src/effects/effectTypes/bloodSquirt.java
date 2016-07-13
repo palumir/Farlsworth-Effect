@@ -9,7 +9,6 @@ import effects.effect;
 import effects.effectType;
 import modes.mode;
 import sounds.sound;
-import units.animalType;
 import units.humanType;
 import units.unit;
 import units.unitType;
@@ -76,8 +75,12 @@ public class bloodSquirt extends effect {
 	public bloodSquirt(int newX, int newY) {
 		super(theEffectType, newX, newY);
 		
+		// Force in front
+		forceInFront = true;
+		
 		// Set sound.
 		sound s = new sound(effectSound2);
+		s.setPosition(newX, newY, sound.DEFAULT_SOUND_RADIUS);
 		s.start();
 		
 		// Make adjustments on hitbox if we're in topDown.

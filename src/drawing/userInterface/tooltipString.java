@@ -17,7 +17,6 @@ import effects.effect;
 import effects.effectType;
 import modes.mode;
 import sounds.sound;
-import units.animalType;
 import units.humanType;
 import units.unit;
 import units.unitType;
@@ -77,6 +76,9 @@ public class tooltipString extends effect {
 		// So it displays over everything.
 		setHeight(1);
 		setWidth(1);
+		
+		// Draw above everything.
+		forceInFront = true;
 	}
 	
 	// Draw the object.
@@ -105,7 +107,7 @@ public class tooltipString extends effect {
 		g.setPaint(newColor);
 	
 		// Draw.)
-		g.drawString(text,(int)(gameCanvas.getScaleX()*(getX()) - g.getFontMetrics().stringWidth(text)/2), (int)(gameCanvas.getScaleY()*getY()));
+		g.drawString(text,(int)(gameCanvas.getScaleX()*(getIntX()) - g.getFontMetrics().stringWidth(text)/2), (int)(gameCanvas.getScaleY()*getIntY()));
 		g2.drawImage(img,0,0,null);
 	}
 

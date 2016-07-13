@@ -1,5 +1,6 @@
 package utilities;
 
+import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -45,5 +46,27 @@ public class imageUtils {
 
     	ImageProducer ip = new FilteredImageSource(im.getSource(), filter);
     	return imageToBufferedImage(Toolkit.getDefaultToolkit().createImage(ip));
+    }
+    
+    public static BufferedImage replaceWithClear(BufferedImage image, int target) {
+    	int preferred = Color.TRANSLUCENT; //AlphaComposite.CLEAR;
+        int width = image.getWidth();
+        int height = image.getHeight();
+        BufferedImage newImage = new BufferedImage(width, height, image.getType());
+        int color;
+
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < height; j++) {
+                color = image.getRGB(i, j);
+                if (color == target) {
+                    newImage.setRGB(i, j, preferred);
+                }
+                else {
+                    newImage.setRGB(i, j, color);
+                }
+            }
+        }
+
+        return newImage;
     }
 }

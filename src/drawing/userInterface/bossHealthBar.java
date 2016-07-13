@@ -72,27 +72,27 @@ public class bossHealthBar extends interfaceObject  {
 		// Draw name.
 		g.setColor(DEFAULT_NAME_COLOR);
 		g.drawString(b.getDisplayName(),
-				   (int)(gameCanvas.getScaleX()*(getX() + hpAdjustX + DEFAULT_HEALTHBAR_WIDTH/2) - g.getFontMetrics().stringWidth(b.getDisplayName())/2),
-				   (int)(gameCanvas.getScaleY()*(getY() + hpAdjustY - 5)));
+				   (int)(gameCanvas.getScaleX()*(getIntX() + hpAdjustX + DEFAULT_HEALTHBAR_WIDTH/2) - g.getFontMetrics().stringWidth(b.getDisplayName())/2),
+				   (int)(gameCanvas.getScaleY()*(getIntY() + hpAdjustY - 5)));
 		
 		// Draw the red.
 		g.setColor(DEFAULT_LOST_HEALTH_COLOR);
-		g.fillRect((int)(gameCanvas.getScaleX()*(getX() + hpAdjustX)),
-				   (int)(gameCanvas.getScaleY()*(getY() + hpAdjustY)),
+		g.fillRect((int)(gameCanvas.getScaleX()*(getIntX() + hpAdjustX)),
+				   (int)(gameCanvas.getScaleY()*(getIntY() + hpAdjustY)),
 				   (int)(gameCanvas.getScaleX()*(DEFAULT_HEALTHBAR_WIDTH)),
 		           (int)(gameCanvas.getScaleY()*(DEFAULT_HEALTHBAR_HEIGHT)));
 		
 		// Draw the green chunks.
 		g.setColor(DEFAULT_HEALTH_COLOR);
-		g.fillRect((int)(gameCanvas.getScaleX()*(getX()+ hpAdjustX)),
-				   (int)(gameCanvas.getScaleY()*(getY() + hpAdjustY)),
+		g.fillRect((int)(gameCanvas.getScaleX()*(getIntX()+ hpAdjustX)),
+				   (int)(gameCanvas.getScaleY()*(getIntY() + hpAdjustY)),
 				   (int)(gameCanvas.getScaleX()*(healthChunkSize)),
 				   (int)(gameCanvas.getScaleY()*(DEFAULT_HEALTHBAR_HEIGHT)));
 		
 		// Draw border.
 		g.setColor(DEFAULT_BORDER_COLOR);
-		g.drawRect((int)(gameCanvas.getScaleX()*(getX() + hpAdjustX)),
-				   (int)(gameCanvas.getScaleY()*(getY() + hpAdjustY)),
+		g.drawRect((int)(gameCanvas.getScaleX()*(getIntX() + hpAdjustX)),
+				   (int)(gameCanvas.getScaleY()*(getIntY() + hpAdjustY)),
 				   (int)(gameCanvas.getScaleX()*(DEFAULT_HEALTHBAR_WIDTH)),
 				   (int)(gameCanvas.getScaleY()*(DEFAULT_HEALTHBAR_HEIGHT)));	
 		

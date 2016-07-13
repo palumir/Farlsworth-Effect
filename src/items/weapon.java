@@ -28,6 +28,7 @@ public abstract class weapon extends item {
 	protected int attackDamage = 0;
 	protected float attackTime = 0f;
 	protected float baseAttackTime = 0f;
+	protected String attackSound = "";
 	protected int attackWidth = 0;
 	protected int attackLength = 0;
 	protected float critChance = 0;
@@ -78,7 +79,7 @@ public abstract class weapon extends item {
 	// Update.
 	@Override
 	public void update() {
-		if(this.isDrawObject() && this.collides(this.getX(), this.getY(), player.getCurrentPlayer())) {
+		if(this.isDrawObject() && this.collides(this.getIntX(), this.getIntY(), player.getCurrentPlayer())) {
 			pickUp();
 		}
 	}

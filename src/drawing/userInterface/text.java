@@ -12,7 +12,8 @@ public class text extends interfaceObject  {
 	////// FIELDS /////////
 	///////////////////////
 	private String theText;
-	protected Color theColor;
+	private Color theColor;
+	protected float size = 1f;
 	
 	///////////////
 	/// METHODS ///
@@ -24,20 +25,30 @@ public class text extends interfaceObject  {
 		
 		// Set fields.
 		setTheText(newText);
-		theColor = newColor;
+		setTheColor(newColor);
+	}
+	
+	// Constructor
+	public text(String newText, int newX, int newY, Color newColor, float fontSize) {
+		super(null, newX, newY, 1, 1);	
+		
+		// Set fields.
+		size = fontSize;
+		setTheText(newText);
+		setTheColor(newColor);
 	}
 	
 	// Draw the unit. 
 	@Override
 	public void drawObject(Graphics g) {
 		// Set font.
-		g.setFont(drawnObject.DEFAULT_FONT);
+		g.setFont(drawnObject.DEFAULT_FONT.deriveFont(drawnObject.DEFAULT_FONT.getSize()*size));
 		
 		// Color and string.
-		g.setColor(theColor);
+		g.setColor(getTheColor());
 		g.drawString(getTheText(),
-				   getX(),
-				   getY());
+				   getIntX(),
+				   getIntY());
 	}
 	
 	// Update unit
@@ -51,6 +62,14 @@ public class text extends interfaceObject  {
 
 	public void setTheText(String theText) {
 		this.theText = theText;
+	}
+
+	public Color getTheColor() {
+		return theColor;
+	}
+
+	public void setTheColor(Color theColor) {
+		this.theColor = theColor;
 	}
 	
 }

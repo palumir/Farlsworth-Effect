@@ -52,7 +52,7 @@ public class bone extends chunk {
 		}
 		// Do a random interaction.
 		randomNum = utility.RNG.nextInt(6);
-		interactable = true;
+		setInteractable(true);
 		setPassable(true);
 	}
 	

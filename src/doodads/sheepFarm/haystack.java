@@ -143,7 +143,7 @@ public class haystack extends chunk {
 		if(strange && (needleJoke.isCompleted() || timesSearched >= 6)) {
 			
 			// Spawn a needleStack.
-			needlestack n = new needlestack(getX(), getY(), 0);
+			needlestack n = new needlestack(getIntX(), getIntY(), 0);
 			needleJoke.setCompleted(true);
 			
 			// Destroy this.
@@ -186,7 +186,7 @@ public class haystack extends chunk {
 		}
 		
 		// Interactable.
-		interactable = true;
+		setInteractable(true);
 		interactSequence = makeNormalInteractSequence();
 		
 		// Passable.

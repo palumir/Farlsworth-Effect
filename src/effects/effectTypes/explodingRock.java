@@ -16,7 +16,6 @@ import effects.buffs.darkSlow;
 import modes.mode;
 import sounds.sound;
 import terrain.chunk;
-import units.animalType;
 import units.humanType;
 import units.player;
 import units.unit;
@@ -95,7 +94,7 @@ public class explodingRock extends effect {
 		
 		// Set sound.
 		sound s = new sound(rockSpawn);
-		s.setPosition(getX(), getY(), sound.DEFAULT_SOUND_RADIUS);
+		s.setPosition(getIntX(), getIntY(), sound.DEFAULT_SOUND_RADIUS);
 		s.start();
 		
 		// Make adjustments on hitbox if we're in topDown.
@@ -104,30 +103,14 @@ public class explodingRock extends effect {
 		setHitBoxAdjustmentY(getDefaultHitBoxAdjustmentY());
 		
 		// Rocks
-		rock = spawnRock(getX(),getY(),radius);
+		rock = spawnRock(getIntX(),getIntY(),radius);
 
 	}
 	
 	// Spawn circle of rocks
-	public chunk spawnRock(int atX, int atY, int radius) {
-		int n = 1;
-		
-		// returnlist
-		ArrayList<chunk> returnList = new ArrayList<chunk>();
-		
-		sandRock r = new sandRock(this.getX(), this.getY(), 0);
+	public chunk spawnRock(int atX, int atY, int radius) {		
+		sandRock r = new sandRock(this.getIntX(), this.getIntY(), 0);
 		r.setBackgroundDoodad(true);
-		
-		// Check if collides with player.
-		ArrayList<unit> moveUnits = unit.getUnitsInBox(r.getX(), r.getY() + r.getHitBoxAdjustmentY(), r.getX() + r.getWidth(), r.getY() + r.getHeight() + r.getHitBoxAdjustmentY());
-		if(moveUnits!=null) {
-			for(int m = 0; m < moveUnits.size(); m++) {
-				unit currUnit = moveUnits.get(m);
-				int repositionX = (this.getX()) - (currUnit.getX());
-				int repositionY = (this.getY()) - (currUnit.getY());
-				currUnit.move(repositionX, repositionY);
-			}
-		}
 		return r;
 	}
 	
@@ -137,7 +120,7 @@ public class explodingRock extends effect {
 			rock.destroy();
 			// Set sound.
 			sound s = new sound(rockExplode);
-			s.setPosition(getX(), getY(), sound.DEFAULT_SOUND_RADIUS);
+			s.setPosition(getIntX(), getIntY(), sound.DEFAULT_SOUND_RADIUS);
 			s.start();
 			makeCircleOfRockPieces();
 	}
@@ -145,19 +128,20 @@ public class explodingRock extends effect {
 	// Make circle of rock pieces
 	public void makeCircleOfRockPieces() {
 		// How many rock pieces?
-		int n = 12;
+		int n = 4;
 		
 		// Spawn rocks
 		int explodeRadius = 1000;
-		int spawnRadius = 20;
-		double currentDegree = 0;
+		int spawnRadius = 360/n;
+		double currentDegree = utility.RNG.nextInt(spawnRadius);
 		double degreeChange = (double) 360/n;
 		for(int i = 0; i < n; i++){
-			int newX = (int) (getX() + spawnRadius*Math.cos(Math.toRadians(currentDegree))); 
-			int newY = (int) (getY() + spawnRadius*Math.sin(Math.toRadians(currentDegree)));
-			int goToX = (int) (getX() + explodeRadius*Math.cos(Math.toRadians(currentDegree))); 
-			int goToY = (int) (getY() + explodeRadius*Math.sin(Math.toRadians(currentDegree))); 
+			int newX = (int) (getIntX() + 0*Math.cos(Math.toRadians(currentDegree))); 
+			int newY = (int) (getIntY() + 0*Math.sin(Math.toRadians(currentDegree)));
+			int goToX = (int) (getIntX() + explodeRadius*Math.cos(Math.toRadians(currentDegree))); 
+			int goToY = (int) (getIntY() + explodeRadius*Math.sin(Math.toRadians(currentDegree))); 
 			rockPiece r = new rockPiece(newX,newY,goToX,goToY,damage);
+			r.setAllied(allied);
 			currentDegree += degreeChange;
 		}
 	}

@@ -14,16 +14,18 @@ import doodads.sheepFarm.rock;
 import drawing.camera;
 import drawing.drawnObject;
 import drawing.gameCanvas;
+import drawing.spriteSheet;
 import drawing.animation.animation;
+import drawing.animation.animationPack;
+import drawing.spriteSheet.spriteSheetInfo;
 import effects.effect;
 import effects.effectTypes.bloodSquirt;
-import effects.effectTypes.darkExplode;
+import effects.effectTypes.darkHole;
 import effects.effectTypes.poisonExplode;
 import effects.effectTypes.explodingRock;
 import modes.mode;
 import sounds.sound;
 import terrain.chunk;
-import units.animalType;
 import units.humanType;
 import units.player;
 import units.unit;
@@ -40,23 +42,44 @@ public abstract class wolf extends unit {
 		////////////////
 		/// DEFAULTS ///
 		////////////////
+	
+		// Spritesheets
+		protected spriteSheet upDownSpriteSheet;
+		protected spriteSheet leftRightSpriteSheet;
 		
 		// Platformer real dimensions
 		public static int DEFAULT_PLATFORMER_HEIGHT = 32;
 		public static int DEFAULT_PLATFORMER_WIDTH = 32;
 		public static int DEFAULT_PLATFORMER_ADJUSTMENT_Y = 0;
+		public static int DEFAULT_SPRITE_ADJUSTMENT_X = 0;
 		
 		// TopDown real dimensions
-		public static int DEFAULT_TOPDOWN_HEIGHT = 18;
-		public static int DEFAULT_TOPDOWN_WIDTH = 30;
-		public static int DEFAULT_TOPDOWN_ADJUSTMENT_Y = 5;
+		public static int DEFAULT_TOPDOWN_HEIGHT = 32;
+		public static int DEFAULT_TOPDOWN_WIDTH = 32;
+		public static int DEFAULT_TOPDOWN_ADJUSTMENT_Y = 0;
 		
 		// Follow until range
-		protected int followUntilRange = 20 + utility.RNG.nextInt(15);
+		protected int followUntilRange = 10 + utility.RNG.nextInt(15);
 		
 		// How close to attack?
 		protected int DEFAULT_ATTACK_RADIUS = 300;
 		protected int DEFAULT_DEAGGRO_RADIUS = 400;
+		
+		// Unit sprite stuff.
+		private static spriteSheet DEFAULT_UPDOWN_SPRITESHEET = new spriteSheet(new spriteSheetInfo(
+				"images/units/animals/wolfUpDown.png", 
+				32, 
+				64,
+				0,
+				DEFAULT_TOPDOWN_ADJUSTMENT_Y
+				));
+		private static spriteSheet DEFAULT_LEFTRIGHT_SPRITESHEET = new spriteSheet(new spriteSheetInfo(
+				"images/units/animals/wolfLeftRight.png",
+				64, 
+				32,
+				0,
+				DEFAULT_TOPDOWN_ADJUSTMENT_Y
+				));
 		
 		// Damage stats
 		static  int DEFAULT_ATTACK_DAMAGE = 2;
@@ -71,19 +94,26 @@ public abstract class wolf extends unit {
 		protected static String growl = "sounds/effects/animals/wolfGrowl.wav";
 		protected static String bark1 = "sounds/effects/animals/wolfBark1.wav";
 		protected static String bark2 = "sounds/effects/animals/wolfBark2.wav";
-		protected static String wolfAttack = "sounds/effects/player/combat/swingWeapon.wav";
 		protected long lastHowl = 0;
 		protected float randomHowl = 0;
+		protected float baseRandomHowl = 15f;
 		
 		//////////////
 		/// FIELDS ///
 		//////////////
+		
+		// Is the wolf the alpha of the group?
+		protected boolean alpha = false;
 		
 		// Is the wolf dosile?
 		protected boolean dosile = false;
 		
 		// Is the wolf aggrod?
 		protected boolean aggrod = false;
+		protected long aggrodTime = 0;
+		
+		// Don't attack for
+		protected float dontAttackFor = 0.5f;
 		
 		// Claw attacking?
 		protected boolean clawAttacking = false;
@@ -100,16 +130,22 @@ public abstract class wolf extends unit {
 		protected boolean hasStartedJumping = false;
 		
 		// Start rise and run
-		protected int startX = 0;
-		protected int startY = 0;
+		protected float startX = 0;
+		protected float startY = 0;
 		
 		// Jumping stuff
 		protected int jumpingToX = 0;
 		protected int jumpingToY = 0;
 		protected boolean hasSlashed = false;
 		protected boolean riseRunSet = false;
-		protected int rise = 0;
-		protected int run = 0;
+		protected float rise = 0;
+		protected float run = 0;
+		
+		// Wolves we are in combat with
+		int numWolves = 0;
+		int numRedWolves = 0;
+		int numBlackWolves = 0;
+		int numYellowWolves = 0;
 		
 		///////////////
 		/// METHODS ///
@@ -117,27 +153,16 @@ public abstract class wolf extends unit {
 		// Constructor
 		public wolf(unitType wolfType, int newX, int newY) {
 			super(wolfType, newX, newY);
-			//showAttackRange();
+			
+			upDownSpriteSheet = getUpDownSpriteSheet();
+			
+			leftRightSpriteSheet = getLeftRightSpriteSheet();
+			
 			// Set wolf combat stuff.
 			setCombatStuff();
-			attackSound = wolfAttack;
 			
-			// Add attack animations.
-			// Attacking left animation.
-			animation slashingLeft = new animation("slashingLeft", wolfType.getUnitTypeSpriteSheet().getAnimation(5), 2, 2, 1);
-			getAnimations().addAnimation(slashingLeft);
-			
-			// Attacking left animation.1
-			animation slashingRight = new animation("slashingRight", wolfType.getUnitTypeSpriteSheet().getAnimation(6), 2, 2, 1);
-			getAnimations().addAnimation(slashingRight);
-			
-			// Attacking left animation.
-			animation attackingLeft = new animation("attackingLeft", wolfType.getUnitTypeSpriteSheet().getAnimation(5), 0, 5, 1);
-			getAnimations().addAnimation(attackingLeft);
-			
-			// Attacking left animation.
-			animation attackingRight = new animation("attackingRight", wolfType.getUnitTypeSpriteSheet().getAnimation(6), 0, 5, 1);
-			getAnimations().addAnimation(attackingRight);
+			// Set animations
+			addAnimations();
 			
 			// Set dimensions
 			setHeight(getDefaultHeight());
@@ -147,6 +172,60 @@ public abstract class wolf extends unit {
 			topDownHeight = DEFAULT_TOPDOWN_HEIGHT;
 			topDownWidth = DEFAULT_TOPDOWN_WIDTH;
 			setHitBoxAdjustmentY(getDefaultHitBoxAdjustmentY());
+		}
+		
+		// Add animations.
+		public void addAnimations() {
+			// Deal with animations
+			animationPack unitTypeAnimations = new animationPack();
+			
+			// Jumping left animation.
+			animation jumpingLeft = new animation("jumpingLeft", leftRightSpriteSheet.getAnimation(6), 4, 4, 1);
+			unitTypeAnimations.addAnimation(jumpingLeft);
+			
+			// Jumping right animation.
+			animation jumpingRight = new animation("jumpingRight", leftRightSpriteSheet.getAnimation(2), 4, 4, 1);
+			unitTypeAnimations.addAnimation(jumpingRight);
+			
+			// Standing left animation.
+			animation standingLeft = new animation("standingLeft", leftRightSpriteSheet.getAnimation(5), 0, 0, 1);
+			unitTypeAnimations.addAnimation(standingLeft);
+			
+			// Standing right animation.
+			animation standingRight = new animation("standingRight", leftRightSpriteSheet.getAnimation(3), 0, 0, 1);
+			unitTypeAnimations.addAnimation(standingRight);
+			
+			// Running left animation.
+			animation runningLeft = new animation("runningLeft", leftRightSpriteSheet.getAnimation(5), 0, 4, 1f);
+			unitTypeAnimations.addAnimation(runningLeft);		
+			
+			// Running right animation.
+			animation runningRight = new animation("runningRight", leftRightSpriteSheet.getAnimation(1), 0, 4, 1f);
+			unitTypeAnimations.addAnimation(runningRight);
+			
+			// Standing up animation.
+			animation standingUp = new animation("standingUp", upDownSpriteSheet.getAnimation(4), 5, 5, 1);
+			unitTypeAnimations.addAnimation(standingUp);
+			
+			// Standing down animation.
+			animation standingDown = new animation("standingDown", upDownSpriteSheet.getAnimation(0), 0, 0, 1);
+			unitTypeAnimations.addAnimation(standingDown);
+			
+			// Running up animation.
+			animation runningUp = new animation("runningUp", upDownSpriteSheet.getAnimation(2), 5, 8, 1f);
+			unitTypeAnimations.addAnimation(runningUp);
+			
+			// Running down animation.
+			animation runningDown = new animation("runningDown", upDownSpriteSheet.getAnimation(2), 0, 3, 1f);
+			unitTypeAnimations.addAnimation(runningDown);
+			
+			// Sleeping animation
+			animation sleepingLeft = new animation("sleepingLeft", leftRightSpriteSheet.getAnimation(4), 3, 3, 0.5f);
+			unitTypeAnimations.addAnimation(sleepingLeft);
+			
+			// Set animations.
+			setAnimations(unitTypeAnimations);
+		
 		}
 		
 		// Combat defaults.
@@ -170,11 +249,47 @@ public abstract class wolf extends unit {
 			
 		}
 		
+		// Assign a random alpha
+		public void assignRandomAlpha(ArrayList<unit> units) {
+			
+			// Assign alpha after we all start attacking
+			if(aggrod && time.getTime() - aggrodTime > dontAttackFor*1000) {
+				
+				// Get wolves from unit list
+				ArrayList<wolf> wolves = new ArrayList<wolf>();
+				for(int i = 0; i < units.size(); i++) {
+					if(units.get(i) instanceof wolf) wolves.add((wolf)units.get(i));
+				}
+				
+				// Make a random wolf alpha
+				int random = utility.RNG.nextInt(wolves.size());
+				boolean alphaAssignedAlready = false;
+				for(int i = 0; i < wolves.size(); i++) {
+					if((wolves.get(i)).alpha) alphaAssignedAlready = true;
+				}
+				if(!alphaAssignedAlready) {
+					
+					if(aggrodTime != 0) {
+						for(int i = 0; i < wolves.size(); i++) {
+							wolves.get(i).aggrodTime = time.getTime();
+						}
+					}
+					
+					// Make alpha
+					sound s = new sound(growl);
+					s.setPosition(getIntX(), getIntY(), sound.DEFAULT_SOUND_RADIUS);
+					s.start();
+					wolves.get(random).alpha = true;
+					wolves.get(random).setAlphaAnimations();
+				}
+			}
+		}
+		
 		// React to pain.
 		public void reactToPain() {
 			// Play a bark on pain.
-			sound s = new sound(bark1);
-			s.setPosition(getX(), getY(), sound.DEFAULT_SOUND_RADIUS);
+			sound s = new sound(bark2);
+			s.setPosition(getIntX(), getIntY(), sound.DEFAULT_SOUND_RADIUS);
 			s.start();
 		}
 		
@@ -182,7 +297,7 @@ public abstract class wolf extends unit {
 		public void makeSounds() {
 			
 				// Create a new random growl interval
-				float newRandomHowlInterval = 10f + utility.RNG.nextInt(10);
+				float newRandomHowlInterval = baseRandomHowl + utility.RNG.nextInt(25);
 				
 				// Make the wolf howl
 				if(randomHowl == 0f) {
@@ -194,7 +309,7 @@ public abstract class wolf extends unit {
 					lastHowl = time.getTime();
 					randomHowl = newRandomHowlInterval;
 					sound s = new sound(howl);
-					s.setPosition(getX(), getY(), sound.DEFAULT_SOUND_RADIUS);
+					s.setPosition(getIntX(), getIntY(), sound.DEFAULT_SOUND_RADIUS);
 					s.start();
 				}
 		}
@@ -208,10 +323,6 @@ public abstract class wolf extends unit {
 			// Start of claw attack.
 			startOfClawAttack = time.getTime();
 		}
-		
-		// Spawn rock every
-		protected float spawnRockEvery = 0.05f;
-		protected long lastSpawnRock = 0;
 		
 		// Charge units?
 		public abstract void chargeUnits();
@@ -229,28 +340,20 @@ public abstract class wolf extends unit {
 				// Get current player.
 				player currPlayer = player.getCurrentPlayer();
 				
-				// Reset rise and run if we're close.
-				if(Math.abs(jumpingToX - getX()) < jumpSpeed) {
-					run = 0;
-				}
-				if(Math.abs(jumpingToY - getY()) < jumpSpeed) {
-					rise = 0;
-				}
-				
 				// Jump to the location.
 				if(jumping) {
 					
 					// Set rise/run
 					if(!riseRunSet) {
 						riseRunSet = true;
-						float yDistance = (jumpingToY - getY());
-						float xDistance = (jumpingToX - getX());
+						float yDistance = (jumpingToY - getIntY());
+						float xDistance = (jumpingToX - getIntX());
 						float distanceXY = (float) Math.sqrt(yDistance * yDistance
 								+ xDistance * xDistance);
-						rise = (int) ((yDistance/distanceXY)*jumpSpeed);
-						run = (int) ((xDistance/distanceXY)*jumpSpeed);
-						startX = getX();
-						startY = getY();
+						rise = ((yDistance/distanceXY)*jumpSpeed);
+						run = ((xDistance/distanceXY)*jumpSpeed);
+						startX = getFloatX();
+						startY = getFloatY();
 					}
 					
 					// Charge units to position.
@@ -259,11 +362,11 @@ public abstract class wolf extends unit {
 					// Spawn rocks
 					spawnTrail();
 					
-					setX(getX() + run);
-					setY(getY() + rise);
+					setFloatX(getFloatX() + run);
+					setFloatY(getFloatY() + rise);
 					
 					// Don't let him not move at all or leave region.
-					if((run == 0 && rise == 0) || ((Math.abs(jumpingToX - getX()) < 1 && Math.abs(jumpingToY - getY()) < 1))) {
+					if((run == 0 && rise == 0) || ((Math.abs(jumpingToX - getIntX()) <= jumpSpeed && Math.abs(jumpingToY - getIntY()) <= jumpSpeed))) {
 						if(currClaw != null) {
 							clawDestroy();
 						}
@@ -273,10 +376,13 @@ public abstract class wolf extends unit {
 					}
 					
 					// If slashing, hurt the player.
-					if(slashing && !hasSlashed && currPlayer.isWithin(getX(), getY(), getX() + getWidth(), getY() + getHeight())) {
+					if(slashing && !hasSlashed && currPlayer.isWithin(getIntX(), getIntY(), getIntX() + getWidth(), getIntY() + getHeight())) {
 						hasSlashed = true;
 						slashing = false;
 					}
+				}
+				else {
+					jumpingFinished();
 				}
 			}
 			else {
@@ -299,11 +405,11 @@ public abstract class wolf extends unit {
 		public void slashTo(chunk c) {
 			stopMove("all");
 			sound s = new sound(bark1);
-			s.setPosition(getX(), getY(), sound.DEFAULT_SOUND_RADIUS);
+			s.setPosition(getIntX(), getIntY(), sound.DEFAULT_SOUND_RADIUS);
 			s.start();
 			
 			// Set facing direction.
-			if(this.getX() - c.getX() < 0) {
+			if(this.getIntX() - c.getIntX() < 0) {
 				setFacingDirection("Right");
 			}
 			else {
@@ -311,8 +417,8 @@ public abstract class wolf extends unit {
 			}
 			
 			// Jump there
-			jumpingToX = c.getX() + c.getWidth()/2 - getWidth()/2;
-			jumpingToY = c.getY() + c.getHeight()/2 - getHeight()/2;
+			jumpingToX = c.getIntX() + c.getWidth()/2 - getWidth()/2;
+			jumpingToY = c.getIntY() + c.getHeight()/2 - getHeight()/2;
 			jumping = true;
 			slashing = true;
 			hasSlashed = false;
@@ -340,14 +446,75 @@ public abstract class wolf extends unit {
 			}
 		}
 		
+		// Yeah
+		public void changeCombatBasedOnHowManyUnitsAreFightingThePlayerIronicallyNamedFunctionMetaJokeNobodyWillSee() {
+			// Current player
+			player currPlayer = player.getCurrentPlayer();
+			numWolves = 0;
+			numRedWolves = 0;
+			numBlackWolves = 0;
+			numYellowWolves = 0;
+			for(int i = 0; i < currPlayer.getInCombatWith().size(); i++) {
+				assignRandomAlpha(currPlayer.getInCombatWith());
+				unit u = currPlayer.getInCombatWith().get(i);
+				String unitName = u.getTypeOfUnit().getName();
+				if(unitName.contains("Wolf")) numWolves++;
+				if(unitName.equals("redWolf")) numRedWolves++;
+				if(unitName.equals("blackWolf")) numBlackWolves++;
+				if(unitName.equals("yellowWolf")) numYellowWolves++;
+			}
+			
+			// Change the combat
+			changeCombat();
+		}
+		
+		// Change combat based on whose alpha
+		public abstract void changeCombat();
+		
+		// Deal with animations.
+		@Override
+		public void dealWithAnimations(int moveX, int moveY) {
+				
+			// No hitboxadjustment.
+			setHitBoxAdjustmentY(DEFAULT_PLATFORMER_ADJUSTMENT_Y);
+			setHitBoxAdjustmentX(0);
+			if(jumping || clawAttacking) {
+				if(clawAttacking && !jumping) {
+					animate("standing" + getFacingDirection());
+				}
+				else {
+					animate("jumping" + getFacingDirection());
+				}
+			}
+			else if(isMoving()) {
+				animate("running" + getFacingDirection());
+			}
+			else {
+				animate("standing" + getFacingDirection());
+			}
+		}
+		
+		// Get updown spritesheet
+		public spriteSheet getUpDownSpriteSheet() {
+			return DEFAULT_UPDOWN_SPRITESHEET;
+		}
+		
+		// Get leftRight spritesheet
+		public spriteSheet getLeftRightSpriteSheet() {
+			return DEFAULT_LEFTRIGHT_SPRITESHEET;
+		}	
+		
 		// wolf AI moves wolf around for now.
 		public void updateUnit() {
 			
 			// If player is in radius, follow player, attacking.
 			player currPlayer = player.getCurrentPlayer();
-			int playerX = currPlayer.getX();
-			int playerY = currPlayer.getY();
-			float howClose = (float) Math.sqrt((playerX - getX())*(playerX - getX()) + (playerY - getY())*(playerY - getY()));
+			int playerX = currPlayer.getIntX() + currPlayer.getWidth()/2;
+			int playerY = currPlayer.getIntY() + currPlayer.getHeight()/2;
+			float howClose = (float) Math.sqrt((playerX - getIntX() - getWidth()/2)*(playerX - getIntX() - getWidth()/2) + (playerY - getIntY() - getHeight()/2)*(playerY - getIntY() - getHeight()/2));
+			
+			// Change combat based on how many units are fighting the player.
+			changeCombatBasedOnHowManyUnitsAreFightingThePlayerIronicallyNamedFunctionMetaJokeNobodyWillSee();
 			
 			// Make sounds.
 			makeSounds();
@@ -357,31 +524,38 @@ public abstract class wolf extends unit {
 			dealWithJumping();
 			
 			// Attack if we're in radius.
-			if(!clawAttacking && !isDosile() && (howClose < DEFAULT_ATTACK_RADIUS || (aggrod && howClose < DEFAULT_DEAGGRO_RADIUS))) {
+			if(!player.isDeveloper() && !clawAttacking && !isDosile() && (howClose < DEFAULT_ATTACK_RADIUS || (aggrod && howClose < DEFAULT_DEAGGRO_RADIUS))) {
 				
-				// If we're in attack range, attack.
-				if(isInAttackRange(currPlayer, 0) && time.getTime() - lastClawAttack > clawAttackEvery*1000) {
-						clawAttackEvery = clawAttackEveryBase + 0.1f*(float)utility.RNG.nextInt(5);
-						lastClawAttack = time.getTime();
-						stopMove("all");
-						clawAttack(currPlayer);
-				}
-				else {
-					if(!aggrod) {
-						sound s = new sound(growl);
-						s.setPosition(getX(), getY(), sound.DEFAULT_SOUND_RADIUS);
-						s.start();
-					}
+				// Enter combat with player
+				enterCombatWith(currPlayer);
+				if(!aggrod) {
+					aggrodTime = time.getTime();
 					aggrod = true;
-					if(howClose > followUntilRange) {
-						follow(currPlayer);
+				}
+				
+				// Only do things after aggrodTime has passed.
+				if(time.getTime() - aggrodTime > dontAttackFor*1000) {
+				
+					// If we're in attack range, attack.
+					if(isInAttackRange(currPlayer, 0) && time.getTime() - lastClawAttack > clawAttackEvery*1000) {
+							clawAttackEvery = clawAttackEveryBase + 0.1f*(float)utility.RNG.nextInt(5);
+							lastClawAttack = time.getTime();
+							stopMove("all");
+							clawAttack(currPlayer);
 					}
 					else {
-						stopMove("all");
+						if(howClose > followUntilRange) {
+							follow(currPlayer);
+						}
+						else {
+							stopMove("all");
+						}
 					}
 				}
 			}
 			else if(aggrod && howClose > DEFAULT_DEAGGRO_RADIUS) {
+				aggrod = false;
+				exitCombatWith(currPlayer);
 				stopMove("all");
 			}
 			
@@ -392,7 +566,7 @@ public abstract class wolf extends unit {
 		}
 		
 		// Deal with movement animations.
-		public void dealWithAnimations(int moveX, int moveY) {
+		/*public void dealWithAnimations(int moveX, int moveY) {
 			if(jumping) {
 				animate("slashing" + facingDirection);
 			}
@@ -406,7 +580,7 @@ public abstract class wolf extends unit {
 			else {
 				animate("standing" + getFacingDirection());
 			}
-		}
+		}*/
 		
 		
 		///////////////////////////
@@ -442,6 +616,8 @@ public abstract class wolf extends unit {
 				return DEFAULT_PLATFORMER_ADJUSTMENT_Y;
 			}
 		}
+		
+		public abstract void setAlphaAnimations();
 		
 		public boolean isDosile() {
 			return dosile;

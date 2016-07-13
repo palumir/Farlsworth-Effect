@@ -108,8 +108,8 @@ public abstract class effect extends drawnObject  {
 		// Of course only draw if the animation is not null.
 		if(getCurrentAnimation() != null) {
 			g.drawImage(getCurrentAnimation().getCurrentFrame(), 
-					drawX, 
-					drawY, 
+					getDrawX(), 
+					getDrawY(), 
 					(int)(gameCanvas.getScaleX()*getObjectSpriteSheet().getSpriteWidth() + 1), 
 					(int)(gameCanvas.getScaleY()*getObjectSpriteSheet().getSpriteHeight() + 1), 
 					null);
@@ -118,8 +118,8 @@ public abstract class effect extends drawnObject  {
 		// Draw the hitbox of the image in green.
 		if(showHitBox) {
 			g.setColor(Color.green);
-			g.drawRect(drawX - (int)(gameCanvas.getScaleX()*(- (getObjectSpriteSheet().getSpriteWidth()/2 - getWidth()/2) - getHitBoxAdjustmentX())),
-					   drawY - (int)(gameCanvas.getScaleY()*(- (getObjectSpriteSheet().getSpriteHeight()/2 - getHeight()/2) - getHitBoxAdjustmentY())), 
+			g.drawRect(getDrawX() - (int)(gameCanvas.getScaleX()*(- (getObjectSpriteSheet().getSpriteWidth()/2 - getWidth()/2) - getHitBoxAdjustmentX())),
+					   getDrawY() - (int)(gameCanvas.getScaleY()*(- (getObjectSpriteSheet().getSpriteHeight()/2 - getHeight()/2) - getHitBoxAdjustmentY())), 
 					   (int)(gameCanvas.getScaleX()*getWidth() + 1), 
 					   (int)(gameCanvas.getScaleY()*getHeight() + 1));
 		}

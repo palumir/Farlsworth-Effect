@@ -22,15 +22,17 @@ public class dagger extends weapon {
 	public static String DEFAULT_WEAPON_NAME = "dagger";
 	
 	// Weapon stats.
-	static private int DEFAULT_ATTACK_DAMAGE = 3;
-	static private float DEFAULT_BAT = 0.12f;
-	static private float DEFAULT_ATTACK_TIME = 0.42f;
+	static private int DEFAULT_ATTACK_DAMAGE = 2;//2;
+	static private float DEFAULT_ATTACK_TIME = 0.30f;//0.30f;
 	static private float DEFAULT_BACKSWING = 0.1f;
 	static private int DEFAULT_ATTACK_WIDTH = 50;
 	static private int DEFAULT_ATTACK_LENGTH = 18;
-	static private float DEFAULT_CRIT_CHANCE = .15f;
-	static private float DEFAULT_CRIT_DAMAGE = 1.6f;
-	static private float DEFAULT_VARIABILITY = 0.2f;
+	static private float DEFAULT_CRIT_CHANCE = .10f;
+	static private float DEFAULT_CRIT_DAMAGE = 2f;
+	static private float DEFAULT_VARIABILITY = 0f;
+	
+	// Attack sound
+	static private String DEFAULT_ATTACK_SOUND = "sounds/effects/combat/knifeSlash.wav";
 	
 	//////////////
 	/// FIELDS ///
@@ -80,8 +82,8 @@ public class dagger extends weapon {
 	public void setStats() {
 		// Weapon stats.
 		setAttackDamage(DEFAULT_ATTACK_DAMAGE);
+		attackSound = DEFAULT_ATTACK_SOUND;
 		attackTime = DEFAULT_ATTACK_TIME;
-		baseAttackTime = DEFAULT_BAT;
 		attackWidth = DEFAULT_ATTACK_WIDTH;
 		attackLength = DEFAULT_ATTACK_LENGTH;
 		critChance = DEFAULT_CRIT_CHANCE;
@@ -105,10 +107,11 @@ public class dagger extends weapon {
 		
 		// Change the player's stats based on the weapon's strength and their
 		// level.
+		player.getCurrentPlayer().setAttackSound(attackSound);
 		player.getCurrentPlayer().setAttackDamage(attackDamage);
 		player.getCurrentPlayer().setAttackTime(attackTime);
-		player.getCurrentPlayer().setAttackFrameStart(3);
-		player.getCurrentPlayer().setAttackFrameEnd(5);
+		player.getCurrentPlayer().setAttackFrameStart(4);
+		player.getCurrentPlayer().setAttackFrameEnd(8);
 		player.getCurrentPlayer().setAttackWidth(attackWidth);
 		player.getCurrentPlayer().setAttackLength(attackLength);
 		player.getCurrentPlayer().setCritChance(critChance);
@@ -120,19 +123,19 @@ public class dagger extends weapon {
 		animationPack unitTypeAnimations = new animationPack();
 		
 		// Attacking left animation.
-		animation attackingLeft = new animation("attackingLeft", weaponSpriteSheet.getAnimation(13), 0, 5, DEFAULT_ATTACK_TIME);
+		animation attackingLeft = new animation("attackingLeft", weaponSpriteSheet.getAnimation(13), 0, 8, DEFAULT_ATTACK_TIME);
 		unitTypeAnimations.addAnimation(attackingLeft);
 		
 		// Attacking left animation.
-		animation attackingRight = new animation("attackingRight", weaponSpriteSheet.getAnimation(15), 0, 5, DEFAULT_ATTACK_TIME);
+		animation attackingRight = new animation("attackingRight", weaponSpriteSheet.getAnimation(15), 0, 8, DEFAULT_ATTACK_TIME);
 		unitTypeAnimations.addAnimation(attackingRight);
 		
 		// Attacking left animation.
-		animation attackingUp = new animation("attackingUp", weaponSpriteSheet.getAnimation(12), 0, 5, DEFAULT_ATTACK_TIME);
+		animation attackingUp = new animation("attackingUp", weaponSpriteSheet.getAnimation(12), 0, 8, DEFAULT_ATTACK_TIME);
 		unitTypeAnimations.addAnimation(attackingUp);
 		
 		// Attacking left animation.
-		animation attackingDown = new animation("attackingDown", weaponSpriteSheet.getAnimation(14), 0, 5, DEFAULT_ATTACK_TIME);
+		animation attackingDown = new animation("attackingDown", weaponSpriteSheet.getAnimation(14), 0, 8, DEFAULT_ATTACK_TIME);
 		unitTypeAnimations.addAnimation(attackingDown);
 		
 		// Jumping left animation.

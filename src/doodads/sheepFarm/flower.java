@@ -141,7 +141,8 @@ public class flower extends chunk {
 		
 		// Set fields.
 		flowerType = i;
-		interactable = true;
+		setInteractable(true);
 		setPassable(true);
+		backgroundDoodad = true;
 	}
 }

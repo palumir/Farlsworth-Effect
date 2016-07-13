@@ -93,7 +93,7 @@ public class horizontalGate extends chunk {
 			setWidth(DEFAULT_CHUNK_WIDTH);
 		}
 		if(i==1) setPassable(true);
-		interactable = true;
+		setInteractable(true);
 	}
 	
 	// Create interact sequence
@@ -167,6 +167,7 @@ public class horizontalGate extends chunk {
 			
 			// Play sound
 			sound s = new sound(openGate);
+			s.setPosition(this.getIntX(), this.getIntY(), sound.DEFAULT_SOUND_RADIUS);
 			s.start();
 			
 			// Open gate.

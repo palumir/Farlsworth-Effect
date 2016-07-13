@@ -66,10 +66,10 @@ public class quest extends text {
 		
 		if(isStarted() && !isCompleted()) {
 			// Color and string.
-			g.setColor(theColor);
+			g.setColor(getTheColor());
 			g.drawString("Quest: " + getTheText(),
-					   (int)(gameCanvas.getScaleX()*getX()),
-					   (int)(gameCanvas.getScaleY()*getY()));
+					   (int)(gameCanvas.getScaleX()*getIntX()),
+					   (int)(gameCanvas.getScaleY()*getIntY()));
 		}
 	}
 	

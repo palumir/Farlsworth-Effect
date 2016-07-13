@@ -99,8 +99,8 @@ public class sound extends Thread {
             while (nBytesRead != -1) { 
             	
     		    // Get player position
-    		    int playerX = player.getCurrentPlayer().getX();
-    		    int playerY = player.getCurrentPlayer().getY();
+    		    int playerX = player.getCurrentPlayer().getIntX();
+    		    int playerY = player.getCurrentPlayer().getIntY();
     		   
     		    // Calculate how close we are.
     		    float howClose = (float) Math.sqrt((playerX - x)*(playerX - x) + (playerY - y)*(playerY - y));

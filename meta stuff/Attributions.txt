@@ -31,21 +31,20 @@ dark_athmosphere_fbone.wav by fawkes027
 Falling Rock.wav by spookymodem
 
 Music: 
-Elidia McFaggot
-
-Writer contributors:
-Paul Tallion
+Elidia McGivern
 
 Art Attributions:
 Character: universal LPC spritesheet by jrconway3 on github.
-Spider: landofshadows
-Sheep: RPGMaker VX and Birdzilla
-Wolf: RPGMaker
-WolfMother SpriteSheet:
+
+Sheep: 
+- Daniel Eddeland
+From: http://opengameart.org/content/lpc-style-farm-animals
+
+Wolf and Spider:
 -Stephen "Redshrike" Challener as graphic artist 
 -William Thompsonj contributor. 
+From: http://opengameart.org/users/williamthompsonj
+
+
 Lever: vxresources
 Houses: Lunerea
-Spiders:
-- Stephen "Redshrike" Challener as graphic artist 
-- William.Thompsonj as contributor.

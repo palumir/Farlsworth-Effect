@@ -11,7 +11,6 @@ import effects.projectile;
 import modes.mode;
 import sounds.sound;
 import terrain.chunk;
-import units.animalType;
 import units.humanType;
 import units.player;
 import units.unit;
@@ -89,7 +88,7 @@ public class poisonBall extends projectile {
 	}
 	
 	public void explode() {
-		poisonExplode p = new poisonExplode(getX()-poisonExplode.getDefaultWidth()/2,getY()-poisonExplode.getDefaultHeight()/2, isAllied(), damage);
+		poisonExplode p = new poisonExplode(getIntX()-poisonExplode.getDefaultWidth()/2,getIntY()-poisonExplode.getDefaultHeight()/2, isAllied(), damage);
 		this.destroy();
 	}
 	

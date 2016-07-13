@@ -102,7 +102,7 @@ public class webDoorDoodad extends chunk {
 		setZ(DEFAULT_Z);
 		
 		// Passable and interactable.
-		interactable = true;
+		setInteractable(true);
 		setPassable(false);
 	}
 }

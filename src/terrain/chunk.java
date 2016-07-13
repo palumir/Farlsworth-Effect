@@ -27,10 +27,10 @@ public class chunk extends drawnObject {
 
 	private static Comparator<chunk> chunkComparator = new Comparator<chunk>() {
 	       public int compare(chunk c1, chunk c2) {
-	         int result = Double.compare(c1.getX(), c2.getX());
+	         int result = Double.compare(c1.getIntX(), c2.getIntX());
 	         if ( result == 0 ) {
 	           // both X are equal -> compare Y too
-	           result = Double.compare(c1.getY(), c2.getY());
+	           result = Double.compare(c1.getIntY(), c2.getIntY());
 	         } 
 	         return result;
 	      }
@@ -113,12 +113,12 @@ public class chunk extends drawnObject {
 				chunk currChunk = impassableChunks.get(i);
 				if(phaseOneOver) {
 					// If we collide with one, return the tuple containing by how much.
-					if(u.collides(newX, u.getY(),currChunk)) tX = true;
-					if(u.collides(u.getX(), newY,currChunk)) tY = true;
+					if(u.collides(newX, u.getIntY(),currChunk)) tX = true;
+					if(u.collides(u.getIntX(), newY,currChunk)) tY = true;
 					i++;
 				}
 				else {
-					if(currChunk.getX() + largestChunkWidth >= u.getX()) {
+					if(currChunk.getIntX() + largestChunkWidth >= u.getIntX()) {
 						phaseOneOver = true;
 						if(i - jump < 0) i = 0;
 						else i -= jump;
@@ -139,13 +139,6 @@ public class chunk extends drawnObject {
 		if(tX || tY) return new intTuple(txInt, tyInt);
 		else return intTuple.emptyTuple;
 	}
-	
-	public boolean dontDrawSprite = false;
-	
-	// Testing
-	public void dontDrawSprite() {
-		dontDrawSprite = true;
-	}
 
 	// Draw the chunk. 
 	@Override
@@ -156,9 +149,9 @@ public class chunk extends drawnObject {
 		if(getChunkImage() != null) {
 			int changeFactor = 0;
 			if(gameCanvas.getScaleX() != 1f || gameCanvas.getScaleY() != 1f) changeFactor = 1;
-			if(!dontDrawSprite) g.drawImage(getChunkImage(), 
-					drawX, 
-					drawY, 
+			if(isDrawSprite()) g.drawImage(getChunkImage(), 
+					getDrawX(), 
+					getDrawY(), 
 					(int)(gameCanvas.getScaleX()*getChunkImage().getWidth() + changeFactor), 
 					(int)(gameCanvas.getScaleY()*getChunkImage().getHeight() + changeFactor), 
 					null);
@@ -166,8 +159,8 @@ public class chunk extends drawnObject {
 			// Draw the outskirts of the sprite.
 			if(showSpriteBox) {
 				g.setColor(Color.red);
-				g.drawRect(drawX,
-						   drawY, 
+				g.drawRect(getDrawX(),
+						   getDrawY(), 
 						   (int)(gameCanvas.getScaleX()*getObjectSpriteSheet().getSpriteWidth()), 
 						   (int)(gameCanvas.getScaleY()*getObjectSpriteSheet().getSpriteHeight()));
 			}
@@ -175,8 +168,8 @@ public class chunk extends drawnObject {
 			// Draw the hitbox of the image in green.
 			if(showHitBox) {
 				g.setColor(Color.green);
-				g.drawRect(drawX - (int)(gameCanvas.getScaleX()*(- (getObjectSpriteSheet().getSpriteWidth()/2 - getWidth()/2) - getHitBoxAdjustmentX())),
-						   drawY - (int)(gameCanvas.getScaleY()*(- (getObjectSpriteSheet().getSpriteHeight()/2 - getHeight()/2) - getHitBoxAdjustmentY())), 
+				g.drawRect(getDrawX() - (int)(gameCanvas.getScaleX()*(- (getObjectSpriteSheet().getSpriteWidth()/2 - getWidth()/2) - getHitBoxAdjustmentX())),
+						   getDrawY() - (int)(gameCanvas.getScaleY()*(- (getObjectSpriteSheet().getSpriteHeight()/2 - getHeight()/2) - getHitBoxAdjustmentY())), 
 						   (int)(gameCanvas.getScaleX()*getWidth()), 
 						   (int)(gameCanvas.getScaleY()*getHeight()));
 			}
@@ -184,9 +177,9 @@ public class chunk extends drawnObject {
 			// Draw the x,y coordinates of the unit.
 			if(showUnitPosition) {
 				g.setColor(Color.white);
-				g.drawString((int)(gameCanvas.getScaleX()*getX()) + "," + (int)(gameCanvas.getScaleX()*getY()),
-						   drawX,
-						   drawY);
+				g.drawString((int)(gameCanvas.getScaleX()*getIntX()) + "," + (int)(gameCanvas.getScaleX()*getIntY()),
+						   getDrawX(),
+						   getDrawY());
 			}
 		}
 	}
@@ -206,10 +199,10 @@ public class chunk extends drawnObject {
 	
 	// Check if a chunk is within 
 	public boolean isWithin(int x1, int y1, int x2, int y2) {
-		return getX() < x2 && 
-		 getX() + getWidth() > x1 && 
-		 getY() < y2 && 
-		 getY() + getHeight() > y1;
+		return getIntX() < x2 && 
+		 getIntX() + getWidth() > x1 && 
+		 getIntY() < y2 && 
+		 getIntY() + getHeight() > y1;
 	}
 	
 	// Initiate chunks

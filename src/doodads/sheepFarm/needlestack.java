@@ -81,7 +81,7 @@ public class needlestack extends chunk {
 		}
 		
 		// Interactable.
-		interactable = true;
+		setInteractable(true);
 		interactSequence = makeNormalInteractSequence();
 		
 		// Passable.

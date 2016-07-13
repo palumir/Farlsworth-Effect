@@ -1,9 +1,15 @@
 package effects.effectTypes;
 
+import java.awt.AlphaComposite;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.Random;
 
 import drawing.camera;
+import drawing.drawnObject;
+import drawing.gameCanvas;
 import drawing.spriteSheet;
 import drawing.animation.animation;
 import drawing.animation.animationPack;
@@ -13,7 +19,7 @@ import effects.effectType;
 import effects.buffs.darkSlow;
 import modes.mode;
 import sounds.sound;
-import units.animalType;
+import terrain.atmosphericEffects.fog;
 import units.humanType;
 import units.player;
 import units.unit;
@@ -23,7 +29,7 @@ import utilities.time;
 import utilities.utility;
 import zones.zone;
 
-public class darkExplode extends effect {
+public class darkHole extends effect {
 	
 	// Default dimensions.
 	public static int DEFAULT_SPRITE_WIDTH = 150;
@@ -44,7 +50,7 @@ public class darkExplode extends effect {
 	////////////////
 	
 	// Default name.
-	private static String DEFAULT_EFFECT_NAME = "darkExplode";
+	private static String DEFAULT_EFFECT_NAME = "darkHole";
 	
 	// Effect sprite stuff.
 	private static String DEFAULT_EFFECT_SPRITESHEET = "images/effects/" + DEFAULT_EFFECT_NAME + ".png";
@@ -70,6 +76,9 @@ public class darkExplode extends effect {
 							)),
 							DEFAULT_ANIMATION_DURATION);	
 	
+	// List of all darkholes
+	public static ArrayList<darkHole> allHoles = new ArrayList<darkHole>();
+	
 	//////////////
 	/// FIELDS ///
 	//////////////
@@ -77,13 +86,13 @@ public class darkExplode extends effect {
 	private int damage = DEFAULT_DAMAGE;
 	private boolean playedOnce = false;
 	private long lastHurt = 0;
-	private float hurtEvery = 0.5f;
+	private float hurtEvery = 0.25f;
 	
 	///////////////
 	/// METHODS ///
 	///////////////
 	// Constructor
-	public darkExplode(int newX, int newY, boolean isAllied, int damage, float duration) {
+	public darkHole(int newX, int newY, boolean isAllied, int damage, float duration) {
 		super(theEffectType, newX, newY);
 		
 		// Allied?
@@ -121,13 +130,16 @@ public class darkExplode extends effect {
 		
 		// Set sound.
 		sound s = new sound(effectSound2);
-		s.setPosition(getX(), getY(), sound.DEFAULT_SOUND_RADIUS);
+		s.setPosition(getIntX(), getIntY(), sound.DEFAULT_SOUND_RADIUS);
 		s.start();
 		
 		// Make adjustments on hitbox if we're in topDown.
 		setHeight(getDefaultHeight());
 		setWidth(getDefaultWidth());
 		setHitBoxAdjustmentY(getDefaultHitBoxAdjustmentY());
+		
+		// Add to all holes.
+		allHoles.add(this);
 
 	}
 	
@@ -148,7 +160,7 @@ public class darkExplode extends effect {
 		if(j>=4) {
 			
 			// If someone is in the explosion radius, hurt.
-			ArrayList<unit> hurtUnits = unit.getUnitsInRadius(getX() + getWidth()/2, getY() + getHeight()/2, getWidth()/2);
+			ArrayList<unit> hurtUnits = unit.getUnitsInRadius(getIntX() + getWidth()/2, getIntY() + getHeight()/2, getWidth()/2);
 			if(hurtUnits != null && time.getTime() - lastHurt > hurtEvery*1000) {
 				lastHurt = time.getTime();
 				for(int i = 0; i < hurtUnits.size(); i++) {
@@ -164,6 +176,41 @@ public class darkExplode extends effect {
 			}
 		}
 	}
+	
+	// Respond to destroy
+	@Override
+	public void respondToDestroy() {
+		if(allHoles.contains(this)) allHoles.remove(this);
+	}
+	
+	// Draw the effect
+	@Override
+	public void drawObject(Graphics g) {
+		
+		// Of course only draw if the animation is not null.
+		if(getCurrentAnimation() != null) {
+			float alpha = 1;//1f - fog.fogLevel;
+			if(alpha<.5f) alpha = 0f;
+			Graphics2D g2d = (Graphics2D) g.create();
+			g2d.setComposite(AlphaComposite.SrcOver.derive(alpha));
+			g2d.drawImage(getCurrentAnimation().getCurrentFrame(), 
+					getDrawX(), 
+					getDrawY(), 
+					(int)(gameCanvas.getScaleX()*getObjectSpriteSheet().getSpriteWidth() + 1), 
+					(int)(gameCanvas.getScaleY()*getObjectSpriteSheet().getSpriteHeight() + 1), 
+					null);
+		}
+		
+		// Draw the hitbox of the image in green.
+		if(showHitBox) {
+			g.setColor(Color.green);
+			g.drawRect(getDrawX() - (int)(gameCanvas.getScaleX()*(- (getObjectSpriteSheet().getSpriteWidth()/2 - getWidth()/2) - getHitBoxAdjustmentX())),
+					   getDrawY() - (int)(gameCanvas.getScaleY()*(- (getObjectSpriteSheet().getSpriteHeight()/2 - getHeight()/2) - getHitBoxAdjustmentY())), 
+					   (int)(gameCanvas.getScaleX()*getWidth() + 1), 
+					   (int)(gameCanvas.getScaleY()*getHeight() + 1));
+		}
+	}
+	
 	
 	///////////////////////////
 	/// GETTERS AND SETTERS ///

@@ -54,6 +54,7 @@ public class interactBox extends interfaceObject  {
 	private boolean textMode = false;
 	private boolean displayOn = false;
 	private boolean unescapable = false;
+	private boolean locked = false;
 	private static interactBox currentDisplay = null;
 	
 	// Sounds.
@@ -106,8 +107,8 @@ public class interactBox extends interfaceObject  {
 			g.setColor(DEFAULT_TEXT_COLOR);
 			
 			// Background
-			g.drawImage(background, (int)(gameCanvas.getScaleX()*getX()), 
-					(int)(gameCanvas.getScaleY()*getY()),
+			g.drawImage(background, (int)(gameCanvas.getScaleX()*getIntX()), 
+					(int)(gameCanvas.getScaleY()*getIntY()),
 					(int)(gameCanvas.getScaleX()*background.getWidth()),
 					(int)(gameCanvas.getScaleY()*background.getHeight())
 					,null);
@@ -122,10 +123,10 @@ public class interactBox extends interfaceObject  {
 					
 					// Display the name of the person or thing talking/interacting
 					g.drawString(whoIsTalking,
-							(int)(gameCanvas.getScaleX()*getX()) + 
+							(int)(gameCanvas.getScaleX()*getIntX()) + 
 							(int)(gameCanvas.getScaleX()*background.getWidth()/2) - 
 							g.getFontMetrics().stringWidth(whoIsTalking)/2,
-							(int)(gameCanvas.getScaleY()*getY()) + 
+							(int)(gameCanvas.getScaleY()*getIntY()) + 
 							(int)(gameCanvas.getScaleY()*background.getHeight()/5) + 
 							(int)(gameCanvas.getScaleY()*4));
 				}
@@ -147,8 +148,8 @@ public class interactBox extends interfaceObject  {
 				
 				// Draw the text.
 				g.drawString(displayedText,
-						(int)(gameCanvas.getScaleX()*getX()) + (int)(gameCanvas.getScaleX()*background.getWidth()/2) - g.getFontMetrics().stringWidth(getTheText().getTextOnPress())/2,
-					   (int)(gameCanvas.getScaleY()*(getY() + background.getHeight()/2 + 4)));
+						(int)(gameCanvas.getScaleX()*getIntX()) + (int)(gameCanvas.getScaleX()*background.getWidth()/2) - g.getFontMetrics().stringWidth(getTheText().getTextOnPress())/2,
+					   (int)(gameCanvas.getScaleY()*(getIntY() + background.getHeight()/2 + 4)));
 			}
 			
 			// Button
@@ -160,10 +161,10 @@ public class interactBox extends interfaceObject  {
 					
 					// Display the name of the person or thing talking/interacting
 					g.drawString(whoIsTalking,
-							(int)(gameCanvas.getScaleX()*getX()) + 
+							(int)(gameCanvas.getScaleX()*getIntX()) + 
 							(int)(gameCanvas.getScaleX()*background.getWidth()/2) - 
 							g.getFontMetrics().stringWidth(whoIsTalking)/2,
-							(int)(gameCanvas.getScaleY()*getY()) + 
+							(int)(gameCanvas.getScaleY()*getIntY()) + 
 							(int)(gameCanvas.getScaleY()*background.getHeight()/5) + 
 							(int)(gameCanvas.getScaleY()*4));
 				}
@@ -182,10 +183,10 @@ public class interactBox extends interfaceObject  {
 							g.setColor(DEFAULT_SELECTED_COLOR);
 							
 							// Draw arrow
-							g.drawImage(arrow, (int) ((int)(gameCanvas.getScaleX()*getX())
+							g.drawImage(arrow, (int) ((int)(gameCanvas.getScaleX()*getIntX())
 									+ (int)(gameCanvas.getScaleX()*((2*(i+1))*percent*background.getWidth()/2 - 2 - arrow.getWidth()))
 									- g.getFontMetrics().stringWidth(buttText)/2),
-									(int)(gameCanvas.getScaleY()*(getY() + background.getHeight()/2 - 2 - arrow.getHeight()/2)), 
+									(int)(gameCanvas.getScaleY()*(getIntY() + background.getHeight()/2 - 2 - arrow.getHeight()/2)), 
 									(int)(gameCanvas.getScaleX()*arrow.getWidth()), 
 									(int)(gameCanvas.getScaleY()*arrow.getHeight()), null);
 						}
@@ -195,8 +196,8 @@ public class interactBox extends interfaceObject  {
 						
 						// Draw text
 						g.drawString(buttText,
-							   (int) ((int)(gameCanvas.getScaleX()*(getX() + (2*(i+1))*percent*background.getWidth()/2)) - g.getFontMetrics().stringWidth(buttText)/2),
-							   (int)(gameCanvas.getScaleY()*(getY() + background.getHeight()/2 + 4)));
+							   (int) ((int)(gameCanvas.getScaleX()*(getIntX() + (2*(i+1))*percent*background.getWidth()/2)) - g.getFontMetrics().stringWidth(buttText)/2),
+							   (int)(gameCanvas.getScaleY()*(getIntY() + background.getHeight()/2 + 4)));
 					}
 			}
 		}
@@ -300,34 +301,37 @@ public class interactBox extends interfaceObject  {
 	
 	// Respond to key press.
 	public void respondToKeyPress(KeyEvent k) {
-		// Player presses esc (inventory) key.
-		if(k.getKeyCode() == KeyEvent.VK_ESCAPE) { 
-			if(!unescapable) toggleDisplay();
-		}
 		
-		// Player presses left key.
-		if(k.getKeyCode() == KeyEvent.VK_LEFT) { 
-			moveSelect("left");
-		}
-		
-		// Player presses right key.
-		if(k.getKeyCode() == KeyEvent.VK_RIGHT) { 
-			moveSelect("right");
-		}
-		
-		// Player presses up key
-		if(k.getKeyCode() == KeyEvent.VK_UP) { 
-			//moveSelect("up");
-		}
-		
-		// Player presses down key
-		if(k.getKeyCode() == KeyEvent.VK_DOWN) { 
-			//moveSelect("down");
-		}
-		
-		// Player presses e key.
-		if(k.getKeyCode() == KeyEvent.VK_SPACE || k.getKeyCode() == KeyEvent.VK_ENTER) { 
-			select();
+		if(!isLocked()) {
+			// Player presses esc (inventory) key.
+			if(k.getKeyCode() == KeyEvent.VK_ESCAPE) { 
+				if(!unescapable) toggleDisplay();
+			}
+			
+			// Player presses left key.
+			if(k.getKeyCode() == KeyEvent.VK_A) { 
+				moveSelect("left");
+			}
+			
+			// Player presses right key.
+			if(k.getKeyCode() == KeyEvent.VK_D) { 
+				moveSelect("right");
+			}
+			
+			// Player presses up key
+			if(k.getKeyCode() == KeyEvent.VK_W) { 
+				//moveSelect("up");
+			}
+			
+			// Player presses down key
+			if(k.getKeyCode() == KeyEvent.VK_S) { 
+				//moveSelect("down");
+			}
+			
+			// Player presses e key.
+			if(k.getKeyCode() == KeyEvent.VK_SPACE || k.getKeyCode() == KeyEvent.VK_ENTER || k.getKeyCode() == KeyEvent.VK_E) { 
+				select();
+			}
 		}
 	}
 	
@@ -366,6 +370,14 @@ public class interactBox extends interfaceObject  {
 
 	public void setUnescapable(boolean unescapable) {
 		this.unescapable = unescapable;
+	}
+
+	public boolean isLocked() {
+		return locked;
+	}
+
+	public void setLocked(boolean locked) {
+		this.locked = locked;
 	}
 	
 }

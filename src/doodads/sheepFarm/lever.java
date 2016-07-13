@@ -74,7 +74,7 @@ public class lever extends chunk {
 		}
 		
 		// Set interactable.
-		interactable = true;
+		setInteractable(true);
 		
 		// Set not passable.
 		setPassable(false);

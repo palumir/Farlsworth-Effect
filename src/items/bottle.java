@@ -101,7 +101,7 @@ public abstract class bottle extends item {
 	// Update.
 	@Override
 	public void update() {
-		if(this.isDrawObject() && this.collides(this.getX(), this.getY(), player.getCurrentPlayer())) {
+		if(this.isDrawObject() && this.collides(this.getIntX(), this.getIntY(), player.getCurrentPlayer())) {
 			pickUp();
 		}
 	}

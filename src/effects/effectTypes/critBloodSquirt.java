@@ -9,7 +9,6 @@ import effects.effect;
 import effects.effectType;
 import modes.mode;
 import sounds.sound;
-import units.animalType;
 import units.humanType;
 import units.unit;
 import units.unitType;
@@ -78,6 +77,7 @@ public class critBloodSquirt extends effect {
 		
 		// Set sound.
 		sound s = new sound(effectSound1);
+		s.setPosition(newX, newY, sound.DEFAULT_SOUND_RADIUS);
 		s.start();
 		
 		// Make adjustments on hitbox if we're in topDown.

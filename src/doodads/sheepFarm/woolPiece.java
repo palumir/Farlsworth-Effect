@@ -94,7 +94,7 @@ public class woolPiece extends chunk {
 		}
 		
 		// Interactable.
-		interactable = true;
+		setInteractable(true);
 		interactSequence = makeNormalInteractSequence();
 		
 		// Passable.

@@ -35,7 +35,7 @@ public class torch extends weapon {
 	private Color DEFAULT_FIRE_COLOR = Color.orange;
 	
 	// Weapon stats.
-	static private int DEFAULT_ATTACK_DAMAGE = 6;
+	static private int DEFAULT_ATTACK_DAMAGE = 1;
 	static private float DEFAULT_BAT = 0.22f;
 	static private float DEFAULT_ATTACK_TIME = 0.47f;
 	static private int DEFAULT_ATTACK_WIDTH = 55;
@@ -43,6 +43,7 @@ public class torch extends weapon {
 	static private float DEFAULT_CRIT_CHANCE = .2f;
 	static private float DEFAULT_CRIT_DAMAGE = 2f;
 	static private float DEFAULT_VARIABILITY = 0.1f;
+	static private int extraLitDamage = 4;
 	
 	//////////////
 	/// FIELDS ///
@@ -107,7 +108,7 @@ public class torch extends weapon {
 		
 		// Add properties list.
 		String[] propertiesArray = {
-				"+4 dmg when",
+				"+" + extraLitDamage + " dmg when",
 				"lit but can",
 				"lose flame on hit."
 			};
@@ -132,7 +133,7 @@ public class torch extends weapon {
 	// Set stats
 	public void setStatsLit() {
 		// Weapon stats.
-		setAttackDamage(DEFAULT_ATTACK_DAMAGE + 4);
+		setAttackDamage(DEFAULT_ATTACK_DAMAGE + extraLitDamage);
 		attackTime = DEFAULT_ATTACK_TIME;
 		baseAttackTime = DEFAULT_BAT;
 		attackWidth = DEFAULT_ATTACK_WIDTH;
@@ -311,8 +312,8 @@ public class torch extends weapon {
 	// Unlight torch
 	public void unLight() {
 		effect e = new floatingString("-Fire", DEFAULT_FIRE_COLOR,
-				player.getCurrentPlayer().getX() + player.getCurrentPlayer().getWidth()/2, 
-				player.getCurrentPlayer().getY() + player.getCurrentPlayer().getHeight()/2, 1.2f);
+				player.getCurrentPlayer().getIntX() + player.getCurrentPlayer().getWidth()/2, 
+				player.getCurrentPlayer().getIntY() + player.getCurrentPlayer().getHeight()/2, 1.2f);
 		setLit(false);
 		setStats();
 		addUnlitAnimations();
@@ -323,8 +324,8 @@ public class torch extends weapon {
 		sound s = new sound(torchLightSound);
 		s.start();
 		effect e = new floatingString("+Fire", DEFAULT_FIRE_COLOR,
-				player.getCurrentPlayer().getX() + player.getCurrentPlayer().getWidth()/2, 
-				player.getCurrentPlayer().getY() + player.getCurrentPlayer().getHeight()/2, 1.2f);
+				player.getCurrentPlayer().getIntX() + player.getCurrentPlayer().getWidth()/2, 
+				player.getCurrentPlayer().getIntY() + player.getCurrentPlayer().getHeight()/2, 1.2f);
 		setLit(true);
 		setStats();
 		addLitAnimations();

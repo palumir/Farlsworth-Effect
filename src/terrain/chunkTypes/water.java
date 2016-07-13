@@ -4,6 +4,7 @@ import java.util.Random;
 
 import doodads.sheepFarm.needlestack;
 import drawing.camera;
+import drawing.userInterface.tooltipString;
 import interactions.interactBox;
 import interactions.textSeries;
 import main.main;
@@ -22,7 +23,7 @@ import utilities.stringUtils;
 import utilities.time;
 import zones.zone;
 
-public class water extends groundTile {
+public class water extends chunk {
 	
 	////////////////
 	/// DEFAULTS ///
@@ -56,10 +57,17 @@ public class water extends groundTile {
 	// Constructor
 	public water(int newX, int newY) {
 		super(typeReference, newX, newY);
-		interactable = true;
+		setInteractable(true);
 		this.setPassable(false);
+		backgroundDoodad = true;
 	}
 	
+	public water(generalChunkType typeReference, int newX, int newY) {
+		super(typeReference, newX, newY);
+		setInteractable(true);
+		this.setPassable(false);
+	}
+
 	// Create interact sequence
 	public static interactBox makeInteractSequence() {
 		
@@ -116,17 +124,25 @@ public class water extends groundTile {
 	@Override
 	public void interactWith() {
 		
-		// Play sound
-		sound s = new sound(waterSplash);
-		s.start();
+		// Not in combat.
+		if(player.getCurrentPlayer().getInCombatWith().size() <= 0) {
+			// Play sound
+			sound s = new sound(waterSplash);
+			s.start();
+			
+			// Restart sequence.
+			interactSequence = makeInteractSequence();
+			
+			// Reset booleans
+			haveSaved = false;
+			
+			// Toggle display.
+			interactSequence.toggleDisplay();
+		}
 		
-		// Restart sequence.
-		interactSequence = makeInteractSequence();
-		
-		// Reset booleans
-		haveSaved = false;
-		
-		// Toggle display.
-		interactSequence.toggleDisplay();
+		// In combat
+		else {
+			tooltipString t = new tooltipString("You cannot save while in combat.");
+		}
 	}
 }

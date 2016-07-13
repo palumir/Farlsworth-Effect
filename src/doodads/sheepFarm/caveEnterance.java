@@ -69,7 +69,7 @@ public class caveEnterance extends chunk {
 	// Update.
 	@Override
 	public void update() {
-		if(this.collides(this.getX(), this.getY(), player.getCurrentPlayer())) {
+		if(this.collides(this.getIntX(), this.getIntY(), player.getCurrentPlayer())) {
 			enter();
 		}
 	}

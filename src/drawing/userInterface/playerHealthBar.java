@@ -86,7 +86,7 @@ public class playerHealthBar extends interfaceObject  {
 		
 		// HP
 		g.setColor(DEFAULT_LOST_HEALTH_COLOR);
-		g.drawString("HP", (int)(gameCanvas.getScaleX()*(getX())), (int)(gameCanvas.getScaleY()*(getY() + hpAdjustY+12)));
+		g.drawString("HP", (int)(gameCanvas.getScaleX()*(getIntX())), (int)(gameCanvas.getScaleY()*(getIntY() + hpAdjustY+12)));
 
 		// Load every chunk.
 		player currPlayer = player.getCurrentPlayer();
@@ -94,15 +94,15 @@ public class playerHealthBar extends interfaceObject  {
 		for(int i = 0; i < currPlayer.getHealthPoints(); i++) {
 			g.setColor(DEFAULT_BORDER_COLOR);
 			drawHeart(g,
-					   (int)(gameCanvas.getScaleX()*(getX() + hpAdjustX + addPerChunk)-1),
-					   (int)(gameCanvas.getScaleY()*(getY() + hpAdjustY)-1),
+					   (int)(gameCanvas.getScaleX()*(getIntX() + hpAdjustX + addPerChunk)-1),
+					   (int)(gameCanvas.getScaleY()*(getIntY() + hpAdjustY)-1),
 					   (int)(gameCanvas.getScaleX()*(energyChunkSize)+2),
 					   (int)(gameCanvas.getScaleY()*(DEFAULT_HEALTHBAR_HEIGHT))+2);
 			
 			g.setColor(DEFAULT_LOST_HEALTH_COLOR);
 			drawHeart(g,
-					   (int)(gameCanvas.getScaleX()*(getX() + hpAdjustX + addPerChunk)),
-					   (int)(gameCanvas.getScaleY()*(getY() + hpAdjustY)),
+					   (int)(gameCanvas.getScaleX()*(getIntX() + hpAdjustX + addPerChunk)),
+					   (int)(gameCanvas.getScaleY()*(getIntY() + hpAdjustY)),
 					   (int)(gameCanvas.getScaleX()*(energyChunkSize)),
 					   (int)(gameCanvas.getScaleY()*(DEFAULT_HEALTHBAR_HEIGHT)));
 			
@@ -115,14 +115,14 @@ public class playerHealthBar extends interfaceObject  {
 		
 		// Exp
 		g.setColor(DEFAULT_ENERGY_COLOR);
-		g.drawString("ENE", (int)(gameCanvas.getScaleX()*(getX())), (int)(gameCanvas.getScaleY()*(getY() + energyAdjustY+12)));
+		g.drawString("ENE", (int)(gameCanvas.getScaleX()*(getIntX())), (int)(gameCanvas.getScaleY()*(getIntY() + energyAdjustY+12)));
 
 		// Load every chunk.
 		currPlayer = player.getCurrentPlayer();
 		addPerChunk = 0;
 		for(int i = 0; i < currPlayer.getEnergy(); i++) {
-			g.fillRect((int)(gameCanvas.getScaleX()*(getX() + energyAdjustX + addPerChunk)),
-					   (int)(gameCanvas.getScaleY()*(getY() + energyAdjustY)),
+			g.fillRect((int)(gameCanvas.getScaleX()*(getIntX() + energyAdjustX + addPerChunk)),
+					   (int)(gameCanvas.getScaleY()*(getIntY() + energyAdjustY)),
 					   (int)(gameCanvas.getScaleX()*(energyChunkSize)),
 					   (int)(gameCanvas.getScaleY()*(DEFAULT_HEALTHBAR_HEIGHT)));
 			addPerChunk += energyChunkSize + energyChunkSize/3;
@@ -138,14 +138,14 @@ public class playerHealthBar extends interfaceObject  {
 			bottle b = player.getCurrentPlayer().getEquippedBottle();
 			g.setColor(DEFAULT_BOTTLE_COLOR);
 			g.drawImage(b.getImage(), 
-					(int)(gameCanvas.getScaleX()*(getX() + bottleAdjustX)), 
-					(int)(gameCanvas.getScaleY()*(getY() + bottleAdjustY)), 
+					(int)(gameCanvas.getScaleX()*(getIntX() + bottleAdjustX)), 
+					(int)(gameCanvas.getScaleY()*(getIntY() + bottleAdjustY)), 
 					(int)(gameCanvas.getScaleX()*(b.getImage().getWidth())), 
 					(int)(gameCanvas.getScaleY()*(b.getImage().getHeight())), 
 					null);
 			g.drawString(b.getChargesLeft() + "/" + b.getMaxCharges(),
-					(int)(gameCanvas.getScaleX()*(getX() + bottleAdjustX + 25)),
-					(int)(gameCanvas.getScaleY()*(getY() + bottleAdjustY + b.getImage().getHeight()/2 + 5)));
+					(int)(gameCanvas.getScaleX()*(getIntX() + bottleAdjustX + 25)),
+					(int)(gameCanvas.getScaleY()*(getIntY() + bottleAdjustY + b.getImage().getHeight()/2 + 5)));
 		}
 		
 		// Draw quest UI
@@ -156,8 +156,8 @@ public class playerHealthBar extends interfaceObject  {
 		if(quest.getCurrentQuests()!=null) {
 			for(int i = 0; i < quest.getCurrentQuests().size(); i++) {
 				g.drawString("Quest: " + quest.getCurrentQuests().get(i),
-						(int)(gameCanvas.getScaleX()*(getX() + questAdjustX - g.getFontMetrics().stringWidth("Quest: " + quest.getCurrentQuests().get(i))/2)),
-						(int)(gameCanvas.getScaleY()*(getY() + questAdjustY + 5)));
+						(int)(gameCanvas.getScaleX()*(getIntX() + questAdjustX - g.getFontMetrics().stringWidth("Quest: " + quest.getCurrentQuests().get(i))/2)),
+						(int)(gameCanvas.getScaleY()*(getIntY() + questAdjustY + 5)));
 				questAdjustY += 15;
 			}
 		}

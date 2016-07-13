@@ -3,6 +3,7 @@ package doodads.sheepFarm;
 import java.util.Random;
 
 import drawing.camera;
+import drawing.userInterface.tooltipString;
 import interactions.event;
 import interactions.interactBox;
 import interactions.textSeries;
@@ -22,7 +23,7 @@ import utilities.stringUtils;
 import utilities.time;
 import zones.zone;
 
-public class well extends chunk {
+public class well extends water {
 	
 	////////////////
 	/// DEFAULTS ///
@@ -41,67 +42,9 @@ public class well extends chunk {
 	// The actual type.
 	private static generalChunkType typeReference = new generalChunkType(DEFAULT_CHUNK_NAME, DEFAULT_CHUNK_SPRITESHEET, DEFAULT_CHUNK_WIDTH, DEFAULT_CHUNK_HEIGHT);  
 	
-	// Have saved?
-	private boolean haveSaved = true;
-	
-	////////////////
-	/// FIELDS /////
-	////////////////
-	
-	// Sequence for haystacks.
-	private interactBox interactSequence;
-	
-	///////////////
-	/// METHODS ///
-	///////////////
-		
-	// Interact stuff.
-		public void doInteractStuff() {
-			
-			if(interactSequence != null) {
-				// Save
-				if(!haveSaved && interactSequence.getTheText().getButtonText().equals("Yes")) {
-					if(player.getCurrentPlayer().getEquippedBottle()!=null) player.getCurrentPlayer().getEquippedBottle().refill();
-					saveState.createSaveState();
-					haveSaved = true;
-					interactSequence.toggleDisplay();
-					main.restartGame("Save");
-				}
-				
-				// Don't save.
-				if(interactSequence.getTheText().getButtonText().equals("No")) {
-					
-				}
-			}
-		}
-		
-		// Update
-		@Override
-		public void update() {
-			doInteractStuff();
-		}
-		
-		// Interacting with heals you and saves.
-		@Override
-		public void interactWith() {
-			
-			// Play sound
-			sound s = new sound(water.waterSplash);
-			s.start();
-			
-			// Restart sequence.
-			interactSequence = water.makeInteractSequence();
-			
-			// Reset booleans
-			haveSaved = false;
-			
-			// Toggle display.
-			interactSequence.toggleDisplay();
-	}
-	
 	// Constructor
 	public well(int newX, int newY, int i) {
-		super(typeReference, newX, newY, i, 0);
+		super(typeReference, newX, newY);
 		if(mode.getCurrentMode().equals("topDown")) {
 			setHitBoxAdjustmentY(10);
 			setWidth(35);
@@ -112,12 +55,5 @@ public class well extends chunk {
 			setHeight(DEFAULT_CHUNK_HEIGHT);
 			setWidth(DEFAULT_CHUNK_WIDTH);
 		}
-		
-		// Interactable.
-		interactable = true;
-		interactSequence = water.makeInteractSequence();
-		
-		// Passable.
-		setPassable(false);
 	}
 }

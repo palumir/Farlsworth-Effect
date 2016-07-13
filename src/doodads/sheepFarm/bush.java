@@ -79,7 +79,7 @@ public class bush extends chunk {
 		}
 		
 		// Set interactable.
-		interactable = true;
+		setInteractable(true);
 		
 		// Set not passable.
 		setPassable(false);
@@ -152,11 +152,11 @@ public class bush extends chunk {
 			
 			// Play sound
 			sound s = new sound(clearBush);
-			s.setPosition(getX(), getY(), sound.DEFAULT_SOUND_RADIUS);
+			s.setPosition(getIntX(), getIntY(), sound.DEFAULT_SOUND_RADIUS);
 			s.start();
 			
 			// Spawn a lever.
-			lever l = new lever(getX(), getY(), 0);
+			lever l = new lever(getIntX(), getIntY(), 0);
 			l.setBushLever(true);
 			leverRevealed.setCompleted(true);
 			

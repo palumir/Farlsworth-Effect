@@ -14,7 +14,6 @@ import effects.effectTypes.floatingString;
 import items.weapons.torch;
 import modes.mode;
 import sounds.sound;
-import units.animalType;
 import units.humanType;
 import units.player;
 import units.unit;
@@ -130,19 +129,19 @@ public class webDoor extends unit {
 		
 		// Crit
 		if(crit != 1f) {
-			effect e = new floatingString("" + (int)(crit*damage), DEFAULT_CRIT_COLOR, getX() + getWidth()/2, getY() + getHeight()/2, 1f, 3f);
+			effect e = new floatingString("" + (int)(crit*damage), DEFAULT_CRIT_COLOR, getIntX() + getWidth()/2, getIntY() + getHeight()/2, 1f, 3f);
 		}
 		
 		// Non crit.
 		else {
-			effect e = new floatingString("" + damage, DEFAULT_DAMAGE_COLOR, getX() + getWidth()/2, getY() + getHeight()/2, 1f);
+			effect e = new floatingString("" + damage, DEFAULT_DAMAGE_COLOR, getIntX() + getWidth()/2, getIntY() + getHeight()/2, 1f);
 		}
 		
 		// Squirt blood
 		int randomX = 0;
 		int randomY = -platformerHeight/3 + utility.RNG.nextInt(platformerHeight/3 + 1);
-		effect blood = new bloodSquirt(getX() - bloodSquirt.getDefaultWidth()/2 + topDownWidth/2 + randomX ,
-				   getY() - bloodSquirt.getDefaultHeight()/2 + platformerHeight/2 + randomY);
+		effect blood = new bloodSquirt(getIntX() - bloodSquirt.getDefaultWidth()/2 + topDownWidth/2 + randomX ,
+				   getIntY() - bloodSquirt.getDefaultHeight()/2 + platformerHeight/2 + randomY);
 		reactToPain();
 		return false;
 	}

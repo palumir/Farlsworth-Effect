@@ -93,8 +93,8 @@ public class saveState implements Serializable {
 				// Load our player. 
 				player currPlayer = player.getCurrentPlayer();
 				s.setZoneName(currPlayer.getCurrentZone().getName());
-				s.setPlayerX(currPlayer.getX());
-				s.setPlayerY(currPlayer.getY());
+				s.setPlayerX(currPlayer.getIntX());
+				s.setPlayerY(currPlayer.getIntY());
 				s.setFacingDirection(currPlayer.getFacingDirection());
 				s.setPlayerInventory(currPlayer.getPlayerInventory());
 				s.setEquippedWeapon(currPlayer.getEquippedWeapon());

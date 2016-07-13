@@ -83,8 +83,8 @@ public class clawMarkYellow extends chunk {
 			Graphics2D g2d = (Graphics2D) g.create();
 			g2d.setComposite(AlphaComposite.SrcOver.derive(alpha));
 			g2d.drawImage(chunkImage, 
-					drawX, 
-					drawY, 
+					getDrawX(), 
+					getDrawY(), 
 					(int)(gameCanvas.getScaleX()*chunkImage.getWidth() + changeFactor), 
 					(int)(gameCanvas.getScaleY()*chunkImage.getHeight() + changeFactor), 
 					null);
@@ -92,8 +92,8 @@ public class clawMarkYellow extends chunk {
 			// Draw the outskirts of the sprite.
 			if(showSpriteBox) {
 				g.setColor(Color.red);
-				g.drawRect(drawX,
-						   drawY, 
+				g.drawRect(getDrawX(),
+						   getDrawY(), 
 						   (int)(gameCanvas.getScaleX()*getObjectSpriteSheet().getSpriteWidth()), 
 						   (int)(gameCanvas.getScaleY()*getObjectSpriteSheet().getSpriteHeight()));
 			}
@@ -101,8 +101,8 @@ public class clawMarkYellow extends chunk {
 			// Draw the hitbox of the image in green.
 			if(showHitBox) {
 				g.setColor(Color.green);
-				g.drawRect(drawX - (int)(gameCanvas.getScaleX()*(- (getObjectSpriteSheet().getSpriteWidth()/2 - getWidth()/2) - getHitBoxAdjustmentX())),
-						   drawY - (int)(gameCanvas.getScaleY()*(- (getObjectSpriteSheet().getSpriteHeight()/2 - getHeight()/2) - getHitBoxAdjustmentY())), 
+				g.drawRect(getDrawX() - (int)(gameCanvas.getScaleX()*(- (getObjectSpriteSheet().getSpriteWidth()/2 - getWidth()/2) - getHitBoxAdjustmentX())),
+						   getDrawY() - (int)(gameCanvas.getScaleY()*(- (getObjectSpriteSheet().getSpriteHeight()/2 - getHeight()/2) - getHitBoxAdjustmentY())), 
 						   (int)(gameCanvas.getScaleX()*getWidth()), 
 						   (int)(gameCanvas.getScaleY()*getHeight()));
 			}
@@ -110,9 +110,9 @@ public class clawMarkYellow extends chunk {
 			// Draw the x,y coordinates of the unit.
 			if(showUnitPosition) {
 				g.setColor(Color.white);
-				g.drawString((int)(gameCanvas.getScaleX()*getX()) + "," + (int)(gameCanvas.getScaleX()*getY()),
-						   drawX,
-						   drawY);
+				g.drawString((int)(gameCanvas.getScaleX()*getIntX()) + "," + (int)(gameCanvas.getScaleX()*getIntY()),
+						   getDrawX(),
+						   getDrawY());
 			}
 		}
 	}

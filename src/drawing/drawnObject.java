@@ -58,26 +58,30 @@ public abstract class drawnObject {
 				    	if(!(d1 instanceof groundTile) && d2 instanceof groundTile) return 7;
 				    	else if(d1 instanceof groundTile && !(d2 instanceof groundTile)) return -7;
 					    else {	
-					    	// Different comparator for drawing effects over ...
-					    	if(d1 instanceof effect && !(d2 instanceof effect) /*&& d1.getY()+d1.getHeight() <= d2.getY()*/) return 6;
-					    	else if(d2 instanceof effect && !(d1 instanceof effect) /*&& d2.getY()+d2.getHeight() <= d1.getY()*/) return -6;
+				    		if(d1.forceInFront && !d2.forceInFront) return 6;
+				    		else if(!d1.forceInFront && d2.forceInFront) return -6;
 					    	else {
-								int z1;
-								int z2;
-								
-								// Get z1, assume 0 if not set.
-								if(d1.getZ() == null) z1 = 0;
-								else z1 = d1.getZ();
-								
-								// Get z2, assume 0 if not set.
-								if(d2.getZ() == null) z2 = 0;
-								else z2 = d2.getZ();
-								
-								// Return the comparison between the two.
-								if(z1 - z2 > 0) return 1;
-								if(z1 - z2 < 0) return -1;
-								else return 0;
-					    	}
+					    		// Different comparator for drawing effects over ...
+					    		if(d1 instanceof effect && !(d2 instanceof effect) /*&& d1.getY()+d1.getHeight() <= d2.getY()*/) return 5;
+					    		else if(d2 instanceof effect && !(d1 instanceof effect) /*&& d2.getY()+d2.getHeight() <= d1.getY()*/) return -5;
+					    		else {
+									int z1;
+									int z2;
+									
+									// Get z1, assume 0 if not set.
+									if(d1.getZ() == null) z1 = 0;
+									else z1 = d1.getZ();
+									
+									// Get z2, assume 0 if not set.
+									if(d2.getZ() == null) z2 = 0;
+									else z2 = d2.getZ();
+									
+									// Return the comparison between the two.
+									if(z1 - z2 > 0) return 1;
+									if(z1 - z2 < 0) return -1;
+									else return 0;
+						    	}
+						    }
 					    }
 			    	}
 		    	}
@@ -105,14 +109,18 @@ public abstract class drawnObject {
 			    	if(!(d1 instanceof groundTile) && d2 instanceof groundTile) return 8;
 			    	else if(d1 instanceof groundTile && !(d2 instanceof groundTile)) return -8;
 			    	else {
-				    	if(d1.isBackgroundDoodad() && !d2.isBackgroundDoodad()) return -7;
-				    	else if(!d1.isBackgroundDoodad() && d2.isBackgroundDoodad()) return 7;
-					    else {	
-						        // Draw units closer to the camera first.
-						    	if(d1.y + d1.getHeight() > d2.y + d2.getHeight()) return 5;
-						    	else if(d1.y + d1.getHeight() < d2.y + d2.getHeight()) return -5;
-						    	else return 0;
-					    }
+			    		if(d1.forceInFront && !d2.forceInFront) return 7;
+			    		else if(!d1.forceInFront && d2.forceInFront) return -7;
+				    	else {
+					    	if(d1.isBackgroundDoodad() && !d2.isBackgroundDoodad()) return -6;
+					    	else if(!d1.isBackgroundDoodad() && d2.isBackgroundDoodad()) return 6;
+						    else {	
+							        // Draw units closer to the camera first.
+							    	if(d1.getIntY() + d1.getHeight() > d2.getIntY() + d2.getHeight()) return 5;
+							    	else if(d1.getIntY() + d1.getHeight() < d2.getIntY() + d2.getHeight()) return -5;
+							    	else return 0;
+						    }
+				    	}
 			    	}
 		    	}
 	    	}
@@ -124,15 +132,21 @@ public abstract class drawnObject {
 	//////////////
 	
 	// X and Y
-	private int x;
-	private int y;
+	private float floatX;
+	private float floatY;
+	
+	// Draw sprite?
+	private boolean drawSprite = true;
 	
 	// Z axis for platformer.
 	private Integer z;
 	
+	// Draw in front?
+	protected boolean forceInFront = false;
+	
 	// Draw X and Y, different from X and Y.
-	protected int drawX;
-	protected int drawY;
+	private int drawX;
+	private int drawY;
 	
 	// Width and height.
 	private int width;
@@ -142,10 +156,10 @@ public abstract class drawnObject {
 	private boolean drawObject = true;
 	
 	// Is it drawn in the background? But above text tiles.
-	private boolean backgroundDoodad = false;
+	protected boolean backgroundDoodad = false;
 	
 	// Can we interact with the object?
-	protected boolean interactable = false;
+	private boolean interactable = false;
 	
 	// Developer stuff
 	protected boolean showHitBox = false;
@@ -174,8 +188,8 @@ public abstract class drawnObject {
 			setHitBoxAdjustmentX(objectSpriteSheet.getHitBoxAdjustmentX());
 			setHitBoxAdjustmentY(objectSpriteSheet.getHitBoxAdjustmentY());
 		}
-		setX(newX);
-		setY(newY);
+		setFloatX(newX);
+		setFloatY(newY);
 		setWidth(newWidth);
 		setHeight(newHeight);
 		addObject(this);
@@ -186,10 +200,10 @@ public abstract class drawnObject {
 		ArrayList<drawnObject> returnList = new ArrayList<drawnObject>();
 		for(int i = 0; i < objects.size(); i++) {
 			drawnObject o = objects.get(i);
-			if(o.getX() < x2 && 
-					 o.getX() + o.getWidth() > x1 && 
-					 o.getY() < y2 && 
-					 o.getY() + o.getHeight() > y1) {
+			if(o.getIntX() < x2 && 
+					 o.getIntX() + o.getWidth() > x1 && 
+					 o.getIntY() < y2 && 
+					 o.getIntY() + o.getHeight() > y1) {
 				returnList.add(o);
 			}
 		}
@@ -315,16 +329,16 @@ public abstract class drawnObject {
 					}
 					
 					 // Adjust.
-					 d.drawX = calculateDrawX(d, d.getX());
-					 d.drawY = calculateDrawY(d, d.getY());
+					 d.setDrawX(calculateDrawX(d, d.getIntX()));
+					 d.setDrawY(calculateDrawY(d, d.getIntY()));
 					
 					// Draw the object if it's on the screen.
 					if(d instanceof tooltipString ||
 						d instanceof interfaceObject ||
-					   (d.drawX + gameCanvas.getScaleX()*spriteWidth > 0 && 
-					   d.drawY + gameCanvas.getScaleY()*spriteHeight > 0 && 
-					   d.drawX < gameCanvas.getActualWidth() && 
-					   d.drawY < gameCanvas.getActualHeight())) {
+					   (d.getDrawX() + gameCanvas.getScaleX()*spriteWidth > 0 && 
+					   d.getDrawY() + gameCanvas.getScaleY()*spriteHeight > 0 && 
+					   d.getDrawX() < gameCanvas.getActualWidth() && 
+					   d.getDrawY() < gameCanvas.getActualHeight())) {
 						d.drawObject(g);
 					}
 				}
@@ -338,10 +352,10 @@ public abstract class drawnObject {
 		// Check each side.
 		boolean intercepts = false;
 		if(checkObject !=null) {
-			intercepts = newX < checkObject.getX() + checkObject.getWidth() && 
-								 newX + getWidth() > checkObject.getX() && 
-								 newY < checkObject.getY() + checkObject.getHeight() && 
-								 newY + getHeight() > checkObject.getY();
+			intercepts = newX < checkObject.getIntX() + checkObject.getWidth() && 
+								 newX + getWidth() > checkObject.getIntX() && 
+								 newY < checkObject.getIntY() + checkObject.getHeight() && 
+								 newY + getHeight() > checkObject.getIntY();
 		}
 		return intercepts;
 	}
@@ -392,7 +406,7 @@ public abstract class drawnObject {
 	/// Getters and Setters ///
 	///////////////////////////
 	public boolean canInteract() {
-		return interactable;
+		return isInteractable();
 	}
 	
 	public void showHitBox() {
@@ -420,20 +434,28 @@ public abstract class drawnObject {
 		if(mode.getCurrentMode() == "platformer") Collections.sort(objects, platformerComparator);
 	}
 
-	public int getY() {
-		return y;
+	public int getIntY() {
+		return (int)floatY;
+	}
+	
+	public float getFloatY() {
+		return floatY;
 	}
 
-	public void setY(int y) {
-		this.y = y;
+	public void setFloatY(float y) {
+		this.floatY = y;
+	}
+	
+	public float getFloatX() {
+		return floatX;
 	}
 
-	public int getX() {
-		return x;
+	public int getIntX() {
+		return (int)floatX;
 	}
 
-	public void setX(int x) {
-		this.x = x;
+	public void setFloatX(float x) {
+		this.floatX = x;
 	}
 
 	public spriteSheet getObjectSpriteSheet() {
@@ -506,6 +528,38 @@ public abstract class drawnObject {
 
 	public void setZ(Integer z) {
 		this.z = z;
+	}
+
+	public int getDrawX() {
+		return drawX;
+	}
+
+	public void setDrawX(int drawX) {
+		this.drawX = drawX;
+	}
+
+	public int getDrawY() {
+		return drawY;
+	}
+
+	public void setDrawY(int drawY) {
+		this.drawY = drawY;
+	}
+
+	public boolean isDrawSprite() {
+		return drawSprite;
+	}
+
+	public void setDrawSprite(boolean drawSprite) {
+		this.drawSprite = drawSprite;
+	}
+
+	public boolean isInteractable() {
+		return interactable;
+	}
+
+	public void setInteractable(boolean interactable) {
+		this.interactable = interactable;
 	}
 	
 }

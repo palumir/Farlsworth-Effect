@@ -82,7 +82,7 @@ public class normalBottle extends bottle {
 	public void reactToPickup() {
 		player currPlayer = player.getCurrentPlayer();
 		if(currPlayer != null) {
-			tooltipString t = new tooltipString("Press 'q' to use bottle.");
+			tooltipString t = new tooltipString("Press 'enter' to use bottle.");
 		}
 	}
 

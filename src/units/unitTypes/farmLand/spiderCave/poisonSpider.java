@@ -133,7 +133,7 @@ public class poisonSpider extends unit {
 		
 		// Set combat stuff.
 		setCombatStuff();
-		attackSound = spiderAttack;
+		setAttackSound(spiderAttack);
 		
 		// Event load.
 		projectileToolTipDisplayed = new event("Unit: projectileToolTipLoaded");
@@ -237,19 +237,19 @@ public class poisonSpider extends unit {
 	
 	// Make sure the movement is within a certain radius.
 	public void checkMovement(String direction) {
-			if(getX() < startX - patrolRadius) moveUnit("right");
-			else if(getX() + getWidth() > startX + patrolRadius)  moveUnit("left");
-			else if(getY() < startY - patrolRadius) moveUnit("down");
-			else if(getY() + getHeight() > startY + patrolRadius) moveUnit("up");
+			if(getIntX() < startX - patrolRadius) moveUnit("right");
+			else if(getIntX() + getWidth() > startX + patrolRadius)  moveUnit("left");
+			else if(getIntY() < startY - patrolRadius) moveUnit("down");
+			else if(getIntY() + getHeight() > startY + patrolRadius) moveUnit("up");
 			else moveUnit(direction);
 	}
 	
 	// Shoot poison.
 	public void shootPoison() {
 		// Spawn the poison ball.
-		poisonBall p = new poisonBall(getX()+getWidth()/2,getY()+getHeight()/2,
-				player.getCurrentPlayer().getX()+player.getCurrentPlayer().getWidth()/2,
-				player.getCurrentPlayer().getY()+player.getCurrentPlayer().getHeight()/2,
+		poisonBall p = new poisonBall(getIntX()+getWidth()/2,getIntY()+getHeight()/2,
+				player.getCurrentPlayer().getIntX()+player.getCurrentPlayer().getWidth()/2,
+				player.getCurrentPlayer().getIntY()+player.getCurrentPlayer().getHeight()/2,
 				DEFAULT_ATTACK_DAMAGE);
 	}
 	
@@ -259,9 +259,9 @@ public class poisonSpider extends unit {
 		if(!isAttacking() && canAttack) {
 			
 			// Attack sound.
-			if(attackSound!=null) {
-				sound s = new sound(attackSound);
-				s.setPosition(getX(), getY(), sound.DEFAULT_SOUND_RADIUS);
+			if(getAttackSound()!=null) {
+				sound s = new sound(getAttackSound());
+				s.setPosition(getIntX(), getIntY(), sound.DEFAULT_SOUND_RADIUS);
 				s.start();
 			}
 			setAttacking(true);
@@ -295,7 +295,7 @@ public class poisonSpider extends unit {
 	public void reactToPain() {
 		// Play a bark on pain.
 		sound s = new sound(spiderHurt);
-		s.setPosition(getX(), getY(), sound.DEFAULT_SOUND_RADIUS);
+		s.setPosition(getIntX(), getIntY(), sound.DEFAULT_SOUND_RADIUS);
 		s.start();
 	}
 
@@ -307,34 +307,34 @@ public class poisonSpider extends unit {
 			int moveY = 0;
 			
 			// Actual movement.
-			if(movingLeft) moveX -= moveSpeed;
-			if(movingRight) moveX += moveSpeed;
+			if(isMovingLeft()) moveX -= moveSpeed;
+			if(isMovingRight()) moveX += moveSpeed;
 			
 			// Only do these ones if we're in topDown mode.
 			if(mode.getCurrentMode() == "topDown" || isStuck()) {
-				if(movingUp) moveY -= moveSpeed;
-				if(movingDown) moveY += moveSpeed;
+				if(isMovingUp()) moveY -= moveSpeed;
+				if(isMovingDown()) moveY += moveSpeed;
 			}
 			
 			// Deal with direction facing.
-			if(movingLeft && movingUp) setFacingDirection("Left");
-			else if(movingRight && movingUp) setFacingDirection("Right");
-			else if(movingLeft && movingDown) setFacingDirection("Left");
-			else if(movingRight && movingDown) setFacingDirection("Right");
-			else if(movingDown && (mode.getCurrentMode() != "platformer" || isStuck())) setFacingDirection("Down");
-			else if(movingUp && (mode.getCurrentMode() != "platformer" || isStuck())) setFacingDirection("Up");
-			else if(movingRight) setFacingDirection("Right");
-			else if(movingLeft) setFacingDirection("Left");
+			if(isMovingLeft() && isMovingUp()) setFacingDirection("Left");
+			else if(isMovingRight() && isMovingUp()) setFacingDirection("Right");
+			else if(isMovingLeft() && isMovingDown()) setFacingDirection("Left");
+			else if(isMovingRight() && isMovingDown()) setFacingDirection("Right");
+			else if(isMovingDown() && (mode.getCurrentMode() != "platformer" || isStuck())) setFacingDirection("Down");
+			else if(isMovingUp() && (mode.getCurrentMode() != "platformer" || isStuck())) setFacingDirection("Up");
+			else if(isMovingRight()) setFacingDirection("Right");
+			else if(isMovingLeft()) setFacingDirection("Left");
 			
 			// Actually move the unit.
-			int oldX = getX();
-			int oldY = getY();
+			int oldX = getIntX();
+			int oldY = getIntY();
 			move(moveX, moveY);
 			
 			// Check if we aren't stuck anymore by doing this.
 			if(getStuckOn() != null &&
-			!isWithinRadius(getStuckOn().getX()+getStuckOn().getWidth()/2,getStuckOn().getY()+getStuckOn().getHeight()/2,getStuckOn().getWidth()/2)) {
-				move(oldX - getX(), oldY - getY());
+			!isWithinRadius(getStuckOn().getIntX()+getStuckOn().getWidth()/2,getStuckOn().getIntY()+getStuckOn().getHeight()/2,getStuckOn().getWidth()/2)) {
+				move(oldX - getIntX(), oldY - getIntY());
 				stopMove("all");
 			}
 		//}
@@ -345,9 +345,9 @@ public class poisonSpider extends unit {
 		
 		// If player is in radius, follow player, attacking.
 		player currPlayer = player.getCurrentPlayer();
-		int playerX = currPlayer.getX();
-		int playerY = currPlayer.getY();
-		float howClose = (float) Math.sqrt((playerX - getX())*(playerX - getX()) + (playerY - getY())*(playerY - getY()));
+		int playerX = currPlayer.getIntX();
+		int playerY = currPlayer.getIntY();
+		float howClose = (float) Math.sqrt((playerX - getIntX())*(playerX - getIntX()) + (playerY - getIntY())*(playerY - getIntY()));
 		
 		// Attack if we're in radius.
 		if(howClose < DEFAULT_ATTACK_RADIUS || aggrod) {
@@ -370,7 +370,7 @@ public class poisonSpider extends unit {
 				// Play aggrod sound on aggro.
 				if(!aggrod) {
 					sound s = new sound(spiderAggro);
-					s.setPosition(getX(), getY(), sound.DEFAULT_SOUND_RADIUS);
+					s.setPosition(getIntX(), getIntY(), sound.DEFAULT_SOUND_RADIUS);
 					s.start();
 				}
 				

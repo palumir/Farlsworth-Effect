@@ -15,7 +15,7 @@ import drawing.spriteSheet;
 import effects.effect;
 import effects.effectTypes.floatingString;
 import items.bottles.normalBottle;
-import items.keys.sheepKey;
+import items.keys.farmKey;
 import items.weapons.dagger;
 import items.weapons.torch;
 import sounds.sound;
@@ -91,11 +91,12 @@ public abstract class item extends drawnObject {
 			if((player.getCurrentPlayer().getEquippedWeapon() == null && this instanceof weapon) ||
 					(player.getCurrentPlayer().getEquippedBottle() == null && this instanceof bottle)) {
 				this.getItemRef().equip();
+				if(this instanceof bottle) ((bottle)this.getItemRef()).setChargesLeft(((bottle)this.getItemRef()).getMaxCharges());
 			}
 		
 			// Display text. 
 			player currPlayer = player.getCurrentPlayer();
-			effect e = new floatingString("+" + stringUtils.toTitleCase(name), DEFAULT_PICKUP_COLOR, currPlayer.getX() + currPlayer.getWidth()/2, currPlayer.getY() + currPlayer.getHeight()/2, 1.2f);
+			effect e = new floatingString("+" + stringUtils.toTitleCase(name), DEFAULT_PICKUP_COLOR, currPlayer.getIntX() + currPlayer.getWidth()/2, currPlayer.getIntY() + currPlayer.getHeight()/2, 1.2f);
 			
 			// At least add the item to the player's inventory.
 			player.getCurrentPlayer().getPlayerInventory().pickUp(this.getItemRef());
@@ -126,8 +127,8 @@ public abstract class item extends drawnObject {
 	@Override
 	public void drawObject(Graphics g) {
 		g.drawImage(getImage(), 
-				drawX, 
-				drawY, 
+				getDrawX(), 
+				getDrawY(), 
 				(int)(gameCanvas.getScaleX()*getImage().getWidth()), 
 				(int)(gameCanvas.getScaleY()*getImage().getHeight()), 
 				null);
@@ -148,7 +149,7 @@ public abstract class item extends drawnObject {
 		if(normalBottle.bottleRef == null) normalBottle.bottleRef = new normalBottle();
 		
 		// Keys.
-		if(sheepKey.keyRef == null) sheepKey.keyRef = new sheepKey();
+		if(farmKey.keyRef == null) farmKey.keyRef = new farmKey();
 		
 	}
 

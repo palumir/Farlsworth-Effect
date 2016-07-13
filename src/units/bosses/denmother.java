@@ -280,7 +280,7 @@ public class denmother extends boss {
 		
 		// Set interactable.
 		setCollisionOn(false);
-		interactable = true;
+		setInteractable(true);
 		
 		// Spritesheets.
 		howlSpriteSheet = new spriteSheet(new spriteSheetInfo(
@@ -322,7 +322,7 @@ public class denmother extends boss {
 		setHitBoxAdjustmentY(getDefaultHitBoxAdjustmentY());
 		
 		// Setup region.
-		fightRegion = new region(this.getX() + this.getWidth()/2, this.getY() + this.getHeight()/2, DEFAULT_ARENA_RADIUS);
+		fightRegion = new region(this.getIntX() + this.getWidth()/2, this.getIntY() + this.getHeight()/2, DEFAULT_ARENA_RADIUS);
 
 	}
 	
@@ -457,8 +457,8 @@ public class denmother extends boss {
 				wolfPack = null;
 				
 				// Do a huge blood squirt.
-				effect blood = new critBloodSquirt(getX() - critBloodSquirt.getDefaultWidth()/2 + topDownWidth/2,
-						   getY() - critBloodSquirt.getDefaultHeight()/2);
+				effect blood = new critBloodSquirt(getIntX() - critBloodSquirt.getDefaultWidth()/2 + topDownWidth/2,
+						   getIntY() - critBloodSquirt.getDefaultHeight()/2);
 				
 				
 				// Drop loot.
@@ -540,7 +540,7 @@ public class denmother extends boss {
 			if(time.getTime() - lastSnore > snoreEvery*1000) {
 				lastSnore = time.getTime();
 				sound s = new sound(snore);
-				s.setPosition(getX(),getY(),sound.DEFAULT_SOUND_RADIUS);
+				s.setPosition(getIntX(),getIntY(),sound.DEFAULT_SOUND_RADIUS);
 				s.start();
 			}
 			
@@ -702,8 +702,8 @@ public class denmother extends boss {
 			double currentDegree = 0;
 			double degreeChange = (double) 360/n;
 			for(int i = 0; i < n; i++){
-				int newX = (int) (getX() + radius*Math.cos(Math.toRadians(currentDegree))); 
-				int newY = (int) (getY() + radius*Math.sin(Math.toRadians(currentDegree)));
+				int newX = (int) (getIntX() + radius*Math.cos(Math.toRadians(currentDegree))); 
+				int newY = (int) (getIntY() + radius*Math.sin(Math.toRadians(currentDegree)));
 				currentDegree += degreeChange;
 				wolfPackPoints.add(new intTuple(newX, newY));
 			}
@@ -715,8 +715,8 @@ public class denmother extends boss {
 			for(int i = 0; i < n; i++){
 				int randomY = utility.RNG.nextInt(76);
 				int randomX = utility.RNG.nextInt(72);
-				int newX = (int) (getX() + (randomX + radius)*Math.cos(Math.toRadians(currentDegree))); 
-				int newY = (int) (getY() + (randomY + radius)*Math.sin(Math.toRadians(currentDegree)));
+				int newX = (int) (getIntX() + (randomX + radius)*Math.cos(Math.toRadians(currentDegree))); 
+				int newY = (int) (getIntY() + (randomY + radius)*Math.sin(Math.toRadians(currentDegree)));
 				originalPoints.add(new intTuple(newX, newY));
 				currentDegree += degreeChange;
 				int randomInt = utility.RNG.nextInt(3);
@@ -817,20 +817,20 @@ public class denmother extends boss {
 							
 							// Move in the direction.
 							if(moveDir.equals("left")) {
-								wolfPackPoints.get(i).x = wolfPack.get(i).getX() - 1000;
-								wolfPackPoints.get(i).y = wolfPack.get(i).getY();
+								wolfPackPoints.get(i).x = wolfPack.get(i).getIntX() - 1000;
+								wolfPackPoints.get(i).y = wolfPack.get(i).getIntY();
 							}
 							if(moveDir.equals("right")) {
-								wolfPackPoints.get(i).x = wolfPack.get(i).getX() + 1000;
-								wolfPackPoints.get(i).y = wolfPack.get(i).getY();
+								wolfPackPoints.get(i).x = wolfPack.get(i).getIntX() + 1000;
+								wolfPackPoints.get(i).y = wolfPack.get(i).getIntY();
 							}
 							if(moveDir.equals("up")) {
-								wolfPackPoints.get(i).y = wolfPack.get(i).getY() - 1000;
-								wolfPackPoints.get(i).x = wolfPack.get(i).getX();
+								wolfPackPoints.get(i).y = wolfPack.get(i).getIntY() - 1000;
+								wolfPackPoints.get(i).x = wolfPack.get(i).getIntX();
 							}
 							if(moveDir.equals("down")){
-								wolfPackPoints.get(i).y = wolfPack.get(i).getY() + 1000;
-								wolfPackPoints.get(i).x = wolfPack.get(i).getX();
+								wolfPackPoints.get(i).y = wolfPack.get(i).getIntY() + 1000;
+								wolfPackPoints.get(i).x = wolfPack.get(i).getIntX();
 							}
 					}
 				}
@@ -840,36 +840,36 @@ public class denmother extends boss {
 				int yMove = 0;
 				
 				// Move region in x?
-				if(wolfPackPoints.get(0).x - wolfPack.get(0).getX() > 3) {
+				if(wolfPackPoints.get(0).x - wolfPack.get(0).getIntX() > 3) {
 					xMove = 1;
 				}
-				else if (wolfPackPoints.get(0).x - wolfPack.get(0).getX() < -3) {
+				else if (wolfPackPoints.get(0).x - wolfPack.get(0).getIntX() < -3) {
 					xMove = -1;
 				}
 				
 				// Move region in y?
-				if(wolfPackPoints.get(0).y - wolfPack.get(0).getY() > 3) {
+				if(wolfPackPoints.get(0).y - wolfPack.get(0).getIntY() > 3) {
 					yMove = 1;
 				}
-				else if (wolfPackPoints.get(0).y - wolfPack.get(0).getY() < -3) {
+				else if (wolfPackPoints.get(0).y - wolfPack.get(0).getIntY() < -3) {
 					yMove = -1;
 				}
 				
 				// Move region.
-				fightRegion.setX(fightRegion.getX() + xMove*wolfPack.get(0).getMoveSpeed());
-				fightRegion.setY(fightRegion.getY() + yMove*wolfPack.get(0).getMoveSpeed());
+				fightRegion.setX(fightRegion.getIntX() + xMove*wolfPack.get(0).getMoveSpeed());
+				fightRegion.setY(fightRegion.getIntY() + yMove*wolfPack.get(0).getMoveSpeed());
 				
 				// Move jumping to X and Y if dog is jumping.
 				if(jumpingToMiddle) {
-					jumpingToX = fightRegion.getX() - getWidth()/2 + xMove*wolfPack.get(0).getMoveSpeed();
-					jumpingToY = fightRegion.getY() - getHeight()/2 + yMove*wolfPack.get(0).getMoveSpeed();
+					jumpingToX = fightRegion.getIntX() - getWidth()/2 + xMove*wolfPack.get(0).getMoveSpeed();
+					jumpingToY = fightRegion.getIntY() - getHeight()/2 + yMove*wolfPack.get(0).getMoveSpeed();
 				}
 				
 				// Move claws.
 				if(claws != null) {
 					for(int i = 0; i < claws.size(); i++) {
-						claws.get(i).setX(claws.get(i).getX() + xMove*wolfPack.get(0).getMoveSpeed());
-						claws.get(i).setY(claws.get(i).getY() + yMove*wolfPack.get(0).getMoveSpeed());
+						claws.get(i).setFloatX(claws.get(i).getIntX() + xMove*wolfPack.get(0).getMoveSpeed());
+						claws.get(i).setFloatY(claws.get(i).getIntY() + yMove*wolfPack.get(0).getMoveSpeed());
 					}
 				}
 				
@@ -910,15 +910,15 @@ public class denmother extends boss {
 			if(jumping) {
 				
 				// set rise/run
-				float yDistance = (jumpingToY - getY());
-				float xDistance = (jumpingToX - getX());
+				float yDistance = (jumpingToY - getIntY());
+				float xDistance = (jumpingToX - getIntX());
 				float distanceXY = (float) Math.sqrt(yDistance * yDistance
 						+ xDistance * xDistance);
 				rise = (int) ((yDistance/distanceXY)*jumpSpeed);
 				run = (int) ((xDistance/distanceXY)*jumpSpeed);
 				
 				// Don't let him not move at all or leave region.
-				if(Math.abs(jumpingToX - getX()) <= jumpSpeed && Math.abs(jumpingToY - getY()) <= jumpSpeed) {
+				if(Math.abs(jumpingToX - getIntX()) <= jumpSpeed && Math.abs(jumpingToY - getIntY()) <= jumpSpeed) {
 					if(claws != null && claws.size() > 0) {
 						claws.get(0).destroy();
 						claws.remove(claws.get(0));
@@ -929,11 +929,11 @@ public class denmother extends boss {
 				}
 				
 				if(jumping) {
-					setX(getX() + run);
-					setY(getY() + rise);
+					setFloatX(getIntX() + run);
+					setFloatY(getIntY() + rise);
 					
 					// If slashing, hurt the player.
-					if(slashing && !hasSlashed && currPlayer.isWithin(getX(), getY(), getX()+getWidth(), getY() + getHeight())) {
+					if(slashing && !hasSlashed && currPlayer.isWithin(getIntX(), getIntY(), getIntX()+getWidth(), getIntY() + getHeight())) {
 						currPlayer.hurt(SLASH_DAMAGE, 1f);
 						hasSlashed = true;
 					}
@@ -949,7 +949,7 @@ public class denmother extends boss {
 		s.start();
 		
 		// Set facing direction.
-		if(this.getX() - newX < 0) {
+		if(this.getIntX() - newX < 0) {
 			setFacingDirection("Right");
 		}
 		else {
@@ -971,7 +971,7 @@ public class denmother extends boss {
 		s.start();
 		
 		// Set facing direction.
-		if(this.getX() - c.getX() < 0) {
+		if(this.getIntX() - c.getIntX() < 0) {
 			setFacingDirection("Right");
 		}
 		else {
@@ -979,8 +979,8 @@ public class denmother extends boss {
 		}
 		
 		// Jump there
-		jumpingToX = c.getX() + c.getWidth()/2 - getWidth()/2;
-		jumpingToY = c.getY() + c.getHeight()/2 - getHeight()/2;
+		jumpingToX = c.getIntX() + c.getWidth()/2 - getWidth()/2;
+		jumpingToY = c.getIntY() + c.getHeight()/2 - getHeight()/2;
 		jumping = true;
 		slashing = true;
 		hasSlashed = false;
@@ -990,8 +990,8 @@ public class denmother extends boss {
 	// Claw attack.
 	public void launchClawAttack() {
 		currentDegree += 90 + utility.RNG.nextInt(90);
-		int newX = (int) (fightRegion.getX() + (fightRegion.getRadius()-10)*Math.cos(Math.toRadians(currentDegree))); 
-		int newY = (int) (fightRegion.getY() + (fightRegion.getRadius()-10)*Math.sin(Math.toRadians(currentDegree)));
+		int newX = (int) (fightRegion.getIntX() + (fightRegion.getRadius()-10)*Math.cos(Math.toRadians(currentDegree))); 
+		int newY = (int) (fightRegion.getIntY() + (fightRegion.getRadius()-10)*Math.sin(Math.toRadians(currentDegree)));
 		jumpTo(newX, newY);
 		
 		// Start slash attack.
@@ -1008,15 +1008,15 @@ public class denmother extends boss {
 			// Spawn claws.
 			if(numClaws > 0 && time.getTime() - lastClawSpawn > clawSpawnTime*1000 && time.getTime() - clawStart > initialClawDelay*1000) {
 					currentDegree += 90 + utility.RNG.nextInt(150);
-					int newX = (int) (fightRegion.getX() + (fightRegion.getRadius()-10)*Math.cos(Math.toRadians(currentDegree))); 
-					int newY = (int) (fightRegion.getY() + (fightRegion.getRadius()-10)*Math.sin(Math.toRadians(currentDegree)));
+					int newX = (int) (fightRegion.getIntX() + (fightRegion.getRadius()-10)*Math.cos(Math.toRadians(currentDegree))); 
+					int newY = (int) (fightRegion.getIntY() + (fightRegion.getRadius()-10)*Math.sin(Math.toRadians(currentDegree)));
 					if(phase > 1) {
-						newX = (int) (fightRegion.getX() + (fightRegion.getRadius() - utility.RNG.nextInt(fightRegion.getRadius()/2))*Math.cos(Math.toRadians(currentDegree))); 
-						newY = (int) (fightRegion.getY() + (fightRegion.getRadius() - utility.RNG.nextInt(fightRegion.getRadius()/2))*Math.sin(Math.toRadians(currentDegree)));
+						newX = (int) (fightRegion.getIntX() + (fightRegion.getRadius() - utility.RNG.nextInt(fightRegion.getRadius()/2))*Math.cos(Math.toRadians(currentDegree))); 
+						newY = (int) (fightRegion.getIntY() + (fightRegion.getRadius() - utility.RNG.nextInt(fightRegion.getRadius()/2))*Math.sin(Math.toRadians(currentDegree)));
 					}
 					if(phase == 4) {
-						newX = (int) (fightRegion.getX() + (fightRegion.getRadius() - utility.RNG.nextInt(fightRegion.getRadius()))*Math.cos(Math.toRadians(currentDegree))); 
-						newY = (int) (fightRegion.getY() + (fightRegion.getRadius() - utility.RNG.nextInt(fightRegion.getRadius()))*Math.sin(Math.toRadians(currentDegree)));
+						newX = (int) (fightRegion.getIntX() + (fightRegion.getRadius() - utility.RNG.nextInt(fightRegion.getRadius()))*Math.cos(Math.toRadians(currentDegree))); 
+						newY = (int) (fightRegion.getIntY() + (fightRegion.getRadius() - utility.RNG.nextInt(fightRegion.getRadius()))*Math.sin(Math.toRadians(currentDegree)));
 					}
 					int r = utility.RNG.nextInt(2);
 					clawsMoveToward.add(new intTuple(newX, newY));
@@ -1033,14 +1033,14 @@ public class denmother extends boss {
 					slashTo(claws.get(0));
 				}
 				else {
-					jumpingToX = claws.get(0).getX();
-					jumpingToY = claws.get(0).getY();
+					jumpingToX = claws.get(0).getIntX();
+					jumpingToY = claws.get(0).getIntY();
 				}
 			}
 			
 			// Jump to middle.
 			else if(!jumpingToMiddle && numClaws <= 0 && claws.size() <= 0 && time.getTime() - lastClaw > clawDelay*1000) {
-				jumpTo(fightRegion.getX()-getWidth()/2, fightRegion.getY()-getHeight()/2);
+				jumpTo(fightRegion.getIntX()-getWidth()/2, fightRegion.getIntY()-getHeight()/2);
 				jumpingToMiddle = true;
 			}
 			
@@ -1202,12 +1202,12 @@ public class denmother extends boss {
 						trail.remove(0);
 					}
 					trailImage.add(getCurrentAnimation().getCurrentFrame());
-					trail.add(new intTuple(getX(),getY()));
+					trail.add(new intTuple(getIntX(),getIntY()));
 				}
 				
 				g.drawImage(getCurrentAnimation().getCurrentFrame(), 
-						drawX, 
-						drawY, 
+						getDrawX(), 
+						getDrawY(), 
 						(int)(gameCanvas.getScaleX()*getCurrentAnimation().getCurrentFrame().getWidth()), 
 						(int)(gameCanvas.getScaleY()*getCurrentAnimation().getCurrentFrame().getHeight()), 
 						null);
@@ -1236,8 +1236,8 @@ public class denmother extends boss {
 					}
 				}
 				g.drawImage(getCurrentAnimation().getCurrentFrame(), 
-						drawX, 
-						drawY, 
+						getDrawX(), 
+						getDrawY(), 
 						(int)(gameCanvas.getScaleX()*getCurrentAnimation().getCurrentFrame().getWidth()), 
 						(int)(gameCanvas.getScaleY()*getCurrentAnimation().getCurrentFrame().getHeight()), 
 						null);
@@ -1262,8 +1262,8 @@ public class denmother extends boss {
 		// Draw the outskirts of the sprite.
 		if(showSpriteBox && getCurrentAnimation() != null) {
 			g.setColor(Color.red);
-			g.drawRect(drawX,
-					   drawY, 
+			g.drawRect(getDrawX(),
+					   getDrawY(), 
 					   (int)(gameCanvas.getScaleX()*getCurrentAnimation().getCurrentFrame().getWidth()), 
 					   (int)(gameCanvas.getScaleY()*getCurrentAnimation().getCurrentFrame().getHeight()));
 		}
@@ -1271,9 +1271,9 @@ public class denmother extends boss {
 		// Draw the x,y coordinates of the unit.
 		if(showUnitPosition) {
 			g.setColor(Color.white);
-			g.drawString(getX() + "," + getY(),
-					   drawX,
-					   drawY);
+			g.drawString(getIntX() + "," + getIntY(),
+					   getDrawX(),
+					   getDrawY());
 		}
 		
 		// Show attack range.
@@ -1284,8 +1284,8 @@ public class denmother extends boss {
 			int y2 = 0;
 			
 			// Get the x and y of hitbox.
-			int hitBoxX = drawX - (- (getCurrentAnimation().getCurrentFrame().getWidth()/2 - getWidth()/2) - getHitBoxAdjustmentX());
-			int hitBoxY = drawY - (- (getCurrentAnimation().getCurrentFrame().getHeight()/2 - getHeight()/2) - getHitBoxAdjustmentY());
+			int hitBoxX = getDrawX() - (- (getCurrentAnimation().getCurrentFrame().getWidth()/2 - getWidth()/2) - getHitBoxAdjustmentX());
+			int hitBoxY = getDrawY() - (- (getCurrentAnimation().getCurrentFrame().getHeight()/2 - getHeight()/2) - getHitBoxAdjustmentY());
 			
 			// Get the box we will attack in if facing left.
 			if(getFacingDirection().equals("Left")) {
@@ -1329,8 +1329,8 @@ public class denmother extends boss {
 		// Draw the hitbox of the image in green.
 		if(showHitBox && getCurrentAnimation() != null) {
 			g.setColor(Color.green);
-			g.drawRect(drawX - (int)(gameCanvas.getScaleX()*(- (getCurrentAnimation().getCurrentFrame().getWidth()/2 - getWidth()/2) - getHitBoxAdjustmentX())),
-					   drawY - (int)(gameCanvas.getScaleY()*(- (getCurrentAnimation().getCurrentFrame().getHeight()/2 - getHeight()/2) - getHitBoxAdjustmentY())), 
+			g.drawRect(getDrawX() - (int)(gameCanvas.getScaleX()*(- (getCurrentAnimation().getCurrentFrame().getWidth()/2 - getWidth()/2) - getHitBoxAdjustmentX())),
+					   getDrawY() - (int)(gameCanvas.getScaleY()*(- (getCurrentAnimation().getCurrentFrame().getHeight()/2 - getHeight()/2) - getHitBoxAdjustmentY())), 
 					   (int)(gameCanvas.getScaleX()*getWidth()), 
 					   (int)(gameCanvas.getScaleY()*getHeight()));
 		}

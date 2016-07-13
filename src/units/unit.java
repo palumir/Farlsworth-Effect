@@ -54,14 +54,17 @@ public abstract class unit extends drawnObject  {
 	// Animation defaults.
 	private String DEFAULT_FACING_DIRECTION = "Right";
 	
+	// List of units we are in combat with
+	private ArrayList<unit> inCombatWith = new ArrayList<unit>();
+	
 	// Fist defaults.
-	protected static int DEFAULT_ATTACK_DAMAGE = 4;
-	protected static float DEFAULT_ATTACK_TIME = 0.4f;
+	protected static int DEFAULT_ATTACK_DAMAGE = 1;
+	protected static float DEFAULT_ATTACK_TIME = 0.44f;
 	protected static int DEFAULT_ATTACK_WIDTH = 35;
 	protected static int DEFAULT_ATTACK_LENGTH = 11;
-	protected static float DEFAULT_BACKSWING = 0f;
+	protected static float DEFAULT_BACKSWING = 0.1f;
 	protected static float DEFAULT_CRIT_CHANCE = 0f;
-	protected float DEFAULT_CRIT_DAMAGE = 1.6f;
+	protected float DEFAULT_CRIT_DAMAGE = 4f;
 	protected static float DEFAULT_ATTACK_VARIABILITY = 0f; // How much the range of hits is. 5% both ways.
 	
 	// Combat defaults.
@@ -136,7 +139,7 @@ public abstract class unit extends drawnObject  {
 	protected double startAttackTime = 0;
 	
 	// Combat sounds
-	protected String attackSound;
+	private String attackSound;
 	
 	// Gravity
 	protected float jumpSpeed = DEFAULT_JUMPSPEED;
@@ -151,19 +154,15 @@ public abstract class unit extends drawnObject  {
 	
 	// Movement
 	protected int moveSpeed = DEFAULT_UNIT_MOVESPEED;
-	protected boolean movingLeft = false;
-	protected boolean movingRight = false;
-	protected boolean movingDown = false;
-	protected boolean movingUp = false;
+	private boolean movingLeft = false;
+	private boolean movingRight = false;
+	private boolean movingDown = false;
+	private boolean movingUp = false;
 	protected String facingDirection = DEFAULT_FACING_DIRECTION;
-	private boolean collisionOn = true;
-	
-	// For diagonal movement
-	private static int maxMoveDiag = 4;
-	private int lastMoveDiag = 0;
+	protected boolean collisionOn = true;
 	
 	// How close is close enough (to a point)?
-	private int closeEnoughFactor = 3;
+	protected int closeEnoughFactor = 3;
 	protected int closeEnough = closeEnoughFactor*moveSpeed;
 	
 	// Quests
@@ -184,7 +183,7 @@ public abstract class unit extends drawnObject  {
 	protected int moveToY = 0;
 	
 	// Moving to a point?
-	private boolean movingToAPoint = false;
+	protected boolean movingToAPoint = false;
 	
 	// Following a path?
 	private boolean followingAPath = false;
@@ -244,6 +243,7 @@ public abstract class unit extends drawnObject  {
 	// Update unit
 	@Override
 	public void update() {
+		
 		if(getCurrentAnimation() != null) getCurrentAnimation().playAnimation();
 		gravity();
 		jump();
@@ -256,10 +256,49 @@ public abstract class unit extends drawnObject  {
 	
 	// Is the unit alive or dead
 	public void aliveOrDead() {
+
 		
 		// Kill unit if we're dead.
 		if(healthPoints <= 0) {
 			die();
+		}
+	}
+	
+	// Respond to destroy
+	@Override
+	public void respondToDestroy() {
+		for(; 0 < getInCombatWith().size();) {
+			exitCombatWith(getInCombatWith().get(0));
+		}
+	}
+	
+	// Enter combat with this unit
+	public void enterCombatWith(unit u) {
+		if(!getInCombatWith().contains(u)) {
+			getInCombatWith().add(u);
+		}
+		if(!u.getInCombatWith().contains(this)) {
+			u.getInCombatWith().add(this);
+		}
+	}
+	
+	// Exit combat
+	public void exitCombatWith(unit u) {
+		if(u.getInCombatWith().contains(this)){
+			for(int i = 0; i < u.getInCombatWith().size(); i++) {
+				if(u.getInCombatWith().get(i).equals(this)) {
+					u.getInCombatWith().remove(i);
+					break;
+				}
+			}
+		}
+		if(getInCombatWith().contains(u)) {
+			for(int i = 0; i < getInCombatWith().size(); i++) {
+				if(getInCombatWith().get(i).equals(u)) {
+					getInCombatWith().remove(i);
+					break;
+				}
+			}
 		}
 	}
 	
@@ -274,8 +313,8 @@ public abstract class unit extends drawnObject  {
 		}
 		
 		// Do a huge blood squirt.
-		effect blood = new critBloodSquirt(getX() - critBloodSquirt.getDefaultWidth()/2 + topDownWidth/2,
-				   getY() - critBloodSquirt.getDefaultHeight()/2);
+		effect blood = new critBloodSquirt(getIntX() - critBloodSquirt.getDefaultWidth()/2 + topDownWidth/2,
+				   getIntY() - critBloodSquirt.getDefaultHeight()/2);
 		
 		// React to death.
 		reactToDeath();
@@ -292,7 +331,7 @@ public abstract class unit extends drawnObject  {
 			healthPoints = maxHealthPoints;
 		}
 		else healthPoints = healthPoints + i;
-		effect e = new floatingString("+" + i, playerHealthBar.DEFAULT_HEALTH_COLOR, getX() + getWidth()/2, getY() + getHeight()/2, 1f);
+		effect e = new floatingString("+" + i, playerHealthBar.DEFAULT_HEALTH_COLOR, getIntX() + getWidth()/2, getIntY() + getHeight()/2, 1f);
 	}
 	
 	// Require units to have some sort of AI.
@@ -328,9 +367,9 @@ public abstract class unit extends drawnObject  {
 			this.knockSpeed = knockSpeed;
 			
 			// Calculate the new X and Y we need to knock them to, based off radius.
-			double currentDegree = mathUtils.angleBetweenTwoPointsWithFixedPoint(getX()+getWidth()/2, getY() + getHeight()/2, knockX, knockY, knockX, knockY);
-			knockToX = (int) (getX() + (knockSpeed*overTime*1000)*Math.cos(Math.toRadians(currentDegree))); 
-			knockToY = (int) (getY() + (knockSpeed*overTime*1000)*Math.sin(Math.toRadians(currentDegree)));
+			double currentDegree = mathUtils.angleBetweenTwoPointsWithFixedPoint(getIntX()+getWidth()/2, getIntY() + getHeight()/2, knockX, knockY, knockX, knockY);
+			knockToX = (int) (getIntX() + (knockSpeed*overTime*1000)*Math.cos(Math.toRadians(currentDegree))); 
+			knockToY = (int) (getIntY() + (knockSpeed*overTime*1000)*Math.sin(Math.toRadians(currentDegree)));
 		}
 	}
 	
@@ -344,9 +383,9 @@ public abstract class unit extends drawnObject  {
 			this.knockSpeed = knockSpeed;
 			
 			// Calculate the new X and Y we need to knock them to, based off radius.
-			double currentDegree = mathUtils.angleBetweenTwoPointsWithFixedPoint(getX()+getWidth()/2, getY() + getHeight()/2, knockX, knockY, knockX, knockY);
-			knockToX = (int) (getX() + (knockSpeed*overTime*1000)*Math.cos(Math.toRadians(currentDegree))); 
-			knockToY = (int) (getY() + (knockSpeed*overTime*1000)*Math.sin(Math.toRadians(currentDegree)));
+			double currentDegree = mathUtils.angleBetweenTwoPointsWithFixedPoint(getIntX()+getWidth()/2, getIntY() + getHeight()/2, knockX, knockY, knockX, knockY);
+			knockToX = (int) (getIntX() + (knockSpeed*overTime*1000)*Math.cos(Math.toRadians(currentDegree))); 
+			knockToY = (int) (getIntY() + (knockSpeed*overTime*1000)*Math.sin(Math.toRadians(currentDegree)));
 		}
 	}
 	
@@ -355,18 +394,18 @@ public abstract class unit extends drawnObject  {
 		if(gettingKnockedBack) {
 			
 			// Knock them there over the duration.
-			float yDistance = (knockToY - getY());
-			float xDistance = (knockToX - getX());
+			float yDistance = (knockToY - getIntY());
+			float xDistance = (knockToX - getIntX());
 			float distanceXY = (float) Math.sqrt(yDistance * yDistance
 						+ xDistance * xDistance);
 			int rise = (int) ((yDistance/distanceXY)*knockSpeed);
 			int run = (int) ((xDistance/distanceXY)*knockSpeed);
 			
 			// Reset rise and run if we're close.
-			if(Math.abs(moveToX - getX()) <  run) {
+			if(Math.abs(moveToX - getIntX()) <  run) {
 				run = 0;
 			}
-			if(Math.abs(moveToY - getY()) < rise) {
+			if(Math.abs(moveToY - getIntY()) < rise) {
 				rise = 0;
 			}
 			
@@ -392,7 +431,7 @@ public abstract class unit extends drawnObject  {
 		dealWithKnockBacks();
 		
 		// Attack if we are attacking.
-		if(isAttacking()) {
+		if(isAttacking() && getCurrentAnimation()!=null) {
 			// Do the attack if our BAT is over.
 			if(getCurrentAnimation().getCurrentSprite() >= getAttackFrameStart() &&
 			   getCurrentAnimation().getCurrentSprite() <= getAttackFrameEnd()) {
@@ -403,38 +442,38 @@ public abstract class unit extends drawnObject  {
 				
 				// Get the box we will attack in if facing left.
 				if(facingDirection.equals("Left")) {
-					int heightMidPoint = getY() + getHeight()/2;
+					int heightMidPoint = getIntY() + getHeight()/2;
 					y1 = heightMidPoint - getAttackWidth()/2;
 					y2 = heightMidPoint + getAttackWidth()/2;
-					x1 = getX() - getAttackLength();
-					x2 = getX() + getWidth() + 5;
+					x1 = getIntX() - getAttackLength();
+					x2 = getIntX() + getWidth() + 5;
 				}
 				
 				// Get the box we will attack in if facing right.
 				if(facingDirection.equals("Right")) {
-					int heightMidPoint = getY() + getHeight()/2;
+					int heightMidPoint = getIntY() + getHeight()/2;
 					y1 = heightMidPoint - getAttackWidth()/2;
 					y2 = heightMidPoint + getAttackWidth()/2;
-					x1 = getX() - 5;
-					x2 = getX() + getWidth() + getAttackLength();
+					x1 = getIntX() - 5;
+					x2 = getIntX() + getWidth() + getAttackLength();
 				}
 				
 				// Get the box we will attack in facing up.
 				if(facingDirection.equals("Up")) {
-					int widthMidPoint = getX() + getWidth()/2;
+					int widthMidPoint = getIntX() + getWidth()/2;
 					x1 = widthMidPoint - getAttackWidth()/2;
 					x2 = widthMidPoint + getAttackWidth()/2;
-					y1 = getY() - getAttackLength();
-					y2 = getY() + getHeight() + 5;
+					y1 = getIntY() - getAttackLength();
+					y2 = getIntY() + getHeight() + 5;
 				}
 				
 				// Get the box we will attack in facing down.
 				if(facingDirection.equals("Down")) {
-					int widthMidPoint = getX() + getWidth()/2;
+					int widthMidPoint = getIntX() + getWidth()/2;
 					x1 = widthMidPoint - getAttackWidth()/2;
 					x2 = widthMidPoint + getAttackWidth()/2;
-					y1 = getY() - 5;
-					y2 = getY() + getHeight() + getAttackLength();
+					y1 = getIntY() - 5;
+					y2 = getIntY() + getHeight() + getAttackLength();
 				}
 				
 				// Attack units in array.
@@ -448,7 +487,7 @@ public abstract class unit extends drawnObject  {
 					if(projs != null) {
 						for(int i = 0; i < projs.size(); i++) {
 							if(!projs.get(i).isAllied()) {
-								projs.get(i).sendBack();
+								if(projs.get(i).isReflectable()) projs.get(i).sendBack();
 							}
 						}
 					}
@@ -484,38 +523,38 @@ public abstract class unit extends drawnObject  {
 		
 		// Get the box we will attack in if facing left.
 		if(facingDirection.equals("Left")) {
-			int heightMidPoint = getY() + getHeight()/2;
+			int heightMidPoint = getIntY() + getHeight()/2;
 			y1 = heightMidPoint - getAttackWidth()/2 + differential/2;
 			y2 = heightMidPoint + getAttackWidth()/2 - differential/2;
-			x1 = getX() - getAttackLength() + differential;
-			x2 = getX() + getWidth();
+			x1 = getIntX() - getAttackLength() + differential;
+			x2 = getIntX() + getWidth();
 		}
 		
 		// Get the box we will attack in if facing right.
 		if(facingDirection.equals("Right")) {
-			int heightMidPoint = getY() + getHeight()/2;
+			int heightMidPoint = getIntY() + getHeight()/2;
 			y1 = heightMidPoint - getAttackWidth()/2 + differential/2;
 			y2 = heightMidPoint + getAttackWidth()/2 - differential/2;
-			x1 = getX();
-			x2 = getX() + getWidth() + getAttackLength() - differential;
+			x1 = getIntX();
+			x2 = getIntX() + getWidth() + getAttackLength() - differential;
 		}
 		
 		// Get the box we will attack in facing up.
 		if(facingDirection.equals("Up")) {
-			int widthMidPoint = getX() + getWidth()/2;
+			int widthMidPoint = getIntX() + getWidth()/2;
 			x1 = widthMidPoint - getAttackWidth()/2 + differential/2;
 			x2 = widthMidPoint + getAttackWidth()/2 - differential/2;
-			y1 = getY() - getAttackLength() + differential;
-			y2 = getY() + getHeight();
+			y1 = getIntY() - getAttackLength() + differential;
+			y2 = getIntY() + getHeight();
 		}
 		
 		// Get the box we will attack in facing down.
 		if(facingDirection.equals("Down")) {
-			int widthMidPoint = getX() + getWidth()/2;
+			int widthMidPoint = getIntX() + getWidth()/2;
 			x1 = widthMidPoint - getAttackWidth()/2 + differential/2;
 			x2 = widthMidPoint + getAttackWidth()/2 - differential/2;
-			y1 = getY();
-			y2 = getY() + getHeight() + getAttackLength() - differential;
+			y1 = getIntY();
+			y2 = getIntY() + getHeight() + getAttackLength() - differential;
 		}
 		
 		ArrayList<unit> unitsInBox = getUnitsInBox(x1,y1,x2,y2);
@@ -551,16 +590,16 @@ public abstract class unit extends drawnObject  {
 	
 	// Check if a unit is within 
 	public boolean isWithin(int x1, int y1, int x2, int y2) {
-		return getX() < x2 && 
-		 getX() + getWidth() > x1 && 
-		 getY() + getHitBoxAdjustmentY() < y2 && 
-		 getY() + + getHitBoxAdjustmentY() + getHeight() > y1;
+		return getIntX() < x2 && 
+		 getIntX() + getWidth() > x1 && 
+		 getIntY() + getHitBoxAdjustmentY() < y2 && 
+		 getIntY() + + getHitBoxAdjustmentY() + getHeight() > y1;
 	}
 	
 	// Get whether a unit is within radius
 	public boolean isWithinRadius(int x, int y, int radius) {
-	    int circleDistanceX = Math.abs(x - (this.getX() + this.getWidth()/2));
-	    int circleDistanceY = Math.abs(y - (this.getY() + this.getHeight()/2));
+	    int circleDistanceX = Math.abs(x - (this.getIntX() + this.getWidth()/2));
+	    int circleDistanceY = Math.abs(y - (this.getIntY() + this.getHeight()/2));
 
 	    if (circleDistanceX > (this.getWidth()/2 + radius)) { return false; }
 	    if (circleDistanceY > (this.getHeight()/2 + radius)) { return false; }
@@ -614,6 +653,9 @@ public abstract class unit extends drawnObject  {
 								currentUnit.hurt(actualDamageDone, crit);
 							}
 						}
+						
+						// Kill unit?
+						if(currentUnit.healthPoints <= 0) currentUnit.die();
 					}
 				}
 			}
@@ -631,19 +673,19 @@ public abstract class unit extends drawnObject  {
 		
 			// Crit
 			if(crit != 1f) {
-				effect e = new floatingString("" + (int)(crit*damage), DEFAULT_CRIT_COLOR, getX() + getWidth()/2, getY() + getHeight()/2, 1f, 3f);
+				effect e = new floatingString("" + (int)(crit*damage), DEFAULT_CRIT_COLOR, getIntX() + getWidth()/2, getIntY() + getHeight()/2, 1f, 3f);
 			}
 			
 			// Non crit.
 			else {
-				effect e = new floatingString("" + damage, DEFAULT_DAMAGE_COLOR, getX() + getWidth()/2, getY() + getHeight()/2, 1f);
+				effect e = new floatingString("" + damage, DEFAULT_DAMAGE_COLOR, getIntX() + getWidth()/2, getIntY() + getHeight()/2, 1f);
 			}
 			
 			// Squirt blood
 			int randomX = 0;
 			int randomY = -platformerHeight/3 + utility.RNG.nextInt(platformerHeight/3 + 1);
-			effect blood = new bloodSquirt(getX() - bloodSquirt.getDefaultWidth()/2 + topDownWidth/2 + randomX ,
-					   getY() - bloodSquirt.getDefaultHeight()/2 + platformerHeight/2 + randomY);
+			effect blood = new bloodSquirt(getIntX() - bloodSquirt.getDefaultWidth()/2 + topDownWidth/2 + randomX ,
+					   getIntY() - bloodSquirt.getDefaultHeight()/2 + platformerHeight/2 + randomY);
 			reactToPain();
 		}
 		return true;
@@ -682,9 +724,9 @@ public abstract class unit extends drawnObject  {
 		if(!isAttacking() && canAttack) {
 			
 			// Attack sound.
-			if(attackSound!=null) {
-				sound s = new sound(attackSound);
-				s.setPosition(getX(), getY(), sound.DEFAULT_SOUND_RADIUS);
+			if(getAttackSound()!=null) {
+				sound s = new sound(getAttackSound());
+				s.setPosition(getIntX(), getIntY(), sound.DEFAULT_SOUND_RADIUS);
 				s.start();
 			}
 			setAttacking(true);
@@ -714,7 +756,7 @@ public abstract class unit extends drawnObject  {
 	// Follow a unit.
 	public void follow(unit u) {
 		followedUnit = u;
-		moveTowards(u.getX(), u.getY());
+		moveTowards(u.getIntX(), u.getIntY());
 	}
 	
 	// Move to
@@ -731,18 +773,18 @@ public abstract class unit extends drawnObject  {
 		stopMove("all");
 		
 		// If we are there, stop.
-		if(Math.abs(getX() - moveX) <= moveSpeed &&  Math.abs(getY() - moveY) <= moveSpeed + 1) {
+		if(Math.abs(getIntX() - moveX) <= moveSpeed &&  Math.abs(getIntY() - moveY) <= moveSpeed + 1) {
 			// Don't move.
 		}
 		else {
 			
 			// Horizontal
-			if(getX() - moveX < 0 && Math.abs(getX() - moveX) > closeEnough) movingRight = true;
-			if(getX() - moveX > 0 && Math.abs(getX() - moveX) > closeEnough) movingLeft = true;
+			if(getIntX() - moveX < 0 && Math.abs(getIntX() - moveX) > closeEnough) setMovingRight(true);
+			if(getIntX() - moveX > 0 && Math.abs(getIntX() - moveX) > closeEnough) setMovingLeft(true);
 			
 			// Vertical
-			if(getY() - moveY < 0 && Math.abs(getY() - moveY) > closeEnough) movingDown = true;
-			if(getY() - moveY > 0 && Math.abs(getY() - moveY) > closeEnough) movingUp = true;
+			if(getIntY() - moveY < 0 && Math.abs(getIntY() - moveY) > closeEnough) setMovingDown(true);
+			if(getIntY() - moveY > 0 && Math.abs(getIntY() - moveY) > closeEnough) setMovingUp(true);
 		}
 	}
 	
@@ -773,12 +815,12 @@ public abstract class unit extends drawnObject  {
 		///////////////////////////////	
 		if(movingToAPoint) {
 			// Moving toward a point?
-			if((Math.abs(moveToX - getX()) > closeEnough || Math.abs(moveToY - getY()) > closeEnough)) {
+			if((Math.abs(moveToX - getIntX()) > closeEnough || Math.abs(moveToY - getIntY()) > closeEnough)) {
 				moveTowards(moveToX, moveToY);
 			}
 			
 			// We have reached our point
-			if(!(Math.abs(moveToX - getX()) > closeEnough || Math.abs(moveToY - getY()) > closeEnough)) {
+			if(!(Math.abs(moveToX - getIntX()) > closeEnough || Math.abs(moveToY - getIntY()) > closeEnough)) {
 				stopMove("all");
 				movingToAPoint = false;
 			}
@@ -794,7 +836,7 @@ public abstract class unit extends drawnObject  {
 					currPoint = path.get(0);
 					path.remove(0);
 				}
-				else if(!(Math.abs(currPoint.x - getX()) > closeEnough || Math.abs(currPoint.y - getY()) > closeEnough)) {
+				else if(!(Math.abs(currPoint.x - getIntX()) > closeEnough || Math.abs(currPoint.y - getIntY()) > closeEnough)) {
 					moveTo(path.get(0).x, path.get(0).y);
 					currPoint = path.get(0);
 					path.remove(0);
@@ -818,7 +860,7 @@ public abstract class unit extends drawnObject  {
 	public void moveUnit() {
 		
 		// Apply movement debuffs/buffs
-		int buffedMoveSpeed = moveSpeed;
+		float buffedMoveSpeed = moveSpeed;
 		ArrayList<Class> appliedEffects = new ArrayList<Class>();
 		for(int i = 0; i < movementBuffs.size(); i++) {
 			if(!appliedEffects.contains(movementBuffs.get(i).getClass())) {
@@ -827,63 +869,55 @@ public abstract class unit extends drawnObject  {
 			}
 		}
 		
-		// How many frames do we drop speed by -1;
-		int maxMoveTimesSpeed = maxMoveDiag*buffedMoveSpeed; // *2 for x and y
-		int moveByX = buffedMoveSpeed;
-		int moveByY = buffedMoveSpeed;
-		
-		// Are we moving diagonally?
-		if(!movingDiagonally()) lastMoveDiag = 0;
-		else {
-			lastMoveDiag++;
-		}
-		
-		// If we need to drop this frame down a movespeed.
-		if(movingDiagonally() && lastMoveDiag%(maxMoveDiag/2) == 0) {
-				moveByX = buffedMoveSpeed - 1;
-				moveByY = buffedMoveSpeed - 1;
-		}
-		
-		// Final frame to drop one movespeed., reset.
-		if(movingDiagonally() && lastMoveDiag >= maxMoveTimesSpeed) {
-			lastMoveDiag = 0;
-		}
+		float moveByX = buffedMoveSpeed;
+		float moveByY = buffedMoveSpeed;
 	
 		// Basic movement.
-		int moveX = 0;
-		int moveY = 0;
+		float moveX = 0;
+		float moveY = 0;
 		
 		// Actual movement.
-		if(movingLeft) moveX -= moveByX;
-		if(movingRight) moveX += moveByX;
+		if(isMovingLeft()) moveX -= moveByX;
+		if(isMovingRight()) moveX += moveByX;
 		
 		// Only do these ones if we're in topDown mode.
 		if(mode.getCurrentMode() == "topDown" || stuck) {
-			if(movingUp) moveY -= moveByY;
-			if(movingDown) moveY += moveByY;
+			if(isMovingUp()) moveY -= moveByY;
+			if(isMovingDown()) moveY += moveByY;
 		}
 		
 		// Deal with direction facing.
-		if(movingLeft && movingUp) setFacingDirection("Left");
-		else if(movingRight && movingUp) setFacingDirection("Right");
-		else if(movingLeft && movingDown) setFacingDirection("Left");
-		else if(movingRight && movingDown) setFacingDirection("Right");
-		else if(movingDown && (mode.getCurrentMode() != "platformer" || stuck)) setFacingDirection("Down");
-		else if(movingUp && (mode.getCurrentMode() != "platformer" || stuck)) setFacingDirection("Up");
-		else if(movingRight) setFacingDirection("Right");
-		else if(movingLeft) setFacingDirection("Left");
+		if(isMovingLeft() && isMovingUp()) setFacingDirection("Left");
+		else if(isMovingRight() && isMovingUp()) setFacingDirection("Right");
+		else if(isMovingLeft() && isMovingDown()) setFacingDirection("Left");
+		else if(isMovingRight() && isMovingDown()) setFacingDirection("Right");
+		else if(isMovingDown() && (mode.getCurrentMode() != "platformer" || stuck)) setFacingDirection("Down");
+		else if(isMovingUp() && (mode.getCurrentMode() != "platformer" || stuck)) setFacingDirection("Up");
+		else if(isMovingRight()) setFacingDirection("Right");
+		else if(isMovingLeft()) setFacingDirection("Left");
 
 		// Move the unit
-		move(moveX, moveY);
+		if(movingDiagonally()) {
+			unitSpecificMovement(moveX*(1f/1.3f),moveY*(1f/1.3f));
+			move(moveX*(1f/1.3f), moveY*(1f/1.3f));
+		}
+		else {
+			unitSpecificMovement(moveX,moveY);
+			move(moveX, moveY);
+		}
 
+	}
+	
+	// Do unit specific movement.
+	public void unitSpecificMovement(float moveX, float moveY) {
 	}
 	
 	// Moving diagonally?
 	public boolean movingDiagonally() {
-		boolean movingLeftAndRight = movingLeft && movingRight;
-		boolean movingUpAndDown = movingUp && movingDown;
-		boolean movingHorizontally = (movingLeft || movingRight) && !movingLeftAndRight;
-		boolean movingVertically = (movingUp || movingDown) && !movingUpAndDown;
+		boolean movingLeftAndRight = isMovingLeft() && isMovingRight();
+		boolean movingUpAndDown = isMovingUp() && isMovingDown();
+		boolean movingHorizontally = (isMovingLeft() || isMovingRight()) && !movingLeftAndRight;
+		boolean movingVertically = (isMovingUp() || isMovingDown()) && !movingUpAndDown;
 		return movingVertically && movingHorizontally;
 	}
 	
@@ -891,40 +925,40 @@ public abstract class unit extends drawnObject  {
 	public void moveUnit(String direction) {
 		
 		// Reset everything.
-		movingLeft = false;
-		movingRight = false;
-		movingUp = false;
-		movingDown = false;
+		setMovingLeft(false);
+		setMovingRight(false);
+		setMovingUp(false);
+		setMovingDown(false);
 		
 		if(!isUnitLocked()) {
 			// Move them in said direction.
 			if(direction.equals("upLeft")) {
-				movingLeft = true;
-				movingUp = true;
+				setMovingLeft(true);
+				setMovingUp(true);
 			}
 			if(direction.equals("upRight")) {
-				movingRight = true;
-				movingUp = true;
+				setMovingRight(true);
+				setMovingUp(true);
 			}
 			if(direction.equals("downLeft")) {
-				movingLeft = true;
-				movingDown = true;
+				setMovingLeft(true);
+				setMovingDown(true);
 			}
 			if(direction.equals("downRight")) {
-				movingRight = true;
-				movingDown = true;
+				setMovingRight(true);
+				setMovingDown(true);
 			}
 			if(direction.equals("left")) {
-				movingLeft = true;
+				setMovingLeft(true);
 			}
 			if(direction.equals("right")) {
-				movingRight = true;
+				setMovingRight(true);
 			}
 			if(direction.equals("up")) {
-				movingUp = true;
+				setMovingUp(true);
 			}
 			if(direction.equals("down")) {
-				movingDown = true;
+				setMovingDown(true);
 			}
 		}
 	}
@@ -947,14 +981,14 @@ public abstract class unit extends drawnObject  {
 	}
 	
 	// Move function
-	public void move(int moveX, int moveY) {
+	public void move(float moveX, float moveY) {
 		
 		if(player.getCurrentPlayer() != null && 
 			player.getCurrentPlayer().getCurrentZone()!=null && 
 			player.getCurrentPlayer().getCurrentZone().isZoneLoaded()) {
 			// Actual move x and y when all is said and done.
-			int actualMoveX = moveX;
-			int actualMoveY = moveY;
+			float actualMoveX = moveX;
+			float actualMoveY = moveY;
 	
 			if(isCollisionOn()) {
 				
@@ -962,8 +996,8 @@ public abstract class unit extends drawnObject  {
 				pathFindingStuck = false;
 				
 				// Check if it collides with a chunk in the x or y plane.
-				intTuple xyCollide = chunk.collidesWith(this, getX() + moveX, getY() + moveY);
-				intTuple leftRegion = region.leftRegion(this, getX() + moveX, getY() + moveY);
+				intTuple xyCollide = chunk.collidesWith(this, (int)(getFloatX() + moveX), (int)(getFloatY() + moveY));
+				intTuple leftRegion = region.leftRegion(this, (int)(getFloatX() + moveX),(int)(getFloatY() + moveY));
 				if(!ignoreCollision && (xyCollide.x == 1 || leftRegion.x == 1)) {
 					pathFindingStuck = true;
 					actualMoveX = 0;
@@ -1005,17 +1039,17 @@ public abstract class unit extends drawnObject  {
 			}
 			
 			// Deal with animations.
-			dealWithAnimations(actualMoveX,actualMoveY);
+			dealWithAnimations((int)actualMoveX,(int)actualMoveY);
 	
 			// Move the camera if it's there.
 			if(attachedCamera != null) {
-				attachedCamera.setX(attachedCamera.getX() + actualMoveX);
-				attachedCamera.setY(attachedCamera.getY() + actualMoveY);
+				attachedCamera.setX((int)(getFloatX() + actualMoveX));
+				attachedCamera.setY((int)(getFloatY() + actualMoveY));
 			}
 			
 			// Move the unit.
-			setX(getX() + actualMoveX);
-			setY(getY() + actualMoveY);
+			setFloatX(getFloatX() + actualMoveX);
+			setFloatY(getFloatY() + actualMoveY);
 		}
 	}
 	
@@ -1024,22 +1058,22 @@ public abstract class unit extends drawnObject  {
 		
 		// Start moving right.
 		if(direction=="right") { 
-			movingRight=true;
+			setMovingRight(true);
 		}
 		
 		// Start moving left.
 		if(direction=="left") { 
-			movingLeft=true;
+			setMovingLeft(true);
 		}
 		
 		// Start moving up.
 		if(direction=="up") {
-			movingUp=true;
+			setMovingUp(true);
 		}
 		
 		// Start moving down..
 		if(direction=="down") {
-			movingDown=true;
+			setMovingDown(true);
 		}
 	}
 	
@@ -1048,40 +1082,40 @@ public abstract class unit extends drawnObject  {
 		
 		// Stop moving in any direction.
 		if(direction=="all") {
-			movingRight=false;
-			movingLeft=false;
-			movingUp=false;
-			movingDown=false;
+			setMovingRight(false);
+			setMovingLeft(false);
+			setMovingUp(false);
+			setMovingDown(false);
 		}
 		
 		// Stop moving right.
 		if(direction=="right") { 
-			movingRight=false;
+			setMovingRight(false);
 		}
 		
 		// Stop moving left.
 		if(direction=="left") {
-			movingLeft=false;
+			setMovingLeft(false);
 		}
 		
 		// Stop moving up.
 		if(direction=="up") {
-			movingUp=false;
+			setMovingUp(false);
 		}
 		
 		// Stop moving down.
 		if(direction=="down") {
-			movingDown=false;
+			setMovingDown(false);
 		}
 		
 		if(direction=="horizontal"){
-			movingLeft = false;
-			movingRight = false;
+			setMovingLeft(false);
+			setMovingRight(false);
 		}
 		
 		if(direction=="vertical"){
-			movingUp = false;
-			movingDown = false;
+			setMovingUp(false);
+			setMovingDown(false);
 		}
 	}
 	
@@ -1118,7 +1152,7 @@ public abstract class unit extends drawnObject  {
 				}
 				animate("jumping" + face);
 			}
-			else if((isMoving() && stuck) || (!stuck && (!movingDown || (movingLeft || movingRight)) && isMoving())) {
+			else if((isMoving() && stuck) || (!stuck && (!isMovingDown() || (isMovingLeft() || isMovingRight())) && isMoving())) {
 				// If we are running.
 				animate("running" + getFacingDirection());
 			}
@@ -1155,8 +1189,8 @@ public abstract class unit extends drawnObject  {
 		// Of course only draw if the animation is not null.
 		if(getCurrentAnimation() != null) {
 			g.drawImage(getCurrentAnimation().getCurrentFrame(), 
-					drawX, 
-					drawY, 
+					getDrawX(), 
+					getDrawY(), 
 					(int)(gameCanvas.getScaleX()*getCurrentAnimation().getCurrentFrame().getWidth()), 
 					(int)(gameCanvas.getScaleY()*getCurrentAnimation().getCurrentFrame().getHeight()), 
 					null);
@@ -1181,22 +1215,22 @@ public abstract class unit extends drawnObject  {
 			
 			// Draw the red.
 			g.setColor(playerHealthBar.DEFAULT_LOST_HEALTH_COLOR);
-			g.fillRect(drawX + hpAdjustX,
-					   drawY + hpAdjustY,
+			g.fillRect(getDrawX() + hpAdjustX,
+					   getDrawY() + hpAdjustY,
 					   (int)(gameCanvas.getScaleX()*DEFAULT_HEALTHBAR_WIDTH),
 					   (int)(gameCanvas.getScaleY()*DEFAULT_HEALTHBAR_HEIGHT));
 			
 			// Draw the green chunks.
 			g.setColor(playerHealthBar.DEFAULT_HEALTH_COLOR);
-			g.fillRect(drawX + hpAdjustX,
-					   drawY + hpAdjustY,
+			g.fillRect(getDrawX() + hpAdjustX,
+					   getDrawY() + hpAdjustY,
 					   (int)(gameCanvas.getScaleX()*healthChunkSize),
 					   (int)(gameCanvas.getScaleY()*DEFAULT_HEALTHBAR_HEIGHT));
 
 			// Draw border.
 			g.setColor(playerHealthBar.DEFAULT_BORDER_COLOR);
-			g.drawRect(drawX + hpAdjustX,
-					   drawY + hpAdjustY,
+			g.drawRect(getDrawX() + hpAdjustX,
+					   getDrawY() + hpAdjustY,
 					   (int)(gameCanvas.getScaleX()*DEFAULT_HEALTHBAR_WIDTH),
 					   (int)(gameCanvas.getScaleY()*DEFAULT_HEALTHBAR_HEIGHT));
 		}
@@ -1204,8 +1238,8 @@ public abstract class unit extends drawnObject  {
 		// Draw the outskirts of the sprite.
 		if(showSpriteBox && getCurrentAnimation() != null) {
 			g.setColor(Color.red);
-			g.drawRect(drawX,
-					   drawY, 
+			g.drawRect(getDrawX(),
+					   getDrawY(), 
 					   (int)(gameCanvas.getScaleX()*getCurrentAnimation().getCurrentFrame().getWidth()), 
 					   (int)(gameCanvas.getScaleY()*getCurrentAnimation().getCurrentFrame().getHeight()));
 		}
@@ -1213,9 +1247,9 @@ public abstract class unit extends drawnObject  {
 		// Draw the x,y coordinates of the unit.
 		if(showUnitPosition) {
 			g.setColor(Color.white);
-			g.drawString(getX() + "," + getY(),
-					   drawX,
-					   drawY);
+			g.drawString(getIntX() + "," + getIntY(),
+					   getDrawX(),
+					   getDrawY());
 		}
 		
 		// Show attack range.
@@ -1226,8 +1260,8 @@ public abstract class unit extends drawnObject  {
 			int y2 = 0;
 			
 			// Get the x and y of hitbox.
-			int hitBoxX = drawX - (- (getCurrentAnimation().getCurrentFrame().getWidth()/2 - getWidth()/2) - getHitBoxAdjustmentX());
-			int hitBoxY = drawY - (- (getCurrentAnimation().getCurrentFrame().getHeight()/2 - getHeight()/2) - getHitBoxAdjustmentY());
+			int hitBoxX = getDrawX() - (- (getCurrentAnimation().getCurrentFrame().getWidth()/2 - getWidth()/2) - getHitBoxAdjustmentX());
+			int hitBoxY = getDrawY() - (- (getCurrentAnimation().getCurrentFrame().getHeight()/2 - getHeight()/2) - getHitBoxAdjustmentY());
 			
 			// Get the box we will attack in if facing left.
 			if(facingDirection.equals("Left")) {
@@ -1271,8 +1305,8 @@ public abstract class unit extends drawnObject  {
 		// Draw the hitbox of the image in green.
 		if(showHitBox && getCurrentAnimation() != null) {
 			g.setColor(Color.green);
-			g.drawRect(drawX - (int)(gameCanvas.getScaleX()*(- (getCurrentAnimation().getCurrentFrame().getWidth()/2 - getWidth()/2) - getHitBoxAdjustmentX())),
-					   drawY - (int)(gameCanvas.getScaleY()*(- (getCurrentAnimation().getCurrentFrame().getHeight()/2 - getHeight()/2) - getHitBoxAdjustmentY())), 
+			g.drawRect(getDrawX() - (int)(gameCanvas.getScaleX()*(- (getCurrentAnimation().getCurrentFrame().getWidth()/2 - getWidth()/2) - getHitBoxAdjustmentX())),
+					   getDrawY() - (int)(gameCanvas.getScaleY()*(- (getCurrentAnimation().getCurrentFrame().getHeight()/2 - getHeight()/2) - getHitBoxAdjustmentY())), 
 					   (int)(gameCanvas.getScaleX()*getWidth()), 
 					   (int)(gameCanvas.getScaleY()*getHeight()));
 		}
@@ -1283,8 +1317,8 @@ public abstract class unit extends drawnObject  {
 	
 	// Set a unit to have a quest.
 	public void hasQuest() {
-		int spawnX = (getX() + getWidth()/2) - questMark.DEFAULT_CHUNK_WIDTH/2;
-		int spawnY = (int)(getY() - 2.5f*questMark.DEFAULT_CHUNK_HEIGHT);
+		int spawnX = (getIntX() + getWidth()/2) - questMark.DEFAULT_CHUNK_WIDTH/2;
+		int spawnY = (int)(getIntY() - 2.5f*questMark.DEFAULT_CHUNK_HEIGHT);
 		questIcon = new questMark(spawnX, spawnY, 0);
 	}
 	
@@ -1297,10 +1331,10 @@ public abstract class unit extends drawnObject  {
 	// Getters and setters //
 	/////////////////////////
 	public boolean isMoving() {
-		boolean movingLeftAndRight = movingLeft && movingRight;
-		boolean movingUpAndDown = movingUp && movingDown;
-		boolean movingHorizontally = (movingLeft || movingRight) && !movingLeftAndRight;
-		boolean movingVertically = (movingUp || movingDown) && !movingUpAndDown;
+		boolean movingLeftAndRight = isMovingLeft() && isMovingRight();
+		boolean movingUpAndDown = isMovingUp() && isMovingDown();
+		boolean movingHorizontally = (isMovingLeft() || isMovingRight()) && !movingLeftAndRight;
+		boolean movingVertically = (isMovingUp() || isMovingDown()) && !movingUpAndDown;
 		return movingVertically || movingHorizontally;
 	}
 	
@@ -1548,6 +1582,54 @@ public abstract class unit extends drawnObject  {
 
 	public void setUnitLocked(boolean unitLocked) {
 		this.unitLocked = unitLocked;
+	}
+
+	public String getAttackSound() {
+		return attackSound;
+	}
+
+	public void setAttackSound(String attackSound) {
+		this.attackSound = attackSound;
+	}
+
+	public ArrayList<unit> getInCombatWith() {
+		return inCombatWith;
+	}
+
+	public void setInCombatWith(ArrayList<unit> inCombatWith) {
+		this.inCombatWith = inCombatWith;
+	}
+
+	public boolean isMovingLeft() {
+		return movingLeft;
+	}
+
+	public void setMovingLeft(boolean movingLeft) {
+		this.movingLeft = movingLeft;
+	}
+
+	public boolean isMovingRight() {
+		return movingRight;
+	}
+
+	public void setMovingRight(boolean movingRight) {
+		this.movingRight = movingRight;
+	}
+
+	public boolean isMovingDown() {
+		return movingDown;
+	}
+
+	public void setMovingDown(boolean movingDown) {
+		this.movingDown = movingDown;
+	}
+
+	public boolean isMovingUp() {
+		return movingUp;
+	}
+
+	public void setMovingUp(boolean movingUp) {
+		this.movingUp = movingUp;
 	}
 	
 }

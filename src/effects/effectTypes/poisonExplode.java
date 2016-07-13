@@ -10,7 +10,6 @@ import effects.effect;
 import effects.effectType;
 import modes.mode;
 import sounds.sound;
-import units.animalType;
 import units.humanType;
 import units.player;
 import units.unit;
@@ -94,7 +93,7 @@ public class poisonExplode extends effect {
 		
 		// Set sound.
 		sound s = new sound(effectSound2);
-		s.setPosition(getX(), getY(), sound.DEFAULT_SOUND_RADIUS);
+		s.setPosition(getIntX(), getIntY(), sound.DEFAULT_SOUND_RADIUS);
 		s.start();
 		
 		// Make adjustments on hitbox if we're in topDown.
@@ -109,16 +108,16 @@ public class poisonExplode extends effect {
 	public void respondToFrame(int j) {
 		if(j >= 1) {
 			// If someone is in the explosion radius, hurt.
-			ArrayList<unit> hurtUnits = unit.getUnitsInBox(getX(), getY(), getX() + getWidth(), getY() + getHeight());
+			ArrayList<unit> hurtUnits = unit.getUnitsInBox(getIntX(), getIntY(), getIntX() + getWidth(), getIntY() + getHeight());
 			if(!alreadyHurt && hurtUnits != null) {
 				alreadyHurt = true;
 				for(int i = 0; i < hurtUnits.size(); i++) {
 					if(hurtUnits.get(i) instanceof player && !allied) {
-						hurtUnits.get(i).knockBack(getX()+getWidth()/2,getY()+getWidth()/2, getWidth()/2, .2f, 5);
+						hurtUnits.get(i).knockBack(getIntX()+getWidth()/2,getIntY()+getWidth()/2, getWidth()/2, .2f, 5);
 						hurtUnits.get(i).hurt(damage, 1f);
 					}
 					else if(allied) {
-						hurtUnits.get(i).knockBack(getX()+getWidth()/2,getY()+getWidth()/2, getWidth()/2, .2f, 5);
+						hurtUnits.get(i).knockBack(getIntX()+getWidth()/2,getIntY()+getWidth()/2, getWidth()/2, .2f, 5);
 						hurtUnits.get(i).hurt(damage, 1f);
 					}
 				}

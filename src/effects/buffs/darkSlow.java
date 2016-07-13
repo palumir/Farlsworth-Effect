@@ -14,9 +14,9 @@ public class darkSlow extends movementBuff {
 	private static float DEFAULT_ANIMATION_DURATION = 0.5f;
 	
 	// Fog percentage
-	private static float FOG_PERCENT = 0.9f;
-	private static float FOG_OVER = 1f;
-	private static float FOG_BACK_OVER = 0.5f;
+	private static float FOG_PERCENT = 0.8f;
+	private static float FOG_OVER = 2f;
+	private static float FOG_BACK_OVER = 0.15f;
 	
 	// The actual type.
 	private static effectType theEffectType =
@@ -51,7 +51,7 @@ public class darkSlow extends movementBuff {
 	
 	// Methods
 	public darkSlow(unit u, float duration) {
-		super(theEffectType, u, DEFAULT_SLOW_PERCENTAGE, duration + 0.1f);
+		super(theEffectType, u, DEFAULT_SLOW_PERCENTAGE, duration + 0.05f);
 	}
 	
 }

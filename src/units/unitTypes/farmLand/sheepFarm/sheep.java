@@ -3,13 +3,16 @@ package units.unitTypes.farmLand.sheepFarm;
 import java.util.Random;
 
 import drawing.camera;
+import drawing.spriteSheet;
+import drawing.animation.animation;
+import drawing.animation.animationPack;
+import drawing.spriteSheet.spriteSheetInfo;
 import effects.effect;
 import effects.effectTypes.bloodSquirt;
 import interactions.interactBox;
 import interactions.textSeries;
 import modes.mode;
 import sounds.sound;
-import units.animalType;
 import units.humanType;
 import units.unit;
 import units.unitType;
@@ -21,13 +24,13 @@ import zones.zone;
 public class sheep extends unit {
 	
 	// Platformer real dimensions
-	public static int DEFAULT_PLATFORMER_HEIGHT = 32;
-	public static int DEFAULT_PLATFORMER_WIDTH = 32;
+	public static int DEFAULT_PLATFORMER_HEIGHT = 18;
+	public static int DEFAULT_PLATFORMER_WIDTH = 24;
 	public static int DEFAULT_PLATFORMER_ADJUSTMENT_Y = 0;
 	
 	// TopDown real dimensions
-	public static int DEFAULT_TOPDOWN_HEIGHT = 18;
-	public static int DEFAULT_TOPDOWN_WIDTH = 24;
+	public static int DEFAULT_TOPDOWN_HEIGHT = 30;
+	public static int DEFAULT_TOPDOWN_WIDTH = 30;
 	public static int DEFAULT_TOPDOWN_ADJUSTMENT_Y = 4;
 	
 	// How far do the sheep patrol
@@ -38,24 +41,37 @@ public class sheep extends unit {
 	////////////////
 	
 	// Default name.
-	private static String DEFAULT_SHEEP_NAME = "sheep";
+	private static String DEFAULT_UNIT_NAME = "sheep";
 	
 	// Default movespeed.
-	private static int DEFAULT_SHEEP_MOVESPEED = 1;
+	private static int DEFAULT_UNIT_MOVESPEED = 1;
+	
+	// Interact times
+	private static int interactTimes = 0;
 	
 	// Default jump speed
-	private static int DEFAULT_SHEEP_JUMPSPEED = 10;
+	private static int DEFAULT_UNIT_JUMPSPEED = 10;
 	
 	// SHEEP sprite stuff.
-	private static String DEFAULT_SHEEP_SPRITESHEET = "images/units/animals/sheep.png";
+	private static String DEFAULT_UNIT_SPRITESHEET = "images/units/animals/sheep.png";
 	
 	// The actual type.
-	private static unitType sheepType =
-			new animalType( "sheep",  // Name of unitType 
-						 DEFAULT_SHEEP_SPRITESHEET,
-					     DEFAULT_SHEEP_MOVESPEED, // Movespeed
-					     DEFAULT_SHEEP_JUMPSPEED // Jump speed
+	public static unitType sheepType =
+			new unitType(DEFAULT_UNIT_NAME,  // Name of unitType 
+					  new spriteSheet(new spriteSheetInfo(
+							"images/units/animals/sheep.png", 
+							90, 
+							90,
+							0,
+							DEFAULT_TOPDOWN_ADJUSTMENT_Y
+							)),
+					     null,
+					     DEFAULT_TOPDOWN_WIDTH,
+					     DEFAULT_TOPDOWN_HEIGHT,
+					     DEFAULT_UNIT_MOVESPEED, // Movespeed
+					     DEFAULT_UNIT_JUMPSPEED // Jump speed
 						);	
+	
 	
 	// Sounds
 	private static String bleet1 = "sounds/effects/animals/sheep1.wav";
@@ -68,7 +84,7 @@ public class sheep extends unit {
 	
 	// AI movement.
 	private long AILastCheck = 0l; // milliseconds
-	private float randomMove = 1f; // seconds
+	private float randomMove = 2f; // seconds
 	private float randomStop = 0.5f;
 	private int startX = 0;
 	private int startY = 0;
@@ -95,7 +111,15 @@ public class sheep extends unit {
 		textSeries startOfConversation = new textSeries(null, "Bah.");
 		startOfConversation.setEnd();
 		
-		return new interactBox(startOfConversation, stringUtils.toTitleCase(DEFAULT_SHEEP_NAME), true);
+		// Funny interactions
+		int random = utility.RNG.nextInt(7);
+		if(interactTimes > 5 && random == 0) {
+			startOfConversation = new textSeries(null, "Frig off.");
+			startOfConversation.setEnd();
+		}
+		interactTimes++;
+			
+		return new interactBox(startOfConversation, stringUtils.toTitleCase(DEFAULT_UNIT_NAME), true);
 	}
 	
 	// Interact with object. 
@@ -110,13 +134,59 @@ public class sheep extends unit {
 	// Constructor
 	public sheep(int newX, int newY) {
 		super(sheepType, newX, newY);
+	
+		// Deal with animations
+		animationPack unitTypeAnimations = new animationPack();
+		
+		// Jumping left animation.
+		//animation jumpingLeft = new animation("jumpingLeft", getObjectSpriteSheet().getAnimation(6), 4, 4, 1);
+		//unitTypeAnimations.addAnimation(jumpingLeft);
+		
+		// Jumping right animation.
+		//animation jumpingRight = new animation("jumpingRight", getObjectSpriteSheet().getAnimation(2), 4, 4, 1);
+		//unitTypeAnimations.addAnimation(jumpingRight);
+		
+		// Standing left animation.
+		animation standingLeft = new animation("standingLeft", getObjectSpriteSheet().getAnimation(1), 3, 3, 1);
+		unitTypeAnimations.addAnimation(standingLeft);
+		
+		// Standing right animation.
+		animation standingRight = new animation("standingRight", getObjectSpriteSheet().getAnimation(3), 3, 3, 1);
+		unitTypeAnimations.addAnimation(standingRight);
+		
+		// Running left animation.
+		animation runningLeft = new animation("runningLeft", getObjectSpriteSheet().getAnimation(1), 0, 3, 1f);
+		unitTypeAnimations.addAnimation(runningLeft);		
+		
+		// Running right animation.
+		animation runningRight = new animation("runningRight", getObjectSpriteSheet().getAnimation(3), 0, 3, 1f);
+		unitTypeAnimations.addAnimation(runningRight);
+		
+		// Standing up animation.
+		animation standingUp = new animation("standingUp", getObjectSpriteSheet().getAnimation(0), 3, 3, 1);
+		unitTypeAnimations.addAnimation(standingUp);
+		
+		// Standing down animation.
+		animation standingDown = new animation("standingDown", getObjectSpriteSheet().getAnimation(2), 3, 3, 1);
+		unitTypeAnimations.addAnimation(standingDown);
+		
+		// Running up animation.
+		animation runningUp = new animation("runningUp", getObjectSpriteSheet().getAnimation(0), 0, 3, 1f);
+		unitTypeAnimations.addAnimation(runningUp);
+		
+		// Running down animation.
+		animation runningDown = new animation("runningDown", getObjectSpriteSheet().getAnimation(2), 0, 3, 1f);
+		unitTypeAnimations.addAnimation(runningDown);
+		
+		// Set animations.
+		setAnimations(unitTypeAnimations);
 		
 		// Set AI start X and Y
 		startX = newX;
 		startY = newY;
 		
 		// Set interactable.
-		interactable = true;
+		setInteractable(true);
 		
 		// Set dimensions
 		setHeight(getDefaultHeight());
@@ -131,10 +201,10 @@ public class sheep extends unit {
 	
 	// Make sure the movement is within a certain radius.
 	public void checkMovement(String direction) {
-			if(getX() < startX - patrolRadius) moveUnit("right");
-			else if(getX() + getWidth() > startX + patrolRadius)  moveUnit("left");
-			else if(getY() < startY - patrolRadius) moveUnit("down");
-			else if(getY() + getHeight() > startY + patrolRadius) moveUnit("up");
+			if(getIntX() < startX - patrolRadius) moveUnit("right");
+			else if(getIntX() + getWidth() > startX + patrolRadius)  moveUnit("left");
+			else if(getIntY() < startY - patrolRadius) moveUnit("down");
+			else if(getIntY() + getHeight() > startY + patrolRadius) moveUnit("up");
 			else moveUnit(direction);
 	}
 	
@@ -162,12 +232,12 @@ public class sheep extends unit {
 			int random = utility.RNG.nextInt(2);
 			if(random==0) {
 				sound s = new sound(bleet1);
-				s.setPosition(getX(), getY(), bleetRadius);
+				s.setPosition(getIntX(), getIntY(), bleetRadius);
 				s.start();
 			}
 			if(random==1) {
 				sound s = new sound(bleet2);
-				s.setPosition(getX(), getY(), bleetRadius);
+				s.setPosition(getIntX(), getIntY(), bleetRadius);
 				s.start();
 			}
 		}
@@ -185,7 +255,7 @@ public class sheep extends unit {
 		
 		// Stop sheep after a fraction of a second
 		if(isMoving() && time.getTime() - AILastCheck > randomStop*1000) {
-			randomMove = 2f + utility.RNG.nextInt(9)*0.5f;
+			randomMove = 3f + utility.RNG.nextInt(9)*0.5f;
 			AILastCheck = time.getTime();
 			stopMove("all");
 		}

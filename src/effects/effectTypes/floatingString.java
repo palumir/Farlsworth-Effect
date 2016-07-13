@@ -16,8 +16,6 @@ import drawing.spriteSheet.spriteSheetInfo;
 import effects.effect;
 import effects.effectType;
 import modes.mode;
-import sounds.sound;
-import units.animalType;
 import units.humanType;
 import units.unit;
 import units.unitType;
@@ -109,8 +107,8 @@ public class floatingString extends effect {
 
 		g.setFont(font);
 		g.drawString(text,0, g2.getFontMetrics().getHeight());
-		g2.drawImage(img,drawX - g2.getFontMetrics().stringWidth(text)/2,drawY - (int)(gameCanvas.getScaleY()*getHeight()*2/3),null);
-		setY(getY() - 1);
+		g2.drawImage(img,getDrawX() - g2.getFontMetrics().stringWidth(text)/2,getDrawY() - (int)(gameCanvas.getScaleY()*getHeight()*2/3),null);
+		setFloatY(getIntY() - 1);
 	}
 
 }

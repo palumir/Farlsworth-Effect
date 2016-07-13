@@ -12,7 +12,6 @@ import effects.projectile;
 import modes.mode;
 import sounds.sound;
 import terrain.chunk;
-import units.animalType;
 import units.humanType;
 import units.player;
 import units.unit;
@@ -25,8 +24,8 @@ import zones.zone;
 public class rockPiece extends projectile {
 	
 	// Default dimensions.
-	public static int DEFAULT_SPRITE_WIDTH = 10;
-	public static int DEFAULT_SPRITE_HEIGHT = 10;
+	public static int DEFAULT_SPRITE_WIDTH = 11;
+	public static int DEFAULT_SPRITE_HEIGHT = 11;
 	
 	// Platformer real dimensions
 	public static int DEFAULT_PLATFORMER_HEIGHT = DEFAULT_SPRITE_WIDTH;
@@ -34,8 +33,8 @@ public class rockPiece extends projectile {
 	public static int DEFAULT_PLATFORMER_ADJUSTMENT_Y = 0;
 	
 	// TopDown real dimensions
-	public static int DEFAULT_TOPDOWN_HEIGHT = 10;
-	public static int DEFAULT_TOPDOWN_WIDTH = 10;
+	public static int DEFAULT_TOPDOWN_HEIGHT = DEFAULT_SPRITE_WIDTH;
+	public static int DEFAULT_TOPDOWN_WIDTH = DEFAULT_SPRITE_HEIGHT;
 	public static int DEFAULT_TOPDOWN_ADJUSTMENT_Y = 0;
 	
 	////////////////
@@ -52,7 +51,7 @@ public class rockPiece extends projectile {
 	private static float DEFAULT_ANIMATION_DURATION = 10f;
 	
 	// Movespeed
-	public static int DEFAULT_MOVESPEED = 4;
+	public static int DEFAULT_MOVESPEED = 2;
 	
 	// The actual type.
 	private static effectType theEffectType =
@@ -72,8 +71,9 @@ public class rockPiece extends projectile {
 	// Constructor
 	public rockPiece(int newX, int newY, int newMoveToX, int newMoveToY, int damage) {
 		super(theEffectType, newX, newY, newMoveToX, newMoveToY, damage);
-		setMoveSpeed(DEFAULT_MOVESPEED);
+		moveSpeed = DEFAULT_MOVESPEED;
 		collisionOn = false;
+		setRiseRun();
 	}
 	
 	///////////////////////////
@@ -99,25 +99,24 @@ public class rockPiece extends projectile {
 		floatY += rise;
 		
 		// Set new X and Y.
-		setX((int)floatX);
-		setY((int)floatY);
+		setFloatX((int)floatX);
+		setFloatY((int)floatY);
 		
 		player currPlayer = player.getCurrentPlayer();
 		
 		boolean isWithin;
 		if(!isAllied()) {
 			// If we hit the player, explode it.
-			isWithin = currPlayer.isWithinRadius(getX() + getWidth()/2, getY()+getHeight()/2, getWidth()/2);
+			isWithin = currPlayer.isWithinRadius(getIntX() + getWidth()/2, getIntY()+getHeight()/2, getWidth()/2);
 			if(isWithin) { 
-				currPlayer.hurt(0, 1);
+				currPlayer.hurt(damage, 1);
 				explode();
 			}
 		}
 		else {
-			ArrayList<unit> uList = unit.getUnitsInBox(getX(), getY(), getX() + getWidth(), getY() + getHeight());
+			ArrayList<unit> uList = unit.getUnitsInBox(getIntX(), getIntY(), getIntX() + getWidth(), getIntY() + getHeight());
 			isWithin = (uList != null) && ((uList.contains(currPlayer) && (uList.size() > 1)) || (uList.size() >= 1 && !uList.contains(currPlayer)));
 			if(isWithin) {
-				System.out.println("FART");
 				explode();
 			}
 			

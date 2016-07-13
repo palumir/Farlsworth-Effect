@@ -9,7 +9,7 @@ public abstract class buff extends effect {
 	
 	// Constructor
 	public buff(effectType e, unit u, float d) {
-		super(e, u.getX(), u.getY());
+		super(e, u.getIntX(), u.getIntY());
 		setDrawObject(false);
 		onUnit = u;
 		animationDuration = d;

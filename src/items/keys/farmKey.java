@@ -15,12 +15,12 @@ import items.weapon;
 import units.player;
 import utilities.saveState;
 
-public class sheepKey extends key {
+public class farmKey extends key {
 	////////////////
 	/// DEFAULTS ///
 	////////////////
 	// Bottle name
-	public static String DEFAULT_KEY_NAME = "Sheep Key";
+	public static String DEFAULT_KEY_NAME = "Farm Key";
 	
 	//////////////
 	/// FIELDS ///
@@ -40,7 +40,7 @@ public class sheepKey extends key {
 	///////////////
 	
 	// In inventory.
-	public sheepKey() {
+	public farmKey() {
 		super(DEFAULT_KEY_NAME);
 	}
 	
@@ -50,7 +50,7 @@ public class sheepKey extends key {
 	}
 	
 	// On floor.
-	public sheepKey(int x, int y) {
+	public farmKey(int x, int y) {
 		super(DEFAULT_KEY_NAME,x,y);
 	}
 	

@@ -6,6 +6,7 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 import doodads.sheepFarm.bone;
+import doodads.sheepFarm.tree;
 import drawing.camera;
 import drawing.drawnObject;
 import drawing.gameCanvas;
@@ -30,6 +31,7 @@ import modes.platformer;
 import modes.topDown;
 import sounds.music;
 import sounds.sound;
+import terrain.chunk;
 import utilities.saveState;
 import utilities.time;
 import utilities.utility;
@@ -40,6 +42,9 @@ public class player extends unit {
 	////////////////
 	/// DEFAULTS ///
 	////////////////
+	
+	// Default attack sound
+	private String DEFAULT_ATTACK_SOUND = "sounds/effects/combat/punch.wav";
 	
 	// Default dimensions.
 	private static int DEFAULT_PLATFORMER_HEIGHT = 46;
@@ -65,7 +70,7 @@ public class player extends unit {
 	// 3 is default
 	
 	// Default HP
-	private static int DEFAULT_PLAYER_HP = 6;//6;
+	private static int DEFAULT_PLAYER_HP = 6;
 	
 	// Default jump speed
 	private static int DEFAULT_PLAYER_JUMPSPEED = 10;
@@ -78,11 +83,14 @@ public class player extends unit {
 	private static int DEFAULT_INTERACT_WIDTH = 40;
 	
 	// Default shield color
-	private Color DEFAULT_SHIELD_COLOR = Color.blue;
+	private Color DEFAULT_SHIELD_COLOR = Color.cyan;
 	
 	///////////////
 	/// GLOBALS ///
 	///////////////
+	
+	// Is this player a developer?
+	private static boolean isDeveloper = false;
 	
 	// Player is loaded
 	public static boolean playerLoaded = false;
@@ -139,15 +147,8 @@ public class player extends unit {
 	public player(int newX, int newY, zone z) {
 		super(playerType, newX, newY);
 		
-		/// TODO: Dev stuff
-		//showUnitPosition();
-		//showHitBox();
-		//setCollision(false);
-		//setMoveSpeed(10);
-		//showAttackRange(); 
-		
 		// Set sounds.
-		attackSound = "sounds/effects/player/combat/swingWeapon.wav";
+		setAttackSound(DEFAULT_ATTACK_SOUND);
 		
 		// Set-up the camera.
 		camera c = new camera(this, 1);
@@ -190,8 +191,8 @@ public class player extends unit {
 		// Squirt blood
 		int randomX = -getWidth()/3 + utility.RNG.nextInt(getWidth()/3);
 		int randomY = -getHeight()/2 + utility.RNG.nextInt(getHeight()/2);
-		effect e = new bloodSquirt(getX() - bloodSquirt.getDefaultWidth()/2 + getWidth()/2 + randomX,
-				   getY() - bloodSquirt.getDefaultHeight()/2 + getHeight()/2 + randomY);
+		effect e = new bloodSquirt(getIntX() - bloodSquirt.getDefaultWidth()/2 + getWidth()/2 + randomX,
+				   getIntY() - bloodSquirt.getDefaultHeight()/2 + getHeight()/2 + randomY);
 	}
 	
 	// Player AI controls the interface
@@ -213,11 +214,6 @@ public class player extends unit {
 			if(getEnergy() >= getMaxEnergy());
 			else setEnergy(getEnergy() + 1);
 		}
-		
-		// If we are shielding, reflect damage etc.
-		if(isShielding()) {
-		}
-		
 	}
 	
 	// Attack?
@@ -335,8 +331,9 @@ public class player extends unit {
 			}
 		}
 		
-		// Create the player in the zone. Start zone if no zone was loaded from the save.
-		thePlayer = new player(playerX, playerY, loadZone);
+		// Create the player. If we are a developer, give developer functions.
+		if(!isDeveloper()) thePlayer = new player(playerX, playerY, loadZone);
+		else thePlayer = new developer(playerX, playerY, loadZone);
 		
 		// Set our fields
 		thePlayer.setFacingDirection(newFacingDirection);
@@ -379,7 +376,7 @@ public class player extends unit {
 		// Respond to other presses (movement)
 		else {
 			// Shield on.
-			if(k.getKeyCode() == KeyEvent.VK_O) {
+			if(k.getKeyCode() == KeyEvent.VK_SHIFT) {
 				shield(true);
 			}
 			
@@ -421,24 +418,14 @@ public class player extends unit {
 			}
 			
 			// Player presses bar key
-			if(k.getKeyCode() == KeyEvent.VK_P) {
+			if(k.getKeyCode() == KeyEvent.VK_ENTER) {
 				if(equippedBottle!=null) equippedBottle.useCharge();
 			}
 			
 			
 			// Player presses e key
-			if(k.getKeyCode() == KeyEvent.VK_ENTER) {
+			if(k.getKeyCode() == KeyEvent.VK_E) {
 				interact();
-			}
-		
-			//////////////////////////////////////////
-			// TODO: CHEAT BUTTON
-			//////////////////////////////////////
-			if(k.getKeyCode() == KeyEvent.VK_Y) {
-				//healthPoints--;
-				saveState.createSaveState();
-				int random = utility.RNG.nextInt(3);
-				System.out.println("u = new wolf(" + getX() + "," + getY() + ");");
 			}
 		}
 	}
@@ -447,7 +434,7 @@ public class player extends unit {
 	public void keyReleased(KeyEvent k) {
 		
 		// Shield off
-		if(k.getKeyCode() == KeyEvent.VK_O) {
+		if(k.getKeyCode() == KeyEvent.VK_SHIFT) {
 			shield(false);
 		}
 		
@@ -507,6 +494,9 @@ public class player extends unit {
 		
 		// Damage
 		setAttackDamage(DEFAULT_ATTACK_DAMAGE);
+		
+		// Set attack sound
+		setAttackSound(DEFAULT_ATTACK_SOUND);
 		
 		// Attack time.
 		setAttackFrameStart(3);
@@ -594,38 +584,38 @@ public class player extends unit {
 		
 		// Get the box we will attack in if facing left.
 		if(getFacingDirection().equals("Left")) {
-			int heightMidPoint = getY() + getHeight()/2;
+			int heightMidPoint = getIntY() + getHeight()/2;
 			y1 = heightMidPoint - DEFAULT_INTERACT_WIDTH/2;
 			y2 = heightMidPoint + DEFAULT_INTERACT_WIDTH/2;
-			x1 = getX() - DEFAULT_INTERACT_RANGE;
-			x2 = getX() + getWidth();
+			x1 = getIntX() - DEFAULT_INTERACT_RANGE;
+			x2 = getIntX() + getWidth();
 		}
 		
 		// Get the box we will attack in if facing right.
 		if(getFacingDirection().equals("Right")) {
-			int heightMidPoint = getY() + getHeight()/2;
+			int heightMidPoint = getIntY() + getHeight()/2;
 			y1 = heightMidPoint - DEFAULT_INTERACT_WIDTH/2;
 			y2 = heightMidPoint + DEFAULT_INTERACT_WIDTH/2;
-			x1 = getX();
-			x2 = getX() + getWidth() + DEFAULT_INTERACT_RANGE;
+			x1 = getIntX();
+			x2 = getIntX() + getWidth() + DEFAULT_INTERACT_RANGE;
 		}
 		
 		// Get the box we will attack in facing up.
 		if(getFacingDirection().equals("Up")) {
-			int widthMidPoint = getX() + getWidth()/2;
+			int widthMidPoint = getIntX() + getWidth()/2;
 			x1 = widthMidPoint - DEFAULT_INTERACT_WIDTH/2;
 			x2 = widthMidPoint + DEFAULT_INTERACT_WIDTH/2;
-			y1 = getY() - DEFAULT_INTERACT_RANGE;
-			y2 = getY() + getHeight();
+			y1 = getIntY() - DEFAULT_INTERACT_RANGE;
+			y2 = getIntY() + getHeight();
 		}
 		
 		// Get the box we will attack in facing down.
 		if(getFacingDirection().equals("Down")) {
-			int widthMidPoint = getX() + getWidth()/2;
+			int widthMidPoint = getIntX() + getWidth()/2;
 			x1 = widthMidPoint - DEFAULT_INTERACT_WIDTH/2;
 			x2 = widthMidPoint + DEFAULT_INTERACT_WIDTH/2;
-			y1 = getY();
-			y2 = getY() + getHeight() + DEFAULT_INTERACT_RANGE;
+			y1 = getIntY();
+			y2 = getIntY() + getHeight() + DEFAULT_INTERACT_RANGE;
 		}
 		
 		// Get the units in the box around the front of the player.
@@ -650,8 +640,8 @@ public class player extends unit {
 		if(isShielding()) {
 			g.setColor(DEFAULT_SHIELD_COLOR);
 			if(getCurrentAnimation()!=null)
-			g.fillOval(drawX - (int)(gameCanvas.getScaleX()*(- (getCurrentAnimation().getCurrentFrame().getWidth()/2 - getWidth()/2) - getHitBoxAdjustmentX())),
-					   ((drawY + getHitBoxAdjustmentY() + getCurrentAnimation().getCurrentFrame().getHeight()/2 - getHeight()/2) + getHeight() - DEFAULT_PLATFORMER_HEIGHT), 
+			g.fillOval(getDrawX() - (int)(gameCanvas.getScaleX()*(- (getCurrentAnimation().getCurrentFrame().getWidth()/2 - getWidth()/2) - getHitBoxAdjustmentX())),
+					   ((getDrawY() + getHitBoxAdjustmentY() + getCurrentAnimation().getCurrentFrame().getHeight()/2 - getHeight()/2) + getHeight() - DEFAULT_PLATFORMER_HEIGHT), 
 					   (int)(gameCanvas.getScaleX()*DEFAULT_PLATFORMER_WIDTH),
 					   (int)(gameCanvas.getScaleY()*DEFAULT_PLATFORMER_HEIGHT));
 		}
@@ -765,5 +755,13 @@ public class player extends unit {
 
 	public void setEnergy(float energy) {
 		this.energy = energy;
+	}
+
+	public static boolean isDeveloper() {
+		return isDeveloper;
+	}
+
+	public static void setDeveloper(boolean isDeveloper) {
+		player.isDeveloper = isDeveloper;
 	}
 }

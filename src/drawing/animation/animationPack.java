@@ -41,5 +41,10 @@ public class animationPack {
 		}
 		return null;
 	}
+
+	public boolean contains(animation trailRight) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 	
 }

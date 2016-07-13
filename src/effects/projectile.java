@@ -13,7 +13,6 @@ import effects.effectType;
 import modes.mode;
 import sounds.sound;
 import terrain.chunk;
-import units.animalType;
 import units.humanType;
 import units.player;
 import units.unit;
@@ -82,7 +81,10 @@ public abstract class projectile extends effect {
 	protected float floatY = 0;
 	
 	// Move-speed
-	private int moveSpeed = DEFAULT_PROJECTILE_MOVESPEED;
+	protected int moveSpeed = DEFAULT_PROJECTILE_MOVESPEED;
+	
+	// Reflectable
+	private boolean reflectable = false;
 	
 	// Damage
 	protected int damage;
@@ -154,10 +156,10 @@ public abstract class projectile extends effect {
 	
 	// Check if a unit is within 
 	public boolean isWithin(int x1, int y1, int x2, int y2) {
-		return getX() < x2 && 
-		 getX() + getWidth() > x1 && 
-		 getY() < y2 && 
-		 getY() + getHeight() > y1;
+		return getIntX() < x2 && 
+		 getIntX() + getWidth() > x1 && 
+		 getIntY() < y2 && 
+		 getIntY() + getHeight() > y1;
 	}
 	
 
@@ -179,8 +181,8 @@ public abstract class projectile extends effect {
 	
 	// Set rise run. Optimized to make projectiles kinda accurate.
 	public void setRiseRun() {
-		float yDistance = (moveToY - getY());
-		float xDistance = (moveToX - getX());
+		float yDistance = (moveToY - getIntY());
+		float xDistance = (moveToX - getIntX());
 		float distanceXY = (float) Math.sqrt(yDistance * yDistance
 					+ xDistance * xDistance);
 		
@@ -190,7 +192,7 @@ public abstract class projectile extends effect {
 		
 		// Calculate run values.
 		float floatRun = ((xDistance/distanceXY)*getMoveSpeed());
-		run = (int)floatRun;
+		run = floatRun;
 		
 	}
 	
@@ -203,26 +205,26 @@ public abstract class projectile extends effect {
 		floatY += rise;
 		
 		// Set new X and Y.
-		setX((int)floatX);
-		setY((int)floatY);
+		setFloatX((int)floatX);
+		setFloatY((int)floatY);
 		
 		player currPlayer = player.getCurrentPlayer();
 		
 		boolean isWithin;
 		if(!isAllied()) {
 			// If we hit the player, explode it.
-			isWithin = currPlayer.isWithinRadius(getX() + getWidth()/2, getY()+getHeight()/2, getWidth()/2);
+			isWithin = currPlayer.isWithinRadius(getIntX() + getWidth()/2, getIntY()+getHeight()/2, getWidth()/2);
 		}
 		else {
-			ArrayList<unit> uList = unit.getUnitsInBox(getX(), getY(), getX() + getWidth(), getY() + getHeight());
+			ArrayList<unit> uList = unit.getUnitsInBox(getIntX(), getIntY(), getIntX() + getWidth(), getIntY() + getHeight());
 			isWithin = (uList != null) && ((uList.contains(currPlayer) && (uList.size() > 1)) || (uList.size() >= 1 && !uList.contains(currPlayer)));
 		}
 				 
 		// If we collide with something, explode it.
-		intTuple tupleXY = chunk.collidesWith(this, getX() + (int)run, getY() + (int)rise);
+		intTuple tupleXY = chunk.collidesWith(this, getIntX() + (int)run, getIntY() + (int)rise);
 		boolean isCollide = (tupleXY.x == 1 || tupleXY.y == 1) && collisionOn;
 		if(isWithin || isCollide) {
-			if(currPlayer.isWithinRadius(getX() + getWidth()/2, getY()+getHeight()/2, getWidth()/2) &&
+			if(currPlayer.isWithinRadius(getIntX() + getWidth()/2, getIntY()+getHeight()/2, getWidth()/2) &&
 					!isAllied() &&
 					currPlayer.isShielding()) {
 				boolean b = currPlayer.hurt(0, 1);
@@ -279,6 +281,14 @@ public abstract class projectile extends effect {
 
 	public void setAllied(boolean allied) {
 		this.allied = allied;
+	}
+
+	public boolean isReflectable() {
+		return reflectable;
+	}
+
+	public void setReflectable(boolean reflectable) {
+		this.reflectable = reflectable;
 	}
 
 }

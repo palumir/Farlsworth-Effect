@@ -123,13 +123,13 @@ public class firePit extends chunk {
 		if(lastFireSound == 0) {
 			lastFireSound = time.getTime();
 			sound s = new sound(firePitSound);
-			s.setPosition(getX(),getY(), sound.DEFAULT_SOUND_RADIUS);
+			s.setPosition(getIntX(),getIntY(), sound.DEFAULT_SOUND_RADIUS);
 			s.start();
 		}
 		else if(time.getTime() - lastFireSound > playEvery*1000) {
 			lastFireSound = time.getTime();
 			sound s = new sound(firePitSound);
-			s.setPosition(getX(),getY(), sound.DEFAULT_SOUND_RADIUS);
+			s.setPosition(getIntX(),getIntY(), sound.DEFAULT_SOUND_RADIUS);
 			s.start();
 		}
 	}
@@ -158,7 +158,7 @@ public class firePit extends chunk {
 		fireAnimation = new animation("fire", typeReference.getChunkTypeSpriteSheet().getAnimation(0), 0, 3, 0.43f);
 		
 		// Interactable.
-		interactable = true;
+		setInteractable(true);
 		interactSequence = makeNormalInteractSequence();
 		
 		// Passable.

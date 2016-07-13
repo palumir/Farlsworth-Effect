@@ -2,12 +2,16 @@ package terrain.atmosphericEffects;
 
 import java.awt.AlphaComposite;
 import java.awt.Color;
+import java.awt.Composite;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.util.Random;
 
+import doodads.tomb.lightSource;
 import drawing.gameCanvas;
+import effects.effectTypes.darkHole;
+import utilities.imageUtils;
 import utilities.time;
 
 public class fog {
@@ -24,13 +28,28 @@ public class fog {
 	// Paint the fog
 	public static void paintFog(Graphics2D g2) {
 		if(fogLevel != 0f) {
+			
+			// Create an image the size of the screen to draw on.
 			BufferedImage img = new BufferedImage(gameCanvas.getActualWidth(),gameCanvas.getActualHeight(), BufferedImage.TYPE_INT_ARGB);
 			Graphics2D g = img.createGraphics();
+			
+			// Regular composite
+			Composite oldComposite = g.getComposite();
+			
+			// Draw the fog.
 			float alpha = fogLevel;
-			Color color = new Color(0, 0, 0, alpha); //Black 
+			Color black = new Color(0, 0, 0, alpha); //Black 
 			g.setComposite(AlphaComposite.Src);
-			g.setPaint(color);
+			g.setPaint(black);
 			g.fillRect(0,0,gameCanvas.getActualWidth(),gameCanvas.getActualHeight());
+			
+			// Draw the lightsources.
+			g.setComposite(AlphaComposite.Clear);
+			for(int i = 0; i < lightSource.lightSources.size(); i++) {
+				lightSource l = lightSource.lightSources.get(i);
+				g.fillOval(l.getDrawX() + l.getWidth()/2 - l.getLightRadius()/2, l.getDrawY() + l.getHeight()/2 - l.getLightRadius()/2, l.getLightRadius(), l.getLightRadius());
+			}
+			
 			g2.drawImage(img,0,0,null);
 		}
 	}
@@ -45,6 +64,13 @@ public class fog {
 			 fogLevel = oldLevel*(1 - ((time.getTime() - startFade)/(fadeTime*1000)));
 			 if((time.getTime() - startFade)/(fadeTime*1000) >= 1) fogLevel = fogLevelMax;
 		}
+	}
+	
+	// Set to
+	public static void setTo(float level) {
+		fogLevelMax = level;
+		fogLevel = level;
+		oldLevel = level;
 	}
 	
 	// Fade to a certain alpha over time.

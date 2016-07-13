@@ -15,7 +15,6 @@ public abstract class mode {
 	
 	// Print mode.
 	public static void printMode() {
-		System.out.println(getCurrentMode());
 	}
 
 	public static String getCurrentMode() {

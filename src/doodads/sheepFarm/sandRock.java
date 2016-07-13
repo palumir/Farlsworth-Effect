@@ -38,7 +38,8 @@ public class sandRock extends chunk {
 	// Constructor
 	public sandRock(int newX, int newY, int i) {
 		super(typeReference, newX, newY, i, 0);
-		setPassable(false);
+		setPassable(true);
+		backgroundDoodad = true;
 		if(mode.getCurrentMode().equals("topDown")) {
 			setHitBoxAdjustmentY(0);
 			setHeight(DEFAULT_CHUNK_HEIGHT);
