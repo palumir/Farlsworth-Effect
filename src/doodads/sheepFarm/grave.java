@@ -84,10 +84,13 @@ public class grave extends chunk {
 	// Constructor
 	public grave(int newX, int newY, int i) {
 		super(typeReference, newX, newY, i, 0);
+		//showUnitPosition();
+		//showHitBox();
 		if(mode.getCurrentMode().equals("topDown")) {
 			setHitBoxAdjustmentY(-10);
-			setWidth(25);
+			setWidth(22);
 			setHeight(7);
+			setHitBoxAdjustmentX(-2);
 		}
 		else {
 			setHitBoxAdjustmentY(0);

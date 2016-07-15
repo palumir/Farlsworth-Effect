@@ -31,7 +31,7 @@ public class darkSlow extends movementBuff {
 	public void applyEffect() {
 		if(!onUnit.getMovementBuffs().contains(this)) {
 			onUnit.getMovementBuffs().add(this);
-			fog.fadeTo(FOG_PERCENT, FOG_OVER);
+			//fog.fadeTo(FOG_PERCENT, FOG_OVER);
 		}
 	}
 
@@ -45,7 +45,7 @@ public class darkSlow extends movementBuff {
 			for(int i = 0; i < onUnit.getMovementBuffs().size(); i++) {
 				if(onUnit.getMovementBuffs().get(i).getClass().equals(this.getClass())) isAnother = true;
 			}
-			if(!isAnother) fog.fadeTo(0, FOG_BACK_OVER);
+			//if(!isAnother) fog.fadeTo(0, FOG_BACK_OVER);
 		}
 	}
 	

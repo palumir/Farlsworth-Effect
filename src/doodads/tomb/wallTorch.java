@@ -3,6 +3,7 @@ package doodads.tomb;
 import java.awt.image.BufferedImage;
 import java.util.Random;
 
+import doodads.general.lightSource;
 import drawing.camera;
 import drawing.animation.animation;
 import modes.mode;

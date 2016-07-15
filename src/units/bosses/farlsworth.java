@@ -432,13 +432,21 @@ public class farlsworth extends boss {
 				s.start();
 				interactSequence.setUnescapable(false);
 				p = new ArrayList<intTuple>();
-				p.add(new intTuple(2366,-107));
+				/*p.add(new intTuple(2366,-107));
 				p.add(new intTuple(2630,-128));
 				p.add(new intTuple(2762,-419));
 				p.add(new intTuple(2921,-419));
 				p.add(new intTuple(2856,-579));
 				p.add(new intTuple(2680,-944));
-				p.add(new intTuple(2680,-1322));
+				p.add(new intTuple(2680,-1322));*/
+				p.add(new intTuple(2307,-121));
+				p.add(new intTuple(2562,-121));
+				p.add(new intTuple(2758,-437));
+				p.add(new intTuple(2926,-437));
+				p.add(new intTuple(2871,-564));
+				p.add(new intTuple(2697,-805));
+				p.add(new intTuple(2697,-1120));
+				p.add(new intTuple(2697,-1405));
 				followPath(p);
 				pastFlowerPatch.setCompleted(true);
 				saveState.setQuiet(true);

@@ -44,19 +44,9 @@ public class generalChunkType extends chunkType {
 	// Returns random chunk image from first row if topDown,
 	// and 1,1 for platformer.
 	public BufferedImage getChunkImage() {
-		if(mode.getCurrentMode().equals("topDown")) {
 			// For now, return a random from the first row.
 			int randomFirstRow = utility.RNG.nextInt(getChunkTypeSpriteSheet().getSheetWidth()/getChunkTypeSpriteSheet().getSpriteWidth());
 			return getChunkTypeSpriteSheet().getSprite(randomFirstRow, 0);
-		}
-		else {
-			if(getChunkTypeSpriteSheet().getSprites().size() > 1) {
-				return getChunkTypeSpriteSheet().getSprite(1, 1); // It's a platformer tile.
-			}
-			else {
-				return null; // It will be set later.
-			}
-		}
 	}
 	
 	// Returns a given chunk image from the spritefile. Usually for

@@ -8,7 +8,7 @@ import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.util.Random;
 
-import doodads.tomb.lightSource;
+import doodads.general.lightSource;
 import drawing.gameCanvas;
 import effects.effectTypes.darkHole;
 import utilities.imageUtils;
@@ -47,7 +47,7 @@ public class fog {
 			g.setComposite(AlphaComposite.Clear);
 			for(int i = 0; i < lightSource.lightSources.size(); i++) {
 				lightSource l = lightSource.lightSources.get(i);
-				g.fillOval(l.getDrawX() + l.getWidth()/2 - l.getLightRadius()/2, l.getDrawY() + l.getHeight()/2 - l.getLightRadius()/2, l.getLightRadius(), l.getLightRadius());
+				g.fillOval(l.getDrawX() + l.getWidth()/2 - l.getLightRadius(), l.getDrawY() + l.getHeight()/2 - l.getLightRadius(), l.getLightRadius()*2, l.getLightRadius()*2);
 			}
 			
 			g2.drawImage(img,0,0,null);

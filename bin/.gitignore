@@ -1,10 +1,7 @@
-/items/
-/units/
-/effects/
-/modes/
-/terrain/
 /zones/
-/main/
-/interactions/
 /doodads/
-/drawing/
+/units/
+/terrain/
+/utilities/
+/main/
+/effects/

@@ -13,6 +13,8 @@ import modes.topDown;
 import terrain.chunk;
 import units.unitTypes.farmLand.sheepFarm.redWolf;
 import units.unitTypes.farmLand.sheepFarm.wolf;
+import units.unitTypes.farmLand.tomb.lightDude;
+import units.unitTypes.farmLand.tomb.shadowDude;
 import utilities.saveState;
 import utilities.utility;
 import zones.zone;
@@ -45,13 +47,19 @@ public class developer extends player {
 									"bush",
 									"grave",
 									"wolf",
-									"wallTorch"};
+									"wallTorch",
+									"shadowDude",
+									"lightDude"};
 	
 	// Developer mode.
 	public developer(int newX, int newY, zone z) {
 		super(newX, newY, z);
 		collisionOn = false;
+		setStuck(true);
 		topDown.setMode();
+		
+		// Give a million hp
+		healthPoints = 100000;
 		
 		// Destroy healthbar.
 		getHealthBar().destroy();
@@ -142,6 +150,9 @@ public class developer extends player {
 	// Spawn the thing and output.
 	public void spawnThing() {
 		
+		// Already printed?
+		boolean alreadyPrinted = false;
+		
 		// Our things.
 		chunk c = null;
 		unit u = null;
@@ -206,6 +217,14 @@ public class developer extends player {
 			
 			// Output what we make.
 			c = new wallTorch(getIntX() + getWidth()/2, getIntY() + getHeight()/2);
+			
+			c.setFloatX(c.getFloatX() -c.getWidth()/2);
+			c.setFloatY(c.getFloatY() -c.getHeight()/2);
+			System.out.println("c = new " + listOfThings[whatThing] + "("+(getIntX()+getWidth()/2-c.getWidth()/2) + "," + (getIntY() + getHeight()/2 - c.getHeight()/2) + ");");
+			// Set some stuff.
+			if(showHitBoxes) c.showHitBox();
+			c.setDrawSprite(visible);
+			alreadyPrinted = true;
 		}
 		
 		/////////////
@@ -217,8 +236,26 @@ public class developer extends player {
 			u = new redWolf(getIntX() + getWidth()/2, getIntY() + getHeight()/2);
 		}
 		
+		/////////////
+		/// LIGHTDUDE  ///
+		/////////////
+		if(listOfThings[whatThing].equals("lightDude")) {
+			
+			// Output what we make.
+			u = new lightDude(getIntX() + getWidth()/2, getIntY() + getHeight()/2);
+		}
+		
+		/////////////
+		/// SHADOWDUDE  ///
+		/////////////
+		if(listOfThings[whatThing].equals("shadowDude")) {
+			
+			// Output what we make.
+			u = new shadowDude(getIntX() + getWidth()/2, getIntY() + getHeight()/2);
+		}
+		
 		// Adjust
-		if(c!=null) {
+		if(c!=null && !alreadyPrinted) {
 			c.setFloatX(c.getFloatX() -c.getWidth()/2);
 			c.setFloatY(c.getFloatY() -c.getHeight()/2);
 			System.out.println("c = new " + listOfThings[whatThing] + "("+(getIntX()+getWidth()/2-c.getWidth()/2) + "," + (getIntY() + getHeight()/2 - c.getHeight()/2) + "," + random + ");");
@@ -226,7 +263,7 @@ public class developer extends player {
 			if(showHitBoxes) c.showHitBox();
 			c.setDrawSprite(visible);
 		}
-		if(u!=null) {
+		if(u!=null && !alreadyPrinted) {
 			u.setFloatX(u.getFloatX() -u.getWidth()/2);
 			u.setFloatY(u.getFloatY() -u.getHeight()/2);
 			System.out.println("u = new " + listOfThings[whatThing] + "("+(getIntX()+getWidth()/2-u.getWidth()/2) + "," + (getIntY() + getHeight()/2 - u.getHeight()/2)+ ");");

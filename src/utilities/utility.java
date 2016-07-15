@@ -2,6 +2,7 @@ package utilities;
 
 import java.util.Random;
 
+import doodads.general.lightSource;
 import drawing.drawnObject;
 import interactions.event;
 import interactions.interactBox;
@@ -67,6 +68,7 @@ public abstract class utility {
 		drawnObject.initiate();
 		interactBox.initiate();
 		region.initiate();
+		lightSource.initiate();
 		fog.initiate();
 		unit.initiate();
 		unitType.initiate();

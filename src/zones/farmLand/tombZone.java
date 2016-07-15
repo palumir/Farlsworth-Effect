@@ -3,6 +3,7 @@ package zones.farmLand;
 import java.awt.image.BufferedImage;
 
 import doodads.sheepFarm.caveEnterance;
+import doodads.tomb.wallTorch;
 import drawing.background;
 import drawing.spriteSheet;
 import interactions.event;
@@ -16,6 +17,8 @@ import terrain.chunkTypes.dirt;
 import terrain.chunkTypes.tombBackground;
 import terrain.chunkTypes.tombDirt;
 import units.unit;
+import units.unitTypes.farmLand.tomb.lightDude;
+import units.unitTypes.farmLand.tomb.shadowDude;
 import utilities.intTuple;
 import zones.zone;
 
@@ -84,18 +87,6 @@ public class tombZone extends zone {
 		}
 	}
 	
-	// Spawn dirt  from x to y.
-	public void spawnPassableDirtRect(int x1, int y1, int x2, int y2) {
-		int numX = (x2 - x1)/dirt.DEFAULT_CHUNK_WIDTH;
-		int numY = (y2 - y1)/dirt.DEFAULT_CHUNK_HEIGHT;
-		for(int i = 0; i < numX; i++) {
-			for(int j = 0; j < numY; j++) {
-				c = new dirt(i*dirt.DEFAULT_CHUNK_WIDTH + x1, j*dirt.DEFAULT_CHUNK_HEIGHT + y1);
-				c.setPassable(true);
-			}
-		}
-	}
-	
 	// Spawn background  from x to y.
 	public void spawnBackgroundRect(int x1, int y1, int x2, int y2) {
 		int numX = (x2 - x1)/dirt.DEFAULT_CHUNK_WIDTH;
@@ -117,20 +108,17 @@ public class tombZone extends zone {
 	public void loadZone() {
 		
 		// Set the mode of the zone of course.
-		topDown.setMode();
-		//platformer.setMode();
+		//topDown.setMode();
+		platformer.setMode();
 		
 		// Set the darkness.
-		//fog.setTo(0.5f);
-		
-		// Background
-		//background.setGameBackground(DEFAULT_ZONE_BACKGROUND);
+		fog.setTo(0.2f);//fog.setTo(0.75f);
 		
 		// Load zone events.
 		loadZoneEvents();
 		
 		// Create surrounding dirt.
-		createSurroundingdirt();
+		createTomb();
 		
 		// Spawn area.
 		createSpawnArea();
@@ -158,7 +146,7 @@ public class tombZone extends zone {
 	//////////////////////
 	
 	// Surrounding dirt.
-	public void createSurroundingdirt() {
+	public void createTomb() {
 		
 		// Background 
 		spawnBackgroundRect(-65,-269, 3230,787);
@@ -168,8 +156,8 @@ public class tombZone extends zone {
 		spawnDirtRect(-500+2, -747, 0,-220,"none"); // roof dirt top left
 	
 		// Floor
-		spawnDirtRect(-18,40,300,40+32*100,"ground");
-		spawnDirtRect(-500+2,46,0,500,"none");
+		spawnDirtRect(-18,40,300,820,"ground");
+		spawnDirtRect(-500+2,46,0,820,"none");
 		
 		// Left wall
 		spawnDirtRect(-338,-242,7,60,"leftWall");
@@ -177,7 +165,27 @@ public class tombZone extends zone {
 		// Right wall
 		spawnDirtRect(3976+32,-750,4300,1000,"rightWall");
 		
+		// First floor
+		spawnDirtRect(337,40,410,820,"ground");
+		
 		// Torches
+		c = new wallTorch(209,-40);
+		c = new wallTorch(767,-76);
+		c = new wallTorch(435,-72);
+		
+		// Second floor
+		spawnDirtRect(508,0,1000,820,"ground");
+		u = new shadowDude(911,-90);
+		u.patrolTo(452,-90);
+		
+		// Third floor
+		spawnDirtRect(1073,63,1195,785,"ground");
+		c = new wallTorch(1126,-2);
+		
+		// Fourth floor, ish?
+		u = new lightDude(1265,38);
+		u.patrolTo(1568, 38);
+		
 	}
 	
 	// Spawn area.

@@ -155,11 +155,11 @@ public class sheep extends unit {
 		unitTypeAnimations.addAnimation(standingRight);
 		
 		// Running left animation.
-		animation runningLeft = new animation("runningLeft", getObjectSpriteSheet().getAnimation(1), 0, 3, 1f);
+		animation runningLeft = new animation("runningLeft", getObjectSpriteSheet().getAnimation(1), 0, 3, 0.75f);
 		unitTypeAnimations.addAnimation(runningLeft);		
 		
 		// Running right animation.
-		animation runningRight = new animation("runningRight", getObjectSpriteSheet().getAnimation(3), 0, 3, 1f);
+		animation runningRight = new animation("runningRight", getObjectSpriteSheet().getAnimation(3), 0, 3, 0.75f);
 		unitTypeAnimations.addAnimation(runningRight);
 		
 		// Standing up animation.
@@ -171,11 +171,11 @@ public class sheep extends unit {
 		unitTypeAnimations.addAnimation(standingDown);
 		
 		// Running up animation.
-		animation runningUp = new animation("runningUp", getObjectSpriteSheet().getAnimation(0), 0, 3, 1f);
+		animation runningUp = new animation("runningUp", getObjectSpriteSheet().getAnimation(0), 0, 3, 0.75f);
 		unitTypeAnimations.addAnimation(runningUp);
 		
 		// Running down animation.
-		animation runningDown = new animation("runningDown", getObjectSpriteSheet().getAnimation(2), 0, 3, 1f);
+		animation runningDown = new animation("runningDown", getObjectSpriteSheet().getAnimation(2), 0, 3, 0.75f);
 		unitTypeAnimations.addAnimation(runningDown);
 		
 		// Set animations.

@@ -27,8 +27,8 @@ public class tombBackground extends groundTile {
 	private static String DEFAULT_CHUNK_SPRITESHEET = "images/terrain/tombBackground.png";
 	
 	// Dimensions
-	public static int DEFAULT_CHUNK_WIDTH = 32;
-	public static int DEFAULT_CHUNK_HEIGHT = 32;
+	public static int DEFAULT_CHUNK_WIDTH = 64;
+	public static int DEFAULT_CHUNK_HEIGHT = 64;
 	
 	// The actual type.
 	private static generalChunkType typeReference = new generalChunkType(DEFAULT_CHUNK_NAME, DEFAULT_CHUNK_SPRITESHEET, DEFAULT_CHUNK_WIDTH, DEFAULT_CHUNK_HEIGHT);  

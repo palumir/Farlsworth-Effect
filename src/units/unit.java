@@ -6,6 +6,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 
+import doodads.general.lightSource;
 import doodads.general.questMark;
 import doodads.sheepFarm.clawMarkYellow;
 import drawing.camera;
@@ -254,6 +255,59 @@ public abstract class unit extends drawnObject  {
 		updateUnit();
 	}
 	
+	// Check if united is illuminated
+	public boolean isIlluminated() {
+		for(int i = 0; i < lightSource.lightSources.size(); i++) {
+			lightSource l = lightSource.lightSources.get(i);
+			if(this.isWithinRadius(l.getIntX() + l.getWidth()/2, l.getIntY() + l.getHeight()/2, l.getLightRadius())) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	// Deal with patrolling
+	public void dealWithPatrolling() {
+		
+		// If we are patrolling, patrol
+		if(patrolling) {
+			if(!movingBack) {
+				if(!isMoving()) {
+					moveTo(patrolX, patrolY);
+					movingBack = true;
+				}
+			}
+			else {
+				if(!isMoving()) {
+					moveTo(startX, startY);
+					movingBack = false;
+				}
+			}
+		}
+	}
+	
+	// Patrol stuff
+	boolean patrolling = false;
+	boolean movingBack = false;
+	int patrolX;
+	int patrolY;
+	int startX;
+	int startY;
+	
+	// Patrol to
+	public void patrolTo(int patrolToX, int patrolToY) {
+		patrolling = true;
+		patrolX = patrolToX;
+		patrolY = patrolToY;
+		startX = this.getIntX();
+		startY = this.getIntY();
+	}
+	
+	// Stop patrolling
+	public void stopPatrol() {
+		patrolling = false;
+	}
+	
 	// Is the unit alive or dead
 	public void aliveOrDead() {
 
@@ -344,7 +398,7 @@ public abstract class unit extends drawnObject  {
 	
 	// Provide gravity
 	public void gravity() {
-		if(gravity && !stuck) {
+		if(gravity && !isStuck()) {
 			
 			// Accelerate
 			if(fallSpeed < DEFAULT_GRAVITY_MAX_VELOCITY){
@@ -746,7 +800,7 @@ public abstract class unit extends drawnObject  {
 	
 	// Jump unit
 	public void jump() {
-		if(!stuck && gravity && !jumping && tryJump && touchingGround) {
+		if(!isStuck() && gravity && !jumping && tryJump && touchingGround) {
 			// Accelerate upward.
 			jumping = true;
 			fallSpeed = -jumpSpeed;
@@ -809,6 +863,11 @@ public abstract class unit extends drawnObject  {
 	
 	// Deal with meta movement. Moving toward a point, following, pathing, etc.
 	public void dealWithMetaMovement() {
+		
+		///////////////////////////////
+		/// PATROLLING ///
+		///////////////////////////////	
+		dealWithPatrolling();
 		
 		///////////////////////////////
 		/// MOVEMENT TOWARD A POINT ///
@@ -881,7 +940,7 @@ public abstract class unit extends drawnObject  {
 		if(isMovingRight()) moveX += moveByX;
 		
 		// Only do these ones if we're in topDown mode.
-		if(mode.getCurrentMode() == "topDown" || stuck) {
+		if(mode.getCurrentMode() == "topDown" || isStuck()) {
 			if(isMovingUp()) moveY -= moveByY;
 			if(isMovingDown()) moveY += moveByY;
 		}
@@ -891,8 +950,8 @@ public abstract class unit extends drawnObject  {
 		else if(isMovingRight() && isMovingUp()) setFacingDirection("Right");
 		else if(isMovingLeft() && isMovingDown()) setFacingDirection("Left");
 		else if(isMovingRight() && isMovingDown()) setFacingDirection("Right");
-		else if(isMovingDown() && (mode.getCurrentMode() != "platformer" || stuck)) setFacingDirection("Down");
-		else if(isMovingUp() && (mode.getCurrentMode() != "platformer" || stuck)) setFacingDirection("Up");
+		else if(isMovingDown() && (mode.getCurrentMode() != "platformer" || isStuck())) setFacingDirection("Down");
+		else if(isMovingUp() && (mode.getCurrentMode() != "platformer" || isStuck())) setFacingDirection("Up");
 		else if(isMovingRight()) setFacingDirection("Right");
 		else if(isMovingLeft()) setFacingDirection("Left");
 
@@ -1142,7 +1201,7 @@ public abstract class unit extends drawnObject  {
 				// Play animation.
 				animate("attacking" + facingDirection);
 			}
-			else if(inAir && !stuck) {
+			else if(inAir && !isStuck()) {
 				String face;
 				if(getFacingDirection().equals("Up") || getFacingDirection().equals("Down")) {
 					face = "Right";
@@ -1152,7 +1211,7 @@ public abstract class unit extends drawnObject  {
 				}
 				animate("jumping" + face);
 			}
-			else if((isMoving() && stuck) || (!stuck && (!isMovingDown() || (isMovingLeft() || isMovingRight())) && isMoving())) {
+			else if((isMoving() && isStuck()) || (!isStuck() && (!isMovingDown() || (isMovingLeft() || isMovingRight())) && isMoving())) {
 				// If we are running.
 				animate("running" + getFacingDirection());
 			}
@@ -1630,6 +1689,10 @@ public abstract class unit extends drawnObject  {
 
 	public void setMovingUp(boolean movingUp) {
 		this.movingUp = movingUp;
+	}
+
+	public void setStuck(boolean stuck) {
+		this.stuck = stuck;
 	}
 	
 }

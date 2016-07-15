@@ -1,4 +1,4 @@
-package doodads.tomb;
+package doodads.general;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -17,12 +17,12 @@ import zones.zone;
 public class lightSource extends chunk {
 	
 	// List of all lightsources
-	public static ArrayList<lightSource> lightSources = new ArrayList<lightSource>();
+	public static ArrayList<lightSource> lightSources;
 	
 	///////////////
 	/// FIELDS ////
 	///////////////
-	private int lightRadius = 200;
+	private int lightRadius = 100;
 
 	///////////////
 	/// METHODS ///
@@ -45,5 +45,10 @@ public class lightSource extends chunk {
 
 	public void setLightRadius(int lightRadius) {
 		this.lightRadius = lightRadius;
+	}
+	
+	// Initiate
+	public static void initiate() {
+		lightSources = new ArrayList<lightSource>();
 	}
 }
