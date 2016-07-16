@@ -9,6 +9,7 @@ import interactions.interactBox;
 import interactions.quest;
 import items.item;
 import sounds.music;
+import sounds.sound;
 import terrain.chunk;
 import terrain.region;
 import terrain.atmosphericEffects.fog;
@@ -48,9 +49,7 @@ public abstract class utility {
 		// Update the current zone.
 		player currPlayer = player.getCurrentPlayer();
 		if(currPlayer != null && currPlayer.getCurrentZone() != null) currPlayer.getCurrentZone().update();
-		
-		// Update fog.
-		fog.update();
+	
 	}
 	
 	// Initiate the utility. Does nothing
@@ -65,11 +64,12 @@ public abstract class utility {
 		
 		// Initiate everything
 		time.initiate();
+		sound.initiate();
 		drawnObject.initiate();
+		fog.initiate();
 		interactBox.initiate();
 		region.initiate();
 		lightSource.initiate();
-		fog.initiate();
 		unit.initiate();
 		unitType.initiate();
 		chunk.initiate();

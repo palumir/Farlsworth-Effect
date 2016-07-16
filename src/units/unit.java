@@ -842,25 +842,6 @@ public abstract class unit extends drawnObject  {
 		}
 	}
 	
-	// Ignore collision
-	public void giveTemporaryIgnoreCollision(float f) {
-		
-		// Start ignoring collison
-		if(ignoreCollisionPeriodStart == 0 && collisionOn) {
-			ignoreCollisionPeriodStart = time.getTime();
-			ignoreCollisionPeriod = f;
-			setCollisionOn(false);
-		}
-		else if(!collisionOn) {
-			if(time.getTime() - ignoreCollisionPeriodStart > ignoreCollisionPeriod*1000) {
-				ignoreCollisionPeriod = 0;
-				ignoreCollisionPeriodStart = 0;
-				setCollisionOn(true);
-			}
-		}
-
-	}
-	
 	// Deal with meta movement. Moving toward a point, following, pathing, etc.
 	public void dealWithMetaMovement() {
 		
@@ -1049,7 +1030,7 @@ public abstract class unit extends drawnObject  {
 			float actualMoveX = moveX;
 			float actualMoveY = moveY;
 	
-			if(isCollisionOn()) {
+			if(isCollisionOn() && (moveX != 0 || moveY != 0)) {
 				
 				// Set to not be stuck.
 				pathFindingStuck = false;
@@ -1057,13 +1038,13 @@ public abstract class unit extends drawnObject  {
 				// Check if it collides with a chunk in the x or y plane.
 				intTuple xyCollide = chunk.collidesWith(this, (int)(getFloatX() + moveX), (int)(getFloatY() + moveY));
 				intTuple leftRegion = region.leftRegion(this, (int)(getFloatX() + moveX),(int)(getFloatY() + moveY));
-				if(!ignoreCollision && (xyCollide.x == 1 || leftRegion.x == 1)) {
+				if((xyCollide.x == 1 || leftRegion.x == 1)) {
 					pathFindingStuck = true;
 					actualMoveX = 0;
 				}
 				
 				// Lots more to check for platformer mode.
-				if(!ignoreCollision && (xyCollide.y == 1 || leftRegion.y == 1)) {
+				if((xyCollide.y == 1 || leftRegion.y == 1)) {
 					
 					// Yes, we're stuck.
 					pathFindingStuck = true;

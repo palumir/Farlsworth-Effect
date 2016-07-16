@@ -1,6 +1,8 @@
 package sounds;
 import java.io.File; 
-import java.io.IOException; 
+import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.sound.sampled.AudioFormat; 
 import javax.sound.sampled.AudioInputStream; 
 import javax.sound.sampled.AudioSystem; 
@@ -14,6 +16,8 @@ import drawing.gameCanvas;
 import units.player; 
 
 public class sound extends Thread { 
+	
+	private static ArrayList<sound> allSounds;
 
     private String filename;
 
@@ -30,6 +34,7 @@ public class sound extends Thread {
     public static float DEFAULT_SOUND_VOLUME = 1f;
     private float soundVolume = DEFAULT_SOUND_VOLUME;
     private float volume = 1f;
+    private boolean stopRequested = false;
     
     // Default sound radius
     public static int DEFAULT_SOUND_RADIUS = 1800;
@@ -41,12 +46,8 @@ public class sound extends Thread {
     public sound(String wavfile) { 
         filename = wavfile;
         curPosition = Position.NORMAL;
-    } 
-
-    public sound(String wavfile, Position p) { 
-        filename = wavfile;
-        curPosition = p;
-    } 
+        allSounds.add(this);
+    }
 
     public void run() { 
 
@@ -96,7 +97,7 @@ public class sound extends Thread {
         byte[] abData = new byte[EXTERNAL_BUFFER_SIZE];
 
         try { 
-            while (nBytesRead != -1) { 
+            while (!stopRequested && nBytesRead != -1) { 
             	
     		    // Get player position
     		    int playerX = player.getCurrentPlayer().getIntX();
@@ -135,6 +136,7 @@ public class sound extends Thread {
         } finally { 
             auline.drain();
             auline.close();
+            allSounds.remove(this);
         } 
 
     }
@@ -147,5 +149,14 @@ public class sound extends Thread {
     	radius = newRadius;
     	x = newX;
     	y = newY;
+    }
+    
+    public static void initiate() {
+    	if(allSounds != null) {
+    		for(int i = 0; i < allSounds.size(); i++) {
+    			allSounds.get(i).stopRequested = true;
+    		}
+    	}
+    	allSounds = new ArrayList<sound>();
     }
 }

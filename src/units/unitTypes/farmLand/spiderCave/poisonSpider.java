@@ -355,7 +355,6 @@ public class poisonSpider extends unit {
 			// If we aggro
 			if(aggrod && !projectileToolTipDisplayed.isCompleted()) {
 				tooltipString t = new tooltipString("Time your attacks to reflect projectiles.");
-				System.out.println("SET TO TRUE!!");
 				projectileToolTipDisplayed.setCompleted(true);
 			}
 			

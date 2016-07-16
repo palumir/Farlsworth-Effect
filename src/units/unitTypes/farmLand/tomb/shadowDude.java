@@ -58,11 +58,11 @@ public class shadowDude extends unit {
 	// Entered light time
 	private long lastInLightTime= 0;
 	private long lastInShadowsTime = 0;
-	private float fadeTime = .2f;
+	private float fadeTime = .3f;
 	
 	// farmer sprite stuff.
-	private static String DEFAULT_UNIT_SPRITESHEET = "images/units/player/female/itsFlaws.png";
-	private static String DEFAULT_EYES_SPRITESHEET = "images/units/player/female/itsFlawsEyes.png";
+	private static String DEFAULT_UNIT_SPRITESHEET = "images/units/player/female/shadow.png";
+	//private static String DEFAULT_FADED_SPRITESHEET = "images/units/player/female/shadowFaded.png";
 	
 	// The actual type.
 	private static unitType shadowType =
@@ -72,12 +72,12 @@ public class shadowDude extends unit {
 					     DEFAULT_UNIT_JUMPSPEED // Jump speed
 						);	   
 	
-	private static unitType shadowEyesType =
+	/*private static unitType shadowFadedType =
 			new humanType( "shadow",  // Name of unitType 
-						 DEFAULT_EYES_SPRITESHEET,
+						 DEFAULT_FADED_SPRITESHEET,
 					     DEFAULT_UNIT_MOVESPEED, // Movespeed
 					     DEFAULT_UNIT_JUMPSPEED // Jump speed
-						);	   
+						);	   */
 	///////////////
 	/// METHODS ///
 	///////////////
@@ -109,8 +109,8 @@ public class shadowDude extends unit {
 	
 	boolean illuminated = false;
 	long lastHurt = 0;
-	int damage = 2;
-	float hurtEvery = 0.15f;
+	int damage = 10;
+	float hurtEvery = 0.10f;
 	
 	public void hurtPeople() {
 		// If someone is in the explosion radius, hurt.
@@ -118,7 +118,7 @@ public class shadowDude extends unit {
 		if(hurtUnits != null && time.getTime() - lastHurt > hurtEvery*1000) {
 			lastHurt = time.getTime();
 			for(int i = 0; i < hurtUnits.size(); i++) {
-				if(hurtUnits.get(i) instanceof player && !hurtUnits.get(i).isIlluminated()) {
+				if(hurtUnits.get(i) instanceof player && !hurtUnits.get(i).isIlluminated() && !illuminated) {
 					hurtUnits.get(i).hurt(damage, 1f);
 					darkSlow d = new darkSlow(hurtUnits.get(i), hurtEvery);
 				}
@@ -148,12 +148,15 @@ public class shadowDude extends unit {
 		// Of course only draw if the animation is not null.
 		if(getCurrentAnimation() != null) {
 			float alpha = 0;
+			float minFade = 0.1f;
 			if(illuminated) {
-				alpha = 1 - (time.getTime() - lastInShadowsTime)/(fadeTime*1000);
-				if(alpha < 0) alpha = 0;
+				alpha = (1 - (time.getTime() - lastInShadowsTime)/(fadeTime*1000))/(1f-minFade);
+				if(alpha < minFade) alpha = minFade;
+				if(alpha > 1) alpha = 1;
 			}
 			else {
-				alpha = (time.getTime() - lastInLightTime)/(fadeTime*1000);
+				alpha = ((time.getTime() - lastInLightTime)/(fadeTime*1000))/(1f-minFade);
+				if(alpha < minFade) alpha = minFade;
 				if(alpha > 1) alpha = 1;
 			}
 			Graphics2D g2d = (Graphics2D) g.create();
@@ -166,16 +169,16 @@ public class shadowDude extends unit {
 					null);
 			
 			// Draw eyes.
-			alpha = 1;
-			g2d.setComposite(AlphaComposite.SrcOver.derive(alpha));
+			//alpha = 1;
+			//g2d.setComposite(AlphaComposite.SrcOver.derive(alpha));
 			// 9 or 11
-			animation eyes = shadowEyesType.getAnimations().getAnimation("running" + getFacingDirection());
-			g2d.drawImage(eyes.getCurrentFrame(), 
+			//animation faded = shadowFadedType.getAnimations().getAnimation("running" + getFacingDirection());
+			/*g2d.drawImage(faded.getCurrentFrame(), 
 					getDrawX(), 
 					getDrawY(), 
-					(int)(gameCanvas.getScaleX()*eyes.getCurrentFrame().getWidth()), 
-					(int)(gameCanvas.getScaleY()*eyes.getCurrentFrame().getHeight()), 
-					null);
+					(int)(gameCanvas.getScaleX()*faded.getCurrentFrame().getWidth()), 
+					(int)(gameCanvas.getScaleY()*faded.getCurrentFrame().getHeight()), 
+					null);*/
 		}
 		
 		// Draw the outskirts of the sprite.

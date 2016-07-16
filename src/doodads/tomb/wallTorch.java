@@ -59,6 +59,9 @@ public class wallTorch extends lightSource {
 			setWidth(DEFAULT_CHUNK_WIDTH);
 		}
 		
+		// Set radius
+		setLightRadius(75);
+		
 		// Add animation
 		fireAnimation = new animation("fire", typeReference.getChunkTypeSpriteSheet().getAnimation(0), 0, 4, 0.43f);
 	}

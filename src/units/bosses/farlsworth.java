@@ -100,6 +100,7 @@ public class farlsworth extends boss {
 	public static event isFenceAttached;
 	private static event pastSpawnFarm;
 	private static event pastFlowerPatch;
+	private static event pastTombEntrance;
 	private static event pastDenmother;
 	
 	// Events that make him like you more TODO:
@@ -247,8 +248,14 @@ public class farlsworth extends boss {
 			s.setEnd();
 			
 			// Don't grab him
-			textSeries dontGrab = givingTheOption.addChild("Don't grab him", "I might be wrong about you.");
-			s = dontGrab.addChild(null, "We'll see, I guess.");
+			textSeries dontGrab = givingTheOption.addChild("Don't grab him", "Hmm ...");
+			s = dontGrab.addChild(null, "I guess some people don't respond well to taunting.");
+			s = s.addChild(null, ".");
+			s.setEnd();
+		}
+		else if(!pastTombEntrance.isCompleted()) {
+			startOfConversation = new textSeries(null, "<insert stuff about being afraid of your own shadow>");
+			s = startOfConversation.addChild(null, "<stfu>");
 			s.setEnd();
 		}
 		
@@ -265,7 +272,7 @@ public class farlsworth extends boss {
 		player currPlayer = player.getCurrentPlayer();
 		
 		// If we are in the farm.
-		if(!pastSpawnFarm.isCompleted()) {
+		if(pastSpawnFarm != null && !pastSpawnFarm.isCompleted()) {
 			// Pissy Farlsworth runs away first time.
 			if(!interactMoved && interactSequence != null && interactSequence.getTheText().isEnd() && interactTimes == 0) {
 				
@@ -361,7 +368,7 @@ public class farlsworth extends boss {
 		}
 		
 		// At the flower patch
-		else if(!pastFlowerPatch.isCompleted()) {
+		else if(pastFlowerPatch!= null && !pastFlowerPatch.isCompleted()) {
 			
 			// Spawn Farlsworth at the Flower patch
 			if(sequencePart == 0 && (p == null || p.size() == 0)) {
@@ -432,13 +439,6 @@ public class farlsworth extends boss {
 				s.start();
 				interactSequence.setUnescapable(false);
 				p = new ArrayList<intTuple>();
-				/*p.add(new intTuple(2366,-107));
-				p.add(new intTuple(2630,-128));
-				p.add(new intTuple(2762,-419));
-				p.add(new intTuple(2921,-419));
-				p.add(new intTuple(2856,-579));
-				p.add(new intTuple(2680,-944));
-				p.add(new intTuple(2680,-1322));*/
 				p.add(new intTuple(2307,-121));
 				p.add(new intTuple(2562,-121));
 				p.add(new intTuple(2758,-437));
@@ -454,40 +454,25 @@ public class farlsworth extends boss {
 				saveState.setQuiet(false);
 				sequencePart = 0;
 			}
-			
-			/*s = s.addChild(null, "Because I'm not giving you the option.");
-			
-			// Grab him
-			textSeries grab = s.addChild("Grab him", "Hold your horses, buddy.");
-			s = grab.addChild(null, "I said I wasn't giving you the option.");
-			s = s.addChild(null, "Didn't you hear me?");
-			s = s.addChild(null, "Frig you.");
-			s.setEnd();
-			
-			// Don't grab him
-			textSeries dontGrab = s.addChild("Don't grab him", "I might be wrong about you.");
-			s = dontGrab.addChild(null, "We'll see, I guess.");*/
 		}
 		
-		// At denmother
-		else if(!pastDenmother.isCompleted()) {
+		// At the tomb
+		else if(pastTombEntrance != null && !pastTombEntrance.isCompleted()) {
 			
-			// Spawn Farlsworth at Denmother TODO: he needs to go somewhere else.
+			// Spawn Farlsworth at the tomb entrance.
 			if(sequencePart == 0 && (p == null || p.size() == 0)) {
 				
-				// Spawn him in front of Denmother.
-				destroyFence();
+				// Spawn him in front of the tomb
 				stopMove("all");
-				setFloatX(-100000);
-				setFloatY(-100000);
-				attachFence();
-				facingDirection = "Up";
+				setFloatX(2227);
+				setFloatY(-3818);
+				facingDirection = "Left";
 				sequencePart++;
 			}
 			
-			// Start the event if we enter a region.
-			/*if((interactSequence == null || (interactSequence != null && !interactSequence.isDisplayOn() && runFromDenmotherStart == 0)) && 
-				currPlayer != null && currPlayer.isWithin(1383,-3349,1650,-3180)) {
+			// Talk to player if he/she walks to Farlsworth at flower patch.
+			if(sequencePart == 1 && (interactSequence == null || (interactSequence != null && !interactSequence.isDisplayOn())) && 
+				currPlayer != null && currPlayer.isWithin(2100,-3884,2411,-3655)) {
 				interactSequence = makeNormalInteractSequence();
 				if(interactBox.getCurrentDisplay() != null) {
 					interactBox.getCurrentDisplay().toggleDisplay();
@@ -495,55 +480,33 @@ public class farlsworth extends boss {
 				interactSequence.toggleDisplay();
 				interactSequence.setUnescapable(true);
 				currPlayer.stopMove("all");
-			}*/
-			
-			// If we fuck up the dialogue.
-			if(!hittingDenMother && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().isEnd() && interactSequence.getTheText().getButtonText()!=null) &&
-					(interactSequence.getTheText().getButtonText().equals("You're crazy"))) {
-				hittingDenMother = true;
-				moveTo(1455,-3280);
 			}
 			
-			// If he is hitting Denmother.
-			if(hittingDenMother) {
-				
-				// When he's in front of denmother.
-				if(!isMoving() && bahDenmotherStartTime == 0) {
-					bahDenmotherStartTime = time.getTime();
-				}
-				
-				// Make him face right after a little bit
-				if(!hasBleetedInDenmothersFace && time.getTime() - bahDenmotherStartTime > 0.7f*1000) {
-					hasBleetedInDenmothersFace = true;
-					sound s = new sound(bleet);
-					s.start();
-					facingDirection = "Right";
-				}
-				
-				// After he's bah'd
-				if(runFromDenmotherStart == 0 && bahDenmotherStartTime != 0 && time.getTime() - bahDenmotherStartTime > bahDuration*1000) {
-					moveTo(400,-3280);
-					interactSequence.toggleDisplay();
-					if(denmother.bossRef != null) denmother.bossRef.wakeUp();
-					runFromDenmotherStart = time.getTime();
-				}
-				
-				// Despawn 
-				if(runFromDenmotherStart != 0 && time.getTime() - runFromDenmotherStart > runFromDenmotherDuration*1000) {
-					hittingDenMother = false;
-					pastDenmother.setCompleted(true);
-					this.destroy(); // TODO: Destroy for now, but should move to next location.
-				}
+			// Sequence over.
+			if((interactSequence != null && interactSequence.getTheText().isEnd())) {
+				sequencePart = 100;
+			}
+			
+			// Follow the path
+			if(sequencePart == 100) {
+				System.out.println("Following a path");
+				p = new ArrayList<intTuple>();
+				interactSequence.setUnescapable(false);
+				p.add(new intTuple(2345,-3827));
+				p.add(new intTuple(2345,-3980));
+				p.add(new intTuple(2345,-3990));
+				followPath(p);
+				pastTombEntrance.setCompleted(true);
+			}
+		}
+		else {
+			if(sequencePart == 0 && (p == null || p.size() == 0)) {
+				stopMove("all");
+				setFloatX(-10000);
+				setFloatY(-10000);
 			}
 		}
 	}
-	
-	private boolean hasBleetedInDenmothersFace = false;
-	private boolean hittingDenMother = false;
-	private long bahDenmotherStartTime = 0;
-	private float bahDuration = 2f;
-	private float runFromDenmotherDuration = 5f;
-	private long runFromDenmotherStart = 0;
 	
 	// Interact with object. 
 	public void interactWith() { 
@@ -619,6 +582,7 @@ public class farlsworth extends boss {
 		pastSpawnFarm = new event("farlsworthRan");
 		pastDenmother = new event("farlsworthPastDenmother");
 		pastFlowerPatch = new event("farlsworthPastFlowerPatch");
+		pastTombEntrance = new event("farlsworthPastTombEntrance");
 		
 		// Good/bad events
 		didYouOpenTheGateForHim = new event("farlsworthDidYouOpenTheGateForHim");

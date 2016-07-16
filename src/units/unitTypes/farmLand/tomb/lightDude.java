@@ -17,7 +17,6 @@ import drawing.animation.animation;
 import drawing.userInterface.playerHealthBar;
 import drawing.userInterface.tooltipString;
 import effects.effect;
-import effects.buffs.darkSlow;
 import effects.effectTypes.bloodSquirt;
 import interactions.interactBox;
 import interactions.quest;
@@ -64,7 +63,7 @@ public class lightDude extends unit {
 	private float fadeTime = .2f;
 	
 	// farmer sprite stuff.
-	private static String DEFAULT_UNIT_SPRITESHEET = "images/units/player/female/yourIdeology.png";
+	private static String DEFAULT_UNIT_SPRITESHEET = "images/units/player/female/light.png";
 	
 	// The actual type.
 	private static unitType lightType =
@@ -104,15 +103,17 @@ public class lightDude extends unit {
 		// Make the light source.
 		light = new invisibleLightSource(newX + getWidth()/2 - invisibleLightSource.DEFAULT_SPRITE_WIDTH/2, 
 				newY + getHeight()/2 - invisibleLightSource.DEFAULT_SPRITE_HEIGHT/2 - getHitBoxAdjustmentY());
-		light.setLightRadius(60);
+		light.setLightRadius(50);
 		
 	}
 	
 	// Do unit specific movement.
 	@Override
 	public void unitSpecificMovement(float moveX, float moveY) {
-		light.setFloatX(getFloatX() + moveX);
-		light.setFloatY(light.getFloatY() + moveY);
+		if(light != null) {
+			light.setFloatX(getFloatX() + moveX);
+			light.setFloatY(light.getFloatY() + moveY);
+		}
 	}
 	
 	// React to pain.

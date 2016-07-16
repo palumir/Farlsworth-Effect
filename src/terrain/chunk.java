@@ -18,6 +18,7 @@ import effects.effectTypes.floatingString;
 import modes.mode;
 import units.player;
 import units.unit;
+import units.unitTypes.farmLand.sheepFarm.sheep;
 import utilities.intTuple;
 
 public class chunk extends drawnObject {
@@ -103,8 +104,73 @@ public class chunk extends drawnObject {
 		boolean tX = false;
 		boolean tY = false;
 		
+		// Get x interval on left. (where foundX < ourChunkX - largestChunkWidth)
+		int i1 = 0;
+		int L = 0;
+		int R = impassableChunks.size()-1;
+		int T = newX - largestChunkWidth;
+		int Am = 0;
+		while(true) {
+			int m = (L+R)/2;
+			Am = impassableChunks.get(m).getIntX();
+			if(Am < T) {
+				if(m+1>R) {
+					i1 = L;
+					break;
+				}
+				L = m + 1;
+			}
+			else if(Am > T) {
+				if(L > m - 1) {
+					i1 = L;
+					break;
+				}
+				R = m - 1;
+			}
+			else {
+				i1 = m; // Found it exactly.
+				break;
+			}
+		}
+		
+		// Get x interval on right. (where foundX > ourChunkX + ourChunk.width)
+		int i2 = 0;
+		L = 0;
+		R = impassableChunks.size()-1;
+		T = newX + u.getWidth();
+		Am = 0;
+		while(true) {
+			int m = (L+R)/2;
+			Am = impassableChunks.get(m).getIntX();
+			if(Am < T) {
+				if(m+1>R) {
+					i2 = R;
+					break;
+				}
+				L = m + 1;
+			}
+			else if(Am > T) {
+				if(L > m - 1) {
+					i2 = R;
+					break;
+				}
+				R = m - 1;
+			}
+			else {
+				i2 = m; // Found it exactly.
+				break;
+			}
+		}
+		
+		// Check between our interval
+		for(;i1 <= i2; i1++) {
+			chunk currChunk = impassableChunks.get(i1);
+			if(u.collides(newX, u.getIntY(),currChunk)) tX = true;
+			if(u.collides(u.getIntX(), newY,currChunk)) tY = true;
+		}
+		
 		// Phase 1 TODO: make it binary search? This is faster, but binary search is very fast.
-		boolean phaseOneOver = false;
+		/*boolean phaseOneOver = false;
 		
 		if(allChunks != null && impassableChunks.size() > 0) {
 			int i = 0;
@@ -128,7 +194,7 @@ public class chunk extends drawnObject {
 					}
 				}
 			}
-		}
+		}*/
 		
 		// Make an intTuple for the return.
 		int txInt = 0;

@@ -3,88 +3,120 @@ package terrain.atmosphericEffects;
 import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Composite;
+import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import java.util.Random;
 
 import doodads.general.lightSource;
+import drawing.drawnObject;
 import drawing.gameCanvas;
+import drawing.spriteSheet;
+import drawing.userInterface.interfaceObject;
 import effects.effectTypes.darkHole;
 import utilities.imageUtils;
 import utilities.time;
 
-public class fog {
+public class fog extends interfaceObject {
 	
+	// All fog effects in place.
+	public static ArrayList<fog> allFog;
+	
+	public fog() {
+		super(null, 0, 0, gameCanvas.getDefaultWidth(), gameCanvas.getDefaultHeight());
+		
+		// Set z
+		setZ(-2);
+	}
+
 	// Fog percentage.
-	public static float fogLevel = 0; // between 0.0 and 1.0
-	public static float fogLevelMax = 0;
-	public static float oldLevel = 0;
+	public float fogLevel = 0; // between 0.0 and 1.0
+	public float fogLevelMax = 0;
+	public float oldLevel = 0;
 	
 	// Timer stuff.
-	private static long startFade = 0;
-	private static float fadeTime = 0;
+	private long startFade = 0;
+	private float fadeTime = 0;
 	
 	// Paint the fog
-	public static void paintFog(Graphics2D g2) {
-		if(fogLevel != 0f) {
+	@Override
+	public void drawObject(Graphics g) {
+		if(this == getMaxFog()) {
 			
 			// Create an image the size of the screen to draw on.
 			BufferedImage img = new BufferedImage(gameCanvas.getActualWidth(),gameCanvas.getActualHeight(), BufferedImage.TYPE_INT_ARGB);
-			Graphics2D g = img.createGraphics();
-			
-			// Regular composite
-			Composite oldComposite = g.getComposite();
+			Graphics2D g2 = img.createGraphics();
 			
 			// Draw the fog.
 			float alpha = fogLevel;
 			Color black = new Color(0, 0, 0, alpha); //Black 
-			g.setComposite(AlphaComposite.Src);
-			g.setPaint(black);
-			g.fillRect(0,0,gameCanvas.getActualWidth(),gameCanvas.getActualHeight());
+			g2.setComposite(AlphaComposite.Src);
+			g2.setPaint(black);
+			g2.fillRect(0,0,gameCanvas.getActualWidth(),gameCanvas.getActualHeight());
 			
 			// Draw the lightsources.
-			g.setComposite(AlphaComposite.Clear);
+			g2.setComposite(AlphaComposite.Clear);
 			for(int i = 0; i < lightSource.lightSources.size(); i++) {
 				lightSource l = lightSource.lightSources.get(i);
-				g.fillOval(l.getDrawX() + l.getWidth()/2 - l.getLightRadius(), l.getDrawY() + l.getHeight()/2 - l.getLightRadius(), l.getLightRadius()*2, l.getLightRadius()*2);
+				g2.fillOval(l.getDrawX() + (int)(gameCanvas.getScaleX()*(l.getWidth()/2 - l.getLightRadius())), 
+						l.getDrawY() + (int)(gameCanvas.getScaleY()*(l.getHeight()/2 - l.getLightRadius())), 
+						(int)(gameCanvas.getScaleX()*(l.getLightRadius()*2)), 
+						(int)( gameCanvas.getScaleY()*(l.getLightRadius()*2)));
 			}
 			
-			g2.drawImage(img,0,0,null);
+			g.drawImage(img,0,0,null);
 		}
 	}
 	
 	// Update.
-	public static void update() {
+	public void update() {
 		if(fogLevel < fogLevelMax) {
-			fogLevel = fogLevelMax*((time.getTime() - startFade)/(fadeTime*1000));
+			fogLevel = fogLevelMax*((time.getTime() - startFade + 1)/(fadeTime*1000));
 			if((time.getTime() - startFade)/(fadeTime*1000) >= 1) fogLevel = fogLevelMax;
 		}
 		else if(fogLevel > fogLevelMax) {
-			 fogLevel = oldLevel*(1 - ((time.getTime() - startFade)/(fadeTime*1000)));
+			 fogLevel = oldLevel*(1 - ((time.getTime() - startFade + 1)/(fadeTime*1000)));
 			 if((time.getTime() - startFade)/(fadeTime*1000) >= 1) fogLevel = fogLevelMax;
 		}
 	}
 	
 	// Set to
-	public static void setTo(float level) {
+	public void setTo(float level) {	
 		fogLevelMax = level;
 		fogLevel = level;
 		oldLevel = level;
+		allFog = new ArrayList<fog>();
+		allFog.add(this);
+	}
+	
+	// Delete current fog
+	@Override
+	public void respondToDestroy() {
+		if(allFog.contains(this)) allFog.remove(this);
+	}
+	
+	// Get max fog
+	public fog getMaxFog() {
+		fog maxFog = null;
+		for(int i=0; i < allFog.size(); i++) {
+			if(maxFog == null || allFog.get(i).fogLevel > maxFog.fogLevel) maxFog = allFog.get(i);
+		}
+		return maxFog;
 	}
 	
 	// Fade to a certain alpha over time.
-	public static void fadeTo(float level, float newTime) {
-		if(level != fogLevelMax || fadeTime != newTime) {
+	public void fadeTo(float level, float newTime) {
 			startFade = time.getTime();
 			fadeTime = newTime;
 			if(level < fogLevel) oldLevel = fogLevel;
 			fogLevelMax = level;
-		}
+			if(!allFog.contains(this)) allFog.add(this);
+			if(!drawnObject.objects.contains(this)) drawnObject.objects.add(this);
 	}
 
 	public static void initiate() {
-		fogLevelMax = 0;
-		fogLevel = 0;
+		allFog = new ArrayList<fog>();
 	}
 }

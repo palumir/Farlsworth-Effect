@@ -3,6 +3,7 @@ package zones.farmLand;
 import java.awt.image.BufferedImage;
 
 import doodads.sheepFarm.caveEnterance;
+import doodads.tomb.stairsUp;
 import doodads.tomb.wallTorch;
 import drawing.background;
 import drawing.spriteSheet;
@@ -31,12 +32,12 @@ public class tombZone extends zone {
 	// Static caller of the zone.
 	private static zone zoneReference;
 	
+	// Zone music.
+	private static music zoneMusic = new music("sounds/music/farmLand/spiderCave/spiderCave.wav");
+	
 	// References we will use throughout.
 	unit u;
 	chunk c;
-	
-	// Default background.
-	//private static BufferedImage DEFAULT_ZONE_BACKGROUND = spriteSheet.getSpriteFromFilePath("images/terrain/backgrounds/dirtBackground.png");
 	
 	// Some defaults.
 	public static int BACKGROUND_Z = -100;
@@ -46,6 +47,9 @@ public class tombZone extends zone {
 	
 	// Defaults
 	public static intTuple DEFAULT_SPAWN_TUPLE = new intTuple(0,-50);
+	
+	// Zone fog
+	public static fog zoneFog;
 	
 	// Constructor
 	public tombZone() {
@@ -57,7 +61,7 @@ public class tombZone extends zone {
 	///////////////////////////////
 	
 	// Spawn grass dirt x to y.
-	public void spawnDirtRect(int x1, int y1, int x2, int y2, String type) {
+	public void spawnTombRect(int x1, int y1, int x2, int y2, String type) {
 		int numX = (x2 - x1)/dirt.DEFAULT_CHUNK_WIDTH;
 		int numY = (y2 - y1)/dirt.DEFAULT_CHUNK_HEIGHT;
 		for(int i = 0; i < numX; i++) {
@@ -112,7 +116,8 @@ public class tombZone extends zone {
 		platformer.setMode();
 		
 		// Set the darkness.
-		fog.setTo(0.2f);//fog.setTo(0.75f);
+		zoneFog = new fog();
+		zoneFog.setTo(0.15f);//fog.setTo(0.75f);
 		
 		// Load zone events.
 		loadZoneEvents();
@@ -130,8 +135,7 @@ public class tombZone extends zone {
 		setZoneLoaded(true);
 		
 		// Play zone music.
-		//zoneMusic.loopMusic();
-		music.endAll();
+		zoneMusic.loopMusic();
 	}
 	
 	// Load zone events.
@@ -152,21 +156,21 @@ public class tombZone extends zone {
 		spawnBackgroundRect(-65,-269, 3230,787);
 		
 		// Roof
-		spawnDirtRect(-18, -747, 4000,-220,"roof"); // the roof
-		spawnDirtRect(-500+2, -747, 0,-220,"none"); // roof dirt top left
+		spawnTombRect(-18, -747, 4000,-220,"roof"); // the roof
+		spawnTombRect(-500+2, -747, 0,-220,"none"); // roof dirt top left
 	
 		// Floor
-		spawnDirtRect(-18,40,300,820,"ground");
-		spawnDirtRect(-500+2,46,0,820,"none");
+		spawnTombRect(-18,40,300,820,"ground");
+		spawnTombRect(-500+2,46,0,820,"none");
 		
 		// Left wall
-		spawnDirtRect(-338,-242,7,60,"leftWall");
+		spawnTombRect(-338,-242,7,60,"leftWall");
 		
 		// Right wall
-		spawnDirtRect(3976+32,-750,4300,1000,"rightWall");
+		spawnTombRect(3976+32,-750,4300,1000,"rightWall");
 		
 		// First floor
-		spawnDirtRect(337,40,410,820,"ground");
+		spawnTombRect(337,40,410,820,"ground");
 		
 		// Torches
 		c = new wallTorch(209,-40);
@@ -174,17 +178,24 @@ public class tombZone extends zone {
 		c = new wallTorch(435,-72);
 		
 		// Second floor
-		spawnDirtRect(508,0,1000,820,"ground");
-		u = new shadowDude(911,-90);
-		u.patrolTo(452,-90);
+		spawnTombRect(508,0,1000,820,"ground");
+		u = new shadowDude(974,-47);
+		u.patrolTo(500,-47);
 		
 		// Third floor
-		spawnDirtRect(1073,63,1195,785,"ground");
+		spawnTombRect(1073,63,1195,785,"ground");
 		c = new wallTorch(1126,-2);
 		
-		// Fourth floor, ish?
-		u = new lightDude(1265,38);
-		u.patrolTo(1568, 38);
+		// Fourth floor
+		spawnTombRect(1209,85,1701,736, "ground");
+		u = new lightDude(1209,38);
+		u.patrolTo(1670, 38);
+		
+		// Spawn 6 shadow dudes above eachother for fourth floor.
+		for(int i = 0; i < 6; i++) {
+			u = new shadowDude(1670, 38-50*i);
+			u.patrolTo(1209,38-50*i);
+		}
 		
 	}
 	
@@ -196,7 +207,7 @@ public class tombZone extends zone {
 		////////////////
 		
 		// Entrance
-		caveEnterance tombZoneEnterance = new caveEnterance(30,-15,0, sheepFarm.getZone(),2320,-3896,"Down");
+		stairsUp tombZoneEnterance = new stairsUp(30,-8,0, sheepFarm.getZone(),2320,-3896,"Down");
 		tombZoneEnterance.setZ(BACKGROUND_Z);
 		
 	}

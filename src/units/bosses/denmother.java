@@ -441,9 +441,6 @@ public class denmother extends boss {
 				claws = null;
 			}
 			
-			// Fade back
-			fog.fadeTo(0f,2f);
-			
 			// Destroy the fight region.
 			fightRegion.destroy();
 			
@@ -635,7 +632,6 @@ public class denmother extends boss {
 		fightInProgress = true;
 		fightStartTime = time.getTime();
 		fightRegion.trapPlayerWithin();
-		fog.fadeTo(0.3f,2f);
 		startHowl();
 	}
 	

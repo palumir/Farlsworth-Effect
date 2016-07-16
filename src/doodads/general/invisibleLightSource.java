@@ -64,11 +64,7 @@ public class invisibleLightSource extends lightSource {
 			setWidth(DEFAULT_PLATFORMER_WIDTH);
 		}
 		
-		// Passable.
-		setPassable(false);
-		
-		// Don't draw object
-		showHitBox();
-		//setDrawObject(false);
+		// Passable
+		setPassable(true);
 	}
 }

@@ -184,9 +184,6 @@ public class gameCanvas extends JComponent {
 
 		// Paint all drawable things.
 		drawnObject.drawObjects(g);
-		
-		// Paint the fog TODO: not done
-		fog.paintFog(g2);
 	}
 
 	// ************************************

@@ -112,14 +112,35 @@ public abstract class drawnObject {
 			    		if(d1.forceInFront && !d2.forceInFront) return 7;
 			    		else if(!d1.forceInFront && d2.forceInFront) return -7;
 				    	else {
-					    	if(d1.isBackgroundDoodad() && !d2.isBackgroundDoodad()) return -6;
-					    	else if(!d1.isBackgroundDoodad() && d2.isBackgroundDoodad()) return 6;
-						    else {	
-							        // Draw units closer to the camera first.
-							    	if(d1.getIntY() + d1.getHeight() > d2.getIntY() + d2.getHeight()) return 5;
-							    	else if(d1.getIntY() + d1.getHeight() < d2.getIntY() + d2.getHeight()) return -5;
-							    	else return 0;
-						    }
+				    		if(d1 instanceof interfaceObject && d2 instanceof interfaceObject) {
+								int z1;
+								int z2;
+								
+								// Get z1, assume 0 if not set.
+								if(d1.getZ() == null) z1 = 0;
+								else z1 = d1.getZ();
+								
+								// Get z2, assume 0 if not set.
+								if(d2.getZ() == null) z2 = 0;
+								else z2 = d2.getZ();
+								
+								// Return the comparison between the two.
+								if(z1 - z2 > 0) return 1;
+								if(z1 - z2 < 0) return -1;
+								else return 0;
+				    		}
+				    		else {
+						    	if(d1.isBackgroundDoodad() && !d2.isBackgroundDoodad()) return -5;
+						    	else if(!d1.isBackgroundDoodad() && d2.isBackgroundDoodad()) return 5;
+							    else {	
+							    		
+							    		
+								    // Draw units closer to the camera first.
+								    if(d1.getIntY() + d1.getHeight() > d2.getIntY() + d2.getHeight()) return 4;
+								    else if(d1.getIntY() + d1.getHeight() < d2.getIntY() + d2.getHeight()) return -4;
+								    else return 0;
+							    }
+					    	}
 				    	}
 			    	}
 		    	}

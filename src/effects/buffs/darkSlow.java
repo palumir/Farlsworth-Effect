@@ -26,12 +26,14 @@ public class darkSlow extends movementBuff {
 	
 	// Fields
 	private static float DEFAULT_SLOW_PERCENTAGE = 0.7f;
+	private fog f;
 	
 	@Override
 	public void applyEffect() {
 		if(!onUnit.getMovementBuffs().contains(this)) {
 			onUnit.getMovementBuffs().add(this);
-			//fog.fadeTo(FOG_PERCENT, FOG_OVER);
+			f = new fog();
+			f.fadeTo(FOG_PERCENT, FOG_OVER);
 		}
 	}
 
@@ -39,13 +41,7 @@ public class darkSlow extends movementBuff {
 	public void removeEffect() {
 		if(onUnit.getMovementBuffs().contains(this)) {
 			onUnit.getMovementBuffs().remove(this);
-			
-			// Check if there's another of the same effect.
-			boolean isAnother = false;
-			for(int i = 0; i < onUnit.getMovementBuffs().size(); i++) {
-				if(onUnit.getMovementBuffs().get(i).getClass().equals(this.getClass())) isAnother = true;
-			}
-			//if(!isAnother) fog.fadeTo(0, FOG_BACK_OVER);
+			f.fadeTo(0, FOG_BACK_OVER);
 		}
 	}
 	

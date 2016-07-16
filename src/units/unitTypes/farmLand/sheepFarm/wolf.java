@@ -96,7 +96,7 @@ public abstract class wolf extends unit {
 		protected static String bark2 = "sounds/effects/animals/wolfBark2.wav";
 		protected long lastHowl = 0;
 		protected float randomHowl = 0;
-		protected float baseRandomHowl = 15f;
+		protected float baseRandomHowl = 10f;
 		
 		//////////////
 		/// FIELDS ///
@@ -297,7 +297,7 @@ public abstract class wolf extends unit {
 		public void makeSounds() {
 			
 				// Create a new random growl interval
-				float newRandomHowlInterval = baseRandomHowl + utility.RNG.nextInt(25);
+				float newRandomHowlInterval = baseRandomHowl + utility.RNG.nextInt(10);
 				
 				// Make the wolf howl
 				if(randomHowl == 0f) {
@@ -308,9 +308,14 @@ public abstract class wolf extends unit {
 					// Set the last time they howled
 					lastHowl = time.getTime();
 					randomHowl = newRandomHowlInterval;
-					sound s = new sound(howl);
-					s.setPosition(getIntX(), getIntY(), sound.DEFAULT_SOUND_RADIUS);
-					s.start();
+					
+					// Will it howl? 10% chance.
+					int willItHowl = utility.RNG.nextInt(10);
+					if(willItHowl == 1) {
+						sound s = new sound(howl);
+						s.setPosition(getIntX(), getIntY(), sound.DEFAULT_SOUND_RADIUS);
+						s.start();
+					}
 				}
 		}
 
