@@ -40,13 +40,18 @@ public class fog extends interfaceObject {
 	private long startFade = 0;
 	private float fadeTime = 0;
 	
+	// Image we will draw on for the fog.
+	BufferedImage img;
+	
 	// Paint the fog
 	@Override
 	public void drawObject(Graphics g) {
 		if(this == getMaxFog()) {
 			
 			// Create an image the size of the screen to draw on.
-			BufferedImage img = new BufferedImage(gameCanvas.getActualWidth(),gameCanvas.getActualHeight(), BufferedImage.TYPE_INT_ARGB);
+			if(img == null || (gameCanvas.getActualWidth() != img.getWidth()) || (gameCanvas.getActualHeight() != img.getHeight())) {
+				img = new BufferedImage(gameCanvas.getActualWidth(),gameCanvas.getActualHeight(), BufferedImage.TYPE_INT_ARGB);
+			}
 			Graphics2D g2 = img.createGraphics();
 			
 			// Draw the fog.

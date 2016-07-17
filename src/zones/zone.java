@@ -16,6 +16,9 @@ public abstract class zone {
 	// List of all zones.
 	private static ArrayList<zone> allZones = new ArrayList<zone>();
 	
+	// Current zone
+	private static zone currentZone;
+	
 	// Fields
 	private String parentName;
 	private String name;
@@ -39,7 +42,14 @@ public abstract class zone {
 	}
 	
 	// Load the zone.
-	public abstract void loadZone();
+	public void loadZone() {
+		loadSpecificZoneStuff();
+		zoneLoaded = true;
+		currentZone = this;
+	}
+	
+	// Load specific zone stuff
+	public abstract void loadSpecificZoneStuff();
 	
 	// Switch zones.
 	public static void switchZones(player p, zone a, zone b, int x, int y, String direction) {	
@@ -94,6 +104,10 @@ public abstract class zone {
 	/////////////////////////
 	// Getters and setters //
 	/////////////////////////
+	public static zone getCurrentZone() {
+		return currentZone;
+	}
+	
 	public String getName() {
 		return name;
 	}

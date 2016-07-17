@@ -91,7 +91,7 @@ public class floatingString extends effect {
 		}
 		g2.setFont(font);
 		
-		BufferedImage img = new BufferedImage(g2.getFontMetrics().stringWidth(text),g2.getFontMetrics().getHeight(), BufferedImage.TYPE_INT_ARGB);
+		BufferedImage img = new BufferedImage(g2.getFontMetrics().stringWidth(text),g2.getFontMetrics().getHeight() + g2.getFontMetrics().getAscent() + g2.getFontMetrics().getDescent(), BufferedImage.TYPE_INT_ARGB);
 		Graphics2D g = img.createGraphics();
 		
 		// Set the alpha depending on how close the animation is to over.

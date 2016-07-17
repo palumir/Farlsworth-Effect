@@ -120,10 +120,10 @@ public class farmer extends unit {
 		s = s.addChild(null, "Can you collect his wool for me?");
 		
 		// Saying yes.
-		textSeries yes = s.addChild("\"Yes\"","Great. Good luck!");
+		textSeries yes = s.addChild("\'Yes\'","Great. Good luck!");
 		
 		// Saying no to path 1.
-		textSeries noHelp = s.addChild("\"No\"","Please?");
+		textSeries noHelp = s.addChild("\'No\'","Please?");
 		
 		// Keep saying no like an asshole.
 		noHelp.addChild(yes);

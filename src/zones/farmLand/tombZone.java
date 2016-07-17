@@ -109,7 +109,7 @@ public class tombZone extends zone {
 	// ZONE LOADER //
 	/////////////////
 	// Load the zone.
-	public void loadZone() {
+	public void loadSpecificZoneStuff() {
 		
 		// Set the mode of the zone of course.
 		//topDown.setMode();
@@ -130,9 +130,6 @@ public class tombZone extends zone {
 		
 		// Sort chunks.
 		chunk.sortChunks();
-		
-		// Zone is loaded.
-		setZoneLoaded(true);
 		
 		// Play zone music.
 		zoneMusic.loopMusic();

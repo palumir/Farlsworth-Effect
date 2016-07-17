@@ -104,9 +104,10 @@ public class farlsworth extends boss {
 	private static event pastDenmother;
 	
 	// Events that make him like you more TODO:
-	private static event didYouOpenTheGateForHim;
-	private static event didYouTryToGrabHim;
-	private static event didYouTellHimAboutYourAdventure;
+	private static event didYouTellHimAboutYourAdventure; // You didn't grab him twice.
+	private static event didYouLieToHimAboutHavingTheKey; // Did you lie to him about having the gate key?
+	private static event didYouOpenTheGateForHim; // Did you open the fence for him?
+	private static event didYouTryToGrabHim; // You tried to grab him at the flower field.
 	
 	///////////////
 	/// METHODS ///
@@ -130,15 +131,15 @@ public class farlsworth extends boss {
 				startOfConversation = new textSeries(null, "He's sent another dumby to gather my wool, has he?");
 				
 				// Give me your wool
-				textSeries giveMeYourWool = startOfConversation.addChild("\"Give me your wool\"", "Is that all I'm good for?");
-				s =  giveMeYourWool.addChild(null, "My wool?");
+				textSeries giveMeYourWool = startOfConversation.addChild("\'Give me your wool\'", "Is that all I'm good for?");
+				s =  giveMeYourWool.addChild(null, "My damn wool?");
 				s = s.addChild(null, "I don't think so, buddy.");
 				s = s.addChild(null, "I will not be friggin objectified.");
 				s =  s.addChild(null, "Leave me alone.");
 				s.setEnd();
 				
 				// I'm on an adventure
-				textSeries adventure = startOfConversation.addChild("\"I'm on an adventure\"", "Neat.");
+				textSeries adventure = startOfConversation.addChild("\'I'm on an adventure\'", "Neat.");
 				s =  adventure.addChild(null, "I'm not sure what that has to do with me.");
 				s =  s.addChild(null, "Hope you have a friggin good one.");
 				s.setEnd();
@@ -163,21 +164,20 @@ public class farlsworth extends boss {
 				else {
 					startOfConversation = new textSeries(null, "My wool. My choice.");
 					s = startOfConversation.addChild(null, "I refuse to be a slave anymore.");
-					s = s.addChild(null, "I am a strong independent sheep who don't need no goat.");
-					textSeries speciestist = s.addChild(null, "And you're a speciesist.");
+					textSeries speciesist = s.addChild(null, "I am a strong independent sheep who don't need no goat.");
 					
 					// Ask for his wool
-					textSeries grabHisWool = speciestist.addChild("\"I need your wool.\"", "Boy, you're persistent, aren't you?");
+					textSeries grabHisWool = speciesist.addChild("\'Give me your wool\'", "Boy, you're persistent, aren't you?");
 					s = grabHisWool.addChild(null, "Some guy you just met asked you to get my wool.");
 					s = s.addChild(null, "And now I'm telling you that you can't have it.");
 					s = s.addChild(null, "Shouldn't those cancel out?");
 					s = s.addChild(null, "Oh right, it's because I'm a sheep and he's a human.");
 					s = s.addChild(null, "Pfft. Typical. You're just like the rest.");
-					s = s.addChild(null, "Go away.");
+					s = s.addChild(null, "Speciesist.");
 					s.setEnd();
 					
 					// Ask for his wool
-					textSeries adventure = speciestist.addChild("\"I'm on an adventure.\"", "Oh boy, that sounds really fun.");
+					textSeries adventure = speciesist.addChild("\"I'm on an adventure\"", "Oh boy, that sounds really fun.");
 					s = adventure.addChild(null, "Mind if I tag along?");
 					s = s.addChild(null, "Just kidding, that sounds really lame.");
 					s = s.addChild(null, "Adventures suck.");
@@ -211,14 +211,27 @@ public class farlsworth extends boss {
 			}
 			else {
 				if(standingInFrontOfFence) {
-					startOfConversation = new textSeries(null, "This is pretty awkward ...");
+					startOfConversation = new textSeries(null, "Hey buddy ... this is kind of awkward.");
 					s = startOfConversation.addChild(null, "But I was trying to run away.");
-					s = s.addChild(null, "And there appears to be a fence here.");
-					textSeries question = s.addChild(null, "Can you open this for me?");
-					s = question.addChild("Yes", "Thanks ... uh ...");
+					s = s.addChild(null, "And there appears to be a gate here.");
+					
+					textSeries doYouHaveTheKey = s.addChild(null, "Do you have the key for this?");
+					textSeries canYouOpenTheFence = new textSeries(null, "Can you open this for me?");
+					s = doYouHaveTheKey.addChild("Yes", "Great. That's some good stuff.");
+					s.addChild(canYouOpenTheFence);
+					s = doYouHaveTheKey.addChild("No", "Oh boy, even more awkward.");
+					s = s.addChild(null, "That was more of a rhetorical question.");
+					s = s.addChild(null, "Why you gotta lie to a sheep like that, man?");
+					s = s.addChild(null, "You got into my pen so you definitely have the key.");
+					s.addChild(canYouOpenTheFence);
+					
+					
+					s = canYouOpenTheFence.addChild("Yes", "Thanks ... uh ...");
 					s = s.addChild(null, "Catch me if you can, I guess.");
 					s.setEnd();
-					s = question.addChild("No", "Okay, I guess I'll just stay in the fence then.");
+					
+					s = canYouOpenTheFence.addChild("No", "Well ...");
+					s = s.addChild(null, "I suppose I'll have to stay in the fence then.");
 					s = s.addChild(null, "Catch me if you can.");
 					s.setEnd();
 				}
@@ -229,13 +242,13 @@ public class farlsworth extends boss {
 			}
 		}
 		else if(!pastFlowerPatch.isCompleted()) {
-			startOfConversation = new textSeries(null, "Beautiful flowers, aren't they?");
-			s = startOfConversation.addChild(null, "Weeds are pretty too, you know.");
-			s = s.addChild(null, "What is it that makes weed and a flower different?");
-			s = s.addChild(null, "Some weeds taste better than flowers.");
+			startOfConversation = new textSeries(null, "Pretty flowers, aren't they?");
+			s = startOfConversation.addChild(null, "Weeds can be pretty too, you know.");
+			s = s.addChild(null, "Weeds and flowers are more alike than they are different.");
+			s = s.addChild(null, "Some weeds even taste better than flowers.");
 			s = s.addChild(null, "Except the prickly ones.");
 			s = s.addChild(null, "Those taste like immense pain.");
-			s = s.addChild(null, "Aren't you supposed to be retrieving my wool?");
+			s = s.addChild(null, "Isn't it your quest to retrieve my wool?");
 			s = s.addChild(null, "Why don't you just grab me while I'm talking?");
 			s = s.addChild(null, "You can't, can you?");
 			textSeries givingTheOption = s.addChild(null, "Because I'm not giving you the option.");
@@ -249,8 +262,10 @@ public class farlsworth extends boss {
 			
 			// Don't grab him
 			textSeries dontGrab = givingTheOption.addChild("Don't grab him", "Hmm ...");
-			s = dontGrab.addChild(null, "I guess some people don't respond well to taunting.");
-			s = s.addChild(null, ".");
+			s = dontGrab.addChild(null, "I guess everybody responds differently to taunting.");
+			s = s.addChild(null, "Maybe I misjudged a book by it's cover.");
+			s = s.addChild(null, "An ugly, stupid cover. But still misjudged.");
+			s = s.addChild(null, "Time will tell.");
 			s.setEnd();
 		}
 		else if(!pastTombEntrance.isCompleted()) {
@@ -288,6 +303,12 @@ public class farlsworth extends boss {
 				sound s = new sound(bleet);
 				s.setPosition(getIntX(), getIntY(), sound.DEFAULT_SOUND_RADIUS);
 				s.start();
+			}
+			
+			// You lied to him.
+			if(interactSequence!=null && interactSequence.getTheText()!=null && interactSequence.getTheText().getTextOnPress()!=null &&
+					interactSequence.getTheText().getTextOnPress().equals("Oh boy, even more awkward.")) {
+				didYouLieToHimAboutHavingTheKey.setCompleted(true);
 			}
 			
 			// Pissy Farlsworth runs away second time.
@@ -396,7 +417,7 @@ public class farlsworth extends boss {
 			
 			// Don't grab him
 			if(sequencePart == 2 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getTextOnPress()!=null) &&
-					(interactSequence.getTheText().getTextOnPress().equals("We'll see, I guess."))) {
+					(interactSequence.getTheText().getTextOnPress().equals("Time will tell."))) {
 				
 				// Run away
 				sequencePart = 100; // Put the sequence on the last event.
@@ -483,13 +504,12 @@ public class farlsworth extends boss {
 			}
 			
 			// Sequence over.
-			if((interactSequence != null && interactSequence.getTheText().isEnd())) {
+			if((interactSequence != null && interactSequence.getTheText().isEnd() && sequencePart != 0)) {
 				sequencePart = 100;
 			}
 			
 			// Follow the path
 			if(sequencePart == 100) {
-				System.out.println("Following a path");
 				p = new ArrayList<intTuple>();
 				interactSequence.setUnescapable(false);
 				p.add(new intTuple(2345,-3827));
@@ -588,6 +608,7 @@ public class farlsworth extends boss {
 		didYouOpenTheGateForHim = new event("farlsworthDidYouOpenTheGateForHim");
 		didYouTryToGrabHim = new event("farlsworthDidYouTryToGrabHim");
 		didYouTellHimAboutYourAdventure = new event("farlsworthDidYouTellHimAboutYourAdventure");
+		didYouLieToHimAboutHavingTheKey = new event("farlsworthDidYouLieToHimAboutHavingTheKey");
 		
 		// If he's lost, don't spawn him in the farm.
 		if(pastSpawnFarm.isCompleted() && 

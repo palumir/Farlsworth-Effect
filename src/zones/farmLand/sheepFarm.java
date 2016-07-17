@@ -242,7 +242,7 @@ public class sheepFarm extends zone {
 	// ZONE LOADER //
 	/////////////////
 	// Load the zone.
-	public void loadZone() {
+	public void loadSpecificZoneStuff() {
 		
 		// Set the mode of the zone of course.
 		topDown.setMode();
@@ -259,7 +259,6 @@ public class sheepFarm extends zone {
 			zoneFog.setTo(stormFogLevel);
 			storm s = new storm();
 		}
-
 		
 		// Spawn area.
 		createSpawnArea();
@@ -276,14 +275,15 @@ public class sheepFarm extends zone {
 		// Create graveyard
 		createGraveYard();
 		
+		// Create final area
+		createFinalArea();
+		
+		
 		// Spawn units
 		spawnUnits();
 		
 		// Sort chunks.
 		chunk.sortChunks();
-		
-		// Zone is loaded.
-		setZoneLoaded(true);
 		
 		// Play zone music.
 		zoneMusic.loopMusic();
@@ -313,9 +313,9 @@ public class sheepFarm extends zone {
 		
 		// Two yellow wolves
 		u = new redWolf(1420,-768);
-		u.setFacingDirection("Up");
+		u.setFacingDirection("Left");
 		u = new yellowWolf(1394,-763);
-		u.setFacingDirection("Up");
+		u.setFacingDirection("Left");
 		
 		// First black wolf, at flower farm
 		u = new blackWolf(1983,-276);
@@ -358,6 +358,57 @@ public class sheepFarm extends zone {
 		u.setFacingDirection("Right");
 
 
+	}
+	
+	// Final area with all the fire.
+	public void createFinalArea() {
+		
+		// Lightning tree
+		tree lightningTree = new tree(-758,-3937,0);
+		
+		// Trees
+		c = new tree(-291,-3931,2);
+		c = new tree(-291,-3904,2);
+		c = new tree(-311,-3866,1);
+		c = new tree(-278,-3880,2);
+		c = new tree(-283,-3840,1);
+		c = new tree(-305,-3814,0);
+		c = new tree(-274,-3785,0);
+		c = new tree(-309,-3759,0);
+		c = new tree(-293,-3732,0);
+		c = new tree(-293,-3708,1);
+		c = new tree(-293,-3687,2);
+		c = new tree(-311,-3666,2);
+		c = new tree(-296,-3645,0);
+		c = new tree(-317,-3624,2);
+		c = new tree(-302,-3597,1);
+		c = new tree(-298,-3948,1);
+		c = new tree(-300,-3964,0);
+		c = new tree(-318,-3988,1);
+		c = new tree(-334,-4014,1);
+		c = new tree(-364,-4038,1);
+		c = new tree(-342,-3657,2);
+		c = new tree(-383,-3639,2);
+		c = new tree(-433,-3643,1);
+		c = new tree(-406,-3646,2);
+		c = new tree(-465,-3656,1);
+		c = new tree(-503,-3681,0);
+		c = new tree(-386,-4052,0);
+		c = new tree(-422,-4048,2);
+		c = new tree(-463,-4063,2);
+		c = new tree(-488,-4077,0);
+		c = new tree(-518,-4082,0);
+		c = new tree(-539,-3690,2);
+		c = new tree(-565,-3683,1);
+		c = new tree(-590,-3699,1);
+		c = new tree(-614,-3682,0);
+		c = new tree(-642,-3698,0);
+		c = new tree(-664,-3691,0);
+		c = new tree(-549,-4087,1);
+		c = new tree(-592,-4087,1);
+		c = new tree(-641,-4075,1);
+		c = new tree(-623,-4087,1);
+		c = new tree(-678,-4068,1);
 	}
 	
 	// Flower farm
@@ -1285,15 +1336,6 @@ public class sheepFarm extends zone {
 		 c = new tree(1368,-54,0);
 		 c = new tree(308,-896,2);
 		
-		 
-		 // TODO: just holding stuff until these areas are designed.
-		// Cave warning.
-		c = new skullSign(-1784,-4000-1000, 0);
-		
-		
-		//bush secretBush = new bush(1904,-3996,0);
-		//secretBush.setSecretPassage(true);
-		
 	}
 	
 	public void spawnMetaGraves() {
@@ -2021,87 +2063,6 @@ public class sheepFarm extends zone {
 		c = new tree(163,-4105,2);
 		c = new tree(144,-4146,2);
 		c = new tree(163,-4123,0);
-		c = new tree(530,-4064,1);
-		c = new tree(546,-4104,2);
-		c = new tree(523,-4123,2);
-		c = new tree(542,-4088,2);
-		c = new tree(509,-4139,2);
-		c = new tree(499,-4170,0);
-		c = new tree(474,-4154,0);
-		c = new tree(477,-4179,0);
-		c = new tree(500,-4208,0);
-		c = new tree(471,-4222,2);
-		c = new tree(440,-4266,2);
-		c = new tree(464,-4251,0);
-		c = new tree(464,-4227,1);
-		c = new tree(498,-4196,2);
-		c = new tree(425,-4287,0);
-		c = new tree(445,-4314,1);
-		c = new tree(420,-4330,2);
-		c = new tree(437,-4340,1);
-		c = new tree(441,-4381,0);
-		c = new tree(433,-4359,1);
-		c = new tree(134,-4165,2);
-		c = new tree(120,-4192,2);
-		c = new tree(99,-4213,2);
-		c = new tree(86,-4239,0);
-		c = new tree(87,-4268,1);
-		c = new tree(57,-4268,1);
-		c = new tree(62,-4303,0);
-		c = new tree(84,-4287,1);
-		c = new tree(80,-4250,0);
-		c = new tree(68,-4323,0);
-		c = new tree(44,-4335,2);
-		c = new tree(14,-4347,1);
-		c = new tree(42,-4350,1);
-		c = new tree(24,-4372,2);
-		c = new tree(5,-4388,1);
-		c = new tree(-7,-4368,2);
-		c = new tree(-17,-4413,0);
-		c = new tree(435,-4407,0);
-		c = new tree(425,-4426,2);
-		c = new tree(447,-4448,0);
-		c = new tree(416,-4464,1);
-		c = new tree(402,-4480,0);
-		c = new tree(401,-4501,1);
-		c = new tree(387,-4530,2);
-		c = new tree(392,-4573,1);
-		c = new tree(383,-4560,1);
-		c = new tree(396,-4547,2);
-		c = new tree(-7,-4436,1);
-		c = new tree(-29,-4453,2);
-		c = new tree(-45,-4481,1);
-		c = new tree(-45,-4463,0);
-		c = new tree(-38,-4501,0);
-		c = new tree(-62,-4525,1);
-		c = new tree(-86,-4543,0);
-		c = new tree(-53,-4569,2);
-		c = new tree(-83,-4555,1);
-		c = new tree(-87,-4570,2);
-		c = new tree(377,-4607,2);
-		c = new tree(377,-4589,0);
-		c = new tree(363,-4624,0);
-		c = new tree(383,-4652,1);
-		c = new tree(371,-4634,0);
-		c = new tree(360,-4669,1);
-		c = new tree(379,-4691,2);
-		c = new tree(355,-4709,2);
-		c = new tree(374,-4735,1);
-		c = new tree(353,-4768,2);
-		c = new tree(376,-4757,1);
-		c = new tree(359,-4798,1);
-		c = new tree(382,-4781,0);
-		c = new tree(361,-4811,1);
-		c = new tree(377,-4836,1);
-		c = new tree(352,-4855,2);
-		c = new tree(376,-4879,2);
-		c = new tree(355,-4900,2);
-		c = new tree(386,-4922,0);
-		c = new tree(359,-4934,2);
-		c = new tree(373,-4969,2);
-		c = new tree(366,-4955,2);
-		c = new tree(354,-4978,0);
-		c = new tree(377,-4995,2);
 	}
 	
 	public static ArrayList<chunk> makeFarlsworthFence(float atX, float atY) {

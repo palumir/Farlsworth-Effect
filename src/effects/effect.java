@@ -45,6 +45,7 @@ public abstract class effect extends drawnObject  {
 	// Animation duration
 	protected long timeStarted = 0;
 	protected float animationDuration = 0;
+	protected boolean hasATimer = true;
 	
 	///////////////
 	/// METHODS ///
@@ -58,17 +59,52 @@ public abstract class effect extends drawnObject  {
 		timeStarted = time.getTime();
 		animationDuration = e.getAnimationDuration();
 		
-		if(e.getEffectTypeSpriteSheet() != null) {
+		// Set animations
+		typeOfEffect = e;
+		setAnimations(false);
+		
+	}
+	
+	// Constructor
+	public effect(effectType e, int newX, int newY, boolean entireSpriteSheetIsAnimation) {
+		super(e.getEffectTypeSpriteSheet(), newX, newY, e.getWidth(), e.getHeight());	
+	
+		// Set timer.
+		timeStarted = time.getTime();
+		animationDuration = e.getAnimationDuration();
+		
+		// Set animations
+		typeOfEffect = e;
+		setAnimations(entireSpriteSheetIsAnimation);
+		
+	}
+	
+	// Set animations
+	public void setAnimations(boolean b) {
+		if(typeOfEffect.getEffectTypeSpriteSheet() != null) {
 			// Set-up animations.
 			animationPack newAnimationPack =  new animationPack();
 			
-			// Set each animation in the spritesheet to be +1 of eachother.
-			for(int i = 0; i < e.getEffectTypeSpriteSheet().getSprites().size(); i++) {
-				animation newAnimation = new animation(e.getName() + i, 
-						e.getEffectTypeSpriteSheet().getAnimation(i), 
+			// Is the entire spritesheet not the animation?
+			if(!b) {
+				// Set each animation in the spritesheet to be +1 of eachother.
+				for(int i = 0; i < typeOfEffect.getEffectTypeSpriteSheet().getSprites().size(); i++) {
+					animation newAnimation = new animation(typeOfEffect.getName() + i, 
+							typeOfEffect.getEffectTypeSpriteSheet().getAnimation(i), 
+							0, 
+							typeOfEffect.getEffectTypeSpriteSheet().getSprites().get(i).size()-1, 
+							typeOfEffect.getAnimationDuration()); //TODO: plays over 1 second by defualt
+					newAnimationPack.addAnimation(newAnimation);
+				}
+			}
+			
+			// Okay then bud, it is. Do it up bud.
+			else {
+				animation newAnimation = new animation(typeOfEffect.getName(), 
+						typeOfEffect.getEffectTypeSpriteSheet().getAnimation(), 
 						0, 
-						e.getEffectTypeSpriteSheet().getSprites().get(i).size()-1, 
-						e.getAnimationDuration()); //TODO: plays over 1 second by defualt
+						typeOfEffect.getEffectTypeSpriteSheet().getAnimation().size() - 1,
+						typeOfEffect.getAnimationDuration()); 
 				newAnimationPack.addAnimation(newAnimation);
 			}
 			animations = newAnimationPack;
@@ -77,7 +113,6 @@ public abstract class effect extends drawnObject  {
 			// Set the animation.
 			setCurrentAnimation(a);
 		}
-		typeOfEffect = e;
 	}
 	
 	// Update unit
@@ -87,7 +122,7 @@ public abstract class effect extends drawnObject  {
 			getCurrentAnimation().playAnimation();
 			respondToFrame(getCurrentAnimation().getCurrentSprite());
 		}
-		if(time.getTime() - timeStarted >= animationDuration*1000) {
+		if(hasATimer && time.getTime() - timeStarted >= animationDuration*1000) {
 			this.destroy();
 		}
 	}

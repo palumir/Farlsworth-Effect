@@ -53,8 +53,8 @@ public class storm extends interfaceObject {
 	// The actual type.
 	private static spriteSheet rainSheet = new spriteSheet(new spriteSheetInfo(
 			DEFAULT_CHUNK_SPRITESHEET, 
-			DEFAULT_SPRITE_WIDTH, 
-			DEFAULT_SPRITE_HEIGHT,
+			600, 
+			600,
 			0,
 			0
 			));
@@ -75,7 +75,6 @@ public class storm extends interfaceObject {
 	public void drawObject(Graphics g) {
 			
 			// Draw the fog.
-			//g.drawImage(rainAnimation.getCurrentFrame(),0,0,gameCanvas.getActualWidth(),gameCanvas.getActualHeight(),null);
 			g.setColor(Color.white);
 		
 	}

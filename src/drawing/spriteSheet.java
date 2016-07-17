@@ -52,6 +52,7 @@ public class spriteSheet {
 	////////////////
 	private BufferedImage sheet;
 	private ArrayList<ArrayList<BufferedImage>> sprites;
+	private ArrayList<BufferedImage> spritesInOrder;
 	private spriteSheetInfo sheetInfo;
 	private int sheetHeight;
 	private int sheetWidth;
@@ -77,15 +78,18 @@ public class spriteSheet {
 			int rows = sheet.getHeight()/getSpriteHeight();
 			int cols = sheet.getWidth()/getSpriteWidth();
 			setSprites(new ArrayList<ArrayList<BufferedImage>>());
+			spritesInOrder = new ArrayList<BufferedImage>();
 			for (int i = 0; i < rows; i++){
 				getSprites().add(new ArrayList<BufferedImage>());
 			    for (int j = 0; j < cols; j++){
-			        getSprites().get(i).add(sheet.getSubimage(
-			            j * getSpriteWidth(),
-			            i * getSpriteHeight(),
-			            getSpriteWidth(),
-			            getSpriteHeight()
-			        ));
+			    	BufferedImage b = sheet.getSubimage(
+				            j * getSpriteWidth(),
+				            i * getSpriteHeight(),
+				            getSpriteWidth(),
+				            getSpriteHeight()
+				        );
+			        getSprites().get(i).add(b);
+			        spritesInOrder.add(b);
 			    }
 			}
 		} 
@@ -125,6 +129,11 @@ public class spriteSheet {
 	// Get animation
 	public ArrayList<BufferedImage> getAnimation(int y) {
 		return getSprites().get(y);
+	}
+	
+	// Get animation
+	public ArrayList<BufferedImage> getAnimation() {
+		return spritesInOrder;
 	}
 
 	public int getSpriteWidth() {

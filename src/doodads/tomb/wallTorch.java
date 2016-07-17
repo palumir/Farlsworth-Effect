@@ -59,6 +59,9 @@ public class wallTorch extends lightSource {
 			setWidth(DEFAULT_CHUNK_WIDTH);
 		}
 		
+		// Z axis
+		setZ(-1);
+		
 		// Set radius
 		setLightRadius(75);
 		

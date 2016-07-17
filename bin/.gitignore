@@ -1,9 +1,7 @@
-/zones/
-/doodads/
-/units/
-/terrain/
-/utilities/
-/main/
-/effects/
 /drawing/
-/sounds/
+/terrain/
+/doodads/
+/effects/
+/main/
+/zones/
+/units/

@@ -4,7 +4,6 @@ import drawing.gameCanvas;
 import drawing.userInterface.tooltipString;
 import units.player;
 import utilities.saveState;
-import utilities.utility;
 
 // The class that initiates the program.
 public class main {
