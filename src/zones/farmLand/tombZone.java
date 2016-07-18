@@ -3,6 +3,7 @@ package zones.farmLand;
 import java.awt.image.BufferedImage;
 
 import doodads.sheepFarm.caveEnterance;
+import doodads.sheepFarm.well;
 import doodads.tomb.stairsUp;
 import doodads.tomb.wallTorch;
 import drawing.background;
@@ -122,11 +123,10 @@ public class tombZone extends zone {
 		// Load zone events.
 		loadZoneEvents();
 		
-		// Create surrounding dirt.
-		createTomb();
-		
 		// Spawn area.
 		createSpawnArea();
+		
+		
 		
 		// Sort chunks.
 		chunk.sortChunks();
@@ -146,14 +146,17 @@ public class tombZone extends zone {
 	// INDIVIDUAL AREAS //
 	//////////////////////
 	
-	// Surrounding dirt.
-	public void createTomb() {
+	public void createSpawnArea() {
+		
+		// Entrance
+		stairsUp tombZoneEnterance = new stairsUp(30,-8,0, sheepFarm.getZone(),2320,-3896,"Down");
+		tombZoneEnterance.setZ(BACKGROUND_Z);
 		
 		// Background 
-		spawnBackgroundRect(-65,-269, 3230,787);
+		spawnBackgroundRect(-65,-269, 7500,787);
 		
 		// Roof
-		spawnTombRect(-18, -747, 4000,-220,"roof"); // the roof
+		spawnTombRect(-18, -747, 7500,-220,"roof"); // the roof
 		spawnTombRect(-500+2, -747, 0,-220,"none"); // roof dirt top left
 	
 		// Floor
@@ -164,50 +167,74 @@ public class tombZone extends zone {
 		spawnTombRect(-338,-242,7,60,"leftWall");
 		
 		// Right wall
-		spawnTombRect(3976+32,-750,4300,1000,"rightWall");
+		spawnTombRect(7000,-750,7000,1000,"rightWall");
 		
 		// First floor
-		spawnTombRect(337,40,410,820,"ground");
+		spawnTombRect(360,40,492,791,"ground");
 		
-		// Torches
-		c = new wallTorch(209,-40);
-		c = new wallTorch(767,-76);
-		c = new wallTorch(435,-72);
-		
+		c = new wallTorch(422,-40);
+			
 		// Second floor
-		spawnTombRect(508,0,1000,820,"ground");
-		u = new shadowDude(974,-47);
-		u.patrolTo(500,-47);
+		spawnTombRect(564,40,1027,785, "ground");
 		
-		// Third floor
-		spawnTombRect(1073,63,1195,785,"ground");
-		c = new wallTorch(1126,-2);
+		c = new wallTorch(635,-40);
+		c = new wallTorch(937,-40);
 		
-		// Fourth floor
-		spawnTombRect(1209,85,1701,736, "ground");
-		u = new lightDude(1209,38);
-		u.patrolTo(1670, 38);
-		
-		// Spawn 6 shadow dudes above eachother for fourth floor.
-		for(int i = 0; i < 6; i++) {
-			u = new shadowDude(1670, 38-50*i);
-			u.patrolTo(1209,38-50*i);
+		for(int i=0; i<5; i++){
+			u = new shadowDude(989,-12 -i*50);
+			u.patrolTo(566,-12 -i*50);
 		}
 		
+		// Third floor
+		spawnTombRect(1027+62,40,1027+62+132,785, "ground");
+		c = new wallTorch(1151,-40);
+		
+		//Fourth floor
+		spawnTombRect(1317,40,2213,785, "ground");
+		
+		c = new wallTorch(1385,-40);
+		c = new wallTorch(1760,-40);
+		c = new wallTorch(2135,-40);
+		
+		for(int i=0; i<5; i++){
+			u = new shadowDude(1325,-12 -i*50);
+			u.patrolTo(1750,-12 -i*50);
+		}
+		
+		for(int i=0; i<5; i++){
+			u = new shadowDude(2195,-12 -i*50);
+			u.patrolTo(1770,-12 -i*50);
+		}
+		
+		// Fifth floor
+		spawnTombRect(2310,40,3218,785, "ground");
+		
+		u = new lightDude(3179,-11);
+		u.patrolTo(2310, -12);
+		u.setMoveSpeed(2);
+		
+		for(int i=0; i<5; i++){
+			u = new shadowDude(2310,-12 -i*50);
+			u.patrolTo(2609,-12 -i*50);
+		}
+		
+		for(int i=0; i<5; i++){
+			u = new shadowDude(2609,-12 -i*50);
+			u.patrolTo(2908,-12 -i*50);
+			u.setMoveSpeed(2);
+		}
+		
+		for(int i=0; i<5; i++){
+			u = new shadowDude(3207,-12 -i*50);
+			u.patrolTo(2908,-12 -i*50);
+		}
+		
+		// Sixth floor
+		spawnTombRect(3321,40,3608,785, "ground");
+		c = new well(3421,5,0);
 	}
 	
-	// Spawn area.
-	public void createSpawnArea() {
-		
-		////////////////
-		// FIRST Area //
-		////////////////
-		
-		// Entrance
-		stairsUp tombZoneEnterance = new stairsUp(30,-8,0, sheepFarm.getZone(),2320,-3896,"Down");
-		tombZoneEnterance.setZ(BACKGROUND_Z);
-		
-	}
+ 
 
 	// Get the player location in the zone.
 	public intTuple getDefaultLocation() {

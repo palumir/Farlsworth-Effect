@@ -146,7 +146,7 @@ public class player extends unit {
 	// Constructor
 	public player(int newX, int newY, zone z) {
 		super(playerType, newX, newY);
-		
+		showHitBox();
 		// Set sounds.
 		setAttackSound(DEFAULT_ATTACK_SOUND);
 		
