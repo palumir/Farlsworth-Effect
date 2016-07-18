@@ -180,10 +180,8 @@ public class tombZone extends zone {
 		c = new wallTorch(635,-40);
 		c = new wallTorch(937,-40);
 		
-		for(int i=0; i<5; i++){
-			u = new shadowDude(989,-12 -i*50);
-			u.patrolTo(566,-12 -i*50);
-		}
+		u = new shadowDude(989,-12);
+		u.patrolTo(566,-12);
 		
 		// Third floor
 		spawnTombRect(1027+62,40,1027+62+132,785, "ground");
@@ -221,7 +219,7 @@ public class tombZone extends zone {
 		for(int i=0; i<5; i++){
 			u = new shadowDude(2609,-12 -i*50);
 			u.patrolTo(2908,-12 -i*50);
-			u.setMoveSpeed(2);
+			u.setMoveSpeed(3);
 		}
 		
 		for(int i=0; i<5; i++){
