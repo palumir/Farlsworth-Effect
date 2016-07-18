@@ -430,7 +430,7 @@ public class denmother extends boss {
 		if(dying == true) {
 			// Run wolves away.
 			for(int i = 0; i < wolfPack.size(); i++) {
-				wolfPack.get(i).moveTowards(originalPoints.get(i).x,originalPoints.get(i).y);
+				wolfPack.get(i).moveTo(originalPoints.get(i).x,originalPoints.get(i).y);
 			}
 			
 			// Remove claws.
@@ -752,7 +752,7 @@ public class denmother extends boss {
 				// Move inward until at the outskirts of the region.
 				for(int i = 0; i < wolfPack.size(); i++) {
 					if(!fightRegion.contains(wolfPack.get(i))) {
-						wolfPack.get(i).moveTowards(wolfPackPoints.get(i).x, wolfPackPoints.get(i).y);
+						wolfPack.get(i).moveTo(wolfPackPoints.get(i).x, wolfPackPoints.get(i).y);
 					}
 					else {
 						wolfPack.get(i).stopMove("all");
@@ -870,7 +870,7 @@ public class denmother extends boss {
 				
 				// Move wolves.
 				for(int i = 0; i < wolfPack.size(); i++) {
-					wolfPack.get(i).moveTowards(wolfPackPoints.get(i).x, wolfPackPoints.get(i).y);
+					wolfPack.get(i).moveTo(wolfPackPoints.get(i).x, wolfPackPoints.get(i).y);
 				}
 			}
 		}

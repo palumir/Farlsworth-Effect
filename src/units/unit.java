@@ -319,7 +319,6 @@ public abstract class unit extends drawnObject  {
 		startX = this.getIntX();
 		startY = this.getIntY();
 		p.add(new intTuple(startX, startY));
-		System.out.println(p);
 		patrolPath = p;
 	}
 	
@@ -831,7 +830,16 @@ public abstract class unit extends drawnObject  {
 	// Follow a unit.
 	public void follow(unit u) {
 		followedUnit = u;
-		moveTowards(u.getIntX(), u.getIntY());
+		
+		// Set where we need to move to.
+		moveToX = u.getIntX();
+		moveToY = u.getIntY();
+		
+		// Set rise/run
+		setRiseRun();
+		
+		// Move there.
+		moveTowards();
 	}
 	
 	// Move to
@@ -839,28 +847,53 @@ public abstract class unit extends drawnObject  {
 		movingToAPoint = true;
 		moveToX = newX;
 		moveToY = newY;
+		
+		// Set rise/run
+		setRiseRun();
 	}
 	
-	// Move towards a spot.
-	public void moveTowards(int moveX, int moveY) {
-		
-		// Reset movement.
-		stopMove("all");
-		
-		// If we are there, stop.
-		if(Math.abs(getIntX() - moveX) <= moveSpeed &&  Math.abs(getIntY() - moveY) <= moveSpeed + 1) {
-			// Don't move.
+	// Move towards a point
+	public void moveTowards() {
+		if(movingToAPoint && Math.abs(moveToX - getFloatX()) < getMoveSpeed() && Math.abs(moveToY - getFloatY()) < getMoveSpeed()) {
+			movingToAPoint = false;
 		}
 		else {
 			
-			// Horizontal
-			if(getIntX() - moveX < 0 && Math.abs(getIntX() - moveX) > closeEnough) setMovingRight(true);
-			if(getIntX() - moveX > 0 && Math.abs(getIntX() - moveX) > closeEnough) setMovingLeft(true);
-			
-			// Vertical
-			if(getIntY() - moveY < 0 && Math.abs(getIntY() - moveY) > closeEnough) setMovingDown(true);
-			if(getIntY() - moveY > 0 && Math.abs(getIntY() - moveY) > closeEnough) setMovingUp(true);
+			// Set facing direction.
+			if(run < 0) {
+				setFacingDirection("Left");
+			}
+			else if(run > 0) {
+				setFacingDirection("Right");
+			}
+			else if(rise < 0) {
+				setFacingDirection("Up");
+			}
+			else {
+				setFacingDirection("Down");
+			}
+			move(run,rise);
 		}
+	}
+	
+	// Moving rise/run.
+	private float rise = 0;
+	private float run = 0;
+	
+	// Set rise run. 
+	public void setRiseRun() {
+		float yDistance = (moveToY - getIntY());
+		float xDistance = (moveToX - getIntX());
+		float distanceXY = (float) Math.sqrt(yDistance * yDistance
+					+ xDistance * xDistance);
+		
+		// Calculate rise values.
+		float floatRise = ((yDistance/distanceXY)*(float)getMoveSpeed());
+		rise = floatRise;
+		
+		// Calculate run values.
+		float floatRun = ((xDistance/distanceXY)*(float)getMoveSpeed());
+		run = floatRun;
 	}
 	
 	// Deal with meta movement. Moving toward a point, following, pathing, etc.
@@ -875,16 +908,7 @@ public abstract class unit extends drawnObject  {
 		/// MOVEMENT TOWARD A POINT ///
 		///////////////////////////////	
 		if(movingToAPoint) {
-			// Moving toward a point?
-			if((Math.abs(moveToX - getIntX()) > closeEnough || Math.abs(moveToY - getIntY()) > closeEnough)) {
-				moveTowards(moveToX, moveToY);
-			}
-			
-			// We have reached our point
-			if(!(Math.abs(moveToX - getIntX()) > closeEnough || Math.abs(moveToY - getIntY()) > closeEnough)) {
-				stopMove("all");
-				movingToAPoint = false;
-			}
+			moveTowards();
 		}
 		
 		///////////////////////////////
@@ -894,19 +918,16 @@ public abstract class unit extends drawnObject  {
 			if(path != null && path.size() > 0) {
 				if(currPoint == null) {
 					moveTo(path.get(0).x, path.get(0).y);
-					if(this instanceof lightDude) System.out.println("Moving to:  " + path.get(0).x +","+path.get(0).y);
 					currPoint = path.get(0);
 					path.remove(0);
 				}
 				else if(!(Math.abs(currPoint.x - getIntX()) > closeEnough || Math.abs(currPoint.y - getIntY()) > closeEnough)) {
 					moveTo(path.get(0).x, path.get(0).y);
-					if(this instanceof lightDude) System.out.println("Moving to:  " + path.get(0).x +","+path.get(0).y);
 					currPoint = path.get(0);
 					path.remove(0);
 				}
 			}
 			else {
-				System.out.println("Path null");
 				currPoint = null;
 				path = null;
 				followingAPath = false;
@@ -962,11 +983,9 @@ public abstract class unit extends drawnObject  {
 
 		// Move the unit
 		if(movingDiagonally()) {
-			unitSpecificMovement(moveX*(1f/1.3f),moveY*(1f/1.3f));
 			move(moveX*(1f/1.3f), moveY*(1f/1.3f));
 		}
 		else {
-			unitSpecificMovement(moveX,moveY);
 			move(moveX, moveY);
 		}
 
@@ -1050,6 +1069,7 @@ public abstract class unit extends drawnObject  {
 		if(player.getCurrentPlayer() != null && 
 			player.getCurrentPlayer().getCurrentZone()!=null && 
 			player.getCurrentPlayer().getCurrentZone().isZoneLoaded()) {
+			
 			// Actual move x and y when all is said and done.
 			float actualMoveX = moveX;
 			float actualMoveY = moveY;
@@ -1114,6 +1134,9 @@ public abstract class unit extends drawnObject  {
 			// Move the unit.
 			setFloatX(getFloatX() + actualMoveX);
 			setFloatY(getFloatY() + actualMoveY);
+			
+			// Specific movement
+			unitSpecificMovement(actualMoveX,actualMoveY);
 		}
 	}
 	
@@ -1399,7 +1422,7 @@ public abstract class unit extends drawnObject  {
 		boolean movingUpAndDown = isMovingUp() && isMovingDown();
 		boolean movingHorizontally = (isMovingLeft() || isMovingRight()) && !movingLeftAndRight;
 		boolean movingVertically = (isMovingUp() || isMovingDown()) && !movingUpAndDown;
-		return movingVertically || movingHorizontally;
+		return movingVertically || movingHorizontally || movingToAPoint;
 	}
 	
 	public void setCollision(boolean b) {
