@@ -738,7 +738,6 @@ public class denmother extends boss {
 				u.setAttackTime(0.25f);
 				u.setKillable(false);
 				u.setTargetable(false);
-				u.ignoreCollision();
 				wolfPack.add(u);
 			}
 	}

@@ -101,7 +101,7 @@ public class tree extends chunk {
 		setPassable(false);
 		
 		// If we are in sheepFarm and it's on fire, light everything on fire.
-		if(true) {
+		if(false) {
 			int rand = 1 + utility.RNG.nextInt(5);
 			for(int j = 0; j < rand; j++) {
 				int minX = getIntX() - 15;

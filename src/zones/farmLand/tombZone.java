@@ -1,6 +1,7 @@
 package zones.farmLand;
 
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 import doodads.sheepFarm.caveEnterance;
 import doodads.sheepFarm.well;
@@ -39,6 +40,7 @@ public class tombZone extends zone {
 	// References we will use throughout.
 	unit u;
 	chunk c;
+	ArrayList<intTuple> path;
 	
 	// Some defaults.
 	public static int BACKGROUND_Z = -100;

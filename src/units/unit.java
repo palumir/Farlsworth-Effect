@@ -32,6 +32,7 @@ import utilities.intTuple;
 import utilities.mathUtils;
 import utilities.time;
 import utilities.utility;
+import units.unitTypes.farmLand.tomb.lightDude;
 
 public abstract class unit extends drawnObject  { 
 	
@@ -172,9 +173,7 @@ public abstract class unit extends drawnObject  {
 	// Sprite stuff.
 	private animationPack animations;
 	private animation currentAnimation = null;
-	
-	// Collision on or off.
-	private boolean ignoreCollision = false;
+
 	
 	// Followed unit
 	protected unit followedUnit = null;
@@ -209,6 +208,16 @@ public abstract class unit extends drawnObject  {
 	private int knockToY;
 	private int knockSpeed;
 	private float knockTime;
+	
+	// Patrol stuff
+	boolean patrolling = false;
+	boolean movingBack = false;
+	int patrolX;
+	int patrolY;
+	int startX;
+	int startY;
+	boolean patrollingPath = false;
+	ArrayList<intTuple> patrolPath;
 	
 	// No collision knockback
 	boolean oldCollision = collisionOn;
@@ -270,7 +279,7 @@ public abstract class unit extends drawnObject  {
 	public void dealWithPatrolling() {
 		
 		// If we are patrolling, patrol
-		if(patrolling) {
+		if(patrolling && !patrollingPath) {
 			if(!movingBack) {
 				if(!isMoving()) {
 					moveTo(patrolX, patrolY);
@@ -284,15 +293,15 @@ public abstract class unit extends drawnObject  {
 				}
 			}
 		}
+		
+		// If we are patrolling a path.
+		if(patrolling && patrollingPath) {
+			if(path == null || path.size() == 0) {
+				ArrayList <intTuple> pathToPatrol = new ArrayList<intTuple>(patrolPath);
+				followPath(pathToPatrol);
+			}
+		}
 	}
-	
-	// Patrol stuff
-	boolean patrolling = false;
-	boolean movingBack = false;
-	int patrolX;
-	int patrolY;
-	int startX;
-	int startY;
 	
 	// Patrol to
 	public void patrolTo(int patrolToX, int patrolToY) {
@@ -303,9 +312,21 @@ public abstract class unit extends drawnObject  {
 		startY = this.getIntY();
 	}
 	
+	// Patrol path
+	public void patrolPath(ArrayList<intTuple> p) {
+		patrolling = true;
+		patrollingPath = true;
+		startX = this.getIntX();
+		startY = this.getIntY();
+		p.add(new intTuple(startX, startY));
+		System.out.println(p);
+		patrolPath = p;
+	}
+	
 	// Stop patrolling
 	public void stopPatrol() {
 		patrolling = false;
+		patrollingPath = false;
 	}
 	
 	// Is the unit alive or dead
@@ -873,16 +894,19 @@ public abstract class unit extends drawnObject  {
 			if(path != null && path.size() > 0) {
 				if(currPoint == null) {
 					moveTo(path.get(0).x, path.get(0).y);
+					if(this instanceof lightDude) System.out.println("Moving to:  " + path.get(0).x +","+path.get(0).y);
 					currPoint = path.get(0);
 					path.remove(0);
 				}
 				else if(!(Math.abs(currPoint.x - getIntX()) > closeEnough || Math.abs(currPoint.y - getIntY()) > closeEnough)) {
 					moveTo(path.get(0).x, path.get(0).y);
+					if(this instanceof lightDude) System.out.println("Moving to:  " + path.get(0).x +","+path.get(0).y);
 					currPoint = path.get(0);
 					path.remove(0);
 				}
 			}
 			else {
+				System.out.println("Path null");
 				currPoint = null;
 				path = null;
 				followingAPath = false;
@@ -1428,9 +1452,6 @@ public abstract class unit extends drawnObject  {
 		this.attackDamage = attackDamage;
 	}
 	
-	public void ignoreCollision() {
-		ignoreCollision = true;
-	}
 	
 	public void showAttackRange() {
 		showAttackRange = true;
