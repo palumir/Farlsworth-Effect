@@ -13,7 +13,8 @@ import javax.sound.sampled.SourceDataLine;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
 import drawing.gameCanvas;
-import units.player; 
+import units.player;
+import utilities.time; 
 
 public class sound extends Thread { 
 	
@@ -35,6 +36,8 @@ public class sound extends Thread {
     private float soundVolume = DEFAULT_SOUND_VOLUME;
     private float volume = 1f;
     private boolean stopRequested = false;
+    private long soundStart = 0;
+    private float fadeOver = 0;
     
     // Default sound radius
     public static int DEFAULT_SOUND_RADIUS = 1800;
@@ -47,6 +50,13 @@ public class sound extends Thread {
         filename = wavfile;
         curPosition = Position.NORMAL;
         allSounds.add(this);
+    }
+    
+    public sound(String wavfile, float fadeOver) { 
+        filename = wavfile;
+        curPosition = Position.NORMAL;
+        allSounds.add(this);
+        this.fadeOver = fadeOver;
     }
 
     public void run() { 
@@ -114,6 +124,11 @@ public class sound extends Thread {
             	else {
             		howClosePercentage = 1f;
             	}
+            	
+        		// Fade in.
+        		float fadePercent = ((time.getTime() - soundStart + 1)/(fadeOver*1000));
+        		if(fadePercent > 1) fadePercent = 1;
+        		if(fadeOver == 0) fadePercent = 1;
     		   
     		    // Adjust volume based on radius.
     		    FloatControl control = (FloatControl) auline.getControl(FloatControl.Type.MASTER_GAIN);
@@ -121,7 +136,7 @@ public class sound extends Thread {
     	        float min = control.getMinimum(); // negative values all seem to be zero?
     	        float range = max - min;
     	        if(howClosePercentage>0) {
-    	        	control.setValue(min + (range * howClosePercentage * volume * soundVolume));
+    	        	control.setValue(min + (range * howClosePercentage * volume * soundVolume * fadePercent));
     	        }
     	        else { 
     	        	control.setValue(min);

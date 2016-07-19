@@ -2376,7 +2376,7 @@ public class sheepFarm extends zone {
 		}
 		
 		// Fog at black flower area
-		if(stormInProgress != null && !stormInProgress.isCompleted() && currPlayer != null && currPlayer.isWithin(2421,-489,2843,-20)) {
+		if(stormInProgress != null && !stormInProgress.isCompleted() && currPlayer != null && currPlayer.isWithin(2439,-918,2914,-790)) {
 			if(zoneFog == null) zoneFog = new fog();
 			zoneFog.fadeTo(stormFogLevel, 2f);
 			stormInProgress.setCompleted(true);
@@ -2396,7 +2396,7 @@ public class sheepFarm extends zone {
 			if(time.getTime() - stormStartTime > howManySecondsUntilStorm*1000) {
 				startStormFromFog = false;
 				stormStarted = true;
-				storm s = new storm();
+				storm s = new storm(15f);
 			}
 		}
 	}

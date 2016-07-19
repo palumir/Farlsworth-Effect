@@ -38,17 +38,9 @@ public class storm extends interfaceObject {
 	// Sprite stuff.
 	private static String DEFAULT_CHUNK_SPRITESHEET = "images/effects/rain.png";
 	
-	// Dimensions
-	private static int DEFAULT_SPRITE_WIDTH = gameCanvas.getDefaultWidth();
-	private static int DEFAULT_SPRITE_HEIGHT = gameCanvas.getDefaultHeight();
-
-	// Topdown
-	private static int DEFAULT_TOPDOWN_WIDTH = gameCanvas.getDefaultWidth();
-	private static int DEFAULT_TOPDOWN_HEIGHT = gameCanvas.getDefaultHeight();
-
-	// Platformer.
-	private static int DEFAULT_PLATFORMER_HEIGHT = gameCanvas.getDefaultHeight();
-	private static int DEFAULT_PLATFORMER_WIDTH = gameCanvas.getDefaultWidth();
+	// Fade over.
+	private float fadeOver = 0;
+	private long stormStart = 0;
 	
 	// The actual type.
 	private static spriteSheet rainSheet = new spriteSheet(new spriteSheetInfo(
@@ -62,6 +54,24 @@ public class storm extends interfaceObject {
 	public storm() {
 		super(null, 0, 0, gameCanvas.getDefaultWidth(), gameCanvas.getDefaultHeight());
 		currentStorm = this;
+		
+		// Storm start time.
+		stormStart = time.getTime();
+		
+		// Be behind fog.
+		setZ(-5);
+		
+		// Add rain animation
+		rainAnimation = new animation("rain",rainSheet.getAnimation(0), 0, 5, 0.4f);
+	}
+	
+	public storm(float fadeOver) {
+		super(null, 0, 0, gameCanvas.getDefaultWidth(), gameCanvas.getDefaultHeight());
+		currentStorm = this;
+		
+		// Storm start time.
+		stormStart = time.getTime();
+		this.fadeOver = fadeOver;
 		
 		// Be behind fog.
 		setZ(-5);
@@ -105,6 +115,7 @@ public class storm extends interfaceObject {
 	public void doLightning() {
 		
 		// Start lightning
+		if(lastLightning == 0) lastLightning = time.getTime();
 		if(!strikingCurrently && time.getTime() - lastLightning > lightningEvery*1000) {
 			strikingCurrently = true;
 			
@@ -146,8 +157,15 @@ public class storm extends interfaceObject {
 		// Play rain sound
 		if(lastRainSound == 0) {
 			lastRainSound = time.getTime();
-			sound s = new sound(rainSound);
-			s.start();
+			if(fadeOver == 0) {
+				sound s = new sound(rainSound);
+				s.start();
+			}
+			else {
+				sound s = new sound(rainSound, fadeOver);
+				s.start();
+			}
+
 		}
 		
 		else if(time.getTime() - lastRainSound > playEvery*1000) {
@@ -164,27 +182,33 @@ public class storm extends interfaceObject {
 	// Make rain splashes
 	public void makeRainSplashes() {
 		
+		// Fade in.
+		float fadePercent = ((time.getTime() - stormStart + 1)/(fadeOver*1000));
+		if(fadePercent > 1) fadePercent = 1;
+		if(fadeOver == 0) fadePercent = 1;
+		
 		// Splashes
-		if(time.getTime() - lastRainSplash > howOftenToRainSplash*1000) {
-			lastRainSplash = time.getTime();
-			player currPlayer = player.getCurrentPlayer();
-			int middleX = currPlayer.getIntX() + getWidth()/2 - rainSplash.getDefaultWidth()/2;
-			int middleY = currPlayer.getIntY() + getHeight()/2 - rainSplash.getDefaultHeight()/2;
-			int randomX = middleX - (utility.RNG.nextInt(gameCanvas.getDefaultWidth()));
-			int randomY = middleY - (utility.RNG.nextInt(gameCanvas.getDefaultHeight()));
-			rainSplash r = new rainSplash(randomX,randomY);
+		if(fadePercent > 0.2f) {
+			if(time.getTime() - lastRainSplash > (20 - 19*fadePercent)*howOftenToRainSplash*1000) {
+				lastRainSplash = time.getTime();
+				player currPlayer = player.getCurrentPlayer();
+				int middleX = currPlayer.getIntX() + getWidth()/2 - rainSplash.getDefaultWidth()/2;
+				int middleY = currPlayer.getIntY() + getHeight()/2 - rainSplash.getDefaultHeight()/2;
+				int randomX = middleX - (utility.RNG.nextInt(gameCanvas.getDefaultWidth()));
+				int randomY = middleY - (utility.RNG.nextInt(gameCanvas.getDefaultHeight()));
+				rainSplash r = new rainSplash(randomX,randomY);
+			}
 		}
-		
-		
+	
 		// Do rain drops
-		for(int i = 0; i < 7; i++) {
-			player currPlayer = player.getCurrentPlayer();
-			int middleX = currPlayer.getIntX() + getWidth()/2 - rainFall.getDefaultWidth()/2;
-			int middleY = currPlayer.getIntY() + getHeight()/2- rainFall.getDefaultHeight()/2;
-			int randomX = middleX - (utility.RNG.nextInt(gameCanvas.getDefaultWidth()));
-			int randomY = middleY - (utility.RNG.nextInt(gameCanvas.getDefaultHeight()));
-			rainFall f = new rainFall(randomX,randomY);
-		}
+			for(int i = 0; i < 8*fadePercent; i++) {
+				player currPlayer = player.getCurrentPlayer();
+				int middleX = currPlayer.getIntX() + getWidth()/2 - rainFall.getDefaultWidth()/2;
+				int middleY = currPlayer.getIntY() + getHeight()/2- rainFall.getDefaultHeight()/2;
+				int randomX = middleX - (utility.RNG.nextInt(gameCanvas.getDefaultWidth()));
+				int randomY = middleY - (utility.RNG.nextInt(gameCanvas.getDefaultHeight()));
+				rainFall f = new rainFall(randomX,randomY);
+			}
 	}
 	
 	// Delete current fog

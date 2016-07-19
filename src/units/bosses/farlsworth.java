@@ -43,7 +43,7 @@ public class farlsworth extends boss {
 	private static String DEFAULT_UNIT_NAME = "Farlsworth";
 	
 	// Default movespeed.
-	private static int DEFAULT_UNIT_MOVESPEED = 5;
+	private static int DEFAULT_UNIT_MOVESPEED = 4;
 	
 	// Default jump speed
 	private static int DEFAULT_UNIT_JUMPSPEED = 10;
@@ -100,6 +100,7 @@ public class farlsworth extends boss {
 	private static event pastSpawnFarm;
 	private static event pastFlowerPatch;
 	private static event pastTombEntrance;
+	private static event pastTombExit;
 	private static event pastDenmother;
 	
 	// Events that make him like you more TODO:
@@ -107,7 +108,7 @@ public class farlsworth extends boss {
 	private static event didYouLieToHimAboutHavingTheKey; // Did you lie to him about having the gate key?
 	private static event didYouOpenTheGateForHim; // Did you open the fence for him?
 	private static event didYouTryToGrabHim; // You tried to grab him at the flower field.
-	private static event doYouSpeakSheep;
+	private static event doYouSpeakSheep; // Do you speak sheep?
 	
 	///////////////
 	/// METHODS ///
@@ -266,7 +267,7 @@ public class farlsworth extends boss {
 			startOfConversation = new textSeries(null, "Bah.");
 			
 			textSeries conversation1 = startOfConversation.addChild("\'What are you doing?\'", "Bah. Baaah?");
-			textSeries conversation2 = startOfConversation.addChild("\'Give me your wool.\'", "Baah, baah bah?");
+			textSeries conversation2 = startOfConversation.addChild("\'Give me your wool\'", "Baah, baah bah?");
 			
 			textSeries what = conversation1.addChild("\'What?\'", "Baah.");
 			conversation2.addChild(what);
@@ -276,18 +277,18 @@ public class farlsworth extends boss {
 			
 			textSeries who1 = what.addChild(null, "Who are you talking to?");
 			s = bah.addChild(null, "Oh, I didn't know you spoke sheep.");
-			textSeries who2 = s.addChild(null, "Wait, who were you talking to?");
+			textSeries who2 = s.addChild(null, "Wait, who are you talking to?");
 			
 			// Conversation with Ben
 			textSeries ben = who2.addChild(null, "Ben?");
 			who1.addChild(ben);
 			s = ben.addChild(null, "Bah.");
 			s.setTalker("Ben");
-			s = s.addChild(null, "What the frig are you doing here?");
+			s = s.addChild(null, "What are you doing here?");
 			s = s.addChild(null, "This is my adventurer.");
-			s = s.addChild(null, "Get your own.");
+			s = s.addChild(null, "Go find your own.");
 			s = s.addChild(null, "Get your wool together, man.");
-			s = s.addChild(null, "Go home.");
+			s = s.addChild(null, "Go home Ben.");
 			s = s.addChild(null, "Baaaah.");
 			s.setTalker("Ben");
 			s = s.addChild(null, "Sorry about him, he's been going through rough times.");
@@ -296,7 +297,7 @@ public class farlsworth extends boss {
 			s = s.addChild(null, "He'll be fine.");
 			s = s.addChild(null, "You may not be, though.");
 			s = s.addChild(null, "That is, if you're not careful in this tomb.");
-			s = s.addChild(null, "Spooky stuff, in there.");
+			s = s.addChild(null, "There's some spooky stuff in there.");
 			s = s.addChild(null, "If you find yourself afraid of your own shadow ...");
 			s = s.addChild(null, "... just shed some light on it.");
 			s = s.addChild(null, "You'll find that there's nothing to be scared of.");
@@ -710,7 +711,19 @@ public class farlsworth extends boss {
 			}
 			
 		}
+		else if(pastTombExit != null && !pastTombExit.isCompleted()) {
+			
+			// Spawn him at the tomb exit.
+			if(sequencePart == 0 && (p == null || p.size() == 0)) {
+				setFloatX(-745);
+				setFloatY(-3899);
+				setFacingDirection("Right");
+			}
+		}
 		else {
+			System.out.println("GO");
+			
+			// He's no longer in the zone.
 			if(sequencePart == 0 && (p == null || p.size() == 0)) {
 				stopMove("all");
 				setFloatX(-10000);
@@ -786,6 +799,7 @@ public class farlsworth extends boss {
 		pastDenmother = new event("farlsworthPastDenmother");
 		pastFlowerPatch = new event("farlsworthPastFlowerPatch");
 		pastTombEntrance = new event("farlsworthPastTombEntrance");
+		pastTombExit = new event("farlsworthPastTombExit");
 		
 		// Good/bad events
 		didYouOpenTheGateForHim = new event("farlsworthDidYouOpenTheGateForHim");
@@ -829,6 +843,7 @@ public class farlsworth extends boss {
 		System.out.println("farlsworthDidYouTryToGrabHim" + didYouTryToGrabHim.isCompleted());
 		System.out.println("didYouTellHimAboutYourAdventure" + didYouTellHimAboutYourAdventure.isCompleted());
 		System.out.println("didYouLieToHimAboutHavingTheKey" + didYouLieToHimAboutHavingTheKey.isCompleted());
+		System.out.println("didYouSpeakSheep" + doYouSpeakSheep.isCompleted());
 	}
 	
 	// React to pain.
