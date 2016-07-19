@@ -1643,7 +1643,6 @@ public class sheepFarm extends zone {
 		c = new grave(1961,-3931,2);
 		c = new grave(1965,-3823,1);
 		c = new grave(2002,-3744,2);
-		c = new grave(2060,-3826,2);
 		c = new grave(2065,-3917,2);
 		c = new grave(2100,-3968,1);
 		c = new grave(2114,-3714,2);

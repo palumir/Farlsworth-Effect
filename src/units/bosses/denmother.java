@@ -192,7 +192,7 @@ public class denmother extends boss {
 	private float dieTime = 4f;
 	
 	// Wolf movespeed.
-	private int wolfMoveSpeed = 1;
+	private float wolfMoveSpeed = 1;
 	
 	// Clawattack stuff
 	private long lastClawAttackTime = 0;
@@ -851,13 +851,13 @@ public class denmother extends boss {
 				}
 				
 				// Move region.
-				fightRegion.setX(fightRegion.getIntX() + xMove*wolfPack.get(0).getMoveSpeed());
-				fightRegion.setY(fightRegion.getIntY() + yMove*wolfPack.get(0).getMoveSpeed());
+				fightRegion.setFloatX(fightRegion.getFloatX() + xMove*wolfPack.get(0).getMoveSpeed());
+				fightRegion.setFloatY(fightRegion.getFloatY() + yMove*wolfPack.get(0).getMoveSpeed());
 				
 				// Move jumping to X and Y if dog is jumping.
 				if(jumpingToMiddle) {
-					jumpingToX = fightRegion.getIntX() - getWidth()/2 + xMove*wolfPack.get(0).getMoveSpeed();
-					jumpingToY = fightRegion.getIntY() - getHeight()/2 + yMove*wolfPack.get(0).getMoveSpeed();
+					jumpingToX = (int) (fightRegion.getIntX() - getWidth()/2 + xMove*wolfPack.get(0).getMoveSpeed());
+					jumpingToY = (int) (fightRegion.getIntY() - getHeight()/2 + yMove*wolfPack.get(0).getMoveSpeed());
 				}
 				
 				// Move claws.

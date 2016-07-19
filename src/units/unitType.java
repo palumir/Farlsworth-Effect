@@ -45,7 +45,7 @@ public class unitType {
 	private int hitBoxAdjustmentY;
 	
 	// Movespeed
-	private int moveSpeed;
+	private float moveSpeed;
 	
 	// Jumpspeed;
 	private int jumpSpeed;
@@ -55,7 +55,7 @@ public class unitType {
 	///////////////
 	
 	// Constructor
-	public unitType(String newName, spriteSheet newSpriteSheet, animationPack newAnimationPack, int newWidth, int newHeight, int newMoveSpeed, int newJumpSpeed) {
+	public unitType(String newName, spriteSheet newSpriteSheet, animationPack newAnimationPack, int newWidth, int newHeight, float newMoveSpeed, int newJumpSpeed) {
 		
 		// Make the sprite sheet and animations.
 		setUnitTypeSpriteSheet(newSpriteSheet);
@@ -72,7 +72,7 @@ public class unitType {
 	/////////////////////////
 	// Getters and Setters //
 	/////////////////////////
-	public void setMoveSpeed(int i) {
+	public void setMoveSpeed(float i) {
 		moveSpeed = i;
 	}
 	
@@ -92,7 +92,7 @@ public class unitType {
 		this.width = width;
 	}
 
-	public int getMoveSpeed() {
+	public float getMoveSpeed() {
 		return moveSpeed;
 	}
 

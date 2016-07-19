@@ -122,10 +122,12 @@ public class interactBox extends interfaceObject  {
 					g.setFont(DEFAULT_FONT_TITLE);
 					
 					// Display the name of the person or thing talking/interacting
-					g.drawString(whoIsTalking,
+					String theTalker = getTheText().getTalker();
+					if(theTalker == null) theTalker = whoIsTalking;
+					g.drawString(theTalker,
 							(int)(gameCanvas.getScaleX()*getIntX()) + 
 							(int)(gameCanvas.getScaleX()*background.getWidth()/2) - 
-							g.getFontMetrics().stringWidth(whoIsTalking)/2,
+							g.getFontMetrics().stringWidth(theTalker)/2,
 							(int)(gameCanvas.getScaleY()*getIntY()) + 
 							(int)(gameCanvas.getScaleY()*background.getHeight()/5) + 
 							(int)(gameCanvas.getScaleY()*4));
@@ -237,41 +239,45 @@ public class interactBox extends interfaceObject  {
 		}
 		
 		// If there's children.
-		else if(theText.getChildren() != null && theText.getChildren().size() > 0) {
-			
-			// If we are currently in text mode.
-			if(textMode) {
-				
-				// If there's only one thing, assume it's just more text.
-				if(theText.getChildren().size() == 1 && theText.getChildren().get(0).getButtonText() == null) {
-					selectedButton = 0;
-					theText = theText.getChildren().get(0);
-				}
-			
-				// Otherwise, there will be buttons to select from. Go to button mode.
-				else {
-					buttonMode = true;
-					textMode = false;
-				}
-				
-				// Reset the text.
-				displayedText = "";
-			}
-			
-			// If we're in button mode.
-			else if(buttonMode) {
-				
-				// Select the button.
-				theText = theText.getChildren().get(selectedButton);
-				buttonMode = false;
-				textMode = true;
-				selectedButton = 0;
-			}
+		else if(!isLocked() && theText.getChildren() != null && theText.getChildren().size() > 0) {
+			goToNext();
 		}
 		
 		// It's the end of an interaction. Exit. Caller should deal with the end.
 		else if(theText.isEnd()) {
 			if(!unescapable) toggleDisplay();
+		}
+	}
+	
+	// Go to next
+	public void goToNext() {
+		// If we are currently in text mode.
+		if(textMode) {
+			
+			// If there's only one thing, assume it's just more text.
+			if(theText.getChildren().size() == 1 && theText.getChildren().get(0).getButtonText() == null) {
+				selectedButton = 0;
+				theText = theText.getChildren().get(0);
+			}
+		
+			// Otherwise, there will be buttons to select from. Go to button mode.
+			else {
+				buttonMode = true;
+				textMode = false;
+			}
+			
+			// Reset the text.
+			displayedText = "";
+		}
+		
+		// If we're in button mode.
+		else if(buttonMode) {
+			
+			// Select the button.
+			theText = theText.getChildren().get(selectedButton);
+			buttonMode = false;
+			textMode = true;
+			selectedButton = 0;
 		}
 	}
 	
@@ -302,36 +308,34 @@ public class interactBox extends interfaceObject  {
 	// Respond to key press.
 	public void respondToKeyPress(KeyEvent k) {
 		
-		if(!isLocked()) {
-			// Player presses esc (inventory) key.
-			if(k.getKeyCode() == KeyEvent.VK_ESCAPE) { 
-				if(!unescapable) toggleDisplay();
-			}
-			
-			// Player presses left key.
-			if(k.getKeyCode() == KeyEvent.VK_A) { 
-				moveSelect("left");
-			}
-			
-			// Player presses right key.
-			if(k.getKeyCode() == KeyEvent.VK_D) { 
-				moveSelect("right");
-			}
-			
-			// Player presses up key
-			if(k.getKeyCode() == KeyEvent.VK_W) { 
-				//moveSelect("up");
-			}
-			
-			// Player presses down key
-			if(k.getKeyCode() == KeyEvent.VK_S) { 
-				//moveSelect("down");
-			}
-			
-			// Player presses e key.
-			if(k.getKeyCode() == KeyEvent.VK_SPACE || k.getKeyCode() == KeyEvent.VK_ENTER || k.getKeyCode() == KeyEvent.VK_E) { 
-				select();
-			}
+		// Player presses esc (inventory) key.
+		if(k.getKeyCode() == KeyEvent.VK_ESCAPE) { 
+			if(!isLocked() && !unescapable) toggleDisplay();
+		}
+		
+		// Player presses left key.
+		if(k.getKeyCode() == KeyEvent.VK_A) { 
+			if(!isLocked()) moveSelect("left");
+		}
+		
+		// Player presses right key.
+		if(k.getKeyCode() == KeyEvent.VK_D) { 
+			if(!isLocked()) moveSelect("right");
+		}
+		
+		// Player presses up key
+		if(k.getKeyCode() == KeyEvent.VK_W) { 
+			//moveSelect("up");
+		}
+		
+		// Player presses down key
+		if(k.getKeyCode() == KeyEvent.VK_S) { 
+			//moveSelect("down");
+		}
+		
+		// Player presses e key.
+		if(k.getKeyCode() == KeyEvent.VK_SPACE || k.getKeyCode() == KeyEvent.VK_ENTER || k.getKeyCode() == KeyEvent.VK_E) { 
+			select();
 		}
 	}
 	
