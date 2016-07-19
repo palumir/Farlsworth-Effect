@@ -21,7 +21,7 @@ public class animation {
 	
 	// The time it takes to complete the animation.
 	private float timeToComplete; // in seconds
-	private long currentFrameTime = 0; // in milliseconds
+	private long startTime; // in milliseconds
 	
 	// Where are we in the animation?
 	private int currentSprite;
@@ -42,24 +42,26 @@ public class animation {
 		setSprites(newSprites);
 	}
 	
+	// Start animation
+	public void startAnimation() {
+		startTime = 0;
+	}
+	
 	// Play animation.
 	public void playAnimation() { 
 			
-		// Advance animation if the correct amount of time has elapsed.
-		if(currentFrameTime == 0) currentFrameTime = time.getTime();
-		else if(time.getTime() - currentFrameTime >= timeToComplete*1000/(endFrame - getStartFrame() + 1)) {
-			
-			// Advance the timer and the sprite.
-			currentFrameTime = time.getTime();
-		
-			// Have we reached the end?
-			if(getCurrentSprite() + 1 > endFrame) {
-					setCurrentSprite(getStartFrame());
-			}
-			else {
-				setCurrentSprite(getCurrentSprite() + 1);
-			}
+		// Get the correct current frame.
+		if(startTime == 0) startTime = time.getTime();
+		int howMuchTimeHasElapsed = (int) (time.getTime() - startTime);
+		int howMuchTimePerFrame = (int) (timeToComplete*1000/((endFrame + 1) - getStartFrame()));
+		int correctFrame = getStartFrame() + howMuchTimeHasElapsed/howMuchTimePerFrame;
+		if(correctFrame>endFrame) {
+			startTime = time.getTime();
+			correctFrame = getStartFrame();
 		}
+		
+		// Set animation
+		setCurrentSprite(correctFrame);
 	}
 	
 	///////////////////////////

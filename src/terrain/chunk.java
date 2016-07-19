@@ -113,6 +113,85 @@ public class chunk extends drawnObject {
 	}
 	
 	// Check if a unit collides with any chunk. Returns by how much.
+		public static chunk getGroundChunk(drawnObject u, int newX, int newY) {
+			
+			// Check if it collides in x or y position.
+			boolean tX = false;
+			boolean tY = false;
+			
+			// Get x interval on left. (where foundX < ourChunkX - largestChunkWidth)
+			int i1 = 0;
+			int L = 0;
+			int R = impassableChunks.size()-1;
+			int T = newX - largestChunkWidth;
+			int Am = 0;
+			while(true) {
+				int m = (L+R)/2;
+				Am = impassableChunks.get(m).getIntX();
+				if(Am < T) {
+					if(m+1>R) {
+						i1 = L;
+						break;
+					}
+					L = m + 1;
+				}
+				else if(Am > T) {
+					if(L > m - 1) {
+						i1 = L;
+						break;
+					}
+					R = m - 1;
+				}
+				else {
+					i1 = m; // Found it exactly.
+					break;
+				}
+			}
+			
+			// Get x interval on right. (where foundX > ourChunkX + ourChunk.width)
+			int i2 = 0;
+			L = 0;
+			R = impassableChunks.size()-1;
+			T = newX + u.getWidth();
+			Am = 0;
+			while(true) {
+				int m = (L+R)/2;
+				Am = impassableChunks.get(m).getIntX();
+				if(Am < T) {
+					if(m+1>R) {
+						i2 = R;
+						break;
+					}
+					L = m + 1;
+				}
+				else if(Am > T) {
+					if(L > m - 1) {
+						i2 = R;
+						break;
+					}
+					R = m - 1;
+				}
+				else {
+					i2 = m; // Found it exactly.
+					break;
+				}
+			}
+			
+			chunk currChunk = null;
+			// Check between our interval
+			for(;i1 <= i2; i1++) {
+				currChunk = impassableChunks.get(i1);
+				if(u.collides(u.getIntX(), newY,currChunk)) {
+					tY = true;
+					break;
+				}
+			}
+			
+			if(tY) return currChunk;
+			else return null;
+		}
+	
+	// Check if a unit collides with any chunk. Returns by how much.
 	public static intTuple collidesWith(drawnObject u, int newX, int newY) {
 		
 		// Check if it collides in x or y position.

@@ -72,9 +72,6 @@ public class player extends unit {
 	// Default HP
 	private static int DEFAULT_PLAYER_HP = 6;
 	
-	// Default jump speed
-	private static int DEFAULT_PLAYER_JUMPSPEED = 10;
-	
 	// Player sprite stuff.
 	private static String DEFAULT_PLAYER_SPRITESHEET = "images/units/player/" + DEFAULT_PLAYER_GENDER + "/noItems.png";
 	
@@ -105,7 +102,7 @@ public class player extends unit {
 				"player",  // Name of unitType 
 				 DEFAULT_PLAYER_SPRITESHEET,
 			     DEFAULT_PLAYER_MOVESPEED, // Movespeed
-			     DEFAULT_PLAYER_JUMPSPEED // Jump speed
+			     (int) unit.DEFAULT_JUMPSPEED // Jump speed
 				);	   
 	
 	////////////////

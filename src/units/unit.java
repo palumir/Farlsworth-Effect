@@ -34,6 +34,7 @@ import utilities.mathUtils;
 import utilities.time;
 import utilities.utility;
 import units.unitTypes.farmLand.tomb.lightDude;
+import units.unitTypes.farmLand.tomb.shadowDude;
 
 public abstract class unit extends drawnObject  { 
 	
@@ -50,9 +51,9 @@ public abstract class unit extends drawnObject  {
 	
 	// Gravity defaults.
 	private static boolean DEFAULT_GRAVITY_STATE = false;
-	private static float DEFAULT_GRAVITY_ACCELERATION = 0.4f;
+	private static float DEFAULT_GRAVITY_ACCELERATION = 0.46f;
 	private static float DEFAULT_GRAVITY_MAX_VELOCITY = 20;
-	private static float DEFAULT_JUMPSPEED = 8;
+	protected static float DEFAULT_JUMPSPEED = 11;
 	
 	// Animation defaults.
 	private String DEFAULT_FACING_DIRECTION = "Right";
@@ -164,10 +165,6 @@ public abstract class unit extends drawnObject  {
 	protected String facingDirection = DEFAULT_FACING_DIRECTION;
 	protected boolean collisionOn = true;
 	
-	// How close is close enough (to a point)?
-	protected int closeEnoughFactor = 3;
-	protected int closeEnough = (int) (closeEnoughFactor*moveSpeed);
-	
 	// Quests
 	private chunk questIcon = null;
 	
@@ -197,10 +194,6 @@ public abstract class unit extends drawnObject  {
 	
 	// Next point.
 	private intTuple currPoint;
-	
-	// Ignore collision start
-	private long ignoreCollisionPeriodStart = 0;
-	private float ignoreCollisionPeriod = 0;
 	
 	// Knockbacks
 	private long knockBackStart = 0;
@@ -255,7 +248,6 @@ public abstract class unit extends drawnObject  {
 	@Override
 	public void update() {
 		
-		if(getCurrentAnimation() != null) getCurrentAnimation().playAnimation();
 		gravity();
 		jump();
 		moveUnit();
@@ -263,6 +255,7 @@ public abstract class unit extends drawnObject  {
 		combat();
 		aliveOrDead();
 		updateUnit();
+		if(getCurrentAnimation() != null) getCurrentAnimation().playAnimation();
 	}
 	
 	// Check if united is illuminated
@@ -282,13 +275,13 @@ public abstract class unit extends drawnObject  {
 		// If we are patrolling, patrol
 		if(patrolling && !patrollingPath) {
 			if(!movingBack) {
-				if(!isMoving()) {
+				if(Math.abs(startX - getIntX()) <= moveSpeed + 1 && Math.abs(startY - getIntY()) <= moveSpeed + 1) {
 					moveTo(patrolX, patrolY);
 					movingBack = true;
 				}
 			}
 			else {
-				if(!isMoving()) {
+				if(Math.abs(patrolX - getIntX()) <= moveSpeed + 1 && Math.abs(patrolY - getIntY()) <= moveSpeed + 1) {
 					moveTo(startX, startY);
 					movingBack = false;
 				}
@@ -938,7 +931,7 @@ public abstract class unit extends drawnObject  {
 					currPoint = path.get(0);
 					path.remove(0);
 				}
-				else if(!(Math.abs(currPoint.x - getIntX()) > closeEnough || Math.abs(currPoint.y - getIntY()) > closeEnough)) {
+				else if(!(Math.abs(currPoint.x - getIntX()) > moveSpeed + 1 || Math.abs(currPoint.y - getIntY()) > moveSpeed+1)) {
 					moveTo(path.get(0).x, path.get(0).y);
 					currPoint = path.get(0);
 					path.remove(0);
@@ -1073,11 +1066,20 @@ public abstract class unit extends drawnObject  {
 	// Unit has touched down.
 	public void touchDown() {
 		
-		// They can jump again if they've touched down.
+		// Hold the fall speed but set the current to be 0.
+		float oldFallSpeed = fallSpeed;
 		fallSpeed = 0;
+		
+		// If they've touched down, place them closer to the ground.
+		chunk ground = chunk.getGroundChunk(this, (int)getFloatX(), (int)(getFloatY() + oldFallSpeed));
+		if(ground != null) {
+			fallSpeed = fallSpeed - (ground.getIntY() - (getIntY() + oldFallSpeed + getHeight()));
+		}
+		
+		// They can jump again if they've touched down.
 		jumping = false;
 		touchingGround = true;
-		inAir = false;
+		inAir = fallSpeed == 0;
 	}
 	
 	// Move function
@@ -1099,13 +1101,14 @@ public abstract class unit extends drawnObject  {
 				// Check if it collides with a chunk in the x or y plane.
 				intTuple xyCollide = chunk.collidesWith(this, (int)(getFloatX() + moveX), (int)(getFloatY() + moveY));
 				intTuple leftRegion = region.leftRegion(this, (int)(getFloatX() + moveX),(int)(getFloatY() + moveY));
-				if((xyCollide.x == 1 || leftRegion.x == 1)) {
+				if((xyCollide.x != 0 || leftRegion.x != 0)) {
 					pathFindingStuck = true;
-					actualMoveX = 0;
+					if(xyCollide.x!=0) actualMoveX = 0;
+					if(leftRegion.x!=0) actualMoveX = 0;
 				}
 				
 				// Lots more to check for platformer mode.
-				if((xyCollide.y == 1 || leftRegion.y == 1)) {
+				if((xyCollide.y != 0 || leftRegion.y != 0)) {
 					
 					// Yes, we're stuck.
 					pathFindingStuck = true;
@@ -1125,7 +1128,8 @@ public abstract class unit extends drawnObject  {
 					}
 					
 					// Don't move the object.
-					actualMoveY = 0;
+					if(xyCollide.y!=0) actualMoveY = 0;
+					if(leftRegion.y!=0) actualMoveY = 0;
 				}
 				
 				// If we are moving in the y direction, but are not touching down.
@@ -1227,7 +1231,7 @@ public abstract class unit extends drawnObject  {
 	public void dealWithAnimations(int moveX, int moveY) {
 		
 		// topDown mode movement animations.
-		if(mode.getCurrentMode() == "topDown") {
+		if(mode.getCurrentMode().equals("topDown")) {
 			if(isAttacking() && !isAlreadyAttacked()) {
 				// Play animation.
 				animate("attacking" + facingDirection);
@@ -1241,7 +1245,7 @@ public abstract class unit extends drawnObject  {
 		}
 		
 		// platformer movement animations.
-		if(mode.getCurrentMode() == "platformer") {
+		if(mode.getCurrentMode().equals("platformer")) {
 			if(isAttacking() && !isAlreadyAttacked()) {
 				// Play animation.
 				animate("attacking" + facingDirection);
@@ -1273,12 +1277,19 @@ public abstract class unit extends drawnObject  {
 			if(a != null) {
 				
 				// Reset the frame if it's a new animation.
-				if(getCurrentAnimation() != null && getCurrentAnimation() != a) {
-					getCurrentAnimation().setCurrentSprite(getCurrentAnimation().getStartFrame());
+				if(getCurrentAnimation() != null) {
+					if(!getCurrentAnimation().getName().equals(a.getName())) { 
+						a.startAnimation();
+					}
+					
+					// Set the animation.
+					setCurrentAnimation(a);
 				}
 				
-				// Set the animation.
-				setCurrentAnimation(a);
+				// No animation yet.
+				else if(getCurrentAnimation()==null) {
+					setCurrentAnimation(a);
+				}
 			}
 		}
 	}
@@ -1439,7 +1450,7 @@ public abstract class unit extends drawnObject  {
 		boolean movingUpAndDown = isMovingUp() && isMovingDown();
 		boolean movingHorizontally = (isMovingLeft() || isMovingRight()) && !movingLeftAndRight;
 		boolean movingVertically = (isMovingUp() || isMovingDown()) && !movingUpAndDown;
-		return movingVertically || movingHorizontally || movingToAPoint || followingUnit;
+		return movingVertically || movingHorizontally || movingToAPoint || followingUnit || followingAPath || patrolling;
 	}
 	
 	public void setCollision(boolean b) {
@@ -1535,7 +1546,6 @@ public abstract class unit extends drawnObject  {
 
 	public void setMoveSpeed(float f) {
 		this.moveSpeed = f;
-		closeEnough = (int) (closeEnoughFactor*f);
 	}
 
 	public static ArrayList<unit> getAllUnits() {

@@ -43,7 +43,7 @@ public class farlsworth extends boss {
 	private static String DEFAULT_UNIT_NAME = "Farlsworth";
 	
 	// Default movespeed.
-	private static int DEFAULT_UNIT_MOVESPEED = 4;
+	private static float DEFAULT_UNIT_MOVESPEED = 4.5f;
 	
 	// Default jump speed
 	private static int DEFAULT_UNIT_JUMPSPEED = 10;
