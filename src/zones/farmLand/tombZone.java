@@ -177,17 +177,96 @@ public class tombZone extends zone {
 		c = new wallTorch(410,-40);
 		u = new shadowDude(350,-6);
 		u.patrolTo(455, -6);
+		u.setMoveSpeed(3);
 		
 		// Second floor
 		spawnTombRect(550,40,1000,791,"ground");
 		c = new wallTorch(617,-40);
 		c = new wallTorch(928,-40);
-		u = new shadowDude(555,-6);
-		u.patrolTo(979, -6);
 		
-		c = new well(3421,5,0);
-	}
+		for(int i=0; i <2; i++) {
+			u = new shadowDude(555,-6 - i*50);
+			u.patrolTo (970,-6 - i*50);
+			u.setMoveSpeed(3);
+		}
+		
+		// Third floor
+		spawnTombRect(1080,40,2380,791,"ground");
+		
+		c = new wallTorch(1141,-40);
+		
+		for(int i=0; i <2; i++) {
+			u = new shadowDude(1500,-6 - i*50);
+			u.patrolTo (1080,-6 - i*50);
+			u.setMoveSpeed(3);
+		}	
+			
+		c = new wallTorch(1523,-40);
+		
+		for(int i=0; i <3; i++) {
+			u = new shadowDude(1750,-6 - i*50);
+			path = new ArrayList<intTuple>();
+			path.add(new intTuple(1523,-6 - i*50));
+			path.add(new intTuple(1880,-6 - i*50));
+			u.patrolPath(path);
+			u.setMoveSpeed(4);
+		}
+		
+		c = new wallTorch(1905,-40);
+		
+		for(int i=0; i <2; i++) {
+			u = new shadowDude(2150,-6 - i*50);
+			path = new ArrayList<intTuple>();
+			path.add(new intTuple(1905,-6 - i*50));
+			path.add(new intTuple(2325,-6 - i*50));
+			u.patrolPath(path);
+			u.setMoveSpeed(3);
+		}	
+		
+		c = new wallTorch(2287,-40);
+		
+		// Fourth floor
+		spawnTombRect(2460,40,4160,791,"ground");
+		
+		c = new wallTorch(2525,-40);
+		
+		for(int i=0; i <3; i++) {
+			u = new shadowDude(2800,-6 - i*50);
+			path = new ArrayList<intTuple>();
+			path.add(new intTuple(2525,-6 - i*50));
+			path.add(new intTuple(3285,-6 - i*50));
+			u.patrolPath(path);
+			u.setMoveSpeed(5);
+		}
+		
+		u = new lightDude(2603,-6);
+		u.patrolTo(3300, -6);
+		u.setMoveSpeed(3);
+		
+		c = new wallTorch(3311,-40);
+		
+		for(int i=0; i <3; i++) {
+			u = new shadowDude(3700,-6 - i*50);
+			path = new ArrayList<intTuple>();
+			path.add(new intTuple(3311,-6 - i*50));
+			path.add(new intTuple(4075,-6 - i*50));
+			u.patrolPath(path);
+			u.setMoveSpeed(5);
+		}
+		
+		u = new lightDude(3388,-6);
+		u.patrolTo(4085, -6);
+		u.setMoveSpeed(3);
+		
+		c = new wallTorch(4097,-40);
+		
+		
+		
+		
+		
+		//c = new well(3421,5,0);
 	
+	}
  
 
 	// Get the player location in the zone.
