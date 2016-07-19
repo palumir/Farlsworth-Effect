@@ -172,6 +172,7 @@ public class tombZone extends zone {
 		spawnTombRect(7000,-750,7000,1000,"rightWall");
 		
 		// First floor
+
 		spawnTombRect(350,40,500,791,"ground");
 		c = new wallTorch(410,-40);
 		u = new shadowDude(350,-6);

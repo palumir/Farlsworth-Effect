@@ -192,7 +192,7 @@ public class denmother extends boss {
 	private float dieTime = 4f;
 	
 	// Wolf movespeed.
-	private int wolfMoveSpeed = 1;
+	private float wolfMoveSpeed = 1;
 	
 	// Clawattack stuff
 	private long lastClawAttackTime = 0;
@@ -430,7 +430,7 @@ public class denmother extends boss {
 		if(dying == true) {
 			// Run wolves away.
 			for(int i = 0; i < wolfPack.size(); i++) {
-				wolfPack.get(i).moveTowards(originalPoints.get(i).x,originalPoints.get(i).y);
+				wolfPack.get(i).moveTo(originalPoints.get(i).x,originalPoints.get(i).y);
 			}
 			
 			// Remove claws.
@@ -752,7 +752,7 @@ public class denmother extends boss {
 				// Move inward until at the outskirts of the region.
 				for(int i = 0; i < wolfPack.size(); i++) {
 					if(!fightRegion.contains(wolfPack.get(i))) {
-						wolfPack.get(i).moveTowards(wolfPackPoints.get(i).x, wolfPackPoints.get(i).y);
+						wolfPack.get(i).moveTo(wolfPackPoints.get(i).x, wolfPackPoints.get(i).y);
 					}
 					else {
 						wolfPack.get(i).stopMove("all");
@@ -851,13 +851,13 @@ public class denmother extends boss {
 				}
 				
 				// Move region.
-				fightRegion.setX(fightRegion.getIntX() + xMove*wolfPack.get(0).getMoveSpeed());
-				fightRegion.setY(fightRegion.getIntY() + yMove*wolfPack.get(0).getMoveSpeed());
+				fightRegion.setFloatX(fightRegion.getFloatX() + xMove*wolfPack.get(0).getMoveSpeed());
+				fightRegion.setFloatY(fightRegion.getFloatY() + yMove*wolfPack.get(0).getMoveSpeed());
 				
 				// Move jumping to X and Y if dog is jumping.
 				if(jumpingToMiddle) {
-					jumpingToX = fightRegion.getIntX() - getWidth()/2 + xMove*wolfPack.get(0).getMoveSpeed();
-					jumpingToY = fightRegion.getIntY() - getHeight()/2 + yMove*wolfPack.get(0).getMoveSpeed();
+					jumpingToX = (int) (fightRegion.getIntX() - getWidth()/2 + xMove*wolfPack.get(0).getMoveSpeed());
+					jumpingToY = (int) (fightRegion.getIntY() - getHeight()/2 + yMove*wolfPack.get(0).getMoveSpeed());
 				}
 				
 				// Move claws.
@@ -870,7 +870,7 @@ public class denmother extends boss {
 				
 				// Move wolves.
 				for(int i = 0; i < wolfPack.size(); i++) {
-					wolfPack.get(i).moveTowards(wolfPackPoints.get(i).x, wolfPackPoints.get(i).y);
+					wolfPack.get(i).moveTo(wolfPackPoints.get(i).x, wolfPackPoints.get(i).y);
 				}
 			}
 		}

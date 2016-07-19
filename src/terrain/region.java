@@ -14,15 +14,11 @@ public class region extends drawnObject {
 	public static region playerTrappedWithin = null;
 	
 	// Fields
-	private int x;
-	private int y;
 	private int radius;
 	
 	// Circular
 	public region(int newX, int newY, int newRadius) {
 		super(null,newX,newY,newRadius, newRadius);
-		setX(newX);
-		setY(newY);
 		setRadius(newRadius);
 	}
 	
@@ -71,22 +67,6 @@ public class region extends drawnObject {
 
 	public void setRadius(int radius) {
 		this.radius = radius;
-	}
-
-	public int getIntX() {
-		return x;
-	}
-
-	public void setX(int x) {
-		this.x = x;
-	}
-
-	public int getIntY() {
-		return y;
-	}
-
-	public void setY(int y) {
-		this.y = y;
 	}
 
 	@Override

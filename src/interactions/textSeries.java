@@ -7,6 +7,7 @@ public class textSeries {
 	/////////////////////
 	////// FIELDS ///////
 	/////////////////////
+	private String talker = null;
 	private String buttonText; // If there's no button, just display textOnPress and go next.
 	private String textOnPress;
 	private textSeries parent = null;
@@ -87,5 +88,13 @@ public class textSeries {
 
 	public void setEnd(textSeries end) {
 		this.end = end;
+	}
+
+	public String getTalker() {
+		return talker;
+	}
+
+	public void setTalker(String talker) {
+		this.talker = talker;
 	}
 }

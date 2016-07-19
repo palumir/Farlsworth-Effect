@@ -253,10 +253,6 @@ public class redWolf extends wolf {
 			for(int i = 0; i < chargeUnits.size(); i++) {
 				if(chargeUnits.get(i) instanceof player) {
 					chargeUnits.get(i).stopMove("all");
-					if(!alreadyHurt) {
-						alreadyHurt = true;
-						chargeUnits.get(i).hurt(SLASH_DAMAGE, 1f);
-					}
 					chargeUnits.get(i).move(run,rise);
 					chargeUnits.get(i).setUnitLocked(true);
 				}
@@ -273,6 +269,17 @@ public class redWolf extends wolf {
 		if(chargeUnits != null && chargeUnits.size() >= 1) {
 			for(int i = 0; i < chargeUnits.size(); i++) {
 				chargeUnits.get(i).setUnitLocked(false);
+			}
+			for(int i = 0; i < chargeUnits.size(); i++) {
+				if(chargeUnits.get(i) instanceof player) {
+					chargeUnits.get(i).stopMove("all");
+					if(!alreadyHurt) {
+						alreadyHurt = true;
+						chargeUnits.get(i).hurt(SLASH_DAMAGE, 1f);
+					}
+					chargeUnits.get(i).move(run,rise);
+					chargeUnits.get(i).setUnitLocked(true);
+				}
 			}
 			chargeUnits = new ArrayList<unit>();
 		}

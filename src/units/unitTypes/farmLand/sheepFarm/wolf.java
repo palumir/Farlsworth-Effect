@@ -545,15 +545,15 @@ public abstract class wolf extends unit {
 					if(isInAttackRange(currPlayer, 0) && time.getTime() - lastClawAttack > clawAttackEvery*1000) {
 							clawAttackEvery = clawAttackEveryBase + 0.1f*(float)utility.RNG.nextInt(5);
 							lastClawAttack = time.getTime();
-							stopMove("all");
+							unfollow();
 							clawAttack(currPlayer);
 					}
 					else {
-						if(howClose > followUntilRange) {
+						if(!followingUnit && howClose > followUntilRange) {
 							follow(currPlayer);
 						}
-						else {
-							stopMove("all");
+						else if(howClose <= followUntilRange) {
+							unfollow();
 						}
 					}
 				}
@@ -561,7 +561,7 @@ public abstract class wolf extends unit {
 			else if(aggrod && howClose > DEFAULT_DEAGGRO_RADIUS) {
 				aggrod = false;
 				exitCombatWith(currPlayer);
-				stopMove("all");
+				unfollow();
 			}
 			
 			// Even dosile wolves attack if provoked.

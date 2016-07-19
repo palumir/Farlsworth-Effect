@@ -26,7 +26,7 @@ public class humanType extends unitType {
 	/// METHODS ///
 	///////////////
 	
-	public humanType(String newName, String spriteSheetLocation, int newMoveSpeed, int newJumpSpeed) {
+	public humanType(String newName, String spriteSheetLocation, float newMoveSpeed, int newJumpSpeed) {
 		super(newName, 
 				new spriteSheet(new spriteSheetInfo(
 				spriteSheetLocation, 

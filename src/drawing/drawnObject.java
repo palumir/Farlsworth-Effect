@@ -329,26 +329,6 @@ public abstract class drawnObject {
 				
 				if(d.isDrawObject()) {
 					
-					// Get the correct sprite width and height.
-					int spriteWidth = 0;
-					int spriteHeight = 0;
-					if(d instanceof unit && ((unit)d).getCurrentAnimation() != null) {
-						spriteWidth = ((unit)d).getCurrentAnimation().getCurrentFrame().getWidth();
-						spriteHeight = ((unit)d).getCurrentAnimation().getCurrentFrame().getHeight();
-					}
-					else if(d.getObjectSpriteSheet() != null) {
-						spriteWidth = d.getObjectSpriteSheet().getSpriteWidth();
-						spriteHeight = d.getObjectSpriteSheet().getSpriteHeight();
-					}
-					else if(d.getObjectImage() != null) {
-						spriteWidth = d.getObjectImage().getWidth();
-						spriteHeight = d.getObjectImage().getHeight();
-					}
-					else if(d instanceof item && ((item)d).getImage() != null) {
-						spriteWidth =((item)d).getImage().getWidth();
-						spriteHeight =((item)d).getImage().getHeight();
-					}
-					
 					 // Adjust.
 					 d.setDrawX(calculateDrawX(d, d.getIntX()));
 					 d.setDrawY(calculateDrawY(d, d.getIntY()));
@@ -356,15 +336,39 @@ public abstract class drawnObject {
 					// Draw the object if it's on the screen.
 					if(d instanceof tooltipString ||
 						d instanceof interfaceObject ||
-					   (d.getDrawX() + gameCanvas.getScaleX()*spriteWidth > 0 && 
-					   d.getDrawY() + gameCanvas.getScaleY()*spriteHeight > 0 && 
-					   d.getDrawX() < gameCanvas.getActualWidth() && 
-					   d.getDrawY() < gameCanvas.getActualHeight())) {
+					   d.isOnScreen()) {
 						d.drawObject(g);
 					}
 				}
 			}
 		}
+	}
+	
+	// Is on screen?
+	public boolean isOnScreen() {
+		// Get the correct sprite width and height.
+		int spriteWidth = 0;
+		int spriteHeight = 0;
+		if(this instanceof unit && ((unit)this).getCurrentAnimation() != null) {
+			spriteWidth = ((unit)this).getCurrentAnimation().getCurrentFrame().getWidth();
+			spriteHeight = ((unit)this).getCurrentAnimation().getCurrentFrame().getHeight();
+		}
+		else if(this.getObjectSpriteSheet() != null) {
+			spriteWidth = this.getObjectSpriteSheet().getSpriteWidth();
+			spriteHeight = this.getObjectSpriteSheet().getSpriteHeight();
+		}
+		else if(this.getObjectImage() != null) {
+			spriteWidth = this.getObjectImage().getWidth();
+			spriteHeight = this.getObjectImage().getHeight();
+		}
+		else if(this instanceof item && ((item)this).getImage() != null) {
+			spriteWidth =((item)this).getImage().getWidth();
+			spriteHeight =((item)this).getImage().getHeight();
+		}
+		return (this.getDrawX() + gameCanvas.getScaleX()*spriteWidth > 0 && 
+				   this.getDrawY() + gameCanvas.getScaleY()*spriteHeight > 0 && 
+				   this.getDrawX() < gameCanvas.getActualWidth() && 
+				   this.getDrawY() < gameCanvas.getActualHeight());
 	}
 	
 	// Returns a tuple containing pertaining to how much the object would

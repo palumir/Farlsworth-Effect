@@ -193,7 +193,6 @@ public abstract class projectile extends effect {
 		// Calculate run values.
 		float floatRun = ((xDistance/distanceXY)*getMoveSpeed());
 		run = floatRun;
-		
 	}
 	
 	// Update unit

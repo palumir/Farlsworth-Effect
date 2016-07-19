@@ -27,6 +27,7 @@ import sounds.sound;
 import terrain.chunk;
 import terrain.region;
 import units.bosses.denmother;
+import units.bosses.farlsworth;
 import units.unitTypes.farmLand.sheepFarm.yellowWolf;
 import utilities.intTuple;
 import utilities.mathUtils;
@@ -155,7 +156,7 @@ public abstract class unit extends drawnObject  {
 	private ArrayList<movementBuff> movementBuffs = new ArrayList<movementBuff>();
 	
 	// Movement
-	protected int moveSpeed = DEFAULT_UNIT_MOVESPEED;
+	protected float moveSpeed = DEFAULT_UNIT_MOVESPEED;
 	private boolean movingLeft = false;
 	private boolean movingRight = false;
 	private boolean movingDown = false;
@@ -165,7 +166,7 @@ public abstract class unit extends drawnObject  {
 	
 	// How close is close enough (to a point)?
 	protected int closeEnoughFactor = 3;
-	protected int closeEnough = closeEnoughFactor*moveSpeed;
+	protected int closeEnough = (int) (closeEnoughFactor*moveSpeed);
 	
 	// Quests
 	private chunk questIcon = null;
@@ -173,10 +174,10 @@ public abstract class unit extends drawnObject  {
 	// Sprite stuff.
 	private animationPack animations;
 	private animation currentAnimation = null;
-
 	
 	// Followed unit
 	protected unit followedUnit = null;
+	protected boolean followingUnit = false;
 	
 	// Where are we moving to?
 	protected int moveToX = 0;
@@ -319,7 +320,6 @@ public abstract class unit extends drawnObject  {
 		startX = this.getIntX();
 		startY = this.getIntY();
 		p.add(new intTuple(startX, startY));
-		System.out.println(p);
 		patrolPath = p;
 	}
 	
@@ -665,6 +665,7 @@ public abstract class unit extends drawnObject  {
 	
 	// Check if a unit is within 
 	public boolean isWithin(int x1, int y1, int x2, int y2) {
+		if(this instanceof developer) return false;
 		return getIntX() < x2 && 
 		 getIntX() + getWidth() > x1 && 
 		 getIntY() + getHitBoxAdjustmentY() < y2 && 
@@ -830,8 +831,17 @@ public abstract class unit extends drawnObject  {
 	
 	// Follow a unit.
 	public void follow(unit u) {
+		
+		// Set following
+		followingUnit = true;
 		followedUnit = u;
-		moveTowards(u.getIntX(), u.getIntY());
+	}
+	
+	// Unfollow
+	public void unfollow() {
+		stopMove("all");
+		followingUnit = false;
+		followedUnit = null;
 	}
 	
 	// Move to
@@ -839,32 +849,72 @@ public abstract class unit extends drawnObject  {
 		movingToAPoint = true;
 		moveToX = newX;
 		moveToY = newY;
+		
+		// Set rise/run
+		setRiseRun();
 	}
 	
-	// Move towards a spot.
-	public void moveTowards(int moveX, int moveY) {
-		
-		// Reset movement.
-		stopMove("all");
-		
-		// If we are there, stop.
-		if(Math.abs(getIntX() - moveX) <= moveSpeed &&  Math.abs(getIntY() - moveY) <= moveSpeed + 1) {
-			// Don't move.
+	// Move towards a point
+	public void moveTowards() {
+		if(movingToAPoint && Math.abs(moveToX - getFloatX()) < getMoveSpeed() && Math.abs(moveToY - getFloatY()) < getMoveSpeed()) {
+			movingToAPoint = false;
 		}
 		else {
-			
-			// Horizontal
-			if(getIntX() - moveX < 0 && Math.abs(getIntX() - moveX) > closeEnough) setMovingRight(true);
-			if(getIntX() - moveX > 0 && Math.abs(getIntX() - moveX) > closeEnough) setMovingLeft(true);
-			
-			// Vertical
-			if(getIntY() - moveY < 0 && Math.abs(getIntY() - moveY) > closeEnough) setMovingDown(true);
-			if(getIntY() - moveY > 0 && Math.abs(getIntY() - moveY) > closeEnough) setMovingUp(true);
+			// Set facing direction.
+			if(run < -0.5f) {
+				setFacingDirection("Left");
+			}
+			else if(run > 0.5f) {
+				setFacingDirection("Right");
+			}
+			else if(rise < 0) {
+				setFacingDirection("Up");
+			}
+			else {
+				setFacingDirection("Down");
+			}
+			move(run,rise);
 		}
+	}
+	
+	// Moving rise/run.
+	private float rise = 0;
+	private float run = 0;
+	
+	// Set rise run. 
+	public void setRiseRun() {
+		float yDistance = (moveToY - getIntY());
+		float xDistance = (moveToX - getIntX());
+		float distanceXY = (float) Math.sqrt(yDistance * yDistance
+					+ xDistance * xDistance);
+		
+		// Calculate rise values.
+		float floatRise = ((yDistance/distanceXY)*(float)getMoveSpeed());
+		rise = floatRise;
+		
+		// Calculate run values.
+		float floatRun = ((xDistance/distanceXY)*(float)getMoveSpeed());
+		run = floatRun;
 	}
 	
 	// Deal with meta movement. Moving toward a point, following, pathing, etc.
 	public void dealWithMetaMovement() {
+		
+		///////////////////////////////
+		/// Following unit ///
+		///////////////////////////////	
+		if(followingUnit) {
+			
+			// Set where we need to move to.
+			moveToX = followedUnit.getIntX();
+			moveToY = followedUnit.getIntY();
+			
+			// Set rise/run
+			setRiseRun();
+			
+			// Move there.
+			moveTowards();
+		}
 		
 		///////////////////////////////
 		/// PATROLLING ///
@@ -875,41 +925,29 @@ public abstract class unit extends drawnObject  {
 		/// MOVEMENT TOWARD A POINT ///
 		///////////////////////////////	
 		if(movingToAPoint) {
-			// Moving toward a point?
-			if((Math.abs(moveToX - getIntX()) > closeEnough || Math.abs(moveToY - getIntY()) > closeEnough)) {
-				moveTowards(moveToX, moveToY);
-			}
-			
-			// We have reached our point
-			if(!(Math.abs(moveToX - getIntX()) > closeEnough || Math.abs(moveToY - getIntY()) > closeEnough)) {
-				stopMove("all");
-				movingToAPoint = false;
-			}
+			moveTowards();
 		}
 		
 		///////////////////////////////
 		/// FOLLOWING A PATH        ///
 		///////////////////////////////	
-		if(followingAPath) {
+		if(isFollowingAPath()) {
 			if(path != null && path.size() > 0) {
 				if(currPoint == null) {
 					moveTo(path.get(0).x, path.get(0).y);
-					if(this instanceof lightDude) System.out.println("Moving to:  " + path.get(0).x +","+path.get(0).y);
 					currPoint = path.get(0);
 					path.remove(0);
 				}
 				else if(!(Math.abs(currPoint.x - getIntX()) > closeEnough || Math.abs(currPoint.y - getIntY()) > closeEnough)) {
 					moveTo(path.get(0).x, path.get(0).y);
-					if(this instanceof lightDude) System.out.println("Moving to:  " + path.get(0).x +","+path.get(0).y);
 					currPoint = path.get(0);
 					path.remove(0);
 				}
 			}
 			else {
-				System.out.println("Path null");
 				currPoint = null;
 				path = null;
-				followingAPath = false;
+				setFollowingAPath(false);
 			}
 		}
 	}
@@ -917,7 +955,7 @@ public abstract class unit extends drawnObject  {
 	// Follow path.
 	public void followPath(ArrayList<intTuple> p) {
 		path = p;
-		followingAPath = true;
+		setFollowingAPath(true);
 	}
 	
 	// Move unit
@@ -962,11 +1000,9 @@ public abstract class unit extends drawnObject  {
 
 		// Move the unit
 		if(movingDiagonally()) {
-			unitSpecificMovement(moveX*(1f/1.3f),moveY*(1f/1.3f));
 			move(moveX*(1f/1.3f), moveY*(1f/1.3f));
 		}
 		else {
-			unitSpecificMovement(moveX,moveY);
 			move(moveX, moveY);
 		}
 
@@ -1050,6 +1086,7 @@ public abstract class unit extends drawnObject  {
 		if(player.getCurrentPlayer() != null && 
 			player.getCurrentPlayer().getCurrentZone()!=null && 
 			player.getCurrentPlayer().getCurrentZone().isZoneLoaded()) {
+			
 			// Actual move x and y when all is said and done.
 			float actualMoveX = moveX;
 			float actualMoveY = moveY;
@@ -1114,6 +1151,9 @@ public abstract class unit extends drawnObject  {
 			// Move the unit.
 			setFloatX(getFloatX() + actualMoveX);
 			setFloatY(getFloatY() + actualMoveY);
+			
+			// Specific movement
+			unitSpecificMovement(actualMoveX,actualMoveY);
 		}
 	}
 	
@@ -1399,7 +1439,7 @@ public abstract class unit extends drawnObject  {
 		boolean movingUpAndDown = isMovingUp() && isMovingDown();
 		boolean movingHorizontally = (isMovingLeft() || isMovingRight()) && !movingLeftAndRight;
 		boolean movingVertically = (isMovingUp() || isMovingDown()) && !movingUpAndDown;
-		return movingVertically || movingHorizontally;
+		return movingVertically || movingHorizontally || movingToAPoint || followingUnit;
 	}
 	
 	public void setCollision(boolean b) {
@@ -1489,13 +1529,13 @@ public abstract class unit extends drawnObject  {
 		this.maxHealthPoints = maxHealthPoints;
 	}
 
-	public int getMoveSpeed() {
+	public float getMoveSpeed() {
 		return moveSpeed;
 	}
 
-	public void setMoveSpeed(int moveSpeed) {
-		this.moveSpeed = moveSpeed;
-		closeEnough = closeEnoughFactor*moveSpeed;
+	public void setMoveSpeed(float f) {
+		this.moveSpeed = f;
+		closeEnough = (int) (closeEnoughFactor*f);
 	}
 
 	public static ArrayList<unit> getAllUnits() {
@@ -1695,6 +1735,14 @@ public abstract class unit extends drawnObject  {
 
 	public void setStuck(boolean stuck) {
 		this.stuck = stuck;
+	}
+
+	public boolean isFollowingAPath() {
+		return followingAPath;
+	}
+
+	public void setFollowingAPath(boolean followingAPath) {
+		this.followingAPath = followingAPath;
 	}
 	
 }

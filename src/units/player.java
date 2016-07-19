@@ -66,7 +66,7 @@ public class player extends unit {
 	private static zone DEFAULT_ZONE = null;
 	
 	// Default movespeed. 
-	private static int DEFAULT_PLAYER_MOVESPEED = 3;
+	private static float DEFAULT_PLAYER_MOVESPEED = 3.5f;
 	// 3 is default
 	
 	// Default HP
@@ -146,7 +146,7 @@ public class player extends unit {
 	// Constructor
 	public player(int newX, int newY, zone z) {
 		super(playerType, newX, newY);
-		showHitBox();
+		
 		// Set sounds.
 		setAttackSound(DEFAULT_ATTACK_SOUND);
 		

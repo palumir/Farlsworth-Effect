@@ -89,6 +89,7 @@ public class sheep extends unit {
 	private int startX = 0;
 	private int startY = 0;
 	private int patrolRadius = DEFAULT_PATROL_RADIUS;
+	private boolean meanders = true;
 	
 	// AI sounds.
 	private float randomBleet = 0f;
@@ -137,14 +138,6 @@ public class sheep extends unit {
 	
 		// Deal with animations
 		animationPack unitTypeAnimations = new animationPack();
-		
-		// Jumping left animation.
-		//animation jumpingLeft = new animation("jumpingLeft", getObjectSpriteSheet().getAnimation(6), 4, 4, 1);
-		//unitTypeAnimations.addAnimation(jumpingLeft);
-		
-		// Jumping right animation.
-		//animation jumpingRight = new animation("jumpingRight", getObjectSpriteSheet().getAnimation(2), 4, 4, 1);
-		//unitTypeAnimations.addAnimation(jumpingRight);
 		
 		// Standing left animation.
 		animation standingLeft = new animation("standingLeft", getObjectSpriteSheet().getAnimation(1), 3, 3, 1);
@@ -199,6 +192,51 @@ public class sheep extends unit {
 
 	}
 	
+	// Set Ben's animations.
+	public void setBenAnimations() {
+		
+		// Deal with animations	
+		animationPack unitTypeAnimations = new animationPack();
+		
+		// Set his movespeed really funnilily slow.
+		setMoveSpeed(1);
+		
+		// Standing left animation.
+		animation standingLeft = new animation("standingLeft", getObjectSpriteSheet().getAnimation(1), 3, 3, 1);
+		unitTypeAnimations.addAnimation(standingLeft);
+		
+		// Standing right animation.
+		animation standingRight = new animation("standingRight", getObjectSpriteSheet().getAnimation(3), 3, 3, 1);
+		unitTypeAnimations.addAnimation(standingRight);
+		
+		// Running left animation.
+		animation runningLeft = new animation("runningLeft", getObjectSpriteSheet().getAnimation(1), 0, 3, 0.05f);
+		unitTypeAnimations.addAnimation(runningLeft);		
+		
+		// Running right animation.
+		animation runningRight = new animation("runningRight", getObjectSpriteSheet().getAnimation(3), 0, 3, 0.05f);
+		unitTypeAnimations.addAnimation(runningRight);
+		
+		// Standing up animation.
+		animation standingUp = new animation("standingUp", getObjectSpriteSheet().getAnimation(0), 3, 3, 1);
+		unitTypeAnimations.addAnimation(standingUp);
+		
+		// Standing down animation.
+		animation standingDown = new animation("standingDown", getObjectSpriteSheet().getAnimation(2), 3, 3, 1);
+		unitTypeAnimations.addAnimation(standingDown);
+		
+		// Running up animation.
+		animation runningUp = new animation("runningUp", getObjectSpriteSheet().getAnimation(0), 0, 3, 0.05f);
+		unitTypeAnimations.addAnimation(runningUp);
+		
+		// Running down animation.
+		animation runningDown = new animation("runningDown", getObjectSpriteSheet().getAnimation(2), 0, 3, 0.05f);
+		unitTypeAnimations.addAnimation(runningDown);
+		
+		// Set animations.
+		setAnimations(unitTypeAnimations);
+	}
+	
 	// Make sure the movement is within a certain radius.
 	public void checkMovement(String direction) {
 			if(getIntX() < startX - patrolRadius) moveUnit("right");
@@ -215,49 +253,51 @@ public class sheep extends unit {
 	// SHEEP AI moves SHEEP around for now.
 	public void updateUnit() {
 		
-		// Create a new random bleet interval
-		float newRandomBleetInterval = 2.5f + utility.RNG.nextInt(18);
-		
-		// Sheep make sounds
-		if(randomBleet == 0f) {
-			randomBleet = newRandomBleetInterval;
-		}
-		if(time.getTime() - lastBleet > randomBleet*1000) {
+		if(isMeanders()) {
+			// Create a new random bleet interval
+			float newRandomBleetInterval = 2.5f + utility.RNG.nextInt(18);
 			
-			// Set the last time they bleeted.
-			lastBleet = time.getTime();
-			randomBleet = newRandomBleetInterval;
+			// Sheep make sounds
+			if(randomBleet == 0f) {
+				randomBleet = newRandomBleetInterval;
+			}
+			if(time.getTime() - lastBleet > randomBleet*1000) {
+				
+				// Set the last time they bleeted.
+				lastBleet = time.getTime();
+				randomBleet = newRandomBleetInterval;
+				
+				// Play a random baaaah
+				int random = utility.RNG.nextInt(2);
+				if(random==0) {
+					sound s = new sound(bleet1);
+					s.setPosition(getIntX(), getIntY(), bleetRadius);
+					s.start();
+				}
+				if(random==1) {
+					sound s = new sound(bleet2);
+					s.setPosition(getIntX(), getIntY(), bleetRadius);
+					s.start();
+				}
+			}
 			
-			// Play a random baaaah
-			int random = utility.RNG.nextInt(2);
-			if(random==0) {
-				sound s = new sound(bleet1);
-				s.setPosition(getIntX(), getIntY(), bleetRadius);
-				s.start();
+			// Move SHEEP in a random direction every interval.
+			if(time.getTime() - AILastCheck > randomMove*1000) {
+				AILastCheck = time.getTime();
+				int random = utility.RNG.nextInt(4);
+				if(random==0) checkMovement("left");
+				if(random==1) checkMovement("right");
+				if(random==2) checkMovement("down");
+				if(random==3) checkMovement("up");
+				randomStop = 0.5f + utility.RNG.nextInt(8)*0.25f;
 			}
-			if(random==1) {
-				sound s = new sound(bleet2);
-				s.setPosition(getIntX(), getIntY(), bleetRadius);
-				s.start();
+			
+			// Stop sheep after a fraction of a second
+			if(isMoving() && time.getTime() - AILastCheck > randomStop*1000) {
+				randomMove = 3f + utility.RNG.nextInt(9)*0.5f;
+				AILastCheck = time.getTime();
+				stopMove("all");
 			}
-		}
-		
-		// Move SHEEP in a random direction every interval.
-		if(time.getTime() - AILastCheck > randomMove*1000) {
-			AILastCheck = time.getTime();
-			int random = utility.RNG.nextInt(4);
-			if(random==0) checkMovement("left");
-			if(random==1) checkMovement("right");
-			if(random==2) checkMovement("down");
-			if(random==3) checkMovement("up");
-			randomStop = 0.5f + utility.RNG.nextInt(8)*0.25f;
-		}
-		
-		// Stop sheep after a fraction of a second
-		if(isMoving() && time.getTime() - AILastCheck > randomStop*1000) {
-			randomMove = 3f + utility.RNG.nextInt(9)*0.5f;
-			AILastCheck = time.getTime();
-			stopMove("all");
 		}
 	}
 	
@@ -293,5 +333,13 @@ public class sheep extends unit {
 		else {
 			return DEFAULT_PLATFORMER_ADJUSTMENT_Y;
 		}
+	}
+
+	public boolean isMeanders() {
+		return meanders;
+	}
+
+	public void setMeanders(boolean meanders) {
+		this.meanders = meanders;
 	}
 }
