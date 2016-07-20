@@ -271,7 +271,13 @@ public class tombZone extends zone {
 		c.setPassable(true);
 		c.setZ(-2);
 		
-		spawnTombRect(4430,155,4800,188,"ground");
+		// Sixth floor
+		
+		spawnTombRect(4330,155,4800,188,"ground");
+		spawnTombRect(4863,-69,4895,541,"rightWall");
+		
+		u = new shadowDude(4335,110);
+		u.patrolTo(4374, 110);
 		
 		ArrayList<intTuple> squarePath = new ArrayList<intTuple>();
 		squarePath.add(new intTuple(0,0));
@@ -322,7 +328,107 @@ public class tombZone extends zone {
 		    	  }
 		      }
 			}
-	}
+		
+		for(int i = 0; i < 3; i++) {
+		      for(int j = 0; j < 3; j++) {
+		       
+		    	  if(i == 1 && j == 1) {
+		    		  // Do nothing.
+		    	  }
+		    	  else if(i == 2 && j==1) {
+		    		  // Do nothing.
+		    	  }
+		    	  else {
+		    		  
+		    		  // How far they are spread
+		    		  int spreadOutX = 70;
+		    		  int spreadOutY = 75;
+		    		    
+		    		  // Spawn the shadow dude
+		    		  u = new shadowDude(4700 + i*spreadOutX,60 + spreadOutY*j);
+		    		  path = new ArrayList <intTuple> ();
+		    		  
+		    		  // Searches squarePath for our shadowDude's start position.
+		    		  int n = 0;
+		    		  for(; n < squarePath.size(); n++) {
+		    			  intTuple currentTuple = squarePath.get(n);
+		    			  if(currentTuple.x == i && currentTuple.y == j) break;
+		    		  }
+		    		  
+		    		  n++;
+		    		  // Walk him on the path.
+		    		  for(int m = 0; m < squarePath.size()-1; m++) {
+		    			  if(n >= squarePath.size()) n = 0;
+		    			  intTuple currentTuple = squarePath.get(n);
+		    			  path.add(new intTuple(4700 + currentTuple.x*spreadOutX,60 + currentTuple.y*spreadOutY));
+		    			  n++;
+		    		  }
+		    		  
+		    		  u.patrolPath(path);
+		    	  }
+		      }
+		}
+		
+		spawnTombRect(4519,308,4893,340,"ground");
+		
+		u = new shadowDude(4519,261);
+		u.patrolTo(4857, 261);
+		
+		spawnTombRect(4430,460,4815,492,"ground");
+		
+		u = new shadowDude(4519,343);
+		u.patrolTo(4519, 415);
+		u.setMoveSpeed(1);
+		
+		for(int i = 0; i < 3; i++) {
+		      for(int j = 0; j < 3; j++) {
+		       
+		    	  if(i == 1 && j == 1) {
+		    		  // Do nothing.
+		    	  }
+		    	  else if(i == 2 && j==1) {
+		    		  // Do nothing.
+		    	  }
+		    	  else {
+		    		  
+		    		  // How far they are spread
+		    		  int spreadOutX = 70;
+		    		  int spreadOutY = 75;
+		    		    
+		    		  // Spawn the shadow dude
+		    		  u = new shadowDude(4575 + i*spreadOutX,350 + spreadOutY*j);
+		    		  path = new ArrayList <intTuple> ();
+		    		  
+		    		  // Searches squarePath for our shadowDude's start position.
+		    		  int n = 0;
+		    		  for(; n < squarePath.size(); n++) {
+		    			  intTuple currentTuple = squarePath.get(n);
+		    			  if(currentTuple.x == i && currentTuple.y == j) break;
+		    		  }
+		    		  
+		    		  n++;
+		    		  // Walk him on the path.
+		    		  for(int m = 0; m < squarePath.size()-1; m++) {
+		    			  if(n >= squarePath.size()) n = 0;
+		    			  intTuple currentTuple = squarePath.get(n);
+		    			  path.add(new intTuple(4575 + currentTuple.x*spreadOutX,350 + currentTuple.y*spreadOutY));
+		    			  n++;
+		    		  }
+		    		  
+		    		  u.patrolPath(path);
+		    	  }
+		      }
+		}
+		
+		u = new shadowDude(4776,343);
+		u.patrolTo(4776, 415);
+		u.setMoveSpeed(1);
+		
+		// Seventh floor
+		
+		spawnTombRect(4794,596,4977,628,"ground");
+		
+		}
  
 
 	// Get the player location in the zone.
