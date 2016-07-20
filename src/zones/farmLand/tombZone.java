@@ -262,26 +262,60 @@ public class tombZone extends zone {
 		// Fifth floor
 		spawnTombRect(4220+15,40,4340+15,791,"ground");
 		c = new well(4252,4,0);
+		c.setPassable(true);
+		c.setZ(-2);
 		
 		spawnTombRect(4430,155,4800,188,"ground");
 		
-		 for(int i = 0; i < 3; i++) {
-			   for(int j = 0; j < 3; j++) {
-			    
-			    if(i == 1 && j == 1) {
-			     // Do nothing.
-			    }
-			    else if(i == 2 && j==1) {
-			     // Do nothing.
-			    }
-			    else {
-			     u = new shadowDude(4400 + i*70,60 + j*75);
-			     path = new ArrayList <intTuple> ();
-			     path.add((new intTuple (4400 + i*70 + 140,60 + j*75)));
-			     u.patrolPath(path);
-			    }
-			   }
-			  }
+		ArrayList<intTuple> squarePath = new ArrayList<intTuple>();
+		squarePath.add(new intTuple(0,0));
+		squarePath.add(new intTuple(1,0));
+		squarePath.add(new intTuple(2,0));
+		squarePath.add(new intTuple(2,1));
+		squarePath.add(new intTuple(2,2));
+		squarePath.add(new intTuple(1,2));
+		squarePath.add(new intTuple(0,2));
+		squarePath.add(new intTuple(0,1));
+
+		for(int i = 0; i < 3; i++) {
+		      for(int j = 0; j < 3; j++) {
+		       
+		    	  if(i == 1 && j == 1) {
+		    		  // Do nothing.
+		    	  }
+		    	  else if(i == 2 && j==1) {
+		    		  // Do nothing.
+		    	  }
+		    	  else {
+		    		  
+		    		  // How far they are spread
+		    		  int spreadOutX = 70;
+		    		  int spreadOutY = 75;
+		    		    
+		    		  // Spawn the shadow dude
+		    		  u = new shadowDude(4400 + i*spreadOutX,60 + spreadOutY*j);
+		    		  path = new ArrayList <intTuple> ();
+		    		  
+		    		  // Searches squarePath for our shadowDude's start position.
+		    		  int n = 0;
+		    		  for(; n < squarePath.size(); n++) {
+		    			  intTuple currentTuple = squarePath.get(n);
+		    			  if(currentTuple.x == i && currentTuple.y == j) break;
+		    		  }
+		    		  
+		    		  n++;
+		    		  // Walk him on the path.
+		    		  for(int m = 0; m < squarePath.size()-1; m++) {
+		    			  if(n >= squarePath.size()) n = 0;
+		    			  intTuple currentTuple = squarePath.get(n);
+		    			  path.add(new intTuple(4400 + currentTuple.x*spreadOutX,60 + currentTuple.y*spreadOutY));
+		    			  n++;
+		    		  }
+		    		  
+		    		  u.patrolPath(path);
+		    	  }
+		      }
+			}
 	}
  
 
