@@ -424,12 +424,67 @@ public class tombZone extends zone {
 		u.patrolTo(4776, 415);
 		u.setMoveSpeed(1);
 		
-		// Seventh floor
+		// Seventh floor (down)
 		
 		spawnTombRect(4794,596,4977,628,"ground");
+		spawnTombRect(5008,681+40,5700,713+40,"ground");
 		
-		}
- 
+		u = new shadowDude(5074,675);
+		u.patrolTo(5074, 575);
+		u.setMoveSpeed(1);
+	
+		u = new shadowDude(5124,575);
+		u.patrolTo(5124, 675);
+		u.setMoveSpeed(1);
+	
+		u = new shadowDude(5174,675);
+		u.patrolTo(5174, 575);
+		u.setMoveSpeed(1);
+		
+		u = new shadowDude(5224,575);
+		u.patrolTo(5224, 675);
+		u.setMoveSpeed(1);
+		
+		u = new shadowDude(5274,675);
+		u.patrolTo(5274, 575);
+		u.setMoveSpeed(1);
+	
+		u = new shadowDude(5324,625);
+		path = new ArrayList<intTuple>();
+		path.add(new intTuple(5324,675));
+		path.add(new intTuple(5324,575));
+		u.setMoveSpeed(1);
+		u.patrolPath(path);
+		
+		u = new shadowDude(5374,575);
+		u.patrolTo(5374, 675);
+		u.setMoveSpeed(1);
+		
+		u = new shadowDude(5424,625);
+		path = new ArrayList<intTuple>();
+		path.add(new intTuple(5424,575));
+		path.add(new intTuple(5424,675));
+		u.setMoveSpeed(1);
+		u.patrolPath(path);
+		
+		u = new shadowDude(5474,575);
+		u.patrolTo(5474, 675);
+		u.setMoveSpeed(2);
+		
+		u = new shadowDude(5524,675);
+		u.patrolTo(5524, 575);
+		u.setMoveSpeed(2);
+		
+		u = new shadowDude(5574,575);
+		u.patrolTo(5574, 675);
+		u.setMoveSpeed(2);
+		
+		u = new shadowDude(5624,675);
+		u.patrolTo(5624, 575);
+		u.setMoveSpeed(2);
+		
+	}
+	
 
 	// Get the player location in the zone.
 	public intTuple getDefaultLocation() {
