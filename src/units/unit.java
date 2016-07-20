@@ -33,8 +33,6 @@ import utilities.intTuple;
 import utilities.mathUtils;
 import utilities.time;
 import utilities.utility;
-import units.unitTypes.farmLand.tomb.lightDude;
-import units.unitTypes.farmLand.tomb.shadowDude;
 
 public abstract class unit extends drawnObject  { 
 	
@@ -158,6 +156,8 @@ public abstract class unit extends drawnObject  {
 	
 	// Movement
 	protected float moveSpeed = DEFAULT_UNIT_MOVESPEED;
+	protected float baseMoveSpeed = DEFAULT_UNIT_MOVESPEED;
+	protected float baseMoveDuration = 0.75f;
 	private boolean movingLeft = false;
 	private boolean movingRight = false;
 	private boolean movingDown = false;
@@ -235,8 +235,9 @@ public abstract class unit extends drawnObject  {
 		//showUnitPosition();
 		//showHitBox();
 		//showSpriteBox();
-		setAnimations(u.getAnimations());
-		setMoveSpeed(u.getMoveSpeed());
+		if(u.getAnimations()!=null) setAnimations(new animationPack(u.getAnimations()));
+		moveSpeed = u.getMoveSpeed();
+		baseMoveSpeed = u.getMoveSpeed();
 		jumpSpeed = u.getJumpSpeed();
 		setTypeOfUnit(u);
 		
@@ -1280,6 +1281,7 @@ public abstract class unit extends drawnObject  {
 				if(getCurrentAnimation() != null) {
 					if(!getCurrentAnimation().getName().equals(a.getName())) { 
 						a.startAnimation();
+						//if(this instanceof shadowDude) 
 					}
 					
 					// Set the animation.
@@ -1545,7 +1547,19 @@ public abstract class unit extends drawnObject  {
 	}
 
 	public void setMoveSpeed(float f) {
+		fixAnimationsBasedOnMoveSpeed(f);
 		this.moveSpeed = f;
+	}
+	
+	public void fixAnimationsBasedOnMoveSpeed(float newSpeed) {
+		if(animations!=null) {
+			for(int i = 0; i < animations.getAnimations().size(); i++) {
+				animation currentAnimation = animations.getAnimations().get(i);
+				if(currentAnimation.getName().contains("running")) {
+					currentAnimation.setTimeToComplete((moveSpeed/newSpeed)*currentAnimation.getTimeToComplete());
+				}
+			}
+		}
 	}
 
 	public static ArrayList<unit> getAllUnits() {

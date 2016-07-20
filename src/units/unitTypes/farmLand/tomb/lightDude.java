@@ -52,7 +52,7 @@ public class lightDude extends unit {
 	private static String unitName = "lightDude";
 	
 	// Default movespeed.
-	private static int DEFAULT_UNIT_MOVESPEED = 1;
+	private static int DEFAULT_UNIT_MOVESPEED = 3;
 	
 	// Default jump speed
 	private static int DEFAULT_UNIT_JUMPSPEED = 10;

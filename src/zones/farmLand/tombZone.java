@@ -35,7 +35,7 @@ public class tombZone extends zone {
 	private static zone zoneReference;
 	
 	// Default background.
-	private static BufferedImage DEFAULT_ZONE_BACKGROUND = spriteSheet.getSpriteFromFilePath("images/terrain/backgrounds/caveBackground.png");
+	private static BufferedImage DEFAULT_ZONE_BACKGROUND = spriteSheet.getSpriteFromFilePath("images/terrain/backgrounds/tombBackground.png");
 	
 	// Zone music.
 	private static music zoneMusic = new music("sounds/music/farmLand/tomb/tomb.wav");
@@ -181,7 +181,7 @@ public class tombZone extends zone {
 		c = new wallTorch(410,-40);
 		u = new shadowDude(350,-6);
 		u.patrolTo(455, -6);
-		u.setMoveSpeed(3);
+		u.setMoveSpeed(2);
 		
 		// Second floor
 		spawnTombRect(550,40,1000,791,"ground");

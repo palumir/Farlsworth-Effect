@@ -22,6 +22,9 @@ public class humanType extends unitType {
 	private static int DEFAULT_SPRITE_ADJUSTMENT_X = 0;
 	private static int DEFAULT_SPRITE_ADJUSTMENT_Y = 6;
 	
+	// Default movespeed.
+	static float DEFAULT_HUMAN_MOVESPEED = 3f;
+	
 	///////////////
 	/// METHODS ///
 	///////////////
