@@ -62,7 +62,7 @@ public class shadowDude extends unit {
 	
 	// farmer sprite stuff.
 	private static String DEFAULT_UNIT_SPRITESHEET = "images/units/player/female/shadow.png";
-	//private static String DEFAULT_FADED_SPRITESHEET = "images/units/player/female/shadowFaded.png";
+	private static String DEFAULT_FADED_SPRITESHEET = "images/units/player/female/shadowEyes.png";
 	
 	// The actual type.
 	private static unitType shadowType =
@@ -72,12 +72,12 @@ public class shadowDude extends unit {
 					     DEFAULT_UNIT_JUMPSPEED // Jump speed
 						);	   
 	
-	/*private static unitType shadowFadedType =
+	private static unitType shadowFadedType =
 			new humanType( "shadow",  // Name of unitType 
 						 DEFAULT_FADED_SPRITESHEET,
 					     DEFAULT_UNIT_MOVESPEED, // Movespeed
 					     DEFAULT_UNIT_JUMPSPEED // Jump speed
-						);	   */
+						);	   
 	///////////////
 	/// METHODS ///
 	///////////////
@@ -114,7 +114,7 @@ public class shadowDude extends unit {
 	
 	public void hurtPeople() {
 		// If someone is in the explosion radius, hurt.
-		ArrayList<unit> hurtUnits = unit.getUnitsInRadius(getIntX() + getWidth()/2, getIntY() + getHeight()/2, getWidth()/2);
+		ArrayList<unit> hurtUnits = unit.getUnitsInBox(getIntX(), getIntY(), getIntX() + getWidth(), getIntY()+getHeight());
 		if(hurtUnits != null && time.getTime() - lastHurt > hurtEvery*1000) {
 			lastHurt = time.getTime();
 			for(int i = 0; i < hurtUnits.size(); i++) {
@@ -169,16 +169,16 @@ public class shadowDude extends unit {
 					null);
 			
 			// Draw eyes.
-			//alpha = 1;
-			//g2d.setComposite(AlphaComposite.SrcOver.derive(alpha));
+			alpha = 1;
+			g2d.setComposite(AlphaComposite.SrcOver.derive(alpha));
 			// 9 or 11
-			//animation faded = shadowFadedType.getAnimations().getAnimation("running" + getFacingDirection());
-			/*g2d.drawImage(faded.getCurrentFrame(), 
+			animation faded = shadowFadedType.getAnimations().getAnimation("running" + getFacingDirection());
+			g2d.drawImage(faded.getCurrentFrame(), 
 					getDrawX(), 
 					getDrawY(), 
 					(int)(gameCanvas.getScaleX()*faded.getCurrentFrame().getWidth()), 
 					(int)(gameCanvas.getScaleY()*faded.getCurrentFrame().getHeight()), 
-					null);*/
+					null);
 		}
 		
 		// Draw the outskirts of the sprite.

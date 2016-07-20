@@ -34,8 +34,11 @@ public class tombZone extends zone {
 	// Static caller of the zone.
 	private static zone zoneReference;
 	
+	// Default background.
+	private static BufferedImage DEFAULT_ZONE_BACKGROUND = spriteSheet.getSpriteFromFilePath("images/terrain/backgrounds/caveBackground.png");
+	
 	// Zone music.
-	private static music zoneMusic = new music("sounds/music/farmLand/spiderCave/spiderCave.wav");
+	private static music zoneMusic = new music("sounds/music/farmLand/tomb/tomb.wav");
 	
 	// References we will use throughout.
 	unit u;
@@ -120,10 +123,13 @@ public class tombZone extends zone {
 		
 		// Set the darkness.
 		zoneFog = new fog();
-		zoneFog.setTo(0.15f);//fog.setTo(0.75f);
+		zoneFog.setTo(0.3f);//fog.setTo(0.75f);
 		
 		// Load zone events.
 		loadZoneEvents();
+		
+		// Background
+		background.setGameBackground(DEFAULT_ZONE_BACKGROUND);
 		
 		// Spawn area.
 		createSpawnArea();
@@ -153,7 +159,7 @@ public class tombZone extends zone {
 		tombZoneEnterance.setZ(BACKGROUND_Z);
 		
 		// Background 
-		spawnBackgroundRect(-65,-269, 7500,787);
+		//spawnBackgroundRect(-65,-269, 7500,787);
 		
 		// Roof
 		spawnTombRect(-18, -747, 7500,-220,"roof"); // the roof

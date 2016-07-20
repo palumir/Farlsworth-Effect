@@ -1073,13 +1073,13 @@ public abstract class unit extends drawnObject  {
 		// If they've touched down, place them closer to the ground.
 		chunk ground = chunk.getGroundChunk(this, (int)getFloatX(), (int)(getFloatY() + oldFallSpeed));
 		if(ground != null) {
-			fallSpeed = fallSpeed - (ground.getIntY() - (getIntY() + oldFallSpeed + getHeight()));
+			fallSpeed = ground.getIntY() - (this.getIntY() + this.getHeight());
 		}
 		
 		// They can jump again if they've touched down.
 		jumping = false;
 		touchingGround = true;
-		inAir = fallSpeed == 0;
+		inAir = (fallSpeed != 0);
 	}
 	
 	// Move function
