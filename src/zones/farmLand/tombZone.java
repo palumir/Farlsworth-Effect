@@ -181,8 +181,8 @@ public class tombZone extends zone {
 		
 		// Second floor
 		spawnTombRect(550,40,1000,791,"ground");
-		//c = new wallTorch(617,-40);
-		//c = new wallTorch(928,-40);
+		c = new wallTorch(617,-40);
+		c = new wallTorch(928,-40);
 		
 		for(int i=0; i <2; i++) {
 			u = new shadowDude(555,-6 - i*50);
@@ -261,10 +261,32 @@ public class tombZone extends zone {
 		c = new wallTorch(4097,-40);
 		
 		
+		// Fifth floor
+		spawnTombRect(4220+15,40,4340+15,791,"ground");
+		c = new well(4252,4,0);
+		
+		spawnTombRect(4430,155,4800,188,"ground");
+		
+		 for(int i = 0; i < 3; i++) {
+			   for(int j = 0; j < 3; j++) {
+			    
+			    if(i == 1 && j == 1) {
+			     // Do nothing.
+			    }
+			    else if(i == 2 && j==1) {
+			     // Do nothing.
+			    }
+			    else {
+			     u = new shadowDude(4400 + i*70,60 + j*75);
+			     path = new ArrayList <intTuple> ();
+			     path.add((new intTuple (4400 + i*70 + 140,60 + j*75)));
+			     u.patrolPath(path);
+			    }
+			   }
+			  }
 		
 		
 		
-		//c = new well(3421,5,0);
 	
 	}
  
