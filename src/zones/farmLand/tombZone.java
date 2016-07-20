@@ -58,7 +58,7 @@ public class tombZone extends zone {
 	public tombZone() {
 		super("tombZone", "farmLand");
 	}
-	
+		
 	///////////////////////////////
 	// SPAWN PATTERNS/GENERATORS //
 	///////////////////////////////
@@ -128,8 +128,6 @@ public class tombZone extends zone {
 		// Spawn area.
 		createSpawnArea();
 		
-		
-		
 		// Sort chunks.
 		chunk.sortChunks();
 		
@@ -151,7 +149,7 @@ public class tombZone extends zone {
 	public void createSpawnArea() {
 		
 		// Entrance
-		stairsUp tombZoneEnterance = new stairsUp(30,-8,0, sheepFarm.getZone(),2320,-3896,"Down");
+		stairsUp tombZoneEnterance = new stairsUp(30,-8,0,sheepFarm.getZone(),2320,-3896,"Down");
 		tombZoneEnterance.setZ(BACKGROUND_Z);
 		
 		// Background 
@@ -259,13 +257,6 @@ public class tombZone extends zone {
 		u.setMoveSpeed(3);
 		
 		c = new wallTorch(4097,-40);
-		
-		
-		
-		
-		
-		//c = new well(3421,5,0);
-	
 	}
  
 
