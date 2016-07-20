@@ -35,13 +35,25 @@ public class animation {
 		
 		// Set the fields.
 		currentSprite = newStartFrame;
-		timeToComplete = newTimeToComplete;
+		setTimeToComplete(newTimeToComplete);
 		setStartFrame(newStartFrame);
 		endFrame = newEndFrame;
 		setName(newName);
 		setSprites(newSprites);
 	}
 	
+	// Copy constructor
+	public animation(animation animation) {
+		
+		// Set the fields.
+		currentSprite = animation.getStartFrame();
+		setTimeToComplete(animation.getTimeToComplete());
+		this.setStartFrame(animation.getStartFrame());
+		endFrame = animation.endFrame;
+		setName(animation.name);
+		setSprites(animation.sprites);
+	}
+
 	// Start animation
 	public void startAnimation() {
 		startTime = 0;
@@ -53,7 +65,7 @@ public class animation {
 		// Get the correct current frame.
 		if(startTime == 0) startTime = time.getTime();
 		int howMuchTimeHasElapsed = (int) (time.getTime() - startTime);
-		int howMuchTimePerFrame = (int) (timeToComplete*1000/((endFrame + 1) - getStartFrame()));
+		int howMuchTimePerFrame = (int) (getTimeToComplete()*1000/((endFrame + 1) - getStartFrame()));
 		int correctFrame = getStartFrame() + howMuchTimeHasElapsed/howMuchTimePerFrame;
 		if(correctFrame>endFrame) {
 			startTime = time.getTime();
@@ -101,5 +113,13 @@ public class animation {
 
 	public void setSprites(ArrayList<BufferedImage> sprites) {
 		this.sprites = sprites;
+	}
+
+	public float getTimeToComplete() {
+		return timeToComplete;
+	}
+
+	public void setTimeToComplete(float timeToComplete) {
+		this.timeToComplete = timeToComplete;
 	}
 }

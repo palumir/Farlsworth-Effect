@@ -67,7 +67,7 @@ public class player extends unit {
 	
 	// Default movespeed. 
 	private static float DEFAULT_PLAYER_MOVESPEED = 3.5f;
-	// 3 is default
+	// 3.5 is default
 	
 	// Default HP
 	private static int DEFAULT_PLAYER_HP = 6;
@@ -101,7 +101,7 @@ public class player extends unit {
 	new humanType(
 				"player",  // Name of unitType 
 				 DEFAULT_PLAYER_SPRITESHEET,
-			     DEFAULT_PLAYER_MOVESPEED, // Movespeed
+			     humanType.DEFAULT_HUMAN_MOVESPEED, // Movespeed
 			     (int) unit.DEFAULT_JUMPSPEED // Jump speed
 				);	   
 	
@@ -143,6 +143,9 @@ public class player extends unit {
 	// Constructor
 	public player(int newX, int newY, zone z) {
 		super(playerType, newX, newY);
+		
+		// Set movespeed.
+		setMoveSpeed(DEFAULT_PLAYER_MOVESPEED);
 		
 		// Set sounds.
 		setAttackSound(DEFAULT_ATTACK_SOUND);

@@ -76,7 +76,7 @@ public abstract class item extends drawnObject {
 		for(int i = 0; i < allItems.size(); i++) {
 			if(s.equals(allItems.get(i).name)) return allItems.get(i).getItemRef();
 		}
-		System.err.println("Item " + s + " has not been initialized in item.initiate()!");
+		if(!s.equals("None!")) System.err.println("Item " + s + " has not been initialized in item.initiate()!");
 		return null;
 	}
 	
