@@ -147,7 +147,6 @@ public class shadowDude extends unit {
 		// Of course only draw if the animation is not null.
 		if(getCurrentAnimation() != null) {
 			
-			
 			// Draw the unit.
 			float alpha = 0;
 			float minFade = 0.2f;
