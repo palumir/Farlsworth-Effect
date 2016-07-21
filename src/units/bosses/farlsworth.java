@@ -608,7 +608,7 @@ public class farlsworth extends boss {
 				
 				// Wait.
 				waiting = true;
-				waitFor = 2f;
+				waitFor = 1.5f;
 				waitStart = time.getTime();
 			}
 			
@@ -691,6 +691,11 @@ public class farlsworth extends boss {
 			if(sequencePart == 13 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getTextOnPress()!=null) &&
 					(interactSequence.getTheText().getTextOnPress().contains("ood luck"))) {
 				
+				// Bleet
+				sound s = new sound(bleet);
+				s.setPosition(getIntX(), getIntY(), sound.DEFAULT_SOUND_RADIUS);
+				s.start();
+				
 				// Move conversation forward.
 				sequencePart = 100;
 			}
@@ -718,11 +723,23 @@ public class farlsworth extends boss {
 				setFloatX(-745);
 				setFloatY(-3899);
 				setFacingDirection("Right");
+				sequencePart++;
+			}
+			
+			// Talk to player if he/she walks to Farlsworth at flower patch.
+			if(sequencePart == 1 && (interactSequence == null || (interactSequence != null && !interactSequence.isDisplayOn())) && 
+				currPlayer != null && currPlayer.isWithin(-803,-4082,-604,-3700)) {
+				interactSequence = makeNormalInteractSequence();
+				if(interactBox.getCurrentDisplay() != null) {
+					interactBox.getCurrentDisplay().toggleDisplay();
+				}
+				interactSequence.toggleDisplay();
+				interactSequence.setUnescapable(true);
+				currPlayer.stopMove("all");
+				sequencePart++;
 			}
 		}
-		else {
-			System.out.println("GO");
-			
+		else {	
 			// He's no longer in the zone.
 			if(sequencePart == 0 && (p == null || p.size() == 0)) {
 				stopMove("all");
