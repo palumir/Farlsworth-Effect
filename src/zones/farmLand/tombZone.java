@@ -213,6 +213,12 @@ public class tombZone extends zone {
 		u.setMoveSpeed(moveSpeed);
 	}
 	
+	public void lightDudePatrol(int lightDudeX, int lightDudeY, int patrolToX, int patrolToY, float moveSpeed) {
+		u = new shadowDude(lightDudeX,lightDudeY);
+		u.patrolTo(patrolToX, patrolToY);
+		u.setMoveSpeed(moveSpeed);
+	}
+	
 	//////////////////////
 	// INDIVIDUAL AREAS //
 	//////////////////////
@@ -241,33 +247,32 @@ public class tombZone extends zone {
 		spawnTombRect(7000,-750,7000,1000,"rightWall");
 		
 		// First floor
-
+		
 		spawnTombRect(350,40,500,791,"ground");
+		
 		c = new wallTorch(410,-40);
-		u = new shadowDude(350,-6);
-		u.patrolTo(455, -6);
-		u.setMoveSpeed(2);
+		
+		shadowDudePatrol (350,-6,455,-6,2);
 		
 		// Second floor
+		
 		spawnTombRect(550,40,1000,791,"ground");
+		
 		c = new wallTorch(617,-40);
 		c = new wallTorch(928,-40);
 		
 		for(int i=0; i <2; i++) {
-			u = new shadowDude(555,-6 - i*50);
-			u.patrolTo (970,-6 - i*50);
-			u.setMoveSpeed(3);
+			shadowDudePatrol (555,-6 - i*50,970,-6 - i*50,3);
 		}
 		
 		// Third floor
+		
 		spawnTombRect(1080,40,2380,791,"ground");
 		
 		c = new wallTorch(1141,-40);
 		
 		for(int i=0; i <2; i++) {
-			u = new shadowDude(1500,-6 - i*50);
-			u.patrolTo (1080,-6 - i*50);
-			u.setMoveSpeed(3);
+			shadowDudePatrol (1500,-6 - i*50, 1080, -6 - i*50,3);
 		}	
 			
 		c = new wallTorch(1523,-40);
@@ -295,6 +300,7 @@ public class tombZone extends zone {
 		c = new wallTorch(2287,-40);
 		
 		// Fourth floor
+		
 		spawnTombRect(2460,40,4160,791,"ground");
 		
 		c = new wallTorch(2525,-40);
@@ -308,9 +314,7 @@ public class tombZone extends zone {
 			u.setMoveSpeed(5);
 		}
 		
-		u = new lightDude(2603,-6);
-		u.patrolTo(3300, -6);
-		u.setMoveSpeed(3);
+		lightDudePatrol (2603,-6, 3300, -6,3);
 		
 		c = new wallTorch(3311,-40);
 		
@@ -323,15 +327,14 @@ public class tombZone extends zone {
 			u.setMoveSpeed(5);
 		}
 		
-		u = new lightDude(3388,-6);
-		u.patrolTo(4085, -6);
-		u.setMoveSpeed(3);
+		lightDudePatrol (3388,-6,4085,-6,3);
 		
 		c = new wallTorch(4097,-40);
 		
-		
 		// Fifth floor
+		
 		spawnTombRect(4220+15,40,4340+15,791,"ground");
+		
 		c = new well(4252,4,0);
 		c.setPassable(true);
 		c.setZ(-2);
@@ -341,28 +344,22 @@ public class tombZone extends zone {
 		spawnTombRect(4330,155,4800,188,"ground");
 		spawnTombRect(4863,-69,4895,541,"rightWall");
 		
-		u = new shadowDude(4335,110);
-		u.patrolTo(4374, 110);
+		shadowDudePatrol (4335,110,4374,110,5);
 
 		makeShadowSquare(4400,60,70,75,3,true);
 		makeShadowSquare(4700,60,70,75,3,true);
 		
 		spawnTombRect(4519,308,4893,340,"ground");
 		
-		u = new shadowDude(4519,261);
-		u.patrolTo(4857, 261);
+		shadowDudePatrol (4519,261,4857,261,2);
 		
 		spawnTombRect(4430,460,4815,492,"ground");
 		
-		u = new shadowDude(4519,343);
-		u.patrolTo(4519, 415);
-		u.setMoveSpeed(1);
+		shadowDudePatrol (4519,343,4519,415,1);
 		
 		makeShadowSquare(4575,350,70,75,3,true);
 		
-		u = new shadowDude(4776,343);
-		u.patrolTo(4776, 415);
-		u.setMoveSpeed(1);
+		shadowDudePatrol (4776,343,4776,415,1);
 		
 		// Seventh floor (down)
 		
@@ -375,27 +372,14 @@ public class tombZone extends zone {
 		spawnTombRect(5008,681+40,5700,713+40,"ground");
 		
 		shadowDudePatrol(5074,675,5074,575,1);
-		
-		/*THIS IS EQUIVALENT TO THIS:
- 		u = new shadowDude(5074,675);
-		u.patrolTo(5074, 575);
-		u.setMoveSpeed(1);*/
 	
-		u = new shadowDude(5124,575);
-		u.patrolTo(5124, 675);
-		u.setMoveSpeed(1);
-	
-		u = new shadowDude(5174,675);
-		u.patrolTo(5174, 575);
-		u.setMoveSpeed(1);
+		shadowDudePatrol (5124,575,5124,675,1);
 		
-		u = new shadowDude(5224,575);
-		u.patrolTo(5224, 675);
-		u.setMoveSpeed(1);
+		shadowDudePatrol (5174,675,5174,575,1);
 		
-		u = new shadowDude(5274,675);
-		u.patrolTo(5274, 575);
-		u.setMoveSpeed(1);
+		shadowDudePatrol (5224,575,5224,675,1);
+		
+		shadowDudePatrol (5274,675,5274,575,1);
 	
 		u = new shadowDude(5324,625);
 		path = new ArrayList<intTuple>();
@@ -404,9 +388,7 @@ public class tombZone extends zone {
 		u.setMoveSpeed(1);
 		u.patrolPath(path);
 		
-		u = new shadowDude(5374,575);
-		u.patrolTo(5374, 675);
-		u.setMoveSpeed(1);
+		shadowDudePatrol (5374,575,5374,675,1);
 		
 		u = new shadowDude(5424,625);
 		path = new ArrayList<intTuple>();
@@ -415,35 +397,24 @@ public class tombZone extends zone {
 		u.setMoveSpeed(1);
 		u.patrolPath(path);
 		
-		u = new shadowDude(5474,575);
-		u.patrolTo(5474, 675);
-		u.setMoveSpeed(2);
+		shadowDudePatrol (5474,675,5474,575,1);
 		
-		u = new shadowDude(5524,675);
-		u.patrolTo(5524, 575);
-		u.setMoveSpeed(2);
+		shadowDudePatrol (5524,575,5524,675,1);
 		
-		u = new shadowDude(5574,575);
-		u.patrolTo(5574, 675);
-		u.setMoveSpeed(2);
+		shadowDudePatrol (5574,675,5574,575,1);
 		
-		u = new shadowDude(5624,675);
-		u.patrolTo(5624, 575);
-		u.setMoveSpeed(2);
+		shadowDudePatrol (5624,575,5624,675,1);
 		
 		spawnTombRect(5773,679,5960,711,"ground");
 		
 		for(int i=0; i <2; i++) {
-			u = new shadowDude(5998,686 - i*50);
-			u.patrolTo (5998, 640 - i*50);
-			u.setMoveSpeed(1);
+			shadowDudePatrol (5998,686 - i*50,5998,640 - i*50,1);
 		}
 		
 			
 		for(int i=0; i <2; i++) {
-			u = new shadowDude(5998,506 - i*50);
-			u.patrolTo (5998, 460 - i*50);
-			u.setMoveSpeed(1);
+			shadowDudePatrol (5998,506 - i*50,5998, 460 - i*50,1);
+		}
 		
 		spawnTombRect(6086,679,6273,711,"ground");
 		
@@ -451,24 +422,45 @@ public class tombZone extends zone {
 		
 		makeShadowSquare(6279,490,70,75,3,true);
 		
+		spawnTombRect(6468,553,6568,585,"ground");
+		
+		spawnTombRect(6618,503,6718,535,"ground");
+		
+		makeShadowSquare(6587,390,70,75,3,true);
+		
+		spawnTombRect(6768,453,6868,485,"ground");
+		
+		spawnTombRect(6918,403,7018,435,"ground");
+		
+		makeShadowSquare(6888,292,70,75,3,true);
+		
+		spawnTombRect(7068,353,7168,385,"ground");
+		
+		spawnTombRect(7218,303,7318,335,"ground");
+		
+		spawnTombRect(7068,203,7168,235,"ground");
+		
+		spawnTombRect(5521,131,7000,163,"ground");
+		
 		// Seventh floor (up)
 		
 		spawnTombRect(5000,522,5152,554,"ground");
 		
 		spawnTombRect(5170,472,5322,504,"ground");
 		
-		spawnTombRect(5000,402,5152,434,"ground");
-		
-		spawnTombRect(5170,322,5322,354,"ground");
-		
-		spawnTombRect(5340,262,5472,294,"ground");
-		
 		makeShadowSquare(5150,380,70,75,3,true);
 		
-		makeShadowSquare(5323,162,70,75,3,true);
+		spawnTombRect(5000,402,5100,434,"ground");
+		
+		spawnTombRect(5185,322,5322,354,"ground");
+		
+		spawnTombRect(5390,262,5472,294,"ground");
+		
+		makeShadowSquare(5340,162,70,75,3,true);
+		
+		spawnTombRect(5153,201,5297,233,"ground");
 
 		}
-	}
 	
 
 	// Get the player location in the zone.
