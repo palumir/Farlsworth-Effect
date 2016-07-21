@@ -149,7 +149,7 @@ public class tombZone extends zone {
 	}
 	
 	
-	public void makeShadowSquare(int topLeftDudePosX, int topLeftDudePosY, int spreadX, int spreadY, boolean clockwise) {
+	public void makeShadowSquare(int topLeftDudePosX, int topLeftDudePosY, int spreadX, int spreadY, float speed, boolean clockwise) {
 		
 		ArrayList<intTuple> squarePath = new ArrayList<intTuple>();
 		squarePath.add(new intTuple(0,0));
@@ -178,6 +178,7 @@ public class tombZone extends zone {
 		    		    
 		    		  // Spawn the shadow dude
 		    		  u = new shadowDude(topLeftDudePosX + i*spreadOutX,topLeftDudePosY + spreadOutY*j);
+		    		  u.setMoveSpeed(speed);
 		    		  path = new ArrayList <intTuple> ();
 		    		  
 		    		  // Searches squarePath for our shadowDude's start position.
@@ -337,8 +338,8 @@ public class tombZone extends zone {
 		u = new shadowDude(4335,110);
 		u.patrolTo(4374, 110);
 
-		makeShadowSquare(4400,60,70,75,true);
-		makeShadowSquare(4700,60,70,75,true);
+		makeShadowSquare(4400,60,70,75,3,true);
+		makeShadowSquare(4700,60,70,75,3,true);
 		
 		spawnTombRect(4519,308,4893,340,"ground");
 		
@@ -351,7 +352,7 @@ public class tombZone extends zone {
 		u.patrolTo(4519, 415);
 		u.setMoveSpeed(1);
 		
-		makeShadowSquare(4575,350,70,75,true);
+		makeShadowSquare(4575,350,70,75,3,true);
 		
 		u = new shadowDude(4776,343);
 		u.patrolTo(4776, 415);
@@ -439,7 +440,7 @@ public class tombZone extends zone {
 		
 		spawnTombRect(6300,609,6452,641,"ground");
 		
-		makeShadowSquare(6279,490,70,75,true);
+		makeShadowSquare(6279,490,70,75,3,true);
 		
 		// Seventh floor (up)
 		
@@ -453,9 +454,9 @@ public class tombZone extends zone {
 		
 		spawnTombRect(5340,262,5472,294,"ground");
 		
-		makeShadowSquare(5150,380,70,75,true);
+		makeShadowSquare(5150,380,70,75,3,true);
 		
-		makeShadowSquare(5323,162,70,75,true);
+		makeShadowSquare(5323,162,70,75,3,true);
 
 		}
 	}
