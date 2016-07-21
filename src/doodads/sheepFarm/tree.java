@@ -47,6 +47,12 @@ public class tree extends chunk {
 	// Sequence
 	private interactBox interactSequence;
 	
+	// Is the tree on fire?
+	private boolean ignited = false;
+	
+	// Type of tree
+	private int type = 0;
+	
 	///////////////
 	/// METHODS ///
 	///////////////
@@ -81,12 +87,40 @@ public class tree extends chunk {
 		interactSequence.toggleDisplay();
 	}
 	
+	// Ignite
+	public void ignite() {
+		
+		// Tree top
+		int minX = getIntX() - 35;
+		int maxX = getIntX() + getWidth() + 35;
+		int minY = getIntY() - 105;
+		int maxY = getIntY()-45;
+		for(int i = minX; i < maxX; i += fire.getDefaultWidth()/3) {
+			for(int j = minY; j < maxY; j += fire.getDefaultWidth()/3) {
+				int rand = utility.RNG.nextInt(5);
+				int randX = 4 - 8*utility.RNG.nextInt(2);
+				int randY = 4 - 8*utility.RNG.nextInt(2);
+				if(rand == 1) { fire f = new fire(i - fire.getDefaultWidth()/2 + randX,j - fire.getDefaultHeight()/2+randY); }
+			}
+		}
+		
+		// Trunk
+		int minYTrunk = getIntY()-30;
+		int maxYTrunk = getIntY()+10;
+		for(int j = minYTrunk; j < maxYTrunk; j += fire.getDefaultWidth()/3) {
+			int randX = 4 - 8*utility.RNG.nextInt(2);
+			int randY = 4 - 8*utility.RNG.nextInt(2);
+			fire f = new fire(getIntX() + randX,j - fire.getDefaultHeight()/2+randY); 
+		}
+	}
+	
 	///////////////
 	/// METHODS ///
 	///////////////
 	// Constructor
 	public tree(int newX, int newY, int i) {
 		super(typeReference, newX, newY, i, 0);
+		type = i;
 		if(mode.getCurrentMode().equals("topDown")) {
 			setHitBoxAdjustmentY(58);
 			setWidth(30);
@@ -102,16 +136,7 @@ public class tree extends chunk {
 		
 		// If we are in sheepFarm and it's on fire, light everything on fire.
 		if(false) {
-			int rand = 1 + utility.RNG.nextInt(5);
-			for(int j = 0; j < rand; j++) {
-				int minX = getIntX() - 15;
-				int maxX = getIntX() + getWidth() + 15;
-				int minY = getIntY() - 100;
-				int maxY = getIntY()-50;
-				int randomX = minX + utility.RNG.nextInt(maxX - minX);
-				int randomY = minY + utility.RNG.nextInt(maxY - minY);
-				fire f = new fire(randomX - fire.getDefaultWidth()/2,randomY - fire.getDefaultHeight()/2);
-			}
+			ignite();
 		}
 	}
 }

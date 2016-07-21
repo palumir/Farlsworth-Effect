@@ -3,16 +3,13 @@ package zones.farmLand;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-import doodads.sheepFarm.caveEnterance;
 import doodads.sheepFarm.well;
 import doodads.tomb.stairsUp;
 import doodads.tomb.wallTorch;
 import drawing.background;
 import drawing.spriteSheet;
 import interactions.event;
-import items.weapons.torch;
 import modes.platformer;
-import modes.topDown;
 import sounds.music;
 import terrain.chunk;
 import terrain.atmosphericEffects.fog;

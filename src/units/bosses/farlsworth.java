@@ -6,6 +6,7 @@ import doodads.sheepFarm.woolPiece;
 import drawing.spriteSheet;
 import drawing.animation.animation;
 import drawing.animation.animationPack;
+import effects.effectTypes.lightningStrike;
 import drawing.spriteSheet.spriteSheetInfo;
 import interactions.event;
 import interactions.interactBox;
@@ -109,10 +110,35 @@ public class farlsworth extends boss {
 	private static event didYouOpenTheGateForHim; // Did you open the fence for him?
 	private static event didYouTryToGrabHim; // You tried to grab him at the flower field.
 	private static event doYouSpeakSheep; // Do you speak sheep?
+	private static event isTheForestOnFire; // Is the forest on fire?
 	
 	///////////////
 	/// METHODS ///
 	///////////////
+	
+	// Does Farlsworth like you? A function that determines if he does or not.
+	public boolean doesFarlsworthLikeYou() {
+		float numberOfDislikes = 0;
+		float numberOfPossibleDislikes = 0;
+		if(!pastSpawnFarm.isCompleted()) {
+			return false;
+		}
+		if(!pastFlowerPatch.isCompleted()) {
+			if(didYouLieToHimAboutHavingTheKey.isCompleted()) numberOfDislikes++;
+			if(!didYouOpenTheGateForHim.isCompleted()) numberOfDislikes++;
+			if(!didYouTellHimAboutYourAdventure.isCompleted()) numberOfDislikes++;
+			numberOfPossibleDislikes += 3;
+		}
+		if(!pastTombEntrance.isCompleted()) {
+			if(didYouTryToGrabHim.isCompleted()) numberOfDislikes++;
+			numberOfPossibleDislikes += 1;
+		}
+		if(!pastTombExit.isCompleted()) {
+			if(doYouSpeakSheep.isCompleted()) if(numberOfDislikes>=1) numberOfDislikes--;
+		}
+		
+		return numberOfDislikes/numberOfPossibleDislikes <= .5f;
+	}
 	
 	// Create interact sequence
 	public interactBox makeNormalInteractSequence() {
@@ -285,7 +311,7 @@ public class farlsworth extends boss {
 			s = ben.addChild(null, "Bah.");
 			s.setTalker("Ben");
 			s = s.addChild(null, "What are you doing here?");
-			s = s.addChild(null, "This is my adventurer.");
+			s = s.addChild(null, "This is my human.");
 			s = s.addChild(null, "Go find your own.");
 			s = s.addChild(null, "Get your wool together, man.");
 			s = s.addChild(null, "Go home Ben.");
@@ -303,6 +329,75 @@ public class farlsworth extends boss {
 			s = s.addChild(null, "You'll find that there's nothing to be scared of.");
 			s = s.addChild(null, "Good luck.");
 			s.setEnd();
+		}
+		else if(!pastTombExit.isCompleted()) {
+			
+			if(doesFarlsworthLikeYou()) {
+				startOfConversation = new textSeries(null, "To be honest, buddy ...");
+				s = startOfConversation.addChild(null, "I didn't think you'd make it through.");
+				s = s.addChild(null, "But look at you. You're more alive than ever.");
+				s = s.addChild(null, "And the look on your face. It's the same ...");
+				s = s.addChild(null, "... it's the same as before we went in.");
+				s = s.addChild(null, "That was easy for you, wasn't it?");
+				s = s.addChild(null, "I get it now ... I get you.");
+				s = s.addChild(null, "The fire in your eyes. I see it now.");
+				s = s.addChild(null, "Sheep ... human... it doesn't matter.");
+				s = s.addChild(null, "You are just like I was.");
+				s = s.addChild(null, "But life isn't a big friggin adventure.");
+				s = s.addChild(null, "There are repercussions for actions, damnit.");
+				s = s.addChild(null, "Like I did, you may have to learn that the hard way.");
+				
+				// Lightning strikes
+				s = s.addChild(null, "Well, you want an adventure, don't you?");
+				s = s.addChild(null, "Looks like you're getting one.");
+				s = s.addChild(null, "Try to keep up.");
+				s.setEnd();
+				// Leave, lightning path, he likes you a little more.
+				
+			}
+			else {
+				startOfConversation = new textSeries(null, "Persistent.");
+				s = startOfConversation.addChild(null, "But annoying.");
+				s = s.addChild(null, "Smart.");
+				s = s.addChild(null, "But ignorant.");
+				s = s.addChild(null, "You know, I'd be lying if I said I understood you.");
+				s = s.addChild(null, "I can't believe you'd go this far just for some wool.");
+				s = s.addChild(null, "There's got to be more to it, damnit.");
+				s = s.addChild(null, "But I can't figure it out.");
+				s = s.addChild(null, "What drives you?");
+				
+				// Lightning strikes
+				s = s.addChild(null, "Because it's certainly not fear.");
+				s = s.addChild(null, "Wolf slayer.");
+				s = s.addChild(null, "Tomb raider.");
+				s = s.addChild(null, "Sheep chaser.");
+				s = s.addChild(null, "Moron.");
+				textSeries imbecile = s.addChild(null, "IMBECILE!");
+				
+				textSeries dodge = imbecile.addChild("Dodge","Damnit, you got me all riled up.");
+				s = dodge.addChild(null, "Now look what you did.");
+				s = s.addChild(null, "Everything's on fire.");
+				s = s.addChild(null, "This is all your fault.");
+				s = s.addChild(null, "He would... I would never do something like this.");
+				s = s.addChild(null, "Why are you still chasing me?");
+				s = s.addChild(null, "What do you have to prove?");
+				s = s.addChild(null, "I'm out of here.");
+				s.setEnd();
+				// Leave, fire path, he likes you less.
+				
+				textSeries hit = imbecile.addChild("Get hit","Oh my goodness.");
+				s = hit.addChild(null, "I'm friggin sorry, bud.");
+				s = s.addChild(null, "I have a bad temper.");
+				s = s.addChild(null, "Boy, that could have been a disaster.");
+				s = s.addChild(null, "Throwing fire logs in a forest is dangerous stuff.");
+				s = s.addChild(null, "This storm is getting serious.");
+				s = s.addChild(null, "I'd tell you following me is dangerous and to stop ...");
+				s = s.addChild(null, "But like I said, you're persistent.");
+				s = s.addChild(null, "So you will persist.");
+				s.setEnd();
+				// Leave, lightning path, he likes you a little more.
+				
+			}
 		}
 		
 		return new interactBox(startOfConversation, stringUtils.toTitleCase(DEFAULT_UNIT_NAME), true);
@@ -738,6 +833,73 @@ public class farlsworth extends boss {
 				currPlayer.stopMove("all");
 				sequencePart++;
 			}
+			
+			// Lightning strike soon.
+			if(sequencePart == 2 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getTextOnPress()!=null) &&
+					((interactSequence.getTheText().getTextOnPress().contains("you may have to learn that the hard way.") || interactSequence.getTheText().getTextOnPress().contains("What drives you?")))) {
+				
+				// Lock sequence.
+				interactSequence.setLocked(true);
+				
+				// Wait.
+				waiting = true;
+				waitFor = 1f;
+				waitStart = time.getTime();
+				sequencePart++;
+			}
+			
+			// Strike.
+			if(sequencePart == 3 && time.getTime() - waitStart > waitFor*1000) {
+				
+				// Strike, ignite tree.
+				lightningStrike.strikeAt(-758,-3937+10);
+				sheepFarm.lightningTree.ignite();
+				
+				// Wait.
+				waiting = true;
+				waitFor = 1f;
+				waitStart = time.getTime();
+				sequencePart++;				
+			}
+			
+			// Look at tree.
+			if(sequencePart == 4 && time.getTime() - waitStart > waitFor*1000) {
+				
+				// Turn
+				setFacingDirection("Up");
+				
+				// Wait.
+				waiting = true;
+				waitFor = 2f;
+				waitStart = time.getTime();
+				sequencePart++;				
+			}
+			
+			// Look back.
+			if(sequencePart == 5 && time.getTime() - waitStart > waitFor*1000) {
+				
+				// Turn
+				setFacingDirection("Right");
+				
+				// Wait.
+				waiting = true;
+				waitFor = 0.5f;
+				waitStart = time.getTime();
+				sequencePart++;	
+				
+			}
+			
+			// Speak
+			
+			if(sequencePart == 6 && time.getTime() - waitStart > waitFor*1000) {
+			
+				// Advance and unlock sequence.
+				interactSequence.goToNext();
+				interactSequence.setLocked(false);
+				sequencePart++;	
+			}
+
+			
 		}
 		else {	
 			// He's no longer in the zone.
