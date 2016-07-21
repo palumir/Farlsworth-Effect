@@ -207,6 +207,12 @@ public class tombZone extends zone {
 			}
 	}
 	
+	public void shadowDudePatrol(int shadowDudeX, int shadowDudeY, int patrolToX, int patrolToY, float moveSpeed) {
+		u = new shadowDude(shadowDudeX,shadowDudeY);
+		u.patrolTo(patrolToX, patrolToY);
+		u.setMoveSpeed(moveSpeed);
+	}
+	
 	//////////////////////
 	// INDIVIDUAL AREAS //
 	//////////////////////
@@ -368,9 +374,12 @@ public class tombZone extends zone {
 		
 		spawnTombRect(5008,681+40,5700,713+40,"ground");
 		
-		u = new shadowDude(5074,675);
+		shadowDudePatrol(5074,675,5074,575,1);
+		
+		/*THIS IS EQUIVALENT TO THIS:
+ 		u = new shadowDude(5074,675);
 		u.patrolTo(5074, 575);
-		u.setMoveSpeed(1);
+		u.setMoveSpeed(1);*/
 	
 		u = new shadowDude(5124,575);
 		u.patrolTo(5124, 675);
