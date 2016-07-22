@@ -16,6 +16,7 @@ import drawing.gameCanvas;
 import drawing.spriteSheet;
 import drawing.userInterface.interfaceObject;
 import effects.effectTypes.darkHole;
+import terrain.atmosphericEffects.atmosphericEffect;
 import utilities.imageUtils;
 import utilities.time;
 
