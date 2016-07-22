@@ -232,9 +232,6 @@ public abstract class unit extends drawnObject  {
 	// Constructor
 	public unit(unitType u, int newX, int newY) {
 		super(u.getUnitTypeSpriteSheet(), newX, newY, u.getWidth(), u.getHeight());	
-		//showUnitPosition();
-		//showHitBox();
-		//showSpriteBox();
 		if(u.getAnimations()!=null) setAnimations(new animationPack(u.getAnimations()));
 		moveSpeed = u.getMoveSpeed();
 		baseMoveSpeed = u.getMoveSpeed();
@@ -692,7 +689,6 @@ public abstract class unit extends drawnObject  {
 				
 				// Don't hit something we already have.
 				if(alreadyAttackedUnits.contains(currentUnit)) {
-					
 				}
 				else {
 					// Don't hit yourself.

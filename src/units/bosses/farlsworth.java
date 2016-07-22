@@ -341,20 +341,22 @@ public class farlsworth extends boss {
 				startOfConversation = new textSeries(null, "To be honest, buddy ...");
 				s = startOfConversation.addChild(null, "I didn't think you'd make it through.");
 				s = s.addChild(null, "But look at you. You're more alive than ever.");
-				s = s.addChild(null, "And the look on your face. It's the same ...");
+				s = s.addChild(null, "And the look on your face ...");
 				s = s.addChild(null, "... it's the same as it was before we went in.");
 				s = s.addChild(null, "That was easy for you, wasn't it?");
 				s = s.addChild(null, "I get it now ... I get you.");
-				s = s.addChild(null, "The fire in your eyes. I see it now.");
+				s = s.addChild(null, "The fire in your eyes. I can see it.");
 				s = s.addChild(null, "Sheep ... human... it doesn't matter.");
 				s = s.addChild(null, "You are just like I was.");
+				s = s.addChild(null, "Ah, those were the glory days.");
 				s = s.addChild(null, "But life isn't a big friggin adventure.");
+				s = s.addChild(null, "You're blissfully and dangerously ignorant.");
 				s = s.addChild(null, "There are repercussions for actions, damnit.");
-				s = s.addChild(null, "Like I did, you may have to learn that the hard way.");
+				s = s.addChild(null, "You will have to learn that the hard way.");
 				
 				// Lightning strikes
 				s = s.addChild(null, "Well, you wanted an adventure, didn't you?");
-				s = s.addChild(null, "Looks like you're getting one.");
+				s = s.addChild(null, "It looks like you're getting one.");
 				s = s.addChild(null, "Try to keep up.");
 				s.setEnd();
 				// Leave, lightning path, he likes you a little more.
@@ -846,14 +848,14 @@ public class farlsworth extends boss {
 			
 			// Lightning strike soon.
 			if(sequencePart == 2 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getTextOnPress()!=null) &&
-					((interactSequence.getTheText().getTextOnPress().contains("you may have to learn that the hard way.")))) {
+					((interactSequence.getTheText().getTextOnPress().contains("hard way")))) {
 				
 				// Lock sequence.
 				interactSequence.setLocked(true);
 				
 				// Wait.
 				waiting = true;
-				waitFor = 2f;
+				waitFor = 2.5f;
 				waitStart = time.getTime();
 				sequencePart++;
 			}
@@ -920,6 +922,19 @@ public class farlsworth extends boss {
 				interactSequence.goToNext();
 				interactSequence.setLocked(false);
 				sequencePart++;	
+			}
+			
+			///////////////
+			/// IF HE LIKES YOU
+			////////////////
+			if(sequencePart == 7 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getTextOnPress()!=null) &&
+					((interactSequence.getTheText().getTextOnPress().contains("keep up")))) {
+				
+				// Lock sequence.
+				interactSequence.setLocked(false);
+				
+				// Wait.
+				sequencePart = 100;
 			}
 			
 			///////////////
@@ -1107,17 +1122,17 @@ public class farlsworth extends boss {
 			if(sequencePart == 100) {
 				
 				// Follow path.
-				ArrayList<intTuple> path = new ArrayList<intTuple>();
-				path.add(new intTuple(-1149,-3905));
-				path.add(new intTuple(-1527,-3905));
-				path.add(new intTuple(-1867,-3905));
-				path.add(new intTuple(-2168,-3905));
+				p = new ArrayList<intTuple>();
+				p.add(new intTuple(-1149,-3905));
+				p.add(new intTuple(-1527,-3905));
+				p.add(new intTuple(-1867,-3905));
+				p.add(new intTuple(-2168,-3905));
 				
 				// Move story along.
 				this.stopPatrol();
 				this.setMoveSpeed(4.5f);
 				interactSequence.setUnescapable(false);
-				followPath(path);
+				followPath(p);
 				pastTombExit.setCompleted(true);
 				saveState.setQuiet(true);
 				saveState.createSaveState();

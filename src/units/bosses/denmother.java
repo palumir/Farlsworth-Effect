@@ -489,8 +489,6 @@ public class denmother extends boss {
 			stopMove("all");
 			
 			// Howl.
-			getAnimations().getAnimation("howlingStartLeft").setCurrentSprite(0);
-			getAnimations().getAnimation("howlingStartRight").setCurrentSprite(0);
 			startHowl();
 		}
 	}
