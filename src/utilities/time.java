@@ -1,9 +1,12 @@
 package utilities;
 
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Date;
 
 import javax.swing.Timer;
+
+import sounds.sound;
 
 public class time extends utility {
 	
@@ -13,6 +16,24 @@ public class time extends utility {
 	// The actual timer we will use.
 	public static Timer gameTimer; 
 	public static Timer drawTimer;
+	
+	// Paused?
+	public static boolean paused = false;
+	
+	// Game time
+	public static long gameTime = 0;
+	
+	// Slow time
+	public static float timeSpeed = 1f;
+	
+	// Default tick rate.
+	public static float DEFAULT_TICK_RATE = 12;
+	
+	// Last tick
+	private static long lastTick = 0;
+	
+	// Sound
+	private static String heartbeat = "sounds/effects/quicktime/heartbeat.wav";
 	
 	// Initiate timer.
 	static void initiate() {
@@ -28,6 +49,42 @@ public class time extends utility {
 		return longTime;
 	}
 	
+	// All sounds
+	static ArrayList<sound> soundsToPlay;
+	
+	// Last heartbeat
+	static long lastHeartBeat = 0;
+	static float playEvery = 3.6f;
+	
+	// Does what is says.
+	public static void potentiallyPlayHeartBeat() {
+		if(timeSpeed < 1 && (lastHeartBeat == 0 || getCurrentUnixTime() - lastHeartBeat > playEvery*1000)) {
+			lastHeartBeat = getCurrentUnixTime();
+			sound s = new sound(heartbeat);
+			s.start();
+		}
+	}
+	
+	// Slow time
+	public static void setTimeSpeed(float f) {
+		if(f < 1) {
+			soundsToPlay = sound.getAllPlaying();
+			sound.initiate();
+		}
+		if(f == 1) {
+			sound.initiate();
+			if(soundsToPlay!=null) {
+				for(int i = 0; i < soundsToPlay.size(); i++) {
+					sound currSound = soundsToPlay.get(i);
+					sound s = new sound(currSound);
+					s.start();
+				}
+			}
+		}
+		gameTimer.setDelay((int) (DEFAULT_TICK_RATE/f));
+		timeSpeed = f;
+	}
+	
 	// Initiate the timer (for repainting)
 	public static void initiateDrawTimer(int fps, ActionListener a) {
 		drawTimer = new Timer(fps, a);
@@ -36,17 +93,33 @@ public class time extends utility {
 	}
 	
 	// Initiate the timer (for repainting)
-	public static void initiateGameTimer(int fps, ActionListener a) {
-		gameTimer = new Timer(fps, a);
+	public static void initiateGameTimer(ActionListener a) {
+		gameTimer = new Timer((int) DEFAULT_TICK_RATE, a);
 		gameTimer.setInitialDelay(190);
 		gameTimer.start();
 	}
 	
+	// Pause time
+	public static void pause() {
+		paused = true;
+	}
+	
+	// Unpause time
+	public static void unpause() {
+		paused = false;
+	}
+	
+	// Tick timer.
+	public static void tickTimer() {
+		if(lastTick==0) lastTick = time.getCurrentUnixTime();
+		if(!paused) gameTime += (time.getCurrentUnixTime() - lastTick)*timeSpeed;
+		lastTick = time.getCurrentUnixTime();
+		potentiallyPlayHeartBeat();
+	}
+	
 	// Get the current game time in milliseconds.
 	public static Long getTime() {
-		Long currentTime = getCurrentUnixTime();
-		if(startTime == 0l) startTime = getCurrentUnixTime(); 
-		return currentTime - startTime;
+		return gameTime;
 	}
 	
 	// Get the current game time in seconds.

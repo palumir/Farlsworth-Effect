@@ -26,14 +26,14 @@ import utilities.imageUtils;
 import utilities.time;
 import utilities.utility;
 
-public class lightning extends interfaceObject {
+public class lightning extends atmosphericEffect {
 
 	long screenWhiteStart = 0;
 	float screenWhiteFor = 0;
 	Color lightningColor;
 	
 	public lightning(float f, Color c) {
-		super(null, 0, 0, gameCanvas.getDefaultWidth(), gameCanvas.getDefaultHeight());
+		super();
 		
 		// Set color
 		lightningColor = c;

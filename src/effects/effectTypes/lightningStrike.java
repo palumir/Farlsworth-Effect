@@ -83,7 +83,7 @@ public class lightningStrike extends effect {
 		super(theEffectType, newX, newY);
 		
 		// Force in front
-		forceInFront = true;
+		setForceInFront(true);
 		lastLightning = time.getTime();
 		
 		// Make adjustments on hitbox if we're in topDown.

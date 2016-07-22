@@ -27,7 +27,7 @@ public class sound extends Thread {
     private final int EXTERNAL_BUFFER_SIZE = 524288/100; // 128Kb DEFAULT
     
     // Where to play and at what radius.
-    private int radius = 0;
+    private int radius = 0; 
     private int x = 0;
     private int y = 0;
     
@@ -45,6 +45,18 @@ public class sound extends Thread {
     enum Position { 
         LEFT, RIGHT, NORMAL
     };
+    
+    // Copy constructor
+    public sound(sound s) {
+    	filename = s.filename;
+    	curPosition = Position.NORMAL;
+    	allSounds.add(this);
+    	this.fadeOver = s.fadeOver;
+    	this.x = s.x;
+    	this.y = s.y;
+    	this.radius = s.radius;
+    	this.volume = s.volume;
+    }
 
     public sound(String wavfile) { 
         filename = wavfile;
@@ -57,6 +69,15 @@ public class sound extends Thread {
         curPosition = Position.NORMAL;
         allSounds.add(this);
         this.fadeOver = fadeOver;
+    }
+    
+    // Get all playing
+    public static ArrayList<sound> getAllPlaying() {
+    	ArrayList<sound> retList = new ArrayList<sound>();
+    	for(int i = 0; i < allSounds.size(); i++) {
+    		retList.add(allSounds.get(i));
+    	}
+    	return retList;
     }
 
     public void run() { 
@@ -135,7 +156,7 @@ public class sound extends Thread {
     	        float max = control.getMaximum();
     	        float min = control.getMinimum(); // negative values all seem to be zero?
     	        float range = max - min;
-    	        if(howClosePercentage>0) {
+    	        if(howClosePercentage>0) {	   
     	        	control.setValue(min + (range * howClosePercentage * volume * soundVolume * fadePercent));
     	        }
     	        else { 

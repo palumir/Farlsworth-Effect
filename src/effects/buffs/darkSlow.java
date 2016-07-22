@@ -50,4 +50,8 @@ public class darkSlow extends movementBuff {
 		super(theEffectType, u, DEFAULT_SLOW_PERCENTAGE, duration + 0.05f);
 	}
 	
+	public darkSlow(unit u, float duration, float slow) {
+		super(theEffectType, u, slow, duration + 0.05f);
+	}
+	
 }

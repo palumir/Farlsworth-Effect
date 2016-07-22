@@ -249,6 +249,38 @@ public class interactBox extends interfaceObject  {
 		}
 	}
 	
+
+	public void goToNext(int i) {
+		// If we are currently in text mode.
+		if(textMode) {
+			
+			// If there's only one thing, assume it's just more text.
+			if(theText.getChildren().size() == 1 && theText.getChildren().get(0).getButtonText() == null) {
+				selectedButton = 0;
+				theText = theText.getChildren().get(0);
+			}
+		
+			// Otherwise, there will be buttons to select from. Go to button mode.
+			else {
+				buttonMode = true;
+				textMode = false;
+			}
+			
+			// Reset the text.
+			displayedText = "";
+		}
+		
+		// If we're in button mode.
+		else if(buttonMode) {
+			
+			// Select the button.
+			theText = theText.getChildren().get(i);
+			buttonMode = false;
+			textMode = true;
+			selectedButton = 0;
+		}
+	}
+	
 	// Go to next
 	public void goToNext() {
 		// If we are currently in text mode.

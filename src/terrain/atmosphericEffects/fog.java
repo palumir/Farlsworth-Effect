@@ -19,13 +19,13 @@ import effects.effectTypes.darkHole;
 import utilities.imageUtils;
 import utilities.time;
 
-public class fog extends interfaceObject {
+public class fog extends atmosphericEffect {
 	
 	// All fog effects in place.
 	public static ArrayList<fog> allFog;
 	
 	public fog() {
-		super(null, 0, 0, gameCanvas.getDefaultWidth(), gameCanvas.getDefaultHeight());
+		super();
 		
 		// Set z
 		setZ(-2);

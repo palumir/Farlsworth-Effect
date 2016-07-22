@@ -27,7 +27,7 @@ import utilities.imageUtils;
 import utilities.time;
 import utilities.utility;
 
-public class storm extends interfaceObject {
+public class storm extends atmosphericEffect {
 	
 	// All fog effects in place.
 	public static storm currentStorm;
@@ -52,7 +52,7 @@ public class storm extends interfaceObject {
 			));
 	
 	public storm() {
-		super(null, 0, 0, gameCanvas.getDefaultWidth(), gameCanvas.getDefaultHeight());
+		super();
 		currentStorm = this;
 		
 		// Storm start time.
@@ -66,7 +66,7 @@ public class storm extends interfaceObject {
 	}
 	
 	public storm(float fadeOver) {
-		super(null, 0, 0, gameCanvas.getDefaultWidth(), gameCanvas.getDefaultHeight());
+		super();
 		currentStorm = this;
 		
 		// Storm start time.
@@ -160,12 +160,12 @@ public class storm extends interfaceObject {
 			if(fadeOver == 0) {
 				sound s = new sound(rainSound);
 				s.start();
+				
 			}
 			else {
 				sound s = new sound(rainSound, fadeOver);
 				s.start();
 			}
-
 		}
 		
 		else if(time.getTime() - lastRainSound > playEvery*1000) {

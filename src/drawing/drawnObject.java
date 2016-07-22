@@ -58,8 +58,8 @@ public abstract class drawnObject {
 				    	if(!(d1 instanceof groundTile) && d2 instanceof groundTile) return 7;
 				    	else if(d1 instanceof groundTile && !(d2 instanceof groundTile)) return -7;
 					    else {	
-				    		if(d1.forceInFront && !d2.forceInFront) return 6;
-				    		else if(!d1.forceInFront && d2.forceInFront) return -6;
+				    		if(d1.isForceInFront() && !d2.isForceInFront()) return 6;
+				    		else if(!d1.isForceInFront() && d2.isForceInFront()) return -6;
 					    	else {
 					    		// Different comparator for drawing effects over ...
 					    		if(d1 instanceof effect && !(d2 instanceof effect) /*&& d1.getY()+d1.getHeight() <= d2.getY()*/) return 5;
@@ -109,8 +109,8 @@ public abstract class drawnObject {
 			    	if(!(d1 instanceof groundTile) && d2 instanceof groundTile) return 8;
 			    	else if(d1 instanceof groundTile && !(d2 instanceof groundTile)) return -8;
 			    	else {
-			    		if(d1.forceInFront && !d2.forceInFront) return 7;
-			    		else if(!d1.forceInFront && d2.forceInFront) return -7;
+			    		if(d1.isForceInFront() && !d2.isForceInFront()) return 7;
+			    		else if(!d1.isForceInFront() && d2.isForceInFront()) return -7;
 				    	else {
 				    		if(d1 instanceof interfaceObject && d2 instanceof interfaceObject) {
 								int z1;
@@ -164,6 +164,9 @@ public abstract class drawnObject {
 	
 	// Draw in front?
 	protected boolean forceInFront = false;
+	
+	// Does this object exist?
+	private boolean exists = true;
 	
 	// Draw X and Y, different from X and Y.
 	private int drawX;
@@ -395,6 +398,7 @@ public abstract class drawnObject {
 	
 	// Destroy an object.
 	public void destroy() {
+		setExists(false);
 		drawnObject.removeObject(this);
 		
 		// If it's a unit, remove it from list.
@@ -585,6 +589,22 @@ public abstract class drawnObject {
 
 	public void setInteractable(boolean interactable) {
 		this.interactable = interactable;
+	}
+
+	public boolean isForceInFront() {
+		return forceInFront;
+	}
+
+	public void setForceInFront(boolean forceInFront) {
+		this.forceInFront = forceInFront;
+	}
+
+	public boolean isExists() {
+		return exists;
+	}
+
+	public void setExists(boolean exists) {
+		this.exists = exists;
 	}
 	
 }

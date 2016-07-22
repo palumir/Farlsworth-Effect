@@ -43,9 +43,9 @@ public abstract class zone {
 	
 	// Load the zone.
 	public void loadZone() {
+		currentZone = this;
 		loadSpecificZoneStuff();
 		zoneLoaded = true;
-		currentZone = this;
 	}
 	
 	// Load specific zone stuff

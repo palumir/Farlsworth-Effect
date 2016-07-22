@@ -4,6 +4,7 @@ import java.util.Random;
 
 import doodads.general.lightSource;
 import drawing.drawnObject;
+import drawing.userInterface.interfaceObject;
 import interactions.event;
 import interactions.interactBox;
 import interactions.quest;
@@ -12,6 +13,7 @@ import sounds.music;
 import sounds.sound;
 import terrain.chunk;
 import terrain.region;
+import terrain.atmosphericEffects.atmosphericEffect;
 import terrain.atmosphericEffects.fog;
 import units.player;
 import units.unit;
@@ -30,25 +32,41 @@ public abstract class utility {
 	// No where else to put this.
 	public static void updateGame() {
 		
-		// Update units.
-		if(unit.getAllUnits() != null) {
-			for(int i = 0; i < unit.getAllUnits().size(); i++) {
-				drawnObject d = unit.getAllUnits().get(i);
-				d.update();
+		// Tick timer
+		time.tickTimer();
+		
+		// Update interface objects (but not atmospheric effects)
+		if(interfaceObject.interfaceObjects != null) {
+			for(int i = 0; i < interfaceObject.interfaceObjects.size(); i++) {
+				drawnObject d = interfaceObject.interfaceObjects.get(i);
+				if(!(d instanceof atmosphericEffect)) {
+					d.update();
+				}
 			}
 		}
 		
-		// Update other drawn objects.
-		if(drawnObject.objects != null) {
-			for(int i = 0; i < drawnObject.objects.size(); i++) {
-				drawnObject d = drawnObject.objects.get(i);
-				if(!(d instanceof unit)) d.update();
+		// If timer is going
+		if(!time.paused) {
+			// Update units.
+			if(unit.getAllUnits() != null) {
+				for(int i = 0; i < unit.getAllUnits().size(); i++) {
+					drawnObject d = unit.getAllUnits().get(i);
+					d.update();
+				}
 			}
+			
+			// Update other drawn objects.
+			if(drawnObject.objects != null) {
+				for(int i = 0; i < drawnObject.objects.size(); i++) {
+					drawnObject d = drawnObject.objects.get(i);
+					if(!(d instanceof unit) && (!(d instanceof interfaceObject) || d instanceof atmosphericEffect)) d.update();
+				}
+			}
+			
+			// Update the current zone.
+			player currPlayer = player.getCurrentPlayer();
+			if(currPlayer != null && currPlayer.getCurrentZone() != null) currPlayer.getCurrentZone().update();
 		}
-		
-		// Update the current zone.
-		player currPlayer = player.getCurrentPlayer();
-		if(currPlayer != null && currPlayer.getCurrentZone() != null) currPlayer.getCurrentZone().update();
 	
 	}
 	
@@ -66,6 +84,7 @@ public abstract class utility {
 		time.initiate();
 		sound.initiate();
 		drawnObject.initiate();
+		interfaceObject.initiate();
 		fog.initiate();
 		interactBox.initiate();
 		region.initiate();
