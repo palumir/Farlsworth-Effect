@@ -95,7 +95,7 @@ public class gameCanvas extends JComponent {
 
 		// Start the game timer.
 		this.setOpaque(true); // we paint every pixel; Java can optimize
-		time.initiateGameTimer(12, gamePerformer);
+		time.initiateGameTimer(gamePerformer);
 		time.initiateDrawTimer(1000/maxFPS, drawPerformer);
 		this.setFocusable(true);
 		this.setFocusTraversalKeysEnabled(false);
@@ -113,6 +113,7 @@ public class gameCanvas extends JComponent {
 				// Change the font.
 				drawnObject.DEFAULT_FONT = new Font(drawnObject.DEFAULT_FONT_NAME, Font.PLAIN, (int)(drawnObject.DEFAULT_FONT_SIZE*scaleX));
 				
+				// Repaint
 	            repaint();
 	        }
 		});

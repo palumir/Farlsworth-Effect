@@ -28,6 +28,7 @@ import doodads.sheepFarm.well;
 import doodads.sheepFarm.woolPiece;
 import drawing.background;
 import drawing.userInterface.tooltipString;
+import effects.effectTypes.fire;
 import interactions.event;
 import items.bottle;
 import items.item;
@@ -35,6 +36,7 @@ import items.bottles.normalBottle;
 import items.weapons.dagger;
 import modes.topDown;
 import sounds.music;
+import sounds.sound;
 import terrain.chunk;
 import terrain.atmosphericEffects.fog;
 import terrain.atmosphericEffects.storm;
@@ -75,6 +77,9 @@ public class sheepFarm extends zone {
 	// Static fence so farlsworth can be attached to it.
 	public static ArrayList<chunk> farlsworthFence;
 	
+	// Lightning tree
+	public static tree lightningTree;
+	
 	// References we will use throughout.
 	static unit u;
 	static chunk c;
@@ -88,6 +93,7 @@ public class sheepFarm extends zone {
 	public static event gameSavedForIdiots;
 	public static event uCanSaveAtWater;
 	public static event stormInProgress;
+	public static event isOnFire;
 	
 	// Storm booleans
 	public static boolean stormStarted = false;
@@ -278,7 +284,6 @@ public class sheepFarm extends zone {
 		// Create final area
 		createFinalArea();
 		
-		
 		// Spawn units
 		spawnUnits();
 		
@@ -364,7 +369,7 @@ public class sheepFarm extends zone {
 	public void createFinalArea() {
 		
 		// Lightning tree
-		tree lightningTree = new tree(-758,-3937,0);
+		lightningTree = new tree(-758,-3937,0);
 		
 		// Trees
 		c = new tree(-291,-3931,2);
@@ -2353,6 +2358,9 @@ public class sheepFarm extends zone {
 		
 		// Storm stuff
 		stormInProgress = new event("sheepFarmStormInProgress");
+		
+		// Is the zone on fire?
+		isOnFire = new event("sheepFarmIsOnFire");
 	}
 	
 	// Deal with the first well we encounters.
@@ -2407,7 +2415,30 @@ public class sheepFarm extends zone {
 	@Override
 	public void update() {
 		startStormFromFog();
+		doForestFireStuff();
 		dealWithRegionStuff();
+	}
+	
+	long lastFireSound = 0;
+	float playEvery = 6f;
+	
+	// Do forest fire stuff.
+	public void doForestFireStuff() {
+		
+		if(isOnFire != null && isOnFire.isCompleted()) {
+			// Play fire sound
+			if(lastFireSound == 0) {
+				lastFireSound = time.getTime();
+				sound s = new sound(fire.forestFire);
+				s.start();
+			}
+			
+			else if(time.getTime() - lastFireSound > playEvery*1000) {
+				lastFireSound = time.getTime();
+				sound s = new sound(fire.forestFire);
+				s.start();
+			}
+		}
 	}
 
 	// Get the player location in the zone.

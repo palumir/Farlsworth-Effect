@@ -125,6 +125,12 @@ public abstract class effect extends drawnObject  {
 		if(hasATimer && time.getTime() - timeStarted >= animationDuration*1000) {
 			this.destroy();
 		}
+		doSpecificEffectStuff();
+	}
+	
+	// Do specific effect stuff
+	public void doSpecificEffectStuff() {
+		
 	}
 
 	

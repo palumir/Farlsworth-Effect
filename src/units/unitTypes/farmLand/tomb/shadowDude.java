@@ -101,8 +101,9 @@ public class shadowDude extends unit {
 	
 	boolean illuminated = false;
 	long lastHurt = 0;
-	int damage = 10;
-	float hurtEvery = 0.10f;
+	int damage = 6;
+	float slowTo = 0.1f;
+	float hurtEvery = 0.1f;
 	
 	public void hurtPeople() {
 		// If someone is in the explosion radius, hurt.
@@ -112,7 +113,7 @@ public class shadowDude extends unit {
 			for(int i = 0; i < hurtUnits.size(); i++) {
 				if(hurtUnits.get(i) instanceof player && !hurtUnits.get(i).isIlluminated() && !illuminated) {
 					hurtUnits.get(i).hurt(damage, 1f);
-					darkSlow d = new darkSlow(hurtUnits.get(i), hurtEvery);
+					darkSlow d = new darkSlow(hurtUnits.get(i), hurtEvery, slowTo);
 				}
 			}
 		}

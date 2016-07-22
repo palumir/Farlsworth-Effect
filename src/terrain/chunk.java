@@ -60,6 +60,9 @@ public class chunk extends drawnObject {
 	
 	// Is the chunk passable or impassable?
 	private boolean passable;
+	
+	// Is the chunk flammable?
+	private boolean flammable = false;
 
 	//////////////
 	/// MEHODS ///
@@ -344,6 +347,11 @@ public class chunk extends drawnObject {
 		impassableChunks = new CopyOnWriteArrayList<chunk>();
 	}
 	
+	// Ignite. Only does something for flammable chunks.
+	public void ignite() {
+		
+	}
+	
 	// Sort chunks.
 	public static void sortChunks() {
 		Collections.sort(impassableChunks, chunkComparator);
@@ -380,6 +388,14 @@ public class chunk extends drawnObject {
 				sortChunks();
 			}
 		}
+	}
+
+	public boolean isFlammable() {
+		return flammable;
+	}
+
+	public void setFlammable(boolean flammable) {
+		this.flammable = flammable;
 	}
 	
 }

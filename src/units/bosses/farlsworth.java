@@ -2,10 +2,14 @@ package units.bosses;
 
 import java.util.ArrayList;
 
+import doodads.sheepFarm.fireLog;
 import doodads.sheepFarm.woolPiece;
 import drawing.spriteSheet;
 import drawing.animation.animation;
 import drawing.animation.animationPack;
+import effects.effectTypes.lightningStrike;
+import effects.effectTypes.poisonBall;
+import effects.effectTypes.spinningFireLog;
 import drawing.spriteSheet.spriteSheetInfo;
 import interactions.event;
 import interactions.interactBox;
@@ -94,6 +98,8 @@ public class farlsworth extends boss {
 	
 	// Fence attached
 	private static ArrayList<chunk> attachedFence = null;
+	private static chunk attachedLog = null;
+	private static spinningFireLog projectileLog = null;
 	
 	// Events
 	public static event isFenceAttached;
@@ -109,10 +115,35 @@ public class farlsworth extends boss {
 	private static event didYouOpenTheGateForHim; // Did you open the fence for him?
 	private static event didYouTryToGrabHim; // You tried to grab him at the flower field.
 	private static event doYouSpeakSheep; // Do you speak sheep?
+	private static event didYouSetTheForestOnFire; // Is the forest on fire?
 	
 	///////////////
 	/// METHODS ///
 	///////////////
+	
+	// Does Farlsworth like you? A function that determines if he does or not.
+	public boolean doesFarlsworthLikeYou() {
+		float numberOfDislikes = 0;
+		float numberOfPossibleDislikes = 0;
+		if(pastSpawnFarm.isCompleted()) {
+			if(didYouLieToHimAboutHavingTheKey.isCompleted()) numberOfDislikes++;
+			if(!didYouOpenTheGateForHim.isCompleted()) numberOfDislikes++;
+			if(!didYouTellHimAboutYourAdventure.isCompleted()) numberOfDislikes++;
+			numberOfPossibleDislikes += 3;
+		}
+		else return false;
+		if(pastFlowerPatch.isCompleted()) {
+			if(didYouTryToGrabHim.isCompleted()) numberOfDislikes++;
+			numberOfPossibleDislikes += 1;
+		}
+		if(pastTombEntrance.isCompleted()) {
+			if(doYouSpeakSheep.isCompleted()) if(numberOfDislikes>=1) numberOfDislikes--;
+		}
+		if(pastTombExit.isCompleted()) {
+			
+		}
+		return numberOfDislikes/numberOfPossibleDislikes <= .5f;
+	}
 	
 	// Create interact sequence
 	public interactBox makeNormalInteractSequence() {
@@ -285,10 +316,10 @@ public class farlsworth extends boss {
 			s = ben.addChild(null, "Bah.");
 			s.setTalker("Ben");
 			s = s.addChild(null, "What are you doing here?");
-			s = s.addChild(null, "This is my adventurer.");
+			s = s.addChild(null, "This is my human.");
 			s = s.addChild(null, "Go find your own.");
 			s = s.addChild(null, "Get your wool together, man.");
-			s = s.addChild(null, "Go home Ben.");
+			s = s.addChild(null, "Go home.");
 			s = s.addChild(null, "Baaaah.");
 			s.setTalker("Ben");
 			s = s.addChild(null, "Sorry about him, he's been going through rough times.");
@@ -304,6 +335,81 @@ public class farlsworth extends boss {
 			s = s.addChild(null, "Good luck.");
 			s.setEnd();
 		}
+		else if(!pastTombExit.isCompleted()) {
+			
+			if(doesFarlsworthLikeYou()) {
+				startOfConversation = new textSeries(null, "To be honest, buddy ...");
+				s = startOfConversation.addChild(null, "I didn't think you'd make it through.");
+				s = s.addChild(null, "But look at you. You're more alive than ever.");
+				s = s.addChild(null, "And the look on your face ...");
+				s = s.addChild(null, "... it's the same as it was before we went in.");
+				s = s.addChild(null, "That was easy for you, wasn't it?");
+				s = s.addChild(null, "I get it now ... I get you.");
+				s = s.addChild(null, "The fire in your eyes. I can see it.");
+				s = s.addChild(null, "Sheep ... human... it doesn't matter.");
+				s = s.addChild(null, "You are just like I was.");
+				s = s.addChild(null, "Ah, those were the glory days.");
+				s = s.addChild(null, "But life isn't a big friggin adventure.");
+				s = s.addChild(null, "You're blissfully and dangerously ignorant.");
+				s = s.addChild(null, "There are repercussions for actions, damnit.");
+				s = s.addChild(null, "You will have to learn that the hard way.");
+				
+				// Lightning strikes
+				s = s.addChild(null, "Well, you wanted an adventure, didn't you?");
+				s = s.addChild(null, "It looks like you're getting one.");
+				s = s.addChild(null, "Try to keep up.");
+				s.setEnd();
+				// Leave, lightning path, he likes you a little more.
+				
+			}
+			else {
+				startOfConversation = new textSeries(null, "Persistent.");
+				s = startOfConversation.addChild(null, "But annoying.");
+				s = s.addChild(null, "Smart.");
+				s = s.addChild(null, "But ignorant.");
+				s = s.addChild(null, "You know, I'd be lying if I said I understood you.");
+				s = s.addChild(null, "I can't believe you'd go this far just for some wool.");
+				s = s.addChild(null, "There's got to be more to it, damnit.");
+				s = s.addChild(null, "But I can't figure it out.");
+				s = s.addChild(null, "What drives you?");
+				
+				// Lightning strikes
+				s = s.addChild(null, "Because it's certainly not fear.");
+				s = s.addChild(null, "Look at you.");
+				s = s.addChild(null, "Wolf slayer.");
+				s = s.addChild(null, "Tomb raider.");
+				s = s.addChild(null, "Sheep chaser.");
+				s = s.addChild(null, "A big, fearless, dumby.");
+				s = s.addChild(null, "Scared of nothing.");
+				s = s.addChild(null, "Just like I was.");
+				s = s.addChild(null, "Well, here's a reality check buddy.");
+				textSeries imbecile = s.addChild(null, "You should be friggin scared.");
+				
+				textSeries dodge = imbecile.addChild("Dodge","Uh oh.");
+				s = dodge.addChild(null, "That's not good.");
+				s = s.addChild(null, "Look at what you did.");
+				s = s.addChild(null, "Everything's on fire.");
+				s = s.addChild(null, "This is all your fault.");
+				s = s.addChild(null, "He would... I would never do something like this.");
+				s = s.addChild(null, "Stop following me, damnit.");
+				s.setEnd();
+				// Leave, fire path, he likes you less.
+				
+				textSeries hit = imbecile.addChild("Get hit","Oh my goodness.");
+				s = hit.addChild(null, "I'm friggin sorry, bud.");
+				s = s.addChild(null, "I thought you would dodge that.");
+				s = s.addChild(null, "Boy, that could have been a disaster.");
+				s = s.addChild(null, "Throwing fire logs in a forest is dangerous stuff.");
+				s = s.addChild(null, "We could have set the entire forest on fire.");
+				s = s.addChild(null, "Well, this storm is getting serious.");
+				s = s.addChild(null, "I'd tell you following me is dangerous and to stop ...");
+				s = s.addChild(null, "But like I said, you're persistent.");
+				s = s.addChild(null, "So you will persist.");
+				s.setEnd();
+				// Leave, lightning path, he likes you a little more.
+				
+			}
+		}
 		
 		return new interactBox(startOfConversation, stringUtils.toTitleCase(DEFAULT_UNIT_NAME), true);
 	}
@@ -313,6 +419,7 @@ public class farlsworth extends boss {
 	private long waitStart = 0;
 	private float waitFor = 0;
 	private boolean waiting = false;
+	private boolean didYouDodgeTheLog = false;
 	
 	// Ben.
 	sheep ben;
@@ -738,6 +845,301 @@ public class farlsworth extends boss {
 				currPlayer.stopMove("all");
 				sequencePart++;
 			}
+			
+			// Lightning strike soon.
+			if(sequencePart == 2 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getTextOnPress()!=null) &&
+					((interactSequence.getTheText().getTextOnPress().contains("hard way")))) {
+				
+				// Lock sequence.
+				interactSequence.setLocked(true);
+				
+				// Wait.
+				waiting = true;
+				waitFor = 2.5f;
+				waitStart = time.getTime();
+				sequencePart++;
+			}
+			
+			// Lightning strike soon.
+			if(sequencePart == 2 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getTextOnPress()!=null) &&
+					((interactSequence.getTheText().getTextOnPress().contains("What drives you?")))) {
+				
+				// Lock sequence.
+				interactSequence.setLocked(true);
+				
+				// Wait.
+				waiting = true;
+				waitFor = 1.25f;
+				waitStart = time.getTime();
+				sequencePart++;
+			}
+			
+			// Strike.
+			if(sequencePart == 3 && time.getTime() - waitStart > waitFor*1000) {
+				
+				// Strike, ignite tree.
+				lightningStrike.strikeAt(-758,-3937+10);
+				sheepFarm.lightningTree.ignite();
+				
+				// Wait.
+				waiting = true;
+				waitFor = 1f;
+				waitStart = time.getTime();
+				sequencePart++;				
+			}
+			
+			// Look at tree.
+			if(sequencePart == 4 && time.getTime() - waitStart > waitFor*1000) {
+				
+				// Turn
+				setFacingDirection("Up");
+				
+				// Wait.
+				waiting = true;
+				waitFor = 1.5f;
+				waitStart = time.getTime();
+				sequencePart++;				
+			}
+			
+			// Look back.
+			if(sequencePart == 5 && time.getTime() - waitStart > waitFor*1000) {
+				
+				// Turn
+				setFacingDirection("Right");
+				
+				// Wait.
+				waiting = true;
+				waitFor = 0.5f;
+				waitStart = time.getTime();
+				sequencePart++;	
+				
+			}
+			
+			// Speak
+			if(sequencePart == 6 && time.getTime() - waitStart > waitFor*1000) {
+			
+				// Advance and unlock sequence.
+				interactSequence.goToNext();
+				interactSequence.setLocked(false);
+				sequencePart++;	
+			}
+			
+			///////////////
+			/// IF HE LIKES YOU
+			////////////////
+			if(sequencePart == 7 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getTextOnPress()!=null) &&
+					((interactSequence.getTheText().getTextOnPress().contains("keep up")))) {
+				
+				// Lock sequence.
+				interactSequence.setLocked(false);
+				
+				// Wait.
+				sequencePart = 100;
+			}
+			
+			///////////////
+			// IF HE DOESNT LIKE YOU
+			//////////////
+			if(sequencePart == 7 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getTextOnPress()!=null) &&
+					(interactSequence.getTheText().getTextOnPress().contains("Look at you."))) {
+				
+				this.setMoveSpeed(1);
+				moveTo(this.getIntX(),this.getIntY() - 15);
+				sequencePart++;	
+			}
+			
+			if(sequencePart == 8 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getTextOnPress()!=null) &&
+					(interactSequence.getTheText().getTextOnPress().contains("Wolf slayer"))) {
+				
+				// Move up to tree.
+				attachedLog = new fireLog(0,0,0);
+				moveTo(this.getIntX(),this.getIntY() + 25);
+				sequencePart++;	
+			}
+			
+			if(sequencePart == 9 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getTextOnPress()!=null) &&
+					(interactSequence.getTheText().getTextOnPress().contains("Tomb raider"))) {
+				
+				moveTo(this.getIntX()-25,this.getIntY());
+				sequencePart++;	
+			}
+			
+			if(sequencePart == 10 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getTextOnPress()!=null) &&
+					(interactSequence.getTheText().getTextOnPress().contains("Sheep chaser"))) {
+				
+				moveTo(this.getIntX(),this.getIntY()+25);
+				sequencePart++;	
+			}
+			
+			if(sequencePart == 11 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getTextOnPress()!=null) &&
+					(interactSequence.getTheText().getTextOnPress().contains("fearless, dumby"))) {
+				
+				moveTo(this.getIntX()+25,this.getIntY());
+				sequencePart++;	
+			}
+			
+			if(sequencePart == 12 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getTextOnPress()!=null) &&
+					(interactSequence.getTheText().getTextOnPress().contains("Scared of nothing"))) {
+				
+				moveTo(this.getIntX(),this.getIntY()+25);
+				sequencePart++;	
+			}
+			
+			if(sequencePart == 13 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getTextOnPress()!=null) &&
+					(interactSequence.getTheText().getTextOnPress().contains("Just like I was"))) {
+				
+				moveTo(this.getIntX(),this.getIntY()-25);
+				sequencePart++;	
+			}
+			
+			if(sequencePart == 14 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getTextOnPress()!=null) &&
+					(interactSequence.getTheText().getTextOnPress().contains("Well, here's"))) {
+				
+				setFacingDirection("Right");
+				sequencePart++;	
+			}
+			
+			if(sequencePart == 15 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getTextOnPress()!=null) &&
+					(interactSequence.getTheText().getTextOnPress().contains("be friggin scared"))) {
+				
+				// Wait
+				waitFor = 1.5f;
+				waitStart = time.getTime();
+				sequencePart++;	
+				
+				// Lock.
+				interactSequence.setLocked(true);
+			}
+			
+			if(sequencePart == 16 && time.getTime() - waitStart > waitFor*1000) {
+				
+				// Unlock and progress sequence.
+				interactSequence.goToNext();
+				
+				// Hurl log.
+				attachedLog.destroy();
+				attachedLog = null;
+				projectileLog = new spinningFireLog((int)getFloatX() + getWidth() - fireLog.DEFAULT_CHUNK_WIDTH/2+5,
+						(int)getFloatY()-7,
+						player.getCurrentPlayer().getIntX()+player.getCurrentPlayer().getWidth()/2,
+						player.getCurrentPlayer().getIntY()+player.getCurrentPlayer().getHeight()/2,
+						1);
+
+				// Move.
+				this.setMoveSpeed(4.5f);
+				moveTo(this.getIntX()+20,this.getIntY());
+				
+				// Wait
+				waitFor = 0.25f;
+				waitStart = time.getTime();
+				sequencePart++;	
+			}
+			
+			// Pause time and give option
+			if(sequencePart == 17 && time.getTime() - waitStart > waitFor*1000) {
+				time.setTimeSpeed(.1f);
+				
+				// Unlock
+				interactSequence.setLocked(false);
+				sequencePart++;
+			}
+			
+			// Log hits player.
+			if(sequencePart == 18 && !projectileLog.isExists()) {
+				
+				// Set time back.
+				time.setTimeSpeed(1);
+				
+				// Advance sequence.
+				interactSequence.goToNext(1);
+				sequencePart++;
+			}
+			
+			// Player selects dodge.
+			if(sequencePart == 18 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getButtonText()!=null) &&
+					(interactSequence.getTheText().getButtonText().contains("Dodge"))) {
+				
+				// Lock sequence
+				interactSequence.setLocked(true);
+				
+				// Set time back.
+				time.setTimeSpeed(1);
+				
+				// Set the log to be allied incase it hits.
+				projectileLog.setAllied(true);
+				
+				// You dodged the log.
+				didYouDodgeTheLog = true;
+				
+				// Move the player
+				currPlayer.moveTo(currPlayer.getIntX(), currPlayer.getIntY() - 30);
+				sequencePart++;
+			}
+			
+			// Player selects get hit.
+			if(sequencePart == 18 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getButtonText()!=null) &&
+					(interactSequence.getTheText().getButtonText().contains("Get hit"))) {
+				
+				// Set time back.
+				time.setTimeSpeed(1);
+				
+				// Get hit
+				sequencePart++;
+			}
+			
+			// Face right
+			if(sequencePart == 19 && !currPlayer.isMoving() && didYouDodgeTheLog && projectileLog.getIntX() > currPlayer.getIntX() + 40) {
+				currPlayer.setFacingDirection("Right");
+			}
+			
+			// Look towards Farlsworth
+			if(sequencePart == 20 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getTextOnPress()!=null) &&
+					(interactSequence.getTheText().getTextOnPress().contains("what you did"))) {
+				currPlayer.setFacingDirection("Left");
+			}
+			
+			// Unlock sequence if it's after 18. The log exploded.
+			if(sequencePart == 19 && !projectileLog.isExists()) {
+				interactSequence.setLocked(false);
+				sequencePart++;
+				
+				// Set that the forest is now on fire if you dodged.
+				if(didYouDodgeTheLog) {
+					this.setMoveSpeed(2.5f);
+					patrolTo(this.getIntX(), this.getIntY() + 50);
+					interactSequence.goToNext();
+					sheepFarm.isOnFire.setCompleted(true);
+					didYouSetTheForestOnFire.setCompleted(false);
+				}
+			}
+			
+			// If we reach the end.
+			if(sequencePart == 20 && interactSequence.getTheText().isEnd()) {
+				sequencePart = 100;
+			}
+			
+			// Run
+			if(sequencePart == 100) {
+				
+				// Follow path.
+				p = new ArrayList<intTuple>();
+				p.add(new intTuple(-1149,-3905));
+				p.add(new intTuple(-1527,-3905));
+				p.add(new intTuple(-1867,-3905));
+				p.add(new intTuple(-2168,-3905));
+				
+				// Move story along.
+				this.stopPatrol();
+				this.setMoveSpeed(4.5f);
+				interactSequence.setUnescapable(false);
+				followPath(p);
+				pastTombExit.setCompleted(true);
+				saveState.setQuiet(true);
+				saveState.createSaveState();
+				saveState.setQuiet(false);
+				sequencePart = 0;
+				
+			}
 		}
 		else {	
 			// He's no longer in the zone.
@@ -768,6 +1170,9 @@ public class farlsworth extends boss {
 		
 		// Facing direction.
 		facingDirection = "Up";
+		
+		// He has no collision
+		collisionOn = false;
 		
 		// Set interactable.
 		setInteractable(true);
@@ -824,6 +1229,7 @@ public class farlsworth extends boss {
 		didYouTellHimAboutYourAdventure = new event("farlsworthDidYouTellHimAboutYourAdventure");
 		didYouLieToHimAboutHavingTheKey = new event("farlsworthDidYouLieToHimAboutHavingTheKey");
 		doYouSpeakSheep = new event("farlsworthDoYouSpeakSheep");
+		didYouSetTheForestOnFire = new event("farlsworthDidYouSetTheForestOnFire");
 		
 		// If he's lost, don't spawn him in the farm.
 		if(pastSpawnFarm.isCompleted() && 
@@ -869,6 +1275,7 @@ public class farlsworth extends boss {
 	
 	// Farlsworth AI
 	public void updateUnit() {
+		//printFarlsworthEvents();
 		
 		// Stuff to do in non-boss fight mode.
 		if(!bossFight) {
@@ -913,6 +1320,28 @@ public class farlsworth extends boss {
 			for(int i = 0; i < attachedFence.size(); i++) {
 				attachedFence.get(i).setFloatX(attachedFence.get(i).getFloatX() + moveX);
 				attachedFence.get(i).setFloatY(attachedFence.get(i).getFloatY() + moveY);
+			}
+		}
+		
+		// Move the log.
+		if(attachedLog != null) {
+			attachedLog.setForceInFront(false);
+			if(facingDirection.equals("Left")) {
+				attachedLog.setFloatX((int)getFloatX() - fireLog.DEFAULT_CHUNK_WIDTH/2-5);
+				attachedLog.setFloatY((int)getFloatY()-7);
+			}
+			if(facingDirection.equals("Right")) {
+				attachedLog.setFloatX((int)getFloatX() + getWidth() - fireLog.DEFAULT_CHUNK_WIDTH/2+5);
+				attachedLog.setFloatY((int)getFloatY()-7);
+			}
+			if(facingDirection.equals("Down")) {
+				attachedLog.setFloatX((int)getFloatX() - fireLog.DEFAULT_CHUNK_WIDTH/2+10);
+				attachedLog.setFloatY(getFloatY()+1);
+				attachedLog.setForceInFront(true);
+			}
+			if(facingDirection.equals("Up")) {
+				attachedLog.setFloatX((int)getFloatX() - fireLog.DEFAULT_CHUNK_WIDTH/2+10);
+				attachedLog.setFloatY((int)getFloatY() - fireLog.DEFAULT_CHUNK_HEIGHT);
 			}
 		}
 	}

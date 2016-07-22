@@ -1,14 +1,17 @@
 package effects.effectTypes;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import drawing.camera;
+import drawing.drawnObject;
 import drawing.spriteSheet;
 import drawing.spriteSheet.spriteSheetInfo;
 import effects.effect;
 import effects.effectType;
 import modes.mode;
 import sounds.sound;
+import terrain.chunk;
 import units.humanType;
 import units.unit;
 import units.unitType;
@@ -32,12 +35,15 @@ public class fire extends effect {
 	public static int DEFAULT_TOPDOWN_WIDTH = 30;
 	public static int DEFAULT_TOPDOWN_ADJUSTMENT_Y = 65;
 	
+	// Ignite sound
+	public static String forestFire = "sounds/effects/natural/forestFire.wav";
+	
 	////////////////
 	/// DEFAULTS ///
 	////////////////
 	
 	// Default name.
-	private static String DEFAULT_EFFECT_NAME = "fire";
+	public static String DEFAULT_EFFECT_NAME = "fire";
 	
 	// Effect sprite stuff.
 	private static String DEFAULT_EFFECT_SPRITESHEET = "images/effects/" + DEFAULT_EFFECT_NAME + ".png";
@@ -71,7 +77,7 @@ public class fire extends effect {
 		super(theEffectType, newX, newY, true);
 		
 		// Force in front
-		forceInFront = true;
+		setForceInFront(true);
 		
 		// Make adjustments on hitbox if we're in topDown.
 		setHeight(getDefaultHeight());
@@ -81,6 +87,25 @@ public class fire extends effect {
 		// Has no timer.
 		hasATimer = false;
 
+	}
+	
+	// Ignite ruffage with fire.
+	public static void igniteRuffageInBox(int x1, int y1, int x2, int y2) {
+		ArrayList<chunk> chunksInArea = chunk.getImpassableChunksInBox(x1, y1, x2, y2);
+		ArrayList<chunk> flammableChunks = new ArrayList<chunk>();
+		
+		if(chunksInArea!=null) {
+			for(int i = 0; i < chunksInArea.size(); i++) {
+				if(chunksInArea.get(i).isFlammable()) {
+					flammableChunks.add(chunksInArea.get(i));
+				}
+			}
+			
+			// Ignite all flammable chunks.
+			for(int i = 0; i < flammableChunks.size(); i++) {
+				flammableChunks.get(i).ignite();
+			}
+		}
 	}
 	
 	///////////////////////////

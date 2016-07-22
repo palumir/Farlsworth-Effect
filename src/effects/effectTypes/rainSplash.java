@@ -70,9 +70,6 @@ public class rainSplash extends effect {
 	public rainSplash(int newX, int newY) {
 		super(theEffectType, newX, newY);
 		
-		// Force in front
-		forceInFront = true;
-		
 		// Make adjustments on hitbox if we're in topDown.
 		setHeight(getDefaultHeight());
 		setWidth(getDefaultWidth());

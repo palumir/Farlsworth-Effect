@@ -9,6 +9,7 @@ import effects.effectTypes.rainFall;
 import interactions.interactBox;
 import interactions.textSeries;
 import modes.mode;
+import sounds.sound;
 import terrain.chunk;
 import terrain.chunkType;
 import terrain.generalChunkType;
@@ -20,6 +21,7 @@ import utilities.stringUtils;
 import utilities.time;
 import utilities.utility;
 import zones.zone;
+import zones.farmLand.sheepFarm;
 
 public class tree extends chunk {
 	
@@ -40,12 +42,23 @@ public class tree extends chunk {
 	// The actual type.
 	private static generalChunkType typeReference = new generalChunkType(DEFAULT_CHUNK_NAME, DEFAULT_CHUNK_SPRITESHEET, DEFAULT_CHUNK_WIDTH, DEFAULT_CHUNK_HEIGHT); 
 	
+	// Ignite time
+	long igniteTime = 0;
+	float igniteEvery = 0.15f;
+	boolean ignitedAround = false;
+	
 	////////////////
 	/// FIELDS /////
 	////////////////
 	
 	// Sequence
 	private interactBox interactSequence;
+	
+	// Is the tree on fire?
+	private boolean ignited = false;
+	
+	// Type of tree
+	private int type = 0;
 	
 	///////////////
 	/// METHODS ///
@@ -73,6 +86,12 @@ public class tree extends chunk {
 	@Override
 	public void update() {
 		doInteractStuff();
+		
+		// Ignite other trees
+		if(ignited && !ignitedAround && time.getTime() - igniteTime > igniteEvery*1000) {
+			ignitedAround = true;
+			fire.igniteRuffageInBox(getIntX()-20, getIntY()-20, getIntX() + getWidth()+20, getIntY() + getHeight()+20);
+		}
 	}
 	
 	// Interact with object. Should be over-ridden.
@@ -81,12 +100,49 @@ public class tree extends chunk {
 		interactSequence.toggleDisplay();
 	}
 	
+	// Ignite
+	@Override
+	public void ignite() {
+		
+		if(!ignited) {
+			
+			// Set ignite time.
+			igniteTime = time.getTime();
+			ignited = true;
+			
+			// Tree top
+			int minX = getIntX() - 35;
+			int maxX = getIntX() + getWidth() + 35;
+			int minY = getIntY() - 105;
+			int maxY = getIntY()-45;
+			for(int i = minX; i < maxX; i += fire.getDefaultWidth()/3) {
+				for(int j = minY; j < maxY; j += fire.getDefaultWidth()/3) {
+					int rand = utility.RNG.nextInt(15);
+					int randX = 4 - 8*utility.RNG.nextInt(2);
+					int randY = 4 - 8*utility.RNG.nextInt(2);
+					if(rand == 1) { fire f = new fire(i - fire.getDefaultWidth()/2 + randX,j - fire.getDefaultHeight()/2+randY); }
+				}
+			}
+			
+			// Trunk
+			int minYTrunk = getIntY()-30;
+			int maxYTrunk = getIntY()+10;
+			for(int j = minYTrunk; j < maxYTrunk; j += fire.getDefaultWidth()/4) {
+				int rand = utility.RNG.nextInt(2);
+				int randX = 4 - 8*utility.RNG.nextInt(2);
+				int randY = 4 - 8*utility.RNG.nextInt(2);
+				if(rand==1) { fire f = new fire(getIntX() + randX,j - fire.getDefaultHeight()/2+randY); }
+			}
+		}
+	}
+	
 	///////////////
 	/// METHODS ///
 	///////////////
 	// Constructor
 	public tree(int newX, int newY, int i) {
 		super(typeReference, newX, newY, i, 0);
+		type = i;
 		if(mode.getCurrentMode().equals("topDown")) {
 			setHitBoxAdjustmentY(58);
 			setWidth(30);
@@ -100,18 +156,12 @@ public class tree extends chunk {
 		setInteractable(true);
 		setPassable(false);
 		
+		// Set to be flammable
+		setFlammable(true);
+		
 		// If we are in sheepFarm and it's on fire, light everything on fire.
-		if(false) {
-			int rand = 1 + utility.RNG.nextInt(5);
-			for(int j = 0; j < rand; j++) {
-				int minX = getIntX() - 15;
-				int maxX = getIntX() + getWidth() + 15;
-				int minY = getIntY() - 100;
-				int maxY = getIntY()-50;
-				int randomX = minX + utility.RNG.nextInt(maxX - minX);
-				int randomY = minY + utility.RNG.nextInt(maxY - minY);
-				fire f = new fire(randomX - fire.getDefaultWidth()/2,randomY - fire.getDefaultHeight()/2);
-			}
+		if(zone.getCurrentZone() != null && zone.getCurrentZone().getName().equals("sheepFarm") && sheepFarm.isOnFire != null && sheepFarm.isOnFire.isCompleted()) {
+			ignite();
 		}
 	}
 }

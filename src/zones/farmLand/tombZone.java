@@ -3,16 +3,13 @@ package zones.farmLand;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-import doodads.sheepFarm.caveEnterance;
 import doodads.sheepFarm.well;
 import doodads.tomb.stairsUp;
 import doodads.tomb.wallTorch;
 import drawing.background;
 import drawing.spriteSheet;
 import interactions.event;
-import items.weapons.torch;
 import modes.platformer;
-import modes.topDown;
 import sounds.music;
 import terrain.chunk;
 import terrain.atmosphericEffects.fog;
@@ -378,6 +375,12 @@ public void makeShadowSquareTopRight (int topLeftDudePosX, int topLeftDudePosY, 
 			}
 	}
 	
+	public void shadowDudePatrolPath(int shadowDudeX, int shadowDudeY, ArrayList<intTuple> path, float moveSpeed) {
+		u = new shadowDude(shadowDudeX,shadowDudeY);
+		u.patrolPath(path);
+		u.setMoveSpeed(moveSpeed);
+	}
+	
 	public void shadowDudePatrol(int shadowDudeX, int shadowDudeY, int patrolToX, int patrolToY, float moveSpeed) {
 		u = new shadowDude(shadowDudeX,shadowDudeY);
 		u.patrolTo(patrolToX, patrolToY);
@@ -477,12 +480,10 @@ public void makeShadowSquareTopRight (int topLeftDudePosX, int topLeftDudePosY, 
 		c = new wallTorch(2525,-40);
 		
 		for(int i=0; i <3; i++) {
-			u = new shadowDude(2800,-6 - i*50);
 			path = new ArrayList<intTuple>();
 			path.add(new intTuple(2525,-6 - i*50));
 			path.add(new intTuple(3285,-6 - i*50));
-			u.patrolPath(path);
-			u.setMoveSpeed(5);
+			shadowDudePatrolPath(2800,-6 - i*50, path, 5);
 		}
 		
 		lightDudePatrol (2603,-6, 3300, -6,3);
@@ -490,12 +491,10 @@ public void makeShadowSquareTopRight (int topLeftDudePosX, int topLeftDudePosY, 
 		c = new wallTorch(3311,-40);
 		
 		for(int i=0; i <3; i++) {
-			u = new shadowDude(3700,-6 - i*50);
 			path = new ArrayList<intTuple>();
 			path.add(new intTuple(3311,-6 - i*50));
 			path.add(new intTuple(4075,-6 - i*50));
-			u.patrolPath(path);
-			u.setMoveSpeed(5);
+			shadowDudePatrolPath(3700,-6 - i*50, path, 5);
 		}
 		
 		lightDudePatrol (3388,-6,4085,-6,3);
@@ -551,9 +550,6 @@ public void makeShadowSquareTopRight (int topLeftDudePosX, int topLeftDudePosY, 
 		spawnTombRect(4972,811,5604,843,"ground");
 		
 		spawnTombRect(4892,1035,5445+32,1067,"ground");
-		
-		/*u = new shadowDude(5109,847);
-		u = new shadowDude(5265,989);*/
 		
 		shadowDudePatrol (5109,847,5109,989,3.5f);
 		

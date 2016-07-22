@@ -61,19 +61,7 @@ public class animation {
 	
 	// Play animation.
 	public void playAnimation() { 
-			
-		// Get the correct current frame.
-		if(startTime == 0) startTime = time.getTime();
-		int howMuchTimeHasElapsed = (int) (time.getTime() - startTime);
-		int howMuchTimePerFrame = (int) (getTimeToComplete()*1000/((endFrame + 1) - getStartFrame()));
-		int correctFrame = getStartFrame() + howMuchTimeHasElapsed/howMuchTimePerFrame;
-		if(correctFrame>endFrame) {
-			startTime = time.getTime();
-			correctFrame = getStartFrame();
-		}
 		
-		// Set animation
-		setCurrentSprite(correctFrame);
 	}
 	
 	///////////////////////////
@@ -92,11 +80,18 @@ public class animation {
 	}
 
 	public int getCurrentSprite() {
-		return currentSprite;
-	}
-
-	public void setCurrentSprite(int currentSprite) {
-		this.currentSprite = currentSprite;
+		
+		// Get the correct current frame.
+		if(startTime == 0) startTime = time.getTime();
+		int howMuchTimeHasElapsed = (int) (time.getTime() - startTime);
+		int howMuchTimePerFrame = (int) (getTimeToComplete()*1000/((endFrame + 1) - getStartFrame()));
+		int correctFrame = getStartFrame() + howMuchTimeHasElapsed/howMuchTimePerFrame;
+		if(correctFrame>endFrame) {
+			startTime = time.getTime();
+			correctFrame = getStartFrame();
+		}
+		
+		return correctFrame;
 	}
 
 	public int getStartFrame() {
