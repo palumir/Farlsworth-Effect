@@ -6,6 +6,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import java.util.Random;
 
 import drawing.camera;
@@ -15,10 +16,12 @@ import drawing.spriteSheet;
 import drawing.spriteSheet.spriteSheetInfo;
 import effects.effect;
 import effects.effectType;
+import effects.buffs.darkSlow;
 import modes.mode;
 import sounds.sound;
 import terrain.atmosphericEffects.lightning;
 import units.humanType;
+import units.player;
 import units.unit;
 import units.unitType;
 import utilities.time;
@@ -28,21 +31,21 @@ import zones.zone;
 public class lightningStrike extends effect {
 	
 	// Default dimensions.
-	public static int DEFAULT_SPRITE_WIDTH = 110;
+	public static int DEFAULT_SPRITE_WIDTH = 72*2;
 	public static int DEFAULT_SPRITE_HEIGHT = 651;
 	
 	// Platformer real dimensions
-	public static int DEFAULT_PLATFORMER_HEIGHT = DEFAULT_SPRITE_WIDTH;
-	public static int DEFAULT_PLATFORMER_WIDTH = DEFAULT_SPRITE_HEIGHT;
+	public static int DEFAULT_PLATFORMER_HEIGHT = DEFAULT_SPRITE_HEIGHT;
+	public static int DEFAULT_PLATFORMER_WIDTH = DEFAULT_SPRITE_WIDTH;
 	public static int DEFAULT_PLATFORMER_ADJUSTMENT_Y = 0;
 	
 	// TopDown real dimensions
-	public static int DEFAULT_TOPDOWN_HEIGHT = 651;
-	public static int DEFAULT_TOPDOWN_WIDTH = 110;
+	public static int DEFAULT_TOPDOWN_HEIGHT = DEFAULT_SPRITE_HEIGHT;
+	public static int DEFAULT_TOPDOWN_WIDTH = DEFAULT_SPRITE_WIDTH;
 	public static int DEFAULT_TOPDOWN_ADJUSTMENT_Y = 0;
 	
 	// effect
-	static String lightningSound = "sounds/effects/weather/lightningStrike.wav";
+	public static String lightningSound = "sounds/effects/weather/lightningStrike.wav";
 	
 	////////////////
 	/// DEFAULTS ///
@@ -56,6 +59,10 @@ public class lightningStrike extends effect {
 	
 	// Duration
 	private static float DEFAULT_ANIMATION_DURATION = 1f;
+	
+	// Default lightning damage.
+	static int DEFAULT_LIGHTNING_DAMAGE = 6;
+	public static int DEFAULT_LIGHTNING_RADIUS = 20;
 	
 	// The actual type.
 	private static effectType theEffectType =
@@ -75,16 +82,65 @@ public class lightningStrike extends effect {
 	/// FIELDS ///
 	//////////////
 	
+	// Timing and lightning animation stuff.
+	long startLightning = 0;
+	float lightningEvery = 0f;
+	long lastMiniStrike = 0;
+	float miniStrikeEvery = .03f;
+	float miniStrikeLastsFor = .03f;
+	int howManyStrikes = 0;
+	int howManyStrikesTotal = 0;
+	float lastsFor = 0.5f;
+	int maxStrikes = 4;
+	boolean strikingCurrently = false;
+	effect preLightning = null;
+	long startPreLightning = 0;
+	float preLightningLastsFor = 1.6f;
+	
+	// Lightning odd color
+	Color lightningOddColor = new Color(211,228,248);
+	Color lightningEvenColor = Color.white;
+	
+	// Are we allied?
+	private boolean allied = false;
+	
 	///////////////
 	/// METHODS ///
 	///////////////
 	// Constructor
 	public lightningStrike(int newX, int newY) {
-		super(theEffectType, newX, newY);
+		super(theEffectType, newX-DEFAULT_SPRITE_WIDTH/2, newY-DEFAULT_SPRITE_HEIGHT);
+		
+		// Don't draw at first.
+		setDrawObject(false);
+		
+		// Has no timer.
+		hasATimer = false;
 		
 		// Force in front
 		setForceInFront(true);
-		lastLightning = time.getTime();
+		
+		// Make adjustments on hitbox if we're in topDown.
+		setHeight(getDefaultHeight());
+		setWidth(getDefaultWidth());
+		setHitBoxAdjustmentY(getDefaultHitBoxAdjustmentY());
+
+	}
+	
+	public lightningStrike(int newX, int newY, boolean muted) {
+		super(theEffectType, newX-DEFAULT_SPRITE_WIDTH/2, newY-DEFAULT_SPRITE_HEIGHT);
+		
+		// Don't draw at first.
+		setDrawObject(false);
+		
+		// Has no timer.
+		hasATimer = false;
+		
+		// Muted.
+		this.muted = muted;
+		
+		// Force in front
+		setForceInFront(true);
 		
 		// Make adjustments on hitbox if we're in topDown.
 		setHeight(getDefaultHeight());
@@ -95,45 +151,61 @@ public class lightningStrike extends effect {
 	
 	// Update
 	@Override 
-	public void doSpecificEffectStuff() {
+	public void update() {
 		doLightning();
 	}
-	
-	long lastLightning = 0;
-	float lightningEvery = 0f;
-	long lastMiniStrike = 0;
-	float miniStrikeEvery = .03f;
-	float miniStrikeLastsFor = .03f;
-	int howManyStrikes = 0;
-	int howManyStrikesTotal = 0;
-	float lastsFor = 0.5f;
-	int maxStrikes = 4;
-	boolean strikingCurrently = false;
-	
-	// Lightning odd color
-	Color lightningOddColor = new Color(211,228,248);
-	Color lightningEvenColor = Color.white;
-	
-	// Do lightning
-	public void doLightning() {	
-		// Mini strike
-		if(time.getTime() - lastLightning < lastsFor*1000 && time.getTime() - lastMiniStrike > miniStrikeEvery*1000) {
-			lastMiniStrike = time.getTime();
-			Color c = lightningEvenColor;
-			if(howManyStrikes%2 != 0) c = lightningOddColor;
-			lightning l = new lightning(miniStrikeLastsFor, c);
-			howManyStrikes++;
+
+	public void hurtPeople() {
+		// If someone is in the explosion radius, hurt.
+		ArrayList<unit> hurtUnits = unit.getUnitsInRadius(getIntX()+DEFAULT_SPRITE_WIDTH/2, getIntY()+DEFAULT_SPRITE_HEIGHT, DEFAULT_LIGHTNING_RADIUS);
+		if(hurtUnits!=null) {
+			for(int i = 0; i < hurtUnits.size(); i++) {
+				if(hurtUnits.get(i) instanceof player && !allied) {
+					hurtUnits.get(i).hurt(DEFAULT_LIGHTNING_DAMAGE, 1f);
+				}
+				if(!(hurtUnits.get(i) instanceof player) && allied) {
+					hurtUnits.get(i).hurt(DEFAULT_LIGHTNING_DAMAGE, 1f);
+				}
+			}
 		}
 	}
 	
-	// Strike lightning at:
-	public static void strikeAt(int x, int y) {
-		new lightningStrike(x-DEFAULT_SPRITE_WIDTH/2, y-DEFAULT_SPRITE_HEIGHT);
+	boolean muted = false;
+	// Do lightning
+	public void doLightning() {	
 		
-		// Play sound
-		sound s = new sound(lightningSound);
-		s.setPosition(x, y, sound.DEFAULT_SOUND_RADIUS);
-		s.start();
+		// Spawn prelightning
+		if(preLightning == null && !strikingCurrently) {
+			preLightning = new lightningAboutToStrike(getIntX()+DEFAULT_SPRITE_WIDTH/2-lightningAboutToStrike.DEFAULT_SPRITE_WIDTH/2, 
+					getIntY()+DEFAULT_SPRITE_HEIGHT-lightningAboutToStrike.DEFAULT_SPRITE_HEIGHT/2, true);
+			startPreLightning = time.getTime();
+		}
+		
+		// Strike!
+		if(!strikingCurrently && time.getTime() - startPreLightning > preLightningLastsFor*1000) {
+			strikingCurrently = true;
+			preLightning.destroy();
+			preLightning = null;
+			startLightning = time.getTime();
+			
+			// Draw the lightning
+			setDrawObject(true);
+			
+			if(!muted) {
+				// Play sound
+				sound s = new sound(lightningSound);
+				s.setPosition(getIntX()+DEFAULT_SPRITE_WIDTH/2, getIntY()+DEFAULT_SPRITE_HEIGHT, sound.DEFAULT_SOUND_RADIUS);
+				s.start();
+			}
+			
+			// Hurt units in the area.
+			hurtPeople();
+		}
+		
+		// Once we're done. Destroy.
+		if(strikingCurrently && time.getTime() - startLightning > lastsFor*1000) {
+			this.destroy();
+		}
 	}
 	
 	///////////////////////////
@@ -155,7 +227,7 @@ public class lightningStrike extends effect {
 	public void drawObject(Graphics g) {
 		
 		// Set the alpha depending on how close the animation is to over.
-		float timeThatHasPassed = (time.getTime() - timeStarted)/1000f; // in seconds
+		float timeThatHasPassed = (time.getTime() - startLightning)/1000f; // in seconds
 		float alpha = 1f - timeThatHasPassed/animationDuration;
 		if(alpha < 0) alpha = 0;
 		if(alpha > 1) alpha = 1;

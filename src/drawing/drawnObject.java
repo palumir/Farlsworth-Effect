@@ -240,6 +240,21 @@ public abstract class drawnObject {
 		// Do nothing for basic objects.
 	}
 	
+	// Get closest to
+	public drawnObject getClosestToFrom(ArrayList<drawnObject> checkObjects) {
+		drawnObject closestTo = null;
+		int howCloseBest = Integer.MAX_VALUE;
+		for(int i = 0; i < checkObjects.size(); i++) {
+			drawnObject currObj = checkObjects.get(i);
+			int howClose = (int) Math.sqrt((currObj.getIntX() + currObj.getWidth()/2 - getIntX() - getWidth()/2)*(currObj.getIntX() + currObj.getWidth()/2 - getIntX() - getWidth()/2) + (currObj.getIntY() + currObj.getHeight()/2 - getIntY() - getHeight()/2)*(currObj.getIntY() + currObj.getHeight()/2 - getIntY() - getHeight()/2));
+			if(howClose < howCloseBest) {
+				howCloseBest = howClose;
+				closestTo = currObj;
+			}
+		}
+		return closestTo;
+	}
+	
 	// Calculate drawX
 	public static int calculateDrawX(drawnObject d, int getX) {
 		int newDrawX = 0;

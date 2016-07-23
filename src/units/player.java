@@ -18,6 +18,7 @@ import drawing.userInterface.tooltipString;
 import effects.effect;
 import effects.effectTypes.bloodSquirt;
 import effects.effectTypes.floatingString;
+import effects.effectTypes.lightningStrike;
 import interactions.event;
 import interactions.interactBox;
 import interactions.quest;
@@ -361,6 +362,11 @@ public class player extends unit {
 		// Respond to dialogue/interact presses.
 		if(interactBox.getCurrentDisplay() != null) {
 			interactBox.getCurrentDisplay().respondToKeyPress(k);
+		}
+		
+		// Player presses y (inventory) key.
+		else if(k.getKeyCode() == KeyEvent.VK_Y) { 
+			lightningStrike l = new lightningStrike(getIntX(),getIntY());
 		}
 		
 		// Player presses i (inventory) key.

@@ -149,7 +149,7 @@ public class storm extends atmosphericEffect {
 	
 	long lastRainSound = 0;
 	String rainSound = "sounds/effects/weather/rain.wav";
-	float playEvery = 16f;
+	float playEvery = 10f;
 	
 	// Play sound.
 	public void playSound() {
