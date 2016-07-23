@@ -597,10 +597,6 @@ public void makeShadowSquareTopRight (int topLeftDudePosX, int topLeftDudePosY, 
 		
 		// Ninth floor (3 floors)
 		
-		//spawnTombRect(4863,615,4895,1070,"leftWall");
-		
-		//spawnTombRect(5572,-69,5604,1100,"rightWall");
-		
 		// Top
 		
 		spawnTombRect(6393,1062,6727,1094,"ground");
@@ -630,6 +626,8 @@ public void makeShadowSquareTopRight (int topLeftDudePosX, int topLeftDudePosY, 
 		
 		lightDudePatrol (6884, 916, 7515,916, 1.4f);
 		
+		makeShadowSquare(7700,1017,100,100,2.8f,false);
+		
 		// Middle
 		
 		spawnTombRect(6353,1162,7103,1194,"ground");
@@ -639,9 +637,11 @@ public void makeShadowSquareTopRight (int topLeftDudePosX, int topLeftDudePosY, 
 		lightDudePatrol (6796, 1117, 7070,1117,3.5f);
 		
 		spawnTombRect(7103+73,1162,7303,1194,"ground");
-		shadowDudePatrol (7169,1117,7350,1117,3);
+		shadowDudePatrol (7169,1117,7350,1117,4);
 		
-		spawnTombRect(7376,1162,10000,1194,"ground");
+		spawnTombRect(7376,1162,7464,1194,"ground");
+		
+		spawnTombRect(7606+73,1162,10000,1194,"ground");
 		
 		// Bottom
 		
@@ -649,6 +649,9 @@ public void makeShadowSquareTopRight (int topLeftDudePosX, int topLeftDudePosY, 
 		shadowDudePatrol (6702,1215,6325,1215,3);
 		shadowDudePatrol (6752,1215,7010,1215,3);
 		u = new shadowDude(7060,1215);
+		
+		spawnTombRect(7376+73,1262,10000,1294,"ground");
+		makeShadowSquare(7494,1120,70,75,2.5f,true);
 		
 	}
 
