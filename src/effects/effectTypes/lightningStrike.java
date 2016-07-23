@@ -90,12 +90,13 @@ public class lightningStrike extends effect {
 	float miniStrikeLastsFor = .03f;
 	int howManyStrikes = 0;
 	int howManyStrikesTotal = 0;
-	float lastsFor = 0.5f;
+	float lastsFor = 0.55f;
+	float startFadeAt = 0.20f;
 	int maxStrikes = 4;
 	boolean strikingCurrently = false;
 	effect preLightning = null;
 	long startPreLightning = 0;
-	float preLightningLastsFor = 1.6f;
+	public static float preLightningLastsFor = 1.2f;
 	
 	// Lightning odd color
 	Color lightningOddColor = new Color(211,228,248);
@@ -118,7 +119,7 @@ public class lightningStrike extends effect {
 		hasATimer = false;
 		
 		// Force in front
-		setForceInFront(true);
+		//setForceInFront(true);
 		
 		// Make adjustments on hitbox if we're in topDown.
 		setHeight(getDefaultHeight());
@@ -138,9 +139,6 @@ public class lightningStrike extends effect {
 		
 		// Muted.
 		this.muted = muted;
-		
-		// Force in front
-		setForceInFront(true);
 		
 		// Make adjustments on hitbox if we're in topDown.
 		setHeight(getDefaultHeight());
@@ -177,7 +175,7 @@ public class lightningStrike extends effect {
 		// Spawn prelightning
 		if(preLightning == null && !strikingCurrently) {
 			preLightning = new lightningAboutToStrike(getIntX()+DEFAULT_SPRITE_WIDTH/2-lightningAboutToStrike.DEFAULT_SPRITE_WIDTH/2, 
-					getIntY()+DEFAULT_SPRITE_HEIGHT-lightningAboutToStrike.DEFAULT_SPRITE_HEIGHT/2, true);
+					getIntY()+DEFAULT_SPRITE_HEIGHT-lightningAboutToStrike.DEFAULT_SPRITE_HEIGHT/2);
 			startPreLightning = time.getTime();
 		}
 		
@@ -228,7 +226,10 @@ public class lightningStrike extends effect {
 		
 		// Set the alpha depending on how close the animation is to over.
 		float timeThatHasPassed = (time.getTime() - startLightning)/1000f; // in seconds
-		float alpha = 1f - timeThatHasPassed/animationDuration;
+		float alpha = 1;
+		if(timeThatHasPassed > startFadeAt) {
+			alpha = 1 - (timeThatHasPassed - startFadeAt)/(lastsFor - startFadeAt);
+		}
 		if(alpha < 0) alpha = 0;
 		if(alpha > 1) alpha = 1;
 		Graphics2D g2d = (Graphics2D) g.create();

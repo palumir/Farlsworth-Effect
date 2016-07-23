@@ -546,19 +546,15 @@ public void makeShadowSquareTopRight (int topLeftDudePosX, int topLeftDudePosY, 
 		
 		makeShadowSquareTopRight (5018,470, 70, 75,2 ,true);
 		
-		makeShadowRectangle (4870,760,115,115, 7, 3, 3 ,false);
+		makeShadowRectangle (4870,760,115,115,7,3,3,false);
 		
 		spawnTombRect(4972,811,5604,843,"ground");
 		
 		spawnTombRect(4892,1035,5445+32,1067,"ground");
 		
-		//shadowDudePatrol (5109,847,5109,989,3.5f);
-		
 		shadowDudePatrol (5265,989,5265,847,3.5f);
 		
 		spawnTombRect(4980,1251,5600,1283,"ground");
-		
-		//shadowDudePatrol (5265,989,5265,847,3.5f);
 
 		
 		

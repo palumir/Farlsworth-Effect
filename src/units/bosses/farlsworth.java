@@ -855,7 +855,7 @@ public class farlsworth extends boss {
 				
 				// Wait.
 				waiting = true;
-				waitFor = 2.5f;
+				waitFor = 2.5f - lightningStrike.preLightningLastsFor;
 				waitStart = time.getTime();
 				sequencePart++;
 			}
@@ -869,7 +869,7 @@ public class farlsworth extends boss {
 				
 				// Wait.
 				waiting = true;
-				waitFor = 1.25f;
+				waitFor = 1.25f - lightningStrike.preLightningLastsFor;
 				waitStart = time.getTime();
 				sequencePart++;
 			}
@@ -878,7 +878,18 @@ public class farlsworth extends boss {
 			if(sequencePart == 3 && time.getTime() - waitStart > waitFor*1000) {
 				
 				// Strike, ignite tree.
-				lightningStrike l =  new lightningStrike(-758,-3937+10);
+				lightningStrike l =  new lightningStrike(-758+16,-3937+5);
+				
+				// Wait.
+				waiting = true;
+				waitFor = lightningStrike.preLightningLastsFor;
+				waitStart = time.getTime();
+				sequencePart++;				
+			}
+			
+			// Ignite tree
+			if(sequencePart == 4 && time.getTime() - waitStart > waitFor*1000) {
+				
 				sheepFarm.lightningTree.ignite();
 				
 				// Wait.
@@ -888,21 +899,21 @@ public class farlsworth extends boss {
 				sequencePart++;				
 			}
 			
-			// Look at tree.
-			if(sequencePart == 4 && time.getTime() - waitStart > waitFor*1000) {
+			// Look at tree
+			if(sequencePart == 5 && time.getTime() - waitStart > waitFor*1000) {
 				
 				// Turn
 				setFacingDirection("Up");
+				sequencePart++;
 				
-				// Wait.
+				// Wait
 				waiting = true;
-				waitFor = 1.5f;
+				waitFor = 1f;
 				waitStart = time.getTime();
-				sequencePart++;				
 			}
 			
 			// Look back.
-			if(sequencePart == 5 && time.getTime() - waitStart > waitFor*1000) {
+			if(sequencePart == 6 && time.getTime() - waitStart > waitFor*1000) {
 				
 				// Turn
 				setFacingDirection("Right");
@@ -916,7 +927,7 @@ public class farlsworth extends boss {
 			}
 			
 			// Speak
-			if(sequencePart == 6 && time.getTime() - waitStart > waitFor*1000) {
+			if(sequencePart == 7 && time.getTime() - waitStart > waitFor*1000) {
 			
 				// Advance and unlock sequence.
 				interactSequence.goToNext();
@@ -927,7 +938,7 @@ public class farlsworth extends boss {
 			///////////////
 			/// IF HE LIKES YOU
 			////////////////
-			if(sequencePart == 7 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getTextOnPress()!=null) &&
+			if(sequencePart == 8 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getTextOnPress()!=null) &&
 					((interactSequence.getTheText().getTextOnPress().contains("keep up")))) {
 				
 				// Lock sequence.
@@ -940,7 +951,7 @@ public class farlsworth extends boss {
 			///////////////
 			// IF HE DOESNT LIKE YOU
 			//////////////
-			if(sequencePart == 7 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getTextOnPress()!=null) &&
+			if(sequencePart == 8 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getTextOnPress()!=null) &&
 					(interactSequence.getTheText().getTextOnPress().contains("Look at you."))) {
 				
 				this.setMoveSpeed(1);
@@ -948,7 +959,7 @@ public class farlsworth extends boss {
 				sequencePart++;	
 			}
 			
-			if(sequencePart == 8 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getTextOnPress()!=null) &&
+			if(sequencePart == 9 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getTextOnPress()!=null) &&
 					(interactSequence.getTheText().getTextOnPress().contains("Wolf slayer"))) {
 				
 				// Move up to tree.
@@ -957,49 +968,49 @@ public class farlsworth extends boss {
 				sequencePart++;	
 			}
 			
-			if(sequencePart == 9 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getTextOnPress()!=null) &&
+			if(sequencePart == 10 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getTextOnPress()!=null) &&
 					(interactSequence.getTheText().getTextOnPress().contains("Tomb raider"))) {
 				
 				moveTo(this.getIntX()-25,this.getIntY());
 				sequencePart++;	
 			}
 			
-			if(sequencePart == 10 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getTextOnPress()!=null) &&
+			if(sequencePart == 11 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getTextOnPress()!=null) &&
 					(interactSequence.getTheText().getTextOnPress().contains("Sheep chaser"))) {
 				
 				moveTo(this.getIntX(),this.getIntY()+25);
 				sequencePart++;	
 			}
 			
-			if(sequencePart == 11 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getTextOnPress()!=null) &&
+			if(sequencePart == 12 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getTextOnPress()!=null) &&
 					(interactSequence.getTheText().getTextOnPress().contains("fearless, dumby"))) {
 				
 				moveTo(this.getIntX()+25,this.getIntY());
 				sequencePart++;	
 			}
 			
-			if(sequencePart == 12 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getTextOnPress()!=null) &&
+			if(sequencePart == 13 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getTextOnPress()!=null) &&
 					(interactSequence.getTheText().getTextOnPress().contains("Scared of nothing"))) {
 				
 				moveTo(this.getIntX(),this.getIntY()+25);
 				sequencePart++;	
 			}
 			
-			if(sequencePart == 13 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getTextOnPress()!=null) &&
+			if(sequencePart == 14 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getTextOnPress()!=null) &&
 					(interactSequence.getTheText().getTextOnPress().contains("Just like I was"))) {
 				
 				moveTo(this.getIntX(),this.getIntY()-25);
 				sequencePart++;	
 			}
 			
-			if(sequencePart == 14 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getTextOnPress()!=null) &&
+			if(sequencePart == 15 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getTextOnPress()!=null) &&
 					(interactSequence.getTheText().getTextOnPress().contains("Well, here's"))) {
 				
 				setFacingDirection("Right");
 				sequencePart++;	
 			}
 			
-			if(sequencePart == 15 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getTextOnPress()!=null) &&
+			if(sequencePart == 16 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getTextOnPress()!=null) &&
 					(interactSequence.getTheText().getTextOnPress().contains("be friggin scared"))) {
 				
 				// Wait
@@ -1011,7 +1022,7 @@ public class farlsworth extends boss {
 				interactSequence.setLocked(true);
 			}
 			
-			if(sequencePart == 16 && time.getTime() - waitStart > waitFor*1000) {
+			if(sequencePart == 17 && time.getTime() - waitStart > waitFor*1000) {
 				
 				// Unlock and progress sequence.
 				interactSequence.goToNext();
@@ -1036,7 +1047,7 @@ public class farlsworth extends boss {
 			}
 			
 			// Pause time and give option
-			if(sequencePart == 17 && time.getTime() - waitStart > waitFor*1000) {
+			if(sequencePart == 18 && time.getTime() - waitStart > waitFor*1000) {
 				time.setTimeSpeed(.1f);
 				
 				// Unlock
@@ -1045,7 +1056,7 @@ public class farlsworth extends boss {
 			}
 			
 			// Log hits player.
-			if(sequencePart == 18 && !projectileLog.isExists()) {
+			if(sequencePart == 19 && !projectileLog.isExists()) {
 				
 				// Set time back.
 				time.setTimeSpeed(1);
@@ -1056,7 +1067,7 @@ public class farlsworth extends boss {
 			}
 			
 			// Player selects dodge.
-			if(sequencePart == 18 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getButtonText()!=null) &&
+			if(sequencePart == 19 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getButtonText()!=null) &&
 					(interactSequence.getTheText().getButtonText().contains("Dodge"))) {
 				
 				// Lock sequence
@@ -1077,7 +1088,7 @@ public class farlsworth extends boss {
 			}
 			
 			// Player selects get hit.
-			if(sequencePart == 18 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getButtonText()!=null) &&
+			if(sequencePart == 19 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getButtonText()!=null) &&
 					(interactSequence.getTheText().getButtonText().contains("Get hit"))) {
 				
 				// Set time back.
@@ -1088,18 +1099,18 @@ public class farlsworth extends boss {
 			}
 			
 			// Face right
-			if(sequencePart == 19 && !currPlayer.isMoving() && didYouDodgeTheLog && projectileLog.getIntX() > currPlayer.getIntX() + 40) {
+			if(sequencePart == 20 && !currPlayer.isMoving() && didYouDodgeTheLog && projectileLog.getIntX() > currPlayer.getIntX() + 40) {
 				currPlayer.setFacingDirection("Right");
 			}
 			
 			// Look towards Farlsworth
-			if(sequencePart == 20 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getTextOnPress()!=null) &&
+			if(sequencePart == 21 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getTextOnPress()!=null) &&
 					(interactSequence.getTheText().getTextOnPress().contains("what you did"))) {
 				currPlayer.setFacingDirection("Left");
 			}
 			
 			// Unlock sequence if it's after 18. The log exploded.
-			if(sequencePart == 19 && !projectileLog.isExists()) {
+			if(sequencePart == 20 && !projectileLog.isExists()) {
 				interactSequence.setLocked(false);
 				sequencePart++;
 				
@@ -1114,7 +1125,7 @@ public class farlsworth extends boss {
 			}
 			
 			// If we reach the end.
-			if(sequencePart == 20 && interactSequence.getTheText().isEnd()) {
+			if(sequencePart == 21 && interactSequence.getTheText().isEnd()) {
 				sequencePart = 100;
 			}
 			
