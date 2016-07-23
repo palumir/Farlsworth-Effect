@@ -538,8 +538,8 @@ public void makeShadowSquareTopRight (int topLeftDudePosX, int topLeftDudePosY, 
 		c.setZ(-2);
 		
 		spawnTombRect(4794,596,5465+32,628,"ground");
-		makeShadowSquareTopRight (5018,470, 70, 75,2 ,true);
-		makeShadowSquareTopLeft (5198,470, 70, 75,2 ,false);
+		makeShadowSquareTopRight (4998,470, 75, 80,2 ,true);
+		makeShadowSquareTopLeft (5198,470, 75, 80,2 ,false);
 		
 		spawnTombRect(4972,811,5604,843,"ground");
 		makeShadowRectangle (4900,764,135,125,5,3,2,false);
@@ -561,39 +561,9 @@ public void makeShadowSquareTopRight (int topLeftDudePosX, int topLeftDudePosY, 
 		c.setPassable(true);
 		c.setZ(-2);
 		
-		for(int i=0; i <2; i++) {
-			path = new ArrayList<intTuple>();
-			path.add(new intTuple(5756,1116 - 75 - i*50));
-			shadowDudePatrolPath(5756,1116 - i*50, path, 1);
-		}
 		
-		for(int i=0; i <2; i++) {
-			path = new ArrayList<intTuple>();
-			path.add(new intTuple(5826,1116 - 175 - i*50));
-			shadowDudePatrolPath(5826,1116 - 100 - i*50, path, 1);
-		}
 		
-		u = new shadowDude(5826,1116);
 		
-		for(int i=0; i <2; i++) {
-			path = new ArrayList<intTuple>();
-			path.add(new intTuple(5896,1116 - i*50));
-			shadowDudePatrolPath(5896,1116 - 75 - i*50, path ,1);
-		}
-		
-		for(int i=0; i <2; i++) {
-			path = new ArrayList<intTuple>();
-			path.add(new intTuple(5956 + i*40 + 50,1116 - 75));
-			shadowDudePatrolPath(5956 + i*40,1116 - 75, path ,1);
-		}
-		
-		for(int i=0; i <2; i++) {
-			path = new ArrayList<intTuple>();
-			path.add(new intTuple(6142 + i*40 + 50,1116 - 75));
-			shadowDudePatrolPath(6142 + i*40,1116 - 75, path ,1);
-		}
-		
-		shadowDudePatrol (5956,1116,6202,1116,2);
 		
 		// Ninth floor (3 floors)
 		
@@ -653,7 +623,7 @@ public void makeShadowSquareTopRight (int topLeftDudePosX, int topLeftDudePosY, 
 		
 		spawnTombRect(7376,1162,7464,1194,"ground");
 		
-		spawnTombRect(7606+73,1162,8300,1194,"ground");
+		spawnTombRect(7606+73,1162,9000,1194,"ground");
 		u = new shadowDude(8206,1117);
 
 		
@@ -667,6 +637,42 @@ public void makeShadowSquareTopRight (int topLeftDudePosX, int topLeftDudePosY, 
 		spawnTombRect(7376+73,1262,8300,1294,"ground");
 		makeShadowSquare(7494,1120,70,75,2.5f,true);
 		u = new shadowDude(8206,1218);
+		
+		// Tenth floor
+		
+		for(int i=0; i <2; i++) {
+			path = new ArrayList<intTuple>();
+			path.add(new intTuple(8456,1116 - 75 - i*50));
+			shadowDudePatrolPath(8456,1116 - i*50, path, 1);
+		}
+		
+		for(int i=0; i <2; i++) {
+			path = new ArrayList<intTuple>();
+			path.add(new intTuple(8526,1116 - 175 - i*50));
+			shadowDudePatrolPath(8526,1116 - 100 - i*50, path, 1);
+		}
+		
+		u = new shadowDude(8526,1116);
+		
+		for(int i=0; i <2; i++) {
+			path = new ArrayList<intTuple>();
+			path.add(new intTuple(8596,1116 - i*50));
+			shadowDudePatrolPath(8596,1116 - 75 - i*50, path ,1);
+		}
+		
+		for(int i=0; i <2; i++) {
+			path = new ArrayList<intTuple>();
+			path.add(new intTuple(8656 + i*40 + 50,1116 - 75));
+			shadowDudePatrolPath(8656 + i*40,1116 - 75, path ,1);
+		}
+		
+		for(int i=0; i <2; i++) {
+			path = new ArrayList<intTuple>();
+			path.add(new intTuple(8842 + i*40 + 50,1116 - 75));
+			shadowDudePatrolPath(8842 + i*40,1116 - 75, path ,1);
+		}
+		
+		shadowDudePatrol (8656,1116,8902,1116,2);
 		
 	}
 
