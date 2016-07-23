@@ -1,10 +1,5 @@
-/units/
-/main/
-/zones/
-/effects/
 /doodads/
-/drawing/
-/utilities/
+/effects/
+/main/
 /terrain/
-/interactions/
-/sounds/
+/zones/
