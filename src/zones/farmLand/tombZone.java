@@ -541,7 +541,7 @@ public void makeShadowSquareTopRight (int topLeftDudePosX, int topLeftDudePosY, 
 		makeShadowSquareTopRight (4998,470, 75, 80,2 ,true);
 		makeShadowSquareTopLeft (5198,470, 75, 80,2 ,false);
 		
-		spawnTombRect(4972,811,5604,843,"ground");
+		spawnTombRect(4972+32,811,5604,843,"ground");
 		makeShadowRectangle (4900,764,135,125,5,3,2,false);
 		
 		spawnTombRect(4888,1061,5480,1093,"ground");
@@ -551,8 +551,8 @@ public void makeShadowSquareTopRight (int topLeftDudePosX, int topLeftDudePosY, 
 		for(int i=0; i <4; i++) {
 			u = new shadowDude(5323,1014 - i*50);
 		}
-		lightDudePatrol (5015,864,5131,864,0.7f);
-		lightDudePatrol (5314,864,5460,864,0.7f);
+		lightDudePatrol (5015,890,5131,890,0.7f);
+		lightDudePatrol (5314,890,5460,890,0.7f);
 		
 		// Eighth floor
 		
@@ -560,10 +560,6 @@ public void makeShadowSquareTopRight (int topLeftDudePosX, int topLeftDudePosY, 
 		c = new well(5555,1126,0);
 		c.setPassable(true);
 		c.setZ(-2);
-		
-		
-		
-		
 		
 		// Ninth floor (3 floors)
 		
