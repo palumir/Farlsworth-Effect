@@ -612,6 +612,24 @@ public void makeShadowSquareTopRight (int topLeftDudePosX, int topLeftDudePosY, 
 		
 		spawnTombRect(6800,1062,10000,1094,"ground");
 		
+		for(int i=0; i <3; i++) {
+			path = new ArrayList<intTuple>();
+			path.add(new intTuple(7086,1016 - i*50));
+			shadowDudePatrolPath(6899,1016 - i*50, path ,2);
+		}
+		for(int i=0; i <3; i++) {
+			path = new ArrayList<intTuple>();
+			path.add(new intTuple(7293,1016 - i*50));
+			shadowDudePatrolPath(7106,1016 - i*50, path ,2);
+		}
+		for(int i=0; i <3; i++) {
+			path = new ArrayList<intTuple>();
+			path.add(new intTuple(7500,1016 - i*50));
+			shadowDudePatrolPath(7313,1016 - i*50, path ,2);
+		}
+		
+		lightDudePatrol (6884, 916, 7515,916, 1.4f);
+		
 		// Middle
 		
 		spawnTombRect(6353,1162,7103,1194,"ground");
