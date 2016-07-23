@@ -168,10 +168,6 @@ public abstract class drawnObject {
 	// Does this object exist?
 	private boolean exists = true;
 	
-	// Draw X and Y, different from X and Y.
-	private int drawX;
-	private int drawY;
-	
 	// Width and height.
 	private int width;
 	private int height;
@@ -346,11 +342,7 @@ public abstract class drawnObject {
 				drawnObject d = objects.get(i);
 				
 				if(d.isDrawObject()) {
-					
-					 // Adjust.
-					 d.setDrawX(calculateDrawX(d, d.getIntX()));
-					 d.setDrawY(calculateDrawY(d, d.getIntY()));
-					
+
 					// Draw the object if it's on the screen.
 					if(d instanceof tooltipString ||
 						d instanceof interfaceObject ||
@@ -575,19 +567,11 @@ public abstract class drawnObject {
 	}
 
 	public int getDrawX() {
-		return drawX;
-	}
-
-	public void setDrawX(int drawX) {
-		this.drawX = drawX;
+		return calculateDrawX(this, this.getIntX());
 	}
 
 	public int getDrawY() {
-		return drawY;
-	}
-
-	public void setDrawY(int drawY) {
-		this.drawY = drawY;
+		return calculateDrawY(this, this.getIntY());
 	}
 
 	public boolean isDrawSprite() {

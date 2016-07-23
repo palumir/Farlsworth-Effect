@@ -20,7 +20,7 @@ public class lightningAboutToStrike extends effect {
 	
 	// Default dimensions.
 	public static int DEFAULT_SPRITE_WIDTH = 32;
-	public static int DEFAULT_SPRITE_HEIGHT = 8;
+	public static int DEFAULT_SPRITE_HEIGHT = 32;
 	
 	// Platformer real dimensions
 	public static int DEFAULT_PLATFORMER_HEIGHT = DEFAULT_SPRITE_HEIGHT;
@@ -42,11 +42,8 @@ public class lightningAboutToStrike extends effect {
 	// Effect sprite stuff.
 	private static String DEFAULT_EFFECT_SPRITESHEET = "images/effects/" + DEFAULT_EFFECT_NAME + ".png";
 	
-	// Sound
-	public static String soundEffect = "sounds/effects/weather/preLightningStrike.wav";
-	
 	// Duration
-	private static float DEFAULT_ANIMATION_DURATION = 0.2f;
+	private static float DEFAULT_ANIMATION_DURATION = 0.15f;
 	
 	// The actual type.
 	private static effectType theEffectType =
@@ -69,36 +66,11 @@ public class lightningAboutToStrike extends effect {
 	///////////////
 	/// METHODS ///
 	///////////////
-	// Constructor
-	public lightningAboutToStrike(int newX, int newY, boolean muted) {
-		super(theEffectType, newX, newY);
-		
-		// Play sound
-		if(!muted) {
-			sound s = new sound(soundEffect);
-			s.setPosition(getIntX(),getIntY(),sound.DEFAULT_SOUND_RADIUS);
-			s.start();
-		}
-				
-		// Make adjustments on hitbox if we're in topDown.
-		setHeight(getDefaultHeight());
-		setWidth(getDefaultWidth());
-		setHitBoxAdjustmentY(getDefaultHitBoxAdjustmentY());
-				
-		// Has no timer.
-		hasATimer = false;
-
-	}
 	
 	// Constructor
 	public lightningAboutToStrike(int newX, int newY) {
 		super(theEffectType, newX, newY);
-		
-		// Play sound
-		sound s = new sound(soundEffect);
-		s.setPosition(getIntX(),getIntY(),sound.DEFAULT_SOUND_RADIUS);
-		s.start();
-				
+
 		// Make adjustments on hitbox if we're in topDown.
 		setHeight(getDefaultHeight());
 		setWidth(getDefaultWidth());

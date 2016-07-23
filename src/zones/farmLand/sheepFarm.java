@@ -3006,16 +3006,36 @@ public class sheepFarm extends zone {
 	
 	// First lightning area.
 	int firstAreaX1 = -2200;
-	int firstAreaY1 = -4164;
+	int firstAreaY1 = -4200;
 	int firstAreaX2 = -1000;
-	int firstAreaY2 = -3719;
-	ArrayList<drawnObject> firstAreaLightning;
-	float firstAreaLightningEvery = 1.9f;
+	int firstAreaY2 = -3800;
+	float firstAreaLightningEvery = 1f;
 	boolean firstAreaPreLightningSoundPlayed = false;
 	boolean firstAreaLightningStrikeSoundPlayed = false;
 	long firstAreaLastStrike = 0;
-	boolean odd = true;
-	int switchEvery = 2;
+	
+	// Second lightning area.
+	int secondAreaX1 = -2354;
+	int secondAreaY1 = -3527;
+	int secondAreaX2 = -1661;
+	int secondAreaY2 = -2200;
+	ArrayList<drawnObject> secondAreaLightning;
+	float secondAreaLightningEvery = lightningStrike.preLightningLastsFor + 1;
+	boolean secondAreaPreLightningSoundPlayed = false;
+	boolean secondAreaLightningStrikeSoundPlayed = false;
+	long secondAreaLastStrike = 0;
+	
+	// Third lightning area.
+	int thirdAreaX1 = -2937;
+	int thirdAreaY1 = -2467;
+	int thirdAreaX2 = -2488;
+	int thirdAreaY2 = -1188;
+	ArrayList<drawnObject> thirdAreaLightning;
+	float thirdAreaLightningEvery = lightningStrike.preLightningLastsFor + 0.5f;
+	boolean thirdAreaPreLightningSoundPlayed = false;
+	boolean thirdAreaLightningStrikeSoundPlayed = false;
+	long thirdAreaLastStrike = 0;
+	
 	
 	// Do final lightning stuff
 	public void doFinalLightningStuff() {
@@ -3032,55 +3052,80 @@ public class sheepFarm extends zone {
 			///////////////////////////
 			if(firstAreaLastStrike == 0 || time.getTime() - firstAreaLastStrike > firstAreaLightningEvery*1000) {
 				
-				// Efficiency.
-				firstAreaLightning = new ArrayList<drawnObject>();
-				
-				int n = 0;
-				for(int j = firstAreaY1; j < firstAreaY2; j += lightningStrike.DEFAULT_LIGHTNING_RADIUS*2) {
-					for(int i = firstAreaX1; i < firstAreaX2; i += lightningStrike.DEFAULT_LIGHTNING_RADIUS*2) {
-						if(odd && n > switchEvery-1) { 
-							lightningStrike l = new lightningStrike(i,j, true); 
-							firstAreaLightning.add(l);
-						}
-						if(!odd && n <= switchEvery-1) { 
-							lightningStrike l = new lightningStrike(i,j, true); 
-							firstAreaLightning.add(l);
-						}
-					}
-					n++;
-					if(n >= switchEvery*2) {
-						n = 0;
-					}
-				}
-				
-				odd = !odd;
+				int i = firstAreaX1 + utility.RNG.nextInt(firstAreaX2 - firstAreaX1);
+				int j = firstAreaY1 + utility.RNG.nextInt(firstAreaY2 - firstAreaY1);
+				lightningStrike l = new lightningStrike(i,j); 
+		
 				firstAreaLastStrike = time.getTime();
-				firstAreaPreLightningSoundPlayed = false;
 				firstAreaLightningStrikeSoundPlayed = false;
-			}
-			
-			if(!firstAreaPreLightningSoundPlayed) {
-				drawnObject l = currPlayer.getClosestToFrom(firstAreaLightning);
-				if(l.isOnScreen()) {
-					sound s = new sound(lightningAboutToStrike.soundEffect);
-					s.start();
-				}
-				firstAreaPreLightningSoundPlayed = true;
-			}
-			
-			if(!firstAreaLightningStrikeSoundPlayed && time.getTime() - firstAreaLastStrike > 1.6f*1000) {
-				drawnObject l = currPlayer.getClosestToFrom(firstAreaLightning);
-				if(l.isOnScreen()) {
-					sound s = new sound(lightningStrike.lightningSound);
-					s.start();
-				}
-				firstAreaLightningStrikeSoundPlayed = true;
 			}
 			
 			///////////////////////////
 			// SECOND LIGHTNING AREA //
 			///////////////////////////
+			if(secondAreaLastStrike == 0 || time.getTime() - secondAreaLastStrike > secondAreaLightningEvery*1000) {
+				
+				// Efficiency.
+				secondAreaLightning = new ArrayList<drawnObject>();
+				
+				for(int j = secondAreaY1; j < secondAreaY2; j += lightningStrike.DEFAULT_LIGHTNING_RADIUS*2) {
+					for(int i = secondAreaX1; i < secondAreaX2; i += lightningStrike.DEFAULT_LIGHTNING_RADIUS*2) {
+							if(utility.RNG.nextInt(100) > 95) {
+								lightningStrike l = new lightningStrike(i,j, true); 
+								secondAreaLightning.add(l);
+							}
+					}
+				}
+				
+				secondAreaLastStrike = time.getTime();
+				secondAreaLightningStrikeSoundPlayed = false;
+			}
+		
+			if(!secondAreaLightningStrikeSoundPlayed && time.getTime() - secondAreaLastStrike > lightningStrike.preLightningLastsFor*1000) {
+				if(secondAreaLightning!=null && secondAreaLightning.size() > 0) {
+					drawnObject l = currPlayer.getClosestToFrom(secondAreaLightning);
+					if(l.isOnScreen()) {
+						sound s = new sound(lightningStrike.lightningSound);
+						s.setPosition(l.getIntX(), l.getIntY(), sound.DEFAULT_SOUND_RADIUS);
+						s.start();
+					}
+				}
+				secondAreaLightningStrikeSoundPlayed = true;
+			}
 			
+			///////////////////////////
+			// THIRD LIGHTNING AREA //
+			///////////////////////////
+			if(thirdAreaLastStrike == 0 || time.getTime() - thirdAreaLastStrike > thirdAreaLightningEvery*1000) {
+				
+				// Efficiency.
+				thirdAreaLightning = new ArrayList<drawnObject>();
+				
+				for(int j = thirdAreaY1; j < thirdAreaY2; j += lightningStrike.DEFAULT_LIGHTNING_RADIUS*2) {
+					for(int i = thirdAreaX1; i < thirdAreaX2; i += lightningStrike.DEFAULT_LIGHTNING_RADIUS*2) {
+							if(utility.RNG.nextInt(100) > 60) {
+								lightningStrike l = new lightningStrike(i,j, true); 
+								thirdAreaLightning.add(l);
+							}
+					}
+				}
+				
+				thirdAreaLastStrike = time.getTime();
+				thirdAreaLightningStrikeSoundPlayed = false;
+			}
+			
+			if(!thirdAreaLightningStrikeSoundPlayed && time.getTime() - thirdAreaLastStrike > lightningStrike.preLightningLastsFor*1000) {
+				if(thirdAreaLightning!=null && thirdAreaLightning.size() > 0) {
+					drawnObject l = currPlayer.getClosestToFrom(thirdAreaLightning);
+					if(l.isOnScreen()) {
+						sound s = new sound(lightningStrike.lightningSound);
+						s.setPosition(l.getIntX(), l.getIntY(), sound.DEFAULT_SOUND_RADIUS);
+						s.start();
+					}
+				}
+				thirdAreaLightningStrikeSoundPlayed = true;
+			}
+
 		}
 		
 	}
