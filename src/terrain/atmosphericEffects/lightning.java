@@ -32,6 +32,8 @@ public class lightning extends atmosphericEffect {
 	float screenWhiteFor = 0;
 	Color lightningColor;
 	
+	public static lightning currentLightning = null;
+	
 	public lightning(float f, Color c) {
 		super();
 		
@@ -44,6 +46,7 @@ public class lightning extends atmosphericEffect {
 		
 		// Be above fog.
 		setZ(-1);
+		
 	}
 	
 	// Paint the fog

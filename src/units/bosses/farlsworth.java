@@ -106,7 +106,7 @@ public class farlsworth extends boss {
 	private static event pastSpawnFarm;
 	private static event pastFlowerPatch;
 	private static event pastTombEntrance;
-	private static event pastTombExit;
+	public static event pastTombExit;
 	private static event pastDenmother;
 	
 	// Events that make him like you more TODO:
@@ -878,7 +878,7 @@ public class farlsworth extends boss {
 			if(sequencePart == 3 && time.getTime() - waitStart > waitFor*1000) {
 				
 				// Strike, ignite tree.
-				lightningStrike.strikeAt(-758,-3937+10);
+				lightningStrike l =  new lightningStrike(-758,-3937+10);
 				sheepFarm.lightningTree.ignite();
 				
 				// Wait.

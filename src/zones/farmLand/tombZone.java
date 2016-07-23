@@ -145,22 +145,26 @@ public class tombZone extends zone {
 		enteredtombZoneBefore = new event("enteredtombZoneBefore");
 	}
 	
-public void makeShadowRectangle (int topLeftDudePosX, int topLeftDudePosY, int spreadX, int spreadY, float speed, boolean clockwise) {
+public void makeShadowRectangle(int topLeftDudePosX, int topLeftDudePosY, int spreadX, int spreadY, int numDudesWidth, int numDudesHeight, float speed, boolean clockwise) {
 		
 		ArrayList<intTuple> squarePath = new ArrayList<intTuple>();
-		squarePath.add(new intTuple(0,0));
-		squarePath.add(new intTuple(1,0));
-		squarePath.add(new intTuple(2,0));
-		squarePath.add(new intTuple(2,1));
-		squarePath.add(new intTuple(2,2));
-		squarePath.add(new intTuple(1,2));
-		squarePath.add(new intTuple(0,2));
-		squarePath.add(new intTuple(0,1));
+		for(int i = 0; i < numDudesWidth; i++) {
+			squarePath.add(new intTuple(i,0));
+		}
+		for(int i = 0; i < numDudesHeight; i++) {
+			squarePath.add(new intTuple(numDudesWidth-1,i));
+		}
+		for(int i = numDudesWidth-1; i > 0; i--) {
+			squarePath.add(new intTuple(i,numDudesHeight-1));
+		}
+		for(int i = numDudesHeight-1; i > 0; i--) {
+			squarePath.add(new intTuple(0,i));
+		}
 		
-		for(int i = 0; i < 3; i++) {
-		      for(int j = 0; j < 3; j++) {
+		for(int i = 0; i < numDudesWidth; i++) {
+		      for(int j = 0; j < numDudesHeight; j++) {
 		       
-		    	  if(i == 1 && j == 1) {
+		    	  if(i != 0 && j != 0 && j != numDudesHeight - 1 && i != numDudesWidth - 1) {
 		    		  // Do nothing.
 		    	  }
 		    	  
@@ -403,9 +407,6 @@ public void makeShadowSquareTopRight (int topLeftDudePosX, int topLeftDudePosY, 
 		stairsUp tombZoneEnterance = new stairsUp(30,-8,0,sheepFarm.getZone(),2320,-3896,"Down");
 		tombZoneEnterance.setZ(BACKGROUND_Z);
 		
-		// Background 
-		//spawnBackgroundRect(-65,-269, 7500,787);
-		
 		// Roof
 		spawnTombRect(-18, -747, 7500,-220,"roof"); // the roof
 		spawnTombRect(-500+2, -747, 0,-220,"none"); // roof dirt top left
@@ -545,15 +546,15 @@ public void makeShadowSquareTopRight (int topLeftDudePosX, int topLeftDudePosY, 
 		
 		makeShadowSquareTopRight (5018,470, 70, 75,2 ,true);
 		
-		makeShadowRectangle (5000,765,200, 112,2 ,false);
+		makeShadowRectangle (4850,760,115,115, 7, 3, 3 ,false);
 		
 		spawnTombRect(4972,811,5604,843,"ground");
 		
 		spawnTombRect(4892,1035,5445+32,1067,"ground");
 		
-		shadowDudePatrol (5109,847,5109,989,3.5f);
+		//shadowDudePatrol (5109,847,5109,989,3.5f);
 		
-		shadowDudePatrol (5265,989,5265,847,3.5f);
+		//shadowDudePatrol (5265,989,5265,847,3.5f);
 
 		
 		

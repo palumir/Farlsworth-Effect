@@ -72,8 +72,16 @@ public class tree extends chunk {
 					
 		// Start of conversation.
 		textSeries startOfConversation = null;
-		startOfConversation = new textSeries(null, "It's an ordinary tree.");
-		startOfConversation.setEnd();
+		
+		if(ignited) {
+			startOfConversation = new textSeries(null, "It's an ordinary tree.");
+			s = startOfConversation.addChild(null, "But also on fire.");
+			s.setEnd();
+		}
+		else {
+			startOfConversation = new textSeries(null, "It's an ordinary tree.");
+			startOfConversation.setEnd();
+		}
 		
 		return new interactBox(startOfConversation, stringUtils.toTitleCase(DEFAULT_CHUNK_NAME));
 	}
