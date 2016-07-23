@@ -554,13 +554,11 @@ public void makeShadowSquareTopRight (int topLeftDudePosX, int topLeftDudePosY, 
 		
 		//shadowDudePatrol (5109,847,5109,989,3.5f);
 		
-<<<<<<< HEAD
 		shadowDudePatrol (5265,989,5265,847,3.5f);
 		
 		spawnTombRect(4980,1251,5600,1283,"ground");
-=======
+		
 		//shadowDudePatrol (5265,989,5265,847,3.5f);
->>>>>>> 1f5f5daec26b71658ef5a65bb3727a37fff56d12
 
 		
 		
