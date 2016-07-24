@@ -330,6 +330,14 @@ public abstract class unit extends drawnObject  {
 		}
 	}
 	
+	// Destroy all units
+	public static void destroyAll() {
+		for(int i = 0; i < allUnits.size(); i++) {
+			allUnits.get(0).destroy();
+			allUnits.remove(0);
+		}
+	}
+	
 	// Respond to destroy
 	@Override
 	public void respondToDestroy() {

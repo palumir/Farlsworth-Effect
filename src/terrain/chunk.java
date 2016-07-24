@@ -397,5 +397,9 @@ public class chunk extends drawnObject {
 	public void setFlammable(boolean flammable) {
 		this.flammable = flammable;
 	}
+
+	public boolean isImportantEnoughToReload() {
+		return importantEnoughToReload;
+	}
 	
 }

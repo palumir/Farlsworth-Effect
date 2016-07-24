@@ -195,6 +195,12 @@ public abstract class drawnObject {
 	// Camera attached to the object,
 	protected camera attachedCamera = null;
 	
+	// Is the chunk important enough to reload?
+	protected boolean importantEnoughToReload = true;
+	
+	// Unimportant objects
+	public static ArrayList<drawnObject> unimportantObjects = new ArrayList<drawnObject>();
+	
 	// A list of things that we need to draw in general.
 	public static CopyOnWriteArrayList<drawnObject> objects;
 	
@@ -398,6 +404,9 @@ public abstract class drawnObject {
 	// Initiate drawnObjects
 	public static void initiate() {
 		objects = new CopyOnWriteArrayList<drawnObject>();
+		if(unimportantObjects!=null && unimportantObjects.size() > 0) {
+			objects = new CopyOnWriteArrayList<drawnObject>(unimportantObjects);
+		}
 	}
 	
 	// Draw object.
@@ -604,6 +613,12 @@ public abstract class drawnObject {
 
 	public void setExists(boolean exists) {
 		this.exists = exists;
+	}
+	
+	public void setImportantEnoughToReload(boolean importantEnoughToReload) {
+		this.importantEnoughToReload = importantEnoughToReload;
+		if(importantEnoughToReload && unimportantObjects.contains(this)) unimportantObjects.remove(this);
+		if(!importantEnoughToReload && !unimportantObjects.contains(this)) unimportantObjects.add(this);
 	}
 	
 }

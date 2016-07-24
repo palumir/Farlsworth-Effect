@@ -171,5 +171,7 @@ public class tree extends chunk {
 		if(zone.getCurrentZone() != null && zone.getCurrentZone().getName().equals("sheepFarm") && sheepFarm.isOnFire != null && sheepFarm.isOnFire.isCompleted()) {
 			ignite();
 		}
+		
+		setImportantEnoughToReload(false);
 	}
 }
