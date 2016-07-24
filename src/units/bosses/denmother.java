@@ -729,7 +729,7 @@ public class denmother extends boss {
 				}
 				randomInt = 2 + utility.RNG.nextInt(2);
 				u.setMoveSpeed(randomInt);
-				u.setAttackDamage(3) ;
+				u.setAttackDamage(1) ;
 				u.setAttackLength(7);
 				u.setAttackWidth(30);
 				u.setBackSwing(0f);

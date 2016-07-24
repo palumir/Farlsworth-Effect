@@ -3,6 +3,7 @@ package units;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 
+import doodads.sheepFarm.bone;
 import doodads.sheepFarm.bush;
 import doodads.sheepFarm.flower;
 import doodads.sheepFarm.grave;
@@ -45,6 +46,7 @@ public class developer extends player {
 	public String[] listOfThings = {"tree", 
 									"flower",
 									"bush",
+									"bone",
 									"grave",
 									"wolf",
 									"wallTorch",
@@ -60,7 +62,7 @@ public class developer extends player {
 		
 		// Give a million hp
 		healthPoints = 100000;
-		//moveSpeed = 10;
+		//moveSpeed = 20;
 		
 		// Destroy healthbar.
 		getHealthBar().destroy();
@@ -182,6 +184,18 @@ public class developer extends player {
 			
 			// Output what we make.
 			c = new flower(getIntX() + getWidth()/2, getIntY() + getHeight()/2, random);
+		}
+		
+		///////////////
+		/// Bone ////
+		///////////////
+		if(listOfThings[whatThing].equals("bone")) {
+			
+			// Get random.
+			random = utility.RNG.nextInt(5);
+			
+			// Output what we make.
+			c = new bone(getIntX() + getWidth()/2, getIntY() + getHeight()/2, random);
 		}
 		
 		/////////////
