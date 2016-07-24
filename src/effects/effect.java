@@ -65,7 +65,6 @@ public abstract class effect extends drawnObject  {
 		
 		// Dont reload these
 		reloadObject = false;
-		
 	}
 	
 	// Constructor

@@ -292,6 +292,9 @@ public class sheepFarm extends zone {
 			// Create final area
 			createFinalArea();
 			
+			// Denmother area
+			createDenmotherArea();
+			
 			// Importance
 			drawnObject.reloadTheFollowingObjects = true;
 		}
@@ -313,6 +316,18 @@ public class sheepFarm extends zone {
 	
 	// Spawn creeps
 	public void spawnUnits() {
+		
+		// Denmother
+		denmother den = new denmother(-3841,-856);
+		
+		// Farlsworth
+		farlsworth sheepBoss = new farlsworth(411,-394);
+		if(!farlsworth.isFenceAttached.isCompleted()) {
+			farlsworthFence = makeFarlsworthFence(5,-406);
+		}
+		else {
+			farlsworthFence = null;
+		}
 		
 		// First wolf
 		u = new redWolf(-2,-747);
@@ -375,6 +390,88 @@ public class sheepFarm extends zone {
 		u.setFacingDirection("Right");
 
 
+	}
+	
+	// Denmother area
+	public void createDenmotherArea() {
+		spawnGrassRect(-4954+2,-5588+12,-3115,63);
+		spawnGrassRect(-3155,-548,-2900,60);
+		c = new bone(-3172,-326,1);
+		c = new bone(-3139,-135,2);
+		c = new bone(-2866,-240,0);
+		c = new bone(-2778,-352,2);
+		c = new bone(-2630,-151,3);
+		c = new bone(-2728,-17,0);
+		c = new bone(-2978,-82,1);
+		c = new bone(-3235,-17,1);
+		c = new bone(-3421,-117,4);
+		c = new bone(-3592,-36,1);
+		c = new bone(-3757,-114,1);
+		c = new bone(-3623,-219,3);
+		c = new bone(-3479,-335,0);
+		c = new bone(-3307,-402,3);
+		c = new bone(-3447,-501,0);
+		c = new bone(-3236,-567,3);
+		c = new bone(-3215,-689,0);
+		c = new bone(-3389,-786,3);
+		c = new bone(-3319,-892,1);
+		c = new bone(-3203,-1028,3);
+		c = new bone(-3372,-1119,2);
+		c = new bone(-3558,-1079,0);
+		c = new bone(-3713,-1143,2);
+		c = new bone(-3621,-980,1);
+		c = new bone(-3451,-957,2);
+		c = new bone(-3564,-879,4);
+		c = new bone(-3698,-790,1);
+		c = new bone(-3639,-665,0);
+		c = new bone(-3692,-587,0);
+		c = new bone(-3641,-443,4);
+		c = new bone(-3813,-422,1);
+		c = new bone(-3928,-303,0);
+		c = new bone(-3976,-181,1);
+		c = new bone(-4034,-79,0);
+		c = new bone(-4195,-44,1);
+		c = new bone(-4343,-17,3);
+		c = new bone(-4340,-128,4);
+		c = new bone(-4190,-236,0);
+		c = new bone(-4058,-316,2);
+		c = new bone(-4107,-454,1);
+		c = new bone(-4296,-386,4);
+		c = new bone(-4194,-568,4);
+		c = new bone(-3943,-533,2);
+		c = new bone(-3795,-661,4);
+		c = new bone(-3974,-741,2);
+		c = new bone(-4064,-855,2);
+		c = new bone(-3901,-893,4);
+		c = new bone(-3761,-912,4);
+		c = new bone(-3791,-1039,4);
+		c = new bone(-3936,-1031,0);
+		c = new bone(-4077,-1135,2);
+		c = new bone(-4188,-1205,1);
+		c = new bone(-4250,-1083,1);
+		c = new bone(-4325,-962,0);
+		c = new bone(-4317,-836,1);
+		c = new bone(-4213,-787,2);
+		c = new bone(-4070,-943,0);
+		c = new bone(-3303,-1229,0);
+		c = new bone(-3489,-1313,1);
+		c = new bone(-3664,-1343,1);
+		c = new bone(-3852,-1386,1);
+		c = new bone(-3878,-1280,2);
+		c = new bone(-4088,-1289,4);
+		c = new bone(-4283,-1308,3);
+		c = new bone(-4457,-1261,1);
+		c = new bone(-4457,-1023,3);
+		c = new bone(-4421,-882,0);
+		c = new bone(-4504,-763,3);
+		c = new bone(-4320,-642,0);
+		c = new bone(-4476,-461,1);
+		c = new bone(-4368,-293,1);
+		c = new bone(-4484,-183,2);
+		c = new bone(-4496,-33,2);
+		c = new bone(-3937,18,0);
+		c = new bone(-3461,24,4);
+		c = new bone(-3303,-258,1);
 	}
 	
 	// Final area with all the fire.
@@ -1591,7 +1688,7 @@ public class sheepFarm extends zone {
 		
 		// Spawn river to left of mountain
 		spawnWaterRect(-2128-1000,-4466+2-1000-16,-2000-1000,-2926-1000);
-		spawnWaterRect(-2128-1000,-2900-1000-12,-2000-1000,200);
+		spawnWaterRect(-2128-1000,-2900-1000-12,-2000-1000,-500);
 		
 		// Spawn river to right of mountain
 		spawnWaterRect(2000+1000-16,-4466+18-1000,2128+1000,200);
@@ -2760,7 +2857,7 @@ public class sheepFarm extends zone {
 		c = new bridge(-170-16,56-33,0);
 		
 		// Draw the water to left of bridge spawn.
-		spawnWaterRect(-2100-1000+10-6-5,56,-167,200);	
+		spawnWaterRect(-2100-3000+10-6-5,56,-167,200);	
 		
 		// Draw the water to right of bridge spawn.
 		spawnWaterRect(-168+20+15-5-6+5,56,2032+1000,200);
@@ -2769,15 +2866,6 @@ public class sheepFarm extends zone {
 		c = new rock(-24,75,0);
 		c = new rock(21,111,1);
 		c = new rock(-6,147,0);
-	
-		// Farlsworth stuff
-		farlsworth sheepBoss = new farlsworth(411,-394);
-		if(!farlsworth.isFenceAttached.isCompleted()) {
-			farlsworthFence = makeFarlsworthFence(5,-406);
-		}
-		else {
-			farlsworthFence = null;
-		}
 		
 		////////////////////////////
 		//// FARMHOUSE AREA  ///////
@@ -3029,7 +3117,7 @@ public class sheepFarm extends zone {
 	int secondAreaX2 = -1661;
 	int secondAreaY2 = -2600;
 	ArrayList<drawnObject> secondAreaLightning;
-	float secondAreaLightningEvery = lightningStrike.preLightningLastsFor + 1;
+	float secondAreaLightningEvery = lightningStrike.preLightningLastsFor + 0.5f;
 	boolean secondAreaPreLightningSoundPlayed = false;
 	boolean secondAreaLightningStrikeSoundPlayed = false;
 	long secondAreaLastStrike = 0;
