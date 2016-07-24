@@ -103,7 +103,7 @@ public class shadowDude extends unit {
 	long lastHurt = 0;
 	int damage = 6;
 	float slowTo = 0.1f;
-	float hurtEvery = 0.1f;
+	float hurtEvery = 0.05f;
 	
 	public void hurtPeople() {
 		// If someone is in the explosion radius, hurt.
