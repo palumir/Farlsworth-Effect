@@ -63,6 +63,9 @@ public abstract class effect extends drawnObject  {
 		typeOfEffect = e;
 		setAnimations(false);
 		
+		// Dont reload these
+		reloadObject = false;
+		
 	}
 	
 	// Constructor

@@ -2,6 +2,7 @@ package zones;
 
 import java.util.ArrayList;
 
+import drawing.drawnObject;
 import drawing.userInterface.tooltipString;
 import units.player;
 import utilities.intTuple;
@@ -57,6 +58,7 @@ public abstract class zone {
 		saveState.createSaveState();
 		
 		// Re-create the player in the new zone.
+		drawnObject.dontReloadTheseObjects = new ArrayList<drawnObject>();
 		player.loadPlayer(player.getCurrentPlayer(), b, x, y, direction);
 		
 		// If we are going into the cave for the first time, display tooltip.

@@ -344,7 +344,6 @@ public class chunk extends drawnObject {
 	// Initiate chunks
 	public static void initiate() {
 		allChunks = new ArrayList<chunk>();
-		impassableChunks = new CopyOnWriteArrayList<chunk>();
 	}
 	
 	// Ignite. Only does something for flammable chunks.
@@ -399,7 +398,7 @@ public class chunk extends drawnObject {
 	}
 
 	public boolean isImportantEnoughToReload() {
-		return importantEnoughToReload;
+		return reloadObject;
 	}
 	
 }

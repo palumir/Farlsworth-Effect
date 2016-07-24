@@ -30,6 +30,9 @@ public abstract class drawnObject {
 	////////////////
 	/// DEFAULTS ///
 	////////////////
+	
+	// Are chunks important?
+	public static boolean reloadTheFollowingObjects = true;
 
 	// Font
 	public static String DEFAULT_FONT_NAME = "TimesRoman";
@@ -196,10 +199,10 @@ public abstract class drawnObject {
 	protected camera attachedCamera = null;
 	
 	// Is the chunk important enough to reload?
-	protected boolean importantEnoughToReload = true;
+	protected boolean reloadObject = true;
 	
 	// Unimportant objects
-	public static ArrayList<drawnObject> unimportantObjects = new ArrayList<drawnObject>();
+	public static ArrayList<drawnObject> dontReloadTheseObjects = new ArrayList<drawnObject>();
 	
 	// A list of things that we need to draw in general.
 	public static CopyOnWriteArrayList<drawnObject> objects;
@@ -219,6 +222,7 @@ public abstract class drawnObject {
 		setWidth(newWidth);
 		setHeight(newHeight);
 		addObject(this);
+		setReloadObject(reloadTheFollowingObjects);
 	}
 	
 	// Get units in box.
@@ -404,8 +408,18 @@ public abstract class drawnObject {
 	// Initiate drawnObjects
 	public static void initiate() {
 		objects = new CopyOnWriteArrayList<drawnObject>();
-		if(unimportantObjects!=null && unimportantObjects.size() > 0) {
-			objects = new CopyOnWriteArrayList<drawnObject>(unimportantObjects);
+		if(dontReloadTheseObjects!=null && dontReloadTheseObjects.size() > 0) {
+			objects = new CopyOnWriteArrayList<drawnObject>(dontReloadTheseObjects);
+			chunk.impassableChunks = new CopyOnWriteArrayList<chunk>();
+			for(int i = 0; i < objects.size(); i++) {
+				drawnObject d = objects.get(i);
+				if(d instanceof chunk) {
+					if(!((chunk)d).isPassable())  chunk.impassableChunks.add((chunk)d);
+				}
+			}
+		}
+		else {
+			chunk.impassableChunks = new CopyOnWriteArrayList<chunk>();
 		}
 	}
 	
@@ -615,10 +629,10 @@ public abstract class drawnObject {
 		this.exists = exists;
 	}
 	
-	public void setImportantEnoughToReload(boolean importantEnoughToReload) {
-		this.importantEnoughToReload = importantEnoughToReload;
-		if(importantEnoughToReload && unimportantObjects.contains(this)) unimportantObjects.remove(this);
-		if(!importantEnoughToReload && !unimportantObjects.contains(this)) unimportantObjects.add(this);
+	public void setReloadObject(boolean importantEnoughToReload) {
+		this.reloadObject = importantEnoughToReload;
+		if(importantEnoughToReload && dontReloadTheseObjects.contains(this)) dontReloadTheseObjects.remove(this);
+		if(!importantEnoughToReload && !dontReloadTheseObjects.contains(this)) dontReloadTheseObjects.add(this);
 	}
 	
 }
