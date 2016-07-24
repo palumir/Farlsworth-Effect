@@ -533,9 +533,9 @@ public void makeShadowSquareTopRight (int topLeftDudePosX, int topLeftDudePosY, 
 		shadowDudePatrol (4519,261,4857,261,2);
 		
 		spawnTombRect(4430,460,4815,492,"ground");
-		shadowDudePatrol (4510,343,4510,415,2);
-		makeShadowSquare(4575,340,70,75,3,false);
-		shadowDudePatrol (4785,343,4785,415,2);
+		shadowDudePatrol (4507,343,4507,415,1.7f);
+		makeShadowSquare(4576,340,70,75,2.5f,false);
+		shadowDudePatrol (4788,343,4788,415,1.7f);
 		
 		// Seventh floor
 		
