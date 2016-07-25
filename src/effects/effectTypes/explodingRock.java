@@ -75,16 +75,22 @@ public class explodingRock extends effect {
 	private boolean allied = false;
 	private int damage = DEFAULT_DAMAGE;
 	private chunk rock;
+	private int howMany = 0;
+	private float rockSpeed = 0;
 	
 	///////////////
 	/// METHODS ///
 	///////////////
 	// Constructor
-	public explodingRock(int newX, int newY, boolean isAllied, int radius, int damage, float duration) {
+	public explodingRock(int newX, int newY, boolean isAllied, int howMany, float rockSpeed, int radius, int damage, float duration) {
 		super(theEffectType, newX, newY);
 		
 		// Allied?
 		allied = isAllied;
+		
+		// Set how many
+		this.howMany = howMany;
+		this.rockSpeed = rockSpeed;
 		
 		// Damage.
 		this.damage = damage;
@@ -128,7 +134,7 @@ public class explodingRock extends effect {
 	// Make circle of rock pieces
 	public void makeCircleOfRockPieces() {
 		// How many rock pieces?
-		int n = 4;
+		int n = howMany;
 		
 		// Spawn rocks
 		int explodeRadius = 1000;
@@ -140,7 +146,7 @@ public class explodingRock extends effect {
 			int newY = (int) (getIntY() + 0*Math.sin(Math.toRadians(currentDegree)));
 			int goToX = (int) (getIntX() + explodeRadius*Math.cos(Math.toRadians(currentDegree))); 
 			int goToY = (int) (getIntY() + explodeRadius*Math.sin(Math.toRadians(currentDegree))); 
-			rockPiece r = new rockPiece(newX,newY,goToX,goToY,damage);
+			rockPiece r = new rockPiece(newX,newY,goToX,goToY,damage,rockSpeed);
 			r.setAllied(allied);
 			currentDegree += degreeChange;
 		}

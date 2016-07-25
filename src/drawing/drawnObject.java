@@ -22,6 +22,7 @@ import modes.mode;
 import terrain.chunk;
 import terrain.groundTile;
 import utilities.intTuple;
+import zones.zone;
 
 // A class for any object that is drawn in the
 // canvas.

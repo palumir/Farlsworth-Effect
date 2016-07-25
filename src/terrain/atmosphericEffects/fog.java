@@ -79,12 +79,13 @@ public class fog extends atmosphericEffect {
 	// Update.
 	public void update() {
 		if(fogLevel < fogLevelMax) {
-			fogLevel = fogLevelMax*((time.getTime() - startFade + 1)/(fadeTime*1000));
 			if((time.getTime() - startFade)/(fadeTime*1000) >= 1) fogLevel = fogLevelMax;
+			else fogLevel = oldLevel + (fogLevelMax - oldLevel)*((time.getTime() - startFade + 1)/(fadeTime*1000));
 		}
 		else if(fogLevel > fogLevelMax) {
-			 fogLevel = oldLevel*(1 - ((time.getTime() - startFade + 1)/(fadeTime*1000)));
 			 if((time.getTime() - startFade)/(fadeTime*1000) >= 1) fogLevel = fogLevelMax;
+			 else fogLevel = fogLevelMax + (oldLevel - fogLevelMax)*(1 - ((time.getTime() - startFade + 1)/(fadeTime*1000)));
+
 		}
 	}
 	
@@ -116,7 +117,7 @@ public class fog extends atmosphericEffect {
 	public void fadeTo(float level, float newTime) {
 			startFade = time.getTime();
 			fadeTime = newTime;
-			if(level < fogLevel) oldLevel = fogLevel;
+			oldLevel = fogLevel;
 			fogLevelMax = level;
 			if(!allFog.contains(this)) allFog.add(this);
 			if(!drawnObject.objects.contains(this)) drawnObject.objects.add(this);

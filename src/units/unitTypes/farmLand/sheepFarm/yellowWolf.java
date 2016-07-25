@@ -54,8 +54,46 @@ public class yellowWolf extends wolf {
 	// Default jump speed
 	private static int DEFAULT_UNIT_JUMPSPEED = 12;
 	
-	// wolf sprite stuff.
-	private static String DEFAULT_UNIT_SPRITESHEET = "images/units/animals/yellowWolf.png";
+	// Beta stats
+	private static float DEFAULT_MOVESPEED_BETA = 2f;
+	private static float DEFAULT_CLAW_ATTACK_EVERY_BASE_BETA = 4f;
+	private static float DEFAULT_SPAWN_CLAW_PHASE_TIME_BETA = 2f;
+	private static int DEFAULT_HOW_FAR_BACK_BASE_BETA = 55;
+	private static int DEFAULT_HOW_FAR_BACK_RANDOM_BETA = 20;
+	private static int DEFAULT_RANDOM_DEGREE_BETA = 40;
+	private static int DEFAULT_FOLLOW_UNTIL_RANGE_BASE_BETA = 90;
+	private static int DEFAULT_FOLLOW_UNTIL_RANGE_RANDOM_BETA = 15;
+
+	// Alpha stats
+	private static float DEFAULT_MOVESPEED_ALPHA = 3f;
+	private static float DEFAULT_CLAW_ATTACK_EVERY_BASE_ALPHA = 1f;
+	private static float DEFAULT_SPAWN_CLAW_PHASE_TIME_ALPHA = 0.75f;
+	private static int DEFAULT_HOW_FAR_BACK_BASE_ALPHA = 15;
+	private static int DEFAULT_HOW_FAR_BACK_RANDOM_ALPHA = 1;
+	private static int DEFAULT_RANDOM_DEGREE_ALPHA = 1;
+	private static int DEFAULT_FOLLOW_UNTIL_RANGE_BASE_ALPHA = 15;
+	
+	// How often to spawn a rock.
+	private static float DEFAULT_SPAWN_ROCK_EVERY = 0.075f/2f;
+	
+	// Rockpile
+	private static int DEFAULT_HOW_MANY_ROCK_PIECES_SPAWN = 5;
+	private static float DEFAULT_ROCK_PIECE_MOVESPEED = 2f;
+	private static float DEFAULT_ROCK_DURATION = 2.5f;
+	private static int DEFAULT_ROCK_RADIUS = 0;
+	private static int DEFAULT_ROCK_DAMAGE = 2;
+	
+	//////////////
+	/// FIELDS ///
+	//////////////
+	// How far back do we put the claw?
+	private int howFarBackBase = 80;
+	private int howFarBackRandom = 20;
+	private int randomRadius = 1;
+	
+	// Spawn rock every
+	protected float spawnRockEvery = DEFAULT_SPAWN_ROCK_EVERY;
+	protected long lastSpawnRock = 0;
 	
 	// Unit sprite stuff.
 	private static spriteSheet DEFAULT_UPDOWN_SPRITESHEET = new spriteSheet(new spriteSheetInfo(
@@ -94,26 +132,6 @@ public class yellowWolf extends wolf {
 					     DEFAULT_UNIT_MOVESPEED, // Movespeed
 					     DEFAULT_UNIT_JUMPSPEED // Jump speed
 						);	
-	
-	
-	// Spawn rock every
-	protected float spawnRockEvery = 0.075f/2f;
-	protected long lastSpawnRock = 0;
-	
-	// Rockpile
-	private static float DEFAULT_ROCK_DURATION = 2.5f;
-	private static int DEFAULT_ROCK_RADIUS = 25;
-	private static int DEFAULT_ROCK_DAMAGE = 2;
-	
-	// How far back do we put the claw?
-	private int howFarBackBase = 80;
-	private int howFarBackRandom = 20;
-	private int randomRadius = 1;
-
-	
-	//////////////
-	/// FIELDS ///
-	//////////////
 	
 	
 	///////////////
@@ -181,6 +199,8 @@ public class yellowWolf extends wolf {
 			explodingRock r = new explodingRock(this.getIntX() + this.getWidth()/2,
 					  this.getIntY() + this.getHeight()/2,
 					  false,
+					  DEFAULT_HOW_MANY_ROCK_PIECES_SPAWN,
+					  DEFAULT_ROCK_PIECE_MOVESPEED,
 					  DEFAULT_ROCK_RADIUS,
 					  DEFAULT_ROCK_DAMAGE,
 					  DEFAULT_ROCK_DURATION);
@@ -196,24 +216,25 @@ public class yellowWolf extends wolf {
 		
 		// Beta wolf
 		if(!alpha) {
-			clawAttackEveryBase = 4f;
-			spawnClawPhaseTime = 2f;
-			howFarBackBase = 55;
-			howFarBackRandom = 20;
-			randomRadius = 40;
-			followUntilRange = 90 + utility.RNG.nextInt(15);
+			setMoveSpeed(DEFAULT_MOVESPEED_BETA);
+			clawAttackEveryBase = DEFAULT_CLAW_ATTACK_EVERY_BASE_BETA;
+			spawnClawPhaseTime = DEFAULT_SPAWN_CLAW_PHASE_TIME_BETA;
+			howFarBackBase = DEFAULT_HOW_FAR_BACK_BASE_BETA;
+			howFarBackRandom = DEFAULT_HOW_FAR_BACK_RANDOM_BETA;
+			randomRadius = DEFAULT_RANDOM_DEGREE_BETA;
+			followUntilRange = DEFAULT_FOLLOW_UNTIL_RANGE_BASE_BETA + utility.RNG.nextInt(DEFAULT_FOLLOW_UNTIL_RANGE_RANDOM_BETA);
 		}
 		
 		// Alpha wolf
 		else {
 			// Claw attack stuff.
-			clawAttackEveryBase = 1f;
-			spawnClawPhaseTime = 0.75f;
-			howFarBackBase = 15;
-			howFarBackRandom = 1;
-			randomRadius = 1;
-			followUntilRange = 15;
-			moveSpeed = 3;
+			setMoveSpeed(DEFAULT_MOVESPEED_ALPHA);
+			clawAttackEveryBase = DEFAULT_CLAW_ATTACK_EVERY_BASE_ALPHA;
+			spawnClawPhaseTime = DEFAULT_SPAWN_CLAW_PHASE_TIME_ALPHA;
+			howFarBackBase = DEFAULT_HOW_FAR_BACK_BASE_ALPHA;
+			howFarBackRandom = DEFAULT_HOW_FAR_BACK_RANDOM_ALPHA;
+			randomRadius = DEFAULT_RANDOM_DEGREE_ALPHA;
+			followUntilRange = DEFAULT_FOLLOW_UNTIL_RANGE_BASE_ALPHA;
 			clawAttackEvery = clawAttackEveryBase;
 		}
 	}

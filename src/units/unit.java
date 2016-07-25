@@ -156,12 +156,13 @@ public abstract class unit extends drawnObject  {
 	
 	// Movement
 	protected float moveSpeed = DEFAULT_UNIT_MOVESPEED;
+	protected float oldMoveSpeed = moveSpeed;
 	protected float baseMoveSpeed = DEFAULT_UNIT_MOVESPEED;
 	protected float baseMoveDuration = 0.75f;
 	private boolean movingLeft = false;
 	private boolean movingRight = false;
 	private boolean movingDown = false;
-	private boolean movingUp = false;
+	public boolean movingUp = false;
 	protected String facingDirection = DEFAULT_FACING_DIRECTION;
 	protected boolean collisionOn = true;
 	
@@ -265,6 +266,17 @@ public abstract class unit extends drawnObject  {
 			}
 		}
 		return false;
+	}
+	
+	// Move in place.
+	public void moveInPlace() {
+		oldMoveSpeed = moveSpeed;
+		moveSpeed = 0.001f;
+	}
+	
+	// Move in place.
+	public void stopMoveInPlace() {
+		moveSpeed = oldMoveSpeed;
 	}
 	
 	// Deal with patrolling

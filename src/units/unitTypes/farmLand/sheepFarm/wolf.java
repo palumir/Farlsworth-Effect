@@ -43,10 +43,6 @@ public abstract class wolf extends unit {
 		/// DEFAULTS ///
 		////////////////
 	
-		// Spritesheets
-		protected spriteSheet upDownSpriteSheet;
-		protected spriteSheet leftRightSpriteSheet;
-		
 		// Platformer real dimensions
 		public static int DEFAULT_PLATFORMER_HEIGHT = 32;
 		public static int DEFAULT_PLATFORMER_WIDTH = 32;
@@ -58,12 +54,29 @@ public abstract class wolf extends unit {
 		public static int DEFAULT_TOPDOWN_WIDTH = 32;
 		public static int DEFAULT_TOPDOWN_ADJUSTMENT_Y = 0;
 		
-		// Follow until range
-		protected int followUntilRange = 10 + utility.RNG.nextInt(15);
+		// Default don't attack for
+		public static float DEFAULT_DONT_ATTACK_FOR = 0f;
 		
 		// How close to attack?
 		protected int DEFAULT_ATTACK_RADIUS = 300;
 		protected int DEFAULT_DEAGGRO_RADIUS = 400;
+		
+		// Damage stats
+		protected static int DEFAULT_ATTACK_WIDTH = 500; // DEFAULT_ATTACK_WIDTH/2 to the right, DEFAULT_ATTACK_WIDTH/2 to the left.
+		protected static int DEFAULT_ATTACK_LENGTH = 500; // DEFAULT_ATTACK_LENGTH in front of him.
+		
+		// Sounds
+		protected static String howl = "sounds/effects/animals/wolfHowl.wav";
+		protected static String growl = "sounds/effects/animals/wolfGrowl.wav";
+		protected static String bark1 = "sounds/effects/animals/wolfBark1.wav";
+		protected static String bark2 = "sounds/effects/animals/wolfBark2.wav";
+		protected long lastHowl = 0;
+		protected float randomHowl = 0;
+		protected float baseRandomHowl = 10f;
+		
+		//////////////
+		/// FIELDS ///
+		//////////////
 		
 		// Unit sprite stuff.
 		private static spriteSheet DEFAULT_UPDOWN_SPRITESHEET = new spriteSheet(new spriteSheetInfo(
@@ -81,26 +94,12 @@ public abstract class wolf extends unit {
 				DEFAULT_TOPDOWN_ADJUSTMENT_Y
 				));
 		
-		// Damage stats
-		static  int DEFAULT_ATTACK_DAMAGE = 2;
-		static protected float DEFAULT_ATTACK_TIME = 2f;
-		static protected int DEFAULT_ATTACK_WIDTH = 500;
-		static protected int DEFAULT_ATTACK_LENGTH = 500;
-		static protected float DEFAULT_CRIT_CHANCE = .15f;
-		static protected float DEFAULT_CRIT_DAMAGE = 1.6f;
+		// Spritesheets
+		protected spriteSheet upDownSpriteSheet;
+		protected spriteSheet leftRightSpriteSheet;
 		
-		// Sounds
-		protected static String howl = "sounds/effects/animals/wolfHowl.wav";
-		protected static String growl = "sounds/effects/animals/wolfGrowl.wav";
-		protected static String bark1 = "sounds/effects/animals/wolfBark1.wav";
-		protected static String bark2 = "sounds/effects/animals/wolfBark2.wav";
-		protected long lastHowl = 0;
-		protected float randomHowl = 0;
-		protected float baseRandomHowl = 10f;
-		
-		//////////////
-		/// FIELDS ///
-		//////////////
+		// Follow until range
+		protected int followUntilRange = 10 + utility.RNG.nextInt(15);
 		
 		// Is the wolf the alpha of the group?
 		protected boolean alpha = false;
@@ -113,7 +112,7 @@ public abstract class wolf extends unit {
 		protected long aggrodTime = 0;
 		
 		// Don't attack for
-		protected float dontAttackFor = 0.5f;
+		protected float dontAttackFor = DEFAULT_DONT_ATTACK_FOR;
 		
 		// Claw attacking?
 		protected boolean clawAttacking = false;
@@ -172,6 +171,9 @@ public abstract class wolf extends unit {
 			topDownHeight = DEFAULT_TOPDOWN_HEIGHT;
 			topDownWidth = DEFAULT_TOPDOWN_WIDTH;
 			setHitBoxAdjustmentY(getDefaultHitBoxAdjustmentY());
+			
+			// Turn collision off
+			collisionOn = false;
 		}
 		
 		// Add animations.
@@ -229,25 +231,7 @@ public abstract class wolf extends unit {
 		}
 		
 		// Combat defaults.
-		public void setCombatStuff() {
-			// Set to be attackable.
-			this.setKillable(true);
-			
-			// Wolf damage.
-			setAttackFrameStart(2);
-			setAttackFrameEnd(3);
-			setAttackDamage(DEFAULT_ATTACK_DAMAGE);
-			setAttackTime(DEFAULT_ATTACK_TIME);
-			setAttackWidth(DEFAULT_ATTACK_WIDTH);
-			setAttackLength(DEFAULT_ATTACK_LENGTH);
-			setCritDamage(DEFAULT_CRIT_DAMAGE);
-			setCritChance(DEFAULT_CRIT_CHANCE);
-			
-			// HP
-			setMaxHealthPoints(DEFAULT_HP);
-			setHealthPoints(DEFAULT_HP);
-			
-		}
+		public abstract void setCombatStuff();
 		
 		// Assign a random alpha
 		public void assignRandomAlpha(ArrayList<unit> units) {
@@ -569,24 +553,6 @@ public abstract class wolf extends unit {
 				attack();
 			}
 		}
-		
-		// Deal with movement animations.
-		/*public void dealWithAnimations(int moveX, int moveY) {
-			if(jumping) {
-				animate("slashing" + facingDirection);
-			}
-			else if(isAttacking() && !isAlreadyAttacked()) {
-				// Play animation.
-				animate("attacking" + facingDirection);
-			}
-			else if(isMoving()) {
-				animate("running" + getFacingDirection());
-			}
-			else {
-				animate("standing" + getFacingDirection());
-			}
-		}*/
-		
 		
 		///////////////////////////
 		/// GETTERS AND SETTERS ///

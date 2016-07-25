@@ -7,19 +7,24 @@ import doodads.sheepFarm.well;
 import doodads.tomb.stairsUp;
 import doodads.tomb.wallTorch;
 import drawing.background;
+import drawing.drawnObject;
 import drawing.spriteSheet;
+import drawing.userInterface.tooltipString;
 import interactions.event;
 import modes.platformer;
 import sounds.music;
 import terrain.chunk;
 import terrain.atmosphericEffects.fog;
-import terrain.chunkTypes.dirt;
-import terrain.chunkTypes.tombBackground;
-import terrain.chunkTypes.tombDirt;
+import terrain.chunkTypes.tomb;
+import terrain.chunkTypes.tombEdge;
+import units.player;
 import units.unit;
+import units.bosses.playerOne;
 import units.unitTypes.farmLand.tomb.lightDude;
 import units.unitTypes.farmLand.tomb.shadowDude;
 import utilities.intTuple;
+import utilities.saveState;
+import utilities.time;
 import zones.zone;
 
 public class tombZone extends zone {
@@ -35,21 +40,29 @@ public class tombZone extends zone {
 	private static BufferedImage DEFAULT_ZONE_BACKGROUND = spriteSheet.getSpriteFromFilePath("images/terrain/backgrounds/tombBackground.png");
 	
 	// Zone music.
-	private static music zoneMusic = new music("sounds/music/farmLand/tomb/tomb.wav");
+	private static String zoneMusic = "sounds/music/farmLand/tomb/tomb.wav";
+	private static String zoneMusicFrantic = "sounds/music/farmLand/tomb/tombElevator.wav";
 	
 	// References we will use throughout.
-	unit u;
-	chunk c;
-	ArrayList<intTuple> path;
+	static unit u;
+	static chunk c;
+	static ArrayList<intTuple> path;
 	
 	// Some defaults.
 	public static int BACKGROUND_Z = -100;
 	
 	// Zone events.
 	public static event enteredtombZoneBefore;
+	public static event shadowElevatorStarted;
+	public static boolean shadowElevatorFirstTime;
+	
+	// Initiated?
+	public boolean shadowElevatorInitiated = false;
 	
 	// Defaults
 	public static intTuple DEFAULT_SPAWN_TUPLE = new intTuple(0,-50);
+	
+	// 
 	
 	// Zone fog
 	public static fog zoneFog;
@@ -65,47 +78,34 @@ public class tombZone extends zone {
 	
 	// Spawn grass dirt x to y.
 	public void spawnTombRect(int x1, int y1, int x2, int y2, String type) {
-		int numX = (x2 - x1)/dirt.DEFAULT_CHUNK_WIDTH;
-		int numY = (y2 - y1)/dirt.DEFAULT_CHUNK_HEIGHT;
-		for(int i = 0; i < numX; i++) {
-			for(int j = 0; j < numY; j++) {
-				if((i == numX-1 || i == 0 || j == 0 || j == numY-1)) {
-					if(j==0 && type.equals("ground")) {
-						c = new tombDirt(i*dirt.DEFAULT_CHUNK_WIDTH + x1, j*dirt.DEFAULT_CHUNK_HEIGHT + y1, 0);
+			
+			int numX = (x2 - x1)/tomb.DEFAULT_CHUNK_WIDTH;
+			int numY = (y2 - y1)/tomb.DEFAULT_CHUNK_HEIGHT;
+			for(int i = 0; i < numX; i++) {
+				for(int j = 0; j < numY; j++) {
+					if((i == numX-1 || i == 0 || j == 0 || j == numY-1)) {
+						if(j==0 && type.equals("ground")) {
+							c = new tombEdge(i*tomb.DEFAULT_CHUNK_WIDTH + x1, j*tomb.DEFAULT_CHUNK_HEIGHT + y1, 0);
+						}
+						else if(i == numX - 1 && type.equals("leftWall")) {
+							c = new tombEdge(i*tomb.DEFAULT_CHUNK_WIDTH + x1, j*tomb.DEFAULT_CHUNK_HEIGHT + y1, 1);
+						}
+						else if(i==0 && type.equals("rightWall")) {
+							c = new tombEdge(i*tomb.DEFAULT_CHUNK_WIDTH + x1, j*tomb.DEFAULT_CHUNK_HEIGHT + y1, 3);
+						}
+						else if(j==numY - 1 && type.equals("roof")) {
+							c = new tombEdge(i*tomb.DEFAULT_CHUNK_WIDTH + x1, j*tomb.DEFAULT_CHUNK_HEIGHT + y1, 2);
+						}
+						else {
+							c = new tomb(i*tomb.DEFAULT_CHUNK_WIDTH + x1, j*tomb.DEFAULT_CHUNK_HEIGHT + y1);
+						}
 					}
-					else if(i == numX - 1 && type.equals("leftWall")) {
-						c = new tombDirt(i*dirt.DEFAULT_CHUNK_WIDTH + x1, j*dirt.DEFAULT_CHUNK_HEIGHT + y1, 1);
-					}
-					else if(i==0 && type.equals("rightWall")) {
-						c = new tombDirt(i*dirt.DEFAULT_CHUNK_WIDTH + x1, j*dirt.DEFAULT_CHUNK_HEIGHT + y1, 3);
-					}
-					else if(j==numY - 1 && type.equals("roof")) {
-						c = new tombDirt(i*dirt.DEFAULT_CHUNK_WIDTH + x1, j*dirt.DEFAULT_CHUNK_HEIGHT + y1, 2);
-					}
-					else {
-						c = new dirt(i*dirt.DEFAULT_CHUNK_WIDTH + x1, j*dirt.DEFAULT_CHUNK_HEIGHT + y1);
+					else { 
+						 c = new tomb(i*tomb.DEFAULT_CHUNK_WIDTH + x1, j*tomb.DEFAULT_CHUNK_HEIGHT + y1);
+						 c.setPassable(true);
 					}
 				}
-				else { 
-					 c = new dirt(i*dirt.DEFAULT_CHUNK_WIDTH + x1, j*dirt.DEFAULT_CHUNK_HEIGHT + y1);
-					 c.setPassable(true);
-				}
 			}
-		}
-	}
-	
-	// Spawn background  from x to y.
-	public void spawnBackgroundRect(int x1, int y1, int x2, int y2) {
-		int numX = (x2 - x1)/dirt.DEFAULT_CHUNK_WIDTH;
-		int numY = (y2 - y1)/dirt.DEFAULT_CHUNK_HEIGHT;
-		for(int i = 0; i < numX; i++) {
-			for(int j = 0; j < numY; j++) {
-				c = new tombBackground(i*dirt.DEFAULT_CHUNK_WIDTH + x1, j*dirt.DEFAULT_CHUNK_HEIGHT + y1);
-				c.setZ(BACKGROUND_Z);
-				c.setBackgroundDoodad(true);
-				c.setPassable(true);
-			}
-		}
 	}
 	
 	/////////////////
@@ -115,15 +115,20 @@ public class tombZone extends zone {
 	public void loadSpecificZoneStuff() {
 		
 		// Set the mode of the zone of course.
-		//topDown.setMode();
 		platformer.setMode();
 		
 		// Set the darkness.
 		zoneFog = new fog();
 		zoneFog.setTo(0.3f);//fog.setTo(0.75f);
 		
+		// Elevator not initiated
+		shadowElevatorInitiated = false;
+		
 		// Load zone events.
 		loadZoneEvents();
+		
+		// Load units
+		loadUnits();
 		
 		// Background
 		background.setGameBackground(DEFAULT_ZONE_BACKGROUND);
@@ -135,7 +140,14 @@ public class tombZone extends zone {
 		chunk.sortChunks();
 		
 		// Play zone music.
-		zoneMusic.loopMusic();
+		if(!shadowElevatorStarted.isCompleted()) { music m = new music(zoneMusic); }
+	}
+	
+	// Load units
+	public void loadUnits() {
+		
+		// Load the villain player.
+		u = new playerOne(Integer.MIN_VALUE,Integer.MIN_VALUE);
 	}
 	
 	// Load zone events.
@@ -143,6 +155,9 @@ public class tombZone extends zone {
 		
 		// Have we entered the dirt before?
 		enteredtombZoneBefore = new event("enteredtombZoneBefore");
+		
+		// Has the elevator started?
+		shadowElevatorStarted = new event("tombZoneShadowElevatorStarted");
 	}
 	
 public void makeShadowRectangle(int topLeftDudePosX, int topLeftDudePosY, int spreadX, int spreadY, int numDudesWidth, int numDudesHeight, float speed, boolean clockwise) {
@@ -683,12 +698,119 @@ public void makeShadowSquareTopRight (int topLeftDudePosX, int topLeftDudePosY, 
 		
 		// Exit
 		
-		spawnTombRect(9073,1150,9500,2374,"ground");
-		spawnTombRect(9481,512,9999,1154,"rightWall");
-		spawnTombRect(9481,1152,11000,1502,"none");
+		spawnTombRect(9075,1150,13000,2374,"ground");
+		//spawnTombRect(9962,512,10500,1154,"rightWall");
+		//spawnTombRect(9965,1152,10500,1502,"none");
 		
-		//brady Turner is fucking faggot wooo!
+		//brady Turner is fucking fagt wooo! 
+		// I linked this to him on facebook and gave him your address and he says he's coming
 		
+	}
+	
+	// Spawn a rectangle of shadow dudes
+	public static ArrayList<shadowDude> createRectangleOfShadows(int x1, int y1, int x2, int y2, boolean eyeless) {
+		
+		ArrayList<shadowDude> retDudes = new ArrayList<shadowDude>();
+		for(int i = x1; i < x2; i += shadowDude.getDefaultWidth()) {
+			for(int j = y1; j < y2; j += shadowDude.getDefaultHeight()) {
+				u = new shadowDude(i,j);
+				((shadowDude)u).setEyeless(true);
+				retDudes.add((shadowDude) u);
+			}
+		}
+		return retDudes;
+	}
+	
+	// Shadow elevator
+	public static ArrayList<shadowDude> shadowElevator;
+	
+	// Give elevator eyes
+	public static void giveElevatorEyes() {
+		for(int i = 0; i < shadowElevator.size(); i++) {
+			shadowElevator.get(i).setEyeless(false);
+			shadowElevator.get(i).setMoveSpeed(0.5f);
+		}
+	}
+	
+	// Move elevator up
+	public static void moveElevatorUp() {
+	
+		// Play frantic music.
+		 music m = new music(zoneMusicFrantic);
+		 
+		// Move the elevator.
+		for(int i = 0; i < shadowElevator.size(); i++) {
+			shadowElevator.get(i).movingUp = true;
+		}
+	}
+	
+	// Create shadow dude elevator
+	public static void createShadowElevatorAroundPlayer(boolean eyeless) {
+		player currPlayer = player.getCurrentPlayer();
+		
+		// Left wall.
+		shadowElevator = createRectangleOfShadows(currPlayer.getIntX() - 600, 
+												  currPlayer.getIntY() - 500, 
+												  currPlayer.getIntX() - 200,
+												  currPlayer.getIntY() + 600, eyeless);
+		
+		// Floor
+		shadowElevator.addAll(createRectangleOfShadows(currPlayer.getIntX() - 200, 
+				  currPlayer.getIntY()+200, 
+				  currPlayer.getIntX() +200,
+				  currPlayer.getIntY() + 600, eyeless));
+		
+		// Right wall.
+		shadowElevator.addAll(createRectangleOfShadows(currPlayer.getIntX() + 200, 
+												  currPlayer.getIntY() - 500, 
+												  currPlayer.getIntX() + 600,
+												  currPlayer.getIntY() + 600, eyeless));
+		
+	}
+	
+	// Deal with the first well we encounters.
+	public void dealWithRegionStuff() {
+		player currPlayer = player.getCurrentPlayer();
+		if(currPlayer != null && currPlayer.isWithin(9335+600,744,9817+600,1268) && shadowElevatorStarted!=null && !shadowElevatorStarted.isCompleted()) {
+			shadowElevatorStarted.setCompleted(true);
+			shadowElevatorFirstTime = true;
+			saveState.setQuiet(true);
+			saveState.createSaveState();
+			saveState.setQuiet(false);
+		}
+	}
+	
+	// Deal with shadow elevator stuff
+	public void dealWithShadowElevatorStuff() {
+		
+		// It's game time, bro!! turner!! wooo!
+		if(shadowElevatorStarted!=null && shadowElevatorStarted.isCompleted()) {
+
+			if(!shadowElevatorInitiated && zoneLoaded) {
+				
+				// If it's the first time.
+				if(shadowElevatorFirstTime) {
+					music.currMusic.fadeOut(5f);
+					shadowElevatorFirstTime = false;
+					playerOne.initiateShadowElevatorScene();
+					shadowElevatorInitiated = true;
+				}
+				else {
+					playerOne.initiateShadowElevatorScene();
+					playerOne.setSequenceTo(10);
+					shadowElevatorInitiated = true;
+				}
+			}
+		}
+		
+	}
+	
+	// Do zone specific tasks that aren't monitored by
+	// zone specific units. 
+	@Override
+	public void update() {
+		dealWithRegionStuff();
+		dealWithShadowElevatorStuff();
 	}
 
 	// Get the player location in the zone.

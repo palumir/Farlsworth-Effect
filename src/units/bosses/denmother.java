@@ -106,8 +106,8 @@ public class denmother extends boss {
 	private static String snore = "sounds/effects/animals/snore.wav";
 	
 	// Music
-	private static music bossMusic = new music("sounds/music/farmLand/sheepFarm/denmother/fight.wav");
-	private static music bossIntro = new music("sounds/music/farmLand/sheepFarm/denmother/intro.wav");
+	private static String bossMusic = "sounds/music/farmLand/sheepFarm/denmother/fight.wav";
+	private static String bossIntro = "sounds/music/farmLand/sheepFarm/denmother/intro.wav";
 	
 	//////////////
 	/// FIELDS ///
@@ -625,8 +625,7 @@ public class denmother extends boss {
 	
 	// Start fight.
 	public void startFight() {
-		bossIntro.getClip().setFramePosition(0);
-		bossIntro.playSound();
+		music m = new music(bossIntro);
 		fightInProgress = true;
 		fightStartTime = time.getTime();
 		fightRegion.trapPlayerWithin();
@@ -879,8 +878,7 @@ public class denmother extends boss {
 		if(fightInProgress && !combatStarted && time.getTime() - fightStartTime > startCombatTime*1000) {
 			
 			// Deal with music.
-			bossIntro.getClip().stop();
-			bossMusic.loopMusic();
+			music m = new music(bossMusic);
 			
 			// Start combat and make boss attackable.
 			combatStarted = true;

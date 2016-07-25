@@ -439,6 +439,12 @@ public class player extends unit {
 	// Responding to key releases.
 	public void keyReleased(KeyEvent k) {
 		
+		// Respond to dialogue/interact presses.
+		if(interactBox.getCurrentDisplay() != null) {
+			interactBox.getCurrentDisplay().respondToKeyRelease(k);
+		}
+		
+		
 		// Shield off
 		if(k.getKeyCode() == KeyEvent.VK_SHIFT) {
 			shield(false);

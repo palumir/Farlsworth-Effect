@@ -52,6 +52,9 @@ public class shadowDude extends unit {
 	private long lastInShadowsTime = 0;
 	private float fadeTime = .25f;
 	
+	// Eyeless?
+	private boolean eyeless = false;
+	
 	// farmer sprite stuff.
 	private static String DEFAULT_UNIT_SPRITESHEET = "images/units/player/female/shadow.png";
 	private static String DEFAULT_FADED_SPRITESHEET = "images/units/player/female/shadowEyes.png";
@@ -173,14 +176,21 @@ public class shadowDude extends unit {
 			// Draw eyes.
 			alpha = 1;
 			g2d.setComposite(AlphaComposite.SrcOver.derive(alpha));
-			// 9 or 11
-			animation faded = shadowFadedType.getAnimations().getAnimation("running" + getFacingDirection());
-			g2d.drawImage(faded.getCurrentFrame(), 
+			
+			animation faded = null;
+			if(getCurrentAnimation().getName().contains("running")) {
+				faded = shadowFadedType.getAnimations().getAnimation("running" + getFacingDirection());
+			}
+			else {
+				faded = shadowFadedType.getAnimations().getAnimation("standing" + getFacingDirection());
+			}
+			if(!isEyeless()) g2d.drawImage(faded.getCurrentFrame(), 
 					getDrawX(), 
 					getDrawY(), 
 					(int)(gameCanvas.getScaleX()*faded.getCurrentFrame().getWidth()), 
 					(int)(gameCanvas.getScaleY()*faded.getCurrentFrame().getHeight()), 
 					null);
+
 		}
 		
 		// Draw special stuff
@@ -219,5 +229,13 @@ public class shadowDude extends unit {
 		else {
 			return DEFAULT_PLATFORMER_ADJUSTMENT_Y;
 		}
+	}
+
+	public boolean isEyeless() {
+		return eyeless;
+	}
+
+	public void setEyeless(boolean eyeless) {
+		this.eyeless = eyeless;
 	}
 }

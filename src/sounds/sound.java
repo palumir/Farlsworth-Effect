@@ -24,7 +24,7 @@ public class sound extends Thread {
 
     private Position curPosition;
 
-    private final int EXTERNAL_BUFFER_SIZE = 524288/1000; // 128Kb DEFAULT
+    private final int EXTERNAL_BUFFER_SIZE = 524288/10000; // 128Kb DEFAULT
     
     // Where to play and at what radius.
     private int radius = 0; 
@@ -35,9 +35,14 @@ public class sound extends Thread {
     public static float DEFAULT_SOUND_VOLUME = 1f;
     private float soundVolume = DEFAULT_SOUND_VOLUME;
     private float volume = 1f;
-    private boolean stopRequested = false;
+    protected boolean stopRequested = false;
     private long soundStart = 0;
     private float fadeOver = 0;
+    private float fadeOutOver = 0;
+    private long fadeOutStart = 0;
+    
+    // Loop?
+    protected boolean loop = false;
     
     // Default sound radius
     public static int DEFAULT_SOUND_RADIUS = 1800;
@@ -78,6 +83,12 @@ public class sound extends Thread {
     		retList.add(allSounds.get(i));
     	}
     	return retList;
+    }
+    
+    // Fade out
+    public void fadeOut(float f) {
+    	fadeOutOver = f;
+    	fadeOutStart = time.getTime();
     }
 
     public void run() { 
@@ -150,6 +161,16 @@ public class sound extends Thread {
         		float fadePercent = ((time.getTime() - soundStart + 1)/(fadeOver*1000));
         		if(fadePercent > 1) fadePercent = 1;
         		if(fadeOver == 0) fadePercent = 1;
+        		
+        		// Fade out
+        		if(fadeOutOver != 0) {
+        			fadePercent = (1 - (time.getTime() - fadeOutStart + 1)/(fadeOutOver*1000));
+            		if(fadePercent > 1) fadePercent = 1;
+            		if(fadePercent < 0) {
+            			stopRequested = true;
+            			fadePercent = 0;
+            		}
+        		}
     		   
     		    // Adjust volume based on radius.
     		    FloatControl control = (FloatControl) auline.getControl(FloatControl.Type.MASTER_GAIN);

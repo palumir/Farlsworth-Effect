@@ -42,6 +42,40 @@ public class redWolf extends wolf {
 	// Health.
 	private int DEFAULT_HP = 10;
 	
+	// Default jump speed
+	private static int DEFAULT_UNIT_JUMPSPEED = 13;
+
+	// Spawn claw stuff
+	protected int DEFAULT_SLASH_DAMAGE = 2;
+	
+	// Beta stats
+	private static float DEFAULT_MOVESPEED_BETA = 2f;
+	private static float DEFAULT_CLAW_ATTACK_EVERY_BASE_BETA = 2f;
+	private static float DEFAULT_SPAWN_CLAW_PHASE_TIME_BETA = 2f;
+	private static int DEFAULT_HOW_FAR_BACK_BASE_BETA = 60;
+	private static int DEFAULT_HOW_FAR_BACK_RANDOM_BETA = 20;
+	private static int DEFAULT_RANDOM_DEGREE_BETA = 10;
+	private static int DEFAULT_FOLLOW_UNTIL_RANGE_BASE_BETA = 90;
+	private static int DEFAULT_FOLLOW_UNTIL_RANGE_RANDOM_BETA = 15;
+
+	// Alpha stats
+	private static float DEFAULT_MOVESPEED_ALPHA = 3f;
+	private static float DEFAULT_CLAW_ATTACK_EVERY_BASE_ALPHA = .9f;
+	private static float DEFAULT_SPAWN_CLAW_PHASE_TIME_ALPHA = .9f;
+	private static int DEFAULT_HOW_FAR_BACK_BASE_ALPHA = 40;
+	private static int DEFAULT_HOW_FAR_BACK_RANDOM_ALPHA = 10;
+	private static int DEFAULT_RANDOM_DEGREE_ALPHA = 1; 
+	private static int DEFAULT_FOLLOW_UNTIL_RANGE_BASE_ALPHA = 15;
+	private static int DEFAULT_FOLLOW_UNTIL_RANGE_RANDOM_ALPHA = 0;
+	
+	////////////////
+	/// FIELDS ///
+	////////////////
+	// How far back do we put the claw?
+	private int howFarBackBase = 80;
+	private int howFarBackRandom = 20;
+	private int randomDegree = 0;
+	
 	// Charged units
 	private ArrayList<unit> chargeUnits;
 	
@@ -61,12 +95,6 @@ public class redWolf extends wolf {
 			DEFAULT_TOPDOWN_ADJUSTMENT_Y
 			));
 	
-	// Default movespeed.
-	private static int DEFAULT_UNIT_MOVESPEED = 2;
-	
-	// Default jump speed
-	private static int DEFAULT_UNIT_JUMPSPEED = 13;
-	
 	// The actual type.
 	private static unitType unitTypeRef =
 			new unitType(DEFAULT_UNIT_NAME,  // Name of unitType 
@@ -74,7 +102,7 @@ public class redWolf extends wolf {
 					     null,
 					     DEFAULT_TOPDOWN_WIDTH,
 					     DEFAULT_TOPDOWN_HEIGHT,
-					     DEFAULT_UNIT_MOVESPEED, // Movespeed
+					     DEFAULT_MOVESPEED_BETA, // Movespeed
 					     DEFAULT_UNIT_JUMPSPEED // Jump speed
 						);	
 	
@@ -85,17 +113,9 @@ public class redWolf extends wolf {
 					     null,
 					     DEFAULT_TOPDOWN_WIDTH,
 					     DEFAULT_TOPDOWN_HEIGHT,
-					     DEFAULT_UNIT_MOVESPEED, // Movespeed
+					     DEFAULT_MOVESPEED_BETA, // Movespeed
 					     DEFAULT_UNIT_JUMPSPEED // Jump speed
 						);	
-
-	// Spawn claw stuff
-	protected int SLASH_DAMAGE = 2;
-	
-	// How far back do we put the claw?
-	private int howFarBackBase = 80;
-	private int howFarBackRandom = 20;
-	private int randomRadius = 1;
 	
 	///////////////
 	/// METHODS ///
@@ -115,23 +135,19 @@ public class redWolf extends wolf {
 		animation trailRight = new animation("trailRight", leftRightSpriteSheet.getAnimation(9), 0, 0, 1);
 		getAnimations().addAnimation(trailRight);
 		
-		/*if(!alphaWolfType.getAnimations().contains(trailRight)) {
-			alphaWolfType.getAnimations().addAnimation(trailLeft);
-			alphaWolfType.getAnimations().addAnimation(trailRight);
-		}*/
-		
 	}
 	
 	// Combat defaults.
 	@Override
 	public void setCombatStuff() {
+		
 		// Set to be attackable.
 		this.setKillable(true);
 		
 		// Wolf damage.
 		setAttackFrameStart(2);
 		setAttackFrameEnd(3);
-		setAttackDamage(SLASH_DAMAGE);
+		setAttackDamage(DEFAULT_SLASH_DAMAGE);
 		setAttackTime(DEFAULT_ATTACK_TIME);
 		setAttackWidth(DEFAULT_ATTACK_WIDTH);
 		setAttackLength(DEFAULT_ATTACK_LENGTH);
@@ -141,7 +157,6 @@ public class redWolf extends wolf {
 		// HP
 		setMaxHealthPoints(DEFAULT_HP);
 		setHealthPoints(DEFAULT_HP);
-		
 	}
 		
 	// Remove claw.
@@ -275,7 +290,7 @@ public class redWolf extends wolf {
 					chargeUnits.get(i).stopMove("all");
 					if(!alreadyHurt) {
 						alreadyHurt = true;
-						chargeUnits.get(i).hurt(SLASH_DAMAGE, 1f);
+						chargeUnits.get(i).hurt(DEFAULT_SLASH_DAMAGE, 1f);
 					}
 					chargeUnits.get(i).move(run,rise);
 					chargeUnits.get(i).setUnitLocked(true);
@@ -295,7 +310,7 @@ public class redWolf extends wolf {
 				spawnX, spawnY,
 				this.getIntX()+this.getWidth()/2, this.getIntY()+this.getHeight()/2, 
 				this.getIntX()+this.getWidth()/2, this.getIntY()+this.getHeight()/2) -
-				randomRadius + 2*utility.RNG.nextInt(randomRadius);
+				randomDegree + 2*utility.RNG.nextInt(randomDegree + 1);
 		int distance = (int) Math.sqrt(Math.pow(spawnX - (this.getIntX()+this.getWidth()/2),2) + Math.pow(spawnY - (this.getIntY()+this.getHeight()/2),2));
 		int newX = (int) (getIntX() + (distance+howFarBack)*Math.cos(Math.toRadians(degree))); 
 		int newY = (int) (getIntY() + (distance+howFarBack)*Math.sin(Math.toRadians(degree)));
@@ -310,25 +325,27 @@ public class redWolf extends wolf {
 		
 		// Beta wolf
 		if(!alpha) {
-			clawAttackEveryBase = 2f;
-			spawnClawPhaseTime = 2f;
-			howFarBackBase = 60;
-			howFarBackRandom = 20;
-			randomRadius = 10;
-			followUntilRange = 90 + utility.RNG.nextInt(15);
+			clawAttackEveryBase = DEFAULT_CLAW_ATTACK_EVERY_BASE_BETA;
+			spawnClawPhaseTime = DEFAULT_SPAWN_CLAW_PHASE_TIME_BETA;
+			howFarBackBase = DEFAULT_HOW_FAR_BACK_BASE_BETA;
+			howFarBackRandom = DEFAULT_HOW_FAR_BACK_RANDOM_BETA;
+			randomDegree = DEFAULT_RANDOM_DEGREE_BETA;
+			followUntilRange = DEFAULT_FOLLOW_UNTIL_RANGE_BASE_BETA + utility.RNG.nextInt(DEFAULT_FOLLOW_UNTIL_RANGE_RANDOM_BETA);
+			setMoveSpeed(DEFAULT_MOVESPEED_BETA);
 		}
-		
-		// Alpha wolf
+
+		// Alpha
 		else {
+			
 			// Claw attack stuff.
-			clawAttackEveryBase = .9f;
+			clawAttackEveryBase = DEFAULT_CLAW_ATTACK_EVERY_BASE_ALPHA;
 			clawAttackEvery = clawAttackEveryBase;
-			spawnClawPhaseTime = .9f;
-			howFarBackBase = 40;
-			howFarBackRandom = 10;
-			randomRadius = 1;
-			moveSpeed = 3;
-			followUntilRange = 15;
+			spawnClawPhaseTime = DEFAULT_SPAWN_CLAW_PHASE_TIME_ALPHA;
+			howFarBackBase = DEFAULT_HOW_FAR_BACK_BASE_ALPHA;
+			howFarBackRandom = DEFAULT_HOW_FAR_BACK_RANDOM_ALPHA;
+			randomDegree = DEFAULT_RANDOM_DEGREE_ALPHA;
+			setMoveSpeed(DEFAULT_MOVESPEED_ALPHA);
+			followUntilRange = DEFAULT_FOLLOW_UNTIL_RANGE_BASE_ALPHA + DEFAULT_FOLLOW_UNTIL_RANGE_RANDOM_ALPHA;
 		}
 	}
 

@@ -40,9 +40,33 @@ public class blackWolf extends wolf {
 	// Default name.
 	private static String DEFAULT_UNIT_NAME = "blackWolf";
 	
-	// Spawn claw stuff
-	protected float DEFAULT_CLAW_ATTACK_EVERY = 1.5f;
-	protected float DEFAULT_SPAWN_CLAW_PHASE_TIME = 1f;
+	// Health.
+	private int DEFAULT_HP = 10;
+	
+	// Default jump speed
+	private static int DEFAULT_UNIT_JUMPSPEED = 12;
+	
+	// Darkhole
+	private static float DEFAULT_DARKHOLE_FOR = 10;
+	
+	// Beta stats
+	private static float DEFAULT_MOVESPEED_BETA = 2f;
+	private static float DEFAULT_CLAW_ATTACK_EVERY_BETA = 2f;
+	private static float DEFAULT_SPAWN_CLAW_PHASE_TIME_BETA = 2f;
+	private static int DEFAULT_HOW_FAR_IN_A_DIRECTION_BETA = 73;
+	private static int DEFAULT_FOLLOW_UNTIL_RANGE_BASE_BETA = 90;
+	private static int DEFAULT_FOLLOW_UNTIL_RANGE_RANDOM_BETA = 15;
+
+	// Alpha stats
+	private static float DEFAULT_MOVESPEED_ALPHA = 3f;
+	private static float DEFAULT_CLAW_ATTACK_EVERY_ALPHA = 1.5f;
+	private static float DEFAULT_SPAWN_CLAW_PHASE_TIME_ALPHA = 0.75f;
+	private static int DEFAULT_HOW_FAR_IN_A_DIRECTION_ALPHA = 0;
+	private static int DEFAULT_FOLLOW_UNTIL_RANGE_BASE_ALPHA = 15;
+	
+	//////////////
+	/// FIELDS ///
+	//////////////
 	
 	// Unit sprite stuff.
 	private static spriteSheet DEFAULT_UPDOWN_SPRITESHEET = new spriteSheet(new spriteSheetInfo(
@@ -60,15 +84,6 @@ public class blackWolf extends wolf {
 			DEFAULT_TOPDOWN_ADJUSTMENT_Y
 			));
 	
-	// Health.
-	private int DEFAULT_HP = 10;
-	
-	// Default movespeed.
-	private static int DEFAULT_UNIT_MOVESPEED = 2;
-	
-	// Default jump speed
-	private static int DEFAULT_UNIT_JUMPSPEED = 12;
-	
 	// The actual type.
 	private static unitType unitTypeRef =
 			new unitType(DEFAULT_UNIT_NAME,  // Name of unitType 
@@ -76,7 +91,7 @@ public class blackWolf extends wolf {
 					     null,
 					     DEFAULT_TOPDOWN_WIDTH,
 					     DEFAULT_TOPDOWN_HEIGHT,
-					     DEFAULT_UNIT_MOVESPEED, // Movespeed
+					     DEFAULT_MOVESPEED_BETA, // Movespeed
 					     DEFAULT_UNIT_JUMPSPEED // Jump speed
 						);	
 	
@@ -87,19 +102,14 @@ public class blackWolf extends wolf {
 					     null,
 					     DEFAULT_TOPDOWN_WIDTH,
 					     DEFAULT_TOPDOWN_HEIGHT,
-					     DEFAULT_UNIT_MOVESPEED, // Movespeed
+					     DEFAULT_MOVESPEED_BETA, // Movespeed
 					     DEFAULT_UNIT_JUMPSPEED // Jump speed
 						);	
-	
-	
-	//////////////
-	/// FIELDS ///
-	//////////////
 	
 	private int moveClawBy = 3*(1000/12)/2;
 	
 	// Dark attacking
-	private float darkAttackFor = 10f;
+	private float darkAttackFor = DEFAULT_DARKHOLE_FOR;
 	
 	///////////////
 	/// METHODS ///
@@ -118,8 +128,8 @@ public class blackWolf extends wolf {
 		this.setKillable(true);
 		
 		// Claw attack stuff.
-		clawAttackEveryBase = DEFAULT_CLAW_ATTACK_EVERY;
-		spawnClawPhaseTime = DEFAULT_SPAWN_CLAW_PHASE_TIME;
+		clawAttackEveryBase = DEFAULT_CLAW_ATTACK_EVERY_BETA;
+		spawnClawPhaseTime = DEFAULT_SPAWN_CLAW_PHASE_TIME_BETA;
 		
 		// Wolf damage.
 		setAttackFrameStart(2);
@@ -209,8 +219,8 @@ public class blackWolf extends wolf {
 		int spawnY = player.getCurrentPlayer().getIntY()+player.getCurrentPlayer().getHeight()/2;
 		
 		// Change X and Y by
-		int changeX = moveClawBy - 2*utility.RNG.nextInt(moveClawBy);
-		int changeY = moveClawBy - 2*utility.RNG.nextInt(moveClawBy);
+		int changeX = moveClawBy - 2*utility.RNG.nextInt(moveClawBy+1);
+		int changeY = moveClawBy - 2*utility.RNG.nextInt(moveClawBy+1);
 		
 		// Move based on where the player is moving
 		spawnX += changeX;
@@ -224,22 +234,22 @@ public class blackWolf extends wolf {
 	
 	@Override
 	public void changeCombat() {
-		
 		// Beta wolf
 		if(!alpha) {
-			clawAttackEveryBase = 4f;
-			spawnClawPhaseTime = 2f;
-			followUntilRange = 90 + utility.RNG.nextInt(15);
-			moveClawBy = 3*(1000/12)/4;
+			setMoveSpeed(DEFAULT_MOVESPEED_BETA);
+			clawAttackEveryBase = DEFAULT_CLAW_ATTACK_EVERY_BETA;
+			spawnClawPhaseTime = DEFAULT_SPAWN_CLAW_PHASE_TIME_BETA;
+			followUntilRange = DEFAULT_FOLLOW_UNTIL_RANGE_BASE_BETA + utility.RNG.nextInt(DEFAULT_FOLLOW_UNTIL_RANGE_RANDOM_BETA);
+			moveClawBy = DEFAULT_HOW_FAR_IN_A_DIRECTION_BETA;
 		}
 		
 		// Alpha wolf
 		else {
-			clawAttackEveryBase = 1.5f;
-			spawnClawPhaseTime = 0.75f;
-			moveSpeed = 3;
-			followUntilRange = 15;
-			moveClawBy = 1;
+			setMoveSpeed(DEFAULT_MOVESPEED_ALPHA);
+			clawAttackEveryBase =DEFAULT_CLAW_ATTACK_EVERY_ALPHA;
+			spawnClawPhaseTime = DEFAULT_SPAWN_CLAW_PHASE_TIME_ALPHA;
+			followUntilRange = DEFAULT_FOLLOW_UNTIL_RANGE_BASE_ALPHA;
+			moveClawBy = DEFAULT_HOW_FAR_IN_A_DIRECTION_ALPHA;
 			clawAttackEvery = clawAttackEveryBase;
 		}
 	}

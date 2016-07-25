@@ -51,7 +51,7 @@ public class spiderCave extends zone {
 	public static intTuple DEFAULT_SPAWN_TUPLE = new intTuple(0,-50);
 	
 	// Zone music.
-	private static music zoneMusic = new music("sounds/music/farmLand/spiderCave/spiderCave.wav");
+	private static String zoneMusic = "sounds/music/farmLand/spiderCave/spiderCave.wav";
 	
 	// Constructor
 	public spiderCave() {
@@ -115,7 +115,7 @@ public class spiderCave extends zone {
 		chunk.sortChunks();
 		
 		// Play zone music.
-		zoneMusic.loopMusic();
+		music m = new music(zoneMusic);
 	}
 	
 	// Load zone events.

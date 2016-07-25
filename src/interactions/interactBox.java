@@ -57,6 +57,9 @@ public class interactBox extends interfaceObject  {
 	private boolean locked = false;
 	private static interactBox currentDisplay = null;
 	
+	// Allow select? (Prevents retards from holding e)
+	private boolean allowSelect = true;
+	
 	// Sounds.
 	private static String UIMove = "sounds/effects/player/UI/UIMove.wav";
 	private static String typing = "sounds/effects/player/UI/typing.wav";
@@ -366,8 +369,18 @@ public class interactBox extends interfaceObject  {
 		}
 		
 		// Player presses e key.
-		if(k.getKeyCode() == KeyEvent.VK_SPACE || k.getKeyCode() == KeyEvent.VK_ENTER || k.getKeyCode() == KeyEvent.VK_E) { 
+		if(allowSelect && (k.getKeyCode() == KeyEvent.VK_SPACE || k.getKeyCode() == KeyEvent.VK_ENTER || k.getKeyCode() == KeyEvent.VK_E)) { 
 			select();
+			allowSelect = false;
+		}
+	}
+	
+	// Respond to key press.
+	public void respondToKeyRelease(KeyEvent k) {
+		
+		// Player presses e key.
+		if(k.getKeyCode() == KeyEvent.VK_SPACE || k.getKeyCode() == KeyEvent.VK_ENTER || k.getKeyCode() == KeyEvent.VK_E) { 
+			allowSelect = true;
 		}
 	}
 	

@@ -24,8 +24,11 @@ public abstract class zone {
 	private String parentName;
 	private String name;
 	
+	// Has the current zone been loaded once before?
+	public static boolean loadedOnce = false;
+	
 	// Zone loaded?
-	private boolean zoneLoaded = false;
+	protected boolean zoneLoaded = false;
 	
 	// Constructor
 	public zone(String newName, String parentName) {
@@ -46,6 +49,7 @@ public abstract class zone {
 	public void loadZone() {
 		currentZone = this;
 		loadSpecificZoneStuff();
+		loadedOnce = true;
 		zoneLoaded = true;
 	}
 	
@@ -59,6 +63,7 @@ public abstract class zone {
 		
 		// Re-create the player in the new zone.
 		drawnObject.dontReloadTheseObjects = new ArrayList<drawnObject>();
+		loadedOnce = false;
 		player.loadPlayer(player.getCurrentPlayer(), b, x, y, direction);
 		
 		// If we are going into the cave for the first time, display tooltip.

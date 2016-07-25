@@ -28,6 +28,8 @@ public class main {
 		// Create the player.
 		player p = player.loadPlayer(null,null,0,0,"Up");
 		
+		//p.setMoveSpeed(20);;
+		
 		// Saved game?
 		if(s!=null) {
 			

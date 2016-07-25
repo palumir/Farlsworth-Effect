@@ -25,6 +25,7 @@ import utilities.intTuple;
 import utilities.saveState;
 import utilities.stringUtils;
 import utilities.time;
+import zones.zone;
 import zones.farmLand.sheepFarm;
 
 public class farlsworth extends boss {
@@ -430,734 +431,738 @@ public class farlsworth extends boss {
 		// Load player.
 		player currPlayer = player.getCurrentPlayer();
 		
-		// If we are in the farm.
-		if(pastSpawnFarm != null && !pastSpawnFarm.isCompleted()) {
+		// Only do this stuff in the sheep farm. It's linear.
+		if(zone.getCurrentZone().getName().equals(sheepFarm.getZone().getName())) {
 			
-			// Pissy Farlsworth runs away first time.
-			if(!interactMoved && interactSequence != null && interactSequence.getTheText().isEnd() && interactTimes == 0) {
+			// If we are in the farm.
+			if(pastSpawnFarm != null && !pastSpawnFarm.isCompleted()) {
 				
-				// What did you pick?
-				if(interactSequence.getTheText().getTextOnPress()!=null &&
-					interactSequence.getTheText().getTextOnPress().equals("Hope you have a friggin good one.")) {
-					didYouTellHimAboutYourAdventure.setCompleted(true);
+				// Pissy Farlsworth runs away first time.
+				if(!interactMoved && interactSequence != null && interactSequence.getTheText().isEnd() && interactTimes == 0) {
+					
+					// What did you pick?
+					if(interactSequence.getTheText().getTextOnPress()!=null &&
+						interactSequence.getTheText().getTextOnPress().equals("Hope you have a friggin good one.")) {
+						didYouTellHimAboutYourAdventure.setCompleted(true);
+					}
+					
+					interactTimes++;
+					moveTo(74,-58);
+					interactMoved = true;
+					sound s = new sound(bleet);
+					s.setPosition(getIntX(), getIntY(), sound.DEFAULT_SOUND_RADIUS);
+					s.start();
 				}
 				
-				interactTimes++;
-				moveTo(74,-58);
-				interactMoved = true;
-				sound s = new sound(bleet);
-				s.setPosition(getIntX(), getIntY(), sound.DEFAULT_SOUND_RADIUS);
-				s.start();
-			}
-			
-			// You lied to him.
-			if(interactSequence!=null && interactSequence.getTheText()!=null && interactSequence.getTheText().getTextOnPress()!=null &&
-					interactSequence.getTheText().getTextOnPress().contains("Oh boy")) {
-				didYouLieToHimAboutHavingTheKey.setCompleted(true);
-			}
-			
-			// Pissy Farlsworth runs away second time.
-			if(!interactMoved && interactSequence != null && interactSequence.getTheText().isEnd() && interactTimes == 1) {
-				
-				// What did you pick?
-				if(interactSequence.getTheText().getTextOnPress()!=null &&
-					interactSequence.getTheText().getTextOnPress().equals("See you later.")) {
-					didYouTellHimAboutYourAdventure.setCompleted(true);
+				// You lied to him.
+				if(interactSequence!=null && interactSequence.getTheText()!=null && interactSequence.getTheText().getTextOnPress()!=null &&
+						interactSequence.getTheText().getTextOnPress().contains("Oh boy")) {
+					didYouLieToHimAboutHavingTheKey.setCompleted(true);
 				}
 				
-				interactTimes++;
-				moveTo(74,-406);
-				interactMoved = true;
-				sound s = new sound(bleet);
-				s.setPosition(getIntX(), getIntY(), sound.DEFAULT_SOUND_RADIUS);
-				s.start();
-			}
-			
-			// Pissy Farlsworth runs away third time.
-			if(!interactMoved && interactSequence != null && interactSequence.getTheText().isEnd() && interactTimes == 2) {
-				interactTimes++;
-				p = new ArrayList<intTuple>();
-				p.add(new intTuple(425,-70));
-				p.add(new intTuple(425,5));
-				p.add(new intTuple(5,-1));
-				p.add(new intTuple(5,-420));
-				followPath(p);
-				interactMoved = true;
-				sound s = new sound(bleet);
-				s.setPosition(getIntX(), getIntY(), sound.DEFAULT_SOUND_RADIUS);
-				s.start();
-			}
-			
-			// Check if we need to do comedic timing.
-			if(!waiting && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getTextOnPress()!=null) &&
-					(interactSequence.getTheText().getTextOnPress().equals("I suppose I'll have to stay in the fence then."))) {
-				waitStart = time.getTime();
-				waitFor = 2.5f;
-				waiting = true;
-				interactSequence.setLocked(true);
-			}
-			
-			// Run off with the fence.
-			if(waiting && time.getTime() - waitStart > waitFor*1000) {
-				interactSequence.goToNext();
-				waiting = false;
-			}
-			
-			// Do we attach fence to him?
-			if(!isFenceAttached.isCompleted() && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().isEnd() && interactSequence.getTheText().getTextOnPress()!=null) &&
-					(interactSequence.getTheText().getTextOnPress().equals("Catch me if you can."))) {
-				attachFence();
-				p = new ArrayList<intTuple>();
-				p.add(new intTuple(13,-1003));
-				p.add(new intTuple(366,-1266));
-				p.add(new intTuple(842,-1312));
-				p.add(new intTuple(1322,-1210));
-				p.add(new intTuple(1413,-912));
-				followPath(p);
-				sound s = new sound(bleet);
-				s.setPosition(getIntX(), getIntY(), sound.DEFAULT_SOUND_RADIUS);
-				s.start();
-				pastSpawnFarm.setCompleted(true);
-				saveState.setQuiet(true);
-				saveState.createSaveState();
-				saveState.setQuiet(false);
-				movedFromFence = true;
-			}
-			
-			// Do we attach fence to him?
-			if(!isFenceAttached.isCompleted() && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().isEnd() && interactSequence.getTheText().getTextOnPress()!=null) &&
-					(interactSequence.getTheText().getTextOnPress().equals("Catch me if you can, I guess."))) {
-				sheepFarm.forestGate.open();
-				p = new ArrayList<intTuple>();
-				p.add(new intTuple(13,-1003));
-				p.add(new intTuple(366,-1266));
-				p.add(new intTuple(842,-1312));
-				p.add(new intTuple(1322,-1210));
-				p.add(new intTuple(1413,-912));
-				followPath(p);
-				sound s = new sound(bleet);
-				s.setPosition(getIntX(), getIntY(), sound.DEFAULT_SOUND_RADIUS);
-				s.start();
-				pastSpawnFarm.setCompleted(true);
-				didYouOpenTheGateForHim.setCompleted(true);
-				saveState.setQuiet(true);
-				saveState.createSaveState();
-				saveState.setQuiet(false);
-				movedFromFence = true;
-			}
-		}
-		
-		// At the flower patch
-		else if(pastFlowerPatch!= null && !pastFlowerPatch.isCompleted()) {
-			
-			// Spawn Farlsworth at the Flower patch
-			if(sequencePart == 0 && (p == null || p.size() == 0)) {
-				stopMove("all");
-				destroyFence();
-				movingToAPoint = false;
-				setFloatX(2238);
-				setFloatY(-456);
-				facingDirection = "Left";
-				sequencePart++;
-			}
-			
-			// Talk to player if he/she walks to Farlsworth at flower patch.
-			if(sequencePart == 1 && (interactSequence == null || (interactSequence != null && !interactSequence.isDisplayOn())) && 
-				currPlayer != null && currPlayer.isWithin(2080,-478,2242,-363)) {
-				interactSequence = makeNormalInteractSequence();
-				if(interactBox.getCurrentDisplay() != null) {
-					interactBox.getCurrentDisplay().toggleDisplay();
+				// Pissy Farlsworth runs away second time.
+				if(!interactMoved && interactSequence != null && interactSequence.getTheText().isEnd() && interactTimes == 1) {
+					
+					// What did you pick?
+					if(interactSequence.getTheText().getTextOnPress()!=null &&
+						interactSequence.getTheText().getTextOnPress().equals("See you later.")) {
+						didYouTellHimAboutYourAdventure.setCompleted(true);
+					}
+					
+					interactTimes++;
+					moveTo(74,-406);
+					interactMoved = true;
+					sound s = new sound(bleet);
+					s.setPosition(getIntX(), getIntY(), sound.DEFAULT_SOUND_RADIUS);
+					s.start();
 				}
-				interactSequence.toggleDisplay();
-				interactSequence.setUnescapable(true);
-				currPlayer.stopMove("all");
-				sequencePart++;
-			}
-			
-			// Don't grab him
-			if(sequencePart == 2 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getTextOnPress()!=null) &&
-					(interactSequence.getTheText().getTextOnPress().equals("Time will tell."))) {
 				
-				// Run away
-				sequencePart = 100; // Put the sequence on the last event.
-			}
-			
-			// Grab him
-			if(sequencePart == 2 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getTextOnPress()!=null) &&
-					(interactSequence.getTheText().getTextOnPress().equals("Hold your horses, buddy."))) {
-				
-				// Move player and Farlsworth
-				sound s = new sound(bleet);
-				s.start();
-				moveTo(this.getIntX() + 70, this.getIntY());
-				player.getCurrentPlayer().moveTo(player.getCurrentPlayer().getIntX()+70, player.getCurrentPlayer().getIntY());
-				
-				// Run away
-				didYouTryToGrabHim.setCompleted(true);
-				sequencePart++;
-				interactSequence.setLocked(true);
-			}
-			
-			// Turn back
-			else if(sequencePart == 3 && !movingToAPoint) {
-				moveTo(this.getIntX() -1, this.getIntY());
-				interactSequence.setLocked(false);
-				sequencePart++;
-			}
-			
-			// Run at the end of the conversation
-			if(sequencePart == 4 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getTextOnPress()!=null) &&
-					(interactSequence.getTheText().getTextOnPress().equals("Frig you."))) {
-				
-				// Run away
-				sequencePart = 100;
-			}
-			
-			// Run
-			if(sequencePart == 100) {
-				interactSequence.setUnescapable(false);
-				p = new ArrayList<intTuple>();
-				p.add(new intTuple(2307,-121));
-				p.add(new intTuple(2562,-121));
-				p.add(new intTuple(2758,-437));
-				p.add(new intTuple(2926,-437));
-				p.add(new intTuple(2871,-564));
-				p.add(new intTuple(2697,-805));
-				p.add(new intTuple(2697,-1120));
-				p.add(new intTuple(2697,-1405));
-				sound s = new sound(bleet);
-				s.setPosition(getIntX(), getIntY(), sound.DEFAULT_SOUND_RADIUS);
-				s.start();
-				followPath(p);
-				pastFlowerPatch.setCompleted(true);
-				saveState.setQuiet(true);
-				saveState.createSaveState();
-				saveState.setQuiet(false);
-				sequencePart = 0;
-			}
-		}
-		
-		// At the tomb
-		else if(pastTombEntrance != null && !pastTombEntrance.isCompleted()) {
-			
-			// Spawn Farlsworth at the tomb entrance.
-			if(sequencePart == 0 && (p == null || p.size() == 0)) {
-				
-				// Spawn Ben in front of the tomb
-				stopMove("all");
-				setFloatX(-10000);
-				setFloatY(-10000);
-				ben = new sheep(-10000,-10000);
-				ben.setMeanders(false);
-				ben.setFloatX(2227);
-				ben.setFloatY(-3818);
-				ben.setFacingDirection("Left");
-				ben.setBenAnimations();
-				sequencePart++;
-			}
-			
-			// Talk to player if he/she walks to Farlsworth at flower patch.
-			if(sequencePart == 1 && (interactSequence == null || (interactSequence != null && !interactSequence.isDisplayOn())) && 
-				currPlayer != null && currPlayer.isWithin(2100,-3884,2411,-3655)) {
-				interactSequence = makeNormalInteractSequence();
-				if(interactBox.getCurrentDisplay() != null) {
-					interactBox.getCurrentDisplay().toggleDisplay();
+				// Pissy Farlsworth runs away third time.
+				if(!interactMoved && interactSequence != null && interactSequence.getTheText().isEnd() && interactTimes == 2) {
+					interactTimes++;
+					p = new ArrayList<intTuple>();
+					p.add(new intTuple(425,-70));
+					p.add(new intTuple(425,5));
+					p.add(new intTuple(5,-1));
+					p.add(new intTuple(5,-420));
+					followPath(p);
+					interactMoved = true;
+					sound s = new sound(bleet);
+					s.setPosition(getIntX(), getIntY(), sound.DEFAULT_SOUND_RADIUS);
+					s.start();
 				}
-				interactSequence.toggleDisplay();
-				interactSequence.setUnescapable(true);
-				currPlayer.stopMove("all");
-				sequencePart++;
-			}
-			
-			// Set wait timer for comedic timing.
-			if(sequencePart == 2 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getTextOnPress()!=null) &&
-				(interactSequence.getTheText().getTextOnPress().equals("Baah."))) {
 				
-				// Wait.
-				waiting = true;
-				waitFor = 0.75f;
-				waitStart = time.getTime();
-				
-				// Lock sequence.
-				interactSequence.setLocked(true);
-				
-				// Run away
-				sequencePart++;
-			}
-			
-			// Spawn Farlsworth.
-			if(sequencePart == 3 && time.getTime() - waitStart > waitFor*1000) {
-				this.setFloatX(1507);
-				this.setFloatY(-3911);
-				this.moveTo(1900,-3911);
-				sequencePart++;
-			}
-			
-			// If Farlsworth has stopped moving.
-			if(sequencePart == 4 && !isMoving()) {
-				interactSequence.goToNext();
-				sequencePart++;
-				interactSequence.setLocked(false);
-			}
-			
-			if(sequencePart == 5 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getTextOnPress()!=null) &&
-					(interactSequence.getTheText().getTextOnPress().contains("spoke sheep"))) {
-				doYouSpeakSheep.setCompleted(true);
-			}
-			
-			// If we are moving forward to see who is talking.
-			if(sequencePart == 5 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getTextOnPress()!=null) &&
-					(interactSequence.getTheText().getTextOnPress().contains("talking to?"))) {
-				
-				// Lock sequence for movement of Farlsworth.
-				interactSequence.setLocked(true);
-				sequencePart++;
-				
-				// Wait.
-				waiting = true;
-				waitFor = 1.5f;
-				waitStart = time.getTime();
-			}
-			
-			// Wait for comedic timing.
-			if(sequencePart == 6 && time.getTime() - waitStart > waitFor*1000) {
-				
-				// Move to in front of Ben.
-				ArrayList<intTuple> p = new ArrayList<intTuple>();
-				p.add(new intTuple(2079,-3875));
-				p.add(new intTuple(2150,-3825));
-				followPath(p);
-				sequencePart++;
-			}
-			
-			// Talk to Ben.
-			if(sequencePart == 7 && !isMoving() && !isFollowingAPath()) {
-				interactSequence.setLocked(false);
-				
-				// Continue conversation.
-				sequencePart++;
-				interactSequence.goToNext();
-			}
-			
-			// Make Ben leave.
-			if(sequencePart == 8 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getTextOnPress()!=null) &&
-					(interactSequence.getTheText().getTextOnPress().contains("Baaaah."))) {
-				ArrayList<intTuple> path = new ArrayList<intTuple>();
-				path.add(new intTuple(2104,-3866));
-				path.add(new intTuple(1943,-3866));
-				path.add(new intTuple(1794,-3807));
-				path.add(new intTuple(1279,-3807));
-				ben.followPath(path);
-				sound s = new sound(bleet);
-				s.setPosition(ben.getIntX(), ben.getIntY(), sound.DEFAULT_SOUND_RADIUS);
-				s.start();
-				sequencePart++;
-				
-				// Lock the sequence until Ben leaves.
-				interactSequence.setLocked(true);
-			}
-			
-			// Turn Farlsworth.
-			if(sequencePart == 9 && ben.getIntX() < getIntX()) {
-				setFacingDirection("Left");
-				sequencePart++;
-			}
-			
-			// Turn the player.
-			if(sequencePart == 10 && ben.getIntX() < currPlayer.getIntX()) {
-				currPlayer.setFacingDirection("Left");
-				sequencePart++;
-			}
-			
-			// When Ben has left, allow the conversation to continue.
-			if(sequencePart == 11 && !ben.isOnScreen()) {
-				
-				// Destroy Ben, the fucker.
-				ben.destroy();
-				
-				// Set facing direction right.
-				currPlayer.setFacingDirection("Right");
-				
-				// Wait.
-				waiting = true;
-				waitFor = 0.5f;
-				waitStart = time.getTime();
-				sequencePart++;
-			}
-			
-			// Wait for comedic timing
-			if(sequencePart == 12 && time.getTime() - waitStart > waitFor*1000) {
-				
-				// Move conversation forward.
-				sequencePart++;
-				interactSequence.setLocked(false);
-				interactSequence.goToNext();
-			}
-			
-			// Run into the tomb.
-			if(sequencePart == 13 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getTextOnPress()!=null) &&
-					(interactSequence.getTheText().getTextOnPress().contains("ood luck"))) {
-				
-				// Bleet
-				sound s = new sound(bleet);
-				s.setPosition(getIntX(), getIntY(), sound.DEFAULT_SOUND_RADIUS);
-				s.start();
-				
-				// Move conversation forward.
-				sequencePart = 100;
-			}
-			
-			// Follow the path
-			if(sequencePart == 100) {
-				p = new ArrayList<intTuple>();
-				interactSequence.setUnescapable(false);
-				p.add(new intTuple(2330,-3800));
-				p.add(new intTuple(2330,-3980));
-				p.add(new intTuple(2330,-3990));
-				followPath(p);
-				pastTombEntrance.setCompleted(true);
-				saveState.setQuiet(true);
-				saveState.createSaveState();
-				saveState.setQuiet(false);
-				sequencePart = 0;
-			}
-			
-		}
-		else if(pastTombExit != null && !pastTombExit.isCompleted()) {
-			
-			// Spawn him at the tomb exit.
-			if(sequencePart == 0 && (p == null || p.size() == 0)) {
-				setFloatX(-745);
-				setFloatY(-3899);
-				setFacingDirection("Right");
-				sequencePart++;
-			}
-			
-			// Talk to player if he/she walks to Farlsworth at flower patch.
-			if(sequencePart == 1 && (interactSequence == null || (interactSequence != null && !interactSequence.isDisplayOn())) && 
-				currPlayer != null && currPlayer.isWithin(-803,-4082,-604,-3700)) {
-				interactSequence = makeNormalInteractSequence();
-				if(interactBox.getCurrentDisplay() != null) {
-					interactBox.getCurrentDisplay().toggleDisplay();
+				// Check if we need to do comedic timing.
+				if(!waiting && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getTextOnPress()!=null) &&
+						(interactSequence.getTheText().getTextOnPress().equals("I suppose I'll have to stay in the fence then."))) {
+					waitStart = time.getTime();
+					waitFor = 2.5f;
+					waiting = true;
+					interactSequence.setLocked(true);
 				}
-				interactSequence.toggleDisplay();
-				interactSequence.setUnescapable(true);
-				currPlayer.stopMove("all");
-				sequencePart++;
-			}
-			
-			// Lightning strike soon.
-			if(sequencePart == 2 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getTextOnPress()!=null) &&
-					((interactSequence.getTheText().getTextOnPress().contains("hard way")))) {
 				
-				// Lock sequence.
-				interactSequence.setLocked(true);
-				
-				// Wait.
-				waiting = true;
-				waitFor = 2.5f - lightningStrike.preLightningLastsFor;
-				waitStart = time.getTime();
-				sequencePart++;
-			}
-			
-			// Lightning strike soon.
-			if(sequencePart == 2 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getTextOnPress()!=null) &&
-					((interactSequence.getTheText().getTextOnPress().contains("What drives you?")))) {
-				
-				// Lock sequence.
-				interactSequence.setLocked(true);
-				
-				// Wait.
-				waiting = true;
-				waitFor = 1.25f - lightningStrike.preLightningLastsFor;
-				waitStart = time.getTime();
-				sequencePart++;
-			}
-			
-			// Strike.
-			if(sequencePart == 3 && time.getTime() - waitStart > waitFor*1000) {
-				
-				// Strike, ignite tree.
-				lightningStrike l =  new lightningStrike(-758+16,-3937+5);
-				
-				// Wait.
-				waiting = true;
-				waitFor = lightningStrike.preLightningLastsFor;
-				waitStart = time.getTime();
-				sequencePart++;				
-			}
-			
-			// Ignite tree
-			if(sequencePart == 4 && time.getTime() - waitStart > waitFor*1000) {
-				
-				sheepFarm.lightningTree.ignite();
-				
-				// Wait.
-				waiting = true;
-				waitFor = 1f;
-				waitStart = time.getTime();
-				sequencePart++;				
-			}
-			
-			// Look at tree
-			if(sequencePart == 5 && time.getTime() - waitStart > waitFor*1000) {
-				
-				// Turn
-				setFacingDirection("Up");
-				sequencePart++;
-				
-				// Wait
-				waiting = true;
-				waitFor = 1f;
-				waitStart = time.getTime();
-			}
-			
-			// Look back.
-			if(sequencePart == 6 && time.getTime() - waitStart > waitFor*1000) {
-				
-				// Turn
-				setFacingDirection("Right");
-				
-				// Wait.
-				waiting = true;
-				waitFor = 0.5f;
-				waitStart = time.getTime();
-				sequencePart++;	
-				
-			}
-			
-			// Speak
-			if(sequencePart == 7 && time.getTime() - waitStart > waitFor*1000) {
-			
-				// Advance and unlock sequence.
-				interactSequence.goToNext();
-				interactSequence.setLocked(false);
-				sequencePart++;	
-			}
-			
-			///////////////
-			/// IF HE LIKES YOU
-			////////////////
-			if(sequencePart == 8 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getTextOnPress()!=null) &&
-					((interactSequence.getTheText().getTextOnPress().contains("keep up")))) {
-				
-				// Lock sequence.
-				interactSequence.setLocked(false);
-				
-				// Wait.
-				sequencePart = 100;
-			}
-			
-			///////////////
-			// IF HE DOESNT LIKE YOU
-			//////////////
-			if(sequencePart == 8 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getTextOnPress()!=null) &&
-					(interactSequence.getTheText().getTextOnPress().contains("Look at you."))) {
-				
-				this.setMoveSpeed(1);
-				moveTo(this.getIntX(),this.getIntY() - 15);
-				sequencePart++;	
-			}
-			
-			if(sequencePart == 9 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getTextOnPress()!=null) &&
-					(interactSequence.getTheText().getTextOnPress().contains("Wolf slayer"))) {
-				
-				// Move up to tree.
-				attachedLog = new fireLog(0,0,0);
-				moveTo(this.getIntX(),this.getIntY() + 25);
-				sequencePart++;	
-			}
-			
-			if(sequencePart == 10 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getTextOnPress()!=null) &&
-					(interactSequence.getTheText().getTextOnPress().contains("Tomb raider"))) {
-				
-				moveTo(this.getIntX()-25,this.getIntY());
-				sequencePart++;	
-			}
-			
-			if(sequencePart == 11 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getTextOnPress()!=null) &&
-					(interactSequence.getTheText().getTextOnPress().contains("Sheep chaser"))) {
-				
-				moveTo(this.getIntX(),this.getIntY()+25);
-				sequencePart++;	
-			}
-			
-			if(sequencePart == 12 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getTextOnPress()!=null) &&
-					(interactSequence.getTheText().getTextOnPress().contains("fearless, dumby"))) {
-				
-				moveTo(this.getIntX()+25,this.getIntY());
-				sequencePart++;	
-			}
-			
-			if(sequencePart == 13 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getTextOnPress()!=null) &&
-					(interactSequence.getTheText().getTextOnPress().contains("Scared of nothing"))) {
-				
-				moveTo(this.getIntX(),this.getIntY()+25);
-				sequencePart++;	
-			}
-			
-			if(sequencePart == 14 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getTextOnPress()!=null) &&
-					(interactSequence.getTheText().getTextOnPress().contains("Just like I was"))) {
-				
-				moveTo(this.getIntX(),this.getIntY()-25);
-				sequencePart++;	
-			}
-			
-			if(sequencePart == 15 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getTextOnPress()!=null) &&
-					(interactSequence.getTheText().getTextOnPress().contains("Well, here's"))) {
-				
-				setFacingDirection("Right");
-				sequencePart++;	
-			}
-			
-			if(sequencePart == 16 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getTextOnPress()!=null) &&
-					(interactSequence.getTheText().getTextOnPress().contains("be friggin scared"))) {
-				
-				// Wait
-				waitFor = 1.5f;
-				waitStart = time.getTime();
-				sequencePart++;	
-				
-				// Lock.
-				interactSequence.setLocked(true);
-			}
-			
-			if(sequencePart == 17 && time.getTime() - waitStart > waitFor*1000) {
-				
-				// Unlock and progress sequence.
-				interactSequence.goToNext();
-				
-				// Hurl log.
-				attachedLog.destroy();
-				attachedLog = null;
-				projectileLog = new spinningFireLog((int)getFloatX() + getWidth() - fireLog.DEFAULT_CHUNK_WIDTH/2+5,
-						(int)getFloatY()-7,
-						player.getCurrentPlayer().getIntX()+player.getCurrentPlayer().getWidth()/2,
-						player.getCurrentPlayer().getIntY()+player.getCurrentPlayer().getHeight()/2,
-						1);
-
-				// Move.
-				this.setMoveSpeed(4.5f);
-				moveTo(this.getIntX()+20,this.getIntY());
-				
-				// Wait
-				waitFor = 0.25f;
-				waitStart = time.getTime();
-				sequencePart++;	
-			}
-			
-			// Pause time and give option
-			if(sequencePart == 18 && time.getTime() - waitStart > waitFor*1000) {
-				time.setTimeSpeed(.1f);
-				
-				// Unlock
-				interactSequence.setLocked(false);
-				sequencePart++;
-			}
-			
-			// Log hits player.
-			if(sequencePart == 19 && !projectileLog.isExists()) {
-				
-				// Set time back.
-				time.setTimeSpeed(1);
-				
-				// Advance sequence.
-				interactSequence.goToNext(1);
-				sequencePart++;
-			}
-			
-			// Player selects dodge.
-			if(sequencePart == 19 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getButtonText()!=null) &&
-					(interactSequence.getTheText().getButtonText().contains("Dodge"))) {
-				
-				// Lock sequence
-				interactSequence.setLocked(true);
-				
-				// Set time back.
-				time.setTimeSpeed(1);
-				
-				// Set the log to be allied incase it hits.
-				projectileLog.setAllied(true);
-				
-				// You dodged the log.
-				didYouDodgeTheLog = true;
-				
-				// Move the player
-				currPlayer.moveTo(currPlayer.getIntX(), currPlayer.getIntY() - 30);
-				sequencePart++;
-			}
-			
-			// Player selects get hit.
-			if(sequencePart == 19 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getButtonText()!=null) &&
-					(interactSequence.getTheText().getButtonText().contains("Get hit"))) {
-				
-				// Set time back.
-				time.setTimeSpeed(1);
-				
-				// Get hit
-				sequencePart++;
-			}
-			
-			// Face right
-			if(sequencePart == 20 && !currPlayer.isMoving() && didYouDodgeTheLog && projectileLog.getIntX() > currPlayer.getIntX() + 40) {
-				currPlayer.setFacingDirection("Right");
-			}
-			
-			// Look towards Farlsworth
-			if(sequencePart == 21 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getTextOnPress()!=null) &&
-					(interactSequence.getTheText().getTextOnPress().contains("what you did"))) {
-				currPlayer.setFacingDirection("Left");
-			}
-			
-			// Unlock sequence if it's after 18. The log exploded.
-			if(sequencePart == 20 && !projectileLog.isExists()) {
-				interactSequence.setLocked(false);
-				sequencePart++;
-				
-				// Set that the forest is now on fire if you dodged.
-				if(didYouDodgeTheLog) {
-					this.setMoveSpeed(2.5f);
-					patrolTo(this.getIntX(), this.getIntY() + 50);
+				// Run off with the fence.
+				if(waiting && time.getTime() - waitStart > waitFor*1000) {
 					interactSequence.goToNext();
-					sheepFarm.isOnFire.setCompleted(true);
-					didYouSetTheForestOnFire.setCompleted(false);
+					waiting = false;
+				}
+				
+				// Do we attach fence to him?
+				if(!isFenceAttached.isCompleted() && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().isEnd() && interactSequence.getTheText().getTextOnPress()!=null) &&
+						(interactSequence.getTheText().getTextOnPress().equals("Catch me if you can."))) {
+					attachFence();
+					p = new ArrayList<intTuple>();
+					p.add(new intTuple(13,-1003));
+					p.add(new intTuple(366,-1266));
+					p.add(new intTuple(842,-1312));
+					p.add(new intTuple(1322,-1210));
+					p.add(new intTuple(1413,-912));
+					followPath(p);
+					sound s = new sound(bleet);
+					s.setPosition(getIntX(), getIntY(), sound.DEFAULT_SOUND_RADIUS);
+					s.start();
+					pastSpawnFarm.setCompleted(true);
+					saveState.setQuiet(true);
+					saveState.createSaveState();
+					saveState.setQuiet(false);
+					movedFromFence = true;
+				}
+				
+				// Do we attach fence to him?
+				if(!isFenceAttached.isCompleted() && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().isEnd() && interactSequence.getTheText().getTextOnPress()!=null) &&
+						(interactSequence.getTheText().getTextOnPress().equals("Catch me if you can, I guess."))) {
+					sheepFarm.forestGate.open();
+					p = new ArrayList<intTuple>();
+					p.add(new intTuple(13,-1003));
+					p.add(new intTuple(366,-1266));
+					p.add(new intTuple(842,-1312));
+					p.add(new intTuple(1322,-1210));
+					p.add(new intTuple(1413,-912));
+					followPath(p);
+					sound s = new sound(bleet);
+					s.setPosition(getIntX(), getIntY(), sound.DEFAULT_SOUND_RADIUS);
+					s.start();
+					pastSpawnFarm.setCompleted(true);
+					didYouOpenTheGateForHim.setCompleted(true);
+					saveState.setQuiet(true);
+					saveState.createSaveState();
+					saveState.setQuiet(false);
+					movedFromFence = true;
 				}
 			}
 			
-			// If we reach the end.
-			if(sequencePart == 21 && interactSequence.getTheText().isEnd()) {
-				sequencePart = 100;
+			// At the flower patch
+			else if(pastFlowerPatch!= null && !pastFlowerPatch.isCompleted()) {
+				
+				// Spawn Farlsworth at the Flower patch
+				if(sequencePart == 0 && (p == null || p.size() == 0)) {
+					stopMove("all");
+					destroyFence();
+					movingToAPoint = false;
+					setFloatX(2238);
+					setFloatY(-456);
+					facingDirection = "Left";
+					sequencePart++;
+				}
+				
+				// Talk to player if he/she walks to Farlsworth at flower patch.
+				if(sequencePart == 1 && (interactSequence == null || (interactSequence != null && !interactSequence.isDisplayOn())) && 
+					currPlayer != null && currPlayer.isWithin(2080,-478,2242,-363)) {
+					interactSequence = makeNormalInteractSequence();
+					if(interactBox.getCurrentDisplay() != null) {
+						interactBox.getCurrentDisplay().toggleDisplay();
+					}
+					interactSequence.toggleDisplay();
+					interactSequence.setUnescapable(true);
+					currPlayer.stopMove("all");
+					sequencePart++;
+				}
+				
+				// Don't grab him
+				if(sequencePart == 2 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getTextOnPress()!=null) &&
+						(interactSequence.getTheText().getTextOnPress().equals("Time will tell."))) {
+					
+					// Run away
+					sequencePart = 100; // Put the sequence on the last event.
+				}
+				
+				// Grab him
+				if(sequencePart == 2 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getTextOnPress()!=null) &&
+						(interactSequence.getTheText().getTextOnPress().equals("Hold your horses, buddy."))) {
+					
+					// Move player and Farlsworth
+					sound s = new sound(bleet);
+					s.start();
+					moveTo(this.getIntX() + 70, this.getIntY());
+					player.getCurrentPlayer().moveTo(player.getCurrentPlayer().getIntX()+70, player.getCurrentPlayer().getIntY());
+					
+					// Run away
+					didYouTryToGrabHim.setCompleted(true);
+					sequencePart++;
+					interactSequence.setLocked(true);
+				}
+				
+				// Turn back
+				else if(sequencePart == 3 && !movingToAPoint) {
+					moveTo(this.getIntX() -1, this.getIntY());
+					interactSequence.setLocked(false);
+					sequencePart++;
+				}
+				
+				// Run at the end of the conversation
+				if(sequencePart == 4 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getTextOnPress()!=null) &&
+						(interactSequence.getTheText().getTextOnPress().equals("Frig you."))) {
+					
+					// Run away
+					sequencePart = 100;
+				}
+				
+				// Run
+				if(sequencePart == 100) {
+					interactSequence.setUnescapable(false);
+					p = new ArrayList<intTuple>();
+					p.add(new intTuple(2307,-121));
+					p.add(new intTuple(2562,-121));
+					p.add(new intTuple(2758,-437));
+					p.add(new intTuple(2926,-437));
+					p.add(new intTuple(2871,-564));
+					p.add(new intTuple(2697,-805));
+					p.add(new intTuple(2697,-1120));
+					p.add(new intTuple(2697,-1405));
+					sound s = new sound(bleet);
+					s.setPosition(getIntX(), getIntY(), sound.DEFAULT_SOUND_RADIUS);
+					s.start();
+					followPath(p);
+					pastFlowerPatch.setCompleted(true);
+					saveState.setQuiet(true);
+					saveState.createSaveState();
+					saveState.setQuiet(false);
+					sequencePart = 0;
+				}
 			}
 			
-			// Run
-			if(sequencePart == 100) {
+			// At the tomb
+			else if(pastTombEntrance != null && !pastTombEntrance.isCompleted()) {
 				
-				// Follow path.
-				p = new ArrayList<intTuple>();
-				p.add(new intTuple(-1149,-3905));
-				p.add(new intTuple(-1527,-3905));
-				p.add(new intTuple(-1867,-3905));
-				p.add(new intTuple(-2168,-3905));
+				// Spawn Farlsworth at the tomb entrance.
+				if(sequencePart == 0 && (p == null || p.size() == 0)) {
+					
+					// Spawn Ben in front of the tomb
+					stopMove("all");
+					setFloatX(-10000);
+					setFloatY(-10000);
+					ben = new sheep(-10000,-10000);
+					ben.setMeanders(false);
+					ben.setFloatX(2227);
+					ben.setFloatY(-3818);
+					ben.setFacingDirection("Left");
+					ben.setBenAnimations();
+					sequencePart++;
+				}
 				
-				// Move story along.
-				this.stopPatrol();
-				this.setMoveSpeed(4.5f);
-				interactSequence.setUnescapable(false);
-				followPath(p);
-				pastTombExit.setCompleted(true);
-				saveState.setQuiet(true);
-				saveState.createSaveState();
-				saveState.setQuiet(false);
-				sequencePart = 0;
+				// Talk to player if he/she walks to Farlsworth at flower patch.
+				if(sequencePart == 1 && (interactSequence == null || (interactSequence != null && !interactSequence.isDisplayOn())) && 
+					currPlayer != null && currPlayer.isWithin(2100,-3884,2411,-3655)) {
+					interactSequence = makeNormalInteractSequence();
+					if(interactBox.getCurrentDisplay() != null) {
+						interactBox.getCurrentDisplay().toggleDisplay();
+					}
+					interactSequence.toggleDisplay();
+					interactSequence.setUnescapable(true);
+					currPlayer.stopMove("all");
+					sequencePart++;
+				}
+				
+				// Set wait timer for comedic timing.
+				if(sequencePart == 2 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getTextOnPress()!=null) &&
+					(interactSequence.getTheText().getTextOnPress().equals("Baah."))) {
+					
+					// Wait.
+					waiting = true;
+					waitFor = 0.75f;
+					waitStart = time.getTime();
+					
+					// Lock sequence.
+					interactSequence.setLocked(true);
+					
+					// Run away
+					sequencePart++;
+				}
+				
+				// Spawn Farlsworth.
+				if(sequencePart == 3 && time.getTime() - waitStart > waitFor*1000) {
+					this.setFloatX(1507);
+					this.setFloatY(-3911);
+					this.moveTo(1900,-3911);
+					sequencePart++;
+				}
+				
+				// If Farlsworth has stopped moving.
+				if(sequencePart == 4 && !isMoving()) {
+					interactSequence.goToNext();
+					sequencePart++;
+					interactSequence.setLocked(false);
+				}
+				
+				if(sequencePart == 5 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getTextOnPress()!=null) &&
+						(interactSequence.getTheText().getTextOnPress().contains("spoke sheep"))) {
+					doYouSpeakSheep.setCompleted(true);
+				}
+				
+				// If we are moving forward to see who is talking.
+				if(sequencePart == 5 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getTextOnPress()!=null) &&
+						(interactSequence.getTheText().getTextOnPress().contains("talking to?"))) {
+					
+					// Lock sequence for movement of Farlsworth.
+					interactSequence.setLocked(true);
+					sequencePart++;
+					
+					// Wait.
+					waiting = true;
+					waitFor = 1.5f;
+					waitStart = time.getTime();
+				}
+				
+				// Wait for comedic timing.
+				if(sequencePart == 6 && time.getTime() - waitStart > waitFor*1000) {
+					
+					// Move to in front of Ben.
+					ArrayList<intTuple> p = new ArrayList<intTuple>();
+					p.add(new intTuple(2079,-3875));
+					p.add(new intTuple(2150,-3825));
+					followPath(p);
+					sequencePart++;
+				}
+				
+				// Talk to Ben.
+				if(sequencePart == 7 && !isMoving() && !isFollowingAPath()) {
+					interactSequence.setLocked(false);
+					
+					// Continue conversation.
+					sequencePart++;
+					interactSequence.goToNext();
+				}
+				
+				// Make Ben leave.
+				if(sequencePart == 8 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getTextOnPress()!=null) &&
+						(interactSequence.getTheText().getTextOnPress().contains("Baaaah."))) {
+					ArrayList<intTuple> path = new ArrayList<intTuple>();
+					path.add(new intTuple(2104,-3866));
+					path.add(new intTuple(1943,-3866));
+					path.add(new intTuple(1794,-3807));
+					path.add(new intTuple(1279,-3807));
+					ben.followPath(path);
+					sound s = new sound(bleet);
+					s.setPosition(ben.getIntX(), ben.getIntY(), sound.DEFAULT_SOUND_RADIUS);
+					s.start();
+					sequencePart++;
+					
+					// Lock the sequence until Ben leaves.
+					interactSequence.setLocked(true);
+				}
+				
+				// Turn Farlsworth.
+				if(sequencePart == 9 && ben.getIntX() < getIntX()) {
+					setFacingDirection("Left");
+					sequencePart++;
+				}
+				
+				// Turn the player.
+				if(sequencePart == 10 && ben.getIntX() < currPlayer.getIntX()) {
+					currPlayer.setFacingDirection("Left");
+					sequencePart++;
+				}
+				
+				// When Ben has left, allow the conversation to continue.
+				if(sequencePart == 11 && !ben.isOnScreen()) {
+					
+					// Destroy Ben, the fucker.
+					ben.destroy();
+					
+					// Set facing direction right.
+					currPlayer.setFacingDirection("Right");
+					
+					// Wait.
+					waiting = true;
+					waitFor = 0.5f;
+					waitStart = time.getTime();
+					sequencePart++;
+				}
+				
+				// Wait for comedic timing
+				if(sequencePart == 12 && time.getTime() - waitStart > waitFor*1000) {
+					
+					// Move conversation forward.
+					sequencePart++;
+					interactSequence.setLocked(false);
+					interactSequence.goToNext();
+				}
+				
+				// Run into the tomb.
+				if(sequencePart == 13 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getTextOnPress()!=null) &&
+						(interactSequence.getTheText().getTextOnPress().contains("ood luck"))) {
+					
+					// Bleet
+					sound s = new sound(bleet);
+					s.setPosition(getIntX(), getIntY(), sound.DEFAULT_SOUND_RADIUS);
+					s.start();
+					
+					// Move conversation forward.
+					sequencePart = 100;
+				}
+				
+				// Follow the path
+				if(sequencePart == 100) {
+					p = new ArrayList<intTuple>();
+					interactSequence.setUnescapable(false);
+					p.add(new intTuple(2330,-3800));
+					p.add(new intTuple(2330,-3980));
+					p.add(new intTuple(2330,-3990));
+					followPath(p);
+					pastTombEntrance.setCompleted(true);
+					saveState.setQuiet(true);
+					saveState.createSaveState();
+					saveState.setQuiet(false);
+					sequencePart = 0;
+				}
 				
 			}
-		}
-		else {	
-			// He's no longer in the zone.
-			if(sequencePart == 0 && (p == null || p.size() == 0)) {
-				stopMove("all");
-				setFloatX(-10000);
-				setFloatY(-10000);
+			else if(pastTombExit != null && !pastTombExit.isCompleted()) {
+				
+				// Spawn him at the tomb exit.
+				if(sequencePart == 0 && (p == null || p.size() == 0)) {
+					setFloatX(-745);
+					setFloatY(-3899);
+					setFacingDirection("Right");
+					sequencePart++;
+				}
+				
+				// Talk to player if he/she walks to Farlsworth at flower patch.
+				if(sequencePart == 1 && (interactSequence == null || (interactSequence != null && !interactSequence.isDisplayOn())) && 
+					currPlayer != null && currPlayer.isWithin(-803,-4082,-604,-3700)) {
+					interactSequence = makeNormalInteractSequence();
+					if(interactBox.getCurrentDisplay() != null) {
+						interactBox.getCurrentDisplay().toggleDisplay();
+					}
+					interactSequence.toggleDisplay();
+					interactSequence.setUnescapable(true);
+					currPlayer.stopMove("all");
+					sequencePart++;
+				}
+				
+				// Lightning strike soon.
+				if(sequencePart == 2 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getTextOnPress()!=null) &&
+						((interactSequence.getTheText().getTextOnPress().contains("hard way")))) {
+					
+					// Lock sequence.
+					interactSequence.setLocked(true);
+					
+					// Wait.
+					waiting = true;
+					waitFor = 2.5f - lightningStrike.preLightningLastsFor;
+					waitStart = time.getTime();
+					sequencePart++;
+				}
+				
+				// Lightning strike soon.
+				if(sequencePart == 2 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getTextOnPress()!=null) &&
+						((interactSequence.getTheText().getTextOnPress().contains("What drives you?")))) {
+					
+					// Lock sequence.
+					interactSequence.setLocked(true);
+					
+					// Wait.
+					waiting = true;
+					waitFor = 1.25f - lightningStrike.preLightningLastsFor;
+					waitStart = time.getTime();
+					sequencePart++;
+				}
+				
+				// Strike.
+				if(sequencePart == 3 && time.getTime() - waitStart > waitFor*1000) {
+					
+					// Strike, ignite tree.
+					lightningStrike l =  new lightningStrike(-758+16,-3937+5);
+					
+					// Wait.
+					waiting = true;
+					waitFor = lightningStrike.preLightningLastsFor;
+					waitStart = time.getTime();
+					sequencePart++;				
+				}
+				
+				// Ignite tree
+				if(sequencePart == 4 && time.getTime() - waitStart > waitFor*1000) {
+					
+					sheepFarm.lightningTree.ignite();
+					
+					// Wait.
+					waiting = true;
+					waitFor = 1f;
+					waitStart = time.getTime();
+					sequencePart++;				
+				}
+				
+				// Look at tree
+				if(sequencePart == 5 && time.getTime() - waitStart > waitFor*1000) {
+					
+					// Turn
+					setFacingDirection("Up");
+					sequencePart++;
+					
+					// Wait
+					waiting = true;
+					waitFor = 1f;
+					waitStart = time.getTime();
+				}
+				
+				// Look back.
+				if(sequencePart == 6 && time.getTime() - waitStart > waitFor*1000) {
+					
+					// Turn
+					setFacingDirection("Right");
+					
+					// Wait.
+					waiting = true;
+					waitFor = 0.5f;
+					waitStart = time.getTime();
+					sequencePart++;	
+					
+				}
+				
+				// Speak
+				if(sequencePart == 7 && time.getTime() - waitStart > waitFor*1000) {
+				
+					// Advance and unlock sequence.
+					interactSequence.goToNext();
+					interactSequence.setLocked(false);
+					sequencePart++;	
+				}
+				
+				///////////////
+				/// IF HE LIKES YOU
+				////////////////
+				if(sequencePart == 8 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getTextOnPress()!=null) &&
+						((interactSequence.getTheText().getTextOnPress().contains("keep up")))) {
+					
+					// Lock sequence.
+					interactSequence.setLocked(false);
+					
+					// Wait.
+					sequencePart = 100;
+				}
+				
+				///////////////
+				// IF HE DOESNT LIKE YOU
+				//////////////
+				if(sequencePart == 8 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getTextOnPress()!=null) &&
+						(interactSequence.getTheText().getTextOnPress().contains("Look at you."))) {
+					
+					this.setMoveSpeed(1);
+					moveTo(this.getIntX(),this.getIntY() - 15);
+					sequencePart++;	
+				}
+				
+				if(sequencePart == 9 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getTextOnPress()!=null) &&
+						(interactSequence.getTheText().getTextOnPress().contains("Wolf slayer"))) {
+					
+					// Move up to tree.
+					attachedLog = new fireLog(0,0,0);
+					moveTo(this.getIntX(),this.getIntY() + 25);
+					sequencePart++;	
+				}
+				
+				if(sequencePart == 10 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getTextOnPress()!=null) &&
+						(interactSequence.getTheText().getTextOnPress().contains("Tomb raider"))) {
+					
+					moveTo(this.getIntX()-25,this.getIntY());
+					sequencePart++;	
+				}
+				
+				if(sequencePart == 11 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getTextOnPress()!=null) &&
+						(interactSequence.getTheText().getTextOnPress().contains("Sheep chaser"))) {
+					
+					moveTo(this.getIntX(),this.getIntY()+25);
+					sequencePart++;	
+				}
+				
+				if(sequencePart == 12 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getTextOnPress()!=null) &&
+						(interactSequence.getTheText().getTextOnPress().contains("fearless, dumby"))) {
+					
+					moveTo(this.getIntX()+25,this.getIntY());
+					sequencePart++;	
+				}
+				
+				if(sequencePart == 13 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getTextOnPress()!=null) &&
+						(interactSequence.getTheText().getTextOnPress().contains("Scared of nothing"))) {
+					
+					moveTo(this.getIntX(),this.getIntY()+25);
+					sequencePart++;	
+				}
+				
+				if(sequencePart == 14 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getTextOnPress()!=null) &&
+						(interactSequence.getTheText().getTextOnPress().contains("Just like I was"))) {
+					
+					moveTo(this.getIntX(),this.getIntY()-25);
+					sequencePart++;	
+				}
+				
+				if(sequencePart == 15 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getTextOnPress()!=null) &&
+						(interactSequence.getTheText().getTextOnPress().contains("Well, here's"))) {
+					
+					setFacingDirection("Right");
+					sequencePart++;	
+				}
+				
+				if(sequencePart == 16 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getTextOnPress()!=null) &&
+						(interactSequence.getTheText().getTextOnPress().contains("be friggin scared"))) {
+					
+					// Wait
+					waitFor = 1.5f;
+					waitStart = time.getTime();
+					sequencePart++;	
+					
+					// Lock.
+					interactSequence.setLocked(true);
+				}
+				
+				if(sequencePart == 17 && time.getTime() - waitStart > waitFor*1000) {
+					
+					// Unlock and progress sequence.
+					interactSequence.goToNext();
+					
+					// Hurl log.
+					attachedLog.destroy();
+					attachedLog = null;
+					projectileLog = new spinningFireLog((int)getFloatX() + getWidth() - fireLog.DEFAULT_CHUNK_WIDTH/2+5,
+							(int)getFloatY()-7,
+							player.getCurrentPlayer().getIntX()+player.getCurrentPlayer().getWidth()/2,
+							player.getCurrentPlayer().getIntY()+player.getCurrentPlayer().getHeight()/2,
+							1);
+	
+					// Move.
+					this.setMoveSpeed(4.5f);
+					moveTo(this.getIntX()+20,this.getIntY());
+					
+					// Wait
+					waitFor = 0.25f;
+					waitStart = time.getTime();
+					sequencePart++;	
+				}
+				
+				// Pause time and give option
+				if(sequencePart == 18 && time.getTime() - waitStart > waitFor*1000) {
+					time.setTimeSpeed(.1f);
+					
+					// Unlock
+					interactSequence.setLocked(false);
+					sequencePart++;
+				}
+				
+				// Log hits player.
+				if(sequencePart == 19 && !projectileLog.isExists()) {
+					
+					// Set time back.
+					time.setTimeSpeed(1);
+					
+					// Advance sequence.
+					interactSequence.goToNext(1);
+					sequencePart++;
+				}
+				
+				// Player selects dodge.
+				if(sequencePart == 19 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getButtonText()!=null) &&
+						(interactSequence.getTheText().getButtonText().contains("Dodge"))) {
+					
+					// Lock sequence
+					interactSequence.setLocked(true);
+					
+					// Set time back.
+					time.setTimeSpeed(1);
+					
+					// Set the log to be allied incase it hits.
+					projectileLog.setAllied(true);
+					
+					// You dodged the log.
+					didYouDodgeTheLog = true;
+					
+					// Move the player
+					currPlayer.moveTo(currPlayer.getIntX(), currPlayer.getIntY() - 30);
+					sequencePart++;
+				}
+				
+				// Player selects get hit.
+				if(sequencePart == 19 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getButtonText()!=null) &&
+						(interactSequence.getTheText().getButtonText().contains("Get hit"))) {
+					
+					// Set time back.
+					time.setTimeSpeed(1);
+					
+					// Get hit
+					sequencePart++;
+				}
+				
+				// Face right
+				if(sequencePart == 20 && !currPlayer.isMoving() && didYouDodgeTheLog && projectileLog.getIntX() > currPlayer.getIntX() + 40) {
+					currPlayer.setFacingDirection("Right");
+				}
+				
+				// Look towards Farlsworth
+				if(sequencePart == 21 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getTextOnPress()!=null) &&
+						(interactSequence.getTheText().getTextOnPress().contains("what you did"))) {
+					currPlayer.setFacingDirection("Left");
+				}
+				
+				// Unlock sequence if it's after 18. The log exploded.
+				if(sequencePart == 20 && !projectileLog.isExists()) {
+					interactSequence.setLocked(false);
+					sequencePart++;
+					
+					// Set that the forest is now on fire if you dodged.
+					if(didYouDodgeTheLog) {
+						this.setMoveSpeed(2.5f);
+						patrolTo(this.getIntX(), this.getIntY() + 50);
+						interactSequence.goToNext();
+						sheepFarm.isOnFire.setCompleted(true);
+						didYouSetTheForestOnFire.setCompleted(false);
+					}
+				}
+				
+				// If we reach the end.
+				if(sequencePart == 21 && interactSequence.getTheText().isEnd()) {
+					sequencePart = 100;
+				}
+				
+				// Run
+				if(sequencePart == 100) {
+					
+					// Follow path.
+					p = new ArrayList<intTuple>();
+					p.add(new intTuple(-1149,-3905));
+					p.add(new intTuple(-1527,-3905));
+					p.add(new intTuple(-1867,-3905));
+					p.add(new intTuple(-2168,-3905));
+					
+					// Move story along.
+					this.stopPatrol();
+					this.setMoveSpeed(4.5f);
+					interactSequence.setUnescapable(false);
+					followPath(p);
+					pastTombExit.setCompleted(true);
+					saveState.setQuiet(true);
+					saveState.createSaveState();
+					saveState.setQuiet(false);
+					sequencePart = 0;
+					
+				}
+			}
+			else {	
+				// He's no longer in the zone.
+				if(sequencePart == 0 && (p == null || p.size() == 0)) {
+					stopMove("all");
+					setFloatX(-10000);
+					setFloatY(-10000);
+				}
 			}
 		}
 	}

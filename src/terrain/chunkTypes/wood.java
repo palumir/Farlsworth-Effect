@@ -2,6 +2,7 @@ package terrain.chunkTypes;
 
 import java.util.Random;
 
+import doodads.sheepFarm.tree;
 import drawing.camera;
 import modes.mode;
 import terrain.chunk;

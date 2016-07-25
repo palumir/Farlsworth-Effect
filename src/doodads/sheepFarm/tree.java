@@ -3,6 +3,7 @@ package doodads.sheepFarm;
 import java.util.Random;
 
 import drawing.camera;
+import drawing.drawnObject;
 import drawing.gameCanvas;
 import effects.effectTypes.fire;
 import effects.effectTypes.rainFall;
@@ -141,6 +142,18 @@ public class tree extends chunk {
 				int randY = 4 - 8*utility.RNG.nextInt(2);
 				if(rand==1) { fire f = new fire(getIntX() + randX,j - fire.getDefaultHeight()/2+randY); }
 			}
+		}
+	}
+	
+	// Create function
+	public static tree createTree(int newX, int newY, int i) {
+		if(!zone.loadedOnce) {
+			tree t = new tree(newX,newY,i);
+			t.setReloadObject(false);
+			return t;
+		}
+		else {
+			return null;
 		}
 	}
 	

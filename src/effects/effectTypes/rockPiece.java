@@ -50,9 +50,6 @@ public class rockPiece extends projectile {
 	// Duration
 	private static float DEFAULT_ANIMATION_DURATION = 10f;
 	
-	// Movespeed
-	public static int DEFAULT_MOVESPEED = 2;
-	
 	// The actual type.
 	private static effectType theEffectType =
 			new effectType(DEFAULT_EFFECT_NAME,
@@ -69,9 +66,9 @@ public class rockPiece extends projectile {
 	/// METHODS ///
 	///////////////
 	// Constructor
-	public rockPiece(int newX, int newY, int newMoveToX, int newMoveToY, int damage) {
+	public rockPiece(int newX, int newY, int newMoveToX, int newMoveToY, int damage, float moveSpeed) {
 		super(theEffectType, newX, newY, newMoveToX, newMoveToY, damage);
-		moveSpeed = DEFAULT_MOVESPEED;
+		this.moveSpeed = moveSpeed;
 		collisionOn = false;
 		setRiseRun();
 	}

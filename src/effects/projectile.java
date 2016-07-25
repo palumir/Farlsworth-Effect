@@ -81,7 +81,7 @@ public abstract class projectile extends effect {
 	protected float floatY = 0;
 	
 	// Move-speed
-	protected int moveSpeed = DEFAULT_PROJECTILE_MOVESPEED;
+	protected float moveSpeed = DEFAULT_PROJECTILE_MOVESPEED;
 	
 	// Reflectable
 	private boolean reflectable = false;
@@ -266,7 +266,7 @@ public abstract class projectile extends effect {
 		}
 	}
 
-	public int getMoveSpeed() {
+	public float getMoveSpeed() {
 		return moveSpeed;
 	}
 

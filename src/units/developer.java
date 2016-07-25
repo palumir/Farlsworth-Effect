@@ -7,7 +7,11 @@ import doodads.sheepFarm.bone;
 import doodads.sheepFarm.bush;
 import doodads.sheepFarm.flower;
 import doodads.sheepFarm.grave;
+import doodads.sheepFarm.haystack;
+import doodads.sheepFarm.log;
+import doodads.sheepFarm.rock;
 import doodads.sheepFarm.tree;
+import doodads.sheepFarm.well;
 import doodads.tomb.wallTorch;
 import drawing.userInterface.text;
 import modes.topDown;
@@ -48,6 +52,10 @@ public class developer extends player {
 									"bush",
 									"bone",
 									"grave",
+									"log",
+									"haystack",
+									"rock",
+									"well",
 									"wolf",
 									"wallTorch",
 									"shadowDude",
@@ -159,7 +167,6 @@ public class developer extends player {
 		// Our things.
 		chunk c = null;
 		unit u = null;
-		
 		int random = 0;
 		
 		/////////////
@@ -184,6 +191,49 @@ public class developer extends player {
 			
 			// Output what we make.
 			c = new flower(getIntX() + getWidth()/2, getIntY() + getHeight()/2, random);
+		}
+		
+		///////////////
+		/// HAYSTACK ////
+		///////////////
+		if(listOfThings[whatThing].equals("haystack")) {
+			
+			// Get random.
+			random = utility.RNG.nextInt(1);
+			
+			// Output what we make.
+			c = new haystack(getIntX() + getWidth()/2, getIntY() + getHeight()/2, random);
+		}
+		
+		///////////////
+		/// ROCK ////
+		///////////////
+		if(listOfThings[whatThing].equals("rock")) {
+			
+			// Get random.
+			random = utility.RNG.nextInt(2);
+			
+			// Output what we make.
+			c = new rock(getIntX() + getWidth()/2, getIntY() + getHeight()/2, random);
+		}
+		
+		///////////////
+		/// WELL ////
+		///////////////
+		if(listOfThings[whatThing].equals("well")) {
+			
+			// Output what we make.
+			c = new well(getIntX() + getWidth()/2, getIntY() + getHeight()/2, 0);
+		}
+		
+		///////////////
+		/// LOG ////
+		///////////////
+		if(listOfThings[whatThing].equals("log")) {
+			
+			
+			// Output what we make.
+			c = new log(getIntX() + getWidth()/2, getIntY() + getHeight()/2,0);
 		}
 		
 		///////////////
@@ -216,7 +266,7 @@ public class developer extends player {
 		if(listOfThings[whatThing].equals("grave")) {
 			
 			// Get random.
-			random = utility.RNG.nextInt(5);
+			random = utility.RNG.nextInt(3);
 			
 			// Output what we make.
 			c = new grave(getIntX() + getWidth()/2, getIntY() + getHeight()/2, random);

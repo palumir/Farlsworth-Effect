@@ -54,7 +54,8 @@ public class water extends chunk {
 	///////////////
 	/// METHODS ///
 	///////////////
-	// Constructor
+	
+	// A tile of water.
 	public water(int newX, int newY) {
 		super(typeReference, newX, newY);
 		setInteractable(true);
@@ -62,10 +63,23 @@ public class water extends chunk {
 		backgroundDoodad = true;
 	}
 	
+	// A water source.
 	public water(generalChunkType typeReference, int newX, int newY) {
 		super(typeReference, newX, newY);
 		setInteractable(true);
 		this.setPassable(false);
+	}
+	
+	// Create function
+	public static chunk createChunk(int newX, int newY) {
+		if(!zone.loadedOnce) {
+			chunk t = new water(newX,newY);
+			t.setReloadObject(false);
+			return t;
+		}
+		else {
+			return null;
+		}
 	}
 
 	// Create interact sequence

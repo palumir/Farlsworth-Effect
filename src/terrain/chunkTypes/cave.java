@@ -33,6 +33,18 @@ public class cave extends groundTile {
 	// The actual type.
 	private static generalChunkType typeReference = new generalChunkType(DEFAULT_CHUNK_NAME, DEFAULT_CHUNK_SPRITESHEET, DEFAULT_CHUNK_WIDTH, DEFAULT_CHUNK_HEIGHT);  
 	
+	// Create function
+	public static chunk createChunk(int newX, int newY) {
+		if(!zone.loadedOnce) {
+			chunk t = new cave(newX,newY);
+			t.setReloadObject(false);
+			return t;
+		}
+		else {
+			return null;
+		}
+	}
+	
 	///////////////
 	/// METHODS ///
 	///////////////
