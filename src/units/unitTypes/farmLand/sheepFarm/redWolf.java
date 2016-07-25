@@ -40,10 +40,10 @@ public class redWolf extends wolf {
 	private static String DEFAULT_UNIT_NAME = "redWolf";
 	
 	// Health.
-	private int DEFAULT_HP = 10;
+	private int DEFAULT_HP = 11;
 	
 	// Default jump speed
-	private static int DEFAULT_UNIT_JUMPSPEED = 13;
+	private static int DEFAULT_UNIT_JUMPSPEED = 20;
 
 	// Spawn claw stuff
 	protected int DEFAULT_SLASH_DAMAGE = 2;
@@ -51,7 +51,7 @@ public class redWolf extends wolf {
 	// Beta stats
 	private static float DEFAULT_MOVESPEED_BETA = 2f;
 	private static float DEFAULT_CLAW_ATTACK_EVERY_BASE_BETA = 2f;
-	private static float DEFAULT_SPAWN_CLAW_PHASE_TIME_BETA = 2f;
+	private static float DEFAULT_SPAWN_CLAW_PHASE_TIME_BETA = 1.7f;
 	private static int DEFAULT_HOW_FAR_BACK_BASE_BETA = 60;
 	private static int DEFAULT_HOW_FAR_BACK_RANDOM_BETA = 20;
 	private static int DEFAULT_RANDOM_DEGREE_BETA = 10;
@@ -60,12 +60,12 @@ public class redWolf extends wolf {
 
 	// Alpha stats
 	private static float DEFAULT_MOVESPEED_ALPHA = 3f;
-	private static float DEFAULT_CLAW_ATTACK_EVERY_BASE_ALPHA = .9f;
-	private static float DEFAULT_SPAWN_CLAW_PHASE_TIME_ALPHA = .9f;
+	private static float DEFAULT_CLAW_ATTACK_EVERY_BASE_ALPHA = 1f;
+	private static float DEFAULT_SPAWN_CLAW_PHASE_TIME_ALPHA = .85f;
 	private static int DEFAULT_HOW_FAR_BACK_BASE_ALPHA = 40;
-	private static int DEFAULT_HOW_FAR_BACK_RANDOM_ALPHA = 10;
+	private static int DEFAULT_HOW_FAR_BACK_RANDOM_ALPHA = 5;
 	private static int DEFAULT_RANDOM_DEGREE_ALPHA = 1; 
-	private static int DEFAULT_FOLLOW_UNTIL_RANGE_BASE_ALPHA = 15;
+	private static int DEFAULT_FOLLOW_UNTIL_RANGE_BASE_ALPHA = 20;
 	private static int DEFAULT_FOLLOW_UNTIL_RANGE_RANDOM_ALPHA = 0;
 	
 	////////////////

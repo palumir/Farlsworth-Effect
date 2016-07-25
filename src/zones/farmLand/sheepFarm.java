@@ -310,65 +310,12 @@ public class sheepFarm extends zone {
 		}
 		
 		// First wolf
-		u = new redWolf(-2,-747);
+		u = new yellowWolf(748,-790);
 		u.setFacingDirection("Down");
-		
-		// Second pack of wolves after spawn
-		u = new redWolf(179,-1240);
+		u = new redWolf(788,-790);
 		u.setFacingDirection("Down");
-		u = new redWolf(145,-1243);
+		u = new blackWolf(828,-790);
 		u.setFacingDirection("Down");
-		
-		// First yellow wolf
-		u = new yellowWolf(699,-1344);
-		u.setFacingDirection("Left");
-		
-		// Two yellow wolves
-		u = new redWolf(1420,-768);
-		u.setFacingDirection("Left");
-		u = new yellowWolf(1394,-763);
-		u.setFacingDirection("Left");
-		
-		// First black wolf, at flower farm
-		u = new blackWolf(1983,-276);
-		u.setFacingDirection("Left");
-		
-		// Black and red wolf at the end of the flower patch
-		u = new redWolf(2655,-137);
-		u.setFacingDirection("Left");
-		u = new blackWolf(2655,-121);
-		u.setFacingDirection("Left");
-		
-		// Two blacks
-		u = new blackWolf(2646,-955);
-		u.setFacingDirection("Down");
-		u = new blackWolf(2678,-957);
-		u.setFacingDirection("Down");
-		
-		// Two reds and black, before graveyard well
-		u = new blackWolf(2645,-1387);
-		u.setFacingDirection("Down");
-		u = new redWolf(2683,-1397);
-		u.setFacingDirection("Down");
-		u = new redWolf(2717,-1398);
-		u.setFacingDirection("Down");
-		
-		// Two reds and black, before graveyard well
-		u = new blackWolf(2771,-2566);
-		u.setFacingDirection("Down");
-		u = new blackWolf(2804,-2568);
-		u.setFacingDirection("Down");
-		u = new yellowWolf(2745,-2563);
-		u.setFacingDirection("Down");
-		
-		// Pack of all 3 wolves in graveyard
-		u = new yellowWolf(2168,-3046);
-		u.setFacingDirection("Right");
-		u = new redWolf(2163,-3067);
-		u.setFacingDirection("Right");
-		u = new blackWolf(2155,-3079);
-		u.setFacingDirection("Right");
-
 
 	}
 	

@@ -1,17 +1,12 @@
-<<<<<<< HEAD
-=======
 /doodads/
-/effects/
-/main/
-/terrain/
->>>>>>> 1f5f5daec26b71658ef5a65bb3727a37fff56d12
-/zones/
 /drawing/
-/units/
-<<<<<<< HEAD
-=======
-/sounds/
->>>>>>> 523d7eb301f2b60618f39d8deec7b4aef77b55c3
-/utilities/
-/items/
+/effects/
 /interactions/
+/items/
+/main/
+/modes/
+/sounds/
+/terrain/
+/units/
+/utilities/
+/zones/
