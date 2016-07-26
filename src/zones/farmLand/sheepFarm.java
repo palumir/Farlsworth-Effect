@@ -329,8 +329,6 @@ public class sheepFarm extends zone {
 		item b = new normalBottle(1293,-1300);
 		
 		// Fourth wolf pack
-		u = new redWolf(1400,-781);
-		u.setFacingDirection("Up");
 		u = new yellowWolf(1315,-700);
 		u.setFacingDirection("Up");
 		u = new blackWolf(1485,-700);
@@ -340,21 +338,15 @@ public class sheepFarm extends zone {
 		c = new well(1400,-300,0);
 		
 		// Fifth wolf pack
-		u = new yellowWolf(1860,-420);
-		u.setFacingDirection("Down");
-		u = new redWolf(1920,-455);
+		u = new blackWolf(1860,-420);
 		u.setFacingDirection("Down");
 		u = new blackWolf(1980,-455);
 		u.setFacingDirection("Down");
 		
 		// Sixth wolf pack
-		u = new blackWolf(2705,-427);
-		u.setFacingDirection("Left");
 		u = new yellowWolf(2625,-332);
 		u.setFacingDirection("Left");
-		u = new blackWolf(2696,-242);
-		u.setFacingDirection("Left");
-		u = new redWolf(2621,-122);
+		u = new yellowWolf(2625,-122);
 		u.setFacingDirection("Left");
 
 	}
