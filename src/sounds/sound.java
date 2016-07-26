@@ -24,7 +24,7 @@ public class sound extends Thread {
 
     private Position curPosition;
 
-    private final int EXTERNAL_BUFFER_SIZE = 524288/10000; // 128Kb DEFAULT
+    private final int EXTERNAL_BUFFER_SIZE = 64; // 128Kb DEFAULT
     
     // Where to play and at what radius.
     private int radius = 0; 
@@ -198,7 +198,6 @@ public class sound extends Thread {
             	if(this instanceof music) {
             		music m = new music((music)this);
             		m.loop = true;
-	            	m.start();
             	}
             	else { 
 	            	sound s = new sound(this);

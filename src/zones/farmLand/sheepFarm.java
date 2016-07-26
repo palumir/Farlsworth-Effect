@@ -2733,23 +2733,23 @@ public class sheepFarm extends zone {
 		
 		// Draw the fence gate above the fields.
 		// Fencebars to left of gate.
-		new fenceBarsSmall(adjustX + -21+fenceAdjustX,adjustY + -436,0);
+		c = new fenceBarsSmall(adjustX + -21+fenceAdjustX,adjustY + -436,0);
 		farlsworthFence.add(c);
-		new fenceBarsSmall(adjustX + -18+fenceAdjustX,adjustY + -436,0);
+		c = new fenceBarsSmall(adjustX + -18+fenceAdjustX,adjustY + -436,0);
 		farlsworthFence.add(c);
-		new fenceBarsSmall(adjustX + -15+fenceAdjustX,adjustY + -436,0);
+		c = new fenceBarsSmall(adjustX + -15+fenceAdjustX,adjustY + -436,0);
 		farlsworthFence.add(c);
-		new fenceBarsSmall(adjustX + -15+fenceAdjustX+3,adjustY + -436,0);
+		c = new fenceBarsSmall(adjustX + -15+fenceAdjustX+3,adjustY + -436,0);
 		farlsworthFence.add(c);
 		
 		// Fencebars to right of gate
-		new fenceBarsSmall(adjustX + 32-3,adjustY + -436,0);
+		c = new fenceBarsSmall(adjustX + 32-3,adjustY + -436,0);
 		farlsworthFence.add(c);
-		new fenceBarsSmall(adjustX + 32,adjustY + -436,0);
+		c = new fenceBarsSmall(adjustX + 32,adjustY + -436,0);
 		farlsworthFence.add(c);
-		new fenceBarsSmall(adjustX + 35,adjustY + -436,0);
+		c = new fenceBarsSmall(adjustX + 35,adjustY + -436,0);
 		farlsworthFence.add(c);
-		new fenceBarsSmall(adjustX + 37,adjustY + -436,0);
+		c = new fenceBarsSmall(adjustX + 37,adjustY + -436,0);
 		farlsworthFence.add(c);
 		forestGate = new horizontalGate("Forest Gate", "Farm Key", adjustX + -13+fenceAdjustX/2,adjustY + -434,0);
 		farlsworthFence.add(forestGate);
@@ -2764,7 +2764,7 @@ public class sheepFarm extends zone {
 		farlsworthFence = spawnFence(farlsworthFence, adjustX + 40,adjustY + -43,adjustX + 440,adjustY + -43); // Bottom middle area.
 		
 		// Left of gate.
-		new fenceBarsSmall(adjustX + 409,adjustY + -17,0); 
+		c = new fenceBarsSmall(adjustX + 409,adjustY + -17,0); 
 		farlsworthFence.add(c);
 		
 		// Gate.
@@ -2772,7 +2772,7 @@ public class sheepFarm extends zone {
 		farlsworthFence.add(farlsworthGate);
 		
 		// Right of gate
-		new fenceBarsSmall(adjustX + 457,adjustY + -17,0); 
+		c = new fenceBarsSmall(adjustX + 457,adjustY + -17,0); 
 		farlsworthFence.add(c);
 		
 		return farlsworthFence;
@@ -3000,7 +3000,7 @@ public class sheepFarm extends zone {
 	// Deal with the first well we encounters.
 	public void dealWithRegionStuff() {
 		player currPlayer = player.getCurrentPlayer();
-		if(currPlayer != null && currPlayer.isWithin(998,-1483,1290,-1034) && wellTooltipLoaded != null && !wellTooltipLoaded.isCompleted()) {
+		if(currPlayer != null && currPlayer.isWithin(1138,-484,1666,-46) && wellTooltipLoaded != null && !wellTooltipLoaded.isCompleted()) {
 			wellTooltipLoaded.setCompleted(true);
 			tooltipString t = new tooltipString("Use any water source to save and heal.");
 		}

@@ -10,6 +10,7 @@ import drawing.spriteSheet;
 import interactions.quest;
 import items.bottle;
 import units.player;
+import utilities.imageUtils;
 
 public class playerHealthBar extends interfaceObject  {
 	
@@ -21,13 +22,8 @@ public class playerHealthBar extends interfaceObject  {
 	private int DEFAULT_HEALTHBAR_HEIGHT = 20;
 	
 	// Colors
-	public static Color DEFAULT_HEALTH_COLOR = new Color(6,228,1);
-	public static Color DEFAULT_LOST_HEALTH_COLOR = Color.red;
+	public static Color DEFAULT_HEART_COLOR = Color.red;
 	public static Color DEFAULT_BORDER_COLOR = new Color(45,45,45);
-	public static Color DEFAULT_EXP_COLOR = new Color(239,255,40);
-	public static Color DEFAULT_LOST_EXP_COLOR = new Color(15,15,0);
-	public static Color DEFAULT_LEVEL_COLOR = new Color(64,48,38);
-	public static Color DEFAULT_OUTOF_COLOR = new Color(100,48,38);
 	public static Color DEFAULT_BOTTLE_COLOR = Color.white;
 	public static Color DEFAULT_QUEST_COLOR = Color.white;
 	public static Color DEFAULT_ENERGY_COLOR = Color.cyan;
@@ -45,31 +41,6 @@ public class playerHealthBar extends interfaceObject  {
 		super(null, newX, newY, 1, 1);	
 	}
 	
-	// Draw a heart.
-	public void drawHeart(Graphics g, int drawAtX, int drawAtY, int drawWidth, int drawHeight) {
-		int triangleXLeft = drawAtX - 2*drawWidth/24;
-		int triangleXRight = drawAtX + drawWidth + 2*drawWidth/20;
-		int[] triangleX = {
-				triangleXLeft,
-				triangleXRight,
-				(triangleXLeft + triangleXRight)/2};
-    	int[] triangleY = { 
-    			drawAtY + drawHeight - 2*drawHeight/3, 
-    			drawAtY + drawHeight - 2*drawHeight/3, 
-    			drawAtY + drawHeight };
-	    g.fillOval(
-	    		drawAtX - drawWidth/12,
-	    		drawAtY, 
-	    		drawWidth/2 + drawWidth/6, 
-	    		drawHeight/2); 
-	    g.fillOval(
-	    		drawAtX + drawWidth/2 - drawWidth/12,
-	    		drawAtY,
-	    		drawWidth/2 + drawWidth/6,
-	    		drawHeight/2);
-	    g.fillPolygon(triangleX, triangleY, triangleX.length);
-	}
-	
 	// Draw the unit. 
 	@Override
 	public void drawObject(Graphics g) {
@@ -85,7 +56,7 @@ public class playerHealthBar extends interfaceObject  {
 		int hpAdjustY = 10;
 		
 		// HP
-		g.setColor(DEFAULT_LOST_HEALTH_COLOR);
+		g.setColor(DEFAULT_HEART_COLOR);
 		g.drawString("HP", (int)(gameCanvas.getScaleX()*(getIntX())), (int)(gameCanvas.getScaleY()*(getIntY() + hpAdjustY+12)));
 
 		// Load every chunk.
@@ -93,14 +64,14 @@ public class playerHealthBar extends interfaceObject  {
 		int addPerChunk = 0;
 		for(int i = 0; i < currPlayer.getHealthPoints(); i++) {
 			g.setColor(DEFAULT_BORDER_COLOR);
-			drawHeart(g,
+			imageUtils.drawHeart(g,
 					   (int)(gameCanvas.getScaleX()*(getIntX() + hpAdjustX + addPerChunk)-1),
 					   (int)(gameCanvas.getScaleY()*(getIntY() + hpAdjustY)-1),
 					   (int)(gameCanvas.getScaleX()*(energyChunkSize)+2),
 					   (int)(gameCanvas.getScaleY()*(DEFAULT_HEALTHBAR_HEIGHT))+2);
 			
-			g.setColor(DEFAULT_LOST_HEALTH_COLOR);
-			drawHeart(g,
+			g.setColor(DEFAULT_HEART_COLOR);
+			imageUtils.drawHeart(g,
 					   (int)(gameCanvas.getScaleX()*(getIntX() + hpAdjustX + addPerChunk)),
 					   (int)(gameCanvas.getScaleY()*(getIntY() + hpAdjustY)),
 					   (int)(gameCanvas.getScaleX()*(energyChunkSize)),
@@ -110,7 +81,7 @@ public class playerHealthBar extends interfaceObject  {
 		}
 		
 		// Adjustment
-		int energyAdjustX = 25;
+		/*int energyAdjustX = 25;
 		int energyAdjustY = hpAdjustY + energyChunkSize + energyChunkSize/3;
 		
 		// Exp
@@ -126,11 +97,11 @@ public class playerHealthBar extends interfaceObject  {
 					   (int)(gameCanvas.getScaleX()*(energyChunkSize)),
 					   (int)(gameCanvas.getScaleY()*(DEFAULT_HEALTHBAR_HEIGHT)));
 			addPerChunk += energyChunkSize + energyChunkSize/3;
-		}
+		}*/
 				   
 		// Draw bottle UI.
 		int bottleAdjustX = 9;
-		int bottleAdjustY = energyAdjustY + energyChunkSize + energyChunkSize/3;
+		int bottleAdjustY = /*energyAdjustY */+ energyChunkSize + energyChunkSize/3;
 		if(player.getCurrentPlayer().getEquippedBottle() != null) {
 			bottleAdjustX += 0;
 			bottleAdjustY += 53-25;

@@ -40,7 +40,6 @@ public class main {
 			
 			// Restart due to death.
 			if(s.equals("Death")) {
-				tooltipString t = new tooltipString("You died.");
 			}
 		}
 	}

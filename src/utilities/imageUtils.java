@@ -2,6 +2,7 @@ package utilities;
 
 import java.awt.AlphaComposite;
 import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -25,6 +26,31 @@ public class imageUtils {
 
     	return bufferedImage;
     }
+    
+	// Draw a heart.
+	public static void drawHeart(Graphics g, int drawAtX, int drawAtY, int drawWidth, int drawHeight) {
+		int triangleXLeft = drawAtX - 2*drawWidth/24;
+		int triangleXRight = drawAtX + drawWidth + 2*drawWidth/20;
+		int[] triangleX = {
+				triangleXLeft,
+				triangleXRight,
+				(triangleXLeft + triangleXRight)/2};
+    	int[] triangleY = { 
+    			drawAtY + drawHeight - 2*drawHeight/3, 
+    			drawAtY + drawHeight - 2*drawHeight/3, 
+    			drawAtY + drawHeight };
+	    g.fillOval(
+	    		drawAtX - drawWidth/12,
+	    		drawAtY, 
+	    		drawWidth/2 + drawWidth/6, 
+	    		drawHeight/2); 
+	    g.fillOval(
+	    		drawAtX + drawWidth/2 - drawWidth/12,
+	    		drawAtY,
+	    		drawWidth/2 + drawWidth/6,
+	    		drawHeight/2);
+	    g.fillPolygon(triangleX, triangleY, triangleX.length);
+	}
 
     // Make an certain color in a BufferedImage transparent.
     public static BufferedImage makeColorTransparent(BufferedImage im, final Color color) {

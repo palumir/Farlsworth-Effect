@@ -23,6 +23,9 @@ public class music extends sound {
 	
 	// Current music.
 	public static music currMusic;
+	
+	// Restart on death?
+	public boolean stopOnDeath = false;
 
 	// Music constructor.
 	public music(String soundFile) {
@@ -80,6 +83,14 @@ public class music extends sound {
 			for(int i = 0; i < allMusic.size(); i++) {
 				allMusic.get(i).stopRequested = true;
 			}
+			currMusic = null;
+		}
+	}
+	
+	// Player died
+	public static void playerDied() {
+		if(currMusic != null && currMusic.stopOnDeath) {
+			currMusic.stopRequested = true;
 			currMusic = null;
 		}
 	}

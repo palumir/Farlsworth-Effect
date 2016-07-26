@@ -127,7 +127,7 @@ public class playerOne extends boss {
 			s = s.addChild(null, "Smell their aroma.");
 			s = s.addChild(null, "Hearken their call.");
 			s = s.addChild(null, "Let them embrace you.");
-			s = s.addChild(null, "But do not get consumed by them.");
+			s = s.addChild(null, "But do not let them consume you.");
 			s = s.addChild(null, "View them as an opportunity.");
 			s = s.addChild(null, "An opportunity to test your power of will.");
 			s = s.addChild(null, "He wants to know if you are strong ...");
@@ -200,7 +200,7 @@ public class playerOne extends boss {
 				sequencePart++;
 			}
 			if(sequencePart == 7 && interactSequence!=null && interactSequence.getTheText()!=null && interactSequence.getTheText().getTextOnPress()!=null &&
-					interactSequence.getTheText().getTextOnPress().contains("consumed")) {
+					interactSequence.getTheText().getTextOnPress().contains("consume")) {
 				tombZone.zoneFog.fadeTo(.9f, 1);
 				sequencePart++;
 			}
@@ -224,7 +224,6 @@ public class playerOne extends boss {
 			if(sequencePart == 10 && time.getTime() - waitStart > waitFor*1000) {
 				
 				// Create elevator and set fog.
-				tombZone.zoneFog.setTo(1);
 				if(interactSequence != null) {
 					interactSequence.setUnescapable(false);
 					interactSequence.toggleDisplay();

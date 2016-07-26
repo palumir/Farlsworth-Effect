@@ -77,7 +77,7 @@ public class tombZone extends zone {
 	///////////////////////////////
 	
 	// Spawn grass dirt x to y.
-	public static void spawnTombRect(int x1, int y1, int x2, int y2, String type) {
+	public static void spawnReloadableTombRect(int x1, int y1, int x2, int y2, String type) {
 			
 			int numX = (x2 - x1)/tomb.DEFAULT_CHUNK_WIDTH;
 			int numY = (y2 - y1)/tomb.DEFAULT_CHUNK_HEIGHT;
@@ -101,8 +101,40 @@ public class tombZone extends zone {
 						}
 					}
 					else { 
-						 c = new tomb(i*tomb.DEFAULT_CHUNK_WIDTH + x1, j*tomb.DEFAULT_CHUNK_HEIGHT + y1);
-						 c.setPassable(true);
+						c = new tomb(i*tomb.DEFAULT_CHUNK_WIDTH + x1, j*tomb.DEFAULT_CHUNK_HEIGHT + y1);
+						 if(c!=null) c.setPassable(true);
+					}
+				}
+			}
+	}
+	
+	// Spawn grass dirt x to y.
+	public static void spawnTombRect(int x1, int y1, int x2, int y2, String type) {
+			
+			int numX = (x2 - x1)/tomb.DEFAULT_CHUNK_WIDTH;
+			int numY = (y2 - y1)/tomb.DEFAULT_CHUNK_HEIGHT;
+			for(int i = 0; i < numX; i++) {
+				for(int j = 0; j < numY; j++) {
+					if((i == numX-1 || i == 0 || j == 0 || j == numY-1)) {
+						if(j==0 && type.equals("ground")) {
+							tombEdge.createChunk(i*tomb.DEFAULT_CHUNK_WIDTH + x1, j*tomb.DEFAULT_CHUNK_HEIGHT + y1, 0);
+						}
+						else if(i == numX - 1 && type.equals("leftWall")) {
+							tombEdge.createChunk(i*tomb.DEFAULT_CHUNK_WIDTH + x1, j*tomb.DEFAULT_CHUNK_HEIGHT + y1, 1);
+						}
+						else if(i==0 && type.equals("rightWall")) {
+							tombEdge.createChunk(i*tomb.DEFAULT_CHUNK_WIDTH + x1, j*tomb.DEFAULT_CHUNK_HEIGHT + y1, 3);
+						}
+						else if(j==numY - 1 && type.equals("roof")) {
+							tombEdge.createChunk(i*tomb.DEFAULT_CHUNK_WIDTH + x1, j*tomb.DEFAULT_CHUNK_HEIGHT + y1, 2);
+						}
+						else {
+							tomb.createChunk(i*tomb.DEFAULT_CHUNK_WIDTH + x1, j*tomb.DEFAULT_CHUNK_HEIGHT + y1);
+						}
+					}
+					else { 
+						 c = tomb.createChunk(i*tomb.DEFAULT_CHUNK_WIDTH + x1, j*tomb.DEFAULT_CHUNK_HEIGHT + y1);
+						 if(c!=null) c.setPassable(true);
 					}
 				}
 			}
@@ -737,7 +769,8 @@ public void makeShadowSquareTopRight (int topLeftDudePosX, int topLeftDudePosY, 
 	public static void moveElevatorUp() {
 	
 		// Play frantic music.
-		 music.startMusic(zoneMusicFrantic);
+		music m = music.startMusic(zoneMusicFrantic);
+		m.stopOnDeath = true;
 		 
 		// Move the elevator.
 		for(int i = 0; i < shadowElevator.size(); i++) {
@@ -769,51 +802,51 @@ public void makeShadowSquareTopRight (int topLeftDudePosX, int topLeftDudePosY, 
 		
 		
 		// First platform
-		spawnTombRect(currPlayer.getIntX() -200,
+		spawnReloadableTombRect(currPlayer.getIntX() -200,
 				      1150-30 - 35 - 32,
 				      currPlayer.getIntX() - 100,
 				      1150-30 - 35,
 				      "ground");
 		
 		// Second platform
-		spawnTombRect(currPlayer.getIntX() - 50,
+		spawnReloadableTombRect(currPlayer.getIntX() - 50,
 				      1150-30 - 35 - 32 - 64*1,
 				      currPlayer.getIntX() - 0,
 				      1150-30 - 35 - 64*1,
 				      "ground");
 		
 		// Third platform
-		spawnTombRect(currPlayer.getIntX() + 25,
+		spawnReloadableTombRect(currPlayer.getIntX() + 25,
 				      1150-30 - 35 - 32 - 64*2,
 				      currPlayer.getIntX() + 200,
 					  1150-30 - 35 - 64*2,
 						      "ground");
 		
 		// Fourth platform
-		spawnTombRect(currPlayer.getIntX() + 170,
+		spawnReloadableTombRect(currPlayer.getIntX() + 170,
 				      1150-30 - 35 - 32 - 64*4 + 20,
 				      currPlayer.getIntX() + 220,
 					  1150-30 - 35 - 64*4 + 20,
 						      "ground");
 		
 		// Fifth platform
-		spawnTombRect(currPlayer.getIntX() - 200,
+		spawnReloadableTombRect(currPlayer.getIntX() - 200,
 				      1150-30 - 35 - 32 - 64*5,
 				      currPlayer.getIntX() + 150,
 					  1150-30 - 35 - 64*5,
 						      "ground");
 		shadowDudePatrol(currPlayer.getIntX() - 210, 1150-30 - 35 - 32 - 64*5 - 46, currPlayer.getIntX() + 100, 1150-30 - 35 - 32 - 64*5 - 46, 1.5f);
-		shadowDudePatrol(currPlayer.getIntX() - 210, 1150-30 - 35 - 32 - 64*5 - 46 - 50, currPlayer.getIntX() + 100, 1150-30 - 35 - 32 - 64*5 - 46-50, 3f);
+		shadowDudePatrol(currPlayer.getIntX() - 210, 1150-30 - 35 - 32 - 64*5 - 46 - 50, currPlayer.getIntX() + 100, 1150-30 - 35 - 32 - 64*5 - 46-50, 2.9f);
 		
 		// Sixth platform
-		spawnTombRect(currPlayer.getIntX() - 200,
+		spawnReloadableTombRect(currPlayer.getIntX() - 200,
 				      1150-30 - 35 - 32 - 64*7 + 20,
 				      currPlayer.getIntX() -150,
 					  1150-30 - 35 - 64*7 + 20,
 						      "ground");
 		
 		// Seventh platform
-		spawnTombRect(currPlayer.getIntX() - 140,
+		spawnReloadableTombRect(currPlayer.getIntX() - 140,
 				      1150-30 - 35 - 32 - 64*8,
 				      currPlayer.getIntX() + 150,
 					  1150-30 - 35 - 64*8,
@@ -831,52 +864,52 @@ public void makeShadowSquareTopRight (int topLeftDudePosX, int topLeftDudePosY, 
 			      1150-30 - 35 - 32 - 64*8 - 46 - 50*2 + 10,
 			      currPlayer.getIntX() + 130,
 			      1150-30 - 35 - 32 - 64*8 - 46 - 50*2 + 10,
-			      3f);
+			      2.7f);
 		
 		// Eighth Platform
-		spawnTombRect(currPlayer.getIntX() + 150,
+		spawnReloadableTombRect(currPlayer.getIntX() + 150,
 			      1150-30 - 35 - 32 - 64*10 + 20,
 			      currPlayer.getIntX() + 200,
 				  1150-30 - 35 - 64*10 + 20,
 					      "ground");
 		
 		// Ninth Platform
-		spawnTombRect(currPlayer.getIntX() + 200,
+		spawnReloadableTombRect(currPlayer.getIntX() + 200,
 					      1150-30 - 35 - 32 - 64*12 + 40,
 					      currPlayer.getIntX() + 250,
 						  1150-30 - 35 - 64*12 + 40,
 							      "ground");
 		
 		// Ten
-		spawnTombRect(currPlayer.getIntX() + 130,
+		spawnReloadableTombRect(currPlayer.getIntX() + 130,
 					      1150-30 - 35 - 32 - 64*14 + 20*3,
 					      currPlayer.getIntX() + 170,
 						  1150-30 - 35 - 64*14 + 20*3,
 							      "ground");
 		
 		// Eleven
-		spawnTombRect(currPlayer.getIntX() - 10 ,
+		spawnReloadableTombRect(currPlayer.getIntX() - 10 ,
 					      1150-30 - 35 - 32 - 64*13 + 20*2,
 					      currPlayer.getIntX() + 32 - 10,
 						  1150-30 - 35 - 64*13 + 20*2,
 							      "ground");
 		
 		// Twelve
-		spawnTombRect(currPlayer.getIntX() - 150 ,
+		spawnReloadableTombRect(currPlayer.getIntX() - 150 ,
 					      1150-30 - 35 - 32 - 64*13 + 20*2,
 					      currPlayer.getIntX() + 40 - 150,
 						  1150-30 - 35 - 64*13 + 20*2,
 							      "ground");
 		
 		// Thirteen
-		spawnTombRect(currPlayer.getIntX() - 230 ,
+		spawnReloadableTombRect(currPlayer.getIntX() - 230 ,
 					      1150-30 - 35 - 32 - 64*15 + 20*3,
 					      currPlayer.getIntX() - 190,
 						  1150-30 - 35 - 64*15 + 20*3,
 							      "ground");
 		
 		// Fourteen
-		spawnTombRect(currPlayer.getIntX() - 150 ,
+		spawnReloadableTombRect(currPlayer.getIntX() - 150 ,
 					      1150-30 - 35 - 32 - 64*17 + 20*5,
 					      currPlayer.getIntX() - 150 + 40,
 						  1150-30 - 35 - 64*17 + 20*5,
@@ -888,7 +921,7 @@ public void makeShadowSquareTopRight (int topLeftDudePosX, int topLeftDudePosY, 
 						2f);
 		
 		// Fifteen
-		spawnTombRect(currPlayer.getIntX() - 80 ,
+		spawnReloadableTombRect(currPlayer.getIntX() - 80 ,
 					      1150-30 - 35 - 32 - 64*19 + 20*7,
 					      currPlayer.getIntX() + 220,
 						  1150-30 - 35 - 64*19 + 20*7,
@@ -904,7 +937,7 @@ public void makeShadowSquareTopRight (int topLeftDudePosX, int topLeftDudePosY, 
 		u.setFacingDirection("Left");
 		
 		// Sixteen
-		spawnTombRect(currPlayer.getIntX() + 200 ,
+		spawnReloadableTombRect(currPlayer.getIntX() + 200 ,
 					      1150-30 - 35 - 32 - 64*21 + 20*8,
 					      currPlayer.getIntX() + 240,
 						  1150-30 - 35 - 64*21+ 20*8,
@@ -914,48 +947,48 @@ public void makeShadowSquareTopRight (int topLeftDudePosX, int topLeftDudePosY, 
 		u.setMoveSpeed(1f);
 		
 		// Seventeen
-		spawnTombRect(currPlayer.getIntX() + 160 ,
+		spawnReloadableTombRect(currPlayer.getIntX() + 160 ,
 					      1150-30 - 35 - 32 - 64*23 + 20*9,
 					      currPlayer.getIntX() + 200,
 						  1150-30 - 35 - 64*23+ 20*9,
 							      "ground");
 		
 		// Eighteen
-		spawnTombRect(currPlayer.getIntX() + 160 ,
+		spawnReloadableTombRect(currPlayer.getIntX() + 160 ,
 					      1150-30 - 35 - 32 - 64*23 + 20*9,
 					      currPlayer.getIntX() + 200,
 						  1150-30 - 35 - 64*23+ 20*9,
 							      "ground");
 		
 		// Nineteen
-		spawnTombRect(currPlayer.getIntX() + -200 ,
+		spawnReloadableTombRect(currPlayer.getIntX() + -200 ,
 					      1150-30 - 35 - 32 - 64*25 + 20*10,
 					      currPlayer.getIntX() + 150,
 						  1150-30 - 35 - 64*25+ 20*10,
 							      "ground");
 		
 		// Left wall
-		spawnTombRect(currPlayer.getIntX() + -228 ,
+		spawnReloadableTombRect(currPlayer.getIntX() + -228 ,
 			      1150-30 - 35 - 32 - 64*25 + 20*10 - 480 - 32*9,
 			      currPlayer.getIntX() -190,
 				  1150-30 - 35 - 64*25+ 20*10,
 					      "none");
 		
 		// Right wall
-		spawnTombRect(currPlayer.getIntX() + +200 ,
+		spawnReloadableTombRect(currPlayer.getIntX() + +200 ,
 			      1150-30 - 35 - 32 - 64*25 + 20*10 - 480 - 32*9,
 			      currPlayer.getIntX() +250,
 				  1150-30 - 35 - 64*25+ 20*10,
 					      "none");
 		
 		// Nineteen second platform
-		spawnTombRect(currPlayer.getIntX() + -200 + 50 ,
+		spawnReloadableTombRect(currPlayer.getIntX() + -200 + 50 ,
 			      1150-30 - 35 - 32 - 64*27 + 20*11,
 			      currPlayer.getIntX() + 150 + 80,
 				  1150-30 - 35 - 64*27+ 20*11,
 					      "ground");
 		//makeShadowRectangle(int topLeftDudePosX, int topLeftDudePosY, int spreadX, int spreadY, int numDudesWidth, int numDudesHeight, float speed, boolean clockwise)
-		makeShadowRectangle(currPlayer.getIntX() + -200 + 50 - 170 + 100 ,
+		makeShadowRectangle(currPlayer.getIntX() + -200 + 50 - 170 + 100 - 5 ,
 			      1150-30 - 35 - 32 - 64*27 + 20*11 - 155, 
 			      110,
 			      110,
@@ -974,70 +1007,131 @@ public void makeShadowSquareTopRight (int topLeftDudePosX, int topLeftDudePosY, 
 				
 		
 		// Nineteen third
-		spawnTombRect(currPlayer.getIntX() + -200 ,
+		spawnReloadableTombRect(currPlayer.getIntX() + -200 ,
 				  1150-30 - 35 - 32 - 64*29 + 20*12,
 			      currPlayer.getIntX() + 150,
 			      1150-30 - 35 - 64*29+ 20*12,
 					      "ground");
-		u = new lightDude(currPlayer.getIntX() + -300 - 170 + 210+140,1150-30 - 35 - 32 - 64*27 + 20*11 - 45-110*2 + 2);
-		u.setFacingDirection("Left");
+		
 		
 		// Nineteen fourth
-		spawnTombRect(currPlayer.getIntX() + -200 + 50 ,
+		spawnReloadableTombRect(currPlayer.getIntX() + -200 + 50 ,
 				1150-30 - 35 - 32 - 64*31 + 20*13,
 			      currPlayer.getIntX() + 150 + 80,
 			      1150-30 - 35 - 64*31+ 20*13,
 					      "ground");
+		u = new lightDude(currPlayer.getIntX() + -300 - 170 + 210+140,1150-30 - 35 - 32 - 64*27 + 20*11 - 45-110*2 + 2);
+		u.setFacingDirection("Left");
+		u = new lightDude(currPlayer.getIntX() + -300 - 170 + 210+300,1150-30 - 35 - 32 - 64*27 + 20*11 - 45-110*2 + 2);
+		u.setFacingDirection("Left");
 		
-		// Evens
-		u = new shadowDude(currPlayer.getIntX() + -300 - 170 + 210+140,1150-30 - 35 - 32 - 64*27 + 20*11 - 45-110*2 + 2+ 30);
-		u.patrolTo(currPlayer.getIntX() + -300 - 170 + 210+140,1150-30 - 35 - 32 - 64*27 + 20*11 - 45-110*2 + 2 - 150- 20);
-		u.setMoveSpeed(1.5f);
-		u = new shadowDude(currPlayer.getIntX() + -300 - 170 + 210+140 + 40*2,1150-30 - 35 - 32 - 64*27 + 20*11 - 45-110*2 + 2+ 30);
-		u.patrolTo(currPlayer.getIntX() + -300 - 170 + 210+140 + 40*2,1150-30 - 35 - 32 - 64*27 + 20*11 - 45-110*2 + 2 - 150- 20);
-		u.setMoveSpeed(2f);
-		u = new shadowDude(currPlayer.getIntX() + -300 - 170 + 210+140 + 40*4,1150-30 - 35 - 32 - 64*27 + 20*11 - 45-110*2 + 2+ 30);
-		u.patrolTo(currPlayer.getIntX() + -300 - 170 + 210+140 + 40*4,1150-30 - 35 - 32 - 64*27 + 20*11 - 45-110*2 + 2 - 150- 20);
-		u.setMoveSpeed(2.5f);
-	
+		// Fast guy
+		u = new shadowDude(currPlayer.getIntX() + -300 - 210 + 210+140,1150-30 - 35 - 32 - 64*27 + 20*11 - 45-110*2 + 2);
+		u.patrolTo(currPlayer.getIntX() + -200 - 170 + 400+140,1150-30 - 35 - 32 - 64*27 + 20*11 - 45-110*2 + 2);
+		u.setMoveSpeed(5);
+		
+
 		
 		// Nineteen fifth
-		spawnTombRect(currPlayer.getIntX() + -200 ,
+		spawnReloadableTombRect(currPlayer.getIntX() + -200 ,
 				1150-30 - 35 - 32 - 64*33 + 20*14,
 			      currPlayer.getIntX() + 150,
 			      1150-30 - 35 - 64*33+ 20*14,
 					      "ground");
 		
+		for(int i = 0; i < 8; i++) {
+			u = new shadowDude(currPlayer.getIntX() + -200 ,
+					1150-30 - 35 - 32 - 64*33 + 20*14-47 - i*50);
+			u.patrolTo(currPlayer.getIntX()+200,
+					1150-30 - 35 - 32 - 64*33 + 20*14-47 - i*50);
+			u.setMoveSpeed(1);
+		}
+		
+		u = new lightDude(currPlayer.getIntX()+100,
+				1150-30 - 35 - 32 - 64*33 + 20*14-47);
+		u.patrolTo(currPlayer.getIntX() + -200 ,
+				1150-30 - 35 - 32 - 64*33 + 20*14-47);
+		u.setMoveSpeed(3.5f);
+		
 		// Nineteen Sixth
-		spawnTombRect(currPlayer.getIntX() + -200 + 50 ,
+		spawnReloadableTombRect(currPlayer.getIntX() + -200 + 50 ,
 				1150-30 - 35 - 32 - 64*35 + 20*15,
 			      currPlayer.getIntX() + 150 + 80,
 			      1150-30 - 35 - 64*35+ 20*15,
 					      "ground");
-		for(int i = 0; i < 4; i++) {
-			u = new shadowDude(currPlayer.getIntX() + -250 ,
-					1150-30 - 35 - 32 - 64*35 + 20*15 - 46 - 50*i);
-			u.patrolTo(currPlayer.getIntX() + 250 ,
-					1150-30 - 35 - 32 - 64*35 + 20*15 - 46 - 50*i);
-			u.setMoveSpeed(2);
-		}
+		u = new lightDude(currPlayer.getIntX()-130,
+				1150-30 - 35 - 32 - 64*35 + 20*15 - 47);
+		u.setFacingDirection("Left");
 		
 		// Nineteen seventh
-		spawnTombRect(currPlayer.getIntX() + -200 ,
+		spawnReloadableTombRect(currPlayer.getIntX() + -200 ,
 				1150-30 - 35 - 32 - 64*37 + 20*16,
 			      currPlayer.getIntX() + 150,
 			      1150-30 - 35 - 64*37+ 20*16,
 					      "ground");
+		u = new lightDude(currPlayer.getIntX()-130,
+				1150-30 - 35 - 32 - 64*37 + 20*16 - 47);
+		u.setFacingDirection("Right");
 		
 		// Nineteen eighth
-		spawnTombRect(currPlayer.getIntX() + -200 + 50 ,
+		spawnReloadableTombRect(currPlayer.getIntX() + -200 + 50 ,
 				1150-30 - 35 - 32 - 64*39 + 20*17,
 			      currPlayer.getIntX() + 150 + 80,
 			      1150-30 - 35 - 64*39+ 20*17,
 					      "ground");
 		
-		//make(currPlayer.getIntX() + -200 + 15+ 30*2,
-			//	1150-30 - 35 - 32 - 64*39 + 20*17 - 46)
+		// 20th
+		// Right
+		spawnReloadableTombRect(currPlayer.getIntX()+100,
+				-1103-170,
+			    currPlayer.getIntX() + 100 + 32,
+			    -1103-170+ 32,
+				"ground");
+		
+		// Middle
+		spawnReloadableTombRect(currPlayer.getIntX()-30,
+				-1103-170,
+			    currPlayer.getIntX() - 30 + 32,
+			    -1103-170+ 32,
+				"ground");
+		
+		// Left
+		spawnReloadableTombRect(currPlayer.getIntX()-150,
+				-1103-170 + 32,
+			    currPlayer.getIntX() + -150 + +32,
+			    -1103-170+ 32*2,
+				"ground");
+		
+		// End the wall on right.
+		spawnReloadableTombRect(currPlayer.getIntX()+200,
+				-1103-70,
+			    currPlayer.getIntX() + 200 + 32,
+			    -1103-60+ 32*3,
+				"ground");
+		
+		// End the wall on Left
+			spawnReloadableTombRect(currPlayer.getIntX()-200-28,
+						-1103-200,
+					    currPlayer.getIntX()-180,
+					    -1103-60+ 32*3,
+						"ground");
+			
+		// 22
+			
+		// Left
+		spawnReloadableTombRect(currPlayer.getIntX()-150,
+				-1103-300,
+			    currPlayer.getIntX(),
+			    -1103-300+ 32,
+				"ground");
+		
+		// Right
+		spawnReloadableTombRect(currPlayer.getIntX() + 64,
+				-1103-300,
+			    currPlayer.getIntX() + 64 + 32*3,
+			    -1103-300+ 32,
+				"ground");
+		
 		
 	
 	}

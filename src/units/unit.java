@@ -49,9 +49,9 @@ public abstract class unit extends drawnObject  {
 	
 	// Gravity defaults.
 	private static boolean DEFAULT_GRAVITY_STATE = false;
-	private static float DEFAULT_GRAVITY_ACCELERATION = 0.46f;
+	private static float DEFAULT_GRAVITY_ACCELERATION = 0.455f;
 	private static float DEFAULT_GRAVITY_MAX_VELOCITY = 20;
-	protected static float DEFAULT_JUMPSPEED = 11;
+	protected static float DEFAULT_JUMPSPEED = 11f;
 	
 	// Animation defaults.
 	private String DEFAULT_FACING_DIRECTION = "Right";
@@ -80,6 +80,7 @@ public abstract class unit extends drawnObject  {
 	// Colors for combat.
 	protected Color DEFAULT_DAMAGE_COLOR = Color.white;
 	protected Color DEFAULT_CRIT_COLOR = Color.yellow;
+	protected Color DEFAULT_HEAL_COLOR = Color.green;
 	
 	// Sounds
 	protected static int DEFAULT_ATTACK_SOUND_RADIUS = 1000;
@@ -109,6 +110,11 @@ public abstract class unit extends drawnObject  {
 	protected boolean pathFindingStuck = false;
 	
 	// Combat
+	// Has the unit
+	protected boolean unitIsDead = false;
+	protected long unitDiedAt = 0;
+	protected float deathAnimationLasts = 1f;
+	
 	// Health points
 	protected int maxHealthPoints = DEFAULT_HP;
 	protected int healthPoints = DEFAULT_HP;
@@ -247,12 +253,14 @@ public abstract class unit extends drawnObject  {
 	@Override
 	public void update() {
 		
-		gravity();
-		jump();
-		moveUnit();
-		dealWithMetaMovement();
-		combat();
-		aliveOrDead();
+		if(!unitIsDead) {
+			gravity();
+			jump();
+			moveUnit();
+			dealWithMetaMovement();
+			combat();
+			aliveOrDead();
+		}
 		updateUnit();
 		if(getCurrentAnimation() != null) getCurrentAnimation().playAnimation();
 	}
@@ -419,7 +427,7 @@ public abstract class unit extends drawnObject  {
 			healthPoints = maxHealthPoints;
 		}
 		else healthPoints = healthPoints + i;
-		effect e = new floatingString("+" + i, playerHealthBar.DEFAULT_HEALTH_COLOR, getIntX() + getWidth()/2, getIntY() + getHeight()/2, 1f);
+		effect e = new floatingString("+" + i, DEFAULT_HEAL_COLOR, getIntX() + getWidth()/2, getIntY() + getHeight()/2, 1f);
 	}
 	
 	// Require units to have some sort of AI.
@@ -772,8 +780,10 @@ public abstract class unit extends drawnObject  {
 			// Squirt blood
 			int randomX = 0;
 			int randomY = -platformerHeight/3 + utility.RNG.nextInt(platformerHeight/3 + 1);
-			effect blood = new bloodSquirt(getIntX() - bloodSquirt.getDefaultWidth()/2 + topDownWidth/2 + randomX ,
-					   getIntY() - bloodSquirt.getDefaultHeight()/2 + platformerHeight/2 + randomY);
+			if(healthPoints > 0) {
+				effect blood = new bloodSquirt(getIntX() - bloodSquirt.getDefaultWidth()/2 + topDownWidth/2 + randomX ,
+						getIntY() - bloodSquirt.getDefaultHeight()/2 + platformerHeight/2 + randomY);
+			}
 			reactToPain();
 		}
 		return true;
@@ -781,26 +791,31 @@ public abstract class unit extends drawnObject  {
 	
 	// Take damage. Ouch!
 	public boolean hurt(int damage, float crit) {
-		if(shielding && ((player)this).getEnergy() > 0) {
-			if(this instanceof player) {
-				float hitDamage = 1;
-				if(((player)this).getEnergy() <= 0) {
-					return forceHurt(damage,crit);
-				}
-				else if(((player)this).getEnergy() - hitDamage < 0) {
-					float difference = (float) ((hitDamage - ((player)this).getEnergy())/hitDamage);
-					((player)this).setShielding(false);
-					((player)this).setEnergy(0);
-					forceHurt((int) (damage*difference),crit);
+		if(targetable && killable) {
+			if(shielding && ((player)this).getEnergy() > 0) {
+				if(this instanceof player) {
+					float hitDamage = 1;
+					if(((player)this).getEnergy() <= 0) {
+						return forceHurt(damage,crit);
+					}
+					else if(((player)this).getEnergy() - hitDamage < 0) {
+						float difference = (float) ((hitDamage - ((player)this).getEnergy())/hitDamage);
+						((player)this).setShielding(false);
+						((player)this).setEnergy(0);
+						forceHurt((int) (damage*difference),crit);
+						return false;
+					}
+					else ((player)this).setEnergy((((player)this).getEnergy() - hitDamage));
 					return false;
 				}
-				else ((player)this).setEnergy((((player)this).getEnergy() - hitDamage));
 				return false;
 			}
-			return false;
+			else {
+				return forceHurt(damage,crit);
+			}
 		}
 		else {
-			return forceHurt(damage,crit);
+			return false;
 		}
 	}
 	
@@ -822,6 +837,9 @@ public abstract class unit extends drawnObject  {
 		}
 	}
 	
+	// Jump only once.
+	boolean alreadyJumped = false;
+	
 	// Start trying to jump.
 	public void startJump() {
 		tryJump = true;
@@ -829,13 +847,15 @@ public abstract class unit extends drawnObject  {
 	
 	// Stop trying to jump
 	public void stopJump() {
+		alreadyJumped = false;
 		tryJump = false;
 	}
 	
 	// Jump unit
 	public void jump() {
-		if(!isStuck() && gravity && !jumping && tryJump && touchingGround) {
+		if(!alreadyJumped && !isStuck() && gravity && !jumping && tryJump && touchingGround) {
 			// Accelerate upward.
+			alreadyJumped = true;
 			jumping = true;
 			fallSpeed = -jumpSpeed;
 		}
@@ -1279,7 +1299,8 @@ public abstract class unit extends drawnObject  {
 				}
 				animate("jumping" + face);
 			}
-			else if((isMoving() && isStuck()) || (!isStuck() && (!isMovingDown() || (isMovingLeft() || isMovingRight())) && isMoving())) {
+			else if(!(alreadyJumped && tryJump && !movingHorizontally()) && ((isMoving() && isStuck()) || (!isStuck() && (!isMovingDown() || (isMovingLeft() || isMovingRight())) && isMoving()))) {
+				
 				// If we are running.
 				animate("running" + getFacingDirection());
 			}
@@ -1349,14 +1370,14 @@ public abstract class unit extends drawnObject  {
 			}
 			
 			// Draw the red.
-			g.setColor(playerHealthBar.DEFAULT_LOST_HEALTH_COLOR);
+			g.setColor(playerHealthBar.DEFAULT_HEART_COLOR);
 			g.fillRect(getDrawX() + hpAdjustX,
 					   getDrawY() + hpAdjustY,
 					   (int)(gameCanvas.getScaleX()*DEFAULT_HEALTHBAR_WIDTH),
 					   (int)(gameCanvas.getScaleY()*DEFAULT_HEALTHBAR_HEIGHT));
 			
 			// Draw the green chunks.
-			g.setColor(playerHealthBar.DEFAULT_HEALTH_COLOR);
+			g.setColor(DEFAULT_HEAL_COLOR);
 			g.fillRect(getDrawX() + hpAdjustX,
 					   getDrawY() + hpAdjustY,
 					   (int)(gameCanvas.getScaleX()*healthChunkSize),
@@ -1465,12 +1486,18 @@ public abstract class unit extends drawnObject  {
 	/////////////////////////
 	// Getters and setters //
 	/////////////////////////
-	public boolean isMoving() {
+	public boolean movingHorizontally() {
 		boolean movingLeftAndRight = isMovingLeft() && isMovingRight();
+		return (isMovingLeft() || isMovingRight()) && !movingLeftAndRight;
+	}
+	
+	public boolean movingVertically() {
 		boolean movingUpAndDown = isMovingUp() && isMovingDown();
-		boolean movingHorizontally = (isMovingLeft() || isMovingRight()) && !movingLeftAndRight;
-		boolean movingVertically = (isMovingUp() || isMovingDown()) && !movingUpAndDown;
-		return movingVertically || movingHorizontally || movingToAPoint || followingUnit || followingAPath || patrolling;
+		return (isMovingUp() || isMovingDown()) && !movingUpAndDown;
+	}
+	
+	public boolean isMoving() {
+		return movingVertically() || movingHorizontally() || movingToAPoint || followingUnit || followingAPath || patrolling;
 	}
 	
 	public void setCollision(boolean b) {

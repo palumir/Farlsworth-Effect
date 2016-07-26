@@ -17,6 +17,7 @@ import drawing.userInterface.text;
 import drawing.userInterface.tooltipString;
 import effects.effect;
 import effects.effectTypes.bloodSquirt;
+import effects.effectTypes.critBloodSquirt;
 import effects.effectTypes.floatingString;
 import effects.effectTypes.lightningStrike;
 import interactions.event;
@@ -189,15 +190,11 @@ public class player extends unit {
 	
 	// React to pain.
 	public void reactToPain() {
-		// Squirt blood
-		int randomX = -getWidth()/3 + utility.RNG.nextInt(getWidth()/3);
-		int randomY = -getHeight()/2 + utility.RNG.nextInt(getHeight()/2);
-		effect e = new bloodSquirt(getIntX() - bloodSquirt.getDefaultWidth()/2 + getWidth()/2 + randomX,
-				   getIntY() - bloodSquirt.getDefaultHeight()/2 + getHeight()/2 + randomY);
 	}
 	
 	// Player AI controls the interface
 	public void updateUnit() {
+		isPlayerDead();
 		potentiallyAttack();
 		dealWithEnergyStuff();
 	}
@@ -234,7 +231,40 @@ public class player extends unit {
 	
 	// Kill player.
 	public void killPlayer() {
+		
+		if(!unitIsDead) {
+			
+			// Tell the player
+			tooltipString t = new tooltipString("You died.");
+			
+			// Tell the player death timer to start.
+			unitDiedAt = time.getTime();
+			unitIsDead = true;
+			
+			// Destroy player.
+			drawnObject.objects.remove(this);
+			
+			// Make the player invinsible.
+			setTargetable(false);
+			setKillable(false);
+			
+			// Play blood squirt.
+			effect blood = new critBloodSquirt(getIntX() - critBloodSquirt.getDefaultWidth()/2 + getDefaultWidth()/2,
+					   getIntY() + critBloodSquirt.getDefaultHeight()/2 - critBloodSquirt.getDefaultHeight()/2);
+		}
+	}
+	
+	// Kill player finally.
+	public void killPlayerFinally() {
+		music.playerDied();
 		main.restartGame("Death");
+	}
+	
+	// Is player dead
+	public void isPlayerDead() {
+		if(unitIsDead && time.getTime() - unitDiedAt > deathAnimationLasts*1000) {
+			killPlayerFinally();
+		}
 	}
 	
 	// Shielding
@@ -382,7 +412,7 @@ public class player extends unit {
 		else {
 			// Shield on.
 			if(k.getKeyCode() == KeyEvent.VK_SHIFT) {
-				shield(true);
+				//shield(true);
 			}
 			
 			// Player presses left key.
@@ -446,7 +476,7 @@ public class player extends unit {
 		
 		// Shield off
 		if(k.getKeyCode() == KeyEvent.VK_SHIFT) {
-			shield(false);
+			//shield(false);
 		}
 		
 		
@@ -469,7 +499,6 @@ public class player extends unit {
 		if(k.getKeyCode() == KeyEvent.VK_W) { 
 			stopJump();
 			stopMove("up");
-			
 		}
 		
 		// Player presses down key
