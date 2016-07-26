@@ -115,7 +115,7 @@ public class spiderCave extends zone {
 		chunk.sortChunks();
 		
 		// Play zone music.
-		music m = new music(zoneMusic);
+		music.startMusic(zoneMusic);
 	}
 	
 	// Load zone events.

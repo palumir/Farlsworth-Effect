@@ -15,6 +15,7 @@ import interactions.event;
 import interactions.interactBox;
 import interactions.textSeries;
 import modes.mode;
+import sounds.music;
 import sounds.sound;
 import terrain.chunk;
 import units.boss;
@@ -121,7 +122,7 @@ public class playerOne extends boss {
 		if(shadowElevatorSceneInProgress) {
 			
 			// Start of conversation.
-			startOfConversation = new textSeries(null, "Can you feel them slithering around you?");
+			startOfConversation = new textSeries(null, "Can you feel the shadows slinking around you?");
 			s = startOfConversation.addChild(null, "They are getting closer and closer.");
 			s = s.addChild(null, "Smell their aroma.");
 			s = s.addChild(null, "Hearken their call.");
@@ -174,7 +175,7 @@ public class playerOne extends boss {
 			
 			// Fade slowly.
 			if(sequencePart == 2 && interactSequence!=null && interactSequence.getTheText()!=null && interactSequence.getTheText().getTextOnPress()!=null &&
-					interactSequence.getTheText().getTextOnPress().contains("Can you feel them slithering")) {
+					interactSequence.getTheText().getTextOnPress().contains("Can you feel")) {
 				tombZone.zoneFog.fadeTo(.4f, 1);
 				sequencePart++;
 			}

@@ -23,12 +23,12 @@ public class main {
 	public static void restartGame(String s) {
 		
 		// Development mode?
-		//player.setDeveloper(true);
+		player.setDeveloper(true);
 		
 		// Create the player.
 		player p = player.loadPlayer(null,null,0,0,"Up");
 		
-		//p.setMoveSpeed(20);;
+		//p.setMoveSpeed(20);
 		
 		// Saved game?
 		if(s!=null) {

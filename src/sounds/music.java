@@ -58,12 +58,29 @@ public class music extends sound {
 		allMusic.add(this);
 	}
 	
+	// Factory constructor
+	public static music startMusic(String s) {
+		if(currMusic != null && currMusic.filename.equals(s)) {
+			// Don't play the same music twice, dumby!
+			return null;
+		}
+		else {
+			if(currMusic!=null) {
+				System.out.println(currMusic.filename + " and " + s);
+			}
+			// Play the music
+			music m = new music(s);
+			return m;
+		}
+	}
+	
 	// Init.
 	public static void endAll() {
 		if(allMusic != null) {
 			for(int i = 0; i < allMusic.size(); i++) {
 				allMusic.get(i).stopRequested = true;
 			}
+			currMusic = null;
 		}
 	}
 	

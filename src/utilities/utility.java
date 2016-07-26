@@ -99,28 +99,4 @@ public abstract class utility {
 		
 		return s;
 	}
-	
-	// Set-up all the utilities.
-	public static saveState initiateAllButChunks() {
-		
-		// Initiate everything
-		time.initiate();
-		sound.initiate();
-		//drawnObject.initiate();
-		interfaceObject.initiate();
-		fog.initiate();
-		interactBox.initiate();
-		region.initiate();
-		lightSource.initiate();
-		unit.destroyAll();
-		unit.initiate();
-		//unitType.initiate();
-		//chunk.initiate();
-		//zone.initiate(); 
-		
-		// Load save state and return
-		saveState s = saveState.loadSaveState();
-		
-		return s;
-	}
 }

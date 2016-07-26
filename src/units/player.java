@@ -228,7 +228,6 @@ public class player extends unit {
 		
 		// Dead
 		if(getHealthPoints() <= 0) {
-			music.endAll();
 			killPlayer();
 		}
 	}

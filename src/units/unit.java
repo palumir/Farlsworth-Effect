@@ -299,10 +299,12 @@ public abstract class unit extends drawnObject  {
 		}
 		
 		// If we are patrolling a path.
-		if(patrolling && patrollingPath) {
+		if(patrolling && patrollingPath ) {
 			if(path == null || path.size() == 0) {
-				ArrayList <intTuple> pathToPatrol = new ArrayList<intTuple>(patrolPath);
-				followPath(pathToPatrol);
+				if(patrolPath != null) {
+					ArrayList <intTuple> pathToPatrol = new ArrayList<intTuple>(patrolPath);
+					followPath(pathToPatrol);
+				}
 			}
 		}
 	}

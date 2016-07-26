@@ -20,7 +20,7 @@ public class sound extends Thread {
 	
 	private static ArrayList<sound> allSounds;
 
-    private String filename;
+    protected String filename;
 
     private Position curPosition;
 
@@ -194,6 +194,11 @@ public class sound extends Thread {
             auline.drain();
             auline.close();
             allSounds.remove(this);
+            if(loop) {
+            	sound s = new sound(this);
+            	s.loop = true;
+            	s.start();
+            }
         } 
 
     }
@@ -211,9 +216,13 @@ public class sound extends Thread {
     public static void initiate() {
     	if(allSounds != null) {
     		for(int i = 0; i < allSounds.size(); i++) {
-    			allSounds.get(i).stopRequested = true;
+    			if(!(allSounds.get(i) instanceof music)) {
+    				allSounds.get(i).stopRequested = true;
+    				allSounds.remove(i);
+    				i--;
+    			}
     		}
     	}
-    	allSounds = new ArrayList<sound>();
+    	if(allSounds == null) allSounds = new ArrayList<sound>();
     }
 }

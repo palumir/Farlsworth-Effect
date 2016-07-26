@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import drawing.drawnObject;
 import drawing.userInterface.tooltipString;
+import sounds.music;
 import units.player;
 import utilities.intTuple;
 import utilities.saveState;
@@ -63,6 +64,7 @@ public abstract class zone {
 		
 		// Re-create the player in the new zone.
 		drawnObject.dontReloadTheseObjects = new ArrayList<drawnObject>();
+		music.endAll();
 		loadedOnce = false;
 		player.loadPlayer(player.getCurrentPlayer(), b, x, y, direction);
 		

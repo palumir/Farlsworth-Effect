@@ -55,6 +55,9 @@ public class shadowDude extends unit {
 	// Eyeless?
 	private boolean eyeless = false;
 	
+	// Ignores illumination?
+	private boolean ignoreIllumination = false;
+	
 	// farmer sprite stuff.
 	private static String DEFAULT_UNIT_SPRITESHEET = "images/units/player/female/shadow.png";
 	private static String DEFAULT_FADED_SPRITESHEET = "images/units/player/female/shadowEyes.png";
@@ -102,22 +105,26 @@ public class shadowDude extends unit {
 	public void reactToPain() {
 	}
 	
+	// Hurt people stuff.
 	boolean illuminated = false;
 	long lastHurt = 0;
 	int damage = 6;
 	float slowTo = 0.1f;
 	float hurtEvery = 0.05f;
 	
+	// How lenient are we in hurting people?
+	// How many units of space do we reduce the radius of pain by?
+	private int leniency = 2;
+	
 	public void hurtPeople() {
 		// If someone is in the explosion radius, hurt.
-		ArrayList<unit> hurtUnits = unit.getUnitsInBox(getIntX(), getIntY(), getIntX() + getWidth(), getIntY()+getHeight());
-		if(hurtUnits != null && time.getTime() - lastHurt > hurtEvery*1000) {
+		if(time.getTime() - lastHurt > hurtEvery*1000) {
+			player currPlayer = player.getCurrentPlayer();
 			lastHurt = time.getTime();
-			for(int i = 0; i < hurtUnits.size(); i++) {
-				if(hurtUnits.get(i) instanceof player && !hurtUnits.get(i).isIlluminated() && !illuminated) {
-					hurtUnits.get(i).hurt(damage, 1f);
-					darkSlow d = new darkSlow(hurtUnits.get(i), hurtEvery, slowTo);
-				}
+			if(currPlayer.isWithin(this.getIntX() + leniency, this.getIntY() + leniency, this.getIntX() + this.getWidth() - leniency, this.getIntY() + this.getHeight() - leniency) 
+					&& ((!currPlayer.isIlluminated() && !illuminated) || isIgnoreIllumination())) {
+				currPlayer.hurt(damage, 1);
+				darkSlow d = new darkSlow(currPlayer, hurtEvery, slowTo);
 			}
 		}
 	}
@@ -237,5 +244,13 @@ public class shadowDude extends unit {
 
 	public void setEyeless(boolean eyeless) {
 		this.eyeless = eyeless;
+	}
+
+	public boolean isIgnoreIllumination() {
+		return ignoreIllumination;
+	}
+
+	public void setIgnoreIllumination(boolean ignoreIllumination) {
+		this.ignoreIllumination = ignoreIllumination;
 	}
 }
