@@ -70,7 +70,7 @@ public class developer extends player {
 		
 		// Give a million hp
 		healthPoints = 100000;
-		moveSpeed = 20;
+		moveSpeed = 5f;
 		
 		// Destroy healthbar.
 		getHealthBar().destroy();
