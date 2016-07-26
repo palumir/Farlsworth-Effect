@@ -344,10 +344,45 @@ public class sheepFarm extends zone {
 		u.setFacingDirection("Down");
 		
 		// Sixth wolf pack
-		u = new yellowWolf(2625,-332);
+		u = new yellowWolf(2775,-242);
 		u.setFacingDirection("Left");
-		u = new yellowWolf(2625,-122);
+		u = new redWolf(2725,-167);
 		u.setFacingDirection("Left");
+		u = new yellowWolf(2775,-92);
+		u.setFacingDirection("Left");
+		
+		// Seventh wolf pack
+		u = new blackWolf(2685,-1210);
+		u.setFacingDirection("Down");
+		u = new yellowWolf(2582,-1317);
+		u.setFacingDirection("Down");
+		u = new redWolf(2812,-1317);
+		u.setFacingDirection("Down");
+		
+		// Eighth wolf pack (grave)
+		
+		u = new redWolf(2625,-3092);
+		u.setFacingDirection("Down");
+		u = new redWolf(2780,-3092);
+		u.setFacingDirection("Down");
+		
+		// Ninth wolf pack
+		
+		u = new redWolf(1405,-2786);
+		u.setFacingDirection("Right");
+		u = new yellowWolf(1405,-2921);
+		u.setFacingDirection("Right");
+		u = new blackWolf(1405,-3056);
+		u.setFacingDirection("Right");
+		
+		// Tenth wolf pack
+		
+		u = new yellowWolf(452,-3013);
+		u.setFacingDirection("Right");
+		u = new blackWolf(422,-3910);
+		u.setFacingDirection("Right");
+		u = new redWolf(285,-3470);
+		u.setFacingDirection("Down");
 
 	}
 	
@@ -2102,86 +2137,26 @@ public class sheepFarm extends zone {
 		c.setInteractable(false);
 		
 		// Second grave area.
-		new grave(1196,-3103,1);
-		new grave(1196,-3036,2);
-		new grave(1196,-2969,2);
-		new grave(1196,-2902,2);
-		new grave(1196,-2835,2);
-		new grave(1196,-2768,2);
-		new grave(1196,-2701,1);
-		new grave(1196,-2634,2);
 		new grave(1298,-3103,2);
-		new grave(1298,-3036,2);
 		new grave(1298,-2969,2);
-		new grave(1298,-2902,2);
 		new grave(1298,-2835,2);
-		new grave(1298,-2768,2);
 		new grave(1298,-2701,2);
-		new grave(1298,-2634,1);
-		new grave(1400,-3103,2);
-		new grave(1400,-3036,2);
-		new grave(1400,-2969,2);
-		new grave(1400,-2902,2);
-		new grave(1400,-2835,2);
-		new grave(1400,-2768,2);
-		new grave(1400,-2701,2);
-		new grave(1400,-2634,2);
 		new grave(1502,-3103,2);
-		new grave(1502,-3036,1);
 		new grave(1502,-2969,1);
-		new grave(1502,-2902,2);
 		new grave(1502,-2835,2);
-		new grave(1502,-2768,2);
 		new grave(1502,-2701,2);
-		new grave(1502,-2634,2);
-		new grave(1604,-3103,2);
-		new grave(1604,-3036,2);
-		new grave(1604,-2969,2);
-		new grave(1604,-2902,2);
-		new grave(1604,-2835,2);
-		new grave(1604,-2768,2);
-		new grave(1604,-2701,2);
-		new grave(1604,-2634,2);
 		new grave(1706,-3103,2);
-		new grave(1706,-3036,2);
 		new grave(1706,-2969,1);
-		new grave(1706,-2902,2);
 		new grave(1706,-2835,2);
-		new grave(1706,-2768,2);
 		new grave(1706,-2701,2);
-		new grave(1706,-2634,2);
-		new grave(1808,-3103,2);
-		new grave(1808,-3036,2);
-		new grave(1808,-2969,1);
-		new grave(1808,-2902,2);
-		new grave(1808,-2835,2);
-		new grave(1808,-2768,2);
-		new grave(1808,-2701,2);
-		new grave(1808,-2634,2);
 		new grave(1910,-3103,2);
-		new grave(1910,-3036,2);
 		new grave(1910,-2969,2);
-		new grave(1910,-2902,2);
 		new grave(1910,-2835,2);
-		new grave(1910,-2768,2);
 		new grave(1910,-2701,2);
-		new grave(1910,-2634,2);
-		new grave(2012,-3103,2);
-		new grave(2012,-3036,2);
-		new grave(2012,-2969,2);
-		new grave(2012,-2902,2);
-		new grave(2012,-2835,1);
-		new grave(2012,-2768,2);
-		new grave(2012,-2701,2);
-		new grave(2012,-2634,2);
 		new grave(2114,-3103,2);
-		new grave(2114,-3036,1);
 		new grave(2114,-2969,2);
-		new grave(2114,-2902,2);
 		new grave(2114,-2835,2);
-		new grave(2114,-2768,1);
 		new grave(2114,-2701,2);
-		new grave(2114,-2634,2);
 		
 		// Far left area.
 		tree.createTree(818,-3104,1);
