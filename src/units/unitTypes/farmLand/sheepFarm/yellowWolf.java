@@ -55,31 +55,31 @@ public class yellowWolf extends wolf {
 	private static int DEFAULT_UNIT_JUMPSPEED = 12;
 	
 	// Beta stats
-	private static float DEFAULT_MOVESPEED_BETA = 1.9f;
+	private static float DEFAULT_MOVESPEED_BETA = 2f;
 	private static float DEFAULT_CLAW_ATTACK_EVERY_BASE_BETA = 3.5f;
 	private static float DEFAULT_SPAWN_CLAW_PHASE_TIME_BETA = 2.5f;
 	private static int DEFAULT_HOW_FAR_BACK_BASE_BETA = 55;
 	private static int DEFAULT_HOW_FAR_BACK_RANDOM_BETA = 20;
-	private static int DEFAULT_RANDOM_DEGREE_BETA = 45;
-	private static int DEFAULT_FOLLOW_UNTIL_RANGE_BASE_BETA = 60;
+	private static int DEFAULT_RANDOM_DEGREE_BETA = 15;
+	private static int DEFAULT_FOLLOW_UNTIL_RANGE_BASE_BETA = 50;
 	private static int DEFAULT_FOLLOW_UNTIL_RANGE_RANDOM_BETA = 10;
 
 	// Alpha stats
-	private static float DEFAULT_MOVESPEED_ALPHA = 2.8f;
+	private static float DEFAULT_MOVESPEED_ALPHA = 3f;
 	private static float DEFAULT_CLAW_ATTACK_EVERY_BASE_ALPHA = 1.75f;
 	private static float DEFAULT_SPAWN_CLAW_PHASE_TIME_ALPHA = 0.95f;
 	private static int DEFAULT_HOW_FAR_BACK_BASE_ALPHA = 15;
 	private static int DEFAULT_HOW_FAR_BACK_RANDOM_ALPHA = 1;
 	private static int DEFAULT_RANDOM_DEGREE_ALPHA = 1;
-	private static int DEFAULT_FOLLOW_UNTIL_RANGE_BASE_ALPHA = 25;
+	private static int DEFAULT_FOLLOW_UNTIL_RANGE_BASE_ALPHA = 10;
 	
 	// How often to spawn a rock.
 	private static float DEFAULT_SPAWN_ROCK_EVERY = 0.1f/2f;
 	
 	// Rockpile
-	private static int DEFAULT_HOW_MANY_ROCK_PIECES_SPAWN = 4;
+	private static int DEFAULT_HOW_MANY_ROCK_PIECES_SPAWN = 5;
 	private static float DEFAULT_ROCK_PIECE_MOVESPEED = 1.7f;
-	private static float DEFAULT_ROCK_DURATION = 2f;
+	private static float DEFAULT_ROCK_DURATION = 0.75f;
 	private static int DEFAULT_ROCK_RADIUS = 0;
 	private static int DEFAULT_ROCK_DAMAGE = 1;
 	
