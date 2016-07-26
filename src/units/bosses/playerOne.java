@@ -132,7 +132,7 @@ public class playerOne extends boss {
 			s = s.addChild(null, "An opportunity to test your power of will.");
 			s = s.addChild(null, "He wants to know if you are strong ...");
 			s = s.addChild(null, "What interests me is far more important than that.");
-			s = s.addChild(null, "I want you to know if you understand.");
+			s = s.addChild(null, "I want to know if you understand.");
 			s.setEnd();
 		}
 			

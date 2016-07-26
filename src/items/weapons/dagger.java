@@ -27,7 +27,7 @@ public class dagger extends weapon {
 	static private float DEFAULT_BACKSWING = 0.1f;
 	static private int DEFAULT_ATTACK_WIDTH = 50;
 	static private int DEFAULT_ATTACK_LENGTH = 18;
-	static private float DEFAULT_CRIT_CHANCE = .10f;
+	static private float DEFAULT_CRIT_CHANCE = .2f;
 	static private float DEFAULT_CRIT_DAMAGE = 2f;
 	static private float DEFAULT_VARIABILITY = 0f;
 	

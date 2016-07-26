@@ -101,7 +101,7 @@ public class playerHealthBar extends interfaceObject  {
 				   
 		// Draw bottle UI.
 		int bottleAdjustX = 9;
-		int bottleAdjustY = /*energyAdjustY */+ energyChunkSize + energyChunkSize/3;
+		int bottleAdjustY = /*energyAdjustY + energyChunkSize*/ + energyChunkSize/3;
 		if(player.getCurrentPlayer().getEquippedBottle() != null) {
 			bottleAdjustX += 0;
 			bottleAdjustY += 53-25;

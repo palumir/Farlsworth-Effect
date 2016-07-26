@@ -61,8 +61,8 @@ public class redWolf extends wolf {
 	// Alpha stats
 	private static float DEFAULT_MOVESPEED_ALPHA = 3f;
 	private static float DEFAULT_CLAW_ATTACK_EVERY_BASE_ALPHA = 1f;
-	private static float DEFAULT_SPAWN_CLAW_PHASE_TIME_ALPHA = .85f;
-	private static int DEFAULT_HOW_FAR_BACK_BASE_ALPHA = 40;
+	private static float DEFAULT_SPAWN_CLAW_PHASE_TIME_ALPHA = .95f;
+	private static int DEFAULT_HOW_FAR_BACK_BASE_ALPHA = 30;
 	private static int DEFAULT_HOW_FAR_BACK_RANDOM_ALPHA = 5;
 	private static int DEFAULT_RANDOM_DEGREE_ALPHA = 1; 
 	private static int DEFAULT_FOLLOW_UNTIL_RANGE_BASE_ALPHA = 20;
@@ -263,6 +263,13 @@ public class redWolf extends wolf {
 		int chargeStartX = this.getIntX() + this.getWidth()/2;
 		int chargeStartY = this.getIntY() + this.getHeight()/2;
 		int radius = 30;
+		if(chargeUnits!=null) {
+			for(int i = 0; i < chargeUnits.size(); i++) {
+				if(chargeUnits.get(i) instanceof player) {
+					chargeUnits.get(i).setUnitLocked(false);
+				}
+			}
+		}
 		chargeUnits = unit.getUnitsInRadius(chargeStartX, chargeStartY, radius);
 		if(chargeUnits != null) {
 			for(int i = 0; i < chargeUnits.size(); i++) {
@@ -283,9 +290,6 @@ public class redWolf extends wolf {
 	public void jumpingFinished() {
 		if(chargeUnits != null && chargeUnits.size() >= 1) {
 			for(int i = 0; i < chargeUnits.size(); i++) {
-				chargeUnits.get(i).setUnitLocked(false);
-			}
-			for(int i = 0; i < chargeUnits.size(); i++) {
 				if(chargeUnits.get(i) instanceof player) {
 					chargeUnits.get(i).stopMove("all");
 					if(!alreadyHurt) {
@@ -293,7 +297,7 @@ public class redWolf extends wolf {
 						chargeUnits.get(i).hurt(DEFAULT_SLASH_DAMAGE, 1f);
 					}
 					chargeUnits.get(i).move(run,rise);
-					chargeUnits.get(i).setUnitLocked(true);
+					chargeUnits.get(i).setUnitLocked(false);
 				}
 			}
 			chargeUnits = new ArrayList<unit>();

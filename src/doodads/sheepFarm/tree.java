@@ -181,7 +181,7 @@ public class tree extends chunk {
 		setFlammable(true);
 		
 		// If we are in sheepFarm and it's on fire, light everything on fire.
-		if(zone.getCurrentZone() != null && zone.getCurrentZone().getName().equals("sheepFarm") && sheepFarm.isOnFire != null && sheepFarm.isOnFire.isCompleted()) {
+		if(zone.getCurrentZone() != null && zone.getCurrentZone().getParentName().equals("farmLand") && sheepFarm.isOnFire != null && sheepFarm.isOnFire.isCompleted()) {
 			ignite();
 		}
 	}

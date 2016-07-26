@@ -791,7 +791,7 @@ public abstract class unit extends drawnObject  {
 	
 	// Take damage. Ouch!
 	public boolean hurt(int damage, float crit) {
-		if(targetable && killable) {
+		if(targetable) {
 			if(shielding && ((player)this).getEnergy() > 0) {
 				if(this instanceof player) {
 					float hitDamage = 1;
@@ -1030,12 +1030,14 @@ public abstract class unit extends drawnObject  {
 		else if(isMovingRight()) setFacingDirection("Right");
 		else if(isMovingLeft()) setFacingDirection("Left");
 
-		// Move the unit
-		if(movingDiagonally()) {
-			move(moveX*(1f/1.3f), moveY*(1f/1.3f));
-		}
-		else {
-			move(moveX, moveY);
+		if(!isUnitLocked()) {
+			// Move the unit
+			if(movingDiagonally()) {
+				move(moveX*(1f/1.3f), moveY*(1f/1.3f));
+			}
+			else {
+				move(moveX, moveY);
+			}
 		}
 
 	}
@@ -1062,36 +1064,34 @@ public abstract class unit extends drawnObject  {
 		setMovingUp(false);
 		setMovingDown(false);
 		
-		if(!isUnitLocked()) {
-			// Move them in said direction.
-			if(direction.equals("upLeft")) {
-				setMovingLeft(true);
-				setMovingUp(true);
-			}
-			if(direction.equals("upRight")) {
-				setMovingRight(true);
-				setMovingUp(true);
-			}
-			if(direction.equals("downLeft")) {
-				setMovingLeft(true);
-				setMovingDown(true);
-			}
-			if(direction.equals("downRight")) {
-				setMovingRight(true);
-				setMovingDown(true);
-			}
-			if(direction.equals("left")) {
-				setMovingLeft(true);
-			}
-			if(direction.equals("right")) {
-				setMovingRight(true);
-			}
-			if(direction.equals("up")) {
-				setMovingUp(true);
-			}
-			if(direction.equals("down")) {
-				setMovingDown(true);
-			}
+		// Move them in said direction.
+		if(direction.equals("upLeft")) {
+			setMovingLeft(true);
+			setMovingUp(true);
+		}
+		if(direction.equals("upRight")) {
+			setMovingRight(true);
+			setMovingUp(true);
+		}
+		if(direction.equals("downLeft")) {
+			setMovingLeft(true);
+			setMovingDown(true);
+		}
+		if(direction.equals("downRight")) {
+			setMovingRight(true);
+			setMovingDown(true);
+		}
+		if(direction.equals("left")) {
+			setMovingLeft(true);
+		}
+		if(direction.equals("right")) {
+			setMovingRight(true);
+		}
+		if(direction.equals("up")) {
+			setMovingUp(true);
+		}
+		if(direction.equals("down")) {
+			setMovingDown(true);
 		}
 	}
 	

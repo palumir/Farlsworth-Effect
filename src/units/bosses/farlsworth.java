@@ -26,6 +26,7 @@ import utilities.saveState;
 import utilities.stringUtils;
 import utilities.time;
 import zones.zone;
+import zones.farmLand.forest;
 import zones.farmLand.sheepFarm;
 
 public class farlsworth extends boss {
@@ -432,8 +433,7 @@ public class farlsworth extends boss {
 		player currPlayer = player.getCurrentPlayer();
 		
 		// Only do this stuff in the sheep farm. It's linear.
-		if(zone.getCurrentZone().getName().equals(sheepFarm.getZone().getName())) {
-			
+		if(zone.getCurrentZone().getParentName().equals("farmLand")) {
 			// If we are in the farm.
 			if(pastSpawnFarm != null && !pastSpawnFarm.isCompleted()) {
 				
@@ -700,6 +700,7 @@ public class farlsworth extends boss {
 				// If Farlsworth has stopped moving.
 				if(sequencePart == 4 && !isMoving()) {
 					interactSequence.goToNext();
+					player.getCurrentPlayer().setFacingDirection("Left");
 					sequencePart++;
 					interactSequence.setLocked(false);
 				}
@@ -719,8 +720,13 @@ public class farlsworth extends boss {
 					
 					// Wait.
 					waiting = true;
-					waitFor = 1.5f;
+					waitFor = 2f;
 					waitStart = time.getTime();
+				}
+				
+				// Change player's direction facing.
+				if(sequencePart == 7 && player.getCurrentPlayer().getIntX() < getIntX()) {
+					player.getCurrentPlayer().setFacingDirection("Right");
 				}
 				
 				// Wait for comedic timing.
@@ -733,6 +739,7 @@ public class farlsworth extends boss {
 					followPath(p);
 					sequencePart++;
 				}
+				
 				
 				// Talk to Ben.
 				if(sequencePart == 7 && !isMoving() && !isFollowingAPath()) {

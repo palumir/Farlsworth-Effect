@@ -87,6 +87,7 @@ public class sound extends Thread {
     
     // Fade out
     public void fadeOut(float f) {
+    	loop = false;
     	fadeOutOver = f;
     	fadeOutStart = time.getTime();
     }
