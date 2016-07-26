@@ -1090,16 +1090,9 @@ public void makeShadowSquareTopRight (int topLeftDudePosX, int topLeftDudePosY, 
 		
 		// Middle
 		spawnReloadableTombRect(currPlayer.getIntX()-30,
-				-1103-170-10,
+				-1103-170-40,
 			    currPlayer.getIntX() - 30 + 32,
-			    -1103-170+ -10 + 32,
-				"ground");
-		
-		// Left
-		spawnReloadableTombRect(currPlayer.getIntX()-150-10,
-				-1103-170 + 32-20,
-			    currPlayer.getIntX() + -150 + +32,
-			    -1103-170+ - 20 +  32*2,
+			    -1103-170+ -40 + 32,
 				"ground");
 		
 		// End the wall on right.
@@ -1120,9 +1113,9 @@ public void makeShadowSquareTopRight (int topLeftDudePosX, int topLeftDudePosY, 
 			
 		// Left
 		spawnReloadableTombRect(currPlayer.getIntX()-150,
-				-1103-300-20,
+				-1103-300-10,
 			    currPlayer.getIntX()-32,
-			    -1103-300-20+ 32,
+			    -1103-300-10+ 32,
 				"ground");
 		
 		// Right
@@ -1134,33 +1127,33 @@ public void makeShadowSquareTopRight (int topLeftDudePosX, int topLeftDudePosY, 
 		
 		for(int i = 0; i < 8; i++) {
 			u = new shadowDude(currPlayer.getIntX(),
-				-1103-300-20 - 47 - i*50);
+				-1103-300-40 - 47 - i*50);
 		}
 		u = new lightDude(currPlayer.getIntX(),
-				-1103-300-20 - 47 - 8*50);
+				-1103-300-40 - 47 - 8*50);
 		u.patrolTo(currPlayer.getIntX(),
-				-1103-300-20 - 47);
+				-1103-300-40 - 47);
 		
 		// 23
 		spawnReloadableTombRect(currPlayer.getIntX() + 64+20-32,
-				-1103-300-20-32-140+20,
+				-1103-300-20-32-140+20+10,
 			    currPlayer.getIntX() + 20+64,
-			    -1103-300+ 32-20-32-140+20,
+			    -1103-300+ 32-20-32-140+20+10,
 				"ground");
 		// 24
 		spawnReloadableTombRect(currPlayer.getIntX() -32-20,
-				-1103-300-20-32-250+30,
+				-1103-300-20-32-250+30+20,
 			    currPlayer.getIntX()-20,
-			    -1103-300+ 32-20-32-250+30,
+			    -1103-300+ 32-20-32-250+30+20,
 				"ground");
 		
 		// End
 		spawnReloadableTombRect(currPlayer.getIntX() + 64+20-32,
-				-1103-300-20-32-340+20,
+				-1103-300-20-32-340+20+30,
 			    currPlayer.getIntX() + 20+200,
-			    -1103-300+ 32-20-32-340+20,
+			    -1103-300+ 32-20-32-340+20+30,
 				"ground");
-		stairsUp tombExit = new stairsUp(currPlayer.getIntX() + 64+20-32+130,-1103-300-20-32-340+20-47,0,forest.getZone(),393,-3915,"Down");
+		stairsUp tombExit = new stairsUp(currPlayer.getIntX() + 64+20-32+130,-1103-300-20-32-340+20-47+30,0,forest.getZone(),-394,-3915,"Left");
 	
 	}
 	
