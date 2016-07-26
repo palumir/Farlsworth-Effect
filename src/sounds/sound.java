@@ -194,7 +194,7 @@ public class sound extends Thread {
             auline.drain();
             auline.close();
             allSounds.remove(this);
-            if(loop) {
+            if(loop && !stopRequested) {
             	sound s = new sound(this);
             	s.loop = true;
             	s.start();

@@ -160,7 +160,7 @@ public class tombZone extends zone {
 		shadowElevatorStarted = new event("tombZoneShadowElevatorStarted");
 	}
 	
-public void makeShadowRectangle(int topLeftDudePosX, int topLeftDudePosY, int spreadX, int spreadY, int numDudesWidth, int numDudesHeight, float speed, boolean clockwise) {
+public static void makeShadowRectangle(int topLeftDudePosX, int topLeftDudePosY, int spreadX, int spreadY, int numDudesWidth, int numDudesHeight, float speed, boolean clockwise) {
 		
 		ArrayList<intTuple> squarePath = new ArrayList<intTuple>();
 		for(int i = 0; i < numDudesWidth; i++) {
@@ -954,6 +954,24 @@ public void makeShadowSquareTopRight (int topLeftDudePosX, int topLeftDudePosY, 
 			      currPlayer.getIntX() + 150 + 80,
 				  currPlayer.getIntY() - 35 - 64*27+ 20*11,
 					      "ground");
+		//makeShadowRectangle(int topLeftDudePosX, int topLeftDudePosY, int spreadX, int spreadY, int numDudesWidth, int numDudesHeight, float speed, boolean clockwise)
+		makeShadowRectangle(currPlayer.getIntX() + -200 + 50 - 170 + 100 ,
+			      currPlayer.getIntY() - 35 - 32 - 64*27 + 20*11 - 155, 
+			      110,
+			      110,
+			      5,
+			      2,
+			      0.6f,
+			      true);
+		u = new lightDude(currPlayer.getIntX() + -200 + 50 - 170 + 210,currPlayer.getIntY() - 35 - 32 - 64*27 + 20*11 - 45);
+		u.setFacingDirection("Left");
+		u = new lightDude(currPlayer.getIntX() + -200 + 50 - 170 + 210+180,currPlayer.getIntY() - 35 - 32 - 64*27 + 20*11 - 45);
+		u.setFacingDirection("Left");
+		u = new lightDude(currPlayer.getIntX() + -200 + 70 - 170 + 210+180,currPlayer.getIntY() - 35 - 32 - 64*27 + 20*11 - 45-110);
+		u.setFacingDirection("Right");
+		u = new lightDude(currPlayer.getIntX() + -300 - 170 + 210+180,currPlayer.getIntY() - 35 - 32 - 64*27 + 20*11 - 45-110);
+		u.setFacingDirection("Right");
+				
 		
 		// Nineteen third
 		spawnTombRect(currPlayer.getIntX() + -200 ,
@@ -961,6 +979,8 @@ public void makeShadowSquareTopRight (int topLeftDudePosX, int topLeftDudePosY, 
 			      currPlayer.getIntX() + 150,
 			      currPlayer.getIntY() - 35 - 64*29+ 20*12,
 					      "ground");
+		u = new lightDude(currPlayer.getIntX() + -300 - 170 + 210+140,currPlayer.getIntY() - 35 - 32 - 64*27 + 20*11 - 45-110*2 + 2);
+		u.setFacingDirection("Left");
 		
 		// Nineteen fourth
 		spawnTombRect(currPlayer.getIntX() + -200 + 50 ,
@@ -968,6 +988,18 @@ public void makeShadowSquareTopRight (int topLeftDudePosX, int topLeftDudePosY, 
 			      currPlayer.getIntX() + 150 + 80,
 			      currPlayer.getIntY() - 35 - 64*31+ 20*13,
 					      "ground");
+		
+		// Evens
+		u = new shadowDude(currPlayer.getIntX() + -300 - 170 + 210+140,currPlayer.getIntY() - 35 - 32 - 64*27 + 20*11 - 45-110*2 + 2+ 30);
+		u.patrolTo(currPlayer.getIntX() + -300 - 170 + 210+140,currPlayer.getIntY() - 35 - 32 - 64*27 + 20*11 - 45-110*2 + 2 - 150- 20);
+		u.setMoveSpeed(1.5f);
+		u = new shadowDude(currPlayer.getIntX() + -300 - 170 + 210+140 + 40*2,currPlayer.getIntY() - 35 - 32 - 64*27 + 20*11 - 45-110*2 + 2+ 30);
+		u.patrolTo(currPlayer.getIntX() + -300 - 170 + 210+140 + 40*2,currPlayer.getIntY() - 35 - 32 - 64*27 + 20*11 - 45-110*2 + 2 - 150- 20);
+		u.setMoveSpeed(2f);
+		u = new shadowDude(currPlayer.getIntX() + -300 - 170 + 210+140 + 40*4,currPlayer.getIntY() - 35 - 32 - 64*27 + 20*11 - 45-110*2 + 2+ 30);
+		u.patrolTo(currPlayer.getIntX() + -300 - 170 + 210+140 + 40*4,currPlayer.getIntY() - 35 - 32 - 64*27 + 20*11 - 45-110*2 + 2 - 150- 20);
+		u.setMoveSpeed(2.5f);
+	
 		
 		// Nineteen fifth
 		spawnTombRect(currPlayer.getIntX() + -200 ,
@@ -982,6 +1014,13 @@ public void makeShadowSquareTopRight (int topLeftDudePosX, int topLeftDudePosY, 
 			      currPlayer.getIntX() + 150 + 80,
 			      currPlayer.getIntY() - 35 - 64*35+ 20*15,
 					      "ground");
+		for(int i = 0; i < 4; i++) {
+			u = new shadowDude(currPlayer.getIntX() + -250 ,
+					currPlayer.getIntY() - 35 - 32 - 64*35 + 20*15 - 46 - 50*i);
+			u.patrolTo(currPlayer.getIntX() + 250 ,
+					currPlayer.getIntY() - 35 - 32 - 64*35 + 20*15 - 46 - 50*i);
+			u.setMoveSpeed(2);
+		}
 		
 		// Nineteen seventh
 		spawnTombRect(currPlayer.getIntX() + -200 ,
@@ -997,69 +1036,6 @@ public void makeShadowSquareTopRight (int topLeftDudePosX, int topLeftDudePosY, 
 			      currPlayer.getIntY() - 35 - 64*39+ 20*17,
 					      "ground");
 		
-		// Patrolling dudes left
-		u = new shadowDude(currPlayer.getIntX() + -200 + 15,
-				currPlayer.getIntY() - 35 - 32 - 64*39 + 20*17 - 46);
-		u.patrolTo(currPlayer.getIntX() + -200 + 15,
-				currPlayer.getIntY() - 35 - 32 - 64*39 + 20*17 - 46 + 760);
-		u.setMoveSpeed(3);
-		u = new shadowDude(currPlayer.getIntX() + -200 + 15 + 30,
-				currPlayer.getIntY() - 35 - 32 - 64*39 + 20*17 - 46);
-		u.patrolTo(currPlayer.getIntX() + -200 + 15+ 30,
-				currPlayer.getIntY() - 35 - 32 - 64*39 + 20*17 - 46 + 760);
-		u.setMoveSpeed(2);
-		u = new shadowDude(currPlayer.getIntX() + -200 + 15+ 30*2,
-				currPlayer.getIntY() - 35 - 32 - 64*39 + 20*17 - 46);
-		u.patrolTo(currPlayer.getIntX() + -200 + 15 + 30*2,
-				currPlayer.getIntY() - 35 - 32 - 64*39 + 20*17 - 46 + 760);
-		u.setMoveSpeed(3);
-		u = new shadowDude(currPlayer.getIntX() + -200 + 15+ 30*3,
-				currPlayer.getIntY() - 35 - 32 - 64*39 + 20*17 - 46);
-		u.patrolTo(currPlayer.getIntX() + -200 + 15 + 30*3,
-				currPlayer.getIntY() - 35 - 32 - 64*39 + 20*17 - 46 + 760);
-		u.setMoveSpeed(2);
-		u = new shadowDude(currPlayer.getIntX() + -200 + 15+ 30*4,
-				currPlayer.getIntY() - 35 - 32 - 64*39 + 20*17 - 46);
-		u.patrolTo(currPlayer.getIntX() + -200 + 15 + 30*4,
-				currPlayer.getIntY() - 35 - 32 - 64*39 + 20*17 - 46 + 760);
-		u.setMoveSpeed(3);
-		u = new shadowDude(currPlayer.getIntX() + -200 + 15+ 30*5,
-				currPlayer.getIntY() - 35 - 32 - 64*39 + 20*17 - 46);
-		u.patrolTo(currPlayer.getIntX() + -200 + 15 + 30*5,
-				currPlayer.getIntY() - 35 - 32 - 64*39 + 20*17 - 46 + 760);
-		u.setMoveSpeed(2);
-		
-		// Patrolling dudes right
-		u = new shadowDude(currPlayer.getIntX() + -200 + 15+ 30*6,
-				currPlayer.getIntY() - 35 - 32 - 64*39 + 20*17 - 46 + 760);
-		u.patrolTo(currPlayer.getIntX() + -200 + 15+ 30*6,
-				currPlayer.getIntY() - 35 - 32 - 64*39 + 20*17 - 46);
-		u.setMoveSpeed(3);
-		u = new shadowDude(currPlayer.getIntX() + -200 + 15+ + 30*7,
-				currPlayer.getIntY() - 35 - 32 - 64*39 + 20*17 - 46 + 760);
-		u.patrolTo(currPlayer.getIntX() + -200 + 15 + 30*7,
-				currPlayer.getIntY() - 35 - 32 - 64*39 + 20*17 - 46);
-		u.setMoveSpeed(2);
-		u = new shadowDude(currPlayer.getIntX() + -200 + 15 + + 30*8,
-				currPlayer.getIntY() - 35 - 32 - 64*39 + 20*17 - 46 + 760);
-		u.patrolTo(currPlayer.getIntX() + -200 + 15+ 30*8,
-				currPlayer.getIntY() - 35 - 32 - 64*39 + 20*17 - 46);
-		u.setMoveSpeed(3);
-		u = new shadowDude(currPlayer.getIntX() + -200 + 15 + + 30*9,
-				currPlayer.getIntY() - 35 - 32 - 64*39 + 20*17 - 46 + 760);
-		u.patrolTo(currPlayer.getIntX() + -200 + 15+ 30*9,
-				currPlayer.getIntY() - 35 - 32 - 64*39 + 20*17 - 46);
-		u.setMoveSpeed(2);
-		u = new shadowDude(currPlayer.getIntX() + -200 + 15 + 30*10,
-				currPlayer.getIntY() - 35 - 32 - 64*39 + 20*17 - 46 + 760);
-		u.patrolTo(currPlayer.getIntX() + -200 + 15+ 30*10,
-				currPlayer.getIntY() - 35 - 32 - 64*39 + 20*17 - 46);
-		u.setMoveSpeed(3);
-		u = new shadowDude(currPlayer.getIntX() + -200 + 15 + 30*11,
-				currPlayer.getIntY() - 35 - 32 - 64*39 + 20*17 - 46 + 760);
-		u.patrolTo(currPlayer.getIntX() + -200 + 15+ 30*11,
-				currPlayer.getIntY() - 35 - 32 - 64*39 + 20*17 - 46);
-		u.setMoveSpeed(2);
 		//make(currPlayer.getIntX() + -200 + 15+ 30*2,
 			//	currPlayer.getIntY() - 35 - 32 - 64*39 + 20*17 - 46)
 		
