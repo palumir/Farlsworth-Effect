@@ -102,7 +102,7 @@ public class sheepFarm extends zone {
 	private float stormFogLevel = 0.15f;
 	
 	// Defaults
-	public static intTuple DEFAULT_SPAWN_TUPLE = new intTuple(-9,11);
+	public static intTuple DEFAULT_SPAWN_TUPLE = new intTuple(-1115,391);
 	
 	// Constructor
 	public sheepFarm() {
@@ -294,19 +294,19 @@ public class sheepFarm extends zone {
 		spawnGrassRect(-1000-1000,-1000,2000+1000,64);
 		
 		// Spawn some grass on the other side of the bridge.
-		spawnGrassRect(-2000,184,2000,1000);
+		spawnGrassRect(-2000-550,184,2000-550,1000);
 		
 		// Spawn forest grass
 		spawnGrassRect(-1500+5,-4000-1000,2000+1000,-440);
 		
 		// Draw the bridge.
-		spawnPassableWaterRect(-170-6-32,56,-165+32+32,200);
+		spawnPassableWaterRect(-208-580,56,-101-580,200);
 		
 		// Draw the water to left of bridge spawn.
-		spawnWaterRect(-2100-3000-10,56,-167,200);	
+		spawnWaterRect(-2100-3000-10-580,56,-167-580,200);	
 		
 		// Draw the water to right of bridge spawn.
-		spawnWaterRect(-168+20+15-5-6+5,56,2032+1000,200);
+		spawnWaterRect(-168+20+15-5-6+5-580,56,2032+1000-580,200);
 		
 		// Spawn river to right of mountain
 		spawnWaterRect(2000+1000-16,-4466+18-1000,2128+1000,200);
@@ -2036,14 +2036,14 @@ public class sheepFarm extends zone {
 		new haystack(-195,-165,0);
 		
 		// Make bridge
-		new bridgePole(-192+6,35-11,0);
-		new bridgePole(-140-2,35-10,0);
-		new bridge(-170-16,56-33,0);
+		new bridgePole(-192+6-580,35-11,0);
+		new bridgePole(-140-2-580,35-10,0);
+		new bridge(-170-16-580,56-33,0);
 		
 		// Draw rocks behind spawn.
-		new rock(-24,75,0);
-		new rock(21,111,1);
-		new rock(-6,147,0);
+		new rock(-24-550,75,0);
+		new rock(21-550,111,1);
+		new rock(-6-550,147,0);
 		
 		////////////////////////////
 		//// FARMHOUSE AREA  ///////
@@ -2051,7 +2051,7 @@ public class sheepFarm extends zone {
 		tree.createTree(-720,-325,0);
 		new farmHouse(-650,-420,0);
 		new barn(-950,-420,0);
-		farmer theFarmer = new farmer(-711,-267);
+		farmer theFarmer = new farmer(-711,-247);
 		theFarmer.setFacingDirection("Down");
 		tree.createTree(-1017, -414, 1);
 		tree.createTree(-1011, 0, 0);
@@ -2064,142 +2064,142 @@ public class sheepFarm extends zone {
 		/////////////////////////////////////
 		//// ARMORY/SHED/ACROSS RIVER ///////
 		/////////////////////////////////////
-		new blackSmith(-600,200,0);
-		tree.createTree(-135,186,1);
-		tree.createTree(-70,220,2);
-		new bush(-110,250,0);
-		tree.createTree(-120,280,1);
-		tree.createTree(-135,310,2);
-		tree.createTree(-70,340,0);
-		new bush(-90,360,1);
-		tree.createTree(-90,380,1);
-		tree.createTree(-65,410,2);
-		tree.createTree(-40,450,1);
-		tree.createTree(-99,212,0);
-		tree.createTree(-120,323,1);
-		tree.createTree(-58,425,2);
-		tree.createTree(-774,428,2);
-		tree.createTree(-693,314,1);
-		tree.createTree(-627,260,1);
+		new blackSmith(-600-550,200,0);
+		tree.createTree(-135-550,186,1);
+		tree.createTree(-70-550,220,2);
+		new bush(-110-550,250,0);
+		tree.createTree(-120-550,280,1);
+		tree.createTree(-135-550,310,2);
+		tree.createTree(-70-550,340,0);
+		new bush(-90-550,360,1);
+		tree.createTree(-90-550,380,1);
+		tree.createTree(-65-550,410,2);
+		tree.createTree(-40-550,450,1);
+		tree.createTree(-99-550,212,0);
+		tree.createTree(-120-550,323,1);
+		tree.createTree(-58-550,425,2);
+		tree.createTree(-774-550,428,2);
+		tree.createTree(-693-550,314,1);
+		tree.createTree(-627-550,260,1);
 		
 		// Dagger.
-		item daggerSpawn = new dagger(-516,387);
+		item daggerSpawn = new dagger(-800,387);
 		
 		// Corner
-		tree.createTree(-60,480,2);
-		tree.createTree(-20,500,1);
-		tree.createTree(-55,525,2);
-		tree.createTree(-80,545,1);
-		tree.createTree(-100,570,1);
-		new bush(-142,360,2);
-		new bush(-250,465,0);
+		tree.createTree(-60-550,480,2);
+		tree.createTree(-20-550,500,1);
+		tree.createTree(-55-550,525,2);
+		tree.createTree(-80-550,545,1);
+		tree.createTree(-100-550,570,1);
+		new bush(-142-550,360,2);
+		new bush(-250-550,465,0);
 		
 		// The bottom trees.
-		tree.createTree(309,-464,1);
-		tree.createTree(338,-450,1);
-		tree.createTree(366,-454,2);
-		tree.createTree(393,-448,2);
-		tree.createTree(414,-467,1);
-		tree.createTree(436,-448,1);
-		tree.createTree(461,-450,1);
-		tree.createTree(483,-429,1);
-		tree.createTree(-331,-462,0);
-		tree.createTree(-361,-462,2);
-		tree.createTree(-397,-468,2);
-		tree.createTree(-422,-452,0);
-		tree.createTree(-439,-469,1);
-		tree.createTree(-460,-447,1);
-		tree.createTree(-487,-465,2);
-		tree.createTree(-1003,-567,0);
-		tree.createTree(-993,-536,1);
-		tree.createTree(-1012,-520,0);
-		tree.createTree(-120,600,2);
-		tree.createTree(-145,580,0);
-		tree.createTree(-165,605,2);
-		tree.createTree(-195,585,1);
-		tree.createTree(-225,585,1);
-		tree.createTree(-240,610,0);
-		tree.createTree(-260,600,1);
-		tree.createTree(-285,575,2);
-		tree.createTree(-310,610,2);
-		tree.createTree(-330,565,2);
-		tree.createTree(-345,585,1);
-		tree.createTree(-375,615,0);
-		tree.createTree(-415,600,2);
-		tree.createTree(-445,575,0);
-		tree.createTree(-465,605,0);
-		tree.createTree(-490,585,1);
-		tree.createTree(-525,580,1);
-		tree.createTree(-550,615,2);
-		tree.createTree(-580,610,2);
-		tree.createTree(-610,580,1);
-		tree.createTree(-635,610,2);
-		tree.createTree(-665,580,1);
-		tree.createTree(-700,580,0);
-		tree.createTree(-715,615,0);
+		tree.createTree(309-550,-464,1);
+		tree.createTree(338-550,-450,1);
+		tree.createTree(366-550,-454,2);
+		tree.createTree(393-550,-448,2);
+		tree.createTree(414-550,-467,1);
+		tree.createTree(436-550,-448,1);
+		tree.createTree(461-550,-450,1);
+		tree.createTree(483-550,-429,1);
+		tree.createTree(-331-550,-462,0);
+		tree.createTree(-361-550,-462,2);
+		tree.createTree(-397-550,-468,2);
+		tree.createTree(-422-550,-452,0);
+		tree.createTree(-439-550,-469,1);
+		tree.createTree(-460-550,-447,1);
+		tree.createTree(-487-550,-465,2);
+		tree.createTree(-1003-550,-567,0);
+		tree.createTree(-993-550,-536,1);
+		tree.createTree(-1012-550,-520,0);
+		tree.createTree(-120-550,600,2);
+		tree.createTree(-145-550,580,0);
+		tree.createTree(-165-550,605,2);
+		tree.createTree(-195-550,585,1);
+		tree.createTree(-225-550,585,1);
+		tree.createTree(-240-550,610,0);
+		tree.createTree(-260-550,600,1);
+		tree.createTree(-285-550,575,2);
+		tree.createTree(-310-550,610,2);
+		tree.createTree(-330-550,565,2);
+		tree.createTree(-345-550,585,1);
+		tree.createTree(-375-550,615,0);
+		tree.createTree(-415-550,600,2);
+		tree.createTree(-445-550,575,0);
+		tree.createTree(-465-550,605,0);
+		tree.createTree(-490-550,585,1);
+		tree.createTree(-525-550,580,1);
+		tree.createTree(-550-550,615,2);
+		tree.createTree(-580-550,610,2);
+		tree.createTree(-610-550,580,1);
+		tree.createTree(-635-550,610,2);
+		tree.createTree(-665-550,580,1);
+		tree.createTree(-700-550,580,0);
+		tree.createTree(-715-550,615,0);
 		
 		// The left trees.
-		tree.createTree(-730,590,0);
-		tree.createTree(-700,560,1);
-		tree.createTree(-660,555,2);
-		tree.createTree(-685,530,0);
-		tree.createTree(-705,499,2);
-		tree.createTree(-735,476,1);
-		tree.createTree(-755,454,2);
-		tree.createTree(-785,415,0);
-		tree.createTree(-745,390,1);
-		tree.createTree(-710,360,0);
-		tree.createTree(-685,335,2);
-		tree.createTree(-655,300,1);
-		tree.createTree(-774,234,1);
-		tree.createTree(-670,275,2);
-		tree.createTree(-680,260,1);
-		tree.createTree(-690,235,0);
-		tree.createTree(-730,200,1);
-		new bush(-741,240,2);
-		new bush(-642,393,1);
+		tree.createTree(-730-550,590,0);
+		tree.createTree(-700-550,560,1);
+		tree.createTree(-660-550,555,2);
+		tree.createTree(-685-550,530,0);
+		tree.createTree(-705-550,499,2);
+		tree.createTree(-735-550,476,1);
+		tree.createTree(-755-550,454,2);
+		tree.createTree(-785-550,415,0);
+		tree.createTree(-745-550,390,1);
+		tree.createTree(-710-550,360,0);
+		tree.createTree(-685-550,335,2);
+		tree.createTree(-655-550,300,1);
+		tree.createTree(-774-550,234,1);
+		tree.createTree(-670-550,275,2);
+		tree.createTree(-680-550,260,1);
+		tree.createTree(-690-550,235,0);
+		tree.createTree(-730-550,200,1);
+		new bush(-741-550,240,2);
+		new bush(-642-550,393,1);
 		
 		// Misc left trees beyond the line of trees that block you
-		tree.createTree(-850,590,0);
-		tree.createTree(-775,560,2);
-		tree.createTree(-1025,555,1);
-		tree.createTree(-855,530,2);
-		tree.createTree(-1200,499,1);
-		tree.createTree(-1100,476,1);
-		tree.createTree(-929,454,0);
-		tree.createTree(-828,415,0);
-		tree.createTree(-979,390,2);
-		tree.createTree(-1202,360,0);
-		tree.createTree(-827,335,2);
-		tree.createTree(-1209,300,1);
-		tree.createTree(-919,275,0);
-		tree.createTree(-929,260,2);
-		tree.createTree(-890,235,0);
-		tree.createTree(-950,200,2);
-		new bush(-921,510,1);
-		new bush(-771,636,2);
-		new bush(-795,201,0);
-		new rock(-891,312,1);
-		tree.createTree(-804,675,1);
+		tree.createTree(-850-550,590,0);
+		tree.createTree(-775-550,560,2);
+		tree.createTree(-1025-550,555,1);
+		tree.createTree(-855-550,530,2);
+		tree.createTree(-1200-550,499,1);
+		tree.createTree(-1100-550,476,1);
+		tree.createTree(-929-550,454,0);
+		tree.createTree(-828-550,415,0);
+		tree.createTree(-979-550,390,2);
+		tree.createTree(-1202-550,360,0);
+		tree.createTree(-827-550,335,2);
+		tree.createTree(-1209-550,300,1);
+		tree.createTree(-919-550,275,0);
+		tree.createTree(-929-550,260,2);
+		tree.createTree(-890-550,235,0);
+		tree.createTree(-950-550,200,2);
+		new bush(-921-550,510,1);
+		new bush(-771-550,636,2);
+		new bush(-795-550,201,0);
+		new rock(-891-550,312,1);
+		tree.createTree(-804-550,675,1);
 		
 		// Trees below bottom tree wall.
-		tree.createTree(-699,672,2);
-		tree.createTree(-660,770,1);
-		tree.createTree(-635,890,2);
-		tree.createTree(-580,840,1);
-		tree.createTree(-520,780,2);
-		tree.createTree(-480,827,1);
-		tree.createTree(-410,820,0);
-		tree.createTree(-385,890,0);
-		tree.createTree(-360,760,1);
-		tree.createTree(-519, 660, 0);
-		tree.createTree(-310,700,1);
-		tree.createTree(-280,792,0);
-		tree.createTree(-265,700,2);
-		tree.createTree(-200,679,0);
-		tree.createTree(-160,740,1);
-		new rock(-612,669,1);
-		new bush(-429,636,1);
+		tree.createTree(-699-550,672,2);
+		tree.createTree(-660-550,770,1);
+		tree.createTree(-635-550,890,2);
+		tree.createTree(-580-550,840,1);
+		tree.createTree(-520-550,780,2);
+		tree.createTree(-480-550,827,1);
+		tree.createTree(-410-550,820,0);
+		tree.createTree(-385-550,890,0);
+		tree.createTree(-360-550,760,1);
+		tree.createTree(-519-550, 660, 0);
+		tree.createTree(-310-550,700,1);
+		tree.createTree(-280-550,792,0);
+		tree.createTree(-265-550,700,2);
+		tree.createTree(-200-550,679,0);
+		tree.createTree(-160-550,740,1);
+		new rock(-612-550,669,1);
+		new bush(-429-550,636,1);
 	}
 	
 	// Create zone events.
