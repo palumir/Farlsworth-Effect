@@ -58,9 +58,6 @@ public class farmKey extends key {
 	@Override
 	public void reactToPickup() {
 		player currPlayer = player.getCurrentPlayer();
-		if(currPlayer != null) {
-			tooltipString t = new tooltipString("Press 'i' to open inventory.");
-		}
 	}
 
 	// Get the item ground image.

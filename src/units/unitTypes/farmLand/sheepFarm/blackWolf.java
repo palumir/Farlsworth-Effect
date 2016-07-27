@@ -41,26 +41,26 @@ public class blackWolf extends wolf {
 	private static String DEFAULT_UNIT_NAME = "blackWolf";
 	
 	// Health.
-	private int DEFAULT_HP = 11;
+	private int DEFAULT_HP = 6;
 	
 	// Default jump speed
-	private static int DEFAULT_UNIT_JUMPSPEED = 11;
+	private static int DEFAULT_UNIT_JUMPSPEED = 9;
 	
 	// Darkhole
-	private static float DEFAULT_DARKHOLE_FOR = 7;
+	private static float DEFAULT_DARKHOLE_FOR = 5;
 	
 	// Beta stats
-	private static float DEFAULT_MOVESPEED_BETA = 2f;
-	private static float DEFAULT_CLAW_ATTACK_EVERY_BETA = 3f;
-	private static float DEFAULT_SPAWN_CLAW_PHASE_TIME_BETA = 2f;
+	private static float DEFAULT_MOVESPEED_BETA = 3.5f;
+	private static float DEFAULT_CLAW_ATTACK_EVERY_BETA = 4f;
+	private static float DEFAULT_SPAWN_CLAW_PHASE_TIME_BETA = 3f;
 	private static int DEFAULT_HOW_FAR_IN_A_DIRECTION_BETA = 90;
 	private static int DEFAULT_FOLLOW_UNTIL_RANGE_BASE_BETA = 40;
 	private static int DEFAULT_FOLLOW_UNTIL_RANGE_RANDOM_BETA = 5;
 
 	// Alpha stats
-	private static float DEFAULT_MOVESPEED_ALPHA = 3f;
-	private static float DEFAULT_CLAW_ATTACK_EVERY_ALPHA = 1.7f;
-	private static float DEFAULT_SPAWN_CLAW_PHASE_TIME_ALPHA = 0.75f;
+	private static float DEFAULT_MOVESPEED_ALPHA = 3.5f;
+	private static float DEFAULT_CLAW_ATTACK_EVERY_ALPHA = 2f;
+	private static float DEFAULT_SPAWN_CLAW_PHASE_TIME_ALPHA = 1f;
 	private static int DEFAULT_HOW_FAR_IN_A_DIRECTION_ALPHA = 30;
 	private static int DEFAULT_FOLLOW_UNTIL_RANGE_BASE_ALPHA = 15;
 	

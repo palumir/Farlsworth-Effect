@@ -1,6 +1,8 @@
 package items;
 
 import drawing.spriteSheet;
+import drawing.userInterface.tooltipString;
+import interactions.event;
 import sounds.sound;
 import units.player;
 
@@ -38,6 +40,9 @@ public abstract class bottle extends item {
 	// Does the player actually own the item?
 	public static boolean inInventory = false;
 	
+	// Event
+	private static event pressEnterToHeal;
+	
 	///////////////
 	/// METHODS ///
 	///////////////
@@ -45,6 +50,9 @@ public abstract class bottle extends item {
 	// For weapon being in your inventory.
 	public bottle(String newName) {
 		super(newName,null,0,0,0,0);
+		
+		// Create event.
+		pressEnterToHeal = new event("bottlePressEnterToHeal");
 		
 		// It is, of course, equippable.
 		equippable = true;
@@ -57,6 +65,9 @@ public abstract class bottle extends item {
 	// For weapon being in your floor
 	public bottle(String newName, int x, int y) {
 		super(newName,null,x,y,0,0);
+		
+		// Create event.
+		pressEnterToHeal = new event("bottlePressEnterToHeal");
 		
 		// Set the width and height.
 		setWidth(getImage().getWidth());
@@ -77,6 +88,12 @@ public abstract class bottle extends item {
 	
 	// Equip item
 	public void equip() {
+		
+		// Set pressIToExit to be true.
+		if(!pressEnterToHeal.isCompleted()) {
+			pressEnterToHeal.setCompleted(true);
+			tooltipString t = new tooltipString("Press 'enter' to use a bottle charge and heal.");
+		}
 		
 		// Equip the weapon.
 		player.getCurrentPlayer().setEquippedBottle(this);

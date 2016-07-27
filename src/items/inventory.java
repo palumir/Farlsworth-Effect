@@ -11,6 +11,8 @@ import drawing.drawnObject;
 import drawing.gameCanvas;
 import drawing.spriteSheet;
 import drawing.userInterface.interfaceObject;
+import drawing.userInterface.tooltipString;
+import interactions.event;
 import sounds.sound;
 import units.player;
 import utilities.stringUtils;
@@ -25,7 +27,7 @@ public class inventory extends interfaceObject {
 	
 	// Draw position
 	public static int DEFAULT_INVENTORY_START_X = (int)(gameCanvas.getScaleX()*20);
-	public static int DEFAULT_INVENTORY_START_Y = (int)(gameCanvas.getScaleY()*gameCanvas.getDefaultHeight()-320);
+	public static int DEFAULT_INVENTORY_START_Y = (int)(gameCanvas.getScaleY()*gameCanvas.getDefaultHeight()-420);
 	
 	// Inventory size.
 	public static int DEFAULT_INVENTORY_SIZE = 16; // total number of slots. must be a perfect root of 2
@@ -62,12 +64,18 @@ public class inventory extends interfaceObject {
 	private String unequipWeapon;
 	private String UIMove;
 	
+	// Have they been given the pressSpaceToAttack message?
+	private static event pressSpaceToAttack;
+	
 	///////////////
 	/// METHODS ///
 	///////////////
 	public inventory() {
 		super(null, DEFAULT_INVENTORY_START_X, DEFAULT_INVENTORY_START_Y, 0, 0);
 		setItems(new ArrayList<item>());
+		
+		// Create the event
+		pressSpaceToAttack = new event("inventoryPressSpaceToAttack");
 		
 		// Set sounds.
 		openInventory = "sounds/effects/player/UI/openInventory.wav";
@@ -85,6 +93,13 @@ public class inventory extends interfaceObject {
 			s.start();
 		}
 		else { 
+			
+			// Set pressSpaceToAttack to be true.
+			if(!pressSpaceToAttack.isCompleted() && player.getCurrentPlayer().getEquippedWeapon().name.equals("Dagger")) {
+				pressSpaceToAttack.setCompleted(true);
+				tooltipString t = new tooltipString("Press or hold 'space' to attack.");
+			}
+			
 			sound s = new sound(closeInventory);
 			s.start();
 		}

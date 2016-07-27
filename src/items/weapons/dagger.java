@@ -8,6 +8,7 @@ import drawing.animation.animation;
 import drawing.animation.animationPack;
 import drawing.spriteSheet.spriteSheetInfo;
 import drawing.userInterface.tooltipString;
+import interactions.event;
 import items.item;
 import items.weapon;
 import units.player;
@@ -22,14 +23,17 @@ public class dagger extends weapon {
 	public static String DEFAULT_WEAPON_NAME = "Dagger";
 	
 	// Weapon stats.
-	static private int DEFAULT_ATTACK_DAMAGE = 2;//2;
-	static private float DEFAULT_ATTACK_TIME = 0.30f;//0.30f;
+	static private int DEFAULT_ATTACK_DAMAGE = 2; //2;
+	static private float DEFAULT_ATTACK_TIME = 0.30f; //0.30f;
 	static private float DEFAULT_BACKSWING = 0.1f;
 	static private int DEFAULT_ATTACK_WIDTH = 50;
 	static private int DEFAULT_ATTACK_LENGTH = 18;
 	static private float DEFAULT_CRIT_CHANCE = .2f;
 	static private float DEFAULT_CRIT_DAMAGE = 2f;
 	static private float DEFAULT_VARIABILITY = 0f;
+	
+	// Event for telling the player to press 'i' to exit inventory.
+	static private event pressIToExit;
 	
 	// Attack sound
 	static private String DEFAULT_ATTACK_SOUND = "sounds/effects/combat/knifeSlash.wav";
@@ -56,6 +60,9 @@ public class dagger extends weapon {
 	public dagger() {
 		super(DEFAULT_WEAPON_NAME,weaponSpriteSheet);
 		
+		// Create event.
+		pressIToExit = new event("daggerPressIToExit");
+		
 		// Weapon stats.
 		setStats();
 	}
@@ -63,6 +70,9 @@ public class dagger extends weapon {
 	// On floor.
 	public dagger(int x, int y) {
 		super(DEFAULT_WEAPON_NAME,x,y);
+		
+		// Create event.
+		pressIToExit = new event("daggerPressIToExit");
 		
 		// Weapon stats.
 		setStats();
@@ -74,7 +84,7 @@ public class dagger extends weapon {
 		player currPlayer = player.getCurrentPlayer();
 		if(currPlayer != null) {
 			if(!sheepFarm.attackTooltipLoaded.isCompleted()) sheepFarm.attackTooltipLoaded.setCompleted(true);
-			tooltipString t = new tooltipString("Press or hold 'space' to attack.");
+			tooltipString t = new tooltipString("Press 'i' to open inventory.");
 		}
 	}
 	
@@ -101,6 +111,12 @@ public class dagger extends weapon {
 	
 	// Equip item
 	public void equip() {
+		
+		// Set pressIToExit to be true.
+		if(!pressIToExit.isCompleted()) {
+			pressIToExit.setCompleted(true);
+			tooltipString t = new tooltipString("Press 'i' or 'esc' to exit inventory.");
+		}
 		
 		// Equip the weapon.
 		player.getCurrentPlayer().setEquippedWeapon(this);
