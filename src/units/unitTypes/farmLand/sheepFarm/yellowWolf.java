@@ -67,7 +67,7 @@ public class yellowWolf extends wolf {
 	// Alpha stats
 	private static float DEFAULT_MOVESPEED_ALPHA = 3.5f;
 	private static float DEFAULT_CLAW_ATTACK_EVERY_BASE_ALPHA = 1.75f;
-	private static float DEFAULT_SPAWN_CLAW_PHASE_TIME_ALPHA = 0.95f;
+	private static float DEFAULT_SPAWN_CLAW_PHASE_TIME_ALPHA = 1.25f;
 	private static int DEFAULT_HOW_FAR_BACK_BASE_ALPHA = 15;
 	private static int DEFAULT_HOW_FAR_BACK_RANDOM_ALPHA = 1;
 	private static int DEFAULT_RANDOM_DEGREE_ALPHA = 1;

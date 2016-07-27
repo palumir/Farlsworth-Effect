@@ -51,7 +51,7 @@ public class redWolf extends wolf {
 	// Beta stats
 	private static float DEFAULT_MOVESPEED_BETA = 3.5f;
 	private static float DEFAULT_CLAW_ATTACK_EVERY_BASE_BETA = 2.5f;
-	private static float DEFAULT_SPAWN_CLAW_PHASE_TIME_BETA = 2.2f;
+	private static float DEFAULT_SPAWN_CLAW_PHASE_TIME_BETA = 2f;
 	private static int DEFAULT_HOW_FAR_BACK_BASE_BETA = 60;
 	private static int DEFAULT_HOW_FAR_BACK_RANDOM_BETA = 20;
 	private static int DEFAULT_RANDOM_DEGREE_BETA = 10;
@@ -61,7 +61,7 @@ public class redWolf extends wolf {
 	// Alpha stats
 	private static float DEFAULT_MOVESPEED_ALPHA = 3.5f;
 	private static float DEFAULT_CLAW_ATTACK_EVERY_BASE_ALPHA = 2f;
-	private static float DEFAULT_SPAWN_CLAW_PHASE_TIME_ALPHA = 1.5f;
+	private static float DEFAULT_SPAWN_CLAW_PHASE_TIME_ALPHA = 1.25f;
 	private static int DEFAULT_HOW_FAR_BACK_BASE_ALPHA = 30;
 	private static int DEFAULT_HOW_FAR_BACK_RANDOM_ALPHA = 5;
 	private static int DEFAULT_RANDOM_DEGREE_ALPHA = 1; 

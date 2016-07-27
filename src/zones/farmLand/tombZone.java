@@ -735,9 +735,6 @@ public void makeShadowSquareTopRight (int topLeftDudePosX, int topLeftDudePosY, 
 		//spawnTombRect(9962,512,10500,1154,"rightWall");
 		//spawnTombRect(9965,1152,10500,1502,"none");
 		
-		//brady Turner is fucking fagt wooo! 
-		// I linked this to him on facebook and gave him your address and he says he's coming
-		
 	}
 	
 	// Spawn a rectangle of shadow dudes
@@ -929,9 +926,9 @@ public void makeShadowSquareTopRight (int topLeftDudePosX, int topLeftDudePosY, 
 							      "ground");
 		for(int i = 0; i < 16; i++) {
 			shadowDudePatrol(currPlayer.getIntX() - 230 + i*30,
-					1150-30 - 35 - 32 - 64*19 + 20*7 - 46 - 50*3, 
+					1150-30 - 35 - 32 - 64*19 + 20*7 - 46, 
 					currPlayer.getIntX()  - 230 + i*30,
-					1150-30 - 35 - 32 - 64*19 + 20*7 - 46,
+					1150-30 - 35 - 32 - 64*19 + 20*7 - 46 - 50*3,
 					2f);
 		}
 		u = new lightDude(currPlayer.getIntX() + 70, 1150-30 - 35 - 32 - 64*19 + 20*7 - 46);
@@ -943,8 +940,8 @@ public void makeShadowSquareTopRight (int topLeftDudePosX, int topLeftDudePosY, 
 					      currPlayer.getIntX() + 240,
 						  1150-30 - 35 - 64*21+ 20*8,
 							      "ground");
-		u = new lightDude(currPlayer.getIntX() + 200 + 15 - 40, 1150-30 - 35 - 32 - 64*19 + 20*7 - 200);
-		u.patrolTo(currPlayer.getIntX() + 200 + 15 - 40, 1150-30 - 35 - 32 - 64*21 + 20*10 - 46);
+		u = new lightDude(currPlayer.getIntX() + 200 + 15 - 40, 1150-30 - 35 - 32 - 64*21 + 20*10 - 46);
+		u.patrolTo(currPlayer.getIntX() + 200 + 15 - 40,1150-30 - 35 - 32 - 64*19 + 20*7 - 200);
 		u.setMoveSpeed(1f);
 		
 		// Seventeen
@@ -1131,9 +1128,9 @@ public void makeShadowSquareTopRight (int topLeftDudePosX, int topLeftDudePosY, 
 				-1103-300-40 - 47 - i*50);
 		}
 		u = new lightDude(currPlayer.getIntX(),
-				-1103-300-40 - 47 - 8*50);
-		u.patrolTo(currPlayer.getIntX(),
 				-1103-300-40 - 47);
+		u.patrolTo(currPlayer.getIntX(),
+				-1103-300-40 - 47 - 8*50);
 		
 		// 23
 		spawnReloadableTombRect(currPlayer.getIntX() + 64+20-32,
