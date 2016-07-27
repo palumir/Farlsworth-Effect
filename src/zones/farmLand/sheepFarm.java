@@ -340,43 +340,31 @@ public class sheepFarm extends zone {
 		u.setFacingDirection("Left");
 		
 		// Fourth wolf pack
-		u = new yellowWolf(1315,-700);
-		u.setFacingDirection("Up");
-		u = new blackWolf(1485,-700);
+		u = new redWolf(1400,-700);
 		u.setFacingDirection("Up");
 		
 		// Well.
 		c = new well(1400,-300,0);
 		
 		// Fifth wolf pack
-		u = new blackWolf(1860,-200+30);
+		u = new yellowWolf(1910,-408);
 		u.setFacingDirection("Down");
-		u = new blackWolf(1890,-455+250);
+		u = new blackWolf(1860,-428);
 		u.setFacingDirection("Down");
 		
 		// Sixth wolf pack
-		u = new blackWolf(2775,-242);
+		u = new blackWolf(2775,-147);
 		u.setFacingDirection("Left");
-		u = new redWolf(2725,-167);
+		u = new redWolf(2750,-100);
 		u.setFacingDirection("Left");
 		
 		// Seventh wolf pack
-		u = new blackWolf(2685,-1210);
+		u = new yellowWolf(2582+50,-1317);
 		u.setFacingDirection("Down");
-		u = new yellowWolf(2582,-1317);
-		u.setFacingDirection("Down");
-		u = new redWolf(2812,-1317);
+		u = new redWolf(2812-50,-1317);
 		u.setFacingDirection("Down");
 		
-		// Eighth wolf pack (grave)
-		
-		u = new redWolf(2625,-3092);
-		u.setFacingDirection("Down");
-		u = new redWolf(2780,-3092);
-		u.setFacingDirection("Down");
-		
-		// Ninth wolf pack
-		
+		// Eighth wolf pack
 		u = new redWolf(1405,-2786);
 		u.setFacingDirection("Right");
 		u = new yellowWolf(1405,-2921);
@@ -384,8 +372,7 @@ public class sheepFarm extends zone {
 		u = new blackWolf(1405,-3056);
 		u.setFacingDirection("Right");
 		
-		// Tenth wolf pack
-		
+		// Ninth wolf pack
 		u = new yellowWolf(452,-3013);
 		u.setFacingDirection("Right");
 		u = new blackWolf(422,-3910);

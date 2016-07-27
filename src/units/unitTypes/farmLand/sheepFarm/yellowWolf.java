@@ -74,7 +74,7 @@ public class yellowWolf extends wolf {
 	private static int DEFAULT_FOLLOW_UNTIL_RANGE_BASE_ALPHA = 10;
 	
 	// How often to spawn a rock.
-	private static float DEFAULT_SPAWN_ROCK_EVERY = 0.05f;
+	private static float DEFAULT_SPAWN_ROCK_EVERY = 0.1f;
 	
 	// Rockpile
 	private static int DEFAULT_HOW_MANY_ROCK_PIECES_SPAWN = 3;

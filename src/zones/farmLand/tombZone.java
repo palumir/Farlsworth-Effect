@@ -468,6 +468,8 @@ public void makeShadowSquareTopRight (int topLeftDudePosX, int topLeftDudePosY, 
 		// Right wall
 		spawnTombRect(7000,-750,7000,1000,"rightWall");
 		
+		// Kill player when they fall
+		
 		// First floor
 		
 		spawnTombRect(350,40,500,791,"ground");
@@ -569,20 +571,19 @@ public void makeShadowSquareTopRight (int topLeftDudePosX, int topLeftDudePosY, 
 		
 		// Sixth floor
 		
-		spawnTombRect(4863,-69,4895,517,"rightWall");
+		spawnTombRect(4863+32,-69,4895+32,517,"rightWall");
 		
-		spawnTombRect(4330,155,4800,188,"ground");
-		shadowDudePatrol (4335,110,4374,110,2);
-		makeShadowSquare(4400,60,70,75,3,true);
-		makeShadowSquare(4700,60,70,75,3,true);
+		spawnTombRect(4330,155,4832,188,"ground");
+		makeShadowSquare(4400,40,75,80,1.8f,true);
+		makeShadowSquare(4700,40,75,80,1.8f,true);
 		
-		spawnTombRect(4519,308,4893,340,"ground");
-		shadowDudePatrol (4519,261,4857,261,2);
+		spawnTombRect(4519,308+32,4893+32,340+32,"ground");
+		shadowDudePatrol (4519,261+32,4857,261+32,2);
 		
-		spawnTombRect(4430,460,4815,492,"ground");
-		shadowDudePatrol (4507,343,4507,415,1.7f);
-		makeShadowSquare(4576,340,70,75,2.5f,false);
-		shadowDudePatrol (4788,343,4788,415,1.7f);
+		spawnTombRect(4430,460+48,4815,492+48,"ground");
+		shadowDudePatrol (4500,343+48,4500,415+48,1f);
+		makeShadowSquare(4575,340+48,75,80,1.5f,false);
+		shadowDudePatrol (4790,343+48,4790,415+48,1f);
 		
 		// Seventh floor
 		
@@ -595,11 +596,11 @@ public void makeShadowSquareTopRight (int topLeftDudePosX, int topLeftDudePosY, 
 		c.setZ(-2);
 		
 		spawnTombRect(4794,596,5465+32,628,"ground");
-		makeShadowSquareTopRight (4998,470, 77, 82,2 ,true);
-		makeShadowSquareTopLeft (5198,470, 77, 82,2 ,false);
+		makeShadowSquareTopRight (4998,470, 80, 85,1.7f ,true);
+		makeShadowSquareTopLeft (5198,470, 80, 85,1.7f ,false);
 		
 		spawnTombRect(4972+32,811,5604,843,"ground");
-		makeShadowRectangle (4950,764,135,125,5,3,2,false);
+		makeShadowRectangle (4965,764,250,250,3,2,1.2f,false);
 		
 		spawnTombRect(4888,1061,5480,1093,"ground");
 		for(int i=0; i <4; i++) {
@@ -608,8 +609,8 @@ public void makeShadowSquareTopRight (int topLeftDudePosX, int topLeftDudePosY, 
 		for(int i=0; i <4; i++) {
 			u = new shadowDude(5323,1014 - i*50);
 		}
-		lightDudePatrol (5015,890,5131,890,0.7f);
-		lightDudePatrol (5314,890,5460,890,0.7f);
+		lightDudePatrol (5015,890,5131,890,0.9f);
+		lightDudePatrol (5314,890,5460,890,0.9f);
 		
 		// Eighth floor
 		
@@ -655,7 +656,7 @@ public void makeShadowSquareTopRight (int topLeftDudePosX, int topLeftDudePosY, 
 			u = new shadowDude (7656,1016 - i*50);
 		}
 		
-		makeShadowSquare(7720,1017,99,99,2.8f,false);
+		makeShadowSquare(7770,1017,99,99,2f,false);
 		
 		spawnTombRect(8082+73,1062,8300,1094,"ground");
 		
@@ -665,10 +666,10 @@ public void makeShadowSquareTopRight (int topLeftDudePosX, int topLeftDudePosY, 
 		shadowDudePatrol (6351,1117,6682,1117,3);
 		shadowDudePatrol (6844,1095,6844,1117,1);
 		shadowDudePatrol (7037,1117,7037,1095,1);
-		lightDudePatrol (6796, 1117, 7070,1117,3.5f);
+		lightDudePatrol (6796, 1117, 7070,1117,3f);
 		
 		spawnTombRect(7103+73,1162,7303,1194,"ground");
-		shadowDudePatrol (7169,1117,7350,1117,4);
+		shadowDudePatrol (7169,1117,7350,1117,2);
 		
 		spawnTombRect(7376,1162,7464,1194,"ground");
 		
@@ -683,7 +684,7 @@ public void makeShadowSquareTopRight (int topLeftDudePosX, int topLeftDudePosY, 
 		u = new shadowDude(7060,1215);
 		
 		spawnTombRect(7376+73,1262,8300,1294,"ground");
-		makeShadowSquare(7494,1120,75,80,2.5f,true);
+		makeShadowSquare(7494,1120,80,85,1.5f,true);
 		u = new shadowDude(8206,1218);
 		
 		// Tenth floor
@@ -864,7 +865,7 @@ public void makeShadowSquareTopRight (int topLeftDudePosX, int topLeftDudePosY, 
 			      1150-30 - 35 - 32 - 64*8 - 46 - 50*2 + 10,
 			      currPlayer.getIntX() + 130,
 			      1150-30 - 35 - 32 - 64*8 - 46 - 50*2 + 10,
-			      2.7f);
+			      2.6f);
 		
 		// Eighth Platform
 		spawnReloadableTombRect(currPlayer.getIntX() + 150,
