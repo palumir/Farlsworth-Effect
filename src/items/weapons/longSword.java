@@ -14,21 +14,21 @@ import units.player;
 import utilities.saveState;
 import zones.farmLand.sheepFarm;
 
-public class dagger extends weapon {
+public class longSword extends weapon {
 	////////////////
 	/// DEFAULTS ///
 	////////////////
 	// Weapon name
-	public static String DEFAULT_WEAPON_NAME = "Dagger";
+	public static String DEFAULT_WEAPON_NAME = "Long Sword";
 	
 	// Weapon stats.
-	static private int DEFAULT_ATTACK_DAMAGE = 2;//2;
-	static private float DEFAULT_ATTACK_TIME = 0.30f;//0.30f;
-	static private float DEFAULT_BACKSWING = 0.1f;
-	static private int DEFAULT_ATTACK_WIDTH = 50;
-	static private int DEFAULT_ATTACK_LENGTH = 18;
-	static private float DEFAULT_CRIT_CHANCE = .2f;
-	static private float DEFAULT_CRIT_DAMAGE = 2f;
+	static private int DEFAULT_ATTACK_DAMAGE = 4; //2;
+	static private float DEFAULT_ATTACK_TIME = 0.5f; //0.30f;
+	static private float DEFAULT_BACKSWING = 0.15f;
+	static private int DEFAULT_ATTACK_WIDTH = 70;
+	static private int DEFAULT_ATTACK_LENGTH = 30;
+	static private float DEFAULT_CRIT_CHANCE = .15f;
+	static private float DEFAULT_CRIT_DAMAGE = 3f;
 	static private float DEFAULT_VARIABILITY = 0f;
 	
 	// Attack sound
@@ -53,7 +53,7 @@ public class dagger extends weapon {
 	///////////////
 	
 	// In inventory.
-	public dagger() {
+	public longSword() {
 		super(DEFAULT_WEAPON_NAME,weaponSpriteSheet);
 		
 		// Weapon stats.
@@ -61,7 +61,7 @@ public class dagger extends weapon {
 	}
 	
 	// On floor.
-	public dagger(int x, int y) {
+	public longSword(int x, int y) {
 		super(DEFAULT_WEAPON_NAME,x,y);
 		
 		// Weapon stats.
@@ -90,8 +90,8 @@ public class dagger extends weapon {
 		critDamage = DEFAULT_CRIT_DAMAGE;
 		attackVariability = DEFAULT_VARIABILITY;
 		backSwing = DEFAULT_BACKSWING;
-		setRange("short");
-		setSpeed("fast");
+		setRange("medium");
+		setSpeed("medium");
 	}
 	
 	// Get item ref.

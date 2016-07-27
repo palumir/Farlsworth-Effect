@@ -19,7 +19,7 @@ public class normalBottle extends bottle {
 	/// DEFAULTS ///
 	////////////////
 	// Bottle name
-	public static String DEFAULT_BOTTLE_NAME = "bottle";
+	public static String DEFAULT_BOTTLE_NAME = "Bottle";
 	
 	// Bottle stats.
 	public static int DEFAULT_MAX_CHARGES = 3;

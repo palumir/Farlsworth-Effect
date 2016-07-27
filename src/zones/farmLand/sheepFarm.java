@@ -79,9 +79,6 @@ public class sheepFarm extends zone {
 	// Static fence so farlsworth can be attached to it.
 	public static ArrayList<chunk> farlsworthFence;
 	
-	// Lightning tree
-	public static tree lightningTree;
-	
 	// References we will use throughout.
 	static unit u;
 	static chunk c;

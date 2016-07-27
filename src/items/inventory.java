@@ -355,6 +355,8 @@ public class inventory extends interfaceObject {
 										(int)(gameCanvas.getScaleY()*(getIntY()+ 34 + adjustY + 34)));
 								g.drawString("Range: " + currentWeapon.getRange(), (int)(gameCanvas.getScaleX()*(getIntX() + (int) (Math.sqrt(DEFAULT_INVENTORY_SIZE)*DEFAULT_SLOT_SIZE) + selectedSlotTextAdjustX + adjustX)) - g.getFontMetrics().stringWidth("Range: " + currentWeapon.getRange())/2, 
 										(int)(gameCanvas.getScaleY()*(getIntY()+ 34 + adjustY + 48)));
+								g.drawString("Crit: " + ((int)(currentWeapon.critChance*100)) + "%", (int)(gameCanvas.getScaleX()*(getIntX() + (int) (Math.sqrt(DEFAULT_INVENTORY_SIZE)*DEFAULT_SLOT_SIZE) + selectedSlotTextAdjustX + adjustX)) - g.getFontMetrics().stringWidth("Crit: " + ((int)(currentWeapon.critChance*100)) + "%")/2, 
+										(int)(gameCanvas.getScaleY()*(getIntY()+ 34 + adjustY + 48+14)));
 								
 								// Draw weapon properties
 								int startY = getIntY()+ 34 + adjustY + 48 + 18;

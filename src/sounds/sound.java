@@ -24,7 +24,7 @@ public class sound extends Thread {
 
     private Position curPosition;
 
-    private final int EXTERNAL_BUFFER_SIZE = 64; // 128Kb DEFAULT
+    private final int EXTERNAL_BUFFER_SIZE = 640; // 128Kb DEFAULT
     
     // Where to play and at what radius.
     private int radius = 0; 

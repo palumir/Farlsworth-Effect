@@ -901,7 +901,7 @@ public class farlsworth extends boss {
 				// Ignite tree
 				if(sequencePart == 4 && time.getTime() - waitStart > waitFor*1000) {
 					
-					sheepFarm.lightningTree.ignite();
+					forest.lightningTree.ignite();
 					
 					// Wait.
 					waiting = true;
