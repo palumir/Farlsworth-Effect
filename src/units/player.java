@@ -34,6 +34,7 @@ import modes.topDown;
 import sounds.music;
 import sounds.sound;
 import terrain.chunk;
+import terrain.atmosphericEffects.storm;
 import utilities.saveState;
 import utilities.time;
 import utilities.utility;
@@ -387,6 +388,13 @@ public class player extends unit {
 	// Make the player the main player.
 	public void makeCurrentPlayer() {
 		setCurrentPlayer(this);
+	}
+	
+	// Make the current player stop doing things
+	public void stop() {
+		stopMove("all");
+		stopAttack();
+		stopJump();
 	}
 	
 	// Responding to key presses.

@@ -267,6 +267,12 @@ public class forest extends zone {
 		// Denmother area
 		createDenmotherArea();
 		
+		// Play fire sound
+		if(isOnFire != null && isOnFire.isCompleted()) {
+			sound s = new sound(fire.forestFire);
+			s.start();
+		}
+		
 		// Sort chunks.
 		chunk.sortChunks();
 		

@@ -15,6 +15,7 @@ import terrain.chunk;
 import terrain.region;
 import terrain.atmosphericEffects.atmosphericEffect;
 import terrain.atmosphericEffects.fog;
+import terrain.atmosphericEffects.storm;
 import units.player;
 import units.unit;
 import units.unitType;
@@ -86,6 +87,7 @@ public abstract class utility {
 		drawnObject.initiate();
 		interfaceObject.initiate();
 		fog.initiate();
+		storm.initiate();
 		interactBox.initiate();
 		region.initiate();
 		lightSource.initiate();

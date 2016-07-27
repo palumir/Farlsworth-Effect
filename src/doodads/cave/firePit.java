@@ -53,8 +53,6 @@ public class firePit extends chunk {
 	
 	// Firepit sound
 	private static String firePitSound = "sounds/effects/doodads/firePit.wav";
-	private static long lastFireSound = 0;
-	private static float playEvery = 28.6f;
 	
 	////////////////
 	/// FIELDS /////
@@ -83,7 +81,7 @@ public class firePit extends chunk {
 		startOfConversation = new textSeries(null, "A fire pit.");
 		
 		// If player doesn't have torch.
-		if(!player.getPlayer().getPlayerInventory().hasItem(torch.weaponRef)) {
+		if(!player.getPlayer().getPlayerInventory().hasItem("Torch")) {
 			s = startOfConversation.addChild(null, "You have nothing to light.");
 			s = s.addChild(null, "You'd probably just set everything on fire anyway.");
 			s.setEnd();
@@ -115,23 +113,14 @@ public class firePit extends chunk {
 	public void update() {
 		doInteractStuff();
 		if(fireAnimation != null) fireAnimation.playAnimation();
-		playFireSound();
 	}
 	
 	// Play fire sound
 	public void playFireSound() {
-		if(lastFireSound == 0) {
-			lastFireSound = time.getTime();
-			sound s = new sound(firePitSound);
-			s.setPosition(getIntX(),getIntY(), sound.DEFAULT_SOUND_RADIUS);
-			s.start();
-		}
-		else if(time.getTime() - lastFireSound > playEvery*1000) {
-			lastFireSound = time.getTime();
-			sound s = new sound(firePitSound);
-			s.setPosition(getIntX(),getIntY(), sound.DEFAULT_SOUND_RADIUS);
-			s.start();
-		}
+		sound s = new sound(firePitSound);
+		s.setLoop(true);
+		s.setPosition(getIntX(),getIntY(), sound.DEFAULT_SOUND_RADIUS);
+		s.start();
 	}
 	
 	// Interact with object. Should be over-ridden.
@@ -153,6 +142,9 @@ public class firePit extends chunk {
 			setHeight(DEFAULT_PLATFORMER_HEIGHT);
 			setWidth(DEFAULT_PLATFORMER_WIDTH);
 		}
+		
+		// Play fire sound.
+		playFireSound();
 		
 		// Add animation
 		fireAnimation = new animation("fire", typeReference.getChunkTypeSpriteSheet().getAnimation(0), 0, 3, 0.43f);

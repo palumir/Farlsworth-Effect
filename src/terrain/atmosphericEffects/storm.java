@@ -33,7 +33,7 @@ public class storm extends atmosphericEffect {
 	public static storm currentStorm;
 	
 	// Animation
-	private animation rainAnimation;
+	private static animation rainAnimation;
 	
 	// Sprite stuff.
 	private static String DEFAULT_CHUNK_SPRITESHEET = "images/effects/rain.png";
@@ -42,15 +42,6 @@ public class storm extends atmosphericEffect {
 	private float fadeOver = 0;
 	private long stormStart = 0;
 	
-	// The actual type.
-	private static spriteSheet rainSheet = new spriteSheet(new spriteSheetInfo(
-			DEFAULT_CHUNK_SPRITESHEET, 
-			600, 
-			600,
-			0,
-			0
-			));
-	
 	public storm() {
 		super();
 		currentStorm = this;
@@ -58,11 +49,14 @@ public class storm extends atmosphericEffect {
 		// Storm start time.
 		stormStart = time.getTime();
 		
+		// Play rain.
+		System.out.println("STARTED");
+		sound s = new sound(rainSound);
+		s.setLoop(true);
+		s.start();
+		
 		// Be behind fog.
 		setZ(-5);
-		
-		// Add rain animation
-		rainAnimation = new animation("rain",rainSheet.getAnimation(0), 0, 5, 0.4f);
 	}
 	
 	public storm(float fadeOver) {
@@ -70,29 +64,30 @@ public class storm extends atmosphericEffect {
 		currentStorm = this;
 		
 		// Storm start time.
+		System.out.println("FADING");
 		stormStart = time.getTime();
 		this.fadeOver = fadeOver;
 		
+		// Play rain
+		sound s = new sound(rainSound);
+		s.setLoop(true);
+		s.fadeIn(fadeOver);
+		s.start();
+		
 		// Be behind fog.
 		setZ(-5);
-		
-		// Add rain animation
-		rainAnimation = new animation("rain",rainSheet.getAnimation(0), 0, 5, 0.4f);
 	}
 	
 	// Paint the fog
 	@Override
 	public void drawObject(Graphics g) {
-			
-			// Draw the fog.
-			g.setColor(Color.white);
-		
+		// Draw the fog.
+		g.setColor(Color.white);
 	}
 	
 	// Update.
 	public void update() {
 		if(rainAnimation != null) rainAnimation.playAnimation();
-		playSound();
 		makeRainSplashes();
 		doLightning();
 	}
@@ -149,31 +144,6 @@ public class storm extends atmosphericEffect {
 	
 	long lastRainSound = 0;
 	String rainSound = "sounds/effects/weather/rain.wav";
-	float playEvery = 10f;
-	
-	// Play sound.
-	public void playSound() {
-		
-		// Play rain sound
-		if(lastRainSound == 0) {
-			lastRainSound = time.getTime();
-			if(fadeOver == 0) {
-				sound s = new sound(rainSound);
-				s.start();
-				
-			}
-			else {
-				sound s = new sound(rainSound, fadeOver);
-				s.start();
-			}
-		}
-		
-		else if(time.getTime() - lastRainSound > playEvery*1000) {
-			lastRainSound = time.getTime();
-			sound s = new sound(rainSound);
-			s.start();
-		}
-	}
 	
 	// How often to make rainsplash
 	float howOftenToRainSplash = 0.015f;

@@ -64,7 +64,8 @@ public class inventory extends interfaceObject {
 	private String unequipWeapon;
 	private String UIMove;
 	
-	// Have they been given the pressSpaceToAttack message?
+	// Tutorial messages
+	private static event pressEToEquip;
 	private static event pressSpaceToAttack;
 	
 	///////////////
@@ -76,6 +77,7 @@ public class inventory extends interfaceObject {
 		
 		// Create the event
 		pressSpaceToAttack = new event("inventoryPressSpaceToAttack");
+		pressEToEquip = new event("inventoryPressEToEquipTheDagger");
 		
 		// Set sounds.
 		openInventory = "sounds/effects/player/UI/openInventory.wav";
@@ -89,13 +91,23 @@ public class inventory extends interfaceObject {
 	public void toggleDisplay() {
 		setDisplayOn(!isDisplayOn());
 		if(displayOn) {
+			
+			// Stop the player
+			player.getPlayer().stop();
+			
+			// Set pressEToEquip to be true.
+			if(!pressEToEquip.isCompleted() && player.getPlayer().getPlayerInventory().hasItem("Dagger")) {
+				pressEToEquip.setCompleted(true);
+				tooltipString t = new tooltipString("Press 'e' to equip the dagger.");
+			}
+			
 			sound s = new sound(openInventory);
 			s.start();
 		}
 		else { 
 			
 			// Set pressSpaceToAttack to be true.
-			if(!pressSpaceToAttack.isCompleted() && player.getPlayer().getEquippedWeapon().name.equals("Dagger")) {
+			if(!pressSpaceToAttack.isCompleted() &&  player.getPlayer().getEquippedWeapon() != null && player.getPlayer().getEquippedWeapon().name.equals("Dagger")) {
 				pressSpaceToAttack.setCompleted(true);
 				tooltipString t = new tooltipString("Press or hold 'space' to attack.");
 			}
@@ -119,16 +131,16 @@ public class inventory extends interfaceObject {
 	
 	// Pickup an item into inventory.
 	public void pickUp(item i) {
-		if(!hasItem(i)) {
+		if(!hasItem(i.name)) {
 			getItems().add(i);
 		}
 	}
 	
 	// Check if inventory has item with the same name.
-	public boolean hasItem(item i) {
+	public boolean hasItem(String i) {
 		if(getItems() != null) {
 			for(int j = 0; j < getItems().size(); j++) {
-				if(getItems().get(j) != null  && getItems().get(j).name.equals(i.name)) return true;
+				if(getItems().get(j) != null  && getItems().get(j).name.equals(i)) return true;
 			}
 		}
 		return false;

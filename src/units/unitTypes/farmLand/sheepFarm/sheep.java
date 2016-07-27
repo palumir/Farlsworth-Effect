@@ -124,7 +124,7 @@ public class sheep extends unit {
 			startOfConversation = new textSeries(null, "Dude.");
 			s = startOfConversation.addChild(null, "I'm unkillable.");
 			s = s.addChild(null, "Frig off.");
-			s = s.addChild(null, "I mean...  baah.");
+			s = s.addChild(null, "I mean... uh...  baah.");
 			s.setEnd();
 		}
 		
@@ -286,7 +286,7 @@ public class sheep extends unit {
 	
 	// Meander the sheep
 	public void meander() {
-		if(isMeanders() && interactSequence != null && !interactSequence.isDisplayOn()) {
+		if(isMeanders() && (interactSequence == null || (interactSequence != null && !interactSequence.isDisplayOn()))) {
 			// Create a new random bleet interval
 			float newRandomBleetInterval = 2.5f + utility.RNG.nextInt(18);
 			

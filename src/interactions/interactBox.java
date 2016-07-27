@@ -11,6 +11,7 @@ import drawing.gameCanvas;
 import drawing.spriteSheet;
 import drawing.userInterface.interfaceObject;
 import sounds.sound;
+import units.player;
 
 public class interactBox extends interfaceObject  {
 	
@@ -221,6 +222,10 @@ public class interactBox extends interfaceObject  {
 	// Display on.
 	public void toggleDisplay() {
 		setDisplayOn(!isDisplayOn());
+		if(isDisplayOn()) {
+			// Stop the player
+			player.getPlayer().stop();
+		}
 		if(getCurrentDisplay() != this) {
 			setCurrentDisplay(this);
 		}
