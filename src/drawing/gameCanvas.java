@@ -122,12 +122,12 @@ public class gameCanvas extends JComponent {
 		this.addKeyListener(new KeyListener() {
 			@Override
 			public void keyPressed(KeyEvent k) {
-				if(player.getCurrentPlayer()!=null) player.getCurrentPlayer().keyPressed(k);
+				if(player.getPlayer()!=null) player.getPlayer().keyPressed(k);
 			}
 
 			@Override
 			public void keyReleased(KeyEvent k) {
-				if(player.getCurrentPlayer()!=null) player.getCurrentPlayer().keyReleased(k);
+				if(player.getPlayer()!=null) player.getPlayer().keyReleased(k);
 			} 
 
 			@Override

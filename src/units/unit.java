@@ -31,6 +31,7 @@ import units.bosses.farlsworth;
 import units.unitTypes.farmLand.sheepFarm.yellowWolf;
 import utilities.intTuple;
 import utilities.mathUtils;
+import utilities.stringUtils;
 import utilities.time;
 import utilities.utility;
 
@@ -280,6 +281,23 @@ public abstract class unit extends drawnObject  {
 	public void moveInPlace() {
 		oldMoveSpeed = moveSpeed;
 		moveSpeed = 0.001f;
+	}
+	
+	// Face toward player
+	public void faceTowardPlayer() {
+		int angle = this.getAngleBetween(player.getPlayer());
+		if(angle >= 45 && angle <= 45+90) {
+			this.facingDirection = "Right";
+		}
+		else if(angle >= 45+90 && angle <= 45+90+90) {
+			this.facingDirection = "Down";
+		}
+		else if(angle >= 45+90+90 && angle <= 45+90+90+90) {
+			this.facingDirection = "Left";
+		}
+		else {
+			this.facingDirection = "Up";
+		}
 	}
 	
 	// Move in place.
@@ -1124,9 +1142,9 @@ public abstract class unit extends drawnObject  {
 	// Move function
 	public void move(float moveX, float moveY) {
 		
-		if(player.getCurrentPlayer() != null && 
-			player.getCurrentPlayer().getCurrentZone()!=null && 
-			player.getCurrentPlayer().getCurrentZone().isZoneLoaded()) {
+		if(player.getPlayer() != null && 
+			player.getPlayer().getCurrentZone()!=null && 
+			player.getPlayer().getCurrentZone().isZoneLoaded()) {
 			
 			// Actual move x and y when all is said and done.
 			float actualMoveX = moveX;

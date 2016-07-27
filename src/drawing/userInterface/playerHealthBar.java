@@ -60,7 +60,7 @@ public class playerHealthBar extends interfaceObject  {
 		g.drawString("HP", (int)(gameCanvas.getScaleX()*(getIntX())), (int)(gameCanvas.getScaleY()*(getIntY() + hpAdjustY+12)));
 
 		// Load every chunk.
-		player currPlayer = player.getCurrentPlayer();
+		player currPlayer = player.getPlayer();
 		int addPerChunk = 0;
 		for(int i = 0; i < currPlayer.getHealthPoints(); i++) {
 			g.setColor(DEFAULT_BORDER_COLOR);
@@ -102,11 +102,11 @@ public class playerHealthBar extends interfaceObject  {
 		// Draw bottle UI.
 		int bottleAdjustX = 9;
 		int bottleAdjustY = /*energyAdjustY + energyChunkSize*/ + energyChunkSize/3;
-		if(player.getCurrentPlayer().getEquippedBottle() != null) {
+		if(player.getPlayer().getEquippedBottle() != null) {
 			bottleAdjustX += 0;
 			bottleAdjustY += 53-25;
 			
-			bottle b = player.getCurrentPlayer().getEquippedBottle();
+			bottle b = player.getPlayer().getEquippedBottle();
 			g.setColor(DEFAULT_BOTTLE_COLOR);
 			g.drawImage(b.getImage(), 
 					(int)(gameCanvas.getScaleX()*(getIntX() + bottleAdjustX)), 

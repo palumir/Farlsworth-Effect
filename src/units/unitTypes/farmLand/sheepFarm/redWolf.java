@@ -308,8 +308,8 @@ public class redWolf extends wolf {
 	@Override
 	public void spawnClaw() {	
 		int howFarBack = howFarBackBase + utility.RNG.nextInt(howFarBackRandom);
-		int spawnX = player.getCurrentPlayer().getIntX()+player.getCurrentPlayer().getWidth()/2;
-		int spawnY = player.getCurrentPlayer().getIntY()+player.getCurrentPlayer().getHeight()/2;
+		int spawnX = player.getPlayer().getIntX()+player.getPlayer().getWidth()/2;
+		int spawnY = player.getPlayer().getIntY()+player.getPlayer().getHeight()/2;
 		int degree = (int) mathUtils.angleBetweenTwoPointsWithFixedPoint(
 				spawnX, spawnY,
 				this.getIntX()+this.getWidth()/2, this.getIntY()+this.getHeight()/2, 

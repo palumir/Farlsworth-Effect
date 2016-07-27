@@ -780,7 +780,7 @@ public void makeShadowSquareTopRight (int topLeftDudePosX, int topLeftDudePosY, 
 	
 	// Create shadow dude elevator
 	public static void createShadowElevatorAroundPlayer(boolean eyeless) {
-		player currPlayer = player.getCurrentPlayer();
+		player currPlayer = player.getPlayer();
 		
 		// Left wall.
 		shadowElevator = createRectangleOfShadows(currPlayer.getIntX() - 590, 
@@ -1159,7 +1159,7 @@ public void makeShadowSquareTopRight (int topLeftDudePosX, int topLeftDudePosY, 
 	
 	// Deal with the first well we encounters.
 	public void dealWithRegionStuff() {
-		player currPlayer = player.getCurrentPlayer();
+		player currPlayer = player.getPlayer();
 		if(currPlayer != null && currPlayer.isWithin(9335+600,744,9817+600,1268) && shadowElevatorStarted!=null && !shadowElevatorStarted.isCompleted()) {
 			shadowElevatorStarted.setCompleted(true);
 			shadowElevatorFirstTime = true;

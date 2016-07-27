@@ -114,7 +114,7 @@ public class water extends chunk {
 		if(interactSequence != null) {
 			// Save
 			if(!haveSaved && interactSequence.getTheText().getButtonText().equals("Yes")) {
-				if(player.getCurrentPlayer().getEquippedBottle()!=null) player.getCurrentPlayer().getEquippedBottle().refill();
+				if(player.getPlayer().getEquippedBottle()!=null) player.getPlayer().getEquippedBottle().refill();
 				saveState.createSaveState();
 				haveSaved = true;
 				interactSequence.toggleDisplay();
@@ -139,7 +139,7 @@ public class water extends chunk {
 	public void interactWith() {
 		
 		// Not in combat.
-		if(player.getCurrentPlayer().getInCombatWith().size() <= 0) {
+		if(player.getPlayer().getInCombatWith().size() <= 0) {
 			// Play sound
 			sound s = new sound(waterSplash);
 			s.start();

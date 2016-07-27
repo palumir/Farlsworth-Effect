@@ -215,8 +215,8 @@ public class blackWolf extends wolf {
 
 	@Override
 	public void spawnClaw() {
-		int spawnX = player.getCurrentPlayer().getIntX()+player.getCurrentPlayer().getWidth()/2;
-		int spawnY = player.getCurrentPlayer().getIntY()+player.getCurrentPlayer().getHeight()/2;
+		int spawnX = player.getPlayer().getIntX()+player.getPlayer().getWidth()/2;
+		int spawnY = player.getPlayer().getIntY()+player.getPlayer().getHeight()/2;
 		
 		// Change X and Y by
 		int changeX = moveClawBy - 2*utility.RNG.nextInt(moveClawBy+1);

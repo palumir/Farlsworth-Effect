@@ -2232,12 +2232,12 @@ public class sheepFarm extends zone {
 		stormInProgress = new event("sheepFarmStormInProgress");
 		
 		// Is the zone on fire?
-		isOnFire = new event("sheepFarmIsOnFire");
+		isOnFire = new event("forestIsOnFire");
 	}
 	
 	// Deal with the first well we encounters.
 	public void dealWithRegionStuff() {
-		player currPlayer = player.getCurrentPlayer();
+		player currPlayer = player.getPlayer();
 		if(currPlayer != null && currPlayer.isWithin(1138,-484,1666,-46) && wellTooltipLoaded != null && !wellTooltipLoaded.isCompleted()) {
 			wellTooltipLoaded.setCompleted(true);
 			tooltipString t = new tooltipString("Press 'e' on a well or river to save and heal.");

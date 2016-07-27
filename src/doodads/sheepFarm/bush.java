@@ -134,10 +134,10 @@ public class bush extends chunk {
 			s.start();
 		
 			if(randomBetween < 0) {
-				player.getCurrentPlayer().hurt(randomBetween*(-1), 1);
+				player.getPlayer().hurt(randomBetween*(-1), 1);
 			}
 			else {
-				player.getCurrentPlayer().heal(randomBetween);
+				player.getPlayer().heal(randomBetween);
 			}
 			hasEatenBerry = true;
 		}

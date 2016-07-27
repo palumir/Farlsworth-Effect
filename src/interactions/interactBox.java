@@ -160,7 +160,7 @@ public class interactBox extends interfaceObject  {
 			// Button
 			if(buttonMode) {
 				
-				if(isUnit) {
+				/*if(isUnit) {
 					// Set font.
 					g.setFont(DEFAULT_FONT_TITLE);
 					
@@ -172,7 +172,7 @@ public class interactBox extends interfaceObject  {
 							(int)(gameCanvas.getScaleY()*getIntY()) + 
 							(int)(gameCanvas.getScaleY()*background.getHeight()/5) + 
 							(int)(gameCanvas.getScaleY()*4));
-				}
+				}*/
 				
 				
 				// Set font.

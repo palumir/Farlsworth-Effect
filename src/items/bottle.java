@@ -77,8 +77,8 @@ public abstract class bottle extends item {
 		equippable = true;
 		
 		// Break up the spriteSheet. Assumed to be regular human character size, for now.
-		if(player.getCurrentPlayer()!=null) {
-			if(player.getCurrentPlayer().getPlayerInventory().hasItem(this)) {
+		if(player.getPlayer()!=null) {
+			if(player.getPlayer().getPlayerInventory().hasItem(this)) {
 				setDrawObject(false);
 			}
 		}
@@ -96,7 +96,7 @@ public abstract class bottle extends item {
 		}
 		
 		// Equip the weapon.
-		player.getCurrentPlayer().setEquippedBottle(this);
+		player.getPlayer().setEquippedBottle(this);
 		
 		// Change the player's stats based on the weapon's strength and their
 		// level.
@@ -105,7 +105,7 @@ public abstract class bottle extends item {
 	
 	// Use charge.
 	public void useCharge() {
-		player currPlayer = player.getCurrentPlayer();
+		player currPlayer = player.getPlayer();
 		if(getChargesLeft() > 0) {
 			sound s = new sound(bottleDrink);
 			s.start();
@@ -118,7 +118,7 @@ public abstract class bottle extends item {
 	// Update.
 	@Override
 	public void update() {
-		if(this.isDrawObject() && this.collides(this.getIntX(), this.getIntY(), player.getCurrentPlayer())) {
+		if(this.isDrawObject() && this.collides(this.getIntX(), this.getIntY(), player.getPlayer())) {
 			pickUp();
 		}
 	}

@@ -116,7 +116,7 @@ public class farmer extends unit {
 		s = s.addChild(null, "I require wool from a particular sheep.");
 		s = s.addChild(null, "He never makes it easy.");
 		s = s.addChild(null, "But he needs to be sheared.");
-		s = s.addChild(null, "You'll find him in the pen to the far East.");
+		s = s.addChild(null, "You'll find him in Eastern pen.");
 		s = s.addChild(null, "Can you collect his wool for me?");
 		
 		// Saying yes.
@@ -210,7 +210,7 @@ public class farmer extends unit {
 	public void interactWith() { 
 		if(!farlsworthQuest.completed())  {
 			farlsworthQuest = makeQuest();
-			this.facingDirection = stringUtils.oppositeDir(player.getCurrentPlayer().getFacingDirection());
+			faceTowardPlayer();
 			farlsworthQuest.getInteractBox().toggleDisplay();
 		}
 	}
@@ -221,7 +221,7 @@ public class farmer extends unit {
 	
 	// Tutorial stuff.
 	public void doTutorialStuff() {
-		player currPlayer = player.getCurrentPlayer();
+		player currPlayer = player.getPlayer();
 		if(!tooltipShown && farlsworthQuest != null && !farlsworthQuest.isStarted() && currPlayer != null && currPlayer.isWithin(-1017,-283,-450,25)) {
 			tooltipShown = true;
 			tooltipString t = new tooltipString("Press 'e' to interact with something.");

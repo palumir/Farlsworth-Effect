@@ -615,7 +615,7 @@ public class denmother extends boss {
 	public void potentiallyStartFight() {
 		
 		// Player	
-		player currPlayer = player.getCurrentPlayer();
+		player currPlayer = player.getPlayer();
 		
 		// Start the fight.
 		if(!fightInProgress && currPlayer != null && fightRegion != null && fightRegion.contains(currPlayer)) {
@@ -895,7 +895,7 @@ public class denmother extends boss {
 	public void dealWithJumping() {
 		if(doingSpecialAttack) {
 			// Get current player.
-			player currPlayer = player.getCurrentPlayer();
+			player currPlayer = player.getPlayer();
 			
 			// Jump to the location.
 			if(jumping) {
@@ -1055,14 +1055,14 @@ public class denmother extends boss {
 	
 	// Kill player if out of region.
 	public void killPlayerIfOutOfRegion() {
-		if(!fightRegion.contains(player.getCurrentPlayer()) && outOfRegionStart == 0) {
+		if(!fightRegion.contains(player.getPlayer()) && outOfRegionStart == 0) {
 			outOfRegionStart = time.getTime();
 		}
-		else if(fightRegion.contains(player.getCurrentPlayer())) {
+		else if(fightRegion.contains(player.getPlayer())) {
 			outOfRegionStart = 0;
 		}
 		else if(outOfRegionStart != 0 && time.getTime() - outOfRegionStart > outOfRegionKillTimer*1000) {
-			player.getCurrentPlayer().hurt(player.getCurrentPlayer().getHealthPoints(), 1f);
+			player.getPlayer().hurt(player.getPlayer().getHealthPoints(), 1f);
 		}
 		
 	}

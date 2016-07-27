@@ -1,4 +1,4 @@
-package effects.effectTypes;
+package effects.projectiles;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -9,6 +9,7 @@ import drawing.spriteSheet.spriteSheetInfo;
 import effects.effect;
 import effects.effectType;
 import effects.projectile;
+import effects.effectTypes.fire;
 import modes.mode;
 import sounds.sound;
 import terrain.chunk;
@@ -21,11 +22,11 @@ import utilities.time;
 import utilities.utility;
 import zones.zone;
 
-public class rockPiece extends projectile {
+public class spinningFireLog extends projectile {
 	
 	// Default dimensions.
-	public static int DEFAULT_SPRITE_WIDTH = 11;
-	public static int DEFAULT_SPRITE_HEIGHT = 11;
+	public static int DEFAULT_SPRITE_WIDTH = 30;
+	public static int DEFAULT_SPRITE_HEIGHT = 30;
 	
 	// Platformer real dimensions
 	public static int DEFAULT_PLATFORMER_HEIGHT = DEFAULT_SPRITE_WIDTH;
@@ -42,13 +43,16 @@ public class rockPiece extends projectile {
 	////////////////
 	
 	// Default name.
-	private static String DEFAULT_EFFECT_NAME = "rockPiece";
+	private static String DEFAULT_EFFECT_NAME = "spinningFireLog";
 	
 	// Effect sprite stuff.
 	private static String DEFAULT_EFFECT_SPRITESHEET = "images/effects/" + DEFAULT_EFFECT_NAME + ".png";
 	
 	// Duration
-	private static float DEFAULT_ANIMATION_DURATION = 10f;
+	private static float DEFAULT_ANIMATION_DURATION = 0.3f;
+	
+	// Movespeed
+	public static int DEFAULT_MOVESPEED = 2;
 	
 	// The actual type.
 	private static effectType theEffectType =
@@ -66,10 +70,11 @@ public class rockPiece extends projectile {
 	/// METHODS ///
 	///////////////
 	// Constructor
-	public rockPiece(int newX, int newY, int newMoveToX, int newMoveToY, int damage, float moveSpeed) {
+	public spinningFireLog(int newX, int newY, int newMoveToX, int newMoveToY, int damage) {
 		super(theEffectType, newX, newY, newMoveToX, newMoveToY, damage);
-		this.moveSpeed = moveSpeed;
-		collisionOn = false;
+		moveSpeed = DEFAULT_MOVESPEED;
+		collisionOn = true;
+		hasATimer = false;
 		setRiseRun();
 	}
 	
@@ -99,13 +104,15 @@ public class rockPiece extends projectile {
 		setFloatX((int)floatX);
 		setFloatY((int)floatY);
 		
-		player currPlayer = player.getCurrentPlayer();
+		player currPlayer = player.getPlayer();
 		
 		boolean isWithin;
 		if(!isAllied()) {
 			// If we hit the player, explode it.
 			isWithin = currPlayer.isWithinRadius(getIntX() + getWidth()/2, getIntY()+getHeight()/2, getWidth()/2);
-			if(isWithin) { 
+			intTuple tupleXY = chunk.collidesWith(this, getIntX() + (int)run, getIntY() + (int)rise);
+			boolean isCollide = (tupleXY.x != 0 || tupleXY.y != 0) && collisionOn;
+			if(isWithin || isCollide) { 
 				currPlayer.hurt(damage, 1);
 				explode();
 			}
@@ -113,7 +120,9 @@ public class rockPiece extends projectile {
 		else {
 			ArrayList<unit> uList = unit.getUnitsInBox(getIntX(), getIntY(), getIntX() + getWidth(), getIntY() + getHeight());
 			isWithin = (uList != null) && ((uList.contains(currPlayer) && (uList.size() > 1)) || (uList.size() >= 1 && !uList.contains(currPlayer)));
-			if(isWithin) {
+			intTuple tupleXY = chunk.collidesWith(this, getIntX() + (int)run, getIntY() + (int)rise);
+			boolean isCollide = (tupleXY.x != 0 || tupleXY.y != 0) && collisionOn;
+			if(isWithin || isCollide) {
 				explode();
 			}
 			
@@ -121,12 +130,11 @@ public class rockPiece extends projectile {
 		
 		// Run animation.
 		if(getCurrentAnimation() != null) getCurrentAnimation().playAnimation();
-		if(time.getTime() - timeStarted >= animationDuration*1000) {
-			explode();
-		}
 	}
 	
 	public void explode() {
+		//poisonExplode p = new poisonExplode(getIntX()-poisonExplode.getDefaultWidth()/2,getIntY()-poisonExplode.getDefaultHeight()/2, isAllied(), damage);
+		fire.igniteRuffageInBox(getIntX()-10, getIntY()-10, getIntX() + getWidth()+10, getIntY() + getHeight()+10);
 		this.destroy();
 	}
 	

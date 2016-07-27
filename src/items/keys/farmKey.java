@@ -57,7 +57,7 @@ public class farmKey extends key {
 	// React to being picked up.
 	@Override
 	public void reactToPickup() {
-		player currPlayer = player.getCurrentPlayer();
+		player currPlayer = player.getPlayer();
 	}
 
 	// Get the item ground image.

@@ -64,7 +64,7 @@ public abstract class utility {
 			}
 			
 			// Update the current zone.
-			player currPlayer = player.getCurrentPlayer();
+			player currPlayer = player.getPlayer();
 			if(currPlayer != null && currPlayer.getCurrentZone() != null) currPlayer.getCurrentZone().update();
 		}
 	

@@ -8,8 +8,8 @@ import drawing.spriteSheet;
 import drawing.animation.animation;
 import drawing.animation.animationPack;
 import effects.effectTypes.lightningStrike;
-import effects.effectTypes.poisonBall;
-import effects.effectTypes.spinningFireLog;
+import effects.projectiles.poisonBall;
+import effects.projectiles.spinningFireLog;
 import drawing.spriteSheet.spriteSheetInfo;
 import interactions.event;
 import interactions.interactBox;
@@ -149,7 +149,7 @@ public class playerOne extends boss {
 	public void doInteractStuff() {
 		
 		// Load player.
-		player currPlayer = player.getCurrentPlayer();
+		player currPlayer = player.getPlayer();
 		
 		// Scenes.
 		if(shadowElevatorSceneInProgress) {
@@ -169,7 +169,7 @@ public class playerOne extends boss {
 				}
 				currentPlayerOne.interactSequence.toggleDisplay();
 				currentPlayerOne.interactSequence.setUnescapable(true);
-				player.getCurrentPlayer().stopMove("all");
+				player.getPlayer().stopMove("all");
 				sequencePart++;
 			}
 			
@@ -272,7 +272,7 @@ public class playerOne extends boss {
 	// Interact with object. 
 	public void interactWith() { 
 		if(interactSequence == null || (interactSequence != null && !interactSequence.isUnescapable())) {
-			this.facingDirection = stringUtils.oppositeDir(player.getCurrentPlayer().getFacingDirection());
+			this.facingDirection = stringUtils.oppositeDir(player.getPlayer().getFacingDirection());
 			interactSequence = makeNormalInteractSequence();
 			interactSequence.toggleDisplay();
 		}

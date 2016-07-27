@@ -327,7 +327,7 @@ public abstract class wolf extends unit {
 			if(clawAttacking) {
 				
 				// Get current player.
-				player currPlayer = player.getCurrentPlayer();
+				player currPlayer = player.getPlayer();
 				
 				// Jump to the location.
 				if(jumping) {
@@ -438,7 +438,7 @@ public abstract class wolf extends unit {
 		// Yeah
 		public void changeCombatBasedOnHowManyUnitsAreFightingThePlayerIronicallyNamedFunctionMetaJokeNobodyWillSee() {
 			// Current player
-			player currPlayer = player.getCurrentPlayer();
+			player currPlayer = player.getPlayer();
 			numWolves = 0;
 			numRedWolves = 0;
 			numBlackWolves = 0;
@@ -497,7 +497,7 @@ public abstract class wolf extends unit {
 		public void updateUnit() {
 			
 			// If player is in radius, follow player, attacking.
-			player currPlayer = player.getCurrentPlayer();
+			player currPlayer = player.getPlayer();
 			int playerX = currPlayer.getIntX() + currPlayer.getWidth()/2;
 			int playerY = currPlayer.getIntY() + currPlayer.getHeight()/2;
 			float howClose = (float) Math.sqrt((playerX - getIntX() - getWidth()/2)*(playerX - getIntX() - getWidth()/2) + (playerY - getIntY() - getHeight()/2)*(playerY - getIntY() - getHeight()/2));

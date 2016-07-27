@@ -80,7 +80,7 @@ public class normalBottle extends bottle {
 	// React to being picked up.
 	@Override
 	public void reactToPickup() {
-		player currPlayer = player.getCurrentPlayer();
+		player currPlayer = player.getPlayer();
 		if(currPlayer != null) {
 			tooltipString t = new tooltipString("Equip the bottle.");
 		}

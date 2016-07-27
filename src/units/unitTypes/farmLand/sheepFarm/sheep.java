@@ -9,6 +9,7 @@ import drawing.animation.animationPack;
 import drawing.spriteSheet.spriteSheetInfo;
 import effects.effect;
 import effects.effectTypes.bloodSquirt;
+import interactions.event;
 import interactions.interactBox;
 import interactions.textSeries;
 import modes.mode;
@@ -29,8 +30,8 @@ public class sheep extends unit {
 	public static int DEFAULT_PLATFORMER_ADJUSTMENT_Y = 0;
 	
 	// TopDown real dimensions
-	public static int DEFAULT_TOPDOWN_HEIGHT = 30;
-	public static int DEFAULT_TOPDOWN_WIDTH = 30;
+	public static int DEFAULT_TOPDOWN_HEIGHT = 22;
+	public static int DEFAULT_TOPDOWN_WIDTH = 24;
 	public static int DEFAULT_TOPDOWN_ADJUSTMENT_Y = 4;
 	
 	// How far do the sheep patrol
@@ -82,6 +83,12 @@ public class sheep extends unit {
 	/// FIELDS ///
 	//////////////
 	
+	// How many times has a sheep been hit?
+	private int hitTimes = 0;
+	
+	// Has the sheep been hit 10 times joke been done?
+	private static event sheepHitABunchJoke;
+	
 	// AI movement.
 	private long AILastCheck = 0l; // milliseconds
 	private float randomMove = 2f; // seconds
@@ -108,9 +115,18 @@ public class sheep extends unit {
 		// Placeholder for each individual textSeries.
 		textSeries s;
 		
-		// Start of conversation.
+		// Default
 		textSeries startOfConversation = new textSeries(null, "Bah.");
 		startOfConversation.setEnd();
+		
+		// Sheep getting hit joke.
+		if(hitTimes >= 10 && !sheepHitABunchJoke.isCompleted()) {
+			startOfConversation = new textSeries(null, "Dude.");
+			s = startOfConversation.addChild(null, "I'm unkillable.");
+			s = s.addChild(null, "Frig off.");
+			s = s.addChild(null, "I mean...  baah.");
+			s.setEnd();
+		}
 		
 		// Funny interactions
 		int random = utility.RNG.nextInt(7);
@@ -125,6 +141,8 @@ public class sheep extends unit {
 	
 	// Interact with object. 
 	public void interactWith() { 
+		stopMove("all");
+		faceTowardPlayer();
 		interactSequence = makeNormalInteractSequence();
 		interactSequence.toggleDisplay();
 	}
@@ -135,6 +153,9 @@ public class sheep extends unit {
 	// Constructor
 	public sheep(int newX, int newY) {
 		super(sheepType, newX, newY);
+		
+		// Sheep joke
+		sheepHitABunchJoke = new event("sheepHitABunchOfTimesJoke");
 	
 		// Deal with animations
 		animationPack unitTypeAnimations = new animationPack();
@@ -248,12 +269,24 @@ public class sheep extends unit {
 	
 	// React to pain.
 	public void reactToPain() {
+		hitTimes++;
 	}
 	
-	// SHEEP AI moves SHEEP around for now.
-	public void updateUnit() {
-		
-		if(isMeanders()) {
+	// Deal with getting hit joke.
+	public void dealWithGettingHitJoke() {
+		if(hitTimes >= 10 && !sheepHitABunchJoke.isCompleted()) {
+			
+			// Open interactbox.
+			interactWith();
+			
+			// Set the joke to be completed.
+			sheepHitABunchJoke.setCompleted(true);
+		}
+	}
+	
+	// Meander the sheep
+	public void meander() {
+		if(isMeanders() && interactSequence != null && !interactSequence.isDisplayOn()) {
 			// Create a new random bleet interval
 			float newRandomBleetInterval = 2.5f + utility.RNG.nextInt(18);
 			
@@ -299,6 +332,12 @@ public class sheep extends unit {
 				stopMove("all");
 			}
 		}
+	}
+	
+	// SHEEP AI moves SHEEP around for now.
+	public void updateUnit() {
+		dealWithGettingHitJoke();
+		meander();
 	}
 	
 	///////////////////////////

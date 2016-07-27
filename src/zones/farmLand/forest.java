@@ -1031,12 +1031,12 @@ public class forest extends zone {
 		stormInProgress = new event("sheepFarmStormInProgress");
 		
 		// Is the zone on fire?
-		isOnFire = new event("sheepFarmIsOnFire");
+		isOnFire = new event("forestIsOnFire");
 	}
 	
 	// Deal with the first well we encounters.
 	public void dealWithRegionStuff() {
-		player currPlayer = player.getCurrentPlayer();
+		player currPlayer = player.getPlayer();
 	}
 	
 	// Storm stuff
@@ -1109,7 +1109,7 @@ public class forest extends zone {
 	public void doFinalLightningStuff() {
 		
 		// Current player
-		player currPlayer = player.getCurrentPlayer();
+		player currPlayer = player.getPlayer();
 		
 		// Only do this if the player is actually past the part. TODO: needs to be changed to only
 		// be done if they are not on the fire path.

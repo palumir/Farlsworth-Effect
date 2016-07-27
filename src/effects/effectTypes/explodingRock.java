@@ -13,6 +13,7 @@ import drawing.spriteSheet.spriteSheetInfo;
 import effects.effect;
 import effects.effectType;
 import effects.buffs.darkSlow;
+import effects.projectiles.rockPiece;
 import modes.mode;
 import sounds.sound;
 import terrain.chunk;

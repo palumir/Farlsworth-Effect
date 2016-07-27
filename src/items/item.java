@@ -86,14 +86,14 @@ public abstract class item extends drawnObject {
 	
 	// Pickup the item.
 	public void pickUp() {
-		if(player.getCurrentPlayer() != null) {
+		if(player.getPlayer() != null) {
 		
 			// Display text. 
-			player currPlayer = player.getCurrentPlayer();
+			player currPlayer = player.getPlayer();
 			effect e = new floatingString("+" + stringUtils.toTitleCase(name), DEFAULT_PICKUP_COLOR, currPlayer.getIntX() + currPlayer.getWidth()/2, currPlayer.getIntY() + currPlayer.getHeight()/2, 1.2f);
 			
 			// At least add the item to the player's inventory.
-			player.getCurrentPlayer().getPlayerInventory().pickUp(this.getItemRef());
+			player.getPlayer().getPlayerInventory().pickUp(this.getItemRef());
 			
 		}
 		

@@ -69,13 +69,13 @@ public class tomb extends chunk {
 	// Update.
 	@Override
 	public void update() {
-		if(this.collides(this.getIntX(), this.getIntY(), player.getCurrentPlayer())) {
+		if(this.collides(this.getIntX(), this.getIntY(), player.getPlayer())) {
 			enter();
 		}
 	}
 	
 	// Enter the cave
 	public void enter() {
-		zone.switchZones(player.getCurrentPlayer(), player.getCurrentPlayer().getCurrentZone(), toZone, spawnX, spawnY, spawnDirection);
+		zone.switchZones(player.getPlayer(), player.getPlayer().getCurrentZone(), toZone, spawnX, spawnY, spawnDirection);
 	}
 }

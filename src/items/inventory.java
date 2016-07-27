@@ -95,7 +95,7 @@ public class inventory extends interfaceObject {
 		else { 
 			
 			// Set pressSpaceToAttack to be true.
-			if(!pressSpaceToAttack.isCompleted() && player.getCurrentPlayer().getEquippedWeapon().name.equals("Dagger")) {
+			if(!pressSpaceToAttack.isCompleted() && player.getPlayer().getEquippedWeapon().name.equals("Dagger")) {
 				pressSpaceToAttack.setCompleted(true);
 				tooltipString t = new tooltipString("Press or hold 'space' to attack.");
 			}
@@ -145,7 +145,7 @@ public class inventory extends interfaceObject {
 				
 				// Get the item.
 				item i = getItems().get(selectedSlot);
-				player currPlayer = player.getCurrentPlayer();
+				player currPlayer = player.getPlayer();
 				
 				// Deal with weapons.
 				if(i instanceof weapon) {
@@ -436,12 +436,12 @@ public class inventory extends interfaceObject {
 					   (int)(gameCanvas.getScaleY()*(DEFAULT_SLOT_SIZE)-1));
 			
 			// Draw the weapon.
-			if(player.getCurrentPlayer().getEquippedWeapon() != null) {
-				g.drawImage(player.getCurrentPlayer().getEquippedWeapon().getImage(), 
-						(int)(gameCanvas.getScaleX()*(getIntX() + DEFAULT_SLOT_SIZE + 35 - player.getCurrentPlayer().getEquippedWeapon().getImage().getWidth()/2 + adjustX)), 
-						(int)(gameCanvas.getScaleY()*(getIntY() + (int) (DEFAULT_SLOT_SIZE*Math.sqrt(DEFAULT_INVENTORY_SIZE)+19) - player.getCurrentPlayer().getEquippedWeapon().getImage().getHeight()/2 + adjustY)), 
-						(int)(gameCanvas.getScaleX()*(player.getCurrentPlayer().getEquippedWeapon().getImage().getWidth())), 
-						(int)(gameCanvas.getScaleY()*(player.getCurrentPlayer().getEquippedWeapon().getImage().getHeight())), 
+			if(player.getPlayer().getEquippedWeapon() != null) {
+				g.drawImage(player.getPlayer().getEquippedWeapon().getImage(), 
+						(int)(gameCanvas.getScaleX()*(getIntX() + DEFAULT_SLOT_SIZE + 35 - player.getPlayer().getEquippedWeapon().getImage().getWidth()/2 + adjustX)), 
+						(int)(gameCanvas.getScaleY()*(getIntY() + (int) (DEFAULT_SLOT_SIZE*Math.sqrt(DEFAULT_INVENTORY_SIZE)+19) - player.getPlayer().getEquippedWeapon().getImage().getHeight()/2 + adjustY)), 
+						(int)(gameCanvas.getScaleX()*(player.getPlayer().getEquippedWeapon().getImage().getWidth())), 
+						(int)(gameCanvas.getScaleY()*(player.getPlayer().getEquippedWeapon().getImage().getHeight())), 
 						null);
 			}
 			
@@ -466,12 +466,12 @@ public class inventory extends interfaceObject {
 					   (int)(gameCanvas.getScaleY()*(DEFAULT_SLOT_SIZE)-1));
 			
 			// Draw the potion
-			if(player.getCurrentPlayer().getEquippedBottle() != null) {
-				g.drawImage(player.getCurrentPlayer().getEquippedBottle().getImage(), 
-						(int)(gameCanvas.getScaleX()*(getIntX() + DEFAULT_SLOT_SIZE + 35 - player.getCurrentPlayer().getEquippedBottle().getImage().getWidth()/2 + adjustX)), 
-						(int)(gameCanvas.getScaleY()*(getIntY() + (int) (DEFAULT_SLOT_SIZE*Math.sqrt(DEFAULT_INVENTORY_SIZE)+53) - player.getCurrentPlayer().getEquippedBottle().getImage().getHeight()/2 + adjustY)), 
-						(int)(gameCanvas.getScaleX()*(player.getCurrentPlayer().getEquippedBottle().getImage().getWidth())), 
-						(int)(gameCanvas.getScaleY()*(player.getCurrentPlayer().getEquippedBottle().getImage().getHeight())), 
+			if(player.getPlayer().getEquippedBottle() != null) {
+				g.drawImage(player.getPlayer().getEquippedBottle().getImage(), 
+						(int)(gameCanvas.getScaleX()*(getIntX() + DEFAULT_SLOT_SIZE + 35 - player.getPlayer().getEquippedBottle().getImage().getWidth()/2 + adjustX)), 
+						(int)(gameCanvas.getScaleY()*(getIntY() + (int) (DEFAULT_SLOT_SIZE*Math.sqrt(DEFAULT_INVENTORY_SIZE)+53) - player.getPlayer().getEquippedBottle().getImage().getHeight()/2 + adjustY)), 
+						(int)(gameCanvas.getScaleX()*(player.getPlayer().getEquippedBottle().getImage().getWidth())), 
+						(int)(gameCanvas.getScaleY()*(player.getPlayer().getEquippedBottle().getImage().getHeight())), 
 						null);
 			}
 		}

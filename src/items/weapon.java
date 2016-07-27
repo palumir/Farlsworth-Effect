@@ -67,8 +67,8 @@ public abstract class weapon extends item {
 		equippable = true;
 		
 		// Break up the spriteSheet. Assumed to be regular human character size, for now.
-		if(player.getCurrentPlayer()!=null) {
-			if(player.getCurrentPlayer().getPlayerInventory().hasItem(this)) {
+		if(player.getPlayer()!=null) {
+			if(player.getPlayer().getPlayerInventory().hasItem(this)) {
 				setDrawObject(false);
 			}
 		}
@@ -79,7 +79,7 @@ public abstract class weapon extends item {
 	// Update.
 	@Override
 	public void update() {
-		if(this.isDrawObject() && this.collides(this.getIntX(), this.getIntY(), player.getCurrentPlayer())) {
+		if(this.isDrawObject() && this.collides(this.getIntX(), this.getIntY(), player.getPlayer())) {
 			pickUp();
 		}
 	}
