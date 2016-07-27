@@ -470,6 +470,54 @@ public void makeShadowSquareTopRight (int topLeftDudePosX, int topLeftDudePosY, 
 		
 		// Kill player when they fall
 		
+		u = new shadowDude(270,116);
+		u.setFacingDirection("Down");
+		u = new shadowDude(290,116);
+		u.setFacingDirection("Down");
+		u = new shadowDude(310,116);
+		u.setFacingDirection("Down");
+		u = new shadowDude(330,116);
+		u.setFacingDirection("Down");
+		
+		u = new shadowDude(476,116);
+		u.setFacingDirection("Up");
+		u = new shadowDude(496,116);
+		u.setFacingDirection("Up");
+		u = new shadowDude(516,116);
+		u.setFacingDirection("Up");
+		u = new shadowDude(536,116);
+		u.setFacingDirection("Up");
+		
+		u = new shadowDude(1000,116);
+		u.setFacingDirection("Down");
+		u = new shadowDude(1020,116);
+		u.setFacingDirection("Down");
+		u = new shadowDude(1040,116);
+		u.setFacingDirection("Down");
+		u = new shadowDude(1060,116);
+		u.setFacingDirection("Down");
+		
+		u = new shadowDude(2359,116);
+		u.setFacingDirection("Up");
+		u = new shadowDude(2379,116);
+		u.setFacingDirection("Up");
+		u = new shadowDude(2399,116);
+		u.setFacingDirection("Up");
+		u = new shadowDude(2419,116);
+		u.setFacingDirection("Up");
+		u = new shadowDude(2439,116);
+		u.setFacingDirection("Up");
+		
+		u = new shadowDude(4155,116);
+		u.setFacingDirection("Down");
+		u = new shadowDude(4175,116);
+		u.setFacingDirection("Down");
+		u = new shadowDude(4195,116);
+		u.setFacingDirection("Down");
+		u = new shadowDude(4215,116);
+		u.setFacingDirection("Down");
+
+		
 		// First floor
 		
 		spawnTombRect(350,40,500,791,"ground");
@@ -577,21 +625,24 @@ public void makeShadowSquareTopRight (int topLeftDudePosX, int topLeftDudePosY, 
 		makeShadowSquare(4400,40,75,80,1.8f,true);
 		makeShadowSquare(4700,40,75,80,1.8f,true);
 		
-		spawnTombRect(4519,308+32,4893+32,340+32,"ground");
+		spawnTombRect(4519-8,308+32,4893+24,340+32,"ground");
 		shadowDudePatrol (4519,261+32,4857,261+32,2);
 		
-		spawnTombRect(4430,460+48,4815,492+48,"ground");
+		spawnTombRect(4330,460+48,4815,492+48,"ground");
 		shadowDudePatrol (4500,343+48,4500,415+48,1f);
 		makeShadowSquare(4575,340+48,75,80,1.5f,false);
 		shadowDudePatrol (4790,343+48,4790,415+48,1f);
+		u = new shadowDude(4790,550);
+		u.setFacingDirection("Down");
+
 		
 		// Seventh floor
 		
-		spawnTombRect(4863,615,4895,1070,"leftWall");
+		spawnTombRect(4864,615-32-2,4896,1070+32+24-2,"leftWall");
 		
 		spawnTombRect(5572,-69,5604,1100,"rightWall");
 		
-		c = new well(4840, 560,0);
+		c = new well(4843, 560,0);
 		c.setPassable(true);
 		c.setZ(-2);
 		
@@ -599,7 +650,7 @@ public void makeShadowSquareTopRight (int topLeftDudePosX, int topLeftDudePosY, 
 		makeShadowSquareTopRight (4998,470, 80, 85,1.7f ,true);
 		makeShadowSquareTopLeft (5198,470, 80, 85,1.7f ,false);
 		
-		spawnTombRect(4972+32,811,5604,843,"ground");
+		spawnTombRect(5004-8,811,5604-8,843,"ground");
 		makeShadowRectangle (4965,764,250,250,3,2,1.2f,false);
 		
 		spawnTombRect(4888,1061,5480,1093,"ground");
