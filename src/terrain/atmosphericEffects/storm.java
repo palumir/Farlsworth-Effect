@@ -191,7 +191,7 @@ public class storm extends atmosphericEffect {
 		if(fadePercent > 0.2f) {
 			if(time.getTime() - lastRainSplash > (20 - 19*fadePercent)*howOftenToRainSplash*1000) {
 				lastRainSplash = time.getTime();
-				player currPlayer = player.getCurrentPlayer();
+				player currPlayer = player.getPlayer();
 				int middleX = currPlayer.getIntX() + getWidth()/2 - rainSplash.getDefaultWidth()/2;
 				int middleY = currPlayer.getIntY() + getHeight()/2 - rainSplash.getDefaultHeight()/2;
 				int randomX = middleX - (utility.RNG.nextInt(gameCanvas.getDefaultWidth()));
@@ -202,7 +202,7 @@ public class storm extends atmosphericEffect {
 	
 		// Do rain drops.
 		for(int i = 0; i < 8*fadePercent; i++) {
-			player currPlayer = player.getCurrentPlayer();
+			player currPlayer = player.getPlayer();
 			int middleX = currPlayer.getIntX() + getWidth()/2 - rainFall.getDefaultWidth()/2;
 			int middleY = currPlayer.getIntY() + getHeight()/2- rainFall.getDefaultHeight()/2;
 			int randomX = middleX - (utility.RNG.nextInt(gameCanvas.getDefaultWidth()));

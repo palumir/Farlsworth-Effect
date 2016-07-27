@@ -8,8 +8,8 @@ import drawing.spriteSheet;
 import drawing.animation.animation;
 import drawing.animation.animationPack;
 import effects.effectTypes.lightningStrike;
-import effects.effectTypes.poisonBall;
-import effects.effectTypes.spinningFireLog;
+import effects.projectiles.poisonBall;
+import effects.projectiles.spinningFireLog;
 import drawing.spriteSheet.spriteSheetInfo;
 import interactions.event;
 import interactions.interactBox;
@@ -105,7 +105,7 @@ public class farlsworth extends boss {
 	
 	// Events
 	public static event isFenceAttached;
-	private static event pastSpawnFarm;
+	public static event pastSpawnFarm;
 	private static event pastFlowerPatch;
 	private static event pastTombEntrance;
 	public static event pastTombExit;
@@ -430,7 +430,7 @@ public class farlsworth extends boss {
 	public void doInteractStuff() {
 		
 		// Load player.
-		player currPlayer = player.getCurrentPlayer();
+		player currPlayer = player.getPlayer();
 		
 		// Only do this stuff in the sheep farm. It's linear.
 		if(zone.getCurrentZone().getParentName().equals("farmLand")) {
@@ -594,7 +594,7 @@ public class farlsworth extends boss {
 					sound s = new sound(bleet);
 					s.start();
 					moveTo(this.getIntX() + 70, this.getIntY());
-					player.getCurrentPlayer().moveTo(player.getCurrentPlayer().getIntX()+70, player.getCurrentPlayer().getIntY());
+					player.getPlayer().moveTo(player.getPlayer().getIntX()+70, player.getPlayer().getIntY());
 					
 					// Run away
 					didYouTryToGrabHim.setCompleted(true);
@@ -700,7 +700,7 @@ public class farlsworth extends boss {
 				// If Farlsworth has stopped moving.
 				if(sequencePart == 4 && !isMoving()) {
 					interactSequence.goToNext();
-					player.getCurrentPlayer().setFacingDirection("Left");
+					player.getPlayer().setFacingDirection("Left");
 					sequencePart++;
 					interactSequence.setLocked(false);
 				}
@@ -725,8 +725,8 @@ public class farlsworth extends boss {
 				}
 				
 				// Change player's direction facing.
-				if(sequencePart == 7 && player.getCurrentPlayer().getIntX() < getIntX()) {
-					player.getCurrentPlayer().setFacingDirection("Right");
+				if(sequencePart == 7 && player.getPlayer().getIntX() < getIntX()) {
+					player.getPlayer().setFacingDirection("Right");
 				}
 				
 				// Wait for comedic timing.
@@ -1043,8 +1043,8 @@ public class farlsworth extends boss {
 					attachedLog = null;
 					projectileLog = new spinningFireLog((int)getFloatX() + getWidth() - fireLog.DEFAULT_CHUNK_WIDTH/2+5,
 							(int)getFloatY()-7,
-							player.getCurrentPlayer().getIntX()+player.getCurrentPlayer().getWidth()/2,
-							player.getCurrentPlayer().getIntY()+player.getCurrentPlayer().getHeight()/2,
+							player.getPlayer().getIntX()+player.getPlayer().getWidth()/2,
+							player.getPlayer().getIntY()+player.getPlayer().getHeight()/2,
 							1);
 	
 					// Move.
@@ -1130,7 +1130,7 @@ public class farlsworth extends boss {
 						this.setMoveSpeed(2.5f);
 						patrolTo(this.getIntX(), this.getIntY() + 50);
 						interactSequence.goToNext();
-						sheepFarm.isOnFire.setCompleted(true);
+						forest.isOnFire.setCompleted(true);
 						didYouSetTheForestOnFire.setCompleted(false);
 					}
 				}
@@ -1178,7 +1178,7 @@ public class farlsworth extends boss {
 	public void interactWith() { 
 		if(interactSequence == null || (interactSequence != null && !interactSequence.isUnescapable())) {
 			interactMoved = false;
-			this.facingDirection = stringUtils.oppositeDir(player.getCurrentPlayer().getFacingDirection());
+			faceTowardPlayer();
 			interactSequence = makeNormalInteractSequence();
 			interactSequence.toggleDisplay();
 		}
@@ -1256,7 +1256,7 @@ public class farlsworth extends boss {
 		
 		// If he's lost, don't spawn him in the farm.
 		if(pastSpawnFarm.isCompleted() && 
-		   player.getCurrentPlayer().getCurrentZone().getName().equals("sheepFarm")) {
+		   player.getPlayer().getCurrentZone().getName().equals("sheepFarm")) {
 			
 			// If we aren't past Denmother, spawn Farlsworth there.
 			if(!pastDenmother.isCompleted()) {

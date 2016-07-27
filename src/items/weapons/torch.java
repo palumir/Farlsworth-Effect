@@ -95,7 +95,7 @@ public class torch extends weapon {
 	// React to being picked up.
 	@Override
 	public void reactToPickup() {
-		player currPlayer = player.getCurrentPlayer();
+		player currPlayer = player.getPlayer();
 		if(currPlayer != null) {
 			// TODO:
 			//if(!sheepFarm.attackTooltipLoaded.isCompleted()) sheepFarm.attackTooltipLoaded.setCompleted(true);
@@ -149,7 +149,7 @@ public class torch extends weapon {
 	public void equip() {
 		
 		// Equip the weapon.
-		player.getCurrentPlayer().setEquippedWeapon(this);
+		player.getPlayer().setEquippedWeapon(this);
 		
 		// Set animations
 		if(isLit()) addLitAnimations();
@@ -157,22 +157,22 @@ public class torch extends weapon {
 		
 		// Change the player's stats based on the weapon's strength and their
 		// level.
-		player.getCurrentPlayer().setAttackDamage(attackDamage);
-		player.getCurrentPlayer().setAttackTime(attackTime);
-		player.getCurrentPlayer().setAttackFrameStart(3);
-		player.getCurrentPlayer().setAttackFrameEnd(5);
-		player.getCurrentPlayer().setAttackWidth(attackWidth);
-		player.getCurrentPlayer().setAttackLength(attackLength);
-		player.getCurrentPlayer().setCritChance(critChance);
-		player.getCurrentPlayer().setCritDamage(critDamage);
-		player.getCurrentPlayer().setAttackVariability(attackVariability);
+		player.getPlayer().setAttackDamage(attackDamage);
+		player.getPlayer().setAttackTime(attackTime);
+		player.getPlayer().setAttackFrameStart(3);
+		player.getPlayer().setAttackFrameEnd(5);
+		player.getPlayer().setAttackWidth(attackWidth);
+		player.getPlayer().setAttackLength(attackLength);
+		player.getPlayer().setCritChance(critChance);
+		player.getPlayer().setCritDamage(critDamage);
+		player.getPlayer().setAttackVariability(attackVariability);
 		
 	}
 	
 	// Add lit animations
 	public void addLitAnimations() {
 		
-		if(player.getCurrentPlayer().getEquippedWeapon() == this && isLit()) {
+		if(player.getPlayer().getEquippedWeapon() == this && isLit()) {
 			// Deal with animations
 			animationPack unitTypeAnimations = new animationPack();
 			
@@ -233,13 +233,13 @@ public class torch extends weapon {
 			unitTypeAnimations.addAnimation(runningDown);
 			
 			// Set animations.
-			player.getCurrentPlayer().setAnimations(unitTypeAnimations);
+			player.getPlayer().setAnimations(unitTypeAnimations);
 		}
 	}
 	
 	// Add unlit animations
 	public void addUnlitAnimations() {
-		if(player.getCurrentPlayer().getEquippedWeapon() == this) {
+		if(player.getPlayer().getEquippedWeapon() == this) {
 			// Deal with animations
 			animationPack unitTypeAnimations = new animationPack();
 			
@@ -300,7 +300,7 @@ public class torch extends weapon {
 			unitTypeAnimations.addAnimation(runningDown);
 			
 			// Set animations.
-			player.getCurrentPlayer().setAnimations(unitTypeAnimations);
+			player.getPlayer().setAnimations(unitTypeAnimations);
 		}
 	}
 	
@@ -312,8 +312,8 @@ public class torch extends weapon {
 	// Unlight torch
 	public void unLight() {
 		effect e = new floatingString("-Fire", DEFAULT_FIRE_COLOR,
-				player.getCurrentPlayer().getIntX() + player.getCurrentPlayer().getWidth()/2, 
-				player.getCurrentPlayer().getIntY() + player.getCurrentPlayer().getHeight()/2, 1.2f);
+				player.getPlayer().getIntX() + player.getPlayer().getWidth()/2, 
+				player.getPlayer().getIntY() + player.getPlayer().getHeight()/2, 1.2f);
 		setLit(false);
 		setStats();
 		addUnlitAnimations();
@@ -324,8 +324,8 @@ public class torch extends weapon {
 		sound s = new sound(torchLightSound);
 		s.start();
 		effect e = new floatingString("+Fire", DEFAULT_FIRE_COLOR,
-				player.getCurrentPlayer().getIntX() + player.getCurrentPlayer().getWidth()/2, 
-				player.getCurrentPlayer().getIntY() + player.getCurrentPlayer().getHeight()/2, 1.2f);
+				player.getPlayer().getIntX() + player.getPlayer().getWidth()/2, 
+				player.getPlayer().getIntY() + player.getPlayer().getHeight()/2, 1.2f);
 		setLit(true);
 		setStats();
 		addLitAnimations();

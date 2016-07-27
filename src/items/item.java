@@ -86,21 +86,14 @@ public abstract class item extends drawnObject {
 	
 	// Pickup the item.
 	public void pickUp() {
-		if(player.getCurrentPlayer() != null) {
-			
-			// Equip the item if it's a weapon or bottle and we don't have one equipped.
-			if((player.getCurrentPlayer().getEquippedWeapon() == null && this instanceof weapon) ||
-					(player.getCurrentPlayer().getEquippedBottle() == null && this instanceof bottle)) {
-				this.getItemRef().equip();
-				if(this instanceof bottle) ((bottle)this.getItemRef()).setChargesLeft(((bottle)this.getItemRef()).getMaxCharges());
-			}
+		if(player.getPlayer() != null) {
 		
 			// Display text. 
-			player currPlayer = player.getCurrentPlayer();
+			player currPlayer = player.getPlayer();
 			effect e = new floatingString("+" + stringUtils.toTitleCase(name), DEFAULT_PICKUP_COLOR, currPlayer.getIntX() + currPlayer.getWidth()/2, currPlayer.getIntY() + currPlayer.getHeight()/2, 1.2f);
 			
 			// At least add the item to the player's inventory.
-			player.getCurrentPlayer().getPlayerInventory().pickUp(this.getItemRef());
+			player.getPlayer().getPlayerInventory().pickUp(this.getItemRef());
 			
 		}
 		

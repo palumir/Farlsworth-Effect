@@ -1,6 +1,8 @@
 package items;
 
 import drawing.spriteSheet;
+import drawing.userInterface.tooltipString;
+import interactions.event;
 import sounds.sound;
 import units.player;
 
@@ -38,6 +40,9 @@ public abstract class bottle extends item {
 	// Does the player actually own the item?
 	public static boolean inInventory = false;
 	
+	// Event
+	private static event pressEnterToHeal;
+	
 	///////////////
 	/// METHODS ///
 	///////////////
@@ -45,6 +50,9 @@ public abstract class bottle extends item {
 	// For weapon being in your inventory.
 	public bottle(String newName) {
 		super(newName,null,0,0,0,0);
+		
+		// Create event.
+		pressEnterToHeal = new event("bottlePressEnterToHeal");
 		
 		// It is, of course, equippable.
 		equippable = true;
@@ -58,6 +66,9 @@ public abstract class bottle extends item {
 	public bottle(String newName, int x, int y) {
 		super(newName,null,x,y,0,0);
 		
+		// Create event.
+		pressEnterToHeal = new event("bottlePressEnterToHeal");
+		
 		// Set the width and height.
 		setWidth(getImage().getWidth());
 		setHeight(getImage().getHeight());
@@ -66,8 +77,8 @@ public abstract class bottle extends item {
 		equippable = true;
 		
 		// Break up the spriteSheet. Assumed to be regular human character size, for now.
-		if(player.getCurrentPlayer()!=null) {
-			if(player.getCurrentPlayer().getPlayerInventory().hasItem(this)) {
+		if(player.getPlayer()!=null) {
+			if(player.getPlayer().getPlayerInventory().hasItem(this)) {
 				setDrawObject(false);
 			}
 		}
@@ -78,8 +89,14 @@ public abstract class bottle extends item {
 	// Equip item
 	public void equip() {
 		
+		// Set pressIToExit to be true.
+		if(!pressEnterToHeal.isCompleted()) {
+			pressEnterToHeal.setCompleted(true);
+			tooltipString t = new tooltipString("Press 'enter' to use a bottle charge and heal.");
+		}
+		
 		// Equip the weapon.
-		player.getCurrentPlayer().setEquippedBottle(this);
+		player.getPlayer().setEquippedBottle(this);
 		
 		// Change the player's stats based on the weapon's strength and their
 		// level.
@@ -88,7 +105,7 @@ public abstract class bottle extends item {
 	
 	// Use charge.
 	public void useCharge() {
-		player currPlayer = player.getCurrentPlayer();
+		player currPlayer = player.getPlayer();
 		if(getChargesLeft() > 0) {
 			sound s = new sound(bottleDrink);
 			s.start();
@@ -101,7 +118,7 @@ public abstract class bottle extends item {
 	// Update.
 	@Override
 	public void update() {
-		if(this.isDrawObject() && this.collides(this.getIntX(), this.getIntY(), player.getCurrentPlayer())) {
+		if(this.isDrawObject() && this.collides(this.getIntX(), this.getIntY(), player.getPlayer())) {
 			pickUp();
 		}
 	}

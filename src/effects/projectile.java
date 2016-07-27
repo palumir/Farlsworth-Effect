@@ -207,7 +207,7 @@ public abstract class projectile extends effect {
 		setFloatX((int)floatX);
 		setFloatY((int)floatY);
 		
-		player currPlayer = player.getCurrentPlayer();
+		player currPlayer = player.getPlayer();
 		
 		boolean isWithin;
 		if(!isAllied()) {

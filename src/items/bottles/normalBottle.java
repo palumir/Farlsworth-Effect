@@ -25,7 +25,7 @@ public class normalBottle extends bottle {
 	public static int DEFAULT_MAX_CHARGES = 3;
 	
 	// Bottle heal percentage.
-	public static float DEFAULT_HEAL_PERCENT = .6f;
+	public static float DEFAULT_HEAL_PERCENT = 1f;
 	
 	//////////////
 	/// FIELDS ///
@@ -80,9 +80,9 @@ public class normalBottle extends bottle {
 	// React to being picked up.
 	@Override
 	public void reactToPickup() {
-		player currPlayer = player.getCurrentPlayer();
+		player currPlayer = player.getPlayer();
 		if(currPlayer != null) {
-			tooltipString t = new tooltipString("Press 'enter' to use bottle.");
+			tooltipString t = new tooltipString("Equip the bottle.");
 		}
 	}
 

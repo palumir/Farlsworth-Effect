@@ -68,9 +68,6 @@ public class music extends sound {
 			return null;
 		}
 		else {
-			if(currMusic!=null) {
-				System.out.println(currMusic.filename + " and " + s);
-			}
 			// Play the music
 			music m = new music(s);
 			return m;

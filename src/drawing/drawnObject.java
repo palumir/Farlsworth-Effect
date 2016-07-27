@@ -22,6 +22,7 @@ import modes.mode;
 import terrain.chunk;
 import terrain.groundTile;
 import utilities.intTuple;
+import utilities.mathUtils;
 import zones.zone;
 
 // A class for any object that is drawn in the
@@ -260,6 +261,15 @@ public abstract class drawnObject {
 			}
 		}
 		return closestTo;
+	}
+	
+	// Get angle between (in degrees) 
+	public int getAngleBetween(drawnObject d) {
+		double currentDegree = mathUtils.angleBetweenTwoPointsWithFixedPoint(d.getIntX()+d.getWidth()/2, d.getIntY() + d.getHeight()/2, 
+				getIntX()+getWidth()/2, getIntY() + getHeight()/2-100, 
+				getIntX()+getWidth()/2, getIntY() + getHeight()/2);
+		if(currentDegree < 0) currentDegree += 360 + currentDegree;
+		return (int)currentDegree;
 	}
 	
 	// Calculate drawX

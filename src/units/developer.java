@@ -384,7 +384,13 @@ public class developer extends player {
 		
 		// Show hitboxes?
 		if(k.getKeyCode() == KeyEvent.VK_Y) {
-			saveState.createSaveState();
+			saveState.createSaveState();		
+			
+			// Development mode?
+			player.setDeveloper(false);
+				
+			// Create the player.
+			player p = player.loadPlayer(null,null,0,0,"Up");
 		}
 		
 		// Player presses e key

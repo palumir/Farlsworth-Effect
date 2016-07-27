@@ -251,7 +251,7 @@ public class spider extends unit {
 	public void updateUnit() {
 		
 		// If player is in radius, follow player, attacking.
-		player currPlayer = player.getCurrentPlayer();
+		player currPlayer = player.getPlayer();
 		int playerX = currPlayer.getIntX();
 		int playerY = currPlayer.getIntY();
 		float howClose = (float) Math.sqrt((playerX - getIntX())*(playerX - getIntX()) + (playerY - getIntY())*(playerY - getIntY()));

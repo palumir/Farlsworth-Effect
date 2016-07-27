@@ -80,7 +80,7 @@ public class saveState implements Serializable {
 	// Save the game.
 	public static void createSaveState() {
 		try {
-			if(player.playerLoaded && player.getCurrentPlayer()!= null) {
+			if(player.playerLoaded && player.getPlayer()!= null) {
 				
 				// Display that we made a new savestate.
 				if(!quiet) {
@@ -91,7 +91,7 @@ public class saveState implements Serializable {
 				saveState s = new saveState();
 				
 				// Load our player. 
-				player currPlayer = player.getCurrentPlayer();
+				player currPlayer = player.getPlayer();
 				s.setZoneName(currPlayer.getCurrentZone().getName());
 				s.setPlayerX(currPlayer.getIntX());
 				s.setPlayerY(currPlayer.getIntY());

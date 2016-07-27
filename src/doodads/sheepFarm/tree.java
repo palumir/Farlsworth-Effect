@@ -22,6 +22,7 @@ import utilities.stringUtils;
 import utilities.time;
 import utilities.utility;
 import zones.zone;
+import zones.farmLand.forest;
 import zones.farmLand.sheepFarm;
 
 public class tree extends chunk {
@@ -60,6 +61,10 @@ public class tree extends chunk {
 	
 	// Type of tree
 	private int type = 0;
+	
+	// Default width
+	static int DEFAULT_WIDTH = 30;
+	static int DEFAULT_HEIGHT = 16;
 	
 	///////////////
 	/// METHODS ///
@@ -110,6 +115,33 @@ public class tree extends chunk {
 	}
 	
 	// Ignite
+	public static void igniteArea(int newX, int newY) {
+			// Tree top
+			int minX = newX - 35;
+			int maxX = newX + DEFAULT_WIDTH + 35;
+			int minY = newY - 105;
+			int maxY = newY-45;
+			for(int i = minX; i < maxX; i += fire.getDefaultWidth()/3) {
+				for(int j = minY; j < maxY; j += fire.getDefaultWidth()/3) {
+					int rand = utility.RNG.nextInt(15);
+					int randX = 4 - 8*utility.RNG.nextInt(2);
+					int randY = 4 - 8*utility.RNG.nextInt(2);
+					if(rand == 1) { fire f = new fire(i - fire.getDefaultWidth()/2 + randX,j - fire.getDefaultHeight()/2+randY); }
+				}
+			}
+			
+			// Trunk
+			int minYTrunk = newY-30;
+			int maxYTrunk = newY+10;
+			for(int j = minYTrunk; j < maxYTrunk; j += fire.getDefaultWidth()/4) {
+				int rand = utility.RNG.nextInt(2);
+				int randX = 4 - 8*utility.RNG.nextInt(2);
+				int randY = 4 - 8*utility.RNG.nextInt(2);
+				if(rand==1) { fire f = new fire(newX + randX,j - fire.getDefaultHeight()/2+randY); }
+			}
+	}
+	
+	// Ignite
 	@Override
 	public void ignite() {
 		
@@ -153,6 +185,12 @@ public class tree extends chunk {
 			return t;
 		}
 		else {
+			// Get the tree at the x and y to ignite it.
+			if(zone.getCurrentZone() != null && zone.getCurrentZone().getParentName().equals("farmLand") && 
+					((forest.isOnFire != null && forest.isOnFire.isCompleted()) || 
+					  (sheepFarm.isOnFire != null && sheepFarm.isOnFire.isCompleted()))) {
+				igniteArea(newX,newY);
+			}
 			return null;
 		}
 	}
@@ -181,7 +219,9 @@ public class tree extends chunk {
 		setFlammable(true);
 		
 		// If we are in sheepFarm and it's on fire, light everything on fire.
-		if(zone.getCurrentZone() != null && zone.getCurrentZone().getParentName().equals("farmLand") && sheepFarm.isOnFire != null && sheepFarm.isOnFire.isCompleted()) {
+		if(zone.getCurrentZone() != null && zone.getCurrentZone().getParentName().equals("farmLand") && 
+				((forest.isOnFire != null && forest.isOnFire.isCompleted()) || 
+				  (sheepFarm.isOnFire != null && sheepFarm.isOnFire.isCompleted()))) {
 			ignite();
 		}
 	}

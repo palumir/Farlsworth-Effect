@@ -40,18 +40,18 @@ public class redWolf extends wolf {
 	private static String DEFAULT_UNIT_NAME = "redWolf";
 	
 	// Health.
-	private int DEFAULT_HP = 11;
+	private int DEFAULT_HP = 6;
 	
 	// Default jump speed
-	private static int DEFAULT_UNIT_JUMPSPEED = 20;
+	private static int DEFAULT_UNIT_JUMPSPEED = 14;
 
 	// Spawn claw stuff
-	protected int DEFAULT_SLASH_DAMAGE = 2;
+	protected int DEFAULT_SLASH_DAMAGE = 1;
 	
 	// Beta stats
-	private static float DEFAULT_MOVESPEED_BETA = 2f;
-	private static float DEFAULT_CLAW_ATTACK_EVERY_BASE_BETA = 2f;
-	private static float DEFAULT_SPAWN_CLAW_PHASE_TIME_BETA = 1.7f;
+	private static float DEFAULT_MOVESPEED_BETA = 3.5f;
+	private static float DEFAULT_CLAW_ATTACK_EVERY_BASE_BETA = 2.5f;
+	private static float DEFAULT_SPAWN_CLAW_PHASE_TIME_BETA = 2.2f;
 	private static int DEFAULT_HOW_FAR_BACK_BASE_BETA = 60;
 	private static int DEFAULT_HOW_FAR_BACK_RANDOM_BETA = 20;
 	private static int DEFAULT_RANDOM_DEGREE_BETA = 10;
@@ -59,9 +59,9 @@ public class redWolf extends wolf {
 	private static int DEFAULT_FOLLOW_UNTIL_RANGE_RANDOM_BETA = 15;
 
 	// Alpha stats
-	private static float DEFAULT_MOVESPEED_ALPHA = 3f;
-	private static float DEFAULT_CLAW_ATTACK_EVERY_BASE_ALPHA = 1f;
-	private static float DEFAULT_SPAWN_CLAW_PHASE_TIME_ALPHA = .95f;
+	private static float DEFAULT_MOVESPEED_ALPHA = 3.5f;
+	private static float DEFAULT_CLAW_ATTACK_EVERY_BASE_ALPHA = 2f;
+	private static float DEFAULT_SPAWN_CLAW_PHASE_TIME_ALPHA = 1.5f;
 	private static int DEFAULT_HOW_FAR_BACK_BASE_ALPHA = 30;
 	private static int DEFAULT_HOW_FAR_BACK_RANDOM_ALPHA = 5;
 	private static int DEFAULT_RANDOM_DEGREE_ALPHA = 1; 
@@ -308,8 +308,8 @@ public class redWolf extends wolf {
 	@Override
 	public void spawnClaw() {	
 		int howFarBack = howFarBackBase + utility.RNG.nextInt(howFarBackRandom);
-		int spawnX = player.getCurrentPlayer().getIntX()+player.getCurrentPlayer().getWidth()/2;
-		int spawnY = player.getCurrentPlayer().getIntY()+player.getCurrentPlayer().getHeight()/2;
+		int spawnX = player.getPlayer().getIntX()+player.getPlayer().getWidth()/2;
+		int spawnY = player.getPlayer().getIntY()+player.getPlayer().getHeight()/2;
 		int degree = (int) mathUtils.angleBetweenTwoPointsWithFixedPoint(
 				spawnX, spawnY,
 				this.getIntX()+this.getWidth()/2, this.getIntY()+this.getHeight()/2, 

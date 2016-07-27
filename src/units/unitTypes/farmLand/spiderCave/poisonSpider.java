@@ -4,8 +4,8 @@ import drawing.spriteSheet;
 import drawing.animation.animation;
 import drawing.animation.animationPack;
 import drawing.userInterface.tooltipString;
+import effects.projectiles.poisonBall;
 import drawing.spriteSheet.spriteSheetInfo;
-import effects.effectTypes.poisonBall;
 import interactions.event;
 import modes.mode;
 import sounds.sound;
@@ -248,8 +248,8 @@ public class poisonSpider extends unit {
 	public void shootPoison() {
 		// Spawn the poison ball.
 		poisonBall p = new poisonBall(getIntX()+getWidth()/2,getIntY()+getHeight()/2,
-				player.getCurrentPlayer().getIntX()+player.getCurrentPlayer().getWidth()/2,
-				player.getCurrentPlayer().getIntY()+player.getCurrentPlayer().getHeight()/2,
+				player.getPlayer().getIntX()+player.getPlayer().getWidth()/2,
+				player.getPlayer().getIntY()+player.getPlayer().getHeight()/2,
 				DEFAULT_ATTACK_DAMAGE);
 	}
 	
@@ -344,7 +344,7 @@ public class poisonSpider extends unit {
 	public void updateUnit() {
 		
 		// If player is in radius, follow player, attacking.
-		player currPlayer = player.getCurrentPlayer();
+		player currPlayer = player.getPlayer();
 		int playerX = currPlayer.getIntX();
 		int playerY = currPlayer.getIntY();
 		float howClose = (float) Math.sqrt((playerX - getIntX())*(playerX - getIntX()) + (playerY - getIntY())*(playerY - getIntY()));

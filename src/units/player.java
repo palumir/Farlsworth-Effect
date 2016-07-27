@@ -146,8 +146,6 @@ public class player extends unit {
 	public player(int newX, int newY, zone z) {
 		super(playerType, newX, newY);
 		
-		showAttackRange();
-		
 		// Set movespeed.
 		setMoveSpeed(DEFAULT_PLAYER_MOVESPEED);
 		
@@ -196,6 +194,10 @@ public class player extends unit {
 	
 	// Player AI controls the interface
 	public void updateUnit() {
+		
+		// TODO: dev stuff
+		if(drawnObject.dontReloadTheseObjects!=null); //System.out.println(drawnObject.dontReloadTheseObjects.size());
+		
 		isPlayerDead();
 		potentiallyAttack();
 		dealWithEnergyStuff();
@@ -397,7 +399,13 @@ public class player extends unit {
 		
 		// Player presses y (inventory) key.
 		else if(k.getKeyCode() == KeyEvent.VK_Y) { 
-			lightningStrike l = new lightningStrike(getIntX(),getIntY());
+			saveState.createSaveState();	
+			
+			// Development mode?
+			player.setDeveloper(true);
+			
+			// Create the player.
+			player p = player.loadPlayer(null,null,0,0,"Up");
 		}
 		
 		// Player presses i (inventory) key.
@@ -521,9 +529,6 @@ public class player extends unit {
 	
 	// Remove the weapon.
 	public void unequipBottle() {
-		
-		// Set the charges to be 0, we can only fill equipped bottles.
-		equippedBottle.setChargesLeft(0);
 		
 		// Dequip the bottle.
 		setEquippedBottle(null);
@@ -697,7 +702,7 @@ public class player extends unit {
 	// Getters and setters //
 	/////////////////////////
 	
-	public static player getCurrentPlayer() {
+	public static player getPlayer() {
 		return currentPlayer;
 	}
 

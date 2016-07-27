@@ -15,9 +15,11 @@ import units.humanType;
 import units.player;
 import units.unit;
 import units.unitType;
+import units.bosses.farlsworth;
 import utilities.stringUtils;
 import utilities.time;
 import zones.zone;
+import zones.farmLand.sheepFarm;
 
 public class horizontalGate extends chunk {
 	
@@ -50,6 +52,9 @@ public class horizontalGate extends chunk {
 	
 	// Open or closed.
 	private boolean open = false;
+	
+	// Talked to the gate? For forest joke.
+	private boolean talkedToForestGateOnce = false;
 	
 	// Event on whether or not the gate is open.
 	private event hasBeenOpened;
@@ -107,9 +112,48 @@ public class horizontalGate extends chunk {
 			
 		if(!open) {
 			startOfConversation = new textSeries("StartWithButtons", "StartWithButtons");
+			startOfConversation.setTalker("");
 			
-			if((player.getCurrentPlayer() != null && player.getCurrentPlayer().getPlayerInventory().hasKey(keyName)) || hasBeenOpened.isCompleted()) {
-				s = startOfConversation.addChild("Open", "You open the gate.");
+			if((player.getPlayer() != null && player.getPlayer().getPlayerInventory().hasKey(keyName)) || hasBeenOpened.isCompleted()) {
+				
+				String funnyGateName = "Talking Gate";
+				
+				// Farlsworth gate joke
+				if(isForestGateAndUnopenable() && !talkedToForestGateOnce) {
+					s = startOfConversation.addChild("Open", "I'm not trying to pass judgement or anything.");
+					s.setTalker(funnyGateName);
+					s = s.addChild(null, "Because I am a gate and all.");
+					s.setTalker(funnyGateName);
+					s = s.addChild(null, "But don't you have some wool to retrieve nearby?");
+					s.setTalker(funnyGateName);
+					s = s.addChild(null, "I'm not all-knowing or something.");
+					s.setTalker(funnyGateName);
+					s = s.addChild(null, "I just overheard you talking to the \"farmer\"'.");
+					s.setTalker(funnyGateName);
+					s = s.addChild(null, "Though, I am a talking gate.");
+					s.setTalker(funnyGateName);
+					s = s.addChild(null, "But that's life.");
+					s.setTalker(funnyGateName);
+					s = s.addChild(null, "We're all talking gates at heart.");
+					s.setTalker(funnyGateName);
+					talkedToForestGateOnce = true;
+				}
+				else if(isForestGateAndUnopenable() && talkedToForestGateOnce) {
+					s = startOfConversation.addChild("Open", "Go get that wool.");
+					s.setTalker(funnyGateName);
+					s = s.addChild(null, "Farlsworth is in the pen to my left.");
+					s.setTalker(funnyGateName);
+					s = s.addChild(null, "I am facing toward you, before you ask.");
+					s.setTalker(funnyGateName);
+					s = s.addChild(null, "I have nothing more to say.");
+					s.setTalker(funnyGateName);
+					s = s.addChild(null, "The gate life is a dull one.");
+					s.setTalker(funnyGateName);
+				}
+				else {
+					s = startOfConversation.addChild("Open", "You open the gate.");
+				}
+				
 			}
 			else {
 				s = startOfConversation.addChild("Open", "You don't have the key.");
@@ -124,7 +168,20 @@ public class horizontalGate extends chunk {
 			s.setEnd();
 		}
 		
-		return new interactBox(startOfConversation, "Gate");
+		boolean isUnit = false;
+		if(isForestGateAndUnopenable()) {
+			isUnit = true;
+		}
+		
+		return new interactBox(startOfConversation, "Gate", isUnit);
+	}
+	
+	// Is it the forest gate
+	public boolean isForestGateAndUnopenable() {
+		return sheepFarm.forestGate != null &&
+				this.equals(sheepFarm.forestGate) 
+				&& farlsworth.pastSpawnFarm != null && !farlsworth.pastSpawnFarm.isCompleted()
+				&& player.getPlayer() != null && player.getPlayer().getPlayerInventory().hasKey(keyName);
 	}
 	
 	// Interact stuff.
@@ -133,15 +190,17 @@ public class horizontalGate extends chunk {
 		// Open gate?
 		if(!open 
 			&& interactSequence != null 
+			&& interactSequence.getTheText().getButtonText() != null
 			&& interactSequence.getTheText().getButtonText().equals("Open")
 			&& interactSequence.getTheText().isEnd()
 			&& interactSequence.isDisplayOn()) {
-			open();
+			if(!isForestGateAndUnopenable()) open();
 		}
 			
 		// Close gate?
 		if(open 
 			&& interactSequence != null 
+			&& interactSequence.getTheText().getButtonText() != null
 			&& interactSequence.getTheText().getButtonText().equals("Close")
 			&& interactSequence.getTheText().isEnd()
 			&& interactSequence.isDisplayOn()) {
@@ -163,7 +222,7 @@ public class horizontalGate extends chunk {
 	
 	// Open the gate
 	public void open() {
-		if(hasBeenOpened.isCompleted() || (player.getCurrentPlayer() != null && player.getCurrentPlayer().getPlayerInventory().hasKey(keyName))) {
+		if(hasBeenOpened.isCompleted() || (player.getPlayer() != null && player.getPlayer().getPlayerInventory().hasKey(keyName))) {
 			
 			// Play sound
 			sound s = new sound(openGate);

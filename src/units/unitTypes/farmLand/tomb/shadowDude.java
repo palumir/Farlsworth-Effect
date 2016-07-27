@@ -119,7 +119,7 @@ public class shadowDude extends unit {
 	public void hurtPeople() {
 		// If someone is in the explosion radius, hurt.
 		if(time.getTime() - lastHurt > hurtEvery*1000) {
-			player currPlayer = player.getCurrentPlayer();
+			player currPlayer = player.getPlayer();
 			lastHurt = time.getTime();
 			if(currPlayer.isWithin(this.getIntX() + leniency, this.getIntY() + leniency, this.getIntX() + this.getWidth() - leniency, this.getIntY() + this.getHeight() - leniency) 
 					&& ((!currPlayer.isIlluminated() && !illuminated) || isIgnoreIllumination())) {

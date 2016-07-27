@@ -22,9 +22,6 @@ public class main {
 	// Restart game
 	public static void restartGame(String s) {
 		
-		// Development mode?
-		//player.setDeveloper(true);
-		
 		// Create the player.
 		player p = player.loadPlayer(null,null,0,0,"Up");
 		

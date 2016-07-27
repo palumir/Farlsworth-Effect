@@ -70,7 +70,7 @@ public abstract class zone {
 		drawnObject.dontReloadTheseObjects = new ArrayList<drawnObject>();
 		music.endAll();
 		loadedOnce = false;
-		player.loadPlayer(player.getCurrentPlayer(), b, x, y, direction);
+		player.loadPlayer(player.getPlayer(), b, x, y, direction);
 		
 		// If we are going into the cave for the first time, display tooltip.
 		if(spiderCave.enteredSpiderCaveBefore != null && !spiderCave.enteredSpiderCaveBefore.isCompleted()) {

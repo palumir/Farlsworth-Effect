@@ -113,12 +113,12 @@ public class webDoor extends unit {
 	// Take damage. Ouch!
 	@Override
 	public boolean hurt(int damage, float crit) {
-		if(player.getCurrentPlayer().getEquippedWeapon() != null &&
-				player.getCurrentPlayer().getEquippedWeapon() instanceof torch
-				&& ((torch)player.getCurrentPlayer().getEquippedWeapon()).isLit()) {
+		if(player.getPlayer().getEquippedWeapon() != null &&
+				player.getPlayer().getEquippedWeapon() instanceof torch
+				&& ((torch)player.getPlayer().getEquippedWeapon()).isLit()) {
 			setKillable(true);
 			damage = damage*3214;
-			((torch)player.getCurrentPlayer().getEquippedWeapon()).unLight();
+			((torch)player.getPlayer().getEquippedWeapon()).unLight();
 			return true;
 		}
 		

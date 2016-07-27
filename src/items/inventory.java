@@ -11,6 +11,8 @@ import drawing.drawnObject;
 import drawing.gameCanvas;
 import drawing.spriteSheet;
 import drawing.userInterface.interfaceObject;
+import drawing.userInterface.tooltipString;
+import interactions.event;
 import sounds.sound;
 import units.player;
 import utilities.stringUtils;
@@ -25,7 +27,7 @@ public class inventory extends interfaceObject {
 	
 	// Draw position
 	public static int DEFAULT_INVENTORY_START_X = (int)(gameCanvas.getScaleX()*20);
-	public static int DEFAULT_INVENTORY_START_Y = (int)(gameCanvas.getScaleY()*gameCanvas.getDefaultHeight()-320);
+	public static int DEFAULT_INVENTORY_START_Y = (int)(gameCanvas.getScaleY()*gameCanvas.getDefaultHeight()-420);
 	
 	// Inventory size.
 	public static int DEFAULT_INVENTORY_SIZE = 16; // total number of slots. must be a perfect root of 2
@@ -62,12 +64,18 @@ public class inventory extends interfaceObject {
 	private String unequipWeapon;
 	private String UIMove;
 	
+	// Have they been given the pressSpaceToAttack message?
+	private static event pressSpaceToAttack;
+	
 	///////////////
 	/// METHODS ///
 	///////////////
 	public inventory() {
 		super(null, DEFAULT_INVENTORY_START_X, DEFAULT_INVENTORY_START_Y, 0, 0);
 		setItems(new ArrayList<item>());
+		
+		// Create the event
+		pressSpaceToAttack = new event("inventoryPressSpaceToAttack");
 		
 		// Set sounds.
 		openInventory = "sounds/effects/player/UI/openInventory.wav";
@@ -85,6 +93,13 @@ public class inventory extends interfaceObject {
 			s.start();
 		}
 		else { 
+			
+			// Set pressSpaceToAttack to be true.
+			if(!pressSpaceToAttack.isCompleted() && player.getPlayer().getEquippedWeapon().name.equals("Dagger")) {
+				pressSpaceToAttack.setCompleted(true);
+				tooltipString t = new tooltipString("Press or hold 'space' to attack.");
+			}
+			
 			sound s = new sound(closeInventory);
 			s.start();
 		}
@@ -130,7 +145,7 @@ public class inventory extends interfaceObject {
 				
 				// Get the item.
 				item i = getItems().get(selectedSlot);
-				player currPlayer = player.getCurrentPlayer();
+				player currPlayer = player.getPlayer();
 				
 				// Deal with weapons.
 				if(i instanceof weapon) {
@@ -421,12 +436,12 @@ public class inventory extends interfaceObject {
 					   (int)(gameCanvas.getScaleY()*(DEFAULT_SLOT_SIZE)-1));
 			
 			// Draw the weapon.
-			if(player.getCurrentPlayer().getEquippedWeapon() != null) {
-				g.drawImage(player.getCurrentPlayer().getEquippedWeapon().getImage(), 
-						(int)(gameCanvas.getScaleX()*(getIntX() + DEFAULT_SLOT_SIZE + 35 - player.getCurrentPlayer().getEquippedWeapon().getImage().getWidth()/2 + adjustX)), 
-						(int)(gameCanvas.getScaleY()*(getIntY() + (int) (DEFAULT_SLOT_SIZE*Math.sqrt(DEFAULT_INVENTORY_SIZE)+19) - player.getCurrentPlayer().getEquippedWeapon().getImage().getHeight()/2 + adjustY)), 
-						(int)(gameCanvas.getScaleX()*(player.getCurrentPlayer().getEquippedWeapon().getImage().getWidth())), 
-						(int)(gameCanvas.getScaleY()*(player.getCurrentPlayer().getEquippedWeapon().getImage().getHeight())), 
+			if(player.getPlayer().getEquippedWeapon() != null) {
+				g.drawImage(player.getPlayer().getEquippedWeapon().getImage(), 
+						(int)(gameCanvas.getScaleX()*(getIntX() + DEFAULT_SLOT_SIZE + 35 - player.getPlayer().getEquippedWeapon().getImage().getWidth()/2 + adjustX)), 
+						(int)(gameCanvas.getScaleY()*(getIntY() + (int) (DEFAULT_SLOT_SIZE*Math.sqrt(DEFAULT_INVENTORY_SIZE)+19) - player.getPlayer().getEquippedWeapon().getImage().getHeight()/2 + adjustY)), 
+						(int)(gameCanvas.getScaleX()*(player.getPlayer().getEquippedWeapon().getImage().getWidth())), 
+						(int)(gameCanvas.getScaleY()*(player.getPlayer().getEquippedWeapon().getImage().getHeight())), 
 						null);
 			}
 			
@@ -451,12 +466,12 @@ public class inventory extends interfaceObject {
 					   (int)(gameCanvas.getScaleY()*(DEFAULT_SLOT_SIZE)-1));
 			
 			// Draw the potion
-			if(player.getCurrentPlayer().getEquippedBottle() != null) {
-				g.drawImage(player.getCurrentPlayer().getEquippedBottle().getImage(), 
-						(int)(gameCanvas.getScaleX()*(getIntX() + DEFAULT_SLOT_SIZE + 35 - player.getCurrentPlayer().getEquippedBottle().getImage().getWidth()/2 + adjustX)), 
-						(int)(gameCanvas.getScaleY()*(getIntY() + (int) (DEFAULT_SLOT_SIZE*Math.sqrt(DEFAULT_INVENTORY_SIZE)+53) - player.getCurrentPlayer().getEquippedBottle().getImage().getHeight()/2 + adjustY)), 
-						(int)(gameCanvas.getScaleX()*(player.getCurrentPlayer().getEquippedBottle().getImage().getWidth())), 
-						(int)(gameCanvas.getScaleY()*(player.getCurrentPlayer().getEquippedBottle().getImage().getHeight())), 
+			if(player.getPlayer().getEquippedBottle() != null) {
+				g.drawImage(player.getPlayer().getEquippedBottle().getImage(), 
+						(int)(gameCanvas.getScaleX()*(getIntX() + DEFAULT_SLOT_SIZE + 35 - player.getPlayer().getEquippedBottle().getImage().getWidth()/2 + adjustX)), 
+						(int)(gameCanvas.getScaleY()*(getIntY() + (int) (DEFAULT_SLOT_SIZE*Math.sqrt(DEFAULT_INVENTORY_SIZE)+53) - player.getPlayer().getEquippedBottle().getImage().getHeight()/2 + adjustY)), 
+						(int)(gameCanvas.getScaleX()*(player.getPlayer().getEquippedBottle().getImage().getWidth())), 
+						(int)(gameCanvas.getScaleY()*(player.getPlayer().getEquippedBottle().getImage().getHeight())), 
 						null);
 			}
 		}

@@ -143,8 +143,8 @@ public class sound extends Thread {
             while (!stopRequested && nBytesRead != -1) { 
             	
     		    // Get player position
-    		    int playerX = player.getCurrentPlayer().getIntX();
-    		    int playerY = player.getCurrentPlayer().getIntY();
+    		    int playerX = player.getPlayer().getIntX();
+    		    int playerY = player.getPlayer().getIntY();
     		   
     		    // Calculate how close we are.
     		    float howClose = (float) Math.sqrt((playerX - x)*(playerX - x) + (playerY - y)*(playerY - y));
@@ -218,6 +218,14 @@ public class sound extends Thread {
     	radius = newRadius;
     	x = newX;
     	y = newY;
+    }
+    
+    public static void stopAllSounds() {
+		for(int i = 0; i < allSounds.size(); i++) {
+				allSounds.get(0).stopRequested = true;
+				allSounds.remove(0);
+		}
+		if(allSounds == null) allSounds = new ArrayList<sound>();
     }
     
     public static void initiate() {

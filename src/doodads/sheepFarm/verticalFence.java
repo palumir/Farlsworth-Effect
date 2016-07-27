@@ -40,7 +40,7 @@ public class verticalFence extends chunk {
 		super(typeReference, newX, newY, i, 0);
 		if(mode.getCurrentMode().equals("topDown")) {
 			setHitBoxAdjustmentY(8);
-			setHeight(65);
+			setHeight(60);
 		}
 		else {
 			setHitBoxAdjustmentY(0);

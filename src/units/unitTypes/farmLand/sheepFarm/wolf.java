@@ -58,12 +58,12 @@ public abstract class wolf extends unit {
 		public static float DEFAULT_DONT_ATTACK_FOR = 0f;
 		
 		// How close to attack?
-		protected int DEFAULT_ATTACK_RADIUS = 300;
-		protected int DEFAULT_DEAGGRO_RADIUS = 400;
+		protected int DEFAULT_AGGRO_RADIUS = 250;
+		protected int DEFAULT_DEAGGRO_RADIUS = 1000;
 		
 		// Damage stats
-		protected static int DEFAULT_ATTACK_WIDTH = 500; // DEFAULT_ATTACK_WIDTH/2 to the right, DEFAULT_ATTACK_WIDTH/2 to the left.
-		protected static int DEFAULT_ATTACK_LENGTH = 500; // DEFAULT_ATTACK_LENGTH in front of him.
+		protected static int DEFAULT_ATTACK_WIDTH = 300; // DEFAULT_ATTACK_WIDTH/2 to the right, DEFAULT_ATTACK_WIDTH/2 to the left.
+		protected static int DEFAULT_ATTACK_LENGTH = 300; // DEFAULT_ATTACK_LENGTH in front of him.
 		
 		// Sounds
 		protected static String howl = "sounds/effects/animals/wolfHowl.wav";
@@ -327,7 +327,7 @@ public abstract class wolf extends unit {
 			if(clawAttacking) {
 				
 				// Get current player.
-				player currPlayer = player.getCurrentPlayer();
+				player currPlayer = player.getPlayer();
 				
 				// Jump to the location.
 				if(jumping) {
@@ -438,7 +438,7 @@ public abstract class wolf extends unit {
 		// Yeah
 		public void changeCombatBasedOnHowManyUnitsAreFightingThePlayerIronicallyNamedFunctionMetaJokeNobodyWillSee() {
 			// Current player
-			player currPlayer = player.getCurrentPlayer();
+			player currPlayer = player.getPlayer();
 			numWolves = 0;
 			numRedWolves = 0;
 			numBlackWolves = 0;
@@ -497,7 +497,7 @@ public abstract class wolf extends unit {
 		public void updateUnit() {
 			
 			// If player is in radius, follow player, attacking.
-			player currPlayer = player.getCurrentPlayer();
+			player currPlayer = player.getPlayer();
 			int playerX = currPlayer.getIntX() + currPlayer.getWidth()/2;
 			int playerY = currPlayer.getIntY() + currPlayer.getHeight()/2;
 			float howClose = (float) Math.sqrt((playerX - getIntX() - getWidth()/2)*(playerX - getIntX() - getWidth()/2) + (playerY - getIntY() - getHeight()/2)*(playerY - getIntY() - getHeight()/2));
@@ -513,7 +513,7 @@ public abstract class wolf extends unit {
 			dealWithJumping();
 			
 			// Attack if we're in radius.
-			if(!player.isDeveloper() && !clawAttacking && !isDosile() && (howClose < DEFAULT_ATTACK_RADIUS || (aggrod && howClose < DEFAULT_DEAGGRO_RADIUS))) {
+			if(!player.isDeveloper() && !clawAttacking && !isDosile() && (howClose < DEFAULT_AGGRO_RADIUS || (aggrod && howClose < DEFAULT_DEAGGRO_RADIUS))) {
 				
 				// Enter combat with player
 				enterCombatWith(currPlayer);
@@ -543,6 +543,7 @@ public abstract class wolf extends unit {
 				}
 			}
 			else if(aggrod && howClose > DEFAULT_DEAGGRO_RADIUS) {
+				System.out.println("Out of aggro radius");
 				aggrod = false;
 				exitCombatWith(currPlayer);
 				unfollow();
