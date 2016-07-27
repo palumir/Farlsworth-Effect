@@ -52,7 +52,7 @@ public class music extends sound {
 		currMusic = this;
 		
 		// Loop all music.
-		this.loop = true;
+		this.setLoop(true);
 		
 		// Start music.
 		this.start();

@@ -273,6 +273,12 @@ public class sheepFarm extends zone {
 		// Create graveyard
 		createGraveYard();
 		
+		// Play fire sound
+		if(isOnFire != null && isOnFire.isCompleted()) {
+			sound s = new sound(fire.forestFire);
+			s.start();
+		}
+		
 		// Spawn units
 		spawnUnits();
 		
@@ -1284,7 +1290,6 @@ public class sheepFarm extends zone {
 		 tree.createTree(1353,-39,0);
 		 tree.createTree(1368,-54,0);
 		 tree.createTree(308,-896,2);
-		
 	}
 	
 	public void spawnMetaGraves() {
@@ -1963,14 +1968,24 @@ public class sheepFarm extends zone {
 		int adjustX = (int) (atX - defaultX);
 		int adjustY = (int) (atY - defaultY);
 		
-		// Arraylist that will contain fence pices.
+		// Arraylist that will contain fence pieces.
 		ArrayList<chunk> farlsworthFence = new ArrayList<chunk>();
 		int fenceAdjustX = -6;
-		farlsworthFence = spawnFence(farlsworthFence, adjustX + -30+fenceAdjustX,adjustY -435,adjustX + -30+fenceAdjustX,adjustY + 200); // Vertical, right
+		farlsworthFence = spawnFence(farlsworthFence, adjustX + -30+fenceAdjustX,adjustY -435+2,adjustX + -30+fenceAdjustX,adjustY + 200); // Vertical, right
 		farlsworthFence = spawnFence(farlsworthFence, adjustX + -1050+fenceAdjustX+17,adjustY + -462,adjustX + 10+fenceAdjustX,adjustY + -462); // Horizontal, top of field
-		farlsworthFence = spawnFence(farlsworthFence, adjustX + -168+40,adjustY + 17,adjustX + 70,adjustY + 17); // Horizontal, right of bridge.
-		farlsworthFence = spawnFence(farlsworthFence, adjustX + -1050+fenceAdjustX+17,adjustY + 17,adjustX + -150,adjustY + 17); // Horizontal, left of bridge.
-		farlsworthFence = spawnFence(farlsworthFence, adjustX + -450+fenceAdjustX,adjustY + -436,adjustX + -450+fenceAdjustX,adjustY + 200); // Vertical, far left
+		farlsworthFence = spawnFence(farlsworthFence, adjustX + -168+40 - 580,adjustY + 17,adjustX + 70+420,adjustY + 17); // Horizontal, right of bridge.
+		farlsworthFence = spawnFence(farlsworthFence, adjustX + -168+40 - 900,adjustY + 17,adjustX + -168 - 580,adjustY + 17); // Horizontal, left of bridge.
+		farlsworthFence = spawnFence(farlsworthFence, adjustX + -450+fenceAdjustX,adjustY + -436+2,adjustX + -450+fenceAdjustX,adjustY + 200); // Vertical, far left
+		c = new fenceBarsSmall(adjustX + 70+375,adjustY + 43,0);
+		farlsworthFence.add(c);
+		c = new fenceBarsSmall(adjustX + 70+375+3,adjustY + 43,0);
+		farlsworthFence.add(c);
+		c = new fenceBarsSmall(adjustX + 70+375+6,adjustY + 43,0);
+		farlsworthFence.add(c);
+		c = new fenceBarsSmall(adjustX + 70+375+9,adjustY + 43,0);
+		farlsworthFence.add(c);
+		c = new fenceBarsSmall(adjustX + 70+375+12,adjustY + 43,0);
+		farlsworthFence.add(c);
 		
 		// Draw the fence gate above the fields.
 		// Fencebars to left of gate.
@@ -1999,9 +2014,8 @@ public class sheepFarm extends zone {
 		//// FARLSWORTH'S AREA  ///////
 		///////////////////////////////
 		farlsworthFence = spawnFence(farlsworthFence, adjustX + 40,adjustY + -462,adjustX + 500,adjustY + -462); // Horizontal, top of field
-		farlsworthFence = spawnFence(farlsworthFence, adjustX + 40,adjustY + 17,adjustX + 500,adjustY + 17); // Horizontal, bottom
-		farlsworthFence = spawnFence(farlsworthFence, adjustX + 35,adjustY + -435,adjustX + 35,adjustY + 200); // Vertical, left
-		farlsworthFence = spawnFence(farlsworthFence, adjustX + 455,adjustY + 1 + -436,adjustX + 455,adjustY + 300); // Vertical, right
+		farlsworthFence = spawnFence(farlsworthFence, adjustX + 35,adjustY + 2 -435,adjustX + 35,adjustY + 200); // Vertical, left
+		farlsworthFence = spawnFence(farlsworthFence, adjustX + 455,adjustY + 3 + -436,adjustX + 455,adjustY + 300); // Vertical, right
 		farlsworthFence = spawnFence(farlsworthFence, adjustX + 40,adjustY + -43,adjustX + 440,adjustY + -43); // Bottom middle area.
 		
 		// Left of gate.
@@ -2095,14 +2109,6 @@ public class sheepFarm extends zone {
 		new bush(-250-550,465,0);
 		
 		// The bottom trees.
-		tree.createTree(309-550,-464,1);
-		tree.createTree(338-550,-450,1);
-		tree.createTree(366-550,-454,2);
-		tree.createTree(393-550,-448,2);
-		tree.createTree(414-550,-467,1);
-		tree.createTree(436-550,-448,1);
-		tree.createTree(461-550,-450,1);
-		tree.createTree(483-550,-429,1);
 		tree.createTree(-331-550,-462,0);
 		tree.createTree(-361-550,-462,2);
 		tree.createTree(-397-550,-468,2);
@@ -2263,7 +2269,7 @@ public class sheepFarm extends zone {
 			if(time.getTime() - stormStartTime > howManySecondsUntilStorm*1000) {
 				startStormFromFog = false;
 				stormStarted = true;
-				storm s = new storm(15f);
+				storm s = new storm(7f);
 			}
 		}
 	}
@@ -2278,25 +2284,10 @@ public class sheepFarm extends zone {
 		dealWithRegionStuff();
 	}
 	
-	long lastFireSound = 0;
-	float playEvery = 6f;
-	
 	// Do forest fire stuff.
 	public void doForestFireStuff() {
 		
 		if(isOnFire != null && isOnFire.isCompleted()) {
-			// Play fire sound
-			if(lastFireSound == 0) {
-				lastFireSound = time.getTime();
-				sound s = new sound(fire.forestFire);
-				s.start();
-			}
-			
-			else if(time.getTime() - lastFireSound > playEvery*1000) {
-				lastFireSound = time.getTime();
-				sound s = new sound(fire.forestFire);
-				s.start();
-			}
 		}
 	}
 

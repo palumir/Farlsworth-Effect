@@ -24,7 +24,7 @@ public class sound extends Thread {
 
     private Position curPosition;
 
-    private final int EXTERNAL_BUFFER_SIZE = 640; // 128Kb DEFAULT
+    private final int EXTERNAL_BUFFER_SIZE = 1024; // 128Kb DEFAULT
     
     // Where to play and at what radius.
     private int radius = 0; 
@@ -38,11 +38,10 @@ public class sound extends Thread {
     protected boolean stopRequested = false;
     private long soundStart = 0;
     private float fadeOver = 0;
-    private float fadeOutOver = 0;
     private long fadeOutStart = 0;
     
     // Loop?
-    protected boolean loop = false;
+    private boolean loop = false;
     
     // Default sound radius
     public static int DEFAULT_SOUND_RADIUS = 1800;
@@ -56,7 +55,6 @@ public class sound extends Thread {
     	filename = s.filename;
     	curPosition = Position.NORMAL;
     	allSounds.add(this);
-    	this.fadeOver = s.fadeOver;
     	this.x = s.x;
     	this.y = s.y;
     	this.radius = s.radius;
@@ -68,14 +66,7 @@ public class sound extends Thread {
         curPosition = Position.NORMAL;
         allSounds.add(this);
     }
-    
-    public sound(String wavfile, float fadeOver) { 
-        filename = wavfile;
-        curPosition = Position.NORMAL;
-        allSounds.add(this);
-        this.fadeOver = fadeOver;
-    }
-    
+ 
     // Get all playing
     public static ArrayList<sound> getAllPlaying() {
     	ArrayList<sound> retList = new ArrayList<sound>();
@@ -87,9 +78,14 @@ public class sound extends Thread {
     
     // Fade out
     public void fadeOut(float f) {
-    	loop = false;
-    	fadeOutOver = f;
+    	setLoop(false);
+    	fadeOver = f;
     	fadeOutStart = time.getTime();
+    }
+    
+    // Fade out
+    public void fadeIn(float f) {
+    	fadeOver = f;
     }
 
     public void run() { 
@@ -151,21 +147,26 @@ public class sound extends Thread {
     		    
     		    // How close are you to the sound?
     		    float howClosePercentage;
-            	if(/*howClose > gameCanvas.getDefaultWidth()/3 &&*/ radius > 0) {
+            	if(radius > 0) {
             		howClosePercentage = ((float)radius - howClose)/(float)radius;
             	}
             	else {
             		howClosePercentage = 1f;
             	}
             	
+            	// Sound dev testing
+            	/*if(filename.contains("rain")) {
+            		System.out.println(fadeOver);
+            	}*/
+            	
         		// Fade in.
-        		float fadePercent = ((time.getTime() - soundStart + 1)/(fadeOver*1000));
+            	float fadePercent = 1;
+        		if(fadeOver != 0) fadePercent = ((time.getTime() - soundStart + 1)/(fadeOver*1000));
         		if(fadePercent > 1) fadePercent = 1;
-        		if(fadeOver == 0) fadePercent = 1;
         		
         		// Fade out
-        		if(fadeOutOver != 0) {
-        			fadePercent = (1 - (time.getTime() - fadeOutStart + 1)/(fadeOutOver*1000));
+        		if(fadeOutStart != 0) {
+        			fadePercent = (1 - (time.getTime() - fadeOutStart + 1)/(fadeOver*1000));
             		if(fadePercent > 1) fadePercent = 1;
             		if(fadePercent < 0) {
             			stopRequested = true;
@@ -195,14 +196,14 @@ public class sound extends Thread {
             auline.drain();
             auline.close();
             allSounds.remove(this);
-            if(loop && !stopRequested) {
+            if(isLoop() && !stopRequested) {
             	if(this instanceof music) {
             		music m = new music((music)this);
-            		m.loop = true;
+            		m.setLoop(true);
             	}
             	else { 
 	            	sound s = new sound(this);
-	            	s.loop = true;
+	            	s.setLoop(true);
 	            	s.start();
             	}
             }
@@ -240,4 +241,12 @@ public class sound extends Thread {
     	}
     	if(allSounds == null) allSounds = new ArrayList<sound>();
     }
+
+	public boolean isLoop() {
+		return loop;
+	}
+
+	public void setLoop(boolean loop) {
+		this.loop = loop;
+	}
 }
