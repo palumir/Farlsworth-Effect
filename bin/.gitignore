@@ -1,7 +1,12 @@
 /zones/
+<<<<<<< HEAD
 /drawing/
 /doodads/
 /effects/
 /items/
 /terrain/
 /units/
+=======
+/units/
+/interactions/
+>>>>>>> 807bc603d0fba33a5d8d8a2c89202bf7d900077a
