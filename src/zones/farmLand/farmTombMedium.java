@@ -27,7 +27,7 @@ import utilities.saveState;
 import utilities.time;
 import zones.zone;
 
-public class tombZone extends zone {
+public class farmTombMedium extends zone {
 	
 	//////////////////////////////////
 	// FIELDS, GLOBALS, CONSTRUCTOR //
@@ -68,8 +68,8 @@ public class tombZone extends zone {
 	public static fog zoneFog;
 	
 	// Constructor
-	public tombZone() {
-		super("tombZone", "farmLand");
+	public farmTombMedium() {
+		super("farmTombMedium", "farmLand");
 	}
 		
 	///////////////////////////////

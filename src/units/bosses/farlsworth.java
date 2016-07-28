@@ -168,7 +168,7 @@ public class farlsworth extends boss {
 				textSeries rodeo = s.addChild(null, "This isn't my first rodeo.");
 				
 				// Give me your wool
-				textSeries giveMeYourWool = rodeo.addChild("\'Give me your wool\'", "Is that all I'm good for?");
+				textSeries giveMeYourWool = rodeo.addChild("\'Give me your wool\'", "Is that really all I'm good for now?");
 				s =  giveMeYourWool.addChild(null, "My wool?");
 				s = s.addChild(null, "I don't think so, pal.");
 				s = s.addChild(null, "I will not be friggin objectified.");
@@ -200,15 +200,17 @@ public class farlsworth extends boss {
 				// No, you fucking didn't.
 				else {
 					startOfConversation = new textSeries(null, "My wool. My choice.");
-					s = startOfConversation.addChild(null, "I refuse to be a slave anymore.");
-					textSeries speciesist = s.addChild(null, "I am a strong independent sheep who don't need no goat.");
+					s = startOfConversation.addChild(null, "I'm sick of being a slave.");
+					s = s.addChild(null, "I'm not just a sheep.");
+					s = s.addChild(null, "I'm somebody.");
+					textSeries speciesist = s.addChild(null, "I'm Farlsworth.");
 					
 					// Ask for his wool
 					textSeries grabHisWool = speciesist.addChild("\'Give me your wool\'", "Boy, you're persistent, aren't you?");
 					s = grabHisWool.addChild(null, "Some guy you just met asked you to get my wool.");
 					s = s.addChild(null, "And now I'm telling you that you can't have it.");
 					s = s.addChild(null, "Shouldn't those cancel out?");
-					s = s.addChild(null, "Oh right, it's because I'm a sheep and he's a human.");
+					s = s.addChild(null, "Oh right, I'm a sheep. Guess that's important, right?");
 					s = s.addChild(null, "Pfft. Typical.");
 					s = s.addChild(null, "You're just like the rest.");
 					s.setEnd();
@@ -437,8 +439,21 @@ public class farlsworth extends boss {
 			// If we are in the farm.
 			if(pastSpawnFarm != null && !pastSpawnFarm.isCompleted()) {
 				
+				// Talk to Farlsworth for the first time.	
+				if(sequencePart == 0 && (interactSequence == null || (interactSequence != null && !interactSequence.isDisplayOn())) && 
+					currPlayer != null && currPlayer.isWithin(230,-458,433,-250)) {
+					interactSequence = makeNormalInteractSequence();
+					if(interactBox.getCurrentDisplay() != null) {
+						interactBox.getCurrentDisplay().toggleDisplay();
+					}
+					interactSequence.toggleDisplay();
+					interactSequence.setUnescapable(true);
+					setFacingDirection("Down");
+					sequencePart++;
+				}
+				
 				// Pissy Farlsworth runs away first time.
-				if(!interactMoved && interactSequence != null && interactSequence.getTheText().isEnd() && interactTimes == 0) {
+				if(sequencePart == 1 && !interactMoved && interactSequence != null && interactSequence.getTheText().isEnd() && interactTimes == 0) {
 					
 					// What did you pick?
 					if(interactSequence.getTheText().getTextOnPress()!=null &&
@@ -446,22 +461,42 @@ public class farlsworth extends boss {
 						didYouTellHimAboutYourAdventure.setCompleted(true);
 					}
 					
-					interactTimes++;
+					// Move Farley
+					sequencePart++;
 					moveTo(74,-58);
 					interactMoved = true;
 					sound s = new sound(bleet);
 					s.setPosition(getIntX(), getIntY(), sound.DEFAULT_SOUND_RADIUS);
 					s.start();
+					
+					// Lock sequence.
+					interactSequence.setLocked(true);
+					
+					// Move player eventually
+					waitStart = time.getTime();
+					waitFor = 2f;
+					
 				}
 				
-				// You lied to him.
-				if(interactSequence!=null && interactSequence.getTheText()!=null && interactSequence.getTheText().getTextOnPress()!=null &&
-						interactSequence.getTheText().getTextOnPress().contains("Oh boy")) {
-					didYouLieToHimAboutHavingTheKey.setCompleted(true);
+				// Follow Farlsworth
+				if(sequencePart == 2 && time.getTime() - waitStart > waitFor*1000) {
+					currPlayer.moveTo(142,-97);
+					sequencePart++;
+				}
+				
+				// Wait until the player has stopped moving
+				if(sequencePart == 3 && !currPlayer.isMoving()) {
+					setFacingDirection("Right");
+					interactTimes++;
+					interactSequence.toggleDisplay();
+					interactSequence = makeNormalInteractSequence();
+					interactSequence.toggleDisplay();
+					interactSequence.setUnescapable(true);
+					sequencePart++;
 				}
 				
 				// Pissy Farlsworth runs away second time.
-				if(!interactMoved && interactSequence != null && interactSequence.getTheText().isEnd() && interactTimes == 1) {
+				if(sequencePart == 4 && interactSequence != null && interactSequence.getTheText().isEnd()) {
 					
 					// What did you pick?
 					if(interactSequence.getTheText().getTextOnPress()!=null &&
@@ -469,17 +504,40 @@ public class farlsworth extends boss {
 						didYouTellHimAboutYourAdventure.setCompleted(true);
 					}
 					
-					interactTimes++;
+					// Move Farley
+					sequencePart++;
 					moveTo(74,-406);
 					interactMoved = true;
 					sound s = new sound(bleet);
 					s.setPosition(getIntX(), getIntY(), sound.DEFAULT_SOUND_RADIUS);
 					s.start();
+
+					// Move player eventually
+					waitStart = time.getTime();
+					waitFor = 2f;
+					
+				}
+				
+				// Follow Farlsworth
+				if(sequencePart == 5 && time.getTime() - waitStart > waitFor*1000) {
+					currPlayer.moveTo(100,-357);
+					sequencePart++;
+				}
+				
+				// Wait until the player has stopped moving
+				if(sequencePart == 6 && !currPlayer.isMoving()) {
+					setFacingDirection("Down");
+					interactTimes++;
+					interactSequence.toggleDisplay();
+					interactSequence = makeNormalInteractSequence();
+					interactSequence.toggleDisplay();
+					interactSequence.setUnescapable(true);
+					sequencePart++;
 				}
 				
 				// Pissy Farlsworth runs away third time.
-				if(!interactMoved && interactSequence != null && interactSequence.getTheText().isEnd() && interactTimes == 2) {
-					interactTimes++;
+				if(sequencePart == 7 && interactSequence != null && interactSequence.getTheText().isEnd()) {
+					sequencePart++;
 					p = new ArrayList<intTuple>();
 					p.add(new intTuple(425,-70));
 					p.add(new intTuple(425,5));
@@ -490,24 +548,44 @@ public class farlsworth extends boss {
 					sound s = new sound(bleet);
 					s.setPosition(getIntX(), getIntY(), sound.DEFAULT_SOUND_RADIUS);
 					s.start();
+					interactTimes++;
+					interactSequence.setLocked(false);
+					interactSequence.setUnescapable(false);
+				}
+				
+				// Trigger talking to him in front of the fence.
+				if(sequencePart == 8 && currPlayer.isWithin(-50, -453, 20, -300)) {
+					interactSequence = makeNormalInteractSequence();
+					interactSequence.toggleDisplay();
+					interactSequence.setUnescapable(true);
+					faceTowardPlayer();
+					sequencePart++;
+				}
+				
+				// You lied to him.
+				if(interactSequence!=null && interactSequence.getTheText()!=null && interactSequence.getTheText().getTextOnPress()!=null &&
+						interactSequence.getTheText().getTextOnPress().contains("rhetorical question")) {
+					didYouLieToHimAboutHavingTheKey.setCompleted(true);
 				}
 				
 				// Check if we need to do comedic timing.
-				if(!waiting && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getTextOnPress()!=null) &&
+				if(sequencePart == 9 && !waiting && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getTextOnPress()!=null) &&
 						(interactSequence.getTheText().getTextOnPress().equals("I suppose I'll have to stay in the fence then."))) {
 					waitStart = time.getTime();
 					waitFor = 2.5f;
 					waiting = true;
 					interactSequence.setLocked(true);
+					sequencePart++;
 				}
 				
 				// Run off with the fence.
-				if(waiting && time.getTime() - waitStart > waitFor*1000) {
+				if(sequencePart == 10 && waiting && time.getTime() - waitStart > waitFor*1000) {
 					interactSequence.goToNext();
 					waiting = false;
+					sequencePart++;
 				}
 				
-				// Do we attach fence to him?
+				// Attach fence to him
 				if(!isFenceAttached.isCompleted() && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().isEnd() && interactSequence.getTheText().getTextOnPress()!=null) &&
 						(interactSequence.getTheText().getTextOnPress().equals("Catch me if you can."))) {
 					attachFence();
@@ -521,14 +599,11 @@ public class farlsworth extends boss {
 					sound s = new sound(bleet);
 					s.setPosition(getIntX(), getIntY(), sound.DEFAULT_SOUND_RADIUS);
 					s.start();
-					pastSpawnFarm.setCompleted(true);
-					saveState.setQuiet(true);
-					saveState.createSaveState();
-					saveState.setQuiet(false);
-					movedFromFence = true;
+					interactSequence.setUnescapable(true);
+					sequencePart = 100;
 				}
 				
-				// Do we attach fence to him?
+				// Don't attach fence.
 				if(!isFenceAttached.isCompleted() && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().isEnd() && interactSequence.getTheText().getTextOnPress()!=null) &&
 						(interactSequence.getTheText().getTextOnPress().equals("Catch me if you can, I guess."))) {
 					sheepFarm.forestGate.open();
@@ -542,12 +617,20 @@ public class farlsworth extends boss {
 					sound s = new sound(bleet);
 					s.setPosition(getIntX(), getIntY(), sound.DEFAULT_SOUND_RADIUS);
 					s.start();
-					pastSpawnFarm.setCompleted(true);
 					didYouOpenTheGateForHim.setCompleted(true);
+					sequencePart = 100;
+				}
+				
+				// End.
+				if(sequencePart == 100) {
+					sequencePart = 0;
+					interactSequence.setUnescapable(false);
+					movedFromFence = true;
+					pastSpawnFarm.setCompleted(true);
 					saveState.setQuiet(true);
 					saveState.createSaveState();
 					saveState.setQuiet(false);
-					movedFromFence = true;
+					printFarlsworthEvents();
 				}
 			}
 			
@@ -574,7 +657,6 @@ public class farlsworth extends boss {
 					}
 					interactSequence.toggleDisplay();
 					interactSequence.setUnescapable(true);
-					currPlayer.stopMove("all");
 					sequencePart++;
 				}
 				

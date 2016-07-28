@@ -1317,7 +1317,7 @@ public class sheepFarm extends zone {
 	public void createGraveYard()  {
 		
 		// Tomb
-		new tomb(2305+2,-3944-85,0, tombZone.getZone(),57,-6,"Right");
+		new tomb(2305+2,-3944-85,0, farmTombEasy.getZone(),57,-6,"Right");
 		
 		// Fence around tomb
 		spawnFence(null, 2216,-3990,2216,-3820); // Left fence
