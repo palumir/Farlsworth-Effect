@@ -60,7 +60,7 @@ public abstract class unit extends drawnObject  {
 	// List of units we are in combat with
 	private ArrayList<unit> inCombatWith = new ArrayList<unit>();
 	
-	// Fist defaults.
+	// Unit defaults.
 	protected static int DEFAULT_ATTACK_DAMAGE = 1;
 	protected static float DEFAULT_ATTACK_TIME = 0.44f;
 	protected static int DEFAULT_ATTACK_WIDTH = 35;
