@@ -353,15 +353,15 @@ public class sheepFarm extends zone {
 		c = new well(1400,-300,0);
 		
 		// Fifth wolf pack
-		u = new yellowWolf(1910,-408);
-		u.setFacingDirection("Down");
-		u = new blackWolf(1860,-428);
-		u.setFacingDirection("Down");
+		u = new blackWolf(2335,-210);
+		u.setFacingDirection("Left");
+		u = new yellowWolf(2385,-110);
+		u.setFacingDirection("Left");
 		
 		// Sixth wolf pack
-		u = new blackWolf(2775,-147);
+		u = new blackWolf(2785,-210);
 		u.setFacingDirection("Left");
-		u = new redWolf(2750,-100);
+		u = new redWolf(2760,-110);
 		u.setFacingDirection("Left");
 		
 		// Seventh wolf pack
