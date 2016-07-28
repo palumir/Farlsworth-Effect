@@ -558,7 +558,6 @@ public class player extends unit {
 			// Player presses down key
 			if(k.getKeyCode() == KeyEvent.VK_S) { 
 				if(mode.getCurrentMode() == platformer.name) {
-					//crouch(true);
 					startMove("down");
 				}
 				else if(mode.getCurrentMode() == topDown.name) {

@@ -37,6 +37,7 @@ import items.bottle;
 import items.item;
 import items.bottles.normalBottle;
 import items.weapons.dagger;
+import items.weapons.longSword;
 import modes.topDown;
 import sounds.music;
 import sounds.sound;
@@ -2109,6 +2110,9 @@ public class sheepFarm extends zone {
 		
 		// Dagger.
 		item daggerSpawn = new dagger(-800,387);
+		
+		// Long sword testing
+		item longSwordSpawn = new longSword(-400,387);
 		
 		// Corner
 		tree.createTree(-60-550,480,2);

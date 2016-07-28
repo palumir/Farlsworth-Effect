@@ -830,19 +830,19 @@ public void makeShadowSquareTopRight (int topLeftDudePosX, int topLeftDudePosY, 
 		player currPlayer = player.getPlayer();
 		
 		// Left wall.
-		shadowElevator = createRectangleOfShadows(currPlayer.getIntX() - 590, 
+		shadowElevator = createRectangleOfShadows(currPlayer.getIntX() - 580, 
 												  1150-30 - 1500, 
 												  currPlayer.getIntX() - 250,
 												  1150-30 + 600, eyeless);
 		
 		// Floor
-		shadowElevator.addAll(createRectangleOfShadows(currPlayer.getIntX() - 230, 
-				  1150-30+200, 
-				  currPlayer.getIntX() +250,
+		shadowElevator.addAll(createRectangleOfShadows(currPlayer.getIntX() - 220-22, 
+				  1150-30+200+3, 
+				  currPlayer.getIntX() +250+20,
 				  1150-30 + 600, eyeless));
 		
 		// Right wall.
-		shadowElevator.addAll(createRectangleOfShadows(currPlayer.getIntX() + 250, 
+		shadowElevator.addAll(createRectangleOfShadows(currPlayer.getIntX() + 260, 
 												  1150-30 - 1500, 
 												  currPlayer.getIntX() + 600,
 												  1150-30 + 600, eyeless));
@@ -963,7 +963,7 @@ public void makeShadowSquareTopRight (int topLeftDudePosX, int topLeftDudePosY, 
 							      "ground");
 		shadowDudePatrol(currPlayer.getIntX() - 200 ,
 						1150-30 - 35 - 32 - 64*17 + 20*5 + 100, 
-						currPlayer.getIntX() + 200,
+						currPlayer.getIntX() + 220,
 						1150-30 - 35 - 32 - 64*17 + 20*5 + 100,
 						2f);
 		
@@ -975,7 +975,7 @@ public void makeShadowSquareTopRight (int topLeftDudePosX, int topLeftDudePosY, 
 							      "ground");
 		for(int i = 0; i < 16; i++) {
 			shadowDudePatrol(currPlayer.getIntX() - 230 + i*30,
-					1150-30 - 35 - 32 - 64*19 + 20*7 - 46, 
+					1150-30 - 35 - 32 - 64*19 + 20*7 - 46-20, 
 					currPlayer.getIntX()  - 230 + i*30,
 					1150-30 - 35 - 32 - 64*19 + 20*7 - 46 - 50*3,
 					2f);
@@ -1201,6 +1201,7 @@ public void makeShadowSquareTopRight (int topLeftDudePosX, int topLeftDudePosY, 
 			    -1103-300+ 32-20-32-340+20+30,
 				"ground");
 		stairsUp tombExit = new stairsUp(currPlayer.getIntX() + 64+20-32+130,-1103-300-20-32-340+20-47+30,0,forest.getZone(),-394,-3915,"Left");
+		tombExit.setZ(-1);
 	
 	}
 	

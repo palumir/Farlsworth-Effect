@@ -50,7 +50,8 @@ public abstract class unit extends drawnObject  {
 	
 	// Gravity defaults.
 	private static boolean DEFAULT_GRAVITY_STATE = false;
-	private static float DEFAULT_GRAVITY_ACCELERATION = 0.455f;
+	private static float DEFAULT_JUMP_SHORTEN_ACCELERATION = .35f;
+	private static float DEFAULT_GRAVITY_ACCELERATION = 0.45f + DEFAULT_JUMP_SHORTEN_ACCELERATION;
 	private static float DEFAULT_GRAVITY_MAX_VELOCITY = 20;
 	protected static float DEFAULT_JUMPSPEED = 11f;
 	
@@ -85,15 +86,12 @@ public abstract class unit extends drawnObject  {
 	
 	// Sounds
 	protected static int DEFAULT_ATTACK_SOUND_RADIUS = 1000;
-	
-	///////////////
-	/// GLOBALS ///
-	///////////////
-	private static boolean gravity = DEFAULT_GRAVITY_STATE;
 
 	////////////////
 	//// FIELDS ////
 	////////////////
+	
+	private static boolean gravity = DEFAULT_GRAVITY_STATE;
 	
 	// The actual unit type.
 	private unitType typeOfUnit;
@@ -463,6 +461,11 @@ public abstract class unit extends drawnObject  {
 			// Accelerate
 			if(fallSpeed < DEFAULT_GRAVITY_MAX_VELOCITY){
 				fallSpeed += DEFAULT_GRAVITY_ACCELERATION;
+				if(!tryJump) {
+				}
+				else {
+					fallSpeed -= DEFAULT_JUMP_SHORTEN_ACCELERATION;
+				}
 			}
 			
 			move(0,(int)fallSpeed);

@@ -24,7 +24,7 @@ public class dagger extends weapon {
 	
 	// Weapon stats.
 	static private int DEFAULT_ATTACK_DAMAGE = 2; //2;
-	static private float DEFAULT_ATTACK_TIME = 0.30f; //0.30f;
+	static private float DEFAULT_ATTACK_TIME = 0.27f; //0.30f;
 	static private float DEFAULT_BACKSWING = 0.1f;
 	static private int DEFAULT_ATTACK_WIDTH = 50;
 	static private int DEFAULT_ATTACK_LENGTH = 18;

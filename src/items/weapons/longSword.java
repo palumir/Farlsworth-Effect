@@ -19,11 +19,11 @@ public class longSword extends weapon {
 	/// DEFAULTS ///
 	////////////////
 	// Weapon name
-	public static String DEFAULT_WEAPON_NAME = "Dagger";
+	public static String DEFAULT_WEAPON_NAME = "Long Sword";
 	
 	// Weapon stats.
 	static private int DEFAULT_ATTACK_DAMAGE = 4; //2;
-	static private float DEFAULT_ATTACK_TIME = 0.5f; //0.30f;
+	static private float DEFAULT_ATTACK_TIME = 0.41f; //0.30f;
 	static private float DEFAULT_BACKSWING = 0.15f;
 	static private int DEFAULT_ATTACK_WIDTH = 70;
 	static private int DEFAULT_ATTACK_LENGTH = 30;
@@ -37,10 +37,17 @@ public class longSword extends weapon {
 	//////////////
 	/// FIELDS ///
 	//////////////
-	public static BufferedImage itemImage = spriteSheet.getSpriteFromFilePath("images/doodads/items/"+ DEFAULT_WEAPON_NAME + ".png");
-	public static spriteSheet weaponSpriteSheet = new spriteSheet(new spriteSheetInfo(
-			"images/units/player/" + player.DEFAULT_PLAYER_GENDER + "/"+ DEFAULT_WEAPON_NAME + ".png", 
+	public static BufferedImage itemImage = spriteSheet.getSpriteFromFilePath("images/doodads/items/longSword.png");
+	public static spriteSheet weaponMovingSpriteSheet = new spriteSheet(new spriteSheetInfo(
+			"images/units/player/" + player.DEFAULT_PLAYER_GENDER + "/longSwordMoving.png", 
 			weapon.DEFAULT_SPRITE_WIDTH, 
+			weapon.DEFAULT_SPRITE_HEIGHT,
+			weapon.DEFAULT_SPRITE_ADJUSTMENT_X,
+			weapon.DEFAULT_SPRITE_ADJUSTMENT_Y
+			));
+	public static spriteSheet weaponAttackingSpriteSheet = new spriteSheet(new spriteSheetInfo(
+			"images/units/player/" + player.DEFAULT_PLAYER_GENDER + "/longSwordAttacking.png", 
+			weapon.DEFAULT_SPRITE_WIDTH*2, 
 			weapon.DEFAULT_SPRITE_HEIGHT,
 			weapon.DEFAULT_SPRITE_ADJUSTMENT_X,
 			weapon.DEFAULT_SPRITE_ADJUSTMENT_Y
@@ -54,7 +61,7 @@ public class longSword extends weapon {
 	
 	// In inventory.
 	public longSword() {
-		super(DEFAULT_WEAPON_NAME,weaponSpriteSheet);
+		super(DEFAULT_WEAPON_NAME,null);
 		
 		// Weapon stats.
 		setStats();
@@ -123,59 +130,59 @@ public class longSword extends weapon {
 		animationPack unitTypeAnimations = new animationPack();
 		
 		// Attacking left animation.
-		animation attackingLeft = new animation("attackingLeft", weaponSpriteSheet.getAnimation(13), 0, 8, DEFAULT_ATTACK_TIME);
+		animation attackingLeft = new animation("attackingLeft", weaponAttackingSpriteSheet.getAnimation(1), 0, 8, DEFAULT_ATTACK_TIME);
 		unitTypeAnimations.addAnimation(attackingLeft);
 		
 		// Attacking left animation.
-		animation attackingRight = new animation("attackingRight", weaponSpriteSheet.getAnimation(15), 0, 8, DEFAULT_ATTACK_TIME);
+		animation attackingRight = new animation("attackingRight", weaponAttackingSpriteSheet.getAnimation(3), 0, 8, DEFAULT_ATTACK_TIME);
 		unitTypeAnimations.addAnimation(attackingRight);
 		
 		// Attacking left animation.
-		animation attackingUp = new animation("attackingUp", weaponSpriteSheet.getAnimation(12), 0, 8, DEFAULT_ATTACK_TIME);
+		animation attackingUp = new animation("attackingUp", weaponAttackingSpriteSheet.getAnimation(0), 0, 8, DEFAULT_ATTACK_TIME);
 		unitTypeAnimations.addAnimation(attackingUp);
 		
 		// Attacking left animation.
-		animation attackingDown = new animation("attackingDown", weaponSpriteSheet.getAnimation(14), 0, 8, DEFAULT_ATTACK_TIME);
+		animation attackingDown = new animation("attackingDown", weaponAttackingSpriteSheet.getAnimation(2), 0, 8, DEFAULT_ATTACK_TIME);
 		unitTypeAnimations.addAnimation(attackingDown);
 		
 		// Jumping left animation.
-		animation jumpingLeft = new animation("jumpingLeft", weaponSpriteSheet.getAnimation(1), 5, 5, 1);
+		animation jumpingLeft = new animation("jumpingLeft", weaponMovingSpriteSheet.getAnimation(1), 5, 5, 1);
 		unitTypeAnimations.addAnimation(jumpingLeft);
 		
 		// Jumping right animation.
-		animation jumpingRight = new animation("jumpingRight", weaponSpriteSheet.getAnimation(3), 5, 5, 1);
+		animation jumpingRight = new animation("jumpingRight", weaponMovingSpriteSheet.getAnimation(3), 5, 5, 1);
 		unitTypeAnimations.addAnimation(jumpingRight);
 		
 		// Standing left animation.
-		animation standingLeft = new animation("standingLeft", weaponSpriteSheet.getAnimation(9), 0, 0, 1);
+		animation standingLeft = new animation("standingLeft", weaponMovingSpriteSheet.getAnimation(9), 0, 0, 1);
 		unitTypeAnimations.addAnimation(standingLeft);
 		
 		// Standing up animation.
-		animation standingUp = new animation("standingUp", weaponSpriteSheet.getAnimation(8), 0, 0, 1);
+		animation standingUp = new animation("standingUp", weaponMovingSpriteSheet.getAnimation(8), 0, 0, 1);
 		unitTypeAnimations.addAnimation(standingUp);
 		
 		// Standing right animation.
-		animation standingRight = new animation("standingRight", weaponSpriteSheet.getAnimation(11), 0, 0, 1);
+		animation standingRight = new animation("standingRight", weaponMovingSpriteSheet.getAnimation(11), 0, 0, 1);
 		unitTypeAnimations.addAnimation(standingRight);
 		
 		// Standing down animation.
-		animation standingDown = new animation("standingDown", weaponSpriteSheet.getAnimation(10), 0, 0, 1);
+		animation standingDown = new animation("standingDown", weaponMovingSpriteSheet.getAnimation(10), 0, 0, 1);
 		unitTypeAnimations.addAnimation(standingDown);
 		
 		// Running left animation.
-		animation runningLeft = new animation("runningLeft", weaponSpriteSheet.getAnimation(9), 1, 8, 0.75f);
+		animation runningLeft = new animation("runningLeft", weaponMovingSpriteSheet.getAnimation(9), 1, 8, 0.75f);
 		unitTypeAnimations.addAnimation(runningLeft);		
 		
 		// Running up animation.
-		animation runningUp = new animation("runningUp", weaponSpriteSheet.getAnimation(8), 1, 8, 0.75f);
+		animation runningUp = new animation("runningUp", weaponMovingSpriteSheet.getAnimation(8), 1, 8, 0.75f);
 		unitTypeAnimations.addAnimation(runningUp);
 		
 		// Running right animation.
-		animation runningRight = new animation("runningRight", weaponSpriteSheet.getAnimation(11), 1, 8, 0.75f);
+		animation runningRight = new animation("runningRight", weaponMovingSpriteSheet.getAnimation(11), 1, 8, 0.75f);
 		unitTypeAnimations.addAnimation(runningRight);
 		
 		// Running down animation.
-		animation runningDown = new animation("runningDown", weaponSpriteSheet.getAnimation(10), 1, 8, 0.75f);
+		animation runningDown = new animation("runningDown", weaponMovingSpriteSheet.getAnimation(10), 1, 8, 0.75f);
 		unitTypeAnimations.addAnimation(runningDown);
 		
 		// Set animations.
