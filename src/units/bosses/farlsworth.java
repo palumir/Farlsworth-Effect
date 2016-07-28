@@ -642,8 +642,8 @@ public class farlsworth extends boss {
 					stopMove("all");
 					destroyFence();
 					movingToAPoint = false;
-					setFloatX(2238);
-					setFloatY(-456);
+					setDoubleX(2238);
+					setDoubleY(-456);
 					facingDirection = "Left";
 					sequencePart++;
 				}
@@ -731,12 +731,12 @@ public class farlsworth extends boss {
 					
 					// Spawn Ben in front of the tomb
 					stopMove("all");
-					setFloatX(-10000);
-					setFloatY(-10000);
+					setDoubleX(-10000);
+					setDoubleY(-10000);
 					ben = new sheep(-10000,-10000);
 					ben.setMeanders(false);
-					ben.setFloatX(2227);
-					ben.setFloatY(-3818);
+					ben.setDoubleX(2227);
+					ben.setDoubleY(-3818);
 					ben.setFacingDirection("Left");
 					ben.setBenAnimations();
 					sequencePart++;
@@ -773,8 +773,8 @@ public class farlsworth extends boss {
 				
 				// Spawn Farlsworth.
 				if(sequencePart == 3 && time.getTime() - waitStart > waitFor*1000) {
-					this.setFloatX(1507);
-					this.setFloatY(-3911);
+					this.setDoubleX(1507);
+					this.setDoubleY(-3911);
 					this.moveTo(1900,-3911);
 					sequencePart++;
 				}
@@ -920,8 +920,8 @@ public class farlsworth extends boss {
 				
 				// Spawn him at the tomb exit.
 				if(sequencePart == 0 && (p == null || p.size() == 0)) {
-					setFloatX(-745);
-					setFloatY(-3899);
+					setDoubleX(-745);
+					setDoubleY(-3899);
 					setFacingDirection("Right");
 					sequencePart++;
 				}
@@ -1123,8 +1123,8 @@ public class farlsworth extends boss {
 					// Hurl log.
 					attachedLog.destroy();
 					attachedLog = null;
-					projectileLog = new spinningFireLog((int)getFloatX() + getWidth() - fireLog.DEFAULT_CHUNK_WIDTH/2+5,
-							(int)getFloatY()-7,
+					projectileLog = new spinningFireLog((int)getDoubleX() + getWidth() - fireLog.DEFAULT_CHUNK_WIDTH/2+5,
+							(int)getDoubleY()-7,
 							player.getPlayer().getIntX()+player.getPlayer().getWidth()/2,
 							player.getPlayer().getIntY()+player.getPlayer().getHeight()/2,
 							1);
@@ -1249,8 +1249,8 @@ public class farlsworth extends boss {
 				// He's no longer in the zone.
 				if(sequencePart == 0 && (p == null || p.size() == 0)) {
 					stopMove("all");
-					setFloatX(-10000);
-					setFloatY(-10000);
+					setDoubleX(-10000);
+					setDoubleY(-10000);
 				}
 			}
 		}
@@ -1418,13 +1418,13 @@ public class farlsworth extends boss {
 	
 	// Do unit specific movement.
 	@Override
-	public void unitSpecificMovement(float moveX, float moveY) {
+	public void unitSpecificMovement(double moveX, double moveY) {
 		
 		// Move the fence for the joke.
 		if(attachedFence != null) {
 			for(int i = 0; i < attachedFence.size(); i++) {
-				attachedFence.get(i).setFloatX(attachedFence.get(i).getFloatX() + moveX);
-				attachedFence.get(i).setFloatY(attachedFence.get(i).getFloatY() + moveY);
+				attachedFence.get(i).setDoubleX(attachedFence.get(i).getDoubleX() + moveX);
+				attachedFence.get(i).setDoubleY(attachedFence.get(i).getDoubleY() + moveY);
 			}
 		}
 		
@@ -1432,21 +1432,21 @@ public class farlsworth extends boss {
 		if(attachedLog != null) {
 			attachedLog.setForceInFront(false);
 			if(facingDirection.equals("Left")) {
-				attachedLog.setFloatX((int)getFloatX() - fireLog.DEFAULT_CHUNK_WIDTH/2-5);
-				attachedLog.setFloatY((int)getFloatY()-7);
+				attachedLog.setDoubleX((int)getDoubleX() - fireLog.DEFAULT_CHUNK_WIDTH/2-5);
+				attachedLog.setDoubleY((int)getDoubleY()-7);
 			}
 			if(facingDirection.equals("Right")) {
-				attachedLog.setFloatX((int)getFloatX() + getWidth() - fireLog.DEFAULT_CHUNK_WIDTH/2+5);
-				attachedLog.setFloatY((int)getFloatY()-7);
+				attachedLog.setDoubleX((int)getDoubleX() + getWidth() - fireLog.DEFAULT_CHUNK_WIDTH/2+5);
+				attachedLog.setDoubleY((int)getDoubleY()-7);
 			}
 			if(facingDirection.equals("Down")) {
-				attachedLog.setFloatX((int)getFloatX() - fireLog.DEFAULT_CHUNK_WIDTH/2+10);
-				attachedLog.setFloatY(getFloatY()+1);
+				attachedLog.setDoubleX((int)getDoubleX() - fireLog.DEFAULT_CHUNK_WIDTH/2+10);
+				attachedLog.setDoubleY(getDoubleY()+1);
 				attachedLog.setForceInFront(true);
 			}
 			if(facingDirection.equals("Up")) {
-				attachedLog.setFloatX((int)getFloatX() - fireLog.DEFAULT_CHUNK_WIDTH/2+10);
-				attachedLog.setFloatY((int)getFloatY() - fireLog.DEFAULT_CHUNK_HEIGHT);
+				attachedLog.setDoubleX((int)getDoubleX() - fireLog.DEFAULT_CHUNK_WIDTH/2+10);
+				attachedLog.setDoubleY((int)getDoubleY() - fireLog.DEFAULT_CHUNK_HEIGHT);
 			}
 		}
 	}

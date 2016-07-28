@@ -129,16 +129,16 @@ public abstract class wolf extends unit {
 		protected boolean hasStartedJumping = false;
 		
 		// Start rise and run
-		protected float startX = 0;
-		protected float startY = 0;
+		protected double startX = 0;
+		protected double startY = 0;
 		
 		// Jumping stuff
 		protected int jumpingToX = 0;
 		protected int jumpingToY = 0;
 		protected boolean hasSlashed = false;
 		protected boolean riseRunSet = false;
-		protected float rise = 0;
-		protected float run = 0;
+		protected double rise = 0;
+		protected double run = 0;
 		
 		// Wolves we are in combat with
 		int numWolves = 0;
@@ -341,8 +341,8 @@ public abstract class wolf extends unit {
 								+ xDistance * xDistance);
 						rise = ((yDistance/distanceXY)*jumpSpeed);
 						run = ((xDistance/distanceXY)*jumpSpeed);
-						startX = getFloatX();
-						startY = getFloatY();
+						startX = getDoubleX();
+						startY = getDoubleY();
 					}
 					
 					// Charge units to position.
@@ -351,8 +351,8 @@ public abstract class wolf extends unit {
 					// Spawn rocks
 					spawnTrail();
 					
-					setFloatX(getFloatX() + run);
-					setFloatY(getFloatY() + rise);
+					setDoubleX(getDoubleX() + run);
+					setDoubleY(getDoubleY() + rise);
 					
 					// Don't let him not move at all or leave region.
 					if((run == 0 && rise == 0) || ((Math.abs(jumpingToX - getIntX()) <= jumpSpeed && Math.abs(jumpingToY - getIntY()) <= jumpSpeed))) {

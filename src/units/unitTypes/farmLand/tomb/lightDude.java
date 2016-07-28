@@ -109,10 +109,10 @@ public class lightDude extends unit {
 	
 	// Do unit specific movement.
 	@Override
-	public void unitSpecificMovement(float moveX, float moveY) {
+	public void unitSpecificMovement(double moveX, double moveY) {
 		if(light != null) {
-			light.setFloatX(getFloatX() + moveX);
-			light.setFloatY(light.getFloatY() + moveY);
+			light.setDoubleX(getDoubleX() + moveX);
+			light.setDoubleY(light.getDoubleY() + moveY);
 		}
 	}
 	

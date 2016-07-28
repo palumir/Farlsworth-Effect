@@ -158,8 +158,8 @@ public abstract class drawnObject {
 	//////////////
 	
 	// X and Y
-	private float floatX;
-	private float floatY;
+	private double doubleX;
+	private double doubleY;
 	
 	// Draw sprite?
 	private boolean drawSprite = true;
@@ -219,8 +219,8 @@ public abstract class drawnObject {
 			setHitBoxAdjustmentX(objectSpriteSheet.getHitBoxAdjustmentX());
 			setHitBoxAdjustmentY(objectSpriteSheet.getHitBoxAdjustmentY());
 		}
-		setFloatX(newX);
-		setFloatY(newY);
+		setDoubleX(newX);
+		setDoubleY(newY);
 		setWidth(newWidth);
 		setHeight(newHeight);
 		addObject(this);
@@ -505,27 +505,27 @@ public abstract class drawnObject {
 	}
 
 	public int getIntY() {
-		return (int)floatY;
+		return (int)doubleY;
 	}
 	
-	public float getFloatY() {
-		return floatY;
+	public double getDoubleY() {
+		return doubleY;
 	}
 
-	public void setFloatY(float y) {
-		this.floatY = y;
+	public void setDoubleY(double y) {
+		this.doubleY = y;
 	}
 	
-	public float getFloatX() {
-		return floatX;
+	public double getDoubleX() {
+		return doubleX;
 	}
 
 	public int getIntX() {
-		return (int)floatX;
+		return (int)doubleX;
 	}
 
-	public void setFloatX(float x) {
-		this.floatX = x;
+	public void setDoubleX(double x) {
+		this.doubleX = x;
 	}
 
 	public spriteSheet getObjectSpriteSheet() {

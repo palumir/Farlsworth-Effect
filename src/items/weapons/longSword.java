@@ -19,7 +19,7 @@ public class longSword extends weapon {
 	/// DEFAULTS ///
 	////////////////
 	// Weapon name
-	public static String DEFAULT_WEAPON_NAME = "Long Sword";
+	public static String DEFAULT_WEAPON_NAME = "Dagger";
 	
 	// Weapon stats.
 	static private int DEFAULT_ATTACK_DAMAGE = 4; //2;

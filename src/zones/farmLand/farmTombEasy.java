@@ -623,7 +623,7 @@ public void makeShadowSquareTopRight (int topLeftDudePosX, int topLeftDudePosY, 
 		
 		spawnTombRect(4330,155,4832,188,"ground");
 		makeShadowSquare(4400,40,75,80,1.8f,true);
-		makeShadowSquare(4700,40,75,80,1.8f,true);
+		makeShadowSquare(4700,40,75,80,2.7f,true);
 		
 		spawnTombRect(4519-8,308+32,4893+24,340+32,"ground");
 		shadowDudePatrol (4519,261+32,4857,261+32,2);
@@ -635,10 +635,9 @@ public void makeShadowSquareTopRight (int topLeftDudePosX, int topLeftDudePosY, 
 		u = new shadowDude(4790,550);
 		u.setFacingDirection("Down");
 
-		
 		// Seventh floor
 		
-		spawnTombRect(4864,615-32-2,4896,1070+32+24-2,"leftWall");
+		spawnTombRect(4864,615-32-2+32,4896,1070+32+24-2,"leftWall");
 		
 		spawnTombRect(5572,-69,5604,1100,"rightWall");
 		
@@ -785,7 +784,6 @@ public void makeShadowSquareTopRight (int topLeftDudePosX, int topLeftDudePosY, 
 		spawnTombRect(9075,1150,13000,2374,"ground");
 		//spawnTombRect(9962,512,10500,1154,"rightWall");
 		//spawnTombRect(9965,1152,10500,1502,"none");
-		
 	}
 	
 	// Spawn a rectangle of shadow dudes

@@ -906,7 +906,9 @@ public abstract class unit extends drawnObject  {
 	
 	// Move towards a point
 	public void moveTowards() {
-		if(movingToAPoint && Math.abs(moveToX - getFloatX()) < getMoveSpeed() && Math.abs(moveToY - getFloatY()) < getMoveSpeed()) {
+		if(movingToAPoint && Math.abs(moveToX - getDoubleX()) < getMoveSpeed() && Math.abs(moveToY - getDoubleY()) < getMoveSpeed()) {
+			setDoubleX(moveToX);
+			setDoubleY(moveToY);
 			movingToAPoint = false;
 		}
 		else {
@@ -928,22 +930,22 @@ public abstract class unit extends drawnObject  {
 	}
 	
 	// Moving rise/run.
-	private float rise = 0;
-	private float run = 0;
+	private double rise = 0;
+	private double run = 0;
 	
 	// Set rise run. 
 	public void setRiseRun() {
-		float yDistance = (moveToY - getIntY());
-		float xDistance = (moveToX - getIntX());
-		float distanceXY = (float) Math.sqrt(yDistance * yDistance
+		double yDistance = (moveToY - getIntY());
+		double xDistance = (moveToX - getIntX());
+		double distanceXY = (float) Math.sqrt(yDistance * yDistance
 					+ xDistance * xDistance);
 		
 		// Calculate rise values.
-		float floatRise = ((yDistance/distanceXY)*(float)getMoveSpeed());
+		double floatRise = ((yDistance/distanceXY)*(float)getMoveSpeed());
 		rise = floatRise;
 		
 		// Calculate run values.
-		float floatRun = ((xDistance/distanceXY)*(float)getMoveSpeed());
+		double floatRun = ((xDistance/distanceXY)*(float)getMoveSpeed());
 		run = floatRun;
 	}
 	
@@ -989,6 +991,8 @@ public abstract class unit extends drawnObject  {
 					path.remove(0);
 				}
 				else if(!(Math.abs(currPoint.x - getIntX()) > moveSpeed + 1 || Math.abs(currPoint.y - getIntY()) > moveSpeed+1)) {
+					setDoubleX(moveToX);
+					setDoubleY(moveToY);
 					moveTo(path.get(0).x, path.get(0).y);
 					currPoint = path.get(0);
 					path.remove(0);
@@ -1061,7 +1065,7 @@ public abstract class unit extends drawnObject  {
 	}
 	
 	// Do unit specific movement.
-	public void unitSpecificMovement(float moveX, float moveY) {
+	public void unitSpecificMovement(double actualMoveX, double actualMoveY) {
 	}
 	
 	// Moving diagonally?
@@ -1128,7 +1132,7 @@ public abstract class unit extends drawnObject  {
 		fallSpeed = 0;
 		
 		// If they've touched down, place them closer to the ground.
-		chunk ground = chunk.getGroundChunk(this, (int)getFloatX(), (int)(getFloatY() + oldFallSpeed));
+		chunk ground = chunk.getGroundChunk(this, (int)getDoubleX(), (int)(getDoubleY() + oldFallSpeed));
 		if(ground != null) {
 			fallSpeed = ground.getIntY() - (this.getIntY() + this.getHeight());
 		}
@@ -1140,15 +1144,15 @@ public abstract class unit extends drawnObject  {
 	}
 	
 	// Move function
-	public void move(float moveX, float moveY) {
+	public void move(double moveX, double moveY) {
 		
 		if(player.getPlayer() != null && 
 			player.getPlayer().getCurrentZone()!=null && 
 			player.getPlayer().getCurrentZone().isZoneLoaded()) {
 			
 			// Actual move x and y when all is said and done.
-			float actualMoveX = moveX;
-			float actualMoveY = moveY;
+			double actualMoveX = moveX;
+			double actualMoveY = moveY;
 	
 			if(isCollisionOn() && (moveX != 0 || moveY != 0)) {
 				
@@ -1156,8 +1160,8 @@ public abstract class unit extends drawnObject  {
 				pathFindingStuck = false;
 				
 				// Check if it collides with a chunk in the x or y plane.
-				intTuple xyCollide = chunk.collidesWith(this, (int)(getFloatX() + moveX), (int)(getFloatY() + moveY));
-				intTuple leftRegion = region.leftRegion(this, (int)(getFloatX() + moveX),(int)(getFloatY() + moveY));
+				intTuple xyCollide = chunk.collidesWith(this, (int)(getDoubleX() + moveX), (int)(getDoubleY() + moveY));
+				intTuple leftRegion = region.leftRegion(this, (int)(getDoubleX() + moveX),(int)(getDoubleY() + moveY));
 				if((xyCollide.x != 0 || leftRegion.x != 0)) {
 					pathFindingStuck = true;
 					if(xyCollide.x!=0) actualMoveX = 0;
@@ -1205,13 +1209,13 @@ public abstract class unit extends drawnObject  {
 	
 			// Move the camera if it's there.
 			if(attachedCamera != null) {
-				attachedCamera.setX((int)(getFloatX() + actualMoveX));
-				attachedCamera.setY((int)(getFloatY() + actualMoveY));
+				attachedCamera.setX((int)(getDoubleX() + actualMoveX));
+				attachedCamera.setY((int)(getDoubleY() + actualMoveY));
 			}
 			
 			// Move the unit.
-			setFloatX(getFloatX() + actualMoveX);
-			setFloatY(getFloatY() + actualMoveY);
+			setDoubleX(getDoubleX() + actualMoveX);
+			setDoubleY(getDoubleY() + actualMoveY);
 			
 			// Specific movement
 			unitSpecificMovement(actualMoveX,actualMoveY);
