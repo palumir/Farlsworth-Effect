@@ -27,7 +27,7 @@ import utilities.saveState;
 import utilities.stringUtils;
 import utilities.time;
 import zones.farmLand.sheepFarm;
-import zones.farmLand.tombZone;
+import zones.farmLand.farmTombEasy;
 
 public class playerOne extends boss {
 	
@@ -176,37 +176,37 @@ public class playerOne extends boss {
 			// Fade slowly.
 			if(sequencePart == 2 && interactSequence!=null && interactSequence.getTheText()!=null && interactSequence.getTheText().getTextOnPress()!=null &&
 					interactSequence.getTheText().getTextOnPress().contains("Can you feel")) {
-				tombZone.zoneFog.fadeTo(.4f, 1);
+				farmTombEasy.zoneFog.fadeTo(.4f, 1);
 				sequencePart++;
 			}
 			if(sequencePart == 3 && interactSequence!=null && interactSequence.getTheText()!=null && interactSequence.getTheText().getTextOnPress()!=null &&
 					interactSequence.getTheText().getTextOnPress().contains("closer and closer")) {
-				tombZone.zoneFog.fadeTo(.5f, 1);
+				farmTombEasy.zoneFog.fadeTo(.5f, 1);
 				sequencePart++;
 			}
 			if(sequencePart == 4 && interactSequence!=null && interactSequence.getTheText()!=null && interactSequence.getTheText().getTextOnPress()!=null &&
 					interactSequence.getTheText().getTextOnPress().contains("Smell")) {
-				tombZone.zoneFog.fadeTo(.6f, 1);
+				farmTombEasy.zoneFog.fadeTo(.6f, 1);
 				sequencePart++;
 			}
 			if(sequencePart == 5 && interactSequence!=null && interactSequence.getTheText()!=null && interactSequence.getTheText().getTextOnPress()!=null &&
 					interactSequence.getTheText().getTextOnPress().contains("Hearken")) {
-				tombZone.zoneFog.fadeTo(.7f, 1);
+				farmTombEasy.zoneFog.fadeTo(.7f, 1);
 				sequencePart++;
 			}
 			if(sequencePart == 6 && interactSequence!=null && interactSequence.getTheText()!=null && interactSequence.getTheText().getTextOnPress()!=null &&
 					interactSequence.getTheText().getTextOnPress().contains("embrace")) {
-				tombZone.zoneFog.fadeTo(.8f, 1);
+				farmTombEasy.zoneFog.fadeTo(.8f, 1);
 				sequencePart++;
 			}
 			if(sequencePart == 7 && interactSequence!=null && interactSequence.getTheText()!=null && interactSequence.getTheText().getTextOnPress()!=null &&
 					interactSequence.getTheText().getTextOnPress().contains("consume")) {
-				tombZone.zoneFog.fadeTo(.9f, 1);
+				farmTombEasy.zoneFog.fadeTo(.9f, 1);
 				sequencePart++;
 			}
 			if(sequencePart == 8 && interactSequence!=null && interactSequence.getTheText()!=null && interactSequence.getTheText().getTextOnPress()!=null &&
 					interactSequence.getTheText().getTextOnPress().contains("opportun")) {
-				tombZone.zoneFog.fadeTo(1f, 1);
+				farmTombEasy.zoneFog.fadeTo(1f, 1);
 				sequencePart++;
 			}
 			
@@ -228,8 +228,8 @@ public class playerOne extends boss {
 					interactSequence.setUnescapable(false);
 					interactSequence.toggleDisplay();
 				}
-				tombZone.createShadowElevatorAroundPlayer(true);
-				tombZone.zoneFog.fadeTo(.3f, .2f);
+				farmTombEasy.createShadowElevatorAroundPlayer(true);
+				farmTombEasy.zoneFog.fadeTo(.3f, .2f);
 				
 				// Chime
 				sound s = new sound(bellToll);
@@ -245,7 +245,7 @@ public class playerOne extends boss {
 			if(sequencePart == 11 && time.getTime() - waitStart > waitFor*1000) {
 				
 				// Show eyes of elevator.
-				tombZone.giveElevatorEyes();
+				farmTombEasy.giveElevatorEyes();
 
 				// Wait for next chime.
 				waitFor = 3.16f;
@@ -257,7 +257,7 @@ public class playerOne extends boss {
 			if(sequencePart == 12 && time.getTime() - waitStart > waitFor*1000) {
 				
 				// Show eyes of elevator.
-				tombZone.moveElevatorUp();
+				farmTombEasy.moveElevatorUp();
 				sequencePart++;
 			}
 		}

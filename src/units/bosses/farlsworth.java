@@ -437,6 +437,19 @@ public class farlsworth extends boss {
 			// If we are in the farm.
 			if(pastSpawnFarm != null && !pastSpawnFarm.isCompleted()) {
 				
+				// Talk to Farlsworth for the first time.	
+				if(sequencePart == 0 && (interactSequence == null || (interactSequence != null && !interactSequence.isDisplayOn())) && 
+					currPlayer != null && currPlayer.isWithin(141,-458,433,-185)) {
+					interactSequence = makeNormalInteractSequence();
+					if(interactBox.getCurrentDisplay() != null) {
+						interactBox.getCurrentDisplay().toggleDisplay();
+					}
+					interactSequence.toggleDisplay();
+					interactSequence.setUnescapable(true);
+					setFacingDirection("Down");
+					sequencePart++;
+				}
+				
 				// Pissy Farlsworth runs away first time.
 				if(!interactMoved && interactSequence != null && interactSequence.getTheText().isEnd() && interactTimes == 0) {
 					
@@ -446,18 +459,23 @@ public class farlsworth extends boss {
 						didYouTellHimAboutYourAdventure.setCompleted(true);
 					}
 					
+					// Move Farley
 					interactTimes++;
 					moveTo(74,-58);
 					interactMoved = true;
 					sound s = new sound(bleet);
 					s.setPosition(getIntX(), getIntY(), sound.DEFAULT_SOUND_RADIUS);
 					s.start();
+					
+					// Move player eventually
+					waitStart = time.getTime();
+					waitFor = 2.5f;
+					
 				}
 				
-				// You lied to him.
-				if(interactSequence!=null && interactSequence.getTheText()!=null && interactSequence.getTheText().getTextOnPress()!=null &&
-						interactSequence.getTheText().getTextOnPress().contains("Oh boy")) {
-					didYouLieToHimAboutHavingTheKey.setCompleted(true);
+				// Follow Farlsworth
+				if(time.getTime() - waitStart > waitFor*1000) {
+					currPlayer.moveTo(142,-97);
 				}
 				
 				// Pissy Farlsworth runs away second time.
@@ -469,12 +487,16 @@ public class farlsworth extends boss {
 						didYouTellHimAboutYourAdventure.setCompleted(true);
 					}
 					
+					// Move Farley
 					interactTimes++;
 					moveTo(74,-406);
 					interactMoved = true;
 					sound s = new sound(bleet);
 					s.setPosition(getIntX(), getIntY(), sound.DEFAULT_SOUND_RADIUS);
 					s.start();
+					
+					// Move player.
+					currPlayer.moveTo(142,-357);
 				}
 				
 				// Pissy Farlsworth runs away third time.
@@ -490,6 +512,12 @@ public class farlsworth extends boss {
 					sound s = new sound(bleet);
 					s.setPosition(getIntX(), getIntY(), sound.DEFAULT_SOUND_RADIUS);
 					s.start();
+				}
+				
+				// You lied to him.
+				if(interactSequence!=null && interactSequence.getTheText()!=null && interactSequence.getTheText().getTextOnPress()!=null &&
+						interactSequence.getTheText().getTextOnPress().contains("Oh boy")) {
+					didYouLieToHimAboutHavingTheKey.setCompleted(true);
 				}
 				
 				// Check if we need to do comedic timing.
@@ -526,6 +554,7 @@ public class farlsworth extends boss {
 					saveState.createSaveState();
 					saveState.setQuiet(false);
 					movedFromFence = true;
+					sequencePart = 0;
 				}
 				
 				// Do we attach fence to him?
@@ -548,6 +577,7 @@ public class farlsworth extends boss {
 					saveState.createSaveState();
 					saveState.setQuiet(false);
 					movedFromFence = true;
+					sequencePart = 0;
 				}
 			}
 			
@@ -574,7 +604,6 @@ public class farlsworth extends boss {
 					}
 					interactSequence.toggleDisplay();
 					interactSequence.setUnescapable(true);
-					currPlayer.stopMove("all");
 					sequencePart++;
 				}
 				
