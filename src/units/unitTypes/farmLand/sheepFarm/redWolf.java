@@ -65,8 +65,7 @@ public class redWolf extends wolf {
 	private static int DEFAULT_HOW_FAR_BACK_BASE_ALPHA = 30;
 	private static int DEFAULT_HOW_FAR_BACK_RANDOM_ALPHA = 5;
 	private static int DEFAULT_RANDOM_DEGREE_ALPHA = 1; 
-	private static int DEFAULT_FOLLOW_UNTIL_RANGE_BASE_ALPHA = 20;
-	private static int DEFAULT_FOLLOW_UNTIL_RANGE_RANDOM_ALPHA = 0;
+	private static int DEFAULT_FOLLOW_UNTIL_RANGE_BASE_ALPHA = 15;
 	
 	////////////////
 	/// FIELDS ///
@@ -349,7 +348,7 @@ public class redWolf extends wolf {
 			howFarBackRandom = DEFAULT_HOW_FAR_BACK_RANDOM_ALPHA;
 			randomDegree = DEFAULT_RANDOM_DEGREE_ALPHA;
 			setMoveSpeed(DEFAULT_MOVESPEED_ALPHA);
-			followUntilRange = DEFAULT_FOLLOW_UNTIL_RANGE_BASE_ALPHA + DEFAULT_FOLLOW_UNTIL_RANGE_RANDOM_ALPHA;
+			followUntilRange = DEFAULT_FOLLOW_UNTIL_RANGE_BASE_ALPHA;
 		}
 	}
 

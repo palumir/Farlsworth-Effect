@@ -54,8 +54,8 @@ public class blackWolf extends wolf {
 	private static float DEFAULT_CLAW_ATTACK_EVERY_BETA = 4f;
 	private static float DEFAULT_SPAWN_CLAW_PHASE_TIME_BETA = 3f;
 	private static int DEFAULT_HOW_FAR_IN_A_DIRECTION_BETA = 90;
-	private static int DEFAULT_FOLLOW_UNTIL_RANGE_BASE_BETA = 40;
-	private static int DEFAULT_FOLLOW_UNTIL_RANGE_RANDOM_BETA = 5;
+	private static int DEFAULT_FOLLOW_UNTIL_RANGE_BASE_BETA = 90;
+	private static int DEFAULT_FOLLOW_UNTIL_RANGE_RANDOM_BETA = 15;
 
 	// Alpha stats
 	private static float DEFAULT_MOVESPEED_ALPHA = 3.5f;
