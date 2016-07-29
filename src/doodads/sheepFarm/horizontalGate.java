@@ -116,39 +116,37 @@ public class horizontalGate extends chunk {
 			
 			if((player.getPlayer() != null && player.getPlayer().getPlayerInventory().hasKey(keyName)) || hasBeenOpened.isCompleted()) {
 				
-				String funnyGateName = "Talking Gate";
-				
 				// Farlsworth gate joke
 				if(isForestGateAndUnopenable() && !talkedToForestGateOnce) {
 					s = startOfConversation.addChild("Open", "I'm not trying to pass judgement or anything.");
-					s.setTalker(funnyGateName);
+					s.setTalker("What's going on?");
 					s = s.addChild(null, "Because I am a gate and all.");
-					s.setTalker(funnyGateName);
+					s.setTalker("Is this gate speaking to me?");
 					s = s.addChild(null, "But don't you have some wool to retrieve nearby?");
-					s.setTalker(funnyGateName);
+					s.setTalker("Somebody must be playing a practical joke or something");
 					s = s.addChild(null, "I'm not all-knowing or something.");
-					s.setTalker(funnyGateName);
+					s.setTalker("Farmer, is that you just joshing around?");
 					s = s.addChild(null, "I just overheard you talking to the \"farmer\"'.");
-					s.setTalker(funnyGateName);
+					s.setTalker("It really isn't");
 					s = s.addChild(null, "Though, I am a talking gate.");
-					s.setTalker(funnyGateName);
+					s.setTalker("I'm having a casual conversation with a gate");
 					s = s.addChild(null, "But that's life.");
-					s.setTalker(funnyGateName);
+					s.setTalker("What is my life");
 					s = s.addChild(null, "We're all talking gates at heart.");
-					s.setTalker(funnyGateName);
+					s.setTalker("I must have not gotten enough sleep");
 					talkedToForestGateOnce = true;
 				}
 				else if(isForestGateAndUnopenable() && talkedToForestGateOnce) {
 					s = startOfConversation.addChild("Open", "Go get that wool.");
-					s.setTalker(funnyGateName);
+					s.setTalker("A talking gate, I suppose");
 					s = s.addChild(null, "Farlsworth is in the pen to my left.");
-					s.setTalker(funnyGateName);
+					s.setTalker("A talking gate, I suppose");
 					s = s.addChild(null, "I am facing toward you, before you ask.");
-					s.setTalker(funnyGateName);
+					s.setTalker("A talking gate, I suppose");
 					s = s.addChild(null, "I have nothing more to say.");
-					s.setTalker(funnyGateName);
+					s.setTalker("A talking gate, I suppose");
 					s = s.addChild(null, "The gate life is a dull one.");
-					s.setTalker(funnyGateName);
+					s.setTalker("A talking gate, I suppose");
 				}
 				else {
 					s = startOfConversation.addChild("Open", "You open the gate.");

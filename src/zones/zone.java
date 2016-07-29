@@ -12,7 +12,8 @@ import utilities.utility;
 import zones.farmLand.forest;
 import zones.farmLand.sheepFarm;
 import zones.farmLand.spiderCave;
-import zones.farmLand.tombZone;
+import zones.farmLand.farmTombEasy;
+import zones.farmLand.farmTombMedium;
 
 public abstract class zone {
 	
@@ -102,7 +103,8 @@ public abstract class zone {
 		
 		// Sheep Farms
 		sheepFarm.setZone(new sheepFarm());
-		tombZone.setZone(new tombZone());
+		farmTombEasy.setZone(new farmTombEasy());
+		farmTombMedium.setZone(new farmTombMedium());
 		forest.setZone(new forest());
 		spiderCave.setZone(new spiderCave());
 	}

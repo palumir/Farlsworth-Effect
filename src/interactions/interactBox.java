@@ -223,6 +223,7 @@ public class interactBox extends interfaceObject  {
 	public void toggleDisplay() {
 		setDisplayOn(!isDisplayOn());
 		if(isDisplayOn()) {
+			
 			// Stop the player
 			player.getPlayer().stop();
 		}

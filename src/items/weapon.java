@@ -35,6 +35,7 @@ public abstract class weapon extends item {
 	protected float backSwing = 0;
 	protected float critDamage = 0;
 	protected float attackVariability = 0;
+	protected String type = "melee";
 	private String range = "short";
 	private String speed = "fast";
 	

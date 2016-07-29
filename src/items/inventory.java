@@ -376,14 +376,16 @@ public class inventory extends interfaceObject {
 							if(currentItem instanceof weapon) {
 								g.setColor(DEFAULT_DESC_COLOR);
 								weapon currentWeapon = (weapon)currentItem;
-								g.drawString("Damage: " + currentWeapon.getAttackDamage(), (int)(gameCanvas.getScaleX()*(getIntX() + (int) (Math.sqrt(DEFAULT_INVENTORY_SIZE)*DEFAULT_SLOT_SIZE) + selectedSlotTextAdjustX + adjustX)) - g.getFontMetrics().stringWidth("Damage: " + currentWeapon.getAttackDamage())/2, 
+								g.drawString(currentWeapon.type, (int)(gameCanvas.getScaleX()*(getIntX() + (int) (Math.sqrt(DEFAULT_INVENTORY_SIZE)*DEFAULT_SLOT_SIZE) + selectedSlotTextAdjustX + adjustX)) - g.getFontMetrics().stringWidth(currentWeapon.type)/2, 
 										(int)(gameCanvas.getScaleY()*(getIntY()+ 34 + adjustY + 20)));
-								g.drawString("Speed: " + currentWeapon.getSpeed(), (int)(gameCanvas.getScaleX()*(getIntX() + (int) (Math.sqrt(DEFAULT_INVENTORY_SIZE)*DEFAULT_SLOT_SIZE) + selectedSlotTextAdjustX + adjustX)) - g.getFontMetrics().stringWidth("Speed: " + currentWeapon.getSpeed())/2, 
+								g.drawString("Damage: " + currentWeapon.getAttackDamage(), (int)(gameCanvas.getScaleX()*(getIntX() + (int) (Math.sqrt(DEFAULT_INVENTORY_SIZE)*DEFAULT_SLOT_SIZE) + selectedSlotTextAdjustX + adjustX)) - g.getFontMetrics().stringWidth("Damage: " + currentWeapon.getAttackDamage())/2, 
 										(int)(gameCanvas.getScaleY()*(getIntY()+ 34 + adjustY + 34)));
-								g.drawString("Range: " + currentWeapon.getRange(), (int)(gameCanvas.getScaleX()*(getIntX() + (int) (Math.sqrt(DEFAULT_INVENTORY_SIZE)*DEFAULT_SLOT_SIZE) + selectedSlotTextAdjustX + adjustX)) - g.getFontMetrics().stringWidth("Range: " + currentWeapon.getRange())/2, 
+								g.drawString("Speed: " + currentWeapon.getSpeed(), (int)(gameCanvas.getScaleX()*(getIntX() + (int) (Math.sqrt(DEFAULT_INVENTORY_SIZE)*DEFAULT_SLOT_SIZE) + selectedSlotTextAdjustX + adjustX)) - g.getFontMetrics().stringWidth("Speed: " + currentWeapon.getSpeed())/2, 
 										(int)(gameCanvas.getScaleY()*(getIntY()+ 34 + adjustY + 48)));
-								g.drawString("Crit: " + ((int)(currentWeapon.critChance*100)) + "%", (int)(gameCanvas.getScaleX()*(getIntX() + (int) (Math.sqrt(DEFAULT_INVENTORY_SIZE)*DEFAULT_SLOT_SIZE) + selectedSlotTextAdjustX + adjustX)) - g.getFontMetrics().stringWidth("Crit: " + ((int)(currentWeapon.critChance*100)) + "%")/2, 
+								g.drawString("Range: " + currentWeapon.getRange(), (int)(gameCanvas.getScaleX()*(getIntX() + (int) (Math.sqrt(DEFAULT_INVENTORY_SIZE)*DEFAULT_SLOT_SIZE) + selectedSlotTextAdjustX + adjustX)) - g.getFontMetrics().stringWidth("Range: " + currentWeapon.getRange())/2, 
 										(int)(gameCanvas.getScaleY()*(getIntY()+ 34 + adjustY + 48+14)));
+								g.drawString("Crit: " + ((int)(currentWeapon.critChance*100)) + "%", (int)(gameCanvas.getScaleX()*(getIntX() + (int) (Math.sqrt(DEFAULT_INVENTORY_SIZE)*DEFAULT_SLOT_SIZE) + selectedSlotTextAdjustX + adjustX)) - g.getFontMetrics().stringWidth("Crit: " + ((int)(currentWeapon.critChance*100)) + "%")/2, 
+										(int)(gameCanvas.getScaleY()*(getIntY()+ 34 + adjustY + 48+28)));
 								
 								// Draw weapon properties
 								int startY = getIntY()+ 34 + adjustY + 48 + 18;

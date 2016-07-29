@@ -37,6 +37,7 @@ import items.bottle;
 import items.item;
 import items.bottles.normalBottle;
 import items.weapons.dagger;
+import items.weapons.sword;
 import modes.topDown;
 import sounds.music;
 import sounds.sound;
@@ -333,52 +334,85 @@ public class sheepFarm extends zone {
 			farlsworthFence = null;
 		}
 		
+/////////////////////////////////////////
+//////////AREA BETWEEN FARLSWORTH //////
+/////////  FENCE AND GARDEN   /////////
+//////////////////////////////////////
+		
 		// First wolf pack
 		u = new redWolf(-8,-846);
 		u.setFacingDirection("Down");
 		
 		// Second wolf pack
-		u = new blackWolf(430,-1262);
+		u = new yellowWolf(430,-1272);
 		u.setFacingDirection("Left");
 		
+		// Bottle before forest farm
+		item b = new normalBottle(849,-1335);
+		
 		// Third wolf pack
-		u = new yellowWolf(1045,-1262);
+		u = new blackWolf(1392,-1272);
 		u.setFacingDirection("Left");
 		
 		// Fourth wolf pack
 		u = new redWolf(1400,-700);
 		u.setFacingDirection("Up");
 		
-		// Well.
+		// Well before flower garden.
 		c = new well(1400,-300,0);
 		
+/////////////////////////////////////////
+///////// AREA BETWEEN FARLSWORTH //////
+/////////    GARDEN AND GRAVE   ///////
+//////////////////////////////////////
+		
 		// Fifth wolf pack
-		u = new blackWolf(2335,-210);
-		u.setFacingDirection("Left");
-		u = new yellowWolf(2385,-110);
-		u.setFacingDirection("Left");
+		u = new blackWolf(2335,-110);
+		u.setFacingDirection("Up");
+		u = new yellowWolf(2385,-160);
+		u.setFacingDirection("Up");
 		
 		// Sixth wolf pack
-		u = new blackWolf(2785,-210);
+		u = new blackWolf(2785,-160);
 		u.setFacingDirection("Left");
 		u = new redWolf(2760,-110);
 		u.setFacingDirection("Left");
 		
 		// Seventh wolf pack
-		u = new yellowWolf(2582+50,-1317);
-		u.setFacingDirection("Down");
-		u = new redWolf(2812-50,-1317);
-		u.setFacingDirection("Down");
+		u = new yellowWolf(2550,-999);
+		u.setFacingDirection("Right");
+		u = new redWolf(2550,-959);
+		u.setFacingDirection("Right");
 		
 		// Eighth wolf pack
-		u = new redWolf(1405,-2786);
+		u = new blackWolf(2550,-1717);
 		u.setFacingDirection("Right");
-		u = new yellowWolf(1405,-2921);
-		u.setFacingDirection("Right");
-		u = new blackWolf(1405,-3056);
+		u = new yellowWolf(2550,-1717+40);
 		u.setFacingDirection("Right");
 		
 		// Ninth wolf pack
+		u = new redWolf(2850,-2360);
+		u.setFacingDirection("Left");
+		u = new blackWolf(2850,-2360+40);
+		u.setFacingDirection("Left");
+		
+		// Well in grave.
+		new well(2114,-2955,0);
+		
+////////////////////////////////////
+//////////AREA BETWEEN GRAVE //////
+/////////  WELL AND TOMB  /////////
+//////////////////////////////////
+		
+		// Tenth wolf pack
+		u = new redWolf(1155,-3114);
+		u.setFacingDirection("Right");
+		u = new yellowWolf(1155,-3082);
+		u.setFacingDirection("Right");
+		u = new blackWolf(1155,-3050);
+		u.setFacingDirection("Right");
+		
+		// Optional eleventh wolf pack
 		u = new yellowWolf(452,-3013);
 		u.setFacingDirection("Right");
 		u = new blackWolf(422,-3910);
@@ -390,9 +424,6 @@ public class sheepFarm extends zone {
 	
 	// Flower farm
 	public void createFlowerFarm()  {
-	
-		// Bottle before forest farm
-		item b = new normalBottle(1293,-1300);
 		
 		// Forest farm stuff
 		new farmHouse(1892,-626-100,0);
@@ -471,9 +502,6 @@ public class sheepFarm extends zone {
 	
 	// Create area above flower farm.
 	public void createAreaAboveFlowerFarm()  {
-		
-		// Well
-		new well(2685,-1877-125,0);
 		
 		// Trees
 		tree.createTree(2440,-1663,1);
@@ -1305,7 +1333,7 @@ public class sheepFarm extends zone {
 	public void createGraveYard()  {
 		
 		// Tomb
-		new tomb(2305+2,-3944-85,0, tombZone.getZone(),57,-6,"Right");
+		new tomb(2305+2,-3944-85,0, farmTombEasy.getZone(),57,-6,"Right");
 		
 		// Fence around tomb
 		spawnFence(null, 2216,-3990,2216,-3820); // Left fence
@@ -1425,7 +1453,6 @@ public class sheepFarm extends zone {
 		new grave(1910,-2835,2);
 		new grave(1910,-2701,2);
 		new grave(2114,-3103,2);
-		new grave(2114,-2969,2);
 		new grave(2114,-2835,2);
 		new grave(2114,-2701,2);
 		
@@ -2098,6 +2125,9 @@ public class sheepFarm extends zone {
 		
 		// Dagger.
 		item daggerSpawn = new dagger(-800,387);
+		
+		// Long sword testing
+		item longSwordSpawn = new sword(-400,387);
 		
 		// Corner
 		tree.createTree(-60-550,480,2);

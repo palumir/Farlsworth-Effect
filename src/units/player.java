@@ -59,6 +59,16 @@ public class player extends unit {
 	private static int DEFAULT_PLATFORMER_ADJUSTMENT_Y = 6;
 	private static int DEFAULT_TOPDOWN_ADJUSTMENT_Y = 20;
 	
+	// Fist defaults.
+	protected static int DEFAULT_ATTACK_DAMAGE = 1;
+	protected static float DEFAULT_ATTACK_TIME = 0.4f;
+	protected static int DEFAULT_ATTACK_WIDTH = 35;
+	protected static int DEFAULT_ATTACK_LENGTH = 11;
+	protected static float DEFAULT_BACKSWING = 0.1f;
+	protected static float DEFAULT_CRIT_CHANCE = 0f;
+	protected float DEFAULT_CRIT_DAMAGE = 1f;
+	protected static float DEFAULT_ATTACK_VARIABILITY = 0f; // How much the range of hits is. 5% both ways.
+	
 	// Default name.
 	private static String DEFAULT_PLAYER_NAME = "IanRetard";
 	
@@ -147,6 +157,8 @@ public class player extends unit {
 	public player(int newX, int newY, zone z) {
 		super(playerType, newX, newY);
 		
+		
+		//showAttackRange();
 		// Set movespeed.
 		setMoveSpeed(DEFAULT_PLAYER_MOVESPEED);
 		
@@ -187,6 +199,97 @@ public class player extends unit {
 		topDownHeight = DEFAULT_TOPDOWN_HEIGHT;
 		topDownWidth = DEFAULT_TOPDOWN_WIDTH;
 		setHitBoxAdjustmentY(getDefaultHitBoxAdjustmentY());
+		
+		// Set player animations
+		setNoWeaponStats();
+	}
+	
+	// Set animations
+	public void setNoWeaponStats() {
+		// Equip the weapon.
+		setEquippedWeapon(null);
+		
+		// Damage
+		setAttackDamage(DEFAULT_ATTACK_DAMAGE);
+		
+		// Set attack sound
+		setAttackSound(DEFAULT_ATTACK_SOUND);
+		
+		// Attack time.
+		setAttackFrameStart(3);
+		setAttackFrameEnd(5);
+		setAttackTime(DEFAULT_ATTACK_TIME);
+		
+		// Attack range.
+		setAttackWidth(DEFAULT_ATTACK_WIDTH);
+		setAttackLength(DEFAULT_ATTACK_LENGTH);
+		
+		// Unit stats.
+		setAttackVariability(DEFAULT_ATTACK_VARIABILITY); // Percentage
+		setCritChance(DEFAULT_CRIT_CHANCE);
+		setCritDamage(DEFAULT_CRIT_DAMAGE);
+		
+		// Deal with animations
+		animationPack unitTypeAnimations = new animationPack();
+		
+		// Attacking left animation.
+		animation attackingLeft = new animation("attackingLeft", getObjectSpriteSheet().getAnimation(13), 0, 8, DEFAULT_ATTACK_TIME);
+		unitTypeAnimations.addAnimation(attackingLeft);
+		
+		// Attacking left animation.
+		animation attackingRight = new animation("attackingRight", getObjectSpriteSheet().getAnimation(15), 0, 8, DEFAULT_ATTACK_TIME);
+		unitTypeAnimations.addAnimation(attackingRight);
+		
+		// Attacking left animation.
+		animation attackingUp = new animation("attackingUp", getObjectSpriteSheet().getAnimation(12), 0, 8, DEFAULT_ATTACK_TIME);
+		unitTypeAnimations.addAnimation(attackingUp);
+		
+		// Attacking left animation.
+		animation attackingDown = new animation("attackingDown", getObjectSpriteSheet().getAnimation(14), 0, 8, DEFAULT_ATTACK_TIME);
+		unitTypeAnimations.addAnimation(attackingDown);
+		
+		// Jumping left animation.
+		animation jumpingLeft = new animation("jumpingLeft", getObjectSpriteSheet().getAnimation(1), 5, 5, 1);
+		unitTypeAnimations.addAnimation(jumpingLeft);
+		
+		// Jumping right animation.
+		animation jumpingRight = new animation("jumpingRight", getObjectSpriteSheet().getAnimation(3), 5, 5, 1);
+		unitTypeAnimations.addAnimation(jumpingRight);
+		
+		// Standing left animation.
+		animation standingLeft = new animation("standingLeft", getObjectSpriteSheet().getAnimation(9), 0, 0, 1);
+		unitTypeAnimations.addAnimation(standingLeft);
+		
+		// Standing up animation.
+		animation standingUp = new animation("standingUp", getObjectSpriteSheet().getAnimation(8), 0, 0, 1);
+		unitTypeAnimations.addAnimation(standingUp);
+		
+		// Standing right animation.
+		animation standingRight = new animation("standingRight", getObjectSpriteSheet().getAnimation(11), 0, 0, 1);
+		unitTypeAnimations.addAnimation(standingRight);
+		
+		// Standing down animation.
+		animation standingDown = new animation("standingDown", getObjectSpriteSheet().getAnimation(10), 0, 0, 1);
+		unitTypeAnimations.addAnimation(standingDown);
+		
+		// Running left animation.
+		animation runningLeft = new animation("runningLeft", getObjectSpriteSheet().getAnimation(9), 1, 8, 0.75f);
+		unitTypeAnimations.addAnimation(runningLeft);		
+		
+		// Running up animation.
+		animation runningUp = new animation("runningUp", getObjectSpriteSheet().getAnimation(8), 1, 8, 0.75f);
+		unitTypeAnimations.addAnimation(runningUp);
+		
+		// Running right animation.
+		animation runningRight = new animation("runningRight", getObjectSpriteSheet().getAnimation(11), 1, 8, 0.75f);
+		unitTypeAnimations.addAnimation(runningRight);
+		
+		// Running down animation.
+		animation runningDown = new animation("runningDown", getObjectSpriteSheet().getAnimation(10), 1, 8, 0.75f);
+		unitTypeAnimations.addAnimation(runningDown);
+		
+		// Set animations.
+		setAnimations(unitTypeAnimations);
 	}
 	
 	// React to pain.
@@ -329,7 +432,7 @@ public class player extends unit {
 			loadZone = zone.getStartZone();
 			playerX = loadZone.getDefaultLocation().x;
 			playerY = loadZone.getDefaultLocation().y;
-			newFacingDirection = "Up";
+			newFacingDirection = "Right";
 			tooltipString t = new tooltipString("Use 'wasd' to move.");
 		}
 		
@@ -457,7 +560,6 @@ public class player extends unit {
 			// Player presses down key
 			if(k.getKeyCode() == KeyEvent.VK_S) { 
 				if(mode.getCurrentMode() == platformer.name) {
-					//crouch(true);
 					startMove("down");
 				}
 				else if(mode.getCurrentMode() == topDown.name) {
@@ -544,90 +646,8 @@ public class player extends unit {
 	
 	// Remove the weapon.
 	public void unequipWeapon() {
-		// Equip the weapon.
-		setEquippedWeapon(null);
-		
-		// Damage
-		setAttackDamage(DEFAULT_ATTACK_DAMAGE);
-		
-		// Set attack sound
-		setAttackSound(DEFAULT_ATTACK_SOUND);
-		
-		// Attack time.
-		setAttackFrameStart(3);
-		setAttackFrameEnd(5);
-		setAttackTime(DEFAULT_ATTACK_TIME);
-		
-		// Attack range.
-		setAttackWidth(DEFAULT_ATTACK_WIDTH);
-		setAttackLength(DEFAULT_ATTACK_LENGTH);
-		
-		// Unit stats.
-		setAttackVariability(DEFAULT_ATTACK_VARIABILITY); // Percentage
-		setCritChance(DEFAULT_CRIT_CHANCE);
-		setCritDamage(DEFAULT_CRIT_DAMAGE);
 	
-		// Deal with animations
-		animationPack unitTypeAnimations = new animationPack();
-		
-		// Attacking left animation.
-		animation attackingLeft = new animation("attackingLeft", getTypeOfUnit().getUnitTypeSpriteSheet().getAnimation(13), 0, 5, unit.DEFAULT_ATTACK_TIME);
-		unitTypeAnimations.addAnimation(attackingLeft);
-		
-		// Attacking left animation.
-		animation attackingRight = new animation("attackingRight", getTypeOfUnit().getUnitTypeSpriteSheet().getAnimation(15), 0, 5, unit.DEFAULT_ATTACK_TIME);
-		unitTypeAnimations.addAnimation(attackingRight);
-		
-		// Attacking left animation.
-		animation attackingUp = new animation("attackingUp", getTypeOfUnit().getUnitTypeSpriteSheet().getAnimation(12), 0, 5, unit.DEFAULT_ATTACK_TIME);
-		unitTypeAnimations.addAnimation(attackingUp);
-		
-		// Attacking left animation.
-		animation attackingDown = new animation("attackingDown", getTypeOfUnit().getUnitTypeSpriteSheet().getAnimation(14), 0, 5, unit.DEFAULT_ATTACK_TIME);
-		unitTypeAnimations.addAnimation(attackingDown);
-		
-		// Jumping left animation.
-		animation jumpingLeft = new animation("jumpingLeft", getTypeOfUnit().getUnitTypeSpriteSheet().getAnimation(1), 5, 5, 1);
-		unitTypeAnimations.addAnimation(jumpingLeft);
-		
-		// Jumping right animation.
-		animation jumpingRight = new animation("jumpingRight", getTypeOfUnit().getUnitTypeSpriteSheet().getAnimation(3), 5, 5, 1);
-		unitTypeAnimations.addAnimation(jumpingRight);
-		
-		// Standing left animation.
-		animation standingLeft = new animation("standingLeft", getTypeOfUnit().getUnitTypeSpriteSheet().getAnimation(9), 0, 0, 1);
-		unitTypeAnimations.addAnimation(standingLeft);
-		
-		// Standing up animation.
-		animation standingUp = new animation("standingUp", getTypeOfUnit().getUnitTypeSpriteSheet().getAnimation(8), 0, 0, 1);
-		unitTypeAnimations.addAnimation(standingUp);
-		
-		// Standing right animation.
-		animation standingRight = new animation("standingRight", getTypeOfUnit().getUnitTypeSpriteSheet().getAnimation(11), 0, 0, 1);
-		unitTypeAnimations.addAnimation(standingRight);
-		
-		// Standing down animation.
-		animation standingDown = new animation("standingDown", getTypeOfUnit().getUnitTypeSpriteSheet().getAnimation(10), 0, 0, 1);
-		unitTypeAnimations.addAnimation(standingDown);
-		
-		// Running left animation.
-		animation runningLeft = new animation("runningLeft", getTypeOfUnit().getUnitTypeSpriteSheet().getAnimation(9), 0, 8, 1);
-		unitTypeAnimations.addAnimation(runningLeft);		
-		
-		// Running up animation.
-		animation runningUp = new animation("runningUp", getTypeOfUnit().getUnitTypeSpriteSheet().getAnimation(8), 0, 8, 1);
-		unitTypeAnimations.addAnimation(runningUp);
-		
-		// Running right animation.
-		animation runningRight = new animation("runningRight", getTypeOfUnit().getUnitTypeSpriteSheet().getAnimation(11), 0, 8, 1);
-		unitTypeAnimations.addAnimation(runningRight);
-		
-		// Running down animation.
-		animation runningDown = new animation("runningDown", getTypeOfUnit().getUnitTypeSpriteSheet().getAnimation(10), 0, 8, 1);
-		unitTypeAnimations.addAnimation(runningDown);
-		
-		// Set animations.
-		setAnimations(unitTypeAnimations);
+		setNoWeaponStats();
 	}
 	
 	// Interact in front of the player.

@@ -283,8 +283,8 @@ public class developer extends player {
 			// Output what we make.
 			c = new wallTorch(getIntX() + getWidth()/2, getIntY() + getHeight()/2);
 			
-			c.setFloatX(c.getFloatX() -c.getWidth()/2);
-			c.setFloatY(c.getFloatY() -c.getHeight()/2);
+			c.setDoubleX(c.getDoubleX() -c.getWidth()/2);
+			c.setDoubleY(c.getDoubleY() -c.getHeight()/2);
 			System.out.println("c = new " + listOfThings[whatThing] + "("+(getIntX()+getWidth()/2-c.getWidth()/2) + "," + (getIntY() + getHeight()/2 - c.getHeight()/2) + ");");
 			// Set some stuff.
 			if(showHitBoxes) c.showHitBox();
@@ -321,16 +321,16 @@ public class developer extends player {
 		
 		// Adjust
 		if(c!=null && !alreadyPrinted) {
-			c.setFloatX(c.getFloatX() -c.getWidth()/2);
-			c.setFloatY(c.getFloatY() -c.getHeight()/2);
+			c.setDoubleX(c.getDoubleX() -c.getWidth()/2);
+			c.setDoubleY(c.getDoubleY() -c.getHeight()/2);
 			System.out.println("c = new " + listOfThings[whatThing] + "("+(getIntX()+getWidth()/2-c.getWidth()/2) + "," + (getIntY() + getHeight()/2 - c.getHeight()/2) + "," + random + ");");
 			// Set some stuff.
 			if(showHitBoxes) c.showHitBox();
 			c.setDrawSprite(visible);
 		}
 		if(u!=null && !alreadyPrinted) {
-			u.setFloatX(u.getFloatX() -u.getWidth()/2);
-			u.setFloatY(u.getFloatY() -u.getHeight()/2);
+			u.setDoubleX(u.getDoubleX() -u.getWidth()/2);
+			u.setDoubleY(u.getDoubleY() -u.getHeight()/2);
 			System.out.println("u = new " + listOfThings[whatThing] + "("+(getIntX()+getWidth()/2-u.getWidth()/2) + "," + (getIntY() + getHeight()/2 - u.getHeight()/2)+ ");");
 			// Set some stuff.
 			if(showHitBoxes) u.showHitBox();

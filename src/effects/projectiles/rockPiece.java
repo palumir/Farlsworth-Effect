@@ -96,8 +96,8 @@ public class rockPiece extends projectile {
 		floatY += rise;
 		
 		// Set new X and Y.
-		setFloatX((int)floatX);
-		setFloatY((int)floatY);
+		setDoubleX((int)floatX);
+		setDoubleY((int)floatY);
 		
 		player currPlayer = player.getPlayer();
 		

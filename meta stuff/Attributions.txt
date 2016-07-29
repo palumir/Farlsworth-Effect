@@ -1,4 +1,4 @@
-FreeSound.org Attributions:
+Sounds from FreeSound.org Attributions:
 Weapon_Swing3.wav by Everheart 
 Splattt.mp3 by SlykMrByches
 Zipper_fast.aif by tmkappelt
@@ -36,17 +36,24 @@ Music:
 Elidia McGivern
 
 Art Attributions:
-Character: universal LPC spritesheet by jrconway3 on github.
+Player & Human NPCs: Universal LPC Spritesheet by jrconway3 on github.
+Artists: https://github.com/jrconway3/Universal-LPC-spritesheet/blob/master/AUTHORS.txt
+License: https://creativecommons.org/licenses/by-sa/3.0/
+Note:
+We made many changes to many of the sprites. 
+All altered LPC sprites will be made available on the web.
+Required for license, but we planned on doing this with all sprites anyway.
+"Give what you can, take what you need", right? :D
 
 Sheep: 
-- Daniel Eddeland
+Artist: Daniel Eddeland
 From: http://opengameart.org/content/lpc-style-farm-animals
 
 Wolf and Spider:
--Stephen "Redshrike" Challener as graphic artist 
--William Thompsonj contributor. 
+Artist: Stephen "Redshrike" Challener
+Contributor: William Thompsonj
 From: http://opengameart.org/users/williamthompsonj
 
-
+// These need to be changed.
 Lever: vxresources
 Houses: Lunerea

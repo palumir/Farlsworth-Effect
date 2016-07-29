@@ -108,7 +108,7 @@ public class floatingString extends effect {
 		g.setFont(font);
 		g.drawString(text,0, g2.getFontMetrics().getHeight());
 		g2.drawImage(img,getDrawX() - g2.getFontMetrics().stringWidth(text)/2,getDrawY() - (int)(gameCanvas.getScaleY()*getHeight()*2/3),null);
-		setFloatY(getIntY() - 1);
+		setDoubleY(getIntY() - 1);
 	}
 
 }

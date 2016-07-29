@@ -17,7 +17,7 @@ import effects.effectTypes.floatingString;
 import items.bottles.normalBottle;
 import items.keys.farmKey;
 import items.weapons.dagger;
-import items.weapons.longSword;
+import items.weapons.sword;
 import items.weapons.torch;
 import sounds.sound;
 import units.player;
@@ -137,7 +137,7 @@ public abstract class item extends drawnObject {
 		
 		// Weapons
 		if(dagger.weaponRef == null) dagger.weaponRef = new dagger();
-		if(longSword.weaponRef == null) longSword.weaponRef = new longSword();
+		if(sword.weaponRef == null) sword.weaponRef = new sword();
 		if(torch.weaponRef == null) torch.weaponRef = new torch();
 
 		// Bottles.

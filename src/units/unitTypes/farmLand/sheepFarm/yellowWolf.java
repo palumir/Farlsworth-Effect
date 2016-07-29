@@ -61,8 +61,8 @@ public class yellowWolf extends wolf {
 	private static int DEFAULT_HOW_FAR_BACK_BASE_BETA = 55;
 	private static int DEFAULT_HOW_FAR_BACK_RANDOM_BETA = 20;
 	private static int DEFAULT_RANDOM_DEGREE_BETA = 15;
-	private static int DEFAULT_FOLLOW_UNTIL_RANGE_BASE_BETA = 50;
-	private static int DEFAULT_FOLLOW_UNTIL_RANGE_RANDOM_BETA = 10;
+	private static int DEFAULT_FOLLOW_UNTIL_RANGE_BASE_BETA = 90;
+	private static int DEFAULT_FOLLOW_UNTIL_RANGE_RANDOM_BETA = 15;
 
 	// Alpha stats
 	private static float DEFAULT_MOVESPEED_ALPHA = 3.5f;
@@ -71,7 +71,7 @@ public class yellowWolf extends wolf {
 	private static int DEFAULT_HOW_FAR_BACK_BASE_ALPHA = 15;
 	private static int DEFAULT_HOW_FAR_BACK_RANDOM_ALPHA = 1;
 	private static int DEFAULT_RANDOM_DEGREE_ALPHA = 1;
-	private static int DEFAULT_FOLLOW_UNTIL_RANGE_BASE_ALPHA = 10;
+	private static int DEFAULT_FOLLOW_UNTIL_RANGE_BASE_ALPHA = 15;
 	
 	// How often to spawn a rock.
 	private static float DEFAULT_SPAWN_ROCK_EVERY = 0.1f;

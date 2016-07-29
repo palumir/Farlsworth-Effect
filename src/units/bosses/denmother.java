@@ -848,8 +848,8 @@ public class denmother extends boss {
 				}
 				
 				// Move region.
-				fightRegion.setFloatX(fightRegion.getFloatX() + xMove*wolfPack.get(0).getMoveSpeed());
-				fightRegion.setFloatY(fightRegion.getFloatY() + yMove*wolfPack.get(0).getMoveSpeed());
+				fightRegion.setDoubleX(fightRegion.getDoubleX() + xMove*wolfPack.get(0).getMoveSpeed());
+				fightRegion.setDoubleY(fightRegion.getDoubleY() + yMove*wolfPack.get(0).getMoveSpeed());
 				
 				// Move jumping to X and Y if dog is jumping.
 				if(jumpingToMiddle) {
@@ -860,8 +860,8 @@ public class denmother extends boss {
 				// Move claws.
 				if(claws != null) {
 					for(int i = 0; i < claws.size(); i++) {
-						claws.get(i).setFloatX(claws.get(i).getIntX() + xMove*wolfPack.get(0).getMoveSpeed());
-						claws.get(i).setFloatY(claws.get(i).getIntY() + yMove*wolfPack.get(0).getMoveSpeed());
+						claws.get(i).setDoubleX(claws.get(i).getIntX() + xMove*wolfPack.get(0).getMoveSpeed());
+						claws.get(i).setDoubleY(claws.get(i).getIntY() + yMove*wolfPack.get(0).getMoveSpeed());
 					}
 				}
 				
@@ -920,8 +920,8 @@ public class denmother extends boss {
 				}
 				
 				if(jumping) {
-					setFloatX(getIntX() + run);
-					setFloatY(getIntY() + rise);
+					setDoubleX(getIntX() + run);
+					setDoubleY(getIntY() + rise);
 					
 					// If slashing, hurt the player.
 					if(slashing && !hasSlashed && currPlayer.isWithin(getIntX(), getIntY(), getIntX()+getWidth(), getIntY() + getHeight())) {
