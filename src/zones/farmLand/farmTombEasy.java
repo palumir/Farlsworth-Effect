@@ -1068,9 +1068,9 @@ public void makeShadowSquareBottomRight(int topLeftDudePosX, int topLeftDudePosY
 		u = new shadowDude(8206,1218);
 		
 		
+//////////////////////////////////
+//////STRAIGHT FLOOR JUMP AREA //
 ////////////////////////////////
-//////STRAIGHT FLOOR JUMP AREA //////
-//////////////////////////////
 		
 		spawnTombRect(7606+73,1162,10000,1194,"ground");
 		
