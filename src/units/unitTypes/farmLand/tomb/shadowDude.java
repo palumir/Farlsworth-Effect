@@ -82,7 +82,7 @@ public class shadowDude extends unit {
 	// Constructor
 	public shadowDude(int newX, int newY) {
 		super(shadowType, newX, newY);
-		
+		showHitBox();
 		// Make unkillable
 		setKillable(false);
 		setTargetable(false);
