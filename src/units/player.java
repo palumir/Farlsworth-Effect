@@ -157,6 +157,8 @@ public class player extends unit {
 	public player(int newX, int newY, zone z) {
 		super(playerType, newX, newY);
 		
+		
+		//showAttackRange();
 		// Set movespeed.
 		setMoveSpeed(DEFAULT_PLAYER_MOVESPEED);
 		

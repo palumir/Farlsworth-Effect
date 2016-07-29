@@ -18,18 +18,20 @@ public class longSword extends weapon {
 	////////////////
 	/// DEFAULTS ///
 	////////////////
+	
 	// Weapon name
 	public static String DEFAULT_WEAPON_NAME = "Long Sword";
 	
 	// Weapon stats.
-	static private int DEFAULT_ATTACK_DAMAGE = 4; //2;
-	static private float DEFAULT_ATTACK_TIME = 0.41f; //0.30f;
-	static private float DEFAULT_BACKSWING = 0.15f;
-	static private int DEFAULT_ATTACK_WIDTH = 70;
-	static private int DEFAULT_ATTACK_LENGTH = 30;
-	static private float DEFAULT_CRIT_CHANCE = .15f;
-	static private float DEFAULT_CRIT_DAMAGE = 3f;
+	static private int DEFAULT_ATTACK_DAMAGE = 4; //4;
+	static private float DEFAULT_ATTACK_TIME = 0.35f; //0.41f;
+	static private float DEFAULT_BACKSWING = 0.22f;
+	static private int DEFAULT_ATTACK_WIDTH = 75;
+	static private int DEFAULT_ATTACK_LENGTH = 35;
+	static private float DEFAULT_CRIT_CHANCE = .05f;
+	static private float DEFAULT_CRIT_DAMAGE = 2f;
 	static private float DEFAULT_VARIABILITY = 0f;
+	static private float DPS = (1/(DEFAULT_ATTACK_TIME + DEFAULT_BACKSWING))*(DEFAULT_ATTACK_DAMAGE + DEFAULT_ATTACK_DAMAGE*DEFAULT_CRIT_DAMAGE*DEFAULT_CRIT_CHANCE);
 	
 	// Attack sound
 	static private String DEFAULT_ATTACK_SOUND = "sounds/effects/combat/knifeSlash.wav";
@@ -70,6 +72,7 @@ public class longSword extends weapon {
 	// On floor.
 	public longSword(int x, int y) {
 		super(DEFAULT_WEAPON_NAME,x,y);
+		System.out.println("Long Sword DPS: " + DPS);
 		
 		// Weapon stats.
 		setStats();
@@ -97,6 +100,7 @@ public class longSword extends weapon {
 		critDamage = DEFAULT_CRIT_DAMAGE;
 		attackVariability = DEFAULT_VARIABILITY;
 		backSwing = DEFAULT_BACKSWING;
+		type = "Melee Weapon";
 		setRange("medium");
 		setSpeed("medium");
 	}

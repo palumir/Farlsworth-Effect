@@ -50,7 +50,6 @@ public class storm extends atmosphericEffect {
 		stormStart = time.getTime();
 		
 		// Play rain.
-		System.out.println("STARTED");
 		sound s = new sound(rainSound);
 		s.setLoop(true);
 		s.start();
@@ -64,7 +63,6 @@ public class storm extends atmosphericEffect {
 		currentStorm = this;
 		
 		// Storm start time.
-		System.out.println("FADING");
 		stormStart = time.getTime();
 		this.fadeOver = fadeOver;
 		
@@ -81,8 +79,10 @@ public class storm extends atmosphericEffect {
 	// Paint the fog
 	@Override
 	public void drawObject(Graphics g) {
+		
 		// Draw the fog.
 		g.setColor(Color.white);
+		
 	}
 	
 	// Update.
