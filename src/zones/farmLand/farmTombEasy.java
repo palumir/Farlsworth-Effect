@@ -192,7 +192,8 @@ public class farmTombEasy extends zone {
 		shadowElevatorStarted = new event("tombZoneShadowElevatorStarted");
 	}
 	
-public static void makeShadowRectangle(int topLeftDudePosX, int topLeftDudePosY, int spreadX, int spreadY, int numDudesWidth, int numDudesHeight, float speed, boolean clockwise) {
+	
+	public static void makeShadowRectangle(int topLeftDudePosX, int topLeftDudePosY, int spreadX, int spreadY, int numDudesWidth, int numDudesHeight, float speed, boolean clockwise) {
 		
 		ArrayList<intTuple> squarePath = new ArrayList<intTuple>();
 		for(int i = 0; i < numDudesWidth; i++) {
@@ -252,7 +253,7 @@ public static void makeShadowRectangle(int topLeftDudePosX, int topLeftDudePosY,
 			}
 	}
 	
-	public void makeShadowSquareTopLeft (int topLeftDudePosX, int topLeftDudePosY, int spreadX, int spreadY, float speed, boolean clockwise) {
+	public void makeShadowSquareTopLeft(int topLeftDudePosX, int topLeftDudePosY, int spreadX, int spreadY, float speed, boolean clockwise) {
 		
 		ArrayList<intTuple> squarePath = new ArrayList<intTuple>();
 		squarePath.add(new intTuple(0,0));
@@ -308,9 +309,9 @@ public static void makeShadowRectangle(int topLeftDudePosX, int topLeftDudePosY,
 		    	  }
 		      }
 			}
-	}	
+	}
 	
-public void makeShadowSquareTopRight (int topLeftDudePosX, int topLeftDudePosY, int spreadX, int spreadY, float speed, boolean clockwise) {
+public void makeShadowSquareTopMiddle(int topLeftDudePosX, int topLeftDudePosY, int spreadX, int spreadY, float speed, boolean clockwise) {
 		
 		ArrayList<intTuple> squarePath = new ArrayList<intTuple>();
 		squarePath.add(new intTuple(0,0));
@@ -328,7 +329,7 @@ public void makeShadowSquareTopRight (int topLeftDudePosX, int topLeftDudePosY, 
 		    	  if(i == 1 && j == 1) {
 		    		  // Do nothing.
 		    	  }
-		    	  else if(i == 2 && j==0) {
+		    	  else if(i == 1 && j==0) {
 		    		  // Do nothing.
 		    	  }
 		    	  else {
@@ -367,64 +368,354 @@ public void makeShadowSquareTopRight (int topLeftDudePosX, int topLeftDudePosY, 
 		      }
 			}
 	}
+
+public void makeShadowSquareTopRight(int topLeftDudePosX, int topLeftDudePosY, int spreadX, int spreadY, float speed, boolean clockwise) {
 	
-	public void makeShadowSquare(int topLeftDudePosX, int topLeftDudePosY, int spreadX, int spreadY, float speed, boolean clockwise) {
-		
-		ArrayList<intTuple> squarePath = new ArrayList<intTuple>();
-		squarePath.add(new intTuple(0,0));
-		squarePath.add(new intTuple(1,0));
-		squarePath.add(new intTuple(2,0));
-		squarePath.add(new intTuple(2,1));
-		squarePath.add(new intTuple(2,2));
-		squarePath.add(new intTuple(1,2));
-		squarePath.add(new intTuple(0,2));
-		squarePath.add(new intTuple(0,1));
-		
-		for(int i = 0; i < 3; i++) {
-		      for(int j = 0; j < 3; j++) {
-		       
-		    	  if(i == 1 && j == 1) {
-		    		  // Do nothing.
-		    	  }
-		    	  else if(i == 2 && j==1) {
-		    		  // Do nothing.
-		    	  }
-		    	  else {
-		    		  
-		    		  // How far they are spread
-		    		  int spreadOutX = spreadX;
-		    		  int spreadOutY = spreadY;
-		    		    
-		    		  // Spawn the shadow dude
-		    		  u = new shadowDude(topLeftDudePosX + i*spreadOutX,topLeftDudePosY + spreadOutY*j);
-		    		  u.setMoveSpeed(speed);
-		    		  path = new ArrayList <intTuple> ();
-		    		  
-		    		  // Searches squarePath for our shadowDude's start position.
-		    		  int n = 0;
-		    		  for(; n < squarePath.size(); n++) {
-		    			  intTuple currentTuple = squarePath.get(n);
-		    			  if(currentTuple.x == i && currentTuple.y == j) break;
-		    		  }
-		    		  
-		    		  if(clockwise) n++;
-		    		  if(!clockwise) n--;
-		    		  
-		    		  // Walk him on the path.
-		    		  for(int m = 0; m < squarePath.size()-1; m++) {
-		    			  if(n >= squarePath.size()) n = 0;
-		    			  if(n < 0) n = squarePath.size() - 1;
-		    			  intTuple currentTuple = squarePath.get(n);
-		    			  path.add(new intTuple(topLeftDudePosX + currentTuple.x*spreadOutX,topLeftDudePosY + currentTuple.y*spreadOutY));
-		    			  if(clockwise) n++;
-		    			  if(!clockwise) n--;
-		    		  }
-		    		  
-		    		  u.patrolPath(path);
-		    	  }
-		      }
-			}
-	}
+	ArrayList<intTuple> squarePath = new ArrayList<intTuple>();
+	squarePath.add(new intTuple(0,0));
+	squarePath.add(new intTuple(1,0));
+	squarePath.add(new intTuple(2,0));
+	squarePath.add(new intTuple(2,1));
+	squarePath.add(new intTuple(2,2));
+	squarePath.add(new intTuple(1,2));
+	squarePath.add(new intTuple(0,2));
+	squarePath.add(new intTuple(0,1));
+	
+	for(int i = 0; i < 3; i++) {
+	      for(int j = 0; j < 3; j++) {
+	       
+	    	  if(i == 1 && j == 1) {
+	    		  // Do nothing.
+	    	  }
+	    	  else if(i == 2 && j==0) {
+	    		  // Do nothing.
+	    	  }
+	    	  else {
+	    		  
+	    		  // How far they are spread
+	    		  int spreadOutX = spreadX;
+	    		  int spreadOutY = spreadY;
+	    		    
+	    		  // Spawn the shadow dude
+	    		  u = new shadowDude(topLeftDudePosX + i*spreadOutX,topLeftDudePosY + spreadOutY*j);
+	    		  u.setMoveSpeed(speed);
+	    		  path = new ArrayList <intTuple> ();
+	    		  
+	    		  // Searches squarePath for our shadowDude's start position.
+	    		  int n = 0;
+	    		  for(; n < squarePath.size(); n++) {
+	    			  intTuple currentTuple = squarePath.get(n);
+	    			  if(currentTuple.x == i && currentTuple.y == j) break;
+	    		  }
+	    		  
+	    		  if(clockwise) n++;
+	    		  if(!clockwise) n--;
+	    		  
+	    		  // Walk him on the path.
+	    		  for(int m = 0; m < squarePath.size()-1; m++) {
+	    			  if(n >= squarePath.size()) n = 0;
+	    			  if(n < 0) n = squarePath.size() - 1;
+	    			  intTuple currentTuple = squarePath.get(n);
+	    			  path.add(new intTuple(topLeftDudePosX + currentTuple.x*spreadOutX,topLeftDudePosY + currentTuple.y*spreadOutY));
+	    			  if(clockwise) n++;
+	    			  if(!clockwise) n--;
+	    		  }
+	    		  
+	    		  u.patrolPath(path);
+	    	  }
+	      }
+		}
+}
+
+public void makeShadowSquareMiddleLeft(int topLeftDudePosX, int topLeftDudePosY, int spreadX, int spreadY, float speed, boolean clockwise) {
+	
+	ArrayList<intTuple> squarePath = new ArrayList<intTuple>();
+	squarePath.add(new intTuple(0,0));
+	squarePath.add(new intTuple(1,0));
+	squarePath.add(new intTuple(2,0));
+	squarePath.add(new intTuple(2,1));
+	squarePath.add(new intTuple(2,2));
+	squarePath.add(new intTuple(1,2));
+	squarePath.add(new intTuple(0,2));
+	squarePath.add(new intTuple(0,1));
+	
+	for(int i = 0; i < 3; i++) {
+	      for(int j = 0; j < 3; j++) {
+	       
+	    	  if(i == 1 && j == 1) {
+	    		  // Do nothing.
+	    	  }
+	    	  else if(i == 0 && j==1) {
+	    		  // Do nothing.
+	    	  }
+	    	  else {
+	    		  
+	    		  // How far they are spread
+	    		  int spreadOutX = spreadX;
+	    		  int spreadOutY = spreadY;
+	    		    
+	    		  // Spawn the shadow dude
+	    		  u = new shadowDude(topLeftDudePosX + i*spreadOutX,topLeftDudePosY + spreadOutY*j);
+	    		  u.setMoveSpeed(speed);
+	    		  path = new ArrayList <intTuple> ();
+	    		  
+	    		  // Searches squarePath for our shadowDude's start position.
+	    		  int n = 0;
+	    		  for(; n < squarePath.size(); n++) {
+	    			  intTuple currentTuple = squarePath.get(n);
+	    			  if(currentTuple.x == i && currentTuple.y == j) break;
+	    		  }
+	    		  
+	    		  if(clockwise) n++;
+	    		  if(!clockwise) n--;
+	    		  
+	    		  // Walk him on the path.
+	    		  for(int m = 0; m < squarePath.size()-1; m++) {
+	    			  if(n >= squarePath.size()) n = 0;
+	    			  if(n < 0) n = squarePath.size() - 1;
+	    			  intTuple currentTuple = squarePath.get(n);
+	    			  path.add(new intTuple(topLeftDudePosX + currentTuple.x*spreadOutX,topLeftDudePosY + currentTuple.y*spreadOutY));
+	    			  if(clockwise) n++;
+	    			  if(!clockwise) n--;
+	    		  }
+	    		  
+	    		  u.patrolPath(path);
+	    	  }
+	      }
+		}
+}
+
+public void makeShadowSquareMiddleRight(int topLeftDudePosX, int topLeftDudePosY, int spreadX, int spreadY, float speed, boolean clockwise) {
+	
+	ArrayList<intTuple> squarePath = new ArrayList<intTuple>();
+	squarePath.add(new intTuple(0,0));
+	squarePath.add(new intTuple(1,0));
+	squarePath.add(new intTuple(2,0));
+	squarePath.add(new intTuple(2,1));
+	squarePath.add(new intTuple(2,2));
+	squarePath.add(new intTuple(1,2));
+	squarePath.add(new intTuple(0,2));
+	squarePath.add(new intTuple(0,1));
+	
+	for(int i = 0; i < 3; i++) {
+	      for(int j = 0; j < 3; j++) {
+	       
+	    	  if(i == 1 && j == 1) {
+	    		  // Do nothing.
+	    	  }
+	    	  else if(i == 2 && j==1) {
+	    		  // Do nothing.
+	    	  }
+	    	  else {
+	    		  
+	    		  // How far they are spread
+	    		  int spreadOutX = spreadX;
+	    		  int spreadOutY = spreadY;
+	    		    
+	    		  // Spawn the shadow dude
+	    		  u = new shadowDude(topLeftDudePosX + i*spreadOutX,topLeftDudePosY + spreadOutY*j);
+	    		  u.setMoveSpeed(speed);
+	    		  path = new ArrayList <intTuple> ();
+	    		  
+	    		  // Searches squarePath for our shadowDude's start position.
+	    		  int n = 0;
+	    		  for(; n < squarePath.size(); n++) {
+	    			  intTuple currentTuple = squarePath.get(n);
+	    			  if(currentTuple.x == i && currentTuple.y == j) break;
+	    		  }
+	    		  
+	    		  if(clockwise) n++;
+	    		  if(!clockwise) n--;
+	    		  
+	    		  // Walk him on the path.
+	    		  for(int m = 0; m < squarePath.size()-1; m++) {
+	    			  if(n >= squarePath.size()) n = 0;
+	    			  if(n < 0) n = squarePath.size() - 1;
+	    			  intTuple currentTuple = squarePath.get(n);
+	    			  path.add(new intTuple(topLeftDudePosX + currentTuple.x*spreadOutX,topLeftDudePosY + currentTuple.y*spreadOutY));
+	    			  if(clockwise) n++;
+	    			  if(!clockwise) n--;
+	    		  }
+	    		  
+	    		  u.patrolPath(path);
+	    	  }
+	      }
+		}
+}
+
+public void makeShadowSquareBottomLeft(int topLeftDudePosX, int topLeftDudePosY, int spreadX, int spreadY, float speed, boolean clockwise) {
+	
+	ArrayList<intTuple> squarePath = new ArrayList<intTuple>();
+	squarePath.add(new intTuple(0,0));
+	squarePath.add(new intTuple(1,0));
+	squarePath.add(new intTuple(2,0));
+	squarePath.add(new intTuple(2,1));
+	squarePath.add(new intTuple(2,2));
+	squarePath.add(new intTuple(1,2));
+	squarePath.add(new intTuple(0,2));
+	squarePath.add(new intTuple(0,1));
+	
+	for(int i = 0; i < 3; i++) {
+	      for(int j = 0; j < 3; j++) {
+	       
+	    	  if(i == 1 && j == 1) {
+	    		  // Do nothing.
+	    	  }
+	    	  else if(i == 0 && j==2) {
+	    		  // Do nothing.
+	    	  }
+	    	  else {
+	    		  
+	    		  // How far they are spread
+	    		  int spreadOutX = spreadX;
+	    		  int spreadOutY = spreadY;
+	    		    
+	    		  // Spawn the shadow dude
+	    		  u = new shadowDude(topLeftDudePosX + i*spreadOutX,topLeftDudePosY + spreadOutY*j);
+	    		  u.setMoveSpeed(speed);
+	    		  path = new ArrayList <intTuple> ();
+	    		  
+	    		  // Searches squarePath for our shadowDude's start position.
+	    		  int n = 0;
+	    		  for(; n < squarePath.size(); n++) {
+	    			  intTuple currentTuple = squarePath.get(n);
+	    			  if(currentTuple.x == i && currentTuple.y == j) break;
+	    		  }
+	    		  
+	    		  if(clockwise) n++;
+	    		  if(!clockwise) n--;
+	    		  
+	    		  // Walk him on the path.
+	    		  for(int m = 0; m < squarePath.size()-1; m++) {
+	    			  if(n >= squarePath.size()) n = 0;
+	    			  if(n < 0) n = squarePath.size() - 1;
+	    			  intTuple currentTuple = squarePath.get(n);
+	    			  path.add(new intTuple(topLeftDudePosX + currentTuple.x*spreadOutX,topLeftDudePosY + currentTuple.y*spreadOutY));
+	    			  if(clockwise) n++;
+	    			  if(!clockwise) n--;
+	    		  }
+	    		  
+	    		  u.patrolPath(path);
+	    	  }
+	      }
+		}
+}
+
+public void makeShadowSquareBottomMiddle(int topLeftDudePosX, int topLeftDudePosY, int spreadX, int spreadY, float speed, boolean clockwise) {
+	
+	ArrayList<intTuple> squarePath = new ArrayList<intTuple>();
+	squarePath.add(new intTuple(0,0));
+	squarePath.add(new intTuple(1,0));
+	squarePath.add(new intTuple(2,0));
+	squarePath.add(new intTuple(2,1));
+	squarePath.add(new intTuple(2,2));
+	squarePath.add(new intTuple(1,2));
+	squarePath.add(new intTuple(0,2));
+	squarePath.add(new intTuple(0,1));
+	
+	for(int i = 0; i < 3; i++) {
+	      for(int j = 0; j < 3; j++) {
+	       
+	    	  if(i == 1 && j == 1) {
+	    		  // Do nothing.
+	    	  }
+	    	  else if(i == 1 && j==2) {
+	    		  // Do nothing.
+	    	  }
+	    	  else {
+	    		  
+	    		  // How far they are spread
+	    		  int spreadOutX = spreadX;
+	    		  int spreadOutY = spreadY;
+	    		    
+	    		  // Spawn the shadow dude
+	    		  u = new shadowDude(topLeftDudePosX + i*spreadOutX,topLeftDudePosY + spreadOutY*j);
+	    		  u.setMoveSpeed(speed);
+	    		  path = new ArrayList <intTuple> ();
+	    		  
+	    		  // Searches squarePath for our shadowDude's start position.
+	    		  int n = 0;
+	    		  for(; n < squarePath.size(); n++) {
+	    			  intTuple currentTuple = squarePath.get(n);
+	    			  if(currentTuple.x == i && currentTuple.y == j) break;
+	    		  }
+	    		  
+	    		  if(clockwise) n++;
+	    		  if(!clockwise) n--;
+	    		  
+	    		  // Walk him on the path.
+	    		  for(int m = 0; m < squarePath.size()-1; m++) {
+	    			  if(n >= squarePath.size()) n = 0;
+	    			  if(n < 0) n = squarePath.size() - 1;
+	    			  intTuple currentTuple = squarePath.get(n);
+	    			  path.add(new intTuple(topLeftDudePosX + currentTuple.x*spreadOutX,topLeftDudePosY + currentTuple.y*spreadOutY));
+	    			  if(clockwise) n++;
+	    			  if(!clockwise) n--;
+	    		  }
+	    		  
+	    		  u.patrolPath(path);
+	    	  }
+	      }
+		}
+}
+
+public void makeShadowSquareBottomRight(int topLeftDudePosX, int topLeftDudePosY, int spreadX, int spreadY, float speed, boolean clockwise) {
+	
+	ArrayList<intTuple> squarePath = new ArrayList<intTuple>();
+	squarePath.add(new intTuple(0,0));
+	squarePath.add(new intTuple(1,0));
+	squarePath.add(new intTuple(2,0));
+	squarePath.add(new intTuple(2,1));
+	squarePath.add(new intTuple(2,2));
+	squarePath.add(new intTuple(1,2));
+	squarePath.add(new intTuple(0,2));
+	squarePath.add(new intTuple(0,1));
+	
+	for(int i = 0; i < 3; i++) {
+	      for(int j = 0; j < 3; j++) {
+	       
+	    	  if(i == 1 && j == 1) {
+	    		  // Do nothing.
+	    	  }
+	    	  else if(i == 2 && j == 2) {
+	    		  // Do nothing.
+	    	  }
+	    	  else {
+	    		  
+	    		  // How far they are spread
+	    		  int spreadOutX = spreadX;
+	    		  int spreadOutY = spreadY;
+	    		    
+	    		  // Spawn the shadow dude
+	    		  u = new shadowDude(topLeftDudePosX + i*spreadOutX,topLeftDudePosY + spreadOutY*j);
+	    		  u.setMoveSpeed(speed);
+	    		  path = new ArrayList <intTuple> ();
+	    		  
+	    		  // Searches squarePath for our shadowDude's start position.
+	    		  int n = 0;
+	    		  for(; n < squarePath.size(); n++) {
+	    			  intTuple currentTuple = squarePath.get(n);
+	    			  if(currentTuple.x == i && currentTuple.y == j) break;
+	    		  }
+	    		  
+	    		  if(clockwise) n++;
+	    		  if(!clockwise) n--;
+	    		  
+	    		  // Walk him on the path.
+	    		  for(int m = 0; m < squarePath.size()-1; m++) {
+	    			  if(n >= squarePath.size()) n = 0;
+	    			  if(n < 0) n = squarePath.size() - 1;
+	    			  intTuple currentTuple = squarePath.get(n);
+	    			  path.add(new intTuple(topLeftDudePosX + currentTuple.x*spreadOutX,topLeftDudePosY + currentTuple.y*spreadOutY));
+	    			  if(clockwise) n++;
+	    			  if(!clockwise) n--;
+	    		  }
+	    		  
+	    		  u.patrolPath(path);
+	    	  }
+	      }
+		}
+}
 	
 	public void shadowDudePatrolPath(int shadowDudeX, int shadowDudeY, ArrayList<intTuple> path, float moveSpeed) {
 		u = new shadowDude(shadowDudeX,shadowDudeY);
@@ -517,6 +808,9 @@ public void makeShadowSquareTopRight (int topLeftDudePosX, int topLeftDudePosY, 
 		u = new shadowDude(4215,116);
 		u.setFacingDirection("Down");
 
+///////////////////////////////////
+////// SHADOW TUTORIAL AREA //////
+/////////////////////////////////
 		
 		// First floor
 		
@@ -619,7 +913,11 @@ public void makeShadowSquareTopRight (int topLeftDudePosX, int topLeftDudePosY, 
 		
 		c = new wallTorch(4097,-40);
 		
-		// Fifth floor
+////////////////////////////////
+////// SHADOW FIRST AREA //////
+//////////////////////////////
+		
+		// First floor
 		
 		spawnTombRect(4220+15,40,4340+15,791,"ground");
 		
@@ -627,25 +925,39 @@ public void makeShadowSquareTopRight (int topLeftDudePosX, int topLeftDudePosY, 
 		c.setPassable(true);
 		c.setZ(-2);
 		
-		// Sixth floor
+		// Second floor
 		
 		spawnTombRect(4863+32,-69,4895+32,517,"rightWall");
 		
 		spawnTombRect(4330,155,4832,188,"ground");
-		makeShadowSquare(4400,40,75,80,1.8f,true);
-		makeShadowSquare(4700,40,75,80,2.7f,true);
+		makeShadowSquareBottomLeft(4400,40,75,80,2.7f,true);
+		makeShadowSquareTopRight(4700,40,75,80,2.7f,true);
 		
 		spawnTombRect(4519-8,308+32,4893+24,340+32,"ground");
-		shadowDudePatrol (4519,261+32,4857,261+32,2);
+		u = new shadowDude(4750,293);
+		path = new ArrayList<intTuple>();
+		path.add(new intTuple(4857,293));
+		path.add(new intTuple(4519,293));
+		u.patrolPath(path);
+		u.setMoveSpeed(2);
 		
 		spawnTombRect(4330,460+48,4815,492+48,"ground");
-		shadowDudePatrol (4500,343+48,4500,415+48,1f);
-		makeShadowSquare(4575,340+48,75,80,1.5f,false);
+		u = new shadowDude(4500,420);
+		path = new ArrayList<intTuple>();
+		path.add(new intTuple(4500,391));
+		path.add(new intTuple(4500,463));
+		u.patrolPath(path);
+		u.setMoveSpeed(1);
+		makeShadowSquareTopLeft(4575,340+48,75,80,1.5f,false);
 		shadowDudePatrol (4790,343+48,4790,415+48,1f);
 		u = new shadowDude(4790,550);
 		u.setFacingDirection("Down");
+		
+////////////////////////////////
+//////SHADOW SECOND AREA //////
+//////////////////////////////
 
-		// Seventh floor
+		// First floor
 		
 		spawnTombRect(4864,615-32-2+32,4896,1070+32+24-2,"leftWall");
 		
@@ -656,11 +968,11 @@ public void makeShadowSquareTopRight (int topLeftDudePosX, int topLeftDudePosY, 
 		c.setZ(-2);
 		
 		spawnTombRect(4794,596,5465+32,628,"ground");
-		makeShadowSquareTopRight (4998,470, 80, 85,1.7f ,true);
-		makeShadowSquareTopLeft (5198,470, 80, 85,1.7f ,false);
+		makeShadowSquareBottomLeft (4998,470, 80, 85,1.7f ,true);
+		makeShadowSquareBottomRight (5198,470, 80, 85,1.7f ,false);
 		
 		spawnTombRect(5004-8,811,5604-8,843,"ground");
-		makeShadowRectangle (4965,764,250,250,3,2,1.2f,false);
+		makeShadowRectangle (4965,764,250,250,3,2,1.55f,false);
 		
 		spawnTombRect(4888,1061,5480,1093,"ground");
 		for(int i=0; i <4; i++) {
@@ -669,17 +981,21 @@ public void makeShadowSquareTopRight (int topLeftDudePosX, int topLeftDudePosY, 
 		for(int i=0; i <4; i++) {
 			u = new shadowDude(5323,1014 - i*50);
 		}
-		lightDudePatrol (5015,890,5131,890,0.9f);
-		lightDudePatrol (5314,890,5460,890,0.9f);
+		lightDudePatrol (5000,890,5131,890,0.82f);
+		lightDudePatrol (5465,890,5310,890,0.82f);
 		
-		// Eighth floor
+		// Second floor
 		
 		spawnTombRect(5450,1162,6274,1194,"ground");
 		c = new well(5555,1126,0);
 		c.setPassable(true);
 		c.setZ(-2);
 		
-		// Ninth floor (3 floors)
+////////////////////////////////
+//////SHADOW PUZZLE AREA //////
+//////////////////////////////
+		
+		// First floor (3 floors)
 		
 		// Top
 		
@@ -716,7 +1032,7 @@ public void makeShadowSquareTopRight (int topLeftDudePosX, int topLeftDudePosY, 
 			u = new shadowDude (7656,1016 - i*50);
 		}
 		
-		makeShadowSquare(7770,1017,99,99,2f,false);
+		makeShadowSquareTopLeft(7770,1017,99,99,2f,false);
 		
 		spawnTombRect(8082+73,1062,8300,1094,"ground");
 		
@@ -744,10 +1060,10 @@ public void makeShadowSquareTopRight (int topLeftDudePosX, int topLeftDudePosY, 
 		u = new shadowDude(7060,1215);
 		
 		spawnTombRect(7376+73,1262,8300,1294,"ground");
-		makeShadowSquare(7494,1120,80,85,1.5f,true);
+		makeShadowSquareTopLeft(7494,1120,80,85,1.5f,true);
 		u = new shadowDude(8206,1218);
 		
-		// Tenth floor
+		// Second floor
 		
 		spawnTombRect(7606+73,1162,9000,1194,"ground");
 		
@@ -809,6 +1125,10 @@ public void makeShadowSquareTopRight (int topLeftDudePosX, int topLeftDudePosY, 
 		}
 		return retDudes;
 	}
+	
+/////////////////////////////
+//////SHADOW ELEVATOR //////
+///////////////////////////
 	
 	// Shadow elevator
 	public static ArrayList<shadowDude> shadowElevator;

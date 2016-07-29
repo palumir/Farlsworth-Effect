@@ -334,27 +334,37 @@ public class sheepFarm extends zone {
 			farlsworthFence = null;
 		}
 		
+/////////////////////////////////////////
+//////////AREA BETWEEN FARLSWORTH //////
+/////////  FENCE AND GARDEN   /////////
+//////////////////////////////////////
+		
 		// First wolf pack
 		u = new redWolf(-8,-846);
 		u.setFacingDirection("Down");
 		
 		// Second wolf pack
-		u = new blackWolf(430,-1272);
+		u = new yellowWolf(430,-1272);
 		u.setFacingDirection("Left");
 		
 		// Bottle before forest farm
 		item b = new normalBottle(849,-1335);
 		
 		// Third wolf pack
-		u = new yellowWolf(1392,-1272);
+		u = new blackWolf(1392,-1272);
 		u.setFacingDirection("Left");
 		
 		// Fourth wolf pack
 		u = new redWolf(1400,-700);
 		u.setFacingDirection("Up");
 		
-		// Well.
+		// Well before flower garden.
 		c = new well(1400,-300,0);
+		
+/////////////////////////////////////////
+///////// AREA BETWEEN FARLSWORTH //////
+/////////    GARDEN AND GRAVE   ///////
+//////////////////////////////////////
 		
 		// Fifth wolf pack
 		u = new blackWolf(2335,-110);
@@ -369,32 +379,37 @@ public class sheepFarm extends zone {
 		u.setFacingDirection("Left");
 		
 		// Seventh wolf pack
-		u = new blackWolf(2550,-999);
+		u = new yellowWolf(2550,-999);
 		u.setFacingDirection("Right");
-		u = new redWolf(2550,-919);
+		u = new redWolf(2550,-959);
 		u.setFacingDirection("Right");
 		
 		// Eighth wolf pack
-		u = new yellowWolf(2550,-1717);
+		u = new blackWolf(2550,-1717);
 		u.setFacingDirection("Right");
-		u = new redWolf(2550,-1717+80);
+		u = new yellowWolf(2550,-1717+40);
 		u.setFacingDirection("Right");
 		
 		// Ninth wolf pack
-		u = new blackWolf(2850,-2360);
+		u = new redWolf(2850,-2360);
 		u.setFacingDirection("Left");
-		u = new yellowWolf(2850,-2360+80);
+		u = new blackWolf(2850,-2360+40);
 		u.setFacingDirection("Left");
 		
-		// Well
+		// Well in grave.
 		new well(2114,-2955,0);
 		
+////////////////////////////////////
+//////////AREA BETWEEN GRAVE //////
+/////////  WELL AND TOMB  /////////
+//////////////////////////////////
+		
 		// Tenth wolf pack
-		u = new redWolf(1155,-3140);
+		u = new redWolf(1155,-3114);
 		u.setFacingDirection("Right");
-		u = new yellowWolf(1155,-3090);
+		u = new yellowWolf(1155,-3082);
 		u.setFacingDirection("Right");
-		u = new blackWolf(1155,-3040);
+		u = new blackWolf(1155,-3050);
 		u.setFacingDirection("Right");
 		
 		// Optional eleventh wolf pack
