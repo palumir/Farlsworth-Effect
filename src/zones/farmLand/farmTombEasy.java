@@ -534,7 +534,7 @@ public void makeShadowSquareTopRight (int topLeftDudePosX, int topLeftDudePosY, 
 		c = new wallTorch(928,-40);
 		
 		for(int i=0; i <2; i++) {
-			u = new shadowDude(695,-6 - i*50);
+			u = new shadowDude(620,-6 - i*50);
 			path = new ArrayList<intTuple>();
 			path.add(new intTuple(555,-6 - i*50));
 			path.add(new intTuple(970,-6 - i*50));
@@ -549,7 +549,7 @@ public void makeShadowSquareTopRight (int topLeftDudePosX, int topLeftDudePosY, 
 		c = new wallTorch(1141,-40);
 		
 		for(int i=0; i <2; i++) {
-			u = new shadowDude(1370,-6 - i*50);
+			u = new shadowDude(1320,-6 - i*50);
 			path = new ArrayList<intTuple>();
 			path.add(new intTuple(1500,-6 - i*50));
 			path.add(new intTuple(1080, -6 - i*50));
@@ -560,18 +560,18 @@ public void makeShadowSquareTopRight (int topLeftDudePosX, int topLeftDudePosY, 
 		c = new wallTorch(1523,-40);
 		
 		for(int i=0; i <3; i++) {
-			u = new shadowDude(1870,-6 - i*50);
+			u = new shadowDude(1707,-6 - i*50);
 			path = new ArrayList<intTuple>();
-			path.add(new intTuple(1523,-6 - i*50));
 			path.add(new intTuple(1880,-6 - i*50));
+			path.add(new intTuple(1523,-6 - i*50));
 			u.patrolPath(path);
-			u.setMoveSpeed(4);
+			u.setMoveSpeed(3);
 		}
 		
 		c = new wallTorch(1905,-40);
 		
 		for(int i=0; i <2; i++) {
-			u = new shadowDude(2150,-6 - i*50);
+			u = new shadowDude(2285,-6 - i*50);
 			path = new ArrayList<intTuple>();
 			path.add(new intTuple(1905,-6 - i*50));
 			path.add(new intTuple(2325,-6 - i*50));
@@ -594,18 +594,28 @@ public void makeShadowSquareTopRight (int topLeftDudePosX, int topLeftDudePosY, 
 			shadowDudePatrolPath(2800,-6 - i*50, path, 5);
 		}
 		
-		lightDudePatrol (2603,-6, 3300, -6,3);
+		u = new lightDude(2583,-6);
+		path = new ArrayList<intTuple>();
+		path.add(new intTuple(2580,-6));
+		path.add(new intTuple(3235, -6));
+		u.patrolPath(path);
+		u.setMoveSpeed(3.5f);
 		
 		c = new wallTorch(3311,-40);
 		
 		for(int i=0; i <3; i++) {
 			path = new ArrayList<intTuple>();
-			path.add(new intTuple(3311,-6 - i*50));
+			path.add(new intTuple(3301,-6 - i*50));
 			path.add(new intTuple(4075,-6 - i*50));
 			shadowDudePatrolPath(3700,-6 - i*50, path, 5);
 		}
 		
-		lightDudePatrol (3388,-6,4085,-6,3);
+		u = new lightDude(3813,-6);
+		path = new ArrayList<intTuple>();
+		path.add(new intTuple(4017,-6));
+		path.add(new intTuple(3375,-6));
+		u.patrolPath(path);
+		u.setMoveSpeed(3.5f);
 		
 		c = new wallTorch(4097,-40);
 		
