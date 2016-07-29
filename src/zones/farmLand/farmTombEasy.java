@@ -818,7 +818,7 @@ public void makeShadowSquareTopRight (int topLeftDudePosX, int topLeftDudePosY, 
 		for(int i = 0; i < shadowElevator.size(); i++) {
 			shadowElevator.get(i).setEyeless(false);
 			shadowElevator.get(i).setIgnoreIllumination(true);
-			shadowElevator.get(i).setMoveSpeed(0.75f);
+			shadowElevator.get(i).setMoveSpeed(0.70f);
 		}
 	}
 	
@@ -827,7 +827,7 @@ public void makeShadowSquareTopRight (int topLeftDudePosX, int topLeftDudePosY, 
 	
 		// Play frantic music.
 		music m = music.startMusic(zoneMusicFrantic);
-		m.stopOnDeath = true;
+		if(m!=null) m.stopOnDeath = true;
 		 
 		// Move the elevator.
 		for(int i = 0; i < shadowElevator.size(); i++) {
@@ -846,9 +846,9 @@ public void makeShadowSquareTopRight (int topLeftDudePosX, int topLeftDudePosY, 
 												  1150-30 + 600, eyeless);
 		
 		// Floor
-		shadowElevator.addAll(createRectangleOfShadows(currPlayer.getIntX() - 220-22, 
-				  1150-30+200+3, 
-				  currPlayer.getIntX() +250+20,
+		shadowElevator.addAll(createRectangleOfShadows(currPlayer.getIntX() - 220-25+1, 
+				  1150-30+200+3-92, 
+				  currPlayer.getIntX() +250,
 				  1150-30 + 600, eyeless));
 		
 		// Right wall.
@@ -857,23 +857,22 @@ public void makeShadowSquareTopRight (int topLeftDudePosX, int topLeftDudePosY, 
 												  currPlayer.getIntX() + 600,
 												  1150-30 + 600, eyeless));
 		
-		
 		// First platform
-		spawnReloadableTombRect(currPlayer.getIntX() -200,
+		spawnReloadableTombRect(currPlayer.getIntX() -80,
 				      1150-30 - 35 - 32,
-				      currPlayer.getIntX() - 100,
+				      currPlayer.getIntX()-30,
 				      1150-30 - 35,
 				      "ground");
 		
 		// Second platform
-		spawnReloadableTombRect(currPlayer.getIntX() - 50,
-				      1150-30 - 35 - 32 - 64*1,
-				      currPlayer.getIntX() - 0,
-				      1150-30 - 35 - 64*1,
+		spawnReloadableTombRect(currPlayer.getIntX() - 100-10,
+				      1150-30 - 35 - 32 - 64*1-20,
+				      currPlayer.getIntX() -70,
+				      1150-30 - 35 - 64*1-20,
 				      "ground");
 		
 		// Third platform
-		spawnReloadableTombRect(currPlayer.getIntX() + 25,
+		spawnReloadableTombRect(currPlayer.getIntX(),
 				      1150-30 - 35 - 32 - 64*2,
 				      currPlayer.getIntX() + 200,
 					  1150-30 - 35 - 64*2,
@@ -893,7 +892,7 @@ public void makeShadowSquareTopRight (int topLeftDudePosX, int topLeftDudePosY, 
 					  1150-30 - 35 - 64*5,
 						      "ground");
 		shadowDudePatrol(currPlayer.getIntX() - 210, 1150-30 - 35 - 32 - 64*5 - 46, currPlayer.getIntX() + 100, 1150-30 - 35 - 32 - 64*5 - 46, 1.5f);
-		shadowDudePatrol(currPlayer.getIntX() - 210, 1150-30 - 35 - 32 - 64*5 - 46 - 50, currPlayer.getIntX() + 100, 1150-30 - 35 - 32 - 64*5 - 46-50, 2.9f);
+		shadowDudePatrol(currPlayer.getIntX() - 210, 1150-30 - 35 - 32 - 64*5 - 46 - 50, currPlayer.getIntX() + 100, 1150-30 - 35 - 32 - 64*5 - 46-50, 2.8f);
 		
 		// Sixth platform
 		spawnReloadableTombRect(currPlayer.getIntX() - 200,
@@ -1045,9 +1044,9 @@ public void makeShadowSquareTopRight (int topLeftDudePosX, int topLeftDudePosY, 
 				  1150-30 - 35 - 64*27+ 20*11,
 					      "ground");
 		//makeShadowRectangle(int topLeftDudePosX, int topLeftDudePosY, int spreadX, int spreadY, int numDudesWidth, int numDudesHeight, float speed, boolean clockwise)
-		makeShadowRectangle(currPlayer.getIntX() + -200 + 50 - 170 + 100 - 5 ,
+		makeShadowRectangle(currPlayer.getIntX() + -200 + 50 - 170 + 100 - 5-15 ,
 			      1150-30 - 35 - 32 - 64*27 + 20*11 - 155, 
-			      110,
+			      115,
 			      110,
 			      5,
 			      2,
@@ -1096,7 +1095,7 @@ public void makeShadowSquareTopRight (int topLeftDudePosX, int topLeftDudePosY, 
 			      1150-30 - 35 - 64*33+ 20*14,
 					      "ground");
 		
-		for(int i = 0; i < 7; i++) {
+		for(int i = 0; i < 6; i++) {
 			u = new shadowDude(currPlayer.getIntX() + -200 ,
 					1150-30 - 35 - 32 - 64*33 + 20*14-47 - i*50);
 			u.patrolTo(currPlayer.getIntX()+200,
@@ -1146,9 +1145,9 @@ public void makeShadowSquareTopRight (int topLeftDudePosX, int topLeftDudePosY, 
 				"ground");
 		
 		// Middle
-		spawnReloadableTombRect(currPlayer.getIntX()-30,
+		spawnReloadableTombRect(currPlayer.getIntX()-20,
 				-1103-170-40,
-			    currPlayer.getIntX() - 30 + 32,
+			    currPlayer.getIntX() - 30 + 32+10,
 			    -1103-170+ -40 + 32,
 				"ground");
 		
@@ -1169,7 +1168,7 @@ public void makeShadowSquareTopRight (int topLeftDudePosX, int topLeftDudePosY, 
 		// 22
 			
 		// Left
-		spawnReloadableTombRect(currPlayer.getIntX()-150,
+		spawnReloadableTombRect(currPlayer.getIntX()-140,
 				-1103-300-10,
 			    currPlayer.getIntX()-32,
 			    -1103-300-10+ 32,
@@ -1177,7 +1176,7 @@ public void makeShadowSquareTopRight (int topLeftDudePosX, int topLeftDudePosY, 
 		
 		// Right
 		spawnReloadableTombRect(currPlayer.getIntX() + 64-32,
-				-1103-300-20-32,
+				-1103-300-20-32-10,
 			    currPlayer.getIntX() + 64 + 32*3,
 			    -1103-300+ 32-20-32,
 				"ground");
@@ -1190,6 +1189,7 @@ public void makeShadowSquareTopRight (int topLeftDudePosX, int topLeftDudePosY, 
 				-1103-300-40 - 47);
 		u.patrolTo(currPlayer.getIntX(),
 				-1103-300-40 - 47 - 8*50);
+		u.setMoveSpeed(2);
 		
 		// 23
 		spawnReloadableTombRect(currPlayer.getIntX() + 64+20-32,
@@ -1197,10 +1197,11 @@ public void makeShadowSquareTopRight (int topLeftDudePosX, int topLeftDudePosY, 
 			    currPlayer.getIntX() + 20+64,
 			    -1103-300+ 32-20-32-140+20+10,
 				"ground");
+		
 		// 24
-		spawnReloadableTombRect(currPlayer.getIntX() -32-20,
+		spawnReloadableTombRect(currPlayer.getIntX() -32-20+20,
 				-1103-300-20-32-250+30+20,
-			    currPlayer.getIntX()-20,
+			    currPlayer.getIntX()-20+20,
 			    -1103-300+ 32-20-32-250+30+20,
 				"ground");
 		

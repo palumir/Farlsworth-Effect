@@ -14,21 +14,21 @@ import units.player;
 import utilities.saveState;
 import zones.farmLand.sheepFarm;
 
-public class longSword extends weapon {
+public class sword extends weapon {
 	////////////////
 	/// DEFAULTS ///
 	////////////////
 	
 	// Weapon name
-	public static String DEFAULT_WEAPON_NAME = "Long Sword";
+	public static String DEFAULT_WEAPON_NAME = "Sword";
 	
 	// Weapon stats.
 	static private int DEFAULT_ATTACK_DAMAGE = 4; //4;
-	static private float DEFAULT_ATTACK_TIME = 0.35f; //0.41f;
+	static private float DEFAULT_ATTACK_TIME = 0.41f; //0.41f;
 	static private float DEFAULT_BACKSWING = 0.22f;
 	static private int DEFAULT_ATTACK_WIDTH = 75;
 	static private int DEFAULT_ATTACK_LENGTH = 35;
-	static private float DEFAULT_CRIT_CHANCE = .05f;
+	static private float DEFAULT_CRIT_CHANCE = 0.05f;
 	static private float DEFAULT_CRIT_DAMAGE = 2f;
 	static private float DEFAULT_VARIABILITY = 0f;
 	static private float DPS = (1/(DEFAULT_ATTACK_TIME + DEFAULT_BACKSWING))*(DEFAULT_ATTACK_DAMAGE + DEFAULT_ATTACK_DAMAGE*DEFAULT_CRIT_DAMAGE*DEFAULT_CRIT_CHANCE);
@@ -39,16 +39,16 @@ public class longSword extends weapon {
 	//////////////
 	/// FIELDS ///
 	//////////////
-	public static BufferedImage itemImage = spriteSheet.getSpriteFromFilePath("images/doodads/items/longSword.png");
+	public static BufferedImage itemImage = spriteSheet.getSpriteFromFilePath("images/doodads/items/sword.png");
 	public static spriteSheet weaponMovingSpriteSheet = new spriteSheet(new spriteSheetInfo(
-			"images/units/player/" + player.DEFAULT_PLAYER_GENDER + "/longSwordMoving.png", 
+			"images/units/player/" + player.DEFAULT_PLAYER_GENDER + "/swordMoving.png", 
 			weapon.DEFAULT_SPRITE_WIDTH, 
 			weapon.DEFAULT_SPRITE_HEIGHT,
 			weapon.DEFAULT_SPRITE_ADJUSTMENT_X,
 			weapon.DEFAULT_SPRITE_ADJUSTMENT_Y
 			));
 	public static spriteSheet weaponAttackingSpriteSheet = new spriteSheet(new spriteSheetInfo(
-			"images/units/player/" + player.DEFAULT_PLAYER_GENDER + "/longSwordAttacking.png", 
+			"images/units/player/" + player.DEFAULT_PLAYER_GENDER + "/swordAttacking.png", 
 			weapon.DEFAULT_SPRITE_WIDTH*2, 
 			weapon.DEFAULT_SPRITE_HEIGHT,
 			weapon.DEFAULT_SPRITE_ADJUSTMENT_X,
@@ -62,7 +62,7 @@ public class longSword extends weapon {
 	///////////////
 	
 	// In inventory.
-	public longSword() {
+	public sword() {
 		super(DEFAULT_WEAPON_NAME,null);
 		
 		// Weapon stats.
@@ -70,7 +70,7 @@ public class longSword extends weapon {
 	}
 	
 	// On floor.
-	public longSword(int x, int y) {
+	public sword(int x, int y) {
 		super(DEFAULT_WEAPON_NAME,x,y);
 		System.out.println("Long Sword DPS: " + DPS);
 		

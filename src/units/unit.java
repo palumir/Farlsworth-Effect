@@ -50,8 +50,8 @@ public abstract class unit extends drawnObject  {
 	
 	// Gravity defaults.
 	private static boolean DEFAULT_GRAVITY_STATE = false;
-	private static float DEFAULT_JUMP_SHORTEN_ACCELERATION = .35f;
-	private static float DEFAULT_GRAVITY_ACCELERATION = 0.45f + DEFAULT_JUMP_SHORTEN_ACCELERATION;
+	private static float DEFAULT_JUMP_SHORTEN_ACCELERATION = .37f;
+	private static float DEFAULT_GRAVITY_ACCELERATION = 0.43f + DEFAULT_JUMP_SHORTEN_ACCELERATION;
 	private static float DEFAULT_GRAVITY_MAX_VELOCITY = 20;
 	protected static float DEFAULT_JUMPSPEED = 11f;
 	
@@ -309,13 +309,13 @@ public abstract class unit extends drawnObject  {
 		// If we are patrolling, patrol
 		if(patrolling && !patrollingPath) {
 			if(!movingBack) {
-				if(Math.abs(startX - getIntX()) <= moveSpeed + 1 && Math.abs(startY - getIntY()) <= moveSpeed + 1) {
+				if(Math.abs(startX - getDoubleX()) < moveSpeed && Math.abs(startY - getDoubleY()) < moveSpeed) {
 					moveTo(patrolX, patrolY);
 					movingBack = true;
 				}
 			}
 			else {
-				if(Math.abs(patrolX - getIntX()) <= moveSpeed + 1 && Math.abs(patrolY - getIntY()) <= moveSpeed + 1) {
+				if(Math.abs(patrolX - getDoubleX()) < moveSpeed && Math.abs(patrolY - getDoubleY()) < moveSpeed) {
 					moveTo(startX, startY);
 					movingBack = false;
 				}
@@ -907,11 +907,25 @@ public abstract class unit extends drawnObject  {
 		setRiseRun();
 	}
 	
+	// If we are moving to a point and don't get exactly to it, how close are we?
+	private double howCloseX = 0;
+	private double howCloseY = 0;
+	private double lastMoveToX = 0;
+	private double lastMoveToY = 0;
+	
 	// Move towards a point
 	public void moveTowards() {
 		if(movingToAPoint && Math.abs(moveToX - getDoubleX()) < getMoveSpeed() && Math.abs(moveToY - getDoubleY()) < getMoveSpeed()) {
-			setDoubleX(moveToX);
-			setDoubleY(moveToY);
+			
+			// x
+			howCloseX = moveToX - getDoubleX();
+			lastMoveToX = moveToX;
+			
+			// y
+			howCloseY = moveToY - getDoubleY();
+			lastMoveToY = moveToY;
+
+			// Done moving to this point.
 			movingToAPoint = false;
 		}
 		else {
@@ -994,8 +1008,14 @@ public abstract class unit extends drawnObject  {
 					path.remove(0);
 				}
 				else if(!(Math.abs(currPoint.x - getIntX()) > moveSpeed + 1 || Math.abs(currPoint.y - getIntY()) > moveSpeed+1)) {
-					setDoubleX(moveToX);
-					setDoubleY(moveToY);
+					// x
+					howCloseX = moveToX - getDoubleX();
+					lastMoveToX = moveToX;
+					
+					// y
+					howCloseY = moveToY - getDoubleY();
+					lastMoveToY = moveToY;
+					
 					moveTo(path.get(0).x, path.get(0).y);
 					currPoint = path.get(0);
 					path.remove(0);
@@ -1156,6 +1176,23 @@ public abstract class unit extends drawnObject  {
 			// Actual move x and y when all is said and done.
 			double actualMoveX = moveX;
 			double actualMoveY = moveY;
+			 
+			// Deal with moving to a point but not getting close enough.
+			// x
+			if(howCloseX != 0) {
+				setDoubleX(lastMoveToX);
+				actualMoveX -= howCloseX;
+				lastMoveToX = 0;
+				howCloseX = 0;
+			}
+			
+			// y
+			if(howCloseY != 0) {
+				setDoubleY(lastMoveToY);
+				actualMoveY -= howCloseY;
+				lastMoveToY = 0;
+				howCloseY = 0;
+			}
 	
 			if(isCollisionOn() && (moveX != 0 || moveY != 0)) {
 				

@@ -114,7 +114,7 @@ public class shadowDude extends unit {
 	
 	// How lenient are we in hurting people?
 	// How many units of space do we reduce the radius of pain by?
-	private int leniency = 2;
+	private int leniency = 7;
 	
 	public void hurtPeople() {
 		// If someone is in the explosion radius, hurt.

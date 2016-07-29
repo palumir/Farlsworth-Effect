@@ -24,11 +24,11 @@ public class dagger extends weapon {
 	
 	// Weapon stats. // This weapon does 8 DPS with the current calculations below
 	static private int DEFAULT_ATTACK_DAMAGE = 2; // 
-	static private float DEFAULT_ATTACK_TIME = 0.25f; 
-	static private float DEFAULT_BACKSWING = 0.1f;
+	static private float DEFAULT_ATTACK_TIME = 0.29f; 
+	static private float DEFAULT_BACKSWING = 0.09f;
 	static private int DEFAULT_ATTACK_WIDTH = 50;
 	static private int DEFAULT_ATTACK_LENGTH = 18;
-	static private float DEFAULT_CRIT_CHANCE = .2f;
+	static private float DEFAULT_CRIT_CHANCE = .25f;
 	static private float DEFAULT_CRIT_DAMAGE = 2f;
 	static private float DEFAULT_VARIABILITY = 0f;
 	static private float DPS = (1/(DEFAULT_ATTACK_TIME + DEFAULT_BACKSWING))*(DEFAULT_ATTACK_DAMAGE + DEFAULT_ATTACK_DAMAGE*DEFAULT_CRIT_DAMAGE*DEFAULT_CRIT_CHANCE);
@@ -60,6 +60,8 @@ public class dagger extends weapon {
 	// In inventory.
 	public dagger() {
 		super(DEFAULT_WEAPON_NAME,weaponSpriteSheet);
+		
+		System.out.println("Dagger: " + DPS);
 		
 		// Create event.
 		pressIToExit = new event("daggerPressIToExit");

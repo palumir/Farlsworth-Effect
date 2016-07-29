@@ -432,7 +432,7 @@ public class player extends unit {
 			loadZone = zone.getStartZone();
 			playerX = loadZone.getDefaultLocation().x;
 			playerY = loadZone.getDefaultLocation().y;
-			newFacingDirection = "Up";
+			newFacingDirection = "Right";
 			tooltipString t = new tooltipString("Use 'wasd' to move.");
 		}
 		

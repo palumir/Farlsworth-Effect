@@ -197,6 +197,9 @@ public class chunk extends drawnObject {
 	// Check if a unit collides with any chunk. Returns by how much.
 	public static intTuple collidesWith(drawnObject u, int newX, int newY) {
 		
+		// If there's no impassable chunks
+		if(impassableChunks.size() == 0) return intTuple.emptyTuple;
+		
 		// Check if it collides in x or y position.
 		boolean tX = false;
 		boolean tY = false;
