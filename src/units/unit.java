@@ -907,23 +907,13 @@ public abstract class unit extends drawnObject  {
 		setRiseRun();
 	}
 	
-	// If we are moving to a point and don't get exactly to it, how close are we?
-	private double howCloseX = 0;
-	private double howCloseY = 0;
-	private double lastMoveToX = 0;
-	private double lastMoveToY = 0;
-	
 	// Move towards a point
 	public void moveTowards() {
 		if(movingToAPoint && Math.abs(moveToX - getDoubleX()) < getMoveSpeed() && Math.abs(moveToY - getDoubleY()) < getMoveSpeed()) {
 			
-			// x
-			howCloseX = moveToX - getDoubleX();
-			lastMoveToX = moveToX;
-			
-			// y
-			howCloseY = moveToY - getDoubleY();
-			lastMoveToY = moveToY;
+			// Just move to the damn point.
+			setDoubleX(moveToX);
+			setDoubleY(moveToY);
 
 			// Done moving to this point.
 			movingToAPoint = false;
@@ -966,6 +956,8 @@ public abstract class unit extends drawnObject  {
 		run = floatRun;
 	}
 	
+	public boolean track = false;
+	
 	// Deal with meta movement. Moving toward a point, following, pathing, etc.
 	public void dealWithMetaMovement() {
 		
@@ -1007,14 +999,11 @@ public abstract class unit extends drawnObject  {
 					currPoint = path.get(0);
 					path.remove(0);
 				}
-				else if(!(Math.abs(currPoint.x - getIntX()) > moveSpeed + 1 || Math.abs(currPoint.y - getIntY()) > moveSpeed+1)) {
-					// x
-					howCloseX = moveToX - getDoubleX();
-					lastMoveToX = moveToX;
+				else if(Math.abs(currPoint.x - getDoubleX()) < moveSpeed && Math.abs(currPoint.y - getDoubleY()) < moveSpeed) {
 					
-					// y
-					howCloseY = moveToY - getDoubleY();
-					lastMoveToY = moveToY;
+					// Just move to the damn point.
+					setDoubleX(moveToX);
+					setDoubleY(moveToY);
 					
 					moveTo(path.get(0).x, path.get(0).y);
 					currPoint = path.get(0);
@@ -1176,23 +1165,6 @@ public abstract class unit extends drawnObject  {
 			// Actual move x and y when all is said and done.
 			double actualMoveX = moveX;
 			double actualMoveY = moveY;
-			 
-			// Deal with moving to a point but not getting close enough.
-			// x
-			if(howCloseX != 0) {
-				setDoubleX(lastMoveToX);
-				actualMoveX -= howCloseX;
-				lastMoveToX = 0;
-				howCloseX = 0;
-			}
-			
-			// y
-			if(howCloseY != 0) {
-				setDoubleY(lastMoveToY);
-				actualMoveY -= howCloseY;
-				lastMoveToY = 0;
-				howCloseY = 0;
-			}
 	
 			if(isCollisionOn() && (moveX != 0 || moveY != 0)) {
 				

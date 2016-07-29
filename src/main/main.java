@@ -23,6 +23,7 @@ public class main {
 	public static void restartGame(String s) {
 		
 		// Create the player
+		//player.setDeveloper(true);
 		player p = player.loadPlayer(null,null,0,0,"Up");
 		
 		// Saved game?

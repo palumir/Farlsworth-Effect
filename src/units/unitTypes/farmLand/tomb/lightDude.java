@@ -57,11 +57,6 @@ public class lightDude extends unit {
 	// Default jump speed
 	private static int DEFAULT_UNIT_JUMPSPEED = 10;
 	
-	// Entered light time
-	private long lastInLightTime= 0;
-	private long lastInShadowsTime = 0;
-	private float fadeTime = .2f;
-	
 	// farmer sprite stuff.
 	private static String DEFAULT_UNIT_SPRITESHEET = "images/units/player/female/light.png";
 	
