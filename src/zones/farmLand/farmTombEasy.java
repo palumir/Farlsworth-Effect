@@ -975,6 +975,8 @@ public void makeShadowSquareBottomRight(int topLeftDudePosX, int topLeftDudePosY
 		
 		spawnTombRect(5004-8,811,5604-8,843,"ground");
 		makeShadowRectangle (4965,764,125,125,5,3,1.5f,false);
+		u = new shadowDude(5448,1130-14);
+		u.setFacingDirection("Down");
 		
 		spawnTombRect(4888,1061,5480,1093,"ground");
 		for(int i=0; i <4; i++) {
@@ -1034,7 +1036,7 @@ public void makeShadowSquareBottomRight(int topLeftDudePosX, int topLeftDudePosY
 			u = new shadowDude (7656,1016 - i*50);
 		}
 		
-		makeShadowSquareTopLeft(7770,1017,99,99,2f,false);
+		makeShadowSquareTopLeft(7770,1017,99,99,2.7f,false);
 		
 		spawnTombRect(8082+73,1062,8300,1094,"ground");
 		
@@ -1062,12 +1064,15 @@ public void makeShadowSquareBottomRight(int topLeftDudePosX, int topLeftDudePosY
 		u = new shadowDude(7060,1215);
 		
 		spawnTombRect(7376+73,1262,8300,1294,"ground");
-		makeShadowSquareTopLeft(7494,1120,80,85,1.5f,true);
+		makeShadowSquareTopLeft(7494,1120,80,85,2f,true);
 		u = new shadowDude(8206,1218);
 		
-		// Second floor
 		
-		spawnTombRect(7606+73,1162,9000,1194,"ground");
+////////////////////////////////
+//////STRAIGHT FLOOR JUMP AREA //////
+//////////////////////////////
+		
+		spawnTombRect(7606+73,1162,10000,1194,"ground");
 		
 		c = new well(8207,1026,0);
 		c.setPassable(true);
@@ -1099,7 +1104,7 @@ public void makeShadowSquareBottomRight(int topLeftDudePosX, int topLeftDudePosY
 			shadowDudePatrolPath(8656 + i*40,1116 - 75, path ,1);
 		}
 		
-		shadowDudePatrol (8656,1116,8902,1116,2);
+		shadowDudePatrol (8656,1116,8902,1116,1);
 		
 		for(int i=0; i <2; i++) {
 			path = new ArrayList<intTuple>();
@@ -1107,9 +1112,42 @@ public void makeShadowSquareBottomRight(int topLeftDudePosX, int topLeftDudePosY
 			shadowDudePatrolPath(8842 + i*40,1116 - 75, path ,1);
 		}
 		
-		// Exit
+		for(int i = 0; i < 30; i++) {
+			shadowDudePatrol (9038+i*30,1116-230,9038+i*30,1116,1.2f);
+		}
+		u = new shadowDude(9038+3*30,1116);
+		u.setFacingDirection("Left");
+		u = new shadowDude(9038+3*30,1116-50*1);
+		u.setFacingDirection("Left");
 		
-		spawnTombRect(9075,1150,13000,2374,"ground");
+		u = new shadowDude(9038+9*30,1116);
+		u.setFacingDirection("Left");
+		u = new shadowDude(9038+9*30,1116-50*1);
+		u.setFacingDirection("Left");
+		
+		u = new lightDude(9038+14*30,1116);
+		u.setFacingDirection("Left");
+		
+		u = new shadowDude(9038+18*30,1116);
+		u.setFacingDirection("Left");
+		u = new shadowDude(9038+19*30,1116);
+		u.setFacingDirection("Left");
+		
+		u = new shadowDude(9038+22*30,1116);
+		u.setFacingDirection("Left");
+		u = new shadowDude(9038+23*30,1116);
+		u.setFacingDirection("Left");
+		
+		u = new shadowDude(9038+26*30,1116);
+		u.setFacingDirection("Left");
+		u = new shadowDude(9038+26*30,1116-50);
+		u.setFacingDirection("Left");
+		
+		// Exit
+		c = new well(10066,1113,0);
+		c.setPassable(true);
+		c.setZ(-2);
+		spawnTombRect(10050,1150,13000,2374,"ground");
 		//spawnTombRect(9962,512,10500,1154,"rightWall");
 		//spawnTombRect(9965,1152,10500,1502,"none");
 	}
@@ -1181,23 +1219,16 @@ public void makeShadowSquareBottomRight(int topLeftDudePosX, int topLeftDudePosY
 		
 		// First platform
 		spawnReloadableTombRect(currPlayer.getIntX() -80,
-				      1150-30 - 35 - 32,
+				      1150-30 - 35 - 32-20,
 				      currPlayer.getIntX()-30,
 				      1150-30 - 35,
 				      "ground");
 		
-		// Second platform
-		spawnReloadableTombRect(currPlayer.getIntX() - 100-10,
-				      1150-30 - 35 - 32 - 64*1-20,
-				      currPlayer.getIntX() -70,
-				      1150-30 - 35 - 64*1-20,
-				      "ground");
-		
 		// Third platform
 		spawnReloadableTombRect(currPlayer.getIntX(),
-				      1150-30 - 35 - 32 - 64*2,
+				      1150-30 - 35 - 32 - 64*2+3,
 				      currPlayer.getIntX() + 200,
-					  1150-30 - 35 - 64*2,
+					  1150-30 - 35 - 64*2+3,
 						      "ground");
 		
 		// Fourth platform
@@ -1541,7 +1572,7 @@ public void makeShadowSquareBottomRight(int topLeftDudePosX, int topLeftDudePosY
 	// Deal with the first well we encounters.
 	public void dealWithRegionStuff() {
 		player currPlayer = player.getPlayer();
-		if(currPlayer != null && currPlayer.isWithin(9335+600,744,9817+600,1268) && shadowElevatorStarted!=null && !shadowElevatorStarted.isCompleted()) {
+		if(currPlayer != null && currPlayer.isWithin(10966,744,10966+1500,1268) && shadowElevatorStarted!=null && !shadowElevatorStarted.isCompleted()) {
 			shadowElevatorStarted.setCompleted(true);
 			shadowElevatorFirstTime = true;
 			saveState.setQuiet(true);
