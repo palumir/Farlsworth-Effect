@@ -14,7 +14,7 @@ import drawing.gameCanvas;
 import drawing.spriteSheet;
 import drawing.userInterface.interfaceObject;
 import effects.effect;
-import effects.effectTypes.floatingString;
+import effects.interfaceEffects.floatingString;
 import modes.mode;
 import units.player;
 import units.unit;
@@ -69,7 +69,7 @@ public class chunk extends drawnObject {
 	//////////////
 	// Constructor for choosing a random variation of the chunk.
 	public chunk(chunkType c, int newX, int newY) {
-		super(c.getChunkTypeSpriteSheet(), newX, newY, c.getWidth(), c.getHeight());
+		super(c.getChunkTypeSpriteSheet(), c.getClass().getName(), newX, newY, c.getWidth(), c.getHeight());
 		
 		// Set our image field and chunktype
 		chunkImage = c.getChunkImage();
@@ -81,7 +81,7 @@ public class chunk extends drawnObject {
 	
 	// Constructor for choosing a given variation of the chunk.
 	public chunk(chunkType c, int newX, int newY, int i, int j) {
-		super(c.getChunkTypeSpriteSheet(), newX, newY, c.getWidth(), c.getHeight());
+		super(c.getChunkTypeSpriteSheet(), c.getClass().getName(), newX, newY, c.getWidth(), c.getHeight());
 
 		// Set our image field and chunkType
 		if(c.getChunkTypeSpriteSheet() != null) chunkImage = c.getChunkImage(i, j);

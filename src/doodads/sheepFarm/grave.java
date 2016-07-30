@@ -59,7 +59,7 @@ public class grave extends chunk {
 		s = startOfConversation.addChild(null, "You might need one of these soon if you're not careful.");
 		s.setEnd();
 		
-		return new interactBox(startOfConversation, stringUtils.toTitleCase(DEFAULT_CHUNK_NAME));
+		return new interactBox(startOfConversation, this);
 	}
 	
 	// Interact stuff.

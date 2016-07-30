@@ -20,7 +20,7 @@ public abstract class interfaceObject extends drawnObject  {
 
 	// Constructor
 	public interfaceObject(BufferedImage newImage, int newX, int newY, int newWidth, int newHeight) {
-		super(null, newX, newY, newWidth, newHeight);	
+		super(null, "Interface Object" , newX, newY, newWidth, newHeight);	
 		setObjectImage(newImage);
 		interfaceObjects.add(this);
 	}

@@ -257,7 +257,7 @@ public class denmother extends boss {
 		s = s.addChild("Give belly rub", "Alright, here goes ...");
 		s.setEnd();
 		
-		return new interactBox(startOfConversation, stringUtils.toTitleCase(DEFAULT_UNIT_NAME), true);
+		return new interactBox(startOfConversation, this, true);
 	}
 	
 	// Interact with object. 

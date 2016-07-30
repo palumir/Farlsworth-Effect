@@ -10,8 +10,11 @@ import drawing.drawnObject;
 import drawing.gameCanvas;
 import drawing.spriteSheet;
 import drawing.userInterface.interfaceObject;
+import effects.interfaceEffects.textBlurb;
 import sounds.sound;
 import units.player;
+import units.unit;
+import utilities.stringUtils;
 
 public class interactBox extends interfaceObject  {
 	
@@ -40,7 +43,7 @@ public class interactBox extends interfaceObject  {
 	///////////////////////
     
     // Text to display and the color of the text.
-	private String whoIsTalking;
+	private drawnObject whoIsTalking;
 	private boolean isUnit = false;
 	private textSeries theText;
 	private String displayedText = "";
@@ -49,6 +52,9 @@ public class interactBox extends interfaceObject  {
 	
 	// Selected button.
 	private int selectedButton = 0;
+	
+	// Text blurb
+	private textBlurb blurb;
 	
 	// Display
 	private boolean buttonMode = false;
@@ -70,28 +76,28 @@ public class interactBox extends interfaceObject  {
 	///////////////
 
 	// Constructor
-	public interactBox(textSeries newText, String newWhoIsTalking, boolean newIsUnit) {
+	public interactBox(textSeries newText, drawnObject newWhoIsTalking, boolean newIsUnit) {
 		super(null, DEFAULT_X, DEFAULT_Y, background.getWidth(), background.getHeight());	
 		
 		// Is unit.
 		isUnit = newIsUnit;
 		
 		// Set fields.
-		if(newText.getButtonText() != null) buttonMode = true;
+		if(newText.getButtonText() != null) setButtonMode(true);
 		else textMode = true;
 		whoIsTalking = newWhoIsTalking;
 		setTheText(newText);
 	}
 	
 	// Constructor
-	public interactBox(textSeries newText, String newWhoIsTalking) {
+	public interactBox(textSeries newText, drawnObject newWhoIsTalking) {
 		super(null, DEFAULT_X, DEFAULT_Y, background.getWidth(), background.getHeight());	
 		
 		// Is unit.
 		isUnit = false;
 		
 		// Set fields.
-		if(newText.getButtonText() != null) buttonMode = true;
+		if(newText.getButtonText() != null) setButtonMode(true);
 		else textMode = true;
 		whoIsTalking = newWhoIsTalking;
 		setTheText(newText);
@@ -127,7 +133,7 @@ public class interactBox extends interfaceObject  {
 					
 					// Display the name of the person or thing talking/interacting
 					String theTalker = getTheText().getTalker();
-					if(theTalker == null) theTalker = whoIsTalking;
+					if(theTalker == null) theTalker = stringUtils.toTitleCase(whoIsTalking.getName());
 					g.drawString(theTalker,
 							(int)(gameCanvas.getScaleX()*getIntX()) + 
 							(int)(gameCanvas.getScaleX()*background.getWidth()/2) - 
@@ -159,22 +165,7 @@ public class interactBox extends interfaceObject  {
 			}
 			
 			// Button
-			if(buttonMode) {
-				
-				/*if(isUnit) {
-					// Set font.
-					g.setFont(DEFAULT_FONT_TITLE);
-					
-					// Display the name of the person or thing talking/interacting
-					g.drawString(whoIsTalking,
-							(int)(gameCanvas.getScaleX()*getIntX()) + 
-							(int)(gameCanvas.getScaleX()*background.getWidth()/2) - 
-							g.getFontMetrics().stringWidth(whoIsTalking)/2,
-							(int)(gameCanvas.getScaleY()*getIntY()) + 
-							(int)(gameCanvas.getScaleY()*background.getHeight()/5) + 
-							(int)(gameCanvas.getScaleY()*4));
-				}*/
-				
+			if(isButtonMode()) {
 				
 				// Set font.
 				g.setFont(DEFAULT_FONT);
@@ -224,8 +215,24 @@ public class interactBox extends interfaceObject  {
 		setDisplayOn(!isDisplayOn());
 		if(isDisplayOn()) {
 			
+			if(whoIsTalking instanceof unit) {
+				
+				// Create a blurb effect on who is talking
+				setBlurb(new textBlurb(whoIsTalking.getIntX()-textBlurb.getDefaultWidth(),whoIsTalking.getIntY()-whoIsTalking.getHitBoxAdjustmentY()-textBlurb.getDefaultWidth()));
+				getBlurb().attachToObject(whoIsTalking);
+			}
+			
+			// Set that the objest is being interacted.
+			whoIsTalking.setBeingInteracted(true);
+			
 			// Stop the player
 			player.getPlayer().stop();
+		}
+		if(!isDisplayOn()) {
+			if(getBlurb()!=null) getBlurb().end();
+			
+			// Set that the objest is not being interacted.
+			whoIsTalking.setBeingInteracted(false);
 		}
 		if(getCurrentDisplay() != this) {
 			setCurrentDisplay(this);
@@ -260,6 +267,7 @@ public class interactBox extends interfaceObject  {
 	
 
 	public void goToNext(int i) {
+		
 		// If we are currently in text mode.
 		if(textMode) {
 			
@@ -271,20 +279,38 @@ public class interactBox extends interfaceObject  {
 		
 			// Otherwise, there will be buttons to select from. Go to button mode.
 			else {
-				buttonMode = true;
+				
+				if(whoIsTalking instanceof unit) {
+					
+					// Create a blurb effect on who is talking
+					if(getBlurb()!=null) getBlurb().end();
+					setBlurb(new textBlurb(player.getPlayer().getIntX()-textBlurb.getDefaultWidth(),player.getPlayer().getIntY()-player.getPlayer().getHitBoxAdjustmentY()-textBlurb.getDefaultWidth()));
+					getBlurb().attachToObject(whoIsTalking);
+				}
+				
+				setButtonMode(true);
 				textMode = false;
 			}
 			
 			// Reset the text.
 			displayedText = "";
+			
 		}
 		
 		// If we're in button mode.
-		else if(buttonMode) {
+		else if(isButtonMode()) {
 			
+			if(whoIsTalking instanceof unit) {
+				
+				// Send textblurb back to who is speaking.
+				if(getBlurb()!=null) getBlurb().end();
+				setBlurb(new textBlurb(whoIsTalking.getIntX()-textBlurb.getDefaultWidth(),whoIsTalking.getIntY()-whoIsTalking.getHitBoxAdjustmentY()-textBlurb.getDefaultWidth()));
+				getBlurb().attachToObject(whoIsTalking);
+			}
+		
 			// Select the button.
 			theText = theText.getChildren().get(i);
-			buttonMode = false;
+			setButtonMode(false);
 			textMode = true;
 			selectedButton = 0;
 		}
@@ -292,40 +318,13 @@ public class interactBox extends interfaceObject  {
 	
 	// Go to next
 	public void goToNext() {
-		// If we are currently in text mode.
-		if(textMode) {
-			
-			// If there's only one thing, assume it's just more text.
-			if(theText.getChildren().size() == 1 && theText.getChildren().get(0).getButtonText() == null) {
-				selectedButton = 0;
-				theText = theText.getChildren().get(0);
-			}
-		
-			// Otherwise, there will be buttons to select from. Go to button mode.
-			else {
-				buttonMode = true;
-				textMode = false;
-			}
-			
-			// Reset the text.
-			displayedText = "";
-		}
-		
-		// If we're in button mode.
-		else if(buttonMode) {
-			
-			// Select the button.
-			theText = theText.getChildren().get(selectedButton);
-			buttonMode = false;
-			textMode = true;
-			selectedButton = 0;
-		}
+		goToNext(selectedButton);
 	}
 	
 	// Move select
 	public void moveSelect(String direction) {
 		
-		if(buttonMode) {
+		if(isButtonMode()) {
 			// Move select right.
 			if(direction=="right") {
 				if(selectedButton + 1 < theText.getChildren().size()) {
@@ -433,6 +432,22 @@ public class interactBox extends interfaceObject  {
 
 	public void setLocked(boolean locked) {
 		this.locked = locked;
+	}
+
+	public textBlurb getBlurb() {
+		return blurb;
+	}
+
+	public void setBlurb(textBlurb blurb) {
+		this.blurb = blurb;
+	}
+
+	public boolean isButtonMode() {
+		return buttonMode;
+	}
+
+	public void setButtonMode(boolean buttonMode) {
+		this.buttonMode = buttonMode;
 	}
 	
 }

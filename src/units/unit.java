@@ -21,7 +21,7 @@ import effects.projectile;
 import effects.buffs.movementBuff;
 import effects.effectTypes.bloodSquirt;
 import effects.effectTypes.critBloodSquirt;
-import effects.effectTypes.floatingString;
+import effects.interfaceEffects.floatingString;
 import modes.mode;
 import sounds.sound;
 import terrain.chunk;
@@ -91,6 +91,7 @@ public abstract class unit extends drawnObject  {
 	//// FIELDS ////
 	////////////////
 	
+	// State of gravity
 	private static boolean gravity = DEFAULT_GRAVITY_STATE;
 	
 	// The actual unit type.
@@ -237,7 +238,7 @@ public abstract class unit extends drawnObject  {
 
 	// Constructor
 	public unit(unitType u, int newX, int newY) {
-		super(u.getUnitTypeSpriteSheet(), newX, newY, u.getWidth(), u.getHeight());	
+		super(u.getUnitTypeSpriteSheet(), u.getName(), newX, newY, u.getWidth(), u.getHeight());	
 		if(u.getAnimations()!=null) setAnimations(new animationPack(u.getAnimations()));
 		moveSpeed = u.getMoveSpeed();
 		baseMoveSpeed = u.getMoveSpeed();
@@ -1225,6 +1226,14 @@ public abstract class unit extends drawnObject  {
 				attachedCamera.setY((int)(getDoubleY() + actualMoveY));
 			}
 			
+			// Move attached objects
+			if(attachedObjects != null) {
+				for(int i = 0; i < attachedObjects.size(); i++) {
+					attachedObjects.get(i).setDoubleX(this.getDoubleX() + actualMoveX + attachedObjects.get(i).getRelativeX());
+					attachedObjects.get(i).setDoubleY(this.getDoubleY() + actualMoveY + attachedObjects.get(i).getRelativeY());
+				}
+			}
+			
 			// Move the unit.
 			setDoubleX(getDoubleX() + actualMoveX);
 			setDoubleY(getDoubleY() + actualMoveY);
@@ -1520,16 +1529,20 @@ public abstract class unit extends drawnObject  {
 	/////////////////////////
 	// Getters and setters //
 	/////////////////////////
+	
+	// Moving horizontally boolean
 	public boolean movingHorizontally() {
 		boolean movingLeftAndRight = isMovingLeft() && isMovingRight();
 		return (isMovingLeft() || isMovingRight()) && !movingLeftAndRight;
 	}
 	
+	// Moving horizontally boolean
 	public boolean movingVertically() {
 		boolean movingUpAndDown = isMovingUp() && isMovingDown();
 		return (isMovingUp() || isMovingDown()) && !movingUpAndDown;
 	}
 	
+	// Combination of all movement functions boolean
 	public boolean isMoving() {
 		return movingVertically() || movingHorizontally() || movingToAPoint || followingUnit || followingAPath || patrolling;
 	}

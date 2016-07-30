@@ -69,7 +69,7 @@ public abstract class weapon extends item {
 		
 		// Break up the spriteSheet. Assumed to be regular human character size, for now.
 		if(player.getPlayer()!=null) {
-			if(player.getPlayer().getPlayerInventory().hasItem(this.name)) {
+			if(player.getPlayer().getPlayerInventory().hasItem(this.getName())) {
 				setDrawObject(false);
 			}
 		}

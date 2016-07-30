@@ -37,7 +37,7 @@ public class farmer extends unit {
 	////////////////
 	
 	// Default name.
-	private static String unitName = "farmer";
+	private static String unitName = "Farmer";
 	
 	// Default movespeed.
 	private static int DEFAULT_FARMER_MOVESPEED = 1;
@@ -179,14 +179,14 @@ public class farmer extends unit {
 		s = s.addChild(null, "Wait, is that even a pun? Whatever ...");
 		s = s.addChild(null, "Anyway, this particular sheep is difficult.");
 		s = s.addChild(null, "But he needs to be sheared.");
-		s = s.addChild(null, "You'll find him in the pen to the far East.");
+		s = s.addChild(null, "You'll find him in the Eastern pen.");
 		s = s.addChild(null, "Be a lamb and go grab his wool for me?");
 		s.addChild(yes);
 		s.addChild(noHelp);
 		yes.setEnd();
 		
 		// Create the whole quest and add dialogue.
-		quest q = new quest(DEFAULT_QUEST_DESC, this, new interactBox(startOfConversation, stringUtils.toTitleCase(unitName), true));
+		quest q = new quest(DEFAULT_QUEST_DESC, this, new interactBox(startOfConversation, this, true));
 		
 		// If the quest is started, don't allow the person to do the whole dialogue.
 		if(q.isStarted()) {

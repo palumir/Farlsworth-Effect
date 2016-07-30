@@ -18,7 +18,7 @@ public class region extends drawnObject {
 	
 	// Circular
 	public region(int newX, int newY, int newRadius) {
-		super(null,newX,newY,newRadius, newRadius);
+		super(null,"Region",newX,newY,newRadius, newRadius);
 		setRadius(newRadius);
 	}
 	

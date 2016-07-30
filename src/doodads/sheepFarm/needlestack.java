@@ -57,7 +57,7 @@ public class needlestack extends chunk {
 		s = s.addChild(null, "... you find a piece of hay.");
 		s.setEnd();
 		
-		return new interactBox(startOfConversation, stringUtils.toTitleCase(DEFAULT_CHUNK_NAME));
+		return new interactBox(startOfConversation, this);
 	}
 	
 	// Interact with object. Should be over-ridden.

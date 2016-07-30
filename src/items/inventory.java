@@ -107,7 +107,7 @@ public class inventory extends interfaceObject {
 		else { 
 			
 			// Set pressSpaceToAttack to be true.
-			if(!pressSpaceToAttack.isCompleted() &&  player.getPlayer().getEquippedWeapon() != null && player.getPlayer().getEquippedWeapon().name.equals("Dagger")) {
+			if(!pressSpaceToAttack.isCompleted() &&  player.getPlayer().getEquippedWeapon() != null && player.getPlayer().getEquippedWeapon().getName().equals("Dagger")) {
 				pressSpaceToAttack.setCompleted(true);
 				tooltipString t = new tooltipString("Press or hold 'space' to attack.");
 			}
@@ -123,7 +123,7 @@ public class inventory extends interfaceObject {
 			for(int j = 0; j < getItems().size(); j++) {
 				if(getItems().get(j) != null 
 					&& getItems().get(j) instanceof key 
-					&& ((key)getItems().get(j)).name.equals(s)) return true;
+					&& ((key)getItems().get(j)).getName().equals(s)) return true;
 			}
 		}
 		return false;
@@ -131,7 +131,7 @@ public class inventory extends interfaceObject {
 	
 	// Pickup an item into inventory.
 	public void pickUp(item i) {
-		if(!hasItem(i.name)) {
+		if(!hasItem(i.getName())) {
 			getItems().add(i);
 		}
 	}
@@ -140,7 +140,7 @@ public class inventory extends interfaceObject {
 	public boolean hasItem(String i) {
 		if(getItems() != null) {
 			for(int j = 0; j < getItems().size(); j++) {
-				if(getItems().get(j) != null  && getItems().get(j).name.equals(i)) return true;
+				if(getItems().get(j) != null  && getItems().get(j).getName().equals(i)) return true;
 			}
 		}
 		return false;
@@ -163,7 +163,7 @@ public class inventory extends interfaceObject {
 				if(i instanceof weapon) {
 					
 					// If the weapon is currently equipped, unequip it.
-					if(currPlayer.getEquippedWeapon() != null && currPlayer.getEquippedWeapon().name.equals(i.name)) {
+					if(currPlayer.getEquippedWeapon() != null && currPlayer.getEquippedWeapon().getName().equals(i.getName())) {
 						// Unequip item
 						currPlayer.unequipWeapon();
 						
@@ -185,7 +185,7 @@ public class inventory extends interfaceObject {
 				if(i instanceof bottle) {
 					
 					// If the weapon is currently equipped, unequip it.
-					if(currPlayer.getEquippedBottle() != null && currPlayer.getEquippedBottle().name.equals(i.name)) {
+					if(currPlayer.getEquippedBottle() != null && currPlayer.getEquippedBottle().getName().equals(i.getName())) {
 						// Unequip item
 						currPlayer.unequipBottle();
 						
@@ -367,7 +367,7 @@ public class inventory extends interfaceObject {
 
 							// Draw the item information on the right
 							g.setFont(DEFAULT_FONT_TITLE);
-							String itemName = stringUtils.toTitleCase(currentItem.name);
+							String itemName = stringUtils.toTitleCase(currentItem.getName());
 							g.drawString(itemName, (int)(gameCanvas.getScaleX()*(getIntX() + (int) (Math.sqrt(DEFAULT_INVENTORY_SIZE)*DEFAULT_SLOT_SIZE) + selectedSlotTextAdjustX + adjustX)) - g.getFontMetrics().stringWidth(itemName)/2, 
 									(int)(gameCanvas.getScaleY()*(getIntY()+ 34 + adjustY)));
 							

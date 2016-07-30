@@ -75,7 +75,7 @@ public class skullSign extends chunk {
 		s = startOfConversation.addChild("Ignore warning", "You will not be careful of spiders.");
 		s.setEnd();
 			
-		return new interactBox(startOfConversation, stringUtils.toTitleCase(DEFAULT_CHUNK_NAME));
+		return new interactBox(startOfConversation, this);
 	}
 	
 	// Interact stuff.

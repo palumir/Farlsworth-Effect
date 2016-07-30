@@ -96,7 +96,7 @@ public class bone extends chunk {
 				startOfConversation.setEnd();
 			}
 			
-			return new interactBox(startOfConversation, "Gate");
+			return new interactBox(startOfConversation, this);
 		}
 		
 		// Interact with object. Should be over-ridden.

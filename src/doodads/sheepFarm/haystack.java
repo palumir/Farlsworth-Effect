@@ -83,7 +83,7 @@ public class haystack extends chunk {
 			s.setEnd();
 		}
 		
-		return new interactBox(startOfConversation, stringUtils.toTitleCase(DEFAULT_CHUNK_NAME));
+		return new interactBox(startOfConversation, this);
 	}
 	
 	// Create interact sequence
@@ -127,7 +127,7 @@ public class haystack extends chunk {
 		// Set each to the end.
 		s.setEnd();
 		
-		return new interactBox(startOfConversation, stringUtils.toTitleCase(DEFAULT_CHUNK_NAME));
+		return new interactBox(startOfConversation, this);
 	}
 	
 	// Interact stuff.

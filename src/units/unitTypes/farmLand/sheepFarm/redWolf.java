@@ -37,7 +37,7 @@ public class redWolf extends wolf {
 	////////////////
 	
 	// Default name.
-	private static String DEFAULT_UNIT_NAME = "redWolf";
+	private static String DEFAULT_UNIT_NAME = "Red Wolf";
 	
 	// Health.
 	private int DEFAULT_HP = 6;
@@ -368,15 +368,14 @@ public class redWolf extends wolf {
 	@Override
 	public void setAlphaAnimations() {
 		upDownSpriteSheet = new spriteSheet(new spriteSheetInfo(
-				"images/units/animals/" + DEFAULT_UNIT_NAME + "UpDownAlpha.png", 
+				"images/units/animals/redWolfUpDownAlpha.png", 
 				32, 
 				64,
 				0,
 				DEFAULT_TOPDOWN_ADJUSTMENT_Y
 				));
-		
 		leftRightSpriteSheet = new spriteSheet(new spriteSheetInfo(
-				"images/units/animals/" + DEFAULT_UNIT_NAME + "LeftRightAlpha.png", 
+				"images/units/animals/redWolfLeftRightAlpha.png", 
 				64, 
 				32,
 				0,

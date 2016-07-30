@@ -13,7 +13,7 @@ import drawing.drawnObject;
 import drawing.gameCanvas;
 import drawing.spriteSheet;
 import effects.effect;
-import effects.effectTypes.floatingString;
+import effects.interfaceEffects.floatingString;
 import items.bottles.normalBottle;
 import items.keys.farmKey;
 import items.weapons.dagger;
@@ -47,10 +47,7 @@ public abstract class item extends drawnObject {
 	
 	// List of booleans we will save for the item.
 	private saveBooleanList saveBooleans = new saveBooleanList();
-	
-	// Item name
-	public String name;
-	
+
 	// Properties
 	public ArrayList<String> properties;
 	
@@ -64,8 +61,7 @@ public abstract class item extends drawnObject {
 	/// METHODS ///
 	///////////////
 	public item(String newName, spriteSheet newSpriteSheet, int newX, int newY, int newWidth, int newHeight) {
-		super(newSpriteSheet,newX,newY,newWidth,newHeight);
-		name = newName;
+		super(newSpriteSheet,newName, newX,newY,newWidth,newHeight);
 		allItems.add(this);
 	}
 	
@@ -75,7 +71,7 @@ public abstract class item extends drawnObject {
 	// Get item by name.
 	public static item getItemByName(String s) {
 		for(int i = 0; i < allItems.size(); i++) {
-			if(s.equals(allItems.get(i).name)) return allItems.get(i).getItemRef();
+			if(s.equals(allItems.get(i).getName())) return allItems.get(i).getItemRef();
 		}
 		if(!s.equals("None!")) System.err.println("Item " + s + " has not been initialized in item.initiate()!");
 		return null;
@@ -90,7 +86,7 @@ public abstract class item extends drawnObject {
 		
 			// Display text. 
 			player currPlayer = player.getPlayer();
-			effect e = new floatingString("+" + stringUtils.toTitleCase(name), DEFAULT_PICKUP_COLOR, currPlayer.getIntX() + currPlayer.getWidth()/2, currPlayer.getIntY() + currPlayer.getHeight()/2, 1.2f);
+			effect e = new floatingString("+" + stringUtils.toTitleCase(getName()), DEFAULT_PICKUP_COLOR, currPlayer.getIntX() + currPlayer.getWidth()/2, currPlayer.getIntY() + currPlayer.getHeight()/2, 1.2f);
 			
 			// At least add the item to the player's inventory.
 			player.getPlayer().getPlayerInventory().pickUp(this.getItemRef());

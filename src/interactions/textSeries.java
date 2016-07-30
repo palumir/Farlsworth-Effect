@@ -2,6 +2,8 @@ package interactions;
 
 import java.util.ArrayList;
 
+import units.unit;
+
 public class textSeries {
 
 	/////////////////////

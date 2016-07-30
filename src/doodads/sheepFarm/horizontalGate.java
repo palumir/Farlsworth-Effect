@@ -125,23 +125,21 @@ public class horizontalGate extends chunk {
 					s = s.addChild(null, "But don't you have some wool to retrieve nearby?");
 					s.setTalker("Somebody must be playing a practical joke or something");
 					s = s.addChild(null, "I'm not all-knowing or something.");
-					s.setTalker("Farmer, is that you just joshing around?");
+					s.setTalker("Farmer, is that just you joshing around?");
 					s = s.addChild(null, "I just overheard you talking to the \"farmer\"'.");
-					s.setTalker("It really isn't");
+					s.setTalker("It really isn't you, farmer, is it?");
 					s = s.addChild(null, "Though, I am a talking gate.");
 					s.setTalker("I'm having a casual conversation with a gate");
 					s = s.addChild(null, "But that's life.");
-					s.setTalker("What is my life");
+					s.setTalker("What has my life come to?");
 					s = s.addChild(null, "We're all talking gates at heart.");
-					s.setTalker("I must have not gotten enough sleep");
+					s.setTalker("I must not have gotten enough sleep");
 					talkedToForestGateOnce = true;
 				}
 				else if(isForestGateAndUnopenable() && talkedToForestGateOnce) {
 					s = startOfConversation.addChild("Open", "Go get that wool.");
 					s.setTalker("A talking gate, I suppose");
-					s = s.addChild(null, "Farlsworth is in the pen to my left.");
-					s.setTalker("A talking gate, I suppose");
-					s = s.addChild(null, "I am facing toward you, before you ask.");
+					s = s.addChild(null, "Farlsworth is in the pen to your right.");
 					s.setTalker("A talking gate, I suppose");
 					s = s.addChild(null, "I have nothing more to say.");
 					s.setTalker("A talking gate, I suppose");
@@ -171,7 +169,7 @@ public class horizontalGate extends chunk {
 			isUnit = true;
 		}
 		
-		return new interactBox(startOfConversation, "Gate", isUnit);
+		return new interactBox(startOfConversation, this, isUnit);
 	}
 	
 	// Is it the forest gate
@@ -238,6 +236,7 @@ public class horizontalGate extends chunk {
 		// Set that the gate has been opened before.
 		hasBeenOpened.setCompleted(true);
 		isOpen.setCompleted(true);
+		setShowInteractable(false);
 		
 		// Open gate.
 		setPassable(true);
@@ -250,6 +249,7 @@ public class horizontalGate extends chunk {
 		
 		// Set that the gate is closed.
 		isOpen.setCompleted(false);
+		setShowInteractable(true);
 		
 		// Play sound
 		sound s = new sound(closeGate);

@@ -74,7 +74,7 @@ public class statue extends chunk {
 			s.setEnd();
 		}
 		
-		return new interactBox(startOfConversation, stringUtils.toTitleCase(DEFAULT_CHUNK_NAME));
+		return new interactBox(startOfConversation, this);
 	}
 	
 	// Interact stuff.

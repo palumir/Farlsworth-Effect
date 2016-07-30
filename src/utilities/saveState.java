@@ -141,7 +141,7 @@ public class saveState implements Serializable {
 					item currItem = s.getPlayerInventory().get(i);
 					
 					// Write the item name.
-					objectStream.writeObject(currItem.name);
+					objectStream.writeObject(currItem.getName());
 					
 					// For each item, save a list of booleans.
 					
@@ -157,7 +157,7 @@ public class saveState implements Serializable {
 				
 				// Write the equipped items to save file.
 				if(s.getEquippedWeapon() == null) objectStream.writeObject("None!");
-				else objectStream.writeObject(s.getEquippedWeapon().name);
+				else objectStream.writeObject(s.getEquippedWeapon().getName());
 				
 				// Write equipped bottle to file.
 				if(s.getEquippedBottle() == null) {
@@ -165,7 +165,7 @@ public class saveState implements Serializable {
 					objectStream.writeObject(0);
 				}
 				else {
-					objectStream.writeObject(s.getEquippedBottle().name);
+					objectStream.writeObject(s.getEquippedBottle().getName());
 					objectStream.writeObject(s.getEquippedBottle().getChargesLeft());
 				}
 				

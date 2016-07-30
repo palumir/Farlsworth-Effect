@@ -42,7 +42,7 @@ public class sheep extends unit {
 	////////////////
 	
 	// Default name.
-	private static String DEFAULT_UNIT_NAME = "sheep";
+	private static String DEFAULT_UNIT_NAME = "Sheep";
 	
 	// Default movespeed.
 	private static int DEFAULT_UNIT_MOVESPEED = 1;
@@ -136,7 +136,7 @@ public class sheep extends unit {
 		}
 		interactTimes++;
 			
-		return new interactBox(startOfConversation, stringUtils.toTitleCase(DEFAULT_UNIT_NAME), true);
+		return new interactBox(startOfConversation, this, true);
 	}
 	
 	// Interact with object. 

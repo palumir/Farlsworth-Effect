@@ -12,7 +12,7 @@ import drawing.animation.animationPack;
 import drawing.spriteSheet.spriteSheetInfo;
 import drawing.userInterface.tooltipString;
 import effects.effect;
-import effects.effectTypes.floatingString;
+import effects.interfaceEffects.floatingString;
 import interactions.event;
 import items.item;
 import items.weapon;

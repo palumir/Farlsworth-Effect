@@ -10,7 +10,7 @@ import drawing.animation.animationPack;
 import drawing.spriteSheet.spriteSheetInfo;
 import effects.effect;
 import effects.effectTypes.bloodSquirt;
-import effects.effectTypes.floatingString;
+import effects.interfaceEffects.floatingString;
 import items.weapons.torch;
 import modes.mode;
 import sounds.sound;

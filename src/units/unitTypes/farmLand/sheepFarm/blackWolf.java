@@ -38,7 +38,7 @@ public class blackWolf extends wolf {
 	////////////////
 	
 	// Default name.
-	private static String DEFAULT_UNIT_NAME = "blackWolf";
+	private static String DEFAULT_UNIT_NAME = "Black Wolf";
 	
 	// Health.
 	private int DEFAULT_HP = 6;
@@ -270,7 +270,7 @@ public class blackWolf extends wolf {
 	@Override
 	public void setAlphaAnimations() {
 		upDownSpriteSheet = new spriteSheet(new spriteSheetInfo(
-				"images/units/animals/" + DEFAULT_UNIT_NAME + "UpDownAlpha.png", 
+				"images/units/animals/blackWolfUpDownAlpha.png", 
 				32, 
 				64,
 				0,
@@ -278,7 +278,7 @@ public class blackWolf extends wolf {
 				));
 		
 		leftRightSpriteSheet = new spriteSheet(new spriteSheetInfo(
-				"images/units/animals/" + DEFAULT_UNIT_NAME + "LeftRightAlpha.png", 
+				"images/units/animals/blackWolfLeftRightAlpha.png", 
 				64, 
 				32,
 				0,

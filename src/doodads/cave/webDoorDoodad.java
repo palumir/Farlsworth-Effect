@@ -70,7 +70,7 @@ public class webDoorDoodad extends chunk {
 		s = s .addChild(null, "You'll need something else.");
 		s.setEnd();
 		
-		return new interactBox(startOfConversation, "Web Door");
+		return new interactBox(startOfConversation, this);
 	}
 	
 	// Interact with object. Should be over-ridden.

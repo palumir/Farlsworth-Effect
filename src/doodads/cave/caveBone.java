@@ -64,7 +64,7 @@ public class caveBone extends chunk {
 			startOfConversation = new textSeries(null, "Looks like these people couldn't find their way out.");
 			startOfConversation.setEnd();
 			
-			return new interactBox(startOfConversation, "Cave Bone");
+			return new interactBox(startOfConversation, this);
 		}
 		
 		// Interact with object. Should be over-ridden.

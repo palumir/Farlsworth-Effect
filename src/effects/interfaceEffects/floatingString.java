@@ -1,4 +1,4 @@
-package effects.effectTypes;
+package effects.interfaceEffects;
 
 import java.awt.AlphaComposite;
 import java.awt.Color;

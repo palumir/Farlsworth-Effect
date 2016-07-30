@@ -14,6 +14,7 @@ import drawing.animation.animationPack;
 import modes.mode;
 import sounds.sound;
 import terrain.chunk;
+import units.unit;
 import utilities.intTuple;
 import utilities.time;
 import utilities.utility;
@@ -35,9 +36,6 @@ public abstract class effect extends drawnObject  {
 	// The actual unit type.
 	private effectType typeOfEffect;
 	
-	// Movement
-	private boolean collisionOn = false;
-	
 	// Sprite stuff.
 	protected animationPack animations;
 	private animation currentAnimation = null;
@@ -53,7 +51,7 @@ public abstract class effect extends drawnObject  {
 
 	// Constructor
 	public effect(effectType e, int newX, int newY) {
-		super(e.getEffectTypeSpriteSheet(), newX, newY, e.getWidth(), e.getHeight());	
+		super(e.getEffectTypeSpriteSheet(), e.getName(), newX, newY, e.getWidth(), e.getHeight());	
 	
 		// Set timer.
 		timeStarted = time.getTime();
@@ -69,7 +67,7 @@ public abstract class effect extends drawnObject  {
 	
 	// Constructor
 	public effect(effectType e, int newX, int newY, boolean entireSpriteSheetIsAnimation) {
-		super(e.getEffectTypeSpriteSheet(), newX, newY, e.getWidth(), e.getHeight());	
+		super(e.getEffectTypeSpriteSheet(), e.getName(), newX, newY, e.getWidth(), e.getHeight());	
 	
 		// Set timer.
 		timeStarted = time.getTime();
@@ -95,7 +93,7 @@ public abstract class effect extends drawnObject  {
 							typeOfEffect.getEffectTypeSpriteSheet().getAnimation(i), 
 							0, 
 							typeOfEffect.getEffectTypeSpriteSheet().getSprites().get(i).size()-1, 
-							typeOfEffect.getAnimationDuration()); //TODO: plays over 1 second by defualt
+							typeOfEffect.getAnimationDuration()); 
 					newAnimationPack.addAnimation(newAnimation);
 				}
 			}
@@ -120,6 +118,8 @@ public abstract class effect extends drawnObject  {
 	// Update unit
 	@Override
 	public void update() {
+		
+		// Play animation.
 		if(getCurrentAnimation() != null) { 
 			getCurrentAnimation().playAnimation();
 			respondToFrame(getCurrentAnimation().getCurrentSprite());
@@ -171,10 +171,6 @@ public abstract class effect extends drawnObject  {
 	/////////////////////////
 	// Getters and setters //
 	/////////////////////////
-	
-	public void setCollision(boolean b) {
-		collisionOn = b;
-	}
 
 	public animationPack getAnimations() {
 		return animations;

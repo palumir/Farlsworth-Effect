@@ -83,7 +83,7 @@ public class water extends chunk {
 	}
 
 	// Create interact sequence
-	public static interactBox makeInteractSequence() {
+	public interactBox makeInteractSequence() {
 		
 		// Placeholder for each individual textSeries.
 		textSeries s;
@@ -105,7 +105,7 @@ public class water extends chunk {
 		s = saveGame.addChild("No", "The game was not saved.");
 		s.setEnd();
 
-		return new interactBox(startOfConversation, stringUtils.toTitleCase(DEFAULT_CHUNK_NAME));
+		return new interactBox(startOfConversation, this);
 	}
 	
 	// Interact stuff.

@@ -13,7 +13,8 @@ import drawing.userInterface.interfaceObject;
 import drawing.userInterface.tooltipString;
 import effects.effect;
 import effects.projectile;
-import effects.effectTypes.floatingString;
+import effects.interfaceEffects.floatingString;
+import effects.interfaceEffects.interactBlurb;
 import interactions.event;
 import items.item;
 import units.player;
@@ -164,6 +165,14 @@ public abstract class drawnObject {
 	// Draw sprite?
 	private boolean drawSprite = true;
 	
+	// Name of object
+	private String name;
+	
+	// Attached to a unit?
+	private drawnObject attachedObject;
+	private double relativeX;
+	private double relativeY;
+	
 	// Z axis for platformer.
 	private Integer z;
 	
@@ -185,6 +194,10 @@ public abstract class drawnObject {
 	
 	// Can we interact with the object?
 	private boolean interactable = false;
+	private boolean showInteractable = true;
+	
+	// Attached objects to unit
+	protected ArrayList<drawnObject> attachedObjects;
 	
 	// Developer stuff
 	protected boolean showHitBox = false;
@@ -202,6 +215,9 @@ public abstract class drawnObject {
 	
 	// Is the chunk important enough to reload?
 	protected boolean reloadObject = true;
+
+	// Is the object being interacted with?
+	private boolean beingInteracted;
 	
 	// Unimportant objects
 	public static ArrayList<drawnObject> dontReloadTheseObjects = new ArrayList<drawnObject>();
@@ -213,12 +229,13 @@ public abstract class drawnObject {
 	/// METHODS ///
 	///////////////
 	// drawnObject constructor
-	public drawnObject(spriteSheet newSpriteSheet, int newX, int newY, int newWidth, int newHeight) {
+	public drawnObject(spriteSheet newSpriteSheet, String newName, int newX, int newY, int newWidth, int newHeight) {
 		objectSpriteSheet = newSpriteSheet;
 		if(objectSpriteSheet!=null) {
 			setHitBoxAdjustmentX(objectSpriteSheet.getHitBoxAdjustmentX());
 			setHitBoxAdjustmentY(objectSpriteSheet.getHitBoxAdjustmentY());
 		}
+		setName(newName);
 		setDoubleX(newX);
 		setDoubleY(newY);
 		setWidth(newWidth);
@@ -475,6 +492,26 @@ public abstract class drawnObject {
 	///////////////////////////
 	/// Getters and Setters ///
 	///////////////////////////
+	
+	// Attach u to this.
+	public void attachToObject(drawnObject u) {
+		setAttachedObject(u);
+		u.setAttached(this);
+		setRelativeX(this.getDoubleX() - u.getDoubleX());
+		setRelativeY(this.getDoubleY() - u.getDoubleY());
+	}
+	
+	// Attach d to current unit
+	public void setAttached(drawnObject d) {
+		if(attachedObjects == null) attachedObjects = new ArrayList<drawnObject>();
+		if(!attachedObjects.contains(d)) attachedObjects.add(d);
+	}
+	
+	// Unnattach
+	public void unnattachFromObject(drawnObject d) {
+		if(attachedObjects != null && attachedObjects.contains(d)) attachedObjects.remove(d);
+	}
+	
 	public boolean canInteract() {
 		return isInteractable();
 	}
@@ -644,6 +681,63 @@ public abstract class drawnObject {
 		this.reloadObject = importantEnoughToReload;
 		if(importantEnoughToReload && dontReloadTheseObjects.contains(this)) dontReloadTheseObjects.remove(this);
 		if(!importantEnoughToReload && !dontReloadTheseObjects.contains(this)) dontReloadTheseObjects.add(this);
+	}
+
+	public double getRelativeX() {
+		return relativeX;
+	}
+
+	public void setRelativeX(double relativeX) {
+		this.relativeX = relativeX;
+	}
+
+	public double getRelativeY() {
+		return relativeY;
+	}
+
+	public void setRelativeY(double relativeY) {
+		this.relativeY = relativeY;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public interactBlurb getAttachedInteractBlurb() {
+		if(attachedObjects!=null) {
+			for(int i = 0; i < attachedObjects.size(); i++) {
+				if(attachedObjects.get(i) instanceof interactBlurb) return (interactBlurb)attachedObjects.get(i);
+			}
+		}
+		return null;
+	}
+
+	public boolean isBeingInteracted() {
+		return beingInteracted;
+	}
+
+	public void setBeingInteracted(boolean beingInteracted) {
+		this.beingInteracted = beingInteracted;
+	}
+
+	public boolean isShowInteractable() {
+		return showInteractable;
+	}
+
+	public void setShowInteractable(boolean showInteractable) {
+		this.showInteractable = showInteractable;
+	}
+
+	public drawnObject getAttachedObject() {
+		return attachedObject;
+	}
+
+	public void setAttachedObject(drawnObject attachedObject) {
+		this.attachedObject = attachedObject;
 	}
 	
 }

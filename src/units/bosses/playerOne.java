@@ -137,7 +137,7 @@ public class playerOne extends boss {
 		}
 			
 			
-		return new interactBox(startOfConversation, stringUtils.toTitleCase(DEFAULT_UNIT_NAME), true);
+		return new interactBox(startOfConversation, this, true);
 	}
 	
 	// Booleans

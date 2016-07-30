@@ -171,7 +171,10 @@ public class sheepFarm extends zone {
 		for(int i = 0; i < numX; i++) {
 			for(int j = 0; j < numY; j++) {
 				c = water.createChunk(i*water.DEFAULT_CHUNK_WIDTH + x1, j*water.DEFAULT_CHUNK_HEIGHT + y1);
-				if(c!=null) c.setPassable(true);
+				if(c!=null) {
+					c.setInteractable(false);
+					c.setPassable(true);
+				}
 			}
 		}
 	}

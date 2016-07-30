@@ -8,6 +8,7 @@ import drawing.spriteSheet;
 import drawing.animation.animation;
 import drawing.animation.animationPack;
 import effects.effectTypes.lightningStrike;
+import effects.interfaceEffects.textBlurb;
 import effects.projectiles.poisonBall;
 import effects.projectiles.spinningFireLog;
 import drawing.spriteSheet.spriteSheetInfo;
@@ -415,7 +416,7 @@ public class farlsworth extends boss {
 			}
 		}
 		
-		return new interactBox(startOfConversation, stringUtils.toTitleCase(DEFAULT_UNIT_NAME), true);
+		return new interactBox(startOfConversation, this, true);
 	}
 	
 	// Booleans
@@ -734,12 +735,38 @@ public class farlsworth extends boss {
 					setDoubleX(-10000);
 					setDoubleY(-10000);
 					ben = new sheep(-10000,-10000);
+					ben.setShowInteractable(false);
 					ben.setMeanders(false);
 					ben.setDoubleX(2227);
 					ben.setDoubleY(-3818);
 					ben.setFacingDirection("Left");
 					ben.setBenAnimations();
 					sequencePart++;
+				}
+				
+				// Toggle between Farnsgurns and Ben talking
+				if(sequencePart>=1 && interactSequence!=null  && 
+						((interactSequence.getTheText().getTalker() != null && interactSequence.getTheText().getTalker().equals("Ben")) || sequencePart < 5)) {
+					
+					// If we aren't attached to Ben, attach to him!
+					if(interactSequence.isButtonMode() == false && (interactSequence.getBlurb()==null || interactSequence.getBlurb().getAttachedObject() != ben)) {
+
+						// Create a blurb effect on who is talking
+						if(interactSequence.getBlurb()!=null) interactSequence.getBlurb().end();
+						interactSequence.setBlurb(new textBlurb(ben.getIntX()-textBlurb.getDefaultWidth(),ben.getIntY()-ben.getHitBoxAdjustmentY()-textBlurb.getDefaultWidth()));
+						interactSequence.getBlurb().attachToObject(ben);
+					}
+				}
+				else if(sequencePart>=1 && interactSequence!=null) {
+					
+					// If we aren't attached to BarleyGurns, attach to him!
+					if(interactSequence.isButtonMode() == false && interactSequence.getBlurb()==null || interactSequence.getBlurb().getAttachedObject() != this) {
+
+						// Create a blurb effect on who is talking
+						if(interactSequence.getBlurb()!=null) interactSequence.getBlurb().end();
+						interactSequence.setBlurb(new textBlurb(this.getIntX()-textBlurb.getDefaultWidth(),this.getIntY()-this.getHitBoxAdjustmentY()-textBlurb.getDefaultWidth()));
+						interactSequence.getBlurb().attachToObject(this);
+					}
 				}
 				
 				// Talk to player if he/she walks to Farlsworth at flower patch.
