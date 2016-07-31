@@ -1,8 +1,5 @@
 package effects.buffs;
 
-import drawing.spriteSheet;
-import drawing.spriteSheet.spriteSheetInfo;
-import effects.buff;
 import effects.effectType;
 import terrain.atmosphericEffects.fog;
 import units.unit;

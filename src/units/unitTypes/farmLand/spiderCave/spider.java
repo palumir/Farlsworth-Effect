@@ -1,23 +1,16 @@
 package units.unitTypes.farmLand.spiderCave;
 
-import java.util.Random;
-
-import drawing.camera;
 import drawing.spriteSheet;
+import drawing.spriteSheet.spriteSheetInfo;
 import drawing.animation.animation;
 import drawing.animation.animationPack;
-import drawing.spriteSheet.spriteSheetInfo;
-import effects.effect;
-import effects.effectTypes.bloodSquirt;
 import modes.mode;
 import sounds.sound;
-import units.humanType;
 import units.player;
 import units.unit;
 import units.unitType;
 import utilities.time;
 import utilities.utility;
-import zones.zone;
 
 public class spider extends unit {
 	

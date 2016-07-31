@@ -1,12 +1,10 @@
 package units.unitTypes.farmLand.tomb;
 
 import java.awt.AlphaComposite;
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import java.util.Random;
 
 import drawing.gameCanvas;
 import drawing.animation.animation;
@@ -17,10 +15,7 @@ import units.player;
 import units.unit;
 import units.unitType;
 import utilities.intTuple;
-import utilities.stringUtils;
 import utilities.time;
-import utilities.utility;
-import zones.zone;
 
 public class shadowDude extends unit {
 	

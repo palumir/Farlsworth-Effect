@@ -1,37 +1,29 @@
 package units.unitTypes.farmLand.sheepFarm;
 
-import java.util.Random;
-
-import drawing.camera;
 import drawing.spriteSheet;
+import drawing.spriteSheet.spriteSheetInfo;
 import drawing.animation.animation;
 import drawing.animation.animationPack;
-import drawing.spriteSheet.spriteSheetInfo;
-import effects.effect;
-import effects.effectTypes.bloodSquirt;
 import interactions.event;
 import interactions.interactBox;
 import interactions.textSeries;
 import modes.mode;
 import sounds.sound;
-import units.humanType;
 import units.unit;
 import units.unitType;
-import utilities.stringUtils;
 import utilities.time;
 import utilities.utility;
-import zones.zone;
 
 public class sheep extends unit {
 	
 	// Platformer real dimensions
 	public static int DEFAULT_PLATFORMER_HEIGHT = 18;
-	public static int DEFAULT_PLATFORMER_WIDTH = 24;
+	public static int DEFAULT_PLATFORMER_WIDTH = 18;
 	public static int DEFAULT_PLATFORMER_ADJUSTMENT_Y = 0;
 	
 	// TopDown real dimensions
-	public static int DEFAULT_TOPDOWN_HEIGHT = 22;
-	public static int DEFAULT_TOPDOWN_WIDTH = 24;
+	public static int DEFAULT_TOPDOWN_HEIGHT = 18;
+	public static int DEFAULT_TOPDOWN_WIDTH = 18;
 	public static int DEFAULT_TOPDOWN_ADJUSTMENT_Y = 4;
 	
 	// How far do the sheep patrol
@@ -87,7 +79,7 @@ public class sheep extends unit {
 	private int hitTimes = 0;
 	
 	// Has the sheep been hit 10 times joke been done?
-	private static event sheepHitABunchJoke;
+	static event sheepHitABunchJoke;
 	
 	// AI movement.
 	private long AILastCheck = 0l; // milliseconds

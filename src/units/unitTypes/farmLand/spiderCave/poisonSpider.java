@@ -1,11 +1,11 @@
 package units.unitTypes.farmLand.spiderCave;
 
 import drawing.spriteSheet;
+import drawing.spriteSheet.spriteSheetInfo;
 import drawing.animation.animation;
 import drawing.animation.animationPack;
 import drawing.userInterface.tooltipString;
 import effects.projectiles.poisonBall;
-import drawing.spriteSheet.spriteSheetInfo;
 import interactions.event;
 import modes.mode;
 import sounds.sound;

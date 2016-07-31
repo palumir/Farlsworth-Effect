@@ -1,17 +1,15 @@
 package items.weapons;
 
-import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
 import drawing.spriteSheet;
+import drawing.spriteSheet.spriteSheetInfo;
 import drawing.animation.animation;
 import drawing.animation.animationPack;
-import drawing.spriteSheet.spriteSheetInfo;
 import drawing.userInterface.tooltipString;
 import items.item;
 import items.weapon;
 import units.player;
-import utilities.saveState;
 import zones.farmLand.sheepFarm;
 
 public class sword extends weapon {

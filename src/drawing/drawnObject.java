@@ -8,23 +8,18 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import doodads.general.questMark;
 import drawing.userInterface.interfaceObject;
 import drawing.userInterface.tooltipString;
 import effects.effect;
 import effects.projectile;
 import effects.interfaceEffects.floatingString;
 import effects.interfaceEffects.interactBlurb;
-import interactions.event;
 import items.item;
-import units.player;
-import units.unit;
 import modes.mode;
 import terrain.chunk;
 import terrain.groundTile;
-import utilities.intTuple;
+import units.unit;
 import utilities.mathUtils;
-import zones.zone;
 
 // A class for any object that is drawn in the
 // canvas.
@@ -38,14 +33,18 @@ public abstract class drawnObject {
 	public static boolean reloadTheFollowingObjects = true;
 
 	// Font
-	public static String DEFAULT_FONT_NAME = "TimesRoman";
-	public static int DEFAULT_FONT_SIZE = 12;
+	public static String DEFAULT_FONT_NAME = "SansSerif";
+	public static int DEFAULT_FONT_SIZE = 11;
 	protected static Font DEFAULT_FONT = null;
+	protected static Font DEFAULT_FONT_BOLD = null;
 	
 	// Comparator for platformer.
 	private static Comparator<drawnObject> platformerComparator =  new Comparator<drawnObject>() {
 		@Override
 	    public int compare(drawnObject d1, drawnObject d2) {
+			
+			if(d1.attachedToObject != null) d1 = d1.attachedToObject;
+			if(d2.attachedToObject != null) d2 = d2.attachedToObject;
 	    	
 	    	// Draw floating numbers over ...
 	    	if(d1 instanceof floatingString && !(d2 instanceof floatingString)) return 10;
@@ -100,6 +99,9 @@ public abstract class drawnObject {
 		
 	    @Override
 	    public int compare(drawnObject d1, drawnObject d2) {
+	    	
+			if(d1.attachedToObject != null) d1 = d1.attachedToObject;
+			if(d2.attachedToObject != null) d2 = d2.attachedToObject;
 	    	
 	    	// Draw floating numbers over ...
 	    	if(d1 instanceof floatingString && !(d2 instanceof floatingString)) return 10;
@@ -169,7 +171,7 @@ public abstract class drawnObject {
 	private String name;
 	
 	// Attached to a unit?
-	private drawnObject attachedObject;
+	private drawnObject attachedToObject;
 	private double relativeX;
 	private double relativeY;
 	
@@ -370,6 +372,7 @@ public abstract class drawnObject {
 		// Set default font.
 		if(DEFAULT_FONT == null) {
 			DEFAULT_FONT = new Font(DEFAULT_FONT_NAME, Font.PLAIN, DEFAULT_FONT_SIZE); 
+			DEFAULT_FONT_BOLD = new Font(DEFAULT_FONT_NAME, Font.BOLD, DEFAULT_FONT_SIZE); 
 		}
 		g.setFont(DEFAULT_FONT);
 
@@ -458,6 +461,11 @@ public abstract class drawnObject {
 	public void destroy() {
 		setExists(false);
 		drawnObject.removeObject(this);
+		
+		// If it's attached, remove it
+		if(attachedToObject!=null) {
+			attachedToObject.unnattachFromObject(this);
+		}
 		
 		// If it's a unit, remove it from list.
 		if(this instanceof unit) {
@@ -733,11 +741,11 @@ public abstract class drawnObject {
 	}
 
 	public drawnObject getAttachedObject() {
-		return attachedObject;
+		return attachedToObject;
 	}
 
 	public void setAttachedObject(drawnObject attachedObject) {
-		this.attachedObject = attachedObject;
+		this.attachedToObject = attachedObject;
 	}
 	
 }

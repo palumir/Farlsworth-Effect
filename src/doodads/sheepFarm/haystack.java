@@ -1,21 +1,11 @@
 package doodads.sheepFarm;
 
-import java.util.Random;
-
-import drawing.camera;
 import interactions.event;
 import interactions.interactBox;
 import interactions.textSeries;
 import modes.mode;
 import terrain.chunk;
-import terrain.chunkType;
 import terrain.generalChunkType;
-import units.humanType;
-import units.unit;
-import units.unitType;
-import utilities.stringUtils;
-import utilities.time;
-import zones.zone;
 
 public class haystack extends chunk {
 	
@@ -104,16 +94,21 @@ public class haystack extends chunk {
 		}
 		else if(timesSearched == 1) {
 			s = startOfConversation.addChild("Search", "You search the haystack ...");
-			s = s.addChild(null, "You find another needle. Wait ... is this the same one?");
+			s = s.addChild(null, "You find another needle.");
 		}
 		else if(timesSearched == 2) {
 			s = startOfConversation.addChild("Search", "You search the haystack ...");
-			s = s.addChild(null, "You find two needles. Wow, what are the chances?");
+			s = s.addChild(null, "You find two needles.");
 		}
 		else if(timesSearched == 3) {
 			s = startOfConversation.addChild("Search", "You shove your fist into the haystack ...");
 			s = s.addChild(null, "You pull out a handful of needles.");
-			s = s.addChild(null, "This can't possibly be good for the sheep.");
+			s = s.addChild(null, "A needle pricks you in the hand.");
+			s = s.addChild(null, "It draws blood.");
+			s = s.addChild(null, "You have hemophilia. ");
+			s = s.addChild(null, "You feel light headed and your legs begin to tremble.");
+			s = s.addChild(null, "Just kidding, you're fine.");
+			s = s.addChild(null, "It's just a game.");
 		}
 		else if(timesSearched == 4) {
 			s = startOfConversation.addChild("Search", "You search the haystack ...");

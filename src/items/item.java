@@ -3,11 +3,7 @@ package items;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 import drawing.drawnObject;
 import drawing.gameCanvas;
@@ -23,8 +19,6 @@ import sounds.sound;
 import units.player;
 import utilities.saveBooleanList;
 import utilities.stringUtils;
-import zones.farmLand.sheepFarm;
-import zones.farmLand.spiderCave;
 
 public abstract class item extends drawnObject {
 	////////////////

@@ -2,22 +2,14 @@ package terrain.atmosphericEffects;
 
 import java.awt.AlphaComposite;
 import java.awt.Color;
-import java.awt.Composite;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import java.util.Random;
 
 import doodads.general.lightSource;
 import drawing.drawnObject;
 import drawing.gameCanvas;
-import drawing.spriteSheet;
-import drawing.userInterface.interfaceObject;
-import effects.effectTypes.darkHole;
-import terrain.atmosphericEffects.atmosphericEffect;
-import utilities.imageUtils;
 import utilities.time;
 
 public class fog extends atmosphericEffect {

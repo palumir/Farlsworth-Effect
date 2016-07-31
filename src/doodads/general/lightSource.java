@@ -1,18 +1,9 @@
 package doodads.general;
 
 import java.util.ArrayList;
-import java.util.Random;
 
-import drawing.camera;
-import modes.mode;
 import terrain.chunk;
-import terrain.chunkType;
 import terrain.generalChunkType;
-import units.humanType;
-import units.unit;
-import units.unitType;
-import utilities.time;
-import zones.zone;
 
 public class lightSource extends chunk {
 	

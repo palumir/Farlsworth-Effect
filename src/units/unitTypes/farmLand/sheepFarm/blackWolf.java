@@ -1,35 +1,13 @@
 package units.unitTypes.farmLand.sheepFarm;
 
-import java.awt.AlphaComposite;
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-import java.util.Random;
-
 import doodads.sheepFarm.clawMarkBlack;
-import doodads.sheepFarm.clawMarkRed;
-import drawing.camera;
-import drawing.drawnObject;
-import drawing.gameCanvas;
 import drawing.spriteSheet;
-import drawing.animation.animation;
 import drawing.spriteSheet.spriteSheetInfo;
-import effects.effect;
-import effects.effectTypes.bloodSquirt;
 import effects.effectTypes.darkHole;
-import effects.effectTypes.poisonExplode;
 import modes.mode;
-import sounds.sound;
-import units.humanType;
 import units.player;
-import units.unit;
 import units.unitType;
-import utilities.intTuple;
-import utilities.time;
 import utilities.utility;
-import zones.zone;
 
 public class blackWolf extends wolf {
 	

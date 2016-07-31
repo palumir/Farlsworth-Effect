@@ -1,42 +1,18 @@
 package zones.farmLand;
 import java.util.ArrayList;
 
-import doodads.cave.firePit;
-import doodads.cave.skullSign;
-import doodads.general.invisibleDoodad;
-import doodads.sheepFarm.barn;
-import doodads.sheepFarm.blackSmith;
 import doodads.sheepFarm.bone;
-import doodads.sheepFarm.bridge;
-import doodads.sheepFarm.bridgePole;
-import doodads.sheepFarm.bush;
-import doodads.sheepFarm.caveEnterance;
-import doodads.sheepFarm.farmHouse;
 import doodads.sheepFarm.fenceBars;
-import doodads.sheepFarm.fenceBarsSmall;
 import doodads.sheepFarm.fencePost;
 import doodads.sheepFarm.flower;
-import doodads.sheepFarm.grave;
-import doodads.sheepFarm.haystack;
 import doodads.sheepFarm.horizontalGate;
-import doodads.sheepFarm.rock;
-import doodads.sheepFarm.statue;
-import doodads.sheepFarm.tomb;
 import doodads.sheepFarm.tree;
 import doodads.sheepFarm.verticalFence;
-import doodads.sheepFarm.well;
-import doodads.sheepFarm.woolPiece;
 import drawing.background;
 import drawing.drawnObject;
-import drawing.userInterface.tooltipString;
 import effects.effectTypes.fire;
-import effects.effectTypes.lightningAboutToStrike;
 import effects.effectTypes.lightningStrike;
 import interactions.event;
-import items.bottle;
-import items.item;
-import items.bottles.normalBottle;
-import items.weapons.dagger;
 import modes.topDown;
 import sounds.music;
 import sounds.sound;
@@ -46,20 +22,10 @@ import terrain.atmosphericEffects.storm;
 import terrain.chunkTypes.cave;
 import terrain.chunkTypes.grass;
 import terrain.chunkTypes.water;
-import terrain.chunkTypes.wood;
 import units.player;
 import units.unit;
-import units.bosses.denmother;
 import units.bosses.farlsworth;
-import units.unitTypes.farmLand.sheepFarm.farmer;
-import units.unitTypes.farmLand.sheepFarm.redWolf;
-import units.unitTypes.farmLand.sheepFarm.sheep;
-import units.unitTypes.farmLand.sheepFarm.blackWolf;
-import units.unitTypes.farmLand.sheepFarm.yellowWolf;
-import units.unitTypes.farmLand.spiderCave.poisonSpider;
-import units.unitTypes.farmLand.spiderCave.spider;
 import utilities.intTuple;
-import utilities.saveState;
 import utilities.time;
 import utilities.utility;
 import zones.zone;
@@ -249,23 +215,23 @@ public class forest extends zone {
 		loadZoneEvents();
 		
 		// Storming?
-		if(stormInProgress.isCompleted()) {
+		/*if(stormInProgress.isCompleted()) {
 			zoneFog = new fog();
 			zoneFog.setTo(stormFogLevel);
 			storm s = new storm();
-		}
+		}*/
 		
 		// Load units
 		loadUnits();
 		
 		// Create terrain
-		createTerrain();
+		//createTerrain();
 		
 		// Create final area
-		createFinalArea();
+		//createFinalArea();
 		
 		// Denmother area
-		createDenmotherArea();
+		//createDenmotherArea();
 		
 		// Play fire sound
 		if(isOnFire != null && isOnFire.isCompleted()) {
@@ -277,7 +243,7 @@ public class forest extends zone {
 		chunk.sortChunks();
 		
 		// Play zone music.
-		 music.startMusic(zoneMusic); 
+		// music.startMusic(zoneMusic); 
 		
 	}
 	

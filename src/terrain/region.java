@@ -1,6 +1,5 @@
 package terrain;
 
-import java.awt.Color;
 import java.awt.Graphics;
 
 import drawing.drawnObject;

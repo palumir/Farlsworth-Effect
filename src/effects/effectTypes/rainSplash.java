@@ -1,20 +1,10 @@
 package effects.effectTypes;
 
-import java.util.Random;
-
-import drawing.camera;
 import drawing.spriteSheet;
 import drawing.spriteSheet.spriteSheetInfo;
 import effects.effect;
 import effects.effectType;
 import modes.mode;
-import sounds.sound;
-import units.humanType;
-import units.unit;
-import units.unitType;
-import utilities.time;
-import utilities.utility;
-import zones.zone;
 
 public class rainSplash extends effect {
 	

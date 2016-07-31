@@ -1,18 +1,13 @@
 package units;
 
-import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.util.ArrayList;
 
 import doodads.general.lightSource;
 import doodads.general.questMark;
-import doodads.sheepFarm.clawMarkYellow;
-import drawing.camera;
 import drawing.drawnObject;
 import drawing.gameCanvas;
-import drawing.spriteSheet;
 import drawing.animation.animation;
 import drawing.animation.animationPack;
 import drawing.userInterface.playerHealthBar;
@@ -26,12 +21,12 @@ import modes.mode;
 import sounds.sound;
 import terrain.chunk;
 import terrain.region;
-import units.bosses.denmother;
-import units.bosses.farlsworth;
-import units.unitTypes.farmLand.sheepFarm.yellowWolf;
+import units.unitCommands.commandList;
+import units.unitCommands.moveCommand;
+import units.unitCommands.slashCommand;
+import units.unitCommands.waitCommand;
 import utilities.intTuple;
 import utilities.mathUtils;
-import utilities.stringUtils;
 import utilities.time;
 import utilities.utility;
 
@@ -56,10 +51,7 @@ public abstract class unit extends drawnObject  {
 	protected static float DEFAULT_JUMPSPEED = 11f;
 	
 	// Animation defaults.
-	private String DEFAULT_FACING_DIRECTION = "Right";
-	
-	// List of units we are in combat with
-	private ArrayList<unit> inCombatWith = new ArrayList<unit>();
+	private static String DEFAULT_FACING_DIRECTION = "Right";
 	
 	// Unit defaults.
 	protected static int DEFAULT_ATTACK_DAMAGE = 1;
@@ -68,7 +60,7 @@ public abstract class unit extends drawnObject  {
 	protected static int DEFAULT_ATTACK_LENGTH = 11;
 	protected static float DEFAULT_BACKSWING = 0.1f;
 	protected static float DEFAULT_CRIT_CHANCE = 0f;
-	protected float DEFAULT_CRIT_DAMAGE = 4f;
+	protected static float DEFAULT_CRIT_DAMAGE = 4f;
 	protected static float DEFAULT_ATTACK_VARIABILITY = 0f; // How much the range of hits is. 5% both ways.
 	
 	// Combat defaults.
@@ -76,13 +68,13 @@ public abstract class unit extends drawnObject  {
 	protected boolean showAttackRange = false;
 	
 	// Default healthbarsize
-	protected int DEFAULT_HEALTHBAR_HEIGHT = 6;
-	protected int DEFAULT_HEALTHBAR_WIDTH = 40;
+	protected static int DEFAULT_HEALTHBAR_HEIGHT = 6;
+	protected static int DEFAULT_HEALTHBAR_WIDTH = 40;
 	
 	// Colors for combat.
-	protected Color DEFAULT_DAMAGE_COLOR = Color.white;
-	protected Color DEFAULT_CRIT_COLOR = Color.yellow;
-	protected Color DEFAULT_HEAL_COLOR = Color.green;
+	protected static Color DEFAULT_DAMAGE_COLOR = Color.white;
+	protected static Color DEFAULT_CRIT_COLOR = Color.yellow;
+	protected static Color DEFAULT_HEAL_COLOR = Color.green;
 	
 	// Sounds
 	protected static int DEFAULT_ATTACK_SOUND_RADIUS = 1000;
@@ -251,9 +243,9 @@ public abstract class unit extends drawnObject  {
 	
 	// Update unit
 	@Override
-	public void update() {
-		
+	public void update() {	
 		if(!unitIsDead) {
+			doCommands();
 			gravity();
 			jump();
 			moveUnit();
@@ -276,12 +268,6 @@ public abstract class unit extends drawnObject  {
 		return false;
 	}
 	
-	// Move in place.
-	public void moveInPlace() {
-		oldMoveSpeed = moveSpeed;
-		moveSpeed = 0.001f;
-	}
-	
 	// Face toward player
 	public void faceTowardPlayer() {
 		int angle = this.getAngleBetween(player.getPlayer());
@@ -297,6 +283,122 @@ public abstract class unit extends drawnObject  {
 		else {
 			this.facingDirection = "Up";
 		}
+	}
+	
+	//////////////////////////
+	//// ISSUING COMMANDS ////
+	//////////////////////////
+	
+	// Wait command
+	private float waitFor = 0;
+	private long waitStart = 0;
+	
+	// Store the commands we need to issue.
+	private commandList allCommands; // Current commands we will issue. This list gets slowly reduced as commands get issued.
+	private commandList repeatCommands; // List of commands we will repeat. List is never reduced, since it needs to repeat.
+	
+	// Repeat commands
+	public void repeatCommands(commandList c) {
+		repeatCommands = c;
+	}
+
+	// Do commands
+	public void doCommands() {
+		
+		// If we have commands in our allCommands queue left to issue.
+		if(allCommands != null && allCommands.size() > 0) {
+			
+			// Get the current command because we have to do shit with it.
+			unitCommand currentCommand = allCommands.get(0);
+			
+			// Deal with each command type.
+			// AKA, don't move to the next command on a move command
+			// if we are still moving, etc.
+			if(currentCommand instanceof moveCommand) {
+				
+				// Only move to the next command when applicable.
+				if(currentCommand.isIssued()) {
+					
+					// If we have stopped moving. This command is done.
+					if(!isMoving()) {
+						allCommands.remove(0);
+					}
+				}
+				
+				// Issue the command if it hasn't yet been issued.
+				else {
+					currentCommand.setIssued(true);
+					moveCommand moveCommand = (moveCommand) currentCommand;
+					moveTo((int)moveCommand.getX(), (int)moveCommand.getY());
+				}
+				
+			}
+			
+			else if(currentCommand instanceof waitCommand) {
+				
+				// Only move to the next command when applicable.
+				if(currentCommand.isIssued()) {
+					
+					// Time has elapsed. This command is done.
+					if(time.getTime() - waitStart > waitFor*1000) { 
+						allCommands.remove(0);
+					}
+				}
+				
+				// Issue the command if it hasn't yet been issued.
+				else {
+					currentCommand.setIssued(true);
+					waitCommand waitCommand = (waitCommand) currentCommand;
+					waitFor = waitCommand.getHowLong();
+					waitStart = time.getTime();
+				}
+				
+			}
+			
+			else if(currentCommand instanceof slashCommand) {
+				
+				// Only move to the next command when applicable.
+				if(currentCommand.isIssued()) {
+					
+					// Slash is over. This command is done.
+					if(false) { // TODO: slashing
+						allCommands.remove(0);
+					}
+				}
+				
+				// Issue the command if it hasn't yet been issued.
+				else {
+					currentCommand.setIssued(true);
+					slashCommand slashCommand = (slashCommand)currentCommand;
+					slashTo((int)slashCommand.getX(), (int)slashCommand.getY());
+				}
+
+			}
+			
+			else {
+				// Unknown command issued.
+			}
+		}
+		
+		// Otherwise, the allCommands queue is empty.
+		else {
+			
+			// If we have repeat commands, repeat them.
+			if(repeatCommands!=null && repeatCommands.size() > 0) {
+				allCommands = new commandList(repeatCommands);
+			}
+			
+			// Otherwise, do nothing.
+			else {
+				
+			}
+			
+		}
+	}
+	
+	// Regular units do not slash.
+	public void slashTo(int x, int y) {
+		
 	}
 	
 	// Move in place.
@@ -374,44 +476,6 @@ public abstract class unit extends drawnObject  {
 		for(int i = 0; i < allUnits.size(); i++) {
 			allUnits.get(0).destroy();
 			allUnits.remove(0);
-		}
-	}
-	
-	// Respond to destroy
-	@Override
-	public void respondToDestroy() {
-		for(; 0 < getInCombatWith().size();) {
-			exitCombatWith(getInCombatWith().get(0));
-		}
-	}
-	
-	// Enter combat with this unit
-	public void enterCombatWith(unit u) {
-		if(!getInCombatWith().contains(u)) {
-			getInCombatWith().add(u);
-		}
-		if(!u.getInCombatWith().contains(this)) {
-			u.getInCombatWith().add(this);
-		}
-	}
-	
-	// Exit combat
-	public void exitCombatWith(unit u) {
-		if(u.getInCombatWith().contains(this)){
-			for(int i = 0; i < u.getInCombatWith().size(); i++) {
-				if(u.getInCombatWith().get(i).equals(this)) {
-					u.getInCombatWith().remove(i);
-					break;
-				}
-			}
-		}
-		if(getInCombatWith().contains(u)) {
-			for(int i = 0; i < getInCombatWith().size(); i++) {
-				if(getInCombatWith().get(i).equals(u)) {
-					getInCombatWith().remove(i);
-					break;
-				}
-			}
 		}
 	}
 	
@@ -805,6 +869,7 @@ public abstract class unit extends drawnObject  {
 			if(healthPoints > 0) {
 				effect blood = new bloodSquirt(getIntX() - bloodSquirt.getDefaultWidth()/2 + topDownWidth/2 + randomX ,
 						getIntY() - bloodSquirt.getDefaultHeight()/2 + platformerHeight/2 + randomY);
+				blood.attachToObject(this);
 			}
 			reactToPain();
 		}
@@ -1519,11 +1584,14 @@ public abstract class unit extends drawnObject  {
 		int spawnX = (getIntX() + getWidth()/2) - questMark.DEFAULT_CHUNK_WIDTH/2;
 		int spawnY = (int)(getIntY() - 2.5f*questMark.DEFAULT_CHUNK_HEIGHT);
 		questIcon = new questMark(spawnX, spawnY, 0);
+		questIcon.attachToObject(this);
 	}
 	
 	// Set a unit to have a quest.
 	public void noQuest() {
-		if(questIcon != null) questIcon.destroy();
+		if(questIcon != null) {
+			questIcon.destroy();
+		}
 	}
 	
 	/////////////////////////
@@ -1807,14 +1875,6 @@ public abstract class unit extends drawnObject  {
 
 	public void setAttackSound(String attackSound) {
 		this.attackSound = attackSound;
-	}
-
-	public ArrayList<unit> getInCombatWith() {
-		return inCombatWith;
-	}
-
-	public void setInCombatWith(ArrayList<unit> inCombatWith) {
-		this.inCombatWith = inCombatWith;
 	}
 
 	public boolean isMovingLeft() {

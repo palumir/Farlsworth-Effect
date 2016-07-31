@@ -2,11 +2,9 @@ package drawing.userInterface;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.image.BufferedImage;
 
 import drawing.drawnObject;
 import drawing.gameCanvas;
-import drawing.spriteSheet;
 import interactions.quest;
 import items.bottle;
 import units.player;

@@ -1,26 +1,18 @@
 package units.unitTypes.farmLand.sheepFarm;
 
 import java.awt.AlphaComposite;
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import java.util.Random;
 
 import doodads.sheepFarm.clawMarkRed;
 import doodads.sheepFarm.clawMarkYellow;
-import drawing.camera;
 import drawing.drawnObject;
 import drawing.gameCanvas;
 import drawing.spriteSheet;
-import drawing.animation.animation;
 import drawing.spriteSheet.spriteSheetInfo;
-import effects.effect;
-import effects.effectTypes.bloodSquirt;
-import modes.mode;
-import sounds.sound;
-import units.humanType;
+import drawing.animation.animation;
 import units.player;
 import units.unit;
 import units.unitType;
@@ -28,7 +20,6 @@ import utilities.intTuple;
 import utilities.mathUtils;
 import utilities.time;
 import utilities.utility;
-import zones.zone;
 
 public class redWolf extends wolf {
 	
@@ -294,6 +285,24 @@ public class redWolf extends wolf {
 					if(!alreadyHurt) {
 						alreadyHurt = true;
 						chargeUnits.get(i).hurt(DEFAULT_SLASH_DAMAGE, 1f);
+					}
+					chargeUnits.get(i).move(run,rise);
+					chargeUnits.get(i).setUnitLocked(false);
+				}
+			}
+			chargeUnits = new ArrayList<unit>();
+		}
+		alreadyHurt = false;
+	}
+	
+	@Override
+	public void respondToDestroy() {
+		if(chargeUnits != null && chargeUnits.size() >= 1) {
+			for(int i = 0; i < chargeUnits.size(); i++) {
+				if(chargeUnits.get(i) instanceof player) {
+					chargeUnits.get(i).stopMove("all");
+					if(!alreadyHurt) {
+						alreadyHurt = true;
 					}
 					chargeUnits.get(i).move(run,rise);
 					chargeUnits.get(i).setUnitLocked(false);

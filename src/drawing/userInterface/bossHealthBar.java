@@ -5,12 +5,9 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
-import drawing.drawnObject;
 import drawing.gameCanvas;
 import drawing.spriteSheet;
-import items.bottle;
 import units.boss;
-import units.player;
 
 public class bossHealthBar extends interfaceObject  {
 	

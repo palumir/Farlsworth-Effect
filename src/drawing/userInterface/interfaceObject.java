@@ -4,7 +4,6 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 import drawing.drawnObject;
-import utilities.time;
 
 public abstract class interfaceObject extends drawnObject  {
 	

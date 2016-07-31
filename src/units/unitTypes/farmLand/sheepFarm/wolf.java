@@ -1,41 +1,19 @@
 package units.unitTypes.farmLand.sheepFarm;
 
-import java.awt.AlphaComposite;
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import java.util.Random;
 
-import doodads.sheepFarm.clawMarkYellow;
-import doodads.sheepFarm.clawMarkRed;
-import doodads.sheepFarm.rock;
-import drawing.camera;
-import drawing.drawnObject;
-import drawing.gameCanvas;
 import drawing.spriteSheet;
+import drawing.spriteSheet.spriteSheetInfo;
 import drawing.animation.animation;
 import drawing.animation.animationPack;
-import drawing.spriteSheet.spriteSheetInfo;
-import effects.effect;
-import effects.effectTypes.bloodSquirt;
-import effects.effectTypes.darkHole;
-import effects.effectTypes.poisonExplode;
-import effects.effectTypes.explodingRock;
 import modes.mode;
 import sounds.sound;
 import terrain.chunk;
-import units.humanType;
 import units.player;
 import units.unit;
 import units.unitType;
-import utilities.intTuple;
-import utilities.mathUtils;
-import utilities.pathFindingNode;
 import utilities.time;
 import utilities.utility;
-import zones.zone;
 
 public abstract class wolf extends unit {
 		
@@ -435,28 +413,6 @@ public abstract class wolf extends unit {
 			}
 		}
 		
-		// Yeah
-		public void changeCombatBasedOnHowManyUnitsAreFightingThePlayerIronicallyNamedFunctionMetaJokeNobodyWillSee() {
-			// Current player
-			player currPlayer = player.getPlayer();
-			numWolves = 0;
-			numRedWolves = 0;
-			numBlackWolves = 0;
-			numYellowWolves = 0;
-			for(int i = 0; i < currPlayer.getInCombatWith().size(); i++) {
-				assignRandomAlpha(currPlayer.getInCombatWith());
-				unit u = currPlayer.getInCombatWith().get(i);
-				String unitName = u.getTypeOfUnit().getName();
-				if(unitName.contains("Wolf")) numWolves++;
-				if(unitName.equals("redWolf")) numRedWolves++;
-				if(unitName.equals("blackWolf")) numBlackWolves++;
-				if(unitName.equals("yellowWolf")) numYellowWolves++;
-			}
-			
-			// Change the combat
-			changeCombat();
-		}
-		
 		// Change combat based on whose alpha
 		public abstract void changeCombat();
 		
@@ -502,9 +458,6 @@ public abstract class wolf extends unit {
 			int playerY = currPlayer.getIntY() + currPlayer.getHeight()/2;
 			float howClose = (float) Math.sqrt((playerX - getIntX() - getWidth()/2)*(playerX - getIntX() - getWidth()/2) + (playerY - getIntY() - getHeight()/2)*(playerY - getIntY() - getHeight()/2));
 			
-			// Change combat based on how many units are fighting the player.
-			changeCombatBasedOnHowManyUnitsAreFightingThePlayerIronicallyNamedFunctionMetaJokeNobodyWillSee();
-			
 			// Make sounds.
 			makeSounds();
 			
@@ -512,42 +465,12 @@ public abstract class wolf extends unit {
 			dealWithClawAttacks();
 			dealWithJumping();
 			
-			// Attack if we're in radius.
-			if(!player.isDeveloper() && !clawAttacking && !isDosile() && (howClose < DEFAULT_AGGRO_RADIUS || (aggrod && howClose < DEFAULT_DEAGGRO_RADIUS))) {
-				
-				// Enter combat with player
-				enterCombatWith(currPlayer);
-				if(!aggrod) {
-					aggrodTime = time.getTime();
-					aggrod = true;
-				}
-				
-				// Only do things after aggrodTime has passed.
-				if(time.getTime() - aggrodTime > dontAttackFor*1000) {
-				
-					// If we're in attack range, attack.
-					if(isInAttackRange(currPlayer, 0) && time.getTime() - lastClawAttack > clawAttackEvery*1000) {
-							clawAttackEvery = clawAttackEveryBase + 0.1f*(float)utility.RNG.nextInt(5);
-							lastClawAttack = time.getTime();
-							unfollow();
-							clawAttack(currPlayer);
-					}
-					else {
-						if(!followingUnit && howClose > followUntilRange) {
-							follow(currPlayer);
-						}
-						else if(howClose <= followUntilRange) {
-							unfollow();
-						}
-					}
-				}
-			}
-			else if(aggrod && howClose > DEFAULT_DEAGGRO_RADIUS) {
-				System.out.println("Out of aggro radius");
-				aggrod = false;
-				exitCombatWith(currPlayer);
-				unfollow();
-			}
+			/* Claw attack
+			clawAttackEvery = clawAttackEveryBase + 0.1f*(float)utility.RNG.nextInt(5);
+			lastClawAttack = time.getTime();
+			unfollow();
+			clawAttack(currPlayer);
+			*/
 			
 			// Even dosile wolves attack if provoked.
 			if(dosile && isInAttackRange(currPlayer, 0)) {

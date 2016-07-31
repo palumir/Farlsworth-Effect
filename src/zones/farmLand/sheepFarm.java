@@ -2,15 +2,11 @@ package zones.farmLand;
 import java.util.ArrayList;
 
 import doodads.cave.firePit;
-import doodads.cave.skullSign;
-import doodads.general.invisibleDoodad;
 import doodads.sheepFarm.barn;
 import doodads.sheepFarm.blackSmith;
-import doodads.sheepFarm.bone;
 import doodads.sheepFarm.bridge;
 import doodads.sheepFarm.bridgePole;
 import doodads.sheepFarm.bush;
-import doodads.sheepFarm.caveEnterance;
 import doodads.sheepFarm.farmHouse;
 import doodads.sheepFarm.fenceBars;
 import doodads.sheepFarm.fenceBarsSmall;
@@ -25,15 +21,10 @@ import doodads.sheepFarm.tomb;
 import doodads.sheepFarm.tree;
 import doodads.sheepFarm.verticalFence;
 import doodads.sheepFarm.well;
-import doodads.sheepFarm.woolPiece;
 import drawing.background;
-import drawing.drawnObject;
 import drawing.userInterface.tooltipString;
 import effects.effectTypes.fire;
-import effects.effectTypes.lightningAboutToStrike;
-import effects.effectTypes.lightningStrike;
 import interactions.event;
-import items.bottle;
 import items.item;
 import items.bottles.normalBottle;
 import items.weapons.dagger;
@@ -47,18 +38,15 @@ import terrain.atmosphericEffects.storm;
 import terrain.chunkTypes.cave;
 import terrain.chunkTypes.grass;
 import terrain.chunkTypes.water;
-import terrain.chunkTypes.wood;
 import units.player;
 import units.unit;
 import units.bosses.denmother;
 import units.bosses.farlsworth;
+import units.unitTypes.farmLand.sheepFarm.blackWolf;
 import units.unitTypes.farmLand.sheepFarm.farmer;
 import units.unitTypes.farmLand.sheepFarm.redWolf;
 import units.unitTypes.farmLand.sheepFarm.sheep;
-import units.unitTypes.farmLand.sheepFarm.blackWolf;
 import units.unitTypes.farmLand.sheepFarm.yellowWolf;
-import units.unitTypes.farmLand.spiderCave.poisonSpider;
-import units.unitTypes.farmLand.spiderCave.spider;
 import utilities.intTuple;
 import utilities.saveState;
 import utilities.time;
@@ -325,9 +313,6 @@ public class sheepFarm extends zone {
 	// Spawn creeps
 	public void spawnUnits() {
 		
-		// Denmother
-		denmother den = new denmother(-3841,-856);
-		
 		// Farlsworth
 		farlsworth sheepBoss = new farlsworth(411,-394);
 		if(!farlsworth.isFenceAttached.isCompleted()) {
@@ -336,11 +321,21 @@ public class sheepFarm extends zone {
 		else {
 			farlsworthFence = null;
 		}
-		
+	/*	
 /////////////////////////////////////////
 //////////AREA BETWEEN FARLSWORTH //////
 /////////  FENCE AND GARDEN   /////////
 //////////////////////////////////////
+ * 		
+		// Bottle before forest farm
+		item b = new normalBottle(849,-1335);
+		
+				
+		// Well before flower garden.
+		c = new well(1400,-300,0);
+		
+		// Well in grave.
+		new well(2114,-2955,0);
 		
 		// First wolf pack
 		u = new redWolf(-8,-846);
@@ -350,9 +345,6 @@ public class sheepFarm extends zone {
 		u = new yellowWolf(430,-1272);
 		u.setFacingDirection("Left");
 		
-		// Bottle before forest farm
-		item b = new normalBottle(849,-1335);
-		
 		// Third wolf pack
 		u = new blackWolf(1392,-1272);
 		u.setFacingDirection("Left");
@@ -361,8 +353,6 @@ public class sheepFarm extends zone {
 		u = new redWolf(1400,-700);
 		u.setFacingDirection("Up");
 		
-		// Well before flower garden.
-		c = new well(1400,-300,0);
 		
 /////////////////////////////////////////
 ///////// AREA BETWEEN FARLSWORTH //////
@@ -399,9 +389,6 @@ public class sheepFarm extends zone {
 		u = new blackWolf(2850,-2360+40);
 		u.setFacingDirection("Left");
 		
-		// Well in grave.
-		new well(2114,-2955,0);
-		
 ////////////////////////////////////
 //////////AREA BETWEEN GRAVE //////
 /////////  WELL AND TOMB  /////////
@@ -421,7 +408,7 @@ public class sheepFarm extends zone {
 		u = new blackWolf(422,-3910);
 		u.setFacingDirection("Right");
 		u = new redWolf(285,-3470);
-		u.setFacingDirection("Down");
+		u.setFacingDirection("Down");*/
 
 	}
 	

@@ -2,31 +2,21 @@ package units.bosses;
 
 import java.util.ArrayList;
 
-import doodads.sheepFarm.fireLog;
-import doodads.sheepFarm.woolPiece;
 import drawing.spriteSheet;
+import drawing.spriteSheet.spriteSheetInfo;
 import drawing.animation.animation;
 import drawing.animation.animationPack;
-import effects.effectTypes.lightningStrike;
-import effects.projectiles.poisonBall;
-import effects.projectiles.spinningFireLog;
-import drawing.spriteSheet.spriteSheetInfo;
 import interactions.event;
 import interactions.interactBox;
 import interactions.textSeries;
 import modes.mode;
-import sounds.music;
 import sounds.sound;
-import terrain.chunk;
 import units.boss;
 import units.player;
 import units.unitType;
-import units.unitTypes.farmLand.sheepFarm.sheep;
 import utilities.intTuple;
-import utilities.saveState;
 import utilities.stringUtils;
 import utilities.time;
-import zones.farmLand.sheepFarm;
 import zones.farmLand.farmTombEasy;
 
 public class playerOne extends boss {

@@ -1,11 +1,6 @@
 package units.unitTypes.farmLand.sheepFarm;
 
-import java.util.Random;
-
-import drawing.camera;
 import drawing.userInterface.tooltipString;
-import effects.effect;
-import effects.effectTypes.bloodSquirt;
 import interactions.interactBox;
 import interactions.quest;
 import interactions.textSeries;
@@ -15,10 +10,6 @@ import units.humanType;
 import units.player;
 import units.unit;
 import units.unitType;
-import utilities.stringUtils;
-import utilities.time;
-import utilities.utility;
-import zones.zone;
 
 public class farmer extends unit {
 	
@@ -190,7 +181,24 @@ public class farmer extends unit {
 		
 		// If the quest is started, don't allow the person to do the whole dialogue.
 		if(q.isStarted()) {
-			q.getDialogue().setTheText(q.getDialogue().getTheText().getEnd());
+			if(sheep.sheepHitABunchJoke.isCompleted()) {
+				startOfConversation = new textSeries(null, "Why are you beating the crap out of my sheep?");
+				s = startOfConversation.addChild(null, "They're immortal. It's pretty annoying.");
+				s = s.addChild(null, "I can never have lamb for dinner.");
+				s = s.addChild(null, "But there's plenty of wool to go around.");
+				s.setEnd();
+				q.getDialogue().setTheText(startOfConversation);
+			}
+			else {
+				startOfConversation = new textSeries(null, "Are you confused?");
+				s = startOfConversation.addChild(null, "Farnsgirth is in the pen to the East.");
+				s = s.addChild(null, "Please go get his wool for me.");
+				s = s.addChild(null, "I can't get it because I already asked you to.");
+				s = s.addChild(null, "So it would therefore be rude of me.");
+				s = s.addChild(null, "And I'm not rude. I'm chill.");
+				s.setEnd();
+				q.getDialogue().setTheText(startOfConversation);
+			}	
 		}
 		
 		return q;

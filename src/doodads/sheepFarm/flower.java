@@ -1,22 +1,11 @@
 package doodads.sheepFarm;
 
-import java.util.Random;
-
-import drawing.camera;
-import interactions.event;
 import interactions.interactBox;
 import interactions.textSeries;
 import modes.mode;
 import sounds.sound;
 import terrain.chunk;
-import terrain.chunkType;
 import terrain.generalChunkType;
-import units.humanType;
-import units.unit;
-import units.unitType;
-import utilities.stringUtils;
-import utilities.time;
-import zones.zone;
 
 public class flower extends chunk {
 	

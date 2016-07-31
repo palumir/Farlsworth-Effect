@@ -3,15 +3,13 @@ package units.bosses;
 import java.util.ArrayList;
 
 import doodads.sheepFarm.fireLog;
-import doodads.sheepFarm.woolPiece;
 import drawing.spriteSheet;
+import drawing.spriteSheet.spriteSheetInfo;
 import drawing.animation.animation;
 import drawing.animation.animationPack;
 import effects.effectTypes.lightningStrike;
 import effects.interfaceEffects.textBlurb;
-import effects.projectiles.poisonBall;
 import effects.projectiles.spinningFireLog;
-import drawing.spriteSheet.spriteSheetInfo;
 import interactions.event;
 import interactions.interactBox;
 import interactions.textSeries;
@@ -24,7 +22,6 @@ import units.unitType;
 import units.unitTypes.farmLand.sheepFarm.sheep;
 import utilities.intTuple;
 import utilities.saveState;
-import utilities.stringUtils;
 import utilities.time;
 import zones.zone;
 import zones.farmLand.forest;
@@ -164,20 +161,32 @@ public class farlsworth extends boss {
 			if(interactTimes == 0) {
 				// Start of conversation.
 				startOfConversation = new textSeries(null, "He's sent somebody to gather my wool, has he?");
-				s = startOfConversation.addChild(null,"Well, if that's what you want, you can't have it.");
-				s = s.addChild(null, "And don't try anything fishy, buddy.");
-				textSeries rodeo = s.addChild(null, "This isn't my first rodeo.");
+				s = startOfConversation.addChild(null, "Well ... ");
+				s = s.addChild(null, "Frig off.");
+				s = s.addChild(null, "You can't have it.");
+				s = s.addChild(null, "And don't try anything fishy, bud.");
+				s = s.addChild(null, "This isn't my first rodeo.");
+				textSeries rodeo = s.addChild(null, "When will farmer learn that nobody owns me?");
 				
 				// Give me your wool
-				textSeries giveMeYourWool = rodeo.addChild("\'Give me your wool\'", "Is that really all I'm good for now?");
+				textSeries giveMeYourWool = rodeo.addChild("\'Give me your wool\'", "Is that really all I'm good for these days?");
 				s =  giveMeYourWool.addChild(null, "My wool?");
 				s = s.addChild(null, "I don't think so, pal.");
 				s = s.addChild(null, "I will not be friggin objectified.");
 				s =  s.addChild(null, "Leave me alone.");
 				s.setEnd();
 				
-				// I'm on an adventure
-				textSeries adventure = rodeo.addChild("\'I'm on an adventure\'", "Neat.");
+				// Farmer
+				textSeries farmer = rodeo.addChild("\'Isn't it \"the farmer\"?\'", "No, his name is actually Farmer.");
+				s = farmer.addChild(null, "And he wasn't even named that by his parents.");
+				s = s.addChild(null, "He got it changed to Farmer himself.");
+				s = s.addChild(null, "It's extremely friggin confusing.");
+				s = s.addChild(null, "I don't know what his problem is.");
+				s = s.addChild(null, "Or what your's is for that matter.");
+				textSeries whatDoYouWant = s.addChild(null, "What do you want?");
+				
+				whatDoYouWant.addChild(giveMeYourWool);
+				textSeries adventure = whatDoYouWant.addChild("\'I'm on an adventure\'", "Neat.");
 				s =  adventure.addChild(null, "I'm not sure what that has to do with me.");
 				s =  s.addChild(null, "Hope you have a friggin good one.");
 				s.setEnd();
@@ -188,13 +197,14 @@ public class farlsworth extends boss {
 				
 				// Did you tell him about the adventure?
 				if(didYouTellHimAboutYourAdventure.isCompleted()) {
-					startOfConversation = new textSeries(null, "Do you know what happens when a sheep gets too old?");
-					s = startOfConversation.addChild(null, "Well, let's just say ... ");
+					startOfConversation = new textSeries(null, "Why must I be part of your adventure?");
+					s = startOfConversation.addChild(null, "Don't you know what happens when a sheep gets too old?");
+					s = s.addChild(null, "Well, let's just say ...");
 					s = s.addChild(null, "My wool doesn't grow like it used to, buddy.");
 					s = s.addChild(null, "I want to relax and enjoy the time I have left.");
 					s = s.addChild(null, "My petty adventuring years are over.");
 					s = s.addChild(null, "Save that for the kids, dog.");
-					s = s.addChild(null, "Let me eat my dirty old grass in peace.");
+					s = s.addChild(null, "Let me eat my dirty grass in peace.");
 					s.setEnd();
 				}
 				
@@ -210,8 +220,9 @@ public class farlsworth extends boss {
 					textSeries grabHisWool = speciesist.addChild("\'Give me your wool\'", "Boy, you're persistent, aren't you?");
 					s = grabHisWool.addChild(null, "Some guy you just met asked you to get my wool.");
 					s = s.addChild(null, "And now I'm telling you that you can't have it.");
-					s = s.addChild(null, "Shouldn't those cancel out?");
-					s = s.addChild(null, "Oh right, I'm a sheep. Guess that's important, right?");
+					s = s.addChild(null, "Shouldn't those two things cancel out?");
+					s = s.addChild(null, "Ah ... I forgot! I'm a sheep.");
+					s = s.addChild(null, "Guess that's pretty relevant to you, eh bud?");
 					s = s.addChild(null, "Pfft. Typical.");
 					s = s.addChild(null, "You're just like the rest.");
 					s.setEnd();
@@ -219,20 +230,25 @@ public class farlsworth extends boss {
 					// Ask for his wool
 					textSeries adventure = speciesist.addChild("\'I'm on an adventure\'", "Oh boy, that sounds really fun.");
 					s = adventure.addChild(null, "Mind if I tag along?");
-					s = s.addChild(null, "Just kidding, that sounds really awful.");
+					s = s.addChild(null, "Just kidding, that actually sounds really awful.");
 					s = s.addChild(null, "Adventures suck.");
-					s = s.addChild(null, "I'm going to go eat some dirty old dry grass.");
+					s = s.addChild(null, "You suck.");
+					s = s.addChild(null, "I'm going to go enjoy some nasty dirt-covered dry old grass.");
 					s = s.addChild(null, "See you later.");
 					s.setEnd();
 				}
 			}
 			// 1
 			else if(interactTimes == 2) {
+				
 				// Did you tell him about the adventure?
 				if(didYouTellHimAboutYourAdventure.isCompleted()) {
-					startOfConversation = new textSeries(null, "You're really itching for any adventure aren't you?");
-					s = startOfConversation.addChild(null, "Well, then ...");
-					s = s.addChild(null, "Fine.");
+					startOfConversation = new textSeries(null, "Good lord, you're really itching for it.");
+					s = startOfConversation.addChild(null, "You'll take just about any adventure, won't you? ");
+					s = s.addChild(null, "And yet I'm your guy?");
+					s = s.addChild(null, "You may have some future regrets, pal.");
+					s = s.addChild(null, "Well, whatever ... fine.");
+					s = s.addChild(null, "I'll give you an adventure.");
 					s = s.addChild(null, "You wanted my wool?");
 					s = s.addChild(null, "Then come and get it.");
 					s.setEnd();
@@ -241,7 +257,7 @@ public class farlsworth extends boss {
 				// No, you fucking didn't.
 				else {
 					startOfConversation = new textSeries(null, "How hard do I have to make this?");
-					s = startOfConversation.addChild(null, "You know what? Sure.");
+					s = startOfConversation.addChild(null, "You know what? Sure."); 
 					s = s.addChild(null, "You want my wool?");
 					s = s.addChild(null, "You can have it.");
 					s = s.addChild(null, "If you can catch me.");
@@ -292,7 +308,7 @@ public class farlsworth extends boss {
 			s.setEnd();
 			
 			// Don't grab him
-			textSeries dontGrab = givingTheOption.addChild("Don't grab him", "Hmm ...");
+			textSeries dontGrab = givingTheOption.addChild("Don't grab him", "Uh ... okay.");
 			s = dontGrab.addChild(null, "I guess everybody responds differently to taunting.");
 			s = s.addChild(null, "Maybe I misjudged a book by it's cover.");
 			s = s.addChild(null, "An ugly, stupid cover. But still misjudged.");

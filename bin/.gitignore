@@ -1,22 +1,4 @@
+/units/
 /zones/
-<<<<<<< HEAD
-/drawing/
-/doodads/
-/effects/
-/items/
 /terrain/
-/units/
-<<<<<<< HEAD
-/utilities/
-/zones/
-=======
-=======
-/units/
-/interactions/
->>>>>>> 807bc603d0fba33a5d8d8a2c89202bf7d900077a
-/main/
-<<<<<<< HEAD
-/utilities/
-=======
->>>>>>> 4eba34ae065dca4822bd5eedfbe605f8a0dfc490
->>>>>>> 87a3e35ccfbaafffbc0ebf6bf5483d3e6520df93
+/drawing/

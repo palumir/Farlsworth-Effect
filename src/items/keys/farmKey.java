@@ -1,19 +1,12 @@
 package items.keys;
 
-import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
 import drawing.spriteSheet;
-import drawing.animation.animation;
-import drawing.animation.animationPack;
 import drawing.spriteSheet.spriteSheetInfo;
-import drawing.userInterface.tooltipString;
-import items.key;
 import items.item;
 import items.key;
-import items.weapon;
 import units.player;
-import utilities.saveState;
 
 public class farmKey extends key {
 	////////////////

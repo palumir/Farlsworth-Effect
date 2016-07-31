@@ -8,12 +8,11 @@ import sounds.music;
 import units.player;
 import utilities.intTuple;
 import utilities.saveState;
-import utilities.utility;
+import zones.farmLand.farmTombEasy;
+import zones.farmLand.farmTombMedium;
 import zones.farmLand.forest;
 import zones.farmLand.sheepFarm;
 import zones.farmLand.spiderCave;
-import zones.farmLand.farmTombEasy;
-import zones.farmLand.farmTombMedium;
 
 public abstract class zone {
 	

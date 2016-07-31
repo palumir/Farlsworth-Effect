@@ -5,29 +5,20 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
-import java.util.Random;
 
-import drawing.camera;
-import drawing.drawnObject;
 import drawing.gameCanvas;
 import drawing.spriteSheet;
+import drawing.spriteSheet.spriteSheetInfo;
 import drawing.animation.animation;
 import drawing.animation.animationPack;
-import drawing.spriteSheet.spriteSheetInfo;
 import effects.effect;
 import effects.effectType;
 import effects.buffs.darkSlow;
 import modes.mode;
 import sounds.sound;
-import terrain.atmosphericEffects.fog;
-import units.humanType;
 import units.player;
 import units.unit;
-import units.unitType;
-import units.unitTypes.farmLand.spiderCave.poisonSpider;
 import utilities.time;
-import utilities.utility;
-import zones.zone;
 
 public class darkHole extends effect {
 	

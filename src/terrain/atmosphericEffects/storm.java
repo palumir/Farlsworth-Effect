@@ -1,29 +1,14 @@
 package terrain.atmosphericEffects;
 
-import java.awt.AlphaComposite;
 import java.awt.Color;
-import java.awt.Composite;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
-import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-import java.util.Random;
 
-import doodads.general.lightSource;
-import drawing.drawnObject;
 import drawing.gameCanvas;
-import drawing.spriteSheet;
 import drawing.animation.animation;
-import drawing.spriteSheet.spriteSheetInfo;
-import drawing.userInterface.interfaceObject;
-import effects.effectTypes.darkHole;
 import effects.effectTypes.rainFall;
 import effects.effectTypes.rainSplash;
 import sounds.sound;
-import terrain.generalChunkType;
 import units.player;
-import utilities.imageUtils;
 import utilities.time;
 import utilities.utility;
 

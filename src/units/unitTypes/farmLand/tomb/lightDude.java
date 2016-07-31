@@ -1,36 +1,15 @@
 package units.unitTypes.farmLand.tomb;
 
-import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.util.ArrayList;
-import java.util.Random;
 
 import doodads.general.invisibleLightSource;
 import doodads.general.lightSource;
-import doodads.tomb.wallTorch;
-import drawing.camera;
-import drawing.drawnObject;
 import drawing.gameCanvas;
-import drawing.animation.animation;
-import drawing.userInterface.playerHealthBar;
-import drawing.userInterface.tooltipString;
-import effects.effect;
-import effects.effectTypes.bloodSquirt;
-import interactions.interactBox;
-import interactions.quest;
-import interactions.textSeries;
-import items.keys.farmKey;
 import modes.mode;
 import units.humanType;
-import units.player;
 import units.unit;
 import units.unitType;
-import utilities.stringUtils;
-import utilities.time;
-import utilities.utility;
-import zones.zone;
 
 public class lightDude extends unit {
 	

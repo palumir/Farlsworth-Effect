@@ -6,8 +6,6 @@ import interactions.textSeries;
 import modes.mode;
 import terrain.chunk;
 import terrain.generalChunkType;
-import units.player;
-import utilities.utility;
 
 public class caveBone extends chunk {
 	

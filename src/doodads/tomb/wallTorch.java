@@ -1,21 +1,11 @@
 package doodads.tomb;
 
 import java.awt.image.BufferedImage;
-import java.util.Random;
 
 import doodads.general.lightSource;
-import drawing.camera;
 import drawing.animation.animation;
 import modes.mode;
-import sounds.sound;
-import terrain.chunk;
-import terrain.chunkType;
 import terrain.generalChunkType;
-import units.humanType;
-import units.unit;
-import units.unitType;
-import utilities.time;
-import zones.zone;
 
 public class wallTorch extends lightSource {
 	

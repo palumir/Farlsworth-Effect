@@ -2,22 +2,12 @@ package effects;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.util.ArrayList;
 
-import doodads.general.questMark;
-import drawing.camera;
 import drawing.drawnObject;
 import drawing.gameCanvas;
-import drawing.spriteSheet;
 import drawing.animation.animation;
 import drawing.animation.animationPack;
-import modes.mode;
-import sounds.sound;
-import terrain.chunk;
-import units.unit;
-import utilities.intTuple;
 import utilities.time;
-import utilities.utility;
 
 public abstract class effect extends drawnObject  { 
 	

@@ -4,7 +4,6 @@ import java.awt.Color;
 
 import drawing.spriteSheet;
 import drawing.animation.animationPack;
-import drawing.spriteSheet.spriteSheetInfo;
 
 public class unitType {
 	

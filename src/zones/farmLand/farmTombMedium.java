@@ -7,9 +7,7 @@ import doodads.sheepFarm.well;
 import doodads.tomb.stairsUp;
 import doodads.tomb.wallTorch;
 import drawing.background;
-import drawing.drawnObject;
 import drawing.spriteSheet;
-import drawing.userInterface.tooltipString;
 import interactions.event;
 import modes.platformer;
 import sounds.music;
@@ -24,7 +22,6 @@ import units.unitTypes.farmLand.tomb.lightDude;
 import units.unitTypes.farmLand.tomb.shadowDude;
 import utilities.intTuple;
 import utilities.saveState;
-import utilities.time;
 import zones.zone;
 
 public class farmTombMedium extends zone {

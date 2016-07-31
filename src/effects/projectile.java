@@ -1,27 +1,13 @@
 package effects;
 
-import java.math.RoundingMode;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Random;
 
-import drawing.camera;
-import drawing.spriteSheet;
-import drawing.spriteSheet.spriteSheetInfo;
-import effects.effect;
-import effects.effectType;
 import modes.mode;
-import sounds.sound;
 import terrain.chunk;
-import units.humanType;
 import units.player;
 import units.unit;
-import units.unitType;
 import utilities.intTuple;
-import utilities.mathUtils;
 import utilities.time;
-import utilities.utility;
-import zones.zone;
 
 public abstract class projectile extends effect {
 	

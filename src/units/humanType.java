@@ -1,10 +1,9 @@
 package units;
 
 import drawing.spriteSheet;
+import drawing.spriteSheet.spriteSheetInfo;
 import drawing.animation.animation;
 import drawing.animation.animationPack;
-import drawing.spriteSheet.spriteSheetInfo;
-import modes.mode;
 
 public class humanType extends unitType {
 	

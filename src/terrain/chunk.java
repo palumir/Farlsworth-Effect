@@ -6,19 +6,10 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import drawing.drawnObject;
 import drawing.gameCanvas;
-import drawing.spriteSheet;
-import drawing.userInterface.interfaceObject;
-import effects.effect;
-import effects.interfaceEffects.floatingString;
-import modes.mode;
-import units.player;
-import units.unit;
-import units.unitTypes.farmLand.sheepFarm.sheep;
 import utilities.intTuple;
 import zones.zone;
 
@@ -55,9 +46,6 @@ public class chunk extends drawnObject {
 	// The image of the chunk.
 	protected BufferedImage chunkImage;
 	
-	// Chunktype
-	protected chunkType c;
-	
 	// Is the chunk passable or impassable?
 	private boolean passable;
 	
@@ -73,10 +61,9 @@ public class chunk extends drawnObject {
 		
 		// Set our image field and chunktype
 		chunkImage = c.getChunkImage();
-		this.c = c;
 		
 		// Load other chunk stuff (same for both constructors)
-		loadChunkStuff();
+		loadChunkStuff(c);
 	}
 	
 	// Constructor for choosing a given variation of the chunk.
@@ -85,15 +72,14 @@ public class chunk extends drawnObject {
 
 		// Set our image field and chunkType
 		if(c.getChunkTypeSpriteSheet() != null) chunkImage = c.getChunkImage(i, j);
-		this.c = c;
 		
 		// Load other chunk stuff (same for both constructors)
-		loadChunkStuff();
+		loadChunkStuff(c);
 		
 	}
 	
 	// Load chunk stuff
-	public void loadChunkStuff() {
+	public void loadChunkStuff(chunkType c) {
 		// Set default passable
 		passable = DEFAULT_PASSABLE;
 		

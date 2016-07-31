@@ -109,9 +109,8 @@ public class interactBox extends interfaceObject  {
 		if(isDisplayOn()) {
 			
 			// Set default font.
-			Font currentFont = g.getFont();
-			DEFAULT_FONT = currentFont.deriveFont(currentFont.getSize() * 1.4F);
-			DEFAULT_FONT_TITLE = currentFont.deriveFont(currentFont.getSize() * 1.5F);
+			DEFAULT_FONT = drawnObject.DEFAULT_FONT.deriveFont(drawnObject.DEFAULT_FONT.getSize() * 1.4F);
+			DEFAULT_FONT_TITLE = drawnObject.DEFAULT_FONT_BOLD.deriveFont(drawnObject.DEFAULT_FONT_BOLD.getSize() * 1.41F);
 			
 			// Set color.
 			g.setColor(DEFAULT_TEXT_COLOR);

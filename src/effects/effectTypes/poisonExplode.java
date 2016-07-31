@@ -1,23 +1,15 @@
 package effects.effectTypes;
 
 import java.util.ArrayList;
-import java.util.Random;
 
-import drawing.camera;
 import drawing.spriteSheet;
 import drawing.spriteSheet.spriteSheetInfo;
 import effects.effect;
 import effects.effectType;
 import modes.mode;
 import sounds.sound;
-import units.humanType;
 import units.player;
 import units.unit;
-import units.unitType;
-import units.unitTypes.farmLand.spiderCave.poisonSpider;
-import utilities.time;
-import utilities.utility;
-import zones.zone;
 
 public class poisonExplode extends effect {
 	

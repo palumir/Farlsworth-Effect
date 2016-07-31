@@ -1,19 +1,7 @@
 package terrain.chunkTypes;
 
-import java.util.Random;
-
-import doodads.sheepFarm.tree;
-import drawing.camera;
-import modes.mode;
-import terrain.chunk;
-import terrain.chunkType;
 import terrain.generalChunkType;
 import terrain.groundTile;
-import units.humanType;
-import units.unit;
-import units.unitType;
-import utilities.time;
-import zones.zone;
 
 public class wood extends groundTile {
 	

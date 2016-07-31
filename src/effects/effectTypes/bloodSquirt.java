@@ -1,20 +1,11 @@
 package effects.effectTypes;
 
-import java.util.Random;
-
-import drawing.camera;
 import drawing.spriteSheet;
 import drawing.spriteSheet.spriteSheetInfo;
 import effects.effect;
 import effects.effectType;
 import modes.mode;
 import sounds.sound;
-import units.humanType;
-import units.unit;
-import units.unitType;
-import utilities.time;
-import utilities.utility;
-import zones.zone;
 
 public class bloodSquirt extends effect {
 	
@@ -43,7 +34,7 @@ public class bloodSquirt extends effect {
 	private static String DEFAULT_EFFECT_SPRITESHEET = "images/effects/" + DEFAULT_EFFECT_NAME + ".png";
 	
 	// Duration
-	private static float DEFAULT_ANIMATION_DURATION = 0.3f;
+	private static float DEFAULT_ANIMATION_DURATION = 0.4f;
 	
 	// Effect sound
 	protected String effectSound2 = "sounds/effects/combat/splatter2.wav";

@@ -1,26 +1,18 @@
 package units.unitTypes.farmLand.spiderCave;
 
-import java.util.Random;
-
 import doodads.cave.webDoorDoodad;
-import drawing.camera;
 import drawing.spriteSheet;
-import drawing.animation.animation;
-import drawing.animation.animationPack;
 import drawing.spriteSheet.spriteSheetInfo;
+import drawing.animation.animationPack;
 import effects.effect;
 import effects.effectTypes.bloodSquirt;
 import effects.interfaceEffects.floatingString;
 import items.weapons.torch;
 import modes.mode;
-import sounds.sound;
-import units.humanType;
 import units.player;
 import units.unit;
 import units.unitType;
-import utilities.time;
 import utilities.utility;
-import zones.zone;
 
 public class webDoor extends unit {
 	

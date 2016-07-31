@@ -5,39 +5,25 @@ import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
-import doodads.sheepFarm.bone;
-import doodads.sheepFarm.tree;
 import drawing.camera;
 import drawing.drawnObject;
 import drawing.gameCanvas;
 import drawing.animation.animation;
 import drawing.animation.animationPack;
 import drawing.userInterface.playerHealthBar;
-import drawing.userInterface.text;
 import drawing.userInterface.tooltipString;
 import effects.effect;
-import effects.effectTypes.bloodSquirt;
 import effects.effectTypes.critBloodSquirt;
-import effects.effectTypes.fire;
-import effects.effectTypes.lightningStrike;
-import effects.interfaceEffects.floatingString;
 import effects.interfaceEffects.interactBlurb;
-import effects.interfaceEffects.textBlurb;
-import interactions.event;
 import interactions.interactBox;
-import interactions.quest;
 import items.bottle;
 import items.inventory;
-import items.item;
 import items.weapon;
 import main.main;
 import modes.mode;
 import modes.platformer;
 import modes.topDown;
 import sounds.music;
-import sounds.sound;
-import terrain.chunk;
-import terrain.atmosphericEffects.storm;
 import utilities.saveState;
 import utilities.time;
 import utilities.utility;
@@ -92,7 +78,7 @@ public class player extends unit {
 	private static String DEFAULT_PLAYER_SPRITESHEET = "images/units/player/" + DEFAULT_PLAYER_GENDER + "/noItems.png";
 	
 	// Default interact range.
-	private static int DEFAULT_INTERACT_RANGE = 20;
+	private static int DEFAULT_INTERACT_RANGE = 30;
 	private static int DEFAULT_INTERACT_WIDTH = 20;
 	
 	// Default shield color

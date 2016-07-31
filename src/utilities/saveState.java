@@ -7,7 +7,6 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import doodads.sheepFarm.haystack;
 import drawing.userInterface.tooltipString;
 import interactions.event;
 import interactions.quest;
@@ -15,10 +14,7 @@ import items.bottle;
 import items.inventory;
 import items.item;
 import items.weapon;
-import units.boss;
 import units.player;
-import units.unitType;
-import zones.zone;
 
 public class saveState implements Serializable {
 	

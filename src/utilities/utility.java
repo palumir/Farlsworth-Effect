@@ -5,11 +5,7 @@ import java.util.Random;
 import doodads.general.lightSource;
 import drawing.drawnObject;
 import drawing.userInterface.interfaceObject;
-import interactions.event;
 import interactions.interactBox;
-import interactions.quest;
-import items.item;
-import sounds.music;
 import sounds.sound;
 import terrain.chunk;
 import terrain.region;
@@ -94,8 +90,7 @@ public abstract class utility {
 		unit.initiate();
 		unitType.initiate();
 		chunk.initiate();
-		zone.initiate(); 
-		
+		zone.initiate(); 		
 		// Load save state and return
 		saveState s = saveState.loadSaveState();
 		

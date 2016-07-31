@@ -1,26 +1,14 @@
 package terrain.chunkTypes;
 
-import java.util.Random;
-
-import doodads.sheepFarm.needlestack;
-import drawing.camera;
 import drawing.userInterface.tooltipString;
 import interactions.interactBox;
 import interactions.textSeries;
 import main.main;
-import modes.mode;
 import sounds.sound;
 import terrain.chunk;
-import terrain.chunkType;
 import terrain.generalChunkType;
-import terrain.groundTile;
-import units.humanType;
 import units.player;
-import units.unit;
-import units.unitType;
 import utilities.saveState;
-import utilities.stringUtils;
-import utilities.time;
 import zones.zone;
 
 public class water extends chunk {
@@ -138,25 +126,18 @@ public class water extends chunk {
 	@Override
 	public void interactWith() {
 		
-		// Not in combat.
-		if(player.getPlayer().getInCombatWith().size() <= 0) {
-			// Play sound
-			sound s = new sound(waterSplash);
-			s.start();
-			
-			// Restart sequence.
-			interactSequence = makeInteractSequence();
-			
-			// Reset booleans
-			haveSaved = false;
-			
-			// Toggle display.
-			interactSequence.toggleDisplay();
-		}
+		// Play sound
+		sound s = new sound(waterSplash);
+		s.start();
 		
-		// In combat
-		else {
-			tooltipString t = new tooltipString("You cannot save while in combat.");
-		}
+		// Restart sequence.
+		interactSequence = makeInteractSequence();
+		
+		// Reset booleans
+		haveSaved = false;
+		
+		// Toggle display.
+		interactSequence.toggleDisplay();
+
 	}
 }

@@ -7,7 +7,6 @@ import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-import drawing.drawnObject;
 import drawing.gameCanvas;
 import drawing.spriteSheet;
 import drawing.userInterface.interfaceObject;

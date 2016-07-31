@@ -4,20 +4,12 @@ import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.util.Random;
 
-import drawing.camera;
-import drawing.drawnObject;
 import drawing.gameCanvas;
 import modes.mode;
 import terrain.chunk;
-import terrain.chunkType;
 import terrain.generalChunkType;
-import units.humanType;
-import units.unit;
-import units.unitType;
 import utilities.time;
-import zones.zone;
 
 public class clawMarkBlack extends chunk {
 	

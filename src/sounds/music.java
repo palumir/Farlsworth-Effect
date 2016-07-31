@@ -1,14 +1,6 @@
 package sounds;
 
-import java.io.File;
 import java.util.ArrayList;
-
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import javax.sound.sampled.FloatControl;
-
-import units.player;
 
 public class music extends sound {
 	

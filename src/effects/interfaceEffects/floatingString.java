@@ -6,22 +6,12 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
-import java.util.Random;
 
-import drawing.camera;
 import drawing.drawnObject;
 import drawing.gameCanvas;
-import drawing.spriteSheet;
-import drawing.spriteSheet.spriteSheetInfo;
 import effects.effect;
 import effects.effectType;
-import modes.mode;
-import units.humanType;
-import units.unit;
-import units.unitType;
 import utilities.time;
-import utilities.utility;
-import zones.zone;
 
 public class floatingString extends effect {
 	

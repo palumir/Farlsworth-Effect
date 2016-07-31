@@ -17,7 +17,6 @@ import drawing.userInterface.text;
 import modes.topDown;
 import terrain.chunk;
 import units.unitTypes.farmLand.sheepFarm.redWolf;
-import units.unitTypes.farmLand.sheepFarm.wolf;
 import units.unitTypes.farmLand.tomb.lightDude;
 import units.unitTypes.farmLand.tomb.shadowDude;
 import utilities.saveState;

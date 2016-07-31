@@ -1,12 +1,9 @@
 package drawing;
 
-import java.awt.Color;
 import java.awt.Component;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
@@ -20,9 +17,7 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
-import terrain.atmosphericEffects.fog;
 import units.player;
-import units.unit;
 import utilities.time;
 import utilities.utility;
 
@@ -34,7 +29,7 @@ public class gameCanvas extends JComponent {
 	////////////////////
 	
 	// Screen title.
-	private String DEFAULT_GAME_NAME = "Game";
+	private String DEFAULT_GAME_NAME = "The Farlsworth Effect";
 	
 	//////////////////
 	///// FIELDS /////
@@ -112,6 +107,7 @@ public class gameCanvas extends JComponent {
 				
 				// Change the font.
 				drawnObject.DEFAULT_FONT = new Font(drawnObject.DEFAULT_FONT_NAME, Font.PLAIN, (int)(drawnObject.DEFAULT_FONT_SIZE*scaleX));
+				drawnObject.DEFAULT_FONT_BOLD = new Font(drawnObject.DEFAULT_FONT_NAME, Font.BOLD, (int)(drawnObject.DEFAULT_FONT_SIZE*scaleX));
 				
 				// Repaint
 	            repaint();
@@ -166,7 +162,6 @@ public class gameCanvas extends JComponent {
 		frame.setSize(DEFAULT_START_WIDTH, DEFAULT_START_HEIGHT);
 		frame.setContentPane(getGameCanvas());
 		frame.setVisible(true);
-	//	frame.setResizable(false);
 		
 		// Set width.
         defaultWidth = this.getWidth();

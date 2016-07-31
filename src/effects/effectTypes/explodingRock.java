@@ -1,31 +1,13 @@
 package effects.effectTypes;
 
-import java.util.ArrayList;
-import java.util.Random;
-
-import doodads.sheepFarm.rock;
 import doodads.sheepFarm.sandRock;
-import drawing.camera;
-import drawing.spriteSheet;
-import drawing.animation.animation;
-import drawing.animation.animationPack;
-import drawing.spriteSheet.spriteSheetInfo;
 import effects.effect;
 import effects.effectType;
-import effects.buffs.darkSlow;
 import effects.projectiles.rockPiece;
 import modes.mode;
 import sounds.sound;
 import terrain.chunk;
-import units.humanType;
-import units.player;
-import units.unit;
-import units.unitType;
-import units.unitTypes.farmLand.spiderCave.poisonSpider;
-import utilities.intTuple;
-import utilities.time;
 import utilities.utility;
-import zones.zone;
 
 public class explodingRock extends effect {
 	

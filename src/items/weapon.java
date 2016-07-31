@@ -1,8 +1,5 @@
 package items;
 
-import java.awt.Graphics;
-import java.awt.image.BufferedImage;
-
 import drawing.spriteSheet;
 import units.player;
 

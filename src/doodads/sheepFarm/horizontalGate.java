@@ -1,24 +1,14 @@
 package doodads.sheepFarm;
 
-import java.util.Random;
-
-import drawing.camera;
 import interactions.event;
 import interactions.interactBox;
 import interactions.textSeries;
 import modes.mode;
 import sounds.sound;
 import terrain.chunk;
-import terrain.chunkType;
 import terrain.generalChunkType;
-import units.humanType;
 import units.player;
-import units.unit;
-import units.unitType;
 import units.bosses.farlsworth;
-import utilities.stringUtils;
-import utilities.time;
-import zones.zone;
 import zones.farmLand.sheepFarm;
 
 public class horizontalGate extends chunk {
@@ -55,6 +45,8 @@ public class horizontalGate extends chunk {
 	
 	// Talked to the gate? For forest joke.
 	private boolean talkedToForestGateOnce = false;
+	private int interactTimes = 0;
+	private boolean screamingJoke = false;
 	
 	// Event on whether or not the gate is open.
 	private event hasBeenOpened;
@@ -116,35 +108,76 @@ public class horizontalGate extends chunk {
 			
 			if((player.getPlayer() != null && player.getPlayer().getPlayerInventory().hasKey(keyName)) || hasBeenOpened.isCompleted()) {
 				
+				// Screaming joke
+				if(screamingJoke) {
+					s = startOfConversation.addChild(null, "HOLY SHNIKIES!! SOMEBODY HELP!!!");
+					s.setTalker("Talking Gate");
+					s.setEnd();
+				}
 				// Farlsworth gate joke
-				if(isForestGateAndUnopenable() && !talkedToForestGateOnce) {
-					s = startOfConversation.addChild("Open", "I'm not trying to pass judgement or anything.");
-					s.setTalker("What's going on?");
-					s = s.addChild(null, "Because I am a gate and all.");
-					s.setTalker("Is this gate speaking to me?");
-					s = s.addChild(null, "But don't you have some wool to retrieve nearby?");
-					s.setTalker("Somebody must be playing a practical joke or something");
-					s = s.addChild(null, "I'm not all-knowing or something.");
-					s.setTalker("Farmer, is that just you joshing around?");
-					s = s.addChild(null, "I just overheard you talking to the \"farmer\"'.");
-					s.setTalker("It really isn't you, farmer, is it?");
-					s = s.addChild(null, "Though, I am a talking gate.");
-					s.setTalker("I'm having a casual conversation with a gate");
-					s = s.addChild(null, "But that's life.");
-					s.setTalker("What has my life come to?");
-					s = s.addChild(null, "We're all talking gates at heart.");
-					s.setTalker("I must not have gotten enough sleep");
-					talkedToForestGateOnce = true;
+				else if(isForestGateAndUnopenable() && !talkedToForestGateOnce) {
+					
+					if(interactTimes == 0) {
+						s = startOfConversation.addChild("Open", "No.");
+						s.setTalker("Talking Gate");
+						s = s.addChild(null, "That's a pretty rude way to ask, don't you think?");
+						s.setTalker("Talking Gate");
+						s.setEnd();
+						interactTimes++;
+					}
+					else if(interactTimes == 1) {
+						s = startOfConversation.addChild("Please open?", "No.");
+						s.setTalker("Talking Gate");
+						s = s.addChild(null, "That was way more polite though, thanks.");
+						s.setTalker("Talking Gate");
+						s.setEnd();
+						interactTimes++;
+					}
+					else if(interactTimes == 2) {
+						s = startOfConversation.addChild("Are you just joshing around?", "If I was just joshing hard I would tell you.");
+						s.setTalker("Talking Gate");
+						s = s.addChild(null, "People usually only josh big time if they let you know.");
+						s.setTalker("Talking Gate");
+						s = s.addChild(null, "Or it's just a trash josh.");
+						s.setTalker("Talking Gate");
+						s = s.addChild(null, "Farmer just asked you to do a quest, right?");
+						s.setTalker("Talking Gate");
+						s = s.addChild(null, "To get Farnsgurn's wool or something like that?");
+						s.setTalker("Talking Gate");
+						s = s.addChild(null, "Go do it man don't commit and dip.");
+						s.setTalker("Talking Gate");
+						s = s.addChild(null, "Nobody likes a commit and dip.");
+						s.setTalker("Talking Gate");
+						s = s.addChild(null, "Or a dine and dash.");
+						s.setTalker("Talking Gate");
+						s = s.addChild(null, "Or a fart and dart.");
+						s.setTalker("Talking Gate");
+						s = s.addChild(null, "You're just going to josh yourself.");
+						s.setTalker("Talking Gate");
+						s.setEnd();
+						interactTimes++;
+					}
+					else {
+						s = startOfConversation.addChild("Open", "Farlsbones is in the pen to your right.");
+						s.setTalker("Talking Gate");
+						s = s.addChild(null, "Go get his wool man.");
+						s.setTalker("Talking Gate");
+						s = s.addChild(null, "Quit joshing me hard.");
+						s.setTalker("Talking Gate");
+						s.setEnd();
+						talkedToForestGateOnce = true;
+						interactTimes++;
+					}
 				}
 				else if(isForestGateAndUnopenable() && talkedToForestGateOnce) {
 					s = startOfConversation.addChild("Open", "Go get that wool.");
-					s.setTalker("A talking gate, I suppose");
-					s = s.addChild(null, "Farlsworth is in the pen to your right.");
-					s.setTalker("A talking gate, I suppose");
+					s.setTalker("Talking Gate");
+					s = s.addChild(null, "Frannyburns is in the pen to your right.");
+					s.setTalker("Talking Gate");
 					s = s.addChild(null, "I have nothing more to say.");
-					s.setTalker("A talking gate, I suppose");
+					s.setTalker("Talking Gate");
 					s = s.addChild(null, "The gate life is a dull one.");
-					s.setTalker("A talking gate, I suppose");
+					s.setTalker("Talking Gate");
 				}
 				else {
 					s = startOfConversation.addChild("Open", "You open the gate.");
