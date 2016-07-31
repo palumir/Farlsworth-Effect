@@ -117,6 +117,8 @@ public class yellowWolf extends wolf {
 		
 		// Set wolf combat stuff.
 		setCombatStuff();
+		
+		changeCombat();
 	}
 	
 	// Combat defaults.
@@ -147,20 +149,10 @@ public class yellowWolf extends wolf {
 	}
 	
 	// Spawn claw
-	public void spawnClaw() {
-		int howFarBack = howFarBackBase + utility.RNG.nextInt(howFarBackRandom);
-		int spawnX = player.getPlayer().getIntX()+player.getPlayer().getWidth()/2;
-		int spawnY = player.getPlayer().getIntY()+player.getPlayer().getHeight()/2;
-		int degree = (int) mathUtils.angleBetweenTwoPointsWithFixedPoint(
-				spawnX, spawnY,
-				this.getIntX()+this.getWidth()/2, this.getIntY()+this.getHeight()/2, 
-				this.getIntX()+this.getWidth()/2, this.getIntY()+this.getHeight()/2) - randomRadius + 2*(utility.RNG.nextInt(randomRadius));
-		int distance = (int) Math.sqrt(Math.pow(spawnX - (this.getIntX()+this.getWidth()/2),2) + Math.pow(spawnY - (this.getIntY()+this.getHeight()/2),2));
-		int newX = (int) (getIntX() + (distance+howFarBack)*Math.cos(Math.toRadians(degree))); 
-		int newY = (int) (getIntY() + (distance+howFarBack)*Math.sin(Math.toRadians(degree)));
-		currClaw = new clawMarkYellow(newX - clawMarkYellow.DEFAULT_CHUNK_WIDTH/2, 
-									 newY - clawMarkYellow.DEFAULT_CHUNK_HEIGHT/2,
-									 0);
+	public void spawnClaw(int x, int y) {
+		int spawnX = x;
+		int spawnY = y;
+		currClaw = new clawMarkYellow(spawnX,spawnY,0);
 	}
 
 	@Override
@@ -189,7 +181,7 @@ public class yellowWolf extends wolf {
 	public void changeCombat() {
 		
 		// Beta wolf
-		if(!alpha) {
+		if(!isAlpha()) {
 			setMoveSpeed(DEFAULT_MOVESPEED_BETA);
 			clawAttackEveryBase = DEFAULT_CLAW_ATTACK_EVERY_BASE_BETA;
 			spawnClawPhaseTime = DEFAULT_SPAWN_CLAW_PHASE_TIME_BETA;

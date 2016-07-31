@@ -7,6 +7,7 @@ import doodads.sheepFarm.blackSmith;
 import doodads.sheepFarm.bridge;
 import doodads.sheepFarm.bridgePole;
 import doodads.sheepFarm.bush;
+import doodads.sheepFarm.clawMarkRed;
 import doodads.sheepFarm.farmHouse;
 import doodads.sheepFarm.fenceBars;
 import doodads.sheepFarm.fenceBarsSmall;
@@ -40,12 +41,18 @@ import terrain.chunkTypes.grass;
 import terrain.chunkTypes.water;
 import units.player;
 import units.unit;
+import units.unitCommand;
 import units.bosses.denmother;
 import units.bosses.farlsworth;
+import units.unitCommands.commandList;
+import units.unitCommands.moveCommand;
+import units.unitCommands.slashCommand;
+import units.unitCommands.waitCommand;
 import units.unitTypes.farmLand.sheepFarm.blackWolf;
 import units.unitTypes.farmLand.sheepFarm.farmer;
 import units.unitTypes.farmLand.sheepFarm.redWolf;
 import units.unitTypes.farmLand.sheepFarm.sheep;
+import units.unitTypes.farmLand.sheepFarm.wolf;
 import units.unitTypes.farmLand.sheepFarm.yellowWolf;
 import utilities.intTuple;
 import utilities.saveState;
@@ -310,6 +317,9 @@ public class sheepFarm extends zone {
 		spawnWaterRect(2000+1000-16,-4466+18-1000,2128+1000,200);
 	}
 	
+	// Commands
+	commandList commands;
+	
 	// Spawn creeps
 	public void spawnUnits() {
 		
@@ -321,6 +331,43 @@ public class sheepFarm extends zone {
 		else {
 			farlsworthFence = null;
 		}
+		
+		// Wolf height and width
+		int slashAdjustX = wolf.getDefaultWidth()/2/* - clawMarkRed.DEFAULT_CHUNK_WIDTH/2*/;
+		int slashAdjustY = wolf.getDefaultHeight()/2/* - clawMarkRed.DEFAULT_CHUNK_HEIGHT/2*/;
+		
+		// Wolf holder
+		wolf w;
+		
+		//////////////////////////////
+		//// THIS PART IS JUST AN EXAMPLE WE NEED TO CHANGE THIS TO BE EXPLAIN CONCEPTS BETTER
+		/// THIS WILL PROBABLY BE FUCKING CONFUSING FOR YOU SO WAIT FOR ME TO EXPLAIN IT
+		//////////////////////////
+		
+		// Red wolves even row.
+		for(int i = 0; i < 7; i +=2) {
+			w = new redWolf(-240,-821-50*i); 
+			commands = new commandList();
+			commands.add(new slashCommand(222+slashAdjustX,-821-50*i+slashAdjustY));
+			commands.add(new moveCommand(222+slashAdjustX-5,-821-50*i+slashAdjustY));
+			commands.add(new slashCommand(-240+slashAdjustX,-821-50*i+slashAdjustY));
+			commands.add(new moveCommand(-240+slashAdjustX+5,-821-50*i+slashAdjustY));
+			w.repeatCommands(commands);
+		}
+		
+		// Black wolf creating holes on left
+		w = new blackWolf(-222,-821); 
+		w.setAlpha(true);
+		commands = new commandList();
+		commands.add(new slashCommand(-240+slashAdjustX,-821+slashAdjustY));
+		commands.add(new slashCommand(-212+slashAdjustX,-957+slashAdjustY));
+		commands.add(new slashCommand(-145+slashAdjustX,-1046+slashAdjustY));
+		commands.add(new slashCommand(-88+slashAdjustX,-1123+slashAdjustY));
+		commands.add(new slashCommand(-47+slashAdjustX,-1182+slashAdjustY));
+		commands.add(new slashCommand(-222+slashAdjustX,-821+slashAdjustY));
+		w.repeatCommands(commands);
+		
+		
 	/*	
 /////////////////////////////////////////
 //////////AREA BETWEEN FARLSWORTH //////

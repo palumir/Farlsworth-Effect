@@ -37,15 +37,12 @@ public class redWolf extends wolf {
 	private static int DEFAULT_UNIT_JUMPSPEED = 14;
 
 	// Spawn claw stuff
-	protected int DEFAULT_SLASH_DAMAGE = 1;
+	protected int DEFAULT_SLASH_DAMAGE = 3;
 	
 	// Beta stats
 	private static float DEFAULT_MOVESPEED_BETA = 3.5f;
 	private static float DEFAULT_CLAW_ATTACK_EVERY_BASE_BETA = 2.5f;
-	private static float DEFAULT_SPAWN_CLAW_PHASE_TIME_BETA = 2f;
-	private static int DEFAULT_HOW_FAR_BACK_BASE_BETA = 60;
-	private static int DEFAULT_HOW_FAR_BACK_RANDOM_BETA = 20;
-	private static int DEFAULT_RANDOM_DEGREE_BETA = 10;
+	private static float DEFAULT_SPAWN_CLAW_PHASE_TIME_BETA = 1f;
 	private static int DEFAULT_FOLLOW_UNTIL_RANGE_BASE_BETA = 90;
 	private static int DEFAULT_FOLLOW_UNTIL_RANGE_RANDOM_BETA = 15;
 
@@ -53,18 +50,11 @@ public class redWolf extends wolf {
 	private static float DEFAULT_MOVESPEED_ALPHA = 3.5f;
 	private static float DEFAULT_CLAW_ATTACK_EVERY_BASE_ALPHA = 2f;
 	private static float DEFAULT_SPAWN_CLAW_PHASE_TIME_ALPHA = 1.25f;
-	private static int DEFAULT_HOW_FAR_BACK_BASE_ALPHA = 30;
-	private static int DEFAULT_HOW_FAR_BACK_RANDOM_ALPHA = 5;
-	private static int DEFAULT_RANDOM_DEGREE_ALPHA = 1; 
 	private static int DEFAULT_FOLLOW_UNTIL_RANGE_BASE_ALPHA = 15;
 	
 	////////////////
 	/// FIELDS ///
 	////////////////
-	// How far back do we put the claw?
-	private int howFarBackBase = 80;
-	private int howFarBackRandom = 20;
-	private int randomDegree = 0;
 	
 	// Charged units
 	private ArrayList<unit> chargeUnits;
@@ -124,6 +114,8 @@ public class redWolf extends wolf {
 		// Attacking right animation.
 		animation trailRight = new animation("trailRight", leftRightSpriteSheet.getAnimation(9), 0, 0, 1);
 		getAnimations().addAnimation(trailRight);
+		
+		changeCombat();
 		
 	}
 	
@@ -250,9 +242,6 @@ public class redWolf extends wolf {
 
 	@Override
 	public void chargeUnits() {	
-		int chargeStartX = this.getIntX() + this.getWidth()/2;
-		int chargeStartY = this.getIntY() + this.getHeight()/2;
-		int radius = 30;
 		if(chargeUnits!=null) {
 			for(int i = 0; i < chargeUnits.size(); i++) {
 				if(chargeUnits.get(i) instanceof player) {
@@ -260,7 +249,9 @@ public class redWolf extends wolf {
 				}
 			}
 		}
-		chargeUnits = unit.getUnitsInRadius(chargeStartX, chargeStartY, radius);
+		
+		int leniency = 5;
+		chargeUnits = unit.getUnitsInBox(getIntX() + leniency, getIntY() + leniency, getIntX() + getWidth() - leniency, getIntY() + getHeight() + getHitBoxAdjustmentY() - leniency);
 		if(chargeUnits != null) {
 			for(int i = 0; i < chargeUnits.size(); i++) {
 				if(chargeUnits.get(i) instanceof player) {
@@ -314,34 +305,19 @@ public class redWolf extends wolf {
 	}
 
 	@Override
-	public void spawnClaw() {	
-		int howFarBack = howFarBackBase + utility.RNG.nextInt(howFarBackRandom);
-		int spawnX = player.getPlayer().getIntX()+player.getPlayer().getWidth()/2;
-		int spawnY = player.getPlayer().getIntY()+player.getPlayer().getHeight()/2;
-		int degree = (int) mathUtils.angleBetweenTwoPointsWithFixedPoint(
-				spawnX, spawnY,
-				this.getIntX()+this.getWidth()/2, this.getIntY()+this.getHeight()/2, 
-				this.getIntX()+this.getWidth()/2, this.getIntY()+this.getHeight()/2) -
-				randomDegree + 2*utility.RNG.nextInt(randomDegree + 1);
-		int distance = (int) Math.sqrt(Math.pow(spawnX - (this.getIntX()+this.getWidth()/2),2) + Math.pow(spawnY - (this.getIntY()+this.getHeight()/2),2));
-		int newX = (int) (getIntX() + (distance+howFarBack)*Math.cos(Math.toRadians(degree))); 
-		int newY = (int) (getIntY() + (distance+howFarBack)*Math.sin(Math.toRadians(degree)));
-		currClaw = new clawMarkRed(newX - clawMarkYellow.DEFAULT_CHUNK_WIDTH/2, 
-									 newY - clawMarkYellow.DEFAULT_CHUNK_HEIGHT/2,
-			
-									 0);
+	public void spawnClaw(int x, int y) {	
+		int spawnX = x;
+		int spawnY = y;
+		currClaw = new clawMarkRed(spawnX,spawnY,0);
 	}
 	
 	@Override
 	public void changeCombat() {
 		
 		// Beta wolf
-		if(!alpha) {
+		if(!isAlpha()) {
 			clawAttackEveryBase = DEFAULT_CLAW_ATTACK_EVERY_BASE_BETA;
 			spawnClawPhaseTime = DEFAULT_SPAWN_CLAW_PHASE_TIME_BETA;
-			howFarBackBase = DEFAULT_HOW_FAR_BACK_BASE_BETA;
-			howFarBackRandom = DEFAULT_HOW_FAR_BACK_RANDOM_BETA;
-			randomDegree = DEFAULT_RANDOM_DEGREE_BETA;
 			followUntilRange = DEFAULT_FOLLOW_UNTIL_RANGE_BASE_BETA + utility.RNG.nextInt(DEFAULT_FOLLOW_UNTIL_RANGE_RANDOM_BETA);
 			setMoveSpeed(DEFAULT_MOVESPEED_BETA);
 		}
@@ -353,9 +329,6 @@ public class redWolf extends wolf {
 			clawAttackEveryBase = DEFAULT_CLAW_ATTACK_EVERY_BASE_ALPHA;
 			clawAttackEvery = clawAttackEveryBase;
 			spawnClawPhaseTime = DEFAULT_SPAWN_CLAW_PHASE_TIME_ALPHA;
-			howFarBackBase = DEFAULT_HOW_FAR_BACK_BASE_ALPHA;
-			howFarBackRandom = DEFAULT_HOW_FAR_BACK_RANDOM_ALPHA;
-			randomDegree = DEFAULT_RANDOM_DEGREE_ALPHA;
 			setMoveSpeed(DEFAULT_MOVESPEED_ALPHA);
 			followUntilRange = DEFAULT_FOLLOW_UNTIL_RANGE_BASE_ALPHA;
 		}

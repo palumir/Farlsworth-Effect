@@ -12,6 +12,7 @@ import terrain.chunk;
 import units.player;
 import units.unit;
 import units.unitType;
+import units.unitCommands.slashCommand;
 import utilities.time;
 import utilities.utility;
 
@@ -80,7 +81,7 @@ public abstract class wolf extends unit {
 		protected int followUntilRange = 10 + utility.RNG.nextInt(15);
 		
 		// Is the wolf the alpha of the group?
-		protected boolean alpha = false;
+		private boolean alpha = false;
 		
 		// Is the wolf dosile?
 		protected boolean dosile = false;
@@ -109,6 +110,10 @@ public abstract class wolf extends unit {
 		// Start rise and run
 		protected double startX = 0;
 		protected double startY = 0;
+		
+		// Claw attacking x and y
+		protected int clawAttackingX = 0;
+		protected int clawAttackingY = 0;
 		
 		// Jumping stuff
 		protected int jumpingToX = 0;
@@ -227,7 +232,7 @@ public abstract class wolf extends unit {
 				int random = utility.RNG.nextInt(wolves.size());
 				boolean alphaAssignedAlready = false;
 				for(int i = 0; i < wolves.size(); i++) {
-					if((wolves.get(i)).alpha) alphaAssignedAlready = true;
+					if((wolves.get(i)).isAlpha()) alphaAssignedAlready = true;
 				}
 				if(!alphaAssignedAlready) {
 					
@@ -241,7 +246,7 @@ public abstract class wolf extends unit {
 					sound s = new sound(growl);
 					s.setPosition(getIntX(), getIntY(), sound.DEFAULT_SOUND_RADIUS);
 					s.start();
-					wolves.get(random).alpha = true;
+					wolves.get(random).setAlpha(true);
 					wolves.get(random).setAlphaAnimations();
 				}
 			}
@@ -282,10 +287,12 @@ public abstract class wolf extends unit {
 		}
 
 		// Claw attack.
-		public void clawAttack(unit u) {
+		public void clawAttack(int x, int y) {
 			clawAttacking = true;
 			hasClawSpawned = false;
 			slashing = false;
+			clawAttackingX = x;
+			clawAttackingY = y;
 			
 			// Start of claw attack.
 			startOfClawAttack = time.getTime();
@@ -333,10 +340,13 @@ public abstract class wolf extends unit {
 					setDoubleY(getDoubleY() + rise);
 					
 					// Don't let him not move at all or leave region.
-					if((run == 0 && rise == 0) || ((Math.abs(jumpingToX - getIntX()) <= jumpSpeed && Math.abs(jumpingToY - getIntY()) <= jumpSpeed))) {
+					if((run == 0 && rise == 0) || ((Math.abs(jumpingToX - getIntX()) < jumpSpeed && Math.abs(jumpingToY - getIntY()) < jumpSpeed))) {
 						if(currClaw != null) {
+							setDoubleX(jumpingToX);
+							setDoubleY(jumpingToY);
 							clawDestroy();
 						}
+						if(getAllCommands() != null && getAllCommands().size() > 0 && getAllCommands().get(0) instanceof slashCommand) currentCommandComplete = true;
 						jumping = false;
 						clawAttacking = false;
 						hasStartedJumping = false;
@@ -392,8 +402,13 @@ public abstract class wolf extends unit {
 			riseRunSet = false;
 		}
 		
+		// Slash to a point (issued by the command function)
+		public void slashTo(int x, int y) {
+			clawAttack(x,y);
+		}
+		
 		// Spawn claw
-		public abstract void spawnClaw();
+		public abstract void spawnClaw(int x, int y);
 		
 		// Deal with claw attacks.
 		public void dealWithClawAttacks() {
@@ -402,7 +417,7 @@ public abstract class wolf extends unit {
 				// Spawn claw phase.
 				if(!hasClawSpawned && time.getTime() - startOfClawAttack < spawnClawPhaseTime*1000) {
 					hasClawSpawned = true;
-					spawnClaw();
+					spawnClaw(clawAttackingX, clawAttackingY);
 				}
 				
 				// Slashing phase.
@@ -520,6 +535,16 @@ public abstract class wolf extends unit {
 
 		public void setDosile(boolean dosile) {
 			this.dosile = dosile;
+		}
+
+		public boolean isAlpha() {
+			return alpha;
+		}
+
+		public void setAlpha(boolean alpha) {
+			this.alpha = alpha;
+			this.changeCombat();
+			this.setAlphaAnimations();
 		}
 
 }

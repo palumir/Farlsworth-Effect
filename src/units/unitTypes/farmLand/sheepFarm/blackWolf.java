@@ -1,6 +1,7 @@
 package units.unitTypes.farmLand.sheepFarm;
 
 import doodads.sheepFarm.clawMarkBlack;
+import doodads.sheepFarm.clawMarkYellow;
 import drawing.spriteSheet;
 import drawing.spriteSheet.spriteSheetInfo;
 import effects.effectTypes.darkHole;
@@ -22,15 +23,15 @@ public class blackWolf extends wolf {
 	private int DEFAULT_HP = 6;
 	
 	// Default jump speed
-	private static int DEFAULT_UNIT_JUMPSPEED = 9;
+	private static int DEFAULT_UNIT_JUMPSPEED = 12;
 	
 	// Darkhole
-	private static float DEFAULT_DARKHOLE_FOR = 5;
+	private static float DEFAULT_DARKHOLE_FOR = 10;
 	
 	// Beta stats
 	private static float DEFAULT_MOVESPEED_BETA = 3.5f;
 	private static float DEFAULT_CLAW_ATTACK_EVERY_BETA = 4f;
-	private static float DEFAULT_SPAWN_CLAW_PHASE_TIME_BETA = 3f;
+	private static float DEFAULT_SPAWN_CLAW_PHASE_TIME_BETA = 1f;
 	private static int DEFAULT_HOW_FAR_IN_A_DIRECTION_BETA = 90;
 	private static int DEFAULT_FOLLOW_UNTIL_RANGE_BASE_BETA = 90;
 	private static int DEFAULT_FOLLOW_UNTIL_RANGE_RANDOM_BETA = 15;
@@ -38,7 +39,7 @@ public class blackWolf extends wolf {
 	// Alpha stats
 	private static float DEFAULT_MOVESPEED_ALPHA = 3.5f;
 	private static float DEFAULT_CLAW_ATTACK_EVERY_ALPHA = 2f;
-	private static float DEFAULT_SPAWN_CLAW_PHASE_TIME_ALPHA = 1.5f;
+	private static float DEFAULT_SPAWN_CLAW_PHASE_TIME_ALPHA = 0.25f;
 	private static int DEFAULT_HOW_FAR_IN_A_DIRECTION_ALPHA = 30;
 	private static int DEFAULT_FOLLOW_UNTIL_RANGE_BASE_ALPHA = 15;
 	
@@ -97,6 +98,8 @@ public class blackWolf extends wolf {
 		super(unitTypeRef, newX, newY);
 		// Set wolf combat stuff.
 		setCombatStuff();
+		
+		changeCombat();
 	}
 	
 	// Combat defaults.
@@ -192,28 +195,18 @@ public class blackWolf extends wolf {
 	}
 
 	@Override
-	public void spawnClaw() {
-		int spawnX = player.getPlayer().getIntX()+player.getPlayer().getWidth()/2;
-		int spawnY = player.getPlayer().getIntY()+player.getPlayer().getHeight()/2;
-		
-		// Change X and Y by
-		int changeX = moveClawBy - 2*utility.RNG.nextInt(moveClawBy+1);
-		int changeY = moveClawBy - 2*utility.RNG.nextInt(moveClawBy+1);
-		
-		// Move based on where the player is moving
-		spawnX += changeX;
-		spawnX += changeY;
+	public void spawnClaw(int x, int y) {
+		int spawnX = x;
+		int spawnY = y;
 		
 		// Spawn claw
-		currClaw = new clawMarkBlack(spawnX - clawMarkBlack.DEFAULT_CHUNK_WIDTH/2, 
-									 spawnY - clawMarkBlack.DEFAULT_CHUNK_HEIGHT/2,
-									 0);
+		currClaw = new clawMarkBlack(spawnX,spawnY,0);
 	}
 	
 	@Override
 	public void changeCombat() {
 		// Beta wolf
-		if(!alpha) {
+		if(!isAlpha()) {
 			setMoveSpeed(DEFAULT_MOVESPEED_BETA);
 			clawAttackEveryBase = DEFAULT_CLAW_ATTACK_EVERY_BETA;
 			spawnClawPhaseTime = DEFAULT_SPAWN_CLAW_PHASE_TIME_BETA;

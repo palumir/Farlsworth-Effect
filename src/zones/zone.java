@@ -9,7 +9,6 @@ import units.player;
 import utilities.intTuple;
 import utilities.saveState;
 import zones.farmLand.farmTombEasy;
-import zones.farmLand.farmTombMedium;
 import zones.farmLand.forest;
 import zones.farmLand.sheepFarm;
 import zones.farmLand.spiderCave;
@@ -103,7 +102,6 @@ public abstract class zone {
 		// Sheep Farms
 		sheepFarm.setZone(new sheepFarm());
 		farmTombEasy.setZone(new farmTombEasy());
-		farmTombMedium.setZone(new farmTombMedium());
 		forest.setZone(new forest());
 		spiderCave.setZone(new spiderCave());
 	}

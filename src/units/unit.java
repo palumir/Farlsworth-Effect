@@ -297,6 +297,9 @@ public abstract class unit extends drawnObject  {
 	private commandList allCommands; // Current commands we will issue. This list gets slowly reduced as commands get issued.
 	private commandList repeatCommands; // List of commands we will repeat. List is never reduced, since it needs to repeat.
 	
+	// Is the current command complete?
+	protected boolean currentCommandComplete = false;
+	
 	// Repeat commands
 	public void repeatCommands(commandList c) {
 		repeatCommands = c;
@@ -306,10 +309,10 @@ public abstract class unit extends drawnObject  {
 	public void doCommands() {
 		
 		// If we have commands in our allCommands queue left to issue.
-		if(allCommands != null && allCommands.size() > 0) {
+		if(getAllCommands() != null && getAllCommands().size() > 0) {
 			
 			// Get the current command because we have to do shit with it.
-			unitCommand currentCommand = allCommands.get(0);
+			unitCommand currentCommand = getAllCommands().get(0);
 			
 			// Deal with each command type.
 			// AKA, don't move to the next command on a move command
@@ -318,10 +321,11 @@ public abstract class unit extends drawnObject  {
 				
 				// Only move to the next command when applicable.
 				if(currentCommand.isIssued()) {
+				
 					
 					// If we have stopped moving. This command is done.
 					if(!isMoving()) {
-						allCommands.remove(0);
+						getAllCommands().remove(0);
 					}
 				}
 				
@@ -340,8 +344,9 @@ public abstract class unit extends drawnObject  {
 				if(currentCommand.isIssued()) {
 					
 					// Time has elapsed. This command is done.
-					if(time.getTime() - waitStart > waitFor*1000) { 
-						allCommands.remove(0);
+					if(waitStart!=0 && time.getTime() - waitStart > waitFor*1000) { 
+						waitStart = 0;
+						getAllCommands().remove(0);
 					}
 				}
 				
@@ -361,14 +366,15 @@ public abstract class unit extends drawnObject  {
 				if(currentCommand.isIssued()) {
 					
 					// Slash is over. This command is done.
-					if(false) { // TODO: slashing
-						allCommands.remove(0);
+					if(currentCommandComplete) { // TODO: slashing
+						getAllCommands().remove(0);
 					}
 				}
 				
 				// Issue the command if it hasn't yet been issued.
 				else {
 					currentCommand.setIssued(true);
+					currentCommandComplete = false;
 					slashCommand slashCommand = (slashCommand)currentCommand;
 					slashTo((int)slashCommand.getX(), (int)slashCommand.getY());
 				}
@@ -385,7 +391,7 @@ public abstract class unit extends drawnObject  {
 			
 			// If we have repeat commands, repeat them.
 			if(repeatCommands!=null && repeatCommands.size() > 0) {
-				allCommands = new commandList(repeatCommands);
+				setAllCommands(new commandList(repeatCommands));
 			}
 			
 			// Otherwise, do nothing.
@@ -773,10 +779,11 @@ public abstract class unit extends drawnObject  {
 	// Check if a unit is within 
 	public boolean isWithin(int x1, int y1, int x2, int y2) {
 		if(this instanceof developer) return false;
+	
 		return getIntX() < x2 && 
 		 getIntX() + getWidth() > x1 && 
-		 getIntY() + getHitBoxAdjustmentY() < y2 && 
-		 getIntY() + + getHitBoxAdjustmentY() + getHeight() > y1;
+		 getIntY() < y2 && 
+		 getIntY() + + getHeight() > y1;
 	}
 	
 	// Get whether a unit is within radius
@@ -1919,6 +1926,14 @@ public abstract class unit extends drawnObject  {
 
 	public void setFollowingAPath(boolean followingAPath) {
 		this.followingAPath = followingAPath;
+	}
+
+	public commandList getAllCommands() {
+		return allCommands;
+	}
+
+	public void setAllCommands(commandList allCommands) {
+		this.allCommands = allCommands;
 	}
 	
 }
