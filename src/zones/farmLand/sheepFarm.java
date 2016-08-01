@@ -367,8 +367,10 @@ public class sheepFarm extends zone {
 		wolf w;
 		
 		//////////////////////////////
-		//// THIS PART IS JUST AN EXAMPLE WE NEED TO CHANGE THIS TO BE EXPLAIN CONCEPTS BETTER
-		/// THIS WILL PROBABLY BE FUCKING CONFUSING FOR YOU SO WAIT FOR ME TO EXPLAIN IT
+		/// HOLY FUCK THIS PART IS ACTUALLY FUCKING FUN AND IT HAS WOLVES JESUS CHRIST I DID IT RANDOMLY AND IM HAVING FUN
+		
+		// brady turner's a fucking queer I livee at 260 regina street north in waterloo and will fight brady turner any time he shows up
+		// I will be ready this is a verbal contract he can kill me and its not murder if somebody shows him this.
 		//////////////////////////
 		
 		// Red wolves even row.
