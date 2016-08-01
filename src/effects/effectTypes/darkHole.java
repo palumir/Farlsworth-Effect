@@ -23,8 +23,8 @@ import utilities.time;
 public class darkHole extends effect {
 	
 	// Default dimensions.
-	public static int DEFAULT_SPRITE_WIDTH = 150;
-	public static int DEFAULT_SPRITE_HEIGHT = 150;
+	public static int DEFAULT_SPRITE_WIDTH = 150/2;
+	public static int DEFAULT_SPRITE_HEIGHT = 150/2;
 	
 	// Platformer real dimensions
 	public static int DEFAULT_PLATFORMER_HEIGHT = DEFAULT_SPRITE_WIDTH;
@@ -32,8 +32,8 @@ public class darkHole extends effect {
 	public static int DEFAULT_PLATFORMER_ADJUSTMENT_Y = 0;
 	
 	// TopDown real dimensions
-	public static int DEFAULT_TOPDOWN_HEIGHT = 120;
-	public static int DEFAULT_TOPDOWN_WIDTH = 120;
+	public static int DEFAULT_TOPDOWN_HEIGHT = 120/2;
+	public static int DEFAULT_TOPDOWN_WIDTH = 120/2;
 	public static int DEFAULT_TOPDOWN_ADJUSTMENT_Y = 0;
 	
 	////////////////

@@ -12,6 +12,7 @@ import drawing.drawnObject;
 import drawing.gameCanvas;
 import drawing.spriteSheet;
 import drawing.spriteSheet.spriteSheetInfo;
+import items.item;
 import drawing.animation.animation;
 import units.player;
 import units.unit;
@@ -34,10 +35,10 @@ public class redWolf extends wolf {
 	private int DEFAULT_HP = 6;
 	
 	// Default jump speed
-	private static int DEFAULT_UNIT_JUMPSPEED = 14;
+	private static int DEFAULT_UNIT_JUMPSPEED = 12;
 
 	// Spawn claw stuff
-	protected int DEFAULT_SLASH_DAMAGE = 3;
+	protected int DEFAULT_SLASH_DAMAGE = 1;
 	
 	// Beta stats
 	private static float DEFAULT_MOVESPEED_BETA = 3.5f;
@@ -151,9 +152,9 @@ public class redWolf extends wolf {
 	private boolean alreadyHurt = false;
 	
 	// Trail stuff.
-	private float trailInterval = 0.0125f/2f;
+	private float trailInterval = 0.0125f;
 	private long lastTrail = 0;
-	private int trailLength = 40;
+	private int trailLength = 15;
 	private ArrayList<intTuple> trail;
 	private ArrayList<BufferedImage> trailImage;
 	
@@ -246,6 +247,7 @@ public class redWolf extends wolf {
 			for(int i = 0; i < chargeUnits.size(); i++) {
 				if(chargeUnits.get(i) instanceof player) {
 					chargeUnits.get(i).setUnitLocked(false);
+					chargeUnits.get(i).setTargetable(true);
 				}
 			}
 		}
@@ -258,6 +260,7 @@ public class redWolf extends wolf {
 					chargeUnits.get(i).stopMove("all");
 					chargeUnits.get(i).move(run,rise);
 					chargeUnits.get(i).setUnitLocked(true);
+					chargeUnits.get(i).setTargetable(false);
 				}
 			}
 		}
@@ -266,6 +269,32 @@ public class redWolf extends wolf {
 	@Override
 	public void spawnTrail() {
 	}
+	
+	@Override
+	// Is on screen?
+	public boolean isOnScreen() {
+		// Get the correct sprite width and height.
+		int spriteWidth = 0;
+		int spriteHeight = 0;
+		if(this instanceof unit && ((unit)this).getCurrentAnimation() != null) {
+			spriteWidth = ((unit)this).getCurrentAnimation().getCurrentFrame().getWidth();
+			spriteHeight = ((unit)this).getCurrentAnimation().getCurrentFrame().getHeight();
+		}
+		if(trail!=null) {
+			for(int i = 0; i < trail.size(); i++) {
+				int trailDrawX = drawnObject.calculateDrawX(this, trail.get(i).x);
+				int trailDrawY = drawnObject.calculateDrawY(this, trail.get(i).y);
+				if(trailDrawX + gameCanvas.getScaleX()*spriteWidth > 0 && 
+						trailDrawY + gameCanvas.getScaleY()*spriteHeight > 0 && 
+						   trailDrawX < gameCanvas.getActualWidth() && 
+						   trailDrawY < gameCanvas.getActualHeight()) return true;
+			}
+		}
+		return (this.getDrawX() + gameCanvas.getScaleX()*spriteWidth > 0 && 
+				   this.getDrawY() + gameCanvas.getScaleY()*spriteHeight > 0 && 
+				   this.getDrawX() < gameCanvas.getActualWidth() && 
+				   this.getDrawY() < gameCanvas.getActualHeight());
+	}
 
 	@Override
 	public void jumpingFinished() {
@@ -273,6 +302,7 @@ public class redWolf extends wolf {
 			for(int i = 0; i < chargeUnits.size(); i++) {
 				if(chargeUnits.get(i) instanceof player) {
 					chargeUnits.get(i).stopMove("all");
+					chargeUnits.get(i).setTargetable(true);
 					if(!alreadyHurt) {
 						alreadyHurt = true;
 						chargeUnits.get(i).hurt(DEFAULT_SLASH_DAMAGE, 1f);
@@ -296,6 +326,7 @@ public class redWolf extends wolf {
 						alreadyHurt = true;
 					}
 					chargeUnits.get(i).move(run,rise);
+					chargeUnits.get(i).setTargetable(true);
 					chargeUnits.get(i).setUnitLocked(false);
 				}
 			}
@@ -317,7 +348,7 @@ public class redWolf extends wolf {
 		// Beta wolf
 		if(!isAlpha()) {
 			clawAttackEveryBase = DEFAULT_CLAW_ATTACK_EVERY_BASE_BETA;
-			spawnClawPhaseTime = DEFAULT_SPAWN_CLAW_PHASE_TIME_BETA;
+			setSpawnClawPhaseTime(DEFAULT_SPAWN_CLAW_PHASE_TIME_BETA);
 			followUntilRange = DEFAULT_FOLLOW_UNTIL_RANGE_BASE_BETA + utility.RNG.nextInt(DEFAULT_FOLLOW_UNTIL_RANGE_RANDOM_BETA);
 			setMoveSpeed(DEFAULT_MOVESPEED_BETA);
 		}
@@ -327,8 +358,8 @@ public class redWolf extends wolf {
 			
 			// Claw attack stuff.
 			clawAttackEveryBase = DEFAULT_CLAW_ATTACK_EVERY_BASE_ALPHA;
-			clawAttackEvery = clawAttackEveryBase;
-			spawnClawPhaseTime = DEFAULT_SPAWN_CLAW_PHASE_TIME_ALPHA;
+			setClawAttackEvery(clawAttackEveryBase);
+			setSpawnClawPhaseTime(DEFAULT_SPAWN_CLAW_PHASE_TIME_ALPHA);
 			setMoveSpeed(DEFAULT_MOVESPEED_ALPHA);
 			followUntilRange = DEFAULT_FOLLOW_UNTIL_RANGE_BASE_ALPHA;
 		}

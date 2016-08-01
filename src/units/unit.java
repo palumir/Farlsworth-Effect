@@ -133,7 +133,7 @@ public abstract class unit extends drawnObject  {
 	// Attacking/getting attacked mechanics
 	protected boolean canAttack = true; // backswing stuff.
 	private boolean killable = false;
-	private boolean targetable = true;
+	protected boolean targetable = true;
 	private boolean attacking = false;
 	private boolean alreadyAttacked = false;
 	protected double startAttackTime = 0;
@@ -142,7 +142,7 @@ public abstract class unit extends drawnObject  {
 	private String attackSound;
 	
 	// Gravity
-	protected float jumpSpeed = DEFAULT_JUMPSPEED;
+	private float jumpSpeed = DEFAULT_JUMPSPEED;
 	private float fallSpeed = 0;
 	protected boolean jumping = false;
 	private boolean tryJump = false;
@@ -234,7 +234,7 @@ public abstract class unit extends drawnObject  {
 		if(u.getAnimations()!=null) setAnimations(new animationPack(u.getAnimations()));
 		moveSpeed = u.getMoveSpeed();
 		baseMoveSpeed = u.getMoveSpeed();
-		jumpSpeed = u.getJumpSpeed();
+		setJumpSpeed(u.getJumpSpeed());
 		setTypeOfUnit(u);
 		
 		// Add to list
@@ -786,23 +786,6 @@ public abstract class unit extends drawnObject  {
 		 getIntY() + + getHeight() > y1;
 	}
 	
-	// Get whether a unit is within radius
-	public boolean isWithinRadius(int x, int y, int radius) {
-	    int circleDistanceX = Math.abs(x - (this.getIntX() + this.getWidth()/2));
-	    int circleDistanceY = Math.abs(y - (this.getIntY() + this.getHeight()/2));
-
-	    if (circleDistanceX > (this.getWidth()/2 + radius)) { return false; }
-	    if (circleDistanceY > (this.getHeight()/2 + radius)) { return false; }
-
-	    if (circleDistanceX <= (this.getWidth()/2)) { return true; } 
-	    if (circleDistanceY <= (this.getHeight()/2)) { return true; }
-
-	    int cornerDistanceSQ = (int) (Math.pow(circleDistanceX - this.getWidth()/2,2) +
-	                         Math.pow(circleDistanceY - this.getHeight()/2,2));
-
-	    return (cornerDistanceSQ <= Math.pow(radius,2));
-	}
-	
 	// Attack units
 	public void attackUnits() {
 		ArrayList<unit> unitsToAttack = unitsInAttackRange;
@@ -951,7 +934,7 @@ public abstract class unit extends drawnObject  {
 			// Accelerate upward.
 			alreadyJumped = true;
 			jumping = true;
-			fallSpeed = -jumpSpeed;
+			fallSpeed = -getJumpSpeed();
 		}
 	}
 	
@@ -1934,6 +1917,14 @@ public abstract class unit extends drawnObject  {
 
 	public void setAllCommands(commandList allCommands) {
 		this.allCommands = allCommands;
+	}
+
+	public float getJumpSpeed() {
+		return jumpSpeed;
+	}
+
+	public void setJumpSpeed(float jumpSpeed) {
+		this.jumpSpeed = jumpSpeed;
 	}
 	
 }

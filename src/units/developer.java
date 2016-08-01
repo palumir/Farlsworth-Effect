@@ -1,7 +1,13 @@
 package units;
 
 import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.MouseInfo;
+import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 import doodads.sheepFarm.bone;
 import doodads.sheepFarm.bush;
@@ -13,6 +19,9 @@ import doodads.sheepFarm.rock;
 import doodads.sheepFarm.tree;
 import doodads.sheepFarm.well;
 import doodads.tomb.wallTorch;
+import drawing.camera;
+import drawing.drawnObject;
+import drawing.gameCanvas;
 import drawing.userInterface.text;
 import modes.topDown;
 import terrain.chunk;
@@ -141,6 +150,10 @@ public class developer extends player {
 	// Update interface
 	public void updateInterface() {
 		
+		// Record mouse position.
+		Point p = gameCanvas.getGameCanvas().getMousePosition();
+		if(p!=null) lastMousePos = p;
+		
 		// Update the displayed chunk
 		if(currChunkType != null) currChunkType.setTheText(listOfThings[whatThing]);
 	}
@@ -148,7 +161,194 @@ public class developer extends player {
 	// Update unit
 	@Override
 	public void updateUnit() {
+	
+		// Update interface
 		updateInterface();
+		
+		// Move things
+		moveThings();
+	}
+	
+	// Move things
+	public void moveThings() {
+		
+		if(movingObject) {
+			
+			// In game point
+			Point inGamePointCurrent = new Point((int)lastMousePos.getX() + camera.getCurrent().getX() + camera.getCurrent().getAttachedUnit().getWidth()/2 - gameCanvas.getDefaultWidth()/2, 
+				      (int)lastMousePos.getY() + camera.getCurrent().getY() + camera.getCurrent().getAttachedUnit().getHeight()/2 - gameCanvas.getDefaultHeight()/2);
+			
+			// Move all of our selected objects.
+			if(selectedThings!=null) {
+				
+				for(int i = 0; i < selectedThings.size(); i++) {
+					int diffX = (int)relativeDifferences.get(i).getX();
+					int diffY = (int)relativeDifferences.get(i).getY();
+					selectedThings.get(i).setDoubleX(inGamePointCurrent.getX() - diffX);
+					selectedThings.get(i).setDoubleY(inGamePointCurrent.getY() - diffY);
+				}
+				
+			}
+		}
+		
+	}
+	
+	// Selected units
+	private static ArrayList<drawnObject> selectedThings;
+	private static ArrayList<Point> relativeDifferences;
+	
+	// Selection type
+	private static String selectionType = "Unit";
+	
+	// Is left click held?
+	private static Point leftClickStartPoint;
+	private static Point lastMousePos;
+	
+	// Are we selecting?
+	private static boolean selecting = false;
+	private static boolean movingObject = false;
+	
+	// Click radius
+	private static int DEFAULT_CLICK_RADIUS = 10;
+	
+	// Responding to mouse presses
+	public static void devMousePressed(MouseEvent e) {
+		leftClickStartPoint = new Point(e.getX(), e.getY());
+		
+		// In game point
+		Point inGamePoint = new Point(e.getX() + camera.getCurrent().getX() + camera.getCurrent().getAttachedUnit().getWidth()/2 - gameCanvas.getDefaultWidth()/2, 
+				e.getY() + camera.getCurrent().getY() + camera.getCurrent().getAttachedUnit().getHeight()/2 - gameCanvas.getDefaultHeight()/2);
+		
+		// Determine whether or not we are touching something.
+		ArrayList<drawnObject> touchedObjects  = drawnObject.getObjectsInRadius((int)inGamePoint.getX(), (int)inGamePoint.getY(), DEFAULT_CLICK_RADIUS);
+		ArrayList<drawnObject> touchedUnits = new ArrayList<drawnObject>();
+		for(int i = 0; i < touchedObjects.size(); i++) if(touchedObjects.get(i) instanceof unit) touchedUnits.add(touchedObjects.get(i));
+		
+		if(selectionType.equals("Unit") && touchedUnits != null && touchedUnits.size() > 0) {
+			
+			movingObject = true;
+			
+			unit touchedUnit = (unit)drawnObject.getClosestToFrom(
+					(int)inGamePoint.getX(), 
+					(int)inGamePoint.getY(),
+					touchedUnits);
+			
+			// Move all selected things.
+			if(selectedThings != null && selectedThings.contains(touchedUnit)) {
+				relativeDifferences = new ArrayList<Point>();
+				for(int i = 0; i < selectedThings.size(); i++) {
+					relativeDifferences.add(new Point(touchedUnit.getIntX() - selectedThings.get(i).getIntX(),
+													  touchedUnit.getIntY() - selectedThings.get(i).getIntY()));
+				}
+			} 
+			
+			// De-select and move only the newly selected object.
+			else {
+				
+				relativeDifferences = new ArrayList<Point>();
+				relativeDifferences.add(new Point(0,0));
+				ArrayList<drawnObject> touchTheseThings = new ArrayList<drawnObject>();
+				touchTheseThings.add(touchedUnit);
+				selectAll(touchTheseThings);
+				
+			}
+			
+		}
+		
+		// Nothing was touched, draw our selection square.
+		else {
+			selecting = true;
+		}
+	}
+	
+	// Unselect all things
+	public static void unSelectAll() {
+		
+		// Deselect old things.
+		if(selectedThings != null) {
+			for(; selectedThings.size() > 0; ) {
+				selectedThings.get(0).dontShowHitBox();
+				selectedThings.remove(0);
+			}
+		}
+		
+	}
+	
+	// Select all 
+	public static void selectAll(ArrayList<drawnObject> d) {
+		
+		unSelectAll();
+		
+		if(selectedThings == null) {
+			selectedThings = new ArrayList<drawnObject>();
+		}
+		
+		for(int i = 0; i < d.size(); i++) {
+			selectedThings.add(d.get(i));
+			d.get(i).showHitBox();
+		}
+		
+	}
+	
+	// Responding to mouse release
+	public static void devMouseReleased(MouseEvent e) {
+		
+		Rectangle rect= new Rectangle(leftClickStartPoint);
+		rect.add(lastMousePos);
+		
+		// Deal with box selecting
+		if(selecting) {
+			
+			// Units
+			if(selectionType.equals("Unit")) {
+				
+				unSelectAll();
+				
+				ArrayList<unit> selectTheseUnits = unit.getUnitsInBox(
+						rect.x + camera.getCurrent().getX() + camera.getCurrent().getAttachedUnit().getWidth()/2 - gameCanvas.getDefaultWidth()/2, 
+						rect.y + camera.getCurrent().getY() + camera.getCurrent().getAttachedUnit().getHeight()/2 - gameCanvas.getDefaultHeight()/2, 
+						rect.x + rect.width + camera.getCurrent().getX() - gameCanvas.getDefaultWidth()/2, 
+						rect.y + rect.height + camera.getCurrent().getY() - gameCanvas.getDefaultHeight()/2);
+				
+				if(selectTheseUnits!=null) {
+					
+					ArrayList<drawnObject> selectTheseThings = new ArrayList<drawnObject>();
+					for(int i = 0; i < selectTheseUnits.size(); i++) {
+						selectTheseThings.add(selectTheseUnits.get(i));
+					}
+				
+					selectAll(selectTheseThings);
+				}
+			}
+		}
+		
+		selecting = false;
+		movingObject = false;
+		
+	}
+	
+	// Highlight box variables
+	private static Color DEFAULT_HIGHLIGHT_COLOR = Color.green;
+	
+	// Highlight box
+	public static void drawHighLightBox(Graphics g) {
+		
+		// Draw the box.
+		if(selecting) {
+			
+			Rectangle rect= new Rectangle(leftClickStartPoint);
+			rect.add(lastMousePos);
+
+			g.setColor(DEFAULT_HIGHLIGHT_COLOR);
+			g.drawRect(rect.x, rect.y, rect.width, rect.height);
+			
+		}
+		
+	}
+	
+	// Draw unit particular stuff.
+	public void drawUnitSpecialStuff(Graphics g) {
+		drawHighLightBox(g);
 	}
 	
 	// What thing increase

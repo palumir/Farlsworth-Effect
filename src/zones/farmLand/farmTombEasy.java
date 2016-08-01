@@ -425,6 +425,7 @@ public class farmTombEasy extends zone {
 			commands = new commandList();
 			commands.add(new moveCommand(555,-6 - i*50));
 			commands.add(new moveCommand(970,-6 - i*50));
+			commands.add(new moveCommand(620,-6 - i*50));
 			u.repeatCommands(commands);
 			u.setMoveSpeed(3);
 		}
@@ -440,6 +441,7 @@ public class farmTombEasy extends zone {
 			commands = new commandList();
 			commands.add(new moveCommand(1500,-6 - i*50));
 			commands.add(new moveCommand(1080, -6 - i*50));
+			commands.add(new moveCommand(1320,-6 - i*50));
 			u.repeatCommands(commands);
 			u.setMoveSpeed(3);
 		}
@@ -451,6 +453,7 @@ public class farmTombEasy extends zone {
 			commands = new commandList();
 			commands.add(new moveCommand(1880,-6 - i*50));
 			commands.add(new moveCommand(1523,-6 - i*50));
+			commands.add(new moveCommand(1707,-6 - i*50));
 			u.repeatCommands(commands);
 			u.setMoveSpeed(3);
 		}
@@ -462,6 +465,7 @@ public class farmTombEasy extends zone {
 			commands = new commandList();
 			commands.add(new moveCommand(1905,-6 - i*50));
 			commands.add(new moveCommand(2325,-6 - i*50));
+			commands.add(new moveCommand(2285,-6 - i*50));
 			u.repeatCommands(commands);
 			u.setMoveSpeed(3);
 		}	
@@ -478,6 +482,7 @@ public class farmTombEasy extends zone {
 			commands = new commandList();
 			commands.add(new moveCommand(2525,-6 - i*50));
 			commands.add(new moveCommand(3285,-6 - i*50));
+			commands.add(new moveCommand(2800,-6 - i*50));
 			shadowDudePatrolPath(2800,-6 - i*50, commands, 5);
 		}
 		

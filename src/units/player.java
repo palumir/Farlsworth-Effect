@@ -2,9 +2,13 @@ package units;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
+import doodads.sheepFarm.rock;
 import drawing.camera;
 import drawing.drawnObject;
 import drawing.gameCanvas;
@@ -131,6 +135,9 @@ public class player extends unit {
 	
 	// Holding space to attack?
 	private boolean holdingSpace = false;
+	
+	// Telepathy
+	private boolean canLiftMultipleThings = false;
 
 	// Level up sounds
 	private String levelUp = "sounds/effects/player/levelUp.wav";
@@ -146,8 +153,6 @@ public class player extends unit {
 	public player(int newX, int newY, zone z) {
 		super(playerType, newX, newY);
 		
-		
-		//showAttackRange();
 		// Set movespeed.
 		setMoveSpeed(DEFAULT_PLAYER_MOVESPEED);
 		
@@ -284,13 +289,215 @@ public class player extends unit {
 	// React to pain.
 	public void reactToPain() {
 	}
+	/*
+	// Selected units
+	private static ArrayList<drawnObject> selectedThings;
+	private static ArrayList<Point> relativeDifferences;
 	
+	// Selection type
+	private static String selectionType = "Unit";
+	
+	// Is left click held?
+	private static Point leftClickStartPoint;
+	private static Point lastMousePos;
+	
+	// Are we selecting?
+	private static boolean selecting = false;
+	private static boolean movingObject = false;
+	
+	// Click radius
+	private static int DEFAULT_CLICK_RADIUS = 10;
+	
+	// Move things
+	public void telepathy() {
+		
+		// Set our last mouse pointer for boxing.
+		Point p = gameCanvas.getGameCanvas().getMousePosition();
+		if(p!=null) {
+			lastMousePos = p;
+			//new rock((int)lastMousePos.getX() + camera.getCurrent().getX() - gameCanvas.getDefaultWidth()/2, 
+				     // (int)lastMousePos.getY() + camera.getCurrent().getY() - gameCanvas.getDefaultHeight()/2,0);
+		}
+		
+		if(movingObject) {
+			
+			// In game point
+			Point inGamePointCurrent = new Point((int)lastMousePos.getX() + camera.getCurrent().getX() + camera.getCurrent().getAttachedUnit().getWidth()/2 - gameCanvas.getDefaultWidth()/2, 
+				      (int)lastMousePos.getY() + camera.getCurrent().getY() + camera.getCurrent().getAttachedUnit().getHeight()/2 - gameCanvas.getDefaultHeight()/2);
+			
+			// Move all of our selected objects.
+			if(selectedThings!=null) {
+				
+				for(int i = 0; i < selectedThings.size(); i++) {
+					//int diffX = (int)relativeDifferences.get(i).getX();
+					//int diffY = (int)relativeDifferences.get(i).getY();
+					selectedThings.get(i).setDoubleX(inGamePointCurrent.getX());
+					selectedThings.get(i).setDoubleY(inGamePointCurrent.getY());
+				}
+				
+			}
+		}
+		
+	}
+	
+	
+	// Responding to mouse presses
+	public static void playerMousePressed(MouseEvent e) {
+		leftClickStartPoint = new Point(e.getX(), e.getY());
+		
+		// In game point
+		Point inGamePoint = new Point(e.getX() + camera.getCurrent().getX() + camera.getCurrent().getAttachedUnit().getWidth()/2 - gameCanvas.getDefaultWidth()/2, 
+				e.getY() + camera.getCurrent().getY() + camera.getCurrent().getAttachedUnit().getHeight()/2 - gameCanvas.getDefaultHeight()/2);
+		
+		// Determine whether or not we are touching something.
+		ArrayList<drawnObject> touchedObjects  = drawnObject.getObjectsInRadius(
+				(int)inGamePoint.getX(), 
+				(int)inGamePoint.getY(), 
+				DEFAULT_CLICK_RADIUS);
+		
+		if(touchedObjects!=null) {
+			// Remove all ungrabbable objects from touchedObjects
+			for(int i = 0; i < touchedObjects.size(); i++) {
+				if(!touchedObjects.get(i).isSmallObject()) {
+					touchedObjects.remove(i);
+					i--;
+				}
+			}
+		}
+		
+		if(touchedObjects != null && touchedObjects.size() > 0) {
+			
+			movingObject = true;
+			
+			drawnObject touchedObject = drawnObject.getClosestToFrom(
+					(int)inGamePoint.getX(), 
+					(int)inGamePoint.getY(),
+					touchedObjects);
+			
+			if(touchedObject!=null) {
+			
+				// Only allow lifting of one object for now.
+				relativeDifferences = new ArrayList<Point>();
+				relativeDifferences.add(new Point(0,0));
+				ArrayList<drawnObject> touchTheseThings = new ArrayList<drawnObject>();
+				touchTheseThings.add(touchedObject);
+				selectAll(touchTheseThings);
+			}
+				
+		}
+		
+		// Nothing was touched, draw our selection square.
+		else {
+			selecting = true;
+		}
+	}
+	
+	// Unselect all things
+	public static void unSelectAll() {
+		
+		// Deselect old things.
+		if(selectedThings != null) {
+			for(; selectedThings.size() > 0; ) {
+				selectedThings.get(0).dontShowHitBox();
+				selectedThings.remove(0);
+			}
+		}
+		
+	}
+	
+	// Select all 
+	public static void selectAll(ArrayList<drawnObject> d) {
+		
+		unSelectAll();
+		
+		if(selectedThings == null) {
+			selectedThings = new ArrayList<drawnObject>();
+		}
+		
+		
+		// Remove all ungrabbable objects from touchedObjects
+		for(int i = 0; i < d.size(); i++) {
+			if(!d.get(i).isSmallObject()) {
+				d.remove(i);
+				i--;
+			}
+		}
+		
+		for(int i = 0; i < d.size(); i++) {
+			selectedThings.add(d.get(i));
+			d.get(i).showHitBox();
+		}
+		
+	}
+	
+	// Responding to mouse release
+	public static void playerMouseReleased(MouseEvent e) {
+		
+		Rectangle rect= new Rectangle(leftClickStartPoint);
+		rect.add(lastMousePos);
+		
+		// Deal with box selecting
+		if(selecting) {
+			
+			// Units
+			if(selectionType.equals("Unit")) {
+				
+				unSelectAll();
+				
+				ArrayList<drawnObject> selectTheseObjects = drawnObject.getObjectsInBox(
+						rect.x + camera.getCurrent().getX() + camera.getCurrent().getAttachedUnit().getWidth()/2 - gameCanvas.getDefaultWidth()/2, 
+						rect.y + camera.getCurrent().getY() + camera.getCurrent().getAttachedUnit().getHeight()/2 - gameCanvas.getDefaultHeight()/2, 
+						rect.x + rect.width + camera.getCurrent().getX() + camera.getCurrent().getAttachedUnit().getWidth()/2 - gameCanvas.getDefaultWidth()/2, 
+						rect.y + rect.height + camera.getCurrent().getY() + camera.getCurrent().getAttachedUnit().getHeight()/2 - gameCanvas.getDefaultHeight()/2);
+				
+				if(selectTheseObjects!=null) {
+					
+					ArrayList<drawnObject> selectTheseThings = new ArrayList<drawnObject>();
+					for(int i = 0; i < selectTheseObjects.size(); i++) {
+						if(selectTheseObjects.get(i).isSmallObject()) {
+							selectTheseThings.add(selectTheseObjects.get(i));
+							break;
+						}
+					}
+				
+					selectAll(selectTheseThings);
+				}
+				
+			}
+		}
+		
+		selecting = false;
+		movingObject = false;
+		
+	}
+	
+	// Highlight box variables
+	private static Color DEFAULT_HIGHLIGHT_COLOR = Color.green;
+	
+	// Highlight box
+	public static void drawHighLightBox(Graphics g) {
+		
+		// Draw the box.
+		if(selecting) {
+			
+			Rectangle rect= new Rectangle(leftClickStartPoint);
+			rect.add(lastMousePos);
+
+			g.setColor(DEFAULT_HIGHLIGHT_COLOR);
+			g.drawRect(rect.x, rect.y, rect.width, rect.height);
+			
+		}
+		
+	}*/
+
 	// Player AI controls the interface
 	public void updateUnit() {
 		
 		// TODO: dev stuff
 		if(drawnObject.dontReloadTheseObjects!=null); //System.out.println(drawnObject.dontReloadTheseObjects.size());
 		
+		// Move things with telepathy.
+		//telepathy();
 		showPossibleInteractions();
 		isPlayerDead();
 		potentiallyAttack();
@@ -488,6 +695,30 @@ public class player extends unit {
 		stopMove("all");
 		stopAttack();
 		stopJump();
+	}
+	
+	// Responding to mouse presses
+	public void mousePressed(MouseEvent e) {
+		
+		// Developer stuff
+		if(player.isDeveloper()) developer.devMousePressed(e);
+		
+		// Telepathy
+		else {
+			//playerMousePressed(e);
+		}
+	}
+	
+	// Responding to mouse release
+	public void mouseReleased(MouseEvent e) {
+		
+		// Developer stuff
+		if(player.isDeveloper()) developer.devMouseReleased(e);
+		
+		// Telepathy
+		else {
+			//playerMouseReleased(e);
+		}
 	}
 	
 	// Responding to key presses.
@@ -784,6 +1015,9 @@ public class player extends unit {
 	// Draw special stuff
 	@Override
 	public void drawUnitSpecialStuff(Graphics g) {
+		
+		// Highlight box for telepathy
+		//drawHighLightBox(g);
 		
 		// Are we shielding and topDown
 		if(isShielding()) {

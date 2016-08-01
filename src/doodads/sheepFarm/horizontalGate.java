@@ -126,7 +126,7 @@ public class horizontalGate extends chunk {
 						interactTimes++;
 					}
 					else if(interactTimes == 1) {
-						s = startOfConversation.addChild("Please open?", "No.");
+						s = startOfConversation.addChild("Please open?", "Still no.");
 						s.setTalker("Talking Gate");
 						s = s.addChild(null, "That was way more polite though, thanks.");
 						s.setTalker("Talking Gate");

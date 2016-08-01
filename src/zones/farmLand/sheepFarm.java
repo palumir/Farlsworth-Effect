@@ -320,8 +320,35 @@ public class sheepFarm extends zone {
 	// Commands
 	commandList commands;
 	
+	// Create a slash list of wolves
+	public void createRedWolfSlashChain(commandList c, float waitFor, float spawnClawPhaseTime, float jumpSpeed) {
+		
+		int largestDistance = 0;
+		// Get the largest distance.
+		
+		for(int i = 0; i < c.size(); i++) {
+			
+			
+			u = new redWolf((int)((slashCommand) c.get(i)).getX(), (int)((slashCommand) c.get(i)).getY());
+			((redWolf) u).setSpawnClawPhaseTime(spawnClawPhaseTime);
+			((redWolf) u).setJumpSpeed(jumpSpeed);
+			int n = i+1;
+			commands = new commandList();
+			for(int j = 0; j < c.size(); j++) {
+				if(n >= c.size())  n = 0;
+				commands.add(new waitCommand(waitFor));
+				commands.add(new slashCommand((slashCommand)c.get(n)));
+				n++;
+			}
+			u.repeatCommands(commands);
+		}
+	}
+	
 	// Spawn creeps
 	public void spawnUnits() {
+		
+		// One over root 2
+		double oneOverRoot2 = 1/(Math.sqrt(2));
 		
 		// Farlsworth
 		farlsworth sheepBoss = new farlsworth(411,-394);
@@ -345,26 +372,41 @@ public class sheepFarm extends zone {
 		//////////////////////////
 		
 		// Red wolves even row.
-		for(int i = 0; i < 7; i +=2) {
-			w = new redWolf(-240,-821-50*i); 
-			commands = new commandList();
-			commands.add(new slashCommand(222+slashAdjustX,-821-50*i+slashAdjustY));
-			commands.add(new moveCommand(222+slashAdjustX-5,-821-50*i+slashAdjustY));
-			commands.add(new slashCommand(-240+slashAdjustX,-821-50*i+slashAdjustY));
-			commands.add(new moveCommand(-240+slashAdjustX+5,-821-50*i+slashAdjustY));
-			w.repeatCommands(commands);
-		}
-		
-		// Black wolf creating holes on left
-		w = new blackWolf(-222,-821); 
-		w.setAlpha(true);
+		w = new redWolf(-240,-821+200); 
 		commands = new commandList();
-		commands.add(new slashCommand(-240+slashAdjustX,-821+slashAdjustY));
-		commands.add(new slashCommand(-212+slashAdjustX,-957+slashAdjustY));
-		commands.add(new slashCommand(-145+slashAdjustX,-1046+slashAdjustY));
-		commands.add(new slashCommand(-88+slashAdjustX,-1123+slashAdjustY));
-		commands.add(new slashCommand(-47+slashAdjustX,-1182+slashAdjustY));
-		commands.add(new slashCommand(-222+slashAdjustX,-821+slashAdjustY));
+		commands.add(new slashCommand(200+slashAdjustX,-821+200+slashAdjustY));
+		commands.add(new moveCommand(200+slashAdjustX-5,-821+200+slashAdjustY));
+		commands.add(new slashCommand(-240+slashAdjustX,-821+200+slashAdjustY));
+		commands.add(new moveCommand(-240+slashAdjustX+5,-821+200+slashAdjustY)); 
+		w.repeatCommands(commands);
+		
+		// Second pack of wolves
+		commands = new commandList();
+		commands.add(new slashCommand(-205,-951));
+		commands.add(new slashCommand(-205+75,-951));
+		commands.add(new slashCommand(-205+75*2,-951));
+		commands.add(new slashCommand(-205+75*2+75*oneOverRoot2,-951+75*oneOverRoot2));
+		commands.add(new slashCommand(-205+75*3+75*oneOverRoot2,-951+75*oneOverRoot2));
+		commands.add(new slashCommand(-205+75*3+75*oneOverRoot2*2,-951));
+		commands.add(new slashCommand(-205+75*4+75*oneOverRoot2*2,-951));
+		commands.add(new slashCommand(-205+75*4+75*oneOverRoot2*3,-951-75*oneOverRoot2));
+		commands.add(new slashCommand(-205+75*4+75*oneOverRoot2*3,-951-75*oneOverRoot2-75));
+		commands.add(new slashCommand(-205+75*3+75*oneOverRoot2*3,-951-75*oneOverRoot2-75));
+		commands.add(new slashCommand(-205+75*2+75*oneOverRoot2*3,-951-75*oneOverRoot2-75));
+		commands.add(new slashCommand(-205+75*2+75*oneOverRoot2*2,-951-75));
+		commands.add(new slashCommand(-205+75*1+75*oneOverRoot2*2,-951-75));
+		commands.add(new slashCommand(-205+75*oneOverRoot2*2,-951-75));
+		commands.add(new slashCommand(-205+75*oneOverRoot2,-951-75-75*oneOverRoot2));
+		commands.add(new slashCommand(-205,-951-75));
+		createRedWolfSlashChain(commands,0.75f,0.25f, 13);
+		
+		// Yellawolf
+		commands = new commandList();
+		w = new yellowWolf(-141,-1128);
+		commands.add(new slashCommand(306+slashAdjustX,-1128+slashAdjustY));
+		commands.add(new moveCommand(306+slashAdjustX-5,-1128+slashAdjustY));
+		commands.add(new slashCommand(-141+slashAdjustX,-1128+slashAdjustY));
+		commands.add(new moveCommand(-141+slashAdjustX+5,-1128+slashAdjustY)); 
 		w.repeatCommands(commands);
 		
 		
@@ -2161,10 +2203,10 @@ public class sheepFarm extends zone {
 		tree.createTree(-627-550,260,1);
 		
 		// Dagger.
-		item daggerSpawn = new dagger(-800,387);
+		item swordSpawn = new sword(-800,387);
 		
 		// Long sword testing
-		item longSwordSpawn = new sword(-400,387);
+		//item longSwordSpawn = new sword(-400,387);
 		
 		// Corner
 		tree.createTree(-60-550,480,2);

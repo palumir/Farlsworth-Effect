@@ -30,6 +30,7 @@ public class rock extends chunk {
 	public rock(int newX, int newY, int i) {
 		super(typeReference, newX, newY, i, 0);
 		setPassable(false);
+		setSmallObject(true);
 		if(mode.getCurrentMode().equals("topDown")) {
 			setHitBoxAdjustmentY(0);
 			setHeight(DEFAULT_CHUNK_HEIGHT);

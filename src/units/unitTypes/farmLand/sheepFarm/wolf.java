@@ -98,9 +98,9 @@ public abstract class wolf extends unit {
 		protected boolean hasClawSpawned = false;
 		protected boolean slashing = false;
 		protected long startOfClawAttack = 0;
-		protected float spawnClawPhaseTime = .5f;
+		private float spawnClawPhaseTime = .5f;
 		protected float clawAttackEveryBase = 3f;
-		protected float clawAttackEvery = 0f;
+		private float clawAttackEvery = 0f;
 		protected long lastClawAttack = 0;
 		
 		// Claw
@@ -264,7 +264,7 @@ public abstract class wolf extends unit {
 		public void makeSounds() {
 			
 				// Create a new random growl interval
-				float newRandomHowlInterval = baseRandomHowl + utility.RNG.nextInt(10);
+				/*float newRandomHowlInterval = baseRandomHowl + utility.RNG.nextInt(10);
 				
 				// Make the wolf howl
 				if(randomHowl == 0f) {
@@ -283,7 +283,7 @@ public abstract class wolf extends unit {
 						s.setPosition(getIntX(), getIntY(), sound.DEFAULT_SOUND_RADIUS);
 						s.start();
 					}
-				}
+				}*/
 		}
 
 		// Claw attack.
@@ -324,8 +324,8 @@ public abstract class wolf extends unit {
 						float xDistance = (jumpingToX - getIntX());
 						float distanceXY = (float) Math.sqrt(yDistance * yDistance
 								+ xDistance * xDistance);
-						rise = ((yDistance/distanceXY)*jumpSpeed);
-						run = ((xDistance/distanceXY)*jumpSpeed);
+						rise = ((yDistance/distanceXY)*getJumpSpeed());
+						run = ((xDistance/distanceXY)*getJumpSpeed());
 						startX = getDoubleX();
 						startY = getDoubleY();
 					}
@@ -340,7 +340,7 @@ public abstract class wolf extends unit {
 					setDoubleY(getDoubleY() + rise);
 					
 					// Don't let him not move at all or leave region.
-					if((run == 0 && rise == 0) || ((Math.abs(jumpingToX - getIntX()) < jumpSpeed && Math.abs(jumpingToY - getIntY()) < jumpSpeed))) {
+					if((run == 0 && rise == 0) || ((Math.abs(jumpingToX - getIntX()) < getJumpSpeed() && Math.abs(jumpingToY - getIntY()) < getJumpSpeed()))) {
 						if(currClaw != null) {
 							setDoubleX(jumpingToX);
 							setDoubleY(jumpingToY);
@@ -415,13 +415,13 @@ public abstract class wolf extends unit {
 			if(clawAttacking) {
 				
 				// Spawn claw phase.
-				if(!hasClawSpawned && time.getTime() - startOfClawAttack < spawnClawPhaseTime*1000) {
+				if(!hasClawSpawned && time.getTime() - startOfClawAttack < getSpawnClawPhaseTime()*1000) {
 					hasClawSpawned = true;
 					spawnClaw(clawAttackingX, clawAttackingY);
 				}
 				
 				// Slashing phase.
-				else if(hasClawSpawned && time.getTime() - startOfClawAttack > spawnClawPhaseTime*1000 && !hasStartedJumping) {
+				else if(hasClawSpawned && time.getTime() - startOfClawAttack > getSpawnClawPhaseTime()*1000 && !hasStartedJumping) {
 					hasStartedJumping = true;
 					slashTo((chunk)currClaw);
 				}
@@ -545,6 +545,22 @@ public abstract class wolf extends unit {
 			this.alpha = alpha;
 			this.changeCombat();
 			this.setAlphaAnimations();
+		}
+
+		public float getSpawnClawPhaseTime() {
+			return spawnClawPhaseTime;
+		}
+
+		public void setSpawnClawPhaseTime(float spawnClawPhaseTime) {
+			this.spawnClawPhaseTime = spawnClawPhaseTime;
+		}
+
+		public float getClawAttackEvery() {
+			return clawAttackEvery;
+		}
+
+		public void setClawAttackEvery(float clawAttackEvery) {
+			this.clawAttackEvery = clawAttackEvery;
 		}
 
 }

@@ -17,14 +17,14 @@ import utilities.utility;
 public class sheep extends unit {
 	
 	// Platformer real dimensions
-	public static int DEFAULT_PLATFORMER_HEIGHT = 18;
-	public static int DEFAULT_PLATFORMER_WIDTH = 18;
+	public static int DEFAULT_PLATFORMER_HEIGHT = 19;
+	public static int DEFAULT_PLATFORMER_WIDTH = 19;
 	public static int DEFAULT_PLATFORMER_ADJUSTMENT_Y = 0;
 	
 	// TopDown real dimensions
-	public static int DEFAULT_TOPDOWN_HEIGHT = 18;
-	public static int DEFAULT_TOPDOWN_WIDTH = 18;
-	public static int DEFAULT_TOPDOWN_ADJUSTMENT_Y = 4;
+	public static int DEFAULT_TOPDOWN_HEIGHT = 19;
+	public static int DEFAULT_TOPDOWN_WIDTH = 19;
+	public static int DEFAULT_TOPDOWN_ADJUSTMENT_Y = 0;
 	
 	// How far do the sheep patrol
 	private static int DEFAULT_PATROL_RADIUS = 100;
@@ -145,6 +145,9 @@ public class sheep extends unit {
 	// Constructor
 	public sheep(int newX, int newY) {
 		super(sheepType, newX, newY);
+		
+		// Small object
+		setSmallObject(true);
 		
 		// Sheep joke
 		sheepHitABunchJoke = new event("sheepHitABunchOfTimesJoke");
