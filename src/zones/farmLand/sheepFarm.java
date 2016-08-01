@@ -391,26 +391,46 @@ public class sheepFarm extends zone {
 		commands.add(new slashCommand(-205+75*3+75*oneOverRoot2,-951+75*oneOverRoot2));
 		commands.add(new slashCommand(-205+75*3+75*oneOverRoot2*2,-951));
 		commands.add(new slashCommand(-205+75*4+75*oneOverRoot2*2,-951));
-		commands.add(new slashCommand(-205+75*4+75*oneOverRoot2*3,-951-75*oneOverRoot2));
-		commands.add(new slashCommand(-205+75*4+75*oneOverRoot2*3,-951-75*oneOverRoot2-75));
-		commands.add(new slashCommand(-205+75*3+75*oneOverRoot2*3,-951-75*oneOverRoot2-75));
-		commands.add(new slashCommand(-205+75*2+75*oneOverRoot2*3,-951-75*oneOverRoot2-75));
+		commands.add(new slashCommand(-205+75*4+75*oneOverRoot2*2,-951-75));
+		commands.add(new slashCommand(-205+75*3+75*oneOverRoot2*2,-951-75));
 		commands.add(new slashCommand(-205+75*2+75*oneOverRoot2*2,-951-75));
 		commands.add(new slashCommand(-205+75*1+75*oneOverRoot2*2,-951-75));
-		commands.add(new slashCommand(-205+75*oneOverRoot2*2,-951-75));
-		commands.add(new slashCommand(-205+75*oneOverRoot2,-951-75-75*oneOverRoot2));
+		commands.add(new slashCommand(-205+75*1+75*oneOverRoot2,-951-75-oneOverRoot2*75));
+		commands.add(new slashCommand(-205+75*oneOverRoot2,-951-75-oneOverRoot2*75));
 		commands.add(new slashCommand(-205,-951-75));
-		createRedWolfSlashChain(commands,0.75f,0.25f, 13);
+		createRedWolfSlashChain(commands,0.25f,0.25f, 8);
 		
-		// Yellawolf
+		// Redwolf in middle
 		commands = new commandList();
-		w = new yellowWolf(-141,-1128);
-		commands.add(new slashCommand(306+slashAdjustX,-1128+slashAdjustY));
-		commands.add(new moveCommand(306+slashAdjustX-5,-1128+slashAdjustY));
-		commands.add(new slashCommand(-141+slashAdjustX,-1128+slashAdjustY));
-		commands.add(new moveCommand(-141+slashAdjustX+5,-1128+slashAdjustY)); 
+		w = new redWolf(-177,-991);
+		w.setSpawnClawPhaseTime(1f);
+		commands.add(new slashCommand(190+slashAdjustX-20,-991+slashAdjustY-20));
+		commands.add(new moveCommand(190+slashAdjustX-5-20,-991+slashAdjustY-20));
+		commands.add(new slashCommand(-177+slashAdjustX,-991+slashAdjustY-20));
+		commands.add(new moveCommand(-177+slashAdjustX+5,-991+slashAdjustY-20)); 
 		w.repeatCommands(commands);
 		
+		// Red wolves above
+		for(int i = 0; i < 6; i++) {
+			commands = new commandList();
+			w = new redWolf(329,-1073 - i*40);
+			w.setSpawnClawPhaseTime(0.25f);
+			commands.add(new slashCommand(329+slashAdjustX-20,-1073+slashAdjustY-20 - i*40));
+			commands.add(new moveCommand(329+slashAdjustX-5-20,-1073+slashAdjustY-20 - i*40));
+			commands.add(new slashCommand(-17+slashAdjustX,-1073+slashAdjustY-20 - i*40));
+			commands.add(new moveCommand(-17+slashAdjustX+5,-1073+slashAdjustY-20 - i*40)); 
+			w.repeatCommands(commands);
+		}
+		
+		// Red wolf above right
+		commands = new commandList();
+		w = new redWolf(356,-1067-40);
+		w.setSpawnClawPhaseTime(0.25f);
+		commands.add(new slashCommand(356+slashAdjustX,-1277+slashAdjustY-20));
+		commands.add(new moveCommand(356+slashAdjustX,-1277+slashAdjustY-20));
+		commands.add(new slashCommand(356+slashAdjustX,-1067+slashAdjustY-60));
+		commands.add(new moveCommand(356+slashAdjustX,-1067+slashAdjustY-60)); 
+		w.repeatCommands(commands);
 		
 	/*	
 /////////////////////////////////////////
@@ -511,6 +531,7 @@ public class sheepFarm extends zone {
 		new bush(1811,-664,1);
 		new bush(2101,-668,0);
 		new bush(2085,-702,1);
+		tree.createTree(252,-928,1);
 		tree.createTree(1848,-713,0);
 		tree.createTree(1806,-695,2);
 		tree.createTree(1770,-677,0);
