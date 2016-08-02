@@ -277,8 +277,9 @@ public class farlsworth extends boss {
 				s.addChild(canYouOpenTheFence);
 				s = doYouHaveTheKey.addChild("No", "Oh boy, uh ...");
 				s = s.addChild(null, "That was more of a rhetorical question.");
-				s = s.addChild(null, "You were in my pen so you obviously have the key.");
-				s = s.addChild(null, "Why you gotta lie to a sheep like that, man?");
+				s = s.addChild(null, "Farmer only keeps two keys.");
+				s = s.addChild(null, "One opens the gates.");
+				s = s.addChild(null, "The other opens everything else.");
 				s.addChild(canYouOpenTheFence);
 				
 				s = canYouOpenTheFence.addChild("Yes", "Thanks ... uh ...");

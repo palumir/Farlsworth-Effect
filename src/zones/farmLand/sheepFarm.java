@@ -1353,7 +1353,7 @@ public class sheepFarm extends zone {
 		farlsworthFence.add(c);
 		c = new fenceBarsSmall(adjustX + 37,adjustY + -436,0);
 		farlsworthFence.add(c);
-		forestGate = new horizontalGate("Forest Gate", "Farm Key", adjustX + -13+fenceAdjustX/2,adjustY + -434,0);
+		forestGate = new horizontalGate("Forest Gate", "Farm Key But Not Farmer's Barn, House, or Fridge Key", adjustX + -13+fenceAdjustX/2,adjustY + -434,0);
 		farlsworthFence.add(forestGate);
 		
 		///////////////////////////////
@@ -1369,7 +1369,7 @@ public class sheepFarm extends zone {
 		farlsworthFence.add(c);
 		
 		// Gate.
-		horizontalGate farlsworthGate = new horizontalGate("Sheep Gate", "Farm Key", adjustX + 412,adjustY + -15,0);
+		horizontalGate farlsworthGate = new horizontalGate("Sheep Gate", "Farm Key But Not Farmer's Barn, House, or Fridge Key", adjustX + 412,adjustY + -15,0);
 		farlsworthFence.add(farlsworthGate);
 		
 		// Right of gate
