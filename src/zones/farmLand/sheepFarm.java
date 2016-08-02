@@ -394,175 +394,578 @@ public class sheepFarm extends zone {
 		// Wolf holder
 		wolf w;
 		
-		//////////////////////////////
-		/// HOLY FUCK THIS PART IS ACTUALLY FUCKING FUN AND IT HAS WOLVES JESUS CHRIST I DID IT RANDOMLY AND IM HAVING FUN
+		/////////////////////////////
+		/// Wolf Section I guess ///
+		///////////////////////////
 		
-		// brady turner's a fucking queer I livee at 260 regina street north in waterloo and will fight brady turner any time he shows up
-		// I will be ready this is a verbal contract he can kill me and its not murder if somebody shows him this.
-		//////////////////////////
+		//FUCKING TREES FOR NOW!!!
 		
-		// Red wolves even row.
-		w = new redWolf(-240,-821+200); 
+		c = new tree(-233,-448,2);
+		c = new tree(-233,-458,1);
+		c = new tree(-233,-518,1);
+		c = new tree(-233,-568,1);
+		c = new tree(-233,-598,1);
+		c = new tree(-233,-638,1);
+		c = new tree(-233,-688,0);
+		c = new tree(-233,-738,2);
+		c = new tree(-233,-798,2);
+		c = new tree(-233,-848,2);
+		c = new tree(-233,-888,1);
+		c = new tree(-233,-938,1);
+		c = new tree(-271,-976,1);
+		c = new tree(-325,-1030,1);
+		c = new tree(-340,-1065,1);
+		c = new tree(-340,-1135,1);
+		c = new tree(-340,-1195,2);
+		c = new tree(-340,-1275,2);
+		c = new tree(-340,-1345,2);
+		c = new tree(-340,-1395,0);
+		c = new tree(-340,-1435,1);
+		c = new tree(-340,-1495,1);
+		c = new tree(-340,-1555,0);
+		c = new tree(-340,-1605,2);
+		c = new tree(-340,-1685,1);
+		c = new tree(-340,-1715,1);
+		c = new tree(-340,-1785,1);
+		c = new tree(-340,-1845,0);
+		c = new tree(-340,-1895,1);
+		c = new tree(-340,-1945,0);
+		c = new tree(259,-445,1);
+		c = new tree(259,-505,0);
+		c = new tree(259,-555,0);
+		c = new tree(259,-605,0);
+		c = new tree(259,-645,1);
+		c = new tree(259,-695,2);
+		c = new tree(259,-745,0);
+		c = new tree(259,-795,1);
+		c = new tree(259,-845,1);
+		c = new tree(299,-885,1);
+		c = new tree(353,-959,0);
+		c = new tree(353,-889,2);
+		c = new tree(353,-929,1);
+		c = new tree(353,-919,2);
+		c = new tree(323,-919,2);
+		c = new tree(377,-1023,2);
+		c = new tree(397,-1083,0);
+		c = new tree(373,-1166,2);
+		c = new tree(373,-1096,1);
+		c = new tree(323,-1096,2);
+		c = new tree(323,-1016,1);
+		c = new tree(323,-1106,0);
+		c = new tree(323,-1176,0);
+		c = new tree(303,-1236,1);
+		c = new tree(320,-1299,2);
+		c = new tree(351,-1370,1);
+		c = new tree(351,-1430,1);
+		c = new tree(351,-1490,1);
+		c = new tree(351,-1560,1);
+		c = new tree(351,-1610,2);
+		c = new tree(351,-1680,0);
+		c = new tree(351,-1760,2);
+		c = new tree(351,-1840,0);
+		c = new tree(351,-1920,2);
+		c = new tree(351,-2000,0);
+		c = new tree(-308,-2020,2);
+		c = new tree(-258,-2020,1);
+		c = new tree(-212,-2116,0);
+		c = new tree(-212,-2076,0);
+		c = new tree(-262,-2076,2);
+		c = new tree(-262,-2036,2);
+		c = new tree(-200,-2157,0);
+		c = new tree(-200,-2157,2);
+		c = new tree(-142,-2196,2);
+		c = new tree(-73,-2294,1);
+		c = new tree(-126,-2241,1);
+		c = new tree(-86,-2241,1);
+		c = new tree(-86,-2291,1);
+		c = new tree(-33,-2354,2);
+		c = new tree(-33,-2354,0);
+		c = new tree(16,-2354,1);
+		c = new tree(46,-2354,0);
+		c = new tree(46,-2354,0);
+		c = new tree(106,-2354,2);
+		c = new tree(106,-2354,0);
+		c = new tree(136,-2354,0);
+		c = new tree(166,-2354,2);
+		c = new tree(186,-2354,1);
+		c = new tree(236,-2354,0);
+		c = new tree(276,-2354,2);
+		c = new tree(336,-2354,0);
+		c = new tree(336,-2354,0);
+		c = new tree(376,-2354,2);
+		c = new tree(376,-2354,2);
+		c = new tree(436,-2354,2);
+		c = new tree(456,-2354,0);
+		c = new tree(476,-2354,1);
+		c = new tree(546,-2354,2);
+		c = new tree(546,-2354,0);
+		c = new tree(496,-2354,1);
+		c = new tree(556,-2354,2);
+		c = new tree(616,-2354,0);
+		c = new tree(576,-2354,2);
+		c = new tree(576,-2294,1);
+		c = new tree(576,-2294,0);
+		c = new tree(576,-2254,1);
+		c = new tree(576,-2254,0);
+		c = new tree(576,-2204,2);
+		c = new tree(576,-2184,2);
+		c = new tree(576,-2184,0);
+		c = new tree(576,-2134,2);
+		c = new tree(576,-2134,1);
+		c = new tree(576,-2104,0);
+		c = new tree(576,-2104,2);
+		c = new tree(576,-2054,2);
+		c = new tree(576,-2104,1);
+		c = new tree(576,-2054,0);
+		c = new tree(576,-2054,1);
+		c = new tree(576,-2004,1);
+		c = new tree(576,-2074,2);
+		c = new tree(576,-2014,0);
+		c = new tree(576,-1974,0);
+		c = new tree(576,-1934,0);
+		c = new tree(576,-1904,0);
+		c = new tree(376,-1884,2);
+		c = new tree(343,-1841,2);
+		c = new tree(380,-1754,2);
+		c = new tree(380,-1754,2);
+		c = new tree(380,-1724,2);
+		c = new tree(380,-1644,1);
+		c = new tree(380,-1604,2);
+		c = new tree(380,-1544,2);
+		c = new tree(380,-1494,1);
+		c = new tree(380,-1444,0);
+		c = new tree(380,-1494,2);
+		c = new tree(380,-1424,0);
+		c = new tree(380,-1264,1);
+		c = new tree(380,-1174,2);
+		c = new tree(380,-1224,1);
+		c = new tree(411,-1304,2);
+		c = new tree(411,-1304,2);
+		c = new tree(341,-1334,0);
+		c = new tree(403,-1496,0);
+		c = new tree(403,-1536,2);
+		c = new tree(403,-1636,1);
+		c = new tree(403,-1706,0);
+		c = new tree(403,-1756,2);
+		c = new tree(403,-1796,2);
+		c = new tree(403,-1846,1);
+		c = new tree(403,-1926,1);
+		c = new tree(403,-1996,1);
+		c = new tree(403,-2046,0);
+		c = new tree(23,-2343,2);
+		c = new tree(143,-2343,1);
+		c = new tree(203,-2343,0);
+		c = new tree(203,-2343,0);
+		c = new tree(283,-2343,2);
+		c = new tree(353,-2343,1);
+		c = new tree(403,-2343,2);
+		c = new tree(453,-2343,2);
+		c = new tree(483,-2343,2);
+		c = new tree(503,-2343,2);
+		c = new tree(393,-2343,1);
+		c = new tree(263,-2343,2);
+		c = new tree(193,-2343,0);
+		c = new tree(283,-2343,0);
+		c = new tree(333,-2343,0);
+		c = new tree(333,-2343,1);
+		c = new tree(313,-2343,1);
+		c = new tree(416,-1289,0);
+		c = new tree(476,-1289,0);
+		c = new tree(476,-1289,0);
+		c = new tree(506,-1289,2);
+		c = new tree(546,-1289,2);
+		c = new tree(566,-1289,1);
+		c = new tree(606,-1289,0);
+		c = new tree(656,-1289,0);
+		c = new tree(656,-1289,2);
+		c = new tree(736,-1289,2);
+		c = new tree(796,-1289,0);
+		c = new tree(836,-1289,1);
+		c = new tree(866,-1289,1);
+		c = new tree(896,-1289,2);
+		c = new tree(936,-1289,1);
+		c = new tree(986,-1289,0);
+		c = new tree(996,-1289,2);
+		c = new tree(1026,-1289,0);
+		c = new tree(1076,-1289,1);
+		c = new tree(1116,-1289,0);
+		c = new tree(1166,-1289,0);
+		c = new tree(1186,-1289,0);
+		c = new tree(1206,-1289,0);
+		c = new tree(1206,-1289,1);
+		c = new tree(1246,-1289,2);
+		c = new tree(1246,-1289,1);
+		c = new tree(1246,-1289,0);
+		c = new tree(1296,-1289,0);
+		c = new tree(1296,-1289,1);
+		c = new tree(587,-2101,1);
+		c = new tree(597,-2101,0);
+		c = new tree(637,-2101,1);
+		c = new tree(687,-2101,2);
+		c = new tree(727,-2101,1);
+		c = new tree(727,-2101,0);
+		c = new tree(677,-2101,1);
+		c = new tree(677,-2101,1);
+		c = new tree(677,-2101,1);
+		c = new tree(607,-2101,1);
+		c = new tree(677,-2101,0);
+		c = new tree(677,-2101,1);
+		c = new tree(717,-2101,0);
+		c = new tree(737,-2101,2);
+		c = new tree(777,-2101,0);
+		c = new tree(777,-2101,1);
+		c = new tree(777,-2101,0);
+		c = new tree(827,-2101,0);
+		c = new tree(827,-2101,1);
+		c = new tree(827,-2101,1);
+		c = new tree(827,-2101,0);
+		c = new tree(877,-2101,2);
+		c = new tree(877,-2101,0);
+		c = new tree(877,-2101,2);
+		c = new tree(927,-2101,2);
+		c = new tree(927,-2101,1);
+		c = new tree(927,-2101,1);
+		c = new tree(977,-2101,0);
+		c = new tree(977,-2101,2);
+		c = new tree(1007,-2101,1);
+		c = new tree(1007,-2101,2);
+		c = new tree(1007,-2101,1);
+		c = new tree(1037,-2101,2);
+		c = new tree(1057,-2101,1);
+		c = new tree(1077,-2101,0);
+		c = new tree(1097,-2101,0);
+		c = new tree(1127,-2101,2);
+		c = new tree(1167,-2101,1);
+		c = new tree(1167,-2101,0);
+		c = new tree(1217,-2101,1);
+		c = new tree(1267,-2101,2);
+		c = new tree(1267,-2101,1);
+		c = new tree(1317,-2101,0);
+		c = new tree(1367,-2101,1);
+		c = new tree(1377,-2101,1);
+		c = new tree(1417,-2101,0);
+		c = new tree(1337,-2101,0);
+		c = new tree(1297,-2101,2);
+		c = new tree(1257,-2101,0);
+		c = new tree(1177,-2101,0);
+		c = new tree(1147,-2101,0);
+		c = new tree(1097,-2101,2);
+		c = new tree(1077,-2101,2);
+		c = new tree(997,-2101,0);
+		c = new tree(997,-2101,2);
+		c = new tree(927,-2101,0);
+		c = new tree(927,-2101,1);
+		c = new tree(857,-2101,0);
+		c = new tree(857,-2101,0);
+		c = new tree(787,-2101,0);
+		c = new tree(767,-2101,2);
+		c = new tree(847,-2101,2);
+		c = new tree(947,-2101,1);
+		c = new tree(1017,-2101,1);
+		c = new tree(1283,-1290,1);
+		c = new tree(1153,-1290,1);
+		c = new tree(1143,-1290,2);
+		c = new tree(1033,-1290,0);
+		c = new tree(993,-1290,1);
+		c = new tree(943,-1290,2);
+		c = new tree(943,-1290,0);
+		c = new tree(883,-1290,2);
+		c = new tree(863,-1290,0);
+		c = new tree(823,-1290,2);
+		c = new tree(793,-1290,1);
+		c = new tree(753,-1290,1);
+		c = new tree(723,-1290,1);
+		c = new tree(653,-1290,2);
+		c = new tree(603,-1290,1);
+		c = new tree(563,-1290,1);
+		c = new tree(633,-1290,1);
+		c = new tree(723,-1290,2);
+		c = new tree(723,-1290,2);
+		c = new tree(663,-1290,1);
+		c = new tree(663,-1290,1);
+		c = new tree(703,-1290,2);
+		c = new tree(703,-1290,1);
+		c = new tree(693,-1290,2);
+		c = new tree(623,-1290,2);
+		c = new tree(693,-1290,2);
+		c = new tree(693,-1290,0);
+		c = new tree(553,-1290,1);
+		c = new tree(443,-1290,1);
+		c = new tree(573,-1290,1);
+		c = new tree(723,-1290,0);
+		c = new tree(853,-1290,1);
+		c = new tree(923,-1290,0);
+		c = new tree(923,-1290,0);
+		c = new tree(973,-1290,0);
+		c = new tree(1023,-1290,1);
+		c = new tree(1063,-1290,1);
+		c = new tree(1103,-1290,2);
+		c = new tree(1153,-1290,1);
+		c = new tree(1193,-1290,2);
+		c = new tree(1213,-1290,0);
+		c = new tree(1243,-1290,0);
+		c = new tree(1243,-1290,0);
+		c = new tree(1173,-1290,0);
+		c = new tree(1123,-1290,0);
+		c = new tree(1073,-1290,2);
+		c = new tree(1023,-1290,1);
+		c = new tree(953,-1290,0);
+		c = new tree(893,-1290,0);
+		c = new tree(823,-1290,0);
+		
+		// Section 1 (outside farm)
+		
+		w = new redWolf(-161+slashAdjustX,-673+slashAdjustY);
 		commands = new commandList();
-		commands.add(new slashCommand(200+slashAdjustX,-821+200+slashAdjustY));
-		commands.add(new moveCommand(200+slashAdjustX-5,-821+200+slashAdjustY));
-		commands.add(new slashCommand(-240+slashAdjustX,-821+200+slashAdjustY));
-		commands.add(new moveCommand(-240+slashAdjustX+5,-821+200+slashAdjustY)); 
+		commands.add(new slashCommand(139+slashAdjustX,-673+slashAdjustY));
+		commands.add(new slashCommand(-161+slashAdjustX,-673+slashAdjustY));
 		w.repeatCommands(commands);
+		w.setJumpSpeed (10);
+		w.setSpawnClawPhaseTime(1.5f);
 		
-		// Second pack of wolves
+		w = new redWolf(139+slashAdjustX,-773+slashAdjustY);
 		commands = new commandList();
-		commands.add(new moveCommand(-205,-951));
-		commands.add(new moveCommand(-205+75*1,-951));
-		commands.add(new moveCommand(-205+75*2,-951));
-		commands.add(new moveCommand(-205+75*2+75*oneOverRoot2,-951+75*oneOverRoot2));
-		commands.add(new moveCommand(-205+75*3+75*oneOverRoot2,-951+75*oneOverRoot2));
-		commands.add(new moveCommand(-205+75*3+75*oneOverRoot2*2,-951));
-		commands.add(new moveCommand(-205+75*4+75*oneOverRoot2*2,-951));
-		commands.add(new moveCommand(-205+75*4+75*oneOverRoot2*2,-951-75));
-		commands.add(new moveCommand(-205+75*3+75*oneOverRoot2*2,-951-75));
-		commands.add(new moveCommand(-205+75*2+75*oneOverRoot2*2,-951-75));
-		commands.add(new moveCommand(-205+75*1+75*oneOverRoot2*2,-951-75));
-		commands.add(new moveCommand(-205+75*1+75*oneOverRoot2,-951-75-oneOverRoot2*75));
-		commands.add(new moveCommand(-205+75*oneOverRoot2,-951-75-oneOverRoot2*75));
-		commands.add(new moveCommand(-205,-951-75));
-		createChain(commands,"move","red",0f,0.5f, 1.5f, new ArrayList<Integer>(Arrays.asList(new Integer[]{3,10})));
-		
-		// Wolf in middle
-		commands = new commandList();
-		w = new redWolf(-158,-990);
-		w.setJumpSpeed(10);
-		w.setSpawnClawPhaseTime(.5f);
-		commands.add(new slashCommand(-158+slashAdjustX,-990+slashAdjustY-20));
-		commands.add(new moveCommand(-158+slashAdjustX,-990+slashAdjustY-20));
-		commands.add(new waitCommand(.5f));
-		commands.add(new slashCommand(156+slashAdjustX,-990+slashAdjustY-20));
-		commands.add(new moveCommand(156+slashAdjustX,-990+slashAdjustY-20)); 
-		commands.add(new waitCommand(.5f));
+		commands.add(new slashCommand(-161+slashAdjustX,-773+slashAdjustY));
+		commands.add(new slashCommand(139+slashAdjustX,-773+slashAdjustY));
 		w.repeatCommands(commands);
+		w.setJumpSpeed (17.5f);
+		w.setSpawnClawPhaseTime(1f);
 		
-		// Red wolves above
-		for(int i = 0; i < 6; i++) {
-			commands = new commandList();
-			w = new redWolf(329,-1073 - i*40);
-			w.setSpawnClawPhaseTime(0.25f);
-			commands.add(new slashCommand(329+slashAdjustX-20,-1073+slashAdjustY-20 - i*40));
-			commands.add(new moveCommand(329+slashAdjustX-5-20,-1073+slashAdjustY-20 - i*40));
-			commands.add(new waitCommand(.25f));
-			commands.add(new slashCommand(-17+slashAdjustX,-1073+slashAdjustY-20 - i*40));
-			commands.add(new moveCommand(-17+slashAdjustX+5,-1073+slashAdjustY-20 - i*40)); 
-			commands.add(new waitCommand(.25f));
-			w.repeatCommands(commands);
-		}
-		
-		// Red wolf above right
+		w = new redWolf(-161+slashAdjustX,-873+slashAdjustY);
 		commands = new commandList();
-		w = new redWolf(356,-1067-40);
-		w.setSpawnClawPhaseTime(0.25f);
-		commands.add(new slashCommand(356+slashAdjustX,-1277+slashAdjustY-20));
-		commands.add(new moveCommand(356+slashAdjustX,-1277+slashAdjustY-20));
-		commands.add(new slashCommand(356+slashAdjustX,-1067+slashAdjustY-60));
-		commands.add(new moveCommand(356+slashAdjustX,-1067+slashAdjustY-60)); 
+		commands.add(new slashCommand(139+slashAdjustX,-873+slashAdjustY));
+		commands.add(new slashCommand(-161+slashAdjustX,-873+slashAdjustY));
 		w.repeatCommands(commands);
+		w.setJumpSpeed (25);
+		w.setSpawnClawPhaseTime(0.5f);
 		
-		// Yellow wolf in forest above spawn at the top
+		// Section 2 (different pattern)
+		
+		w = new redWolf(-261+slashAdjustX,-973+slashAdjustY);
 		commands = new commandList();
-		commands.add(new slashCommand(1278+slashAdjustX,-1458+slashAdjustY-20));
-		commands.add(new slashCommand(466+slashAdjustX,-1458+slashAdjustY-20));
-		w = new yellowWolf(466,-1458);
-		((yellowWolf)(w)).setSpawnRockEvery(0.25f);
-		w.setSpawnClawPhaseTime(0.25f);
+		commands.add(new slashCommand(-11+slashAdjustX,-1173+slashAdjustY));
+		commands.add(new slashCommand(239+slashAdjustX,-973+slashAdjustY));
+		commands.add(new slashCommand(-11+slashAdjustX,-1173+slashAdjustY));
+		commands.add(new slashCommand(-261+slashAdjustX,-973+slashAdjustY));
 		w.repeatCommands(commands);
+		w.setJumpSpeed (10f);
+		w.setSpawnClawPhaseTime(1f);
 		
+		w = new redWolf(-261+slashAdjustX,-1173+slashAdjustY);
+		commands = new commandList();
+		commands.add(new slashCommand(-11+slashAdjustX,-973+slashAdjustY));
+		commands.add(new slashCommand(239+slashAdjustX,-1173+slashAdjustY));
+		commands.add(new slashCommand(-11+slashAdjustX,-973+slashAdjustY));
+		commands.add(new slashCommand(-261+slashAdjustX,-1173+slashAdjustY));
+		w.repeatCommands(commands);
+		w.setJumpSpeed (10f);
+		w.setSpawnClawPhaseTime(1f);
 		
-	/*	
-/////////////////////////////////////////
-//////////AREA BETWEEN FARLSWORTH //////
-/////////  FENCE AND GARDEN   /////////
-//////////////////////////////////////
- * 		
-		// Bottle before forest farm
-		item b = new normalBottle(849,-1335);
+		w = new redWolf(-186+slashAdjustX,-1073+slashAdjustY);
+		//Middle jumping wolf
+		commands = new commandList();
+		commands.add(new slashCommand(164+slashAdjustX,-1073+slashAdjustY));
+		commands.add(new slashCommand(-186+slashAdjustX,-1073+slashAdjustY));
+		w.repeatCommands(commands);
+		w.setJumpSpeed (13f);
+		w.setSpawnClawPhaseTime(1f);
 		
-				
-		// Well before flower garden.
-		c = new well(1400,-300,0);
+		// Section 3 (same pattern, more wolves)
 		
-		// Well in grave.
-		new well(2114,-2955,0);
+		w = new redWolf(-261+slashAdjustX,-1273+slashAdjustY);
+		commands = new commandList();
+		commands.add(new slashCommand(-11+slashAdjustX,-1473+slashAdjustY));
+		commands.add(new slashCommand(239+slashAdjustX,-1273+slashAdjustY));
+		commands.add(new slashCommand(-11+slashAdjustX,-1473+slashAdjustY));
+		commands.add(new slashCommand(-261+slashAdjustX,-1273+slashAdjustY));
+		w.repeatCommands(commands);
+		w.setJumpSpeed (10f);
+		w.setSpawnClawPhaseTime(1f);
 		
-		// First wolf pack
-		u = new redWolf(-8,-846);
-		u.setFacingDirection("Down");
+		w = new redWolf(-11+slashAdjustX,-1473+slashAdjustY);
+		commands = new commandList();
+		commands.add(new slashCommand(239+slashAdjustX,-1273+slashAdjustY));
+		commands.add(new slashCommand(-11+slashAdjustX,-1473+slashAdjustY));
+		commands.add(new slashCommand(-261+slashAdjustX,-1273+slashAdjustY));
+		commands.add(new slashCommand(-11+slashAdjustX,-1473+slashAdjustY));
+		w.repeatCommands(commands);
+		w.setJumpSpeed (10f);
+		w.setSpawnClawPhaseTime(1f);
 		
-		// Second wolf pack
-		u = new yellowWolf(430,-1272);
-		u.setFacingDirection("Left");
+		w = new redWolf(-261+slashAdjustX,-1473+slashAdjustY);
+		commands = new commandList();
+		commands.add(new slashCommand(-11+slashAdjustX,-1273+slashAdjustY));
+		commands.add(new slashCommand(239+slashAdjustX,-1473+slashAdjustY));
+		commands.add(new slashCommand(-11+slashAdjustX,-1273+slashAdjustY));
+		commands.add(new slashCommand(-261+slashAdjustX,-1473+slashAdjustY));
+		w.repeatCommands(commands);
+		w.setJumpSpeed (10f);
+		w.setSpawnClawPhaseTime(1f);
 		
-		// Third wolf pack
-		u = new blackWolf(1392,-1272);
-		u.setFacingDirection("Left");
+		w = new redWolf(-11+slashAdjustX,-1273+slashAdjustY);
+		commands = new commandList();
+		commands.add(new slashCommand(239+slashAdjustX,-1473+slashAdjustY));
+		commands.add(new slashCommand(-11+slashAdjustX,-1273+slashAdjustY));
+		commands.add(new slashCommand(-261+slashAdjustX,-1473+slashAdjustY));
+		commands.add(new slashCommand(-11+slashAdjustX,-1273+slashAdjustY));
+		w.repeatCommands(commands);
+		w.setJumpSpeed (10f);
+		w.setSpawnClawPhaseTime(1f);
 		
-		// Fourth wolf pack
-		u = new redWolf(1400,-700);
-		u.setFacingDirection("Up");
+		w = new redWolf(-186+slashAdjustX,-1373+slashAdjustY);
+		//Middle jumping wolf
+		commands = new commandList();
+		commands.add(new slashCommand(164+slashAdjustX,-1373+slashAdjustY));
+		commands.add(new slashCommand(-186+slashAdjustX,-1373+slashAdjustY));
+		w.repeatCommands(commands);
+		w.setJumpSpeed (13f);
+		w.setSpawnClawPhaseTime(1f);
 		
+		// Section 4
 		
-/////////////////////////////////////////
-///////// AREA BETWEEN FARLSWORTH //////
-/////////    GARDEN AND GRAVE   ///////
-//////////////////////////////////////
+			//First half
 		
-		// Fifth wolf pack
-		u = new blackWolf(2335,-110);
-		u.setFacingDirection("Up");
-		u = new yellowWolf(2385,-160);
-		u.setFacingDirection("Up");
+		w = new redWolf(-261+slashAdjustX,-1773+slashAdjustY);
+		commands = new commandList();
+		commands.add(new slashCommand(-261+slashAdjustX,-1573+slashAdjustY));
+		commands.add(new slashCommand(-261+slashAdjustX,-1773+slashAdjustY));
+		w.repeatCommands(commands);
+		w.setJumpSpeed (10f);
+		w.setSpawnClawPhaseTime(1f);
 		
-		// Sixth wolf pack
-		u = new blackWolf(2785,-160);
-		u.setFacingDirection("Left");
-		u = new redWolf(2760,-110);
-		u.setFacingDirection("Left");
+		w = new redWolf(-11+slashAdjustX,-1573+slashAdjustY);
+		commands = new commandList();
+		commands.add(new slashCommand(-11+slashAdjustX,-1773+slashAdjustY));
+		commands.add(new slashCommand(-11+slashAdjustX,-1573+slashAdjustY));
+		w.repeatCommands(commands);
+		w.setJumpSpeed (10f);
+		w.setSpawnClawPhaseTime(1f);
 		
-		// Seventh wolf pack
-		u = new yellowWolf(2550,-999);
-		u.setFacingDirection("Right");
-		u = new redWolf(2550,-959);
-		u.setFacingDirection("Right");
+		w = new redWolf(239+slashAdjustX,-1773+slashAdjustY);
+		commands = new commandList();
+		commands.add(new slashCommand(239+slashAdjustX,-1573+slashAdjustY));
+		commands.add(new slashCommand(239+slashAdjustX,-1773+slashAdjustY));
+		w.repeatCommands(commands);
+		w.setJumpSpeed (10f);
+		w.setSpawnClawPhaseTime(1f);
 		
-		// Eighth wolf pack
-		u = new blackWolf(2550,-1717);
-		u.setFacingDirection("Right");
-		u = new yellowWolf(2550,-1717+40);
-		u.setFacingDirection("Right");
+			// Second half
 		
-		// Ninth wolf pack
-		u = new redWolf(2850,-2360);
-		u.setFacingDirection("Left");
-		u = new blackWolf(2850,-2360+40);
-		u.setFacingDirection("Left");
+		w = new redWolf(-261+slashAdjustX,-1973+slashAdjustY);
+		commands = new commandList();
+		commands.add(new slashCommand(-261+slashAdjustX,-1773+slashAdjustY));
+		commands.add(new slashCommand(-261+slashAdjustX,-1973+slashAdjustY));
+		w.repeatCommands(commands);
+		w.setJumpSpeed (10f);
+		w.setSpawnClawPhaseTime(1f);
 		
-////////////////////////////////////
-//////////AREA BETWEEN GRAVE //////
-/////////  WELL AND TOMB  /////////
-//////////////////////////////////
+		w = new redWolf(-11+slashAdjustX,-1773+slashAdjustY);
+		commands = new commandList();
+		commands.add(new slashCommand(-11+slashAdjustX,-1973+slashAdjustY));
+		commands.add(new slashCommand(-11+slashAdjustX,-1773+slashAdjustY));
+		w.repeatCommands(commands);
+		w.setJumpSpeed (10f);
+		w.setSpawnClawPhaseTime(1f);
 		
-		// Tenth wolf pack
-		u = new redWolf(1155,-3114);
-		u.setFacingDirection("Right");
-		u = new yellowWolf(1155,-3082);
-		u.setFacingDirection("Right");
-		u = new blackWolf(1155,-3050);
-		u.setFacingDirection("Right");
+		w = new redWolf(239+slashAdjustX,-1973+slashAdjustY);
+		commands = new commandList();
+		commands.add(new slashCommand(239+slashAdjustX,-1773+slashAdjustY));
+		commands.add(new slashCommand(239+slashAdjustX,-1973+slashAdjustY));
+		w.repeatCommands(commands);
+		w.setJumpSpeed (10f);
+		w.setSpawnClawPhaseTime(1f);
 		
-		// Optional eleventh wolf pack
-		u = new yellowWolf(452,-3013);
-		u.setFacingDirection("Right");
-		u = new blackWolf(422,-3910);
-		u.setFacingDirection("Right");
-		u = new redWolf(285,-3470);
-		u.setFacingDirection("Down");*/
+			// Middle yellow wolf
+		
+		w = new yellowWolf(-136+slashAdjustX,-1873+slashAdjustY);
+		commands = new commandList();
+		commands.add(new slashCommand(114+slashAdjustX,-1873+slashAdjustY));
+		commands.add(new slashCommand(114+slashAdjustX,-1673+slashAdjustY));
+		commands.add(new slashCommand(-136+slashAdjustX,-1673+slashAdjustY));
+		commands.add(new slashCommand(-136+slashAdjustX,-1873+slashAdjustY));
+		w.repeatCommands(commands);
+		w.setJumpSpeed (10f);
+		w.setSpawnClawPhaseTime(1f);
+		
+		// Section 5 (to the right)
+		
+			// Black wolves
+		
+		w = new blackWolf(620+slashAdjustX,-1973+slashAdjustY);
+		commands = new commandList();
+		commands.add(new slashCommand(620+slashAdjustX,-1573+slashAdjustY));
+		commands.add(new slashCommand(620+slashAdjustX,-1973+slashAdjustY));
+		w.repeatCommands(commands);
+		w.setJumpSpeed (10f);
+		w.setSpawnClawPhaseTime(1f);
+		
+		w = new blackWolf(770+slashAdjustX,-1573+slashAdjustY);
+		commands = new commandList();
+		commands.add(new slashCommand(770+slashAdjustX,-1973+slashAdjustY));
+		commands.add(new slashCommand(770+slashAdjustX,-1573+slashAdjustY));
+		w.repeatCommands(commands);
+		w.setJumpSpeed (10f);
+		w.setSpawnClawPhaseTime(1f);
+		
+		w = new blackWolf(920+slashAdjustX,-1973+slashAdjustY);
+		commands = new commandList();
+		commands.add(new slashCommand(920+slashAdjustX,-1573+slashAdjustY));
+		commands.add(new slashCommand(920+slashAdjustX,-1973+slashAdjustY));
+		w.repeatCommands(commands);
+		w.setJumpSpeed (10f);
+		w.setSpawnClawPhaseTime(1f);
+		
+		w = new blackWolf(1070+slashAdjustX,-1573+slashAdjustY);
+		commands = new commandList();
+		commands.add(new slashCommand(1070+slashAdjustX,-1973+slashAdjustY));
+		commands.add(new slashCommand(1070+slashAdjustX,-1573+slashAdjustY));
+		w.repeatCommands(commands);
+		w.setJumpSpeed (10f);
+		w.setSpawnClawPhaseTime(1f);
+		
+			// Red wolves
+		
+		w = new redWolf(700+slashAdjustX,-1923+slashAdjustY);
+		commands = new commandList();
+		commands.add(new slashCommand(1000+slashAdjustX,-1923+slashAdjustY));
+		commands.add(new slashCommand(700+slashAdjustX,-1923+slashAdjustY));
+		w.repeatCommands(commands);
+		w.setJumpSpeed (10f);
+		w.setSpawnClawPhaseTime(1f);
+		
+		w = new redWolf(1000+slashAdjustX,-1773+slashAdjustY);
+		commands = new commandList();
+		commands.add(new slashCommand(700+slashAdjustX,-1773+slashAdjustY));
+		commands.add(new slashCommand(1000+slashAdjustX,-1773+slashAdjustY));
+		w.repeatCommands(commands);
+		w.setJumpSpeed (10f);
+		w.setSpawnClawPhaseTime(1f);
+		
+		w = new redWolf(700+slashAdjustX,-1673+slashAdjustY);
+		commands = new commandList();
+		commands.add(new slashCommand(1000+slashAdjustX,-1623+slashAdjustY));
+		commands.add(new slashCommand(700+slashAdjustX,-1623+slashAdjustY));
+		w.repeatCommands(commands);
+		w.setJumpSpeed (10f);
+		w.setSpawnClawPhaseTime(1f);
+		
+			// Yellow wolves
+		
+		w = new yellowWolf(1070+slashAdjustX,-2073+slashAdjustY);
+		commands = new commandList();
+		commands.add(new slashCommand(620+slashAdjustX,-2073+slashAdjustY));
+		commands.add(new slashCommand(1070+slashAdjustX,-2073+slashAdjustY));
+		w.repeatCommands(commands);
+		w.setJumpSpeed (10f);
+		w.setSpawnClawPhaseTime(1f);
+		
+		w = new yellowWolf(620+slashAdjustX,-1473+slashAdjustY);
+		commands = new commandList();
+		commands.add(new slashCommand(1070+slashAdjustX,-1473+slashAdjustY));
+		commands.add(new slashCommand(620+slashAdjustX,-1473+slashAdjustY));
+		w.repeatCommands(commands);
+		w.setJumpSpeed (10f);
+		w.setSpawnClawPhaseTime(1f);
 
 	}
 	

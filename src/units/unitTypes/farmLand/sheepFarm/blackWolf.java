@@ -26,7 +26,7 @@ public class blackWolf extends wolf {
 	private static int DEFAULT_UNIT_MOVESPEED = 2;
 	
 	// Default jump speed
-	private static int DEFAULT_UNIT_JUMPSPEED = 9;
+	private static int DEFAULT_UNIT_JUMPSPEED = 10;
 	
 	// Beta stats
 	private static float DEFAULT_MOVESPEED_BETA = 3.5f;
@@ -42,7 +42,7 @@ public class blackWolf extends wolf {
 	private static int DEFAULT_FOLLOW_UNTIL_RANGE_BASE_ALPHA = 15;
 	
 	// How often to spawn a darkHole.
-	private static float DEFAULT_SPAWN_DARKHOLE_EVERY = 0.05f;
+	private static float DEFAULT_SPAWN_DARKHOLE_EVERY = 0.33f;
 	
 	// DarkHole
 	

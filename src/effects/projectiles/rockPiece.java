@@ -38,7 +38,7 @@ public class rockPiece extends projectile {
 	private static String DEFAULT_EFFECT_SPRITESHEET = "images/effects/" + DEFAULT_EFFECT_NAME + ".png";
 	
 	// Duration
-	private static float DEFAULT_ANIMATION_DURATION = 10f;
+	private static float DEFAULT_ANIMATION_DURATION = 3f;
 	
 	// The actual type.
 	private static effectType theEffectType =
