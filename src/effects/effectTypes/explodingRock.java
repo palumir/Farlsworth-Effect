@@ -122,7 +122,7 @@ public class explodingRock extends effect {
 		// Spawn rocks
 		int explodeRadius = 1000;
 		int spawnRadius = 360/n;
-		double currentDegree = utility.RNG.nextInt(spawnRadius);
+		double currentDegree = 0;
 		double degreeChange = (double) 360/n;
 		for(int i = 0; i < n; i++){
 			int newX = (int) (getIntX() + 0*Math.cos(Math.toRadians(currentDegree))); 

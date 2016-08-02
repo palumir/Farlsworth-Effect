@@ -45,7 +45,7 @@ public class yellowWolf extends wolf {
 	private static float DEFAULT_SPAWN_ROCK_EVERY = 0.15f;
 	
 	// Rockpile
-	private static int DEFAULT_HOW_MANY_ROCK_PIECES_SPAWN = 3;
+	private static int DEFAULT_HOW_MANY_ROCK_PIECES_SPAWN = 4;
 	private static float DEFAULT_ROCK_PIECE_MOVESPEED = 1.2f;
 	private static float DEFAULT_ROCK_DURATION = 0.25f;
 	private static int DEFAULT_ROCK_RADIUS = 0;
@@ -56,8 +56,13 @@ public class yellowWolf extends wolf {
 	//////////////
 	
 	// Spawn rock every
-	protected float spawnRockEvery = DEFAULT_SPAWN_ROCK_EVERY;
+	private float spawnRockEvery = DEFAULT_SPAWN_ROCK_EVERY;
+	protected int howManyRockPiecesSpawn = DEFAULT_HOW_MANY_ROCK_PIECES_SPAWN;
 	protected long lastSpawnRock = 0;
+	protected boolean spawnUp = true;
+	protected boolean spawnDown = true;
+	protected boolean spawnLeft = true;
+	protected boolean spawnRight = true;
 	
 	// Unit sprite stuff.
 	private static spriteSheet DEFAULT_UPDOWN_SPRITESHEET = new spriteSheet(new spriteSheetInfo(
@@ -150,12 +155,12 @@ public class yellowWolf extends wolf {
 		// Spawn rocks
 		int stopAt = 10;
 		int howClose = (int) Math.sqrt(Math.pow(this.getIntX() - currClaw.getIntX(),2) + Math.pow(this.getIntY() - currClaw.getIntY(), 2));
-		if(time.getTime() - lastSpawnRock > spawnRockEvery*1000 && (howClose > stopAt)) {
+		if(time.getTime() - lastSpawnRock > getSpawnRockEvery()*1000 && (howClose > stopAt)) {
 			lastSpawnRock = time.getTime();
 			explodingRock r = new explodingRock(this.getIntX() + this.getWidth()/2,
 					  this.getIntY() + this.getHeight()/2,
 					  false,
-					  DEFAULT_HOW_MANY_ROCK_PIECES_SPAWN,
+					  howManyRockPiecesSpawn,
 					  DEFAULT_ROCK_PIECE_MOVESPEED,
 					  DEFAULT_ROCK_RADIUS,
 					  DEFAULT_ROCK_DAMAGE,
@@ -220,5 +225,13 @@ public class yellowWolf extends wolf {
 				DEFAULT_TOPDOWN_ADJUSTMENT_Y
 				));
 		addAnimations();
+	}
+
+	public float getSpawnRockEvery() {
+		return spawnRockEvery;
+	}
+
+	public void setSpawnRockEvery(float spawnRockEvery) {
+		this.spawnRockEvery = spawnRockEvery;
 	}
 }

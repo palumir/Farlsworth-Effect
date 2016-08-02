@@ -321,13 +321,19 @@ public class farmTombEasy extends zone {
 	
 	public static void shadowDudePatrol(int shadowDudeX, int shadowDudeY, int patrolToX, int patrolToY, float moveSpeed) {
 		u = new shadowDude(shadowDudeX,shadowDudeY);
-		u.patrolTo(patrolToX, patrolToY);
+		commands = new commandList();
+		commands.add(new moveCommand(patrolToX, patrolToY));
+		commands.add(new moveCommand(shadowDudeX, shadowDudeY));
+		u.repeatCommands(commands);
 		u.setMoveSpeed(moveSpeed);
 	}
 	
 	public static void lightDudePatrol(int lightDudeX, int lightDudeY, int patrolToX, int patrolToY, float moveSpeed) {
 		u = new lightDude (lightDudeX,lightDudeY);
-		u.patrolTo(patrolToX, patrolToY);
+		commands = new commandList();
+		commands.add(new moveCommand(patrolToX, patrolToY));
+		commands.add(new moveCommand(lightDudeX, lightDudeY));
+		u.repeatCommands(commands);
 		u.setMoveSpeed(moveSpeed);
 	}
 	
@@ -958,7 +964,10 @@ public class farmTombEasy extends zone {
 						  1150-30 - 35 - 64*21+ 20*8,
 							      "ground");
 		u = new lightDude(currPlayer.getIntX() + 200 + 15 - 40, 1150-30 - 35 - 32 - 64*21 + 20*10 - 46);
-		u.patrolTo(currPlayer.getIntX() + 200 + 15 - 40,1150-30 - 35 - 32 - 64*19 + 20*7 - 200);
+		commands = new commandList();
+		commands.add(new moveCommand(currPlayer.getIntX() + 200 + 15 - 40,1150-30 - 35 - 32 - 64*19 + 20*7 - 200));
+		commands.add(new moveCommand(currPlayer.getIntX() + 200 + 15 - 40, 1150-30 - 35 - 32 - 64*21 + 20*10 - 46));
+		u.repeatCommands(commands);
 		u.setMoveSpeed(1f);
 		
 		// Seventeen
@@ -1042,7 +1051,10 @@ public class farmTombEasy extends zone {
 		
 		// Fast guy
 		u = new shadowDude(currPlayer.getIntX() + -300 - 210 + 210+140,1150-30 - 35 - 32 - 64*27 + 20*11 - 45-110*2 + 2);
-		u.patrolTo(currPlayer.getIntX() + -200 - 170 + 400+140,1150-30 - 35 - 32 - 64*27 + 20*11 - 45-110*2 + 2);
+		commands = new commandList();
+		commands.add(new moveCommand(currPlayer.getIntX() + -200 - 170 + 400+140,1150-30 - 35 - 32 - 64*27 + 20*11 - 45-110*2 + 2));
+		commands.add(new moveCommand(currPlayer.getIntX() + -300 - 210 + 210+140,1150-30 - 35 - 32 - 64*27 + 20*11 - 45-110*2 + 2));
+		u.repeatCommands(commands);
 		u.setMoveSpeed(5);
 		
 
@@ -1057,15 +1069,25 @@ public class farmTombEasy extends zone {
 		for(int i = 0; i < 6; i++) {
 			u = new shadowDude(currPlayer.getIntX() + -200 ,
 					1150-30 - 35 - 32 - 64*33 + 20*14-47 - i*50);
-			u.patrolTo(currPlayer.getIntX()+200,
-					1150-30 - 35 - 32 - 64*33 + 20*14-47 - i*50);
+			commands = new commandList();
+			commands.add(new moveCommand(currPlayer.getIntX()+200,
+					1150-30 - 35 - 32 - 64*33 + 20*14-47 - i*50));
+			commands.add(new moveCommand(
+					currPlayer.getIntX() + -200 ,
+					1150-30 - 35 - 32 - 64*33 + 20*14-47 - i*50));
+			u.repeatCommands(commands);
 			u.setMoveSpeed(1);
 		}
 		
 		u = new lightDude(currPlayer.getIntX()+100,
 				1150-30 - 35 - 32 - 64*33 + 20*14-47);
-		u.patrolTo(currPlayer.getIntX() + -200 ,
-				1150-30 - 35 - 32 - 64*33 + 20*14-47);
+		commands = new commandList();
+		commands.add(new moveCommand(currPlayer.getIntX() + -200 ,
+				1150-30 - 35 - 32 - 64*33 + 20*14-47));
+		commands.add(new moveCommand(
+				currPlayer.getIntX()+100,
+				1150-30 - 35 - 32 - 64*33 + 20*14-47));
+		u.repeatCommands(commands);
 		u.setMoveSpeed(3.5f);
 		
 		// Nineteen Sixth
@@ -1146,8 +1168,13 @@ public class farmTombEasy extends zone {
 		}
 		u = new lightDude(currPlayer.getIntX(),
 				-1103-300-40 - 47);
-		u.patrolTo(currPlayer.getIntX(),
-				-1103-300-40 - 47 - 8*50);
+		commands = new commandList();
+		commands.add(new moveCommand(currPlayer.getIntX(),
+				-1103-300-40 - 47 - 8*50));
+		commands.add(new moveCommand(
+				currPlayer.getIntX(),
+				-1103-300-40 - 47));
+		u.repeatCommands(commands);
 		u.setMoveSpeed(2);
 		
 		// 23

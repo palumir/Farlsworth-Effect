@@ -57,9 +57,6 @@ public class redWolf extends wolf {
 	/// FIELDS ///
 	////////////////
 	
-	// Charged units
-	private ArrayList<unit> chargeUnits;
-	
 	// Unit sprite stuff.
 	private static spriteSheet DEFAULT_UPDOWN_SPRITESHEET = new spriteSheet(new spriteSheetInfo(
 			"images/units/animals/redWolfUpDown.png", 
@@ -242,31 +239,6 @@ public class redWolf extends wolf {
 	}
 
 	@Override
-	public void chargeUnits() {	
-		if(chargeUnits!=null) {
-			for(int i = 0; i < chargeUnits.size(); i++) {
-				if(chargeUnits.get(i) instanceof player) {
-					chargeUnits.get(i).setUnitLocked(false);
-					chargeUnits.get(i).setTargetable(true);
-				}
-			}
-		}
-		
-		int leniency = 5;
-		chargeUnits = unit.getUnitsInBox(getIntX() + leniency, getIntY() + leniency, getIntX() + getWidth() - leniency, getIntY() + getHeight() + getHitBoxAdjustmentY() - leniency);
-		if(chargeUnits != null) {
-			for(int i = 0; i < chargeUnits.size(); i++) {
-				if(chargeUnits.get(i) instanceof player) {
-					chargeUnits.get(i).stopMove("all");
-					chargeUnits.get(i).move(run,rise);
-					chargeUnits.get(i).setUnitLocked(true);
-					chargeUnits.get(i).setTargetable(false);
-				}
-			}
-		}
-	}
-
-	@Override
 	public void spawnTrail() {
 	}
 	
@@ -298,41 +270,10 @@ public class redWolf extends wolf {
 
 	@Override
 	public void jumpingFinished() {
-		if(chargeUnits != null && chargeUnits.size() >= 1) {
-			for(int i = 0; i < chargeUnits.size(); i++) {
-				if(chargeUnits.get(i) instanceof player) {
-					chargeUnits.get(i).stopMove("all");
-					chargeUnits.get(i).setTargetable(true);
-					if(!alreadyHurt) {
-						alreadyHurt = true;
-						chargeUnits.get(i).hurt(DEFAULT_SLASH_DAMAGE, 1f);
-					}
-					chargeUnits.get(i).move(run,rise);
-					chargeUnits.get(i).setUnitLocked(false);
-				}
-			}
-			chargeUnits = new ArrayList<unit>();
-		}
-		alreadyHurt = false;
 	}
 	
 	@Override
 	public void respondToDestroy() {
-		if(chargeUnits != null && chargeUnits.size() >= 1) {
-			for(int i = 0; i < chargeUnits.size(); i++) {
-				if(chargeUnits.get(i) instanceof player) {
-					chargeUnits.get(i).stopMove("all");
-					if(!alreadyHurt) {
-						alreadyHurt = true;
-					}
-					chargeUnits.get(i).move(run,rise);
-					chargeUnits.get(i).setTargetable(true);
-					chargeUnits.get(i).setUnitLocked(false);
-				}
-			}
-			chargeUnits = new ArrayList<unit>();
-		}
-		alreadyHurt = false;
 	}
 
 	@Override
@@ -403,5 +344,11 @@ public class redWolf extends wolf {
 		// Attacking right animation.
 		animation trailRight = new animation("trailRight", leftRightSpriteSheet.getAnimation(9), 0, 0, 1);
 		getAnimations().addAnimation(trailRight);
+	}
+
+	@Override
+	public void chargeUnits() {
+		// TODO Auto-generated method stub
+		
 	}
 }

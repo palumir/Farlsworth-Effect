@@ -76,7 +76,7 @@ public class player extends unit {
 	// 3.5 is default
 	
 	// Default HP
-	private static int DEFAULT_PLAYER_HP = 6;
+	private static int DEFAULT_PLAYER_HP = 1;
 	
 	// Player sprite stuff.
 	private static String DEFAULT_PLAYER_SPRITESHEET = "images/units/player/" + DEFAULT_PLAYER_GENDER + "/noItems.png";
@@ -137,7 +137,7 @@ public class player extends unit {
 	private boolean holdingSpace = false;
 	
 	// Telepathy
-	private boolean canLiftMultipleThings = false;
+	//private boolean canLiftMultipleThings = false;
 
 	// Level up sounds
 	private String levelUp = "sounds/effects/player/levelUp.wav";
@@ -555,7 +555,7 @@ public class player extends unit {
 			
 			// Play blood squirt.
 			effect blood = new critBloodSquirt(getIntX() - critBloodSquirt.getDefaultWidth()/2 + getDefaultWidth()/2,
-					   getIntY() + critBloodSquirt.getDefaultHeight()/2 - critBloodSquirt.getDefaultHeight()/2);
+					   getIntY() - getHitBoxAdjustmentY() + critBloodSquirt.getDefaultHeight()/2 - critBloodSquirt.getDefaultHeight()/2);
 		}
 	}
 	

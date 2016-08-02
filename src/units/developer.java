@@ -78,7 +78,7 @@ public class developer extends player {
 		
 		// Give a million hp
 		healthPoints = 100000;
-		//moveSpeed = 20f;
+		moveSpeed = 20f;
 		
 		// Destroy healthbar.
 		getHealthBar().destroy();
@@ -222,7 +222,7 @@ public class developer extends player {
 		// Determine whether or not we are touching something.
 		ArrayList<drawnObject> touchedObjects  = drawnObject.getObjectsInRadius((int)inGamePoint.getX(), (int)inGamePoint.getY(), DEFAULT_CLICK_RADIUS);
 		ArrayList<drawnObject> touchedUnits = new ArrayList<drawnObject>();
-		for(int i = 0; i < touchedObjects.size(); i++) if(touchedObjects.get(i) instanceof unit) touchedUnits.add(touchedObjects.get(i));
+		if(touchedObjects!=null) for(int i = 0; i < touchedObjects.size(); i++) if(touchedObjects.get(i) instanceof unit) touchedUnits.add(touchedObjects.get(i));
 		
 		if(selectionType.equals("Unit") && touchedUnits != null && touchedUnits.size() > 0) {
 			

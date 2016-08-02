@@ -19,6 +19,8 @@ import terrain.chunk;
 import units.boss;
 import units.player;
 import units.unitType;
+import units.unitCommands.commandList;
+import units.unitCommands.moveCommand;
 import units.unitTypes.farmLand.sheepFarm.sheep;
 import utilities.intTuple;
 import utilities.saveState;
@@ -555,12 +557,12 @@ public class farlsworth extends boss {
 				// Pissy Farlsworth runs away third time.
 				if(sequencePart == 7 && interactSequence != null && interactSequence.getTheText().isEnd()) {
 					sequencePart++;
-					p = new ArrayList<intTuple>();
-					p.add(new intTuple(425,-70));
-					p.add(new intTuple(425,5));
-					p.add(new intTuple(5,-1));
-					p.add(new intTuple(5,-420));
-					followPath(p);
+					commandList commands = new commandList();
+					commands.add(new moveCommand(425,-70));
+					commands.add(new moveCommand(425,5));
+					commands.add(new moveCommand(5,-1));
+					commands.add(new moveCommand(5,-420));
+					doCommandsOnce(commands);
 					interactMoved = true;
 					sound s = new sound(bleet);
 					s.setPosition(getIntX(), getIntY(), sound.DEFAULT_SOUND_RADIUS);
@@ -606,13 +608,13 @@ public class farlsworth extends boss {
 				if(!isFenceAttached.isCompleted() && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().isEnd() && interactSequence.getTheText().getTextOnPress()!=null) &&
 						(interactSequence.getTheText().getTextOnPress().equals("Catch me if you can."))) {
 					attachFence();
-					p = new ArrayList<intTuple>();
-					p.add(new intTuple(13,-1003));
-					p.add(new intTuple(366,-1266));
-					p.add(new intTuple(842,-1312));
-					p.add(new intTuple(1322,-1210));
-					p.add(new intTuple(1413,-912));
-					followPath(p);
+					commandList commands = new commandList();
+					commands.add(new moveCommand(13,-1003));
+					commands.add(new moveCommand(366,-1266));
+					commands.add(new moveCommand(842,-1312));
+					commands.add(new moveCommand(1322,-1210));
+					commands.add(new moveCommand(1413,-912));
+					doCommandsOnce(commands);
 					sound s = new sound(bleet);
 					s.setPosition(getIntX(), getIntY(), sound.DEFAULT_SOUND_RADIUS);
 					s.start();
@@ -624,13 +626,13 @@ public class farlsworth extends boss {
 				if(!isFenceAttached.isCompleted() && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().isEnd() && interactSequence.getTheText().getTextOnPress()!=null) &&
 						(interactSequence.getTheText().getTextOnPress().equals("Catch me if you can, I guess."))) {
 					sheepFarm.forestGate.open();
-					p = new ArrayList<intTuple>();
-					p.add(new intTuple(13,-1003));
-					p.add(new intTuple(366,-1266));
-					p.add(new intTuple(842,-1312));
-					p.add(new intTuple(1322,-1210));
-					p.add(new intTuple(1413,-912));
-					followPath(p);
+					commandList commands = new commandList();
+					commands.add(new moveCommand(13,-1003));
+					commands.add(new moveCommand(366,-1266));
+					commands.add(new moveCommand(842,-1312));
+					commands.add(new moveCommand(1322,-1210));
+					commands.add(new moveCommand(1413,-912));
+					doCommandsOnce(commands);
 					sound s = new sound(bleet);
 					s.setPosition(getIntX(), getIntY(), sound.DEFAULT_SOUND_RADIUS);
 					s.start();
@@ -719,19 +721,19 @@ public class farlsworth extends boss {
 				// Run
 				if(sequencePart == 100) {
 					interactSequence.setUnescapable(false);
-					p = new ArrayList<intTuple>();
-					p.add(new intTuple(2307,-121));
-					p.add(new intTuple(2562,-121));
-					p.add(new intTuple(2758,-437));
-					p.add(new intTuple(2926,-437));
-					p.add(new intTuple(2871,-564));
-					p.add(new intTuple(2697,-805));
-					p.add(new intTuple(2697,-1120));
-					p.add(new intTuple(2697,-1405));
+					commandList commands = new commandList();
+					commands.add(new moveCommand(2307,-121));
+					commands.add(new moveCommand(2562,-121));
+					commands.add(new moveCommand(2758,-437));
+					commands.add(new moveCommand(2926,-437));
+					commands.add(new moveCommand(2871,-564));
+					commands.add(new moveCommand(2697,-805));
+					commands.add(new moveCommand(2697,-1120));
+					commands.add(new moveCommand(2697,-1405));
 					sound s = new sound(bleet);
 					s.setPosition(getIntX(), getIntY(), sound.DEFAULT_SOUND_RADIUS);
 					s.start();
-					followPath(p);
+					doCommandsOnce(commands);
 					pastFlowerPatch.setCompleted(true);
 					saveState.setQuiet(true);
 					saveState.createSaveState();
@@ -858,16 +860,16 @@ public class farlsworth extends boss {
 				if(sequencePart == 6 && time.getTime() - waitStart > waitFor*1000) {
 					
 					// Move to in front of Ben.
-					ArrayList<intTuple> p = new ArrayList<intTuple>();
-					p.add(new intTuple(2079,-3875));
-					p.add(new intTuple(2150,-3825));
-					followPath(p);
+					commandList commands = new commandList();
+					commands.add(new moveCommand(2079,-3875));
+					commands.add(new moveCommand(2150,-3825));
+					doCommandsOnce(commands);
 					sequencePart++;
 				}
 				
 				
 				// Talk to Ben.
-				if(sequencePart == 7 && !isMoving() && !isFollowingAPath()) {
+				if(sequencePart == 7 && !isMoving() && getAllCommands()==null || getAllCommands().size() == 0) {
 					interactSequence.setLocked(false);
 					
 					// Continue conversation.
@@ -878,12 +880,12 @@ public class farlsworth extends boss {
 				// Make Ben leave.
 				if(sequencePart == 8 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getTextOnPress()!=null) &&
 						(interactSequence.getTheText().getTextOnPress().contains("Baaaah."))) {
-					ArrayList<intTuple> path = new ArrayList<intTuple>();
-					path.add(new intTuple(2104,-3866));
-					path.add(new intTuple(1943,-3866));
-					path.add(new intTuple(1794,-3807));
-					path.add(new intTuple(1279,-3807));
-					ben.followPath(path);
+					commandList commands = new commandList();
+					commands.add(new moveCommand(2104,-3866));
+					commands.add(new moveCommand(1943,-3866));
+					commands.add(new moveCommand(1794,-3807));
+					commands.add(new moveCommand(1279,-3807));
+					ben.doCommandsOnce(commands);
 					sound s = new sound(bleet);
 					s.setPosition(ben.getIntX(), ben.getIntY(), sound.DEFAULT_SOUND_RADIUS);
 					s.start();
@@ -945,12 +947,12 @@ public class farlsworth extends boss {
 				
 				// Follow the path
 				if(sequencePart == 100) {
-					p = new ArrayList<intTuple>();
+					commandList commands = new commandList();
 					interactSequence.setUnescapable(false);
-					p.add(new intTuple(2330,-3800));
-					p.add(new intTuple(2330,-3980));
-					p.add(new intTuple(2330,-3990));
-					followPath(p);
+					commands.add(new moveCommand(2330,-3800));
+					commands.add(new moveCommand(2330,-3980));
+					commands.add(new moveCommand(2330,-3990));
+					doCommandsOnce(commands);
 					pastTombEntrance.setCompleted(true);
 					saveState.setQuiet(true);
 					saveState.createSaveState();
@@ -1253,7 +1255,10 @@ public class farlsworth extends boss {
 					// Set that the forest is now on fire if you dodged.
 					if(didYouDodgeTheLog) {
 						this.setMoveSpeed(2.5f);
-						patrolTo(this.getIntX(), this.getIntY() + 50);
+						commandList commands = new commandList();
+						commands.add(new moveCommand(this.getIntX(), this.getIntY() + 50));
+						commands.add(new moveCommand(this.getIntX(), this.getIntY()));
+						this.repeatCommands(commands);
 						interactSequence.goToNext();
 						forest.isOnFire.setCompleted(true);
 						didYouSetTheForestOnFire.setCompleted(false);
@@ -1262,6 +1267,7 @@ public class farlsworth extends boss {
 				
 				// If we reach the end.
 				if(sequencePart == 21 && interactSequence.getTheText().isEnd()) {
+					this.stopRepeatCommands();
 					sequencePart = 100;
 				}
 				
@@ -1269,17 +1275,16 @@ public class farlsworth extends boss {
 				if(sequencePart == 100) {
 					
 					// Follow path.
-					p = new ArrayList<intTuple>();
-					p.add(new intTuple(-1149,-3905));
-					p.add(new intTuple(-1527,-3905));
-					p.add(new intTuple(-1867,-3905));
-					p.add(new intTuple(-2168,-3905));
+					commandList commands = new commandList();
+					commands.add(new moveCommand(-1149,-3905));
+					commands.add(new moveCommand(-1527,-3905));
+					commands.add(new moveCommand(-1867,-3905));
+					commands.add(new moveCommand(-2168,-3905));
 					
 					// Move story along.
-					this.stopPatrol();
 					this.setMoveSpeed(4.5f);
 					interactSequence.setUnescapable(false);
-					followPath(p);
+					doCommandsOnce(commands);
 					pastTombExit.setCompleted(true);
 					saveState.setQuiet(true);
 					saveState.createSaveState();

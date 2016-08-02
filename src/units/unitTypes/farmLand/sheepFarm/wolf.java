@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import drawing.spriteSheet;
 import drawing.spriteSheet.spriteSheetInfo;
+import effects.buffs.darkSlow;
 import drawing.animation.animation;
 import drawing.animation.animationPack;
 import modes.mode;
@@ -211,6 +212,27 @@ public abstract class wolf extends unit {
 			// Set animations.
 			setAnimations(unitTypeAnimations);
 		
+		}
+		
+		// Hurt people stuff.
+		long lastHurt = 0;
+		int damage = 1;
+		float slowTo = 0.1f;
+		float hurtEvery = 0.05f;
+		
+		// How lenient are we in hurting people?
+		// How many units of space do we reduce the radius of pain by?
+		private int leniency = 7;
+		
+		public void hurtPeople() {
+			// If someone is in the explosion radius, hurt.
+			if(time.getTime() - lastHurt > hurtEvery*1000) {
+				player currPlayer = player.getPlayer();
+				lastHurt = time.getTime();
+				if(currPlayer.isWithin(this.getIntX() + leniency, this.getIntY() + leniency, this.getIntX() + this.getWidth() - leniency, this.getIntY() + this.getHeight() - leniency)) {
+					currPlayer.hurt(damage, 1);
+				}
+			}
 		}
 		
 		// Combat defaults.
@@ -469,12 +491,9 @@ public abstract class wolf extends unit {
 			
 			// If player is in radius, follow player, attacking.
 			player currPlayer = player.getPlayer();
-			int playerX = currPlayer.getIntX() + currPlayer.getWidth()/2;
-			int playerY = currPlayer.getIntY() + currPlayer.getHeight()/2;
-			float howClose = (float) Math.sqrt((playerX - getIntX() - getWidth()/2)*(playerX - getIntX() - getWidth()/2) + (playerY - getIntY() - getHeight()/2)*(playerY - getIntY() - getHeight()/2));
 			
-			// Make sounds.
-			makeSounds();
+			// Hurt people
+			hurtPeople();
 			
 			// Claw attack
 			dealWithClawAttacks();
