@@ -8,12 +8,12 @@ import items.item;
 import items.key;
 import units.player;
 
-public class farmKey extends key {
+public class farmGateKey extends key {
 	////////////////
 	/// DEFAULTS ///
 	////////////////
 	// Bottle name
-	public static String DEFAULT_KEY_NAME = "Farm Key";
+	public static String DEFAULT_KEY_NAME = "Farm Key But Not Farmer's Barn, House, or Fridge Key";
 	
 	//////////////
 	/// FIELDS ///
@@ -33,7 +33,7 @@ public class farmKey extends key {
 	///////////////
 	
 	// In inventory.
-	public farmKey() {
+	public farmGateKey() {
 		super(DEFAULT_KEY_NAME);
 	}
 	
@@ -43,7 +43,7 @@ public class farmKey extends key {
 	}
 	
 	// On floor.
-	public farmKey(int x, int y) {
+	public farmGateKey(int x, int y) {
 		super(DEFAULT_KEY_NAME,x,y);
 	}
 	

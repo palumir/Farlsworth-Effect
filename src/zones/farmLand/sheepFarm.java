@@ -27,6 +27,7 @@ import drawing.background;
 import drawing.userInterface.tooltipString;
 import effects.effectTypes.fire;
 import interactions.event;
+import items.bottle;
 import items.item;
 import items.bottles.normalBottle;
 import items.weapons.dagger;
@@ -1039,10 +1040,7 @@ public class sheepFarm extends zone {
 		tree.createTree(-627-550,260,1);
 		
 		// Dagger.
-		item swordSpawn = new sword(-800,387);
-		
-		// Long sword testing
-		//item longSwordSpawn = new sword(-400,387);
+		bottle okBottle = new normalBottle(-800,387);
 		
 		// Corner
 		tree.createTree(-60-550,480,2);

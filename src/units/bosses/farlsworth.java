@@ -49,7 +49,7 @@ public class farlsworth extends boss {
 	private static String DEFAULT_UNIT_NAME = "Farlsworth";
 	
 	// Default movespeed.
-	private static float DEFAULT_UNIT_MOVESPEED = 4.5f;
+	private static float DEFAULT_UNIT_MOVESPEED = 5f;
 	
 	// Default jump speed
 	private static int DEFAULT_UNIT_JUMPSPEED = 10;
@@ -657,7 +657,7 @@ public class farlsworth extends boss {
 			else if(pastFlowerPatch!= null && !pastFlowerPatch.isCompleted()) {
 				
 				// Spawn Farlsworth at the Flower patch
-				if(sequencePart == 0 && (p == null || p.size() == 0)) {
+				if(sequencePart == 0 && getAllCommands()==null || getAllCommands().size() == 0) {
 					stopMove("all");
 					destroyFence();
 					movingToAPoint = false;
@@ -746,7 +746,7 @@ public class farlsworth extends boss {
 			else if(pastTombEntrance != null && !pastTombEntrance.isCompleted()) {
 				
 				// Spawn Farlsworth at the tomb entrance.
-				if(sequencePart == 0 && (p == null || p.size() == 0)) {
+				if(sequencePart == 0 && getAllCommands()==null || getAllCommands().size() == 0) {
 					
 					// Spawn Ben in front of the tomb
 					stopMove("all");
@@ -964,7 +964,7 @@ public class farlsworth extends boss {
 			else if(pastTombExit != null && !pastTombExit.isCompleted()) {
 				
 				// Spawn him at the tomb exit.
-				if(sequencePart == 0 && (p == null || p.size() == 0)) {
+				if(sequencePart == 0 && getAllCommands()==null || getAllCommands().size() == 0) {
 					setDoubleX(-745);
 					setDoubleY(-3899);
 					setFacingDirection("Right");
@@ -1295,7 +1295,7 @@ public class farlsworth extends boss {
 			}
 			else {	
 				// He's no longer in the zone.
-				if(sequencePart == 0 && (p == null || p.size() == 0)) {
+				if(sequencePart == 0 && getAllCommands()==null || getAllCommands().size() == 0) {
 					stopMove("all");
 					setDoubleX(-10000);
 					setDoubleY(-10000);

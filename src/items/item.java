@@ -11,6 +11,7 @@ import drawing.spriteSheet;
 import effects.effect;
 import effects.interfaceEffects.floatingString;
 import items.bottles.normalBottle;
+import items.keys.farmGateKey;
 import items.keys.farmKey;
 import items.weapons.dagger;
 import items.weapons.sword;
@@ -30,6 +31,7 @@ public abstract class item extends drawnObject {
 	
 	// Display
 	public static Color DEFAULT_PICKUP_COLOR = new Color(103,238,245);
+	public static Color DEFAULT_DROP_COLOR = Color.red;
 	
 	// Volume and sound
 	public static String pickUpSound = "sounds/effects/player/items/itemPickup.wav";
@@ -75,12 +77,36 @@ public abstract class item extends drawnObject {
 	public abstract void equip();
 	
 	// Pickup the item.
+	public void drop() {
+		if(player.getPlayer() != null) {
+		
+			// Display text. 
+			player currPlayer = player.getPlayer();
+			effect e = new floatingString("-" + stringUtils.toTitleCase(getName()), DEFAULT_DROP_COLOR, currPlayer.getIntX() + currPlayer.getWidth()/2, currPlayer.getIntY() + currPlayer.getHeight()/2, 1.3f);
+			e.setAnimationDuration(3f);
+			
+			// At least add the item to the player's inventory.
+			player.getPlayer().getPlayerInventory().drop(this.getItemRef());
+			
+		}
+		
+		// Play sound.
+		sound s = new sound(pickUpSound);
+		s.start();
+		
+		// Stop drawing the weapon on the ground.
+		inInventory = false;
+		destroy();
+	}
+	
+	// Pickup the item.
 	public void pickUp() {
 		if(player.getPlayer() != null) {
 		
 			// Display text. 
 			player currPlayer = player.getPlayer();
-			effect e = new floatingString("+" + stringUtils.toTitleCase(getName()), DEFAULT_PICKUP_COLOR, currPlayer.getIntX() + currPlayer.getWidth()/2, currPlayer.getIntY() + currPlayer.getHeight()/2, 1.2f);
+			effect e = new floatingString("+" + stringUtils.toTitleCase(getName()), DEFAULT_PICKUP_COLOR, currPlayer.getIntX() + currPlayer.getWidth()/2, currPlayer.getIntY() + currPlayer.getHeight()/2, 1.3f);
+			e.setAnimationDuration(3f);
 			
 			// At least add the item to the player's inventory.
 			player.getPlayer().getPlayerInventory().pickUp(this.getItemRef());
@@ -135,6 +161,7 @@ public abstract class item extends drawnObject {
 		
 		// Keys.
 		if(farmKey.keyRef == null) farmKey.keyRef = new farmKey();
+		if(farmGateKey.keyRef == null) farmGateKey.keyRef = new farmGateKey();
 		
 	}
 

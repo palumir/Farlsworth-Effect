@@ -111,7 +111,7 @@ public class rockPiece extends projectile {
 		
 		// Run animation.
 		if(getCurrentAnimation() != null) getCurrentAnimation().playAnimation();
-		if(time.getTime() - timeStarted >= animationDuration*1000) {
+		if(time.getTime() - timeStarted >= getAnimationDuration()*1000) {
 			explode();
 		}
 	}

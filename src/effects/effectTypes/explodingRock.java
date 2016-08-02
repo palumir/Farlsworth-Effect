@@ -79,7 +79,7 @@ public class explodingRock extends effect {
 		this.damage = damage;
 		
 		// Duration
-		this.animationDuration = duration;
+		this.setAnimationDuration(duration);
 		
 		// Set sound.
 		sound s = new sound(rockSpawn);

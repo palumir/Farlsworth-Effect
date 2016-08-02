@@ -4,6 +4,7 @@ import drawing.userInterface.tooltipString;
 import interactions.interactBox;
 import interactions.quest;
 import interactions.textSeries;
+import items.keys.farmGateKey;
 import items.keys.farmKey;
 import modes.mode;
 import units.humanType;
@@ -57,6 +58,9 @@ public class farmer extends unit {
 	// Tooltip help
 	private boolean tooltipShown = false;
 	
+	// Interact sequence
+	private interactBox interactSequence;
+	
 	///////////////
 	/// METHODS ///
 	///////////////
@@ -93,28 +97,26 @@ public class farmer extends unit {
 		textSeries s;
 		
 		// Start of conversation.
-		textSeries startOfConversation = new textSeries(null, "For flock's sake ...");
-		s = startOfConversation.addChild(null, "These sheep wool be the death of me.");
-		s = s.addChild(null, "The shear thought of collecting more wool pains me.");
-		s = s.addChild(null, "If ewe were conveniently looking for a quest ...");
-		textSeries firstSpeakToFarmer = s.addChild(null, "... that wool-d be quite ... convenient.");
-		
-		// Path 1
-		textSeries noPuns = firstSpeakToFarmer.addChild("Quit making puns.", "Sorry. It gets pretty boring around here.");
-		s = noPuns.addChild(null, "When I was a boy I wanted to be a marine biologist.");
-		s = s.addChild(null, "But life happens, and things change.");
-		s = s.addChild(null, "Anyway ...");
-		s = s.addChild(null, "I require wool from a particular sheep.");
-		s = s.addChild(null, "He never makes it easy.");
-		s = s.addChild(null, "But he needs to be sheared.");
-		s = s.addChild(null, "You'll find him in Eastern pen.");
-		s = s.addChild(null, "Can you collect his wool for me?");
+		textSeries startOfConversation = new textSeries(null, "<insert funny dialogue>");
+		s = startOfConversation.addChild(null, "<frig off for now>");
+		s = s.addChild(null, "<insert friggin pizza joke or something>");
+		s = s.addChild(null, "Farlsworth should be on his own in the Eastern pen.");
+		textSeries question = s.addChild(null, "Can you grab his wool for me?");
 		
 		// Saying yes.
-		textSeries yes = s.addChild("\'Yes\'","Great. Good luck!");
+		textSeries yes = question.addChild("\'Yes\'","Alright, here's the key to his pen.");
+		s = yes.addChild(null, "It also doubles as the key to the front gate.");
+		s = s.addChild(null, "And the barn.");
+		s = s.addChild(null, "And my house.");
+		s = s.addChild(null, "And my fridge.");
+		s = s.addChild(null, "Actually, give me that back. I need that one.");
+		s = s.addChild(null, "Otherwise I can't heat up my poptarts.");
+		s = s.addChild(null, "Take this one instead.");
+		s = s.addChild(null, "Good luck.");
+		s.setEnd();
 		
 		// Saying no to path 1.
-		textSeries noHelp = s.addChild("\'No\'","Please?");
+		textSeries noHelp = question.addChild("\'No\'","Please?");
 		
 		// Keep saying no like an asshole.
 		noHelp.addChild(yes);
@@ -162,30 +164,18 @@ public class farmer extends unit {
 		s.addChild(yes);
 		s.addChild(s);
 		
-		// Path 2
-		textSeries morePuns = firstSpeakToFarmer.addChild("I can help.", "Well ...");
-		s = morePuns.addChild(null, "I require wool from a particular sheep.");
-		s = s.addChild(null, "He's quite ...");
-		s = s.addChild(null, "... sheepish, to say the least.");
-		s = s.addChild(null, "Wait, is that even a pun? Whatever ...");
-		s = s.addChild(null, "Anyway, this particular sheep is difficult.");
-		s = s.addChild(null, "But he needs to be sheared.");
-		s = s.addChild(null, "You'll find him in the Eastern pen.");
-		s = s.addChild(null, "Be a lamb and go grab his wool for me?");
-		s.addChild(yes);
-		s.addChild(noHelp);
-		yes.setEnd();
-		
 		// Create the whole quest and add dialogue.
-		quest q = new quest(DEFAULT_QUEST_DESC, this, new interactBox(startOfConversation, this, true));
+		interactSequence = new interactBox(startOfConversation, this, true);
+		quest q = new quest(DEFAULT_QUEST_DESC, this, interactSequence);
 		
 		// If the quest is started, don't allow the person to do the whole dialogue.
 		if(q.isStarted()) {
 			if(sheep.sheepHitABunchJoke.isCompleted()) {
-				startOfConversation = new textSeries(null, "Why are you beating the crap out of my sheep?");
-				s = startOfConversation.addChild(null, "They're immortal. It's pretty annoying.");
+				startOfConversation = new textSeries(null, "Why are you beating the turd out of my sheep?");
+				s = startOfConversation.addChild(null, "They're immortal. It's actually pretty annoying.");
 				s = s.addChild(null, "I can never have lamb for dinner.");
 				s = s.addChild(null, "But there's plenty of wool to go around.");
+				s = s.addChild(null, "So I guess that's pretty dope.");
 				s.setEnd();
 				q.getDialogue().setTheText(startOfConversation);
 			}
@@ -204,13 +194,31 @@ public class farmer extends unit {
 		return q;
 	}
 	
+	// Sequence number
+	int sequenceNumber = 0;
+	
 	// Quest stuff.
 	public void doQuestStuff() {
 
 		// If we have reached the end of our quest conversation (and they clicked yes, of course, since it's all they can do.)
-		if(farlsworthQuest != null && !farlsworthQuest.isStarted() && !farlsworthQuest.completed() && farlsworthQuest.getInteractBox().getTheText().isEnd()) {
+		if(sequenceNumber == 0 && (interactSequence != null && !interactSequence.isButtonMode() && interactSequence.getTheText().getTextOnPress()!=null) &&
+				(interactSequence.getTheText().getTextOnPress().contains("key to his pen") && interactSequence.textScrollingFinished())) {
 			farmKey.keyRef.pickUp();
+			sequenceNumber++;
+		}
+		if(sequenceNumber == 1 && (interactSequence != null && interactSequence.getTheText().getTextOnPress()!=null) &&
+				(interactSequence.getTheText().getTextOnPress().contains("give me that back") && interactSequence.textScrollingFinished())) {
+			farmKey.keyRef.drop();
+			sequenceNumber++;
+		}
+		if(sequenceNumber == 2 && (interactSequence != null && interactSequence.getTheText().getTextOnPress()!=null) &&
+				(interactSequence.getTheText().getTextOnPress().contains("ake this") && interactSequence.textScrollingFinished())) {
+			farmGateKey.keyRef.pickUp();
+			sequenceNumber++;
+		}
+		if(sequenceNumber == 3 && interactSequence != null && interactSequence.getTheText()!=null && interactSequence.getTheText().isEnd()) {
 			farlsworthQuest.startQuest();
+			sequenceNumber++;
 		}
 	}
 	

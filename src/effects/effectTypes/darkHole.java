@@ -93,7 +93,7 @@ public class darkHole extends effect {
 		this.damage = damage;
 		
 		// Duration
-		this.animationDuration = duration;
+		this.setAnimationDuration(duration);
 		
 		// Set background
 		setBackgroundDoodad(true);

@@ -77,7 +77,7 @@ public class floatingString extends effect {
 		// Make font
 		Font font = drawnObject.DEFAULT_FONT.deriveFont(drawnObject.DEFAULT_FONT.getSize()*currSize);
 		if(currSize < endSize) {
-			currSize += (endSize - startSize)/(DEFAULT_ANIMATION_DURATION*gameCanvas.getFPS());
+			currSize += (endSize - startSize)/(getAnimationDuration()*gameCanvas.getFPS());
 		}
 		g2.setFont(font);
 		
@@ -86,7 +86,7 @@ public class floatingString extends effect {
 		
 		// Set the alpha depending on how close the animation is to over.
 		float timeThatHasPassed = (time.getTime() - timeStarted)/1000f; // in seconds
-		float alpha = 1f - timeThatHasPassed/animationDuration;
+		float alpha = 1f - timeThatHasPassed/getAnimationDuration();
 		if(alpha < 0) alpha = 0;
 		if(alpha > 1) alpha = 1;
 		Color newColor = new Color(color.getRed()/255f, color.getGreen()/255f, color.getBlue()/255f, alpha); 
@@ -94,7 +94,6 @@ public class floatingString extends effect {
 		g.setPaint(newColor);
 		
 		// Draw.*/
-
 		g.setFont(font);
 		g.drawString(text,0, g2.getFontMetrics().getHeight());
 		g2.drawImage(img,getDrawX() - g2.getFontMetrics().stringWidth(text)/2,getDrawY() - (int)(gameCanvas.getScaleY()*getHeight()*2/3),null);
