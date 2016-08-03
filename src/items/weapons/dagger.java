@@ -84,8 +84,6 @@ public class dagger extends weapon {
 	public void reactToPickup() {
 		player currPlayer = player.getPlayer();
 		if(currPlayer != null) {
-			if(!sheepFarm.attackTooltipLoaded.isCompleted()) sheepFarm.attackTooltipLoaded.setCompleted(true);
-			tooltipString t = new tooltipString("Press 'i' to open inventory.");
 		}
 	}
 	

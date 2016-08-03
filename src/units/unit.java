@@ -29,6 +29,7 @@ import utilities.intTuple;
 import utilities.mathUtils;
 import utilities.time;
 import utilities.utility;
+import zones.zone;
 
 public abstract class unit extends drawnObject  { 
 	
@@ -1203,9 +1204,8 @@ public abstract class unit extends drawnObject  {
 					// Yes, we're stuck.
 					pathFindingStuck = true;
 				
-					// If gravity is on
-					if (gravity) { 
-						
+					// If gravity is on and is the terrain loaded?
+					if (gravity && zone.getCurrentZone() != null && zone.getCurrentZone().isZoneLoaded()) { 
 						// We touch down
 						if(moveY >= 0) {
 							touchDown();

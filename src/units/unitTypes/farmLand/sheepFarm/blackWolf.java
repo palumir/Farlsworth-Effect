@@ -43,7 +43,7 @@ public class blackWolf extends wolf {
 	private static int DEFAULT_FOLLOW_UNTIL_RANGE_BASE_ALPHA = 15;
 	
 	// How often to spawn a darkHole.
-	private static float DEFAULT_SPAWN_DARKHOLE_EVERY = 0.1f;
+	private static float DEFAULT_SPAWN_DARKHOLE_EVERY = 0.3f;
 	private static float DEFAULT_DARKHOLE_DURATION = 5;
 	private static int DEFAULT_HOW_MANY_BLACKHOLES_SPAWN = 3;
 	

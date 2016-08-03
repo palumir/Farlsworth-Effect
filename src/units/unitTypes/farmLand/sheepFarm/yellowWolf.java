@@ -1,5 +1,7 @@
 package units.unitTypes.farmLand.sheepFarm;
 
+import java.util.ArrayList;
+
 import doodads.sheepFarm.clawMarkYellow;
 import drawing.spriteSheet;
 import drawing.spriteSheet.spriteSheetInfo;
@@ -64,6 +66,9 @@ public class yellowWolf extends wolf {
 	protected boolean spawnDown = true;
 	protected boolean spawnLeft = true;
 	protected boolean spawnRight = true;
+	
+	// List of angles that the rocks will go
+	private ArrayList<Integer> rockAngles;
 	
 	// Unit sprite stuff.
 	private static spriteSheet DEFAULT_UPDOWN_SPRITESHEET = new spriteSheet(new spriteSheetInfo(
@@ -169,6 +174,7 @@ public class yellowWolf extends wolf {
 							  DEFAULT_ROCK_RADIUS,
 							  DEFAULT_ROCK_DAMAGE,
 							  DEFAULT_ROCK_DURATION);
+					r.setRockAngles(getRockAngles());
 				}
 			}
 		}
@@ -176,15 +182,15 @@ public class yellowWolf extends wolf {
 		// Otherwise, spawn every 
 		else if(time.getTime() - lastSpawnRock > getSpawnRockEvery()*1000 && (howClose > stopAt)) {
 			lastSpawnRock = time.getTime();
-			explodingRock r = new explodingRock(this.getIntX() + this.getWidth()/2,
-					  this.getIntY() + this.getHeight()/2,
+			explodingRock r = new explodingRock(this.getIntX() + this.getWidth()/2 - explodingRock.getDefaultWidth()/2,
+					  this.getIntY() + this.getHeight()/2 - explodingRock.getDefaultHeight()/2,
 					  false,
 					  howManyRockPiecesSpawn,
 					  DEFAULT_ROCK_PIECE_MOVESPEED,
 					  DEFAULT_ROCK_RADIUS,
 					  DEFAULT_ROCK_DAMAGE,
 					  DEFAULT_ROCK_DURATION);
-
+			r.setRockAngles(getRockAngles());
 		}
 	}
 
@@ -253,5 +259,13 @@ public class yellowWolf extends wolf {
 
 	public void setSpawnRockEvery(float spawnRockEvery) {
 		this.spawnRockEvery = spawnRockEvery;
+	}
+
+	public ArrayList<Integer> getRockAngles() {
+		return rockAngles;
+	}
+
+	public void setRockAngles(ArrayList<Integer> rockAngles) {
+		this.rockAngles = rockAngles;
 	}
 }
