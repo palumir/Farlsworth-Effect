@@ -374,7 +374,10 @@ public class sheepFarm extends zone {
 	
 	// Spawn creeps
 	public void spawnUnits() {
-		
+		// Wolf holder
+		wolf w;
+		ArrayList<intTuple> spawnList;
+
 		// One over root 2
 		double oneOverRoot2 = 1/(Math.sqrt(2));
 		
@@ -391,8 +394,18 @@ public class sheepFarm extends zone {
 		int slashAdjustX = wolf.getDefaultWidth()/2/* - clawMarkRed.DEFAULT_CHUNK_WIDTH/2*/;
 		int slashAdjustY = wolf.getDefaultHeight()/2/* - clawMarkRed.DEFAULT_CHUNK_HEIGHT/2*/;
 		
-		// Wolf holder
-		wolf w;
+		// TESTING
+		w = new blackWolf(-1068,-1200);
+		spawnList = new ArrayList<intTuple>();
+		spawnList.add(new intTuple(-1068,-1550));
+		spawnList.add(new intTuple(-1068,-1450));
+		spawnList.add(new intTuple(-1068,-1350));
+		spawnList.add(new intTuple(-1068,-1250));
+		((blackWolf)(w)).setTrailSpawns(spawnList);
+		commands = new commandList();
+		commands.add(new slashCommand(-1068,-1650));
+		commands.add(new slashCommand(-1068,-1200));
+		w.repeatCommands(commands);
 		
 		/////////////////////////////
 		/// Wolf Section I guess ///

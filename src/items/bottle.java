@@ -50,7 +50,7 @@ public abstract class bottle extends item {
 		super(newName,null,0,0,0,0);
 		
 		// Create event.
-		pressIToExit = new event("bottlePressEnterToHeal");
+		pressIToExit = new event("bottlePressIToExitInventory");
 		
 		// It is, of course, equippable.
 		equippable = true;

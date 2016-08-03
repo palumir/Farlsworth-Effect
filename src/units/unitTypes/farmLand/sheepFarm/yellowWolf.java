@@ -3,6 +3,7 @@ package units.unitTypes.farmLand.sheepFarm;
 import doodads.sheepFarm.clawMarkYellow;
 import drawing.spriteSheet;
 import drawing.spriteSheet.spriteSheetInfo;
+import effects.effectTypes.darkHole;
 import effects.effectTypes.explodingRock;
 import units.player;
 import units.unitType;
@@ -155,7 +156,25 @@ public class yellowWolf extends wolf {
 		// Spawn rocks
 		int stopAt = 10;
 		int howClose = (int) Math.sqrt(Math.pow(this.getIntX() - currClaw.getIntX(),2) + Math.pow(this.getIntY() - currClaw.getIntY(), 2));
-		if(time.getTime() - lastSpawnRock > getSpawnRockEvery()*1000 && (howClose > stopAt)) {
+		
+		// If we have a list of trailSpawns, use that.
+		if(getTrailSpawns()!=null && getTrailSpawns().size() > 0) {
+			for(int i = 0; i < getTrailSpawns().size(); i++) {
+				if((Math.abs(getTrailSpawns().get(i).x - getIntX()) < getJumpSpeed()*3 && Math.abs(getTrailSpawns().get(i).y - getIntY()) < getJumpSpeed()*3)) {
+					explodingRock r = new explodingRock(getTrailSpawns().get(i).x - explodingRock.getDefaultWidth()/2 + this.getWidth()/2,
+							  getTrailSpawns().get(i).y - darkHole.getDefaultHeight()/2 + this.getHeight()/2,
+							  false,
+							  howManyRockPiecesSpawn,
+							  DEFAULT_ROCK_PIECE_MOVESPEED,
+							  DEFAULT_ROCK_RADIUS,
+							  DEFAULT_ROCK_DAMAGE,
+							  DEFAULT_ROCK_DURATION);
+				}
+			}
+		}
+		
+		// Otherwise, spawn every 
+		else if(time.getTime() - lastSpawnRock > getSpawnRockEvery()*1000 && (howClose > stopAt)) {
 			lastSpawnRock = time.getTime();
 			explodingRock r = new explodingRock(this.getIntX() + this.getWidth()/2,
 					  this.getIntY() + this.getHeight()/2,
@@ -165,6 +184,7 @@ public class yellowWolf extends wolf {
 					  DEFAULT_ROCK_RADIUS,
 					  DEFAULT_ROCK_DAMAGE,
 					  DEFAULT_ROCK_DURATION);
+
 		}
 	}
 

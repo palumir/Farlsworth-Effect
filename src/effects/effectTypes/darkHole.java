@@ -13,7 +13,6 @@ import drawing.animation.animation;
 import drawing.animation.animationPack;
 import effects.effect;
 import effects.effectType;
-import effects.buffs.darkSlow;
 import modes.mode;
 import sounds.sound;
 import units.player;
@@ -157,11 +156,9 @@ public class darkHole extends effect {
 				for(int i = 0; i < hurtUnits.size(); i++) {
 					if(hurtUnits.get(i) instanceof player && !allied) {
 						hurtUnits.get(i).hurt(damage, 1f);
-						darkSlow d = new darkSlow(hurtUnits.get(i), hurtEvery);
 					}
 					else if(allied) {
 						hurtUnits.get(i).hurt(damage, 1f);
-						darkSlow d = new darkSlow(hurtUnits.get(i), hurtEvery);
 					}
 				}
 			}
