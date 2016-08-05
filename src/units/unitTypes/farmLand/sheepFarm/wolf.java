@@ -14,6 +14,7 @@ import units.player;
 import units.unit;
 import units.unitType;
 import units.unitCommands.slashCommand;
+import utilities.intTuple;
 import utilities.time;
 import utilities.utility;
 
@@ -77,6 +78,9 @@ public abstract class wolf extends unit {
 		// Spritesheets
 		protected spriteSheet upDownSpriteSheet;
 		protected spriteSheet leftRightSpriteSheet;
+		
+		// Trail spawns
+		private ArrayList<intTuple> trailSpawns;
 		
 		// Follow until range
 		protected int followUntilRange = 10 + utility.RNG.nextInt(15);
@@ -580,6 +584,14 @@ public abstract class wolf extends unit {
 
 		public void setClawAttackEvery(float clawAttackEvery) {
 			this.clawAttackEvery = clawAttackEvery;
+		}
+
+		public ArrayList<intTuple> getTrailSpawns() {
+			return trailSpawns;
+		}
+
+		public void setTrailSpawns(ArrayList<intTuple> trailSpawns) {
+			this.trailSpawns = trailSpawns;
 		}
 
 }

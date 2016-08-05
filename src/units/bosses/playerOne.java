@@ -15,6 +15,7 @@ import units.boss;
 import units.player;
 import units.unitType;
 import utilities.intTuple;
+import utilities.saveState;
 import utilities.stringUtils;
 import utilities.time;
 import zones.farmLand.farmTombEasy;
@@ -203,6 +204,14 @@ public class playerOne extends boss {
 			// We are done our talk.
 			if(sequencePart == 9 && interactSequence!=null && interactSequence.getTheText()!=null && interactSequence.getTheText().getTextOnPress()!=null &&
 					interactSequence.getTheText().getTextOnPress().contains("understand")) {
+				
+				// Move player.
+				currPlayer.setDoubleX(11500);
+				
+				// Save.
+				saveState.setQuiet(true);
+				saveState.createSaveState();
+				saveState.setQuiet(false);
 				
 				// Wait a bit.
 				waitFor = 3f;

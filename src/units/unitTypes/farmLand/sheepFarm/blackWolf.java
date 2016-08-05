@@ -4,6 +4,7 @@ import doodads.sheepFarm.clawMarkBlack;
 import drawing.spriteSheet;
 import drawing.spriteSheet.spriteSheetInfo;
 import effects.effectTypes.darkHole;
+import effects.effectTypes.explodingRock;
 import units.player;
 import units.unitType;
 import utilities.mathUtils;
@@ -42,7 +43,9 @@ public class blackWolf extends wolf {
 	private static int DEFAULT_FOLLOW_UNTIL_RANGE_BASE_ALPHA = 15;
 	
 	// How often to spawn a darkHole.
-	private static float DEFAULT_SPAWN_DARKHOLE_EVERY = 0.33f;
+	private static float DEFAULT_SPAWN_DARKHOLE_EVERY = 0.3f;
+	private static float DEFAULT_DARKHOLE_DURATION = 5;
+	private static int DEFAULT_HOW_MANY_BLACKHOLES_SPAWN = 3;
 	
 	// DarkHole
 	
@@ -51,8 +54,13 @@ public class blackWolf extends wolf {
 	//////////////
 	
 	// Spawn darkHole every
-	protected float spawnDarkHoleEvery = DEFAULT_SPAWN_DARKHOLE_EVERY;
+	private float spawnDarkHoleEvery = DEFAULT_SPAWN_DARKHOLE_EVERY;
 	protected long lastSpawnDarkHole = 0;
+	
+	// How many holes to spawn
+	protected int howManyBlackHolesSpawn = DEFAULT_HOW_MANY_BLACKHOLES_SPAWN;
+	protected double distanceTravelled = 0;
+	
 	
 	// Unit sprite stuff.
 	private static spriteSheet DEFAULT_UPDOWN_SPRITESHEET = new spriteSheet(new spriteSheetInfo(
@@ -130,8 +138,6 @@ public class blackWolf extends wolf {
 
 	// Charge units
 	@Override
-	public void chargeUnits() {
-	}
 	
 	// Spawn claw
 	public void spawnClaw(int x, int y) {
@@ -142,21 +148,38 @@ public class blackWolf extends wolf {
 
 	@Override
 	public void spawnTrail() {
-		// Spawn darkHoles
+		
+		// Spawn rocks
 		int stopAt = 10;
 		int howClose = (int) Math.sqrt(Math.pow(this.getIntX() - currClaw.getIntX(),2) + Math.pow(this.getIntY() - currClaw.getIntY(), 2));
-		if(time.getTime() - lastSpawnDarkHole > spawnDarkHoleEvery*1000 && (howClose > stopAt)) {
+		
+		// If we have a list of trailSpawns, use that.
+		if(getTrailSpawns()!=null && getTrailSpawns().size() > 0) {
+			for(int i = 0; i < getTrailSpawns().size(); i++) {
+				if((Math.abs(getTrailSpawns().get(i).x - getIntX()) < getJumpSpeed()*3 && Math.abs(getTrailSpawns().get(i).y - getIntY()) < getJumpSpeed()*3)) {
+					darkHole h = new darkHole(getTrailSpawns().get(i).x - darkHole.getDefaultWidth()/2 + this.getWidth()/2,
+							getTrailSpawns().get(i).y - darkHole.getDefaultHeight()/2 + this.getHeight()/2,
+							  false,
+							  1,
+							  DEFAULT_DARKHOLE_DURATION);
+				}
+			}
+		}
+		
+		// Otherwise, spawn every 
+		else if(time.getTime() - lastSpawnDarkHole > getSpawnDarkHoleEvery()*1000 && (howClose > stopAt)) {
 			lastSpawnDarkHole = time.getTime();
 			darkHole h = new darkHole(this.getIntX() + this.getWidth()/2 - darkHole.getDefaultWidth()/2,
-					  this.getIntY() + this.getHeight()/2 - darkHole.getDefaultHeight()/2,
+						this.getIntY() + this.getHeight()/2  - darkHole.getDefaultHeight()/2,
 					  false,
 					  1,
-					  5);
+					  DEFAULT_DARKHOLE_DURATION);
 		}
 	}
 
 	@Override
 	public void jumpingFinished() {
+		distanceTravelled = 0;
 	}
 
 	@Override
@@ -212,5 +235,19 @@ public class blackWolf extends wolf {
 				DEFAULT_TOPDOWN_ADJUSTMENT_Y
 				));
 		addAnimations();
+	}
+
+	public float getSpawnDarkHoleEvery() {
+		return spawnDarkHoleEvery;
+	}
+
+	public void setSpawnDarkHoleEvery(float spawnDarkHoleEvery) {
+		this.spawnDarkHoleEvery = spawnDarkHoleEvery;
+	}
+
+	@Override
+	public void chargeUnits() {
+		// TODO Auto-generated method stub
+		
 	}
 }

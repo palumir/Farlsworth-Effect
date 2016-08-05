@@ -168,7 +168,7 @@ public class farlsworth extends boss {
 				s = s.addChild(null, "You can't have it.");
 				s = s.addChild(null, "And don't try anything fishy, bud.");
 				s = s.addChild(null, "This isn't my first rodeo.");
-				textSeries rodeo = s.addChild(null, "When will farmer learn that nobody owns me?");
+				textSeries rodeo = s.addChild(null, "Why does farmer never try this himself?");
 				
 				// Give me your wool
 				textSeries giveMeYourWool = rodeo.addChild("\'Give me your wool\'", "Is that really all I'm good for these days?");
@@ -275,11 +275,16 @@ public class farlsworth extends boss {
 				textSeries canYouOpenTheFence = new textSeries(null, "Can you open this for me?");
 				s = doYouHaveTheKey.addChild("Yes", "Great. That's some good stuff.");
 				s.addChild(canYouOpenTheFence);
-				s = doYouHaveTheKey.addChild("No", "Oh boy, uh ...");
-				s = s.addChild(null, "That was more of a rhetorical question.");
+				s = doYouHaveTheKey.addChild("No", "Uh, that was more of a rhetorical question.");
 				s = s.addChild(null, "Farmer only keeps two keys.");
-				s = s.addChild(null, "One opens the gates.");
-				s = s.addChild(null, "The other opens everything else.");
+				s = s.addChild(null, "One opens all the gates.");
+				s = s.addChild(null, "The other opens everything else, including his fridge.");
+				s = s.addChild(null, "Which he puts poptarts in, for some reason.");
+				s = s.addChild(null, "I keep telling him they can be kept at room temperature.");
+				s = s.addChild(null, "But he thinks because you heat them up they have to be frozen.");
+				s = s.addChild(null, "It makes sense, I guess. With that assumption.");
+				s = s.addChild(null, "Either way ...");
+				s = s.addChild(null, "You definitely have the key for this.");
 				s.addChild(canYouOpenTheFence);
 				
 				s = canYouOpenTheFence.addChild("Yes", "Thanks ... uh ...");
@@ -658,7 +663,7 @@ public class farlsworth extends boss {
 			else if(pastFlowerPatch!= null && !pastFlowerPatch.isCompleted()) {
 				
 				// Spawn Farlsworth at the Flower patch
-				if(sequencePart == 0 && getAllCommands()==null || getAllCommands().size() == 0) {
+				if(sequencePart == 0 && (getAllCommands()==null || getAllCommands().size() == 0)) {
 					stopMove("all");
 					destroyFence();
 					movingToAPoint = false;
@@ -683,7 +688,6 @@ public class farlsworth extends boss {
 				// Don't grab him
 				if(sequencePart == 2 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getTextOnPress()!=null) &&
 						(interactSequence.getTheText().getTextOnPress().equals("Time will tell."))) {
-					
 					// Run away
 					sequencePart = 100; // Put the sequence on the last event.
 				}
@@ -747,7 +751,7 @@ public class farlsworth extends boss {
 			else if(pastTombEntrance != null && !pastTombEntrance.isCompleted()) {
 				
 				// Spawn Farlsworth at the tomb entrance.
-				if(sequencePart == 0 && getAllCommands()==null || getAllCommands().size() == 0) {
+				if(sequencePart == 0 && (getAllCommands()==null || getAllCommands().size() == 0)) {
 					
 					// Spawn Ben in front of the tomb
 					stopMove("all");
@@ -870,7 +874,7 @@ public class farlsworth extends boss {
 				
 				
 				// Talk to Ben.
-				if(sequencePart == 7 && !isMoving() && getAllCommands()==null || getAllCommands().size() == 0) {
+				if(sequencePart == 7 && !isMoving() && (getAllCommands()==null || getAllCommands().size() == 0)) {
 					interactSequence.setLocked(false);
 					
 					// Continue conversation.
@@ -965,7 +969,7 @@ public class farlsworth extends boss {
 			else if(pastTombExit != null && !pastTombExit.isCompleted()) {
 				
 				// Spawn him at the tomb exit.
-				if(sequencePart == 0 && getAllCommands()==null || getAllCommands().size() == 0) {
+				if(sequencePart == 0 && (getAllCommands()==null || getAllCommands().size() == 0)) {
 					setDoubleX(-745);
 					setDoubleY(-3899);
 					setFacingDirection("Right");
@@ -1296,7 +1300,7 @@ public class farlsworth extends boss {
 			}
 			else {	
 				// He's no longer in the zone.
-				if(sequencePart == 0 && getAllCommands()==null || getAllCommands().size() == 0) {
+				if(sequencePart == 0 && (getAllCommands()==null || getAllCommands().size() == 0)) {
 					stopMove("all");
 					setDoubleX(-10000);
 					setDoubleY(-10000);

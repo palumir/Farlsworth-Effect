@@ -80,10 +80,6 @@ public class sword extends weapon {
 	@Override
 	public void reactToPickup() {
 		player currPlayer = player.getPlayer();
-		if(currPlayer != null) {
-			if(!sheepFarm.attackTooltipLoaded.isCompleted()) sheepFarm.attackTooltipLoaded.setCompleted(true);
-			tooltipString t = new tooltipString("Press or hold 'space' to attack.");
-		}
 	}
 	
 	// Set stats

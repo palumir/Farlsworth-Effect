@@ -86,7 +86,6 @@ public class sheepFarm extends zone {
 	
 	// Zone events.
 	public static event wellTooltipLoaded;
-	public static event attackTooltipLoaded;
 	public static event gameSavedForIdiots;
 	public static event uCanSaveAtWater;
 	public static event stormInProgress;
@@ -375,6 +374,11 @@ public class sheepFarm extends zone {
 	// Spawn creeps
 	public void spawnUnits() {
 		
+		// Wolf holder
+		wolf w;
+		ArrayList<intTuple> spawnList;
+		ArrayList<Integer> angleList;
+
 		// One over root 2
 		double oneOverRoot2 = 1/(Math.sqrt(2));
 		
@@ -391,8 +395,18 @@ public class sheepFarm extends zone {
 		int slashAdjustX = wolf.getDefaultWidth()/2/* - clawMarkRed.DEFAULT_CHUNK_WIDTH/2*/;
 		int slashAdjustY = wolf.getDefaultHeight()/2/* - clawMarkRed.DEFAULT_CHUNK_HEIGHT/2*/;
 		
-		// Wolf holder
-		wolf w;
+		// TESTING
+		w = new blackWolf(-1068,-1200);
+		spawnList = new ArrayList<intTuple>();
+		spawnList.add(new intTuple(-1068,-1550));
+		spawnList.add(new intTuple(-1068,-1450));
+		spawnList.add(new intTuple(-1068,-1350));
+		spawnList.add(new intTuple(-1068,-1250));
+		w.setTrailSpawns(spawnList);
+		commands = new commandList();
+		commands.add(new slashCommand(-1068,-1650));
+		commands.add(new slashCommand(-1068,-1200));
+		w.repeatCommands(commands);
 		
 		/////////////////////////////
 		/// Wolf Section I guess ///
@@ -949,12 +963,15 @@ public class sheepFarm extends zone {
 		w.setJumpSpeed (10f);
 		w.setSpawnClawPhaseTime(1f);
 		
-			// Yellow wolves
-		
+		// Yellow wolves
 		w = new yellowWolf(1070+slashAdjustX,-2073+slashAdjustY);
 		commands = new commandList();
 		commands.add(new slashCommand(620+slashAdjustX,-2073+slashAdjustY));
 		commands.add(new slashCommand(1070+slashAdjustX,-2073+slashAdjustY));
+		angleList = new ArrayList<Integer>();
+		angleList.add(0);
+		angleList.add(180);
+		((yellowWolf)w).setRockAngles(angleList);
 		w.repeatCommands(commands);
 		w.setJumpSpeed (10f);
 		w.setSpawnClawPhaseTime(1f);
@@ -963,6 +980,10 @@ public class sheepFarm extends zone {
 		commands = new commandList();
 		commands.add(new slashCommand(1070+slashAdjustX,-1473+slashAdjustY));
 		commands.add(new slashCommand(620+slashAdjustX,-1473+slashAdjustY));
+		angleList = new ArrayList<Integer>();
+		angleList.add(0);
+		angleList.add(180);
+		((yellowWolf)w).setRockAngles(angleList);
 		w.repeatCommands(commands);
 		w.setJumpSpeed (10f);
 		w.setSpawnClawPhaseTime(1f);
@@ -1559,7 +1580,6 @@ public class sheepFarm extends zone {
 		
 		// Well and attack tooltips.
 		wellTooltipLoaded = new event("sheepFarmWellTooltipLoaded");
-		attackTooltipLoaded = new event("sheepFarmWttackTooltipLoaded");
 		
 		// Load well tooltip event.
 		gameSavedForIdiots = new event("sheepFarmGameSavedForIdiots");
@@ -1580,10 +1600,6 @@ public class sheepFarm extends zone {
 		if(currPlayer != null && currPlayer.isWithin(1138,-484,1666,-46) && wellTooltipLoaded != null && !wellTooltipLoaded.isCompleted()) {
 			wellTooltipLoaded.setCompleted(true);
 			tooltipString t = new tooltipString("Press 'e' on a well or river to save and heal.");
-		}
-		if(currPlayer != null && currPlayer.isWithin(-261,-736,249,-570) && attackTooltipLoaded != null && !attackTooltipLoaded.isCompleted()) {
-			attackTooltipLoaded.setCompleted(true);
-			tooltipString t = new tooltipString("Press or hold 'space' to attack.");
 		}
 		if(currPlayer != null && currPlayer.isWithin(-324,-684,69,-456) && gameSavedForIdiots != null && !gameSavedForIdiots.isCompleted()) {
 			gameSavedForIdiots.setCompleted(true);
