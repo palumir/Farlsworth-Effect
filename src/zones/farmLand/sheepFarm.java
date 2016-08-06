@@ -660,7 +660,7 @@ public class sheepFarm extends zone {
 		
 		w = new redWolf (-904+slashAdjustX,-3105+slashAdjustY+slashAdjustY);
 		commands = new commandList();
-		commands.add(new slashCommand (-590+slashAdjustX, -3105+slashAdjustY+slashAdjustY));
+		commands.add(new slashCommand (-550+slashAdjustX, -3105+slashAdjustY+slashAdjustY));
 		commands.add(new slashCommand (-904+slashAdjustX, -3105+slashAdjustY+slashAdjustY));
 		w.repeatCommands(commands);
 		w.setJumpSpeed (11f);
