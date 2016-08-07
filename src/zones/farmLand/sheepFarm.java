@@ -783,6 +783,38 @@ public class sheepFarm extends zone {
 		w.repeatCommands(commands);
 		w.setJumpSpeed (8f);
 		w.setSpawnClawPhaseTime(0.9f);
+		
+		// Section 7 (up)
+		
+			// Rock wolf bottom
+		
+		w = new yellowWolf(952+slashAdjustX,-2950+slashAdjustY);
+		spawnList = new ArrayList<intTuple>();
+		spawnList.add(new intTuple(1012+slashAdjustX,-2950+slashAdjustY));
+		spawnList.add(new intTuple(1072+slashAdjustX,-2950+slashAdjustY));
+		spawnList.add(new intTuple(1132+slashAdjustX,-2950+slashAdjustY));
+		spawnList.add(new intTuple(1192+slashAdjustX,-2950+slashAdjustY));
+		w.setTrailSpawns(spawnList);
+		commands = new commandList();
+		commands.add(new waitCommand (1f) );
+		commands.add(new slashCommand(1252+slashAdjustX,-2950+slashAdjustY));
+		commands.add(new waitCommand (1f) );
+		commands.add(new slashCommand(902+slashAdjustX,-2950+slashAdjustY));
+		w.repeatCommands(commands);
+		angleList = new ArrayList<Integer>();
+		angleList.add(0);
+		((yellowWolf)w).setRockAngles(angleList);
+		
+			// Patrolling
+		
+		w = new yellowWolf (1192+slashAdjustX, -3100+slashAdjustY);
+		commands = new commandList();
+		commands.add(new moveCommand (952+slashAdjustX,-3000+slashAdjustY));
+		commands.add(new moveCommand (1192+slashAdjustX, -3100+slashAdjustY));
+		commands.add(new moveCommand (952+slashAdjustX, -3200+slashAdjustY));
+		commands.add(new moveCommand (1192+slashAdjustX, -3100+slashAdjustY));
+		w.repeatCommands(commands);
+		w.setMoveSpeed (3f);
 	}
 	
 	// Flower farm
@@ -902,117 +934,6 @@ public class sheepFarm extends zone {
 		c.setInteractable(false);
 		c = new flower(2396,-3902-20,7);
 		c.setInteractable(false);
-		
-		// First grave area.
-		new grave(2225,-3116,1);
-		new grave(2225,-2995,2);
-		new grave(2225,-2874,2);
-		new grave(2225,-2753,2);
-		new grave(2225,-2632,2);
-		new grave(2382,-3116,0);
-		new grave(2382,-2995,2);
-		new grave(2382,-2874,2);
-		new grave(2382,-2753,0);
-		new grave(2382,-2632,2);
-		new grave(2539,-3116,2);
-		new grave(2539,-2995,2);
-		new grave(2539,-2874,2);
-		new grave(2539,-2753,2);
-		new grave(2539,-2632,2);
-		new grave(2696,-3116,2);
-		new grave(2696,-2995,2);
-		new grave(2696,-2874,2);
-		new grave(2696,-2753,2);
-		new grave(2696,-2632,2);
-		new grave(2853,-3116,1);
-		new grave(2853,-2995,2);
-		new grave(2853,-2874,2);
-		new grave(2853,-2753,2);
-		new grave(2853,-2632,2);
-		c = new flower(2390,-2729,10);
-		c.setInteractable(false);
-		c = new flower(2359,-2731,3);
-		c.setInteractable(false);
-		c = new flower(2410,-2731,5);
-		c.setInteractable(false);
-		c = new flower(2412,-2735,4);
-		c.setInteractable(false);
-		c = new flower(2421,-2719,8);
-		c.setInteractable(false);
-		c = new flower(2349,-2719,6);
-		c.setInteractable(false);
-		c = new flower(2371,-2721,3);
-		c.setInteractable(false);
-		c = new flower(2404,-2721,7);
-		c.setInteractable(false);
-		c = new flower(2842,-2633,7);
-		c.setInteractable(false);
-		c = new flower(2869,-2633,8);
-		c.setInteractable(false);
-		c = new flower(2677,-2622,2);
-		c.setInteractable(false);
-		c = new flower(2728,-2622,6);
-		c.setInteractable(false);
-		spawnFence(null, 2927-8,-3183+26,2927-8,-2544+300); // Vertical, right
-		spawnFence(null, 2168-1000-8,-3183,2927+50,-3183); // Top
-		spawnFence(null, 2168+3,-3183+225,2168+3,-2565+200); // First left fence
-		spawnFence(null, 2168-1000-5,-3183+225+1,2168-1000-5,-2565+200); // Second left fence
-		spawnFence(null, 2168-1000,-2565,2929-200,-2565); // Bottom
-		
-		// Flowers in first grave area.
-		c = new flower(2688,-2749,0);
-		c.setInteractable(false);
-		c = new flower(2712,-2749,2);
-		c.setInteractable(false);
-		c = new flower(2372,-2873,7);
-		c.setInteractable(false);
-		c = new flower(2402,-2873,8);
-		c.setInteractable(false);
-		c = new flower(2376,-2747,6);
-		c.setInteractable(false);
-		c = new flower(2397,-2747,3);
-		c.setInteractable(false);
-		c = new flower(2387,-2751,8);
-		c.setInteractable(false);
-		c = new flower(2690,-3119,6);
-		c.setInteractable(false);
-		c = new flower(2705,-3116,5);
-		c.setInteractable(false);
-		c = new flower(2208,-3114,9);
-		c.setInteractable(false);
-		c = new flower(2208,-3099,3);
-		c.setInteractable(false);
-		c = new flower(2208,-3081,8);
-		c.setInteractable(false);
-		c = new flower(2208+43,-3114,9);
-		c.setInteractable(false);
-		c = new flower(2208+43,-3099,3);
-		c.setInteractable(false);
-		c = new flower(2208+43,-3081,8);
-		c.setInteractable(false);
-		
-		// Second grave area.
-		new grave(1298,-3103,2);
-		new grave(1298,-2969,2);
-		new grave(1298,-2835,2);
-		new grave(1298,-2701,2);
-		new grave(1502,-3103,2);
-		new grave(1502,-2969,1);
-		new grave(1502,-2835,2);
-		new grave(1502,-2701,2);
-		new grave(1706,-3103,2);
-		new grave(1706,-2969,1);
-		new grave(1706,-2835,2);
-		new grave(1706,-2701,2);
-		new grave(1910,-3103,2);
-		new grave(1910,-2969,2);
-		new grave(1910,-2835,2);
-		new grave(1910,-2701,2);
-		new grave(2114,-3103,2);
-		new grave(2114,-2835,2);
-		new grave(2114,-2701,2);
-		
-		// Far left area.
 		
 	}
 	
