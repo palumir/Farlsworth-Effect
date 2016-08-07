@@ -461,7 +461,7 @@ public class sheepFarm extends zone {
 		
 		bottle okBottle = new normalBottle(-110,-1192);
 		
-		// Section 2
+		// Section 2 (patrolling intro)
 		
 			// Jumping
 		
@@ -510,37 +510,31 @@ public class sheepFarm extends zone {
 		
 		// Section 3
 		
-			// Square wolves
+			// Jumping wolves
 		
 		w = new redWolf (-722+slashAdjustX,-1890+slashAdjustY);
 		commands = new commandList();
 		commands.add(new slashCommand (-522+slashAdjustX, -2090+slashAdjustY));
-		commands.add(new slashCommand (-722+slashAdjustX, -2090+slashAdjustY));
-		commands.add(new slashCommand (-522+slashAdjustX, -1890+slashAdjustY));
 		commands.add(new slashCommand (-722+slashAdjustX, -1890+slashAdjustY));
 		w.repeatCommands(commands);
 		w.setJumpSpeed (11f);
-		w.setSpawnClawPhaseTime(0.8f);
+		w.setSpawnClawPhaseTime(1.3f);
 		
-		w = new redWolf (-792+slashAdjustX,-2090+slashAdjustY);
+		w = new redWolf (-992+slashAdjustX, -2090+slashAdjustY);
 		commands = new commandList();
 		commands.add(new slashCommand (-792+slashAdjustX, -1890+slashAdjustY));
 		commands.add(new slashCommand (-992+slashAdjustX, -2090+slashAdjustY));
-		commands.add(new slashCommand (-992+slashAdjustX, -1890+slashAdjustY));
-		commands.add(new slashCommand (-792+slashAdjustX, -2090+slashAdjustY));
 		w.repeatCommands(commands);
 		w.setJumpSpeed (11f);
-		w.setSpawnClawPhaseTime(0.8f);
+		w.setSpawnClawPhaseTime(1.3f);
 		
-		w = new redWolf (-1062+slashAdjustX,-1890+slashAdjustY);
+		w = new redWolf (-1262+slashAdjustX, -1890+slashAdjustY);
 		commands = new commandList();
-		commands.add(new slashCommand (-1262+slashAdjustX, -2090+slashAdjustY));
 		commands.add(new slashCommand (-1062+slashAdjustX, -2090+slashAdjustY));
 		commands.add(new slashCommand (-1262+slashAdjustX, -1890+slashAdjustY));
-		commands.add(new slashCommand (-1062+slashAdjustX, -1890+slashAdjustY));
 		w.repeatCommands(commands);
 		w.setJumpSpeed (11f);
-		w.setSpawnClawPhaseTime(0.8f);
+		w.setSpawnClawPhaseTime(1.3f);
 		
 			// Patrolling Wolves
 		
@@ -551,7 +545,7 @@ public class sheepFarm extends zone {
 		commands.add(new moveCommand (-622+slashAdjustX,-2023+slashAdjustY));
 		commands.add(new moveCommand (-622+slashAdjustX,-1957+slashAdjustY));
 		w.repeatCommands(commands);
-		w.setMoveSpeed (5f);
+		w.setMoveSpeed (3f);
 		
 		w = new yellowWolf (-912+slashAdjustX, -2023+slashAdjustY);
 		commands = new commandList();
@@ -560,9 +554,9 @@ public class sheepFarm extends zone {
 		commands.add(new moveCommand (-912+slashAdjustX, -1957+slashAdjustY));
 		commands.add(new moveCommand (-912+slashAdjustX, -2023+slashAdjustY));
 		w.repeatCommands(commands);
-		w.setMoveSpeed (5f);
+		w.setMoveSpeed (3f);
 		
-		// Section 4
+		// Section 4 (rock intro)
 		
 			// Patrolling
 		
@@ -571,21 +565,21 @@ public class sheepFarm extends zone {
 		commands.add(new moveCommand (-994+slashAdjustX,-2467+slashAdjustY));
 		commands.add(new moveCommand (-1234+slashAdjustX, -2377+slashAdjustY));
 		w.repeatCommands(commands);
-		w.setMoveSpeed (5f);
+		w.setMoveSpeed (3f);
 		
 		w = new yellowWolf (-994+slashAdjustX, -2477+slashAdjustY);
 		commands = new commandList();
 		commands.add(new moveCommand (-1234+slashAdjustX,-2567+slashAdjustY));
 		commands.add(new moveCommand (-994+slashAdjustX, -2477+slashAdjustY));
 		w.repeatCommands(commands);
-		w.setMoveSpeed (5f);
+		w.setMoveSpeed (3f);
 		
 		w = new yellowWolf (-1234+slashAdjustX, -2577+slashAdjustY);
 		commands = new commandList();
 		commands.add(new moveCommand (-994+slashAdjustX,-2667+slashAdjustY));
 		commands.add(new moveCommand (-1234+slashAdjustX, -2577+slashAdjustY));
 		w.repeatCommands(commands);
-		w.setMoveSpeed (5f);
+		w.setMoveSpeed (3f);
 		
 			// Rock spawn Left and Right
 		
@@ -619,16 +613,18 @@ public class sheepFarm extends zone {
 		commands.add(new slashCommand(-1324+slashAdjustX,-2727+slashAdjustY));
 		w.repeatCommands(commands);
 		
-		// Section 5
+		c = new well (-1282, -3089, 1);
+		
+		// Section 5 (stone, jumping, patrolling wolves)
 		
 			// Rock spawn top
 		
 		w = new yellowWolf(-984+slashAdjustX,-3253+slashAdjustY);
-		w.setJumpSpeed(10f);
+		w.setJumpSpeed(8f);
 		commands = new commandList();
-		commands.add(new waitCommand(1f));
+		commands.add(new waitCommand(0.5f));
 		commands.add(new slashCommand(-384+slashAdjustX,-3253+slashAdjustY));
-		commands.add(new waitCommand(1f));
+		commands.add(new waitCommand(0.5f));
 		commands.add(new slashCommand(-984+slashAdjustX,-3253+slashAdjustY));
 		w.repeatCommands(commands);
 		spawnList = new ArrayList<intTuple>();
@@ -647,24 +643,146 @@ public class sheepFarm extends zone {
 		commands.add(new moveCommand (-687+slashAdjustX,-2956+slashAdjustY));
 		commands.add(new moveCommand (-844+slashAdjustX, -3153+slashAdjustY));
 		w.repeatCommands(commands);
-		w.setMoveSpeed (5f);
+		w.setMoveSpeed (3f);
 		
 		w = new yellowWolf (-687+slashAdjustX,-2956+slashAdjustY);
 		commands = new commandList();
 		commands.add(new moveCommand (-530+slashAdjustX,-3153+slashAdjustY));
 		commands.add(new moveCommand (-687+slashAdjustX,-2956+slashAdjustY));
 		w.repeatCommands(commands);
-		w.setMoveSpeed (5f);
+		w.setMoveSpeed (3f);
 		
 			// Jumping Wolf
 		
-		w = new redWolf (-904+slashAdjustX,-3105+slashAdjustY+slashAdjustY);
+		w = new redWolf (-904+slashAdjustX,-3205+slashAdjustY);
 		commands = new commandList();
-		commands.add(new slashCommand (-550+slashAdjustX, -3105+slashAdjustY+slashAdjustY));
-		commands.add(new slashCommand (-904+slashAdjustX, -3105+slashAdjustY+slashAdjustY));
+		commands.add(new slashCommand (-550+slashAdjustX, -3205+slashAdjustY));
+		commands.add(new slashCommand (-904+slashAdjustX, -3205+slashAdjustY));
 		w.repeatCommands(commands);
 		w.setJumpSpeed (11f);
-		w.setSpawnClawPhaseTime(0.8f);
+		w.setSpawnClawPhaseTime(1.6f);
+		
+		w = new redWolf (-904+slashAdjustX,-3005+slashAdjustY);
+		commands = new commandList();
+		commands.add(new slashCommand (-550+slashAdjustX, -3005+slashAdjustY));
+		commands.add(new slashCommand (-904+slashAdjustX, -3005+slashAdjustY));
+		w.repeatCommands(commands);
+		w.setJumpSpeed (11f);
+		w.setSpawnClawPhaseTime(1.6f);
+		
+		// Section 6 (black hole intro)
+		
+		// (i)
+		
+			// Black hole dogs
+		
+		w = new blackWolf(-43+slashAdjustX,-3250+slashAdjustY);
+		spawnList = new ArrayList<intTuple>();
+		spawnList.add(new intTuple(-43+slashAdjustX,-3175+slashAdjustY));
+		spawnList.add(new intTuple(-43+slashAdjustX,-3025+slashAdjustY));
+		w.setTrailSpawns(spawnList);
+		commands = new commandList();
+		commands.add(new slashCommand(-43+slashAdjustX,-2950+slashAdjustY));
+		commands.add(new slashCommand(-43+slashAdjustX,-3250+slashAdjustY));
+		w.repeatCommands(commands);
+		
+		w = new blackWolf(67+slashAdjustX,-2950+slashAdjustY);
+		spawnList = new ArrayList<intTuple>();
+		spawnList.add(new intTuple(67+slashAdjustX,-3100+slashAdjustY));
+		spawnList.add(new intTuple(67+slashAdjustX,-3025+slashAdjustY));
+		w.setTrailSpawns(spawnList);
+		commands = new commandList();
+		commands.add(new slashCommand(67+slashAdjustX,-3250+slashAdjustY));
+		commands.add(new slashCommand(67+slashAdjustX,-2950+slashAdjustY));
+		w.repeatCommands(commands);
+		
+		w = new blackWolf(177+slashAdjustX,-3250+slashAdjustY);
+		spawnList = new ArrayList<intTuple>();
+		spawnList.add(new intTuple(177+slashAdjustX,-3175+slashAdjustY));
+		spawnList.add(new intTuple(177+slashAdjustX,-3100+slashAdjustY));
+		w.setTrailSpawns(spawnList);
+		commands = new commandList();
+		commands.add(new slashCommand(177+slashAdjustX,-2950+slashAdjustY));
+		commands.add(new slashCommand(177+slashAdjustX,-3250+slashAdjustY));
+		w.repeatCommands(commands);
+		
+		w = new blackWolf(287+slashAdjustX,-2950+slashAdjustY);
+		spawnList = new ArrayList<intTuple>();
+		spawnList.add(new intTuple(287+slashAdjustX,-3175+slashAdjustY));
+		spawnList.add(new intTuple(287+slashAdjustX,-3025+slashAdjustY));
+		w.setTrailSpawns(spawnList);
+		commands = new commandList();
+		commands.add(new slashCommand(287+slashAdjustX,-3250+slashAdjustY));
+		commands.add(new slashCommand(287+slashAdjustX,-2950+slashAdjustY));
+		w.repeatCommands(commands);
+		
+		// (ii)
+		
+			// Black hole dogs
+		
+		w = new blackWolf(382+slashAdjustX,-3100+slashAdjustY);
+		spawnList = new ArrayList<intTuple>();
+		spawnList.add(new intTuple(452+slashAdjustX,-3100+slashAdjustY));
+		spawnList.add(new intTuple(527+slashAdjustX,-3100+slashAdjustY));
+		spawnList.add(new intTuple(602+slashAdjustX,-3100+slashAdjustY));
+		spawnList.add(new intTuple(677+slashAdjustX,-3100+slashAdjustY));
+		spawnList.add(new intTuple(752+slashAdjustX,-3100+slashAdjustY));
+		spawnList.add(new intTuple(827+slashAdjustX,-3100+slashAdjustY));
+		w.setTrailSpawns(spawnList);
+		commands = new commandList();
+		commands.add(new slashCommand(902+slashAdjustX,-3100+slashAdjustY));
+		commands.add(new slashCommand(382+slashAdjustX,-3100+slashAdjustY));
+		w.repeatCommands(commands);
+		
+			// Jumping
+		
+		w = new redWolf (452+slashAdjustX,-2950+slashAdjustY);
+		commands = new commandList();
+		commands.add(new slashCommand (452+slashAdjustX, -3250+slashAdjustY));
+		commands.add(new slashCommand (452+slashAdjustX, -2950+slashAdjustY));
+		w.repeatCommands(commands);
+		w.setJumpSpeed (8f);
+		w.setSpawnClawPhaseTime(0.9f);
+		
+		w = new redWolf (527+slashAdjustX,-3250+slashAdjustY);
+		commands = new commandList();
+		commands.add(new slashCommand (527+slashAdjustX, -2950+slashAdjustY));
+		commands.add(new slashCommand (527+slashAdjustX, -3250+slashAdjustY));
+		w.repeatCommands(commands);
+		w.setJumpSpeed (8f);
+		w.setSpawnClawPhaseTime(0.9f);
+		
+		w = new redWolf (602+slashAdjustX,-2950+slashAdjustY);
+		commands = new commandList();
+		commands.add(new slashCommand (602+slashAdjustX, -3250+slashAdjustY));
+		commands.add(new slashCommand (602+slashAdjustX, -2950+slashAdjustY));
+		w.repeatCommands(commands);
+		w.setJumpSpeed (8f);
+		w.setSpawnClawPhaseTime(0.9f);
+		
+		w = new redWolf (677+slashAdjustX,-3250+slashAdjustY);
+		commands = new commandList();
+		commands.add(new slashCommand (677+slashAdjustX, -2950+slashAdjustY));
+		commands.add(new slashCommand (677+slashAdjustX, -3250+slashAdjustY));
+		w.repeatCommands(commands);
+		w.setJumpSpeed (8f);
+		w.setSpawnClawPhaseTime(0.9f);
+		
+		w = new redWolf (752+slashAdjustX,-2950+slashAdjustY);
+		commands = new commandList();
+		commands.add(new slashCommand (752+slashAdjustX, -3250+slashAdjustY));
+		commands.add(new slashCommand (752+slashAdjustX, -2950+slashAdjustY));
+		w.repeatCommands(commands);
+		w.setJumpSpeed (8f);
+		w.setSpawnClawPhaseTime(0.9f);
+		
+		w = new redWolf (827+slashAdjustX,-3250+slashAdjustY);
+		commands = new commandList();
+		commands.add(new slashCommand (827+slashAdjustX, -2950+slashAdjustY));
+		commands.add(new slashCommand (827+slashAdjustX, -3250+slashAdjustY));
+		w.repeatCommands(commands);
+		w.setJumpSpeed (8f);
+		w.setSpawnClawPhaseTime(0.9f);
 	}
 	
 	// Flower farm
@@ -895,111 +1013,7 @@ public class sheepFarm extends zone {
 		new grave(2114,-2701,2);
 		
 		// Far left area.
-		new grave(628,-2941,0);
-		new grave(731,-2850,2);
-		new grave(814,-2939,2);
-		new grave(950,-2985,1);
-		new grave(1046,-2895,2);
-		new grave(1092,-2789,2);
-		new grave(1061,-2688,2);
-		new grave(1033,-2597,2);
-		new grave(945,-2634,1);
-		new grave(884,-2561,2);
-		new grave(732,-2712,0);
-		new grave(586,-2581,2);
-		new grave(450,-2562,0);
-		new grave(342,-2739,2);
-		new grave(451,-2838,2);
-		new grave(279,-3016,2);
-		new grave(454,-3095,2);
-		new grave(699,-3143,2);
-		new grave(895,-3219,2);
-		new grave(1029,-3270,2);
-		new grave(1092,-3351,2);
-		new grave(882,-3474,1);
-		new grave(752,-3413,2);
-		new grave(568,-3387,2);
-		new grave(314,-3383,2);
-		new grave(259,-3262,2);
-		new grave(594,-3608,1);
-		new grave(462,-3685,2);
-		new grave(369,-3776,1);
-		new grave(350,-3896,0);
-		new grave(581,-3801,2);
-		new grave(678,-3862,0);
-		new grave(752,-3903,0);
-		new grave(816,-3951,0);
-		new grave(640,-3929,2);
-		new bush(456,-3570,0);
-		new bush(704,-3484,0);
-		new bush(1022,-3589,0);
-		new bush(1005,-3397,1);
-		new bush(693,-3220,2);
-		new bush(718,-3249,0);
-		new bush(594,-3073,0);
-		new bush(570,-3037,0);
-		new bush(595,-2789,2);
-		new bush(615,-2731,0);
-		new bush(893,-2843,1);
-		new bush(1030,-3114,0);
-		new bush(1003,-3082,0);
-		new bush(892,-3300,2);
-		new grave(698,-3965,0);
-		new grave(821,-3816,2);
-		new grave(903,-3776,2);
-		new grave(946,-3861,2);
-		new grave(914,-3945,2);
-		new grave(1019,-3729,0);
-		new grave(1131,-3749,2);
-		new grave(1085,-3879,2);
-		new grave(1174,-3968,2);
-		new grave(1225,-3917,2);
-		new grave(1075,-3965,2);
-		new grave(1201,-3836,2);
-		new grave(1301,-3901,1);
-		new grave(1378,-3954,1);
-		new grave(1417,-3774,2);
-		new grave(1490,-3829,2);
-		new grave(1518,-3921,0);
-		new grave(1596,-3954,1);
-		new grave(1415,-3887,0);
-		new grave(1628,-3857,1);
-		new grave(1603,-3778,2);
-		new grave(1704,-3942,1);
-		new grave(1746,-3840,0);
-		new grave(1849,-3779,2);
-		new grave(1881,-3868,2);
-		new grave(1828,-3931,1);
-		new grave(1961,-3931,2);
-		new grave(1965,-3823,1);
-		new grave(2002,-3744,2);
-		new grave(2065,-3917,2);
-		new grave(2100,-3968,1);
-		new grave(2114,-3714,2);
-		new grave(2140,-3779,2);
-		new grave(2163,-3883,2);
-		new grave(2210,-3705,0);
-		new grave(2275,-3667,2);
-		new grave(2333,-3707,2);
-		new grave(2293,-3753,0);
-		new grave(1011,-3964,2);
-		new grave(748,-3787,1);
-		new grave(544,-3876,2);
-		new grave(479,-3944,2);
-		new grave(370,-3991,2);
-		new grave(256,-3949,0);
-		new grave(279,-3794,2);
-		new grave(471,-3794,2);
-		new grave(879,-3628,2);
-		new grave(466,-3407,2);
-		new grave(274,-2537,2);
-		new flower(542,-3340,2);
-		new flower(943,-2857,4);
-		new flower(949,-3139,8);
-		new flower(1099,-3676,10);
-		new flower(856,-3880,7);
-		new flower(591,-3859,7);
-		new flower(417,-3940,2);
+		
 	}
 	
 	public static ArrayList<chunk> makeFarlsworthFence(float atX, float atY) {
