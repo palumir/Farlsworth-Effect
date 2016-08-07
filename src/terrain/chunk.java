@@ -11,6 +11,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import drawing.drawnObject;
 import drawing.gameCanvas;
 import utilities.intTuple;
+import utilities.utility;
 import zones.zone;
 
 public class chunk extends drawnObject {
@@ -43,6 +44,11 @@ public class chunk extends drawnObject {
 	//////////////
 	/// FIELDS ///
 	//////////////
+	
+	// Chunk variation.
+	private int variationI;
+	private int variationJ;
+	
 	// The image of the chunk.
 	protected BufferedImage chunkImage;
 	
@@ -59,8 +65,15 @@ public class chunk extends drawnObject {
 	public chunk(chunkType c, int newX, int newY) {
 		super(c.getChunkTypeSpriteSheet(), c.getClass().getName(), newX, newY, c.getWidth(), c.getHeight());
 		
+		// Get random chunk image
+		int randomFirstRow = utility.RNG.nextInt(c.getChunkTypeSpriteSheet().getSheetWidth()/c.getChunkTypeSpriteSheet().getSpriteWidth());
+		
 		// Set our image field and chunktype
-		chunkImage = c.getChunkImage();
+		chunkImage = c.getChunkImage(randomFirstRow, 0);
+		
+		// Set variation I and J
+		setVariationI(randomFirstRow);
+		setVariationJ(0);
 		
 		// Load other chunk stuff (same for both constructors)
 		loadChunkStuff(c);
@@ -69,6 +82,10 @@ public class chunk extends drawnObject {
 	// Constructor for choosing a given variation of the chunk.
 	public chunk(chunkType c, int newX, int newY, int i, int j) {
 		super(c.getChunkTypeSpriteSheet(), c.getClass().getName(), newX, newY, c.getWidth(), c.getHeight());
+		
+		// Set variation i and j
+		setVariationI(i);
+		setVariationJ(j);
 
 		// Set our image field and chunkType
 		if(c.getChunkTypeSpriteSheet() != null) chunkImage = c.getChunkImage(i, j);
@@ -388,6 +405,22 @@ public class chunk extends drawnObject {
 
 	public boolean isImportantEnoughToReload() {
 		return reloadObject;
+	}
+
+	public int getVariationI() {
+		return variationI;
+	}
+
+	public void setVariationI(int variationI) {
+		this.variationI = variationI;
+	}
+
+	public int getVariationJ() {
+		return variationJ;
+	}
+
+	public void setVariationJ(int variationJ) {
+		this.variationJ = variationJ;
 	}
 	
 }

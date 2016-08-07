@@ -8,8 +8,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import drawing.userInterface.interfaceObject;
-import drawing.userInterface.tooltipString;
+import UI.interfaceObject;
+import UI.tooltipString;
 import effects.effect;
 import effects.projectile;
 import effects.interfaceEffects.floatingString;
@@ -35,7 +35,7 @@ public abstract class drawnObject {
 	// Font
 	public static String DEFAULT_FONT_NAME = "SansSerif";
 	public static int DEFAULT_FONT_SIZE = 11;
-	protected static Font DEFAULT_FONT = null;
+	public static Font DEFAULT_FONT = null;
 	protected static Font DEFAULT_FONT_BOLD = null;
 	
 	// Comparator for platformer.
@@ -538,6 +538,15 @@ public abstract class drawnObject {
 	// Respond to destruction
 	public void respondToDestroy() {
 		
+	}
+	
+	// Destroy all
+	public static void destroyAll() {
+		if(objects !=null) {
+			for(; 0 < drawnObject.objects.size();) {
+				objects.get(0).destroy();
+			}
+		}
 	}
 	
 	// Interact with object. Should be over-ridden.

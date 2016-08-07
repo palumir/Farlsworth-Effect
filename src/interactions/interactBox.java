@@ -6,10 +6,10 @@ import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 
+import UI.interfaceObject;
 import drawing.drawnObject;
 import drawing.gameCanvas;
 import drawing.spriteSheet;
-import drawing.userInterface.interfaceObject;
 import effects.interfaceEffects.textBlurb;
 import sounds.sound;
 import units.player;

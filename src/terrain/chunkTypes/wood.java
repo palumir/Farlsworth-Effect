@@ -27,7 +27,13 @@ public class wood extends groundTile {
 	///////////////
 	// Constructor
 	public wood(int newX, int newY) {
-		super(typeReference, newX, newY);
+		super(typeReference, newX, newY,0);
+		this.setPassable(true);
+	}
+	
+	// Constructor
+	public wood(int newX, int newY, int n) {
+		super(typeReference, newX, newY,n);
 		this.setPassable(true);
 	}
 }

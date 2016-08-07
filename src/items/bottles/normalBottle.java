@@ -2,9 +2,9 @@ package items.bottles;
 
 import java.awt.image.BufferedImage;
 
+import UI.tooltipString;
 import drawing.spriteSheet;
 import drawing.spriteSheet.spriteSheetInfo;
-import drawing.userInterface.tooltipString;
 import items.bottle;
 import items.item;
 import units.player;

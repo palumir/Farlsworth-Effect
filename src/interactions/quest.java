@@ -4,9 +4,9 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
 
+import UI.text;
 import drawing.drawnObject;
 import drawing.gameCanvas;
-import drawing.userInterface.text;
 import units.unit;
 import utilities.saveState;
 

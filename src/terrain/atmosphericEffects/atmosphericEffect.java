@@ -1,7 +1,7 @@
 package terrain.atmosphericEffects;
 
+import UI.interfaceObject;
 import drawing.gameCanvas;
-import drawing.userInterface.interfaceObject;
 
 public abstract class atmosphericEffect extends interfaceObject {
 	

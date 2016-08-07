@@ -42,7 +42,14 @@ public class grass extends groundTile {
 	///////////////
 	// Constructor
 	public grass(int newX, int newY) {
-		super(typeReference, newX, newY);
+		super(typeReference, newX, newY,0);
+		if(mode.getCurrentMode() == "topDown") this.setPassable(true);
+		else this.setPassable(false);
+	}
+	
+	// Constructor
+	public grass(int newX, int newY, int n) {
+		super(typeReference, newX, newY,n);
 		if(mode.getCurrentMode() == "topDown") this.setPassable(true);
 		else this.setPassable(false);
 	}

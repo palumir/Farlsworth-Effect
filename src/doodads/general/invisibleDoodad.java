@@ -38,7 +38,7 @@ public class invisibleDoodad extends chunk {
 	
 	
 	// Constructor
-	public invisibleDoodad(int newX, int newY) {
+	public invisibleDoodad(int newX, int newY, int i) {
 		super(typeReference, newX, newY, 0, 0);
 		showHitBox();
 		if(mode.getCurrentMode().equals("topDown")) {

@@ -41,7 +41,13 @@ public class cave extends groundTile {
 	///////////////
 	// Constructor
 	public cave(int newX, int newY) {
-		super(typeReference, newX, newY);
+		super(typeReference, newX, newY,0);
+		setPassable(false);
+	}
+	
+	// Constructor
+	public cave(int newX, int newY, int n) {
+		super(typeReference, newX, newY,n);
 		setPassable(false);
 	}
 }

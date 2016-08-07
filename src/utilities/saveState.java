@@ -7,7 +7,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import drawing.userInterface.tooltipString;
+import UI.tooltipString;
 import interactions.event;
 import interactions.quest;
 import items.bottle;

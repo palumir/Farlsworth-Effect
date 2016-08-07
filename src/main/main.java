@@ -1,7 +1,7 @@
 package main;
 
+import UI.tooltipString;
 import drawing.gameCanvas;
-import drawing.userInterface.tooltipString;
 import units.player;
 import utilities.saveState;
 
@@ -23,7 +23,7 @@ public class main {
 	public static void restartGame(String s) {
 		
 		// Create the player
-		//player.setDeveloper(true);
+		player.setDeveloper(true);
 		player p = player.loadPlayer(null,null,0,0,"Up");
 		
 		// Saved game?

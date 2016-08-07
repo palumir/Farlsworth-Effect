@@ -35,7 +35,7 @@ public class wallTorch extends lightSource {
 	/// METHODS ///
 	///////////////
 	// Constructor
-	public wallTorch(int newX, int newY) {
+	public wallTorch(int newX, int newY, int i) {
 		super(typeReference, newX, newY);
 		setPassable(true);
 		if(mode.getCurrentMode().equals("topDown")) {

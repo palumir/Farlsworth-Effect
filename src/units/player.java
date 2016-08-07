@@ -8,14 +8,14 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
+import UI.playerHealthBar;
+import UI.tooltipString;
 import doodads.sheepFarm.rock;
 import drawing.camera;
 import drawing.drawnObject;
 import drawing.gameCanvas;
 import drawing.animation.animation;
 import drawing.animation.animationPack;
-import drawing.userInterface.playerHealthBar;
-import drawing.userInterface.tooltipString;
 import effects.effect;
 import effects.effectTypes.critBloodSquirt;
 import effects.interfaceEffects.interactBlurb;
@@ -28,6 +28,7 @@ import modes.mode;
 import modes.platformer;
 import modes.topDown;
 import sounds.music;
+import utilities.levelSave;
 import utilities.saveState;
 import utilities.time;
 import utilities.utility;
@@ -731,15 +732,18 @@ public class player extends unit {
 		
 		// Player presses y (inventory) key.
 		else if(k.getKeyCode() == KeyEvent.VK_Y) { 
-			/*textBlurb b = new textBlurb((int)this.getDoubleX(),(int)this.getDoubleY());
-			b.attachToObject(this);*/
-			saveState.createSaveState();	
 			
-			// Development mode?
-			player.setDeveloper(true);
-			
-			// Create the player.
-			player p = player.loadPlayer(null,null,0,0,"Up");
+			if(developer.levelName != null) {
+				levelSave.createSaveState(developer.levelName);	
+				saveState.createSaveState();
+				
+				// Development mode?
+				player.setDeveloper(true);
+					
+				// Create the player.
+				player p = player.loadPlayer(null,null,0,0,"Up");
+				levelSave.loadSaveState(developer.levelName);	
+			}
 		}
 		
 		// Player presses i (inventory) key.

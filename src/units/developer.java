@@ -7,8 +7,15 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.io.File;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 
+import UI.button;
+import UI.interfaceObject;
+import UI.text;
+import UI.tooltipString;
 import doodads.sheepFarm.bone;
 import doodads.sheepFarm.bush;
 import doodads.sheepFarm.flower;
@@ -22,12 +29,13 @@ import doodads.tomb.wallTorch;
 import drawing.camera;
 import drawing.drawnObject;
 import drawing.gameCanvas;
-import drawing.userInterface.text;
 import modes.topDown;
 import terrain.chunk;
-import units.unitTypes.farmLand.sheepFarm.redWolf;
-import units.unitTypes.farmLand.tomb.lightDude;
-import units.unitTypes.farmLand.tomb.shadowDude;
+import terrain.groundTile;
+import units.unitTypes.sheepFarm.redWolf;
+import units.unitTypes.tomb.lightDude;
+import units.unitTypes.tomb.shadowDude;
+import utilities.levelSave;
 import utilities.saveState;
 import utilities.utility;
 import zones.zone;
@@ -53,32 +61,44 @@ public class developer extends player {
 	// Show visibility
 	public boolean visible = true;
 	
-	// Current stuff.
-	public int whatThing = 0;
-	public String[] listOfThings = {"tree", 
-									"flower",
-									"bush",
-									"bone",
-									"grave",
-									"log",
-									"haystack",
-									"rock",
-									"well",
-									"wolf",
-									"wallTorch",
-									"shadowDude",
-									"lightDude"};
+	// Lists of our stuff.
+	public static ArrayList<String> listOfChunks;
+	
+	public static ArrayList<String> listOfUnits;
+	public static ArrayList<String> listOfUnitCommands;
+	
+	public static ArrayList<String> listOfGroundTiles;
+	
+	// Selected units
+	private static ArrayList<drawnObject> selectedThings;
+	private static ArrayList<Point> relativeDifferences;
+	
+	// Current object class
+	public static String currentObjectClass;
+	
+	// Is left click held?
+	private static Point leftClickStartPoint;
+	private static Point lastMousePos;
+	
+	// Are we selecting?
+	private static boolean selecting = false;
+	private static boolean movingObject = false;
+	
+	// Click radius
+	private static int DEFAULT_CLICK_RADIUS = 10;
 	
 	// Developer mode.
 	public developer(int newX, int newY, zone z) {
 		super(newX, newY, z);
 		collisionOn = false;
 		setStuck(true);
-		topDown.setMode();
 		
 		// Give a million hp
 		healthPoints = 100000;
 		moveSpeed = 10f;
+		
+		// Create our lists of stuff.
+		createLists();
 		
 		// Destroy healthbar.
 		getHealthBar().destroy();
@@ -91,21 +111,599 @@ public class developer extends player {
 	int adjustX = -150;
 	int adjustY = -150;
 	
+	// Default button stuff
+	static int DEFAULT_BUTTON_WIDTH = 80;
+	static int DEFAULT_BUTTON_HEIGHT = 30;
+	
+	// File button.
+	static button file;
+	text displayFileName;
+	static String levelName;
+	static ArrayList<interfaceObject> areYouSureSave;
+	
+	// Editor mode.
+	static button editorMode;
+	text displayEditorMode;
+	public String[] editorTypeList = {"Unit",
+									  "Chunk",
+									  "Ground Tile"
+	};
+	private static String editorType = "Select a";
+	
+	// Buttons for units
+	static ArrayList<button> unitButtons;
+	
+	// Buttons for chunks
+	static ArrayList<button> chunkButtons;
+	
+	// Buttons for groundTiles
+	static ArrayList<button> groundTileButtons;
+	
+	// Pause button
+	static button pauseButton;
+	
+	// Create lists
+	public void createLists() {
+		// Chunks
+		listOfChunks =  new ArrayList<String>();
+		File folder = new File("src/doodads");
+		File[] listOfFiles = folder.listFiles();
+	    for (int i = 0; i < listOfFiles.length; i++) {
+	      if (listOfFiles[i].isFile()) {
+	    	  System.err.println("There's a file in the base doodads folder!");
+	      } else if (listOfFiles[i].isDirectory()) {
+	    	  File subFolder = new File("src/doodads/" + listOfFiles[i].getName());
+	    	  File[] subListOfFiles = subFolder.listFiles();
+	    	  for(int j = 0; j < subListOfFiles.length; j++) {
+	    		  listOfChunks.add("doodads." + listOfFiles[i].getName() + "." + subListOfFiles[j].getName().substring(0,subListOfFiles[j].getName().length() - 5));
+	    	  }
+	      }
+	    }
+		
+		// Units
+		listOfUnits =  new ArrayList<String>();
+		folder = new File("src/units/unitTypes");
+		listOfFiles = folder.listFiles();
+	    for (int i = 0; i < listOfFiles.length; i++) {
+	      if (listOfFiles[i].isFile()) {
+	    	  System.err.println("There's a file in the base unitTypes folder!");
+	      } else if (listOfFiles[i].isDirectory()) {
+	    	  File subFolder = new File("src/units/unitTypes/" + listOfFiles[i].getName());
+	    	  File[] subListOfFiles = subFolder.listFiles();
+	    	  for(int j = 0; j < subListOfFiles.length; j++) {
+	    		  listOfUnits.add("units.unitTypes." + listOfFiles[i].getName() + "." + subListOfFiles[j].getName().substring(0,subListOfFiles[j].getName().length() - 5));
+	    	  }
+	      }
+	    }
+	    
+		// Unit commands
+		listOfUnitCommands =  new ArrayList<String>();
+		folder = new File("src/units/unitCommands");
+		listOfFiles = folder.listFiles();
+	    for (int i = 0; i < listOfFiles.length; i++) {
+	      if (listOfFiles[i].isFile()) {
+	    	  listOfUnitCommands.add("units.unitCommands." + listOfFiles[i].getName().substring(0,listOfFiles[i].getName().length() - 5));
+	      } else if (listOfFiles[i].isDirectory()) {
+	      }
+	    }
+		
+		// Ground tiles.
+		listOfGroundTiles = new ArrayList<String>();
+		folder = new File("src/terrain/chunkTypes");
+		listOfFiles = folder.listFiles();
+	    for (int i = 0; i < listOfFiles.length; i++) {
+	      if (listOfFiles[i].isFile()) {
+	        
+	      } else if (listOfFiles[i].isDirectory()) {
+	      }
+	    }
+	}
+	
+	// Delete selected.
+	public void deleteSelected() {
+		if(selectedThings!=null) {
+			for(int i = 0;  i < selectedThings.size(); i++) {
+				selectedThings.get(i).destroy();
+			}
+		}
+	}
+
 	// Create dev interface
 	public void createDevInterface() {
 		
-		// Instructions and stuff for now
-		instructionOne = new text("Press 'space' to add something", 200+adjustX,200+adjustY, Color.white, 1.5f);
-		instructionTwo = new text("Press 'tab' to tab through things", 200+adjustX, 220+adjustY, Color.white, 1.5f);
-		currChunkPre = new text("Current thing: ", 200+adjustX, 240+adjustY, Color.white, 1.5f);
-		currChunkType = new text(listOfThings[whatThing], 320+adjustX, 240+adjustY, Color.cyan, 1.5f);
-		instructionThree = new text("Press 'h' to toggle hitboxes of spawned things", 200+adjustX, 280+adjustY, Color.white, 1.5f);
-		hitBoxOnOrOff = new text("Off", 540+adjustX, 280+adjustY, Color.red, 1.5f);
-		instructionFour = new text("Press 't' to toggle your collision", 200+adjustX, 300+adjustY, Color.white, 1.5f);
-		collisionOnOrOff = new text("Off", 440+adjustX, 300+adjustY, Color.red, 1.5f);
-		instructionFive = new text("Press 'r' to make spawned chunks visible", 200+adjustX, 320+adjustY, Color.white, 1.5f);
-		visibilityOnOrOff = new text("On", 520+adjustX, 320+adjustY, Color.green, 1.5f);
-		instructionSix = new text("Press 'y' to save", 200+adjustX, 340+adjustY, Color.white, 1.5f);
+		////////////////////
+		/////////Pause//////
+		////////////////////
+		pauseButton = new button("Pause Actions","pause",gameCanvas.getDefaultWidth() - 150, 50, DEFAULT_BUTTON_WIDTH, DEFAULT_BUTTON_HEIGHT);
+		
+		//////////////////////
+		///////// File ///////
+		//////////////////////
+		
+		file = new button("File","file",50,50,DEFAULT_BUTTON_WIDTH,DEFAULT_BUTTON_HEIGHT);
+		
+		displayFileName = new text("No level loaded", 150, 70, Color.green, 1.3f);
+			
+		// Save
+		button b = new button("Save", "Save", 150, file.getIntY() + 0*DEFAULT_BUTTON_HEIGHT*4/3, DEFAULT_BUTTON_WIDTH, DEFAULT_BUTTON_HEIGHT);
+		file.addChild(b);
+		
+		// Save As
+		//b = new button("Save As", "Save As", 150, file.getIntY() + 1*DEFAULT_BUTTON_HEIGHT*4/3, DEFAULT_BUTTON_WIDTH, DEFAULT_BUTTON_HEIGHT);
+		//file.addChild(b);
+		
+		// Load
+		b = new button("Load", "Load", 150, file.getIntY() + 2*DEFAULT_BUTTON_HEIGHT*4/3, DEFAULT_BUTTON_WIDTH, DEFAULT_BUTTON_HEIGHT);
+		file.addChild(b);
+		
+		// Put levels in the load button.
+		File folder = new File("customLevels");
+		File[] listOfFiles = folder.listFiles();
+		int numButtons = 0;
+	    for (int i = 0; i < listOfFiles.length; i++) {
+	    	
+	      // Make sure it's a .save file.
+	      String extension = listOfFiles[i].getName().substring(listOfFiles[i].getName().indexOf('.') + 1, listOfFiles[i].getName().length());
+	      String fileWithoutExtension = listOfFiles[i].getName().substring(0, listOfFiles[i].getName().indexOf('.'));
+	    	
+	      if (listOfFiles[i].isFile() && extension.equals("save")) {
+	    	  button fileButton = new button(fileWithoutExtension, b.getName() + "." + listOfFiles[i].getName(), b.getIntX() + 100, b.getIntY() + numButtons*DEFAULT_BUTTON_HEIGHT*4/3,DEFAULT_BUTTON_WIDTH, DEFAULT_BUTTON_HEIGHT);
+	    	  b.addChild(fileButton);
+		      numButtons++;
+	      } else if (listOfFiles[i].isDirectory()) {
+	      }
+	    }
+		
+		// Test
+		b = new button("Test Level", "Test", 150, file.getIntY() + 3*DEFAULT_BUTTON_HEIGHT*4/3, DEFAULT_BUTTON_WIDTH, DEFAULT_BUTTON_HEIGHT);
+		file.addChild(b);
+
+		//////////////////////
+		/// EDITOR MODE ///
+		//////////////////////
+		
+		editorMode = new button("Editor Mode","editorMode",50,50 + 1*DEFAULT_BUTTON_HEIGHT*4/3,DEFAULT_BUTTON_WIDTH,DEFAULT_BUTTON_HEIGHT);
+		
+		displayEditorMode = new text(editorType,150,70 + 1*DEFAULT_BUTTON_HEIGHT*4/3, Color.green, 1.3f);
+		
+		int selectionNumber = 0;
+		for(String s : editorTypeList) {
+			
+			// editorModeUnit, editorModeChunk, or editorModeGround Tile
+			b = new button(s, editorMode.getButtonID() + s, 150, editorMode.getIntY() + selectionNumber*DEFAULT_BUTTON_HEIGHT*4/3, DEFAULT_BUTTON_WIDTH, DEFAULT_BUTTON_HEIGHT);
+			editorMode.addChild(b);
+			selectionNumber++;
+		}
+	}
+	
+	// Close prompts
+	public static void closePrompts() {
+		if(areYouSureSave != null) {
+			for(;0 < areYouSureSave.size();) {
+				areYouSureSave.get(0).destroy();
+				areYouSureSave.remove(0);
+			}
+		}
+	}
+	
+	// Reset stuff
+	public static void resetEditorStuff() {
+		
+		// Destroy all old buttons
+		button.recursivelyHide(groundTileButtons);
+		button.recursivelyHide(chunkButtons);
+		button.recursivelyHide(unitButtons);
+		button.recursivelyHide(editorMode.getChildren());
+		button.recursivelyHide(file.getChildren());
+		
+		// Set current placeable object to be null.
+		currentObjectClass = null;
+	}
+	
+	// Select a button on the dev interface
+	public static void selectButton(button b) {
+		
+		// Destroy children of buttons on same level.
+		if(b.getParent() != null) {
+			button.recursivelyHideChildren(b.getParent().getChildren());
+		}
+		
+		// If there's no more kids
+		if(b.getChildren() == null || b.getChildren().size() == 0) {
+			button.recursivelyHide(b.getTopParent().getChildren());
+		}
+		
+		// Initiate these
+		if(groundTileButtons==null) groundTileButtons = new ArrayList<button>();
+		if(chunkButtons==null) chunkButtons = new ArrayList<button>();
+		if(unitButtons==null) unitButtons = new ArrayList<button>();
+		
+		b.select();
+		
+		/////////////////////
+		///////// PAUSE /////
+		/////////////////////
+		if(b.getButtonID().contains("pause")) {
+			
+			// Do nothing.
+			utility.toggleActions();
+		}
+		
+		/////////////////////
+		///// FILE STUFF ////
+		/////////////////////
+		
+		// Quick save button.
+		if(b.getButtonID().equals("Save")) {
+			
+			// We are in a file.
+			if(developer.levelName != null) {
+				String levelName = b.getButtonID().substring(b.getButtonID().indexOf('.')+1,b.getButtonID().length());
+				
+				String buttonText = "Are you sure you want to save over the current level?";
+				int textWidth = gameCanvas.getGameCanvas().getFontMetrics(drawnObject.DEFAULT_FONT).stringWidth(buttonText);
+				
+				areYouSureSave = new ArrayList<interfaceObject>();
+				
+				text textPart = new text(
+						buttonText,
+						gameCanvas.getActualWidth()/2 - textWidth/2,
+						gameCanvas.getActualHeight()*3/4,
+						Color.white
+						);
+				areYouSureSave.add(textPart);
+				
+				areYouSureSave.add(new button(
+						"Yes",
+						"SaveSave." + levelName, 
+						gameCanvas.getActualWidth()/2 - textWidth/2 + textWidth*1/4 - 70/2,
+						gameCanvas.getActualHeight()*3/4 + 30,
+						70,
+						50
+						));
+				
+				areYouSureSave.add(new button(
+						"No",
+						"SaveNotSave." + levelName,
+						gameCanvas.getActualWidth()/2 - textWidth/2 + textWidth*3/4 - 70/2,
+						gameCanvas.getActualHeight()*3/4 + 30,
+						70,
+						50
+						));
+			}
+			
+			// We aren't in a file.
+			else {
+				// TODO: make this prompt saving to a new file.
+				tooltipString t = new tooltipString("We aren't in a loaded level. Create or load a level.");
+			}
+		}
+		
+		if(b.getButtonID().contains("SaveNotSave.")) {
+			
+			// Do nothing.
+			closePrompts();
+		}
+		
+		if(b.getButtonID().contains("SaveSave.")) {
+			
+			// Save
+			levelSave.createSaveState(developer.levelName);
+			closePrompts();
+		}
+		
+		// Load a level
+		if(b.getButtonID().contains("Load.")) {
+			
+			// Loaded level after loading another.
+			if(developer.levelName != null) {
+				String levelName = b.getButtonID().substring(b.getButtonID().indexOf('.')+1,b.getButtonID().length());
+				
+				String buttonText = "Do you want to save the current level before loading?";
+				int textWidth = gameCanvas.getGameCanvas().getFontMetrics(drawnObject.DEFAULT_FONT).stringWidth(buttonText);
+				
+				areYouSureSave = new ArrayList<interfaceObject>();
+				
+				text textPart = new text(
+						buttonText,
+						gameCanvas.getActualWidth()/2 - textWidth/2,
+						gameCanvas.getActualHeight()*3/4,
+						Color.white
+						);
+				areYouSureSave.add(textPart);
+				
+				areYouSureSave.add(new button(
+						"Yes",
+						"LoadSave." + levelName, 
+						gameCanvas.getActualWidth()/2 - textWidth/2 + textWidth*1/4 - 70/2,
+						gameCanvas.getActualHeight()*3/4 + 30,
+						70,
+						50
+						));
+				
+				areYouSureSave.add(new button(
+						"No",
+						"LoadNotSave." + levelName,
+						gameCanvas.getActualWidth()/2 - textWidth/2 + textWidth*3/4 - 70/2,
+						gameCanvas.getActualHeight()*3/4 + 30,
+						70,
+						50
+						));
+			}
+			
+			// Loading a level for the first time.
+			else {
+				// Create the player.
+				player p = player.loadPlayer(null,null,0,0,"Up");
+				String levelName = b.getButtonID().substring(b.getButtonID().indexOf('.')+1,b.getButtonID().length());
+				developer.levelName = levelName;
+				levelSave.loadSaveState(developer.levelName);
+			}
+		}
+		
+		// LoadSave
+		if(b.getButtonID().contains("LoadSave.")) {
+			
+			// Save current level.
+			levelSave.createSaveState(developer.levelName);
+			
+			// Destroy all objects
+			drawnObject.destroyAll();
+			
+			// Create the player.
+			player p = player.loadPlayer(null,null,0,0,"Up");
+			
+			// Open the new one.
+			String levelName = b.getButtonID().substring(b.getButtonID().indexOf('.')+1,b.getButtonID().length());
+			developer.levelName = levelName;
+			levelSave.loadSaveState(developer.levelName);
+		}
+		
+		// LoadNotSave
+		if(b.getButtonID().contains("LoadNotSave.")) {
+			
+			// Destroy all objects
+			drawnObject.destroyAll();
+			
+			// Create the player.
+			player p = player.loadPlayer(null,null,0,0,"Up");
+			
+			// Open the new level.
+			String levelName = b.getButtonID().substring(b.getButtonID().indexOf('.')+1,b.getButtonID().length());
+			developer.levelName = levelName;
+			levelSave.loadSaveState(developer.levelName);
+		}
+		
+		// Test level button
+		if(b.getButtonID().equals("Test")) {
+			testLevel();
+		}
+		
+		///////////////////////
+		//// UNIT COMMANDS ////
+		///////////////////////
+		
+		// Select a unit command
+		if(b.getButtonID().contains("units.unitCommands.")) {
+			System.out.println(b.getButtonID());
+		}
+		
+		
+		//////////////////////
+		///// EDITOR MODE ////
+		//////////////////////
+		if(b.getButtonID().equals("editorModeGround Tile")) {
+			
+			// Set editor type.
+			editorType = "Ground Tile";
+			
+			resetEditorStuff();
+			
+			button typeButton = new button("Ground Tile Type","groundTileTypeButton",
+					editorMode.getIntX(),
+					editorMode.getIntY() + DEFAULT_BUTTON_HEIGHT*4/3,
+					DEFAULT_BUTTON_WIDTH,
+					DEFAULT_BUTTON_HEIGHT);
+			
+			groundTileButtons.add(typeButton);
+			
+			// Show type buttons.
+			int j = 0;
+			int changeX = 0;
+			int changeY = 0;
+			for(String s : listOfGroundTiles) {
+				
+				String noDoodads = s.substring(s.indexOf('.')+1,s.length());
+				String noFolder = noDoodads.substring(noDoodads.indexOf('.')+1,noDoodads.length());
+				
+				// Create each button for each type.
+				button groundTileButton = new button(noFolder,s,
+						150 + changeX*100,
+						editorMode.getIntY() + DEFAULT_BUTTON_HEIGHT*4/3 + changeY*DEFAULT_BUTTON_HEIGHT*4/3,
+						DEFAULT_BUTTON_WIDTH,
+						DEFAULT_BUTTON_HEIGHT);
+				typeButton.addChild(groundTileButton);
+				
+				j++;
+				changeY++;
+				if(editorMode.getIntY() + DEFAULT_BUTTON_HEIGHT*4/3 + changeY*DEFAULT_BUTTON_HEIGHT*4/3 >= gameCanvas.getDefaultHeight()) {
+					changeY = 0;
+					changeX++;
+				}
+			}
+		}
+		
+		if(b.getButtonID().equals("editorModeUnit")) {
+			
+			// Set editor type.
+			editorType = "Unit";
+			
+			resetEditorStuff();
+			
+			////////////
+			/// TYPE BUTTON
+			///////
+			
+			button typeButton = new button("Unit Type","unitTypeButton",
+					editorMode.getIntX(),
+					editorMode.getIntY() + DEFAULT_BUTTON_HEIGHT*4/3,
+					DEFAULT_BUTTON_WIDTH,
+					DEFAULT_BUTTON_HEIGHT);
+			
+			unitButtons.add(typeButton);
+			
+			// Show type buttons.
+			int j = 0;
+			String currentFolder = "<NONE>";
+			button currentFolderButton = null;
+			int numFolders = 0;
+			int changeX = 0;
+			int changeY = 0;
+			for(String s : listOfUnits) {
+				
+				String noUnits = s.substring(s.indexOf('.')+1,s.length());
+				String noUnitTypes = noUnits.substring(noUnits.indexOf('.')+1,noUnits.length());
+				
+				// Create a new button for the new folder.
+				if(!s.contains(currentFolder)) {
+					changeX = 0;
+					changeY = 0;
+					currentFolder = noUnitTypes.substring(0, noUnitTypes.indexOf('.'));
+					currentFolderButton = new button(currentFolder,currentFolder,
+							150,
+							editorMode.getIntY() + DEFAULT_BUTTON_HEIGHT*4/3 + numFolders*DEFAULT_BUTTON_HEIGHT*4/3,
+							DEFAULT_BUTTON_WIDTH,
+							DEFAULT_BUTTON_HEIGHT);
+					typeButton.addChild(currentFolderButton);
+					numFolders++;
+				}
+				
+				// No folder
+				String noFolder = noUnitTypes.substring(noUnitTypes.indexOf('.')+1,noUnitTypes.length());
+				
+				// Create each button for each type.
+				button unitTypeButton = new button(noFolder,s,
+						250 + changeX*100,
+						editorMode.getIntY() + DEFAULT_BUTTON_HEIGHT*4/3 + changeY*DEFAULT_BUTTON_HEIGHT*4/3,
+						DEFAULT_BUTTON_WIDTH,
+						DEFAULT_BUTTON_HEIGHT);
+				currentFolderButton.addChild(unitTypeButton);
+				
+				j++;
+				changeY++;
+				if(editorMode.getIntY() + DEFAULT_BUTTON_HEIGHT*4/3 + changeY*DEFAULT_BUTTON_HEIGHT*4/3 >= gameCanvas.getDefaultHeight()) {
+					changeY = 0;
+					changeX++;
+				}
+			}
+			
+			////////////
+			/// COMMANDS BUTTON
+			///////
+			
+			button commandsButton = new button("Unit Commands","unitCommandsButton",
+					editorMode.getIntX(),
+					editorMode.getIntY() + 2*DEFAULT_BUTTON_HEIGHT*4/3,
+					DEFAULT_BUTTON_WIDTH,
+					DEFAULT_BUTTON_HEIGHT);
+			
+			unitButtons.add(typeButton);
+			
+			// Show type buttons.
+			j = 0;
+			numFolders = 0;
+			changeX = 0;
+			changeY = 0;
+			for(String s : listOfUnitCommands) {
+				
+				String noUnits = s.substring(s.indexOf('.')+1,s.length());
+			
+				// No folder
+				String noFolder = noUnits.substring(noUnits.indexOf('.')+1,noUnits.length());
+				
+				// Create each button for each type.
+				button unitCommandButton = new button(noFolder,s,
+						150 + changeX*100,
+						editorMode.getIntY() + 2*DEFAULT_BUTTON_HEIGHT*4/3 + changeY*DEFAULT_BUTTON_HEIGHT*4/3,
+						DEFAULT_BUTTON_WIDTH,
+						DEFAULT_BUTTON_HEIGHT);
+				commandsButton.addChild(unitCommandButton);
+				
+				j++;
+				changeY++;
+				if(editorMode.getIntY() + DEFAULT_BUTTON_HEIGHT*4/3 + changeY*DEFAULT_BUTTON_HEIGHT*4/3 >= gameCanvas.getDefaultHeight()) {
+					changeY = 0;
+					changeX++;
+				}
+			}
+		}
+		if(b.getButtonID().equals("editorModeChunk")) {
+			editorType = "Chunk";
+			
+			resetEditorStuff();
+			
+			button typeButton = new button("Chunk Type","chunkTypeButton",
+					editorMode.getIntX(),
+					editorMode.getIntY() + DEFAULT_BUTTON_HEIGHT*4/3,
+					DEFAULT_BUTTON_WIDTH,
+					DEFAULT_BUTTON_HEIGHT);
+			
+			chunkButtons.add(typeButton);
+			
+			// Show type buttons.
+			int j = 0;
+			String currentFolder = "<NONE>";
+			button currentFolderButton = null;
+			int numFolders = 0;
+			int changeX = 0;
+			int changeY = 0;
+			for(String s : listOfChunks) {
+				
+				String noDoodads = s.substring(s.indexOf('.')+1,s.length());
+				
+				// Create a new button for the new folder.
+				if(!s.contains(currentFolder)) {
+					changeX = 0;
+					changeY = 0;
+					currentFolder = noDoodads.substring(0, noDoodads.indexOf('.'));
+					currentFolderButton = new button(currentFolder,currentFolder,
+							150,
+							editorMode.getIntY() + DEFAULT_BUTTON_HEIGHT*4/3 + numFolders*DEFAULT_BUTTON_HEIGHT*4/3,
+							DEFAULT_BUTTON_WIDTH,
+							DEFAULT_BUTTON_HEIGHT);
+					typeButton.addChild(currentFolderButton);
+					numFolders++;
+				}
+				
+				// No folder
+				String noFolder = noDoodads.substring(noDoodads.indexOf('.')+1,noDoodads.length());
+				
+				// Create each button for each type.
+				button chunkTypeButton = new button(noFolder,s,
+						250 + changeX*100,
+						editorMode.getIntY() + DEFAULT_BUTTON_HEIGHT*4/3 + changeY*DEFAULT_BUTTON_HEIGHT*4/3,
+						DEFAULT_BUTTON_WIDTH,
+						DEFAULT_BUTTON_HEIGHT);
+				currentFolderButton.addChild(chunkTypeButton);
+				
+				j++;
+				changeY++;
+				if(editorMode.getIntY() + DEFAULT_BUTTON_HEIGHT*4/3 + changeY*DEFAULT_BUTTON_HEIGHT*4/3 >= gameCanvas.getDefaultHeight()) {
+					changeY = 0;
+					changeX++;
+				}
+			}
+		}
+		
+		////////////////////////////////////
+		///// GROUNDTILE TYPE SELECT //////
+		///////////////////////////////////
+		if(b.getButtonID().contains("terrain.chunkTypes.") || 
+				b.getButtonID().contains("units.unitTypes.") ||
+				b.getButtonID().contains("doodads.")) {
+			currentObjectClass = b.getButtonID();
+		}
+		
 	}
 	
 	// Show hitboxes
@@ -152,10 +750,11 @@ public class developer extends player {
 		
 		// Record mouse position.
 		Point p = gameCanvas.getGameCanvas().getMousePosition();
-		if(p!=null) lastMousePos = p;
+		if(p!=null) lastMousePos = toInGamePos(p);
 		
-		// Update the displayed chunk
-		if(currChunkType != null) currChunkType.setTheText(listOfThings[whatThing]);
+		// Update the editor mode.
+		if(displayEditorMode != null) displayEditorMode.setTheText(editorType + " Mode");
+		if(levelName != null) displayFileName.setTheText("Level: " + levelName);
 	}
 	
 	// Update unit
@@ -169,14 +768,27 @@ public class developer extends player {
 		moveThings();
 	}
 	
+	// Get ingame last mouse point
+	public static Point toInGamePos(Point p) {
+		Point inGamePointCurrent = new Point(p.x + camera.getCurrent().getX() + camera.getCurrent().getAttachedUnit().getWidth()/2 - gameCanvas.getDefaultWidth()/2, 
+			      p.y + camera.getCurrent().getY() + camera.getCurrent().getAttachedUnit().getHeight()/2 - gameCanvas.getDefaultHeight()/2);
+		return inGamePointCurrent;
+	}
+	
+	// Get ingame last mouse point
+	public static Point toDrawPos(Point p) {
+		Point inGamePointCurrent = new Point(p.x - (camera.getCurrent().getX() + camera.getCurrent().getAttachedUnit().getWidth()/2 - gameCanvas.getDefaultWidth()/2), 
+			      p.y - (camera.getCurrent().getY() + camera.getCurrent().getAttachedUnit().getHeight()/2 - gameCanvas.getDefaultHeight()/2));
+		return inGamePointCurrent;
+	}
+	
 	// Move things
 	public void moveThings() {
 		
 		if(movingObject) {
 			
 			// In game point
-			Point inGamePointCurrent = new Point((int)lastMousePos.getX() + camera.getCurrent().getX() + camera.getCurrent().getAttachedUnit().getWidth()/2 - gameCanvas.getDefaultWidth()/2, 
-				      (int)lastMousePos.getY() + camera.getCurrent().getY() + camera.getCurrent().getAttachedUnit().getHeight()/2 - gameCanvas.getDefaultHeight()/2);
+			Point inGamePointCurrent = lastMousePos;
 			
 			// Move all of our selected objects.
 			if(selectedThings!=null) {
@@ -187,77 +799,149 @@ public class developer extends player {
 					selectedThings.get(i).setDoubleX(inGamePointCurrent.getX() - diffX);
 					selectedThings.get(i).setDoubleY(inGamePointCurrent.getY() - diffY);
 				}
-				
 			}
 		}
 		
 	}
 	
-	// Selected units
-	private static ArrayList<drawnObject> selectedThings;
-	private static ArrayList<Point> relativeDifferences;
-	
-	// Selection type
-	private static String selectionType = "Unit";
-	
-	// Is left click held?
-	private static Point leftClickStartPoint;
-	private static Point lastMousePos;
-	
-	// Are we selecting?
-	private static boolean selecting = false;
-	private static boolean movingObject = false;
-	
-	// Click radius
-	private static int DEFAULT_CLICK_RADIUS = 10;
-	
 	// Responding to mouse presses
 	public static void devMousePressed(MouseEvent e) {
-		leftClickStartPoint = new Point(e.getX(), e.getY());
 		
-		// In game point
-		Point inGamePoint = new Point(e.getX() + camera.getCurrent().getX() + camera.getCurrent().getAttachedUnit().getWidth()/2 - gameCanvas.getDefaultWidth()/2, 
-				e.getY() + camera.getCurrent().getY() + camera.getCurrent().getAttachedUnit().getHeight()/2 - gameCanvas.getDefaultHeight()/2);
+		button touchedButton = button.getButtonAt(e.getX(), e.getY());
 		
-		// Determine whether or not we are touching something.
-		ArrayList<drawnObject> touchedObjects  = drawnObject.getObjectsInRadius((int)inGamePoint.getX(), (int)inGamePoint.getY(), DEFAULT_CLICK_RADIUS);
-		ArrayList<drawnObject> touchedUnits = new ArrayList<drawnObject>();
-		if(touchedObjects!=null) for(int i = 0; i < touchedObjects.size(); i++) if(touchedObjects.get(i) instanceof unit) touchedUnits.add(touchedObjects.get(i));
+		// If we have touched a button
+		if(touchedButton != null) {
+			selectButton(touchedButton);
+		}
 		
-		if(selectionType.equals("Unit") && touchedUnits != null && touchedUnits.size() > 0) {
+		// If we haven't touched a button.
+		if(touchedButton == null) {
+			leftClickStartPoint = toInGamePos(new Point(e.getX(), e.getY()));
 			
-			movingObject = true;
+			// In game point
+			Point inGamePoint = leftClickStartPoint;
 			
-			unit touchedUnit = (unit)drawnObject.getClosestToFrom(
-					(int)inGamePoint.getX(), 
-					(int)inGamePoint.getY(),
-					touchedUnits);
+			// Determine whether or not we are touching something.
+			ArrayList<drawnObject> touchedObjects  = drawnObject.getObjectsInRadius((int)inGamePoint.getX(), (int)inGamePoint.getY(), DEFAULT_CLICK_RADIUS);
+			ArrayList<drawnObject> touchedUnits = new ArrayList<drawnObject>();
+			ArrayList<drawnObject> touchedChunks = new ArrayList<drawnObject>();
+			ArrayList<drawnObject> touchedGroundTiles = new ArrayList<drawnObject>();
 			
-			// Move all selected things.
-			if(selectedThings != null && selectedThings.contains(touchedUnit)) {
-				relativeDifferences = new ArrayList<Point>();
-				for(int i = 0; i < selectedThings.size(); i++) {
-					relativeDifferences.add(new Point(touchedUnit.getIntX() - selectedThings.get(i).getIntX(),
-													  touchedUnit.getIntY() - selectedThings.get(i).getIntY()));
-				}
-			} 
+			if(touchedObjects!=null) for(int i = 0; i < touchedObjects.size(); i++) 
+				if(touchedObjects.get(i) instanceof unit) 
+					touchedUnits.add(touchedObjects.get(i));
 			
-			// De-select and move only the newly selected object.
-			else {
+			if(touchedObjects!=null) for(int i = 0; i < touchedObjects.size(); i++) 
+				if(touchedObjects.get(i) instanceof chunk && !(touchedObjects.get(i) instanceof groundTile)) 
+					touchedChunks.add(touchedObjects.get(i));
+			
+			if(touchedObjects!=null) for(int i = 0; i < touchedObjects.size(); i++) 
+				if(touchedObjects.get(i) instanceof groundTile) 
+					touchedGroundTiles.add(touchedObjects.get(i));
+			
+			////////////
+			// UNITS ///
+			////////////
+			if(editorType.equals("Unit") && touchedUnits != null && touchedUnits.size() > 0) {
 				
-				relativeDifferences = new ArrayList<Point>();
-				relativeDifferences.add(new Point(0,0));
-				ArrayList<drawnObject> touchTheseThings = new ArrayList<drawnObject>();
-				touchTheseThings.add(touchedUnit);
-				selectAll(touchTheseThings);
+				movingObject = true;
+				
+				unit touchedUnit = (unit)drawnObject.getClosestToFrom(
+						(int)inGamePoint.getX(), 
+						(int)inGamePoint.getY(),
+						touchedUnits);
+				
+				// Move all selected things.
+				if(selectedThings != null && selectedThings.contains(touchedUnit)) {
+					relativeDifferences = new ArrayList<Point>();
+					for(int i = 0; i < selectedThings.size(); i++) {
+						relativeDifferences.add(new Point(touchedUnit.getIntX() - selectedThings.get(i).getIntX(),
+														  touchedUnit.getIntY() - selectedThings.get(i).getIntY()));
+					}
+				}
+				
+				// De-select and move only the newly selected object.
+				else {
+					
+					relativeDifferences = new ArrayList<Point>();
+					relativeDifferences.add(new Point(0,0));
+					ArrayList<drawnObject> touchTheseThings = new ArrayList<drawnObject>();
+					touchTheseThings.add(touchedUnit);
+					selectAll(touchTheseThings);
+					
+				}
+			}
+			
+			////////////
+			// CHUNKS //
+			////////////
+			else if(editorType.equals("Chunk") && touchedChunks != null && touchedChunks.size() > 0) {
+				
+				movingObject = true;
+				
+				chunk touchedChunk = (chunk)drawnObject.getClosestToFrom(
+						(int)inGamePoint.getX(), 
+						(int)inGamePoint.getY(),
+						touchedChunks);
+				
+				// Move all selected things.
+				if(selectedThings != null && selectedThings.contains(touchedChunk)) {
+					relativeDifferences = new ArrayList<Point>();
+					for(int i = 0; i < selectedThings.size(); i++) {
+						relativeDifferences.add(new Point(touchedChunk.getIntX() - selectedThings.get(i).getIntX(),
+								touchedChunk.getIntY() - selectedThings.get(i).getIntY()));
+					}
+				}
+				
+				// De-select and move only the newly selected object.
+				else {
+					
+					relativeDifferences = new ArrayList<Point>();
+					relativeDifferences.add(new Point(0,0));
+					ArrayList<drawnObject> touchTheseThings = new ArrayList<drawnObject>();
+					touchTheseThings.add(touchedChunk);
+					selectAll(touchTheseThings);
+					
+				}
 				
 			}
 			
-		}
-		
-		// Nothing was touched, draw our selection square.
-		else {
-			selecting = true;
+			/////////////////
+			// GROUNDTILES //
+			/////////////////
+			else if(editorType.equals("Ground Tile") && touchedGroundTiles != null && touchedGroundTiles.size() > 0) {
+				
+				movingObject = true;
+				
+				groundTile touchedGroundTile = (groundTile)drawnObject.getClosestToFrom(
+						(int)inGamePoint.getX(), 
+						(int)inGamePoint.getY(),
+						touchedGroundTiles);
+				
+				// Move all selected things.
+				if(selectedThings != null && selectedThings.contains(touchedGroundTile)) {
+					relativeDifferences = new ArrayList<Point>();
+					for(int i = 0; i < selectedThings.size(); i++) {
+						relativeDifferences.add(new Point(touchedGroundTile.getIntX() - selectedThings.get(i).getIntX(),
+								touchedGroundTile.getIntY() - selectedThings.get(i).getIntY()));
+					}
+				}
+				
+				// De-select and move only the newly selected object.
+				else {
+					relativeDifferences = new ArrayList<Point>();
+					relativeDifferences.add(new Point(0,0));
+					ArrayList<drawnObject> touchTheseThings = new ArrayList<drawnObject>();
+					touchTheseThings.add(touchedGroundTile);
+					selectAll(touchTheseThings);
+				}
+				
+			}
+			
+			// Nothing was touched, draw our selection square.
+			else {
+				selecting = true;
+			}
 		}
 	}
 	
@@ -293,38 +977,99 @@ public class developer extends player {
 	// Responding to mouse release
 	public static void devMouseReleased(MouseEvent e) {
 		
-		Rectangle rect= new Rectangle(leftClickStartPoint);
-		rect.add(lastMousePos);
-		
-		// Deal with box selecting
-		if(selecting) {
+		if(leftClickStartPoint!=null) {
+			Rectangle rect= new Rectangle(leftClickStartPoint);
+			rect.add(lastMousePos);
 			
-			// Units
-			if(selectionType.equals("Unit")) {
+			// Deal with box selecting
+			if(selecting) {
 				
-				unSelectAll();
-				
-				ArrayList<unit> selectTheseUnits = unit.getUnitsInBox(
-						rect.x + camera.getCurrent().getX() + camera.getCurrent().getAttachedUnit().getWidth()/2 - gameCanvas.getDefaultWidth()/2, 
-						rect.y + camera.getCurrent().getY() + camera.getCurrent().getAttachedUnit().getHeight()/2 - gameCanvas.getDefaultHeight()/2, 
-						rect.x + rect.width + camera.getCurrent().getX() - gameCanvas.getDefaultWidth()/2, 
-						rect.y + rect.height + camera.getCurrent().getY() - gameCanvas.getDefaultHeight()/2);
-				
-				if(selectTheseUnits!=null) {
+				// Chunks
+				if(editorType.equals("Chunk")) {
 					
-					ArrayList<drawnObject> selectTheseThings = new ArrayList<drawnObject>();
-					for(int i = 0; i < selectTheseUnits.size(); i++) {
-						selectTheseThings.add(selectTheseUnits.get(i));
+					unSelectAll();
+					
+					ArrayList<drawnObject> selectTheseObjects = drawnObject.getObjectsInBox(
+							rect.x, 
+							rect.y, 
+							rect.x + rect.width, 
+							rect.y + rect.height);
+					ArrayList<chunk> selectTheseChunks = new ArrayList<chunk>();
+					if(selectTheseObjects!=null) {
+						for(int i = 0; i < selectTheseObjects.size(); i++) {
+							if(selectTheseObjects.get(i) instanceof chunk && !(selectTheseObjects.get(i) instanceof groundTile)) {
+								selectTheseChunks.add((chunk)selectTheseObjects.get(i));
+							}
+						}
 					}
+					
+					if(selectTheseChunks!=null && selectTheseChunks.size() > 0) {
+						
+						ArrayList<drawnObject> selectTheseThings = new ArrayList<drawnObject>();
+						for(int i = 0; i < selectTheseChunks.size(); i++) {
+							selectTheseThings.add(selectTheseChunks.get(i));
+						}
+					
+						selectAll(selectTheseThings);
+					}
+				}
 				
-					selectAll(selectTheseThings);
+				// Ground Tiles
+				if(editorType.equals("Ground Tile")) {
+					
+					unSelectAll();
+					
+					ArrayList<drawnObject> selectTheseObjects = drawnObject.getObjectsInBox(
+							rect.x, 
+							rect.y, 
+							rect.x + rect.width, 
+							rect.y + rect.height);
+					ArrayList<groundTile> selectTheseChunks = new ArrayList<groundTile>();
+					if(selectTheseObjects!=null) {
+						for(int i = 0; i < selectTheseObjects.size(); i++) {
+							if(selectTheseObjects.get(i) instanceof groundTile) {
+								selectTheseChunks.add((groundTile)selectTheseObjects.get(i));
+							}
+						}
+					}
+					
+					if(selectTheseChunks!=null && selectTheseChunks.size() > 0) {
+						
+						ArrayList<drawnObject> selectTheseThings = new ArrayList<drawnObject>();
+						for(int i = 0; i < selectTheseChunks.size(); i++) {
+							selectTheseThings.add(selectTheseChunks.get(i));
+						}
+					
+						selectAll(selectTheseThings);
+					}
+				}
+				
+				// Units
+				if(editorType.equals("Unit")) {
+					
+					unSelectAll();
+					
+					ArrayList<unit> selectTheseUnits = unit.getUnitsInBox(
+							rect.x, 
+							rect.y, 
+							rect.x + rect.width, 
+							rect.y + rect.height);
+					
+					if(selectTheseUnits!=null) {
+						
+						ArrayList<drawnObject> selectTheseThings = new ArrayList<drawnObject>();
+						for(int i = 0; i < selectTheseUnits.size(); i++) {
+							selectTheseThings.add(selectTheseUnits.get(i));
+						}
+					
+						selectAll(selectTheseThings);
+					}
 				}
 			}
+			
+			selecting = false;
+			movingObject = false;
 		}
-		
-		selecting = false;
-		movingObject = false;
-		
 	}
 	
 	// Highlight box variables
@@ -336,8 +1081,8 @@ public class developer extends player {
 		// Draw the box.
 		if(selecting) {
 			
-			Rectangle rect= new Rectangle(leftClickStartPoint);
-			rect.add(lastMousePos);
+			Rectangle rect= new Rectangle(toDrawPos(leftClickStartPoint));
+			rect.add(toDrawPos(lastMousePos));
 
 			g.setColor(DEFAULT_HIGHLIGHT_COLOR);
 			g.drawRect(rect.x, rect.y, rect.width, rect.height);
@@ -351,196 +1096,222 @@ public class developer extends player {
 		drawHighLightBox(g);
 	}
 	
-	// What thing increase
-	public void increaseWhatThing() {
-		whatThing++;
-		if(whatThing>=listOfThings.length) whatThing = 0;
+	// Test level
+	public static void testLevel() {
+		if(developer.levelName != null) {
+			// Test level
+			levelSave.createSaveState(developer.levelName);	
+			saveState.createSaveState();
+			
+			// Development mode?
+			player.setDeveloper(false);
+				
+			// Create the player.
+			player p = player.loadPlayer(null,null,0,0,"Up");
+			levelSave.loadSaveState(developer.levelName);
+			
+			// Tell them to press y to go back
+			tooltipString t = new tooltipString("Press 'y' to go back to developer mode.");
+		}
+		else {
+			tooltipString t = new tooltipString("You must save before testing the level.");
+		}
 	}
+	
+	// Spawn ground tile.
+	public void spawnGroundTile() {
+		
+		// If we don't have a class, give an error
+		if(currentObjectClass == null) {
+			new tooltipString("You need to select a ground tile type to place.");
+		}
+		// If selecting, make groundtiles in box.
+		else if(selecting) {
+			
+			// Make rectangle.
+			Rectangle rect= new Rectangle(leftClickStartPoint);
+			rect.add(lastMousePos);
+			
+			// Make groundtiles in box.
+			for(int i = (int) rect.getX(); i < rect.getX() + rect.getWidth(); i += groundTile.DEFAULT_TILE_WIDTH) {
+				for(int j = (int) rect.getY(); j < rect.getY() + rect.getHeight(); j += groundTile.DEFAULT_TILE_HEIGHT) {
+					try {
+						Class<?> clazz = Class.forName(currentObjectClass);
+						Constructor<?> ctor = clazz.getConstructor(int.class, int.class, int.class);
+						Object object = ctor.newInstance(new Object[] { i,
+								j,
+								0});
+					}
+					catch(Exception e) {
+						e.printStackTrace();
+					}
+				}
+			}
+			
+			
+		}
+		
+		// Otherwise, make one ground tile on mouse.
+		else {
+			try {
+				Class<?> clazz = Class.forName(currentObjectClass);
+				Constructor<?> ctor = clazz.getConstructor(int.class, int.class, int.class);
+				Object object = ctor.newInstance(new Object[] { (int)(lastMousePos.getX() - groundTile.DEFAULT_TILE_WIDTH/2),
+						(int)(lastMousePos.getY() - groundTile.DEFAULT_TILE_HEIGHT/2),
+						0});
+			}
+			catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	// Spawn ground tile.
+		public void spawnChunk() {
+			
+			// If we don't have a class, give an error
+			if(currentObjectClass == null) {
+				new tooltipString("You need to select a chunk type to place.");
+			}
+			// If selecting, make groundtiles in box.
+			else if(selecting) {
+				
+				// Make rectangle.
+				Rectangle rect= new Rectangle(leftClickStartPoint);
+				rect.add(lastMousePos);
+				
+				// Height
+				int objHeight = 0;
+				int objWidth = 0;
+				
+				// Make chunks in box.
+				for(int i = (int) rect.getX(); i < rect.getX() + rect.getWidth(); ) {
+					for(int j = (int) rect.getY(); j < rect.getY() + rect.getHeight(); ) {
+						try {
+							Class<?> clazz = Class.forName(currentObjectClass);
+							Constructor<?> ctor = clazz.getConstructor(int.class, int.class, int.class);
+							Object object = ctor.newInstance(new Object[] { i,
+									j,
+									0});
+							drawnObject d = (drawnObject)(object);
+							if(objHeight == 0) objHeight = d.getHeight();
+							if(objWidth == 0) objWidth = d.getWidth();
+							j += objHeight;
+						}
+						catch(Exception e) {
+							e.printStackTrace();
+						}
+					}
+					i += objWidth;
+				}
+			}
+			
+			// Otherwise, make one chunk tile on mouse.
+			else {
+				try {
+					Class<?> clazz = Class.forName(currentObjectClass);
+					Constructor<?> ctor = clazz.getConstructor(int.class, int.class, int.class);
+					Object object = ctor.newInstance(new Object[] { (int)(lastMousePos.getX()),
+							(int)(lastMousePos.getY()),
+							0});
+					drawnObject d = (drawnObject)(object);
+					d.setDoubleX(d.getDoubleX() - d.getWidth()/2);
+					d.setDoubleY(d.getDoubleY() - d.getHeight()/2);
+				}
+				catch(Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	
+		// Spawn ground tile.
+		public void spawnUnit() {
+			
+			// If we don't have a class, give an error
+			if(currentObjectClass == null) {
+				new tooltipString("You need to select a unit type to place.");
+			}
+			// If selecting, make groundtiles in box.
+			else if(selecting) {
+				
+				// Make rectangle.
+				Rectangle rect= new Rectangle(leftClickStartPoint);
+				rect.add(lastMousePos);
+				
+				// Height
+				int objHeight = 0;
+				int objWidth = 0;
+				
+				// Make chunks in box.
+				for(int i = (int) rect.getX(); i < rect.getX() + rect.getWidth(); ) {
+					for(int j = (int) rect.getY(); j < rect.getY() + rect.getHeight(); ) {
+						try {
+							Class<?> clazz = Class.forName(currentObjectClass);
+							Constructor<?> ctor = clazz.getConstructor(int.class, int.class);
+							Object object = ctor.newInstance(new Object[] { i,
+									j});
+							drawnObject d = (drawnObject)(object);
+							if(objHeight == 0) objHeight = d.getHeight();
+							if(objWidth == 0) objWidth = d.getWidth();
+							j += objHeight;
+						}
+						catch(Exception e) {
+							e.printStackTrace();
+						}
+					}
+					i += objWidth;
+				}
+			}
+			
+			// Otherwise, make one chunk tile on mouse.
+			else {
+				try {
+					Class<?> clazz = Class.forName(currentObjectClass);
+					Constructor<?> ctor = clazz.getConstructor(int.class, int.class);
+					Object object = ctor.newInstance(new Object[] { (int)(lastMousePos.getX()),
+							(int)(lastMousePos.getY())});
+					drawnObject d = (drawnObject)(object);
+					d.setDoubleX(d.getDoubleX() - d.getWidth()/2);
+					d.setDoubleY(d.getDoubleY() - d.getHeight()/2);
+				}
+				catch(Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	
 	
 	// Spawn the thing and output.
 	public void spawnThing() {
 		
-		// Already printed?
-		boolean alreadyPrinted = false;
-		
-		// Our things.
-		chunk c = null;
-		unit u = null;
-		int random = 0;
-		
-		/////////////
-		/// TREE ////
-		/////////////
-		if(listOfThings[whatThing].equals("tree")) {
-			
-			// Get random.
-			random = utility.RNG.nextInt(3);
-			
-			// Output what we make.
-			c = new tree(getIntX() + getWidth()/2, getIntY() + getHeight()/2, random);
+		if(editorType.equals("Ground Tile")) {
+			spawnGroundTile();
 		}
 		
-		///////////////
-		/// FLOWER ////
-		///////////////
-		if(listOfThings[whatThing].equals("flower")) {
-			
-			// Get random.
-			random = utility.RNG.nextInt(11);
-			
-			// Output what we make.
-			c = new flower(getIntX() + getWidth()/2, getIntY() + getHeight()/2, random);
+		if(editorType.equals("Chunk")) {
+			spawnChunk();
 		}
 		
-		///////////////
-		/// HAYSTACK ////
-		///////////////
-		if(listOfThings[whatThing].equals("haystack")) {
-			
-			// Get random.
-			random = utility.RNG.nextInt(1);
-			
-			// Output what we make.
-			c = new haystack(getIntX() + getWidth()/2, getIntY() + getHeight()/2, random);
+		if(editorType.equals("Unit")) {
+			spawnUnit();
 		}
-		
-		///////////////
-		/// ROCK ////
-		///////////////
-		if(listOfThings[whatThing].equals("rock")) {
-			
-			// Get random.
-			random = utility.RNG.nextInt(2);
-			
-			// Output what we make.
-			c = new rock(getIntX() + getWidth()/2, getIntY() + getHeight()/2, random);
-		}
-		
-		///////////////
-		/// WELL ////
-		///////////////
-		if(listOfThings[whatThing].equals("well")) {
-			
-			// Output what we make.
-			c = new well(getIntX() + getWidth()/2, getIntY() + getHeight()/2, 0);
-		}
-		
-		///////////////
-		/// LOG ////
-		///////////////
-		if(listOfThings[whatThing].equals("log")) {
-			
-			
-			// Output what we make.
-			c = new log(getIntX() + getWidth()/2, getIntY() + getHeight()/2,0);
-		}
-		
-		///////////////
-		/// Bone ////
-		///////////////
-		if(listOfThings[whatThing].equals("bone")) {
-			
-			// Get random.
-			random = utility.RNG.nextInt(5);
-			
-			// Output what we make.
-			c = new bone(getIntX() + getWidth()/2, getIntY() + getHeight()/2, random);
-		}
-		
-		/////////////
-		/// BUSH ////
-		/////////////
-		if(listOfThings[whatThing].equals("bush")) {
-			
-			// Get random.
-			random = utility.RNG.nextInt(3);
-			
-			// Output what we make.
-			c = new bush(getIntX() + getWidth()/2, getIntY() + getHeight()/2, random);
-		}
-		
-		/////////////
-		/// GRAVE ///
-		/////////////
-		if(listOfThings[whatThing].equals("grave")) {
-			
-			// Get random.
-			random = utility.RNG.nextInt(3);
-			
-			// Output what we make.
-			c = new grave(getIntX() + getWidth()/2, getIntY() + getHeight()/2, random);
-		}
-		
-		/////////////////
-		/// WALLTORCH ///
-		/////////////////
-		if(listOfThings[whatThing].equals("wallTorch")) {
-			
-			// Get random.
-			random = utility.RNG.nextInt(5);
-			
-			// Output what we make.
-			c = new wallTorch(getIntX() + getWidth()/2, getIntY() + getHeight()/2);
-			
-			c.setDoubleX(c.getDoubleX() -c.getWidth()/2);
-			c.setDoubleY(c.getDoubleY() -c.getHeight()/2);
-			System.out.println("c = new " + listOfThings[whatThing] + "("+(getIntX()+getWidth()/2-c.getWidth()/2) + "," + (getIntY() + getHeight()/2 - c.getHeight()/2) + ");");
-			// Set some stuff.
-			if(showHitBoxes) c.showHitBox();
-			c.setDrawSprite(visible);
-			alreadyPrinted = true;
-		}
-		
-		/////////////
-		/// WOLF  ///
-		/////////////
-		if(listOfThings[whatThing].equals("wolf")) {
-			
-			// Output what we make.
-			u = new redWolf(getIntX() + getWidth()/2, getIntY() + getHeight()/2);
-		}
-		
-		/////////////
-		/// LIGHTDUDE  ///
-		/////////////
-		if(listOfThings[whatThing].equals("lightDude")) {
-			
-			// Output what we make.
-			u = new lightDude(getIntX() + getWidth()/2, getIntY() + getHeight()/2);
-		}
-		
-		/////////////
-		/// SHADOWDUDE  ///
-		/////////////
-		if(listOfThings[whatThing].equals("shadowDude")) {
-			
-			// Output what we make.
-			u = new shadowDude(getIntX() + getWidth()/2, getIntY() + getHeight()/2);
-		}
-		
-		// Adjust
-		if(c!=null && !alreadyPrinted) {
-			c.setDoubleX(c.getDoubleX() -c.getWidth()/2);
-			c.setDoubleY(c.getDoubleY() -c.getHeight()/2);
-			System.out.println("c = new " + listOfThings[whatThing] + "("+(getIntX()+getWidth()/2-c.getWidth()/2) + "," + (getIntY() + getHeight()/2 - c.getHeight()/2) + "," + random + ");");
-			// Set some stuff.
-			if(showHitBoxes) c.showHitBox();
-			c.setDrawSprite(visible);
-		}
-		if(u!=null && !alreadyPrinted) {
-			u.setDoubleX(u.getDoubleX() -u.getWidth()/2);
-			u.setDoubleY(u.getDoubleY() -u.getHeight()/2);
-			System.out.println("u = new " + listOfThings[whatThing] + "("+(getIntX()+getWidth()/2-u.getWidth()/2) + "," + (getIntY() + getHeight()/2 - u.getHeight()/2)+ ");");
-			// Set some stuff.
-			if(showHitBoxes) u.showHitBox();
-			u.setDrawSprite(visible);
-		}
-		
 	}
 	
 	// Controls
 	public void keyPressed(KeyEvent k) {
-			
+		
+		// Player presses excape
+		if(k.getKeyCode() == KeyEvent.VK_ESCAPE) { 
+			button.hideAllChildButtons();
+			unSelectAll();
+			closePrompts();
+		}
+		
+		// Player presses delete key.
+		if(k.getKeyCode() == KeyEvent.VK_DELETE) { 
+			deleteSelected();
+		}
+		
 		// Player presses left key.
 		if(k.getKeyCode() == KeyEvent.VK_A) { 
 			startMove("left");
@@ -560,41 +1331,15 @@ public class developer extends player {
 		if(k.getKeyCode() == KeyEvent.VK_S) { 
 			startMove("down");
 		}
-		
-		// Make sprites invisible
-		if(k.getKeyCode() == KeyEvent.VK_R) { 
-			toggleSpriteVisibility();
-		}
 	
 		// Player presses bar key
 		if(k.getKeyCode() == KeyEvent.VK_SPACE) {
 			spawnThing();
 		}
 		
-		// Show hitboxes?
-		if(k.getKeyCode() == KeyEvent.VK_H) {
-			showHitBoxes();
-		}
-		
-		// Show hitboxes?
-		if(k.getKeyCode() == KeyEvent.VK_T) {
-			toggleDevCollision();
-		}
-		
-		// Show hitboxes?
+		// Test level
 		if(k.getKeyCode() == KeyEvent.VK_Y) {
-			saveState.createSaveState();		
-			
-			// Development mode?
-			player.setDeveloper(false);
-				
-			// Create the player.
-			player p = player.loadPlayer(null,null,0,0,"Up");
-		}
-		
-		// Player presses e key
-		if(k.getKeyCode() == KeyEvent.VK_TAB) {
-			increaseWhatThing();
+			testLevel();
 		}
 	}
 	

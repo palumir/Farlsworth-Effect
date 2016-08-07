@@ -1,7 +1,7 @@
 package items;
 
+import UI.tooltipString;
 import drawing.spriteSheet;
-import drawing.userInterface.tooltipString;
 import interactions.event;
 import sounds.sound;
 import units.player;
