@@ -12,7 +12,7 @@ public abstract class buff extends effect {
 		super(e, u.getIntX(), u.getIntY());
 		setDrawObject(false);
 		onUnit = u;
-		animationDuration = d;
+		setAnimationDuration(d);
 		applyEffect();
 	}
 	

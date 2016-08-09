@@ -81,11 +81,11 @@ public class tooltipString extends effect {
 		// Set the alpha depending on how close the animation is to over.
 		float timeThatHasPassed = (time.getTime() - timeStarted)/1000f; // in seconds
 		float alpha = 1f;
-		if(timeThatHasPassed/animationDuration < 0.05f) {
-			alpha = 20f*(timeThatHasPassed/animationDuration);
+		if(timeThatHasPassed/getAnimationDuration() < 0.05f) {
+			alpha = 20f*(timeThatHasPassed/getAnimationDuration());
 		}
-		if(timeThatHasPassed/animationDuration > 0.95f) {
-			alpha = 20f*(1f - (timeThatHasPassed/animationDuration));
+		if(timeThatHasPassed/getAnimationDuration() > 0.95f) {
+			alpha = 20f*(1f - (timeThatHasPassed/getAnimationDuration()));
 		}
 		if(alpha < 0) alpha = 0;
 		if(alpha > 1) alpha = 1;

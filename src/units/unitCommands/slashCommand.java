@@ -15,6 +15,12 @@ public class slashCommand extends unitCommand {
 		this.setY(y);
 	}
 
+	public slashCommand(slashCommand unitCommand) {
+		super("slash");
+		this.setX(unitCommand.x);
+		this.setY(unitCommand.y);
+	}
+
 	public double getX() {
 		return x;
 	}

@@ -13,7 +13,6 @@ import drawing.animation.animation;
 import drawing.animation.animationPack;
 import effects.effect;
 import effects.effectType;
-import effects.buffs.darkSlow;
 import modes.mode;
 import sounds.sound;
 import units.player;
@@ -23,8 +22,8 @@ import utilities.time;
 public class darkHole extends effect {
 	
 	// Default dimensions.
-	public static int DEFAULT_SPRITE_WIDTH = 150;
-	public static int DEFAULT_SPRITE_HEIGHT = 150;
+	public static int DEFAULT_SPRITE_WIDTH = 150/2;
+	public static int DEFAULT_SPRITE_HEIGHT = 150/2;
 	
 	// Platformer real dimensions
 	public static int DEFAULT_PLATFORMER_HEIGHT = DEFAULT_SPRITE_WIDTH;
@@ -32,8 +31,8 @@ public class darkHole extends effect {
 	public static int DEFAULT_PLATFORMER_ADJUSTMENT_Y = 0;
 	
 	// TopDown real dimensions
-	public static int DEFAULT_TOPDOWN_HEIGHT = 120;
-	public static int DEFAULT_TOPDOWN_WIDTH = 120;
+	public static int DEFAULT_TOPDOWN_HEIGHT = 120/2;
+	public static int DEFAULT_TOPDOWN_WIDTH = 120/2;
 	public static int DEFAULT_TOPDOWN_ADJUSTMENT_Y = 0;
 	
 	////////////////
@@ -93,7 +92,7 @@ public class darkHole extends effect {
 		this.damage = damage;
 		
 		// Duration
-		this.animationDuration = duration;
+		this.setAnimationDuration(duration);
 		
 		// Set background
 		setBackgroundDoodad(true);
@@ -157,11 +156,9 @@ public class darkHole extends effect {
 				for(int i = 0; i < hurtUnits.size(); i++) {
 					if(hurtUnits.get(i) instanceof player && !allied) {
 						hurtUnits.get(i).hurt(damage, 1f);
-						darkSlow d = new darkSlow(hurtUnits.get(i), hurtEvery);
 					}
 					else if(allied) {
 						hurtUnits.get(i).hurt(damage, 1f);
-						darkSlow d = new darkSlow(hurtUnits.get(i), hurtEvery);
 					}
 				}
 			}

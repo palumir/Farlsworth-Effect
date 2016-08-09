@@ -15,6 +15,12 @@ public class moveCommand extends unitCommand {
 		this.setY(y);
 	}
 
+	public moveCommand(moveCommand unitCommand) {
+		super("move");
+		this.setX(unitCommand.x);
+		this.setY(unitCommand.y);
+	}
+
 	public double getX() {
 		return x;
 	}

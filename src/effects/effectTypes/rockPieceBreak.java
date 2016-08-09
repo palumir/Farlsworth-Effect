@@ -1,18 +1,12 @@
-package effects.projectiles;
-
-import java.util.ArrayList;
+package effects.effectTypes;
 
 import drawing.spriteSheet;
 import drawing.spriteSheet.spriteSheetInfo;
+import effects.effect;
 import effects.effectType;
-import effects.projectile;
-import effects.effectTypes.rockPieceBreak;
 import modes.mode;
-import units.player;
-import units.unit;
-import utilities.time;
 
-public class rockPiece extends projectile {
+public class rockPieceBreak extends effect {
 	
 	// Default dimensions.
 	public static int DEFAULT_SPRITE_WIDTH = 11;
@@ -24,8 +18,8 @@ public class rockPiece extends projectile {
 	public static int DEFAULT_PLATFORMER_ADJUSTMENT_Y = 0;
 	
 	// TopDown real dimensions
-	public static int DEFAULT_TOPDOWN_HEIGHT = DEFAULT_SPRITE_WIDTH;
-	public static int DEFAULT_TOPDOWN_WIDTH = DEFAULT_SPRITE_HEIGHT;
+	public static int DEFAULT_TOPDOWN_HEIGHT = 11;
+	public static int DEFAULT_TOPDOWN_WIDTH = 11;
 	public static int DEFAULT_TOPDOWN_ADJUSTMENT_Y = 0;
 	
 	////////////////
@@ -33,13 +27,13 @@ public class rockPiece extends projectile {
 	////////////////
 	
 	// Default name.
-	private static String DEFAULT_EFFECT_NAME = "rockPiece";
+	private static String DEFAULT_EFFECT_NAME = "rockPieceBreak";
 	
 	// Effect sprite stuff.
 	private static String DEFAULT_EFFECT_SPRITESHEET = "images/effects/" + DEFAULT_EFFECT_NAME + ".png";
 	
 	// Duration
-	private static float DEFAULT_ANIMATION_DURATION = 3f;
+	private static float DEFAULT_ANIMATION_DURATION = 0.45f;
 	
 	// The actual type.
 	private static effectType theEffectType =
@@ -53,15 +47,24 @@ public class rockPiece extends projectile {
 							)),
 							DEFAULT_ANIMATION_DURATION);	
 	
+	
+	
+	//////////////
+	/// FIELDS ///
+	//////////////
+	
 	///////////////
 	/// METHODS ///
 	///////////////
 	// Constructor
-	public rockPiece(int newX, int newY, int newMoveToX, int newMoveToY, int damage, float moveSpeed) {
-		super(theEffectType, newX, newY, newMoveToX, newMoveToY, damage);
-		this.moveSpeed = moveSpeed;
-		collisionOn = false;
-		setRiseRun();
+	public rockPieceBreak(int newX, int newY) {
+		super(theEffectType, newX, newY);
+		
+		// Make adjustments on hitbox if we're in topDown.
+		setHeight(getDefaultHeight());
+		setWidth(getDefaultWidth());
+		setHitBoxAdjustmentY(getDefaultHitBoxAdjustmentY());
+
 	}
 	
 	///////////////////////////
@@ -76,50 +79,6 @@ public class rockPiece extends projectile {
 		else {
 			return DEFAULT_PLATFORMER_WIDTH;
 		}
-	}
-	
-	// Update unit
-	@Override
-	public void update() {
-		
-		// Set floatX and Y
-		floatX += run;
-		floatY += rise;
-		
-		// Set new X and Y.
-		setDoubleX((int)floatX);
-		setDoubleY((int)floatY);
-		
-		player currPlayer = player.getPlayer();
-		
-		boolean isWithin;
-		if(!isAllied()) {
-			// If we hit the player, explode it.
-			isWithin = currPlayer.isWithinRadius(getIntX() + getWidth()/2, getIntY()+getHeight()/2, getWidth()/2);
-			if(isWithin) { 
-				currPlayer.hurt(damage, 1);
-				explode();
-			}
-		}
-		else {
-			ArrayList<unit> uList = unit.getUnitsInBox(getIntX(), getIntY(), getIntX() + getWidth(), getIntY() + getHeight());
-			isWithin = (uList != null) && ((uList.contains(currPlayer) && (uList.size() > 1)) || (uList.size() >= 1 && !uList.contains(currPlayer)));
-			if(isWithin) {
-				explode();
-			}
-			
-		}
-		
-		// Run animation.
-		if(getCurrentAnimation() != null) getCurrentAnimation().playAnimation();
-		if(time.getTime() - timeStarted >= getAnimationDuration()*1000) {
-			explode();
-		}
-	}
-	
-	public void explode() {
-		this.destroy();
-		new rockPieceBreak(this.getIntX(), this.getIntY());
 	}
 	
 	// Get default height.

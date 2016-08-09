@@ -74,6 +74,11 @@ public class interactBox extends interfaceObject  {
 	///////////////
 	/// METHODS ///
 	///////////////
+	
+	// Is text fully written out?
+	public boolean textScrollingFinished() {
+		return displayedText.equals(theText.getTextOnPress());
+	}
 
 	// Constructor
 	public interactBox(textSeries newText, drawnObject newWhoIsTalking, boolean newIsUnit) {

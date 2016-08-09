@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import drawing.spriteSheet;
 import drawing.spriteSheet.spriteSheetInfo;
+import effects.buffs.darkSlow;
 import drawing.animation.animation;
 import drawing.animation.animationPack;
 import modes.mode;
@@ -13,6 +14,7 @@ import units.player;
 import units.unit;
 import units.unitType;
 import units.unitCommands.slashCommand;
+import utilities.intTuple;
 import utilities.time;
 import utilities.utility;
 
@@ -77,6 +79,9 @@ public abstract class wolf extends unit {
 		protected spriteSheet upDownSpriteSheet;
 		protected spriteSheet leftRightSpriteSheet;
 		
+		// Trail spawns
+		private ArrayList<intTuple> trailSpawns;
+		
 		// Follow until range
 		protected int followUntilRange = 10 + utility.RNG.nextInt(15);
 		
@@ -98,9 +103,9 @@ public abstract class wolf extends unit {
 		protected boolean hasClawSpawned = false;
 		protected boolean slashing = false;
 		protected long startOfClawAttack = 0;
-		protected float spawnClawPhaseTime = .5f;
+		private float spawnClawPhaseTime = .5f;
 		protected float clawAttackEveryBase = 3f;
-		protected float clawAttackEvery = 0f;
+		private float clawAttackEvery = 0f;
 		protected long lastClawAttack = 0;
 		
 		// Claw
@@ -213,6 +218,27 @@ public abstract class wolf extends unit {
 		
 		}
 		
+		// Hurt people stuff.
+		long lastHurt = 0;
+		int damage = 1;
+		float slowTo = 0.1f;
+		float hurtEvery = 0.05f;
+		
+		// How lenient are we in hurting people?
+		// How many units of space do we reduce the radius of pain by?
+		private int leniency = 7;
+		
+		public void hurtPeople() {
+			// If someone is in the explosion radius, hurt.
+			if(time.getTime() - lastHurt > hurtEvery*1000) {
+				player currPlayer = player.getPlayer();
+				lastHurt = time.getTime();
+				if(currPlayer.isWithin(this.getIntX() + leniency, this.getIntY() + leniency, this.getIntX() + this.getWidth() - leniency, this.getIntY() + this.getHeight() - leniency)) {
+					currPlayer.hurt(damage, 1);
+				}
+			}
+		}
+		
 		// Combat defaults.
 		public abstract void setCombatStuff();
 		
@@ -264,7 +290,7 @@ public abstract class wolf extends unit {
 		public void makeSounds() {
 			
 				// Create a new random growl interval
-				float newRandomHowlInterval = baseRandomHowl + utility.RNG.nextInt(10);
+				/*float newRandomHowlInterval = baseRandomHowl + utility.RNG.nextInt(10);
 				
 				// Make the wolf howl
 				if(randomHowl == 0f) {
@@ -283,7 +309,7 @@ public abstract class wolf extends unit {
 						s.setPosition(getIntX(), getIntY(), sound.DEFAULT_SOUND_RADIUS);
 						s.start();
 					}
-				}
+				}*/
 		}
 
 		// Claw attack.
@@ -324,8 +350,8 @@ public abstract class wolf extends unit {
 						float xDistance = (jumpingToX - getIntX());
 						float distanceXY = (float) Math.sqrt(yDistance * yDistance
 								+ xDistance * xDistance);
-						rise = ((yDistance/distanceXY)*jumpSpeed);
-						run = ((xDistance/distanceXY)*jumpSpeed);
+						rise = ((yDistance/distanceXY)*getJumpSpeed());
+						run = ((xDistance/distanceXY)*getJumpSpeed());
 						startX = getDoubleX();
 						startY = getDoubleY();
 					}
@@ -340,7 +366,7 @@ public abstract class wolf extends unit {
 					setDoubleY(getDoubleY() + rise);
 					
 					// Don't let him not move at all or leave region.
-					if((run == 0 && rise == 0) || ((Math.abs(jumpingToX - getIntX()) < jumpSpeed && Math.abs(jumpingToY - getIntY()) < jumpSpeed))) {
+					if((run == 0 && rise == 0) || ((Math.abs(jumpingToX - getIntX()) < getJumpSpeed() && Math.abs(jumpingToY - getIntY()) < getJumpSpeed()))) {
 						if(currClaw != null) {
 							setDoubleX(jumpingToX);
 							setDoubleY(jumpingToY);
@@ -415,13 +441,13 @@ public abstract class wolf extends unit {
 			if(clawAttacking) {
 				
 				// Spawn claw phase.
-				if(!hasClawSpawned && time.getTime() - startOfClawAttack < spawnClawPhaseTime*1000) {
+				if(!hasClawSpawned && time.getTime() - startOfClawAttack < getSpawnClawPhaseTime()*1000) {
 					hasClawSpawned = true;
 					spawnClaw(clawAttackingX, clawAttackingY);
 				}
 				
 				// Slashing phase.
-				else if(hasClawSpawned && time.getTime() - startOfClawAttack > spawnClawPhaseTime*1000 && !hasStartedJumping) {
+				else if(hasClawSpawned && time.getTime() - startOfClawAttack > getSpawnClawPhaseTime()*1000 && !hasStartedJumping) {
 					hasStartedJumping = true;
 					slashTo((chunk)currClaw);
 				}
@@ -469,12 +495,9 @@ public abstract class wolf extends unit {
 			
 			// If player is in radius, follow player, attacking.
 			player currPlayer = player.getPlayer();
-			int playerX = currPlayer.getIntX() + currPlayer.getWidth()/2;
-			int playerY = currPlayer.getIntY() + currPlayer.getHeight()/2;
-			float howClose = (float) Math.sqrt((playerX - getIntX() - getWidth()/2)*(playerX - getIntX() - getWidth()/2) + (playerY - getIntY() - getHeight()/2)*(playerY - getIntY() - getHeight()/2));
 			
-			// Make sounds.
-			makeSounds();
+			// Hurt people
+			hurtPeople();
 			
 			// Claw attack
 			dealWithClawAttacks();
@@ -545,6 +568,30 @@ public abstract class wolf extends unit {
 			this.alpha = alpha;
 			this.changeCombat();
 			this.setAlphaAnimations();
+		}
+
+		public float getSpawnClawPhaseTime() {
+			return spawnClawPhaseTime;
+		}
+
+		public void setSpawnClawPhaseTime(float spawnClawPhaseTime) {
+			this.spawnClawPhaseTime = spawnClawPhaseTime;
+		}
+
+		public float getClawAttackEvery() {
+			return clawAttackEvery;
+		}
+
+		public void setClawAttackEvery(float clawAttackEvery) {
+			this.clawAttackEvery = clawAttackEvery;
+		}
+
+		public ArrayList<intTuple> getTrailSpawns() {
+			return trailSpawns;
+		}
+
+		public void setTrailSpawns(ArrayList<intTuple> trailSpawns) {
+			this.trailSpawns = trailSpawns;
 		}
 
 }

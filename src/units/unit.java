@@ -29,6 +29,7 @@ import utilities.intTuple;
 import utilities.mathUtils;
 import utilities.time;
 import utilities.utility;
+import zones.zone;
 
 public abstract class unit extends drawnObject  { 
 	
@@ -133,7 +134,7 @@ public abstract class unit extends drawnObject  {
 	// Attacking/getting attacked mechanics
 	protected boolean canAttack = true; // backswing stuff.
 	private boolean killable = false;
-	private boolean targetable = true;
+	protected boolean targetable = true;
 	private boolean attacking = false;
 	private boolean alreadyAttacked = false;
 	protected double startAttackTime = 0;
@@ -142,7 +143,7 @@ public abstract class unit extends drawnObject  {
 	private String attackSound;
 	
 	// Gravity
-	protected float jumpSpeed = DEFAULT_JUMPSPEED;
+	private float jumpSpeed = DEFAULT_JUMPSPEED;
 	private float fallSpeed = 0;
 	protected boolean jumping = false;
 	private boolean tryJump = false;
@@ -182,14 +183,8 @@ public abstract class unit extends drawnObject  {
 	// Moving to a point?
 	protected boolean movingToAPoint = false;
 	
-	// Following a path?
-	private boolean followingAPath = false;
-	
 	// Units in attack range.
 	protected ArrayList<unit> unitsInAttackRange;
-	
-	// Path to follow
-	protected ArrayList<intTuple> path;
 	
 	// Next point.
 	private intTuple currPoint;
@@ -201,16 +196,6 @@ public abstract class unit extends drawnObject  {
 	private int knockToY;
 	private int knockSpeed;
 	private float knockTime;
-	
-	// Patrol stuff
-	boolean patrolling = false;
-	boolean movingBack = false;
-	int patrolX;
-	int patrolY;
-	int startX;
-	int startY;
-	boolean patrollingPath = false;
-	ArrayList<intTuple> patrolPath;
 	
 	// No collision knockback
 	boolean oldCollision = collisionOn;
@@ -234,7 +219,7 @@ public abstract class unit extends drawnObject  {
 		if(u.getAnimations()!=null) setAnimations(new animationPack(u.getAnimations()));
 		moveSpeed = u.getMoveSpeed();
 		baseMoveSpeed = u.getMoveSpeed();
-		jumpSpeed = u.getJumpSpeed();
+		setJumpSpeed(u.getJumpSpeed());
 		setTypeOfUnit(u);
 		
 		// Add to list
@@ -304,6 +289,11 @@ public abstract class unit extends drawnObject  {
 	public void repeatCommands(commandList c) {
 		repeatCommands = c;
 	}
+	
+	// Do commands once
+	public void doCommandsOnce(commandList c) {
+		allCommands = c;
+	}
 
 	// Do commands
 	public void doCommands() {
@@ -326,6 +316,7 @@ public abstract class unit extends drawnObject  {
 					// If we have stopped moving. This command is done.
 					if(!isMoving()) {
 						getAllCommands().remove(0);
+						doCommands();
 					}
 				}
 				
@@ -335,7 +326,6 @@ public abstract class unit extends drawnObject  {
 					moveCommand moveCommand = (moveCommand) currentCommand;
 					moveTo((int)moveCommand.getX(), (int)moveCommand.getY());
 				}
-				
 			}
 			
 			else if(currentCommand instanceof waitCommand) {
@@ -347,6 +337,7 @@ public abstract class unit extends drawnObject  {
 					if(waitStart!=0 && time.getTime() - waitStart > waitFor*1000) { 
 						waitStart = 0;
 						getAllCommands().remove(0);
+						doCommands();
 					}
 				}
 				
@@ -366,8 +357,9 @@ public abstract class unit extends drawnObject  {
 				if(currentCommand.isIssued()) {
 					
 					// Slash is over. This command is done.
-					if(currentCommandComplete) { // TODO: slashing
+					if(currentCommandComplete) { 
 						getAllCommands().remove(0);
+						doCommands();
 					}
 				}
 				
@@ -392,6 +384,7 @@ public abstract class unit extends drawnObject  {
 			// If we have repeat commands, repeat them.
 			if(repeatCommands!=null && repeatCommands.size() > 0) {
 				setAllCommands(new commandList(repeatCommands));
+				doCommands();
 			}
 			
 			// Otherwise, do nothing.
@@ -412,59 +405,10 @@ public abstract class unit extends drawnObject  {
 		moveSpeed = oldMoveSpeed;
 	}
 	
-	// Deal with patrolling
-	public void dealWithPatrolling() {
-		
-		// If we are patrolling, patrol
-		if(patrolling && !patrollingPath) {
-			if(!movingBack) {
-				if(Math.abs(startX - getDoubleX()) < moveSpeed && Math.abs(startY - getDoubleY()) < moveSpeed) {
-					moveTo(patrolX, patrolY);
-					movingBack = true;
-				}
-			}
-			else {
-				if(Math.abs(patrolX - getDoubleX()) < moveSpeed && Math.abs(patrolY - getDoubleY()) < moveSpeed) {
-					moveTo(startX, startY);
-					movingBack = false;
-				}
-			}
-		}
-		
-		// If we are patrolling a path.
-		if(patrolling && patrollingPath ) {
-			if(path == null || path.size() == 0) {
-				if(patrolPath != null) {
-					ArrayList <intTuple> pathToPatrol = new ArrayList<intTuple>(patrolPath);
-					followPath(pathToPatrol);
-				}
-			}
-		}
-	}
-	
-	// Patrol to
-	public void patrolTo(int patrolToX, int patrolToY) {
-		patrolling = true;
-		patrolX = patrolToX;
-		patrolY = patrolToY;
-		startX = this.getIntX();
-		startY = this.getIntY();
-	}
-	
-	// Patrol path
-	public void patrolPath(ArrayList<intTuple> p) {
-		patrolling = true;
-		patrollingPath = true;
-		startX = this.getIntX();
-		startY = this.getIntY();
-		p.add(new intTuple(startX, startY));
-		patrolPath = p;
-	}
-	
-	// Stop patrolling
-	public void stopPatrol() {
-		patrolling = false;
-		patrollingPath = false;
+	// Stop repaet commands
+	public void stopRepeatCommands() {
+		stopMove("all");
+		repeatCommands = null;
 	}
 	
 	// Is the unit alive or dead
@@ -786,23 +730,6 @@ public abstract class unit extends drawnObject  {
 		 getIntY() + + getHeight() > y1;
 	}
 	
-	// Get whether a unit is within radius
-	public boolean isWithinRadius(int x, int y, int radius) {
-	    int circleDistanceX = Math.abs(x - (this.getIntX() + this.getWidth()/2));
-	    int circleDistanceY = Math.abs(y - (this.getIntY() + this.getHeight()/2));
-
-	    if (circleDistanceX > (this.getWidth()/2 + radius)) { return false; }
-	    if (circleDistanceY > (this.getHeight()/2 + radius)) { return false; }
-
-	    if (circleDistanceX <= (this.getWidth()/2)) { return true; } 
-	    if (circleDistanceY <= (this.getHeight()/2)) { return true; }
-
-	    int cornerDistanceSQ = (int) (Math.pow(circleDistanceX - this.getWidth()/2,2) +
-	                         Math.pow(circleDistanceY - this.getHeight()/2,2));
-
-	    return (cornerDistanceSQ <= Math.pow(radius,2));
-	}
-	
 	// Attack units
 	public void attackUnits() {
 		ArrayList<unit> unitsToAttack = unitsInAttackRange;
@@ -951,7 +878,7 @@ public abstract class unit extends drawnObject  {
 			// Accelerate upward.
 			alreadyJumped = true;
 			jumping = true;
-			fallSpeed = -jumpSpeed;
+			fallSpeed = -getJumpSpeed();
 		}
 	}
 	
@@ -980,32 +907,91 @@ public abstract class unit extends drawnObject  {
 		setRiseRun();
 	}
 	
+	// Check if next comamnd is movement
+	public boolean nextCommandIsMovement() {
+		return (allCommands!=null && allCommands.size() > 0) && 
+				((allCommands.size() > 1 && allCommands.get(1) instanceof moveCommand) ||
+				(allCommands.size() == 1 && repeatCommands != null && repeatCommands.size() > 0 && repeatCommands.get(0) instanceof moveCommand));
+	}
+	
+	// Get next command
+	public unitCommand getNextCommand() {
+		if(allCommands!=null && allCommands.size() > 0) {
+			
+			if(allCommands.size() > 1) return allCommands.get(1);
+			else if(allCommands.size() == 1 && repeatCommands != null && repeatCommands.size() > 0) return repeatCommands.get(0);
+			
+		}
+		return null;
+	}
+	
 	// Move towards a point
 	public void moveTowards() {
-		if(movingToAPoint && Math.abs(moveToX - getDoubleX()) < getMoveSpeed() && Math.abs(moveToY - getDoubleY()) < getMoveSpeed()) {
-			
-			// Just move to the damn point.
-			setDoubleX(moveToX);
-			setDoubleY(moveToY);
-
-			// Done moving to this point.
-			movingToAPoint = false;
-		}
-		else {
-			// Set facing direction.
-			if(run < -0.5f) {
-				setFacingDirection("Left");
-			}
-			else if(run > 0.5f) {
-				setFacingDirection("Right");
-			}
-			else if(rise < 0) {
-				setFacingDirection("Up");
+		if(movingToAPoint) {
+			if(Math.abs(moveToX - getDoubleX()) < getMoveSpeed() && Math.abs(moveToY - getDoubleY()) < getMoveSpeed()) {
+				
+				// If the next command is movement, move in that direction by
+				// whatever we overshoot our point by.
+				
+				/*if(nextCommandIsMovement()) {
+					
+					// Get the differences
+					double diffX = moveToX - getDoubleX();
+					double diffY = moveToY - getDoubleY();
+					double distanceBetween = (float) Math.sqrt(diffY * diffY
+							+ diffX * diffX);
+					
+					// Check if we overshot
+					boolean overShot = (diffX > 0 && run > 0) || (diffX < 0 && run < 0) || (diffY > 0 && rise > 0) || (diffY < 0 && rise < 0);
+					
+					// If we overshot, move in the direction we are going to go
+					// next by how much we overshot.
+					if(overShot) {
+						
+						System.out.println("Overshot");
+						
+						setDoubleX(moveToX);
+						setDoubleY(moveToY);
+						
+						moveCommand command = (moveCommand)getNextCommand();
+						
+						double yDistance = (command.getY() - getIntY());
+						double xDistance = (command.getX() - getIntX());
+						double distanceXY = (float) Math.sqrt(yDistance * yDistance
+									+ xDistance * xDistance);
+						
+						// Calculate rise values.
+						double floatRise = ((yDistance/distanceXY)*(float)distanceBetween);
+						
+						// Calculate run values.
+						double floatRun = ((xDistance/distanceXY)*(float)distanceBetween);
+						
+						move(floatRun,floatRise);
+					}
+				}*/
+				
+				setDoubleX(moveToX);
+				setDoubleY(moveToY);
+	
+				// Done moving to this point.
+				movingToAPoint = false;
 			}
 			else {
-				setFacingDirection("Down");
+				// Set facing direction.
+				if(run < -0.49f) {
+					setFacingDirection("Left");
+				}
+				else if(run > 0.49f) {
+					setFacingDirection("Right");
+				}
+				else if(rise < 0) {
+					setFacingDirection("Up");
+				}
+				else {
+					setFacingDirection("Down");
+				}
+				move(run,rise);
 			}
-			move(run,rise);
 		}
 	}
 	
@@ -1051,50 +1037,9 @@ public abstract class unit extends drawnObject  {
 		}
 		
 		///////////////////////////////
-		/// PATROLLING ///
-		///////////////////////////////	
-		dealWithPatrolling();
-		
-		///////////////////////////////
 		/// MOVEMENT TOWARD A POINT ///
 		///////////////////////////////	
-		if(movingToAPoint) {
-			moveTowards();
-		}
-		
-		///////////////////////////////
-		/// FOLLOWING A PATH        ///
-		///////////////////////////////	
-		if(isFollowingAPath()) {
-			if(path != null && path.size() > 0) {
-				if(currPoint == null) {
-					moveTo(path.get(0).x, path.get(0).y);
-					currPoint = path.get(0);
-					path.remove(0);
-				}
-				else if(Math.abs(currPoint.x - getDoubleX()) < moveSpeed && Math.abs(currPoint.y - getDoubleY()) < moveSpeed) {
-					
-					// Just move to the damn point.
-					setDoubleX(moveToX);
-					setDoubleY(moveToY);
-					
-					moveTo(path.get(0).x, path.get(0).y);
-					currPoint = path.get(0);
-					path.remove(0);
-				}
-			}
-			else {
-				currPoint = null;
-				path = null;
-				setFollowingAPath(false);
-			}
-		}
-	}
-	
-	// Follow path.
-	public void followPath(ArrayList<intTuple> p) {
-		path = p;
-		setFollowingAPath(true);
+		moveTowards();
 	}
 	
 	// Move unit
@@ -1259,9 +1204,8 @@ public abstract class unit extends drawnObject  {
 					// Yes, we're stuck.
 					pathFindingStuck = true;
 				
-					// If gravity is on
-					if (gravity) { 
-						
+					// If gravity is on and is the terrain loaded?
+					if (gravity && zone.getCurrentZone() != null && zone.getCurrentZone().isZoneLoaded()) { 
 						// We touch down
 						if(moveY >= 0) {
 							touchDown();
@@ -1619,7 +1563,7 @@ public abstract class unit extends drawnObject  {
 	
 	// Combination of all movement functions boolean
 	public boolean isMoving() {
-		return movingVertically() || movingHorizontally() || movingToAPoint || followingUnit || followingAPath || patrolling;
+		return movingVertically() || movingHorizontally() || movingToAPoint || followingUnit;
 	}
 	
 	public void setCollision(boolean b) {
@@ -1920,20 +1864,20 @@ public abstract class unit extends drawnObject  {
 		this.stuck = stuck;
 	}
 
-	public boolean isFollowingAPath() {
-		return followingAPath;
-	}
-
-	public void setFollowingAPath(boolean followingAPath) {
-		this.followingAPath = followingAPath;
-	}
-
 	public commandList getAllCommands() {
 		return allCommands;
 	}
 
 	public void setAllCommands(commandList allCommands) {
 		this.allCommands = allCommands;
+	}
+
+	public float getJumpSpeed() {
+		return jumpSpeed;
+	}
+
+	public void setJumpSpeed(float jumpSpeed) {
+		this.jumpSpeed = jumpSpeed;
 	}
 	
 }

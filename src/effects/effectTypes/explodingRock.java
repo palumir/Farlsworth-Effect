@@ -1,5 +1,7 @@
 package effects.effectTypes;
 
+import java.util.ArrayList;
+
 import doodads.sheepFarm.sandRock;
 import effects.effect;
 import effects.effectType;
@@ -61,6 +63,9 @@ public class explodingRock extends effect {
 	private int howMany = 0;
 	private float rockSpeed = 0;
 	
+	// Rock angles
+	private ArrayList<Integer> rockAngles;
+	
 	///////////////
 	/// METHODS ///
 	///////////////
@@ -79,7 +84,7 @@ public class explodingRock extends effect {
 		this.damage = damage;
 		
 		// Duration
-		this.animationDuration = duration;
+		this.setAnimationDuration(duration);
 		
 		// Set sound.
 		sound s = new sound(rockSpawn);
@@ -116,22 +121,35 @@ public class explodingRock extends effect {
 	
 	// Make circle of rock pieces
 	public void makeCircleOfRockPieces() {
-		// How many rock pieces?
-		int n = howMany;
 		
-		// Spawn rocks
+		// How many rock pieces?
 		int explodeRadius = 1000;
-		int spawnRadius = 360/n;
-		double currentDegree = utility.RNG.nextInt(spawnRadius);
-		double degreeChange = (double) 360/n;
-		for(int i = 0; i < n; i++){
-			int newX = (int) (getIntX() + 0*Math.cos(Math.toRadians(currentDegree))); 
-			int newY = (int) (getIntY() + 0*Math.sin(Math.toRadians(currentDegree)));
-			int goToX = (int) (getIntX() + explodeRadius*Math.cos(Math.toRadians(currentDegree))); 
-			int goToY = (int) (getIntY() + explodeRadius*Math.sin(Math.toRadians(currentDegree))); 
-			rockPiece r = new rockPiece(newX,newY,goToX,goToY,damage,rockSpeed);
-			r.setAllied(allied);
-			currentDegree += degreeChange;
+		
+		if(rockAngles!=null && rockAngles.size()>0) {
+			for(int i = 0; i < rockAngles.size(); i++) {
+				int newX = (int) (getIntX() + 0*Math.cos(Math.toRadians(rockAngles.get(i)-90))); 
+				int newY = (int) (getIntY() + 0*Math.sin(Math.toRadians(rockAngles.get(i)-90)));
+				int goToX = (int) (getIntX() + explodeRadius*Math.cos(Math.toRadians(rockAngles.get(i)-90))); 
+				int goToY = (int) (getIntY() + explodeRadius*Math.sin(Math.toRadians(rockAngles.get(i)-90))); 
+				rockPiece r = new rockPiece(newX,newY,goToX,goToY,damage,rockSpeed);
+				r.setAllied(allied);
+			}
+		}
+		else {
+			int n = howMany;
+			
+			// Spawn rocks
+			double currentDegree = 0;
+			double degreeChange = (double) 360/n;
+			for(int i = 0; i < n; i++){
+				int newX = (int) (getIntX() + 0*Math.cos(Math.toRadians(currentDegree))); 
+				int newY = (int) (getIntY() + 0*Math.sin(Math.toRadians(currentDegree)));
+				int goToX = (int) (getIntX() + explodeRadius*Math.cos(Math.toRadians(currentDegree))); 
+				int goToY = (int) (getIntY() + explodeRadius*Math.sin(Math.toRadians(currentDegree))); 
+				rockPiece r = new rockPiece(newX,newY,goToX,goToY,damage,rockSpeed);
+				r.setAllied(allied);
+				currentDegree += degreeChange;
+			}
 		}
 	}
 	
@@ -167,6 +185,14 @@ public class explodingRock extends effect {
 		else {
 			return DEFAULT_PLATFORMER_ADJUSTMENT_Y;
 		}
+	}
+
+	public ArrayList<Integer> getRockAngles() {
+		return rockAngles;
+	}
+
+	public void setRockAngles(ArrayList<Integer> rockAngles) {
+		this.rockAngles = rockAngles;
 	}
 
 }

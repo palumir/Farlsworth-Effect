@@ -32,7 +32,7 @@ public abstract class effect extends drawnObject  {
 	
 	// Animation duration
 	protected long timeStarted = 0;
-	protected float animationDuration = 0;
+	private float animationDuration = 0;
 	protected boolean hasATimer = true;
 	
 	///////////////
@@ -45,7 +45,7 @@ public abstract class effect extends drawnObject  {
 	
 		// Set timer.
 		timeStarted = time.getTime();
-		animationDuration = e.getAnimationDuration();
+		setAnimationDuration(e.getAnimationDuration());
 		
 		// Set animations
 		typeOfEffect = e;
@@ -61,7 +61,7 @@ public abstract class effect extends drawnObject  {
 	
 		// Set timer.
 		timeStarted = time.getTime();
-		animationDuration = e.getAnimationDuration();
+		setAnimationDuration(e.getAnimationDuration());
 		
 		// Set animations
 		typeOfEffect = e;
@@ -114,7 +114,7 @@ public abstract class effect extends drawnObject  {
 			getCurrentAnimation().playAnimation();
 			respondToFrame(getCurrentAnimation().getCurrentSprite());
 		}
-		if(hasATimer && time.getTime() - timeStarted >= animationDuration*1000) {
+		if(hasATimer && time.getTime() - timeStarted >= getAnimationDuration()*1000) {
 			this.destroy();
 		}
 		doSpecificEffectStuff();
@@ -176,5 +176,13 @@ public abstract class effect extends drawnObject  {
 
 	public void setCurrentAnimation(animation currentAnimation) {
 		this.currentAnimation = currentAnimation;
+	}
+
+	public float getAnimationDuration() {
+		return animationDuration;
+	}
+
+	public void setAnimationDuration(float animationDuration) {
+		this.animationDuration = animationDuration;
 	}
 }

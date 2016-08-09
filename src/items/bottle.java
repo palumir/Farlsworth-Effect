@@ -5,6 +5,7 @@ import drawing.userInterface.tooltipString;
 import interactions.event;
 import sounds.sound;
 import units.player;
+import utilities.saveState;
 
 public abstract class bottle extends item {
 	////////////////
@@ -28,9 +29,6 @@ public abstract class bottle extends item {
 	private int chargesLeft = 0;
 	private int maxCharges = 1;
 	
-	// Heal percent.
-	private float healPercent = 0;
-	
 	// Bottle sheet.
 	protected static spriteSheet bottleSpriteSheet = null;
 	
@@ -41,7 +39,7 @@ public abstract class bottle extends item {
 	public static boolean inInventory = false;
 	
 	// Event
-	private static event pressEnterToHeal;
+	private static event pressIToExit;
 	
 	///////////////
 	/// METHODS ///
@@ -52,7 +50,7 @@ public abstract class bottle extends item {
 		super(newName,null,0,0,0,0);
 		
 		// Create event.
-		pressEnterToHeal = new event("bottlePressEnterToHeal");
+		pressIToExit = new event("bottlePressIToExitInventory");
 		
 		// It is, of course, equippable.
 		equippable = true;
@@ -67,7 +65,7 @@ public abstract class bottle extends item {
 		super(newName,null,x,y,0,0);
 		
 		// Create event.
-		pressEnterToHeal = new event("bottlePressEnterToHeal");
+		pressIToExit = new event("bottlePressIToExitInventory");
 		
 		// Set the width and height.
 		setWidth(getImage().getWidth());
@@ -90,9 +88,9 @@ public abstract class bottle extends item {
 	public void equip() {
 		
 		// Set pressIToExit to be true.
-		if(!pressEnterToHeal.isCompleted()) {
-			pressEnterToHeal.setCompleted(true);
-			tooltipString t = new tooltipString("Press 'enter' to use a bottle charge and heal.");
+		if(!pressIToExit.isCompleted()) {
+			pressIToExit.setCompleted(true);
+			tooltipString t = new tooltipString("Press 'i' or 'esc' to exit inventory.");
 		}
 		
 		// Equip the weapon.
@@ -110,8 +108,7 @@ public abstract class bottle extends item {
 			sound s = new sound(bottleDrink);
 			s.start();
 			setChargesLeft(getChargesLeft() - 1);
-			int healHp = (int) (getHealPercent()*currPlayer.getMaxHealthPoints());
-			currPlayer.heal(healHp);
+			saveState.createSaveState();
 		}
 	}
 	
@@ -144,11 +141,4 @@ public abstract class bottle extends item {
 		this.maxCharges = maxCharges;
 	}
 
-	public float getHealPercent() {
-		return healPercent;
-	}
-
-	public void setHealPercent(float healPercent) {
-		this.healPercent = healPercent;
-	}
 }

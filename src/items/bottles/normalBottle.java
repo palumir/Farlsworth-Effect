@@ -19,9 +19,6 @@ public class normalBottle extends bottle {
 	// Bottle stats.
 	public static int DEFAULT_MAX_CHARGES = 3;
 	
-	// Bottle heal percentage.
-	public static float DEFAULT_HEAL_PERCENT = 1f;
-	
 	//////////////
 	/// FIELDS ///
 	//////////////
@@ -67,9 +64,6 @@ public class normalBottle extends bottle {
 		// Bottle charges.
 		setChargesLeft(3);
 		setMaxCharges(DEFAULT_MAX_CHARGES);
-		
-		// Heal percent.
-		setHealPercent(DEFAULT_HEAL_PERCENT);
 	}
 	
 	// React to being picked up.
@@ -77,7 +71,7 @@ public class normalBottle extends bottle {
 	public void reactToPickup() {
 		player currPlayer = player.getPlayer();
 		if(currPlayer != null) {
-			tooltipString t = new tooltipString("Equip the bottle.");
+			tooltipString t = new tooltipString("Press 'i' to open inventory.");
 		}
 	}
 

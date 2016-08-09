@@ -65,7 +65,7 @@ public class inventory extends interfaceObject {
 	
 	// Tutorial messages
 	private static event pressEToEquip;
-	private static event pressSpaceToAttack;
+	private static event pressEnterToUse;
 	
 	///////////////
 	/// METHODS ///
@@ -75,8 +75,8 @@ public class inventory extends interfaceObject {
 		setItems(new ArrayList<item>());
 		
 		// Create the event
-		pressSpaceToAttack = new event("inventoryPressSpaceToAttack");
-		pressEToEquip = new event("inventoryPressEToEquipTheDagger");
+		pressEnterToUse = new event("inventoryPressEnterToUseBottle");
+		pressEToEquip = new event("inventoryPressEToEquipTheBottle");
 		
 		// Set sounds.
 		openInventory = "sounds/effects/player/UI/openInventory.wav";
@@ -95,9 +95,9 @@ public class inventory extends interfaceObject {
 			player.getPlayer().stop();
 			
 			// Set pressEToEquip to be true.
-			if(!pressEToEquip.isCompleted() && player.getPlayer().getPlayerInventory().hasItem("Dagger")) {
+			if(!pressEToEquip.isCompleted() && player.getPlayer().getPlayerInventory().hasItem("Bottle")) {
 				pressEToEquip.setCompleted(true);
-				tooltipString t = new tooltipString("Press 'e' to equip the dagger.");
+				tooltipString t = new tooltipString("Select the bottle then press 'e' to equip.");
 			}
 			
 			sound s = new sound(openInventory);
@@ -106,9 +106,10 @@ public class inventory extends interfaceObject {
 		else { 
 			
 			// Set pressSpaceToAttack to be true.
-			if(!pressSpaceToAttack.isCompleted() &&  player.getPlayer().getEquippedWeapon() != null && player.getPlayer().getEquippedWeapon().getName().equals("Dagger")) {
-				pressSpaceToAttack.setCompleted(true);
-				tooltipString t = new tooltipString("Press or hold 'space' to attack.");
+			if(!pressEnterToUse.isCompleted() && player.getPlayer().getEquippedBottle() != null &&
+					player.getPlayer().getEquippedBottle().getName().equals("Bottle")) {
+				pressEnterToUse.setCompleted(true);
+				tooltipString t = new tooltipString("Press 'enter' to use a bottle charge to save game.");
 			}
 			
 			sound s = new sound(closeInventory);
@@ -132,6 +133,13 @@ public class inventory extends interfaceObject {
 	public void pickUp(item i) {
 		if(!hasItem(i.getName())) {
 			getItems().add(i);
+		}
+	}
+	
+	// Drop an item from inventory.
+	public void drop(item i) {
+		if(hasItem(i.getName())) {
+			getItems().remove(i);
 		}
 	}
 	
@@ -412,8 +420,8 @@ public class inventory extends interfaceObject {
 								g.drawString("Max Charges: " + currentBottle.getMaxCharges(), 
 										(int)(gameCanvas.getScaleX()*(getIntX() + (int) (Math.sqrt(DEFAULT_INVENTORY_SIZE)*DEFAULT_SLOT_SIZE) + selectedSlotTextAdjustX + adjustX)) - g.getFontMetrics().stringWidth("Max Charges: " + currentBottle.getMaxCharges())/2, 
 										(int)(gameCanvas.getScaleY()*(getIntY()+ 34 + adjustY + 34)));
-								g.drawString("Heal: " + (int)(currentBottle.getHealPercent()*100) + "%", 
-										(int)(gameCanvas.getScaleX()*(getIntX() + (int) (Math.sqrt(DEFAULT_INVENTORY_SIZE)*DEFAULT_SLOT_SIZE) + selectedSlotTextAdjustX + adjustX)) - g.getFontMetrics().stringWidth("Heal: " + (int)(currentBottle.getHealPercent()*100) + "%")/2, 
+								g.drawString("Saves game", 
+										(int)(gameCanvas.getScaleX()*(getIntX() + (int) (Math.sqrt(DEFAULT_INVENTORY_SIZE)*DEFAULT_SLOT_SIZE) + selectedSlotTextAdjustX + adjustX)) - g.getFontMetrics().stringWidth("Saves game")/2, 
 										(int)(gameCanvas.getScaleY()*(getIntY()+ 34 + adjustY + 48)));
 								
 								// Press e to equip.
@@ -421,7 +429,6 @@ public class inventory extends interfaceObject {
 										(int)(gameCanvas.getScaleX()*(getIntX() + selectedSlotTextAdjustX + (int) (Math.sqrt(DEFAULT_INVENTORY_SIZE)*DEFAULT_SLOT_SIZE) + adjustX)) - g.getFontMetrics().stringWidth(DEFAULT_BOTTOM_TEXT)/2, 
 										(int)(gameCanvas.getScaleY()*(getIntY()+ 34 + adjustY + 140)));
 							}
-						
 						}
 						x++;
 					}

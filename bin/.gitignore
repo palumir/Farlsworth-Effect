@@ -1,5 +1,16 @@
+/doodads/
+/drawing/
+/effects/
+/interactions/
+/items/
+/main/
+/modes/
+/sounds/
+/terrain/
 /units/
+/utilities/
 /zones/
+<<<<<<< HEAD
 /terrain/
 /drawing/
 /doodads/
@@ -8,3 +19,5 @@
 /items/
 /sounds/
 /utilities/
+=======
+>>>>>>> db7757a75785b59e5496611d9dd10051f0ee6ae1

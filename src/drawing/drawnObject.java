@@ -175,6 +175,9 @@ public abstract class drawnObject {
 	private double relativeX;
 	private double relativeY;
 	
+	// Is the object grabbable?
+	private boolean smallObject = false;
+	
 	// Z axis for platformer.
 	private Integer z;
 	
@@ -267,6 +270,36 @@ public abstract class drawnObject {
 		// Do nothing for basic objects.
 	}
 	
+	// Get objects in box.
+	public static ArrayList<drawnObject> getObjectsInRadius(int x, int y, int radius) {
+		ArrayList<drawnObject> returnList = new ArrayList<drawnObject>();
+		for(int i = 0; i < objects.size(); i++) {
+			drawnObject u = objects.get(i);
+			if(u.isWithinRadius(x, y, radius)) {
+				returnList.add(u);
+			}
+		}
+		if(returnList.size()==0) return null;
+		return returnList;
+	}
+	
+	// Get whether a object is within radius
+	public boolean isWithinRadius(int x, int y, int radius) {
+	    int circleDistanceX = Math.abs(x - (this.getIntX() + this.getWidth()/2));
+	    int circleDistanceY = Math.abs(y - (this.getIntY() + this.getHeight()/2));
+
+	    if (circleDistanceX > (this.getWidth()/2 + radius)) { return false; }
+	    if (circleDistanceY > (this.getHeight()/2 + radius)) { return false; }
+
+	    if (circleDistanceX <= (this.getWidth()/2)) { return true; } 
+	    if (circleDistanceY <= (this.getHeight()/2)) { return true; }
+
+	    int cornerDistanceSQ = (int) (Math.pow(circleDistanceX - this.getWidth()/2,2) +
+	                         Math.pow(circleDistanceY - this.getHeight()/2,2));
+
+	    return (cornerDistanceSQ <= Math.pow(radius,2));
+	}
+	
 	// Get closest to
 	public drawnObject getClosestToFrom(ArrayList<drawnObject> checkObjects) {
 		drawnObject closestTo = null;
@@ -274,6 +307,21 @@ public abstract class drawnObject {
 		for(int i = 0; i < checkObjects.size(); i++) {
 			drawnObject currObj = checkObjects.get(i);
 			int howClose = (int) Math.sqrt((currObj.getIntX() + currObj.getWidth()/2 - getIntX() - getWidth()/2)*(currObj.getIntX() + currObj.getWidth()/2 - getIntX() - getWidth()/2) + (currObj.getIntY() + currObj.getHeight()/2 - getIntY() - getHeight()/2)*(currObj.getIntY() + currObj.getHeight()/2 - getIntY() - getHeight()/2));
+			if(howClose < howCloseBest) {
+				howCloseBest = howClose;
+				closestTo = currObj;
+			}
+		}
+		return closestTo;
+	}
+	
+	// Get closest to
+	public static drawnObject getClosestToFrom(int x, int y, ArrayList<drawnObject> checkObjects) {
+		drawnObject closestTo = null;
+		int howCloseBest = Integer.MAX_VALUE;
+		for(int i = 0; i < checkObjects.size(); i++) {
+			drawnObject currObj = checkObjects.get(i);
+			int howClose = (int) Math.sqrt((currObj.getIntX() + currObj.getWidth()/2 - x)*(currObj.getIntX() + currObj.getWidth()/2 - x) + (currObj.getIntY() + currObj.getHeight()/2 - y)*(currObj.getIntY() + currObj.getHeight()/2 - y));
 			if(howClose < howCloseBest) {
 				howCloseBest = howClose;
 				closestTo = currObj;
@@ -528,6 +576,10 @@ public abstract class drawnObject {
 		showHitBox = true;
 	}
 	
+	public void dontShowHitBox() {
+		showHitBox =false;
+	}
+	
 	public void showSpriteBox() {
 		showSpriteBox = true;
 	}
@@ -746,6 +798,14 @@ public abstract class drawnObject {
 
 	public void setAttachedObject(drawnObject attachedObject) {
 		this.attachedToObject = attachedObject;
+	}
+
+	public boolean isSmallObject() {
+		return smallObject;
+	}
+
+	public void setSmallObject(boolean smallObject) {
+		this.smallObject = smallObject;
 	}
 	
 }

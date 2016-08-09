@@ -1,13 +1,14 @@
 package units.unitTypes.farmLand.sheepFarm;
 
 import doodads.sheepFarm.clawMarkBlack;
-import doodads.sheepFarm.clawMarkYellow;
 import drawing.spriteSheet;
 import drawing.spriteSheet.spriteSheetInfo;
 import effects.effectTypes.darkHole;
-import modes.mode;
+import effects.effectTypes.explodingRock;
 import units.player;
 import units.unitType;
+import utilities.mathUtils;
+import utilities.time;
 import utilities.utility;
 
 public class blackWolf extends wolf {
@@ -22,30 +23,44 @@ public class blackWolf extends wolf {
 	// Health.
 	private int DEFAULT_HP = 6;
 	
-	// Default jump speed
-	private static int DEFAULT_UNIT_JUMPSPEED = 12;
+	// Default movespeed.
+	private static int DEFAULT_UNIT_MOVESPEED = 2;
 	
-	// Darkhole
-	private static float DEFAULT_DARKHOLE_FOR = 10;
+	// Default jump speed
+	private static int DEFAULT_UNIT_JUMPSPEED = 10;
 	
 	// Beta stats
 	private static float DEFAULT_MOVESPEED_BETA = 3.5f;
-	private static float DEFAULT_CLAW_ATTACK_EVERY_BETA = 4f;
-	private static float DEFAULT_SPAWN_CLAW_PHASE_TIME_BETA = 1f;
-	private static int DEFAULT_HOW_FAR_IN_A_DIRECTION_BETA = 90;
+	private static float DEFAULT_CLAW_ATTACK_EVERY_BASE_BETA = 3.5f;
+	private static float DEFAULT_SPAWN_CLAW_PHASE_TIME_BETA = 2.5f;
 	private static int DEFAULT_FOLLOW_UNTIL_RANGE_BASE_BETA = 90;
 	private static int DEFAULT_FOLLOW_UNTIL_RANGE_RANDOM_BETA = 15;
 
 	// Alpha stats
 	private static float DEFAULT_MOVESPEED_ALPHA = 3.5f;
-	private static float DEFAULT_CLAW_ATTACK_EVERY_ALPHA = 2f;
-	private static float DEFAULT_SPAWN_CLAW_PHASE_TIME_ALPHA = 0.25f;
-	private static int DEFAULT_HOW_FAR_IN_A_DIRECTION_ALPHA = 30;
+	private static float DEFAULT_CLAW_ATTACK_EVERY_BASE_ALPHA = 1.75f;
+	private static float DEFAULT_SPAWN_CLAW_PHASE_TIME_ALPHA = 1.25f;
 	private static int DEFAULT_FOLLOW_UNTIL_RANGE_BASE_ALPHA = 15;
+	
+	// How often to spawn a darkHole.
+	private static float DEFAULT_SPAWN_DARKHOLE_EVERY = 0.3f;
+	private static float DEFAULT_DARKHOLE_DURATION = 5;
+	private static int DEFAULT_HOW_MANY_BLACKHOLES_SPAWN = 3;
+	
+	// DarkHole
 	
 	//////////////
 	/// FIELDS ///
 	//////////////
+	
+	// Spawn darkHole every
+	private float spawnDarkHoleEvery = DEFAULT_SPAWN_DARKHOLE_EVERY;
+	protected long lastSpawnDarkHole = 0;
+	
+	// How many holes to spawn
+	protected int howManyBlackHolesSpawn = DEFAULT_HOW_MANY_BLACKHOLES_SPAWN;
+	protected double distanceTravelled = 0;
+	
 	
 	// Unit sprite stuff.
 	private static spriteSheet DEFAULT_UPDOWN_SPRITESHEET = new spriteSheet(new spriteSheetInfo(
@@ -70,7 +85,7 @@ public class blackWolf extends wolf {
 					     null,
 					     DEFAULT_TOPDOWN_WIDTH,
 					     DEFAULT_TOPDOWN_HEIGHT,
-					     DEFAULT_MOVESPEED_BETA, // Movespeed
+					     DEFAULT_UNIT_MOVESPEED, // Movespeed
 					     DEFAULT_UNIT_JUMPSPEED // Jump speed
 						);	
 	
@@ -81,14 +96,10 @@ public class blackWolf extends wolf {
 					     null,
 					     DEFAULT_TOPDOWN_WIDTH,
 					     DEFAULT_TOPDOWN_HEIGHT,
-					     DEFAULT_MOVESPEED_BETA, // Movespeed
+					     DEFAULT_UNIT_MOVESPEED, // Movespeed
 					     DEFAULT_UNIT_JUMPSPEED // Jump speed
 						);	
 	
-	private int moveClawBy = 3*(1000/12)/2;
-	
-	// Dark attacking
-	private float darkAttackFor = DEFAULT_DARKHOLE_FOR;
 	
 	///////////////
 	/// METHODS ///
@@ -96,6 +107,7 @@ public class blackWolf extends wolf {
 	// Constructor
 	public blackWolf(int newX, int newY) {
 		super(unitTypeRef, newX, newY);
+		
 		// Set wolf combat stuff.
 		setCombatStuff();
 		
@@ -107,10 +119,6 @@ public class blackWolf extends wolf {
 	public void setCombatStuff() {
 		// Set to be attackable.
 		this.setKillable(true);
-		
-		// Claw attack stuff.
-		clawAttackEveryBase = DEFAULT_CLAW_ATTACK_EVERY_BETA;
-		spawnClawPhaseTime = DEFAULT_SPAWN_CLAW_PHASE_TIME_BETA;
 		
 		// Wolf damage.
 		setAttackFrameStart(2);
@@ -128,100 +136,71 @@ public class blackWolf extends wolf {
 		
 	}
 
-	// Claw destroy
+	// Charge units
 	@Override
-	public void clawDestroy() {
-		darkHole b = new darkHole(currClaw.getIntX() + currClaw.getWidth()/2 - darkHole.getDefaultWidth()/2,
-				currClaw.getIntY() + currClaw.getHeight()/2  - darkHole.getDefaultHeight()/2,
-				false,
-				1,
-				darkAttackFor);
-		currClaw.destroy();
-	}		
 	
-	
-	///////////////////////////
-	/// GETTERS AND SETTERS ///
-	///////////////////////////
-	
-	// Get default width.
-	public static int getDefaultWidth() {
-		if(mode.getCurrentMode().equals("topDown")) {
-			return DEFAULT_TOPDOWN_WIDTH;
-		}
-		else {
-			return DEFAULT_PLATFORMER_WIDTH;
-		}
-	}
-	
-	// Get default height.
-	public static int getDefaultHeight() {
-		if(mode.getCurrentMode().equals("topDown")) {
-			return DEFAULT_TOPDOWN_HEIGHT;
-		}
-		else {
-			return DEFAULT_PLATFORMER_HEIGHT;
-		}
-	}
-	
-	// Get default hitbox adjustment Y.
-	public static int getDefaultHitBoxAdjustmentY() {
-		if(mode.getCurrentMode().equals("topDown")) {
-			return DEFAULT_TOPDOWN_ADJUSTMENT_Y;
-		}
-		else {
-			return DEFAULT_PLATFORMER_ADJUSTMENT_Y;
-		}
-	}
-	
-	public boolean isDosile() {
-		return dosile;
-	}
-
-	public void setDosile(boolean dosile) {
-		this.dosile = dosile;
+	// Spawn claw
+	public void spawnClaw(int x, int y) {
+		int spawnX = x;
+		int spawnY = y;
+		currClaw = new clawMarkBlack(spawnX,spawnY,0);
 	}
 
 	@Override
-	public void chargeUnits() {
-	}
-
-	@Override
-	public void spawnTrail() {	
+	public void spawnTrail() {
+		
+		// Spawn rocks
+		int stopAt = 10;
+		int howClose = (int) Math.sqrt(Math.pow(this.getIntX() - currClaw.getIntX(),2) + Math.pow(this.getIntY() - currClaw.getIntY(), 2));
+		
+		// If we have a list of trailSpawns, use that.
+		if(getTrailSpawns()!=null && getTrailSpawns().size() > 0) {
+			for(int i = 0; i < getTrailSpawns().size(); i++) {
+				if((Math.abs(getTrailSpawns().get(i).x - getIntX()) < getJumpSpeed()*3 && Math.abs(getTrailSpawns().get(i).y - getIntY()) < getJumpSpeed()*3)) {
+					darkHole h = new darkHole(getTrailSpawns().get(i).x - darkHole.getDefaultWidth()/2 + this.getWidth()/2,
+							getTrailSpawns().get(i).y - darkHole.getDefaultHeight()/2 + this.getHeight()/2,
+							  false,
+							  1,
+							  DEFAULT_DARKHOLE_DURATION);
+				}
+			}
+		}
+		
+		// Otherwise, spawn every 
+		else if(time.getTime() - lastSpawnDarkHole > getSpawnDarkHoleEvery()*1000 && (howClose > stopAt)) {
+			lastSpawnDarkHole = time.getTime();
+			darkHole h = new darkHole(this.getIntX() + this.getWidth()/2 - darkHole.getDefaultWidth()/2,
+						this.getIntY() + this.getHeight()/2  - darkHole.getDefaultHeight()/2,
+					  false,
+					  1,
+					  DEFAULT_DARKHOLE_DURATION);
+		}
 	}
 
 	@Override
 	public void jumpingFinished() {
+		distanceTravelled = 0;
 	}
 
 	@Override
-	public void spawnClaw(int x, int y) {
-		int spawnX = x;
-		int spawnY = y;
-		
-		// Spawn claw
-		currClaw = new clawMarkBlack(spawnX,spawnY,0);
-	}
-	
-	@Override
 	public void changeCombat() {
+		
 		// Beta wolf
 		if(!isAlpha()) {
 			setMoveSpeed(DEFAULT_MOVESPEED_BETA);
-			clawAttackEveryBase = DEFAULT_CLAW_ATTACK_EVERY_BETA;
-			spawnClawPhaseTime = DEFAULT_SPAWN_CLAW_PHASE_TIME_BETA;
+			clawAttackEveryBase = DEFAULT_CLAW_ATTACK_EVERY_BASE_BETA;
+			setSpawnClawPhaseTime(DEFAULT_SPAWN_CLAW_PHASE_TIME_BETA);
 			followUntilRange = DEFAULT_FOLLOW_UNTIL_RANGE_BASE_BETA + utility.RNG.nextInt(DEFAULT_FOLLOW_UNTIL_RANGE_RANDOM_BETA);
-			moveClawBy = DEFAULT_HOW_FAR_IN_A_DIRECTION_BETA;
 		}
 		
 		// Alpha wolf
 		else {
+			// Claw attack stuff.
 			setMoveSpeed(DEFAULT_MOVESPEED_ALPHA);
-			clawAttackEveryBase =DEFAULT_CLAW_ATTACK_EVERY_ALPHA;
-			spawnClawPhaseTime = DEFAULT_SPAWN_CLAW_PHASE_TIME_ALPHA;
+			clawAttackEveryBase = DEFAULT_CLAW_ATTACK_EVERY_BASE_ALPHA;
+			setSpawnClawPhaseTime(DEFAULT_SPAWN_CLAW_PHASE_TIME_ALPHA);
 			followUntilRange = DEFAULT_FOLLOW_UNTIL_RANGE_BASE_ALPHA;
-			moveClawBy = DEFAULT_HOW_FAR_IN_A_DIRECTION_ALPHA;
-			clawAttackEvery = clawAttackEveryBase;
+			setClawAttackEvery(clawAttackEveryBase);
 		}
 	}
 	
@@ -256,5 +235,19 @@ public class blackWolf extends wolf {
 				DEFAULT_TOPDOWN_ADJUSTMENT_Y
 				));
 		addAnimations();
+	}
+
+	public float getSpawnDarkHoleEvery() {
+		return spawnDarkHoleEvery;
+	}
+
+	public void setSpawnDarkHoleEvery(float spawnDarkHoleEvery) {
+		this.spawnDarkHoleEvery = spawnDarkHoleEvery;
+	}
+
+	@Override
+	public void chargeUnits() {
+		// TODO Auto-generated method stub
+		
 	}
 }
