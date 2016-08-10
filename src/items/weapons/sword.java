@@ -70,7 +70,6 @@ public class sword extends weapon {
 	// On floor.
 	public sword(int x, int y) {
 		super(DEFAULT_WEAPON_NAME,x,y);
-		System.out.println("Long Sword DPS: " + DPS);
 		
 		// Weapon stats.
 		setStats();

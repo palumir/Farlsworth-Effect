@@ -15,11 +15,12 @@ import terrain.chunk;
 import terrain.atmosphericEffects.fog;
 import terrain.chunkTypes.tomb;
 import terrain.chunkTypes.tombEdge;
-import units.commandList;
 import units.player;
 import units.unit;
 import units.bosses.playerOne;
-import units.unitCommands.moveCommand;
+import units.unitCommands.commandList;
+import units.unitCommands.commands.moveCommand;
+import units.unitCommands.commands.waitCommand;
 import units.unitTypes.tomb.lightDude;
 import units.unitTypes.tomb.shadowDude;
 import utilities.intTuple;
@@ -365,12 +366,6 @@ public class farmTombEasy extends zone {
 		// Entrance
 		stairsUp tombZoneEnterance = new stairsUp(30,-8,0,sheepFarm.getZone(),2320,-3896,"Down");
 		tombZoneEnterance.setZ(BACKGROUND_Z);
-		
-		shadowDude s = new shadowDude(50,50);
-		commands = new commandList();
-		commands.add(new moveCommand(100, 100));
-		commands.add(new moveCommand(50, 50));
-		s.repeatCommands(commands);
 		
 		// Roof
 		/*spawnTombRect(-18, -747, 7500,-220,"roof"); // the roof

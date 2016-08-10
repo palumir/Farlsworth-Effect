@@ -28,6 +28,7 @@ import modes.mode;
 import modes.platformer;
 import modes.topDown;
 import sounds.music;
+import units.developer.developer;
 import utilities.levelSave;
 import utilities.saveState;
 import utilities.time;

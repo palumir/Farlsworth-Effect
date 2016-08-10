@@ -2,6 +2,7 @@ package drawing;
 
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -161,8 +162,8 @@ public abstract class drawnObject {
 	//////////////
 	
 	// X and Y
-	private double doubleX;
-	private double doubleY;
+	protected double doubleX;
+	protected double doubleY;
 	
 	// Draw sprite?
 	private boolean drawSprite = true;
@@ -186,6 +187,10 @@ public abstract class drawnObject {
 	
 	// Does this object exist?
 	private boolean exists = true;
+	
+	// Where was it spawned
+	private int spawnedAtX;
+	private int spawnedAtY;
 	
 	// Width and height.
 	private int width;
@@ -243,13 +248,15 @@ public abstract class drawnObject {
 		setName(newName);
 		setDoubleX(newX);
 		setDoubleY(newY);
+		setSpawnedAtX(newX);
+		setSpawnedAtY(newY);
 		setWidth(newWidth);
 		setHeight(newHeight);
 		addObject(this);
 		setReloadObject(reloadTheFollowingObjects);
 	}
 	
-	// Get units in box.
+	// Get drawnObjects in box.
 	public static ArrayList<drawnObject> getObjectsInBox(int x1, int y1, int x2, int y2) {
 		ArrayList<drawnObject> returnList = new ArrayList<drawnObject>();
 		for(int i = 0; i < objects.size(); i++) {
@@ -298,6 +305,21 @@ public abstract class drawnObject {
 	                         Math.pow(circleDistanceY - this.getHeight()/2,2));
 
 	    return (cornerDistanceSQ <= Math.pow(radius,2));
+	}
+	
+	
+	// Convert drawn point to in game position.
+	public static Point toInGamePos(Point p) {
+		Point inGamePointCurrent = new Point(p.x + camera.getCurrent().getX() + camera.getCurrent().getAttachedUnit().getWidth()/2 - gameCanvas.getDefaultWidth()/2, 
+			      p.y + camera.getCurrent().getY() + camera.getCurrent().getAttachedUnit().getHeight()/2 - gameCanvas.getDefaultHeight()/2);
+		return inGamePointCurrent;
+	}
+	
+	// Convert point to draw position based on camera position.
+	public static Point toDrawPos(Point p) {
+		Point inGamePointCurrent = new Point(p.x - (camera.getCurrent().getX() + camera.getCurrent().getAttachedUnit().getWidth()/2 - gameCanvas.getDefaultWidth()/2), 
+			      p.y - (camera.getCurrent().getY() + camera.getCurrent().getAttachedUnit().getHeight()/2 - gameCanvas.getDefaultHeight()/2));
+		return inGamePointCurrent;
 	}
 	
 	// Get closest to
@@ -815,6 +837,22 @@ public abstract class drawnObject {
 
 	public void setSmallObject(boolean smallObject) {
 		this.smallObject = smallObject;
+	}
+
+	public int getSpawnedAtX() {
+		return spawnedAtX;
+	}
+
+	public void setSpawnedAtX(int spawnedAtX) {
+		this.spawnedAtX = spawnedAtX;
+	}
+
+	public int getSpawnedAtY() {
+		return spawnedAtY;
+	}
+
+	public void setSpawnedAtY(int spawnedAtY) {
+		this.spawnedAtY = spawnedAtY;
 	}
 	
 }

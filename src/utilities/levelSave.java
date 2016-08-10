@@ -23,6 +23,10 @@ import terrain.chunk;
 import terrain.groundTile;
 import units.player;
 import units.unit;
+import units.unitCommand;
+import units.unitCommands.commandList;
+import units.unitCommands.positionedCommand;
+import units.unitCommands.commands.waitCommand;
 
 public class levelSave implements Serializable {
 	
@@ -69,12 +73,19 @@ public class levelSave implements Serializable {
 				}};
 				
 	public static ArrayList<String> dontSaveTheseThings = new ArrayList<String>() {{
+		add("new units.bosses.playerOne");
 		add("doodads.tomb.stairsUp");
 		add("doodads.sheepFarm.caveEnterance");
 		add("doodads.sheepFarm.tomb");
 		add("doodads.sheepFarm.horizontalGate");
 		add("units.developer");
 		add("units.player");
+		add("doodads.general.invisibleLightSource");
+		add("terrain.chunkTypes.water");
+		add("units.developer.developer");
+		add("doodads.sheepFarm.clawMarkBlack");
+		add("doodads.sheepFarm.clawMarkRed");
+		add("doodads.sheepFarm.clawMarkYellow");
 	}};
 
 	// Save the game.
@@ -168,14 +179,50 @@ public class levelSave implements Serializable {
 							
 							else if(object instanceof unit) {
 								
+								unit u = (unit)object;
+								
 								// Write class name.
 								objectStream.writeObject(object.getClass().getName());
 								
-								// Position
+								// Position TODO: figure out where to put the unit?
 								objectStream.writeObject(object.getIntX());
 								objectStream.writeObject(object.getIntY());
 								
-								// TODO: commandlist
+								// Command List
+								if(u.getRepeatCommands() == null) objectStream.writeObject(0);
+								else {
+									
+									// Write the length of commands
+									objectStream.writeObject(u.getRepeatCommands().size());
+									
+									// Write the commands
+									for(int j = 0; j < u.getRepeatCommands().size(); j++) {
+										
+										// Unit command
+										unitCommand c = u.getRepeatCommands().get(j);
+										
+										// Write the command details
+										objectStream.writeObject(c.getClass().getName());
+										
+										// Types of commands
+										if(c instanceof positionedCommand) {
+											positionedCommand p = (positionedCommand)c;
+											objectStream.writeObject(p.getX());
+											objectStream.writeObject(p.getY());
+											
+										}
+										else if(c instanceof waitCommand) {
+											waitCommand w = (waitCommand)c;
+											objectStream.writeObject(w.getHowLong());
+											objectStream.writeObject(0); // Dumby object.
+										}
+										else {
+											objectStream.writeObject(0); // Dumby object.
+											objectStream.writeObject(0); // Dumby object.
+											System.err.println("Unknown unit command saved to file.");
+										}
+									}
+								}
 							}
 						}
 						
@@ -218,72 +265,106 @@ public class levelSave implements Serializable {
 			
 			// Run through our list of objects and create them. 
 			for(int i = 0; i < lengthToCome; i++) {
-				
+			
 				// Type of object
 				String typeOfObject = ((String)(objectStream.readObject()));
 				
+				// Read class name.
+				String objectClass = (String)objectStream.readObject();
+				
 				// Ground tiles.
 				if(typeOfObject.equals("groundTile")) {
-					
-					// Write class name.
-					String objectClass = (String)objectStream.readObject();
 					
 					// Properties
 					int x = (int)objectStream.readObject();
 					int y = (int)objectStream.readObject();
 					int j = (int)objectStream.readObject();
 					
-					Class<?> clazz = Class.forName(objectClass);
-					Constructor<?> ctor = clazz.getConstructor(int.class, int.class, int.class);
-					Object object = ctor.newInstance(new Object[] { x,
-							y,
-							j});
-					
-					if(toCode) {
-						out.println("new " + objectClass + "(" + x + "," + y + "," + j + ");");
+					if(!dontSaveTheseThings.contains(objectClass)) {
+						Class<?> clazz = Class.forName(objectClass);
+						Constructor<?> ctor = clazz.getConstructor(int.class, int.class, int.class);
+						Object object = ctor.newInstance(new Object[] { x,
+								y,
+								j});
+						
+						if(toCode) {
+							out.println("new " + objectClass + "(" + x + "," + y + "," + j + ");");
+						}
 					}
 				}
 				
 				// Chunk
 				else if(typeOfObject.equals("chunk")) {
 					
-					// Write class name.
-					String objectClass = (String)objectStream.readObject();
-					
 					// Properties
 					int x = (int)objectStream.readObject();
 					int y = (int)objectStream.readObject();
 					int j = (int)objectStream.readObject();
 					
-					Class<?> clazz = Class.forName(objectClass);
-					Constructor<?> ctor = clazz.getConstructor(int.class, int.class, int.class);
-					Object object = ctor.newInstance(new Object[] { x,
-							y,
-							j});
-					
-					if(toCode) {
-						out.println("new " + objectClass + "(" + x + "," + y + "," + j + ");");
+					if(!dontSaveTheseThings.contains(objectClass)) {
+						Class<?> clazz = Class.forName(objectClass);
+						Constructor<?> ctor = clazz.getConstructor(int.class, int.class, int.class);
+						Object object = ctor.newInstance(new Object[] { x,
+								y,
+								j});
+						
+						if(toCode) {
+							out.println("new " + objectClass + "(" + x + "," + y + "," + j + ");");
+						}
 					}
 				}
 				
 				// Unit
 				else if(typeOfObject.equals("unit")) {
 					
-					// Write class name.
-					String objectClass = (String)objectStream.readObject();
-					
 					// Properties
 					int x = (int)objectStream.readObject();
 					int y = (int)objectStream.readObject();
 					
-					Class<?> clazz = Class.forName(objectClass);
-				
-					Constructor<?> ctor = clazz.getConstructor(int.class, int.class);
-					Object object = ctor.newInstance(new Object[] { x,
-							y});
+					// Get the unit commands length
+					int howManyCommands = (int)objectStream.readObject();
 					
-					if(toCode) {
-						out.println("new " + objectClass + "(" + x + "," + y + ");");
+					if(!dontSaveTheseThings.contains(objectClass)) {
+						Class<?> clazz = Class.forName(objectClass);
+					
+						Constructor<?> ctor = clazz.getConstructor(int.class, int.class);
+						Object object = ctor.newInstance(new Object[] { x,
+								y});
+						
+						
+						if(toCode) {
+							out.println("u = new " + objectClass + "(" + x + "," + y + ");");
+						}
+						
+						// Cast to unit
+						unit u = (unit)object;
+						
+						if(howManyCommands>0 && toCode) out.println("commands = new commandList();");
+						
+						// Make unit commands
+						u.setRepeatCommands(new commandList());
+						for(int j = 0; j < howManyCommands; j++) {
+							
+							// Read 
+							String commandClass = (String)objectStream.readObject();
+							
+							// Properties
+							double commandX = (double)objectStream.readObject();
+							double commandY = (double)objectStream.readObject();
+							
+							Class<?> commandClazz = Class.forName(commandClass);
+						
+							Constructor<?> commandCtor = commandClazz.getConstructor(double.class, double.class);
+							Object commandObject = commandCtor.newInstance(new Object[] { commandX,
+									commandY});
+							u.getRepeatCommands().add((unitCommand)commandObject);
+							
+							if(toCode) {
+								out.println("commands.add(new " + commandClass + "(" + commandX + "," + commandY + "));");
+							}
+						}
+						
+						if(howManyCommands>0 && toCode) out.println("u.setRepeatCommands(commands);");
 					}
 				}
 			}

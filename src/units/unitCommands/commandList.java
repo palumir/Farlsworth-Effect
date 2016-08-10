@@ -1,6 +1,8 @@
-package units;
+package units.unitCommands;
 
 import java.util.ArrayList;
+
+import units.unitCommand;
 
 public class commandList extends ArrayList<unitCommand> {
 	

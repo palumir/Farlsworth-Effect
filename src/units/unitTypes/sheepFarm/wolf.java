@@ -13,7 +13,7 @@ import terrain.chunk;
 import units.player;
 import units.unit;
 import units.unitType;
-import units.unitCommands.slashCommand;
+import units.unitCommands.commands.slashCommand;
 import utilities.intTuple;
 import utilities.time;
 import utilities.utility;
@@ -382,10 +382,14 @@ public abstract class wolf extends unit {
 					}
 				}
 				else {
+					if(mode.getCurrentMode().equals("platformer")) collisionOn = true;
+					setStuck(false);
 					jumpingFinished();
 				}
 			}
 			else {
+				if(mode.getCurrentMode().equals("platformer")) collisionOn = true;
+				setStuck(false);
 				jumpingFinished();
 			}
 		}
@@ -404,6 +408,8 @@ public abstract class wolf extends unit {
 		// Jump
 		public void slashTo(chunk c) {
 			stopMove("all");
+			collisionOn = false;
+			setStuck(true);
 			sound s = new sound(bark1);
 			s.setPosition(getIntX(), getIntY(), sound.DEFAULT_SOUND_RADIUS);
 			s.start();

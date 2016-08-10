@@ -59,8 +59,6 @@ public class dagger extends weapon {
 	public dagger() {
 		super(DEFAULT_WEAPON_NAME,weaponSpriteSheet);
 		
-		System.out.println("Dagger: " + DPS);
-		
 		// Create event.
 		pressIToExit = new event("daggerPressIToExit");
 		

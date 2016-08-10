@@ -10,7 +10,7 @@ public abstract class unitCommand {
 	
 	// Constructor
 	public unitCommand(String n) {
-		name = n;
+		setName(n);
 		setIssued(false);
 	}
 
@@ -20,5 +20,13 @@ public abstract class unitCommand {
 
 	public void setIssued(boolean issued) {
 		this.issued = issued;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 }

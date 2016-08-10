@@ -21,9 +21,12 @@ import modes.mode;
 import sounds.sound;
 import terrain.chunk;
 import terrain.region;
-import units.unitCommands.moveCommand;
-import units.unitCommands.slashCommand;
-import units.unitCommands.waitCommand;
+import units.developer.developer;
+import units.unitCommands.commandList;
+import units.unitCommands.positionedCommand;
+import units.unitCommands.commands.moveCommand;
+import units.unitCommands.commands.slashCommand;
+import units.unitCommands.commands.waitCommand;
 import utilities.intTuple;
 import utilities.mathUtils;
 import utilities.time;
@@ -286,7 +289,7 @@ public abstract class unit extends drawnObject  {
 	
 	// Repeat commands
 	public void repeatCommands(commandList c) {
-		repeatCommands = c;
+		setRepeatCommands(c);
 	}
 	
 	// Do commands once
@@ -344,7 +347,7 @@ public abstract class unit extends drawnObject  {
 				else {
 					currentCommand.setIssued(true);
 					waitCommand waitCommand = (waitCommand) currentCommand;
-					waitFor = waitCommand.getHowLong();
+					waitFor = (float)waitCommand.getHowLong();
 					waitStart = time.getTime();
 				}
 				
@@ -381,8 +384,8 @@ public abstract class unit extends drawnObject  {
 		else {
 			
 			// If we have repeat commands, repeat them.
-			if(repeatCommands!=null && repeatCommands.size() > 0) {
-				setAllCommands(new commandList(repeatCommands));
+			if(getRepeatCommands()!=null && getRepeatCommands().size() > 0) {
+				setAllCommands(new commandList(getRepeatCommands()));
 				doCommands();
 			}
 			
@@ -396,7 +399,7 @@ public abstract class unit extends drawnObject  {
 	
 	// Regular units do not slash.
 	public void slashTo(int x, int y) {
-		
+		currentCommandComplete = true;
 	}
 	
 	// Move in place.
@@ -407,7 +410,7 @@ public abstract class unit extends drawnObject  {
 	// Stop repaet commands
 	public void stopRepeatCommands() {
 		stopMove("all");
-		repeatCommands = null;
+		setRepeatCommands(null);
 	}
 	
 	// Is the unit alive or dead
@@ -910,7 +913,7 @@ public abstract class unit extends drawnObject  {
 	public boolean nextCommandIsMovement() {
 		return (allCommands!=null && allCommands.size() > 0) && 
 				((allCommands.size() > 1 && allCommands.get(1) instanceof moveCommand) ||
-				(allCommands.size() == 1 && repeatCommands != null && repeatCommands.size() > 0 && repeatCommands.get(0) instanceof moveCommand));
+				(allCommands.size() == 1 && getRepeatCommands() != null && getRepeatCommands().size() > 0 && getRepeatCommands().get(0) instanceof moveCommand));
 	}
 	
 	// Get next command
@@ -918,7 +921,7 @@ public abstract class unit extends drawnObject  {
 		if(allCommands!=null && allCommands.size() > 0) {
 			
 			if(allCommands.size() > 1) return allCommands.get(1);
-			else if(allCommands.size() == 1 && repeatCommands != null && repeatCommands.size() > 0) return repeatCommands.get(0);
+			else if(allCommands.size() == 1 && getRepeatCommands() != null && getRepeatCommands().size() > 0) return getRepeatCommands().get(0);
 			
 		}
 		return null;
@@ -1146,11 +1149,25 @@ public abstract class unit extends drawnObject  {
 		}
 	}
 	
+	// Set next fall speed
+	boolean zeroNextFallSpeed = false;
+	
 	// Unit has touched up
 	public void touchUp() {
 		
-		// Essentially, bonk unit's head of roof.
-		fallSpeed = 0;
+		// If they've touched up, place them closer to the ground.
+		if(!zeroNextFallSpeed && fallSpeed < 0) {
+			chunk ground = chunk.getGroundChunk(this, (int)getDoubleX(), (int)(getDoubleY() + fallSpeed));
+			if(ground != null) {
+				fallSpeed = -(this.getIntY() - ground.getIntY() - ground.getHeight());
+				zeroNextFallSpeed = true;
+			}
+		}
+		else {
+			fallSpeed = 0;
+			zeroNextFallSpeed = false;
+		}
+	
 	}
 	
 	// Unit has touched down.
@@ -1866,6 +1883,24 @@ public abstract class unit extends drawnObject  {
 	public commandList getAllCommands() {
 		return allCommands;
 	}
+	
+	// Get previous move command
+	public positionedCommand getPreviousPosCommand(int j) {
+		
+		if(repeatCommands == null) return null;
+		
+		// Get the previous command that is positioned
+		int x = 0;
+		for(int n = j; ; n--) {
+			if(x >= repeatCommands.size()) break;
+			if(n < 0) n = repeatCommands.size() - 1;
+			if(repeatCommands.get(n) instanceof positionedCommand) {
+				return (positionedCommand)repeatCommands.get(n);
+			}
+			x++;
+		}
+		return null;
+	}
 
 	public void setAllCommands(commandList allCommands) {
 		this.allCommands = allCommands;
@@ -1877,6 +1912,14 @@ public abstract class unit extends drawnObject  {
 
 	public void setJumpSpeed(float jumpSpeed) {
 		this.jumpSpeed = jumpSpeed;
+	}
+
+	public commandList getRepeatCommands() {
+		return repeatCommands;
+	}
+
+	public void setRepeatCommands(commandList repeatCommands) {
+		this.repeatCommands = repeatCommands;
 	}
 	
 }

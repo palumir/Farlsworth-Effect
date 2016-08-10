@@ -2,23 +2,17 @@ package units.unitCommands;
 
 import units.unitCommand;
 
-public class slashCommand extends unitCommand {
+public class positionedCommand extends unitCommand {
 	
-	// Where do we slash to?
+	// Where do we move to?
 	private double x;
 	private double y;
 	
 	// Constructor
-	public slashCommand(double x, double y) {
-		super("slash");
+	public positionedCommand(String s, double x, double y) {
+		super(s);
 		this.setX(x);
 		this.setY(y);
-	}
-
-	public slashCommand(slashCommand unitCommand) {
-		super("slash");
-		this.setX(unitCommand.x);
-		this.setY(unitCommand.y);
 	}
 
 	public double getX() {

@@ -13,6 +13,23 @@ import java.awt.image.RGBImageFilter;
 
 public class imageUtils {
 	
+	public static void drawArrow(Graphics g, int x1, int y1, int x2, int y2) {
+		
+		// Draw the line.
+		g.drawLine(x1, y1, x2, y2);
+		
+		// Draw the arrow parts
+		int angle = mathUtils.getAngleBetween(x2,y2,x1,y1);
+		int arrowPartX = (int) (x2 + (25)*Math.cos(Math.toRadians(angle-30))); 
+		int arrowPartY = (int) (y2 + (25)*Math.sin(Math.toRadians(angle-30)));
+		g.drawLine(x2, y2, arrowPartX, arrowPartY);
+		
+		// Draw the arrow parts
+		arrowPartX = (int) (x2 + (25)*Math.cos(Math.toRadians(angle+30))); 
+		arrowPartY = (int) (y2 + (25)*Math.sin(Math.toRadians(angle+30)));
+		g.drawLine(x2, y2, arrowPartX, arrowPartY);
+	}
+	
 	// SOURCE: http://stackoverflow.com/questions/665406/how-to-make-a-color-transparent-in-a-bufferedimage-and-save-as-png
 	
 	// Convert Image to BufferedImage

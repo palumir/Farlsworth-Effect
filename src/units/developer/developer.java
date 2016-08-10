@@ -1,4 +1,4 @@
-package units;
+package units.developer;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -32,10 +32,14 @@ import drawing.gameCanvas;
 import modes.topDown;
 import terrain.chunk;
 import terrain.groundTile;
-import units.unitTypes.sheepFarm.redWolf;
-import units.unitTypes.tomb.lightDude;
-import units.unitTypes.tomb.shadowDude;
+import units.player;
+import units.unit;
+import units.unitCommand;
+import units.unitCommands.commandIndicator;
+import units.unitCommands.commandList;
+import units.unitCommands.positionedCommand;
 import utilities.levelSave;
+import utilities.mathUtils;
 import utilities.saveState;
 import utilities.utility;
 import zones.zone;
@@ -71,7 +75,10 @@ public class developer extends player {
 	
 	// Selected units
 	private static ArrayList<drawnObject> selectedThings;
-	private static ArrayList<Point> relativeDifferences;
+	private static drawnObject selectedThing;
+	
+	// Unit commands displayed
+	public static ArrayList<commandIndicator> unitCommands;
 	
 	// Current object class
 	public static String currentObjectClass;
@@ -118,7 +125,7 @@ public class developer extends player {
 	// File button.
 	static button file;
 	text displayFileName;
-	static String levelName;
+	public static String levelName;
 	static ArrayList<interfaceObject> areYouSureSave;
 	
 	// Editor mode.
@@ -128,7 +135,10 @@ public class developer extends player {
 									  "Chunk",
 									  "Ground Tile"
 	};
-	private static String editorType = "Select a";
+	private static String editorType = "";
+	
+	// Display the selected unit
+	static text selectedThingDisplay;
 	
 	// Buttons for units
 	static ArrayList<button> unitButtons;
@@ -178,11 +188,11 @@ public class developer extends player {
 	    
 		// Unit commands
 		listOfUnitCommands =  new ArrayList<String>();
-		folder = new File("src/units/unitCommands");
+		folder = new File("src/units/unitCommands/commands");
 		listOfFiles = folder.listFiles();
 	    for (int i = 0; i < listOfFiles.length; i++) {
 	      if (listOfFiles[i].isFile()) {
-	    	  listOfUnitCommands.add("units.unitCommands." + listOfFiles[i].getName().substring(0,listOfFiles[i].getName().length() - 5));
+	    	  listOfUnitCommands.add("units.unitCommands.commands." + listOfFiles[i].getName().substring(0,listOfFiles[i].getName().length() - 5));
 	      } else if (listOfFiles[i].isDirectory()) {
 	      }
 	    }
@@ -193,7 +203,7 @@ public class developer extends player {
 		listOfFiles = folder.listFiles();
 	    for (int i = 0; i < listOfFiles.length; i++) {
 	      if (listOfFiles[i].isFile()) {
-	        
+	    	  listOfGroundTiles .add("terrain.chunkTypes." + listOfFiles[i].getName().substring(0,listOfFiles[i].getName().length() - 5));
 	      } else if (listOfFiles[i].isDirectory()) {
 	      }
 	    }
@@ -202,8 +212,34 @@ public class developer extends player {
 	// Delete selected.
 	public void deleteSelected() {
 		if(selectedThings!=null) {
-			for(int i = 0;  i < selectedThings.size(); i++) {
-				selectedThings.get(i).destroy();
+			
+			// Special case for unit commands.
+			if(unitSelected() && commandSelected()) {
+				for(int i = 0;  i < selectedThings.size(); i++) {
+					if(selectedThings.get(i) instanceof commandIndicator) {
+						
+						// Remove from unit's repeatCommands
+						for(int j = 0; j < ((commandIndicator)selectedThings.get(i)).getUnit().getRepeatCommands().size(); j++) {
+							if(((commandIndicator)selectedThings.get(i)).getUnit().getRepeatCommands().get(j) == ((commandIndicator)selectedThings.get(i)).getCommand()) {
+								((commandIndicator)selectedThings.get(i)).getUnit().getRepeatCommands().remove(j);
+								break;
+							}
+						}
+						
+						// Remove from unitCommands list.
+						unitCommands.remove(unitCommands.indexOf((commandIndicator)(selectedThings.get(i))));
+						
+						// Remove from drawing
+						selectedThings.get(i).destroy();
+					}
+				}
+			}
+			
+			// Just delete everything selected otherwise.
+			else {
+				for(int i = 0;  i < selectedThings.size(); i++) {
+					selectedThings.get(i).destroy();
+				}
 			}
 		}
 	}
@@ -233,7 +269,7 @@ public class developer extends player {
 		//file.addChild(b);
 		
 		// Load
-		b = new button("Load", "Load", 150, file.getIntY() + 2*DEFAULT_BUTTON_HEIGHT*4/3, DEFAULT_BUTTON_WIDTH, DEFAULT_BUTTON_HEIGHT);
+		b = new button("Load", "Load", 150, file.getIntY() + 1*DEFAULT_BUTTON_HEIGHT*4/3, DEFAULT_BUTTON_WIDTH, DEFAULT_BUTTON_HEIGHT);
 		file.addChild(b);
 		
 		// Put levels in the load button.
@@ -255,7 +291,7 @@ public class developer extends player {
 	    }
 		
 		// Test
-		b = new button("Test Level", "Test", 150, file.getIntY() + 3*DEFAULT_BUTTON_HEIGHT*4/3, DEFAULT_BUTTON_WIDTH, DEFAULT_BUTTON_HEIGHT);
+		b = new button("Test Level", "Test", 150, file.getIntY() + 2*DEFAULT_BUTTON_HEIGHT*4/3, DEFAULT_BUTTON_WIDTH, DEFAULT_BUTTON_HEIGHT);
 		file.addChild(b);
 
 		//////////////////////
@@ -264,7 +300,7 @@ public class developer extends player {
 		
 		editorMode = new button("Editor Mode","editorMode",50,50 + 1*DEFAULT_BUTTON_HEIGHT*4/3,DEFAULT_BUTTON_WIDTH,DEFAULT_BUTTON_HEIGHT);
 		
-		displayEditorMode = new text(editorType,150,70 + 1*DEFAULT_BUTTON_HEIGHT*4/3, Color.green, 1.3f);
+		displayEditorMode = new text("",150,70 + 1*DEFAULT_BUTTON_HEIGHT*4/3, Color.green, 1.3f);
 		
 		int selectionNumber = 0;
 		for(String s : editorTypeList) {
@@ -485,7 +521,9 @@ public class developer extends player {
 		
 		// Select a unit command
 		if(b.getButtonID().contains("units.unitCommands.")) {
-			System.out.println(b.getButtonID());
+			
+			currentObjectClass = b.getButtonID();
+			
 		}
 		
 		
@@ -493,6 +531,9 @@ public class developer extends player {
 		///// EDITOR MODE ////
 		//////////////////////
 		if(b.getButtonID().equals("editorModeGround Tile")) {
+			
+			if(selectedThingDisplay != null) selectedThingDisplay.destroy();
+			selectedThingDisplay = new text("Select a Ground Tile Type", 150, 70 + 2*DEFAULT_BUTTON_HEIGHT*4/3, Color.green, 1.3f);
 			
 			// Set editor type.
 			editorType = "Ground Tile";
@@ -534,6 +575,9 @@ public class developer extends player {
 		}
 		
 		if(b.getButtonID().equals("editorModeUnit")) {
+			
+			if(selectedThingDisplay != null) selectedThingDisplay.destroy();
+			selectedThingDisplay = new text("Select a Unit Type", 150, 70 + 2*DEFAULT_BUTTON_HEIGHT*4/3, Color.green, 1.3f);
 			
 			// Set editor type.
 			editorType = "Unit";
@@ -617,9 +661,10 @@ public class developer extends player {
 			for(String s : listOfUnitCommands) {
 				
 				String noUnits = s.substring(s.indexOf('.')+1,s.length());
+				String noCommands = noUnits.substring(noUnits.indexOf('.')+1,noUnits.length());
 			
 				// No folder
-				String noFolder = noUnits.substring(noUnits.indexOf('.')+1,noUnits.length());
+				String noFolder = noCommands.substring(noCommands.indexOf('.')+1,noCommands.length());
 				
 				// Create each button for each type.
 				button unitCommandButton = new button(noFolder,s,
@@ -638,6 +683,10 @@ public class developer extends player {
 			}
 		}
 		if(b.getButtonID().equals("editorModeChunk")) {
+			
+			if(selectedThingDisplay != null) selectedThingDisplay.destroy();
+			selectedThingDisplay = new text("Select a Chunk Type", 150, 70 + 2*DEFAULT_BUTTON_HEIGHT*4/3, Color.green, 1.3f);
+			
 			editorType = "Chunk";
 			
 			resetEditorStuff();
@@ -706,45 +755,6 @@ public class developer extends player {
 		
 	}
 	
-	// Show hitboxes
-	public void toggleSpriteVisibility() {
-		visible = !visible;
-		if(visible) {
-			visibilityOnOrOff.setTheText("On");
-			visibilityOnOrOff.setTheColor(Color.green);
-		}
-		else {
-			visibilityOnOrOff.setTheText("Off");
-			visibilityOnOrOff.setTheColor(Color.red);
-		}
-	}
-	
-	// Show hitboxes
-	public void showHitBoxes() {
-		showHitBoxes = !showHitBoxes;
-		if(showHitBoxes) {
-			hitBoxOnOrOff.setTheText("On");
-			hitBoxOnOrOff.setTheColor(Color.green);
-		}
-		else {
-			hitBoxOnOrOff.setTheText("Off");
-			hitBoxOnOrOff.setTheColor(Color.red);
-		}
-	}
-	
-	// Show hitboxes
-	public void toggleDevCollision() {
-		collisionOn = !collisionOn;
-		if(collisionOn) {
-			collisionOnOrOff.setTheText("On");
-			collisionOnOrOff.setTheColor(Color.green);
-		}
-		else {
-			collisionOnOrOff.setTheText("Off");
-			collisionOnOrOff.setTheColor(Color.red);
-		}
-	}
-	
 	// Update interface
 	public void updateInterface() {
 		
@@ -753,8 +763,12 @@ public class developer extends player {
 		if(p!=null) lastMousePos = toInGamePos(p);
 		
 		// Update the editor mode.
-		if(displayEditorMode != null) displayEditorMode.setTheText(editorType + " Mode");
 		if(levelName != null) displayFileName.setTheText("Level: " + levelName);
+		if(displayEditorMode != null) {
+			if(editorType.equals("")) displayEditorMode.setTheText("Select an Edit Mode");
+			else displayEditorMode.setTheText("Edit Mode: " + editorType + "s");
+		}
+		if(currentObjectClass != null) selectedThingDisplay.setTheText("Type: " + currentObjectClass);
 	}
 	
 	// Update unit
@@ -768,20 +782,6 @@ public class developer extends player {
 		moveThings();
 	}
 	
-	// Get ingame last mouse point
-	public static Point toInGamePos(Point p) {
-		Point inGamePointCurrent = new Point(p.x + camera.getCurrent().getX() + camera.getCurrent().getAttachedUnit().getWidth()/2 - gameCanvas.getDefaultWidth()/2, 
-			      p.y + camera.getCurrent().getY() + camera.getCurrent().getAttachedUnit().getHeight()/2 - gameCanvas.getDefaultHeight()/2);
-		return inGamePointCurrent;
-	}
-	
-	// Get ingame last mouse point
-	public static Point toDrawPos(Point p) {
-		Point inGamePointCurrent = new Point(p.x - (camera.getCurrent().getX() + camera.getCurrent().getAttachedUnit().getWidth()/2 - gameCanvas.getDefaultWidth()/2), 
-			      p.y - (camera.getCurrent().getY() + camera.getCurrent().getAttachedUnit().getHeight()/2 - gameCanvas.getDefaultHeight()/2));
-		return inGamePointCurrent;
-	}
-	
 	// Move things
 	public void moveThings() {
 		
@@ -793,11 +793,23 @@ public class developer extends player {
 			// Move all of our selected objects.
 			if(selectedThings!=null) {
 				
-				for(int i = 0; i < selectedThings.size(); i++) {
-					int diffX = (int)relativeDifferences.get(i).getX();
-					int diffY = (int)relativeDifferences.get(i).getY();
-					selectedThings.get(i).setDoubleX(inGamePointCurrent.getX() - diffX);
-					selectedThings.get(i).setDoubleY(inGamePointCurrent.getY() - diffY);
+				// Check if we are selecting a unit command while also selecting a unit. Don't move units then.
+				if(selectedThing instanceof commandIndicator) {
+					for(int i = 0; i < selectedThings.size(); i++) {
+						if(selectedThings.get(i) instanceof commandIndicator) {
+							selectedThings.get(i).setDoubleX(inGamePointCurrent.getX() - selectedThings.get(i).getRelativeX());
+							selectedThings.get(i).setDoubleY(inGamePointCurrent.getY() - selectedThings.get(i).getRelativeY());
+						}
+					}
+				}
+				else {
+					for(int i = 0; i < selectedThings.size(); i++) {
+						selectedThings.get(i).setDoubleX(inGamePointCurrent.getX() - selectedThings.get(i).getRelativeX());
+						selectedThings.get(i).setDoubleY(inGamePointCurrent.getY() - selectedThings.get(i).getRelativeY());
+						if(selectedThings.get(i) instanceof unit) {
+							((unit)(selectedThings.get(i))).setRiseRun();
+						}
+					}
 				}
 			}
 		}
@@ -823,13 +835,18 @@ public class developer extends player {
 			
 			// Determine whether or not we are touching something.
 			ArrayList<drawnObject> touchedObjects  = drawnObject.getObjectsInRadius((int)inGamePoint.getX(), (int)inGamePoint.getY(), DEFAULT_CLICK_RADIUS);
+			ArrayList<drawnObject> touchedUnitCommands = new ArrayList<drawnObject>();
 			ArrayList<drawnObject> touchedUnits = new ArrayList<drawnObject>();
 			ArrayList<drawnObject> touchedChunks = new ArrayList<drawnObject>();
 			ArrayList<drawnObject> touchedGroundTiles = new ArrayList<drawnObject>();
 			
 			if(touchedObjects!=null) for(int i = 0; i < touchedObjects.size(); i++) 
-				if(touchedObjects.get(i) instanceof unit) 
+				if(touchedObjects.get(i) instanceof unit && !(touchedObjects.get(i) instanceof player)) 
 					touchedUnits.add(touchedObjects.get(i));
+			
+			if(touchedObjects!=null) for(int i = 0; i < touchedObjects.size(); i++) 
+				if(touchedObjects.get(i) instanceof commandIndicator) 
+					touchedUnitCommands.add(touchedObjects.get(i));
 			
 			if(touchedObjects!=null) for(int i = 0; i < touchedObjects.size(); i++) 
 				if(touchedObjects.get(i) instanceof chunk && !(touchedObjects.get(i) instanceof groundTile)) 
@@ -839,10 +856,41 @@ public class developer extends player {
 				if(touchedObjects.get(i) instanceof groundTile) 
 					touchedGroundTiles.add(touchedObjects.get(i));
 			
+			//////////////////
+			// UNIT COMMANDS//
+			//////////////////
+			if(editorType.equals("Unit") && touchedUnitCommands != null && touchedUnitCommands.size() > 0) {
+				movingObject = true;
+				
+				commandIndicator touchedUnitCommand = (commandIndicator)drawnObject.getClosestToFrom(
+						(int)inGamePoint.getX(), 
+						(int)inGamePoint.getY(),
+						touchedUnitCommands);
+				selectedThing = touchedUnitCommand;
+				
+				
+				// Move all selected things.
+				if(selectedThings != null && selectedThings.contains(touchedUnitCommand)) {
+					for(int i = 0; i < selectedThings.size(); i++) {
+						selectedThings.get(i).setRelativeX(inGamePoint.getX() - selectedThings.get(i).getIntX());
+						selectedThings.get(i).setRelativeY(inGamePoint.getY() - selectedThings.get(i).getIntY());
+					}
+				}
+				
+				// De-select and move only the newly selected object.
+				else {
+					touchedUnitCommand.setRelativeX(inGamePoint.getX() - touchedUnitCommand.getIntX());
+					touchedUnitCommand.setRelativeY(inGamePoint.getY() - touchedUnitCommand.getIntY());
+					ArrayList<drawnObject> touchTheseThings = new ArrayList<drawnObject>();
+					touchTheseThings.add(touchedUnitCommand);
+					selectAll(touchTheseThings);
+				}
+			}
+			
 			////////////
 			// UNITS ///
 			////////////
-			if(editorType.equals("Unit") && touchedUnits != null && touchedUnits.size() > 0) {
+			else if(editorType.equals("Unit") && touchedUnits != null && touchedUnits.size() > 0) {
 				
 				movingObject = true;
 				
@@ -850,25 +898,24 @@ public class developer extends player {
 						(int)inGamePoint.getX(), 
 						(int)inGamePoint.getY(),
 						touchedUnits);
+				selectedThing = touchedUnit;
 				
 				// Move all selected things.
 				if(selectedThings != null && selectedThings.contains(touchedUnit)) {
-					relativeDifferences = new ArrayList<Point>();
 					for(int i = 0; i < selectedThings.size(); i++) {
-						relativeDifferences.add(new Point(touchedUnit.getIntX() - selectedThings.get(i).getIntX(),
-														  touchedUnit.getIntY() - selectedThings.get(i).getIntY()));
+						selectedThings.get(i).setRelativeX(inGamePoint.getX() - selectedThings.get(i).getIntX());
+						selectedThings.get(i).setRelativeY(inGamePoint.getY() - selectedThings.get(i).getIntY());
 					}
 				}
 				
 				// De-select and move only the newly selected object.
 				else {
 					
-					relativeDifferences = new ArrayList<Point>();
-					relativeDifferences.add(new Point(0,0));
+					touchedUnit.setRelativeX(inGamePoint.getX() - touchedUnit.getIntX());
+					touchedUnit.setRelativeY(inGamePoint.getY() - touchedUnit.getIntY());
 					ArrayList<drawnObject> touchTheseThings = new ArrayList<drawnObject>();
 					touchTheseThings.add(touchedUnit);
 					selectAll(touchTheseThings);
-					
 				}
 			}
 			
@@ -883,21 +930,21 @@ public class developer extends player {
 						(int)inGamePoint.getX(), 
 						(int)inGamePoint.getY(),
 						touchedChunks);
+				selectedThing = touchedChunk;
 				
 				// Move all selected things.
 				if(selectedThings != null && selectedThings.contains(touchedChunk)) {
-					relativeDifferences = new ArrayList<Point>();
 					for(int i = 0; i < selectedThings.size(); i++) {
-						relativeDifferences.add(new Point(touchedChunk.getIntX() - selectedThings.get(i).getIntX(),
-								touchedChunk.getIntY() - selectedThings.get(i).getIntY()));
+						selectedThings.get(i).setRelativeX(inGamePoint.getX() - selectedThings.get(i).getIntX());
+						selectedThings.get(i).setRelativeY(inGamePoint.getY() - selectedThings.get(i).getIntY());
 					}
 				}
 				
 				// De-select and move only the newly selected object.
 				else {
 					
-					relativeDifferences = new ArrayList<Point>();
-					relativeDifferences.add(new Point(0,0));
+					touchedChunk.setRelativeX(inGamePoint.getX() - touchedChunk.getIntX());
+					touchedChunk.setRelativeY(inGamePoint.getY() - touchedChunk.getIntY());
 					ArrayList<drawnObject> touchTheseThings = new ArrayList<drawnObject>();
 					touchTheseThings.add(touchedChunk);
 					selectAll(touchTheseThings);
@@ -917,20 +964,20 @@ public class developer extends player {
 						(int)inGamePoint.getX(), 
 						(int)inGamePoint.getY(),
 						touchedGroundTiles);
+				selectedThing = touchedGroundTile;
 				
 				// Move all selected things.
 				if(selectedThings != null && selectedThings.contains(touchedGroundTile)) {
-					relativeDifferences = new ArrayList<Point>();
 					for(int i = 0; i < selectedThings.size(); i++) {
-						relativeDifferences.add(new Point(touchedGroundTile.getIntX() - selectedThings.get(i).getIntX(),
-								touchedGroundTile.getIntY() - selectedThings.get(i).getIntY()));
+						selectedThings.get(i).setRelativeX(inGamePoint.getX() - selectedThings.get(i).getIntX());
+						selectedThings.get(i).setRelativeY(inGamePoint.getY() - selectedThings.get(i).getIntY());
 					}
 				}
 				
 				// De-select and move only the newly selected object.
 				else {
-					relativeDifferences = new ArrayList<Point>();
-					relativeDifferences.add(new Point(0,0));
+					touchedGroundTile.setRelativeX(inGamePoint.getX() - touchedGroundTile.getIntX());
+					touchedGroundTile.setRelativeY(inGamePoint.getY() - touchedGroundTile.getIntY());
 					ArrayList<drawnObject> touchTheseThings = new ArrayList<drawnObject>();
 					touchTheseThings.add(touchedGroundTile);
 					selectAll(touchTheseThings);
@@ -948,32 +995,80 @@ public class developer extends player {
 	// Unselect all things
 	public static void unSelectAll() {
 		
-		// Deselect old things.
 		if(selectedThings != null) {
 			for(; selectedThings.size() > 0; ) {
+				
+				// Remove their unit commands, if they exist.
+				if(selectedThings.get(0) instanceof unit) {
+					unit u  = (unit)selectedThings.get(0);
+					if(u.getRepeatCommands()!=null) {
+						for(int i = 0; i < u.getRepeatCommands().size(); i++) {
+							if(unitCommands != null) {
+								for(int j = 0; j < unitCommands.size(); j++) {
+									if(u.getRepeatCommands().get(i) == unitCommands.get(j).getCommand()) {
+										unitCommands.get(j).destroy();
+										unitCommands.remove(j);
+										j--;
+									}
+								}
+							}
+						}
+					}
+				}
+				
 				selectedThings.get(0).dontShowHitBox();
 				selectedThings.remove(0);
 			}
 		}
-		
+		selectedThings = new ArrayList<drawnObject>();
+	}
+	
+	// Unselect all things
+	public static void unSelectUnitCommands() {
+	
+		if(selectedThings != null) {
+			for(int i =0; selectedThings.size() > i; i++) {
+				if(selectedThings.get(i) instanceof commandIndicator) {
+					selectedThings.get(i).dontShowHitBox();
+					selectedThings.remove(i);
+					i--;
+				}
+			}
+		}
 	}
 	
 	// Select all 
 	public static void selectAll(ArrayList<drawnObject> d) {
 		
-		unSelectAll();
+		// Create selected things if they don't exist
+		if(selectedThings == null) selectedThings = new ArrayList<drawnObject>();
 		
-		if(selectedThings == null) {
-			selectedThings = new ArrayList<drawnObject>();
+		// If a unit is selected, draw unit commands.
+		if(d != null && d.size() > 0 && d.get(0) instanceof unit) {
+			for(int i = 0; i < d.size(); i++) {
+				selectedThings.add(d.get(i));
+				d.get(i).showHitBox();
+			}
+			drawingThings.createUnitCommandsText(selectedThings);
 		}
 		
-		for(int i = 0; i < d.size(); i++) {
-			selectedThings.add(d.get(i));
-			d.get(i).showHitBox();
+		else {
+			// If we select a commandIndicator after first selecting a unit or units.
+			if(d != null && d.size() > 0 && d.get(0) instanceof commandIndicator) {
+				unSelectUnitCommands();
+			}
+			else {
+				unSelectAll();
+			}
+	
+			for(int i = 0; i < d.size(); i++) {
+				selectedThings.add(d.get(i));
+				d.get(i).showHitBox();
+			}
 		}
 		
 	}
-	
+
 	// Responding to mouse release
 	public static void devMouseReleased(MouseEvent e) {
 		
@@ -1047,22 +1142,28 @@ public class developer extends player {
 				// Units
 				if(editorType.equals("Unit")) {
 					
-					unSelectAll();
-					
-					ArrayList<unit> selectTheseUnits = unit.getUnitsInBox(
+					ArrayList<drawnObject> selectTheseObjects = drawnObject.getObjectsInBox(
 							rect.x, 
 							rect.y, 
 							rect.x + rect.width, 
 							rect.y + rect.height);
+
 					
-					if(selectTheseUnits!=null) {
-						
-						ArrayList<drawnObject> selectTheseThings = new ArrayList<drawnObject>();
-						for(int i = 0; i < selectTheseUnits.size(); i++) {
-							selectTheseThings.add(selectTheseUnits.get(i));
+					if(selectTheseObjects != null) {
+						for(int i = 0; i < selectTheseObjects.size(); i++) {
+							if(!(selectTheseObjects.get(i) instanceof unit || selectTheseObjects.get(i) instanceof commandIndicator) || selectTheseObjects.get(i) instanceof player) {
+								selectTheseObjects.remove(i);
+								i--;
+							}
 						}
+					}
 					
-						selectAll(selectTheseThings);
+					if(selectTheseObjects != null && selectTheseObjects.size() > 0) {
+
+						selectAll(selectTheseObjects);
+					}
+					else {
+						unSelectAll();
 					}
 				}
 			}
@@ -1072,28 +1173,22 @@ public class developer extends player {
 		}
 	}
 	
-	// Highlight box variables
-	private static Color DEFAULT_HIGHLIGHT_COLOR = Color.green;
+	// Unit selected?
+	public static boolean unitSelected() {
+		for(int i = 0; i < selectedThings.size(); i++) if(selectedThings.get(i) instanceof unit) return true;
+		return false;
+	}
 	
-	// Highlight box
-	public static void drawHighLightBox(Graphics g) {
-		
-		// Draw the box.
-		if(selecting) {
-			
-			Rectangle rect= new Rectangle(toDrawPos(leftClickStartPoint));
-			rect.add(toDrawPos(lastMousePos));
-
-			g.setColor(DEFAULT_HIGHLIGHT_COLOR);
-			g.drawRect(rect.x, rect.y, rect.width, rect.height);
-			
-		}
-		
+	// Command selected
+	public static boolean commandSelected() {
+		for(int i = 0; i < selectedThings.size(); i++) if(selectedThings.get(i) instanceof commandIndicator) return true;
+		return false;
 	}
 	
 	// Draw unit particular stuff.
 	public void drawUnitSpecialStuff(Graphics g) {
-		drawHighLightBox(g);
+		drawingThings.drawHighLightBox(g, selecting, lastMousePos, leftClickStartPoint);
+		drawingThings.drawUnitCommands(g, selectedThings);
 	}
 	
 	// Test level
@@ -1118,182 +1213,25 @@ public class developer extends player {
 		}
 	}
 	
-	// Spawn ground tile.
-	public void spawnGroundTile() {
-		
-		// If we don't have a class, give an error
-		if(currentObjectClass == null) {
-			new tooltipString("You need to select a ground tile type to place.");
-		}
-		// If selecting, make groundtiles in box.
-		else if(selecting) {
-			
-			// Make rectangle.
-			Rectangle rect= new Rectangle(leftClickStartPoint);
-			rect.add(lastMousePos);
-			
-			// Make groundtiles in box.
-			for(int i = (int) rect.getX(); i < rect.getX() + rect.getWidth(); i += groundTile.DEFAULT_TILE_WIDTH) {
-				for(int j = (int) rect.getY(); j < rect.getY() + rect.getHeight(); j += groundTile.DEFAULT_TILE_HEIGHT) {
-					try {
-						Class<?> clazz = Class.forName(currentObjectClass);
-						Constructor<?> ctor = clazz.getConstructor(int.class, int.class, int.class);
-						Object object = ctor.newInstance(new Object[] { i,
-								j,
-								0});
-					}
-					catch(Exception e) {
-						e.printStackTrace();
-					}
+	// Add unit command to selected units
+	public static void addUnitCommandToSelectedUnits(unitCommand c) {
+		if(selectedThings != null) {
+			for(int i = 0; i < selectedThings.size(); i++) {
+				if(selectedThings.get(i) instanceof unit) {
+					if(((unit)selectedThings.get(i)).getRepeatCommands() == null) ((unit)selectedThings.get(i)).setRepeatCommands(new commandList());
+					((unit)selectedThings.get(i)).getRepeatCommands().add(c);
+					
+					// Draw the commands
+					if(unitCommands == null) drawingThings.createUnitCommandsText(selectedThings);
+					else unitCommands.add(new commandIndicator(c, (unit)selectedThings.get(i)));
 				}
 			}
-			
-			
-		}
-		
-		// Otherwise, make one ground tile on mouse.
-		else {
-			try {
-				Class<?> clazz = Class.forName(currentObjectClass);
-				Constructor<?> ctor = clazz.getConstructor(int.class, int.class, int.class);
-				Object object = ctor.newInstance(new Object[] { (int)(lastMousePos.getX() - groundTile.DEFAULT_TILE_WIDTH/2),
-						(int)(lastMousePos.getY() - groundTile.DEFAULT_TILE_HEIGHT/2),
-						0});
-			}
-			catch(Exception e) {
-				e.printStackTrace();
+			if(selectedThings.size() == 0) {
+				tooltipString t = new tooltipString("You must select a unit to add this command to.");
 			}
 		}
-	}
-	
-	// Spawn ground tile.
-		public void spawnChunk() {
-			
-			// If we don't have a class, give an error
-			if(currentObjectClass == null) {
-				new tooltipString("You need to select a chunk type to place.");
-			}
-			// If selecting, make groundtiles in box.
-			else if(selecting) {
-				
-				// Make rectangle.
-				Rectangle rect= new Rectangle(leftClickStartPoint);
-				rect.add(lastMousePos);
-				
-				// Height
-				int objHeight = 0;
-				int objWidth = 0;
-				
-				// Make chunks in box.
-				for(int i = (int) rect.getX(); i < rect.getX() + rect.getWidth(); ) {
-					for(int j = (int) rect.getY(); j < rect.getY() + rect.getHeight(); ) {
-						try {
-							Class<?> clazz = Class.forName(currentObjectClass);
-							Constructor<?> ctor = clazz.getConstructor(int.class, int.class, int.class);
-							Object object = ctor.newInstance(new Object[] { i,
-									j,
-									0});
-							drawnObject d = (drawnObject)(object);
-							if(objHeight == 0) objHeight = d.getHeight();
-							if(objWidth == 0) objWidth = d.getWidth();
-							j += objHeight;
-						}
-						catch(Exception e) {
-							e.printStackTrace();
-						}
-					}
-					i += objWidth;
-				}
-			}
-			
-			// Otherwise, make one chunk tile on mouse.
-			else {
-				try {
-					Class<?> clazz = Class.forName(currentObjectClass);
-					Constructor<?> ctor = clazz.getConstructor(int.class, int.class, int.class);
-					Object object = ctor.newInstance(new Object[] { (int)(lastMousePos.getX()),
-							(int)(lastMousePos.getY()),
-							0});
-					drawnObject d = (drawnObject)(object);
-					d.setDoubleX(d.getDoubleX() - d.getWidth()/2);
-					d.setDoubleY(d.getDoubleY() - d.getHeight()/2);
-				}
-				catch(Exception e) {
-					e.printStackTrace();
-				}
-			}
-		}
-	
-		// Spawn ground tile.
-		public void spawnUnit() {
-			
-			// If we don't have a class, give an error
-			if(currentObjectClass == null) {
-				new tooltipString("You need to select a unit type to place.");
-			}
-			// If selecting, make groundtiles in box.
-			else if(selecting) {
-				
-				// Make rectangle.
-				Rectangle rect= new Rectangle(leftClickStartPoint);
-				rect.add(lastMousePos);
-				
-				// Height
-				int objHeight = 0;
-				int objWidth = 0;
-				
-				// Make chunks in box.
-				for(int i = (int) rect.getX(); i < rect.getX() + rect.getWidth(); ) {
-					for(int j = (int) rect.getY(); j < rect.getY() + rect.getHeight(); ) {
-						try {
-							Class<?> clazz = Class.forName(currentObjectClass);
-							Constructor<?> ctor = clazz.getConstructor(int.class, int.class);
-							Object object = ctor.newInstance(new Object[] { i,
-									j});
-							drawnObject d = (drawnObject)(object);
-							if(objHeight == 0) objHeight = d.getHeight();
-							if(objWidth == 0) objWidth = d.getWidth();
-							j += objHeight;
-						}
-						catch(Exception e) {
-							e.printStackTrace();
-						}
-					}
-					i += objWidth;
-				}
-			}
-			
-			// Otherwise, make one chunk tile on mouse.
-			else {
-				try {
-					Class<?> clazz = Class.forName(currentObjectClass);
-					Constructor<?> ctor = clazz.getConstructor(int.class, int.class);
-					Object object = ctor.newInstance(new Object[] { (int)(lastMousePos.getX()),
-							(int)(lastMousePos.getY())});
-					drawnObject d = (drawnObject)(object);
-					d.setDoubleX(d.getDoubleX() - d.getWidth()/2);
-					d.setDoubleY(d.getDoubleY() - d.getHeight()/2);
-				}
-				catch(Exception e) {
-					e.printStackTrace();
-				}
-			}
-		}
-	
-	
-	// Spawn the thing and output.
-	public void spawnThing() {
-		
-		if(editorType.equals("Ground Tile")) {
-			spawnGroundTile();
-		}
-		
-		if(editorType.equals("Chunk")) {
-			spawnChunk();
-		}
-		
-		if(editorType.equals("Unit")) {
-			spawnUnit();
+		if(selectedThings == null) {
+			tooltipString t = new tooltipString("You must select a unit to add this command to.");
 		}
 	}
 	
@@ -1334,7 +1272,7 @@ public class developer extends player {
 	
 		// Player presses bar key
 		if(k.getKeyCode() == KeyEvent.VK_SPACE) {
-			spawnThing();
+			spawningThings.spawnThing(editorType, currentObjectClass, lastMousePos, leftClickStartPoint, selecting);
 		}
 		
 		// Test level
