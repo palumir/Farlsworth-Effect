@@ -91,8 +91,6 @@ public class levelSave implements Serializable {
 	
 	// Save fields for units
 	public static ArrayList<String> saveTheseUnitFields = new ArrayList<String>() {{
-		add("doubleX");
-		add("doubleY");
 		add("moveSpeed");
 		add("jumpSpeed");
 	}};
@@ -193,12 +191,29 @@ public class levelSave implements Serializable {
 								// Write class name.
 								objectStream.writeObject(object.getClass().getName());
 								
-								// Position TODO: figure out where to put the unit?
-								objectStream.writeObject(object.getIntX());
-								objectStream.writeObject(object.getIntY());
+								// If there's repeat commands, spawn unit on last positioned command.
+								if(u.getRepeatCommands() != null && u.getRepeatCommands().size() > 0) {
+									
+									positionedCommand p = u.getPreviousPosCommand(u.getRepeatCommands().size()-1);
+									
+									// If there is no positioned command, spawn where it is in editor.
+									if(p == null) {
+										objectStream.writeObject(object.getIntX());
+										objectStream.writeObject(object.getIntY());
+									}
+									else {
+										objectStream.writeObject((int)p.getX());
+										objectStream.writeObject((int)p.getY());
+									}
+								}
+								else {
+									// Otherwise, spawn where it currently is in editor.
+									objectStream.writeObject(object.getIntX());
+									objectStream.writeObject(object.getIntY());
+								}
 								
 								// Save fields.
-								Class<?> clazz = Class.forName(u.getClass().getName());
+								Class<?> clazz = Class.forName("units.unit");
 								
 								// Save fields.
 								objectStream.writeObject(saveTheseUnitFields.size()); // Write number of things fields to file.
@@ -350,52 +365,61 @@ public class levelSave implements Serializable {
 				// Unit
 				else if(typeOfObject.equals("unit")) {
 					
-					// Load class
-					Class<?> clazz = Class.forName(objectClass);
-					
-					// Properties
-					int x = (int)objectStream.readObject();
-					int y = (int)objectStream.readObject();
-					
-					// How many fields
-					int howManyFields = (int)objectStream.readObject();
-					
-					// Load the fields.
-					for(int j = 0; j < howManyFields; j++) {
-						String currFieldName = (String)objectStream.readObject();
-						
-						try {
-							Field f = clazz.getDeclaredField(currFieldName);
-							f.setAccessible(true);
-							Object val = objectStream.readObject();
-							
-							// Try constructor first.
-							
-						}
-						
-						// Field doesn't exist. Leave to default.
-						catch(Exception e) {
-							e.printStackTrace();
-							Object val = objectStream.readObject();
-						}
-					}
-					
-					// Get the unit commands length
-					int howManyCommands = (int)objectStream.readObject();
-					
 					if(!dontSaveTheseThings.contains(objectClass)) {
-					
+						
+						// Properties
+						int x = (int)objectStream.readObject();
+						int y = (int)objectStream.readObject();
+						
+						// Create the object.
+						Class<?> clazz = Class.forName(objectClass);
 						Constructor<?> ctor = clazz.getConstructor(int.class, int.class);
 						Object object = ctor.newInstance(new Object[] { x,
 								y});
 						
+						// Cast to unit
+						unit u = (unit)object;
+						
+						// Load unit class
+						clazz = Class.forName("units.unit");
+						
+						// How many fields
+						int howManyFields = (int)objectStream.readObject();
+						
+						// Load the fields.
+						for(int j = 0; j < howManyFields; j++) {
+							String currFieldName = (String)objectStream.readObject();
+							
+							try {
+								Field f = clazz.getDeclaredField(currFieldName);
+								f.setAccessible(true);
+								Object val = objectStream.readObject();
+								
+								// If it's movement, do the constructor. Special case.
+								if(currFieldName.equals("moveSpeed")) {
+									u.setMoveSpeed((float)val);
+								}
+								
+								// Otherwise, straight up set the value.
+								else {
+									f.set(u,val);
+								}
+								
+							}
+							
+							// Field doesn't exist. Leave to default.
+							catch(Exception e) {
+								e.printStackTrace();
+								Object val = objectStream.readObject();
+							}
+						}
+						
+						// Get the unit commands length
+						int howManyCommands = (int)objectStream.readObject();
 						
 						if(toCode) {
 							out.println("u = new " + objectClass + "(" + x + "," + y + ");");
 						}
-						
-						// Cast to unit
-						unit u = (unit)object;
 						
 						if(howManyCommands>0 && toCode) out.println("commands = new commandList();");
 						
