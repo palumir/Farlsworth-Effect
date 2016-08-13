@@ -242,61 +242,6 @@ public class spider extends unit {
 	
 	// wolf AI moves wolf around for now.
 	public void updateUnit() {
-		
-		// If player is in radius, follow player, attacking.
-		player currPlayer = player.getPlayer();
-		int playerX = currPlayer.getIntX();
-		int playerY = currPlayer.getIntY();
-		float howClose = (float) Math.sqrt((playerX - getIntX())*(playerX - getIntX()) + (playerY - getIntY())*(playerY - getIntY()));
-		
-		// Make sounds.
-		makeSounds();
-		
-		// Attack if we're in radius.
-		if(howClose < DEFAULT_ATTACK_RADIUS || aggrod) {
-			
-			// If we're in attack range, attack.
-			if(isInAttackRange(currPlayer, DEFAULT_ATTACK_DIFFERENTIAL)) {
-				stopMove("all");
-				attack();
-				aggrod = true;
-			}
-			else {
-				if(!aggrod) {
-					sound s = new sound(spiderAggro);
-					s.setPosition(getIntX(), getIntY(), soundRadius);
-					s.start();
-				}
-				aggrod = true;
-				follow(currPlayer);
-			}
-		}
-		
-		// Deagro
-		if(howClose > DEFAULT_DEAGGRO_RADIUS) {
-			aggrod = false;
-		}
-		
-		// Do movement if we're not aggrod.
-		if(!aggrod && isWanders()) {
-			// Move in a random direction every interval.
-			if(time.getTime() - AILastCheck > randomMove*1000) {
-				AILastCheck = time.getTime();
-				int random = utility.RNG.nextInt(4);
-				if(random==0) checkMovement("left");
-				if(random==1) checkMovement("right");
-				if(random==2) checkMovement("down");
-				if(random==3) checkMovement("up");
-				randomStop = 0.35f + utility.RNG.nextInt(4)*0.125f;
-			}
-			
-			// Stop after a fraction of a second
-			if(isMoving() && time.getTime() - AILastCheck > randomStop*1000) {
-				randomMove = 2.4f + utility.RNG.nextInt(9)*0.2f;
-				AILastCheck = time.getTime();
-				stopMove("all");
-			}
-		}
 	}
 	
 	///////////////////////////

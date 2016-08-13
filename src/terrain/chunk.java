@@ -3,6 +3,7 @@ package terrain;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -10,6 +11,8 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 import drawing.drawnObject;
 import drawing.gameCanvas;
+import units.unit;
+import units.unitCommands.commandList;
 import utilities.intTuple;
 import utilities.utility;
 import zones.zone;
@@ -61,6 +64,7 @@ public class chunk extends drawnObject {
 	//////////////
 	/// MEHODS ///
 	//////////////
+	
 	// Constructor for choosing a random variation of the chunk.
 	public chunk(chunkType c, int newX, int newY) {
 		super(c.getChunkTypeSpriteSheet(), c.getClass().getName(), newX, newY, c.getWidth(), c.getHeight());
@@ -116,6 +120,28 @@ public class chunk extends drawnObject {
 		// Set largest.
 		if(c.getWidth() > largestChunkWidth) largestChunkWidth = c.getWidth();
 		if(c.getHeight() > largestChunkHeight) largestChunkHeight = c.getHeight();
+	}
+	
+	// Make copy
+	@Override
+	public drawnObject makeCopy() {
+		
+		try {
+			Class<?> clazz = Class.forName(this.getClass().getName());
+			Constructor<?> ctor = clazz.getConstructor(int.class, int.class, int.class);
+			Object object = ctor.newInstance(new Object[] { this.getIntX(),
+					this.getIntY(),
+					this.getVariationI()});
+			
+			chunk d = (chunk)object;
+			
+			return d;
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+			
 	}
 	
 	// Check if a unit collides with any chunk. Returns by how much.

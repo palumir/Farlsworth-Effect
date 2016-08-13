@@ -34,7 +34,7 @@ public class yellowWolf extends wolf {
 	// Beta stats
 	private static float DEFAULT_MOVESPEED_BETA = 3.5f;
 	private static float DEFAULT_CLAW_ATTACK_EVERY_BASE_BETA = 3.5f;
-	private static float DEFAULT_SPAWN_CLAW_PHASE_TIME_BETA = 2.5f;
+	private static float DEFAULT_SPAWN_CLAW_PHASE_TIME_BETA = 0.5f;
 	private static int DEFAULT_FOLLOW_UNTIL_RANGE_BASE_BETA = 90;
 	private static int DEFAULT_FOLLOW_UNTIL_RANGE_RANDOM_BETA = 15;
 

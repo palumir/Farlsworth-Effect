@@ -13,6 +13,9 @@ public abstract class unitCommand {
 		setName(n);
 		setIssued(false);
 	}
+	
+	// Make copy
+	public abstract unitCommand makeCopy();
 
 	public boolean isIssued() {
 		return issued;

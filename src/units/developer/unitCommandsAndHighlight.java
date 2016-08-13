@@ -6,14 +6,16 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.util.ArrayList;
 
+import UI.tooltipString;
 import drawing.drawnObject;
 import units.unit;
 import units.unitCommand;
 import units.unitCommands.commandIndicator;
+import units.unitCommands.commandList;
 import units.unitCommands.positionedCommand;
 import utilities.imageUtils;
 
-public class drawingThings {
+public class unitCommandsAndHighlight {
 	
 	// Highlight box variables
 	private static Color DEFAULT_HIGHLIGHT_COLOR = Color.green;
@@ -128,53 +130,78 @@ public class drawingThings {
 		}
 	}
 	
-	// Draw the text for unit commands
-	public static void createUnitCommandsText(ArrayList<drawnObject> selectedThings) {
-		
-		if(developer.unitCommands == null || developer.unitCommands.size() == 0) {
-			
-			// If we are selecting at least one unit.
-			if(selectedThings != null && selectedThings.size() > 0) {
-				
-				// Go through the units and draw their commands.
-				for(int i = 0; i < selectedThings.size(); i++) {
-					
-					if(selectedThings.get(i) instanceof unit) {
-						unit u = (unit)selectedThings.get(i);
-						 
-						// Draw commands
-						if(u.getRepeatCommands() != null && u.getRepeatCommands().size() > 0) {
-							
-							for(int j = 0; j < u.getRepeatCommands().size(); j++) {
-								
-								unitCommand command = u.getRepeatCommands().get(j);
-								
-								// Initialize if we haven't.
-								if(knownCommands == null) {
-									knownCommands = new ArrayList<String>();
-								}
-								
-								// If it's not a known command, add it.
-								if(!knownCommands.contains(command.getName())) {
-									knownCommands.add(command.getName());
-								}
-								
-								// Get the command color.
-								Color c = possibleColors.get(knownCommands.indexOf(command.getName()));
-								
-								// For commands that have an x and y coordinate
-								if(command instanceof positionedCommand) {
-									
-									// Cast
-									positionedCommand p = (positionedCommand)command;
-										
-									if(developer.unitCommands==null) developer.unitCommands = new ArrayList<commandIndicator>();
-									commandIndicator t = new commandIndicator(p, u);
-									t.setColor(c);
-									developer.unitCommands.add(t);
 	
-								}
+	// Add unit command to selected units
+	public static void addUnitCommandToSelectedUnits(unitCommand c, ArrayList<drawnObject> selectedThings) {
+		if(selectedThings != null) {
+			for(int i = 0; i < selectedThings.size(); i++) {
+				if(selectedThings.get(i) instanceof unit) {
+					if(((unit)selectedThings.get(i)).getRepeatCommands() == null) ((unit)selectedThings.get(i)).setRepeatCommands(new commandList());
+					((unit)selectedThings.get(i)).getRepeatCommands().add(c);
+					
+					// Draw the commands
+					if(developer.unitCommands == null) unitCommandsAndHighlight.createUnitCommandsText(selectedThings, null);
+					else {
+						commandIndicator indicator = new commandIndicator(c, (unit)selectedThings.get(i));
+						developer.unitCommands.add(indicator);
+						Color color = possibleColors.get(knownCommands.indexOf(c.getName()));
+						indicator.setColor(color);
+					}
+				}
+			}
+			if(selectedThings.size() == 0) {
+				tooltipString t = new tooltipString("You must select a unit to add this command to.");
+			}
+		}
+		if(selectedThings == null) {
+			tooltipString t = new tooltipString("You must select a unit to add this command to.");
+		}
+	}
+	
+	// Draw the text for unit commands
+	public static void createUnitCommandsText(ArrayList<drawnObject> d, ArrayList<drawnObject> selectedThings) {
+		
+		// If we are selecting at least one unit.
+		if(d != null && d.size() > 0) {
+			
+			// Go through the units and draw their commands.
+			for(int i = 0; i < d.size(); i++) {
+				
+				// Only draw for units that aren't already drawn.
+				if(d.get(i) instanceof unit && (selectedThings == null || !selectedThings.contains(d.get(i)))) {
+					unit u = (unit)d.get(i);
+					 
+					// Draw commands
+					if(u.getRepeatCommands() != null && u.getRepeatCommands().size() > 0) {
+						
+						for(int j = 0; j < u.getRepeatCommands().size(); j++) {
+							
+							unitCommand command = u.getRepeatCommands().get(j);
+							
+							// Initialize if we haven't.
+							if(knownCommands == null) {
+								knownCommands = new ArrayList<String>();
+							}
+							
+							// If it's not a known command, add it.
+							if(!knownCommands.contains(command.getName())) {
+								knownCommands.add(command.getName());
+							}
+							
+							// Get the command color.
+							Color c = possibleColors.get(knownCommands.indexOf(command.getName()));
+							
+							// For commands that have an x and y coordinate
+							if(command instanceof positionedCommand) {
 								
+								// Cast
+								positionedCommand p = (positionedCommand)command;
+									
+								if(developer.unitCommands==null) developer.unitCommands = new ArrayList<commandIndicator>();
+								commandIndicator t = new commandIndicator(p, u);
+								t.setColor(c);
+								developer.unitCommands.add(t);
+
 							}
 							
 						}
@@ -184,8 +211,9 @@ public class drawingThings {
 				}
 				
 			}
+			
 		}
-				
 	}
+				
 	
 }

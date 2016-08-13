@@ -14,6 +14,8 @@ import java.util.ArrayList;
 
 import UI.button;
 import UI.interfaceObject;
+import UI.playerHealthBar;
+import UI.propertyEditBox;
 import UI.text;
 import UI.tooltipString;
 import doodads.sheepFarm.bone;
@@ -74,7 +76,7 @@ public class developer extends player {
 	public static ArrayList<String> listOfGroundTiles;
 	
 	// Selected units
-	private static ArrayList<drawnObject> selectedThings;
+	static ArrayList<drawnObject> selectedThings;
 	private static drawnObject selectedThing;
 	
 	// Unit commands displayed
@@ -85,7 +87,7 @@ public class developer extends player {
 	
 	// Is left click held?
 	private static Point leftClickStartPoint;
-	private static Point lastMousePos;
+	static Point lastMousePos;
 	
 	// Are we selecting?
 	private static boolean selecting = false;
@@ -97,15 +99,17 @@ public class developer extends player {
 	// Developer mode.
 	public developer(int newX, int newY, zone z) {
 		super(newX, newY, z);
+		
+		// Create our lists of stuff.
+		createLists();
+		
+		// Collision
 		collisionOn = false;
 		setStuck(true);
 		
 		// Give a million hp
-		healthPoints = 100000;
+		healthPoints = Integer.MAX_VALUE;
 		moveSpeed = 10f;
-		
-		// Create our lists of stuff.
-		createLists();
 		
 		// Destroy healthbar.
 		getHealthBar().destroy();
@@ -210,7 +214,7 @@ public class developer extends player {
 	}
 	
 	// Delete selected.
-	public void deleteSelected() {
+	public static void deleteSelected() {
 		if(selectedThings!=null) {
 			
 			// Special case for unit commands.
@@ -243,22 +247,37 @@ public class developer extends player {
 			}
 		}
 	}
+	
+	// Remove dev interface
+	public void removeDevInterface() {
+		for(int i = 0; i < devInterface.size(); i++) {
+			devInterface.get(i).destroy();
+		}
+	}
+	
+	ArrayList<drawnObject> devInterface;
 
 	// Create dev interface
 	public void createDevInterface() {
+		
+		// The dev interface
+		devInterface = new ArrayList<drawnObject>();
 		
 		////////////////////
 		/////////Pause//////
 		////////////////////
 		pauseButton = new button("Pause Actions","pause",gameCanvas.getDefaultWidth() - 150, 50, DEFAULT_BUTTON_WIDTH, DEFAULT_BUTTON_HEIGHT);
+		devInterface.add(pauseButton);
 		
 		//////////////////////
 		///////// File ///////
 		//////////////////////
 		
 		file = new button("File","file",50,50,DEFAULT_BUTTON_WIDTH,DEFAULT_BUTTON_HEIGHT);
+		devInterface.add(file);
 		
 		displayFileName = new text("No level loaded", 150, 70, Color.green, 1.3f);
+		devInterface.add(displayFileName);
 			
 		// Save
 		button b = new button("Save", "Save", 150, file.getIntY() + 0*DEFAULT_BUTTON_HEIGHT*4/3, DEFAULT_BUTTON_WIDTH, DEFAULT_BUTTON_HEIGHT);
@@ -299,8 +318,10 @@ public class developer extends player {
 		//////////////////////
 		
 		editorMode = new button("Editor Mode","editorMode",50,50 + 1*DEFAULT_BUTTON_HEIGHT*4/3,DEFAULT_BUTTON_WIDTH,DEFAULT_BUTTON_HEIGHT);
+		devInterface.add(editorMode);
 		
 		displayEditorMode = new text("",150,70 + 1*DEFAULT_BUTTON_HEIGHT*4/3, Color.green, 1.3f);
+		devInterface.add(displayEditorMode);
 		
 		int selectionNumber = 0;
 		for(String s : editorTypeList) {
@@ -356,181 +377,186 @@ public class developer extends player {
 		
 		b.select();
 		
+		// Deal with specific button presses.
+		
+		propertiesButton.editPropertiesButtons(b);
+		
+		pauseButton(b);
+		
+		fileButtons(b);
+		
+		changeEditorModeButton(b);
+		
+		pickingSomethingToAddButtons(b);
+		
+	}
+	
+	public static void pauseButton(button b) {
 		/////////////////////
 		///////// PAUSE /////
 		/////////////////////
 		if(b.getButtonID().contains("pause")) {
-			
-			// Do nothing.
 			utility.toggleActions();
 		}
-		
+	}
+	
+	public static void fileButtons(button b) {
 		/////////////////////
 		///// FILE STUFF ////
 		/////////////////////
 		
 		// Quick save button.
 		if(b.getButtonID().equals("Save")) {
+		
+		// We are in a file.
+		if(developer.levelName != null) {
+			String levelName = b.getButtonID().substring(b.getButtonID().indexOf('.')+1,b.getButtonID().length());
 			
-			// We are in a file.
-			if(developer.levelName != null) {
-				String levelName = b.getButtonID().substring(b.getButtonID().indexOf('.')+1,b.getButtonID().length());
-				
-				String buttonText = "Are you sure you want to save over the current level?";
-				int textWidth = gameCanvas.getGameCanvas().getFontMetrics(drawnObject.DEFAULT_FONT).stringWidth(buttonText);
-				
-				areYouSureSave = new ArrayList<interfaceObject>();
-				
-				text textPart = new text(
-						buttonText,
-						gameCanvas.getActualWidth()/2 - textWidth/2,
-						gameCanvas.getActualHeight()*3/4,
-						Color.white
-						);
-				areYouSureSave.add(textPart);
-				
-				areYouSureSave.add(new button(
-						"Yes",
-						"SaveSave." + levelName, 
-						gameCanvas.getActualWidth()/2 - textWidth/2 + textWidth*1/4 - 70/2,
-						gameCanvas.getActualHeight()*3/4 + 30,
-						70,
-						50
-						));
-				
-				areYouSureSave.add(new button(
-						"No",
-						"SaveNotSave." + levelName,
-						gameCanvas.getActualWidth()/2 - textWidth/2 + textWidth*3/4 - 70/2,
-						gameCanvas.getActualHeight()*3/4 + 30,
-						70,
-						50
-						));
-			}
+			String buttonText = "Are you sure you want to save over the current level?";
+			int textWidth = gameCanvas.getGameCanvas().getFontMetrics(drawnObject.DEFAULT_FONT).stringWidth(buttonText);
 			
-			// We aren't in a file.
-			else {
-				// TODO: make this prompt saving to a new file.
-				tooltipString t = new tooltipString("We aren't in a loaded level. Create or load a level.");
-			}
+			areYouSureSave = new ArrayList<interfaceObject>();
+			
+			text textPart = new text(
+					buttonText,
+					gameCanvas.getActualWidth()/2 - textWidth/2,
+					gameCanvas.getActualHeight()*3/4,
+					Color.white
+					);
+			areYouSureSave.add(textPart);
+			
+			areYouSureSave.add(new button(
+					"Yes",
+					"SaveSave." + levelName, 
+					gameCanvas.getActualWidth()/2 - textWidth/2 + textWidth*1/4 - 70/2,
+					gameCanvas.getActualHeight()*3/4 + 30,
+					70,
+					50
+					));
+			
+			areYouSureSave.add(new button(
+					"No",
+					"SaveNotSave." + levelName,
+					gameCanvas.getActualWidth()/2 - textWidth/2 + textWidth*3/4 - 70/2,
+					gameCanvas.getActualHeight()*3/4 + 30,
+					70,
+					50
+					));
+		}
+		
+		// We aren't in a file.
+		else {
+			// TODO: make this prompt saving to a new file.
+			tooltipString t = new tooltipString("We aren't in a loaded level. Create or load a level.");
+		}
 		}
 		
 		if(b.getButtonID().contains("SaveNotSave.")) {
-			
-			// Do nothing.
-			closePrompts();
+		
+		// Do nothing.
+		closePrompts();
 		}
 		
 		if(b.getButtonID().contains("SaveSave.")) {
-			
-			// Save
-			levelSave.createSaveState(developer.levelName);
-			closePrompts();
+		
+		// Save
+		levelSave.createSaveState(developer.levelName);
+		closePrompts();
 		}
 		
 		// Load a level
 		if(b.getButtonID().contains("Load.")) {
+		
+		// Loaded level after loading another.
+		if(developer.levelName != null) {
+			String levelName = b.getButtonID().substring(b.getButtonID().indexOf('.')+1,b.getButtonID().length());
 			
-			// Loaded level after loading another.
-			if(developer.levelName != null) {
-				String levelName = b.getButtonID().substring(b.getButtonID().indexOf('.')+1,b.getButtonID().length());
-				
-				String buttonText = "Do you want to save the current level before loading?";
-				int textWidth = gameCanvas.getGameCanvas().getFontMetrics(drawnObject.DEFAULT_FONT).stringWidth(buttonText);
-				
-				areYouSureSave = new ArrayList<interfaceObject>();
-				
-				text textPart = new text(
-						buttonText,
-						gameCanvas.getActualWidth()/2 - textWidth/2,
-						gameCanvas.getActualHeight()*3/4,
-						Color.white
-						);
-				areYouSureSave.add(textPart);
-				
-				areYouSureSave.add(new button(
-						"Yes",
-						"LoadSave." + levelName, 
-						gameCanvas.getActualWidth()/2 - textWidth/2 + textWidth*1/4 - 70/2,
-						gameCanvas.getActualHeight()*3/4 + 30,
-						70,
-						50
-						));
-				
-				areYouSureSave.add(new button(
-						"No",
-						"LoadNotSave." + levelName,
-						gameCanvas.getActualWidth()/2 - textWidth/2 + textWidth*3/4 - 70/2,
-						gameCanvas.getActualHeight()*3/4 + 30,
-						70,
-						50
-						));
-			}
+			String buttonText = "Do you want to save the current level before loading?";
+			int textWidth = gameCanvas.getGameCanvas().getFontMetrics(drawnObject.DEFAULT_FONT).stringWidth(buttonText);
 			
-			// Loading a level for the first time.
-			else {
-				// Create the player.
-				player p = player.loadPlayer(null,null,0,0,"Up");
-				String levelName = b.getButtonID().substring(b.getButtonID().indexOf('.')+1,b.getButtonID().length());
-				developer.levelName = levelName;
-				levelSave.loadSaveState(developer.levelName);
-			}
+			areYouSureSave = new ArrayList<interfaceObject>();
+			
+			text textPart = new text(
+					buttonText,
+					gameCanvas.getActualWidth()/2 - textWidth/2,
+					gameCanvas.getActualHeight()*3/4,
+					Color.white
+					);
+			areYouSureSave.add(textPart);
+			
+			areYouSureSave.add(new button(
+					"Yes",
+					"LoadSave." + levelName, 
+					gameCanvas.getActualWidth()/2 - textWidth/2 + textWidth*1/4 - 70/2,
+					gameCanvas.getActualHeight()*3/4 + 30,
+					70,
+					50
+					));
+			
+			areYouSureSave.add(new button(
+					"No",
+					"LoadNotSave." + levelName,
+					gameCanvas.getActualWidth()/2 - textWidth/2 + textWidth*3/4 - 70/2,
+					gameCanvas.getActualHeight()*3/4 + 30,
+					70,
+					50
+					));
+		}
+		
+		// Loading a level for the first time.
+		else {
+			// Create the player.
+			player p = player.loadPlayer(null,null,0,0,"Up");
+			String levelName = b.getButtonID().substring(b.getButtonID().indexOf('.')+1,b.getButtonID().length());
+			developer.levelName = levelName;
+			levelSave.loadSaveState(developer.levelName);
+		}
 		}
 		
 		// LoadSave
 		if(b.getButtonID().contains("LoadSave.")) {
-			
-			// Save current level.
-			levelSave.createSaveState(developer.levelName);
-			
-			// Destroy all objects
-			drawnObject.destroyAll();
-			
-			// Create the player.
-			player p = player.loadPlayer(null,null,0,0,"Up");
-			
-			// Open the new one.
-			String levelName = b.getButtonID().substring(b.getButtonID().indexOf('.')+1,b.getButtonID().length());
-			developer.levelName = levelName;
-			levelSave.loadSaveState(developer.levelName);
+		
+		// Save current level.
+		levelSave.createSaveState(developer.levelName);
+		
+		// Destroy all objects
+		drawnObject.destroyAll();
+		
+		// Create the player.
+		player p = player.loadPlayer(null,null,0,0,"Up");
+		
+		// Open the new one.
+		String levelName = b.getButtonID().substring(b.getButtonID().indexOf('.')+1,b.getButtonID().length());
+		developer.levelName = levelName;
+		levelSave.loadSaveState(developer.levelName);
 		}
 		
 		// LoadNotSave
 		if(b.getButtonID().contains("LoadNotSave.")) {
-			
-			// Destroy all objects
-			drawnObject.destroyAll();
-			
-			// Create the player.
-			player p = player.loadPlayer(null,null,0,0,"Up");
-			
-			// Open the new level.
-			String levelName = b.getButtonID().substring(b.getButtonID().indexOf('.')+1,b.getButtonID().length());
-			developer.levelName = levelName;
-			levelSave.loadSaveState(developer.levelName);
+		
+		// Destroy all objects
+		drawnObject.destroyAll();
+		
+		// Create the player.
+		player p = player.loadPlayer(null,null,0,0,"Up");
+		
+		// Open the new level.
+		String levelName = b.getButtonID().substring(b.getButtonID().indexOf('.')+1,b.getButtonID().length());
+		developer.levelName = levelName;
+		levelSave.loadSaveState(developer.levelName);
 		}
 		
 		// Test level button
 		if(b.getButtonID().equals("Test")) {
-			testLevel();
+			((developer)(player.getPlayer())).testLevel();
 		}
-		
-		///////////////////////
-		//// UNIT COMMANDS ////
-		///////////////////////
-		
-		// Select a unit command
-		if(b.getButtonID().contains("units.unitCommands.")) {
-			
-			currentObjectClass = b.getButtonID();
-			
-		}
-		
-		
-		//////////////////////
-		///// EDITOR MODE ////
-		//////////////////////
-		if(b.getButtonID().equals("editorModeGround Tile")) {
+	}
+	
+	public static void changeEditorModeButton(button b) {
+			//////////////////////
+			///// EDITOR MODE ////
+			//////////////////////
+			if(b.getButtonID().equals("editorModeGround Tile")) {
 			
 			if(selectedThingDisplay != null) selectedThingDisplay.destroy();
 			selectedThingDisplay = new text("Select a Ground Tile Type", 150, 70 + 2*DEFAULT_BUTTON_HEIGHT*4/3, Color.green, 1.3f);
@@ -556,6 +582,7 @@ public class developer extends player {
 				
 				String noDoodads = s.substring(s.indexOf('.')+1,s.length());
 				String noFolder = noDoodads.substring(noDoodads.indexOf('.')+1,noDoodads.length());
+			
 				
 				// Create each button for each type.
 				button groundTileButton = new button(noFolder,s,
@@ -572,9 +599,9 @@ public class developer extends player {
 					changeX++;
 				}
 			}
-		}
-		
-		if(b.getButtonID().equals("editorModeUnit")) {
+			}
+			
+			if(b.getButtonID().equals("editorModeUnit")) {
 			
 			if(selectedThingDisplay != null) selectedThingDisplay.destroy();
 			selectedThingDisplay = new text("Select a Unit Type", 150, 70 + 2*DEFAULT_BUTTON_HEIGHT*4/3, Color.green, 1.3f);
@@ -640,49 +667,8 @@ public class developer extends player {
 					changeX++;
 				}
 			}
-			
-			////////////
-			/// COMMANDS BUTTON
-			///////
-			
-			button commandsButton = new button("Unit Commands","unitCommandsButton",
-					editorMode.getIntX(),
-					editorMode.getIntY() + 2*DEFAULT_BUTTON_HEIGHT*4/3,
-					DEFAULT_BUTTON_WIDTH,
-					DEFAULT_BUTTON_HEIGHT);
-			
-			unitButtons.add(typeButton);
-			
-			// Show type buttons.
-			j = 0;
-			numFolders = 0;
-			changeX = 0;
-			changeY = 0;
-			for(String s : listOfUnitCommands) {
-				
-				String noUnits = s.substring(s.indexOf('.')+1,s.length());
-				String noCommands = noUnits.substring(noUnits.indexOf('.')+1,noUnits.length());
-			
-				// No folder
-				String noFolder = noCommands.substring(noCommands.indexOf('.')+1,noCommands.length());
-				
-				// Create each button for each type.
-				button unitCommandButton = new button(noFolder,s,
-						150 + changeX*100,
-						editorMode.getIntY() + 2*DEFAULT_BUTTON_HEIGHT*4/3 + changeY*DEFAULT_BUTTON_HEIGHT*4/3,
-						DEFAULT_BUTTON_WIDTH,
-						DEFAULT_BUTTON_HEIGHT);
-				commandsButton.addChild(unitCommandButton);
-				
-				j++;
-				changeY++;
-				if(editorMode.getIntY() + DEFAULT_BUTTON_HEIGHT*4/3 + changeY*DEFAULT_BUTTON_HEIGHT*4/3 >= gameCanvas.getDefaultHeight()) {
-					changeY = 0;
-					changeX++;
-				}
 			}
-		}
-		if(b.getButtonID().equals("editorModeChunk")) {
+			if(b.getButtonID().equals("editorModeChunk")) {
 			
 			if(selectedThingDisplay != null) selectedThingDisplay.destroy();
 			selectedThingDisplay = new text("Select a Chunk Type", 150, 70 + 2*DEFAULT_BUTTON_HEIGHT*4/3, Color.green, 1.3f);
@@ -743,17 +729,20 @@ public class developer extends player {
 				}
 			}
 		}
-		
+	}
+	
+	public static void pickingSomethingToAddButtons(button b) {
 		////////////////////////////////////
 		///// GROUNDTILE TYPE SELECT //////
 		///////////////////////////////////
 		if(b.getButtonID().contains("terrain.chunkTypes.") || 
-				b.getButtonID().contains("units.unitTypes.") ||
-				b.getButtonID().contains("doodads.")) {
-			currentObjectClass = b.getButtonID();
+		b.getButtonID().contains("units.unitTypes.") ||
+		b.getButtonID().contains("doodads.") ||
+		b.getButtonID().contains("units.unitCommands.")) {
+		currentObjectClass = b.getButtonID();
 		}
-		
 	}
+
 	
 	// Update interface
 	public void updateInterface() {
@@ -780,6 +769,29 @@ public class developer extends player {
 		
 		// Move things
 		moveThings();
+	}
+	
+	// Get selected units
+	public static ArrayList<drawnObject> getSelectedUnits() {
+		if(selectedThings != null) {
+			ArrayList<drawnObject> units = new ArrayList<drawnObject>();
+			for(int i = 0; i < selectedThings.size(); i++) {
+				if(selectedThings.get(i) instanceof unit) units.add(selectedThings.get(i));
+			}
+			if(units.size() == 0) return null;
+			return units;
+		}
+		return null;
+	}
+	
+	// Contains unit command?
+	public static boolean containsUnitCommand() {
+		if(selectedThings != null) {
+			for(int i = 0; i < selectedThings.size(); i++) {
+				if(selectedThings.get(i) instanceof commandIndicator) return true;
+			}
+		}
+		return false;
 	}
 	
 	// Move things
@@ -911,6 +923,7 @@ public class developer extends player {
 				// De-select and move only the newly selected object.
 				else {
 					
+					unSelectAll();
 					touchedUnit.setRelativeX(inGamePoint.getX() - touchedUnit.getIntX());
 					touchedUnit.setRelativeY(inGamePoint.getY() - touchedUnit.getIntY());
 					ArrayList<drawnObject> touchTheseThings = new ArrayList<drawnObject>();
@@ -1020,6 +1033,11 @@ public class developer extends player {
 				selectedThings.remove(0);
 			}
 		}
+		if(propertiesButton.propertiesButton != null) {
+			button.recursivelyDestroy(propertiesButton.propertiesButton.getChildren());
+			propertiesButton.propertiesButton.destroy();
+			propertiesButton.propertiesButton = null;
+		}
 		selectedThings = new ArrayList<drawnObject>();
 	}
 	
@@ -1045,11 +1063,24 @@ public class developer extends player {
 		
 		// If a unit is selected, draw unit commands.
 		if(d != null && d.size() > 0 && d.get(0) instanceof unit) {
+			
+			// Create unit commands for newly selected units.
+			unitCommandsAndHighlight.createUnitCommandsText(d, selectedThings);
+			
+			// Select all in box.
 			for(int i = 0; i < d.size(); i++) {
-				selectedThings.add(d.get(i));
-				d.get(i).showHitBox();
+				if(!selectedThings.contains(d.get(i))) { 
+					selectedThings.add(d.get(i));
+					d.get(i).showHitBox();
+				}
 			}
-			drawingThings.createUnitCommandsText(selectedThings);
+			
+			// Since we selected at least one unit, make a properties button.
+			// For the top left unit (or unit command)
+			if(propertiesButton.propertiesButton == null) {
+				propertiesButton.makePropertiesButton();
+			}
+		
 		}
 		
 		else {
@@ -1064,6 +1095,9 @@ public class developer extends player {
 			for(int i = 0; i < d.size(); i++) {
 				selectedThings.add(d.get(i));
 				d.get(i).showHitBox();
+			}
+			if(propertiesButton.propertiesButton == null) {
+				propertiesButton.makePropertiesButton();
 			}
 		}
 		
@@ -1187,98 +1221,131 @@ public class developer extends player {
 	
 	// Draw unit particular stuff.
 	public void drawUnitSpecialStuff(Graphics g) {
-		drawingThings.drawHighLightBox(g, selecting, lastMousePos, leftClickStartPoint);
-		drawingThings.drawUnitCommands(g, selectedThings);
+		unitCommandsAndHighlight.drawHighLightBox(g, selecting, lastMousePos, leftClickStartPoint);
+		unitCommandsAndHighlight.drawUnitCommands(g, selectedThings);
 	}
 	
-	// Test level
-	public static void testLevel() {
-		if(developer.levelName != null) {
-			// Test level
-			levelSave.createSaveState(developer.levelName);	
-			saveState.createSaveState();
+	// Set test mode.
+	public static void toggleTestMode() {
+		
+		// Test mode
+		if(player.isDeveloper()) {
+			
+			// Save where we are.
+			saveState.createSaveState();	
+			levelSave.createSaveState("testLevelSave.temp");
 			
 			// Development mode?
 			player.setDeveloper(false);
-				
+			
 			// Create the player.
 			player p = player.loadPlayer(null,null,0,0,"Up");
-			levelSave.loadSaveState(developer.levelName);
+			
+			// Load savestate.
+			levelSave.loadSaveState("testLevelSave.temp");
+		}
+		
+		// Dev mode
+		else {
+			// Development mode?
+			player.setDeveloper(true);
+			
+			// Create the player.
+			player p = player.loadPlayer(null,null,0,0,"Up");
+			
+			// Load savestate.
+			levelSave.loadSaveState("testLevelSave.temp");
+		}
+	}
+	
+	// Test level
+	public void testLevel() {
+		if(developer.levelName != null) {
+			// Test level
+			toggleTestMode();
 			
 			// Tell them to press y to go back
-			tooltipString t = new tooltipString("Press 'y' to go back to developer mode.");
+			tooltipString t = new tooltipString("Press 'y' to go back.");
 		}
 		else {
 			tooltipString t = new tooltipString("You must save before testing the level.");
 		}
 	}
 	
-	// Add unit command to selected units
-	public static void addUnitCommandToSelectedUnits(unitCommand c) {
-		if(selectedThings != null) {
-			for(int i = 0; i < selectedThings.size(); i++) {
-				if(selectedThings.get(i) instanceof unit) {
-					if(((unit)selectedThings.get(i)).getRepeatCommands() == null) ((unit)selectedThings.get(i)).setRepeatCommands(new commandList());
-					((unit)selectedThings.get(i)).getRepeatCommands().add(c);
-					
-					// Draw the commands
-					if(unitCommands == null) drawingThings.createUnitCommandsText(selectedThings);
-					else unitCommands.add(new commandIndicator(c, (unit)selectedThings.get(i)));
-				}
-			}
-			if(selectedThings.size() == 0) {
-				tooltipString t = new tooltipString("You must select a unit to add this command to.");
-			}
-		}
-		if(selectedThings == null) {
-			tooltipString t = new tooltipString("You must select a unit to add this command to.");
-		}
-	}
-	
 	// Controls
-	public void keyPressed(KeyEvent k) {
+	public void devKeyPressed(KeyEvent k) {
 		
-		// Player presses excape
-		if(k.getKeyCode() == KeyEvent.VK_ESCAPE) { 
-			button.hideAllChildButtons();
-			unSelectAll();
-			closePrompts();
-		}
-		
-		// Player presses delete key.
-		if(k.getKeyCode() == KeyEvent.VK_DELETE) { 
-			deleteSelected();
-		}
-		
-		// Player presses left key.
-		if(k.getKeyCode() == KeyEvent.VK_A) { 
-			startMove("left");
-		}
-		
-		// Player presses right key.
-		if(k.getKeyCode() == KeyEvent.VK_D) { 
-			startMove("right");
-		}
-		
-		// Player presses up key, presumably to jump!
-		if(k.getKeyCode() == KeyEvent.VK_W) { 
-			startMove("up");
-		}
-		
-		// Player presses down key
-		if(k.getKeyCode() == KeyEvent.VK_S) { 
-			startMove("down");
-		}
-	
-		// Player presses bar key
-		if(k.getKeyCode() == KeyEvent.VK_SPACE) {
-			spawningThings.spawnThing(editorType, currentObjectClass, lastMousePos, leftClickStartPoint, selecting);
-		}
-		
-		// Test level
-		if(k.getKeyCode() == KeyEvent.VK_Y) {
-			testLevel();
+			// If there's a box open, key presses go to that.
+			if(propertyEditBox.getCurrentBox()!=null) {
+				propertyEditBox.getCurrentBox().respondToKeyPress(k);
+			}
+			else {
+				// If control is held.
+				if(k.isControlDown()) {
+					
+					if(k.getKeyCode() == KeyEvent.VK_C) { 
+						copyCutPaste.copy();
+					}
+					
+					if(k.getKeyCode() == KeyEvent.VK_X) { 
+						copyCutPaste.cut();
+					}
+					
+					if(k.getKeyCode() == KeyEvent.VK_V) { 
+						copyCutPaste.paste();
+					}
+					
+					if(k.getKeyCode() == KeyEvent.VK_Z) { 
+						tooltipString t = new tooltipString("u joshing me? ctrl+z not implemented yet. sry");
+					}
+					
+				}
+				// Otherwise, one key.
+				else {
+					// Player presses excape
+					if(k.getKeyCode() == KeyEvent.VK_ESCAPE) { 
+						button.hideAllChildButtons();
+						unSelectAll();
+						closePrompts();
+					}
+					
+					// Player presses delete key.
+					if(k.getKeyCode() == KeyEvent.VK_DELETE) { 
+						deleteSelected();
+					}
+					
+					// Player presses left key.
+					if(k.getKeyCode() == KeyEvent.VK_A) { 
+						startMove("left");
+					}
+					
+					// Player presses right key.
+					if(k.getKeyCode() == KeyEvent.VK_D) { 
+						startMove("right");
+					}
+					
+					// Player presses up key, presumably to jump!
+					if(k.getKeyCode() == KeyEvent.VK_W) { 
+						startMove("up");
+					}
+					
+					// Player presses down key
+					if(k.getKeyCode() == KeyEvent.VK_S) { 
+						startMove("down");
+					}
+				
+					// Player presses bar key
+					if(k.getKeyCode() == KeyEvent.VK_SPACE) {
+						spawningThings.spawnThing(editorType, currentObjectClass, lastMousePos, leftClickStartPoint, selecting);
+					}
+					
+					// Test level
+					if(k.getKeyCode() == KeyEvent.VK_Y) {
+						toggleTestMode();
+					}
+				}
 		}
 	}
+
 	
 }

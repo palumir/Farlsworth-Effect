@@ -5,11 +5,13 @@ import java.awt.Graphics;
 
 import doodads.general.invisibleLightSource;
 import doodads.general.lightSource;
+import drawing.drawnObject;
 import drawing.gameCanvas;
 import modes.mode;
 import units.humanType;
 import units.unit;
 import units.unitType;
+import units.unitCommands.commandList;
 
 public class lightDude extends unit {
 	
@@ -86,7 +88,7 @@ public class lightDude extends unit {
 	public void unitSpecificMovement(double moveX, double moveY) {
 		if(light != null) {
 			light.setDoubleX(getDoubleX() + moveX);
-			light.setDoubleY(light.getDoubleY() + moveY);
+			light.setDoubleY(getDoubleY() + getHitBoxAdjustmentY() + moveY);
 		}
 	}
 	

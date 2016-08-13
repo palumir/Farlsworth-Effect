@@ -2,7 +2,7 @@ package units.unitCommands;
 
 import units.unitCommand;
 
-public class positionedCommand extends unitCommand {
+public abstract class positionedCommand extends unitCommand {
 	
 	// Where do we move to?
 	private double x;
@@ -30,5 +30,6 @@ public class positionedCommand extends unitCommand {
 	public void setY(double y) {
 		this.y = y;
 	}
+
 }
 

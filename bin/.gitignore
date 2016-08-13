@@ -1,12 +1,8 @@
 /units/
-/zones/
-/terrain/
-/drawing/
-/doodads/
-/effects/
-/items/
-/interactions/
-/main/
 /UI/
+/drawing/
+/terrain/
+/effects/
+/interactions/
+/items/
 /utilities/
-/commandsMeta/

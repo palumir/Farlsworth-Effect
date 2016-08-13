@@ -270,7 +270,7 @@ public class poisonSpider extends unit {
 	}
 	
 	// Do combat mechanics.
-	@Override
+	/*@Override
 	public void combat() {
 		
 		// Attack if we are attacking.
@@ -289,7 +289,7 @@ public class poisonSpider extends unit {
 		else if(time.getTime() - startAttackTime > (getAttackTime() + backSwing)*1000) {
 			canAttack = true;
 		}
-	}
+	}*/
 	
 	// React to pain.
 	public void reactToPain() {

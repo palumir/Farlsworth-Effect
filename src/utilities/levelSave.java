@@ -8,6 +8,7 @@ import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.io.Serializable;
 import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -73,7 +74,7 @@ public class levelSave implements Serializable {
 				}};
 				
 	public static ArrayList<String> dontSaveTheseThings = new ArrayList<String>() {{
-		add("new units.bosses.playerOne");
+		add("units.bosses.playerOne");
 		add("doodads.tomb.stairsUp");
 		add("doodads.sheepFarm.caveEnterance");
 		add("doodads.sheepFarm.tomb");
@@ -86,6 +87,14 @@ public class levelSave implements Serializable {
 		add("doodads.sheepFarm.clawMarkBlack");
 		add("doodads.sheepFarm.clawMarkRed");
 		add("doodads.sheepFarm.clawMarkYellow");
+	}};
+	
+	// Save fields for units
+	public static ArrayList<String> saveTheseUnitFields = new ArrayList<String>() {{
+		add("doubleX");
+		add("doubleY");
+		add("moveSpeed");
+		add("jumpSpeed");
 	}};
 
 	// Save the game.
@@ -187,6 +196,30 @@ public class levelSave implements Serializable {
 								// Position TODO: figure out where to put the unit?
 								objectStream.writeObject(object.getIntX());
 								objectStream.writeObject(object.getIntY());
+								
+								// Save fields.
+								Class<?> clazz = Class.forName(u.getClass().getName());
+								
+								// Save fields.
+								objectStream.writeObject(saveTheseUnitFields.size()); // Write number of things fields to file.
+								
+								// Save each field. If it doesn't exist, save a dummy.
+								for(int j = 0; j < saveTheseUnitFields.size(); j++) {
+									String currFieldName = saveTheseUnitFields.get(j);
+									
+									try {
+										Field f = clazz.getDeclaredField(currFieldName);
+										f.setAccessible(true);
+										objectStream.writeObject(currFieldName);
+										objectStream.writeObject(f.get(u));
+									}
+									
+									// Field doesn't exist, just add a dumby variable.
+									catch(Exception e) {
+										objectStream.writeObject("<dne>");
+										objectStream.writeObject("<dne>");
+									}
+								}
 								
 								// Command List
 								if(u.getRepeatCommands() == null) objectStream.writeObject(0);
@@ -317,15 +350,40 @@ public class levelSave implements Serializable {
 				// Unit
 				else if(typeOfObject.equals("unit")) {
 					
+					// Load class
+					Class<?> clazz = Class.forName(objectClass);
+					
 					// Properties
 					int x = (int)objectStream.readObject();
 					int y = (int)objectStream.readObject();
+					
+					// How many fields
+					int howManyFields = (int)objectStream.readObject();
+					
+					// Load the fields.
+					for(int j = 0; j < howManyFields; j++) {
+						String currFieldName = (String)objectStream.readObject();
+						
+						try {
+							Field f = clazz.getDeclaredField(currFieldName);
+							f.setAccessible(true);
+							Object val = objectStream.readObject();
+							
+							// Try constructor first.
+							
+						}
+						
+						// Field doesn't exist. Leave to default.
+						catch(Exception e) {
+							e.printStackTrace();
+							Object val = objectStream.readObject();
+						}
+					}
 					
 					// Get the unit commands length
 					int howManyCommands = (int)objectStream.readObject();
 					
 					if(!dontSaveTheseThings.contains(objectClass)) {
-						Class<?> clazz = Class.forName(objectClass);
 					
 						Constructor<?> ctor = clazz.getConstructor(int.class, int.class);
 						Object object = ctor.newInstance(new Object[] { x,

@@ -232,7 +232,7 @@ public class sound extends Thread {
     	if(allSounds != null) {
     		for(int i = 0; i < allSounds.size(); i++) {
     			if(!(allSounds.get(i) instanceof music)) {
-    				allSounds.get(i).stopRequested = true;
+    				if(allSounds.get(i) != null) allSounds.get(i).stopRequested = true;
     				allSounds.remove(i);
     				i--;
     			}

@@ -272,6 +272,11 @@ public abstract class drawnObject {
 		return returnList;
 	}
 	
+	// Make copy to be overrided.
+	public drawnObject makeCopy() {
+		return null;
+	}
+	
 	// Every thing needs to update itself in some way.
 	public void update() {
 		// Do nothing for basic objects.
@@ -350,6 +355,18 @@ public abstract class drawnObject {
 			}
 		}
 		return closestTo;
+	}
+	
+	// Get top left out of
+	public static drawnObject getTopLeftFrom(ArrayList<drawnObject> checkObjects) {
+		int minX = Integer.MAX_VALUE;
+		int minY = Integer.MAX_VALUE;
+		for(int i = 0; i < checkObjects.size(); i++) {
+			drawnObject currObj = checkObjects.get(i);
+			if(currObj.getIntX() < minX) minX = currObj.getIntX();
+			if(currObj.getIntY() < minY) minY = currObj.getIntY();
+		}
+		return getClosestToFrom(minX,minY,checkObjects);
 	}
 	
 	// Get angle between (in degrees) 
@@ -560,6 +577,15 @@ public abstract class drawnObject {
 	// Respond to destruction
 	public void respondToDestroy() {
 		
+	}
+	
+	// Destroy all
+	public static void destroyAll(ArrayList<drawnObject> d) {
+		if(d != null) {
+			for(int i = 0; i < d.size(); i++) {
+				d.get(i).destroy();
+			}
+		}
 	}
 	
 	// Destroy all

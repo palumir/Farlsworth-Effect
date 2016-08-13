@@ -31,6 +31,10 @@ public class button extends interfaceObject  {
 	// Children
 	private ArrayList<button> children;
 	private button parent;
+	
+	// For children
+	private int moveOverNumber = 0;
+	private int rowNumber = 0;
 
 	///////////////
 	/// METHODS ///
@@ -96,6 +100,15 @@ public class button extends interfaceObject  {
 		return null;
 	}
 	
+	// Respond to destroy
+	@Override
+	public void respondToDestroy() {
+		if(interfaceObjects.contains(this)) interfaceObjects.remove(this);
+		if(children != null) {
+			recursivelyDestroy(children);
+		}
+	}
+	
 	// Hide all child buttons
 	public static void hideAllChildButtons() {
 		for(int i = 0; i < interfaceObjects.size(); i++) {
@@ -112,6 +125,15 @@ public class button extends interfaceObject  {
 		if(!getChildren().contains(b)) {
 			b.setDrawObject(false);
 			getChildren().add(b);
+
+			// If we go off the screen, move over.
+			if(this.getDoubleY() + (rowNumber)*b.getHeight()*4/3 + b.getHeight() > gameCanvas.getDefaultHeight()) {
+				moveOverNumber++;
+				rowNumber = 0;
+			}
+			b.setDoubleX(this.getDoubleX() + 100*(moveOverNumber+1));
+			b.setDoubleY(this.getDoubleY() + rowNumber*b.getHeight()*4/3);
+			rowNumber++;
 			b.setParent(this);
 		}
 	}

@@ -8,6 +8,7 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 import UI.playerHealthBar;
+import drawing.drawnObject;
 import drawing.gameCanvas;
 import drawing.animation.animation;
 import effects.buffs.darkSlow;
@@ -16,6 +17,7 @@ import units.humanType;
 import units.player;
 import units.unit;
 import units.unitType;
+import units.unitCommands.commandList;
 import utilities.intTuple;
 import utilities.time;
 

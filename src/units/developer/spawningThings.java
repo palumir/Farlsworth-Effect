@@ -205,7 +205,7 @@ public class spawningThings {
 			Object object = ctor.newInstance(new Object[] { (int)(lastMousePos.getX()),
 					(int)(lastMousePos.getY())});
 			unitCommand d = (unitCommand)(object);
-			developer.addUnitCommandToSelectedUnits(d);
+			unitCommandsAndHighlight.addUnitCommandToSelectedUnits(d,developer.selectedThings);
 		}
 		catch(Exception e) {
 			e.printStackTrace();

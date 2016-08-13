@@ -1,6 +1,7 @@
 package units.unitCommands.commands;
 
 import units.unitCommand;
+import units.unitCommands.positionedCommand;
 import utilities.time;
 
 public class waitCommand extends unitCommand {
@@ -18,6 +19,11 @@ public class waitCommand extends unitCommand {
 	public waitCommand(double howLong, double dumbyValueForSaving) {
 		super("wait");
 		this.setHowLong(howLong);
+	}
+	
+	@Override
+	public unitCommand makeCopy() {
+		return new waitCommand(howLong);
 	}
 
 	public double getHowLong() {

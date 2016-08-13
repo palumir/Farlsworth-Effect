@@ -13,5 +13,10 @@ public class moveCommand extends positionedCommand {
 	public moveCommand(moveCommand unitCommand) {
 		super("move",unitCommand.getX(),unitCommand.getY());
 	}
+	
+	@Override
+	public unitCommand makeCopy() {
+		return new moveCommand(getX(), getY());
+	}
 }
 

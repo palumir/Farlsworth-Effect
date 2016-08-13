@@ -13,5 +13,10 @@ public class slashCommand extends positionedCommand {
 	public slashCommand(slashCommand unitCommand) {
 		super("slash",unitCommand.getX(),unitCommand.getY());
 	}
+	
+	@Override
+	public unitCommand makeCopy() {
+		return new slashCommand(getX(), getY());
+	}
 }
 
