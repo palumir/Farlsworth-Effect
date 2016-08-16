@@ -35,6 +35,7 @@ public class tombEdge extends groundTile {
 			return null;
 		}
 	}
+
 	
 	///////////////
 	/// METHODS ///

@@ -36,6 +36,18 @@ public class tomb extends groundTile {
 		}
 	}
 	
+	// Create function with variation
+	public static chunk createChunk(int newX, int newY, int i) {
+		if(!zone.loadedOnce) {
+			chunk t = new tomb(newX,newY,i);
+			t.setReloadObject(false);
+			return t;
+		}
+		else {
+			return null;
+		}
+	}
+	
 	///////////////
 	/// METHODS ///
 	///////////////

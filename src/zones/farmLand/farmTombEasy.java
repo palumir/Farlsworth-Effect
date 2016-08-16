@@ -141,16 +141,10 @@ public class farmTombEasy extends zone {
 			}
 	}
 	
+	
 	/////////////////
 	// ZONE LOADER //
 	/////////////////
-	public void helpJenkins() {
-		//makeShadowSquarePosMissing (-200,-200, 80, 85,2f ,true,0,2);
-		//makeShadowSquarePosMissing (5198,470, 80, 85,2f ,false,2,2);
-		
-		//spawnTombRect(5004-8,811,5604-8,843,"ground");
-		//makeShadowRectangle (-200,-200,125,125,7,3,.2f,true);
-	}
 	// Load the zone.
 	public void loadSpecificZoneStuff() {
 		
@@ -162,23 +156,14 @@ public class farmTombEasy extends zone {
 		
 		// Set the darkness.
 		zoneFog = new fog();
-		zoneFog.setTo(0.3f);//fog.setTo(0.75f);
+		zoneFog.setTo(0.4f);//fog.setTo(0.75f);
 		
 		// Elevator not initiated
 		shadowElevatorInitiated = false;
 		
 		// Load zone events.
 		loadZoneEvents();
-		
-		// Load terrain
-		createTerrain();
-		
-		// Help jenkins
-		helpJenkins();
-		
-		// Load units
-		loadUnits();
-		
+				
 		// Background
 		background.setGameBackground(DEFAULT_ZONE_BACKGROUND);
 		

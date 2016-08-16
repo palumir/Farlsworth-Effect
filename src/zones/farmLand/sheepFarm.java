@@ -269,7 +269,7 @@ public class sheepFarm extends zone {
 		//createForestAboveSpawn();
 		
 		// Create flower farm
-		//createFlowerFarm();
+		createFlowerFarm();
 		
 		// Create area above flower farm
 		//createAreaAboveFlowerFarm();

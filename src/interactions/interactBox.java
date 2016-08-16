@@ -102,7 +102,7 @@ public class interactBox extends interfaceObject  {
 		isUnit = false;
 		
 		// Set fields.
-		if(newText.getButtonText() != null) setButtonMode(true);
+		if(newText != null && newText.getButtonText() != null) setButtonMode(true);
 		else textMode = true;
 		whoIsTalking = newWhoIsTalking;
 		setTheText(newText);

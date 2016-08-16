@@ -294,6 +294,7 @@ public class levelSave implements Serializable {
 	
 	// To code?
 	private static boolean toCode = true;
+	private static int newFunctionEvery = 50;
 	
 	// Load the game
 	public static levelSave loadSaveState(String fileName) {
@@ -310,6 +311,14 @@ public class levelSave implements Serializable {
 			
 			// Run through the list of objects to load.
 			int lengthToCome = ((int)(objectStream.readObject()));
+			
+			// Num objects
+			int numObjects = 0;
+			int numFunctions = 0;
+			
+			if(toCode) {
+				out.println("public void addSegment" + numFunctions + "() {");
+			}
 			
 			// Run through our list of objects and create them. 
 			for(int i = 0; i < lengthToCome; i++) {
@@ -334,6 +343,7 @@ public class levelSave implements Serializable {
 						Object object = ctor.newInstance(new Object[] { x,
 								y,
 								j});
+						numObjects++;
 						
 						if(toCode) {
 							out.println("new " + objectClass + "(" + x + "," + y + "," + j + ");");
@@ -355,6 +365,7 @@ public class levelSave implements Serializable {
 						Object object = ctor.newInstance(new Object[] { x,
 								y,
 								j});
+						numObjects++;
 						
 						if(toCode) {
 							out.println("new " + objectClass + "(" + x + "," + y + "," + j + ");");
@@ -376,9 +387,14 @@ public class levelSave implements Serializable {
 						Constructor<?> ctor = clazz.getConstructor(int.class, int.class);
 						Object object = ctor.newInstance(new Object[] { x,
 								y});
+						numObjects++;
 						
 						// Cast to unit
 						unit u = (unit)object;
+						
+						if(toCode) {
+							out.println("u = new " + objectClass + "(" + x + "," + y + ");");
+						}
 						
 						// Load unit class
 						clazz = Class.forName("units.unit");
@@ -398,11 +414,17 @@ public class levelSave implements Serializable {
 								// If it's movement, do the constructor. Special case.
 								if(currFieldName.equals("moveSpeed")) {
 									u.setMoveSpeed((float)val);
+									if(toCode) {
+										out.println("u.setMoveSpeed(" + "(float)" + val + ");");
+									}
 								}
 								
 								// Otherwise, straight up set the value.
 								else {
 									f.set(u,val);
+									if(toCode) {
+										out.println("u." + f.getName() + " = " + "(" + f.getType().getName() + ")" + val + ";");
+									}
 								}
 								
 							}
@@ -416,10 +438,6 @@ public class levelSave implements Serializable {
 						
 						// Get the unit commands length
 						int howManyCommands = (int)objectStream.readObject();
-						
-						if(toCode) {
-							out.println("u = new " + objectClass + "(" + x + "," + y + ");");
-						}
 						
 						if(howManyCommands>0 && toCode) out.println("commands = new commandList();");
 						
@@ -448,6 +466,29 @@ public class levelSave implements Serializable {
 						
 						if(howManyCommands>0 && toCode) out.println("u.setRepeatCommands(commands);");
 					}
+				}
+				
+				// Move to next function?
+				if(numObjects >= newFunctionEvery) {
+					numObjects = 0;
+					numFunctions++;
+					if(toCode) {
+						out.println("}");
+						out.println("");
+						out.println("public void addSegment" + numFunctions + "() {");
+					}
+				}
+			}
+			
+			// End code
+			if(toCode) {
+				out.println("}");
+				out.println("");
+				out.println("////////////////////////");
+				out.println("////////SEGMENTS ARE:///");
+				out.println("////////////////////////");
+				for(int i = 0; i <= numFunctions; i++) {
+					out.println("addSegment" + i + "();");
 				}
 			}
 			

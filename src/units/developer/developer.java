@@ -461,6 +461,9 @@ public class developer extends player {
 		
 		// Save
 		levelSave.createSaveState(developer.levelName);
+		
+		// Save game.
+		saveState.createSaveState();
 		closePrompts();
 		}
 		
@@ -1247,6 +1250,10 @@ public class developer extends player {
 		
 		// Dev mode
 		else {
+			// Save where we are.
+			saveState.createSaveState();	
+			levelSave.createSaveState("testLevelSave.temp");
+						
 			// Development mode?
 			player.setDeveloper(true);
 			

@@ -146,7 +146,7 @@ public class unit extends drawnObject  {
 	private String attackSound;
 	
 	// Gravity
-	private float jumpSpeed = DEFAULT_JUMPSPEED;
+	public float jumpSpeed = DEFAULT_JUMPSPEED;
 	private float fallSpeed = 0;
 	protected boolean jumping = false;
 	private boolean tryJump = false;

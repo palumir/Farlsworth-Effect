@@ -24,7 +24,7 @@ import utilities.time;
 public class shadowDude extends unit {
 	
 	// Default dimensions.
-	private static int DEFAULT_PLATFORMER_HEIGHT = 46;
+	private static int DEFAULT_PLATFORMER_HEIGHT = 50;
 	private static int DEFAULT_PLATFORMER_WIDTH = humanType.DEFAULT_UNIT_WIDTH;
 	private static int DEFAULT_TOPDOWN_HEIGHT = 20;
 	private static int DEFAULT_TOPDOWN_WIDTH = humanType.DEFAULT_UNIT_WIDTH;
@@ -112,18 +112,15 @@ public class shadowDude extends unit {
 	
 	// How lenient are we in hurting people?
 	// How many units of space do we reduce the radius of pain by?
-	private int leniency = 7;
+	private int leniency = 9;
 	
 	public void hurtPeople() {
 		// If someone is in the explosion radius, hurt.
-		if(time.getTime() - lastHurt > hurtEvery*1000) {
 			player currPlayer = player.getPlayer();
-			lastHurt = time.getTime();
 			if(currPlayer.isWithin(this.getIntX() + leniency, this.getIntY() + leniency, this.getIntX() + this.getWidth() - leniency, this.getIntY() + this.getHeight() - leniency) 
 					&& ((!currPlayer.isIlluminated() && !illuminated) || isIgnoreIllumination())) {
 				currPlayer.hurt(damage, 1);
 			}
-		}
 	}
 
 	// Does nothing yet.
