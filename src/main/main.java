@@ -1,8 +1,10 @@
 package main;
 
+import UI.tooltipString;
 import drawing.gameCanvas;
-import drawing.userInterface.tooltipString;
 import units.player;
+import units.developer.developer;
+import utilities.levelSave;
 import utilities.saveState;
 
 // The class that initiates the program.
@@ -36,6 +38,11 @@ public class main {
 			
 			// Restart due to death.
 			if(s.equals("Death")) {
+				
+				// Load zone if we're a developer
+				if(player.isDeveloper() && developer.levelName != null) {
+					levelSave.loadSaveState(developer.levelName);
+				}
 			}
 		}
 	}

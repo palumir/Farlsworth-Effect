@@ -19,9 +19,10 @@ import units.player;
 import units.unit;
 import units.bosses.playerOne;
 import units.unitCommands.commandList;
-import units.unitCommands.moveCommand;
-import units.unitTypes.farmLand.tomb.lightDude;
-import units.unitTypes.farmLand.tomb.shadowDude;
+import units.unitCommands.commands.moveCommand;
+import units.unitCommands.commands.waitCommand;
+import units.unitTypes.tomb.lightDude;
+import units.unitTypes.tomb.shadowDude;
 import utilities.intTuple;
 import utilities.saveState;
 import zones.zone;
@@ -140,6 +141,7 @@ public class farmTombEasy extends zone {
 			}
 	}
 	
+	
 	/////////////////
 	// ZONE LOADER //
 	/////////////////
@@ -154,17 +156,14 @@ public class farmTombEasy extends zone {
 		
 		// Set the darkness.
 		zoneFog = new fog();
-		zoneFog.setTo(0.3f);//fog.setTo(0.75f);
+		zoneFog.setTo(0.4f);//fog.setTo(0.75f);
 		
 		// Elevator not initiated
 		shadowElevatorInitiated = false;
 		
 		// Load zone events.
 		loadZoneEvents();
-		
-		// Load units
-		loadUnits();
-		
+				
 		// Background
 		background.setGameBackground(DEFAULT_ZONE_BACKGROUND);
 		
@@ -349,15 +348,22 @@ public class farmTombEasy extends zone {
 	//////////////////////
 	// INDIVIDUAL AREAS //
 	//////////////////////
+	public void createTerrain() {
+		
+	}
 	
 	public void createSpawnArea() {
+		
+		/////////////////////////
+		//////// ENTRANCE ///////
+		/////////////////////////
 		
 		// Entrance
 		stairsUp tombZoneEnterance = new stairsUp(30,-8,0,sheepFarm.getZone(),2320,-3896,"Down");
 		tombZoneEnterance.setZ(BACKGROUND_Z);
 		
 		// Roof
-		spawnTombRect(-18, -747, 7500,-220,"roof"); // the roof
+		/*spawnTombRect(-18, -747, 7500,-220,"roof"); // the roof
 		spawnTombRect(-500+2, -747, 0,-220,"none"); // roof dirt top left
 	
 		// Floor
@@ -368,10 +374,10 @@ public class farmTombEasy extends zone {
 		spawnTombRect(-338,-242,7,60,"leftWall");
 		
 		// Right wall
-		spawnTombRect(7000,-750,7000,1000,"rightWall");
+		spawnTombRect(7000,-750,7000,1000,"rightWall");*/
 		
 		// Kill player when they fall
-		u = new shadowDude(270,116);
+		/*u = new shadowDude(270,116);
 		u.setFacingDirection("Down");
 		u = new shadowDude(290,116);
 		u.setFacingDirection("Down");
@@ -770,7 +776,7 @@ public class farmTombEasy extends zone {
 		c.setZ(-2);
 		spawnTombRect(10050,1150,13000,2374,"ground");
 		//spawnTombRect(9962,512,10500,1154,"rightWall");
-		//spawnTombRect(9965,1152,10500,1502,"none");
+		//spawnTombRect(9965,1152,10500,1502,"none");*/
 	}
 	
 	// Spawn a rectangle of shadow dudes

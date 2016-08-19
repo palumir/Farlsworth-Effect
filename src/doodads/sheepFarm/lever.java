@@ -22,9 +22,6 @@ public class lever extends chunk {
 	// Sounds
 	private String leverPull = "sounds/effects/doodads/lever.wav";
 	
-	// Bushtype
-	private int bushType = 0;
-	
 	// Dimensions
 	private static int DEFAULT_CHUNK_WIDTH = 26;
 	private static int DEFAULT_CHUNK_HEIGHT = 25;
@@ -37,9 +34,6 @@ public class lever extends chunk {
 	////////////
 	private interactBox interactSequence;
 	
-	// Is it the bush lever?
-	private boolean bushLever = false;
-	
 	// On or off
 	private boolean on = false;
 	
@@ -49,7 +43,6 @@ public class lever extends chunk {
 	// Constructor
 	public lever(int newX, int newY, int i) {
 		super(typeReference, newX, newY, i, 0);
-		bushType = i;
 		if(mode.getCurrentMode().equals("topDown")) {
 			setHitBoxAdjustmentY(5);
 			setWidth(50);
@@ -76,50 +69,44 @@ public class lever extends chunk {
 					
 		// Start of conversation.
 		textSeries startOfConversation = null;
-		if(isBushLever()) {
-			// Start of conversation.
-			startOfConversation = new textSeries("Start with buttons", "A lever.");
-				
-			if(!on) {
-				s = startOfConversation.addChild("Switch lever on", "The lever was switched on.");
-				s.setEnd();
-			}
-			else {
-				s = startOfConversation.addChild("Switch lever off", "The lever was switched off.");
-				s.setEnd();
-			}
-		}	
+		
+		// Start of conversation.
+		startOfConversation = new textSeries("Start with buttons", "A lever.");
+			
+		if(!on) {
+			s = startOfConversation.addChild("Switch lever on", "The lever was switched on.");
+			s.setEnd();
+		}
+		else {
+			s = startOfConversation.addChild("Switch lever off", "The lever was switched off.");
+			s.setEnd();
+		}
 		return new interactBox(startOfConversation, this);
 	}
 	
 	// Interact stuff.
 	public void doInteractStuff() {
+			
+		// On.
+		if(!on &&
+			interactSequence != null 
+			&& interactSequence.getTheText().isEnd() 
+			&& interactSequence.getTheText().getButtonText() != null
+			&& interactSequence.getTheText().getButtonText().equals("Switch lever on")) {
+			
+			// TODO: OPEN SECRET PASSAGE.
+			System.out.println("Open secret passage TODO:");
+			setOn();
+		}
 		
-		// If they choose to eat a berry.
-		if(bushLever)  {
-			
-			// On.
-			if(!on &&
-				interactSequence != null 
-				&& interactSequence.getTheText().isEnd() 
-				&& interactSequence.getTheText().getButtonText() != null
-				&& interactSequence.getTheText().getButtonText().equals("Switch lever on")) {
+		// Off.
+		if(on &&
+			interactSequence != null 
+			&& interactSequence.getTheText().isEnd() 
+			&& interactSequence.getTheText().getButtonText() != null
+			&& interactSequence.getTheText().getButtonText().equals("Switch lever off")) {
 				
-				// TODO: OPEN SECRET PASSAGE.
-				System.out.println("Open secret passage TODO:");
-				setOn();
-			}
-			
-			// Off.
-			if(on &&
-				interactSequence != null 
-				&& interactSequence.getTheText().isEnd() 
-				&& interactSequence.getTheText().getButtonText() != null
-				&& interactSequence.getTheText().getButtonText().equals("Switch lever off")) {
-					
-				// TODO: CLOSE SECRET PASSAGE.
-				setOff();
-			}
+			setOff();
 		}
 	}
 	
@@ -149,13 +136,5 @@ public class lever extends chunk {
 		s.start();
 		on = false;
 		chunkImage = typeReference.getChunkImage(0, 0);
-	}
-
-	public boolean isBushLever() {
-		return bushLever;
-	}
-
-	public void setBushLever(boolean bushLever) {
-		this.bushLever = bushLever;
 	}
 }

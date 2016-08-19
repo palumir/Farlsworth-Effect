@@ -2,14 +2,15 @@ package drawing;
 
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import drawing.userInterface.interfaceObject;
-import drawing.userInterface.tooltipString;
+import UI.interfaceObject;
+import UI.tooltipString;
 import effects.effect;
 import effects.projectile;
 import effects.interfaceEffects.floatingString;
@@ -35,7 +36,7 @@ public abstract class drawnObject {
 	// Font
 	public static String DEFAULT_FONT_NAME = "SansSerif";
 	public static int DEFAULT_FONT_SIZE = 11;
-	protected static Font DEFAULT_FONT = null;
+	public static Font DEFAULT_FONT = null;
 	protected static Font DEFAULT_FONT_BOLD = null;
 	
 	// Comparator for platformer.
@@ -161,8 +162,8 @@ public abstract class drawnObject {
 	//////////////
 	
 	// X and Y
-	private double doubleX;
-	private double doubleY;
+	protected double doubleX;
+	protected double doubleY;
 	
 	// Draw sprite?
 	private boolean drawSprite = true;
@@ -186,6 +187,10 @@ public abstract class drawnObject {
 	
 	// Does this object exist?
 	private boolean exists = true;
+	
+	// Where was it spawned
+	private int spawnedAtX;
+	private int spawnedAtY;
 	
 	// Width and height.
 	private int width;
@@ -243,13 +248,15 @@ public abstract class drawnObject {
 		setName(newName);
 		setDoubleX(newX);
 		setDoubleY(newY);
+		setSpawnedAtX(newX);
+		setSpawnedAtY(newY);
 		setWidth(newWidth);
 		setHeight(newHeight);
 		addObject(this);
 		setReloadObject(reloadTheFollowingObjects);
 	}
 	
-	// Get units in box.
+	// Get drawnObjects in box.
 	public static ArrayList<drawnObject> getObjectsInBox(int x1, int y1, int x2, int y2) {
 		ArrayList<drawnObject> returnList = new ArrayList<drawnObject>();
 		for(int i = 0; i < objects.size(); i++) {
@@ -263,6 +270,11 @@ public abstract class drawnObject {
 		}
 		if(returnList.size()==0) return null;
 		return returnList;
+	}
+	
+	// Make copy to be overrided.
+	public drawnObject makeCopy() {
+		return null;
 	}
 	
 	// Every thing needs to update itself in some way.
@@ -300,6 +312,21 @@ public abstract class drawnObject {
 	    return (cornerDistanceSQ <= Math.pow(radius,2));
 	}
 	
+	
+	// Convert drawn point to in game position.
+	public static Point toInGamePos(Point p) {
+		Point inGamePointCurrent = new Point(p.x + camera.getCurrent().getX() + camera.getCurrent().getAttachedUnit().getWidth()/2 - gameCanvas.getDefaultWidth()/2, 
+			      p.y + camera.getCurrent().getY() + camera.getCurrent().getAttachedUnit().getHeight()/2 - gameCanvas.getDefaultHeight()/2);
+		return inGamePointCurrent;
+	}
+	
+	// Convert point to draw position based on camera position.
+	public static Point toDrawPos(Point p) {
+		Point inGamePointCurrent = new Point(p.x - (camera.getCurrent().getX() + camera.getCurrent().getAttachedUnit().getWidth()/2 - gameCanvas.getDefaultWidth()/2), 
+			      p.y - (camera.getCurrent().getY() + camera.getCurrent().getAttachedUnit().getHeight()/2 - gameCanvas.getDefaultHeight()/2));
+		return inGamePointCurrent;
+	}
+	
 	// Get closest to
 	public drawnObject getClosestToFrom(ArrayList<drawnObject> checkObjects) {
 		drawnObject closestTo = null;
@@ -328,6 +355,18 @@ public abstract class drawnObject {
 			}
 		}
 		return closestTo;
+	}
+	
+	// Get top left out of
+	public static drawnObject getTopLeftFrom(ArrayList<drawnObject> checkObjects) {
+		int minX = Integer.MAX_VALUE;
+		int minY = Integer.MAX_VALUE;
+		for(int i = 0; i < checkObjects.size(); i++) {
+			drawnObject currObj = checkObjects.get(i);
+			if(currObj.getIntX() < minX) minX = currObj.getIntX();
+			if(currObj.getIntY() < minY) minY = currObj.getIntY();
+		}
+		return getClosestToFrom(minX,minY,checkObjects);
 	}
 	
 	// Get angle between (in degrees) 
@@ -538,6 +577,24 @@ public abstract class drawnObject {
 	// Respond to destruction
 	public void respondToDestroy() {
 		
+	}
+	
+	// Destroy all
+	public static void destroyAll(ArrayList<drawnObject> d) {
+		if(d != null) {
+			for(int i = 0; i < d.size(); i++) {
+				d.get(i).destroy();
+			}
+		}
+	}
+	
+	// Destroy all
+	public static void destroyAll() {
+		if(objects !=null) {
+			for(; 0 < drawnObject.objects.size();) {
+				objects.get(0).destroy();
+			}
+		}
 	}
 	
 	// Interact with object. Should be over-ridden.
@@ -806,6 +863,22 @@ public abstract class drawnObject {
 
 	public void setSmallObject(boolean smallObject) {
 		this.smallObject = smallObject;
+	}
+
+	public int getSpawnedAtX() {
+		return spawnedAtX;
+	}
+
+	public void setSpawnedAtX(int spawnedAtX) {
+		this.spawnedAtX = spawnedAtX;
+	}
+
+	public int getSpawnedAtY() {
+		return spawnedAtY;
+	}
+
+	public void setSpawnedAtY(int spawnedAtY) {
+		this.spawnedAtY = spawnedAtY;
 	}
 	
 }

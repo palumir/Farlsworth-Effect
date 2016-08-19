@@ -40,14 +40,6 @@ public class generalChunkType extends chunkType {
 	// Getters and setters //
 	/////////////////////////
 	
-	// Returns random chunk image from first row if topDown,
-	// and 1,1 for platformer.
-	public BufferedImage getChunkImage() {
-			// For now, return a random from the first row.
-			int randomFirstRow = utility.RNG.nextInt(getChunkTypeSpriteSheet().getSheetWidth()/getChunkTypeSpriteSheet().getSpriteWidth());
-			return getChunkTypeSpriteSheet().getSprite(randomFirstRow, 0);
-	}
-	
 	// Returns a given chunk image from the spritefile. Usually for
 	// doodads.
 	public BufferedImage getChunkImage(int givenX, int givenY) {

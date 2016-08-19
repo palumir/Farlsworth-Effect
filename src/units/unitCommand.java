@@ -10,9 +10,12 @@ public abstract class unitCommand {
 	
 	// Constructor
 	public unitCommand(String n) {
-		name = n;
+		setName(n);
 		setIssued(false);
 	}
+	
+	// Make copy
+	public abstract unitCommand makeCopy();
 
 	public boolean isIssued() {
 		return issued;
@@ -20,5 +23,13 @@ public abstract class unitCommand {
 
 	public void setIssued(boolean issued) {
 		this.issued = issued;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 }

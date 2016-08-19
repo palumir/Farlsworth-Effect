@@ -6,10 +6,10 @@ import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 
+import UI.interfaceObject;
 import drawing.drawnObject;
 import drawing.gameCanvas;
 import drawing.spriteSheet;
-import drawing.userInterface.interfaceObject;
 import effects.interfaceEffects.textBlurb;
 import sounds.sound;
 import units.player;
@@ -102,7 +102,7 @@ public class interactBox extends interfaceObject  {
 		isUnit = false;
 		
 		// Set fields.
-		if(newText.getButtonText() != null) setButtonMode(true);
+		if(newText != null && newText.getButtonText() != null) setButtonMode(true);
 		else textMode = true;
 		whoIsTalking = newWhoIsTalking;
 		setTheText(newText);

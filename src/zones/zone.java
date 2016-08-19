@@ -2,8 +2,8 @@ package zones;
 
 import java.util.ArrayList;
 
+import UI.tooltipString;
 import drawing.drawnObject;
-import drawing.userInterface.tooltipString;
 import sounds.music;
 import units.player;
 import utilities.intTuple;

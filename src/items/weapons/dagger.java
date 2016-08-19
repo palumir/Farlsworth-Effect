@@ -2,11 +2,11 @@ package items.weapons;
 
 import java.awt.image.BufferedImage;
 
+import UI.tooltipString;
 import drawing.spriteSheet;
 import drawing.spriteSheet.spriteSheetInfo;
 import drawing.animation.animation;
 import drawing.animation.animationPack;
-import drawing.userInterface.tooltipString;
 import interactions.event;
 import items.item;
 import items.weapon;
@@ -58,8 +58,6 @@ public class dagger extends weapon {
 	// In inventory.
 	public dagger() {
 		super(DEFAULT_WEAPON_NAME,weaponSpriteSheet);
-		
-		System.out.println("Dagger: " + DPS);
 		
 		// Create event.
 		pressIToExit = new event("daggerPressIToExit");

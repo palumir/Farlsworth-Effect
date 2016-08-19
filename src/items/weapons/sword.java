@@ -2,11 +2,11 @@ package items.weapons;
 
 import java.awt.image.BufferedImage;
 
+import UI.tooltipString;
 import drawing.spriteSheet;
 import drawing.spriteSheet.spriteSheetInfo;
 import drawing.animation.animation;
 import drawing.animation.animationPack;
-import drawing.userInterface.tooltipString;
 import items.item;
 import items.weapon;
 import units.player;
@@ -70,7 +70,6 @@ public class sword extends weapon {
 	// On floor.
 	public sword(int x, int y) {
 		super(DEFAULT_WEAPON_NAME,x,y);
-		System.out.println("Long Sword DPS: " + DPS);
 		
 		// Weapon stats.
 		setStats();

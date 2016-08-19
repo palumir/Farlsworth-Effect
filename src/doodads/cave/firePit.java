@@ -147,6 +147,34 @@ public class firePit extends chunk {
 		setPassable(false);
 	}
 	
+	// Constructor
+	public firePit(int newX, int newY, int i) {
+		super(typeReference, newX, newY);
+		if(mode.getCurrentMode().equals("topDown")) {
+			setHitBoxAdjustmentY(DEFAULT_TOPDOWN_ADJUSTMENT_Y);
+			setWidth(DEFAULT_TOPDOWN_WIDTH);
+			setHeight(DEFAULT_TOPDOWN_HEIGHT);
+		}
+		else {
+			setHitBoxAdjustmentY(DEFAULT_PLATFORMER_ADJUSTMENT_Y);
+			setHeight(DEFAULT_PLATFORMER_HEIGHT);
+			setWidth(DEFAULT_PLATFORMER_WIDTH);
+		}
+		
+		// Play fire sound.
+		playFireSound();
+		
+		// Add animation
+		fireAnimation = new animation("fire", typeReference.getChunkTypeSpriteSheet().getAnimation(0), 0, 3, 0.43f);
+		
+		// Interactable.
+		setInteractable(true);
+		interactSequence = makeNormalInteractSequence();
+		
+		// Passable.
+		setPassable(false);
+	}
+	
 	// Override chunkImage so we can do an animation
 	@Override
 	public BufferedImage getChunkImage() {

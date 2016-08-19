@@ -17,9 +17,9 @@ import sounds.music;
 import terrain.chunk;
 import terrain.chunkTypes.cave;
 import units.unit;
-import units.unitTypes.farmLand.spiderCave.poisonSpider;
-import units.unitTypes.farmLand.spiderCave.spider;
-import units.unitTypes.farmLand.spiderCave.webDoor;
+import units.unitTypes.spiderCave.poisonSpider;
+import units.unitTypes.spiderCave.spider;
+import units.unitTypes.spiderCave.webDoor;
 import utilities.intTuple;
 import zones.zone;
 

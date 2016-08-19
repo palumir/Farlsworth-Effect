@@ -2,9 +2,9 @@ package utilities;
 
 import java.util.Random;
 
+import UI.interfaceObject;
 import doodads.general.lightSource;
 import drawing.drawnObject;
-import drawing.userInterface.interfaceObject;
 import interactions.interactBox;
 import sounds.sound;
 import terrain.chunk;
@@ -25,6 +25,9 @@ public abstract class utility {
 	// Random number generator.
 	public static Random RNG = new Random();
 	
+	// Boolean
+	public static boolean actionsPaused = false;
+	
 	// Update the actual game.
 	// No where else to put this.
 	public static void updateGame() {
@@ -43,12 +46,12 @@ public abstract class utility {
 		}
 		
 		// If timer is going
-		if(!time.paused) {
+		if(!time.paused && !actionsPaused) {
 			// Update units.
 			if(unit.getAllUnits() != null) {
 				for(int i = 0; i < unit.getAllUnits().size(); i++) {
 					drawnObject d = unit.getAllUnits().get(i);
-					d.update();
+					if(!(d instanceof player)) d.update();
 				}
 			}
 			
@@ -62,9 +65,20 @@ public abstract class utility {
 			
 			// Update the current zone.
 			player currPlayer = player.getPlayer();
+			if(currPlayer != null) currPlayer.update();
 			if(currPlayer != null && currPlayer.getCurrentZone() != null) currPlayer.getCurrentZone().update();
 		}
+		
+		if(actionsPaused) {
+			player currPlayer = player.getPlayer();
+			if(currPlayer != null) currPlayer.update();
+		}
 	
+	}
+	
+	// Pause actions
+	public static void toggleActions() {
+		actionsPaused = !actionsPaused;
 	}
 	
 	// Initiate the utility. Does nothing

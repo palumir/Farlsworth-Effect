@@ -7,10 +7,10 @@ import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
+import UI.interfaceObject;
+import UI.tooltipString;
 import drawing.gameCanvas;
 import drawing.spriteSheet;
-import drawing.userInterface.interfaceObject;
-import drawing.userInterface.tooltipString;
 import interactions.event;
 import sounds.sound;
 import units.player;

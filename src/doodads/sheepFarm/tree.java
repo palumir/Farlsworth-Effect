@@ -46,9 +46,6 @@ public class tree extends chunk {
 	// Is the tree on fire?
 	private boolean ignited = false;
 	
-	// Type of tree
-	private int type = 0;
-	
 	// Default width
 	static int DEFAULT_WIDTH = 30;
 	static int DEFAULT_HEIGHT = 16;
@@ -188,7 +185,6 @@ public class tree extends chunk {
 	// Constructor
 	public tree(int newX, int newY, int i) {
 		super(typeReference, newX, newY, i, 0);
-		type = i;
 		if(mode.getCurrentMode().equals("topDown")) {
 			setHitBoxAdjustmentY(58);
 			setWidth(30);

@@ -36,8 +36,6 @@ public abstract class chunkType {
 	// Getters and setters //
 	/////////////////////////
 	
-	public abstract BufferedImage getChunkImage();
-	
 	public abstract BufferedImage getChunkImage(int i, int j);
 
 	public int getWidth() {

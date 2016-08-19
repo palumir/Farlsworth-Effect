@@ -8,14 +8,14 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
+import UI.playerHealthBar;
+import UI.tooltipString;
 import doodads.sheepFarm.rock;
 import drawing.camera;
 import drawing.drawnObject;
 import drawing.gameCanvas;
 import drawing.animation.animation;
 import drawing.animation.animationPack;
-import drawing.userInterface.playerHealthBar;
-import drawing.userInterface.tooltipString;
 import effects.effect;
 import effects.effectTypes.critBloodSquirt;
 import effects.interfaceEffects.interactBlurb;
@@ -28,6 +28,8 @@ import modes.mode;
 import modes.platformer;
 import modes.topDown;
 import sounds.music;
+import units.developer.developer;
+import utilities.levelSave;
 import utilities.saveState;
 import utilities.time;
 import utilities.utility;
@@ -714,96 +716,90 @@ public class player extends unit {
 		
 		// Developer stuff
 		if(player.isDeveloper()) developer.devMouseReleased(e);
-		
-		// Telepathy
-		else {
-			//playerMouseReleased(e);
-		}
 	}
 	
 	// Responding to key presses.
 	public void keyPressed(KeyEvent k) {
 		
-		// Respond to dialogue/interact presses.
-		if(interactBox.getCurrentDisplay() != null) {
-			interactBox.getCurrentDisplay().respondToKeyPress(k);
+		// Developer
+		if(isDeveloper()) {
+			((developer)(this)).devKeyPressed(k);
 		}
 		
-		// Player presses y (inventory) key.
-		else if(k.getKeyCode() == KeyEvent.VK_Y) { 
-			/*textBlurb b = new textBlurb((int)this.getDoubleX(),(int)this.getDoubleY());
-			b.attachToObject(this);*/
-			saveState.createSaveState();	
-			
-			// Development mode?
-			player.setDeveloper(true);
-			
-			// Create the player.
-			player p = player.loadPlayer(null,null,0,0,"Up");
-		}
-		
-		// Player presses i (inventory) key.
-		else if(k.getKeyCode() == KeyEvent.VK_I) { 
-			playerInventory.toggleDisplay();
-		}
-		
-		// Respond to inventory presses.
-		else if(playerInventory.isDisplayOn()) {
-			playerInventory.respondToKeyPress(k);
-		}
-		
-		// Respond to other presses (movement)
 		else {
-			// Shield on.
-			if(k.getKeyCode() == KeyEvent.VK_SHIFT) {
-				//shield(true);
+			// Respond to dialogue/interact presses.
+			if(interactBox.getCurrentDisplay() != null) {
+				interactBox.getCurrentDisplay().respondToKeyPress(k);
 			}
 			
-			// Player presses left key.
-			if(k.getKeyCode() == KeyEvent.VK_A) { 
-				startMove("left");
+			// Player presses y key.
+			else if(k.getKeyCode() == KeyEvent.VK_Y) { 
+				developer.toggleTestMode();
 			}
 			
-			// Player presses right key.
-			if(k.getKeyCode() == KeyEvent.VK_D) { 
-				startMove("right");
+			// Player presses i (inventory) key.
+			else if(k.getKeyCode() == KeyEvent.VK_I) { 
+				playerInventory.toggleDisplay();
 			}
 			
-			// Player presses up key, presumably to jump!
-			if(k.getKeyCode() == KeyEvent.VK_W) { 
-				if(mode.getCurrentMode() == platformer.name) {
-					startMove("up");
-					startJump();
+			// Respond to inventory presses.
+			else if(playerInventory.isDisplayOn()) {
+				playerInventory.respondToKeyPress(k);
+			}
+			
+			// Respond to other presses (movement)
+			else {
+				// Shield on.
+				if(k.getKeyCode() == KeyEvent.VK_SHIFT) {
+					//shield(true);
 				}
-				else if(mode.getCurrentMode() == topDown.name) {
-					startMove("up");
+				
+				// Player presses left key.
+				if(k.getKeyCode() == KeyEvent.VK_A) { 
+					startMove("left");
 				}
-			}
-			
-			// Player presses down key
-			if(k.getKeyCode() == KeyEvent.VK_S) { 
-				if(mode.getCurrentMode() == platformer.name) {
-					startMove("down");
+				
+				// Player presses right key.
+				if(k.getKeyCode() == KeyEvent.VK_D) { 
+					startMove("right");
 				}
-				else if(mode.getCurrentMode() == topDown.name) {
-					startMove("down");
+				
+				// Player presses up key, presumably to jump!
+				if(k.getKeyCode() == KeyEvent.VK_W) { 
+					if(mode.getCurrentMode() == platformer.name) {
+						startMove("up");
+						startJump();
+					}
+					else if(mode.getCurrentMode() == topDown.name) {
+						startMove("up");
+					}
 				}
-			}
-		
-			// Player presses bar key
-			if(k.getKeyCode() == KeyEvent.VK_SPACE) {
-				startAttack();
-			}
+				
+				// Player presses down key
+				if(k.getKeyCode() == KeyEvent.VK_S) { 
+					if(mode.getCurrentMode() == platformer.name) {
+						startMove("down");
+					}
+					else if(mode.getCurrentMode() == topDown.name) {
+						startMove("down");
+					}
+				}
 			
-			// Player presses bar key
-			if(k.getKeyCode() == KeyEvent.VK_ENTER) {
-				if(equippedBottle!=null) equippedBottle.useCharge();
-			}
-			
-			
-			// Player presses e key
-			if(k.getKeyCode() == KeyEvent.VK_E) {
-				interact();
+				// Player presses bar key
+				if(k.getKeyCode() == KeyEvent.VK_SPACE) {
+					startAttack();
+				}
+				
+				// Player presses bar key
+				if(k.getKeyCode() == KeyEvent.VK_ENTER) {
+					if(equippedBottle!=null) equippedBottle.useCharge();
+				}
+				
+				
+				// Player presses e key
+				if(k.getKeyCode() == KeyEvent.VK_E) {
+					interact();
+				}
 			}
 		}
 	}

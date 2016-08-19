@@ -3,6 +3,7 @@ package terrain;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -10,7 +11,10 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 import drawing.drawnObject;
 import drawing.gameCanvas;
+import units.unit;
+import units.unitCommands.commandList;
 import utilities.intTuple;
+import utilities.utility;
 import zones.zone;
 
 public class chunk extends drawnObject {
@@ -43,6 +47,11 @@ public class chunk extends drawnObject {
 	//////////////
 	/// FIELDS ///
 	//////////////
+	
+	// Chunk variation.
+	private int variationI;
+	private int variationJ;
+	
 	// The image of the chunk.
 	protected BufferedImage chunkImage;
 	
@@ -55,12 +64,20 @@ public class chunk extends drawnObject {
 	//////////////
 	/// MEHODS ///
 	//////////////
+	
 	// Constructor for choosing a random variation of the chunk.
 	public chunk(chunkType c, int newX, int newY) {
 		super(c.getChunkTypeSpriteSheet(), c.getClass().getName(), newX, newY, c.getWidth(), c.getHeight());
 		
+		// Get random chunk image
+		int randomFirstRow = utility.RNG.nextInt(c.getChunkTypeSpriteSheet().getSheetWidth()/c.getChunkTypeSpriteSheet().getSpriteWidth());
+		
 		// Set our image field and chunktype
-		chunkImage = c.getChunkImage();
+		chunkImage = c.getChunkImage(randomFirstRow, 0);
+		
+		// Set variation I and J
+		setVariationI(randomFirstRow);
+		setVariationJ(0);
 		
 		// Load other chunk stuff (same for both constructors)
 		loadChunkStuff(c);
@@ -69,6 +86,10 @@ public class chunk extends drawnObject {
 	// Constructor for choosing a given variation of the chunk.
 	public chunk(chunkType c, int newX, int newY, int i, int j) {
 		super(c.getChunkTypeSpriteSheet(), c.getClass().getName(), newX, newY, c.getWidth(), c.getHeight());
+		
+		// Set variation i and j
+		setVariationI(i);
+		setVariationJ(j);
 
 		// Set our image field and chunkType
 		if(c.getChunkTypeSpriteSheet() != null) chunkImage = c.getChunkImage(i, j);
@@ -99,6 +120,28 @@ public class chunk extends drawnObject {
 		// Set largest.
 		if(c.getWidth() > largestChunkWidth) largestChunkWidth = c.getWidth();
 		if(c.getHeight() > largestChunkHeight) largestChunkHeight = c.getHeight();
+	}
+	
+	// Make copy
+	@Override
+	public drawnObject makeCopy() {
+		
+		try {
+			Class<?> clazz = Class.forName(this.getClass().getName());
+			Constructor<?> ctor = clazz.getConstructor(int.class, int.class, int.class);
+			Object object = ctor.newInstance(new Object[] { this.getIntX(),
+					this.getIntY(),
+					this.getVariationI()});
+			
+			chunk d = (chunk)object;
+			
+			return d;
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+			
 	}
 	
 	// Check if a unit collides with any chunk. Returns by how much.
@@ -388,6 +431,22 @@ public class chunk extends drawnObject {
 
 	public boolean isImportantEnoughToReload() {
 		return reloadObject;
+	}
+
+	public int getVariationI() {
+		return variationI;
+	}
+
+	public void setVariationI(int variationI) {
+		this.variationI = variationI;
+	}
+
+	public int getVariationJ() {
+		return variationJ;
+	}
+
+	public void setVariationJ(int variationJ) {
+		this.variationJ = variationJ;
 	}
 	
 }

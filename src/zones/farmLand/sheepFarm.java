@@ -1,7 +1,9 @@
 package zones.farmLand;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import UI.tooltipString;
 import doodads.cave.firePit;
 import doodads.sheepFarm.barn;
 import doodads.sheepFarm.blackSmith;
@@ -24,7 +26,7 @@ import doodads.sheepFarm.tree;
 import doodads.sheepFarm.verticalFence;
 import doodads.sheepFarm.well;
 import drawing.background;
-import drawing.userInterface.tooltipString;
+import drawing.spriteSheet;
 import effects.effectTypes.fire;
 import interactions.event;
 import items.bottle;
@@ -47,15 +49,15 @@ import units.unitCommand;
 import units.bosses.denmother;
 import units.bosses.farlsworth;
 import units.unitCommands.commandList;
-import units.unitCommands.moveCommand;
-import units.unitCommands.slashCommand;
-import units.unitCommands.waitCommand;
-import units.unitTypes.farmLand.sheepFarm.blackWolf;
-import units.unitTypes.farmLand.sheepFarm.farmer;
-import units.unitTypes.farmLand.sheepFarm.redWolf;
-import units.unitTypes.farmLand.sheepFarm.sheep;
-import units.unitTypes.farmLand.sheepFarm.wolf;
-import units.unitTypes.farmLand.sheepFarm.yellowWolf;
+import units.unitCommands.commands.moveCommand;
+import units.unitCommands.commands.slashCommand;
+import units.unitCommands.commands.waitCommand;
+import units.unitTypes.sheepFarm.blackWolf;
+import units.unitTypes.sheepFarm.farmer;
+import units.unitTypes.sheepFarm.redWolf;
+import units.unitTypes.sheepFarm.sheep;
+import units.unitTypes.sheepFarm.wolf;
+import units.unitTypes.sheepFarm.yellowWolf;
 import utilities.intTuple;
 import utilities.saveState;
 import utilities.time;
@@ -233,6 +235,8 @@ public class sheepFarm extends zone {
 		return chunkList;
 	}
 	
+	private static BufferedImage DEFAULT_ZONE_BACKGROUND = spriteSheet.getSpriteFromFilePath("images/terrain/backgrounds/hogle.png");
+	
 	/////////////////
 	// ZONE LOADER //
 	/////////////////
@@ -243,7 +247,7 @@ public class sheepFarm extends zone {
 		topDown.setMode();
 		
 		// Set background
-		background.setGameBackground(null);
+		background.setGameBackground(DEFAULT_ZONE_BACKGROUND);
 		
 		// Load zone events.
 		loadZoneEvents();
@@ -262,13 +266,13 @@ public class sheepFarm extends zone {
 		createSpawnArea();
 		
 		// Create forest above spawn
-		createForestAboveSpawn();
+		//createForestAboveSpawn();
 		
 		// Create flower farm
 		createFlowerFarm();
 		
 		// Create area above flower farm
-		createAreaAboveFlowerFarm();
+		//createAreaAboveFlowerFarm();
 		
 		// Create graveyard
 		createGraveYard();
@@ -296,14 +300,6 @@ public class sheepFarm extends zone {
 	
 	// Create terrain
 	public void createTerrain() {
-		// Draw the grass around spawn.
-		spawnGrassRect(-1000-1000,-1000,2000+1000,64);
-		
-		// Spawn some grass on the other side of the bridge.
-		spawnGrassRect(-2000-550,184,2000-550,1000);
-		
-		// Spawn forest grass
-		spawnGrassRect(-1500+5,-4000-1000,2000+1000,-440);
 		
 		// Draw the bridge.
 		spawnPassableWaterRect(-208-580,56,-101-580,200);

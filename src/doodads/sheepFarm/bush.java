@@ -147,7 +147,6 @@ public class bush extends chunk {
 			
 			// Spawn a lever.
 			lever l = new lever(getIntX(), getIntY(), 0);
-			l.setBushLever(true);
 			leverRevealed.setCompleted(true);
 			
 			// Destroy this.

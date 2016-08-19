@@ -1,6 +1,6 @@
 package terrain.chunkTypes;
 
-import drawing.userInterface.tooltipString;
+import UI.tooltipString;
 import interactions.interactBox;
 import interactions.textSeries;
 import main.main;

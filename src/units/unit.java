@@ -2,15 +2,16 @@ package units;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 
+import UI.playerHealthBar;
 import doodads.general.lightSource;
 import doodads.general.questMark;
 import drawing.drawnObject;
 import drawing.gameCanvas;
 import drawing.animation.animation;
 import drawing.animation.animationPack;
-import drawing.userInterface.playerHealthBar;
 import effects.effect;
 import effects.projectile;
 import effects.buffs.movementBuff;
@@ -21,17 +22,19 @@ import modes.mode;
 import sounds.sound;
 import terrain.chunk;
 import terrain.region;
+import units.developer.developer;
 import units.unitCommands.commandList;
-import units.unitCommands.moveCommand;
-import units.unitCommands.slashCommand;
-import units.unitCommands.waitCommand;
+import units.unitCommands.positionedCommand;
+import units.unitCommands.commands.moveCommand;
+import units.unitCommands.commands.slashCommand;
+import units.unitCommands.commands.waitCommand;
 import utilities.intTuple;
 import utilities.mathUtils;
 import utilities.time;
 import utilities.utility;
 import zones.zone;
 
-public abstract class unit extends drawnObject  { 
+public class unit extends drawnObject  { 
 	
 	/////////////////////////
 	////// DEFAULTS /////////
@@ -143,7 +146,7 @@ public abstract class unit extends drawnObject  {
 	private String attackSound;
 	
 	// Gravity
-	private float jumpSpeed = DEFAULT_JUMPSPEED;
+	public float jumpSpeed = DEFAULT_JUMPSPEED;
 	private float fallSpeed = 0;
 	protected boolean jumping = false;
 	private boolean tryJump = false;
@@ -184,7 +187,7 @@ public abstract class unit extends drawnObject  {
 	protected boolean movingToAPoint = false;
 	
 	// Units in attack range.
-	protected ArrayList<unit> unitsInAttackRange;
+	//protected ArrayList<unit> unitsInAttackRange;
 	
 	// Next point.
 	private intTuple currPoint;
@@ -224,8 +227,54 @@ public abstract class unit extends drawnObject  {
 		
 		// Add to list
 		getAllUnits().add(this);
+		
+		// Add animation
+		move(0,0);
 	}
 	
+	// Copy Constructor
+	public unit(unit u) {
+		super(u.getObjectSpriteSheet(), u.getName(), u.getIntX(), u.getIntX(), u.getWidth(), u.getHeight());	
+		if(u.getAnimations()!=null) setAnimations(new animationPack(u.getAnimations()));
+		moveSpeed = u.getMoveSpeed();
+		baseMoveSpeed = u.getMoveSpeed();
+		setJumpSpeed(u.getJumpSpeed());
+		setTypeOfUnit(u.getTypeOfUnit());
+		
+		// Copy the repeatCommands
+		repeatCommands(new commandList(u.getRepeatCommands()));
+		
+		// Add to list
+		getAllUnits().add(this);
+		
+		// Add animation
+		move(0,0);
+	}
+	
+	// Make copy
+	@Override
+	public drawnObject makeCopy() {
+		
+		try {
+			Class<?> clazz = Class.forName(this.getClass().getName());
+			Constructor<?> ctor = clazz.getConstructor(int.class, int.class);
+			Object object = ctor.newInstance(new Object[] { this.getIntX(),
+					this.getIntY()});
+			
+			unit d = (unit)object;
+			d.setMoveSpeed(this.getMoveSpeed());
+			
+			// Copy the repeatCommands
+			if(this.getRepeatCommands() != null) d.repeatCommands(new commandList(this.getRepeatCommands()));
+			
+			return d;
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			return null;
+		}	
+	}
+
 	// Update unit
 	@Override
 	public void update() {	
@@ -235,7 +284,7 @@ public abstract class unit extends drawnObject  {
 			jump();
 			moveUnit();
 			dealWithMetaMovement();
-			combat();
+			//combat();
 			aliveOrDead();
 		}
 		updateUnit();
@@ -287,7 +336,7 @@ public abstract class unit extends drawnObject  {
 	
 	// Repeat commands
 	public void repeatCommands(commandList c) {
-		repeatCommands = c;
+		setRepeatCommands(c);
 	}
 	
 	// Do commands once
@@ -300,6 +349,7 @@ public abstract class unit extends drawnObject  {
 		
 		// If we have commands in our allCommands queue left to issue.
 		if(getAllCommands() != null && getAllCommands().size() > 0) {
+			
 			
 			// Get the current command because we have to do shit with it.
 			unitCommand currentCommand = getAllCommands().get(0);
@@ -345,7 +395,7 @@ public abstract class unit extends drawnObject  {
 				else {
 					currentCommand.setIssued(true);
 					waitCommand waitCommand = (waitCommand) currentCommand;
-					waitFor = waitCommand.getHowLong();
+					waitFor = (float)waitCommand.getHowLong();
 					waitStart = time.getTime();
 				}
 				
@@ -382,8 +432,8 @@ public abstract class unit extends drawnObject  {
 		else {
 			
 			// If we have repeat commands, repeat them.
-			if(repeatCommands!=null && repeatCommands.size() > 0) {
-				setAllCommands(new commandList(repeatCommands));
+			if(getRepeatCommands()!=null && getRepeatCommands().size() > 0) {
+				setAllCommands(new commandList(getRepeatCommands()));
 				doCommands();
 			}
 			
@@ -397,7 +447,7 @@ public abstract class unit extends drawnObject  {
 	
 	// Regular units do not slash.
 	public void slashTo(int x, int y) {
-		
+		currentCommandComplete = true;
 	}
 	
 	// Move in place.
@@ -408,7 +458,7 @@ public abstract class unit extends drawnObject  {
 	// Stop repaet commands
 	public void stopRepeatCommands() {
 		stopMove("all");
-		repeatCommands = null;
+		setRepeatCommands(null);
 	}
 	
 	// Is the unit alive or dead
@@ -462,7 +512,8 @@ public abstract class unit extends drawnObject  {
 	}
 	
 	// Require units to have some sort of AI.
-	public abstract void updateUnit();
+	public void updateUnit() {
+	}
 	
 	// Set gravity on or off.
 	public static void setGravity(boolean b) {
@@ -558,7 +609,7 @@ public abstract class unit extends drawnObject  {
 	private ArrayList<unit> alreadyAttackedUnits = new ArrayList<unit>();
 	
 	// Do combat mechanics.
-	public void combat() {
+/*	public void combat() {
 		// Deal with knock backs
 		dealWithKnockBacks();
 		
@@ -634,7 +685,7 @@ public abstract class unit extends drawnObject  {
 		else if(time.getTime() - startAttackTime > (getAttackTime() + backSwing)*1000) {
 			canAttack = true;
 		}
-	}
+	}*/
 	
 	// Attack is over
 	public void attackOver() {
@@ -731,7 +782,7 @@ public abstract class unit extends drawnObject  {
 	}
 	
 	// Attack units
-	public void attackUnits() {
+/*	public void attackUnits() {
 		ArrayList<unit> unitsToAttack = unitsInAttackRange;
 		if(unitsToAttack!=null) {
 			for(int i = 0; i < unitsToAttack.size(); i++) {
@@ -776,7 +827,7 @@ public abstract class unit extends drawnObject  {
 				}
 			}
 		}
-	}
+	}*/
 	
 	// Force to take damage.
 	public boolean forceHurt(int damage, float crit) {
@@ -841,7 +892,9 @@ public abstract class unit extends drawnObject  {
 	}
 	
 	// React to pain.
-	public abstract void reactToPain();
+	public void reactToPain() {
+		
+	}
 	
 	// Start attacking.
 	public void attack() {
@@ -911,7 +964,7 @@ public abstract class unit extends drawnObject  {
 	public boolean nextCommandIsMovement() {
 		return (allCommands!=null && allCommands.size() > 0) && 
 				((allCommands.size() > 1 && allCommands.get(1) instanceof moveCommand) ||
-				(allCommands.size() == 1 && repeatCommands != null && repeatCommands.size() > 0 && repeatCommands.get(0) instanceof moveCommand));
+				(allCommands.size() == 1 && getRepeatCommands() != null && getRepeatCommands().size() > 0 && getRepeatCommands().get(0) instanceof moveCommand));
 	}
 	
 	// Get next command
@@ -919,7 +972,7 @@ public abstract class unit extends drawnObject  {
 		if(allCommands!=null && allCommands.size() > 0) {
 			
 			if(allCommands.size() > 1) return allCommands.get(1);
-			else if(allCommands.size() == 1 && repeatCommands != null && repeatCommands.size() > 0) return repeatCommands.get(0);
+			else if(allCommands.size() == 1 && getRepeatCommands() != null && getRepeatCommands().size() > 0) return getRepeatCommands().get(0);
 			
 		}
 		return null;
@@ -1147,11 +1200,25 @@ public abstract class unit extends drawnObject  {
 		}
 	}
 	
+	// Set next fall speed
+	boolean zeroNextFallSpeed = false;
+	
 	// Unit has touched up
 	public void touchUp() {
 		
-		// Essentially, bonk unit's head of roof.
-		fallSpeed = 0;
+		// If they've touched up, place them closer to the ground.
+		if(!zeroNextFallSpeed && fallSpeed < 0) {
+			chunk ground = chunk.getGroundChunk(this, (int)getDoubleX(), (int)(getDoubleY() + fallSpeed));
+			if(ground != null) {
+				fallSpeed = -(this.getIntY() - ground.getIntY() - ground.getHeight());
+				zeroNextFallSpeed = true;
+			}
+		}
+		else {
+			fallSpeed = 0;
+			zeroNextFallSpeed = false;
+		}
+	
 	}
 	
 	// Unit has touched down.
@@ -1867,6 +1934,24 @@ public abstract class unit extends drawnObject  {
 	public commandList getAllCommands() {
 		return allCommands;
 	}
+	
+	// Get previous move command
+	public positionedCommand getPreviousPosCommand(int j) {
+		
+		if(repeatCommands == null) return null;
+		
+		// Get the previous command that is positioned
+		int x = 0;
+		for(int n = j; ; n--) {
+			if(x >= repeatCommands.size()) break;
+			if(n < 0) n = repeatCommands.size() - 1;
+			if(repeatCommands.get(n) instanceof positionedCommand) {
+				return (positionedCommand)repeatCommands.get(n);
+			}
+			x++;
+		}
+		return null;
+	}
 
 	public void setAllCommands(commandList allCommands) {
 		this.allCommands = allCommands;
@@ -1878,6 +1963,14 @@ public abstract class unit extends drawnObject  {
 
 	public void setJumpSpeed(float jumpSpeed) {
 		this.jumpSpeed = jumpSpeed;
+	}
+
+	public commandList getRepeatCommands() {
+		return repeatCommands;
+	}
+
+	public void setRepeatCommands(commandList repeatCommands) {
+		this.repeatCommands = repeatCommands;
 	}
 	
 }
