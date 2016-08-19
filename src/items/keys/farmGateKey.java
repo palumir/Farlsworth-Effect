@@ -13,7 +13,7 @@ public class farmGateKey extends key {
 	/// DEFAULTS ///
 	////////////////
 	// Bottle name
-	public static String DEFAULT_KEY_NAME = "Farm Key But Not Farmer's Barn, House, or Fridge Key";
+	public static String DEFAULT_KEY_NAME = "Not Fridge Key";
 	
 	//////////////
 	/// FIELDS ///

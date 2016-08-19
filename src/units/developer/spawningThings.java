@@ -8,6 +8,7 @@ import UI.tooltipString;
 import drawing.drawnObject;
 import terrain.groundTile;
 import units.unitCommand;
+import units.unitCommands.positionedCommand;
 
 public class spawningThings {
 	
@@ -202,8 +203,17 @@ public class spawningThings {
 		try {
 			Class<?> clazz = Class.forName(currentObjectClass);
 			Constructor<?> ctor = clazz.getConstructor(double.class, double.class);
-			Object object = ctor.newInstance(new Object[] { (int)(lastMousePos.getX()),
-					(int)(lastMousePos.getY())});
+			Object object = ctor.newInstance(new Object[] { 
+					0,
+					0});
+			
+			// If we are a positionedCommand, move to mouse position.
+			if(object instanceof positionedCommand) {
+				positionedCommand p = (positionedCommand)object;
+				p.setX(lastMousePos.getX());
+				p.setY(lastMousePos.getY());
+			}
+			
 			unitCommand d = (unitCommand)(object);
 			unitCommandsAndHighlight.addUnitCommandToSelectedUnits(d,developer.selectedThings);
 		}

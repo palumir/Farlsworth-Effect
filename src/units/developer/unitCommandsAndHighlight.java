@@ -13,6 +13,8 @@ import units.unitCommand;
 import units.unitCommands.commandIndicator;
 import units.unitCommands.commandList;
 import units.unitCommands.positionedCommand;
+import units.unitCommands.positionedMovementCommand;
+import units.unitCommands.commands.waitCommand;
 import utilities.imageUtils;
 
 public class unitCommandsAndHighlight {
@@ -66,10 +68,10 @@ public class unitCommandsAndHighlight {
 							Color c = possibleColors.get(knownCommands.indexOf(command.getName()));
 							
 							// For commands that have an x and y coordinate
-							if(command instanceof positionedCommand) {
+							if(command instanceof positionedMovementCommand) {
 								
 								// Cast
-								positionedCommand p = (positionedCommand)command;
+								positionedMovementCommand p = (positionedMovementCommand)command;
 								
 								// Get the draw position
 								Point inGamePointP = drawnObject.toDrawPos(new Point((int)p.getX(),(int) p.getY()));
@@ -102,6 +104,10 @@ public class unitCommandsAndHighlight {
 									
 								}
 								
+							}
+							
+							// Other commands
+							else {
 							}
 							
 						}
@@ -142,6 +148,17 @@ public class unitCommandsAndHighlight {
 					// Draw the commands
 					if(developer.unitCommands == null) unitCommandsAndHighlight.createUnitCommandsText(selectedThings, null);
 					else {
+						
+						// Initialize if we haven't.
+						if(knownCommands == null) {
+							knownCommands = new ArrayList<String>();
+						}
+						
+						// If it's not a known command, add it.
+						if(!knownCommands.contains(c.getName())) {
+							knownCommands.add(c.getName());
+						}
+						
 						commandIndicator indicator = new commandIndicator(c, (unit)selectedThings.get(i));
 						developer.unitCommands.add(indicator);
 						Color color = possibleColors.get(knownCommands.indexOf(c.getName()));
@@ -190,19 +207,11 @@ public class unitCommandsAndHighlight {
 							
 							// Get the command color.
 							Color c = possibleColors.get(knownCommands.indexOf(command.getName()));
-							
-							// For commands that have an x and y coordinate
-							if(command instanceof positionedCommand) {
 								
-								// Cast
-								positionedCommand p = (positionedCommand)command;
-									
-								if(developer.unitCommands==null) developer.unitCommands = new ArrayList<commandIndicator>();
-								commandIndicator t = new commandIndicator(p, u);
-								t.setColor(c);
-								developer.unitCommands.add(t);
-
-							}
+							if(developer.unitCommands==null) developer.unitCommands = new ArrayList<commandIndicator>();
+							commandIndicator t = new commandIndicator(command, u);
+							t.setColor(c);
+							developer.unitCommands.add(t);
 							
 						}
 						

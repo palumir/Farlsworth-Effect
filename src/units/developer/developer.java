@@ -111,9 +111,6 @@ public class developer extends player {
 		healthPoints = Integer.MAX_VALUE;
 		moveSpeed = 10f;
 		
-		// Destroy healthbar.
-		getHealthBar().destroy();
-		
 		// Create dev interface
 		createDevInterface();
 	}
@@ -787,6 +784,19 @@ public class developer extends player {
 		return null;
 	}
 	
+	// Get selected unit commands
+	public static ArrayList<drawnObject> getSelectedUnitCommands() {
+		if(selectedThings != null) {
+			ArrayList<drawnObject> units = new ArrayList<drawnObject>();
+			for(int i = 0; i < selectedThings.size(); i++) {
+				if(selectedThings.get(i) instanceof commandIndicator) units.add(selectedThings.get(i));
+			}
+			if(units.size() == 0) return null;
+			return units;
+		}
+		return null;
+	}
+	
 	// Contains unit command?
 	public static boolean containsUnitCommand() {
 		if(selectedThings != null) {
@@ -1080,9 +1090,8 @@ public class developer extends player {
 			
 			// Since we selected at least one unit, make a properties button.
 			// For the top left unit (or unit command)
-			if(propertiesButton.propertiesButton == null) {
-				propertiesButton.makePropertiesButton();
-			}
+			propertiesButton.destroyPropertiesButton();
+			propertiesButton.makePropertiesButton();
 		
 		}
 		
@@ -1099,9 +1108,9 @@ public class developer extends player {
 				selectedThings.add(d.get(i));
 				d.get(i).showHitBox();
 			}
-			if(propertiesButton.propertiesButton == null) {
-				propertiesButton.makePropertiesButton();
-			}
+			
+			propertiesButton.destroyPropertiesButton();
+			propertiesButton.makePropertiesButton();
 		}
 		
 	}

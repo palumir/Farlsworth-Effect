@@ -2,8 +2,9 @@ package units.unitCommands.commands;
 
 import units.unitCommand;
 import units.unitCommands.positionedCommand;
+import units.unitCommands.positionedMovementCommand;
 
-public class slashCommand extends positionedCommand {
+public class slashCommand extends positionedMovementCommand {
 	
 	// Constructor
 	public slashCommand(double x, double y) {

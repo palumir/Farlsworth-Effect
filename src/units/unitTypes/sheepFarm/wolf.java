@@ -13,6 +13,7 @@ import terrain.chunk;
 import units.player;
 import units.unit;
 import units.unitType;
+import units.unitCommands.commands.placeSummonCommand;
 import units.unitCommands.commands.slashCommand;
 import utilities.intTuple;
 import utilities.time;
@@ -78,9 +79,6 @@ public abstract class wolf extends unit {
 		// Spritesheets
 		protected spriteSheet upDownSpriteSheet;
 		protected spriteSheet leftRightSpriteSheet;
-		
-		// Trail spawns
-		private ArrayList<intTuple> trailSpawns;
 		
 		// Follow until range
 		protected int followUntilRange = 10 + utility.RNG.nextInt(15);
@@ -347,8 +345,14 @@ public abstract class wolf extends unit {
 						float xDistance = (jumpingToX - getIntX());
 						float distanceXY = (float) Math.sqrt(yDistance * yDistance
 								+ xDistance * xDistance);
-						rise = ((yDistance/distanceXY)*getJumpSpeed());
-						run = ((xDistance/distanceXY)*getJumpSpeed());
+						
+						rise = 0;
+						run = 0;
+						
+						if(distanceXY != 0) {
+							rise = ((yDistance/distanceXY)*getJumpSpeed());
+							run = ((xDistance/distanceXY)*getJumpSpeed());
+						}
 						startX = getDoubleX();
 						startY = getDoubleY();
 					}
@@ -421,10 +425,12 @@ public abstract class wolf extends unit {
 			else {
 				setFacingDirection("Left");
 			}
+		
 			
 			// Jump there
 			jumpingToX = c.getIntX() + c.getWidth()/2 - getWidth()/2;
 			jumpingToY = c.getIntY() + c.getHeight()/2 - getHeight()/2;
+			
 			jumping = true;
 			slashing = true;
 			hasSlashed = false;
@@ -589,12 +595,18 @@ public abstract class wolf extends unit {
 			this.clawAttackEvery = clawAttackEvery;
 		}
 
-		public ArrayList<intTuple> getTrailSpawns() {
+		public ArrayList<placeSummonCommand> getTrailSpawns() {
+			
+			// Go through repeat commands and get trailSpawns
+			ArrayList<placeSummonCommand> trailSpawns = new ArrayList<placeSummonCommand>();
+			
+			if(getRepeatCommands() != null) {
+				for(int i = 0; i < getRepeatCommands().size(); i++) {
+					if(getRepeatCommands().get(i) instanceof placeSummonCommand) trailSpawns.add((placeSummonCommand) getRepeatCommands().get(i));
+				}
+			}
+				
 			return trailSpawns;
-		}
-
-		public void setTrailSpawns(ArrayList<intTuple> trailSpawns) {
-			this.trailSpawns = trailSpawns;
 		}
 
 }

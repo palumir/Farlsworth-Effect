@@ -8,17 +8,28 @@ import UI.propertyEditBox;
 import drawing.drawnObject;
 import drawing.gameCanvas;
 import units.unit;
+import units.unitCommand;
+import units.unitCommands.commandIndicator;
+import units.unitCommands.commands.waitCommand;
 import utilities.utility;
 
 public class propertiesButton {
 	
 	static button propertiesButton;
 	
+	// Destroy properties button
+	public static void destroyPropertiesButton() {
+		if(propertiesButton!=null && propertiesButton.getChildren() != null) button.recursivelyDestroy(propertiesButton.getChildren());
+		if(propertiesButton!=null) propertiesButton.destroy();
+		propertiesButton = null;
+	}
+	
 	// Make unit properties button
 	public static void makePropertiesButton() {
 		
 		// Only show unit properties if one unit is selected
 		ArrayList<drawnObject> units = developer.getSelectedUnits();
+		ArrayList<drawnObject> unitCommands = developer.getSelectedUnitCommands();
 			
 		////////////
 		/// Properties
@@ -77,28 +88,94 @@ public class propertiesButton {
 				developer.DEFAULT_BUTTON_WIDTH,
 				developer.DEFAULT_BUTTON_HEIGHT);
 		propertiesButton.addChild(editPropertiesButton);
+		editPropertiesButton.setChildren(new ArrayList<button>());
 			
-		// For all units, add a x and y property editor.
+		// For all things, add a x and y property editor.
 		button editXButton = new button("X Position","editProperties.x",
 				developer.editorMode.getIntX()+200,
-				developer.editorMode.getIntY()+3*developer.DEFAULT_BUTTON_HEIGHT*4/3,
+				developer.editorMode.getIntY()+3*developer.DEFAULT_BUTTON_HEIGHT*4/3 + editPropertiesButton.getChildren().size()*developer.DEFAULT_BUTTON_HEIGHT*4/3,
 				developer.DEFAULT_BUTTON_WIDTH,
 				developer.DEFAULT_BUTTON_HEIGHT);
 		editPropertiesButton.addChild(editXButton);
 			
 		button editYButton = new button("Y Position","editProperties.y",
 				developer.editorMode.getIntX()+200,
-				developer.editorMode.getIntY()+4*developer.DEFAULT_BUTTON_HEIGHT*4/3,
+				developer.editorMode.getIntY()+3*developer.DEFAULT_BUTTON_HEIGHT*4/3 + editPropertiesButton.getChildren().size()*developer.DEFAULT_BUTTON_HEIGHT*4/3,
 				developer.DEFAULT_BUTTON_WIDTH,
 				developer.DEFAULT_BUTTON_HEIGHT);
 		editPropertiesButton.addChild(editYButton);
 		
-		button editMoveSpeedButton = new button("Movespeed","editProperties.moveSpeed",
-				developer.editorMode.getIntX()+200,
-				developer.editorMode.getIntY()+4*developer.DEFAULT_BUTTON_HEIGHT*4/3,
-				developer.DEFAULT_BUTTON_WIDTH,
-				developer.DEFAULT_BUTTON_HEIGHT);
-		editPropertiesButton.addChild(editMoveSpeedButton);
+		// Add unit command stuff 
+		if(unitCommands != null) {
+			
+			boolean containsWait = false;
+			
+			// Check some things
+			for(int i = 0; i < unitCommands.size(); i++) {
+				unitCommand c = ((commandIndicator)unitCommands.get(i)).getCommand();
+				
+				if(c instanceof waitCommand) {
+					containsWait = true;
+				}
+			}
+			
+			// Show some buttons for said things.
+			if(containsWait) {
+				
+				// Wait time
+				button editMoveSpeedButton = new button("Wait Time","editProperties.waitTime",
+						developer.editorMode.getIntX()+200,
+						developer.editorMode.getIntY()+3*developer.DEFAULT_BUTTON_HEIGHT*4/3 + editPropertiesButton.getChildren().size()*developer.DEFAULT_BUTTON_HEIGHT*4/3,
+						developer.DEFAULT_BUTTON_WIDTH,
+						developer.DEFAULT_BUTTON_HEIGHT);
+				editPropertiesButton.addChild(editMoveSpeedButton);
+				
+			}
+				
+		}
+		
+		// Add unit stuff.
+		else if(units != null) {
+			
+			// Movespeed.
+			button editMoveSpeedButton = new button("Movespeed","editProperties.moveSpeed",
+					developer.editorMode.getIntX()+200,
+					developer.editorMode.getIntY()+3*developer.DEFAULT_BUTTON_HEIGHT*4/3 + editPropertiesButton.getChildren().size()*developer.DEFAULT_BUTTON_HEIGHT*4/3,
+					developer.DEFAULT_BUTTON_WIDTH,
+					developer.DEFAULT_BUTTON_HEIGHT);
+			editPropertiesButton.addChild(editMoveSpeedButton);
+		}
+	}
+	
+	public static void saveUnitProperties(String b, String value) {
+		
+		// moveSpeed
+		if(b.contains("editProperties.moveSpeed")) {
+			double newSpeed = Double.parseDouble(value);
+			for(int i = 0; i < saveThings.size(); i++) {
+				if(saveThings.get(i) instanceof unit) { 
+					((unit) saveThings.get(i)).setMoveSpeed((float)newSpeed);
+					((unit) saveThings.get(i)).setRiseRun();
+				}
+			}
+		}
+		
+	}
+	
+	public static void saveUnitCommandProperties(String b, String value) {
+		
+		// waitTime
+		if(b.contains("editProperties.waitTime")) {
+			double newHowLong = Double.parseDouble(value);
+			for(int i = 0; i < saveThings.size(); i++) {
+				if(saveThings.get(i) instanceof commandIndicator &&
+						((commandIndicator)(saveThings.get(i))).getCommand() instanceof waitCommand) { 
+					waitCommand w = (waitCommand)((commandIndicator)(saveThings.get(i))).getCommand();
+					w.setHowLong(newHowLong);
+				}
+			}
+		}
+		
 	}
 	
 	public static void saveProperty(String b, String value) {
@@ -121,16 +198,8 @@ public class propertiesButton {
 			}
 		}
 		
-		// moveSpeed
-		if(b.contains("editProperties.moveSpeed")) {
-			double newSpeed = Double.parseDouble(value);
-			for(int i = 0; i < saveThings.size(); i++) {
-				if(saveThings.get(i) instanceof unit) { 
-					((unit) saveThings.get(i)).setMoveSpeed((float)newSpeed);
-					((unit) saveThings.get(i)).setRiseRun();
-				}
-			}
-		}
+		saveUnitProperties(b,value);
+		saveUnitCommandProperties(b,value);
 		
 	}
 	
@@ -175,6 +244,12 @@ public class propertiesButton {
 			propertyEditBox p = new propertyEditBox(b.getButtonID(),b.getButtonID(), saveThing.getIntY() + "");
 		}
 		
+		makeUnitPopUpBoxes(b);
+		
+		makeUnitCommandPopUpBoxes(b);
+	}
+	
+	public static void makeUnitPopUpBoxes(button b) {
 		// moveSpeed
 		if(b.getButtonID().equals("editProperties.moveSpeed")) {
 			ArrayList<drawnObject> objects = developer.getSelectedUnits();
@@ -182,8 +257,33 @@ public class propertiesButton {
 			if(objects != null && objects.size() > 0 && developer.containsUnitCommand()) {
 				saveThings.removeAll(objects);
 			}
+			
 			saveThing = drawnObject.getTopLeftFrom(saveThings);
 			propertyEditBox p = new propertyEditBox(b.getButtonID(),b.getButtonID(), ((unit)saveThing).getMoveSpeed() + "");
+		}
+	}
+	
+	public static void makeUnitCommandPopUpBoxes(button b) {
+		
+		// waitTime
+		if(b.getButtonID().equals("editProperties.waitTime")) {
+			ArrayList<drawnObject> objects = developer.getSelectedUnits();
+			saveThings = new ArrayList<drawnObject>(developer.selectedThings);
+			if(objects != null && objects.size() > 0 && developer.containsUnitCommand()) {
+				saveThings.removeAll(objects);
+			}
+			
+			// Get from only the wait commands
+			ArrayList<drawnObject> waitCommands = new ArrayList<drawnObject>();
+			for(int i = 0; i < saveThings.size(); i++) {
+				if(saveThings.get(i) instanceof commandIndicator
+						&& ((commandIndicator)saveThings.get(i)).getCommand() instanceof waitCommand) {
+					waitCommands.add(saveThings.get(i));
+				}
+			}
+			
+			saveThing = drawnObject.getTopLeftFrom(waitCommands);
+			propertyEditBox p = new propertyEditBox(b.getButtonID(),b.getButtonID(), ((waitCommand)((commandIndicator)saveThing).getCommand()).getHowLong() + "");
 		}
 	}
 }

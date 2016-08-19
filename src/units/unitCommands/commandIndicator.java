@@ -7,6 +7,7 @@ import drawing.drawnObject;
 import drawing.gameCanvas;
 import units.unit;
 import units.unitCommand;
+import units.unitCommands.commands.waitCommand;
 
 public class commandIndicator extends drawnObject {
 
@@ -24,10 +25,41 @@ public class commandIndicator extends drawnObject {
 			setDoubleY((int)((positionedCommand) c).getY());
 		}
 		
-		// TODO: draw wait command at last positioned command on unit
 		else {
-			setDrawObject(false);
+			
+			positionedCommand p = null;
+			int x = 0;
+			
+			// Get previous pos command
+			if(u.getRepeatCommands() != null && u.getRepeatCommands().size() > 0) {
+				
+				// Get the previous command that is positioned
+				int newN = u.getRepeatCommands().size()-1;
+				if(u.getRepeatCommands().contains(c)) newN = u.getRepeatCommands().indexOf(c);
+				for(int n = newN; ; n--) {
+					if(x >= u.getRepeatCommands().size()) break;
+					if(n < 0) n = u.getRepeatCommands().size() - 1;
+					if(u.getRepeatCommands().get(n) instanceof positionedCommand) {
+						p = (positionedCommand)u.getRepeatCommands().get(n);
+						break;
+					}
+					x++;
+				}
+			}
+			
+			// If we found a command.
+			if(p!=null) {
+				setDoubleX((int)(p.getX()));
+				setDoubleY((int)(p.getY()+(x+1)*15));
+			}
+			
+			// Otherwise.
+			else {
+				setDoubleX(u.getIntX());
+				setDoubleY(u.getIntY());
+			}
 		}
+		
 		setUnit(u);
 		setCommand(c);
 	}
@@ -61,14 +93,11 @@ public class commandIndicator extends drawnObject {
 	@Override
 	public void drawObject(Graphics g) {
 		
-		// Can only draw positionedCommands for now.
-		if(getCommand() instanceof positionedCommand) {
-			if(getColor() == null) g.setColor(Color.green);
-			else g.setColor(getColor());
-			g.drawString(getCommand().getName(),
-					  getDrawX() - (int)(gameCanvas.getScaleX()*gameCanvas.getGameCanvas().getFontMetrics(drawnObject.DEFAULT_FONT).stringWidth(getCommand().getName())/2),
-					  getDrawY());
-		}
+		if(getColor() == null) g.setColor(Color.green);
+		else g.setColor(getColor());
+		if(getCommand()!=null) g.drawString(getCommand().getName(),
+				  getDrawX() - (int)(gameCanvas.getScaleX()*gameCanvas.getGameCanvas().getFontMetrics(drawnObject.DEFAULT_FONT).stringWidth(getCommand().getName())/2),
+				  getDrawY());
 		
 		// Show hitbox?
 		if(showHitBox) {

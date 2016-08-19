@@ -115,6 +115,9 @@ public class redWolf extends wolf {
 		
 		changeCombat();
 		
+		setCanSlash(true);
+		setCanSlashSummon(true);
+		
 	}
 	
 	// Combat defaults.
