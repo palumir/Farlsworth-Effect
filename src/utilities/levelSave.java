@@ -262,11 +262,11 @@ public class levelSave implements Serializable {
 										else if(c instanceof waitCommand) {
 											waitCommand w = (waitCommand)c;
 											objectStream.writeObject(w.getHowLong());
-											objectStream.writeObject(0); // Dumby object.
+											objectStream.writeObject(0.0); // Dumby object.
 										}
 										else {
-											objectStream.writeObject(0); // Dumby object.
-											objectStream.writeObject(0); // Dumby object.
+											objectStream.writeObject(0.0); // Dumby object.
+											objectStream.writeObject(0.0); // Dumby object.
 											System.err.println("Unknown unit command saved to file.");
 										}
 									}

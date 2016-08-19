@@ -247,7 +247,7 @@ public class sheepFarm extends zone {
 		topDown.setMode();
 		
 		// Set background
-		background.setGameBackground(DEFAULT_ZONE_BACKGROUND);
+		//background.setGameBackground(DEFAULT_ZONE_BACKGROUND);
 		
 		// Load zone events.
 		loadZoneEvents();
@@ -259,17 +259,20 @@ public class sheepFarm extends zone {
 			storm s = new storm();
 		}
 		
+		// Spawn Farlsworth and fence
+		//spawnFarlsworthAndFence();
+		
 		// Create terrain
-		createTerrain();
+		//createTerrain();
 		
 		// Spawn area.
-		createSpawnArea();
+		//createSpawnArea();
 		
 		// Create forest above spawn
 		//createForestAboveSpawn();
 		
 		// Create flower farm
-		createFlowerFarm();
+		//createFlowerFarm();
 		
 		// Create area above flower farm
 		//createAreaAboveFlowerFarm();
@@ -284,7 +287,7 @@ public class sheepFarm extends zone {
 		}
 		
 		// Spawn units
-		spawnUnits();
+		//spawnUnits();
 		
 		// Sort chunks.
 		chunk.sortChunks();
@@ -297,6 +300,17 @@ public class sheepFarm extends zone {
 	//////////////////////
 	// INDIVIDUAL AREAS //
 	//////////////////////
+	
+	// Spawn farlsworth and fence.
+	public void spawnFarlsworthAndFence() {
+		farlsworth sheepBoss = new farlsworth(411,-394);
+		if(!farlsworth.isFenceAttached.isCompleted()) {
+			farlsworthFence = makeFarlsworthFence(5,-406);
+		}
+		else {
+			farlsworthFence = null;
+		}
+	}
 	
 	// Create terrain
 	public void createTerrain() {
@@ -368,7 +382,7 @@ public class sheepFarm extends zone {
 	}
 	
 	// Spawn creeps
-	public void spawnUnits() {
+	/*public void spawnUnits() {
 		
 		// Wolf holder
 		wolf w;
@@ -379,37 +393,17 @@ public class sheepFarm extends zone {
 		double oneOverRoot2 = 1/(Math.sqrt(2));
 		
 		// Farlsworth
-		farlsworth sheepBoss = new farlsworth(411,-394);
-		if(!farlsworth.isFenceAttached.isCompleted()) {
-			farlsworthFence = makeFarlsworthFence(5,-406);
-		}
-		else {
-			farlsworthFence = null;
-		}
 		
 		// Wolf height and width
-		int slashAdjustX = wolf.getDefaultWidth()/2/* - clawMarkRed.DEFAULT_CHUNK_WIDTH/2*/;
-		int slashAdjustY = wolf.getDefaultHeight()/2/* - clawMarkRed.DEFAULT_CHUNK_HEIGHT/2*/;
+		int slashAdjustX = wolf.getDefaultWidth()/2/* - clawMarkRed.DEFAULT_CHUNK_WIDTH/2;
+		int slashAdjustY = wolf.getDefaultHeight()/2/* - clawMarkRed.DEFAULT_CHUNK_HEIGHT/2;
 		
 		/////////////////////////////
 		/// Wolf Section I guess ///
 		///////////////////////////
 		
 		//FUCKING TREES FOR NOW!!!
-		
-		/*
-		w = new blackWolf(-1068,-1200);
-		spawnList = new ArrayList<intTuple>();
-		spawnList.add(new intTuple(-1068,-1550));
-		spawnList.add(new intTuple(-1068,-1450));
-		spawnList.add(new intTuple(-1068,-1350));
-		spawnList.add(new intTuple(-1068,-1250));
-		w.setTrailSpawns(spawnList);
-		commands = new commandList();
-		commands.add(new slashCommand(-1068,-1650));
-		commands.add(new slashCommand(-1068,-1200));
-		w.repeatCommands(commands);
-		*/
+	
 		
 		// Section 1
 		
@@ -811,7 +805,7 @@ public class sheepFarm extends zone {
 		commands.add(new moveCommand (1192+slashAdjustX, -3100+slashAdjustY));
 		w.repeatCommands(commands);
 		w.setMoveSpeed (3f);
-	}
+	}*/
 	
 	// Flower farm
 	public void createFlowerFarm()  {
@@ -920,7 +914,7 @@ public class sheepFarm extends zone {
 		new tomb(2305+2,-3944-85,0, farmTombEasy.getZone(),57,-6,"Right");
 		
 		// Fence around tomb
-		spawnFence(null, 2216,-3990,2216,-3820); // Left fence
+		/*spawnFence(null, 2216,-3990,2216,-3820); // Left fence
 		spawnFence(null, 2216+5,-3890-8,2330,-3890-8); // Left bottom
 		spawnFence(null, 2216+220,-3990,2216+220,-3820); // Right fence
 		spawnFence(null, 2216+5+166,-3890-8,2330+166,-3890-8); // Right bottom
@@ -929,7 +923,7 @@ public class sheepFarm extends zone {
 		c = new flower(2249,-3902-20,10);
 		c.setInteractable(false);
 		c = new flower(2396,-3902-20,7);
-		c.setInteractable(false);
+		c.setInteractable(false);*/
 		
 	}
 	
@@ -982,7 +976,7 @@ public class sheepFarm extends zone {
 		farlsworthFence.add(c);
 		c = new fenceBarsSmall(adjustX + 37,adjustY + -436,0);
 		farlsworthFence.add(c);
-		forestGate = new horizontalGate("Forest Gate", "Farm Key But Not Farmer's Barn, House, or Fridge Key", adjustX + -13+fenceAdjustX/2,adjustY + -434,0);
+		forestGate = new horizontalGate("Forest Gate", "Not Fridge Key", adjustX + -13+fenceAdjustX/2,adjustY + -434,0);
 		farlsworthFence.add(forestGate);
 		
 		///////////////////////////////
@@ -998,7 +992,7 @@ public class sheepFarm extends zone {
 		farlsworthFence.add(c);
 		
 		// Gate.
-		horizontalGate farlsworthGate = new horizontalGate("Sheep Gate", "Farm Key But Not Farmer's Barn, House, or Fridge Key", adjustX + 412,adjustY + -15,0);
+		horizontalGate farlsworthGate = new horizontalGate("Sheep Gate", "Not Fridge Key", adjustX + 412,adjustY + -15,0);
 		farlsworthFence.add(farlsworthGate);
 		
 		// Right of gate

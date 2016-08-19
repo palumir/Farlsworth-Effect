@@ -25,6 +25,7 @@ import terrain.region;
 import units.developer.developer;
 import units.unitCommands.commandList;
 import units.unitCommands.positionedCommand;
+import units.unitCommands.positionedMovementCommand;
 import units.unitCommands.commands.moveCommand;
 import units.unitCommands.commands.slashCommand;
 import units.unitCommands.commands.waitCommand;
@@ -211,6 +212,10 @@ public class unit extends drawnObject  {
 	
 	// If unit is locked, prohibit movement.
 	private boolean unitLocked = false;
+	
+	// What commands do we do?
+	private boolean canSlash = false;
+	private boolean canSlashSummon = false;
 	
 	///////////////
 	/// METHODS ///
@@ -424,7 +429,11 @@ public class unit extends drawnObject  {
 			}
 			
 			else {
-				// Unknown command issued.
+				// Unknown command issued. Skip it.
+				currentCommand.setIssued(true);
+				currentCommandComplete = true;
+				getAllCommands().remove(0);
+				doCommands();
 			}
 		}
 		
@@ -1945,7 +1954,7 @@ public class unit extends drawnObject  {
 		for(int n = j; ; n--) {
 			if(x >= repeatCommands.size()) break;
 			if(n < 0) n = repeatCommands.size() - 1;
-			if(repeatCommands.get(n) instanceof positionedCommand) {
+			if(repeatCommands.get(n) instanceof positionedMovementCommand) {
 				return (positionedCommand)repeatCommands.get(n);
 			}
 			x++;
@@ -1971,6 +1980,22 @@ public class unit extends drawnObject  {
 
 	public void setRepeatCommands(commandList repeatCommands) {
 		this.repeatCommands = repeatCommands;
+	}
+
+	public boolean isCanSlash() {
+		return canSlash;
+	}
+
+	public void setCanSlash(boolean canSlash) {
+		this.canSlash = canSlash;
+	}
+
+	public boolean isCanSlashSummon() {
+		return canSlashSummon;
+	}
+
+	public void setCanSlashSummon(boolean canSlashSummon) {
+		this.canSlashSummon = canSlashSummon;
 	}
 	
 }

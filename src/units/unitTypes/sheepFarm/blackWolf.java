@@ -112,6 +112,9 @@ public class blackWolf extends wolf {
 		setCombatStuff();
 		
 		changeCombat();
+		
+		setCanSlash(true);
+		setCanSlashSummon(true);
 	}
 	
 	// Combat defaults.
@@ -156,9 +159,9 @@ public class blackWolf extends wolf {
 		// If we have a list of trailSpawns, use that.
 		if(getTrailSpawns()!=null && getTrailSpawns().size() > 0) {
 			for(int i = 0; i < getTrailSpawns().size(); i++) {
-				if((Math.abs(getTrailSpawns().get(i).x - getIntX()) < getJumpSpeed()*3 && Math.abs(getTrailSpawns().get(i).y - getIntY()) < getJumpSpeed()*3)) {
-					darkHole h = new darkHole(getTrailSpawns().get(i).x - darkHole.getDefaultWidth()/2 + this.getWidth()/2,
-							getTrailSpawns().get(i).y - darkHole.getDefaultHeight()/2 + this.getHeight()/2,
+				if((Math.abs(getTrailSpawns().get(i).getX() - getIntX()) < getJumpSpeed()*3 && Math.abs(getTrailSpawns().get(i).getY() - getIntY()) < getJumpSpeed()*3)) {
+					darkHole h = new darkHole((int)getTrailSpawns().get(i).getX() - darkHole.getDefaultWidth()/2 + this.getWidth()/2,
+							(int)getTrailSpawns().get(i).getY() - darkHole.getDefaultHeight()/2 + this.getHeight()/2,
 							  false,
 							  1,
 							  DEFAULT_DARKHOLE_DURATION);

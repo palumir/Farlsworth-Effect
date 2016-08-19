@@ -145,7 +145,7 @@ public class player extends unit {
 	private String levelUp = "sounds/effects/player/levelUp.wav";
 	
 	// Player interface
-	private playerHealthBar healthBar = new playerHealthBar(5,5);
+	private playerHealthBar healthBar;
 
 	///////////////
 	/// METHODS ///
@@ -669,7 +669,10 @@ public class player extends unit {
 		}
 		
 		// Create the player. If we are a developer, give developer functions.
-		if(!isDeveloper()) thePlayer = new player(playerX, playerY, loadZone);
+		if(!isDeveloper()) {
+			thePlayer = new player(playerX, playerY, loadZone);
+			thePlayer.healthBar = new playerHealthBar(5,5);
+		}
 		else thePlayer = new developer(playerX, playerY, loadZone);
 		
 		// Set our fields
