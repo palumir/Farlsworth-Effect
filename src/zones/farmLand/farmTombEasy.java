@@ -163,6 +163,9 @@ public class farmTombEasy extends zone {
 		
 		// Load zone events.
 		loadZoneEvents();
+		
+		// Load units
+		loadUnits();
 				
 		// Background
 		background.setGameBackground(DEFAULT_ZONE_BACKGROUND);
@@ -174,7 +177,7 @@ public class farmTombEasy extends zone {
 		if(!shadowElevatorStarted.isCompleted()) { music.startMusic(zoneMusic);  }
 		else {
 			// Load elevator
-			createShadowElevatorAroundPlayer(true);
+			//createShadowElevatorAroundPlayer(true);
 		}
 		
 		// Sort chunks.
@@ -774,7 +777,7 @@ public class farmTombEasy extends zone {
 		c = new well(10066,1113,0);
 		c.setPassable(true);
 		c.setZ(-2);
-		spawnTombRect(10050,1150,13000,2374,"ground");
+		spawnTombRect(10050,1725,13000,2374,"ground");
 		//spawnTombRect(9962,512,10500,1154,"rightWall");
 		//spawnTombRect(9965,1152,10500,1502,"none");*/
 	}
@@ -827,392 +830,392 @@ public class farmTombEasy extends zone {
 		
 		if(!elevatorLoaded) {
 			// Left wall.
-			shadowElevator = createRectangleOfShadows(11500 - 580, 
-													  1150-30 - 1500, 
-													  11500 - 250,
-													  1150-30 + 600, eyeless);
+			shadowElevator = createRectangleOfShadows(13232 - 580, 
+													  1725-30 - 1500, 
+													  13232 - 250,
+													  1725-30 + 600, eyeless);
 			
 			// Floor
-			shadowElevator.addAll(createRectangleOfShadows(11500 - 220-25+1, 
-					  1150-30+200+3-92, 
-					  11500 +250,
-					  1150-30 + 600, eyeless));
+			shadowElevator.addAll(createRectangleOfShadows(13232 - 220-25+1, 
+					  1725-30+200+3-92, 
+					  13232 +250,
+					  1725-30 + 600, eyeless));
 			
 			// Right wall.
-			shadowElevator.addAll(createRectangleOfShadows(11500 + 260, 
-													  1150-30 - 1500, 
-													  11500 + 600,
-													  1150-30 + 600, eyeless));
+			shadowElevator.addAll(createRectangleOfShadows(13232 + 260, 
+													  1725-30 - 1500, 
+													  13232 + 600,
+													  1725-30 + 600, eyeless));
 			
 			// First platform
-			spawnReloadableTombRect(11500 -80,
-					      1150-30 - 35 - 32-20,
-					      11500-30,
-					      1150-30 - 35,
+			spawnReloadableTombRect(13232 -80,
+					      1725-30 - 35 - 32-20,
+					      13232-30,
+					      1725-30 - 35,
 					      "ground");
 			
 			// Third platform
-			spawnReloadableTombRect(11500,
-					      1150-30 - 35 - 32 - 64*2+3,
-					      11500 + 200,
-						  1150-30 - 35 - 64*2+3,
+			spawnReloadableTombRect(13232,
+					      1725-30 - 35 - 32 - 64*2+3,
+					      13232 + 200,
+						  1725-30 - 35 - 64*2+3,
 							      "ground");
 			
 			// Fourth platform
-			spawnReloadableTombRect(11500 + 170,
-					      1150-30 - 35 - 32 - 64*4 + 20,
-					      11500 + 220,
-						  1150-30 - 35 - 64*4 + 20,
+			spawnReloadableTombRect(13232 + 170,
+					      1725-30 - 35 - 32 - 64*4 + 20,
+					      13232 + 220,
+						  1725-30 - 35 - 64*4 + 20,
 							      "ground");
 			
 			// Fifth platform
-			spawnReloadableTombRect(11500 - 200,
-					      1150-30 - 35 - 32 - 64*5,
-					      11500 + 150,
-						  1150-30 - 35 - 64*5,
+			spawnReloadableTombRect(13232 - 200,
+					      1725-30 - 35 - 32 - 64*5,
+					      13232 + 150,
+						  1725-30 - 35 - 64*5,
 							      "ground");
-			shadowDudePatrol(11500 - 210, 1150-30 - 35 - 32 - 64*5 - 46, 11500 + 100, 1150-30 - 35 - 32 - 64*5 - 46, 1.5f);
-			shadowDudePatrol(11500 - 210, 1150-30 - 35 - 32 - 64*5 - 46 - 50, 11500 + 100, 1150-30 - 35 - 32 - 64*5 - 46-50, 2.8f);
+			shadowDudePatrol(13232 - 210, 1725-30 - 35 - 32 - 64*5 - 46, 13232 + 100, 1725-30 - 35 - 32 - 64*5 - 46, 1.5f);
+			shadowDudePatrol(13232 - 210, 1725-30 - 35 - 32 - 64*5 - 46 - 50, 13232 + 100, 1725-30 - 35 - 32 - 64*5 - 46-50, 2.8f);
 			
 			// Sixth platform
-			spawnReloadableTombRect(11500 - 200,
-					      1150-30 - 35 - 32 - 64*7 + 20,
-					      11500 -150,
-						  1150-30 - 35 - 64*7 + 20,
+			spawnReloadableTombRect(13232 - 200,
+					      1725-30 - 35 - 32 - 64*7 + 20,
+					      13232 -150,
+						  1725-30 - 35 - 64*7 + 20,
 							      "ground");
 			
 			// Seventh platform
-			spawnReloadableTombRect(11500 - 140,
-					      1150-30 - 35 - 32 - 64*8,
-					      11500 + 150,
-						  1150-30 - 35 - 64*8,
+			spawnReloadableTombRect(13232 - 140,
+					      1725-30 - 35 - 32 - 64*8,
+					      13232 + 150,
+						  1725-30 - 35 - 64*8,
 							      "ground");
-			u = new shadowDude(11500 + 5 - 10,
-				      1150-30 - 35 - 32 - 64*8 - 46);
+			u = new shadowDude(13232 + 5 - 10,
+				      1725-30 - 35 - 32 - 64*8 - 46);
 			u.setFacingDirection("Left");
-			u = new shadowDude(11500 + 5 - 10,
-				      1150-30 - 35 - 32 - 64*8 - 46 - 50);
+			u = new shadowDude(13232 + 5 - 10,
+				      1725-30 - 35 - 32 - 64*8 - 46 - 50);
 			u.setFacingDirection("Left");
-			u = new shadowDude(11500 + 5 - 10,
-				      1150-30 - 35 - 32 - 64*8 - 46 - 50*2);
+			u = new shadowDude(13232 + 5 - 10,
+				      1725-30 - 35 - 32 - 64*8 - 46 - 50*2);
 			u.setFacingDirection("Left");
-			lightDudePatrol(11500 - 140,
-				      1150-30 - 35 - 32 - 64*8 - 46 - 50*2 + 10,
-				      11500 + 130,
-				      1150-30 - 35 - 32 - 64*8 - 46 - 50*2 + 10,
+			lightDudePatrol(13232 - 140,
+				      1725-30 - 35 - 32 - 64*8 - 46 - 50*2 + 10,
+				      13232 + 130,
+				      1725-30 - 35 - 32 - 64*8 - 46 - 50*2 + 10,
 				      2.6f);
 			
 			// Eighth Platform
-			spawnReloadableTombRect(11500 + 150,
-				      1150-30 - 35 - 32 - 64*10 + 20,
-				      11500 + 200,
-					  1150-30 - 35 - 64*10 + 20,
+			spawnReloadableTombRect(13232 + 150,
+				      1725-30 - 35 - 32 - 64*10 + 20,
+				      13232 + 200,
+					  1725-30 - 35 - 64*10 + 20,
 						      "ground");
 			
 			// Ninth Platform
-			spawnReloadableTombRect(11500 + 200,
-						      1150-30 - 35 - 32 - 64*12 + 40,
-						      11500 + 250,
-							  1150-30 - 35 - 64*12 + 40,
+			spawnReloadableTombRect(13232 + 200,
+						      1725-30 - 35 - 32 - 64*12 + 40,
+						      13232 + 250,
+							  1725-30 - 35 - 64*12 + 40,
 								      "ground");
 			
 			// Ten
-			spawnReloadableTombRect(11500 + 130,
-						      1150-30 - 35 - 32 - 64*14 + 20*3,
-						      11500 + 170,
-							  1150-30 - 35 - 64*14 + 20*3,
+			spawnReloadableTombRect(13232 + 130,
+						      1725-30 - 35 - 32 - 64*14 + 20*3,
+						      13232 + 170,
+							  1725-30 - 35 - 64*14 + 20*3,
 								      "ground");
 			
 			// Eleven
-			spawnReloadableTombRect(11500 - 10 ,
-						      1150-30 - 35 - 32 - 64*13 + 20*2,
-						      11500 + 32 - 10,
-							  1150-30 - 35 - 64*13 + 20*2,
+			spawnReloadableTombRect(13232 - 10 ,
+						      1725-30 - 35 - 32 - 64*13 + 20*2,
+						      13232 + 32 - 10,
+							  1725-30 - 35 - 64*13 + 20*2,
 								      "ground");
 			
 			// Twelve
-			spawnReloadableTombRect(11500 - 150 ,
-						      1150-30 - 35 - 32 - 64*13 + 20*2,
-						      11500 + 40 - 150,
-							  1150-30 - 35 - 64*13 + 20*2,
+			spawnReloadableTombRect(13232 - 150 ,
+						      1725-30 - 35 - 32 - 64*13 + 20*2,
+						      13232 + 40 - 150,
+							  1725-30 - 35 - 64*13 + 20*2,
 								      "ground");
 			
 			// Thirteen
-			spawnReloadableTombRect(11500 - 230 ,
-						      1150-30 - 35 - 32 - 64*15 + 20*3,
-						      11500 - 190,
-							  1150-30 - 35 - 64*15 + 20*3,
+			spawnReloadableTombRect(13232 - 230 ,
+						      1725-30 - 35 - 32 - 64*15 + 20*3,
+						      13232 - 190,
+							  1725-30 - 35 - 64*15 + 20*3,
 								      "ground");
 			
 			// Fourteen
-			spawnReloadableTombRect(11500 - 150 ,
-						      1150-30 - 35 - 32 - 64*17 + 20*5,
-						      11500 - 150 + 40,
-							  1150-30 - 35 - 64*17 + 20*5,
+			spawnReloadableTombRect(13232 - 150 ,
+						      1725-30 - 35 - 32 - 64*17 + 20*5,
+						      13232 - 150 + 40,
+							  1725-30 - 35 - 64*17 + 20*5,
 								      "ground");
-			shadowDudePatrol(11500 - 200 ,
-							1150-30 - 35 - 32 - 64*17 + 20*5 + 100, 
-							11500 + 220,
-							1150-30 - 35 - 32 - 64*17 + 20*5 + 100,
+			shadowDudePatrol(13232 - 200 ,
+							1725-30 - 35 - 32 - 64*17 + 20*5 + 100, 
+							13232 + 220,
+							1725-30 - 35 - 32 - 64*17 + 20*5 + 100,
 							2f);
 			
 			// Fifteen
-			spawnReloadableTombRect(11500 - 80 ,
-						      1150-30 - 35 - 32 - 64*19 + 20*7,
-						      11500 + 220,
-							  1150-30 - 35 - 64*19 + 20*7,
+			spawnReloadableTombRect(13232 - 80 ,
+						      1725-30 - 35 - 32 - 64*19 + 20*7,
+						      13232 + 220,
+							  1725-30 - 35 - 64*19 + 20*7,
 								      "ground");
 			for(int i = 0; i < 16; i++) {
-				shadowDudePatrol(11500 - 230 + i*30,
-						1150-30 - 35 - 32 - 64*19 + 20*7 - 46-20, 
-						11500  - 230 + i*30,
-						1150-30 - 35 - 32 - 64*19 + 20*7 - 46 - 50*3,
+				shadowDudePatrol(13232 - 230 + i*30,
+						1725-30 - 35 - 32 - 64*19 + 20*7 - 46-20, 
+						13232  - 230 + i*30,
+						1725-30 - 35 - 32 - 64*19 + 20*7 - 46 - 50*3,
 						2f);
 			}
-			u = new lightDude(11500 + 70, 1150-30 - 35 - 32 - 64*19 + 20*7 - 46);
+			u = new lightDude(13232 + 70, 1725-30 - 35 - 32 - 64*19 + 20*7 - 46);
 			u.setFacingDirection("Left");
 			
 			// Sixteen
-			spawnReloadableTombRect(11500 + 200 ,
-						      1150-30 - 35 - 32 - 64*21 + 20*8,
-						      11500 + 240,
-							  1150-30 - 35 - 64*21+ 20*8,
+			spawnReloadableTombRect(13232 + 200 ,
+						      1725-30 - 35 - 32 - 64*21 + 20*8,
+						      13232 + 240,
+							  1725-30 - 35 - 64*21+ 20*8,
 								      "ground");
-			u = new lightDude(11500 + 200 + 15 - 40, 1150-30 - 35 - 32 - 64*21 + 20*10 - 46);
+			u = new lightDude(13232 + 200 + 15 - 40, 1725-30 - 35 - 32 - 64*21 + 20*10 - 46);
 			commands = new commandList();
-			commands.add(new moveCommand(11500 + 200 + 15 - 40,1150-30 - 35 - 32 - 64*19 + 20*7 - 200));
-			commands.add(new moveCommand(11500 + 200 + 15 - 40, 1150-30 - 35 - 32 - 64*21 + 20*10 - 46));
+			commands.add(new moveCommand(13232 + 200 + 15 - 40,1725-30 - 35 - 32 - 64*19 + 20*7 - 200));
+			commands.add(new moveCommand(13232 + 200 + 15 - 40, 1725-30 - 35 - 32 - 64*21 + 20*10 - 46));
 			u.repeatCommands(commands);
 			u.setMoveSpeed(1f);
 			
 			// Seventeen
-			spawnReloadableTombRect(11500 + 160 ,
-						      1150-30 - 35 - 32 - 64*23 + 20*9,
-						      11500 + 200,
-							  1150-30 - 35 - 64*23+ 20*9,
+			spawnReloadableTombRect(13232 + 160 ,
+						      1725-30 - 35 - 32 - 64*23 + 20*9,
+						      13232 + 200,
+							  1725-30 - 35 - 64*23+ 20*9,
 								      "ground");
 			
 			// Eighteen
-			spawnReloadableTombRect(11500 + 160 ,
-						      1150-30 - 35 - 32 - 64*23 + 20*9,
-						      11500 + 200,
-							  1150-30 - 35 - 64*23+ 20*9,
+			spawnReloadableTombRect(13232 + 160 ,
+						      1725-30 - 35 - 32 - 64*23 + 20*9,
+						      13232 + 200,
+							  1725-30 - 35 - 64*23+ 20*9,
 								      "ground");
 			
 			// Nineteen
-			spawnReloadableTombRect(11500 + -200 ,
-						      1150-30 - 35 - 32 - 64*25 + 20*10,
-						      11500 + 150,
-							  1150-30 - 35 - 64*25+ 20*10,
+			spawnReloadableTombRect(13232 + -200 ,
+						      1725-30 - 35 - 32 - 64*25 + 20*10,
+						      13232 + 150,
+							  1725-30 - 35 - 64*25+ 20*10,
 								      "ground");
 			
 			// Left wall
-			spawnReloadableTombRect(11500 + -228 ,
-				      1150-30 - 35 - 32 - 64*25 + 20*10 - 480 - 32*9,
-				      11500 -190,
-					  1150-30 - 35 - 64*25+ 20*10,
+			spawnReloadableTombRect(13232 + -228 ,
+				      1725-30 - 35 - 32 - 64*25 + 20*10 - 480 - 32*9,
+				      13232 -190,
+					  1725-30 - 35 - 64*25+ 20*10,
 						      "none");
 			
 			// Right wall
-			spawnReloadableTombRect(11500 + +200 ,
-				      1150-30 - 35 - 32 - 64*25 + 20*10 - 480 - 32*9,
-				      11500 +250,
-					  1150-30 - 35 - 64*25+ 20*10,
+			spawnReloadableTombRect(13232 + +200 ,
+				      1725-30 - 35 - 32 - 64*25 + 20*10 - 480 - 32*9,
+				      13232 +250,
+					  1725-30 - 35 - 64*25+ 20*10,
 						      "none");
 			
 			// Nineteen second platform
-			spawnReloadableTombRect(11500 + -200 + 50 ,
-				      1150-30 - 35 - 32 - 64*27 + 20*11,
-				      11500 + 150 + 80,
-					  1150-30 - 35 - 64*27+ 20*11,
+			spawnReloadableTombRect(13232 + -200 + 50 ,
+				      1725-30 - 35 - 32 - 64*27 + 20*11,
+				      13232 + 150 + 80,
+					  1725-30 - 35 - 64*27+ 20*11,
 						      "ground");
 			//makeShadowRectangle(int topLeftDudePosX, int topLeftDudePosY, int spreadX, int spreadY, int numDudesWidth, int numDudesHeight, float speed, boolean clockwise)
-			makeShadowRectangle(11500 + -200 + 50 - 170 + 100 - 5-15 ,
-				      1150-30 - 35 - 32 - 64*27 + 20*11 - 155, 
+			makeShadowRectangle(13232 + -200 + 50 - 170 + 100 - 5-15 ,
+				      1725-30 - 35 - 32 - 64*27 + 20*11 - 155, 
 				      115,
 				      110,
 				      5,
 				      2,
 				      0.6f,
 				      true);
-			u = new lightDude(11500 + -200 + 50 - 170 + 210,1150-30 - 35 - 32 - 64*27 + 20*11 - 45);
+			u = new lightDude(13232 + -200 + 50 - 170 + 210,1725-30 - 35 - 32 - 64*27 + 20*11 - 45);
 			u.setFacingDirection("Left");
-			u = new lightDude(11500 + -200 + 50 - 170 + 210+180,1150-30 - 35 - 32 - 64*27 + 20*11 - 45);
+			u = new lightDude(13232 + -200 + 50 - 170 + 210+180,1725-30 - 35 - 32 - 64*27 + 20*11 - 45);
 			u.setFacingDirection("Left");
-			u = new lightDude(11500 + -200 + 70 - 170 + 210+180,1150-30 - 35 - 32 - 64*27 + 20*11 - 45-110);
+			u = new lightDude(13232 + -200 + 70 - 170 + 210+180,1725-30 - 35 - 32 - 64*27 + 20*11 - 45-110);
 			u.setFacingDirection("Right");
-			u = new lightDude(11500 + -300 - 170 + 210+180,1150-30 - 35 - 32 - 64*27 + 20*11 - 45-110);
+			u = new lightDude(13232 + -300 - 170 + 210+180,1725-30 - 35 - 32 - 64*27 + 20*11 - 45-110);
 			u.setFacingDirection("Right");
 					
 			
 			// Nineteen third
-			spawnReloadableTombRect(11500 + -200 ,
-					  1150-30 - 35 - 32 - 64*29 + 20*12,
-				      11500 + 150,
-				      1150-30 - 35 - 64*29+ 20*12,
+			spawnReloadableTombRect(13232 + -200 ,
+					  1725-30 - 35 - 32 - 64*29 + 20*12,
+				      13232 + 150,
+				      1725-30 - 35 - 64*29+ 20*12,
 						      "ground");
 			
 			
 			// Nineteen fourth
-			spawnReloadableTombRect(11500 + -200 + 50 ,
-					1150-30 - 35 - 32 - 64*31 + 20*13,
-				      11500 + 150 + 80,
-				      1150-30 - 35 - 64*31+ 20*13,
+			spawnReloadableTombRect(13232 + -200 + 50 ,
+					1725-30 - 35 - 32 - 64*31 + 20*13,
+				      13232 + 150 + 80,
+				      1725-30 - 35 - 64*31+ 20*13,
 						      "ground");
-			u = new lightDude(11500 + -300 - 170 + 210+140,1150-30 - 35 - 32 - 64*27 + 20*11 - 45-110*2 + 2);
+			u = new lightDude(13232 + -300 - 170 + 210+140,1725-30 - 35 - 32 - 64*27 + 20*11 - 45-110*2 + 2);
 			u.setFacingDirection("Left");
-			u = new lightDude(11500 + -300 - 170 + 210+300,1150-30 - 35 - 32 - 64*27 + 20*11 - 45-110*2 + 2);
+			u = new lightDude(13232 + -300 - 170 + 210+300,1725-30 - 35 - 32 - 64*27 + 20*11 - 45-110*2 + 2);
 			u.setFacingDirection("Left");
 			
 			// Fast guy
-			u = new shadowDude(11500 + -300 - 210 + 210+140,1150-30 - 35 - 32 - 64*27 + 20*11 - 45-110*2 + 2);
+			u = new shadowDude(13232 + -300 - 210 + 210+140,1725-30 - 35 - 32 - 64*27 + 20*11 - 45-110*2 + 2);
 			commands = new commandList();
-			commands.add(new moveCommand(11500 + -200 - 170 + 400+140,1150-30 - 35 - 32 - 64*27 + 20*11 - 45-110*2 + 2));
-			commands.add(new moveCommand(11500 + -300 - 210 + 210+140,1150-30 - 35 - 32 - 64*27 + 20*11 - 45-110*2 + 2));
+			commands.add(new moveCommand(13232 + -200 - 170 + 400+140,1725-30 - 35 - 32 - 64*27 + 20*11 - 45-110*2 + 2));
+			commands.add(new moveCommand(13232 + -300 - 210 + 210+140,1725-30 - 35 - 32 - 64*27 + 20*11 - 45-110*2 + 2));
 			u.repeatCommands(commands);
 			u.setMoveSpeed(5);
 			
 	
 			
 			// Nineteen fifth
-			spawnReloadableTombRect(11500 + -200 ,
-					1150-30 - 35 - 32 - 64*33 + 20*14,
-				      11500 + 150,
-				      1150-30 - 35 - 64*33+ 20*14,
+			spawnReloadableTombRect(13232 + -200 ,
+					1725-30 - 35 - 32 - 64*33 + 20*14,
+				      13232 + 150,
+				      1725-30 - 35 - 64*33+ 20*14,
 						      "ground");
 			
 			for(int i = 0; i < 6; i++) {
-				u = new shadowDude(11500 + -200 ,
-						1150-30 - 35 - 32 - 64*33 + 20*14-47 - i*50);
+				u = new shadowDude(13232 + -200 ,
+						1725-30 - 35 - 32 - 64*33 + 20*14-47 - i*50);
 				commands = new commandList();
-				commands.add(new moveCommand(11500+200,
-						1150-30 - 35 - 32 - 64*33 + 20*14-47 - i*50));
+				commands.add(new moveCommand(13232+200,
+						1725-30 - 35 - 32 - 64*33 + 20*14-47 - i*50));
 				commands.add(new moveCommand(
-						11500 + -200 ,
-						1150-30 - 35 - 32 - 64*33 + 20*14-47 - i*50));
+						13232 + -200 ,
+						1725-30 - 35 - 32 - 64*33 + 20*14-47 - i*50));
 				u.repeatCommands(commands);
 				u.setMoveSpeed(1);
 			}
 			
-			u = new lightDude(11500+100,
-					1150-30 - 35 - 32 - 64*33 + 20*14-47);
+			u = new lightDude(13232+100,
+					1725-30 - 35 - 32 - 64*33 + 20*14-47);
 			commands = new commandList();
-			commands.add(new moveCommand(11500 + -200 ,
-					1150-30 - 35 - 32 - 64*33 + 20*14-47));
+			commands.add(new moveCommand(13232 + -200 ,
+					1725-30 - 35 - 32 - 64*33 + 20*14-47));
 			commands.add(new moveCommand(
-					11500+100,
-					1150-30 - 35 - 32 - 64*33 + 20*14-47));
+					13232+100,
+					1725-30 - 35 - 32 - 64*33 + 20*14-47));
 			u.repeatCommands(commands);
 			u.setMoveSpeed(3.5f);
 			
 			// Nineteen Sixth
-			spawnReloadableTombRect(11500 + -200 + 50 ,
-					1150-30 - 35 - 32 - 64*35 + 20*15,
-				      11500 + 150 + 80,
-				      1150-30 - 35 - 64*35+ 20*15,
+			spawnReloadableTombRect(13232 + -200 + 50 ,
+					1725-30 - 35 - 32 - 64*35 + 20*15,
+				      13232 + 150 + 80,
+				      1725-30 - 35 - 64*35+ 20*15,
 						      "ground");
-			u = new lightDude(11500-130,
-					1150-30 - 35 - 32 - 64*35 + 20*15 - 47);
+			u = new lightDude(13232-130,
+					1725-30 - 35 - 32 - 64*35 + 20*15 - 47);
 			u.setFacingDirection("Left");
 			
 			// Nineteen seventh
-			spawnReloadableTombRect(11500 + -200 ,
-					1150-30 - 35 - 32 - 64*37 + 20*16,
-				      11500 + 150,
-				      1150-30 - 35 - 64*37+ 20*16,
+			spawnReloadableTombRect(13232 + -200 ,
+					1725-30 - 35 - 32 - 64*37 + 20*16,
+				      13232 + 150,
+				      1725-30 - 35 - 64*37+ 20*16,
 						      "ground");
-			u = new lightDude(11500-130,
-					1150-30 - 35 - 32 - 64*37 + 20*16 - 47);
+			u = new lightDude(13232-130,
+					1725-30 - 35 - 32 - 64*37 + 20*16 - 47);
 			u.setFacingDirection("Right");
 			
 			// Nineteen eighth
-			spawnReloadableTombRect(11500 + -200 + 50 ,
-					1150-30 - 35 - 32 - 64*39 + 20*17,
-				      11500 + 150 + 80,
-				      1150-30 - 35 - 64*39+ 20*17,
+			spawnReloadableTombRect(13232 + -200 + 50 ,
+					1725-30 - 35 - 32 - 64*39 + 20*17,
+				      13232 + 150 + 80,
+				      1725-30 - 35 - 64*39+ 20*17,
 						      "ground");
 			
 			// 20th
 			// Right
-			spawnReloadableTombRect(11500+100,
+			spawnReloadableTombRect(13232+100,
 					-1103-170,
-				    11500 + 100 + 32,
+				    13232 + 100 + 32,
 				    -1103-170+ 32,
 					"ground");
 			
 			// Middle
-			spawnReloadableTombRect(11500-20,
+			spawnReloadableTombRect(13232-20,
 					-1103-170-40,
-				    11500 - 30 + 32+10,
+				    13232 - 30 + 32+10,
 				    -1103-170+ -40 + 32,
 					"ground");
 			
 			// End the wall on right.
-			spawnReloadableTombRect(11500+200,
+			spawnReloadableTombRect(13232+200,
 					-1103-70,
-				    11500 + 200 + 32,
+				    13232 + 200 + 32,
 				    -1103-60+ 32*3,
 					"ground");
 			
 			// End the wall on Left
-				spawnReloadableTombRect(11500-200-28,
+				spawnReloadableTombRect(13232-200-28,
 							-1103-200,
-						    11500-180,
+						    13232-180,
 						    -1103-60+ 32*3,
 							"ground");
 				
 			// 22
 				
 			// Left
-			spawnReloadableTombRect(11500-140,
+			spawnReloadableTombRect(13232-140,
 					-1103-300-10,
-				    11500-32,
+				    13232-32,
 				    -1103-300-10+ 32,
 					"ground");
 			
 			// Right
-			spawnReloadableTombRect(11500 + 64-32,
+			spawnReloadableTombRect(13232 + 64-32,
 					-1103-300-20-32-10,
-				    11500 + 64 + 32*3,
+				    13232 + 64 + 32*3,
 				    -1103-300+ 32-20-32,
 					"ground");
 			
 			for(int i = 0; i < 8; i++) {
-				u = new shadowDude(11500,
+				u = new shadowDude(13232,
 					-1103-300-40 - 47 - i*50);
 			}
-			u = new lightDude(11500,
+			u = new lightDude(13232,
 					-1103-300-40 - 47);
 			commands = new commandList();
-			commands.add(new moveCommand(11500,
+			commands.add(new moveCommand(13232,
 					-1103-300-40 - 47 - 8*50));
 			commands.add(new moveCommand(
-					11500,
+					13232,
 					-1103-300-40 - 47));
 			u.repeatCommands(commands);
 			u.setMoveSpeed(2);
 			
 			// 23
-			spawnReloadableTombRect(11500 + 64+20-32,
+			spawnReloadableTombRect(13232 + 64+20-32,
 					-1103-300-20-32-140+20+10,
-				    11500 + 20+64,
+				    13232 + 20+64,
 				    -1103-300+ 32-20-32-140+20+10,
 					"ground");
 			
 			// 24
-			spawnReloadableTombRect(11500 -32-20+20,
+			spawnReloadableTombRect(13232 -32-20+20,
 					-1103-300-20-32-250+30+20,
-				    11500-20+20,
+				    13232-20+20,
 				    -1103-300+ 32-20-32-250+30+20,
 					"ground");
 			
 			// End
-			spawnReloadableTombRect(11500 + 64+20-32,
+			spawnReloadableTombRect(13232 + 64+20-32,
 					-1103-300-20-32-340+20+30,
-				    11500 + 20+200,
+				    13232 + 20+200,
 				    -1103-300+ 32-20-32-340+20+30,
 					"ground");
-			stairsUp tombExit = new stairsUp(11500 + 64+20-32+130,-1103-300-20-32-340+20-47+30,0,forest.getZone(),-394,-3915,"Left");
+			stairsUp tombExit = new stairsUp(13232 + 64+20-32+130,-1103-300-20-32-340+20-47+30,0,forest.getZone(),-394,-3915,"Left");
 			tombExit.setZ(-1);
 			
 			elevatorLoaded = true;
@@ -1222,17 +1225,17 @@ public class farmTombEasy extends zone {
 	// Deal with the first well we encounters.
 	public void dealWithRegionStuff() {
 		player currPlayer = player.getPlayer();
-		if(currPlayer != null && currPlayer.isWithin(10966,744,10966+1500,1268) && shadowElevatorStarted!=null && !shadowElevatorStarted.isCompleted()) {
-			shadowElevatorStarted.setCompleted(true);
-			shadowElevatorFirstTime = true;
-		}
+		//if(currPlayer != null && currPlayer.isWithin(13232,1000,13232+1500,1800) && shadowElevatorStarted!=null && !shadowElevatorStarted.isCompleted()) {
+		//	shadowElevatorStarted.setCompleted(true);
+		//	shadowElevatorFirstTime = true;
+		//}
 	}
 	
 	// Deal with shadow elevator stuff
 	public void dealWithShadowElevatorStuff() {
 		
 		// It's game time, bro!! turner!! wooo!
-		if(shadowElevatorStarted!=null && shadowElevatorStarted.isCompleted()) {
+		/*if(shadowElevatorStarted!=null && shadowElevatorStarted.isCompleted()) {
 
 			if(!shadowElevatorInitiated && zoneLoaded) {
 				
@@ -1249,7 +1252,7 @@ public class farmTombEasy extends zone {
 					shadowElevatorInitiated = true;
 				}
 			}
-		}
+		}*/
 		
 	}
 	
