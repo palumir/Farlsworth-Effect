@@ -206,7 +206,7 @@ public class playerOne extends boss {
 					interactSequence.getTheText().getTextOnPress().contains("understand")) {
 				
 				// Move player.
-				currPlayer.setDoubleX(11500);
+				currPlayer.setDoubleX(13232);
 				
 				// Save.
 				saveState.setQuiet(true);
