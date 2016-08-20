@@ -100,6 +100,12 @@ public class lightDude extends unit {
 	public void updateUnit() {
 	}
 	
+	// Respond to destroy
+	@Override
+	public void respondToDestroy() {
+		light.destroy();
+	}
+	
 	// Draw the unit. 
 	@Override
 	public void drawObject(Graphics g) {

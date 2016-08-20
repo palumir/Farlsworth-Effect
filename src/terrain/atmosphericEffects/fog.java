@@ -54,15 +54,7 @@ public class fog extends atmosphericEffect {
 			g2.setPaint(black);
 			g2.fillRect(0,0,gameCanvas.getActualWidth(),gameCanvas.getActualHeight());
 			
-			// Draw the lightsources.
-			g2.setComposite(AlphaComposite.Clear);
-			for(int i = 0; i < lightSource.lightSources.size(); i++) {
-				lightSource l = lightSource.lightSources.get(i);
-				g2.fillOval(l.getDrawX() + (int)(gameCanvas.getScaleX()*(l.getWidth()/2 - l.getLightRadius())), 
-						l.getDrawY() + (int)(gameCanvas.getScaleY()*(l.getHeight()/2 - l.getLightRadius())), 
-						(int)(gameCanvas.getScaleX()*(l.getLightRadius()*2)), 
-						(int)( gameCanvas.getScaleY()*(l.getLightRadius()*2)));
-			}
+			lightSource.drawLightSources(g2);
 			
 			g.drawImage(img,0,0,null);
 		}
