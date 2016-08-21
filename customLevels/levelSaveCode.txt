@@ -1,11 +1,4 @@
 public void addSegment0() {
-new terrain.chunkTypes.grass(662,-3879,0);
-new terrain.chunkTypes.grass(694,-3879,0);
-new terrain.chunkTypes.grass(726,-3879,0);
-new terrain.chunkTypes.grass(758,-3879,0);
-new terrain.chunkTypes.grass(790,-3879,0);
-new terrain.chunkTypes.grass(822,-3879,0);
-new terrain.chunkTypes.grass(854,-3879,0);
 new terrain.chunkTypes.grass(886,-3879,0);
 new terrain.chunkTypes.grass(918,-3879,0);
 new terrain.chunkTypes.grass(950,-3879,0);
@@ -28,13 +21,6 @@ new terrain.chunkTypes.grass(1462,-3879,0);
 new terrain.chunkTypes.grass(1494,-3879,0);
 new terrain.chunkTypes.grass(1526,-3879,0);
 new terrain.chunkTypes.grass(1558,-3879,0);
-new terrain.chunkTypes.grass(662,-3847,0);
-new terrain.chunkTypes.grass(694,-3847,0);
-new terrain.chunkTypes.grass(726,-3847,0);
-new terrain.chunkTypes.grass(758,-3847,0);
-new terrain.chunkTypes.grass(790,-3847,0);
-new terrain.chunkTypes.grass(822,-3847,0);
-new terrain.chunkTypes.grass(854,-3847,0);
 new terrain.chunkTypes.grass(886,-3847,0);
 new terrain.chunkTypes.grass(918,-3847,0);
 new terrain.chunkTypes.grass(950,-3847,0);
@@ -49,9 +35,6 @@ new terrain.chunkTypes.grass(1206,-3847,0);
 new terrain.chunkTypes.grass(1238,-3847,0);
 new terrain.chunkTypes.grass(1270,-3847,0);
 new terrain.chunkTypes.grass(1302,-3847,0);
-}
-
-public void addSegment1() {
 new terrain.chunkTypes.grass(1334,-3847,0);
 new terrain.chunkTypes.grass(1366,-3847,0);
 new terrain.chunkTypes.grass(1398,-3847,0);
@@ -60,19 +43,15 @@ new terrain.chunkTypes.grass(1462,-3847,0);
 new terrain.chunkTypes.grass(1494,-3847,0);
 new terrain.chunkTypes.grass(1526,-3847,0);
 new terrain.chunkTypes.grass(1558,-3847,0);
-new terrain.chunkTypes.grass(662,-3815,0);
-new terrain.chunkTypes.grass(694,-3815,0);
-new terrain.chunkTypes.grass(726,-3815,0);
-new terrain.chunkTypes.grass(758,-3815,0);
-new terrain.chunkTypes.grass(790,-3815,0);
-new terrain.chunkTypes.grass(822,-3815,0);
-new terrain.chunkTypes.grass(854,-3815,0);
 new terrain.chunkTypes.grass(886,-3815,0);
 new terrain.chunkTypes.grass(918,-3815,0);
 new terrain.chunkTypes.grass(950,-3815,0);
 new terrain.chunkTypes.grass(982,-3815,0);
 new terrain.chunkTypes.grass(1014,-3815,0);
 new terrain.chunkTypes.grass(1046,-3815,0);
+}
+
+public void addSegment1() {
 new terrain.chunkTypes.grass(1078,-3815,0);
 new terrain.chunkTypes.grass(1110,-3815,0);
 new terrain.chunkTypes.grass(1142,-3815,0);
@@ -89,22 +68,12 @@ new terrain.chunkTypes.grass(1462,-3815,0);
 new terrain.chunkTypes.grass(1494,-3815,0);
 new terrain.chunkTypes.grass(1526,-3815,0);
 new terrain.chunkTypes.grass(1558,-3815,0);
-new terrain.chunkTypes.grass(662,-3783,0);
-new terrain.chunkTypes.grass(694,-3783,0);
-new terrain.chunkTypes.grass(726,-3783,0);
-new terrain.chunkTypes.grass(758,-3783,0);
-new terrain.chunkTypes.grass(790,-3783,0);
-new terrain.chunkTypes.grass(822,-3783,0);
-new terrain.chunkTypes.grass(854,-3783,0);
 new terrain.chunkTypes.grass(886,-3783,0);
 new terrain.chunkTypes.grass(918,-3783,0);
 new terrain.chunkTypes.grass(950,-3783,0);
 new terrain.chunkTypes.grass(982,-3783,0);
 new terrain.chunkTypes.grass(1014,-3783,0);
 new terrain.chunkTypes.grass(1046,-3783,0);
-}
-
-public void addSegment2() {
 new terrain.chunkTypes.grass(1078,-3783,0);
 new terrain.chunkTypes.grass(1110,-3783,0);
 new terrain.chunkTypes.grass(1142,-3783,0);
@@ -121,13 +90,6 @@ new terrain.chunkTypes.grass(1462,-3783,0);
 new terrain.chunkTypes.grass(1494,-3783,0);
 new terrain.chunkTypes.grass(1526,-3783,0);
 new terrain.chunkTypes.grass(1558,-3783,0);
-new terrain.chunkTypes.grass(662,-3751,0);
-new terrain.chunkTypes.grass(694,-3751,0);
-new terrain.chunkTypes.grass(726,-3751,0);
-new terrain.chunkTypes.grass(758,-3751,0);
-new terrain.chunkTypes.grass(790,-3751,0);
-new terrain.chunkTypes.grass(822,-3751,0);
-new terrain.chunkTypes.grass(854,-3751,0);
 new terrain.chunkTypes.grass(886,-3751,0);
 new terrain.chunkTypes.grass(918,-3751,0);
 new terrain.chunkTypes.grass(950,-3751,0);
@@ -140,6 +102,9 @@ new terrain.chunkTypes.grass(1142,-3751,0);
 new terrain.chunkTypes.grass(1174,-3751,0);
 new terrain.chunkTypes.grass(1206,-3751,0);
 new terrain.chunkTypes.grass(1238,-3751,0);
+}
+
+public void addSegment2() {
 new terrain.chunkTypes.grass(1270,-3751,0);
 new terrain.chunkTypes.grass(1302,-3751,0);
 new terrain.chunkTypes.grass(1334,-3751,0);
@@ -155,9 +120,6 @@ new terrain.chunkTypes.grass(694,-3719,0);
 new terrain.chunkTypes.grass(726,-3719,0);
 new terrain.chunkTypes.grass(758,-3719,0);
 new terrain.chunkTypes.grass(790,-3719,0);
-}
-
-public void addSegment3() {
 new terrain.chunkTypes.grass(822,-3719,0);
 new terrain.chunkTypes.grass(854,-3719,0);
 new terrain.chunkTypes.grass(886,-3719,0);
@@ -193,6 +155,9 @@ new terrain.chunkTypes.grass(886,-3687,0);
 new terrain.chunkTypes.grass(918,-3687,0);
 new terrain.chunkTypes.grass(950,-3687,0);
 new terrain.chunkTypes.grass(982,-3687,0);
+}
+
+public void addSegment3() {
 new terrain.chunkTypes.grass(1014,-3687,0);
 new terrain.chunkTypes.grass(1046,-3687,0);
 new terrain.chunkTypes.grass(1078,-3687,0);
@@ -208,9 +173,6 @@ new terrain.chunkTypes.grass(1366,-3687,0);
 new terrain.chunkTypes.grass(1398,-3687,0);
 new terrain.chunkTypes.grass(1430,-3687,0);
 new terrain.chunkTypes.grass(1462,-3687,0);
-}
-
-public void addSegment4() {
 new terrain.chunkTypes.grass(1494,-3687,0);
 new terrain.chunkTypes.grass(1526,-3687,0);
 new terrain.chunkTypes.grass(1558,-3687,0);
@@ -246,6 +208,9 @@ new terrain.chunkTypes.grass(1558,-3655,0);
 new terrain.chunkTypes.grass(662,-3623,0);
 new terrain.chunkTypes.grass(694,-3623,0);
 new terrain.chunkTypes.grass(726,-3623,0);
+}
+
+public void addSegment4() {
 new terrain.chunkTypes.grass(758,-3623,0);
 new terrain.chunkTypes.grass(790,-3623,0);
 new terrain.chunkTypes.grass(822,-3623,0);
@@ -261,9 +226,6 @@ new terrain.chunkTypes.grass(1110,-3623,0);
 new terrain.chunkTypes.grass(1142,-3623,0);
 new terrain.chunkTypes.grass(1174,-3623,0);
 new terrain.chunkTypes.grass(1206,-3623,0);
-}
-
-public void addSegment5() {
 new terrain.chunkTypes.grass(1238,-3623,0);
 new terrain.chunkTypes.grass(1270,-3623,0);
 new terrain.chunkTypes.grass(1302,-3623,0);
@@ -299,6 +261,9 @@ new terrain.chunkTypes.grass(1302,-3591,0);
 new terrain.chunkTypes.grass(1334,-3591,0);
 new terrain.chunkTypes.grass(1366,-3591,0);
 new terrain.chunkTypes.grass(1398,-3591,0);
+}
+
+public void addSegment5() {
 new terrain.chunkTypes.grass(1430,-3591,0);
 new terrain.chunkTypes.grass(1462,-3591,0);
 new terrain.chunkTypes.grass(1494,-3591,0);
@@ -314,9 +279,6 @@ new terrain.chunkTypes.grass(854,-3559,0);
 new terrain.chunkTypes.grass(886,-3559,0);
 new terrain.chunkTypes.grass(918,-3559,0);
 new terrain.chunkTypes.grass(950,-3559,0);
-}
-
-public void addSegment6() {
 new terrain.chunkTypes.grass(982,-3559,0);
 new terrain.chunkTypes.grass(1014,-3559,0);
 new terrain.chunkTypes.grass(1046,-3559,0);
@@ -352,6 +314,9 @@ new terrain.chunkTypes.grass(1046,-3527,0);
 new terrain.chunkTypes.grass(1078,-3527,0);
 new terrain.chunkTypes.grass(1110,-3527,0);
 new terrain.chunkTypes.grass(1142,-3527,0);
+}
+
+public void addSegment6() {
 new terrain.chunkTypes.grass(1174,-3527,0);
 new terrain.chunkTypes.grass(1206,-3527,0);
 new terrain.chunkTypes.grass(1238,-3527,0);
@@ -367,9 +332,6 @@ new terrain.chunkTypes.grass(1526,-3527,0);
 new terrain.chunkTypes.grass(1558,-3527,0);
 new terrain.chunkTypes.grass(662,-3495,0);
 new terrain.chunkTypes.grass(694,-3495,0);
-}
-
-public void addSegment7() {
 new terrain.chunkTypes.grass(726,-3495,0);
 new terrain.chunkTypes.grass(758,-3495,0);
 new terrain.chunkTypes.grass(790,-3495,0);
@@ -405,6 +367,9 @@ new terrain.chunkTypes.grass(790,-3463,0);
 new terrain.chunkTypes.grass(822,-3463,0);
 new terrain.chunkTypes.grass(854,-3463,0);
 new terrain.chunkTypes.grass(886,-3463,0);
+}
+
+public void addSegment7() {
 new terrain.chunkTypes.grass(918,-3463,0);
 new terrain.chunkTypes.grass(950,-3463,0);
 new terrain.chunkTypes.grass(982,-3463,0);
@@ -420,9 +385,6 @@ new terrain.chunkTypes.grass(1270,-3463,0);
 new terrain.chunkTypes.grass(1302,-3463,0);
 new terrain.chunkTypes.grass(1334,-3463,0);
 new terrain.chunkTypes.grass(1366,-3463,0);
-}
-
-public void addSegment8() {
 new terrain.chunkTypes.grass(1398,-3463,0);
 new terrain.chunkTypes.grass(1430,-3463,0);
 new terrain.chunkTypes.grass(1462,-3463,0);
@@ -458,6 +420,9 @@ new terrain.chunkTypes.grass(1462,-3431,0);
 new terrain.chunkTypes.grass(1494,-3431,0);
 new terrain.chunkTypes.grass(1526,-3431,0);
 new terrain.chunkTypes.grass(1558,-3431,0);
+}
+
+public void addSegment8() {
 new terrain.chunkTypes.grass(662,-3399,0);
 new terrain.chunkTypes.grass(694,-3399,0);
 new terrain.chunkTypes.grass(726,-3399,0);
@@ -473,9 +438,6 @@ new terrain.chunkTypes.grass(1014,-3399,0);
 new terrain.chunkTypes.grass(1046,-3399,0);
 new terrain.chunkTypes.grass(1078,-3399,0);
 new terrain.chunkTypes.grass(1110,-3399,0);
-}
-
-public void addSegment9() {
 new terrain.chunkTypes.grass(1142,-3399,0);
 new terrain.chunkTypes.grass(1174,-3399,0);
 new terrain.chunkTypes.grass(1206,-3399,0);
@@ -511,6 +473,9 @@ new terrain.chunkTypes.grass(1206,-3367,0);
 new terrain.chunkTypes.grass(1238,-3367,0);
 new terrain.chunkTypes.grass(1270,-3367,0);
 new terrain.chunkTypes.grass(1302,-3367,0);
+}
+
+public void addSegment9() {
 new terrain.chunkTypes.grass(1334,-3367,0);
 new terrain.chunkTypes.grass(1366,-3367,0);
 new terrain.chunkTypes.grass(1398,-3367,0);
@@ -526,9 +491,6 @@ new terrain.chunkTypes.grass(758,-3335,0);
 new terrain.chunkTypes.grass(790,-3335,0);
 new terrain.chunkTypes.grass(822,-3335,0);
 new terrain.chunkTypes.grass(854,-3335,0);
-}
-
-public void addSegment10() {
 new terrain.chunkTypes.grass(886,-3335,0);
 new terrain.chunkTypes.grass(918,-3335,0);
 new terrain.chunkTypes.grass(950,-3335,0);
@@ -564,6 +526,9 @@ new terrain.chunkTypes.grass(950,-3303,0);
 new terrain.chunkTypes.grass(982,-3303,0);
 new terrain.chunkTypes.grass(1014,-3303,0);
 new terrain.chunkTypes.grass(1046,-3303,0);
+}
+
+public void addSegment10() {
 new terrain.chunkTypes.grass(1078,-3303,0);
 new terrain.chunkTypes.grass(1110,-3303,0);
 new terrain.chunkTypes.grass(1142,-3303,0);
@@ -579,9 +544,6 @@ new terrain.chunkTypes.grass(1430,-3303,0);
 new terrain.chunkTypes.grass(1462,-3303,0);
 new terrain.chunkTypes.grass(1494,-3303,0);
 new terrain.chunkTypes.grass(1526,-3303,0);
-}
-
-public void addSegment11() {
 new terrain.chunkTypes.grass(1558,-3303,0);
 new terrain.chunkTypes.grass(662,-3271,0);
 new terrain.chunkTypes.grass(694,-3271,0);
@@ -617,6 +579,9 @@ new terrain.chunkTypes.grass(694,-3239,0);
 new terrain.chunkTypes.grass(726,-3239,0);
 new terrain.chunkTypes.grass(758,-3239,0);
 new terrain.chunkTypes.grass(790,-3239,0);
+}
+
+public void addSegment11() {
 new terrain.chunkTypes.grass(822,-3239,0);
 new terrain.chunkTypes.grass(854,-3239,0);
 new terrain.chunkTypes.grass(886,-3239,0);
@@ -632,9 +597,6 @@ new terrain.chunkTypes.grass(1174,-3239,0);
 new terrain.chunkTypes.grass(1206,-3239,0);
 new terrain.chunkTypes.grass(1238,-3239,0);
 new terrain.chunkTypes.grass(1270,-3239,0);
-}
-
-public void addSegment12() {
 new terrain.chunkTypes.grass(1302,-3239,0);
 new terrain.chunkTypes.grass(1334,-3239,0);
 new terrain.chunkTypes.grass(1366,-3239,0);
@@ -670,6 +632,9 @@ new terrain.chunkTypes.grass(1366,-3207,0);
 new terrain.chunkTypes.grass(1398,-3207,0);
 new terrain.chunkTypes.grass(1430,-3207,0);
 new terrain.chunkTypes.grass(1462,-3207,0);
+}
+
+public void addSegment12() {
 new terrain.chunkTypes.grass(1494,-3207,0);
 new terrain.chunkTypes.grass(1526,-3207,0);
 new terrain.chunkTypes.grass(1558,-3207,0);
@@ -685,9 +650,6 @@ new terrain.chunkTypes.grass(918,-3175,0);
 new terrain.chunkTypes.grass(950,-3175,0);
 new terrain.chunkTypes.grass(982,-3175,0);
 new terrain.chunkTypes.grass(1014,-3175,0);
-}
-
-public void addSegment13() {
 new terrain.chunkTypes.grass(1046,-3175,0);
 new terrain.chunkTypes.grass(1078,-3175,0);
 new terrain.chunkTypes.grass(1110,-3175,0);
@@ -723,6 +685,9 @@ new terrain.chunkTypes.grass(1110,-3143,0);
 new terrain.chunkTypes.grass(1142,-3143,0);
 new terrain.chunkTypes.grass(1174,-3143,0);
 new terrain.chunkTypes.grass(1206,-3143,0);
+}
+
+public void addSegment13() {
 new terrain.chunkTypes.grass(1238,-3143,0);
 new terrain.chunkTypes.grass(1270,-3143,0);
 new terrain.chunkTypes.grass(1302,-3143,0);
@@ -738,9 +703,6 @@ new terrain.chunkTypes.grass(662,-3111,0);
 new terrain.chunkTypes.grass(694,-3111,0);
 new terrain.chunkTypes.grass(726,-3111,0);
 new terrain.chunkTypes.grass(758,-3111,0);
-}
-
-public void addSegment14() {
 new terrain.chunkTypes.grass(790,-3111,0);
 new terrain.chunkTypes.grass(822,-3111,0);
 new terrain.chunkTypes.grass(854,-3111,0);
@@ -776,6 +738,9 @@ new terrain.chunkTypes.grass(854,-3079,0);
 new terrain.chunkTypes.grass(886,-3079,0);
 new terrain.chunkTypes.grass(918,-3079,0);
 new terrain.chunkTypes.grass(950,-3079,0);
+}
+
+public void addSegment14() {
 new terrain.chunkTypes.grass(982,-3079,0);
 new terrain.chunkTypes.grass(1014,-3079,0);
 new terrain.chunkTypes.grass(1046,-3079,0);
@@ -791,9 +756,6 @@ new terrain.chunkTypes.grass(1334,-3079,0);
 new terrain.chunkTypes.grass(1366,-3079,0);
 new terrain.chunkTypes.grass(1398,-3079,0);
 new terrain.chunkTypes.grass(1430,-3079,0);
-}
-
-public void addSegment15() {
 new terrain.chunkTypes.grass(1462,-3079,0);
 new terrain.chunkTypes.grass(1494,-3079,0);
 new terrain.chunkTypes.grass(1526,-3079,0);
@@ -829,6 +791,9 @@ new terrain.chunkTypes.grass(1526,-3047,0);
 new terrain.chunkTypes.grass(1558,-3047,0);
 new terrain.chunkTypes.grass(662,-3015,0);
 new terrain.chunkTypes.grass(694,-3015,0);
+}
+
+public void addSegment15() {
 new terrain.chunkTypes.grass(726,-3015,0);
 new terrain.chunkTypes.grass(758,-3015,0);
 new terrain.chunkTypes.grass(790,-3015,0);
@@ -844,9 +809,6 @@ new terrain.chunkTypes.grass(1078,-3015,0);
 new terrain.chunkTypes.grass(1110,-3015,0);
 new terrain.chunkTypes.grass(1142,-3015,0);
 new terrain.chunkTypes.grass(1174,-3015,0);
-}
-
-public void addSegment16() {
 new terrain.chunkTypes.grass(1206,-3015,0);
 new terrain.chunkTypes.grass(1238,-3015,0);
 new terrain.chunkTypes.grass(1270,-3015,0);
@@ -882,6 +844,9 @@ new terrain.chunkTypes.grass(1270,-2983,0);
 new terrain.chunkTypes.grass(1302,-2983,0);
 new terrain.chunkTypes.grass(1334,-2983,0);
 new terrain.chunkTypes.grass(1366,-2983,0);
+}
+
+public void addSegment16() {
 new terrain.chunkTypes.grass(1398,-2983,0);
 new terrain.chunkTypes.grass(1430,-2983,0);
 new terrain.chunkTypes.grass(1462,-2983,0);
@@ -897,9 +862,6 @@ new terrain.chunkTypes.grass(822,-2951,0);
 new terrain.chunkTypes.grass(854,-2951,0);
 new terrain.chunkTypes.grass(886,-2951,0);
 new terrain.chunkTypes.grass(918,-2951,0);
-}
-
-public void addSegment17() {
 new terrain.chunkTypes.grass(950,-2951,0);
 new terrain.chunkTypes.grass(982,-2951,0);
 new terrain.chunkTypes.grass(1014,-2951,0);
@@ -935,6 +897,9 @@ new terrain.chunkTypes.grass(1014,-2919,0);
 new terrain.chunkTypes.grass(1046,-2919,0);
 new terrain.chunkTypes.grass(1078,-2919,0);
 new terrain.chunkTypes.grass(1110,-2919,0);
+}
+
+public void addSegment17() {
 new terrain.chunkTypes.grass(1142,-2919,0);
 new terrain.chunkTypes.grass(1174,-2919,0);
 new terrain.chunkTypes.grass(1206,-2919,0);
@@ -950,9 +915,6 @@ new terrain.chunkTypes.grass(1494,-2919,0);
 new terrain.chunkTypes.grass(1526,-2919,0);
 new terrain.chunkTypes.grass(1558,-2919,0);
 new terrain.chunkTypes.grass(662,-2887,0);
-}
-
-public void addSegment18() {
 new terrain.chunkTypes.grass(694,-2887,0);
 new terrain.chunkTypes.grass(726,-2887,0);
 new terrain.chunkTypes.grass(758,-2887,0);
@@ -988,6 +950,9 @@ new terrain.chunkTypes.grass(758,-2855,0);
 new terrain.chunkTypes.grass(790,-2855,0);
 new terrain.chunkTypes.grass(822,-2855,0);
 new terrain.chunkTypes.grass(854,-2855,0);
+}
+
+public void addSegment18() {
 new terrain.chunkTypes.grass(886,-2855,0);
 new terrain.chunkTypes.grass(918,-2855,0);
 new terrain.chunkTypes.grass(950,-2855,0);
@@ -1003,9 +968,6 @@ new terrain.chunkTypes.grass(1238,-2855,0);
 new terrain.chunkTypes.grass(1270,-2855,0);
 new terrain.chunkTypes.grass(1302,-2855,0);
 new terrain.chunkTypes.grass(1334,-2855,0);
-}
-
-public void addSegment19() {
 new terrain.chunkTypes.grass(1366,-2855,0);
 new terrain.chunkTypes.grass(1398,-2855,0);
 new terrain.chunkTypes.grass(1430,-2855,0);
@@ -1041,6 +1003,9 @@ new terrain.chunkTypes.grass(1430,-2823,0);
 new terrain.chunkTypes.grass(1462,-2823,0);
 new terrain.chunkTypes.grass(1494,-2823,0);
 new terrain.chunkTypes.grass(1526,-2823,0);
+}
+
+public void addSegment19() {
 new terrain.chunkTypes.grass(1558,-2823,0);
 new terrain.chunkTypes.grass(214,-2791,0);
 new terrain.chunkTypes.grass(246,-2791,0);
@@ -1056,9 +1021,6 @@ new terrain.chunkTypes.grass(534,-2791,0);
 new terrain.chunkTypes.grass(566,-2791,0);
 new terrain.chunkTypes.grass(598,-2791,0);
 new terrain.chunkTypes.grass(630,-2791,0);
-}
-
-public void addSegment20() {
 new terrain.chunkTypes.grass(662,-2791,0);
 new terrain.chunkTypes.grass(694,-2791,0);
 new terrain.chunkTypes.grass(726,-2791,0);
@@ -1094,6 +1056,9 @@ new terrain.chunkTypes.grass(278,-2759,0);
 new terrain.chunkTypes.grass(310,-2759,0);
 new terrain.chunkTypes.grass(342,-2759,0);
 new terrain.chunkTypes.grass(374,-2759,0);
+}
+
+public void addSegment20() {
 new terrain.chunkTypes.grass(406,-2759,0);
 new terrain.chunkTypes.grass(438,-2759,0);
 new terrain.chunkTypes.grass(470,-2759,0);
@@ -1109,9 +1074,6 @@ new terrain.chunkTypes.grass(758,-2759,0);
 new terrain.chunkTypes.grass(790,-2759,0);
 new terrain.chunkTypes.grass(822,-2759,0);
 new terrain.chunkTypes.grass(854,-2759,0);
-}
-
-public void addSegment21() {
 new terrain.chunkTypes.grass(886,-2759,0);
 new terrain.chunkTypes.grass(918,-2759,0);
 new terrain.chunkTypes.grass(950,-2759,0);
@@ -1147,6 +1109,9 @@ new terrain.chunkTypes.grass(502,-2727,0);
 new terrain.chunkTypes.grass(534,-2727,0);
 new terrain.chunkTypes.grass(566,-2727,0);
 new terrain.chunkTypes.grass(598,-2727,0);
+}
+
+public void addSegment21() {
 new terrain.chunkTypes.grass(630,-2727,0);
 new terrain.chunkTypes.grass(662,-2727,0);
 new terrain.chunkTypes.grass(694,-2727,0);
@@ -1162,9 +1127,6 @@ new terrain.chunkTypes.grass(982,-2727,0);
 new terrain.chunkTypes.grass(1014,-2727,0);
 new terrain.chunkTypes.grass(1046,-2727,0);
 new terrain.chunkTypes.grass(1078,-2727,0);
-}
-
-public void addSegment22() {
 new terrain.chunkTypes.grass(1110,-2727,0);
 new terrain.chunkTypes.grass(1142,-2727,0);
 new terrain.chunkTypes.grass(1174,-2727,0);
@@ -1200,6 +1162,9 @@ new terrain.chunkTypes.grass(278,-2610,0);
 new terrain.chunkTypes.grass(309,-2600,0);
 new terrain.chunkTypes.grass(341,-2600,0);
 new terrain.chunkTypes.grass(373,-2600,0);
+}
+
+public void addSegment22() {
 new terrain.chunkTypes.grass(405,-2600,0);
 new terrain.chunkTypes.grass(437,-2600,0);
 new terrain.chunkTypes.grass(469,-2600,0);
@@ -1215,9 +1180,6 @@ new terrain.chunkTypes.grass(341,-2568,0);
 new terrain.chunkTypes.grass(373,-2568,0);
 new terrain.chunkTypes.grass(405,-2568,0);
 new terrain.chunkTypes.grass(437,-2568,0);
-}
-
-public void addSegment23() {
 new terrain.chunkTypes.grass(469,-2568,0);
 new terrain.chunkTypes.grass(501,-2568,0);
 new terrain.chunkTypes.grass(533,-2568,0);
@@ -1253,6 +1215,9 @@ new terrain.chunkTypes.grass(215,-2377,0);
 new terrain.chunkTypes.grass(444,-2345,0);
 new terrain.chunkTypes.grass(476,-2345,0);
 new terrain.chunkTypes.grass(183,-2345,0);
+}
+
+public void addSegment23() {
 new terrain.chunkTypes.grass(215,-2345,0);
 new terrain.chunkTypes.grass(444,-2313,0);
 new terrain.chunkTypes.grass(476,-2313,0);
@@ -1268,9 +1233,6 @@ new terrain.chunkTypes.grass(183,-2249,0);
 new terrain.chunkTypes.grass(215,-2249,0);
 new terrain.chunkTypes.grass(444,-2218,0);
 new terrain.chunkTypes.grass(476,-2218,0);
-}
-
-public void addSegment24() {
 new terrain.chunkTypes.grass(508,-2218,0);
 new terrain.chunkTypes.grass(540,-2218,0);
 new terrain.chunkTypes.grass(183,-2217,0);
@@ -1306,6 +1268,9 @@ new terrain.chunkTypes.grass(8,-2185,0);
 new terrain.chunkTypes.grass(40,-2185,0);
 new terrain.chunkTypes.grass(444,-2154,0);
 new terrain.chunkTypes.grass(476,-2154,0);
+}
+
+public void addSegment24() {
 new terrain.chunkTypes.grass(508,-2154,0);
 new terrain.chunkTypes.grass(540,-2154,0);
 new terrain.chunkTypes.grass(183,-2153,0);
@@ -1321,9 +1286,6 @@ new terrain.chunkTypes.grass(-376,-2153,0);
 new terrain.chunkTypes.grass(-344,-2153,0);
 new terrain.chunkTypes.grass(-312,-2153,0);
 new terrain.chunkTypes.grass(-280,-2153,0);
-}
-
-public void addSegment25() {
 new terrain.chunkTypes.grass(-248,-2153,0);
 new terrain.chunkTypes.grass(-216,-2153,0);
 new terrain.chunkTypes.grass(-184,-2153,0);
@@ -1359,6 +1321,9 @@ new terrain.chunkTypes.grass(-216,-2121,0);
 new terrain.chunkTypes.grass(-184,-2121,0);
 new terrain.chunkTypes.grass(-152,-2121,0);
 new terrain.chunkTypes.grass(-120,-2121,0);
+}
+
+public void addSegment25() {
 new terrain.chunkTypes.grass(-88,-2121,0);
 new terrain.chunkTypes.grass(-56,-2121,0);
 new terrain.chunkTypes.grass(-24,-2121,0);
@@ -1374,9 +1339,6 @@ new terrain.chunkTypes.grass(-1047,-2121,0);
 new terrain.chunkTypes.grass(-1015,-2121,0);
 new terrain.chunkTypes.grass(-983,-2121,0);
 new terrain.chunkTypes.grass(-951,-2121,0);
-}
-
-public void addSegment26() {
 new terrain.chunkTypes.grass(-919,-2121,0);
 new terrain.chunkTypes.grass(-887,-2121,0);
 new terrain.chunkTypes.grass(-855,-2121,0);
@@ -1412,6 +1374,9 @@ new terrain.chunkTypes.grass(-184,-2089,0);
 new terrain.chunkTypes.grass(-152,-2089,0);
 new terrain.chunkTypes.grass(-120,-2089,0);
 new terrain.chunkTypes.grass(-88,-2089,0);
+}
+
+public void addSegment26() {
 new terrain.chunkTypes.grass(-56,-2089,0);
 new terrain.chunkTypes.grass(-24,-2089,0);
 new terrain.chunkTypes.grass(8,-2089,0);
@@ -1427,9 +1392,6 @@ new terrain.chunkTypes.grass(-983,-2089,0);
 new terrain.chunkTypes.grass(-951,-2089,0);
 new terrain.chunkTypes.grass(-919,-2089,0);
 new terrain.chunkTypes.grass(-887,-2089,0);
-}
-
-public void addSegment27() {
 new terrain.chunkTypes.grass(-855,-2089,0);
 new terrain.chunkTypes.grass(-823,-2089,0);
 new terrain.chunkTypes.grass(-759,-2089,0);
@@ -1465,6 +1427,9 @@ new terrain.chunkTypes.grass(-88,-2057,0);
 new terrain.chunkTypes.grass(-56,-2057,0);
 new terrain.chunkTypes.grass(-24,-2057,0);
 new terrain.chunkTypes.grass(8,-2057,0);
+}
+
+public void addSegment27() {
 new terrain.chunkTypes.grass(40,-2057,0);
 new terrain.chunkTypes.grass(-1239,-2057,0);
 new terrain.chunkTypes.grass(-1175,-2057,0);
@@ -1480,9 +1445,6 @@ new terrain.chunkTypes.grass(-887,-2057,0);
 new terrain.chunkTypes.grass(-855,-2057,0);
 new terrain.chunkTypes.grass(-823,-2057,0);
 new terrain.chunkTypes.grass(-791,-2057,0);
-}
-
-public void addSegment28() {
 new terrain.chunkTypes.grass(-759,-2057,0);
 new terrain.chunkTypes.grass(-727,-2057,0);
 new terrain.chunkTypes.grass(-695,-2057,0);
@@ -1518,6 +1480,9 @@ new terrain.chunkTypes.grass(8,-2025,0);
 new terrain.chunkTypes.grass(40,-2025,0);
 new terrain.chunkTypes.grass(-1239,-2025,0);
 new terrain.chunkTypes.grass(-1207,-2025,0);
+}
+
+public void addSegment28() {
 new terrain.chunkTypes.grass(-1175,-2025,0);
 new terrain.chunkTypes.grass(-1143,-2025,0);
 new terrain.chunkTypes.grass(-1111,-2025,0);
@@ -1533,9 +1498,6 @@ new terrain.chunkTypes.grass(-727,-2025,0);
 new terrain.chunkTypes.grass(444,-1994,0);
 new terrain.chunkTypes.grass(476,-1994,0);
 new terrain.chunkTypes.grass(508,-1994,0);
-}
-
-public void addSegment29() {
 new terrain.chunkTypes.grass(540,-1994,0);
 new terrain.chunkTypes.grass(183,-1993,0);
 new terrain.chunkTypes.grass(215,-1993,0);
@@ -1571,6 +1533,9 @@ new terrain.chunkTypes.grass(-1047,-1993,0);
 new terrain.chunkTypes.grass(-1015,-1993,0);
 new terrain.chunkTypes.grass(-983,-1993,0);
 new terrain.chunkTypes.grass(-951,-1993,0);
+}
+
+public void addSegment29() {
 new terrain.chunkTypes.grass(-919,-1993,0);
 new terrain.chunkTypes.grass(-855,-1993,0);
 new terrain.chunkTypes.grass(-823,-1993,0);
@@ -1586,9 +1551,6 @@ new terrain.chunkTypes.grass(247,-1961,0);
 new terrain.chunkTypes.grass(279,-1961,0);
 new terrain.chunkTypes.grass(-600,-1961,0);
 new terrain.chunkTypes.grass(-568,-1961,0);
-}
-
-public void addSegment30() {
 new terrain.chunkTypes.grass(-536,-1961,0);
 new terrain.chunkTypes.grass(-504,-1961,0);
 new terrain.chunkTypes.grass(-472,-1961,0);
@@ -1624,6 +1586,9 @@ new terrain.chunkTypes.grass(-727,-1961,0);
 new terrain.chunkTypes.grass(444,-1930,0);
 new terrain.chunkTypes.grass(476,-1930,0);
 new terrain.chunkTypes.grass(508,-1930,0);
+}
+
+public void addSegment30() {
 new terrain.chunkTypes.grass(540,-1930,0);
 new terrain.chunkTypes.grass(183,-1929,0);
 new terrain.chunkTypes.grass(215,-1929,0);
@@ -1639,9 +1604,6 @@ new terrain.chunkTypes.grass(-408,-1929,0);
 new terrain.chunkTypes.grass(-376,-1929,0);
 new terrain.chunkTypes.grass(-344,-1929,0);
 new terrain.chunkTypes.grass(-312,-1929,0);
-}
-
-public void addSegment31() {
 new terrain.chunkTypes.grass(-280,-1929,0);
 new terrain.chunkTypes.grass(-248,-1929,0);
 new terrain.chunkTypes.grass(-216,-1929,0);
@@ -1677,6 +1639,9 @@ new terrain.chunkTypes.grass(247,-1897,0);
 new terrain.chunkTypes.grass(279,-1897,0);
 new terrain.chunkTypes.grass(-632,-1897,0);
 new terrain.chunkTypes.grass(-600,-1897,0);
+}
+
+public void addSegment31() {
 new terrain.chunkTypes.grass(-568,-1897,0);
 new terrain.chunkTypes.grass(-536,-1897,0);
 new terrain.chunkTypes.grass(-504,-1897,0);
@@ -1692,9 +1657,6 @@ new terrain.chunkTypes.grass(-216,-1897,0);
 new terrain.chunkTypes.grass(-184,-1897,0);
 new terrain.chunkTypes.grass(-152,-1897,0);
 new terrain.chunkTypes.grass(-120,-1897,0);
-}
-
-public void addSegment32() {
 new terrain.chunkTypes.grass(-88,-1897,0);
 new terrain.chunkTypes.grass(-56,-1897,0);
 new terrain.chunkTypes.grass(-24,-1897,0);
@@ -1730,6 +1692,9 @@ new terrain.chunkTypes.grass(-568,-1865,0);
 new terrain.chunkTypes.grass(-536,-1865,0);
 new terrain.chunkTypes.grass(-504,-1865,0);
 new terrain.chunkTypes.grass(-472,-1865,0);
+}
+
+public void addSegment32() {
 new terrain.chunkTypes.grass(-440,-1865,0);
 new terrain.chunkTypes.grass(-408,-1865,0);
 new terrain.chunkTypes.grass(-376,-1865,0);
@@ -1745,9 +1710,6 @@ new terrain.chunkTypes.grass(-88,-1865,0);
 new terrain.chunkTypes.grass(-56,-1865,0);
 new terrain.chunkTypes.grass(-24,-1865,0);
 new terrain.chunkTypes.grass(8,-1865,0);
-}
-
-public void addSegment33() {
 new terrain.chunkTypes.grass(40,-1865,0);
 new terrain.chunkTypes.grass(-1239,-1865,0);
 new terrain.chunkTypes.grass(-1175,-1865,0);
@@ -1783,6 +1745,9 @@ new terrain.chunkTypes.grass(-344,-1833,0);
 new terrain.chunkTypes.grass(-312,-1833,0);
 new terrain.chunkTypes.grass(-280,-1833,0);
 new terrain.chunkTypes.grass(-248,-1833,0);
+}
+
+public void addSegment33() {
 new terrain.chunkTypes.grass(-216,-1833,0);
 new terrain.chunkTypes.grass(-184,-1833,0);
 new terrain.chunkTypes.grass(-152,-1833,0);
@@ -1798,9 +1763,6 @@ new terrain.chunkTypes.grass(-1175,-1833,0);
 new terrain.chunkTypes.grass(-1143,-1833,0);
 new terrain.chunkTypes.grass(-1111,-1833,0);
 new terrain.chunkTypes.grass(-1079,-1833,0);
-}
-
-public void addSegment34() {
 new terrain.chunkTypes.grass(-1047,-1833,0);
 new terrain.chunkTypes.grass(-1015,-1833,0);
 new terrain.chunkTypes.grass(-983,-1833,0);
@@ -1836,6 +1798,9 @@ new terrain.chunkTypes.grass(-1239,-1801,0);
 new terrain.chunkTypes.grass(-1175,-1801,0);
 new terrain.chunkTypes.grass(-1143,-1801,0);
 new terrain.chunkTypes.grass(-1111,-1801,0);
+}
+
+public void addSegment34() {
 new terrain.chunkTypes.grass(-1015,-1801,0);
 new terrain.chunkTypes.grass(-983,-1801,0);
 new terrain.chunkTypes.grass(-887,-1801,0);
@@ -1851,9 +1816,6 @@ new terrain.chunkTypes.grass(92,-1770,0);
 new terrain.chunkTypes.grass(124,-1770,0);
 new terrain.chunkTypes.grass(156,-1770,0);
 new terrain.chunkTypes.grass(188,-1770,0);
-}
-
-public void addSegment35() {
 new terrain.chunkTypes.grass(220,-1770,0);
 new terrain.chunkTypes.grass(252,-1770,0);
 new terrain.chunkTypes.grass(284,-1770,0);
@@ -1889,6 +1851,9 @@ new terrain.chunkTypes.grass(252,-1738,0);
 new terrain.chunkTypes.grass(284,-1738,0);
 new terrain.chunkTypes.grass(316,-1738,0);
 new terrain.chunkTypes.grass(348,-1738,0);
+}
+
+public void addSegment35() {
 new terrain.chunkTypes.grass(380,-1738,0);
 new terrain.chunkTypes.grass(412,-1738,0);
 new terrain.chunkTypes.grass(444,-1738,0);
@@ -1904,9 +1869,6 @@ new terrain.chunkTypes.grass(-1079,-1737,0);
 new terrain.chunkTypes.grass(-1047,-1737,0);
 new terrain.chunkTypes.grass(-1015,-1737,0);
 new terrain.chunkTypes.grass(-983,-1737,0);
-}
-
-public void addSegment36() {
 new terrain.chunkTypes.grass(-951,-1737,0);
 new terrain.chunkTypes.grass(-919,-1737,0);
 new terrain.chunkTypes.grass(-887,-1737,0);
@@ -1942,6 +1904,9 @@ new terrain.chunkTypes.grass(-1111,-1673,0);
 new terrain.chunkTypes.grass(-1079,-1673,0);
 new terrain.chunkTypes.grass(-1047,-1673,0);
 new terrain.chunkTypes.grass(-1015,-1673,0);
+}
+
+public void addSegment36() {
 new terrain.chunkTypes.grass(-983,-1673,0);
 new terrain.chunkTypes.grass(-951,-1673,0);
 new terrain.chunkTypes.grass(-919,-1673,0);
@@ -1957,9 +1922,6 @@ new terrain.chunkTypes.grass(-1111,-1641,0);
 new terrain.chunkTypes.grass(-1079,-1641,0);
 new terrain.chunkTypes.grass(-1047,-1641,0);
 new terrain.chunkTypes.grass(-1015,-1641,0);
-}
-
-public void addSegment37() {
 new terrain.chunkTypes.grass(-983,-1641,0);
 new terrain.chunkTypes.grass(-951,-1641,0);
 new terrain.chunkTypes.grass(-919,-1641,0);
@@ -1995,6 +1957,9 @@ new terrain.chunkTypes.grass(-1143,-1577,0);
 new terrain.chunkTypes.grass(-1111,-1577,0);
 new terrain.chunkTypes.grass(-1079,-1577,0);
 new terrain.chunkTypes.grass(-1047,-1577,0);
+}
+
+public void addSegment37() {
 new terrain.chunkTypes.grass(-1015,-1577,0);
 new terrain.chunkTypes.grass(-983,-1577,0);
 new terrain.chunkTypes.grass(-951,-1577,0);
@@ -2010,9 +1975,6 @@ new terrain.chunkTypes.grass(-663,-1577,0);
 new terrain.chunkTypes.grass(-1239,-1545,0);
 new terrain.chunkTypes.grass(-1207,-1545,0);
 new terrain.chunkTypes.grass(-1175,-1545,0);
-}
-
-public void addSegment38() {
 new terrain.chunkTypes.grass(-1079,-1545,0);
 new terrain.chunkTypes.grass(-1047,-1545,0);
 new terrain.chunkTypes.grass(-1015,-1545,0);
@@ -2048,6 +2010,9 @@ new terrain.chunkTypes.grass(-1047,-1481,0);
 new terrain.chunkTypes.grass(-1015,-1481,0);
 new terrain.chunkTypes.grass(-983,-1481,0);
 new terrain.chunkTypes.grass(-951,-1481,0);
+}
+
+public void addSegment38() {
 new terrain.chunkTypes.grass(-919,-1481,0);
 new terrain.chunkTypes.grass(-887,-1481,0);
 new terrain.chunkTypes.grass(-855,-1481,0);
@@ -2063,9 +2028,6 @@ new terrain.chunkTypes.grass(-1175,-1449,0);
 new terrain.chunkTypes.grass(-1143,-1449,0);
 new terrain.chunkTypes.grass(-1111,-1449,0);
 new terrain.chunkTypes.grass(-1079,-1449,0);
-}
-
-public void addSegment39() {
 new terrain.chunkTypes.grass(-1047,-1449,0);
 new terrain.chunkTypes.grass(-1015,-1449,0);
 new terrain.chunkTypes.grass(-983,-1449,0);
@@ -2101,6 +2063,9 @@ new terrain.chunkTypes.grass(-663,-1417,0);
 new terrain.chunkTypes.grass(-1239,-1385,0);
 new terrain.chunkTypes.grass(-1207,-1385,0);
 new terrain.chunkTypes.grass(-1175,-1385,0);
+}
+
+public void addSegment39() {
 new terrain.chunkTypes.grass(-1143,-1385,0);
 new terrain.chunkTypes.grass(-1111,-1385,0);
 new terrain.chunkTypes.grass(-1079,-1385,0);
@@ -2116,9 +2081,6 @@ new terrain.chunkTypes.grass(-791,-1385,0);
 new terrain.chunkTypes.grass(-759,-1385,0);
 new terrain.chunkTypes.grass(-727,-1385,0);
 new terrain.chunkTypes.grass(-695,-1385,0);
-}
-
-public void addSegment40() {
 new terrain.chunkTypes.grass(-663,-1385,0);
 new terrain.chunkTypes.grass(-631,-1353,0);
 new terrain.chunkTypes.grass(-599,-1353,0);
@@ -2154,6 +2116,9 @@ new terrain.chunkTypes.grass(-1015,-1353,0);
 new terrain.chunkTypes.grass(-983,-1353,0);
 new terrain.chunkTypes.grass(-951,-1353,0);
 new terrain.chunkTypes.grass(-919,-1353,0);
+}
+
+public void addSegment40() {
 new terrain.chunkTypes.grass(-887,-1353,0);
 new terrain.chunkTypes.grass(-855,-1353,0);
 new terrain.chunkTypes.grass(-823,-1353,0);
@@ -2169,9 +2134,6 @@ new terrain.chunkTypes.grass(-535,-1321,0);
 new terrain.chunkTypes.grass(-503,-1321,0);
 new terrain.chunkTypes.grass(-471,-1321,0);
 new terrain.chunkTypes.grass(-439,-1321,0);
-}
-
-public void addSegment41() {
 new terrain.chunkTypes.grass(-407,-1321,0);
 new terrain.chunkTypes.grass(-375,-1321,0);
 new terrain.chunkTypes.grass(-343,-1321,0);
@@ -2207,6 +2169,9 @@ new terrain.chunkTypes.grass(-759,-1321,0);
 new terrain.chunkTypes.grass(-727,-1321,0);
 new terrain.chunkTypes.grass(-695,-1321,0);
 new terrain.chunkTypes.grass(-663,-1321,0);
+}
+
+public void addSegment41() {
 new terrain.chunkTypes.grass(-631,-1289,0);
 new terrain.chunkTypes.grass(-599,-1289,0);
 new terrain.chunkTypes.grass(-567,-1289,0);
@@ -2222,9 +2187,6 @@ new terrain.chunkTypes.grass(-279,-1289,0);
 new terrain.chunkTypes.grass(-247,-1289,0);
 new terrain.chunkTypes.grass(-215,-1289,0);
 new terrain.chunkTypes.grass(-183,-1289,0);
-}
-
-public void addSegment42() {
 new terrain.chunkTypes.grass(-151,-1289,0);
 new terrain.chunkTypes.grass(-119,-1289,0);
 new terrain.chunkTypes.grass(-87,-1289,0);
@@ -2260,6 +2222,9 @@ new terrain.chunkTypes.grass(-503,-1257,0);
 new terrain.chunkTypes.grass(-471,-1257,0);
 new terrain.chunkTypes.grass(-439,-1257,0);
 new terrain.chunkTypes.grass(-407,-1257,0);
+}
+
+public void addSegment42() {
 new terrain.chunkTypes.grass(-375,-1257,0);
 new terrain.chunkTypes.grass(-343,-1257,0);
 new terrain.chunkTypes.grass(-311,-1257,0);
@@ -2275,9 +2240,6 @@ new terrain.chunkTypes.grass(-23,-1257,0);
 new terrain.chunkTypes.grass(9,-1257,0);
 new terrain.chunkTypes.grass(41,-1257,0);
 new terrain.chunkTypes.grass(73,-1257,0);
-}
-
-public void addSegment43() {
 new terrain.chunkTypes.grass(-1239,-1257,0);
 new terrain.chunkTypes.grass(-1207,-1257,0);
 new terrain.chunkTypes.grass(-1175,-1257,0);
@@ -2313,6 +2275,9 @@ new terrain.chunkTypes.grass(-247,-1225,0);
 new terrain.chunkTypes.grass(-215,-1225,0);
 new terrain.chunkTypes.grass(-183,-1225,0);
 new terrain.chunkTypes.grass(-151,-1225,0);
+}
+
+public void addSegment43() {
 new terrain.chunkTypes.grass(-119,-1225,0);
 new terrain.chunkTypes.grass(-87,-1225,0);
 new terrain.chunkTypes.grass(-55,-1225,0);
@@ -2328,9 +2293,6 @@ new terrain.chunkTypes.grass(-503,-1193,0);
 new terrain.chunkTypes.grass(-471,-1193,0);
 new terrain.chunkTypes.grass(-439,-1193,0);
 new terrain.chunkTypes.grass(-407,-1193,0);
-}
-
-public void addSegment44() {
 new terrain.chunkTypes.grass(-375,-1193,0);
 new terrain.chunkTypes.grass(-343,-1193,0);
 new terrain.chunkTypes.grass(-311,-1193,0);
@@ -2366,6 +2328,9 @@ new terrain.chunkTypes.grass(-119,-1161,0);
 new terrain.chunkTypes.grass(-87,-1161,0);
 new terrain.chunkTypes.grass(-55,-1161,0);
 new terrain.chunkTypes.grass(-23,-1161,0);
+}
+
+public void addSegment44() {
 new terrain.chunkTypes.grass(9,-1161,0);
 new terrain.chunkTypes.grass(41,-1161,0);
 new terrain.chunkTypes.grass(73,-1161,0);
@@ -2381,9 +2346,6 @@ new terrain.chunkTypes.grass(-375,-1129,0);
 new terrain.chunkTypes.grass(-343,-1129,0);
 new terrain.chunkTypes.grass(-311,-1129,0);
 new terrain.chunkTypes.grass(-279,-1129,0);
-}
-
-public void addSegment45() {
 new terrain.chunkTypes.grass(-247,-1129,0);
 new terrain.chunkTypes.grass(-215,-1129,0);
 new terrain.chunkTypes.grass(-183,-1129,0);
@@ -2419,6 +2381,9 @@ new terrain.chunkTypes.grass(9,-1097,0);
 new terrain.chunkTypes.grass(41,-1097,0);
 new terrain.chunkTypes.grass(73,-1097,0);
 new terrain.chunkTypes.grass(-87,-1065,0);
+}
+
+public void addSegment45() {
 new terrain.chunkTypes.grass(-55,-1065,0);
 new terrain.chunkTypes.grass(-23,-1065,0);
 new terrain.chunkTypes.grass(9,-1065,0);
@@ -2434,9 +2399,6 @@ new terrain.chunkTypes.grass(-87,-1001,0);
 new terrain.chunkTypes.grass(-55,-1001,0);
 new terrain.chunkTypes.grass(-23,-1001,0);
 new terrain.chunkTypes.grass(9,-1001,0);
-}
-
-public void addSegment46() {
 new terrain.chunkTypes.grass(41,-1001,0);
 new terrain.chunkTypes.grass(73,-1001,0);
 new terrain.chunkTypes.grass(-87,-969,0);
@@ -2472,6 +2434,9 @@ new terrain.chunkTypes.grass(73,-841,0);
 new terrain.chunkTypes.grass(-87,-809,0);
 new terrain.chunkTypes.grass(-55,-809,0);
 new terrain.chunkTypes.grass(-23,-809,0);
+}
+
+public void addSegment46() {
 new terrain.chunkTypes.grass(9,-809,0);
 new terrain.chunkTypes.grass(41,-809,0);
 new terrain.chunkTypes.grass(73,-809,0);
@@ -2487,9 +2452,6 @@ new terrain.chunkTypes.grass(-53,-745,0);
 new terrain.chunkTypes.grass(-21,-745,0);
 new terrain.chunkTypes.grass(11,-745,0);
 new terrain.chunkTypes.grass(43,-745,0);
-}
-
-public void addSegment47() {
 new terrain.chunkTypes.grass(75,-745,0);
 new terrain.chunkTypes.grass(107,-745,0);
 new terrain.chunkTypes.grass(-117,-713,0);
@@ -2525,6 +2487,9 @@ new terrain.chunkTypes.grass(43,-617,0);
 new terrain.chunkTypes.grass(75,-617,0);
 new terrain.chunkTypes.grass(107,-617,0);
 new terrain.chunkTypes.grass(-117,-585,0);
+}
+
+public void addSegment47() {
 new terrain.chunkTypes.grass(-85,-585,0);
 new terrain.chunkTypes.grass(-53,-585,0);
 new terrain.chunkTypes.grass(-21,-585,0);
@@ -2540,9 +2505,6 @@ new terrain.chunkTypes.grass(11,-553,0);
 new terrain.chunkTypes.grass(43,-553,0);
 new terrain.chunkTypes.grass(75,-553,0);
 new terrain.chunkTypes.grass(107,-553,0);
-}
-
-public void addSegment48() {
 new terrain.chunkTypes.grass(-117,-521,0);
 new terrain.chunkTypes.grass(-85,-521,0);
 new terrain.chunkTypes.grass(-53,-521,0);
@@ -2578,6 +2540,9 @@ new terrain.chunkTypes.grass(-572,-457,0);
 new terrain.chunkTypes.grass(-540,-457,0);
 new terrain.chunkTypes.grass(-508,-457,0);
 new terrain.chunkTypes.grass(-476,-457,0);
+}
+
+public void addSegment48() {
 new terrain.chunkTypes.grass(-444,-457,0);
 new terrain.chunkTypes.grass(-412,-457,0);
 new terrain.chunkTypes.grass(-380,-457,0);
@@ -2593,9 +2558,6 @@ new terrain.chunkTypes.grass(-92,-457,0);
 new terrain.chunkTypes.grass(-60,-457,0);
 new terrain.chunkTypes.grass(-28,-457,0);
 new terrain.chunkTypes.grass(4,-457,0);
-}
-
-public void addSegment49() {
 new terrain.chunkTypes.grass(36,-457,0);
 new terrain.chunkTypes.grass(68,-457,0);
 new terrain.chunkTypes.grass(100,-457,0);
@@ -2631,6 +2593,9 @@ new terrain.chunkTypes.grass(-508,-426,0);
 new terrain.chunkTypes.grass(-476,-426,0);
 new terrain.chunkTypes.grass(-444,-426,0);
 new terrain.chunkTypes.grass(-412,-426,0);
+}
+
+public void addSegment49() {
 new terrain.chunkTypes.grass(-380,-426,0);
 new terrain.chunkTypes.grass(-348,-426,0);
 new terrain.chunkTypes.grass(-316,-426,0);
@@ -2646,9 +2611,6 @@ new terrain.chunkTypes.grass(-28,-426,0);
 new terrain.chunkTypes.grass(4,-426,0);
 new terrain.chunkTypes.grass(36,-426,0);
 new terrain.chunkTypes.grass(68,-426,0);
-}
-
-public void addSegment50() {
 new terrain.chunkTypes.grass(100,-426,0);
 new terrain.chunkTypes.grass(132,-426,0);
 new terrain.chunkTypes.grass(164,-426,0);
@@ -2684,6 +2646,9 @@ new terrain.chunkTypes.grass(-444,-394,0);
 new terrain.chunkTypes.grass(-412,-394,0);
 new terrain.chunkTypes.grass(-380,-394,0);
 new terrain.chunkTypes.grass(-348,-394,0);
+}
+
+public void addSegment50() {
 new terrain.chunkTypes.grass(-316,-394,0);
 new terrain.chunkTypes.grass(-284,-394,0);
 new terrain.chunkTypes.grass(-252,-394,0);
@@ -2699,9 +2664,6 @@ new terrain.chunkTypes.grass(36,-394,0);
 new terrain.chunkTypes.grass(68,-394,0);
 new terrain.chunkTypes.grass(100,-394,0);
 new terrain.chunkTypes.grass(132,-394,0);
-}
-
-public void addSegment51() {
 new terrain.chunkTypes.grass(164,-394,0);
 new terrain.chunkTypes.grass(196,-394,0);
 new terrain.chunkTypes.grass(228,-394,0);
@@ -2737,6 +2699,9 @@ new terrain.chunkTypes.grass(-380,-362,0);
 new terrain.chunkTypes.grass(-348,-362,0);
 new terrain.chunkTypes.grass(-316,-362,0);
 new terrain.chunkTypes.grass(-284,-362,0);
+}
+
+public void addSegment51() {
 new terrain.chunkTypes.grass(-252,-362,0);
 new terrain.chunkTypes.grass(-220,-362,0);
 new terrain.chunkTypes.grass(-188,-362,0);
@@ -2752,9 +2717,6 @@ new terrain.chunkTypes.grass(100,-362,0);
 new terrain.chunkTypes.grass(132,-362,0);
 new terrain.chunkTypes.grass(164,-362,0);
 new terrain.chunkTypes.grass(196,-362,0);
-}
-
-public void addSegment52() {
 new terrain.chunkTypes.grass(228,-362,0);
 new terrain.chunkTypes.grass(260,-362,0);
 new terrain.chunkTypes.grass(292,-362,0);
@@ -2790,6 +2752,9 @@ new terrain.chunkTypes.grass(-316,-330,0);
 new terrain.chunkTypes.grass(-284,-330,0);
 new terrain.chunkTypes.grass(-252,-330,0);
 new terrain.chunkTypes.grass(-220,-330,0);
+}
+
+public void addSegment52() {
 new terrain.chunkTypes.grass(-188,-330,0);
 new terrain.chunkTypes.grass(-156,-330,0);
 new terrain.chunkTypes.grass(-124,-330,0);
@@ -2805,9 +2770,6 @@ new terrain.chunkTypes.grass(164,-330,0);
 new terrain.chunkTypes.grass(196,-330,0);
 new terrain.chunkTypes.grass(228,-330,0);
 new terrain.chunkTypes.grass(260,-330,0);
-}
-
-public void addSegment53() {
 new terrain.chunkTypes.grass(292,-330,0);
 new terrain.chunkTypes.grass(324,-330,0);
 new terrain.chunkTypes.grass(356,-330,0);
@@ -2843,6 +2805,9 @@ new terrain.chunkTypes.grass(-252,-298,0);
 new terrain.chunkTypes.grass(-220,-298,0);
 new terrain.chunkTypes.grass(-188,-298,0);
 new terrain.chunkTypes.grass(-156,-298,0);
+}
+
+public void addSegment53() {
 new terrain.chunkTypes.grass(-124,-298,0);
 new terrain.chunkTypes.grass(-92,-298,0);
 new terrain.chunkTypes.grass(-60,-298,0);
@@ -2858,9 +2823,6 @@ new terrain.chunkTypes.grass(228,-298,0);
 new terrain.chunkTypes.grass(260,-298,0);
 new terrain.chunkTypes.grass(292,-298,0);
 new terrain.chunkTypes.grass(324,-298,0);
-}
-
-public void addSegment54() {
 new terrain.chunkTypes.grass(356,-298,0);
 new terrain.chunkTypes.grass(388,-298,0);
 new terrain.chunkTypes.grass(420,-298,0);
@@ -2896,6 +2858,9 @@ new terrain.chunkTypes.grass(-188,-266,0);
 new terrain.chunkTypes.grass(-156,-266,0);
 new terrain.chunkTypes.grass(-124,-266,0);
 new terrain.chunkTypes.grass(-92,-266,0);
+}
+
+public void addSegment54() {
 new terrain.chunkTypes.grass(-60,-266,0);
 new terrain.chunkTypes.grass(-28,-266,0);
 new terrain.chunkTypes.grass(4,-266,0);
@@ -2911,9 +2876,6 @@ new terrain.chunkTypes.grass(292,-266,0);
 new terrain.chunkTypes.grass(324,-266,0);
 new terrain.chunkTypes.grass(356,-266,0);
 new terrain.chunkTypes.grass(388,-266,0);
-}
-
-public void addSegment55() {
 new terrain.chunkTypes.grass(420,-266,0);
 new terrain.chunkTypes.grass(452,-266,0);
 new terrain.chunkTypes.grass(-1052,-234,0);
@@ -2949,6 +2911,9 @@ new terrain.chunkTypes.grass(-124,-234,0);
 new terrain.chunkTypes.grass(-92,-234,0);
 new terrain.chunkTypes.grass(-60,-234,0);
 new terrain.chunkTypes.grass(-28,-234,0);
+}
+
+public void addSegment55() {
 new terrain.chunkTypes.grass(4,-234,0);
 new terrain.chunkTypes.grass(36,-234,0);
 new terrain.chunkTypes.grass(68,-234,0);
@@ -2964,9 +2929,6 @@ new terrain.chunkTypes.grass(356,-234,0);
 new terrain.chunkTypes.grass(388,-234,0);
 new terrain.chunkTypes.grass(420,-234,0);
 new terrain.chunkTypes.grass(452,-234,0);
-}
-
-public void addSegment56() {
 new terrain.chunkTypes.grass(-1052,-202,0);
 new terrain.chunkTypes.grass(-1020,-202,0);
 new terrain.chunkTypes.grass(-988,-202,0);
@@ -3002,6 +2964,9 @@ new terrain.chunkTypes.grass(-60,-202,0);
 new terrain.chunkTypes.grass(-28,-202,0);
 new terrain.chunkTypes.grass(4,-202,0);
 new terrain.chunkTypes.grass(36,-202,0);
+}
+
+public void addSegment56() {
 new terrain.chunkTypes.grass(68,-202,0);
 new terrain.chunkTypes.grass(100,-202,0);
 new terrain.chunkTypes.grass(132,-202,0);
@@ -3017,9 +2982,6 @@ new terrain.chunkTypes.grass(420,-202,0);
 new terrain.chunkTypes.grass(452,-202,0);
 new terrain.chunkTypes.grass(-1052,-170,0);
 new terrain.chunkTypes.grass(-1020,-170,0);
-}
-
-public void addSegment57() {
 new terrain.chunkTypes.grass(-988,-170,0);
 new terrain.chunkTypes.grass(-956,-170,0);
 new terrain.chunkTypes.grass(-924,-170,0);
@@ -3055,6 +3017,9 @@ new terrain.chunkTypes.grass(4,-170,0);
 new terrain.chunkTypes.grass(36,-170,0);
 new terrain.chunkTypes.grass(68,-170,0);
 new terrain.chunkTypes.grass(100,-170,0);
+}
+
+public void addSegment57() {
 new terrain.chunkTypes.grass(132,-170,0);
 new terrain.chunkTypes.grass(164,-170,0);
 new terrain.chunkTypes.grass(196,-170,0);
@@ -3070,9 +3035,6 @@ new terrain.chunkTypes.grass(-1052,-138,0);
 new terrain.chunkTypes.grass(-1020,-138,0);
 new terrain.chunkTypes.grass(-988,-138,0);
 new terrain.chunkTypes.grass(-956,-138,0);
-}
-
-public void addSegment58() {
 new terrain.chunkTypes.grass(-924,-138,0);
 new terrain.chunkTypes.grass(-892,-138,0);
 new terrain.chunkTypes.grass(-860,-138,0);
@@ -3108,6 +3070,9 @@ new terrain.chunkTypes.grass(68,-138,0);
 new terrain.chunkTypes.grass(100,-138,0);
 new terrain.chunkTypes.grass(132,-138,0);
 new terrain.chunkTypes.grass(164,-138,0);
+}
+
+public void addSegment58() {
 new terrain.chunkTypes.grass(196,-138,0);
 new terrain.chunkTypes.grass(228,-138,0);
 new terrain.chunkTypes.grass(260,-138,0);
@@ -3123,9 +3088,6 @@ new terrain.chunkTypes.grass(-988,-106,0);
 new terrain.chunkTypes.grass(-956,-106,0);
 new terrain.chunkTypes.grass(-924,-106,0);
 new terrain.chunkTypes.grass(-892,-106,0);
-}
-
-public void addSegment59() {
 new terrain.chunkTypes.grass(-860,-106,0);
 new terrain.chunkTypes.grass(-828,-106,0);
 new terrain.chunkTypes.grass(-796,-106,0);
@@ -3161,6 +3123,9 @@ new terrain.chunkTypes.grass(132,-106,0);
 new terrain.chunkTypes.grass(164,-106,0);
 new terrain.chunkTypes.grass(196,-106,0);
 new terrain.chunkTypes.grass(228,-106,0);
+}
+
+public void addSegment59() {
 new terrain.chunkTypes.grass(260,-106,0);
 new terrain.chunkTypes.grass(292,-106,0);
 new terrain.chunkTypes.grass(324,-106,0);
@@ -3176,9 +3141,6 @@ new terrain.chunkTypes.grass(-924,-74,0);
 new terrain.chunkTypes.grass(-892,-74,0);
 new terrain.chunkTypes.grass(-860,-74,0);
 new terrain.chunkTypes.grass(-828,-74,0);
-}
-
-public void addSegment60() {
 new terrain.chunkTypes.grass(-796,-74,0);
 new terrain.chunkTypes.grass(-764,-74,0);
 new terrain.chunkTypes.grass(-732,-74,0);
@@ -3214,6 +3176,9 @@ new terrain.chunkTypes.grass(196,-74,0);
 new terrain.chunkTypes.grass(228,-74,0);
 new terrain.chunkTypes.grass(260,-74,0);
 new terrain.chunkTypes.grass(292,-74,0);
+}
+
+public void addSegment60() {
 new terrain.chunkTypes.grass(324,-74,0);
 new terrain.chunkTypes.grass(356,-74,0);
 new terrain.chunkTypes.grass(388,-74,0);
@@ -3229,9 +3194,6 @@ new terrain.chunkTypes.grass(-860,-42,0);
 new terrain.chunkTypes.grass(-828,-42,0);
 new terrain.chunkTypes.grass(-796,-42,0);
 new terrain.chunkTypes.grass(-764,-42,0);
-}
-
-public void addSegment61() {
 new terrain.chunkTypes.grass(-732,-42,0);
 new terrain.chunkTypes.grass(-700,-42,0);
 new terrain.chunkTypes.grass(-668,-42,0);
@@ -3267,6 +3229,9 @@ new terrain.chunkTypes.grass(260,-42,0);
 new terrain.chunkTypes.grass(292,-42,0);
 new terrain.chunkTypes.grass(324,-42,0);
 new terrain.chunkTypes.grass(356,-42,0);
+}
+
+public void addSegment61() {
 new terrain.chunkTypes.grass(388,-42,0);
 new terrain.chunkTypes.grass(420,-42,0);
 new terrain.chunkTypes.grass(452,-42,0);
@@ -3282,9 +3247,6 @@ new terrain.chunkTypes.grass(-796,-10,0);
 new terrain.chunkTypes.grass(-764,-10,0);
 new terrain.chunkTypes.grass(-732,-10,0);
 new terrain.chunkTypes.grass(-700,-10,0);
-}
-
-public void addSegment62() {
 new terrain.chunkTypes.grass(-668,-10,0);
 new terrain.chunkTypes.grass(-636,-10,0);
 new terrain.chunkTypes.grass(-604,-10,0);
@@ -3320,6 +3282,9 @@ new terrain.chunkTypes.grass(324,-10,0);
 new terrain.chunkTypes.grass(356,-10,0);
 new terrain.chunkTypes.grass(388,-10,0);
 new terrain.chunkTypes.grass(420,-10,0);
+}
+
+public void addSegment62() {
 new terrain.chunkTypes.grass(452,-10,0);
 new terrain.chunkTypes.grass(-1052,22,0);
 new terrain.chunkTypes.grass(-1020,22,0);
@@ -3335,9 +3300,6 @@ new terrain.chunkTypes.grass(-732,22,0);
 new terrain.chunkTypes.grass(-700,22,0);
 new terrain.chunkTypes.grass(-668,22,0);
 new terrain.chunkTypes.grass(-636,22,0);
-}
-
-public void addSegment63() {
 new terrain.chunkTypes.grass(-604,22,0);
 new terrain.chunkTypes.grass(-572,22,0);
 new terrain.chunkTypes.grass(-540,22,0);
@@ -3373,6 +3335,9 @@ new terrain.chunkTypes.grass(388,22,0);
 new terrain.chunkTypes.grass(420,22,0);
 new terrain.chunkTypes.grass(452,22,0);
 new terrain.chunkTypes.grass(-1473,178,0);
+}
+
+public void addSegment63() {
 new terrain.chunkTypes.grass(-1441,178,0);
 new terrain.chunkTypes.grass(-1409,178,0);
 new terrain.chunkTypes.grass(-1377,178,0);
@@ -3388,9 +3353,6 @@ new terrain.chunkTypes.grass(-1089,178,0);
 new terrain.chunkTypes.grass(-1057,178,0);
 new terrain.chunkTypes.grass(-1025,178,0);
 new terrain.chunkTypes.grass(-993,178,0);
-}
-
-public void addSegment64() {
 new terrain.chunkTypes.grass(-961,178,0);
 new terrain.chunkTypes.grass(-929,178,0);
 new terrain.chunkTypes.grass(-897,178,0);
@@ -3426,6 +3388,9 @@ new terrain.chunkTypes.grass(-961,210,0);
 new terrain.chunkTypes.grass(-929,210,0);
 new terrain.chunkTypes.grass(-897,210,0);
 new terrain.chunkTypes.grass(-865,210,0);
+}
+
+public void addSegment64() {
 new terrain.chunkTypes.grass(-833,210,0);
 new terrain.chunkTypes.grass(-801,210,0);
 new terrain.chunkTypes.grass(-769,210,0);
@@ -3441,9 +3406,6 @@ new terrain.chunkTypes.grass(-1473,242,0);
 new terrain.chunkTypes.grass(-1441,242,0);
 new terrain.chunkTypes.grass(-1409,242,0);
 new terrain.chunkTypes.grass(-1377,242,0);
-}
-
-public void addSegment65() {
 new terrain.chunkTypes.grass(-1345,242,0);
 new terrain.chunkTypes.grass(-1313,242,0);
 new terrain.chunkTypes.grass(-1281,242,0);
@@ -3479,6 +3441,9 @@ new terrain.chunkTypes.grass(-1345,274,0);
 new terrain.chunkTypes.grass(-1313,274,0);
 new terrain.chunkTypes.grass(-1281,274,0);
 new terrain.chunkTypes.grass(-1249,274,0);
+}
+
+public void addSegment65() {
 new terrain.chunkTypes.grass(-1217,274,0);
 new terrain.chunkTypes.grass(-1185,274,0);
 new terrain.chunkTypes.grass(-1153,274,0);
@@ -3494,9 +3459,6 @@ new terrain.chunkTypes.grass(-865,274,0);
 new terrain.chunkTypes.grass(-833,274,0);
 new terrain.chunkTypes.grass(-801,274,0);
 new terrain.chunkTypes.grass(-769,274,0);
-}
-
-public void addSegment66() {
 new terrain.chunkTypes.grass(-737,274,0);
 new terrain.chunkTypes.grass(-705,274,0);
 new terrain.chunkTypes.grass(-673,274,0);
@@ -3532,6 +3494,9 @@ new terrain.chunkTypes.grass(-737,306,0);
 new terrain.chunkTypes.grass(-705,306,0);
 new terrain.chunkTypes.grass(-673,306,0);
 new terrain.chunkTypes.grass(-641,306,0);
+}
+
+public void addSegment66() {
 new terrain.chunkTypes.grass(-609,306,0);
 new terrain.chunkTypes.grass(-577,306,0);
 new terrain.chunkTypes.grass(-545,306,0);
@@ -3547,9 +3512,6 @@ new terrain.chunkTypes.grass(-1249,338,0);
 new terrain.chunkTypes.grass(-1217,338,0);
 new terrain.chunkTypes.grass(-1185,338,0);
 new terrain.chunkTypes.grass(-1153,338,0);
-}
-
-public void addSegment67() {
 new terrain.chunkTypes.grass(-1121,338,0);
 new terrain.chunkTypes.grass(-1089,338,0);
 new terrain.chunkTypes.grass(-1057,338,0);
@@ -3585,6 +3547,9 @@ new terrain.chunkTypes.grass(-1121,370,0);
 new terrain.chunkTypes.grass(-1089,370,0);
 new terrain.chunkTypes.grass(-1057,370,0);
 new terrain.chunkTypes.grass(-1025,370,0);
+}
+
+public void addSegment67() {
 new terrain.chunkTypes.grass(-993,370,0);
 new terrain.chunkTypes.grass(-961,370,0);
 new terrain.chunkTypes.grass(-929,370,0);
@@ -3600,9 +3565,6 @@ new terrain.chunkTypes.grass(-641,370,0);
 new terrain.chunkTypes.grass(-609,370,0);
 new terrain.chunkTypes.grass(-577,370,0);
 new terrain.chunkTypes.grass(-545,370,0);
-}
-
-public void addSegment68() {
 new terrain.chunkTypes.grass(-513,370,0);
 new terrain.chunkTypes.grass(-1473,402,0);
 new terrain.chunkTypes.grass(-1441,402,0);
@@ -3638,6 +3600,9 @@ new terrain.chunkTypes.grass(-513,402,0);
 new terrain.chunkTypes.grass(-1473,434,0);
 new terrain.chunkTypes.grass(-1441,434,0);
 new terrain.chunkTypes.grass(-1409,434,0);
+}
+
+public void addSegment68() {
 new terrain.chunkTypes.grass(-1377,434,0);
 new terrain.chunkTypes.grass(-1345,434,0);
 new terrain.chunkTypes.grass(-1313,434,0);
@@ -3653,9 +3618,6 @@ new terrain.chunkTypes.grass(-1025,434,0);
 new terrain.chunkTypes.grass(-993,434,0);
 new terrain.chunkTypes.grass(-961,434,0);
 new terrain.chunkTypes.grass(-929,434,0);
-}
-
-public void addSegment69() {
 new terrain.chunkTypes.grass(-897,434,0);
 new terrain.chunkTypes.grass(-865,434,0);
 new terrain.chunkTypes.grass(-833,434,0);
@@ -3691,6 +3653,9 @@ new terrain.chunkTypes.grass(-897,466,0);
 new terrain.chunkTypes.grass(-865,466,0);
 new terrain.chunkTypes.grass(-833,466,0);
 new terrain.chunkTypes.grass(-801,466,0);
+}
+
+public void addSegment69() {
 new terrain.chunkTypes.grass(-769,466,0);
 new terrain.chunkTypes.grass(-737,466,0);
 new terrain.chunkTypes.grass(-705,466,0);
@@ -3706,9 +3671,6 @@ new terrain.chunkTypes.grass(-1409,498,0);
 new terrain.chunkTypes.grass(-1377,498,0);
 new terrain.chunkTypes.grass(-1345,498,0);
 new terrain.chunkTypes.grass(-1313,498,0);
-}
-
-public void addSegment70() {
 new terrain.chunkTypes.grass(-1281,498,0);
 new terrain.chunkTypes.grass(-1249,498,0);
 new terrain.chunkTypes.grass(-1217,498,0);
@@ -3744,6 +3706,9 @@ new terrain.chunkTypes.grass(-1281,530,0);
 new terrain.chunkTypes.grass(-1249,530,0);
 new terrain.chunkTypes.grass(-1217,530,0);
 new terrain.chunkTypes.grass(-1185,530,0);
+}
+
+public void addSegment70() {
 new terrain.chunkTypes.grass(-1153,530,0);
 new terrain.chunkTypes.grass(-1121,530,0);
 new terrain.chunkTypes.grass(-1089,530,0);
@@ -3759,9 +3724,6 @@ new terrain.chunkTypes.grass(-801,530,0);
 new terrain.chunkTypes.grass(-769,530,0);
 new terrain.chunkTypes.grass(-737,530,0);
 new terrain.chunkTypes.grass(-705,530,0);
-}
-
-public void addSegment71() {
 new terrain.chunkTypes.grass(-673,530,0);
 new terrain.chunkTypes.grass(-641,530,0);
 new terrain.chunkTypes.grass(-609,530,0);
@@ -3797,6 +3759,9 @@ new terrain.chunkTypes.grass(-673,562,0);
 new terrain.chunkTypes.grass(-641,562,0);
 new terrain.chunkTypes.grass(-609,562,0);
 new terrain.chunkTypes.grass(-577,562,0);
+}
+
+public void addSegment71() {
 new terrain.chunkTypes.grass(-545,562,0);
 new terrain.chunkTypes.grass(-513,562,0);
 new terrain.chunkTypes.grass(-1473,594,0);
@@ -3812,9 +3777,6 @@ new terrain.chunkTypes.grass(-1185,594,0);
 new terrain.chunkTypes.grass(-1153,594,0);
 new terrain.chunkTypes.grass(-1121,594,0);
 new terrain.chunkTypes.grass(-1089,594,0);
-}
-
-public void addSegment72() {
 new terrain.chunkTypes.grass(-1057,594,0);
 new terrain.chunkTypes.grass(-1025,594,0);
 new terrain.chunkTypes.grass(-993,594,0);
@@ -3850,6 +3812,9 @@ new terrain.chunkTypes.grass(-1057,626,0);
 new terrain.chunkTypes.grass(-1025,626,0);
 new terrain.chunkTypes.grass(-993,626,0);
 new terrain.chunkTypes.grass(-961,626,0);
+}
+
+public void addSegment72() {
 new terrain.chunkTypes.grass(-929,626,0);
 new terrain.chunkTypes.grass(-897,626,0);
 new terrain.chunkTypes.grass(-865,626,0);
@@ -3865,9 +3830,6 @@ new terrain.chunkTypes.grass(-577,626,0);
 new terrain.chunkTypes.grass(-545,626,0);
 new terrain.chunkTypes.grass(-513,626,0);
 new terrain.chunkTypes.grass(-1473,658,0);
-}
-
-public void addSegment73() {
 new terrain.chunkTypes.grass(-1441,658,0);
 new terrain.chunkTypes.grass(-1409,658,0);
 new terrain.chunkTypes.grass(-1377,658,0);
@@ -3903,6 +3865,9 @@ new terrain.chunkTypes.grass(-1441,690,0);
 new terrain.chunkTypes.grass(-1409,690,0);
 new terrain.chunkTypes.grass(-1377,690,0);
 new terrain.chunkTypes.grass(-1345,690,0);
+}
+
+public void addSegment73() {
 new terrain.chunkTypes.grass(-1313,690,0);
 new terrain.chunkTypes.grass(-1281,690,0);
 new terrain.chunkTypes.grass(-1249,690,0);
@@ -3918,9 +3883,6 @@ new terrain.chunkTypes.grass(-961,690,0);
 new terrain.chunkTypes.grass(-929,690,0);
 new terrain.chunkTypes.grass(-897,690,0);
 new terrain.chunkTypes.grass(-865,690,0);
-}
-
-public void addSegment74() {
 new terrain.chunkTypes.grass(-833,690,0);
 new terrain.chunkTypes.grass(-801,690,0);
 new terrain.chunkTypes.grass(-769,690,0);
@@ -3947,6 +3909,7 @@ new doodads.sheepFarm.sandRock(-982,-2224,0);
 new doodads.sheepFarm.sandRock(-766,-2224,0);
 new doodads.sheepFarm.sandRock(-874,-2224,0);
 new doodads.sheepFarm.sandRock(-766,-2224,0);
+new doodads.sheepFarm.sandRock(-766,-2224,0);
 new doodads.sheepFarm.sandRock(315,-2188,0);
 new doodads.sheepFarm.sandRock(315,-2080,0);
 new doodads.sheepFarm.sandRock(-1334,-1931,0);
@@ -3955,6 +3918,9 @@ new doodads.sheepFarm.sandRock(-1334,-1767,0);
 new doodads.sheepFarm.sandRock(-1334,-1767,0);
 new doodads.sheepFarm.sandRock(-1334,-1767,0);
 new doodads.sheepFarm.flower(2094,-631,0);
+}
+
+public void addSegment74() {
 new doodads.sheepFarm.flower(2224,-626,0);
 new doodads.sheepFarm.flower(2258,-564,2);
 new doodads.sheepFarm.flower(1712,-534,2);
@@ -3971,9 +3937,6 @@ new doodads.sheepFarm.flower(1847,-470,1);
 new doodads.sheepFarm.flower(1865,-470,1);
 new doodads.sheepFarm.flower(1883,-470,1);
 new doodads.sheepFarm.flower(1901,-470,1);
-}
-
-public void addSegment75() {
 new doodads.sheepFarm.flower(1919,-470,1);
 new doodads.sheepFarm.flower(1937,-470,1);
 new doodads.sheepFarm.flower(1955,-470,1);
@@ -4008,6 +3971,9 @@ new doodads.sheepFarm.flower(2493,-470,10);
 new doodads.sheepFarm.flower(2511,-470,10);
 new doodads.sheepFarm.flower(2529,-470,10);
 new doodads.sheepFarm.flower(2547,-470,10);
+}
+
+public void addSegment75() {
 new doodads.sheepFarm.flower(2565,-470,10);
 new doodads.sheepFarm.flower(2583,-470,10);
 new doodads.sheepFarm.flower(2601,-470,10);
@@ -4024,9 +3990,6 @@ new doodads.sheepFarm.flower(2781,-470,10);
 new doodads.sheepFarm.flower(2799,-470,10);
 new doodads.sheepFarm.flower(2817,-470,10);
 new doodads.sheepFarm.flower(2835,-470,10);
-}
-
-public void addSegment76() {
 new doodads.sheepFarm.flower(1684,-452,7);
 new doodads.sheepFarm.flower(1702,-452,7);
 new doodads.sheepFarm.flower(1720,-452,7);
@@ -4061,6 +4024,9 @@ new doodads.sheepFarm.flower(2246,-452,8);
 new doodads.sheepFarm.flower(2264,-452,8);
 new doodads.sheepFarm.flower(2282,-452,8);
 new doodads.sheepFarm.flower(2300,-452,8);
+}
+
+public void addSegment76() {
 new doodads.sheepFarm.flower(2318,-452,8);
 new doodads.sheepFarm.flower(2336,-452,8);
 new doodads.sheepFarm.flower(2354,-452,8);
@@ -4077,9 +4043,6 @@ new doodads.sheepFarm.flower(2547,-452,10);
 new doodads.sheepFarm.flower(2565,-452,10);
 new doodads.sheepFarm.flower(2583,-452,10);
 new doodads.sheepFarm.flower(2601,-452,10);
-}
-
-public void addSegment77() {
 new doodads.sheepFarm.flower(2619,-452,10);
 new doodads.sheepFarm.flower(2637,-452,10);
 new doodads.sheepFarm.flower(2655,-452,10);
@@ -4114,6 +4077,9 @@ new doodads.sheepFarm.flower(1991,-434,1);
 new doodads.sheepFarm.flower(2009,-434,1);
 new doodads.sheepFarm.flower(2027,-434,1);
 new doodads.sheepFarm.flower(2045,-434,1);
+}
+
+public void addSegment77() {
 new doodads.sheepFarm.flower(2084,-434,8);
 new doodads.sheepFarm.flower(2102,-434,8);
 new doodads.sheepFarm.flower(2120,-434,8);
@@ -4130,9 +4096,6 @@ new doodads.sheepFarm.flower(2300,-434,8);
 new doodads.sheepFarm.flower(2318,-434,8);
 new doodads.sheepFarm.flower(2336,-434,8);
 new doodads.sheepFarm.flower(2354,-434,8);
-}
-
-public void addSegment78() {
 new doodads.sheepFarm.flower(2372,-434,8);
 new doodads.sheepFarm.flower(2390,-434,8);
 new doodads.sheepFarm.flower(2408,-434,8);
@@ -4167,6 +4130,9 @@ new doodads.sheepFarm.flower(2156,-420,1);
 new doodads.sheepFarm.flower(2174,-420,1);
 new doodads.sheepFarm.flower(2192,-420,1);
 new doodads.sheepFarm.flower(2210,-420,1);
+}
+
+public void addSegment78() {
 new doodads.sheepFarm.flower(2228,-420,1);
 new doodads.sheepFarm.flower(2246,-420,1);
 new doodads.sheepFarm.flower(2264,-420,1);
@@ -4183,9 +4149,6 @@ new doodads.sheepFarm.flower(1702,-416,7);
 new doodads.sheepFarm.flower(1720,-416,7);
 new doodads.sheepFarm.flower(1738,-416,7);
 new doodads.sheepFarm.flower(1756,-416,7);
-}
-
-public void addSegment79() {
 new doodads.sheepFarm.flower(1774,-416,7);
 new doodads.sheepFarm.flower(1793,-416,1);
 new doodads.sheepFarm.flower(1811,-416,1);
@@ -4220,6 +4183,9 @@ new doodads.sheepFarm.flower(2691,-416,10);
 new doodads.sheepFarm.flower(2709,-416,10);
 new doodads.sheepFarm.flower(2727,-416,10);
 new doodads.sheepFarm.flower(2745,-416,10);
+}
+
+public void addSegment79() {
 new doodads.sheepFarm.flower(2763,-416,10);
 new doodads.sheepFarm.flower(2781,-416,10);
 new doodads.sheepFarm.flower(2799,-416,10);
@@ -4236,9 +4202,6 @@ new doodads.sheepFarm.flower(2210,-402,1);
 new doodads.sheepFarm.flower(2228,-402,1);
 new doodads.sheepFarm.flower(2246,-402,1);
 new doodads.sheepFarm.flower(2264,-402,1);
-}
-
-public void addSegment80() {
 new doodads.sheepFarm.flower(2282,-402,1);
 new doodads.sheepFarm.flower(2300,-402,1);
 new doodads.sheepFarm.flower(2318,-402,1);
@@ -4273,6 +4236,9 @@ new doodads.sheepFarm.flower(2457,-398,10);
 new doodads.sheepFarm.flower(2475,-398,10);
 new doodads.sheepFarm.flower(2493,-398,10);
 new doodads.sheepFarm.flower(2511,-398,10);
+}
+
+public void addSegment80() {
 new doodads.sheepFarm.flower(2529,-398,10);
 new doodads.sheepFarm.flower(2547,-398,10);
 new doodads.sheepFarm.flower(2565,-398,10);
@@ -4289,9 +4255,6 @@ new doodads.sheepFarm.flower(2745,-398,10);
 new doodads.sheepFarm.flower(2763,-398,10);
 new doodads.sheepFarm.flower(2781,-398,10);
 new doodads.sheepFarm.flower(2799,-398,10);
-}
-
-public void addSegment81() {
 new doodads.sheepFarm.flower(2817,-398,10);
 new doodads.sheepFarm.flower(2835,-398,10);
 new doodads.sheepFarm.flower(2084,-384,1);
@@ -4326,6 +4289,9 @@ new doodads.sheepFarm.flower(1847,-380,1);
 new doodads.sheepFarm.flower(1865,-380,1);
 new doodads.sheepFarm.flower(1883,-380,1);
 new doodads.sheepFarm.flower(1901,-380,1);
+}
+
+public void addSegment81() {
 new doodads.sheepFarm.flower(1919,-380,1);
 new doodads.sheepFarm.flower(1937,-380,1);
 new doodads.sheepFarm.flower(1955,-380,1);
@@ -4342,9 +4308,6 @@ new doodads.sheepFarm.flower(2511,-380,10);
 new doodads.sheepFarm.flower(2529,-380,10);
 new doodads.sheepFarm.flower(2547,-380,10);
 new doodads.sheepFarm.flower(2565,-380,10);
-}
-
-public void addSegment82() {
 new doodads.sheepFarm.flower(2583,-380,10);
 new doodads.sheepFarm.flower(2601,-380,10);
 new doodads.sheepFarm.flower(2619,-380,10);
@@ -4379,6 +4342,9 @@ new doodads.sheepFarm.flower(2354,-370,7);
 new doodads.sheepFarm.flower(2372,-370,7);
 new doodads.sheepFarm.flower(2390,-370,7);
 new doodads.sheepFarm.flower(2408,-370,7);
+}
+
+public void addSegment82() {
 new doodads.sheepFarm.flower(1684,-362,7);
 new doodads.sheepFarm.flower(1702,-362,7);
 new doodads.sheepFarm.flower(1720,-362,7);
@@ -4395,9 +4361,6 @@ new doodads.sheepFarm.flower(1901,-362,1);
 new doodads.sheepFarm.flower(1919,-362,1);
 new doodads.sheepFarm.flower(1937,-362,1);
 new doodads.sheepFarm.flower(1955,-362,1);
-}
-
-public void addSegment83() {
 new doodads.sheepFarm.flower(1973,-362,1);
 new doodads.sheepFarm.flower(1991,-362,1);
 new doodads.sheepFarm.flower(2009,-362,1);
@@ -4432,6 +4395,9 @@ new doodads.sheepFarm.flower(2120,-352,7);
 new doodads.sheepFarm.flower(2138,-352,7);
 new doodads.sheepFarm.flower(2156,-352,7);
 new doodads.sheepFarm.flower(2174,-352,7);
+}
+
+public void addSegment83() {
 new doodads.sheepFarm.flower(2192,-352,7);
 new doodads.sheepFarm.flower(2210,-352,7);
 new doodads.sheepFarm.flower(2228,-352,7);
@@ -4448,9 +4414,6 @@ new doodads.sheepFarm.flower(2408,-352,7);
 new doodads.sheepFarm.flower(1684,-344,7);
 new doodads.sheepFarm.flower(1702,-344,7);
 new doodads.sheepFarm.flower(1720,-344,7);
-}
-
-public void addSegment84() {
 new doodads.sheepFarm.flower(1738,-344,7);
 new doodads.sheepFarm.flower(1756,-344,7);
 new doodads.sheepFarm.flower(1774,-344,7);
@@ -4485,6 +4448,9 @@ new doodads.sheepFarm.flower(2655,-344,10);
 new doodads.sheepFarm.flower(2673,-344,10);
 new doodads.sheepFarm.flower(2691,-344,10);
 new doodads.sheepFarm.flower(2709,-344,10);
+}
+
+public void addSegment84() {
 new doodads.sheepFarm.flower(2727,-344,10);
 new doodads.sheepFarm.flower(2745,-344,10);
 new doodads.sheepFarm.flower(2763,-344,10);
@@ -4501,9 +4467,6 @@ new doodads.sheepFarm.flower(2174,-334,7);
 new doodads.sheepFarm.flower(2192,-334,7);
 new doodads.sheepFarm.flower(2210,-334,7);
 new doodads.sheepFarm.flower(2228,-334,7);
-}
-
-public void addSegment85() {
 new doodads.sheepFarm.flower(2246,-334,7);
 new doodads.sheepFarm.flower(2264,-334,7);
 new doodads.sheepFarm.flower(2282,-334,7);
@@ -4538,6 +4501,9 @@ new doodads.sheepFarm.flower(2045,-326,1);
 new doodads.sheepFarm.flower(2439,-326,10);
 new doodads.sheepFarm.flower(2457,-326,10);
 new doodads.sheepFarm.flower(2475,-326,10);
+}
+
+public void addSegment85() {
 new doodads.sheepFarm.flower(2493,-326,10);
 new doodads.sheepFarm.flower(2511,-326,10);
 new doodads.sheepFarm.flower(2529,-326,10);
@@ -4554,9 +4520,6 @@ new doodads.sheepFarm.flower(2709,-326,10);
 new doodads.sheepFarm.flower(2727,-326,10);
 new doodads.sheepFarm.flower(2745,-326,10);
 new doodads.sheepFarm.flower(2763,-326,10);
-}
-
-public void addSegment86() {
 new doodads.sheepFarm.flower(2781,-326,10);
 new doodads.sheepFarm.flower(2799,-326,10);
 new doodads.sheepFarm.flower(2817,-326,10);
@@ -4591,6 +4554,9 @@ new doodads.sheepFarm.flower(1811,-308,1);
 new doodads.sheepFarm.flower(1829,-308,1);
 new doodads.sheepFarm.flower(1847,-308,1);
 new doodads.sheepFarm.flower(1865,-308,1);
+}
+
+public void addSegment86() {
 new doodads.sheepFarm.flower(1883,-308,1);
 new doodads.sheepFarm.flower(1901,-308,1);
 new doodads.sheepFarm.flower(1919,-308,1);
@@ -4607,9 +4573,6 @@ new doodads.sheepFarm.flower(2475,-308,10);
 new doodads.sheepFarm.flower(2493,-308,10);
 new doodads.sheepFarm.flower(2511,-308,10);
 new doodads.sheepFarm.flower(2529,-308,10);
-}
-
-public void addSegment87() {
 new doodads.sheepFarm.flower(2547,-308,10);
 new doodads.sheepFarm.flower(2565,-308,10);
 new doodads.sheepFarm.flower(2583,-308,10);
@@ -4644,6 +4607,9 @@ new doodads.sheepFarm.flower(2318,-302,6);
 new doodads.sheepFarm.flower(2336,-302,6);
 new doodads.sheepFarm.flower(2354,-302,6);
 new doodads.sheepFarm.flower(2372,-302,6);
+}
+
+public void addSegment87() {
 new doodads.sheepFarm.flower(2390,-302,6);
 new doodads.sheepFarm.flower(2408,-302,6);
 new doodads.sheepFarm.flower(1684,-290,7);
@@ -4660,9 +4626,6 @@ new doodads.sheepFarm.flower(1865,-290,1);
 new doodads.sheepFarm.flower(1883,-290,1);
 new doodads.sheepFarm.flower(1901,-290,1);
 new doodads.sheepFarm.flower(1919,-290,1);
-}
-
-public void addSegment88() {
 new doodads.sheepFarm.flower(1937,-290,1);
 new doodads.sheepFarm.flower(1955,-290,1);
 new doodads.sheepFarm.flower(1973,-290,1);
@@ -4697,6 +4660,9 @@ new doodads.sheepFarm.flower(2084,-284,6);
 new doodads.sheepFarm.flower(2102,-284,6);
 new doodads.sheepFarm.flower(2120,-284,6);
 new doodads.sheepFarm.flower(2138,-284,6);
+}
+
+public void addSegment88() {
 new doodads.sheepFarm.flower(2156,-284,6);
 new doodads.sheepFarm.flower(2174,-284,6);
 new doodads.sheepFarm.flower(2192,-284,6);
@@ -4713,9 +4679,6 @@ new doodads.sheepFarm.flower(2372,-284,6);
 new doodads.sheepFarm.flower(2390,-284,6);
 new doodads.sheepFarm.flower(2408,-284,6);
 new doodads.sheepFarm.flower(1684,-272,7);
-}
-
-public void addSegment89() {
 new doodads.sheepFarm.flower(1702,-272,7);
 new doodads.sheepFarm.flower(1720,-272,7);
 new doodads.sheepFarm.flower(1738,-272,7);
@@ -4750,6 +4713,9 @@ new doodads.sheepFarm.flower(2619,-272,10);
 new doodads.sheepFarm.flower(2637,-272,10);
 new doodads.sheepFarm.flower(2655,-272,10);
 new doodads.sheepFarm.flower(2673,-272,10);
+}
+
+public void addSegment89() {
 new doodads.sheepFarm.flower(2691,-272,10);
 new doodads.sheepFarm.flower(2709,-272,10);
 new doodads.sheepFarm.flower(2727,-272,10);
@@ -4766,9 +4732,6 @@ new doodads.sheepFarm.flower(2138,-270,3);
 new doodads.sheepFarm.flower(2156,-270,3);
 new doodads.sheepFarm.flower(2174,-270,3);
 new doodads.sheepFarm.flower(2192,-270,3);
-}
-
-public void addSegment90() {
 new doodads.sheepFarm.flower(2210,-270,3);
 new doodads.sheepFarm.flower(2228,-270,3);
 new doodads.sheepFarm.flower(2246,-270,3);
@@ -4803,6 +4766,9 @@ new doodads.sheepFarm.flower(1738,-254,7);
 new doodads.sheepFarm.flower(1756,-254,7);
 new doodads.sheepFarm.flower(1774,-254,7);
 new doodads.sheepFarm.flower(2439,-254,10);
+}
+
+public void addSegment90() {
 new doodads.sheepFarm.flower(2457,-254,10);
 new doodads.sheepFarm.flower(2475,-254,10);
 new doodads.sheepFarm.flower(2493,-254,10);
@@ -4819,9 +4785,6 @@ new doodads.sheepFarm.flower(2673,-254,10);
 new doodads.sheepFarm.flower(2691,-254,10);
 new doodads.sheepFarm.flower(2709,-254,10);
 new doodads.sheepFarm.flower(2727,-254,10);
-}
-
-public void addSegment91() {
 new doodads.sheepFarm.flower(2745,-254,10);
 new doodads.sheepFarm.flower(2763,-254,10);
 new doodads.sheepFarm.flower(2781,-254,10);
@@ -4856,6 +4819,9 @@ new doodads.sheepFarm.flower(1883,-240,5);
 new doodads.sheepFarm.flower(1901,-240,5);
 new doodads.sheepFarm.flower(1919,-240,5);
 new doodads.sheepFarm.flower(1937,-240,5);
+}
+
+public void addSegment91() {
 new doodads.sheepFarm.flower(1954,-240,6);
 new doodads.sheepFarm.flower(1972,-240,6);
 new doodads.sheepFarm.flower(1990,-240,6);
@@ -4872,9 +4838,6 @@ new doodads.sheepFarm.flower(2439,-236,10);
 new doodads.sheepFarm.flower(2457,-236,10);
 new doodads.sheepFarm.flower(2475,-236,10);
 new doodads.sheepFarm.flower(2493,-236,10);
-}
-
-public void addSegment92() {
 new doodads.sheepFarm.flower(2511,-236,10);
 new doodads.sheepFarm.flower(2529,-236,10);
 new doodads.sheepFarm.flower(2547,-236,10);
@@ -4909,6 +4872,9 @@ new doodads.sheepFarm.flower(2282,-234,3);
 new doodads.sheepFarm.flower(2300,-234,3);
 new doodads.sheepFarm.flower(2318,-234,3);
 new doodads.sheepFarm.flower(2336,-234,3);
+}
+
+public void addSegment92() {
 new doodads.sheepFarm.flower(2354,-234,3);
 new doodads.sheepFarm.flower(2372,-234,3);
 new doodads.sheepFarm.flower(2390,-234,3);
@@ -4925,9 +4891,6 @@ new doodads.sheepFarm.flower(1937,-222,5);
 new doodads.sheepFarm.flower(1954,-222,6);
 new doodads.sheepFarm.flower(1972,-222,6);
 new doodads.sheepFarm.flower(1990,-222,6);
-}
-
-public void addSegment93() {
 new doodads.sheepFarm.flower(2008,-222,6);
 new doodads.sheepFarm.flower(2026,-222,6);
 new doodads.sheepFarm.flower(2044,-222,6);
@@ -4962,6 +4925,9 @@ new doodads.sheepFarm.flower(2475,-218,10);
 new doodads.sheepFarm.flower(2493,-218,10);
 new doodads.sheepFarm.flower(2511,-218,10);
 new doodads.sheepFarm.flower(2529,-218,10);
+}
+
+public void addSegment93() {
 new doodads.sheepFarm.flower(2547,-218,10);
 new doodads.sheepFarm.flower(2565,-218,10);
 new doodads.sheepFarm.flower(2583,-218,10);
@@ -4978,9 +4944,6 @@ new doodads.sheepFarm.flower(2763,-218,10);
 new doodads.sheepFarm.flower(2781,-218,10);
 new doodads.sheepFarm.flower(2799,-218,10);
 new doodads.sheepFarm.flower(2817,-218,10);
-}
-
-public void addSegment94() {
 new doodads.sheepFarm.flower(2835,-218,10);
 new doodads.sheepFarm.flower(1793,-204,5);
 new doodads.sheepFarm.flower(1811,-204,5);
@@ -5015,6 +4978,9 @@ new doodads.sheepFarm.flower(2336,-202,9);
 new doodads.sheepFarm.flower(2354,-202,9);
 new doodads.sheepFarm.flower(2372,-202,9);
 new doodads.sheepFarm.flower(2390,-202,9);
+}
+
+public void addSegment94() {
 new doodads.sheepFarm.flower(2408,-202,9);
 new doodads.sheepFarm.flower(1684,-200,7);
 new doodads.sheepFarm.flower(1702,-200,7);
@@ -5031,9 +4997,6 @@ new doodads.sheepFarm.flower(2529,-200,10);
 new doodads.sheepFarm.flower(2547,-200,10);
 new doodads.sheepFarm.flower(2565,-200,10);
 new doodads.sheepFarm.flower(2583,-200,10);
-}
-
-public void addSegment95() {
 new doodads.sheepFarm.flower(2601,-200,10);
 new doodads.sheepFarm.flower(2619,-200,10);
 new doodads.sheepFarm.flower(2637,-200,10);
@@ -5068,6 +5031,9 @@ new doodads.sheepFarm.flower(2102,-184,9);
 new doodads.sheepFarm.flower(2120,-184,9);
 new doodads.sheepFarm.flower(2138,-184,9);
 new doodads.sheepFarm.flower(2156,-184,9);
+}
+
+public void addSegment95() {
 new doodads.sheepFarm.flower(2174,-184,9);
 new doodads.sheepFarm.flower(2192,-184,9);
 new doodads.sheepFarm.flower(2210,-184,9);
@@ -5084,9 +5050,6 @@ new doodads.sheepFarm.flower(2390,-184,9);
 new doodads.sheepFarm.flower(2408,-184,9);
 new doodads.sheepFarm.flower(1684,-182,7);
 new doodads.sheepFarm.flower(1702,-182,7);
-}
-
-public void addSegment96() {
 new doodads.sheepFarm.flower(1720,-182,7);
 new doodads.sheepFarm.flower(1738,-182,7);
 new doodads.sheepFarm.flower(1756,-182,7);
@@ -5121,6 +5084,9 @@ new doodads.sheepFarm.flower(2138,-170,5);
 new doodads.sheepFarm.flower(2156,-170,5);
 new doodads.sheepFarm.flower(2174,-170,5);
 new doodads.sheepFarm.flower(2192,-170,5);
+}
+
+public void addSegment96() {
 new doodads.sheepFarm.flower(2210,-170,5);
 new doodads.sheepFarm.flower(2228,-170,5);
 new doodads.sheepFarm.flower(2246,-170,5);
@@ -5137,9 +5103,6 @@ new doodads.sheepFarm.flower(1793,-168,5);
 new doodads.sheepFarm.flower(1811,-168,5);
 new doodads.sheepFarm.flower(1829,-168,5);
 new doodads.sheepFarm.flower(1847,-168,5);
-}
-
-public void addSegment97() {
 new doodads.sheepFarm.flower(1865,-168,5);
 new doodads.sheepFarm.flower(1883,-168,5);
 new doodads.sheepFarm.flower(1901,-168,5);
@@ -5174,6 +5137,9 @@ new doodads.sheepFarm.flower(2673,-164,10);
 new doodads.sheepFarm.flower(2691,-164,10);
 new doodads.sheepFarm.flower(2709,-164,10);
 new doodads.sheepFarm.flower(2727,-164,10);
+}
+
+public void addSegment97() {
 new doodads.sheepFarm.flower(2745,-164,10);
 new doodads.sheepFarm.flower(2763,-164,10);
 new doodads.sheepFarm.flower(2781,-164,10);
@@ -5190,9 +5156,6 @@ new doodads.sheepFarm.flower(2192,-152,5);
 new doodads.sheepFarm.flower(2210,-152,5);
 new doodads.sheepFarm.flower(2228,-152,5);
 new doodads.sheepFarm.flower(2246,-152,5);
-}
-
-public void addSegment98() {
 new doodads.sheepFarm.flower(2264,-152,5);
 new doodads.sheepFarm.flower(2282,-152,5);
 new doodads.sheepFarm.flower(2300,-152,5);
@@ -5227,6 +5190,9 @@ new doodads.sheepFarm.flower(2439,-146,10);
 new doodads.sheepFarm.flower(2457,-146,10);
 new doodads.sheepFarm.flower(2475,-146,10);
 new doodads.sheepFarm.flower(2493,-146,10);
+}
+
+public void addSegment98() {
 new doodads.sheepFarm.flower(2511,-146,10);
 new doodads.sheepFarm.flower(2529,-146,10);
 new doodads.sheepFarm.flower(2547,-146,10);
@@ -5243,9 +5209,6 @@ new doodads.sheepFarm.flower(2727,-146,10);
 new doodads.sheepFarm.flower(2745,-146,10);
 new doodads.sheepFarm.flower(2763,-146,10);
 new doodads.sheepFarm.flower(2781,-146,10);
-}
-
-public void addSegment99() {
 new doodads.sheepFarm.flower(2799,-146,10);
 new doodads.sheepFarm.flower(2817,-146,10);
 new doodads.sheepFarm.flower(2835,-146,10);
@@ -5280,6 +5243,9 @@ new doodads.sheepFarm.flower(1829,-132,5);
 new doodads.sheepFarm.flower(1847,-132,5);
 new doodads.sheepFarm.flower(1865,-132,5);
 new doodads.sheepFarm.flower(1883,-132,5);
+}
+
+public void addSegment99() {
 new doodads.sheepFarm.flower(1901,-132,5);
 new doodads.sheepFarm.flower(1919,-132,5);
 new doodads.sheepFarm.flower(1937,-132,5);
@@ -5296,9 +5262,6 @@ new doodads.sheepFarm.flower(2493,-128,10);
 new doodads.sheepFarm.flower(2511,-128,10);
 new doodads.sheepFarm.flower(2529,-128,10);
 new doodads.sheepFarm.flower(2547,-128,10);
-}
-
-public void addSegment100() {
 new doodads.sheepFarm.flower(2565,-128,10);
 new doodads.sheepFarm.flower(2583,-128,10);
 new doodads.sheepFarm.flower(2601,-128,10);
@@ -5333,6 +5296,9 @@ new doodads.sheepFarm.flower(2336,-120,8);
 new doodads.sheepFarm.flower(2354,-120,8);
 new doodads.sheepFarm.flower(2372,-120,8);
 new doodads.sheepFarm.flower(2390,-120,8);
+}
+
+public void addSegment100() {
 new doodads.sheepFarm.flower(2408,-120,8);
 new doodads.sheepFarm.flower(1684,-114,3);
 new doodads.sheepFarm.flower(1702,-114,3);
@@ -5349,9 +5315,6 @@ new doodads.sheepFarm.flower(1883,-114,5);
 new doodads.sheepFarm.flower(1901,-114,5);
 new doodads.sheepFarm.flower(1919,-114,5);
 new doodads.sheepFarm.flower(1937,-114,5);
-}
-
-public void addSegment101() {
 new doodads.sheepFarm.flower(1954,-114,6);
 new doodads.sheepFarm.flower(1972,-114,6);
 new doodads.sheepFarm.flower(1990,-114,6);
@@ -5386,6 +5349,9 @@ new doodads.sheepFarm.flower(2102,-102,8);
 new doodads.sheepFarm.flower(2120,-102,8);
 new doodads.sheepFarm.flower(2138,-102,8);
 new doodads.sheepFarm.flower(2156,-102,8);
+}
+
+public void addSegment101() {
 new doodads.sheepFarm.flower(2174,-102,8);
 new doodads.sheepFarm.flower(2192,-102,8);
 new doodads.sheepFarm.flower(2210,-102,8);
@@ -5402,9 +5368,6 @@ new doodads.sheepFarm.flower(2390,-102,8);
 new doodads.sheepFarm.flower(2408,-102,8);
 new doodads.sheepFarm.flower(1684,-96,3);
 new doodads.sheepFarm.flower(1702,-96,3);
-}
-
-public void addSegment102() {
 new doodads.sheepFarm.flower(1720,-96,3);
 new doodads.sheepFarm.flower(1738,-96,3);
 new doodads.sheepFarm.flower(1756,-96,3);
@@ -5439,6 +5402,9 @@ new doodads.sheepFarm.flower(2637,-92,10);
 new doodads.sheepFarm.flower(2655,-92,10);
 new doodads.sheepFarm.flower(2673,-92,10);
 new doodads.sheepFarm.flower(2691,-92,10);
+}
+
+public void addSegment102() {
 new doodads.sheepFarm.flower(2709,-92,10);
 new doodads.sheepFarm.flower(2727,-92,10);
 new doodads.sheepFarm.flower(2745,-92,10);
@@ -5455,9 +5421,6 @@ new doodads.sheepFarm.flower(2156,-84,8);
 new doodads.sheepFarm.flower(2174,-84,8);
 new doodads.sheepFarm.flower(2192,-84,8);
 new doodads.sheepFarm.flower(2210,-84,8);
-}
-
-public void addSegment103() {
 new doodads.sheepFarm.flower(2228,-84,8);
 new doodads.sheepFarm.flower(2246,-84,8);
 new doodads.sheepFarm.flower(2264,-84,8);
@@ -5492,6 +5455,9 @@ new doodads.sheepFarm.flower(2026,-78,6);
 new doodads.sheepFarm.flower(2044,-78,6);
 new doodads.sheepFarm.flower(2439,-74,10);
 new doodads.sheepFarm.flower(2457,-74,10);
+}
+
+public void addSegment103() {
 new doodads.sheepFarm.flower(2475,-74,10);
 new doodads.sheepFarm.flower(2493,-74,10);
 new doodads.sheepFarm.flower(2511,-74,10);
@@ -5508,9 +5474,6 @@ new doodads.sheepFarm.flower(2691,-74,10);
 new doodads.sheepFarm.flower(2709,-74,10);
 new doodads.sheepFarm.flower(2727,-74,10);
 new doodads.sheepFarm.flower(2745,-74,10);
-}
-
-public void addSegment104() {
 new doodads.sheepFarm.flower(2763,-74,10);
 new doodads.sheepFarm.flower(2781,-74,10);
 new doodads.sheepFarm.flower(2799,-74,10);
@@ -5545,6 +5508,9 @@ new doodads.sheepFarm.flower(1793,-60,5);
 new doodads.sheepFarm.flower(1811,-60,5);
 new doodads.sheepFarm.flower(1829,-60,5);
 new doodads.sheepFarm.flower(1847,-60,5);
+}
+
+public void addSegment104() {
 new doodads.sheepFarm.flower(1865,-60,5);
 new doodads.sheepFarm.flower(1883,-60,5);
 new doodads.sheepFarm.flower(1901,-60,5);
@@ -5561,9 +5527,6 @@ new doodads.sheepFarm.flower(2457,-56,10);
 new doodads.sheepFarm.flower(2475,-56,10);
 new doodads.sheepFarm.flower(2493,-56,10);
 new doodads.sheepFarm.flower(2511,-56,10);
-}
-
-public void addSegment105() {
 new doodads.sheepFarm.flower(2529,-56,10);
 new doodads.sheepFarm.flower(2547,-56,10);
 new doodads.sheepFarm.flower(2565,-56,10);
@@ -5598,6 +5561,9 @@ new doodads.sheepFarm.flower(2300,-52,1);
 new doodads.sheepFarm.flower(2318,-52,1);
 new doodads.sheepFarm.flower(2336,-52,1);
 new doodads.sheepFarm.flower(2354,-52,1);
+}
+
+public void addSegment105() {
 new doodads.sheepFarm.flower(2372,-52,1);
 new doodads.sheepFarm.flower(2390,-52,1);
 new doodads.sheepFarm.flower(2408,-52,1);
@@ -5614,9 +5580,6 @@ new doodads.sheepFarm.flower(1847,-42,5);
 new doodads.sheepFarm.flower(1865,-42,5);
 new doodads.sheepFarm.flower(1883,-42,5);
 new doodads.sheepFarm.flower(1901,-42,5);
-}
-
-public void addSegment106() {
 new doodads.sheepFarm.flower(1919,-42,5);
 new doodads.sheepFarm.flower(1937,-42,5);
 new doodads.sheepFarm.flower(1954,-42,6);
@@ -5630,12 +5593,17 @@ new doodads.sheepFarm.verticalFence(2221,-3990,0);
 new doodads.sheepFarm.verticalFence(2441,-3990,0);
 new doodads.sheepFarm.statue(2253,-3944,0);
 new doodads.sheepFarm.statue(2397,-3944,1);
+u = new units.unitTypes.sheepFarm.redWolf(1459,-3914);
+u.setMoveSpeed((float)3.5);
+u.jumpSpeed = (float)12.0;
+commands = new commandList();
+commands.add(new units.unitCommands.commands.slashCommand(1458.0,-3019.0));
+commands.add(new units.unitCommands.commands.slashCommand(1459.0,-3914.0));
+u.setRepeatCommands(commands);
 new doodads.sheepFarm.bush(903,-3891,0);
 new doodads.sheepFarm.bush(953,-3891,0);
 new doodads.sheepFarm.bush(1003,-3891,0);
 new doodads.sheepFarm.bush(1053,-3891,0);
-new doodads.sheepFarm.bush(1103,-3891,0);
-new doodads.sheepFarm.bush(1153,-3891,0);
 new doodads.sheepFarm.bush(1203,-3891,0);
 new doodads.sheepFarm.bush(1253,-3891,0);
 new doodads.sheepFarm.bush(1303,-3891,0);
@@ -5652,11 +5620,12 @@ new doodads.sheepFarm.fencePost(2415,-3872,0);
 new doodads.sheepFarm.fenceBars(2420,-3872,0);
 new doodads.sheepFarm.fencePost(2443,-3872,0);
 new doodads.sheepFarm.bush(903,-3876,0);
+}
+
+public void addSegment106() {
 new doodads.sheepFarm.bush(953,-3876,0);
 new doodads.sheepFarm.bush(1003,-3876,0);
 new doodads.sheepFarm.bush(1053,-3876,0);
-new doodads.sheepFarm.bush(1103,-3876,0);
-new doodads.sheepFarm.bush(1153,-3876,0);
 new doodads.sheepFarm.bush(1203,-3876,0);
 new doodads.sheepFarm.bush(1253,-3876,0);
 new doodads.sheepFarm.bush(1303,-3876,0);
@@ -5664,20 +5633,13 @@ new doodads.sheepFarm.bush(903,-3861,0);
 new doodads.sheepFarm.bush(953,-3861,0);
 new doodads.sheepFarm.bush(1003,-3861,0);
 new doodads.sheepFarm.bush(1053,-3861,0);
-new doodads.sheepFarm.bush(1103,-3861,0);
-new doodads.sheepFarm.bush(1153,-3861,0);
 new doodads.sheepFarm.bush(1203,-3861,0);
-}
-
-public void addSegment107() {
 new doodads.sheepFarm.bush(1253,-3861,0);
 new doodads.sheepFarm.bush(1303,-3861,0);
 new doodads.sheepFarm.bush(903,-3846,0);
 new doodads.sheepFarm.bush(953,-3846,0);
 new doodads.sheepFarm.bush(1003,-3846,0);
 new doodads.sheepFarm.bush(1053,-3846,0);
-new doodads.sheepFarm.bush(1103,-3846,0);
-new doodads.sheepFarm.bush(1153,-3846,0);
 new doodads.sheepFarm.bush(1203,-3846,0);
 new doodads.sheepFarm.bush(1253,-3846,0);
 new doodads.sheepFarm.bush(1303,-3846,0);
@@ -5685,55 +5647,41 @@ new doodads.sheepFarm.bush(903,-3831,0);
 new doodads.sheepFarm.bush(953,-3831,0);
 new doodads.sheepFarm.bush(1003,-3831,0);
 new doodads.sheepFarm.bush(1053,-3831,0);
-new doodads.sheepFarm.bush(1103,-3831,0);
-new doodads.sheepFarm.bush(1153,-3831,0);
 new doodads.sheepFarm.bush(1203,-3831,0);
 new doodads.sheepFarm.bush(1253,-3831,0);
 new doodads.sheepFarm.bush(1303,-3831,0);
 new doodads.sheepFarm.verticalFence(887,-3862,0);
 new doodads.sheepFarm.bush(903,-3816,0);
-new doodads.sheepFarm.bush(953,-3816,0);
 new doodads.sheepFarm.bush(1003,-3816,0);
 new doodads.sheepFarm.bush(1053,-3816,0);
-new doodads.sheepFarm.bush(1103,-3816,0);
-new doodads.sheepFarm.bush(1153,-3816,0);
 new doodads.sheepFarm.bush(1203,-3816,0);
 new doodads.sheepFarm.bush(1253,-3816,0);
 new doodads.sheepFarm.bush(1303,-3816,0);
+new doodads.sheepFarm.bush(953,-3815,0);
 new doodads.sheepFarm.verticalFence(1364,-3860,0);
-new doodads.sheepFarm.bush(903,-3801,0);
-new doodads.sheepFarm.bush(953,-3801,0);
-new doodads.sheepFarm.bush(1003,-3801,0);
-new doodads.sheepFarm.bush(1053,-3801,0);
-new doodads.sheepFarm.bush(1103,-3801,0);
 new doodads.sheepFarm.bush(1153,-3801,0);
 new doodads.sheepFarm.bush(1203,-3801,0);
 new doodads.sheepFarm.bush(1253,-3801,0);
 new doodads.sheepFarm.bush(1303,-3801,0);
-new doodads.sheepFarm.bush(903,-3786,0);
-new doodads.sheepFarm.bush(953,-3786,0);
-new doodads.sheepFarm.bush(1003,-3786,0);
-new doodads.sheepFarm.bush(1053,-3786,0);
-new doodads.sheepFarm.bush(1103,-3786,0);
+u = new units.unitTypes.sheepFarm.redWolf(1163,-3132);
+u.setMoveSpeed((float)3.5);
+u.jumpSpeed = (float)12.0;
+commands = new commandList();
+commands.add(new units.unitCommands.commands.slashCommand(1163.0,-3862.0));
+commands.add(new units.unitCommands.commands.slashCommand(1163.0,-3132.0));
+u.setRepeatCommands(commands);
 new doodads.sheepFarm.bush(1153,-3786,0);
 new doodads.sheepFarm.bush(1203,-3786,0);
 new doodads.sheepFarm.bush(1253,-3786,0);
 new doodads.sheepFarm.bush(1303,-3786,0);
-new doodads.sheepFarm.bush(749,-3785,0);
-}
-
-public void addSegment108() {
-new doodads.sheepFarm.bush(903,-3771,0);
-new doodads.sheepFarm.bush(953,-3771,0);
-new doodads.sheepFarm.bush(1003,-3771,0);
-new doodads.sheepFarm.bush(1053,-3771,0);
-new doodads.sheepFarm.bush(1103,-3771,0);
 new doodads.sheepFarm.bush(1153,-3771,0);
 new doodads.sheepFarm.bush(1203,-3771,0);
 new doodads.sheepFarm.bush(1253,-3771,0);
 new doodads.sheepFarm.bush(1303,-3771,0);
 new doodads.sheepFarm.verticalFence(887,-3802,0);
-new doodads.sheepFarm.bush(903,-3756,0);
+}
+
+public void addSegment107() {
 new doodads.sheepFarm.bush(953,-3756,0);
 new doodads.sheepFarm.bush(1003,-3756,0);
 new doodads.sheepFarm.bush(1053,-3756,0);
@@ -5743,7 +5691,6 @@ new doodads.sheepFarm.bush(1203,-3756,0);
 new doodads.sheepFarm.bush(1253,-3756,0);
 new doodads.sheepFarm.bush(1303,-3756,0);
 new doodads.sheepFarm.verticalFence(1364,-3800,0);
-new doodads.sheepFarm.bush(903,-3741,0);
 new doodads.sheepFarm.bush(953,-3741,0);
 new doodads.sheepFarm.bush(1003,-3741,0);
 new doodads.sheepFarm.bush(1053,-3741,0);
@@ -5752,7 +5699,6 @@ new doodads.sheepFarm.bush(1153,-3741,0);
 new doodads.sheepFarm.bush(1203,-3741,0);
 new doodads.sheepFarm.bush(1253,-3741,0);
 new doodads.sheepFarm.bush(1303,-3741,0);
-new doodads.sheepFarm.bush(903,-3726,0);
 new doodads.sheepFarm.bush(953,-3726,0);
 new doodads.sheepFarm.bush(1003,-3726,0);
 new doodads.sheepFarm.bush(1053,-3726,0);
@@ -5761,264 +5707,196 @@ new doodads.sheepFarm.bush(1153,-3726,0);
 new doodads.sheepFarm.bush(1203,-3726,0);
 new doodads.sheepFarm.bush(1253,-3726,0);
 new doodads.sheepFarm.bush(1303,-3726,0);
-new doodads.sheepFarm.bush(903,-3711,0);
 new doodads.sheepFarm.bush(953,-3711,0);
-new doodads.sheepFarm.bush(1003,-3711,0);
-new doodads.sheepFarm.bush(1053,-3711,0);
-new doodads.sheepFarm.bush(1103,-3711,0);
-new doodads.sheepFarm.bush(1153,-3711,0);
 new doodads.sheepFarm.bush(1203,-3711,0);
 new doodads.sheepFarm.bush(1253,-3711,0);
 new doodads.sheepFarm.bush(1303,-3711,0);
+u = new units.unitTypes.sheepFarm.yellowWolf(608,-3219);
+u.setMoveSpeed((float)3.5);
+u.jumpSpeed = (float)9.0;
+commands = new commandList();
+commands.add(new units.unitCommands.commands.slashCommand(609.0,-3718.0));
+commands.add(new units.unitCommands.commands.slashCommand(608.0,-3219.0));
+u.setRepeatCommands(commands);
 new doodads.sheepFarm.verticalFence(1512,-3745,0);
 new doodads.sheepFarm.verticalFence(887,-3742,0);
-new doodads.sheepFarm.bush(903,-3696,0);
-}
-
-public void addSegment109() {
-new doodads.sheepFarm.bush(953,-3696,0);
-new doodads.sheepFarm.bush(1003,-3696,0);
-new doodads.sheepFarm.bush(1053,-3696,0);
-new doodads.sheepFarm.bush(1103,-3696,0);
-new doodads.sheepFarm.bush(1153,-3696,0);
 new doodads.sheepFarm.bush(1203,-3696,0);
 new doodads.sheepFarm.bush(1253,-3696,0);
 new doodads.sheepFarm.bush(1303,-3696,0);
 new doodads.sheepFarm.verticalFence(1364,-3740,0);
-new doodads.sheepFarm.bush(903,-3681,0);
-new doodads.sheepFarm.bush(953,-3681,0);
-new doodads.sheepFarm.bush(1003,-3681,0);
-new doodads.sheepFarm.bush(1053,-3681,0);
-new doodads.sheepFarm.bush(1103,-3681,0);
-new doodads.sheepFarm.bush(1153,-3681,0);
 new doodads.sheepFarm.bush(1203,-3681,0);
 new doodads.sheepFarm.bush(1253,-3681,0);
 new doodads.sheepFarm.bush(1303,-3681,0);
 new doodads.sheepFarm.bush(903,-3666,0);
-new doodads.sheepFarm.bush(953,-3666,0);
 new doodads.sheepFarm.bush(1003,-3666,0);
 new doodads.sheepFarm.bush(1053,-3666,0);
 new doodads.sheepFarm.bush(1103,-3666,0);
-new doodads.sheepFarm.bush(1153,-3666,0);
 new doodads.sheepFarm.bush(1203,-3666,0);
 new doodads.sheepFarm.bush(1253,-3666,0);
 new doodads.sheepFarm.bush(1303,-3666,0);
 new doodads.sheepFarm.bush(903,-3651,0);
-new doodads.sheepFarm.bush(953,-3651,0);
 new doodads.sheepFarm.bush(1003,-3651,0);
 new doodads.sheepFarm.bush(1053,-3651,0);
 new doodads.sheepFarm.bush(1103,-3651,0);
-new doodads.sheepFarm.bush(1153,-3651,0);
+}
+
+public void addSegment108() {
 new doodads.sheepFarm.bush(1203,-3651,0);
 new doodads.sheepFarm.bush(1253,-3651,0);
 new doodads.sheepFarm.bush(1303,-3651,0);
 new doodads.sheepFarm.verticalFence(1512,-3685,0);
 new doodads.sheepFarm.verticalFence(887,-3682,0);
 new doodads.sheepFarm.bush(903,-3636,0);
-new doodads.sheepFarm.bush(953,-3636,0);
 new doodads.sheepFarm.bush(1003,-3636,0);
 new doodads.sheepFarm.bush(1053,-3636,0);
 new doodads.sheepFarm.bush(1103,-3636,0);
-new doodads.sheepFarm.bush(1153,-3636,0);
 new doodads.sheepFarm.bush(1203,-3636,0);
 new doodads.sheepFarm.bush(1253,-3636,0);
 new doodads.sheepFarm.bush(1303,-3636,0);
 new doodads.sheepFarm.verticalFence(1364,-3680,0);
 new doodads.sheepFarm.bush(903,-3621,0);
-new doodads.sheepFarm.bush(953,-3621,0);
-}
-
-public void addSegment110() {
 new doodads.sheepFarm.bush(1003,-3621,0);
 new doodads.sheepFarm.bush(1053,-3621,0);
 new doodads.sheepFarm.bush(1103,-3621,0);
-new doodads.sheepFarm.bush(1153,-3621,0);
 new doodads.sheepFarm.bush(1203,-3621,0);
 new doodads.sheepFarm.bush(1253,-3621,0);
 new doodads.sheepFarm.bush(1303,-3621,0);
 new doodads.sheepFarm.bush(903,-3606,0);
-new doodads.sheepFarm.bush(953,-3606,0);
 new doodads.sheepFarm.bush(1003,-3606,0);
 new doodads.sheepFarm.bush(1053,-3606,0);
 new doodads.sheepFarm.bush(1103,-3606,0);
-new doodads.sheepFarm.bush(1153,-3606,0);
 new doodads.sheepFarm.bush(1203,-3606,0);
 new doodads.sheepFarm.bush(1253,-3606,0);
 new doodads.sheepFarm.bush(1303,-3606,0);
 new doodads.sheepFarm.verticalFence(752,-3638,0);
 new doodads.sheepFarm.bush(903,-3591,0);
-new doodads.sheepFarm.bush(953,-3591,0);
 new doodads.sheepFarm.bush(1003,-3591,0);
 new doodads.sheepFarm.bush(1053,-3591,0);
 new doodads.sheepFarm.bush(1103,-3591,0);
-new doodads.sheepFarm.bush(1153,-3591,0);
 new doodads.sheepFarm.bush(1203,-3591,0);
 new doodads.sheepFarm.bush(1253,-3591,0);
 new doodads.sheepFarm.bush(1303,-3591,0);
+u = new units.unitTypes.sheepFarm.redWolf(938,-3952);
+u.setMoveSpeed((float)3.5);
+u.jumpSpeed = (float)12.0;
+commands = new commandList();
+commands.add(new units.unitCommands.commands.slashCommand(938.0,-3132.0));
+commands.add(new units.unitCommands.commands.slashCommand(938.0,-3952.0));
+u.setRepeatCommands(commands);
 new doodads.sheepFarm.verticalFence(1512,-3625,0);
 new doodads.sheepFarm.verticalFence(887,-3622,0);
 new doodads.sheepFarm.bush(903,-3576,0);
-new doodads.sheepFarm.bush(953,-3576,0);
 new doodads.sheepFarm.bush(1003,-3576,0);
 new doodads.sheepFarm.bush(1053,-3576,0);
 new doodads.sheepFarm.bush(1103,-3576,0);
-new doodads.sheepFarm.bush(1153,-3576,0);
-new doodads.sheepFarm.bush(1203,-3576,0);
-new doodads.sheepFarm.bush(1253,-3576,0);
-new doodads.sheepFarm.bush(1303,-3576,0);
 new doodads.sheepFarm.bush(903,-3561,0);
-new doodads.sheepFarm.bush(953,-3561,0);
 new doodads.sheepFarm.bush(1003,-3561,0);
 new doodads.sheepFarm.bush(1053,-3561,0);
 new doodads.sheepFarm.bush(1103,-3561,0);
-new doodads.sheepFarm.bush(1153,-3561,0);
-new doodads.sheepFarm.bush(1203,-3561,0);
-new doodads.sheepFarm.bush(1253,-3561,0);
-new doodads.sheepFarm.bush(1303,-3561,0);
+u = new units.unitTypes.sheepFarm.redWolf(1611,-3568);
+u.setMoveSpeed((float)3.5);
+u.jumpSpeed = (float)12.0;
+commands = new commandList();
+commands.add(new units.unitCommands.commands.slashCommand(1171.0,-3568.0));
+commands.add(new units.unitCommands.commands.slashCommand(1611.0,-3568.0));
+u.setRepeatCommands(commands);
+new doodads.sheepFarm.bush(1053,-3547,0);
 new doodads.sheepFarm.bush(903,-3546,0);
-new doodads.sheepFarm.bush(953,-3546,0);
 new doodads.sheepFarm.bush(1003,-3546,0);
-new doodads.sheepFarm.bush(1053,-3546,0);
 }
 
-public void addSegment111() {
+public void addSegment109() {
 new doodads.sheepFarm.bush(1103,-3546,0);
-new doodads.sheepFarm.bush(1153,-3546,0);
-new doodads.sheepFarm.bush(1203,-3546,0);
-new doodads.sheepFarm.bush(1253,-3546,0);
-new doodads.sheepFarm.bush(1303,-3546,0);
 new doodads.sheepFarm.verticalFence(752,-3578,0);
-new doodads.sheepFarm.bush(903,-3531,0);
-new doodads.sheepFarm.bush(953,-3531,0);
-new doodads.sheepFarm.bush(1003,-3531,0);
-new doodads.sheepFarm.bush(1053,-3531,0);
-new doodads.sheepFarm.bush(1103,-3531,0);
-new doodads.sheepFarm.bush(1153,-3531,0);
-new doodads.sheepFarm.bush(1203,-3531,0);
-new doodads.sheepFarm.bush(1253,-3531,0);
-new doodads.sheepFarm.bush(1303,-3531,0);
 new doodads.sheepFarm.verticalFence(1512,-3565,0);
 new doodads.sheepFarm.verticalFence(887,-3562,0);
-new doodads.sheepFarm.bush(903,-3516,0);
-new doodads.sheepFarm.bush(953,-3516,0);
-new doodads.sheepFarm.bush(1003,-3516,0);
-new doodads.sheepFarm.bush(1053,-3516,0);
-new doodads.sheepFarm.bush(1103,-3516,0);
-new doodads.sheepFarm.bush(1153,-3516,0);
 new doodads.sheepFarm.bush(1203,-3516,0);
 new doodads.sheepFarm.bush(1253,-3516,0);
 new doodads.sheepFarm.bush(1303,-3516,0);
-new doodads.sheepFarm.bush(903,-3501,0);
-new doodads.sheepFarm.bush(953,-3501,0);
-new doodads.sheepFarm.bush(1003,-3501,0);
-new doodads.sheepFarm.bush(1053,-3501,0);
-new doodads.sheepFarm.bush(1103,-3501,0);
-new doodads.sheepFarm.bush(1153,-3501,0);
 new doodads.sheepFarm.bush(1203,-3501,0);
 new doodads.sheepFarm.bush(1253,-3501,0);
 new doodads.sheepFarm.bush(1303,-3501,0);
-new doodads.sheepFarm.bush(903,-3486,0);
-new doodads.sheepFarm.bush(953,-3486,0);
 new doodads.sheepFarm.bush(1003,-3486,0);
 new doodads.sheepFarm.bush(1053,-3486,0);
 new doodads.sheepFarm.bush(1103,-3486,0);
-new doodads.sheepFarm.bush(1153,-3486,0);
 new doodads.sheepFarm.bush(1203,-3486,0);
 new doodads.sheepFarm.bush(1253,-3486,0);
 new doodads.sheepFarm.bush(1303,-3486,0);
 new doodads.sheepFarm.verticalFence(752,-3518,0);
-new doodads.sheepFarm.bush(903,-3471,0);
-new doodads.sheepFarm.bush(953,-3471,0);
 new doodads.sheepFarm.bush(1003,-3471,0);
 new doodads.sheepFarm.bush(1053,-3471,0);
 new doodads.sheepFarm.bush(1103,-3471,0);
-}
-
-public void addSegment112() {
-new doodads.sheepFarm.bush(1153,-3471,0);
 new doodads.sheepFarm.bush(1203,-3471,0);
 new doodads.sheepFarm.bush(1253,-3471,0);
 new doodads.sheepFarm.bush(1303,-3471,0);
 new doodads.sheepFarm.verticalFence(1512,-3505,0);
 new doodads.sheepFarm.verticalFence(887,-3502,0);
-new doodads.sheepFarm.bush(903,-3456,0);
-new doodads.sheepFarm.bush(953,-3456,0);
 new doodads.sheepFarm.bush(1003,-3456,0);
 new doodads.sheepFarm.bush(1053,-3456,0);
 new doodads.sheepFarm.bush(1103,-3456,0);
-new doodads.sheepFarm.bush(1153,-3456,0);
 new doodads.sheepFarm.bush(1203,-3456,0);
 new doodads.sheepFarm.bush(1253,-3456,0);
 new doodads.sheepFarm.bush(1303,-3456,0);
-new doodads.sheepFarm.bush(903,-3441,0);
-new doodads.sheepFarm.bush(953,-3441,0);
 new doodads.sheepFarm.bush(1003,-3441,0);
 new doodads.sheepFarm.bush(1053,-3441,0);
 new doodads.sheepFarm.bush(1103,-3441,0);
-new doodads.sheepFarm.bush(1153,-3441,0);
 new doodads.sheepFarm.bush(1203,-3441,0);
 new doodads.sheepFarm.bush(1253,-3441,0);
 new doodads.sheepFarm.bush(1303,-3441,0);
+u = new units.unitTypes.sheepFarm.blackWolf(1387,-3447);
+u.setMoveSpeed((float)3.5);
+u.jumpSpeed = (float)10.0;
+commands = new commandList();
+commands.add(new units.unitCommands.commands.slashCommand(1607.0,-3447.0));
+commands.add(new units.unitCommands.commands.slashCommand(1387.0,-3447.0));
+u.setRepeatCommands(commands);
 new doodads.sheepFarm.verticalFence(1364,-3475,0);
-new doodads.sheepFarm.bush(903,-3426,0);
-new doodads.sheepFarm.bush(953,-3426,0);
 new doodads.sheepFarm.bush(1003,-3426,0);
 new doodads.sheepFarm.bush(1053,-3426,0);
 new doodads.sheepFarm.bush(1103,-3426,0);
-new doodads.sheepFarm.bush(1153,-3426,0);
 new doodads.sheepFarm.bush(1203,-3426,0);
 new doodads.sheepFarm.bush(1253,-3426,0);
 new doodads.sheepFarm.bush(1303,-3426,0);
 new doodads.sheepFarm.verticalFence(752,-3458,0);
-new doodads.sheepFarm.bush(903,-3411,0);
-new doodads.sheepFarm.bush(953,-3411,0);
 new doodads.sheepFarm.bush(1003,-3411,0);
 new doodads.sheepFarm.bush(1053,-3411,0);
 new doodads.sheepFarm.bush(1103,-3411,0);
-new doodads.sheepFarm.bush(1153,-3411,0);
 new doodads.sheepFarm.bush(1203,-3411,0);
+}
+
+public void addSegment110() {
 new doodads.sheepFarm.bush(1253,-3411,0);
 new doodads.sheepFarm.bush(1303,-3411,0);
 new doodads.sheepFarm.verticalFence(1512,-3445,0);
 new doodads.sheepFarm.verticalFence(887,-3442,0);
-new doodads.sheepFarm.bush(903,-3396,0);
-new doodads.sheepFarm.bush(953,-3396,0);
-new doodads.sheepFarm.bush(1003,-3396,0);
 new doodads.sheepFarm.bush(1053,-3396,0);
-}
-
-public void addSegment113() {
 new doodads.sheepFarm.bush(1103,-3396,0);
-new doodads.sheepFarm.bush(1153,-3396,0);
 new doodads.sheepFarm.bush(1203,-3396,0);
 new doodads.sheepFarm.bush(1253,-3396,0);
 new doodads.sheepFarm.bush(1303,-3396,0);
-new doodads.sheepFarm.bush(903,-3381,0);
-new doodads.sheepFarm.bush(953,-3381,0);
-new doodads.sheepFarm.bush(1003,-3381,0);
 new doodads.sheepFarm.bush(1053,-3381,0);
 new doodads.sheepFarm.bush(1103,-3381,0);
-new doodads.sheepFarm.bush(1153,-3381,0);
 new doodads.sheepFarm.bush(1203,-3381,0);
 new doodads.sheepFarm.bush(1253,-3381,0);
 new doodads.sheepFarm.bush(1303,-3381,0);
 new doodads.sheepFarm.verticalFence(1364,-3415,0);
-new doodads.sheepFarm.bush(903,-3366,0);
-new doodads.sheepFarm.bush(953,-3366,0);
-new doodads.sheepFarm.bush(1003,-3366,0);
 new doodads.sheepFarm.bush(1053,-3366,0);
 new doodads.sheepFarm.bush(1103,-3366,0);
-new doodads.sheepFarm.bush(1153,-3366,0);
 new doodads.sheepFarm.bush(1203,-3366,0);
 new doodads.sheepFarm.bush(1253,-3366,0);
 new doodads.sheepFarm.bush(1303,-3366,0);
+u = new units.unitTypes.sheepFarm.blackWolf(786,-3370);
+u.setMoveSpeed((float)3.5);
+u.jumpSpeed = (float)10.0;
+commands = new commandList();
+commands.add(new units.unitCommands.commands.slashCommand(1610.0,-3372.0));
+commands.add(new units.unitCommands.commands.slashCommand(786.0,-3370.0));
+u.setRepeatCommands(commands);
 new doodads.sheepFarm.verticalFence(752,-3398,0);
 new doodads.sheepFarm.bush(903,-3351,0);
 new doodads.sheepFarm.bush(953,-3351,0);
-new doodads.sheepFarm.bush(1003,-3351,0);
 new doodads.sheepFarm.bush(1053,-3351,0);
 new doodads.sheepFarm.bush(1103,-3351,0);
-new doodads.sheepFarm.bush(1153,-3351,0);
 new doodads.sheepFarm.bush(1203,-3351,0);
 new doodads.sheepFarm.bush(1253,-3351,0);
 new doodads.sheepFarm.bush(1303,-3351,0);
@@ -6026,42 +5904,31 @@ new doodads.sheepFarm.verticalFence(1512,-3385,0);
 new doodads.sheepFarm.verticalFence(887,-3382,0);
 new doodads.sheepFarm.bush(903,-3336,0);
 new doodads.sheepFarm.bush(953,-3336,0);
-new doodads.sheepFarm.bush(1003,-3336,0);
 new doodads.sheepFarm.bush(1053,-3336,0);
 new doodads.sheepFarm.bush(1103,-3336,0);
-new doodads.sheepFarm.bush(1153,-3336,0);
 new doodads.sheepFarm.bush(1203,-3336,0);
 new doodads.sheepFarm.bush(1253,-3336,0);
 new doodads.sheepFarm.bush(1303,-3336,0);
 new doodads.sheepFarm.bush(903,-3321,0);
 new doodads.sheepFarm.bush(953,-3321,0);
-new doodads.sheepFarm.bush(1003,-3321,0);
 new doodads.sheepFarm.bush(1053,-3321,0);
-new doodads.sheepFarm.bush(1103,-3321,0);
-}
-
-public void addSegment114() {
-new doodads.sheepFarm.bush(1153,-3321,0);
 new doodads.sheepFarm.bush(1203,-3321,0);
 new doodads.sheepFarm.bush(1253,-3321,0);
 new doodads.sheepFarm.bush(1303,-3321,0);
 new doodads.sheepFarm.verticalFence(1364,-3355,0);
 new doodads.sheepFarm.bush(903,-3306,0);
 new doodads.sheepFarm.bush(953,-3306,0);
-new doodads.sheepFarm.bush(1003,-3306,0);
 new doodads.sheepFarm.bush(1053,-3306,0);
-new doodads.sheepFarm.bush(1103,-3306,0);
-new doodads.sheepFarm.bush(1153,-3306,0);
 new doodads.sheepFarm.bush(1203,-3306,0);
 new doodads.sheepFarm.bush(1253,-3306,0);
+}
+
+public void addSegment111() {
 new doodads.sheepFarm.bush(1303,-3306,0);
 new doodads.sheepFarm.verticalFence(752,-3338,0);
 new doodads.sheepFarm.bush(903,-3291,0);
 new doodads.sheepFarm.bush(953,-3291,0);
-new doodads.sheepFarm.bush(1003,-3291,0);
 new doodads.sheepFarm.bush(1053,-3291,0);
-new doodads.sheepFarm.bush(1103,-3291,0);
-new doodads.sheepFarm.bush(1153,-3291,0);
 new doodads.sheepFarm.bush(1203,-3291,0);
 new doodads.sheepFarm.bush(1253,-3291,0);
 new doodads.sheepFarm.bush(1303,-3291,0);
@@ -6069,51 +5936,36 @@ new doodads.sheepFarm.verticalFence(1512,-3325,0);
 new doodads.sheepFarm.verticalFence(887,-3322,0);
 new doodads.sheepFarm.bush(903,-3276,0);
 new doodads.sheepFarm.bush(953,-3276,0);
-new doodads.sheepFarm.bush(1003,-3276,0);
 new doodads.sheepFarm.bush(1053,-3276,0);
-new doodads.sheepFarm.bush(1103,-3276,0);
 new doodads.sheepFarm.bush(1153,-3276,0);
 new doodads.sheepFarm.bush(1203,-3276,0);
 new doodads.sheepFarm.bush(1253,-3276,0);
 new doodads.sheepFarm.bush(1303,-3276,0);
+u = new units.unitTypes.sheepFarm.blackWolf(1387,-3291);
+u.setMoveSpeed((float)3.5);
+u.jumpSpeed = (float)10.0;
+commands = new commandList();
+commands.add(new units.unitCommands.commands.slashCommand(1606.0,-3292.0));
+commands.add(new units.unitCommands.commands.slashCommand(1387.0,-3291.0));
+u.setRepeatCommands(commands);
 new doodads.sheepFarm.bush(903,-3261,0);
 new doodads.sheepFarm.bush(953,-3261,0);
-new doodads.sheepFarm.bush(1003,-3261,0);
 new doodads.sheepFarm.bush(1053,-3261,0);
-new doodads.sheepFarm.bush(1103,-3261,0);
 new doodads.sheepFarm.bush(1153,-3261,0);
 new doodads.sheepFarm.bush(1203,-3261,0);
 new doodads.sheepFarm.bush(1253,-3261,0);
 new doodads.sheepFarm.bush(1303,-3261,0);
 new doodads.sheepFarm.verticalFence(1364,-3295,0);
-new doodads.sheepFarm.bush(903,-3246,0);
-new doodads.sheepFarm.bush(953,-3246,0);
-new doodads.sheepFarm.bush(1003,-3246,0);
-new doodads.sheepFarm.bush(1053,-3246,0);
-new doodads.sheepFarm.bush(1103,-3246,0);
-}
-
-public void addSegment115() {
 new doodads.sheepFarm.bush(1153,-3246,0);
 new doodads.sheepFarm.bush(1203,-3246,0);
 new doodads.sheepFarm.bush(1253,-3246,0);
 new doodads.sheepFarm.bush(1303,-3246,0);
 new doodads.sheepFarm.verticalFence(752,-3278,0);
-new doodads.sheepFarm.bush(903,-3231,0);
-new doodads.sheepFarm.bush(953,-3231,0);
-new doodads.sheepFarm.bush(1003,-3231,0);
-new doodads.sheepFarm.bush(1053,-3231,0);
-new doodads.sheepFarm.bush(1103,-3231,0);
 new doodads.sheepFarm.bush(1153,-3231,0);
 new doodads.sheepFarm.bush(1203,-3231,0);
 new doodads.sheepFarm.bush(1253,-3231,0);
 new doodads.sheepFarm.bush(1303,-3231,0);
 new doodads.sheepFarm.verticalFence(1512,-3265,0);
-new doodads.sheepFarm.bush(903,-3216,0);
-new doodads.sheepFarm.bush(953,-3216,0);
-new doodads.sheepFarm.bush(1003,-3216,0);
-new doodads.sheepFarm.bush(1053,-3216,0);
-new doodads.sheepFarm.bush(1103,-3216,0);
 new doodads.sheepFarm.bush(1153,-3216,0);
 new doodads.sheepFarm.bush(1203,-3216,0);
 new doodads.sheepFarm.bush(1253,-3216,0);
@@ -6128,6 +5980,9 @@ new doodads.sheepFarm.bush(1203,-3201,0);
 new doodads.sheepFarm.bush(1253,-3201,0);
 new doodads.sheepFarm.bush(1303,-3201,0);
 new doodads.sheepFarm.verticalFence(1364,-3235,0);
+}
+
+public void addSegment112() {
 new doodads.sheepFarm.bush(903,-3186,0);
 new doodads.sheepFarm.bush(953,-3186,0);
 new doodads.sheepFarm.bush(1003,-3186,0);
@@ -6144,9 +5999,6 @@ new doodads.sheepFarm.fenceBarsSmall(758,-3162,0);
 new doodads.sheepFarm.fenceBarsSmall(757,-3162,0);
 new doodads.sheepFarm.fenceBarsSmall(760,-3162,0);
 new doodads.sheepFarm.fenceBarsSmall(763,-3162,0);
-}
-
-public void addSegment116() {
 new doodads.sheepFarm.fenceBarsSmall(766,-3162,0);
 new doodads.sheepFarm.fenceBarsSmall(769,-3162,0);
 new doodads.sheepFarm.fenceBarsSmall(772,-3162,0);
@@ -6181,6 +6033,9 @@ new doodads.sheepFarm.fenceBarsSmall(856,-3162,0);
 new doodads.sheepFarm.fenceBarsSmall(859,-3162,0);
 new doodads.sheepFarm.fenceBarsSmall(862,-3162,0);
 new doodads.sheepFarm.fenceBarsSmall(865,-3162,0);
+}
+
+public void addSegment113() {
 new doodads.sheepFarm.fenceBarsSmall(868,-3162,0);
 new doodads.sheepFarm.fenceBarsSmall(871,-3162,0);
 new doodads.sheepFarm.fenceBarsSmall(874,-3162,0);
@@ -6197,9 +6052,6 @@ new doodads.sheepFarm.fenceBarsSmall(904,-3162,0);
 new doodads.sheepFarm.fenceBarsSmall(907,-3162,0);
 new doodads.sheepFarm.fenceBarsSmall(910,-3162,0);
 new doodads.sheepFarm.fenceBarsSmall(913,-3162,0);
-}
-
-public void addSegment117() {
 new doodads.sheepFarm.fenceBarsSmall(916,-3162,0);
 new doodads.sheepFarm.fenceBarsSmall(919,-3162,0);
 new doodads.sheepFarm.fenceBarsSmall(922,-3162,0);
@@ -6234,6 +6086,9 @@ new doodads.sheepFarm.fenceBarsSmall(1006,-3162,0);
 new doodads.sheepFarm.fenceBarsSmall(1009,-3162,0);
 new doodads.sheepFarm.fenceBarsSmall(1012,-3162,0);
 new doodads.sheepFarm.fenceBarsSmall(1015,-3162,0);
+}
+
+public void addSegment114() {
 new doodads.sheepFarm.fenceBarsSmall(1018,-3162,0);
 new doodads.sheepFarm.fenceBarsSmall(1021,-3162,0);
 new doodads.sheepFarm.fenceBarsSmall(1024,-3162,0);
@@ -6250,9 +6105,6 @@ new doodads.sheepFarm.fenceBarsSmall(1054,-3162,0);
 new doodads.sheepFarm.fenceBarsSmall(1057,-3162,0);
 new doodads.sheepFarm.fenceBarsSmall(1060,-3162,0);
 new doodads.sheepFarm.fenceBarsSmall(1063,-3162,0);
-}
-
-public void addSegment118() {
 new doodads.sheepFarm.fenceBarsSmall(1066,-3162,0);
 new doodads.sheepFarm.fenceBarsSmall(1069,-3162,0);
 new doodads.sheepFarm.fenceBarsSmall(1072,-3162,0);
@@ -6287,6 +6139,9 @@ new doodads.sheepFarm.fenceBarsSmall(1156,-3162,0);
 new doodads.sheepFarm.fenceBarsSmall(1159,-3162,0);
 new doodads.sheepFarm.fenceBarsSmall(1162,-3162,0);
 new doodads.sheepFarm.fenceBarsSmall(1165,-3162,0);
+}
+
+public void addSegment115() {
 new doodads.sheepFarm.fenceBarsSmall(1168,-3162,0);
 new doodads.sheepFarm.fenceBarsSmall(1171,-3162,0);
 new doodads.sheepFarm.fenceBarsSmall(1174,-3162,0);
@@ -6303,9 +6158,6 @@ new doodads.sheepFarm.fenceBarsSmall(759,-3057,0);
 new doodads.sheepFarm.fenceBarsSmall(762,-3057,0);
 new doodads.sheepFarm.fenceBarsSmall(765,-3057,0);
 new doodads.sheepFarm.fenceBarsSmall(768,-3057,0);
-}
-
-public void addSegment119() {
 new doodads.sheepFarm.fenceBarsSmall(771,-3057,0);
 new doodads.sheepFarm.fenceBarsSmall(774,-3057,0);
 new doodads.sheepFarm.fenceBarsSmall(777,-3057,0);
@@ -6340,6 +6192,9 @@ new doodads.sheepFarm.fenceBarsSmall(861,-3057,0);
 new doodads.sheepFarm.fenceBarsSmall(864,-3057,0);
 new doodads.sheepFarm.fenceBarsSmall(867,-3057,0);
 new doodads.sheepFarm.fenceBarsSmall(870,-3057,0);
+}
+
+public void addSegment116() {
 new doodads.sheepFarm.fenceBarsSmall(873,-3057,0);
 new doodads.sheepFarm.fenceBarsSmall(876,-3057,0);
 new doodads.sheepFarm.fenceBarsSmall(879,-3057,0);
@@ -6356,9 +6211,6 @@ new doodads.sheepFarm.fenceBarsSmall(909,-3057,0);
 new doodads.sheepFarm.fenceBarsSmall(912,-3057,0);
 new doodads.sheepFarm.fenceBarsSmall(915,-3057,0);
 new doodads.sheepFarm.fenceBarsSmall(918,-3057,0);
-}
-
-public void addSegment120() {
 new doodads.sheepFarm.fenceBarsSmall(921,-3057,0);
 new doodads.sheepFarm.fenceBarsSmall(924,-3057,0);
 new doodads.sheepFarm.fenceBarsSmall(927,-3057,0);
@@ -6393,6 +6245,9 @@ new doodads.sheepFarm.fenceBarsSmall(1011,-3057,0);
 new doodads.sheepFarm.fenceBarsSmall(1014,-3057,0);
 new doodads.sheepFarm.fenceBarsSmall(1017,-3057,0);
 new doodads.sheepFarm.fenceBarsSmall(1020,-3057,0);
+}
+
+public void addSegment117() {
 new doodads.sheepFarm.fenceBarsSmall(1023,-3057,0);
 new doodads.sheepFarm.fenceBarsSmall(1026,-3057,0);
 new doodads.sheepFarm.fenceBarsSmall(1029,-3057,0);
@@ -6409,9 +6264,6 @@ new doodads.sheepFarm.fenceBarsSmall(1059,-3057,0);
 new doodads.sheepFarm.fenceBarsSmall(1062,-3057,0);
 new doodads.sheepFarm.fenceBarsSmall(1065,-3057,0);
 new doodads.sheepFarm.fenceBarsSmall(1068,-3057,0);
-}
-
-public void addSegment121() {
 new doodads.sheepFarm.fenceBarsSmall(1071,-3057,0);
 new doodads.sheepFarm.fenceBarsSmall(1074,-3057,0);
 new doodads.sheepFarm.fenceBarsSmall(1077,-3057,0);
@@ -6446,6 +6298,9 @@ new doodads.sheepFarm.fenceBarsSmall(1161,-3057,0);
 new doodads.sheepFarm.fenceBarsSmall(1164,-3057,0);
 new doodads.sheepFarm.fenceBarsSmall(1167,-3057,0);
 new doodads.sheepFarm.fenceBarsSmall(1170,-3057,0);
+}
+
+public void addSegment118() {
 new doodads.sheepFarm.fenceBarsSmall(1173,-3057,0);
 new doodads.sheepFarm.fenceBarsSmall(1176,-3057,0);
 new doodads.sheepFarm.fenceBarsSmall(1179,-3057,0);
@@ -6462,9 +6317,6 @@ new doodads.sheepFarm.fenceBarsSmall(1209,-3057,0);
 new doodads.sheepFarm.fenceBarsSmall(1212,-3057,0);
 new doodads.sheepFarm.fenceBarsSmall(1215,-3057,0);
 new doodads.sheepFarm.fenceBarsSmall(1218,-3057,0);
-}
-
-public void addSegment122() {
 new doodads.sheepFarm.fenceBarsSmall(1221,-3057,0);
 new doodads.sheepFarm.fenceBarsSmall(1224,-3057,0);
 new doodads.sheepFarm.fenceBarsSmall(1227,-3057,0);
@@ -6499,6 +6351,9 @@ new doodads.sheepFarm.fenceBarsSmall(1311,-3057,0);
 new doodads.sheepFarm.fenceBarsSmall(1314,-3057,0);
 new doodads.sheepFarm.fenceBarsSmall(1317,-3057,0);
 new doodads.sheepFarm.fenceBarsSmall(1320,-3057,0);
+}
+
+public void addSegment119() {
 new doodads.sheepFarm.fenceBarsSmall(1323,-3057,0);
 new doodads.sheepFarm.fenceBarsSmall(1326,-3057,0);
 new doodads.sheepFarm.fenceBarsSmall(1329,-3057,0);
@@ -6515,9 +6370,6 @@ new doodads.sheepFarm.fenceBarsSmall(1359,-3057,0);
 new doodads.sheepFarm.fenceBarsSmall(1362,-3057,0);
 new doodads.sheepFarm.fenceBarsSmall(1365,-3057,0);
 new doodads.sheepFarm.fenceBarsSmall(1368,-3057,0);
-}
-
-public void addSegment123() {
 new doodads.sheepFarm.fenceBarsSmall(1371,-3057,0);
 new doodads.sheepFarm.fenceBarsSmall(1374,-3057,0);
 new doodads.sheepFarm.fenceBarsSmall(1377,-3057,0);
@@ -6552,6 +6404,9 @@ new doodads.sheepFarm.fenceBarsSmall(1461,-3057,0);
 new doodads.sheepFarm.fenceBarsSmall(1464,-3057,0);
 new doodads.sheepFarm.fenceBarsSmall(1467,-3057,0);
 new doodads.sheepFarm.fenceBarsSmall(1470,-3057,0);
+}
+
+public void addSegment120() {
 new doodads.sheepFarm.fenceBarsSmall(1473,-3057,0);
 new doodads.sheepFarm.fenceBarsSmall(1476,-3057,0);
 new doodads.sheepFarm.fenceBarsSmall(1479,-3057,0);
@@ -6568,9 +6423,6 @@ new doodads.sheepFarm.fenceBarsSmall(1509,-3057,0);
 new doodads.sheepFarm.fenceBarsSmall(1512,-3057,0);
 new doodads.sheepFarm.fenceBarsSmall(1515,-3057,0);
 new doodads.sheepFarm.fenceBarsSmall(752,-3054,0);
-}
-
-public void addSegment124() {
 new doodads.sheepFarm.fenceBarsSmall(753,-3051,0);
 new doodads.sheepFarm.fenceBarsSmall(756,-3051,0);
 new doodads.sheepFarm.fenceBarsSmall(759,-3051,0);
@@ -6605,6 +6457,9 @@ new doodads.sheepFarm.fenceBarsSmall(843,-3051,0);
 new doodads.sheepFarm.fenceBarsSmall(846,-3051,0);
 new doodads.sheepFarm.fenceBarsSmall(849,-3051,0);
 new doodads.sheepFarm.fenceBarsSmall(852,-3051,0);
+}
+
+public void addSegment121() {
 new doodads.sheepFarm.fenceBarsSmall(855,-3051,0);
 new doodads.sheepFarm.fenceBarsSmall(858,-3051,0);
 new doodads.sheepFarm.fenceBarsSmall(861,-3051,0);
@@ -6621,9 +6476,6 @@ new doodads.sheepFarm.fenceBarsSmall(891,-3051,0);
 new doodads.sheepFarm.fenceBarsSmall(894,-3051,0);
 new doodads.sheepFarm.fenceBarsSmall(897,-3051,0);
 new doodads.sheepFarm.fenceBarsSmall(900,-3051,0);
-}
-
-public void addSegment125() {
 new doodads.sheepFarm.fenceBarsSmall(903,-3051,0);
 new doodads.sheepFarm.fenceBarsSmall(906,-3051,0);
 new doodads.sheepFarm.fenceBarsSmall(909,-3051,0);
@@ -6658,6 +6510,9 @@ new doodads.sheepFarm.fenceBarsSmall(993,-3051,0);
 new doodads.sheepFarm.fenceBarsSmall(996,-3051,0);
 new doodads.sheepFarm.fenceBarsSmall(999,-3051,0);
 new doodads.sheepFarm.fenceBarsSmall(1002,-3051,0);
+}
+
+public void addSegment122() {
 new doodads.sheepFarm.fenceBarsSmall(1005,-3051,0);
 new doodads.sheepFarm.fenceBarsSmall(1008,-3051,0);
 new doodads.sheepFarm.fenceBarsSmall(1011,-3051,0);
@@ -6674,9 +6529,6 @@ new doodads.sheepFarm.fenceBarsSmall(1041,-3051,0);
 new doodads.sheepFarm.fenceBarsSmall(1044,-3051,0);
 new doodads.sheepFarm.fenceBarsSmall(1047,-3051,0);
 new doodads.sheepFarm.fenceBarsSmall(1050,-3051,0);
-}
-
-public void addSegment126() {
 new doodads.sheepFarm.fenceBarsSmall(1053,-3051,0);
 new doodads.sheepFarm.fenceBarsSmall(1056,-3051,0);
 new doodads.sheepFarm.fenceBarsSmall(1059,-3051,0);
@@ -6711,6 +6563,9 @@ new doodads.sheepFarm.fenceBarsSmall(1143,-3051,0);
 new doodads.sheepFarm.fenceBarsSmall(1146,-3051,0);
 new doodads.sheepFarm.fenceBarsSmall(1149,-3051,0);
 new doodads.sheepFarm.fenceBarsSmall(1152,-3051,0);
+}
+
+public void addSegment123() {
 new doodads.sheepFarm.fenceBarsSmall(1155,-3051,0);
 new doodads.sheepFarm.fenceBarsSmall(1158,-3051,0);
 new doodads.sheepFarm.fenceBarsSmall(1161,-3051,0);
@@ -6727,9 +6582,6 @@ new doodads.sheepFarm.fenceBarsSmall(1191,-3051,0);
 new doodads.sheepFarm.fenceBarsSmall(1194,-3051,0);
 new doodads.sheepFarm.fenceBarsSmall(1197,-3051,0);
 new doodads.sheepFarm.fenceBarsSmall(1200,-3051,0);
-}
-
-public void addSegment127() {
 new doodads.sheepFarm.fenceBarsSmall(1203,-3051,0);
 new doodads.sheepFarm.fenceBarsSmall(1206,-3051,0);
 new doodads.sheepFarm.fenceBarsSmall(1209,-3051,0);
@@ -6764,6 +6616,9 @@ new doodads.sheepFarm.fenceBarsSmall(1293,-3051,0);
 new doodads.sheepFarm.fenceBarsSmall(1296,-3051,0);
 new doodads.sheepFarm.fenceBarsSmall(1299,-3051,0);
 new doodads.sheepFarm.fenceBarsSmall(1302,-3051,0);
+}
+
+public void addSegment124() {
 new doodads.sheepFarm.fenceBarsSmall(1305,-3051,0);
 new doodads.sheepFarm.fenceBarsSmall(1308,-3051,0);
 new doodads.sheepFarm.fenceBarsSmall(1311,-3051,0);
@@ -6780,9 +6635,6 @@ new doodads.sheepFarm.fenceBarsSmall(1341,-3051,0);
 new doodads.sheepFarm.fenceBarsSmall(1344,-3051,0);
 new doodads.sheepFarm.fenceBarsSmall(1347,-3051,0);
 new doodads.sheepFarm.fenceBarsSmall(1350,-3051,0);
-}
-
-public void addSegment128() {
 new doodads.sheepFarm.fenceBarsSmall(1353,-3051,0);
 new doodads.sheepFarm.fenceBarsSmall(1356,-3051,0);
 new doodads.sheepFarm.fenceBarsSmall(1359,-3051,0);
@@ -6817,6 +6669,9 @@ new doodads.sheepFarm.fenceBarsSmall(1443,-3051,0);
 new doodads.sheepFarm.fenceBarsSmall(1446,-3051,0);
 new doodads.sheepFarm.fenceBarsSmall(1449,-3051,0);
 new doodads.sheepFarm.fenceBarsSmall(1452,-3051,0);
+}
+
+public void addSegment125() {
 new doodads.sheepFarm.fenceBarsSmall(1455,-3051,0);
 new doodads.sheepFarm.fenceBarsSmall(1458,-3051,0);
 new doodads.sheepFarm.fenceBarsSmall(1461,-3051,0);
@@ -6833,9 +6688,6 @@ new doodads.sheepFarm.fenceBarsSmall(1491,-3051,0);
 new doodads.sheepFarm.fenceBarsSmall(1494,-3051,0);
 new doodads.sheepFarm.fenceBarsSmall(1497,-3051,0);
 new doodads.sheepFarm.fenceBarsSmall(1500,-3051,0);
-}
-
-public void addSegment129() {
 new doodads.sheepFarm.fenceBarsSmall(1503,-3051,0);
 new doodads.sheepFarm.fenceBarsSmall(1506,-3051,0);
 new doodads.sheepFarm.fenceBarsSmall(1509,-3051,0);
@@ -6843,6 +6695,13 @@ new doodads.sheepFarm.fenceBarsSmall(1512,-3051,0);
 new doodads.sheepFarm.fenceBarsSmall(1515,-3051,0);
 new doodads.sheepFarm.fenceBarsSmall(1518,-3051,0);
 new doodads.sheepFarm.verticalFence(752,-3038,0);
+u = new units.unitTypes.sheepFarm.redWolf(791,-2750);
+u.setMoveSpeed((float)3.5);
+u.jumpSpeed = (float)12.0;
+commands = new commandList();
+commands.add(new units.unitCommands.commands.slashCommand(793.0,-3129.0));
+commands.add(new units.unitCommands.commands.slashCommand(791.0,-2750.0));
+u.setRepeatCommands(commands);
 new doodads.sheepFarm.fenceBarsSmall(846,-2953,0);
 new doodads.sheepFarm.fenceBarsSmall(849,-2953,0);
 new doodads.sheepFarm.fenceBarsSmall(852,-2953,0);
@@ -6869,6 +6728,9 @@ new doodads.sheepFarm.fenceBarsSmall(912,-2953,0);
 new doodads.sheepFarm.fenceBarsSmall(915,-2953,0);
 new doodads.sheepFarm.fenceBarsSmall(918,-2953,0);
 new doodads.sheepFarm.fenceBarsSmall(921,-2953,0);
+}
+
+public void addSegment126() {
 new doodads.sheepFarm.fenceBarsSmall(924,-2953,0);
 new doodads.sheepFarm.fenceBarsSmall(927,-2953,0);
 new doodads.sheepFarm.fenceBarsSmall(930,-2953,0);
@@ -6886,9 +6748,6 @@ new doodads.sheepFarm.fenceBarsSmall(963,-2953,0);
 new doodads.sheepFarm.fenceBarsSmall(966,-2953,0);
 new doodads.sheepFarm.fenceBarsSmall(969,-2953,0);
 new doodads.sheepFarm.fenceBarsSmall(969,-2953,0);
-}
-
-public void addSegment130() {
 new doodads.sheepFarm.fenceBarsSmall(972,-2953,0);
 new doodads.sheepFarm.fenceBarsSmall(975,-2953,0);
 new doodads.sheepFarm.fenceBarsSmall(978,-2953,0);
@@ -6922,6 +6781,9 @@ new doodads.sheepFarm.fenceBarsSmall(1059,-2953,0);
 new doodads.sheepFarm.fenceBarsSmall(1062,-2953,0);
 new doodads.sheepFarm.fenceBarsSmall(1065,-2953,0);
 new doodads.sheepFarm.fenceBarsSmall(1068,-2953,0);
+}
+
+public void addSegment127() {
 new doodads.sheepFarm.fenceBarsSmall(1071,-2953,0);
 new doodads.sheepFarm.fenceBarsSmall(1074,-2953,0);
 new doodads.sheepFarm.fenceBarsSmall(1077,-2953,0);
@@ -6939,9 +6801,6 @@ new doodads.sheepFarm.fenceBarsSmall(1110,-2953,0);
 new doodads.sheepFarm.fenceBarsSmall(1113,-2953,0);
 new doodads.sheepFarm.fenceBarsSmall(1116,-2953,0);
 new doodads.sheepFarm.fenceBarsSmall(1119,-2953,0);
-}
-
-public void addSegment131() {
 new doodads.sheepFarm.fenceBarsSmall(1122,-2953,0);
 new doodads.sheepFarm.fenceBarsSmall(1125,-2953,0);
 new doodads.sheepFarm.fenceBarsSmall(1128,-2953,0);
@@ -6975,6 +6834,9 @@ new doodads.sheepFarm.fenceBarsSmall(1209,-2953,0);
 new doodads.sheepFarm.fenceBarsSmall(1212,-2953,0);
 new doodads.sheepFarm.fenceBarsSmall(1215,-2953,0);
 new doodads.sheepFarm.fenceBarsSmall(1218,-2953,0);
+}
+
+public void addSegment128() {
 new doodads.sheepFarm.fenceBarsSmall(1221,-2953,0);
 new doodads.sheepFarm.fenceBarsSmall(1224,-2953,0);
 new doodads.sheepFarm.fenceBarsSmall(1227,-2953,0);
@@ -6992,9 +6854,6 @@ new doodads.sheepFarm.fenceBarsSmall(1260,-2953,0);
 new doodads.sheepFarm.fenceBarsSmall(1263,-2953,0);
 new doodads.sheepFarm.fenceBarsSmall(1266,-2953,0);
 new doodads.sheepFarm.fenceBarsSmall(1269,-2953,0);
-}
-
-public void addSegment132() {
 new doodads.sheepFarm.fenceBarsSmall(1272,-2953,0);
 new doodads.sheepFarm.fenceBarsSmall(1275,-2953,0);
 new doodads.sheepFarm.fenceBarsSmall(1278,-2953,0);
@@ -7028,6 +6887,9 @@ new doodads.sheepFarm.fenceBarsSmall(1359,-2953,0);
 new doodads.sheepFarm.fenceBarsSmall(1362,-2953,0);
 new doodads.sheepFarm.fenceBarsSmall(1365,-2953,0);
 new doodads.sheepFarm.fenceBarsSmall(1368,-2953,0);
+}
+
+public void addSegment129() {
 new doodads.sheepFarm.fenceBarsSmall(1371,-2953,0);
 new doodads.sheepFarm.fenceBarsSmall(1374,-2953,0);
 new doodads.sheepFarm.fenceBarsSmall(1377,-2953,0);
@@ -7045,9 +6907,6 @@ new doodads.sheepFarm.fenceBarsSmall(1410,-2953,0);
 new doodads.sheepFarm.fenceBarsSmall(1413,-2953,0);
 new doodads.sheepFarm.fenceBarsSmall(1416,-2953,0);
 new doodads.sheepFarm.fenceBarsSmall(1419,-2953,0);
-}
-
-public void addSegment133() {
 new doodads.sheepFarm.fenceBarsSmall(1422,-2953,0);
 new doodads.sheepFarm.fenceBarsSmall(1425,-2953,0);
 new doodads.sheepFarm.fenceBarsSmall(1428,-2953,0);
@@ -7081,6 +6940,9 @@ new doodads.sheepFarm.fenceBarsSmall(1509,-2953,0);
 new doodads.sheepFarm.fenceBarsSmall(1512,-2953,0);
 new doodads.sheepFarm.fenceBarsSmall(1515,-2953,0);
 new doodads.sheepFarm.fenceBarsSmall(1518,-2953,0);
+}
+
+public void addSegment130() {
 new doodads.sheepFarm.fenceBarsSmall(1521,-2953,0);
 new doodads.sheepFarm.fenceBarsSmall(1524,-2953,0);
 new doodads.sheepFarm.fenceBarsSmall(1527,-2953,0);
@@ -7098,9 +6960,6 @@ new doodads.sheepFarm.fenceBarsSmall(1560,-2953,0);
 new doodads.sheepFarm.fenceBarsSmall(1563,-2953,0);
 new doodads.sheepFarm.fenceBarsSmall(1566,-2953,0);
 new doodads.sheepFarm.fenceBarsSmall(1569,-2953,0);
-}
-
-public void addSegment134() {
 new doodads.sheepFarm.fenceBarsSmall(1572,-2953,0);
 new doodads.sheepFarm.fenceBarsSmall(1575,-2953,0);
 new doodads.sheepFarm.fenceBarsSmall(1578,-2953,0);
@@ -7108,7 +6967,20 @@ new doodads.sheepFarm.fenceBarsSmall(1581,-2953,0);
 new doodads.sheepFarm.fenceBarsSmall(1584,-2953,0);
 new doodads.sheepFarm.fenceBarsSmall(1587,-2953,0);
 new doodads.sheepFarm.verticalFence(752,-2978,0);
-new doodads.sheepFarm.bush(850,-2931,0);
+u = new units.unitTypes.sheepFarm.redWolf(1342,-2931);
+u.setMoveSpeed((float)3.5);
+u.jumpSpeed = (float)12.0;
+commands = new commandList();
+commands.add(new units.unitCommands.commands.slashCommand(610.0,-2930.0));
+commands.add(new units.unitCommands.commands.slashCommand(1342.0,-2931.0));
+u.setRepeatCommands(commands);
+u = new units.unitTypes.sheepFarm.yellowWolf(1542,-3017);
+u.setMoveSpeed((float)3.5);
+u.jumpSpeed = (float)9.0;
+commands = new commandList();
+commands.add(new units.unitCommands.commands.slashCommand(1541.0,-2922.0));
+commands.add(new units.unitCommands.commands.slashCommand(1542.0,-3017.0));
+u.setRepeatCommands(commands);
 new doodads.sheepFarm.verticalFence(752,-2918,0);
 new doodads.sheepFarm.verticalFence(752,-2858,0);
 new doodads.sheepFarm.fenceBarsSmall(758,-2803,0);
@@ -7133,6 +7005,9 @@ new doodads.sheepFarm.fenceBarsSmall(812,-2803,0);
 new doodads.sheepFarm.fenceBarsSmall(815,-2803,0);
 new doodads.sheepFarm.fenceBarsSmall(818,-2803,0);
 new doodads.sheepFarm.fenceBarsSmall(821,-2803,0);
+}
+
+public void addSegment131() {
 new doodads.sheepFarm.fenceBarsSmall(824,-2803,0);
 new doodads.sheepFarm.fenceBarsSmall(827,-2803,0);
 new doodads.sheepFarm.fenceBarsSmall(830,-2803,0);
@@ -7151,9 +7026,6 @@ new doodads.sheepFarm.fenceBarsSmall(866,-2803,0);
 new doodads.sheepFarm.fenceBarsSmall(869,-2803,0);
 new doodads.sheepFarm.fenceBarsSmall(872,-2803,0);
 new doodads.sheepFarm.fenceBarsSmall(875,-2803,0);
-}
-
-public void addSegment135() {
 new doodads.sheepFarm.fenceBarsSmall(878,-2803,0);
 new doodads.sheepFarm.fenceBarsSmall(881,-2803,0);
 new doodads.sheepFarm.fenceBarsSmall(884,-2803,0);
@@ -7186,6 +7058,9 @@ new doodads.sheepFarm.fenceBarsSmall(962,-2803,0);
 new doodads.sheepFarm.fenceBarsSmall(965,-2803,0);
 new doodads.sheepFarm.fenceBarsSmall(968,-2803,0);
 new doodads.sheepFarm.fenceBarsSmall(971,-2803,0);
+}
+
+public void addSegment132() {
 new doodads.sheepFarm.fenceBarsSmall(974,-2803,0);
 new doodads.sheepFarm.fenceBarsSmall(977,-2803,0);
 new doodads.sheepFarm.fenceBarsSmall(980,-2803,0);
@@ -7204,9 +7079,6 @@ new doodads.sheepFarm.fenceBarsSmall(1016,-2803,0);
 new doodads.sheepFarm.fenceBarsSmall(1019,-2803,0);
 new doodads.sheepFarm.fenceBarsSmall(1022,-2803,0);
 new doodads.sheepFarm.fenceBarsSmall(1025,-2803,0);
-}
-
-public void addSegment136() {
 new doodads.sheepFarm.fenceBarsSmall(1028,-2803,0);
 new doodads.sheepFarm.fenceBarsSmall(1031,-2803,0);
 new doodads.sheepFarm.fenceBarsSmall(1034,-2803,0);
@@ -7239,6 +7111,9 @@ new doodads.sheepFarm.fenceBarsSmall(1112,-2803,0);
 new doodads.sheepFarm.fenceBarsSmall(1115,-2803,0);
 new doodads.sheepFarm.fenceBarsSmall(1118,-2803,0);
 new doodads.sheepFarm.fenceBarsSmall(1121,-2803,0);
+}
+
+public void addSegment133() {
 new doodads.sheepFarm.fenceBarsSmall(1124,-2803,0);
 new doodads.sheepFarm.fenceBarsSmall(1127,-2803,0);
 new doodads.sheepFarm.fenceBarsSmall(1130,-2803,0);
@@ -7257,9 +7132,6 @@ new doodads.sheepFarm.fenceBarsSmall(1166,-2803,0);
 new doodads.sheepFarm.fenceBarsSmall(1169,-2803,0);
 new doodads.sheepFarm.fenceBarsSmall(1172,-2803,0);
 new doodads.sheepFarm.fenceBarsSmall(1175,-2803,0);
-}
-
-public void addSegment137() {
 new doodads.sheepFarm.fenceBarsSmall(1178,-2803,0);
 new doodads.sheepFarm.fenceBarsSmall(1181,-2803,0);
 new doodads.sheepFarm.fenceBarsSmall(1184,-2803,0);
@@ -7292,6 +7164,9 @@ new doodads.sheepFarm.fenceBarsSmall(1262,-2803,0);
 new doodads.sheepFarm.fenceBarsSmall(1265,-2803,0);
 new doodads.sheepFarm.fenceBarsSmall(1338,-2803,0);
 new doodads.sheepFarm.fenceBarsSmall(1341,-2803,0);
+}
+
+public void addSegment134() {
 new doodads.sheepFarm.fenceBarsSmall(1344,-2803,0);
 new doodads.sheepFarm.fenceBarsSmall(1347,-2803,0);
 new doodads.sheepFarm.fenceBarsSmall(1350,-2803,0);
@@ -7310,9 +7185,6 @@ new doodads.sheepFarm.fenceBarsSmall(1386,-2803,0);
 new doodads.sheepFarm.fenceBarsSmall(1389,-2803,0);
 new doodads.sheepFarm.fenceBarsSmall(1392,-2803,0);
 new doodads.sheepFarm.fenceBarsSmall(1395,-2803,0);
-}
-
-public void addSegment138() {
 new doodads.sheepFarm.fenceBarsSmall(1398,-2803,0);
 new doodads.sheepFarm.fenceBarsSmall(1401,-2803,0);
 new doodads.sheepFarm.fenceBarsSmall(1404,-2803,0);
@@ -7345,6 +7217,9 @@ new doodads.sheepFarm.fenceBarsSmall(1482,-2803,0);
 new doodads.sheepFarm.fenceBarsSmall(1485,-2803,0);
 new doodads.sheepFarm.fenceBarsSmall(1488,-2803,0);
 new doodads.sheepFarm.fenceBarsSmall(1491,-2803,0);
+}
+
+public void addSegment135() {
 new doodads.sheepFarm.fenceBarsSmall(1494,-2803,0);
 new doodads.sheepFarm.fenceBarsSmall(1497,-2803,0);
 new doodads.sheepFarm.fenceBarsSmall(1500,-2803,0);
@@ -7363,9 +7238,6 @@ new doodads.sheepFarm.fenceBarsSmall(1536,-2803,0);
 new doodads.sheepFarm.fenceBarsSmall(1539,-2803,0);
 new doodads.sheepFarm.fenceBarsSmall(1542,-2803,0);
 new doodads.sheepFarm.fenceBarsSmall(1545,-2803,0);
-}
-
-public void addSegment139() {
 new doodads.sheepFarm.fenceBarsSmall(1548,-2803,0);
 new doodads.sheepFarm.fenceBarsSmall(1551,-2803,0);
 new doodads.sheepFarm.fenceBarsSmall(1554,-2803,0);
@@ -7381,13 +7253,6 @@ new doodads.sheepFarm.fenceBarsSmall(1581,-2803,0);
 new doodads.sheepFarm.fenceBarsSmall(1584,-2803,0);
 new doodads.sheepFarm.fenceBarsSmall(1587,-2803,0);
 new doodads.sheepFarm.verticalFence(1268,-2857,0);
-u = new units.unitTypes.sheepFarm.redWolf(556,-2827);
-u.setMoveSpeed((float)3.5);
-u.jumpSpeed = (float)12.0;
-commands = new commandList();
-commands.add(new units.unitCommands.commands.slashCommand(555.0,-2528.0));
-commands.add(new units.unitCommands.commands.slashCommand(556.0,-2827.0));
-u.setRepeatCommands(commands);
 new doodads.sheepFarm.fenceBarsSmall(758,-2797,0);
 new doodads.sheepFarm.fenceBarsSmall(761,-2797,0);
 new doodads.sheepFarm.fenceBarsSmall(764,-2797,0);
@@ -7405,6 +7270,9 @@ new doodads.sheepFarm.fenceBarsSmall(797,-2797,0);
 new doodads.sheepFarm.fenceBarsSmall(800,-2797,0);
 new doodads.sheepFarm.fenceBarsSmall(803,-2797,0);
 new doodads.sheepFarm.fenceBarsSmall(806,-2797,0);
+}
+
+public void addSegment136() {
 new doodads.sheepFarm.fenceBarsSmall(809,-2797,0);
 new doodads.sheepFarm.fenceBarsSmall(812,-2797,0);
 new doodads.sheepFarm.fenceBarsSmall(815,-2797,0);
@@ -7422,9 +7290,6 @@ new doodads.sheepFarm.fenceBarsSmall(848,-2797,0);
 new doodads.sheepFarm.fenceBarsSmall(851,-2797,0);
 new doodads.sheepFarm.fenceBarsSmall(854,-2797,0);
 new doodads.sheepFarm.fenceBarsSmall(857,-2797,0);
-}
-
-public void addSegment140() {
 new doodads.sheepFarm.fenceBarsSmall(860,-2797,0);
 new doodads.sheepFarm.fenceBarsSmall(863,-2797,0);
 new doodads.sheepFarm.fenceBarsSmall(866,-2797,0);
@@ -7458,6 +7323,9 @@ new doodads.sheepFarm.fenceBarsSmall(947,-2797,0);
 new doodads.sheepFarm.fenceBarsSmall(950,-2797,0);
 new doodads.sheepFarm.fenceBarsSmall(953,-2797,0);
 new doodads.sheepFarm.fenceBarsSmall(956,-2797,0);
+}
+
+public void addSegment137() {
 new doodads.sheepFarm.fenceBarsSmall(959,-2797,0);
 new doodads.sheepFarm.fenceBarsSmall(962,-2797,0);
 new doodads.sheepFarm.fenceBarsSmall(965,-2797,0);
@@ -7475,9 +7343,6 @@ new doodads.sheepFarm.fenceBarsSmall(998,-2797,0);
 new doodads.sheepFarm.fenceBarsSmall(1001,-2797,0);
 new doodads.sheepFarm.fenceBarsSmall(1004,-2797,0);
 new doodads.sheepFarm.fenceBarsSmall(1007,-2797,0);
-}
-
-public void addSegment141() {
 new doodads.sheepFarm.fenceBarsSmall(1010,-2797,0);
 new doodads.sheepFarm.fenceBarsSmall(1013,-2797,0);
 new doodads.sheepFarm.fenceBarsSmall(1016,-2797,0);
@@ -7511,6 +7376,9 @@ new doodads.sheepFarm.fenceBarsSmall(1097,-2797,0);
 new doodads.sheepFarm.fenceBarsSmall(1100,-2797,0);
 new doodads.sheepFarm.fenceBarsSmall(1103,-2797,0);
 new doodads.sheepFarm.fenceBarsSmall(1106,-2797,0);
+}
+
+public void addSegment138() {
 new doodads.sheepFarm.fenceBarsSmall(1109,-2797,0);
 new doodads.sheepFarm.fenceBarsSmall(1112,-2797,0);
 new doodads.sheepFarm.fenceBarsSmall(1115,-2797,0);
@@ -7528,9 +7396,6 @@ new doodads.sheepFarm.fenceBarsSmall(1148,-2797,0);
 new doodads.sheepFarm.fenceBarsSmall(1151,-2797,0);
 new doodads.sheepFarm.fenceBarsSmall(1154,-2797,0);
 new doodads.sheepFarm.fenceBarsSmall(1157,-2797,0);
-}
-
-public void addSegment142() {
 new doodads.sheepFarm.fenceBarsSmall(1160,-2797,0);
 new doodads.sheepFarm.fenceBarsSmall(1163,-2797,0);
 new doodads.sheepFarm.fenceBarsSmall(1166,-2797,0);
@@ -7564,6 +7429,9 @@ new doodads.sheepFarm.fenceBarsSmall(1247,-2797,0);
 new doodads.sheepFarm.fenceBarsSmall(1250,-2797,0);
 new doodads.sheepFarm.fenceBarsSmall(1253,-2797,0);
 new doodads.sheepFarm.fenceBarsSmall(1256,-2797,0);
+}
+
+public void addSegment139() {
 new doodads.sheepFarm.fenceBarsSmall(1259,-2797,0);
 new doodads.sheepFarm.fenceBarsSmall(1262,-2797,0);
 new doodads.sheepFarm.fenceBarsSmall(1265,-2797,0);
@@ -7581,9 +7449,6 @@ new doodads.sheepFarm.fenceBarsSmall(1368,-2797,0);
 new doodads.sheepFarm.fenceBarsSmall(1371,-2797,0);
 new doodads.sheepFarm.fenceBarsSmall(1374,-2797,0);
 new doodads.sheepFarm.fenceBarsSmall(1377,-2797,0);
-}
-
-public void addSegment143() {
 new doodads.sheepFarm.fenceBarsSmall(1380,-2797,0);
 new doodads.sheepFarm.fenceBarsSmall(1383,-2797,0);
 new doodads.sheepFarm.fenceBarsSmall(1386,-2797,0);
@@ -7617,6 +7482,9 @@ new doodads.sheepFarm.fenceBarsSmall(1467,-2797,0);
 new doodads.sheepFarm.fenceBarsSmall(1470,-2797,0);
 new doodads.sheepFarm.fenceBarsSmall(1473,-2797,0);
 new doodads.sheepFarm.fenceBarsSmall(1476,-2797,0);
+}
+
+public void addSegment140() {
 new doodads.sheepFarm.fenceBarsSmall(1479,-2797,0);
 new doodads.sheepFarm.fenceBarsSmall(1482,-2797,0);
 new doodads.sheepFarm.fenceBarsSmall(1485,-2797,0);
@@ -7634,9 +7502,6 @@ new doodads.sheepFarm.fenceBarsSmall(1518,-2797,0);
 new doodads.sheepFarm.fenceBarsSmall(1521,-2797,0);
 new doodads.sheepFarm.fenceBarsSmall(1524,-2797,0);
 new doodads.sheepFarm.fenceBarsSmall(1527,-2797,0);
-}
-
-public void addSegment144() {
 new doodads.sheepFarm.fenceBarsSmall(1530,-2797,0);
 new doodads.sheepFarm.fenceBarsSmall(1533,-2797,0);
 new doodads.sheepFarm.fenceBarsSmall(1536,-2797,0);
@@ -7657,6 +7522,13 @@ new doodads.sheepFarm.fenceBarsSmall(1578,-2797,0);
 new doodads.sheepFarm.fenceBarsSmall(1581,-2797,0);
 new doodads.sheepFarm.fenceBarsSmall(1584,-2797,0);
 new doodads.sheepFarm.fenceBarsSmall(1587,-2797,0);
+u = new units.unitTypes.sheepFarm.yellowWolf(359,-2686);
+u.setMoveSpeed((float)3.5);
+u.jumpSpeed = (float)9.0;
+commands = new commandList();
+commands.add(new units.unitCommands.commands.slashCommand(359.0,-2036.0));
+commands.add(new units.unitCommands.commands.slashCommand(359.0,-2686.0));
+u.setRepeatCommands(commands);
 u = new units.unitTypes.sheepFarm.redWolf(164,-2601);
 u.setMoveSpeed((float)3.5);
 u.jumpSpeed = (float)12.0;
@@ -7664,12 +7536,12 @@ commands = new commandList();
 commands.add(new units.unitCommands.commands.slashCommand(645.0,-2603.0));
 commands.add(new units.unitCommands.commands.slashCommand(164.0,-2601.0));
 u.setRepeatCommands(commands);
-u = new units.unitTypes.sheepFarm.yellowWolf(359,-2686);
+u = new units.unitTypes.sheepFarm.redWolf(556,-2827);
 u.setMoveSpeed((float)3.5);
-u.jumpSpeed = (float)9.0;
+u.jumpSpeed = (float)12.0;
 commands = new commandList();
-commands.add(new units.unitCommands.commands.slashCommand(359.0,-2036.0));
-commands.add(new units.unitCommands.commands.slashCommand(359.0,-2686.0));
+commands.add(new units.unitCommands.commands.slashCommand(555.0,-2528.0));
+commands.add(new units.unitCommands.commands.slashCommand(556.0,-2827.0));
 u.setRepeatCommands(commands);
 u = new units.unitTypes.sheepFarm.yellowWolf(77,-2222);
 u.setMoveSpeed((float)3.5);
@@ -7686,12 +7558,22 @@ commands.add(new units.unitCommands.commands.slashCommand(-938.0,-2180.0));
 commands.add(new units.unitCommands.commands.slashCommand(-678.0,-2180.0));
 u.setRepeatCommands(commands);
 new doodads.sheepFarm.verticalFence(-229,-2165,0);
+u = new units.unitTypes.sheepFarm.yellowWolf(-1290,-2103);
+u.setMoveSpeed((float)3.5);
+u.jumpSpeed = (float)9.0;
+commands = new commandList();
+commands.add(new units.unitCommands.commands.slashCommand(-1290.0,-1723.0));
+commands.add(new units.unitCommands.commands.slashCommand(-1290.0,-2103.0));
+u.setRepeatCommands(commands);
 new doodads.sheepFarm.verticalFence(-229,-2105,0);
 new doodads.sheepFarm.verticalFence(-392,-2105,0);
 new doodads.sheepFarm.verticalFence(-72,-2105,0);
 new doodads.sheepFarm.fenceBars(-191,-2044,0);
 new doodads.sheepFarm.verticalFence(-229,-2045,0);
 new doodads.sheepFarm.verticalFence(-392,-2045,0);
+}
+
+public void addSegment141() {
 new doodads.sheepFarm.verticalFence(-72,-2045,0);
 new doodads.sheepFarm.fenceBars(-139,-1985,0);
 new doodads.sheepFarm.fenceBars(-116,-1985,0);
@@ -7735,20 +7617,10 @@ commands = new commandList();
 commands.add(new units.unitCommands.commands.slashCommand(-440.0,-1849.0));
 commands.add(new units.unitCommands.commands.slashCommand(-49.0,-1849.0));
 u.setRepeatCommands(commands);
-}
-
-public void addSegment145() {
 new doodads.sheepFarm.verticalFence(-392,-1865,0);
 new doodads.sheepFarm.verticalFence(-72,-1865,0);
 new doodads.sheepFarm.bush(-753,-1773,0);
 new doodads.sheepFarm.bush(-882,-1772,0);
-u = new units.unitTypes.sheepFarm.blackWolf(-1062,-2188);
-u.setMoveSpeed((float)3.5);
-u.jumpSpeed = (float)10.0;
-commands = new commandList();
-commands.add(new units.unitCommands.commands.slashCommand(-1065.0,-1784.0));
-commands.add(new units.unitCommands.commands.slashCommand(-1062.0,-2188.0));
-u.setRepeatCommands(commands);
 u = new units.unitTypes.sheepFarm.redWolf(-1147,-1783);
 u.setMoveSpeed((float)3.5);
 u.jumpSpeed = (float)12.0;
@@ -7756,12 +7628,12 @@ commands = new commandList();
 commands.add(new units.unitCommands.commands.slashCommand(-678.0,-1786.0));
 commands.add(new units.unitCommands.commands.slashCommand(-1147.0,-1783.0));
 u.setRepeatCommands(commands);
-u = new units.unitTypes.sheepFarm.yellowWolf(-1290,-2103);
+u = new units.unitTypes.sheepFarm.blackWolf(-1062,-2188);
 u.setMoveSpeed((float)3.5);
-u.jumpSpeed = (float)9.0;
+u.jumpSpeed = (float)10.0;
 commands = new commandList();
-commands.add(new units.unitCommands.commands.slashCommand(-1290.0,-1723.0));
-commands.add(new units.unitCommands.commands.slashCommand(-1290.0,-2103.0));
+commands.add(new units.unitCommands.commands.slashCommand(-1065.0,-1784.0));
+commands.add(new units.unitCommands.commands.slashCommand(-1062.0,-2188.0));
 u.setRepeatCommands(commands);
 u = new units.unitTypes.sheepFarm.blackWolf(-669,-1659);
 u.setMoveSpeed((float)3.5);
@@ -7771,12 +7643,19 @@ commands.add(new units.unitCommands.commands.slashCommand(-1225.0,-1658.0));
 commands.add(new units.unitCommands.commands.slashCommand(-669.0,-1659.0));
 u.setRepeatCommands(commands);
 new doodads.sheepFarm.bush(-1217,-1531,0);
-u = new units.unitTypes.sheepFarm.blackWolf(-355,-1052);
+u = new units.unitTypes.sheepFarm.blackWolf(-210,-1407);
 u.setMoveSpeed((float)3.5);
 u.jumpSpeed = (float)10.0;
 commands = new commandList();
-commands.add(new units.unitCommands.commands.slashCommand(-351.0,-1407.0));
-commands.add(new units.unitCommands.commands.slashCommand(-355.0,-1052.0));
+commands.add(new units.unitCommands.commands.slashCommand(-211.0,-1052.0));
+commands.add(new units.unitCommands.commands.slashCommand(-210.0,-1407.0));
+u.setRepeatCommands(commands);
+u = new units.unitTypes.sheepFarm.redWolf(-516,-1056);
+u.setMoveSpeed((float)3.5);
+u.jumpSpeed = (float)12.0;
+commands = new commandList();
+commands.add(new units.unitCommands.commands.slashCommand(-513.0,-1391.0));
+commands.add(new units.unitCommands.commands.slashCommand(-516.0,-1056.0));
 u.setRepeatCommands(commands);
 u = new units.unitTypes.sheepFarm.yellowWolf(-1221,-1390);
 u.setMoveSpeed((float)3.5);
@@ -7796,19 +7675,12 @@ commands.add(new units.unitCommands.commands.moveCommand(-434.0,-1154.0));
 commands.add(new units.unitCommands.commands.moveCommand(-597.0,-1154.0));
 commands.add(new units.unitCommands.commands.moveCommand(-595.0,-1281.0));
 u.setRepeatCommands(commands);
-u = new units.unitTypes.sheepFarm.redWolf(-516,-1056);
-u.setMoveSpeed((float)3.5);
-u.jumpSpeed = (float)12.0;
-commands = new commandList();
-commands.add(new units.unitCommands.commands.slashCommand(-513.0,-1391.0));
-commands.add(new units.unitCommands.commands.slashCommand(-516.0,-1056.0));
-u.setRepeatCommands(commands);
-u = new units.unitTypes.sheepFarm.blackWolf(-210,-1407);
+u = new units.unitTypes.sheepFarm.blackWolf(-355,-1052);
 u.setMoveSpeed((float)3.5);
 u.jumpSpeed = (float)10.0;
 commands = new commandList();
-commands.add(new units.unitCommands.commands.slashCommand(-211.0,-1052.0));
-commands.add(new units.unitCommands.commands.slashCommand(-210.0,-1407.0));
+commands.add(new units.unitCommands.commands.slashCommand(-351.0,-1407.0));
+commands.add(new units.unitCommands.commands.slashCommand(-355.0,-1052.0));
 u.setRepeatCommands(commands);
 u = new units.unitTypes.sheepFarm.redWolf(-144,-1044);
 u.setMoveSpeed((float)3.5);
@@ -7858,13 +7730,16 @@ commands.add(new units.unitCommands.commands.slashCommand(-169.0,-682.0));
 u.setRepeatCommands(commands);
 new doodads.sheepFarm.bush(1811,-664,1);
 new doodads.sheepFarm.tree(1721,-652,1);
+}
+
+public void addSegment142() {
 new doodads.sheepFarm.tree(2249,-652,0);
 new doodads.sheepFarm.tree(2202,-651,1);
 new doodads.sheepFarm.farmHouse(1892,-726,0);
 new doodads.sheepFarm.tree(2269,-635,1);
 new doodads.sheepFarm.tree(1743,-615,2);
 new doodads.sheepFarm.tree(2287,-602,0);
-new doodads.cave.firePit(2150,-565,2);
+new doodads.cave.firePit(2150,-565,0);
 new doodads.sheepFarm.tree(1736,-568,1);
 new doodads.sheepFarm.tree(-1553,-567,0);
 new doodads.sheepFarm.tree(2309,-565,0);
@@ -7876,9 +7751,6 @@ new doodads.sheepFarm.tree(-1543,-536,1);
 new doodads.sheepFarm.tree(2413,-532,2);
 new doodads.sheepFarm.bush(1731,-528,1);
 new doodads.sheepFarm.tree(-1562,-520,0);
-}
-
-public void addSegment146() {
 u = new units.unitTypes.sheepFarm.redWolf(156,-539);
 u.setMoveSpeed((float)3.5);
 u.jumpSpeed = (float)12.0;
@@ -7917,6 +7789,9 @@ new doodads.sheepFarm.fenceBars(1990,-486,0);
 new doodads.sheepFarm.fencePost(2013,-486,0);
 new doodads.sheepFarm.fenceBars(2018,-486,0);
 new doodads.sheepFarm.fencePost(2041,-486,0);
+}
+
+public void addSegment143() {
 new doodads.sheepFarm.fenceBars(2046,-486,0);
 new doodads.sheepFarm.fencePost(2069,-486,0);
 new doodads.sheepFarm.fenceBars(2074,-486,0);
@@ -7935,9 +7810,6 @@ new doodads.sheepFarm.fenceBars(2242,-486,0);
 new doodads.sheepFarm.fencePost(2265,-486,0);
 new doodads.sheepFarm.fenceBars(2270,-486,0);
 new doodads.sheepFarm.fencePost(2293,-486,0);
-}
-
-public void addSegment147() {
 new doodads.sheepFarm.fenceBars(2298,-486,0);
 new doodads.sheepFarm.fencePost(2321,-486,0);
 new doodads.sheepFarm.fenceBars(2326,-486,0);
@@ -7970,6 +7842,9 @@ new doodads.sheepFarm.fenceBars(2690,-486,0);
 new doodads.sheepFarm.fencePost(2713,-486,0);
 new doodads.sheepFarm.fenceBars(2718,-486,0);
 new doodads.sheepFarm.fencePost(2741,-486,0);
+}
+
+public void addSegment144() {
 new doodads.sheepFarm.fenceBars(2746,-486,0);
 new doodads.sheepFarm.fencePost(2769,-486,0);
 new doodads.sheepFarm.fenceBars(2774,-486,0);
@@ -7990,9 +7865,6 @@ u.jumpSpeed = (float)10.0;
 new doodads.sheepFarm.tree(-1010,-447,1);
 new doodads.sheepFarm.fencePost(-1039,-436,0);
 new doodads.sheepFarm.fenceBars(-1034,-436,0);
-}
-
-public void addSegment148() {
 new doodads.sheepFarm.fencePost(-1011,-436,0);
 new doodads.sheepFarm.fenceBars(-1006,-436,0);
 new doodads.sheepFarm.fencePost(-983,-436,0);
@@ -8025,6 +7897,9 @@ new doodads.sheepFarm.fencePost(-619,-436,0);
 new doodads.sheepFarm.fenceBars(-614,-436,0);
 new doodads.sheepFarm.fencePost(-591,-436,0);
 new doodads.sheepFarm.fenceBars(-586,-436,0);
+}
+
+public void addSegment145() {
 new doodads.sheepFarm.fencePost(-563,-436,0);
 new doodads.sheepFarm.fenceBars(-558,-436,0);
 new doodads.sheepFarm.fencePost(-535,-436,0);
@@ -8043,9 +7918,6 @@ new doodads.sheepFarm.fencePost(-367,-436,0);
 new doodads.sheepFarm.fenceBars(-362,-436,0);
 new doodads.sheepFarm.fencePost(-339,-436,0);
 new doodads.sheepFarm.fenceBars(-334,-436,0);
-}
-
-public void addSegment149() {
 new doodads.sheepFarm.fencePost(-311,-436,0);
 new doodads.sheepFarm.fenceBars(-306,-436,0);
 new doodads.sheepFarm.fencePost(-283,-436,0);
@@ -8078,6 +7950,9 @@ new doodads.sheepFarm.fenceBarsSmall(37,-436,0);
 new doodads.sheepFarm.fencePost(40,-436,0);
 new doodads.sheepFarm.fenceBars(45,-436,0);
 new doodads.sheepFarm.fencePost(68,-436,0);
+}
+
+public void addSegment146() {
 new doodads.sheepFarm.fenceBars(73,-436,0);
 new doodads.sheepFarm.fencePost(96,-436,0);
 new doodads.sheepFarm.fenceBars(101,-436,0);
@@ -8096,9 +7971,6 @@ new doodads.sheepFarm.fenceBars(269,-436,0);
 new doodads.sheepFarm.fencePost(292,-436,0);
 new doodads.sheepFarm.fenceBars(297,-436,0);
 new doodads.sheepFarm.fencePost(320,-436,0);
-}
-
-public void addSegment150() {
 new doodads.sheepFarm.fenceBars(325,-436,0);
 new doodads.sheepFarm.fencePost(348,-436,0);
 new doodads.sheepFarm.fenceBars(353,-436,0);
@@ -8111,7 +7983,7 @@ new doodads.sheepFarm.fenceBars(437,-436,0);
 new doodads.sheepFarm.fencePost(460,-436,0);
 new doodads.sheepFarm.verticalFence(1677,-486,0);
 new doodads.sheepFarm.verticalFence(2433,-486,0);
-u = new units.unitTypes.sheepFarm.sheep(-279,-430);
+u = new units.unitTypes.sheepFarm.sheep(-367,-430);
 u.setMoveSpeed((float)1.0);
 u.jumpSpeed = (float)10.0;
 new doodads.sheepFarm.tree(-1017,-414,1);
@@ -8135,15 +8007,15 @@ new doodads.sheepFarm.verticalFence(-451,-374,0);
 new doodads.sheepFarm.verticalFence(-31,-373,0);
 new doodads.sheepFarm.verticalFence(40,-373,0);
 new doodads.sheepFarm.verticalFence(460,-373,0);
+}
+
+public void addSegment147() {
 new doodads.sheepFarm.tree(-720,-325,0);
 new doodads.sheepFarm.verticalFence(1677,-366,0);
 new doodads.sheepFarm.verticalFence(2433,-366,0);
 new doodads.sheepFarm.haystack(-294,-315,0);
 new doodads.general.questMark(-705,-307,0);
 new doodads.sheepFarm.tree(2849,-295,2);
-u = new units.unitTypes.sheepFarm.sheep(-795,-300);
-u.setMoveSpeed((float)1.0);
-u.jumpSpeed = (float)10.0;
 new doodads.sheepFarm.verticalFence(2849,-328,0);
 new doodads.sheepFarm.verticalFence(2069,-328,0);
 new doodads.sheepFarm.tree(2907,-279,1);
@@ -8155,21 +8027,21 @@ new doodads.sheepFarm.verticalFence(460,-313,0);
 new doodads.sheepFarm.tree(2934,-261,0);
 new doodads.sheepFarm.verticalFence(1677,-306,0);
 new doodads.sheepFarm.verticalFence(2433,-306,0);
-}
-
-public void addSegment151() {
 u = new units.unitTypes.sheepFarm.farmer(-711,-247);
 u.setMoveSpeed((float)1.0);
 u.jumpSpeed = (float)10.0;
 new doodads.sheepFarm.verticalFence(2849,-268,0);
 new doodads.sheepFarm.verticalFence(2069,-268,0);
+u = new units.unitTypes.sheepFarm.sheep(-824,-226);
+u.setMoveSpeed((float)1.0);
+u.jumpSpeed = (float)10.0;
 new doodads.sheepFarm.verticalFence(-451,-254,0);
 new doodads.sheepFarm.verticalFence(-31,-253,0);
 new doodads.sheepFarm.verticalFence(40,-253,0);
 new doodads.sheepFarm.verticalFence(460,-253,0);
 new doodads.sheepFarm.verticalFence(1677,-246,1);
 new doodads.sheepFarm.verticalFence(2433,-246,1);
-u = new units.unitTypes.sheepFarm.sheep(-134,-192);
+u = new units.unitTypes.sheepFarm.sheep(-318,-181);
 u.setMoveSpeed((float)1.0);
 u.jumpSpeed = (float)10.0;
 new doodads.sheepFarm.verticalFence(2849,-208,0);
@@ -8194,6 +8066,9 @@ new doodads.sheepFarm.fencePost(1645,-30,0);
 new doodads.sheepFarm.fenceBars(1650,-30,0);
 new doodads.sheepFarm.fencePost(1673,-30,0);
 new doodads.sheepFarm.fenceBars(1678,-30,0);
+}
+
+public void addSegment148() {
 new doodads.sheepFarm.fencePost(1701,-30,0);
 new doodads.sheepFarm.fenceBars(1706,-30,0);
 new doodads.sheepFarm.fencePost(1729,-30,0);
@@ -8212,9 +8087,6 @@ new doodads.sheepFarm.fencePost(1897,-30,0);
 new doodads.sheepFarm.fenceBars(1902,-30,0);
 new doodads.sheepFarm.fencePost(1925,-30,0);
 new doodads.sheepFarm.fenceBars(1930,-30,0);
-}
-
-public void addSegment152() {
 new doodads.sheepFarm.fencePost(1953,-30,0);
 new doodads.sheepFarm.fenceBars(1958,-30,0);
 new doodads.sheepFarm.fencePost(1981,-30,0);
@@ -8247,6 +8119,9 @@ new doodads.sheepFarm.fencePost(2345,-30,0);
 new doodads.sheepFarm.fenceBars(2350,-30,0);
 new doodads.sheepFarm.fencePost(2373,-30,0);
 new doodads.sheepFarm.fenceBars(2378,-30,0);
+}
+
+public void addSegment149() {
 new doodads.sheepFarm.fencePost(2401,-30,0);
 new doodads.sheepFarm.fenceBars(2406,-30,0);
 new doodads.sheepFarm.fencePost(2429,-30,0);
@@ -8265,9 +8140,6 @@ new doodads.sheepFarm.fencePost(2597,-30,0);
 new doodads.sheepFarm.fenceBars(2602,-30,0);
 new doodads.sheepFarm.fencePost(2625,-30,0);
 new doodads.sheepFarm.fenceBars(2630,-30,0);
-}
-
-public void addSegment153() {
 new doodads.sheepFarm.fencePost(2653,-30,0);
 new doodads.sheepFarm.fenceBars(2658,-30,0);
 new doodads.sheepFarm.fencePost(2681,-30,0);
@@ -8300,6 +8172,9 @@ new doodads.sheepFarm.fenceBars(157,-17,0);
 new doodads.sheepFarm.fencePost(180,-17,0);
 new doodads.sheepFarm.fenceBars(185,-17,0);
 new doodads.sheepFarm.fencePost(208,-17,0);
+}
+
+public void addSegment150() {
 new doodads.sheepFarm.fenceBars(213,-17,0);
 new doodads.sheepFarm.fencePost(236,-17,0);
 new doodads.sheepFarm.fenceBars(241,-17,0);
@@ -8318,9 +8193,6 @@ new doodads.sheepFarm.fenceBarsSmall(409,-17,0);
 new doodads.sheepFarm.fenceBarsSmall(457,-17,0);
 new doodads.sheepFarm.bush(-909,-9,1);
 new doodads.sheepFarm.tree(-1011,0,0);
-}
-
-public void addSegment154() {
 new doodads.sheepFarm.verticalFence(460,-13,1);
 new doodads.sheepFarm.fencePost(-708,43,0);
 new doodads.sheepFarm.fenceBars(-703,43,0);
@@ -8353,6 +8225,9 @@ new doodads.sheepFarm.fenceBars(-339,43,0);
 new doodads.sheepFarm.fencePost(-316,43,0);
 new doodads.sheepFarm.fenceBars(-311,43,0);
 new doodads.sheepFarm.fencePost(-288,43,0);
+}
+
+public void addSegment151() {
 new doodads.sheepFarm.fenceBars(-283,43,0);
 new doodads.sheepFarm.fencePost(-260,43,0);
 new doodads.sheepFarm.fenceBars(-255,43,0);
@@ -8371,9 +8246,6 @@ new doodads.sheepFarm.fenceBars(-87,43,0);
 new doodads.sheepFarm.fencePost(-64,43,0);
 new doodads.sheepFarm.fenceBars(-59,43,0);
 new doodads.sheepFarm.fencePost(-36,43,0);
-}
-
-public void addSegment155() {
 new doodads.sheepFarm.fenceBars(-31,43,0);
 new doodads.sheepFarm.fencePost(-8,43,0);
 new doodads.sheepFarm.fenceBars(-3,43,0);
@@ -8406,6 +8278,9 @@ new doodads.sheepFarm.fenceBars(361,43,0);
 new doodads.sheepFarm.fencePost(384,43,0);
 new doodads.sheepFarm.fenceBars(389,43,0);
 new doodads.sheepFarm.fencePost(412,43,0);
+}
+
+public void addSegment152() {
 new doodads.sheepFarm.fenceBars(417,43,0);
 new doodads.sheepFarm.fencePost(440,43,0);
 new doodads.sheepFarm.fencePost(-1028,43,0);
@@ -8424,9 +8299,6 @@ new doodads.sheepFarm.fencePost(-860,43,0);
 new doodads.sheepFarm.fenceBars(-855,43,0);
 new doodads.sheepFarm.fencePost(-832,43,0);
 new doodads.sheepFarm.fenceBars(-827,43,0);
-}
-
-public void addSegment156() {
 new doodads.sheepFarm.fencePost(-804,43,0);
 new doodads.sheepFarm.fenceBars(-799,43,0);
 new doodads.sheepFarm.fencePost(-776,43,0);
@@ -8459,6 +8331,9 @@ new doodads.sheepFarm.tree(-1220,275,2);
 new doodads.sheepFarm.tree(-1469,275,0);
 new doodads.sheepFarm.tree(-670,280,1);
 new doodads.sheepFarm.tree(-1205,300,1);
+}
+
+public void addSegment153() {
 new doodads.sheepFarm.tree(-1759,300,1);
 new doodads.sheepFarm.tree(-685,310,2);
 new doodads.sheepFarm.tree(-1243,314,1);
@@ -8477,9 +8352,6 @@ new doodads.sheepFarm.tree(-1529,390,2);
 new doodads.sheepFarm.bush(-1192,393,1);
 new doodads.sheepFarm.tree(-615,410,2);
 new doodads.sheepFarm.tree(-1335,415,0);
-}
-
-public void addSegment157() {
 new doodads.sheepFarm.tree(-1378,415,0);
 new doodads.sheepFarm.tree(-608,425,2);
 new doodads.sheepFarm.tree(-1324,428,2);
@@ -8512,6 +8384,9 @@ new doodads.sheepFarm.tree(-1160,580,1);
 new doodads.sheepFarm.tree(-1215,580,1);
 new doodads.sheepFarm.tree(-1250,580,0);
 new doodads.sheepFarm.tree(-745,585,1);
+}
+
+public void addSegment154() {
 new doodads.sheepFarm.tree(-775,585,1);
 new doodads.sheepFarm.tree(-895,585,1);
 new doodads.sheepFarm.tree(-1040,585,1);
@@ -8530,9 +8405,6 @@ new doodads.sheepFarm.tree(-925,615,0);
 new doodads.sheepFarm.tree(-1100,615,2);
 new doodads.sheepFarm.tree(-1265,615,0);
 new doodads.sheepFarm.bush(-1321,636,2);
-}
-
-public void addSegment158() {
 new doodads.sheepFarm.bush(-979,636,1);
 new doodads.sheepFarm.tree(-1069,660,0);
 new doodads.sheepFarm.tree(-1249,672,2);
@@ -8711,7 +8583,3 @@ addSegment151();
 addSegment152();
 addSegment153();
 addSegment154();
-addSegment155();
-addSegment156();
-addSegment157();
-addSegment158();
