@@ -10678,13 +10678,10 @@ new terrain.chunkTypes.tombEdge(8936,2361,0);
 new terrain.chunkTypes.tombEdge(8968,2361,0);
 new terrain.chunkTypes.tombEdge(9000,2361,0);
 new terrain.chunkTypes.tombEdge(9032,2361,0);
-new terrain.chunkTypes.tombEdge(9064,2361,0);
 new terrain.chunkTypes.tombEdge(9096,2361,0);
 new terrain.chunkTypes.tombEdge(9128,2361,0);
-new terrain.chunkTypes.tombEdge(9160,2361,0);
 new terrain.chunkTypes.tombEdge(9192,2361,0);
 new terrain.chunkTypes.tombEdge(9224,2361,0);
-new terrain.chunkTypes.tombEdge(9256,2361,0);
 new terrain.chunkTypes.tombEdge(9288,2361,0);
 new terrain.chunkTypes.tombEdge(9320,2361,0);
 new terrain.chunkTypes.tombEdge(9352,2361,0);
@@ -10702,12 +10699,12 @@ new terrain.chunkTypes.tombEdge(9704,2361,0);
 new terrain.chunkTypes.tombEdge(9736,2361,0);
 new terrain.chunkTypes.tombEdge(9768,2361,0);
 new terrain.chunkTypes.tombEdge(9800,2361,0);
-}
-
-public void addSegment202() {
 new terrain.chunkTypes.tombEdge(9832,2361,0);
 new terrain.chunkTypes.tombEdge(9864,2361,0);
 new terrain.chunkTypes.tombEdge(9896,2361,0);
+}
+
+public void addSegment202() {
 new terrain.chunkTypes.tombEdge(9928,2361,0);
 new terrain.chunkTypes.tombEdge(9960,2361,0);
 new terrain.chunkTypes.tombEdge(9992,2361,0);
@@ -10755,12 +10752,12 @@ new terrain.chunkTypes.tombEdge(11304,2361,0);
 new terrain.chunkTypes.tombEdge(11336,2361,0);
 new terrain.chunkTypes.tombEdge(11368,2361,0);
 new terrain.chunkTypes.tombEdge(11400,2361,0);
-}
-
-public void addSegment203() {
 new terrain.chunkTypes.tombEdge(11432,2361,0);
 new terrain.chunkTypes.tombEdge(11464,2361,0);
 new terrain.chunkTypes.tomb(7464,2425,0);
+}
+
+public void addSegment203() {
 new terrain.chunkTypes.tomb(7464,2457,0);
 new terrain.chunkTypes.tomb(7464,2489,0);
 new terrain.chunkTypes.tomb(7464,2521,0);
@@ -10808,14 +10805,14 @@ new terrain.chunkTypes.tomb(7624,2425,0);
 new terrain.chunkTypes.tomb(7624,2457,0);
 new terrain.chunkTypes.tomb(7624,2489,0);
 new terrain.chunkTypes.tomb(7624,2521,0);
-}
-
-public void addSegment204() {
 new terrain.chunkTypes.tomb(7624,2553,0);
 new terrain.chunkTypes.tomb(7624,2585,0);
 new terrain.chunkTypes.tomb(7624,2617,0);
+}
+
+public void addSegment204() {
 new terrain.chunkTypes.tomb(7624,2649,0);
-new terrain.chunkTypes.tomb(7656,2393,0);
+new terrain.chunkTypes.tomb(7720,2393,0);
 new terrain.chunkTypes.tomb(7656,2425,0);
 new terrain.chunkTypes.tomb(7656,2457,0);
 new terrain.chunkTypes.tomb(7656,2489,0);
@@ -10833,7 +10830,7 @@ new terrain.chunkTypes.tomb(7688,2553,0);
 new terrain.chunkTypes.tomb(7688,2585,0);
 new terrain.chunkTypes.tomb(7688,2617,0);
 new terrain.chunkTypes.tomb(7688,2649,0);
-new terrain.chunkTypes.tomb(7720,2393,0);
+new terrain.chunkTypes.tomb(7656,2393,0);
 new terrain.chunkTypes.tomb(7720,2425,0);
 new terrain.chunkTypes.tomb(7720,2457,0);
 new terrain.chunkTypes.tomb(7720,2489,0);
@@ -10861,12 +10858,12 @@ new terrain.chunkTypes.tomb(7784,2585,0);
 new terrain.chunkTypes.tomb(7784,2617,0);
 new terrain.chunkTypes.tomb(7784,2649,0);
 new terrain.chunkTypes.tomb(7816,2393,0);
-}
-
-public void addSegment205() {
 new terrain.chunkTypes.tomb(7816,2425,0);
 new terrain.chunkTypes.tomb(7816,2457,0);
 new terrain.chunkTypes.tomb(7816,2489,0);
+}
+
+public void addSegment205() {
 new terrain.chunkTypes.tomb(7816,2521,0);
 new terrain.chunkTypes.tomb(7816,2553,0);
 new terrain.chunkTypes.tomb(7816,2585,0);
@@ -10914,12 +10911,12 @@ new terrain.chunkTypes.tomb(7976,2457,0);
 new terrain.chunkTypes.tomb(7976,2489,0);
 new terrain.chunkTypes.tomb(7976,2521,0);
 new terrain.chunkTypes.tomb(7976,2553,0);
-}
-
-public void addSegment206() {
 new terrain.chunkTypes.tomb(7976,2585,0);
 new terrain.chunkTypes.tomb(7976,2617,0);
 new terrain.chunkTypes.tomb(7976,2649,0);
+}
+
+public void addSegment206() {
 new terrain.chunkTypes.tomb(8008,2393,0);
 new terrain.chunkTypes.tomb(8008,2425,0);
 new terrain.chunkTypes.tomb(8008,2457,0);
@@ -10967,12 +10964,12 @@ new terrain.chunkTypes.tomb(8136,2617,0);
 new terrain.chunkTypes.tomb(8136,2649,0);
 new terrain.chunkTypes.tomb(8168,2393,0);
 new terrain.chunkTypes.tomb(8168,2425,0);
-}
-
-public void addSegment207() {
 new terrain.chunkTypes.tomb(8168,2457,0);
 new terrain.chunkTypes.tomb(8168,2489,0);
 new terrain.chunkTypes.tomb(8168,2521,0);
+}
+
+public void addSegment207() {
 new terrain.chunkTypes.tomb(8168,2553,0);
 new terrain.chunkTypes.tomb(8168,2585,0);
 new terrain.chunkTypes.tomb(8168,2617,0);
@@ -11020,12 +11017,12 @@ new terrain.chunkTypes.tomb(8328,2489,0);
 new terrain.chunkTypes.tomb(8328,2521,0);
 new terrain.chunkTypes.tomb(8328,2553,0);
 new terrain.chunkTypes.tomb(8328,2585,0);
-}
-
-public void addSegment208() {
 new terrain.chunkTypes.tomb(8328,2617,0);
 new terrain.chunkTypes.tomb(8328,2649,0);
 new terrain.chunkTypes.tomb(8360,2393,0);
+}
+
+public void addSegment208() {
 new terrain.chunkTypes.tomb(8360,2425,0);
 new terrain.chunkTypes.tomb(8360,2457,0);
 new terrain.chunkTypes.tomb(8360,2489,0);
@@ -11073,12 +11070,12 @@ new terrain.chunkTypes.tomb(8488,2649,0);
 new terrain.chunkTypes.tomb(8520,2393,0);
 new terrain.chunkTypes.tomb(8520,2425,0);
 new terrain.chunkTypes.tomb(8520,2457,0);
-}
-
-public void addSegment209() {
 new terrain.chunkTypes.tomb(8520,2489,0);
 new terrain.chunkTypes.tomb(8520,2521,0);
 new terrain.chunkTypes.tomb(8520,2553,0);
+}
+
+public void addSegment209() {
 new terrain.chunkTypes.tomb(8520,2585,0);
 new terrain.chunkTypes.tomb(8520,2617,0);
 new terrain.chunkTypes.tomb(8520,2649,0);
@@ -11126,12 +11123,12 @@ new terrain.chunkTypes.tomb(8680,2521,0);
 new terrain.chunkTypes.tomb(8680,2553,0);
 new terrain.chunkTypes.tomb(8680,2585,0);
 new terrain.chunkTypes.tomb(8680,2617,0);
-}
-
-public void addSegment210() {
 new terrain.chunkTypes.tomb(8680,2649,0);
 new terrain.chunkTypes.tomb(8712,2393,0);
 new terrain.chunkTypes.tomb(8712,2425,0);
+}
+
+public void addSegment210() {
 new terrain.chunkTypes.tomb(8712,2457,0);
 new terrain.chunkTypes.tomb(8712,2489,0);
 new terrain.chunkTypes.tomb(8712,2521,0);
@@ -11179,12 +11176,12 @@ new terrain.chunkTypes.tomb(8872,2393,0);
 new terrain.chunkTypes.tomb(8872,2425,0);
 new terrain.chunkTypes.tomb(8872,2457,0);
 new terrain.chunkTypes.tomb(8872,2489,0);
-}
-
-public void addSegment211() {
 new terrain.chunkTypes.tomb(8872,2521,0);
 new terrain.chunkTypes.tomb(8872,2553,0);
 new terrain.chunkTypes.tomb(8872,2585,0);
+}
+
+public void addSegment211() {
 new terrain.chunkTypes.tomb(8872,2617,0);
 new terrain.chunkTypes.tomb(8872,2649,0);
 new terrain.chunkTypes.tomb(8904,2393,0);
@@ -11232,12 +11229,12 @@ new terrain.chunkTypes.tomb(9032,2553,0);
 new terrain.chunkTypes.tomb(9032,2585,0);
 new terrain.chunkTypes.tomb(9032,2617,0);
 new terrain.chunkTypes.tomb(9032,2649,0);
-}
-
-public void addSegment212() {
 new terrain.chunkTypes.tomb(9064,2393,0);
 new terrain.chunkTypes.tomb(9064,2425,0);
 new terrain.chunkTypes.tomb(9064,2457,0);
+}
+
+public void addSegment212() {
 new terrain.chunkTypes.tomb(9064,2489,0);
 new terrain.chunkTypes.tomb(9064,2521,0);
 new terrain.chunkTypes.tomb(9064,2553,0);
@@ -11285,12 +11282,12 @@ new terrain.chunkTypes.tomb(9224,2425,0);
 new terrain.chunkTypes.tomb(9224,2457,0);
 new terrain.chunkTypes.tomb(9224,2489,0);
 new terrain.chunkTypes.tomb(9224,2521,0);
-}
-
-public void addSegment213() {
 new terrain.chunkTypes.tomb(9224,2553,0);
 new terrain.chunkTypes.tomb(9224,2585,0);
 new terrain.chunkTypes.tomb(9224,2617,0);
+}
+
+public void addSegment213() {
 new terrain.chunkTypes.tomb(9224,2649,0);
 new terrain.chunkTypes.tomb(9256,2393,0);
 new terrain.chunkTypes.tomb(9256,2425,0);
@@ -11338,12 +11335,12 @@ new terrain.chunkTypes.tomb(9384,2585,0);
 new terrain.chunkTypes.tomb(9384,2617,0);
 new terrain.chunkTypes.tomb(9384,2649,0);
 new terrain.chunkTypes.tomb(9416,2393,0);
-}
-
-public void addSegment214() {
 new terrain.chunkTypes.tomb(9416,2425,0);
 new terrain.chunkTypes.tomb(9416,2457,0);
 new terrain.chunkTypes.tomb(9416,2489,0);
+}
+
+public void addSegment214() {
 new terrain.chunkTypes.tomb(9416,2521,0);
 new terrain.chunkTypes.tomb(9416,2553,0);
 new terrain.chunkTypes.tomb(9416,2585,0);
@@ -11391,12 +11388,12 @@ new terrain.chunkTypes.tomb(9576,2457,0);
 new terrain.chunkTypes.tomb(9576,2489,0);
 new terrain.chunkTypes.tomb(9576,2521,0);
 new terrain.chunkTypes.tomb(9576,2553,0);
-}
-
-public void addSegment215() {
 new terrain.chunkTypes.tomb(9576,2585,0);
 new terrain.chunkTypes.tomb(9576,2617,0);
 new terrain.chunkTypes.tomb(9576,2649,0);
+}
+
+public void addSegment215() {
 new terrain.chunkTypes.tomb(9608,2393,0);
 new terrain.chunkTypes.tomb(9608,2425,0);
 new terrain.chunkTypes.tomb(9608,2457,0);
@@ -11444,12 +11441,12 @@ new terrain.chunkTypes.tomb(9736,2617,0);
 new terrain.chunkTypes.tomb(9736,2649,0);
 new terrain.chunkTypes.tomb(9768,2393,0);
 new terrain.chunkTypes.tomb(9768,2425,0);
-}
-
-public void addSegment216() {
 new terrain.chunkTypes.tomb(9768,2457,0);
 new terrain.chunkTypes.tomb(9768,2489,0);
 new terrain.chunkTypes.tomb(9768,2521,0);
+}
+
+public void addSegment216() {
 new terrain.chunkTypes.tomb(9768,2553,0);
 new terrain.chunkTypes.tomb(9768,2585,0);
 new terrain.chunkTypes.tomb(9768,2617,0);
@@ -11497,12 +11494,12 @@ new terrain.chunkTypes.tomb(9928,2489,0);
 new terrain.chunkTypes.tomb(9928,2521,0);
 new terrain.chunkTypes.tomb(9928,2553,0);
 new terrain.chunkTypes.tomb(9928,2585,0);
-}
-
-public void addSegment217() {
 new terrain.chunkTypes.tomb(9928,2617,0);
 new terrain.chunkTypes.tomb(9928,2649,0);
 new terrain.chunkTypes.tomb(9960,2393,0);
+}
+
+public void addSegment217() {
 new terrain.chunkTypes.tomb(9960,2425,0);
 new terrain.chunkTypes.tomb(9960,2457,0);
 new terrain.chunkTypes.tomb(9960,2489,0);
@@ -11550,12 +11547,12 @@ new terrain.chunkTypes.tomb(10088,2649,0);
 new terrain.chunkTypes.tomb(10120,2393,0);
 new terrain.chunkTypes.tomb(10120,2425,0);
 new terrain.chunkTypes.tomb(10120,2457,0);
-}
-
-public void addSegment218() {
 new terrain.chunkTypes.tomb(10120,2489,0);
 new terrain.chunkTypes.tomb(10120,2521,0);
 new terrain.chunkTypes.tomb(10120,2553,0);
+}
+
+public void addSegment218() {
 new terrain.chunkTypes.tomb(10120,2585,0);
 new terrain.chunkTypes.tomb(10120,2617,0);
 new terrain.chunkTypes.tomb(10120,2649,0);
@@ -11603,12 +11600,12 @@ new terrain.chunkTypes.tomb(10280,2521,0);
 new terrain.chunkTypes.tomb(10280,2553,0);
 new terrain.chunkTypes.tomb(10280,2585,0);
 new terrain.chunkTypes.tomb(10280,2617,0);
-}
-
-public void addSegment219() {
 new terrain.chunkTypes.tomb(10280,2649,0);
 new terrain.chunkTypes.tomb(10312,2393,0);
 new terrain.chunkTypes.tomb(10312,2425,0);
+}
+
+public void addSegment219() {
 new terrain.chunkTypes.tomb(10312,2457,0);
 new terrain.chunkTypes.tomb(10312,2489,0);
 new terrain.chunkTypes.tomb(10312,2521,0);
@@ -11656,12 +11653,12 @@ new terrain.chunkTypes.tomb(10472,2393,0);
 new terrain.chunkTypes.tomb(10472,2425,0);
 new terrain.chunkTypes.tomb(10472,2457,0);
 new terrain.chunkTypes.tomb(10472,2489,0);
-}
-
-public void addSegment220() {
 new terrain.chunkTypes.tomb(10472,2521,0);
 new terrain.chunkTypes.tomb(10472,2553,0);
 new terrain.chunkTypes.tomb(10472,2585,0);
+}
+
+public void addSegment220() {
 new terrain.chunkTypes.tomb(10472,2617,0);
 new terrain.chunkTypes.tomb(10472,2649,0);
 new terrain.chunkTypes.tomb(10504,2393,0);
@@ -11709,12 +11706,12 @@ new terrain.chunkTypes.tomb(10632,2553,0);
 new terrain.chunkTypes.tomb(10632,2585,0);
 new terrain.chunkTypes.tomb(10632,2617,0);
 new terrain.chunkTypes.tomb(10632,2649,0);
-}
-
-public void addSegment221() {
 new terrain.chunkTypes.tomb(10664,2393,0);
 new terrain.chunkTypes.tomb(10664,2425,0);
 new terrain.chunkTypes.tomb(10664,2457,0);
+}
+
+public void addSegment221() {
 new terrain.chunkTypes.tomb(10664,2489,0);
 new terrain.chunkTypes.tomb(10664,2521,0);
 new terrain.chunkTypes.tomb(10664,2553,0);
@@ -11762,12 +11759,12 @@ new terrain.chunkTypes.tomb(10824,2425,0);
 new terrain.chunkTypes.tomb(10824,2457,0);
 new terrain.chunkTypes.tomb(10824,2489,0);
 new terrain.chunkTypes.tomb(10824,2521,0);
-}
-
-public void addSegment222() {
 new terrain.chunkTypes.tomb(10824,2553,0);
 new terrain.chunkTypes.tomb(10824,2585,0);
 new terrain.chunkTypes.tomb(10824,2617,0);
+}
+
+public void addSegment222() {
 new terrain.chunkTypes.tomb(10824,2649,0);
 new terrain.chunkTypes.tomb(10856,2393,0);
 new terrain.chunkTypes.tomb(10856,2425,0);
@@ -11815,12 +11812,12 @@ new terrain.chunkTypes.tomb(10984,2585,0);
 new terrain.chunkTypes.tomb(10984,2617,0);
 new terrain.chunkTypes.tomb(10984,2649,0);
 new terrain.chunkTypes.tomb(11016,2393,0);
-}
-
-public void addSegment223() {
 new terrain.chunkTypes.tomb(11016,2425,0);
 new terrain.chunkTypes.tomb(11016,2457,0);
 new terrain.chunkTypes.tomb(11016,2489,0);
+}
+
+public void addSegment223() {
 new terrain.chunkTypes.tomb(11016,2521,0);
 new terrain.chunkTypes.tomb(11016,2553,0);
 new terrain.chunkTypes.tomb(11016,2585,0);
@@ -11868,12 +11865,12 @@ new terrain.chunkTypes.tomb(11176,2457,0);
 new terrain.chunkTypes.tomb(11176,2489,0);
 new terrain.chunkTypes.tomb(11176,2521,0);
 new terrain.chunkTypes.tomb(11176,2553,0);
-}
-
-public void addSegment224() {
 new terrain.chunkTypes.tomb(11176,2585,0);
 new terrain.chunkTypes.tomb(11176,2617,0);
 new terrain.chunkTypes.tomb(11176,2649,0);
+}
+
+public void addSegment224() {
 new terrain.chunkTypes.tomb(11208,2393,0);
 new terrain.chunkTypes.tomb(11208,2425,0);
 new terrain.chunkTypes.tomb(11208,2457,0);
@@ -11921,12 +11918,12 @@ new terrain.chunkTypes.tomb(11336,2617,0);
 new terrain.chunkTypes.tomb(11336,2649,0);
 new terrain.chunkTypes.tomb(11368,2393,0);
 new terrain.chunkTypes.tomb(11368,2425,0);
-}
-
-public void addSegment225() {
 new terrain.chunkTypes.tomb(11368,2457,0);
 new terrain.chunkTypes.tomb(11368,2489,0);
 new terrain.chunkTypes.tomb(11368,2521,0);
+}
+
+public void addSegment225() {
 new terrain.chunkTypes.tomb(11368,2553,0);
 new terrain.chunkTypes.tomb(11368,2585,0);
 new terrain.chunkTypes.tomb(11368,2617,0);
@@ -11974,12 +11971,12 @@ new terrain.chunkTypes.tomb(7207,2451,0);
 new terrain.chunkTypes.tomb(7207,2483,0);
 new terrain.chunkTypes.tomb(7207,2515,0);
 new terrain.chunkTypes.tomb(7207,2547,0);
-}
-
-public void addSegment226() {
 new terrain.chunkTypes.tomb(7207,2579,0);
 new terrain.chunkTypes.tomb(7207,2611,0);
 new terrain.chunkTypes.tomb(7207,2643,0);
+}
+
+public void addSegment226() {
 new terrain.chunkTypes.tomb(7207,2675,0);
 new terrain.chunkTypes.tomb(7239,2387,0);
 new terrain.chunkTypes.tomb(7239,2419,0);
@@ -12027,12 +12024,12 @@ new terrain.chunkTypes.tomb(7367,2451,0);
 new terrain.chunkTypes.tomb(7367,2483,0);
 new terrain.chunkTypes.tomb(7367,2515,0);
 new terrain.chunkTypes.tomb(7367,2547,0);
-}
-
-public void addSegment227() {
 new terrain.chunkTypes.tomb(7367,2579,0);
 new terrain.chunkTypes.tomb(7367,2611,0);
 new terrain.chunkTypes.tomb(7367,2643,0);
+}
+
+public void addSegment227() {
 new terrain.chunkTypes.tomb(7367,2675,0);
 new terrain.chunkTypes.tomb(7399,2387,0);
 new terrain.chunkTypes.tomb(7399,2419,0);
@@ -12066,12 +12063,21 @@ new terrain.chunkTypes.tomb(7446,2680,0);
 new terrain.chunkTypes.tomb(11719,2156,0);
 new terrain.chunkTypes.tomb(11719,2188,0);
 new terrain.chunkTypes.tomb(11719,2220,0);
+new terrain.chunkTypes.tombEdge(8018,2288,0);
+new terrain.chunkTypes.tombEdge(8725,2298,0);
+new terrain.chunkTypes.tomb(9064,2361,0);
+new terrain.chunkTypes.tomb(9160,2361,0);
+new terrain.chunkTypes.tomb(9256,2361,0);
+new terrain.chunkTypes.tombEdge(9064,2329,0);
+new terrain.chunkTypes.tombEdge(9160,2329,0);
+new terrain.chunkTypes.tombEdge(9256,2329,0);
 new doodads.tomb.wallTorch(230,369,0);
 new doodads.tomb.wallTorch(780,1483,0);
 new doodads.tomb.wallTorch(1041,1599,0);
 new doodads.tomb.wallTorch(1343,1452,0);
 new doodads.tomb.wallTorch(1963,1479,0);
 new doodads.tomb.wallTorch(2228,1479,0);
+new doodads.tomb.wallTorch(8598,2283,0);
 new doodads.sheepFarm.well(213,4,0);
 u = new units.unitTypes.tomb.shadowDude(26,194);
 u.setMoveSpeed((float)1.75);
@@ -12080,6 +12086,9 @@ commands = new commandList();
 commands.add(new units.unitCommands.commands.moveCommand(320.0,194.0));
 commands.add(new units.unitCommands.commands.moveCommand(26.0,194.0));
 u.setRepeatCommands(commands);
+}
+
+public void addSegment228() {
 u = new units.unitTypes.tomb.shadowDude(26,393);
 u.setMoveSpeed((float)1.75);
 u.jumpSpeed = (float)10.0;
@@ -12116,15 +12125,12 @@ commands.add(new units.unitCommands.commands.moveCommand(210.0,594.0));
 commands.add(new units.unitCommands.commands.moveCommand(28.0,594.0));
 u.setRepeatCommands(commands);
 u = new units.unitTypes.tomb.lightDude(30,720);
-u.setMoveSpeed((float)2.65);
+u.setMoveSpeed((float)2.4);
 u.jumpSpeed = (float)10.0;
 commands = new commandList();
 commands.add(new units.unitCommands.commands.moveCommand(314.0,720.0));
 commands.add(new units.unitCommands.commands.moveCommand(30.0,720.0));
 u.setRepeatCommands(commands);
-}
-
-public void addSegment228() {
 u = new units.unitTypes.tomb.shadowDude(60,794);
 u.setMoveSpeed((float)1.75);
 u.jumpSpeed = (float)10.0;
@@ -12621,6 +12627,9 @@ commands = new commandList();
 commands.add(new units.unitCommands.commands.moveCommand(680.0,1800.0));
 commands.add(new units.unitCommands.commands.moveCommand(680.0,1400.0));
 u.setRepeatCommands(commands);
+}
+
+public void addSegment229() {
 u = new units.unitTypes.tomb.shadowDude(710,1400);
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
@@ -12663,9 +12672,6 @@ commands = new commandList();
 commands.add(new units.unitCommands.commands.moveCommand(860.0,1800.0));
 commands.add(new units.unitCommands.commands.moveCommand(860.0,1400.0));
 u.setRepeatCommands(commands);
-}
-
-public void addSegment229() {
 u = new units.unitTypes.tomb.shadowDude(890,1400);
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
@@ -12974,6 +12980,9 @@ commands = new commandList();
 commands.add(new units.unitCommands.commands.moveCommand(2180.0,1800.0));
 commands.add(new units.unitCommands.commands.moveCommand(2180.0,1400.0));
 u.setRepeatCommands(commands);
+}
+
+public void addSegment230() {
 u = new units.unitTypes.tomb.shadowDude(2210,1400);
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
@@ -13016,9 +13025,6 @@ commands = new commandList();
 commands.add(new units.unitCommands.commands.moveCommand(2360.0,1800.0));
 commands.add(new units.unitCommands.commands.moveCommand(2360.0,1400.0));
 u.setRepeatCommands(commands);
-}
-
-public void addSegment230() {
 u = new units.unitTypes.tomb.shadowDude(2390,1400);
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
@@ -13483,6 +13489,9 @@ commands.add(new units.unitCommands.commands.moveCommand(4055.0,1679.0));
 commands.add(new units.unitCommands.commands.moveCommand(4180.0,1679.0));
 commands.add(new units.unitCommands.commands.moveCommand(4305.0,1679.0));
 u.setRepeatCommands(commands);
+}
+
+public void addSegment231() {
 u = new units.unitTypes.tomb.shadowDude(4305,1929);
 u.setMoveSpeed((float)1.0);
 u.jumpSpeed = (float)10.0;
@@ -13621,9 +13630,6 @@ commands.add(new units.unitCommands.commands.moveCommand(4430.0,1679.0));
 commands.add(new units.unitCommands.commands.moveCommand(4555.0,1679.0));
 commands.add(new units.unitCommands.commands.moveCommand(4680.0,1679.0));
 u.setRepeatCommands(commands);
-}
-
-public void addSegment231() {
 u = new units.unitTypes.tomb.shadowDude(4680,1929);
 u.setMoveSpeed((float)1.0);
 u.jumpSpeed = (float)10.0;
@@ -13922,132 +13928,135 @@ commands.add(new units.unitCommands.commands.moveCommand(5495.0,1531.0));
 commands.add(new units.unitCommands.commands.moveCommand(5355.0,1531.0));
 u.setRepeatCommands(commands);
 u = new units.unitTypes.tomb.shadowDude(5670,1180);
-u.setMoveSpeed((float)6.0);
+u.setMoveSpeed((float)5.5);
 u.jumpSpeed = (float)10.0;
 commands = new commandList();
 commands.add(new units.unitCommands.commands.moveCommand(5670.0,1495.0));
 commands.add(new units.unitCommands.commands.moveCommand(5670.0,1180.0));
 u.setRepeatCommands(commands);
 u = new units.unitTypes.tomb.shadowDude(5700,1180);
-u.setMoveSpeed((float)6.0);
+u.setMoveSpeed((float)5.5);
 u.jumpSpeed = (float)10.0;
 commands = new commandList();
 commands.add(new units.unitCommands.commands.moveCommand(5700.0,1495.0));
 commands.add(new units.unitCommands.commands.moveCommand(5700.0,1180.0));
 u.setRepeatCommands(commands);
 u = new units.unitTypes.tomb.shadowDude(5730,1180);
-u.setMoveSpeed((float)6.0);
+u.setMoveSpeed((float)5.5);
 u.jumpSpeed = (float)10.0;
 commands = new commandList();
 commands.add(new units.unitCommands.commands.moveCommand(5730.0,1495.0));
 commands.add(new units.unitCommands.commands.moveCommand(5730.0,1180.0));
 u.setRepeatCommands(commands);
 u = new units.unitTypes.tomb.shadowDude(5790,1180);
-u.setMoveSpeed((float)6.0);
+u.setMoveSpeed((float)5.5);
 u.jumpSpeed = (float)10.0;
 commands = new commandList();
 commands.add(new units.unitCommands.commands.moveCommand(5790.0,1495.0));
 commands.add(new units.unitCommands.commands.moveCommand(5790.0,1180.0));
 u.setRepeatCommands(commands);
 u = new units.unitTypes.tomb.shadowDude(5820,1180);
-u.setMoveSpeed((float)6.0);
+u.setMoveSpeed((float)5.5);
 u.jumpSpeed = (float)10.0;
 commands = new commandList();
 commands.add(new units.unitCommands.commands.moveCommand(5820.0,1495.0));
 commands.add(new units.unitCommands.commands.moveCommand(5820.0,1180.0));
 u.setRepeatCommands(commands);
 u = new units.unitTypes.tomb.shadowDude(5850,1180);
-u.setMoveSpeed((float)6.0);
+u.setMoveSpeed((float)5.5);
 u.jumpSpeed = (float)10.0;
 commands = new commandList();
 commands.add(new units.unitCommands.commands.moveCommand(5850.0,1495.0));
 commands.add(new units.unitCommands.commands.moveCommand(5850.0,1180.0));
 u.setRepeatCommands(commands);
 u = new units.unitTypes.tomb.shadowDude(5910,1180);
-u.setMoveSpeed((float)6.0);
+u.setMoveSpeed((float)5.5);
 u.jumpSpeed = (float)10.0;
 commands = new commandList();
 commands.add(new units.unitCommands.commands.moveCommand(5910.0,1495.0));
 commands.add(new units.unitCommands.commands.moveCommand(5910.0,1180.0));
 u.setRepeatCommands(commands);
 u = new units.unitTypes.tomb.shadowDude(5940,1180);
-u.setMoveSpeed((float)6.0);
+u.setMoveSpeed((float)5.5);
 u.jumpSpeed = (float)10.0;
 commands = new commandList();
 commands.add(new units.unitCommands.commands.moveCommand(5940.0,1495.0));
 commands.add(new units.unitCommands.commands.moveCommand(5940.0,1180.0));
 u.setRepeatCommands(commands);
 u = new units.unitTypes.tomb.shadowDude(5970,1180);
-u.setMoveSpeed((float)6.0);
+u.setMoveSpeed((float)5.5);
 u.jumpSpeed = (float)10.0;
 commands = new commandList();
 commands.add(new units.unitCommands.commands.moveCommand(5970.0,1495.0));
 commands.add(new units.unitCommands.commands.moveCommand(5970.0,1180.0));
 u.setRepeatCommands(commands);
 u = new units.unitTypes.tomb.shadowDude(6000,1180);
-u.setMoveSpeed((float)6.0);
+u.setMoveSpeed((float)5.5);
 u.jumpSpeed = (float)10.0;
 commands = new commandList();
 commands.add(new units.unitCommands.commands.moveCommand(6000.0,1495.0));
 commands.add(new units.unitCommands.commands.moveCommand(6000.0,1180.0));
 u.setRepeatCommands(commands);
 u = new units.unitTypes.tomb.shadowDude(6030,1180);
-u.setMoveSpeed((float)6.0);
+u.setMoveSpeed((float)5.5);
 u.jumpSpeed = (float)10.0;
 commands = new commandList();
 commands.add(new units.unitCommands.commands.moveCommand(6030.0,1495.0));
 commands.add(new units.unitCommands.commands.moveCommand(6030.0,1180.0));
 u.setRepeatCommands(commands);
 u = new units.unitTypes.tomb.shadowDude(6060,1180);
-u.setMoveSpeed((float)6.0);
+u.setMoveSpeed((float)5.5);
 u.jumpSpeed = (float)10.0;
 commands = new commandList();
 commands.add(new units.unitCommands.commands.moveCommand(6060.0,1495.0));
 commands.add(new units.unitCommands.commands.moveCommand(6060.0,1180.0));
 u.setRepeatCommands(commands);
 u = new units.unitTypes.tomb.shadowDude(6090,1180);
-u.setMoveSpeed((float)6.0);
+u.setMoveSpeed((float)5.5);
 u.jumpSpeed = (float)10.0;
 commands = new commandList();
 commands.add(new units.unitCommands.commands.moveCommand(6090.0,1495.0));
 commands.add(new units.unitCommands.commands.moveCommand(6090.0,1180.0));
 u.setRepeatCommands(commands);
 u = new units.unitTypes.tomb.shadowDude(6150,1180);
-u.setMoveSpeed((float)6.0);
+u.setMoveSpeed((float)5.5);
 u.jumpSpeed = (float)10.0;
 commands = new commandList();
 commands.add(new units.unitCommands.commands.moveCommand(6150.0,1495.0));
 commands.add(new units.unitCommands.commands.moveCommand(6150.0,1180.0));
 u.setRepeatCommands(commands);
 u = new units.unitTypes.tomb.shadowDude(6180,1180);
-u.setMoveSpeed((float)6.0);
+u.setMoveSpeed((float)5.5);
 u.jumpSpeed = (float)10.0;
 commands = new commandList();
 commands.add(new units.unitCommands.commands.moveCommand(6180.0,1495.0));
 commands.add(new units.unitCommands.commands.moveCommand(6180.0,1180.0));
 u.setRepeatCommands(commands);
 u = new units.unitTypes.tomb.shadowDude(6210,1180);
-u.setMoveSpeed((float)6.0);
+u.setMoveSpeed((float)5.5);
 u.jumpSpeed = (float)10.0;
 commands = new commandList();
 commands.add(new units.unitCommands.commands.moveCommand(6210.0,1495.0));
 commands.add(new units.unitCommands.commands.moveCommand(6210.0,1180.0));
 u.setRepeatCommands(commands);
 u = new units.unitTypes.tomb.shadowDude(6240,1180);
-u.setMoveSpeed((float)6.0);
+u.setMoveSpeed((float)5.5);
 u.jumpSpeed = (float)10.0;
 commands = new commandList();
 commands.add(new units.unitCommands.commands.moveCommand(6240.0,1495.0));
 commands.add(new units.unitCommands.commands.moveCommand(6240.0,1180.0));
 u.setRepeatCommands(commands);
+}
+
+public void addSegment232() {
 u = new units.unitTypes.tomb.shadowDude(6270,1180);
-u.setMoveSpeed((float)6.0);
+u.setMoveSpeed((float)5.5);
 u.jumpSpeed = (float)10.0;
 commands = new commandList();
 commands.add(new units.unitCommands.commands.moveCommand(6270.0,1495.0));
 commands.add(new units.unitCommands.commands.moveCommand(6270.0,1180.0));
 u.setRepeatCommands(commands);
-new doodads.sheepFarm.well(6437,1808,0);
+new doodads.sheepFarm.well(6440,1808,0);
 u = new units.unitTypes.tomb.shadowDude(5003,1915);
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
@@ -14076,9 +14085,6 @@ commands = new commandList();
 commands.add(new units.unitCommands.commands.moveCommand(5828.0,1849.0));
 commands.add(new units.unitCommands.commands.moveCommand(5528.0,1849.0));
 u.setRepeatCommands(commands);
-}
-
-public void addSegment232() {
 u = new units.unitTypes.tomb.shadowDude(5528,1799);
 u.setMoveSpeed((float)2.0);
 u.jumpSpeed = (float)10.0;
@@ -16023,6 +16029,9 @@ commands.add(new units.unitCommands.commands.moveCommand(9121.0,1646.0));
 commands.add(new units.unitCommands.commands.moveCommand(9321.0,1646.0));
 commands.add(new units.unitCommands.commands.moveCommand(9521.0,1646.0));
 u.setRepeatCommands(commands);
+}
+
+public void addSegment233() {
 u = new units.unitTypes.tomb.shadowDude(9921,846);
 u.setMoveSpeed((float)2.0);
 u.jumpSpeed = (float)10.0;
@@ -16341,9 +16350,6 @@ commands.add(new units.unitCommands.commands.moveCommand(10321.0,1646.0));
 commands.add(new units.unitCommands.commands.moveCommand(10521.0,1646.0));
 commands.add(new units.unitCommands.commands.moveCommand(10721.0,1646.0));
 u.setRepeatCommands(commands);
-}
-
-public void addSegment233() {
 u = new units.unitTypes.tomb.shadowDude(11121,846);
 u.setMoveSpeed((float)2.0);
 u.jumpSpeed = (float)10.0;
@@ -18676,6 +18682,9 @@ commands.add(new units.unitCommands.commands.moveCommand(9921.0,1746.0));
 commands.add(new units.unitCommands.commands.moveCommand(10121.0,1746.0));
 commands.add(new units.unitCommands.commands.moveCommand(10321.0,1746.0));
 u.setRepeatCommands(commands);
+}
+
+public void addSegment234() {
 u = new units.unitTypes.tomb.shadowDude(10721,946);
 u.setMoveSpeed((float)2.0);
 u.jumpSpeed = (float)10.0;
@@ -18994,9 +19003,6 @@ commands.add(new units.unitCommands.commands.moveCommand(11521.0,1746.0));
 commands.add(new units.unitCommands.commands.moveCommand(11521.0,1546.0));
 commands.add(new units.unitCommands.commands.moveCommand(11521.0,1346.0));
 u.setRepeatCommands(commands);
-}
-
-public void addSegment234() {
 u = new units.unitTypes.tomb.shadowDude(11521,1746);
 u.setMoveSpeed((float)2.0);
 u.jumpSpeed = (float)10.0;
@@ -20425,6 +20431,9 @@ commands = new commandList();
 commands.add(new units.unitCommands.commands.moveCommand(4650.0,1679.0));
 commands.add(new units.unitCommands.commands.moveCommand(4650.0,1400.0));
 u.setRepeatCommands(commands);
+}
+
+public void addSegment235() {
 u = new units.unitTypes.tomb.shadowDude(4680,1400);
 u.setMoveSpeed((float)4.0);
 u.jumpSpeed = (float)10.0;
@@ -20459,9 +20468,6 @@ u.jumpSpeed = (float)10.0;
 u = new units.unitTypes.tomb.shadowDude(9089,1730);
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
-}
-
-public void addSegment235() {
 u = new units.unitTypes.tomb.shadowDude(9113,1730);
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
@@ -20622,6 +20628,9 @@ commands = new commandList();
 commands.add(new units.unitCommands.commands.moveCommand(8711.0,1477.0));
 commands.add(new units.unitCommands.commands.moveCommand(8711.0,1248.0));
 u.setRepeatCommands(commands);
+}
+
+public void addSegment236() {
 u = new units.unitTypes.tomb.shadowDude(8741,1248);
 u.setMoveSpeed((float)3.7);
 u.jumpSpeed = (float)10.0;
@@ -20648,9 +20657,6 @@ u.jumpSpeed = (float)10.0;
 u = new units.unitTypes.tomb.shadowDude(11364,1797);
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
-}
-
-public void addSegment236() {
 u = new units.unitTypes.tomb.shadowDude(11388,1797);
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
@@ -20761,7 +20767,7 @@ commands = new commandList();
 commands.add(new units.unitCommands.commands.moveCommand(320.0,144.0));
 commands.add(new units.unitCommands.commands.moveCommand(26.0,144.0));
 u.setRepeatCommands(commands);
-new doodads.sheepFarm.well(7578,1806,0);
+new doodads.sheepFarm.well(7578,1808,0);
 u = new units.unitTypes.tomb.shadowDude(3086,1540);
 u.setMoveSpeed((float)2.0);
 u.jumpSpeed = (float)10.0;
@@ -20871,21 +20877,21 @@ commands.add(new units.unitCommands.commands.moveCommand(6269.0,1503.0));
 commands.add(new units.unitCommands.commands.moveCommand(6009.0,1503.0));
 u.setRepeatCommands(commands);
 u = new units.unitTypes.tomb.shadowDude(6299,1180);
-u.setMoveSpeed((float)6.0);
+u.setMoveSpeed((float)5.5);
 u.jumpSpeed = (float)10.0;
 commands = new commandList();
 commands.add(new units.unitCommands.commands.moveCommand(6299.0,1495.0));
 commands.add(new units.unitCommands.commands.moveCommand(6299.0,1180.0));
 u.setRepeatCommands(commands);
 u = new units.unitTypes.tomb.shadowDude(6329,1180);
-u.setMoveSpeed((float)6.0);
+u.setMoveSpeed((float)5.5);
 u.jumpSpeed = (float)10.0;
 commands = new commandList();
 commands.add(new units.unitCommands.commands.moveCommand(6329.0,1495.0));
 commands.add(new units.unitCommands.commands.moveCommand(6329.0,1180.0));
 u.setRepeatCommands(commands);
 u = new units.unitTypes.tomb.shadowDude(6359,1180);
-u.setMoveSpeed((float)6.0);
+u.setMoveSpeed((float)5.5);
 u.jumpSpeed = (float)10.0;
 commands = new commandList();
 commands.add(new units.unitCommands.commands.moveCommand(6359.0,1495.0));
@@ -20905,6 +20911,9 @@ commands = new commandList();
 commands.add(new units.unitCommands.commands.moveCommand(8097.0,1587.0));
 commands.add(new units.unitCommands.commands.moveCommand(8097.0,1440.0));
 u.setRepeatCommands(commands);
+}
+
+public void addSegment237() {
 u = new units.unitTypes.tomb.shadowDude(4954,2017);
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
@@ -20923,9 +20932,6 @@ u.jumpSpeed = (float)10.0;
 u = new units.unitTypes.tomb.shadowDude(5074,2017);
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
-}
-
-public void addSegment237() {
 u = new units.unitTypes.tomb.shadowDude(5098,2017);
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
@@ -21058,6 +21064,9 @@ u.jumpSpeed = (float)10.0;
 u = new units.unitTypes.tomb.shadowDude(6130,2017);
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
+}
+
+public void addSegment238() {
 u = new units.unitTypes.tomb.shadowDude(6154,2017);
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
@@ -21076,9 +21085,6 @@ u.jumpSpeed = (float)10.0;
 u = new units.unitTypes.tomb.shadowDude(6274,2017);
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
-}
-
-public void addSegment238() {
 u = new units.unitTypes.tomb.shadowDude(6298,2017);
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
@@ -21107,18 +21113,844 @@ u = new units.unitTypes.tomb.shadowDude(7508,2379);
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
 u = new units.unitTypes.tomb.lightDude(7623,2317);
-u.setMoveSpeed((float)3.0);
+u.setMoveSpeed((float)2.5);
 u.jumpSpeed = (float)10.0;
 commands = new commandList();
 commands.add(new units.unitCommands.commands.moveCommand(7783.0,2317.0));
 commands.add(new units.unitCommands.commands.moveCommand(7623.0,2317.0));
 u.setRepeatCommands(commands);
-u = new units.unitTypes.tomb.lightDude(7800,2317);
+u = new units.unitTypes.tomb.lightDude(7960,2317);
+u.setMoveSpeed((float)2.5);
+u.jumpSpeed = (float)10.0;
+commands = new commandList();
+commands.add(new units.unitCommands.commands.moveCommand(7800.0,2317.0));
+commands.add(new units.unitCommands.commands.moveCommand(7960.0,2317.0));
+u.setRepeatCommands(commands);
+u = new units.unitTypes.tomb.lightDude(8216,2315);
+u.setMoveSpeed((float)1.0);
+u.jumpSpeed = (float)10.0;
+commands = new commandList();
+commands.add(new units.unitCommands.commands.moveCommand(8056.0,2315.0));
+commands.add(new units.unitCommands.commands.moveCommand(8216.0,2315.0));
+u.setRepeatCommands(commands);
+u = new units.unitTypes.tomb.lightDude(8338,2317);
+u.setMoveSpeed((float)1.0);
+u.jumpSpeed = (float)10.0;
+commands = new commandList();
+commands.add(new units.unitCommands.commands.moveCommand(8498.0,2317.0));
+commands.add(new units.unitCommands.commands.moveCommand(8338.0,2317.0));
+u.setRepeatCommands(commands);
+u = new units.unitTypes.tomb.lightDude(8660,2245);
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
 commands = new commandList();
-commands.add(new units.unitCommands.commands.moveCommand(7960.0,2317.0));
-commands.add(new units.unitCommands.commands.moveCommand(7800.0,2317.0));
+commands.add(new units.unitCommands.commands.moveCommand(8820.0,2245.0));
+commands.add(new units.unitCommands.commands.moveCommand(8660.0,2245.0));
+u.setRepeatCommands(commands);
+u = new units.unitTypes.tomb.lightDude(8996,2255);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+commands = new commandList();
+commands.add(new units.unitCommands.commands.moveCommand(9156.0,2255.0));
+commands.add(new units.unitCommands.commands.moveCommand(8996.0,2255.0));
+u.setRepeatCommands(commands);
+u = new units.unitTypes.tomb.lightDude(9333,2255);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+commands = new commandList();
+commands.add(new units.unitCommands.commands.moveCommand(9173.0,2255.0));
+commands.add(new units.unitCommands.commands.moveCommand(9333.0,2255.0));
+u.setRepeatCommands(commands);
+u = new units.unitTypes.tomb.lightDude(9345,2316);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(7636,2166);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(7636,2216);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(7636,2266);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(7636,2316);
+u.setMoveSpeed((float)2.5);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(7660,2166);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(7660,2216);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(7660,2266);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(7660,2316);
+u.setMoveSpeed((float)2.5);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(7684,2166);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(7684,2216);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(7684,2266);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(7684,2316);
+u.setMoveSpeed((float)2.5);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(7708,2166);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(7708,2216);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(7708,2266);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(7708,2316);
+u.setMoveSpeed((float)2.5);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(7732,2166);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(7732,2216);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(7732,2266);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(7732,2316);
+u.setMoveSpeed((float)2.5);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(7756,2166);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(7756,2216);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(7756,2266);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(7756,2316);
+u.setMoveSpeed((float)2.5);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(7780,2166);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(7780,2216);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(7780,2266);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+}
+
+public void addSegment239() {
+u = new units.unitTypes.tomb.shadowDude(7780,2316);
+u.setMoveSpeed((float)2.5);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(7804,2166);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(7804,2216);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(7804,2266);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(7804,2316);
+u.setMoveSpeed((float)2.5);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(7828,2166);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(7828,2216);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(7828,2266);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(7828,2316);
+u.setMoveSpeed((float)2.5);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(7852,2166);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(7852,2216);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(7852,2266);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(7852,2316);
+u.setMoveSpeed((float)2.5);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(7876,2166);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(7876,2216);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(7876,2266);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(7876,2316);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(7900,2166);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(7900,2216);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(7900,2266);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(7900,2316);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(7924,2166);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(7924,2216);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(7924,2266);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(7924,2316);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(7948,2166);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(7948,2216);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(7948,2266);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(7948,2316);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(7972,2166);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(7972,2216);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(7972,2266);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(7972,2316);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(7996,2166);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(7996,2316);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8020,2166);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8020,2316);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8044,2166);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8044,2316);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8068,2166);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8068,2216);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8068,2266);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8068,2316);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8092,2166);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8092,2216);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8092,2266);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8092,2316);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8116,2166);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8116,2216);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8116,2266);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+}
+
+public void addSegment240() {
+u = new units.unitTypes.tomb.shadowDude(8116,2316);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8140,2166);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8140,2216);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8140,2266);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8140,2316);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8164,2166);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8164,2216);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8164,2266);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8164,2316);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8188,2166);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8188,2216);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8188,2266);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8188,2316);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8212,2166);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8212,2216);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8212,2266);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8212,2316);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8236,2166);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8236,2216);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8236,2266);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8236,2316);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8260,2166);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8260,2316);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8284,2166);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8284,2316);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8308,2166);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8308,2316);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8332,2166);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8332,2216);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8332,2266);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8332,2316);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8356,2166);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8356,2216);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8356,2266);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8356,2316);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8380,2166);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8380,2216);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8380,2266);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8380,2316);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8404,2166);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8404,2216);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8404,2266);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8404,2316);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8428,2166);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8428,2216);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8428,2266);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8428,2316);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8452,2166);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8452,2216);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8452,2266);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+}
+
+public void addSegment241() {
+u = new units.unitTypes.tomb.shadowDude(8452,2316);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8476,2166);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8476,2216);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8476,2266);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8476,2316);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8500,2166);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8500,2216);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8500,2266);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8500,2316);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8524,2166);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8524,2216);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8524,2266);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8524,2316);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8548,2166);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8548,2216);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8548,2266);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8548,2316);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8572,2166);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8572,2216);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8572,2266);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8572,2316);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8596,2166);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8596,2216);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8596,2266);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8596,2316);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8620,2166);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8620,2216);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8620,2266);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8620,2316);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8644,2166);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8644,2216);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8644,2266);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8644,2316);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8668,2166);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8668,2216);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8668,2266);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8668,2316);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8692,2166);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8692,2216);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8692,2266);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8692,2316);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8716,2166);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8716,2316);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8740,2166);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8740,2316);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8764,2266);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8764,2316);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8788,2266);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8788,2316);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8812,2266);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+}
+
+public void addSegment242() {
+u = new units.unitTypes.tomb.shadowDude(8812,2316);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8836,2316);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8908,2166);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8932,2166);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8932,2216);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8956,2166);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8956,2216);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8980,2166);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8980,2216);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(9004,2166);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(9004,2216);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(9028,2166);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(9028,2216);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(9028,2266);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(9028,2316);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(9052,2166);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(9052,2216);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(9052,2266);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(9076,2166);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(9076,2216);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(9076,2266);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(9100,2166);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(9100,2216);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(9100,2266);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(9124,2166);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(9124,2216);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(9124,2266);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(9148,2166);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(9148,2216);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(9148,2266);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(9172,2166);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(9172,2216);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(9172,2266);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(9196,2166);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(9196,2216);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(9196,2266);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(9220,2166);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(9220,2216);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(9220,2266);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(9244,2166);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(9244,2216);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(9244,2266);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(9268,2166);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(9268,2216);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(9268,2266);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(9292,2166);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(9292,2216);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(9292,2266);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(9292,2316);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(9316,2166);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+}
+
+public void addSegment243() {
+u = new units.unitTypes.tomb.shadowDude(9316,2216);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(9316,2266);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(9316,2316);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(9340,2166);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(9340,2216);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(9340,2266);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(9340,2316);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(9364,2166);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(9364,2216);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(9364,2266);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(9364,2316);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(9388,2166);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(9388,2216);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(9388,2266);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(9388,2316);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(9412,2166);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(9412,2216);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(9412,2266);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(9412,2316);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(9436,2166);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(9436,2216);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(9436,2266);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(9436,2316);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(8766,2213);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(9004,2266);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(9004,2316);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(5880,1180);
+u.setMoveSpeed((float)5.5);
+u.jumpSpeed = (float)10.0;
+commands = new commandList();
+commands.add(new units.unitCommands.commands.moveCommand(5880.0,1495.0));
+commands.add(new units.unitCommands.commands.moveCommand(5880.0,1180.0));
+u.setRepeatCommands(commands);
+u = new units.unitTypes.tomb.lightDude(9423,2314);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+commands = new commandList();
+commands.add(new units.unitCommands.commands.moveCommand(9423.0,2161.0));
+commands.add(new units.unitCommands.commands.moveCommand(9423.0,2314.0));
 u.setRepeatCommands(commands);
 }
 
@@ -21364,3 +22196,8 @@ addSegment235();
 addSegment236();
 addSegment237();
 addSegment238();
+addSegment239();
+addSegment240();
+addSegment241();
+addSegment242();
+addSegment243();

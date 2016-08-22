@@ -139,13 +139,6 @@ public class shadowDude extends unit {
 		
 	}
 	
-	// Trail stuff.
-	private float trailInterval = 0.0125f/2f;
-	private long lastTrail = 0;
-	private int trailLength = 40;
-	private ArrayList<intTuple> trail;
-	private ArrayList<BufferedImage> trailImage;
-	
 	// Draw the unit. 
 		@Override
 		public void drawObject(Graphics g) {
@@ -238,7 +231,8 @@ public class shadowDude extends unit {
 			
 			// Draw the unit.
 			float alpha = 0;
-			float minFade = 0.2f;
+			float minFade = 0.1f;
+			
 			if(illuminated) {
 				alpha = (1 - (time.getTime() - lastInShadowsTime)/(fadeTime*1000))/(1f-minFade);
 				if(alpha < minFade) alpha = minFade;
@@ -263,12 +257,14 @@ public class shadowDude extends unit {
 			g2d.setComposite(AlphaComposite.SrcOver.derive(alpha));
 			
 			animation faded = null;
+			
 			if(getCurrentAnimation().getName().contains("running")) {
 				faded = shadowFadedType.getAnimations().getAnimation("running" + getFacingDirection());
 			}
 			else {
 				faded = shadowFadedType.getAnimations().getAnimation("standing" + getFacingDirection());
 			}
+			
 			if(!isEyeless()) g2d.drawImage(faded.getCurrentFrame(), 
 					getDrawX(), 
 					getDrawY(), 

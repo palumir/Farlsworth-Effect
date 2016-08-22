@@ -1224,7 +1224,7 @@ public class unit extends drawnObject  {
 			}
 		}
 		else {
-			fallSpeed = 0;
+			fallSpeed = fallSpeed/2;
 			zeroNextFallSpeed = false;
 		}
 	
