@@ -61,7 +61,7 @@ public class clawMarkYellow extends chunk {
 	@Override
 	public void drawObject(Graphics g) {	
 		// Draw it. 
-		if(chunkImage != null && this.isDrawObject()) {
+		if(getChunkImage() != null && this.isDrawObject()) {
 			
 			// Scaling.
 			int changeFactor = 0;
@@ -74,11 +74,11 @@ public class clawMarkYellow extends chunk {
 			// Fade in image.
 			Graphics2D g2d = (Graphics2D) g.create();
 			g2d.setComposite(AlphaComposite.SrcOver.derive(alpha));
-			g2d.drawImage(chunkImage, 
+			g2d.drawImage(getChunkImage(), 
 					getDrawX(), 
 					getDrawY(), 
-					(int)(gameCanvas.getScaleX()*chunkImage.getWidth() + changeFactor), 
-					(int)(gameCanvas.getScaleY()*chunkImage.getHeight() + changeFactor), 
+					(int)(gameCanvas.getScaleX()*getChunkImage().getWidth() + changeFactor), 
+					(int)(gameCanvas.getScaleY()*getChunkImage().getHeight() + changeFactor), 
 					null);
 			
 			// Draw the outskirts of the sprite.

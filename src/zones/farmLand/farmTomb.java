@@ -27,7 +27,7 @@ import utilities.intTuple;
 import utilities.saveState;
 import zones.zone;
 
-public class farmTombEasy extends zone {
+public class farmTomb extends zone {
 	
 	//////////////////////////////////
 	// FIELDS, GLOBALS, CONSTRUCTOR //
@@ -69,7 +69,7 @@ public class farmTombEasy extends zone {
 	public static fog zoneFog;
 	
 	// Constructor
-	public farmTombEasy() {
+	public farmTomb() {
 		super("farmTombEasy", "farmLand");
 	}
 		
@@ -179,9 +179,6 @@ public class farmTombEasy extends zone {
 			// Load elevator
 			//createShadowElevatorAroundPlayer(true);
 		}
-		
-		// Sort chunks.
-		chunk.sortChunks();
 		
 	}
 	

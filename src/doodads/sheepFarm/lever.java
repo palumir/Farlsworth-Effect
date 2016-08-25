@@ -127,7 +127,7 @@ public class lever extends chunk {
 		sound s = new sound(leverPull);
 		s.start();
 		on = true;
-		chunkImage = typeReference.getChunkImage(1, 0);
+		setChunkImage(typeReference.getChunkImage(1, 0));
 	}
 	
 	// Close the gate
@@ -135,6 +135,6 @@ public class lever extends chunk {
 		sound s = new sound(leverPull);
 		s.start();
 		on = false;
-		chunkImage = typeReference.getChunkImage(0, 0);
+		setChunkImage(typeReference.getChunkImage(0, 0));
 	}
 }

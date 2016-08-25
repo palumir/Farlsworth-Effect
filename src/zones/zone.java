@@ -5,10 +5,12 @@ import java.util.ArrayList;
 import UI.tooltipString;
 import drawing.drawnObject;
 import sounds.music;
+import terrain.chunk;
+import terrain.groundTile;
 import units.player;
 import utilities.intTuple;
 import utilities.saveState;
-import zones.farmLand.farmTombEasy;
+import zones.farmLand.farmTomb;
 import zones.farmLand.forest;
 import zones.farmLand.sheepFarm;
 import zones.farmLand.spiderCave;
@@ -53,6 +55,11 @@ public abstract class zone {
 	public void loadZone() {
 		currentZone = this;
 		loadSpecificZoneStuff();
+		
+		// Sort chunks.
+		chunk.sortChunks();
+		groundTile.sortGroundTiles();
+		
 		loadedOnce = true;
 		zoneLoaded = true;
 	}
@@ -101,7 +108,7 @@ public abstract class zone {
 		
 		// Sheep Farms
 		sheepFarm.setZone(new sheepFarm());
-		farmTombEasy.setZone(new farmTombEasy());
+		farmTomb.setZone(new farmTomb());
 		forest.setZone(new forest());
 		spiderCave.setZone(new spiderCave());
 	}

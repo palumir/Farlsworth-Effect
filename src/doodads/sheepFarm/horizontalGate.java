@@ -273,7 +273,7 @@ public class horizontalGate extends chunk {
 		
 		// Open gate.
 		setPassable(true);
-		chunkImage = typeReference.getChunkImage(1, 0);
+		setChunkImage(typeReference.getChunkImage(1, 0));
 		open = true;
 	}
 	
@@ -290,7 +290,7 @@ public class horizontalGate extends chunk {
 		
 		// Close the gate.
 		setPassable(false);
-		chunkImage = typeReference.getChunkImage(0, 0);
+		setChunkImage(typeReference.getChunkImage(0, 0));
 		open = false;
 	}
 }

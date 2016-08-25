@@ -35,23 +35,17 @@ public class redWolf extends wolf {
 	private int DEFAULT_HP = 6;
 	
 	// Default jump speed
-	private static int DEFAULT_UNIT_JUMPSPEED = 12;
+	private static int DEFAULT_UNIT_JUMPSPEED = 1;
 
 	// Spawn claw stuff
 	protected int DEFAULT_SLASH_DAMAGE = 1;
 	
 	// Beta stats
-	private static float DEFAULT_MOVESPEED_BETA = 3.5f;
+	private static float DEFAULT_MOVESPEED_BETA = 2f;
 	private static float DEFAULT_CLAW_ATTACK_EVERY_BASE_BETA = 2.5f;
 	private static float DEFAULT_SPAWN_CLAW_PHASE_TIME_BETA = 1f;
 	private static int DEFAULT_FOLLOW_UNTIL_RANGE_BASE_BETA = 90;
 	private static int DEFAULT_FOLLOW_UNTIL_RANGE_RANDOM_BETA = 15;
-
-	// Alpha stats
-	private static float DEFAULT_MOVESPEED_ALPHA = 3.5f;
-	private static float DEFAULT_CLAW_ATTACK_EVERY_BASE_ALPHA = 2f;
-	private static float DEFAULT_SPAWN_CLAW_PHASE_TIME_ALPHA = 1.25f;
-	private static int DEFAULT_FOLLOW_UNTIL_RANGE_BASE_ALPHA = 15;
 	
 	////////////////
 	/// FIELDS ///
@@ -113,10 +107,18 @@ public class redWolf extends wolf {
 		animation trailRight = new animation("trailRight", leftRightSpriteSheet.getAnimation(9), 0, 0, 1);
 		getAnimations().addAnimation(trailRight);
 		
+		// Attacking up animation.
+		animation trailUp = new animation("trailUp", upDownSpriteSheet.getAnimation(6), 0, 0, 1);
+		getAnimations().addAnimation(trailUp);
+		
+		// Attacking down animation.
+		animation trailDown = new animation("trailDown", upDownSpriteSheet.getAnimation(5), 0, 0, 1);
+		getAnimations().addAnimation(trailDown);
+		
 		changeCombat();
+		setJumpSpeed(1);
 		
 		setCanSlash(true);
-		setCanSlashSummon(true);
 		
 	}
 	
@@ -148,13 +150,10 @@ public class redWolf extends wolf {
 		if(currClaw != null) currClaw.destroy();
 	}
 	
-	// Already hurt
-	private boolean alreadyHurt = false;
-	
 	// Trail stuff.
 	private float trailInterval = 0.0125f;
 	private long lastTrail = 0;
-	private int trailLength = 15;
+	private int trailLength = 10;
 	private ArrayList<intTuple> trail;
 	private ArrayList<BufferedImage> trailImage;
 	
@@ -174,8 +173,7 @@ public class redWolf extends wolf {
 						trailImage.remove(0);
 						trail.remove(0);
 					}
-					if(getCurrentAnimation().getName().contains("Left")) trailImage.add(getAnimations().getAnimation("trailLeft").getSprites().get(0));
-					else trailImage.add(getAnimations().getAnimation("trailRight").getSprites().get(0));
+					trailImage.add(getAnimations().getAnimation("trail" + getFacingDirection()).getSprites().get(0));
 					trail.add(new intTuple(getIntX(),getIntY()));
 				}
 				
@@ -284,6 +282,7 @@ public class redWolf extends wolf {
 		int spawnX = x;
 		int spawnY = y;
 		currClaw = new clawMarkRed(spawnX,spawnY,0);
+		faceTowardThing(currClaw);
 	}
 	
 	@Override
@@ -299,13 +298,6 @@ public class redWolf extends wolf {
 
 		// Alpha
 		else {
-			
-			// Claw attack stuff.
-			clawAttackEveryBase = DEFAULT_CLAW_ATTACK_EVERY_BASE_ALPHA;
-			setClawAttackEvery(clawAttackEveryBase);
-			setSpawnClawPhaseTime(DEFAULT_SPAWN_CLAW_PHASE_TIME_ALPHA);
-			setMoveSpeed(DEFAULT_MOVESPEED_ALPHA);
-			followUntilRange = DEFAULT_FOLLOW_UNTIL_RANGE_BASE_ALPHA;
 		}
 	}
 
@@ -347,6 +339,14 @@ public class redWolf extends wolf {
 		// Attacking right animation.
 		animation trailRight = new animation("trailRight", leftRightSpriteSheet.getAnimation(9), 0, 0, 1);
 		getAnimations().addAnimation(trailRight);
+	
+		// Attacking up animation.
+		animation trailUp = new animation("trailUp", upDownSpriteSheet.getAnimation(6), 0, 0, 1);
+		getAnimations().addAnimation(trailUp);
+		
+		// Attacking down animation.
+		animation trailDown = new animation("trailDown", upDownSpriteSheet.getAnimation(5), 0, 0, 1);
+		getAnimations().addAnimation(trailDown);
 	}
 
 	@Override

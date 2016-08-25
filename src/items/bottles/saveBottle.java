@@ -9,12 +9,12 @@ import items.bottle;
 import items.item;
 import units.player;
 
-public class normalBottle extends bottle {
+public class saveBottle extends bottle {
 	////////////////
 	/// DEFAULTS ///
 	////////////////
 	// Bottle name
-	public static String DEFAULT_BOTTLE_NAME = "Bottle";
+	public static String DEFAULT_BOTTLE_NAME = "Save Bottle";
 	
 	// Bottle stats.
 	public static int DEFAULT_MAX_CHARGES = 3;
@@ -37,7 +37,7 @@ public class normalBottle extends bottle {
 	///////////////
 	
 	// In inventory.
-	public normalBottle() {
+	public saveBottle() {
 		super(DEFAULT_BOTTLE_NAME);
 		
 		// Weapon stats.
@@ -45,7 +45,7 @@ public class normalBottle extends bottle {
 	}
 	
 	// On floor.
-	public normalBottle(int x, int y) {
+	public saveBottle(int x, int y) {
 		super(DEFAULT_BOTTLE_NAME,x,y);
 		
 		// Weapon stats.

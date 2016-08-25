@@ -22,12 +22,12 @@ import effects.interfaceEffects.interactBlurb;
 import interactions.interactBox;
 import items.bottle;
 import items.inventory;
-import items.weapon;
 import main.main;
 import modes.mode;
 import modes.platformer;
 import modes.topDown;
 import sounds.music;
+import terrain.groundTile;
 import units.developer.developer;
 import utilities.levelSave;
 import utilities.saveState;
@@ -53,16 +53,6 @@ public class player extends unit {
 	// Platformer and topDown default adjustment
 	private static int DEFAULT_PLATFORMER_ADJUSTMENT_Y = 6;
 	private static int DEFAULT_TOPDOWN_ADJUSTMENT_Y = 20;
-	
-	// Fist defaults.
-	protected static int DEFAULT_ATTACK_DAMAGE = 1;
-	protected static float DEFAULT_ATTACK_TIME = 0.4f;
-	protected static int DEFAULT_ATTACK_WIDTH = 35;
-	protected static int DEFAULT_ATTACK_LENGTH = 11;
-	protected static float DEFAULT_BACKSWING = 0.1f;
-	protected static float DEFAULT_CRIT_CHANCE = 0f;
-	protected float DEFAULT_CRIT_DAMAGE = 1f;
-	protected static float DEFAULT_ATTACK_VARIABILITY = 0f; // How much the range of hits is. 5% both ways.
 	
 	// Default name.
 	private static String DEFAULT_PLAYER_NAME = "IanRetard";
@@ -128,15 +118,11 @@ public class player extends unit {
 	private inventory playerInventory = new inventory();
 	
 	// Combat
-	private weapon equippedWeapon = null;
 	private bottle equippedBottle = null;
 	
 	// Energy level/shielding
 	private float maxEnergy = 5; 
 	private float energy = 5; 
-	
-	// Holding space to attack?
-	private boolean holdingSpace = false;
 	
 	// Telepathy
 	//private boolean canLiftMultipleThings = false;
@@ -202,8 +188,6 @@ public class player extends unit {
 	
 	// Set animations
 	public void setNoWeaponStats() {
-		// Equip the weapon.
-		setEquippedWeapon(null);
 		
 		// Damage
 		setAttackDamage(DEFAULT_ATTACK_DAMAGE);
@@ -502,7 +486,6 @@ public class player extends unit {
 		//telepathy();
 		showPossibleInteractions();
 		isPlayerDead();
-		potentiallyAttack();
 		dealWithEnergyStuff();
 	}
 	
@@ -521,14 +504,14 @@ public class player extends unit {
 		}
 	}
 	
-	// Attack?
-	public void potentiallyAttack() {
-		if(holdingSpace) attack();
-	}
-	
 	// Deal with player being alive or dead.
 	@Override
 	public void aliveOrDead() {
+		
+		// Kill the player if they've left the map.
+		if(hasLeftMap()) {
+			if(isKillable()) killPlayer();
+		}
 		
 		// Dead
 		if(getHealthPoints() <= 0) {
@@ -623,7 +606,6 @@ public class player extends unit {
 		int playerY = 0;
 		String newFacingDirection = null;
 		inventory loadedInventory = new inventory(); // empty inventory
-		weapon loadedEquippedWeapon = null;
 		bottle loadedEquippedBottle = null;
 		
 		// If no zone is given and we don't have the save file. First time running game. 
@@ -642,7 +624,6 @@ public class player extends unit {
 			playerY = s.getPlayerY();
 			newFacingDirection = s.getFacingDirection();
 			loadedInventory = s.getPlayerInventory();
-			loadedEquippedWeapon = s.getEquippedWeapon();
 			loadedEquippedBottle = s.getEquippedBottle();
 		}
 		
@@ -661,8 +642,6 @@ public class player extends unit {
 				drawnObject.objects.add(loadedInventory);
 				
 				// These will be carried over.
-				if(alreadyPlayer.getEquippedWeapon() != null)
-				loadedEquippedWeapon = (weapon) alreadyPlayer.getEquippedWeapon().getItemRef();
 				if(alreadyPlayer.getEquippedBottle() != null)
 				loadedEquippedBottle = (bottle) alreadyPlayer.getEquippedBottle().getItemRef();
 			}
@@ -678,7 +657,6 @@ public class player extends unit {
 		// Set our fields
 		thePlayer.setFacingDirection(newFacingDirection);
 		thePlayer.setPlayerInventory(loadedInventory);
-		if(loadedEquippedWeapon!=null) loadedEquippedWeapon.equip();
 		if(loadedEquippedBottle!=null) loadedEquippedBottle.equip();
 		
 		// Set that we have loaded the player once.
@@ -698,7 +676,6 @@ public class player extends unit {
 	// Make the current player stop doing things
 	public void stop() {
 		stopMove("all");
-		stopAttack();
 		stopJump();
 	}
 	
@@ -787,11 +764,6 @@ public class player extends unit {
 						startMove("down");
 					}
 				}
-			
-				// Player presses bar key
-				if(k.getKeyCode() == KeyEvent.VK_SPACE) {
-					startAttack();
-				}
 				
 				// Player presses bar key
 				if(k.getKeyCode() == KeyEvent.VK_ENTER) {
@@ -832,11 +804,6 @@ public class player extends unit {
 			stopMove("right");
 		}
 		
-		// Player presses right key.
-		if(k.getKeyCode() == KeyEvent.VK_SPACE) { 
-			stopAttack();
-		}
-		
 		// Player presses up key, presumably to jump!
 		if(k.getKeyCode() == KeyEvent.VK_W) { 
 			stopJump();
@@ -848,17 +815,6 @@ public class player extends unit {
 			stopMove("down");
 		}
 	}
-	
-	// Start attack
-	public void startAttack() {
-		holdingSpace = true;
-	}
-	
-	// Stop attack.
-	public void stopAttack() {
-		holdingSpace = false;
-	}
-	
 	// Remove the weapon.
 	public void unequipBottle() {
 		
@@ -1059,14 +1015,6 @@ public class player extends unit {
 
 	public void setPlayerName(String playerName) {
 		this.playerName = playerName;
-	}
-
-	public weapon getEquippedWeapon() {
-		return (weapon)equippedWeapon;
-	}
-
-	public void setEquippedWeapon(weapon equippedWeapon) {
-		this.equippedWeapon = equippedWeapon;
 	}
 
 	public inventory getPlayerInventory() {

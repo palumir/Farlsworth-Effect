@@ -13,7 +13,6 @@ import interactions.quest;
 import items.bottle;
 import items.inventory;
 import items.item;
-import items.weapon;
 import units.player;
 
 public class saveState implements Serializable {
@@ -48,7 +47,6 @@ public class saveState implements Serializable {
 	
 	// Player inventory
 	private inventory playerInventory;
-	private weapon equippedWeapon;
 	private bottle equippedBottle;
 	
 	// Level and exp
@@ -93,7 +91,6 @@ public class saveState implements Serializable {
 				s.setPlayerY(currPlayer.getIntY());
 				s.setFacingDirection(currPlayer.getFacingDirection());
 				s.setPlayerInventory(currPlayer.getPlayerInventory());
-				s.setEquippedWeapon(currPlayer.getEquippedWeapon());
 				s.setEquippedBottle(currPlayer.getEquippedBottle());
 				s.setCurrentQuests(quest.getCurrentQuests());
 				
@@ -150,10 +147,6 @@ public class saveState implements Serializable {
 						objectStream.writeObject(currItem.getSaveBooleans().getBool(j));
 					}
 				}
-				
-				// Write the equipped items to save file.
-				if(s.getEquippedWeapon() == null) objectStream.writeObject("None!");
-				else objectStream.writeObject(s.getEquippedWeapon().getName());
 				
 				// Write equipped bottle to file.
 				if(s.getEquippedBottle() == null) {
@@ -262,10 +255,6 @@ public class saveState implements Serializable {
 			}
 			s.setPlayerInventory(newInventory);
 			
-			// Write the equipped items to save file.
-			String equippedWeaponName = (String)objectStream.readObject();
-			s.setEquippedWeapon((weapon)item.getItemByName(equippedWeaponName));
-			
 			// Write equipped bottle to file.
 			String equippedBottleName = (String)objectStream.readObject();
 			s.setEquippedBottle(((bottle)item.getItemByName(equippedBottleName)));
@@ -346,14 +335,6 @@ public class saveState implements Serializable {
 
 	public void setFacingDirection(String facingDirection) {
 		this.facingDirection = facingDirection;
-	}
-
-	public weapon getEquippedWeapon() {
-		return equippedWeapon;
-	}
-
-	public void setEquippedWeapon(weapon equippedWeapon) {
-		this.equippedWeapon = equippedWeapon;
 	}
 
 	public inventory getPlayerInventory() {

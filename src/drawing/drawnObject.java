@@ -295,6 +295,11 @@ public abstract class drawnObject {
 		return returnList;
 	}
 	
+	// Check if a drawn object contains a point
+	public boolean contains(int x, int y) {
+		return x > this.getIntX() && x < this.getIntX() + this.getWidth() && y > this.getIntY() && y < this.getIntY() + this.getHeight();
+	}
+	
 	// Get whether a object is within radius
 	public boolean isWithinRadius(int x, int y, int radius) {
 	    int circleDistanceX = Math.abs(x - (this.getIntX() + this.getWidth()/2));
@@ -371,8 +376,7 @@ public abstract class drawnObject {
 	
 	// Get angle between (in degrees) 
 	public int getAngleBetween(drawnObject d) {
-		double currentDegree = mathUtils.angleBetweenTwoPointsWithFixedPoint(d.getIntX()+d.getWidth()/2, d.getIntY() + d.getHeight()/2, 
-				getIntX()+getWidth()/2, getIntY() + getHeight()/2-100, 
+		double currentDegree = mathUtils.getAngleBetween(d.getIntX()+d.getWidth()/2, d.getIntY() + d.getHeight()/2, 
 				getIntX()+getWidth()/2, getIntY() + getHeight()/2);
 		if(currentDegree < 0) currentDegree += 360 + currentDegree;
 		return (int)currentDegree;

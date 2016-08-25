@@ -10,10 +10,13 @@ public class background {
 	private static Color defaultBackgroundColor = Color.BLACK;
 	
 	// BufferedImage
-	private static BufferedImage gameBackground = null;
+	private BufferedImage backgroundImage = null;
+	
+	// Current background
+	public static background currentBackground = null;
 	
 	// Paint the background
-	public static void paintBackground(Graphics2D g2, int width, int height) {
+	public void paintBackground(Graphics2D g2, int width, int height) {
 		if(getGameBackground() == null) {
 			g2.setColor(getColor());
 			g2.fillRect(0, 0, (int)(gameCanvas.getScaleX()*width), (int)(gameCanvas.getScaleY()*height));
@@ -25,6 +28,12 @@ public class background {
 		}
 		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
 				RenderingHints.VALUE_ANTIALIAS_ON);
+	}
+	
+	// Make new background
+	public background(BufferedImage b) {
+		backgroundImage = b;
+		currentBackground = this;
 	}
 	
 	// ************************************
@@ -44,10 +53,15 @@ public class background {
 	}
 
 	public static BufferedImage getGameBackground() {
-		return gameBackground;
+		return currentBackground.backgroundImage;
 	}
 
 	public static void setGameBackground(BufferedImage gameBackground) {
-		background.gameBackground = gameBackground;
+		new background(gameBackground);
+	}
+	
+	// Update background
+	public void update() {
+		
 	}
 }

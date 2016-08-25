@@ -35,6 +35,9 @@ public class darkHole extends effect {
 	public static int DEFAULT_TOPDOWN_WIDTH = 120/2;
 	public static int DEFAULT_TOPDOWN_ADJUSTMENT_Y = 0;
 	
+	// Leniency
+	public static int leniency = 13;
+	
 	////////////////
 	/// DEFAULTS ///
 	////////////////
@@ -119,9 +122,9 @@ public class darkHole extends effect {
 		setCurrentAnimation(startAnimation);
 		
 		// Set sound.
-		sound s = new sound(effectSound2);
+		/*sound s = new sound(effectSound2);
 		s.setPosition(getIntX(), getIntY(), sound.DEFAULT_SOUND_RADIUS);
-		s.start();
+		s.start();*/
 		
 		// Make adjustments on hitbox if we're in topDown.
 		setHeight(getDefaultHeight());
@@ -150,7 +153,7 @@ public class darkHole extends effect {
 		if(j>=4) {
 			
 			// If someone is in the explosion radius, hurt.
-			ArrayList<unit> hurtUnits = unit.getUnitsInRadius(getIntX() + getWidth()/2, getIntY() + getHeight()/2, getWidth()/2);
+			ArrayList<unit> hurtUnits = unit.getUnitsInRadius(getIntX() + getWidth()/2, getIntY() + getHeight()/2, getWidth()/2 - leniency);
 			if(hurtUnits != null && time.getTime() - lastHurt > hurtEvery*1000) {
 				lastHurt = time.getTime();
 				for(int i = 0; i < hurtUnits.size(); i++) {

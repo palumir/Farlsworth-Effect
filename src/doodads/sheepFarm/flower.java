@@ -50,68 +50,9 @@ public class flower extends chunk {
 	/// METHODS ///
 	///////////////
 	
-	// Create interact sequence
-	public interactBox makeNormalInteractSequence() {
-		
-		// Placeholder for each individual textSeries.
-		textSeries s;
-					
-		// Start of conversation.
-		textSeries startOfConversation = null;
-		
-		if(flowerType == 0) {
-			startOfConversation = new textSeries(null, "A freshly bloomed dandelion. It's a dazzling hue of yellow.");
-			startOfConversation.setEnd();
-		}
-		if(flowerType == 1) {
-			startOfConversation = new textSeries(null, "A rose. Red, like the blood of your enemies.");
-			startOfConversation.setEnd();
-		}
-		if(flowerType == 2) {
-			startOfConversation = new textSeries(null, "An old, withered dandelion. It's ready to die.");
-			startOfConversation.setEnd();
-		}
-		if(flowerType == 3) {
-			startOfConversation = new textSeries(null, "A rose. Blue.");
-			startOfConversation.setEnd();
-		}
-		if(flowerType == 4) {
-			startOfConversation = new textSeries(null, "A bright red prickly weed.");
-			s = startOfConversation.addChild("Pull it out", "You pull out the weed by the root.");
-			s = s.addChild(null, "One less weed to step on in the world.");
-			s.setEnd();
-			s = startOfConversation.addChild("Leave it alone", "The fate of the plant will be decided by nature.");
-			s.setEnd();
-		}
-		
-		return new interactBox(startOfConversation, this);
-	}
-	
-	// Interact stuff.
-	public void doInteractStuff() {
-		if(flowerType == 4 && interactSequence != null && interactSequence.getTheText().isEnd() &&
-				interactSequence.getTheText().getTextOnPress() != null &&
-				interactSequence.getTheText().getTextOnPress().equals("One less weed to step on in the world.")) {
-			
-			// Play sound
-			sound s = new sound(bush.clearBush);
-			s.start();
-			
-			// Destroy
-			this.destroy();
-		}
-	}
-	
 	// Update
 	@Override
 	public void update() {
-		doInteractStuff();
-	}
-	
-	// Interact with object. Should be over-ridden.
-	public void interactWith() { 
-		interactSequence = makeNormalInteractSequence();
-		interactSequence.toggleDisplay();
 	}
 	
 	// Constructor
@@ -130,7 +71,6 @@ public class flower extends chunk {
 		
 		// Set fields.
 		flowerType = i;
-		setInteractable(true);
 		setPassable(true);
 		backgroundDoodad = true;
 	}

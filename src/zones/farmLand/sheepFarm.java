@@ -27,13 +27,12 @@ import doodads.sheepFarm.verticalFence;
 import doodads.sheepFarm.well;
 import drawing.background;
 import drawing.spriteSheet;
+import drawing.backgrounds.rotatingBackground;
 import effects.effectTypes.fire;
 import interactions.event;
 import items.bottle;
 import items.item;
-import items.bottles.normalBottle;
-import items.weapons.dagger;
-import items.weapons.sword;
+import items.bottles.saveBottle;
 import modes.topDown;
 import sounds.music;
 import sounds.sound;
@@ -235,7 +234,7 @@ public class sheepFarm extends zone {
 		return chunkList;
 	}
 	
-	private static BufferedImage DEFAULT_ZONE_BACKGROUND = spriteSheet.getSpriteFromFilePath("images/terrain/backgrounds/hogle.png");
+	private static BufferedImage DEFAULT_ZONE_BACKGROUND = spriteSheet.getSpriteFromFilePath("images/terrain/backgrounds/spinningFarmBackground.png");
 	
 	/////////////////
 	// ZONE LOADER //
@@ -247,7 +246,7 @@ public class sheepFarm extends zone {
 		topDown.setMode();
 		
 		// Set background
-		//background.setGameBackground(DEFAULT_ZONE_BACKGROUND);
+		new rotatingBackground(DEFAULT_ZONE_BACKGROUND);
 		
 		// Load zone events.
 		loadZoneEvents();
@@ -277,6 +276,9 @@ public class sheepFarm extends zone {
 		// Create area above flower farm
 		//createAreaAboveFlowerFarm();
 		
+		// Create items
+		createItems();
+		
 		// Create graveyard
 		createGraveYard();
 		
@@ -288,9 +290,6 @@ public class sheepFarm extends zone {
 		
 		// Spawn units
 		//spawnUnits();
-		
-		// Sort chunks.
-		chunk.sortChunks();
 		
 		// Play zone music.
 		 music.startMusic(zoneMusic); 
@@ -310,6 +309,14 @@ public class sheepFarm extends zone {
 		else {
 			farlsworthFence = null;
 		}
+	}
+	
+	// Spawn items
+	public void createItems() {
+		
+		// Spawn bottle.
+		bottle saveBottle = new saveBottle(-665,-3102);
+		
 	}
 	
 	// Create terrain
@@ -911,7 +918,7 @@ public class sheepFarm extends zone {
 	public void createGraveYard()  {
 		
 		// Tomb
-		new tomb(2305+2,-3944-85,0, farmTombEasy.getZone(),57,-6,"Right");
+		new tomb(2305+2,-3944-85,0, farmTomb.getZone(),57,-6,"Right");
 		
 		// Fence around tomb
 		/*spawnFence(null, 2216,-3990,2216,-3820); // Left fence

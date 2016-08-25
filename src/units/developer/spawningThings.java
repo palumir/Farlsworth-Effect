@@ -6,9 +6,11 @@ import java.lang.reflect.Constructor;
 
 import UI.tooltipString;
 import drawing.drawnObject;
+import terrain.chunk;
 import terrain.groundTile;
 import units.unitCommand;
 import units.unitCommands.positionedCommand;
+import utilities.utility;
 
 public class spawningThings {
 	
@@ -128,6 +130,13 @@ public class spawningThings {
 						(int)(lastMousePos.getY()),
 						0});
 				drawnObject d = (drawnObject)(object);
+				int numI = d.getObjectSpriteSheet().getAnimation(0).size();
+				int randomI = utility.RNG.nextInt(numI);
+				
+				// Set the variation
+				((chunk)(d)).setVariationI(randomI);
+				((chunk)(d)).setChunkImage((d.getObjectSpriteSheet().getAnimation(0).get(randomI)));
+				
 				d.setDoubleX(d.getDoubleX() - d.getWidth()/2);
 				d.setDoubleY(d.getDoubleY() - d.getHeight()/2);
 			}

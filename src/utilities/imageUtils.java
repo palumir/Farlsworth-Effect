@@ -19,7 +19,7 @@ public class imageUtils {
 		g.drawLine(x1, y1, x2, y2);
 		
 		// Draw the arrow parts
-		int angle = mathUtils.getAngleBetween(x2,y2,x1,y1);
+		int angle = mathUtils.getAngleBetween(x2,y2,x1,y1) + 90;
 		int arrowPartX = (int) (x2 + (25)*Math.cos(Math.toRadians(angle-30))); 
 		int arrowPartY = (int) (y2 + (25)*Math.sin(Math.toRadians(angle-30)));
 		g.drawLine(x2, y2, arrowPartX, arrowPartY);

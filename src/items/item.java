@@ -10,12 +10,9 @@ import drawing.gameCanvas;
 import drawing.spriteSheet;
 import effects.effect;
 import effects.interfaceEffects.floatingString;
-import items.bottles.normalBottle;
+import items.bottles.saveBottle;
 import items.keys.farmGateKey;
 import items.keys.farmKey;
-import items.weapons.dagger;
-import items.weapons.sword;
-import items.weapons.torch;
 import sounds.sound;
 import units.player;
 import utilities.saveBooleanList;
@@ -150,14 +147,9 @@ public abstract class item extends drawnObject {
 	
 	// Initiate so we actually have a list of items.
 	public static void initiate() {
-		
-		// Weapons
-		if(dagger.weaponRef == null) dagger.weaponRef = new dagger();
-		if(sword.weaponRef == null) sword.weaponRef = new sword();
-		if(torch.weaponRef == null) torch.weaponRef = new torch();
 
 		// Bottles.
-		if(normalBottle.bottleRef == null) normalBottle.bottleRef = new normalBottle();
+		if(saveBottle.bottleRef == null) saveBottle.bottleRef = new saveBottle();
 		
 		// Keys.
 		if(farmKey.keyRef == null) farmKey.keyRef = new farmKey();

@@ -86,6 +86,7 @@ public class shadowDude extends unit {
 		setTargetable(false);
 		setStuck(true);
 		collisionOn = false;
+		killsPlayer = true;
 		
 		// Make adjustments on hitbox if we're in topDown.
 		// Set dimensions
@@ -112,9 +113,10 @@ public class shadowDude extends unit {
 	
 	// How lenient are we in hurting people?
 	// How many units of space do we reduce the radius of pain by?
-	private int leniency = 9;
+	private static int leniency = 9;
 	
-	public void hurtPeople() {
+	@Override
+	public void hurtPeople(int leniency) {
 		// If someone is in the explosion radius, hurt.
 			player currPlayer = player.getPlayer();
 			if(currPlayer.isWithin(this.getIntX() + leniency, this.getIntY() + leniency, this.getIntX() + this.getWidth() - leniency, this.getIntY() + this.getHeight() - leniency) 
@@ -125,9 +127,7 @@ public class shadowDude extends unit {
 
 	// Does nothing yet.
 	public void updateUnit() {
-		
-		hurtPeople();
-		
+	
 		// Illumination stuff
 		illuminated = isIlluminated();
 		if(illuminated) {

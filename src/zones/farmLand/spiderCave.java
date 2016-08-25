@@ -11,7 +11,6 @@ import doodads.sheepFarm.caveEnterance;
 import drawing.background;
 import drawing.spriteSheet;
 import interactions.event;
-import items.weapons.torch;
 import modes.platformer;
 import sounds.music;
 import terrain.chunk;
@@ -109,9 +108,6 @@ public class spiderCave extends zone {
 		// Spawn area.
 		createSpawnArea();
 		
-		// Sort chunks.
-		chunk.sortChunks();
-		
 		// Play zone music.
 		music.startMusic(zoneMusic);
 	}
@@ -163,9 +159,6 @@ public class spiderCave extends zone {
 		c = new webSmall(472,273,2);
 		c = new webSmall(640,225,1);
 		c = new webSmall(727,402,3);
-		
-		// Spawn the torch.
-		torch t = new torch(1036,-100);
 		
 		// First patch of spiders
 		u = new poisonSpider(601,-99);

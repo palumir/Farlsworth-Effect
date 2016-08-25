@@ -22,7 +22,7 @@ public class chunk extends drawnObject {
 	/// DEFAULTS ///
 	////////////////
 
-	private static Comparator<chunk> chunkComparator = new Comparator<chunk>() {
+	public static Comparator<chunk> chunkComparator = new Comparator<chunk>() {
 	       public int compare(chunk c1, chunk c2) {
 	         int result = Double.compare(c1.getIntX(), c2.getIntX());
 	         if ( result == 0 ) {
@@ -38,7 +38,7 @@ public class chunk extends drawnObject {
 	public static CopyOnWriteArrayList<chunk> impassableChunks;
 	
 	// Largest chunk size.
-	private static int largestChunkWidth = 0;
+	protected static int largestChunkWidth = 0;
 	private static int largestChunkHeight = 0;
 	
 	// Default passable boolean
@@ -53,7 +53,7 @@ public class chunk extends drawnObject {
 	private int variationJ;
 	
 	// The image of the chunk.
-	protected BufferedImage chunkImage;
+	private BufferedImage chunkImage;
 	
 	// Is the chunk passable or impassable?
 	private boolean passable;
@@ -73,7 +73,7 @@ public class chunk extends drawnObject {
 		int randomFirstRow = utility.RNG.nextInt(c.getChunkTypeSpriteSheet().getSheetWidth()/c.getChunkTypeSpriteSheet().getSpriteWidth());
 		
 		// Set our image field and chunktype
-		chunkImage = c.getChunkImage(randomFirstRow, 0);
+		setChunkImage(c.getChunkImage(randomFirstRow, 0));
 		
 		// Set variation I and J
 		setVariationI(randomFirstRow);
@@ -92,7 +92,7 @@ public class chunk extends drawnObject {
 		setVariationJ(j);
 
 		// Set our image field and chunkType
-		if(c.getChunkTypeSpriteSheet() != null) chunkImage = c.getChunkImage(i, j);
+		if(c.getChunkTypeSpriteSheet() != null) setChunkImage(c.getChunkImage(i, j));
 		
 		// Load other chunk stuff (same for both constructors)
 		loadChunkStuff(c);
@@ -109,9 +109,9 @@ public class chunk extends drawnObject {
 			impassableChunks.add(this);
 			
 			// If the zone is loaded, it's a new chunk, we need to resort this list.
-			if(zone.getCurrentZone() != null && zone.getCurrentZone().isZoneLoaded()) {
+			//if(zone.getCurrentZone() != null && zone.getCurrentZone().isZoneLoaded()) {
 				sortChunks();
-			}
+			//}
 		}
 		
 		// Remember our chunks.
@@ -376,6 +376,7 @@ public class chunk extends drawnObject {
 	// Initiate chunks
 	public static void initiate() {
 		allChunks = new ArrayList<chunk>();
+		groundTile.initiate();
 	}
 	
 	// Ignite. Only does something for flammable chunks.
@@ -385,7 +386,7 @@ public class chunk extends drawnObject {
 	
 	// Sort chunks.
 	public static void sortChunks() {
-		Collections.sort(impassableChunks, chunkComparator);
+		if(impassableChunks != null) Collections.sort(impassableChunks, chunkComparator);
 	}
 	
 	////////////////////////////////////
@@ -447,6 +448,10 @@ public class chunk extends drawnObject {
 
 	public void setVariationJ(int variationJ) {
 		this.variationJ = variationJ;
+	}
+
+	public void setChunkImage(BufferedImage chunkImage) {
+		this.chunkImage = chunkImage;
 	}
 	
 }

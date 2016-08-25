@@ -19,7 +19,6 @@ import interactions.quest;
 import items.bottle;
 import items.inventory;
 import items.item;
-import items.weapon;
 import terrain.chunk;
 import terrain.groundTile;
 import units.player;

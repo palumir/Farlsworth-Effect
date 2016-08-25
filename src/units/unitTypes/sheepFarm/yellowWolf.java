@@ -32,7 +32,7 @@ public class yellowWolf extends wolf {
 	private static int DEFAULT_UNIT_JUMPSPEED = 9;
 	
 	// Beta stats
-	private static float DEFAULT_MOVESPEED_BETA = 3.5f;
+	private static float DEFAULT_MOVESPEED_BETA = 2f;
 	private static float DEFAULT_CLAW_ATTACK_EVERY_BASE_BETA = 3.5f;
 	private static float DEFAULT_SPAWN_CLAW_PHASE_TIME_BETA = 0.5f;
 	private static int DEFAULT_FOLLOW_UNTIL_RANGE_BASE_BETA = 90;

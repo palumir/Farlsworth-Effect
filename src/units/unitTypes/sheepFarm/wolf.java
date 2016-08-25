@@ -26,26 +26,18 @@ public abstract class wolf extends unit {
 		////////////////
 	
 		// Platformer real dimensions
-		public static int DEFAULT_PLATFORMER_HEIGHT = 32;
-		public static int DEFAULT_PLATFORMER_WIDTH = 32;
+		public static int DEFAULT_PLATFORMER_HEIGHT = 25;
+		public static int DEFAULT_PLATFORMER_WIDTH = 25;
 		public static int DEFAULT_PLATFORMER_ADJUSTMENT_Y = 0;
 		public static int DEFAULT_SPRITE_ADJUSTMENT_X = 0;
 		
 		// TopDown real dimensions
-		public static int DEFAULT_TOPDOWN_HEIGHT = 32;
-		public static int DEFAULT_TOPDOWN_WIDTH = 32;
+		public static int DEFAULT_TOPDOWN_HEIGHT = 25;
+		public static int DEFAULT_TOPDOWN_WIDTH = 25;
 		public static int DEFAULT_TOPDOWN_ADJUSTMENT_Y = 0;
 		
 		// Default don't attack for
 		public static float DEFAULT_DONT_ATTACK_FOR = 0f;
-		
-		// How close to attack?
-		protected int DEFAULT_AGGRO_RADIUS = 250;
-		protected int DEFAULT_DEAGGRO_RADIUS = 1000;
-		
-		// Damage stats
-		protected static int DEFAULT_ATTACK_WIDTH = 300; // DEFAULT_ATTACK_WIDTH/2 to the right, DEFAULT_ATTACK_WIDTH/2 to the left.
-		protected static int DEFAULT_ATTACK_LENGTH = 300; // DEFAULT_ATTACK_LENGTH in front of him.
 		
 		// Sounds
 		protected static String howl = "sounds/effects/animals/wolfHowl.wav";
@@ -139,12 +131,16 @@ public abstract class wolf extends unit {
 		public wolf(unitType wolfType, int newX, int newY) {
 			super(wolfType, newX, newY);
 			
+			// If topDown, take off collision
+			if(mode.getCurrentMode().equals("topDown")) collisionOn = false;
+			
 			upDownSpriteSheet = getUpDownSpriteSheet();
 			
 			leftRightSpriteSheet = getLeftRightSpriteSheet();
 			
 			// Set wolf combat stuff.
 			setCombatStuff();
+			killsPlayer = true;
 			
 			// Set animations
 			addAnimations();
@@ -167,6 +163,14 @@ public abstract class wolf extends unit {
 			// Jumping left animation.
 			animation jumpingLeft = new animation("jumpingLeft", leftRightSpriteSheet.getAnimation(6), 4, 4, 1);
 			unitTypeAnimations.addAnimation(jumpingLeft);
+			
+			// Jumping down animation.
+			animation jumpingDown = new animation("jumpingDown", upDownSpriteSheet.getAnimation(3), 2, 2, 1);
+			unitTypeAnimations.addAnimation(jumpingDown);
+			
+			// Jumping up animation.
+			animation jumpingUp = new animation("jumpingUp", upDownSpriteSheet.getAnimation(3), 7, 7, 1);
+			unitTypeAnimations.addAnimation(jumpingUp);
 			
 			// Jumping right animation.
 			animation jumpingRight = new animation("jumpingRight", leftRightSpriteSheet.getAnimation(2), 4, 4, 1);
@@ -211,27 +215,6 @@ public abstract class wolf extends unit {
 			// Set animations.
 			setAnimations(unitTypeAnimations);
 		
-		}
-		
-		// Hurt people stuff.
-		long lastHurt = 0;
-		int damage = 1;
-		float slowTo = 0.1f;
-		float hurtEvery = 0.05f;
-		
-		// How lenient are we in hurting people?
-		// How many units of space do we reduce the radius of pain by?
-		private int leniency = 7;
-		
-		public void hurtPeople() {
-			// If someone is in the explosion radius, hurt.
-			if(time.getTime() - lastHurt > hurtEvery*1000) {
-				player currPlayer = player.getPlayer();
-				lastHurt = time.getTime();
-				if(currPlayer.isWithin(this.getIntX() + leniency, this.getIntY() + leniency, this.getIntX() + this.getWidth() - leniency, this.getIntY() + this.getHeight() - leniency)) {
-					currPlayer.hurt(damage, 1);
-				}
-			}
 		}
 		
 		// Combat defaults.
@@ -418,15 +401,6 @@ public abstract class wolf extends unit {
 			s.setPosition(getIntX(), getIntY(), sound.DEFAULT_SOUND_RADIUS);
 			s.start();
 			
-			// Set facing direction.
-			if(this.getIntX() - c.getIntX() < 0) {
-				setFacingDirection("Right");
-			}
-			else {
-				setFacingDirection("Left");
-			}
-		
-			
 			// Jump there
 			jumpingToX = c.getIntX() + c.getWidth()/2 - getWidth()/2;
 			jumpingToY = c.getIntY() + c.getHeight()/2 - getHeight()/2;
@@ -504,9 +478,6 @@ public abstract class wolf extends unit {
 			
 			// If player is in radius, follow player, attacking.
 			player currPlayer = player.getPlayer();
-			
-			// Hurt people
-			hurtPeople();
 			
 			// Claw attack
 			dealWithClawAttacks();

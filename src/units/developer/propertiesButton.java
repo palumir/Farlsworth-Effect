@@ -144,6 +144,14 @@ public class propertiesButton {
 					developer.DEFAULT_BUTTON_WIDTH,
 					developer.DEFAULT_BUTTON_HEIGHT);
 			editPropertiesButton.addChild(editMoveSpeedButton);
+			
+			// Jumpspeed.
+			button editJumpSpeedButton = new button("Jumpspeed","editProperties.jumpSpeed",
+					developer.editorMode.getIntX()+200,
+					developer.editorMode.getIntY()+3*developer.DEFAULT_BUTTON_HEIGHT*4/3 + editPropertiesButton.getChildren().size()*developer.DEFAULT_BUTTON_HEIGHT*4/3,
+					developer.DEFAULT_BUTTON_WIDTH,
+					developer.DEFAULT_BUTTON_HEIGHT);
+			editPropertiesButton.addChild(editJumpSpeedButton);
 		}
 	}
 	
@@ -155,6 +163,17 @@ public class propertiesButton {
 			for(int i = 0; i < saveThings.size(); i++) {
 				if(saveThings.get(i) instanceof unit) { 
 					((unit) saveThings.get(i)).setMoveSpeed((float)newSpeed);
+					((unit) saveThings.get(i)).setRiseRun();
+				}
+			}
+		}
+		
+		// jumpSpeed
+		if(b.contains("editProperties.jumpSpeed")) {
+			double newSpeed = Double.parseDouble(value);
+			for(int i = 0; i < saveThings.size(); i++) {
+				if(saveThings.get(i) instanceof unit) { 
+					((unit) saveThings.get(i)).setJumpSpeed((float)newSpeed);
 					((unit) saveThings.get(i)).setRiseRun();
 				}
 			}
@@ -250,6 +269,7 @@ public class propertiesButton {
 	}
 	
 	public static void makeUnitPopUpBoxes(button b) {
+		
 		// moveSpeed
 		if(b.getButtonID().equals("editProperties.moveSpeed")) {
 			ArrayList<drawnObject> objects = developer.getSelectedUnits();
@@ -260,6 +280,18 @@ public class propertiesButton {
 			
 			saveThing = drawnObject.getTopLeftFrom(saveThings);
 			propertyEditBox p = new propertyEditBox(b.getButtonID(),b.getButtonID(), ((unit)saveThing).getMoveSpeed() + "");
+		}
+		
+		// jumpSpeed
+		if(b.getButtonID().equals("editProperties.jumpSpeed")) {
+			ArrayList<drawnObject> objects = developer.getSelectedUnits();
+			saveThings = new ArrayList<drawnObject>(developer.selectedThings);
+			if(objects != null && objects.size() > 0 && developer.containsUnitCommand()) {
+				saveThings.removeAll(objects);
+			}
+			
+			saveThing = drawnObject.getTopLeftFrom(saveThings);
+			propertyEditBox p = new propertyEditBox(b.getButtonID(),b.getButtonID(), ((unit)saveThing).getJumpSpeed() + "");
 		}
 	}
 	

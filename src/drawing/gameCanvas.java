@@ -178,7 +178,7 @@ public class gameCanvas extends JComponent {
 		super.paintComponent(g2);
 
 		// Paint the background.
-		background.paintBackground(g2, getDefaultWidth(), getDefaultHeight());
+		if(background.currentBackground != null) background.currentBackground.paintBackground(g2, getDefaultWidth(), getDefaultHeight());
 
 		// Paint all drawable things.
 		drawnObject.drawObjects(g);

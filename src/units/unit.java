@@ -21,6 +21,7 @@ import effects.interfaceEffects.floatingString;
 import modes.mode;
 import sounds.sound;
 import terrain.chunk;
+import terrain.groundTile;
 import terrain.region;
 import units.developer.developer;
 import units.unitCommands.commandList;
@@ -107,6 +108,9 @@ public class unit extends drawnObject  {
 	protected boolean pathFindingStuck = false;
 	
 	// Combat
+	// Does the unit kill the player?
+	protected boolean killsPlayer = false;
+	
 	// Has the unit
 	protected boolean unitIsDead = false;
 	protected long unitDiedAt = 0;
@@ -284,6 +288,7 @@ public class unit extends drawnObject  {
 	@Override
 	public void update() {	
 		if(!unitIsDead) {
+			hurtPeople(leniency);
 			doCommands();
 			gravity();
 			jump();
@@ -294,6 +299,24 @@ public class unit extends drawnObject  {
 		}
 		updateUnit();
 		if(getCurrentAnimation() != null) getCurrentAnimation().playAnimation();
+	}
+	
+	// Hurting people leniency
+	public static int leniency = 9;
+	
+	// Hurt people, if we do.
+	public void hurtPeople(int leniency) {
+		if(killsPlayer) {
+			player currPlayer = player.getPlayer();
+			if(currPlayer.isWithin(this.getIntX() + leniency, this.getIntY() + leniency, this.getIntX() + this.getWidth() - leniency, this.getIntY() + this.getHeight() - leniency)) {
+				currPlayer.hurt(1, 1);
+			}
+		}
+	}
+	
+	// Has the unit left the map?
+	public boolean hasLeftMap() {
+		return (!groundTile.isOnGroundTile(this) && mode.getCurrentMode().equals("topDown"));
 	}
 	
 	// Check if united is illuminated
@@ -309,7 +332,12 @@ public class unit extends drawnObject  {
 	
 	// Face toward player
 	public void faceTowardPlayer() {
-		int angle = this.getAngleBetween(player.getPlayer());
+		faceTowardThing(player.getPlayer());
+	}
+	
+	// Face toward thing
+	public void faceTowardThing(drawnObject d) {
+		int angle = this.getAngleBetween(d);
 		if(angle >= 45 && angle <= 45+90) {
 			this.facingDirection = "Right";
 		}
@@ -559,7 +587,7 @@ public class unit extends drawnObject  {
 			this.knockSpeed = knockSpeed;
 			
 			// Calculate the new X and Y we need to knock them to, based off radius.
-			double currentDegree = mathUtils.angleBetweenTwoPointsWithFixedPoint(getIntX()+getWidth()/2, getIntY() + getHeight()/2, knockX, knockY, knockX, knockY);
+			double currentDegree = mathUtils.getAngleBetween(getIntX()+getWidth()/2, getIntY() + getHeight()/2, knockX, knockY);
 			knockToX = (int) (getIntX() + (knockSpeed*overTime*1000)*Math.cos(Math.toRadians(currentDegree))); 
 			knockToY = (int) (getIntY() + (knockSpeed*overTime*1000)*Math.sin(Math.toRadians(currentDegree)));
 		}
@@ -575,7 +603,7 @@ public class unit extends drawnObject  {
 			this.knockSpeed = knockSpeed;
 			
 			// Calculate the new X and Y we need to knock them to, based off radius.
-			double currentDegree = mathUtils.angleBetweenTwoPointsWithFixedPoint(getIntX()+getWidth()/2, getIntY() + getHeight()/2, knockX, knockY, knockX, knockY);
+			double currentDegree = mathUtils.getAngleBetween(getIntX()+getWidth()/2, getIntY() + getHeight()/2, knockX, knockY);
 			knockToX = (int) (getIntX() + (knockSpeed*overTime*1000)*Math.cos(Math.toRadians(currentDegree))); 
 			knockToY = (int) (getIntY() + (knockSpeed*overTime*1000)*Math.sin(Math.toRadians(currentDegree)));
 		}
@@ -1267,15 +1295,17 @@ public class unit extends drawnObject  {
 				
 				// Check if it collides with a chunk in the x or y plane.
 				intTuple xyCollide = chunk.collidesWith(this, (int)(getDoubleX() + moveX), (int)(getDoubleY() + moveY));
+				//intTuple leftMap = groundTile.collidesWithOffMap(this, (int)(getDoubleX() + moveX), (int)(getDoubleY() + moveY));
 				intTuple leftRegion = region.leftRegion(this, (int)(getDoubleX() + moveX),(int)(getDoubleY() + moveY));
-				if((xyCollide.x != 0 || leftRegion.x != 0)) {
+				if(xyCollide.x != 0 || leftRegion.x != 0 /*|| leftMap.x != 0*/) {
 					pathFindingStuck = true;
 					if(xyCollide.x!=0) actualMoveX = 0;
 					if(leftRegion.x!=0) actualMoveX = 0;
+					//if(leftMap.x!=0) actualMoveX = 0;
 				}
 				
 				// Lots more to check for platformer mode.
-				if((xyCollide.y != 0 || leftRegion.y != 0)) {
+				if(xyCollide.y != 0 || leftRegion.y != 0 /*|| leftMap.y != 0*/) {
 					
 					// Yes, we're stuck.
 					pathFindingStuck = true;
@@ -1291,11 +1321,13 @@ public class unit extends drawnObject  {
 						if(moveY <= 0) {
 							touchUp();
 						}
+					
 					}
 					
 					// Don't move the object.
 					if(xyCollide.y!=0) actualMoveY = 0;
 					if(leftRegion.y!=0) actualMoveY = 0;
+					//if(leftMap.y != 0) actualMoveY = 0;
 				}
 				
 				// If we are moving in the y direction, but are not touching down.

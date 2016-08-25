@@ -106,6 +106,8 @@ public class developer extends player {
 		// Collision
 		collisionOn = false;
 		setStuck(true);
+		targetable = false;
+		setKillable(false);
 		
 		// Give a million hp
 		healthPoints = Integer.MAX_VALUE;

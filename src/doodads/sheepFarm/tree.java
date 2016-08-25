@@ -195,6 +195,8 @@ public class tree extends chunk {
 			setHeight(DEFAULT_CHUNK_HEIGHT);
 			setWidth(DEFAULT_CHUNK_WIDTH);
 		}
+		//showHitBox();
+		//setDrawSprite(false);
 		setShowInteractable(false);
 		setInteractable(true);
 		setPassable(false);

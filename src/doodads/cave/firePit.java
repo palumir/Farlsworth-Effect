@@ -5,7 +5,6 @@ import java.awt.image.BufferedImage;
 import drawing.animation.animation;
 import interactions.interactBox;
 import interactions.textSeries;
-import items.weapons.torch;
 import modes.mode;
 import sounds.sound;
 import terrain.chunk;
@@ -88,14 +87,6 @@ public class firePit extends chunk {
 	
 	// Interact stuff.
 	public void doInteractStuff() {
-		if(interactSequence != null 
-				&& interactSequence.getTheText().getButtonText() != null
-				&& interactSequence.getTheText().getButtonText().equals("Light torch")
-				&& interactSequence.getTheText().isEnd()
-				&& interactSequence.isDisplayOn()
-				&& !((torch)torch.weaponRef).isLit()) {
-			((torch)torch.weaponRef).light();
-		}
 	}
 	
 	// Update

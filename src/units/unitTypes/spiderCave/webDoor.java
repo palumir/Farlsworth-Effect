@@ -7,7 +7,6 @@ import drawing.animation.animationPack;
 import effects.effect;
 import effects.effectTypes.bloodSquirt;
 import effects.interfaceEffects.floatingString;
-import items.weapons.torch;
 import modes.mode;
 import units.player;
 import units.unit;
@@ -105,14 +104,6 @@ public class webDoor extends unit {
 	// Take damage. Ouch!
 	@Override
 	public boolean hurt(int damage, float crit) {
-		if(player.getPlayer().getEquippedWeapon() != null &&
-				player.getPlayer().getEquippedWeapon() instanceof torch
-				&& ((torch)player.getPlayer().getEquippedWeapon()).isLit()) {
-			setKillable(true);
-			damage = damage*3214;
-			((torch)player.getPlayer().getEquippedWeapon()).unLight();
-			return true;
-		}
 		
 		if(isKillable()) {
 			if(healthPoints - crit*damage < 0) healthPoints = 0;
