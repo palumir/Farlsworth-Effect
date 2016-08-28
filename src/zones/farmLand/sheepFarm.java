@@ -58,6 +58,7 @@ import units.unitTypes.sheepFarm.sheep;
 import units.unitTypes.sheepFarm.wolf;
 import units.unitTypes.sheepFarm.yellowWolf;
 import utilities.intTuple;
+import utilities.levelSave;
 import utilities.saveState;
 import utilities.time;
 import utilities.utility;
@@ -74,6 +75,7 @@ public class sheepFarm extends zone {
 	
 	// Zone music.
 	private static String zoneMusic = "sounds/music/farmLand/sheepFarm/forest.wav";
+	private static String zoneMusicDistorted = "sounds/music/farmLand/sheepFarm/forestDistorted.wav";
 	
 	// Static fence so farlsworth can be attached to it.
 	public static ArrayList<chunk> farlsworthFence;
@@ -91,6 +93,7 @@ public class sheepFarm extends zone {
 	public static event uCanSaveAtWater;
 	public static event stormInProgress;
 	public static event isOnFire;
+	public static event distortedMusicPlaying;
 	
 	// Storm booleans
 	public static boolean stormStarted = false;
@@ -258,6 +261,9 @@ public class sheepFarm extends zone {
 			storm s = new storm();
 		}
 		
+		// Load the level save.
+		//loadFromSaveForTesting();
+		
 		// Spawn Farlsworth and fence
 		//spawnFarlsworthAndFence();
 		
@@ -291,9 +297,26 @@ public class sheepFarm extends zone {
 		// Spawn units
 		//spawnUnits();
 		
-		// Play zone music.
-		 music.startMusic(zoneMusic); 
+		if(distortedMusicPlaying.isCompleted()) {
+			music.startMusic(zoneMusicDistorted); 
+		}
+		else {
+			
+			// Deal with possible saving issue
+			if(music.currMusic != null && !music.currMusic.getFileName().contains(zoneMusic)) {
+				music.endAll();
+			}
+			
+			// Play regular zone music. 
+			music.startMusic(zoneMusic); 
+		}
 		
+	}
+	
+	// Load from save
+	public void loadFromSaveForTesting() {
+		levelSave.loadSaveState("sheepFarmLevel.save");
+		spawnFarlsworthAndFence();
 	}
 	
 	//////////////////////
@@ -918,7 +941,7 @@ public class sheepFarm extends zone {
 	public void createGraveYard()  {
 		
 		// Tomb
-		new tomb(2305+2,-3944-85,0, farmTomb.getZone(),57,-6,"Right");
+		new tomb(-3177, -7371,0, farmTomb.getZone(),57,-6,"Right");
 		
 		// Fence around tomb
 		/*spawnFence(null, 2216,-3990,2216,-3820); // Left fence
@@ -1198,6 +1221,9 @@ public class sheepFarm extends zone {
 		
 		// Is the zone on fire?
 		isOnFire = new event("forestIsOnFire");
+		
+		// Is distorted music playing?
+		distortedMusicPlaying = new event("sheepFarmIsDistortedMusicPlaying");
 	}
 	
 	// Deal with the first well we encounters.
@@ -1217,19 +1243,31 @@ public class sheepFarm extends zone {
 		}
 		
 		// Fog at black flower area
-		if(stormInProgress != null && !stormInProgress.isCompleted() && currPlayer != null && currPlayer.isWithin(2439,-918,2914,-790)) {
+		if(stormInProgress != null && !stormInProgress.isCompleted() && currPlayer != null && currPlayer.isWithin(-1719,-5298,-1314,-4818)) {
 			if(zoneFog == null) zoneFog = new fog();
-			zoneFog.fadeTo(stormFogLevel, 2f);
+			zoneFog.fadeTo(stormFogLevel, 1f);
 			stormInProgress.setCompleted(true);
 			stormStartTime = time.getTime();
 			startStormFromFog = true;
+			saveState.setQuiet(true);
+			saveState.createSaveState();
+			saveState.setQuiet(false);
+		}
+		
+		// Distorted revealed?
+		if(distortedMusicPlaying != null && !distortedMusicPlaying.isCompleted()&& currPlayer != null && currPlayer.isWithin(-863,-3191,-460,-2953)) {
+			
+			// Change music to distorted
+			music.endAll();
+			music.startMusic(zoneMusicDistorted);
+			distortedMusicPlaying.setCompleted(true);
 		}
 	}
 	
 	// Storm stuff
 	long stormStartTime = 0;
 	boolean startStormFromFog = false;
-	int howManySecondsUntilStorm = 5;
+	int howManySecondsUntilStorm = 2;
 	
 	// Start storm from fog
 	public void startStormFromFog() {
@@ -1237,7 +1275,7 @@ public class sheepFarm extends zone {
 			if(time.getTime() - stormStartTime > howManySecondsUntilStorm*1000) {
 				startStormFromFog = false;
 				stormStarted = true;
-				storm s = new storm(7f);
+				storm s = new storm(3f);
 			}
 		}
 	}

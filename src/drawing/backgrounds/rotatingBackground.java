@@ -30,7 +30,7 @@ public class rotatingBackground extends background {
 		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
 				RenderingHints.VALUE_ANTIALIAS_ON);
 
-		degree += 0.1f;
+		degree += 0.05f;
 	}
 	
 }

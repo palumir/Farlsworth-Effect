@@ -159,10 +159,11 @@ public class unit extends drawnObject  {
 	private boolean inAir = true;
 	
 	// Movement buffs/debuffs
-	private ArrayList<movementBuff> movementBuffs = new ArrayList<movementBuff>();
+	private ArrayList<movementBuff> movementBuffs;
 	
 	// Movement
-	protected float moveSpeed = DEFAULT_UNIT_MOVESPEED;
+	public float moveSpeed = DEFAULT_UNIT_MOVESPEED;
+	protected float currentMoveSpeed = 0;
 	protected float oldMoveSpeed = moveSpeed;
 	protected float baseMoveSpeed = DEFAULT_UNIT_MOVESPEED;
 	protected float baseMoveDuration = 0.75f;
@@ -172,6 +173,11 @@ public class unit extends drawnObject  {
 	public boolean movingUp = false;
 	protected String facingDirection = DEFAULT_FACING_DIRECTION;
 	protected boolean collisionOn = true;
+	
+	// Movement for slippery stuff
+	private float movementAcceleration = 0;
+	private float momentumX = 0;
+	private float momentumY = 0;
 	
 	// Quests
 	private chunk questIcon = null;
@@ -316,7 +322,7 @@ public class unit extends drawnObject  {
 	
 	// Has the unit left the map?
 	public boolean hasLeftMap() {
-		return (!groundTile.isOnGroundTile(this) && mode.getCurrentMode().equals("topDown"));
+		return zone.getCurrentZone() != null && zone.getCurrentZone().isZoneLoaded() && (!groundTile.isOnGroundTile(this) && mode.getCurrentMode().equals("topDown"));
 	}
 	
 	// Check if united is illuminated
@@ -395,7 +401,6 @@ public class unit extends drawnObject  {
 				// Only move to the next command when applicable.
 				if(currentCommand.isIssued()) {
 				
-					
 					// If we have stopped moving. This command is done.
 					if(!isMoving()) {
 						getAllCommands().remove(0);
@@ -901,27 +906,7 @@ public class unit extends drawnObject  {
 	// Take damage. Ouch!
 	public boolean hurt(int damage, float crit) {
 		if(targetable) {
-			if(shielding && ((player)this).getEnergy() > 0) {
-				if(this instanceof player) {
-					float hitDamage = 1;
-					if(((player)this).getEnergy() <= 0) {
-						return forceHurt(damage,crit);
-					}
-					else if(((player)this).getEnergy() - hitDamage < 0) {
-						float difference = (float) ((hitDamage - ((player)this).getEnergy())/hitDamage);
-						((player)this).setShielding(false);
-						((player)this).setEnergy(0);
-						forceHurt((int) (damage*difference),crit);
-						return false;
-					}
-					else ((player)this).setEnergy((((player)this).getEnergy() - hitDamage));
-					return false;
-				}
-				return false;
-			}
-			else {
-				return forceHurt(damage,crit);
-			}
+			return forceHurt(damage,crit);
 		}
 		else {
 			return false;
@@ -1137,30 +1122,97 @@ public class unit extends drawnObject  {
 		
 		// Apply movement debuffs/buffs
 		float buffedMoveSpeed = moveSpeed;
-		ArrayList<Class> appliedEffects = new ArrayList<Class>();
-		for(int i = 0; i < movementBuffs.size(); i++) {
-			if(!appliedEffects.contains(movementBuffs.get(i).getClass())) {
-				buffedMoveSpeed *= movementBuffs.get(i).getMovementPercentage();
-				appliedEffects.add(movementBuffs.get(i).getClass());
+		//currentMoveSpeed += movementAcceleration;
+		//if(currentMoveSpeed > moveSpeed || movementAcceleration == 0) currentMoveSpeed = moveSpeed;
+		
+		if(movementBuffs != null) {
+			ArrayList<Class> appliedEffects = new ArrayList<Class>();
+			
+			for(int i = 0; i < movementBuffs.size(); i++) {
+				if(!appliedEffects.contains(movementBuffs.get(i).getClass())) {
+					buffedMoveSpeed *= movementBuffs.get(i).getMovementPercentage();
+					appliedEffects.add(movementBuffs.get(i).getClass());
+				}
 			}
 		}
 		
-		float moveByX = buffedMoveSpeed;
-		float moveByY = buffedMoveSpeed;
-	
-		// Basic movement.
-		float moveX = 0;
-		float moveY = 0;
-		
 		// Actual movement.
-		if(isMovingLeft()) moveX -= moveByX;
-		if(isMovingRight()) moveX += moveByX;
+		if(isMovingLeft()) {
+			
+			// If we have no acceleration, use perfect movespeed.
+			if(getMovementAcceleration() == 0) setMomentumX(-buffedMoveSpeed);
+			
+			// Otherwise, increment momentum.
+			else setMomentumX(getMomentumX() - getMovementAcceleration());
+			
+			// Disallow surpassing minimum momentum.
+			if(getMomentumX() < -buffedMoveSpeed) setMomentumX(-buffedMoveSpeed);
+		}
+		else if(isMovingRight()) {
+			
+			// If we have no acceleration, perfect movespeed.
+			if(getMovementAcceleration() == 0) setMomentumX(buffedMoveSpeed);
+			
+			// Otherwise, increment momentum.
+			else setMomentumX(getMomentumX() + getMovementAcceleration());
+			
+			// Set it above a certain threshold.
+			if(getMomentumX() > buffedMoveSpeed) setMomentumX(+buffedMoveSpeed);
+		}
+		else {
+			
+			// If we have no acceleration, set their movespeed immediately to zero.
+			if(getMovementAcceleration() == 0)  setMomentumX(0);
+			
+			else {
+				// Reset x momentum slowly (make them slide).
+				if(getMomentumX() < 0) setMomentumX(getMomentumX() + getMovementAcceleration()*5/8);
+				if(getMomentumX() > 0) setMomentumX(getMomentumX() - getMovementAcceleration()*5/8);
+				if(Math.abs(getMomentumX()) < getMovementAcceleration()*5/8) setMomentumX(0);
+			}
+		}
 		
 		// Only do these ones if we're in topDown mode.
 		if(mode.getCurrentMode() == "topDown" || isStuck()) {
-			if(isMovingUp()) moveY -= moveByY;
-			if(isMovingDown()) moveY += moveByY;
+			if(isMovingUp()) {
+				
+				// Set momentum on no acceleration.
+				if(getMovementAcceleration() == 0) setMomentumY(-buffedMoveSpeed);
+				
+				// Increment momentum.
+				else setMomentumY(getMomentumY() - getMovementAcceleration());
+				
+				// Set momentum below a threshold.
+				if(getMomentumY() < -buffedMoveSpeed) setMomentumY(-buffedMoveSpeed);
+			}
+			else if(isMovingDown()) {
+				
+				// Set movespeed if we have no acceleration.
+				if(getMovementAcceleration() == 0) setMomentumY(buffedMoveSpeed);
+				
+				// Otherwise, increment momentum.
+				else setMomentumY(getMomentumY() + getMovementAcceleration());
+				
+				// Set momentum if it's too high.
+				if(getMomentumY() > buffedMoveSpeed) setMomentumY(+buffedMoveSpeed);
+			}
+			else {
+				// If we have no acceleration, set their movespeed immediately to zero.
+				if(getMovementAcceleration() == 0)  setMomentumY(0);
+				
+				else {
+					
+					// Make them slide on the Y axis.
+					if(getMomentumY() < 0) setMomentumY(getMomentumY() + getMovementAcceleration()*5/8);
+					if(getMomentumY() > 0) setMomentumY(getMomentumY() - getMovementAcceleration()*5/8);
+					if(Math.abs(getMomentumY()) < getMovementAcceleration()*5/8) setMomentumY(0);
+				}
+			}
 		}
+		
+		// Basic movement.
+		float moveX = getMomentumX();
+		float moveY = getMomentumY();
 		
 		// Deal with direction facing.
 		if(isMovingLeft() && isMovingUp()) setFacingDirection("Left");
@@ -1295,13 +1347,14 @@ public class unit extends drawnObject  {
 				
 				// Check if it collides with a chunk in the x or y plane.
 				intTuple xyCollide = chunk.collidesWith(this, (int)(getDoubleX() + moveX), (int)(getDoubleY() + moveY));
-				//intTuple leftMap = groundTile.collidesWithOffMap(this, (int)(getDoubleX() + moveX), (int)(getDoubleY() + moveY));
 				intTuple leftRegion = region.leftRegion(this, (int)(getDoubleX() + moveX),(int)(getDoubleY() + moveY));
 				if(xyCollide.x != 0 || leftRegion.x != 0 /*|| leftMap.x != 0*/) {
 					pathFindingStuck = true;
 					if(xyCollide.x!=0) actualMoveX = 0;
 					if(leftRegion.x!=0) actualMoveX = 0;
-					//if(leftMap.x!=0) actualMoveX = 0;
+					
+					// If we hit something stop momentum
+					if(actualMoveX == 0) setMomentumX(0);
 				}
 				
 				// Lots more to check for platformer mode.
@@ -1327,7 +1380,9 @@ public class unit extends drawnObject  {
 					// Don't move the object.
 					if(xyCollide.y!=0) actualMoveY = 0;
 					if(leftRegion.y!=0) actualMoveY = 0;
-					//if(leftMap.y != 0) actualMoveY = 0;
+					
+					// If we hit something stop momentum
+					if(actualMoveX == 0) setMomentumY(0);
 				}
 				
 				// If we are moving in the y direction, but are not touching down.
@@ -1913,6 +1968,7 @@ public class unit extends drawnObject  {
 	}
 
 	public ArrayList<movementBuff> getMovementBuffs() {
+		if(movementBuffs == null) movementBuffs = new ArrayList<movementBuff>();
 		return movementBuffs;
 	}
 
@@ -2028,6 +2084,30 @@ public class unit extends drawnObject  {
 
 	public void setCanSlashSummon(boolean canSlashSummon) {
 		this.canSlashSummon = canSlashSummon;
+	}
+
+	public float getMovementAcceleration() {
+		return movementAcceleration;
+	}
+
+	public void setMovementAcceleration(float movementAcceleration) {
+		this.movementAcceleration = movementAcceleration;
+	}
+
+	public float getMomentumX() {
+		return momentumX;
+	}
+
+	public void setMomentumX(float momentumX) {
+		this.momentumX = momentumX;
+	}
+
+	public float getMomentumY() {
+		return momentumY;
+	}
+
+	public void setMomentumY(float momentumY) {
+		this.momentumY = momentumY;
 	}
 	
 }

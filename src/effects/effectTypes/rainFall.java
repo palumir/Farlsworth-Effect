@@ -1,10 +1,14 @@
 package effects.effectTypes;
 
+import drawing.gameCanvas;
 import drawing.spriteSheet;
 import drawing.spriteSheet.spriteSheetInfo;
 import effects.effect;
 import effects.effectType;
 import modes.mode;
+import units.player;
+import utilities.time;
+import utilities.utility;
 
 public class rainFall extends effect {
 	
@@ -22,6 +26,10 @@ public class rainFall extends effect {
 	public static int DEFAULT_TOPDOWN_WIDTH = 64;
 	public static int DEFAULT_TOPDOWN_ADJUSTMENT_Y = 0;
 	
+	// Fall speed default
+	public static int FALL_VALUE_X = 5;
+	public static int FALL_VALUE_Y = 9;
+	
 	////////////////
 	/// DEFAULTS ///
 	////////////////
@@ -33,7 +41,7 @@ public class rainFall extends effect {
 	private static String DEFAULT_EFFECT_SPRITESHEET = "images/effects/" + DEFAULT_EFFECT_NAME + ".png";
 	
 	// Duration
-	private static float DEFAULT_ANIMATION_DURATION = 0.09f;
+	private static float DEFAULT_ANIMATION_DURATION = 0.4f;
 	
 	// The actual type.
 	private static effectType theEffectType =
@@ -73,6 +81,19 @@ public class rainFall extends effect {
 	///////////////////////////
 	/// GETTERS AND SETTERS ///
 	///////////////////////////
+	
+	// Move the rain as if it's falling.
+	@Override
+	public void doSpecificEffectStuff() {
+		setDoubleY(getDoubleY() + FALL_VALUE_Y);
+		setDoubleX(getDoubleX() + FALL_VALUE_X);
+	}
+	
+	// Respond to destroy by creating a rain explode effect.
+	@Override 
+	public void respondToDestroy() {
+		rainSplash r = new rainSplash(this.getIntX() + this.getWidth()/2,this.getIntY() + this.getHeight()-10);
+	}
 	
 	// Get default width.
 	public static int getDefaultWidth() {

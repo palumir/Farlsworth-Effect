@@ -141,29 +141,21 @@ public class storm extends atmosphericEffect {
 		float fadePercent = ((time.getTime() - stormStart + 1)/(fadeOver*1000));
 		if(fadePercent > 1) fadePercent = 1;
 		if(fadeOver == 0) fadePercent = 1;
-		
-		// Splashes.
-		if(fadePercent > 0.2f) {
-			if(time.getTime() - lastRainSplash > (20 - 19*fadePercent)*howOftenToRainSplash*1000) {
-				lastRainSplash = time.getTime();
-				player currPlayer = player.getPlayer();
-				int middleX = currPlayer.getIntX() + getWidth()/2 - rainSplash.getDefaultWidth()/2;
-				int middleY = currPlayer.getIntY() + getHeight()/2 - rainSplash.getDefaultHeight()/2;
-				int randomX = middleX - (utility.RNG.nextInt(gameCanvas.getDefaultWidth()));
-				int randomY = middleY - (utility.RNG.nextInt(gameCanvas.getDefaultHeight()));
-				rainSplash r = new rainSplash(randomX,randomY);
-			}
-		}
 	
 		// Do rain drops.
-		for(int i = 0; i < 8*fadePercent; i++) {
+		for(int i = 0; i < 2*fadePercent; i++) {
 			player currPlayer = player.getPlayer();
 			int middleX = currPlayer.getIntX() + getWidth()/2 - rainFall.getDefaultWidth()/2;
 			int middleY = currPlayer.getIntY() + getHeight()/2- rainFall.getDefaultHeight()/2;
-			int randomX = middleX - (utility.RNG.nextInt(gameCanvas.getDefaultWidth()));
-			int randomY = middleY - (utility.RNG.nextInt(gameCanvas.getDefaultHeight()));
+			int randomX = middleX - (utility.RNG.nextInt(gameCanvas.getDefaultWidth())) - gameCanvas.getDefaultWidth()*1/6;
+			int randomY = middleY - (utility.RNG.nextInt(gameCanvas.getDefaultHeight())) - gameCanvas.getDefaultHeight()*3/9;
 			rainFall f = new rainFall(randomX,randomY);
 		}
+	}
+	
+	// Is raining?
+	public static boolean isRaining() {
+		return currentStorm != null;
 	}
 	
 	// Delete current fog

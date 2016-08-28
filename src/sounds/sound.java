@@ -19,7 +19,7 @@ public class sound extends Thread {
 	
 	private static ArrayList<sound> allSounds;
 
-    protected String filename;
+    private String fileName;
 
     private Position curPosition;
 
@@ -51,7 +51,7 @@ public class sound extends Thread {
     
     // Copy constructor
     public sound(sound s) {
-    	filename = s.filename;
+    	setFileName(s.getFileName());
     	curPosition = Position.NORMAL;
     	allSounds.add(this);
     	this.x = s.x;
@@ -61,7 +61,7 @@ public class sound extends Thread {
     }
 
     public sound(String wavfile) { 
-        filename = wavfile;
+        setFileName(wavfile);
         curPosition = Position.NORMAL;
         allSounds.add(this);
     }
@@ -89,9 +89,9 @@ public class sound extends Thread {
 
     public void run() { 
 
-        File soundFile = new File(filename);
+        File soundFile = new File(getFileName());
         if (!soundFile.exists()) { 
-            System.err.println("Wave file not found: " + filename);
+            System.err.println("Wave file not found: " + getFileName());
             return;
         } 
 
@@ -133,7 +133,12 @@ public class sound extends Thread {
         auline.start();
         int nBytesRead = 0;
         byte[] abData = new byte[EXTERNAL_BUFFER_SIZE];
-
+        
+        // Get the control. 
+	    FloatControl control = (FloatControl) auline.getControl(FloatControl.Type.MASTER_GAIN);
+        float max = control.getMaximum();
+        float min = control.getMinimum(); // negative values all seem to be zero?
+        
         try { 
             while (!stopRequested && nBytesRead != -1) { 
             	
@@ -153,11 +158,6 @@ public class sound extends Thread {
             		howClosePercentage = 1f;
             	}
             	
-            	// Sound dev testing
-            	/*if(filename.contains("rain")) {
-            		System.out.println(fadeOver);
-            	}*/
-            	
         		// Fade in.
             	float fadePercent = 1;
         		if(fadeOver != 0) fadePercent = ((time.getTime() - soundStart + 1)/(fadeOver*1000));
@@ -174,9 +174,6 @@ public class sound extends Thread {
         		}
     		   
     		    // Adjust volume based on radius.
-    		    FloatControl control = (FloatControl) auline.getControl(FloatControl.Type.MASTER_GAIN);
-    	        float max = control.getMaximum();
-    	        float min = control.getMinimum(); // negative values all seem to be zero?
     	        float range = max - min;
     	        if(howClosePercentage>0) {	   
     	        	control.setValue(min + (range * howClosePercentage * volume * soundVolume * fadePercent));
@@ -192,20 +189,22 @@ public class sound extends Thread {
             e.printStackTrace();
             return;
         } finally { 
-            auline.drain();
-            auline.close();
-            allSounds.remove(this);
             if(isLoop() && !stopRequested) {
             	if(this instanceof music) {
             		music m = new music((music)this);
+            		auline.stop();
             		m.setLoop(true);
             	}
             	else { 
 	            	sound s = new sound(this);
+	            	auline.stop();
 	            	s.setLoop(true);
 	            	s.start();
             	}
             }
+            auline.drain();
+            auline.close();
+            allSounds.remove(this);
         } 
 
     }
@@ -247,5 +246,13 @@ public class sound extends Thread {
 
 	public void setLoop(boolean loop) {
 		this.loop = loop;
+	}
+
+	public String getFileName() {
+		return fileName;
+	}
+
+	public void setFileName(String filename) {
+		this.fileName = filename;
 	}
 }

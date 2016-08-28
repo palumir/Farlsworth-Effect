@@ -2,6 +2,10 @@ package terrain.chunkTypes;
 
 import terrain.generalChunkType;
 import terrain.groundTile;
+import units.player;
+import utilities.time;
+import effects.buff;
+import effects.buffs.slideEffect;
 
 public class wood extends groundTile {
 	
@@ -35,5 +39,20 @@ public class wood extends groundTile {
 	public wood(int newX, int newY, int n) {
 		super(typeReference, newX, newY,n);
 		this.setPassable(true);
+	}
+	
+	// TODO: TESTING SLIDE EFFECT 
+	@Override
+	public void update() {
+		if(player.getPlayer().isWithin(this.getIntX(),this.getIntY(),this.getIntX()+this.getWidth(),this.getIntY()+this.getHeight())) {
+			boolean containsSlide = false;
+			for(int i = 0; i < player.getPlayer().getMovementBuffs().size(); i++) {
+				buff b = player.getPlayer().getMovementBuffs().get(i);
+				if(b instanceof slideEffect) containsSlide = true;
+			}
+			if(!containsSlide) { 
+				slideEffect s = new slideEffect(player.getPlayer()); 
+			}
+		}
 	}
 }

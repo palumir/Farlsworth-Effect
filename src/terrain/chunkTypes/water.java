@@ -51,6 +51,14 @@ public class water extends chunk {
 		backgroundDoodad = true;
 	}
 	
+	// A tile of water. Dumby constructor for adding water.
+	public water(int newX, int newY, int n) {
+		super(typeReference, newX, newY);
+		setInteractable(true);
+		this.setPassable(false);
+		backgroundDoodad = true;
+	}
+	
 	// A water source.
 	public water(generalChunkType typeReference, int newX, int newY) {
 		super(typeReference, newX, newY);

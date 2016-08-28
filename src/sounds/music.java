@@ -55,7 +55,7 @@ public class music extends sound {
 	
 	// Factory constructor
 	public static music startMusic(String s) {
-		if(currMusic != null && currMusic.filename.equals(s)) {
+		if(currMusic != null && currMusic.getFileName().equals(s)) {
 			// Don't play the same music twice, dumby!
 			return null;
 		}

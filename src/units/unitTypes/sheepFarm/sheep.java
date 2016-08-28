@@ -88,7 +88,7 @@ public class sheep extends unit {
 	private int startX = 0;
 	private int startY = 0;
 	private int patrolRadius = DEFAULT_PATROL_RADIUS;
-	private boolean meanders = true;
+	private boolean meanders = false;
 	
 	// AI sounds.
 	private float randomBleet = 0f;

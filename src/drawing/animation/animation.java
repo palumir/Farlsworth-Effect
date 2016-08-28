@@ -23,9 +23,6 @@ public class animation {
 	private float timeToComplete; // in seconds
 	private long startTime; // in milliseconds
 	
-	// Where are we in the animation?
-	private int currentSprite;
-	
 	///////////////
 	/// METHODS ///
 	///////////////
@@ -34,7 +31,6 @@ public class animation {
 	public animation(String newName, ArrayList<BufferedImage> newSprites, int newStartFrame, int newEndFrame, float newTimeToComplete) {
 		
 		// Set the fields.
-		currentSprite = newStartFrame;
 		setTimeToComplete(newTimeToComplete);
 		setStartFrame(newStartFrame);
 		endFrame = newEndFrame;
@@ -46,7 +42,6 @@ public class animation {
 	public animation(animation animation) {
 		
 		// Set the fields.
-		currentSprite = animation.getStartFrame();
 		setTimeToComplete(animation.getTimeToComplete());
 		this.setStartFrame(animation.getStartFrame());
 		endFrame = animation.endFrame;
@@ -85,13 +80,13 @@ public class animation {
 		if(startTime == 0) startTime = time.getTime();
 		int howMuchTimeHasElapsed = (int) (time.getTime() - startTime);
 		int howMuchTimePerFrame = (int) (getTimeToComplete()*1000/((endFrame + 1) - getStartFrame()));
-		int correctFrame = getStartFrame() + howMuchTimeHasElapsed/howMuchTimePerFrame;
-		if(correctFrame>endFrame) {
+		float correctFrame = getStartFrame() + ((float)howMuchTimeHasElapsed)/((float)howMuchTimePerFrame);
+		if(correctFrame >= endFrame+1) {
 			startTime = time.getTime();
 			correctFrame = getStartFrame();
 		}
 		
-		return correctFrame;
+		return (int)correctFrame;
 	}
 
 	public int getStartFrame() {
