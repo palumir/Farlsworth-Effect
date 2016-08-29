@@ -344,17 +344,28 @@ public class unit extends drawnObject  {
 	// Face toward thing
 	public void faceTowardThing(drawnObject d) {
 		int angle = this.getAngleBetween(d);
-		if(angle >= 45 && angle <= 45+90) {
-			this.facingDirection = "Right";
-		}
-		else if(angle >= 45+90 && angle <= 45+90+90) {
-			this.facingDirection = "Down";
-		}
-		else if(angle >= 45+90+90 && angle <= 45+90+90+90) {
-			this.facingDirection = "Left";
+		
+		if(mode.getCurrentMode().equals("topDown") || stuck) {
+			if(angle >= 45 && angle <= 45+90) {
+				this.facingDirection = "Right";
+			}
+			else if(angle >= 45+90 && angle <= 45+90+90) {
+				this.facingDirection = "Down";
+			}
+			else if(angle >= 45+90+90 && angle <= 45+90+90+90) {
+				this.facingDirection = "Left";
+			}
+			else {
+				this.facingDirection = "Up";
+			}
 		}
 		else {
-			this.facingDirection = "Up";
+			if(angle >= 0 && angle <= 180) {
+				this.facingDirection = "Right";
+			}
+			else {
+				this.facingDirection = "Left";
+			}
 		}
 	}
 	

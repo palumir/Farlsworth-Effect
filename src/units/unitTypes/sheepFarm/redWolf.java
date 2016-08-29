@@ -35,7 +35,7 @@ public class redWolf extends wolf {
 	private int DEFAULT_HP = 6;
 	
 	// Default jump speed
-	private static int DEFAULT_UNIT_JUMPSPEED = 1;
+	private static int DEFAULT_UNIT_JUMPSPEED = 8;
 
 	// Spawn claw stuff
 	protected int DEFAULT_SLASH_DAMAGE = 1;

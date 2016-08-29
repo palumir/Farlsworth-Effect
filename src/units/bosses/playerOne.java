@@ -88,10 +88,10 @@ public class playerOne extends boss {
 	public static playerOne currentPlayerOne;
 	
 	// Scenes
-	private boolean shadowElevatorSceneInProgress = false;
+	private boolean shadowBossFightSceneInProgress = false;
 	
 	// Events
-	private event pastShadowElevator;
+	private event pastShadowBossFight;
 	
 	// Have we revealed who this character is?
 	private event playerOneHasBeenRevealed; // Player one is the bad player (in regards to what the hero decides) 
@@ -110,7 +110,7 @@ public class playerOne extends boss {
 		// Start.
 		textSeries startOfConversation = null;
 	
-		if(shadowElevatorSceneInProgress) {
+		if(shadowBossFightSceneInProgress) {
 			
 			// Start of conversation.
 			startOfConversation = new textSeries(null, "Can you feel the shadows slinking around you?");
@@ -143,7 +143,7 @@ public class playerOne extends boss {
 		player currPlayer = player.getPlayer();
 		
 		// Scenes.
-		if(shadowElevatorSceneInProgress) {
+		if(shadowBossFightSceneInProgress) {
 			
 			// Hold the player for a bit.
 			if(sequencePart == 0) {
@@ -206,7 +206,8 @@ public class playerOne extends boss {
 					interactSequence.getTheText().getTextOnPress().contains("understand")) {
 				
 				// Move player.
-				currPlayer.setDoubleX(13232);
+				currPlayer.setDoubleX(13226);
+				currPlayer.setDoubleY(418);
 				
 				// Save.
 				saveState.setQuiet(true);
@@ -227,7 +228,7 @@ public class playerOne extends boss {
 					interactSequence.setUnescapable(false);
 					interactSequence.toggleDisplay();
 				}
-				farmTomb.createShadowElevatorAroundPlayer(true);
+				farmTomb.createShadowBossFightAroundPlayer(true);
 				farmTomb.zoneFog.fadeTo(.3f, .2f);
 				
 				// Chime
@@ -244,7 +245,7 @@ public class playerOne extends boss {
 			if(sequencePart == 11 && time.getTime() - waitStart > waitFor*1000) {
 				
 				// Show eyes of elevator.
-				farmTomb.giveElevatorEyes();
+				farmTomb.giveBossFightEyes();
 
 				// Wait for next chime.
 				waitFor = 3.16f;
@@ -256,7 +257,7 @@ public class playerOne extends boss {
 			if(sequencePart == 12 && time.getTime() - waitStart > waitFor*1000) {
 				
 				// Show eyes of elevator.
-				farmTomb.moveElevatorUp();
+				farmTomb.startBossFight();
 				sequencePart++;
 			}
 		}
@@ -351,12 +352,12 @@ public class playerOne extends boss {
 	public void loadEvents() {
 		
 		// Load events that dictate where the player is in the game.
-		pastShadowElevator = new event("playerOnePastShadowElevator");
+		pastShadowBossFight = new event("playerOnePastShadowBossFight");
 	}
 	
 	// Initiate shadow elevator scene.
-	public static void initiateShadowElevatorScene() {
-		currentPlayerOne.shadowElevatorSceneInProgress = true;
+	public static void initiateShadowBossFightScene() {
+		currentPlayerOne.shadowBossFightSceneInProgress = true;
 	}
 	
 	// React to pain.

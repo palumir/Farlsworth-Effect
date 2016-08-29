@@ -18,6 +18,7 @@ import terrain.chunkTypes.tombEdge;
 import units.player;
 import units.unit;
 import units.bosses.playerOne;
+import units.bosses.shadowOfTheDenmother;
 import units.unitCommands.commandList;
 import units.unitCommands.commands.moveCommand;
 import units.unitCommands.commands.waitCommand;
@@ -42,7 +43,7 @@ public class farmTomb extends zone {
 	
 	// Zone music.
 	private static String zoneMusic = "sounds/music/farmLand/tomb/tomb.wav";
-	private static String zoneMusicFrantic = "sounds/music/farmLand/tomb/tombElevator.wav";
+	private static String zoneMusicFrantic = "sounds/music/farmLand/tomb/tombBossFight.wav";
 	
 	// References we will use throughout.
 	static unit u;
@@ -54,17 +55,17 @@ public class farmTomb extends zone {
 	
 	// Zone events.
 	public static event enteredtombZoneBefore;
-	public static event shadowElevatorStarted;
-	public static boolean shadowElevatorFirstTime;
+	public static event shadowBossFightStarted;
+	public static boolean shadowBossFightFirstTime;
 	
 	// Initiated?
-	public boolean shadowElevatorInitiated = false;
+	public boolean shadowBossFightInitiated = false;
 	
 	// Defaults
 	public static intTuple DEFAULT_SPAWN_TUPLE = new intTuple(0,-50);
 	
-	 // Elevator loaded?
-	static boolean elevatorLoaded = false;
+	 // BossFight loaded?
+	static boolean bossFightLoaded = false;
 	
 	// Zone fog
 	public static fog zoneFog;
@@ -149,8 +150,8 @@ public class farmTomb extends zone {
 	// Load the zone.
 	public void loadSpecificZoneStuff() {
 		
-		// Shadow elevator not loaded
-		elevatorLoaded = false;
+		// Shadow bossFight not loaded
+		bossFightLoaded = false;
 		
 		// Set the mode of the zone of course.
 		platformer.setMode();
@@ -159,8 +160,8 @@ public class farmTomb extends zone {
 		zoneFog = new fog();
 		zoneFog.setTo(0.4f);//fog.setTo(0.75f);
 		
-		// Elevator not initiated
-		shadowElevatorInitiated = false;
+		// BossFight not initiated
+		shadowBossFightInitiated = false;
 		
 		// Load zone events.
 		loadZoneEvents();
@@ -178,10 +179,10 @@ public class farmTomb extends zone {
 		createSpawnArea();
 		
 		// Play zone music.
-		if(!shadowElevatorStarted.isCompleted()) { music.startMusic(zoneMusic);  }
+		if(!shadowBossFightStarted.isCompleted()) { music.startMusic(zoneMusic);  }
 		else {
-			// Load elevator
-			//createShadowElevatorAroundPlayer(true);
+			// Load bossFight
+			//createShadowBossFightAroundPlayer(true);
 		}
 		
 	}
@@ -191,6 +192,9 @@ public class farmTomb extends zone {
 		
 		// Load the villain player.
 		u = new playerOne(Integer.MIN_VALUE,Integer.MIN_VALUE);
+		
+		// Load shadow of denmother
+		//new shadowOfTheDenmother(13387,343);
 	}
 	
 	// Load zone events.
@@ -199,8 +203,8 @@ public class farmTomb extends zone {
 		// Have we entered the dirt before?
 		enteredtombZoneBefore = new event("enteredtombZoneBefore");
 		
-		// Has the elevator started?
-		shadowElevatorStarted = new event("tombZoneShadowElevatorStarted");
+		// Has the BossFight started?
+		shadowBossFightStarted = new event("tombZoneShadowBossFightStarted");
 	}
 	
 	
@@ -801,53 +805,63 @@ public class farmTomb extends zone {
 //////SHADOW ELEVATOR //////
 ///////////////////////////
 	
-	// Shadow elevator
-	public static ArrayList<shadowDude> shadowElevator;
+	// Shadow bossFight
+	public static ArrayList<shadowDude> shadowBossFight;
 	
-	// Give elevator eyes
-	public static void giveElevatorEyes() {
-		for(int i = 0; i < shadowElevator.size(); i++) {
-			shadowElevator.get(i).setEyeless(false);
-			shadowElevator.get(i).setIgnoreIllumination(true);
-			shadowElevator.get(i).setMoveSpeed(0.70f);
+	// Give bossFight eyes
+	public static void giveBossFightEyes() {
+		for(int i = 0; i < shadowBossFight.size(); i++) {
+			shadowBossFight.get(i).setEyeless(false);
+			shadowBossFight.get(i).setIgnoreIllumination(true);
+			shadowBossFight.get(i).setMoveSpeed(0.70f);
 		}
 	}
 	
-	// Move elevator up
-	public static void moveElevatorUp() {
+	// Move bossFight up
+	public static void startBossFight() {
 	
 		// Play frantic music.
 		music m = music.startMusic(zoneMusicFrantic);
 		if(m!=null) m.stopOnDeath = true;
 		 
-		// Move the elevator.
-		for(int i = 0; i < shadowElevator.size(); i++) {
-			shadowElevator.get(i).movingUp = true;
-		}
+		// Move the bossFight.
+		/*for(int i = 0; i < shadowBossFight.size(); i++) {
+			shadowBossFight.get(i).movingUp = true;
+		}*/
 	}
 	
-	// Create shadow dude elevator
-	public static void createShadowElevatorAroundPlayer(boolean eyeless) {
+	// Create shadow dude bossFight
+	public static void createShadowBossFightAroundPlayer(boolean eyeless) {
 		
-		if(!elevatorLoaded) {
+		if(!bossFightLoaded) {
 			// Left wall.
-			shadowElevator = createRectangleOfShadows(13232 - 580, 
-													  1725-30 - 1500, 
-													  13232 - 250,
-													  1725-30 + 600, eyeless);
+			shadowBossFight = createRectangleOfShadows(13232 - 580-25, 
+													  1725-30 - 1500-1000, 
+													  13232 - 250-25,
+													  1725-30 + 600-1000, eyeless);
 			
 			// Floor
-			shadowElevator.addAll(createRectangleOfShadows(13232 - 220-25+1, 
-					  1725-30+200+3-92, 
-					  13232 +250,
-					  1725-30 + 600, eyeless));
+			shadowBossFight.addAll(createRectangleOfShadows(13232 - 220-25+1-25, 
+					  1725-30+200+3-92-1011, 
+					  13232 +250+25,
+					  1725-30 + 600-1000, eyeless));
 			
 			// Right wall.
-			shadowElevator.addAll(createRectangleOfShadows(13232 + 260, 
-													  1725-30 - 1500, 
+			shadowBossFight.addAll(createRectangleOfShadows(13232 + 260+25, 
+													  1725-30 - 1500-1000, 
 													  13232 + 600,
-													  1725-30 + 600, eyeless));
+													  1725-30 + 600-1000, eyeless));
 			
+			// Roof
+			shadowBossFight.addAll(createRectangleOfShadows(13232 - 220-25+1-25, 
+					  1725-30+200+3-92-2011-200, 
+					  13232 +250+25,
+					  1725-30 + 600-2000-200, eyeless));
+			
+			shadowOfTheDenmother s = new shadowOfTheDenmother(13395,343);
+			s.startFight();
+			
+			/*
 			// First platform
 			spawnReloadableTombRect(13232 -80,
 					      1725-30 - 35 - 32-20,
@@ -1217,43 +1231,43 @@ public class farmTomb extends zone {
 				    -1103-300+ 32-20-32-340+20+30,
 					"ground");
 			stairsUp tombExit = new stairsUp(13232 + 64+20-32+130,-1103-300-20-32-340+20-47+30,0,forest.getZone(),-394,-3915,"Left");
-			tombExit.setZ(-1);
+			tombExit.setZ(-1);*/
 			
-			elevatorLoaded = true;
+			bossFightLoaded = true;
 		}
 	}
 	
 	// Deal with the first well we encounters.
 	public void dealWithRegionStuff() {
 		player currPlayer = player.getPlayer();
-		//if(currPlayer != null && currPlayer.isWithin(13232,1000,13232+1500,1800) && shadowElevatorStarted!=null && !shadowElevatorStarted.isCompleted()) {
-		//	shadowElevatorStarted.setCompleted(true);
-		//	shadowElevatorFirstTime = true;
-		//}
+		if(currPlayer != null && currPlayer.isWithin(13232,1000,13232+1500,1800) && shadowBossFightStarted!=null && !shadowBossFightStarted.isCompleted()) {
+			shadowBossFightStarted.setCompleted(true);
+			shadowBossFightFirstTime = true;
+		}
 	}
 	
-	// Deal with shadow elevator stuff
-	public void dealWithShadowElevatorStuff() {
+	// Deal with shadow bossFight stuff
+	public void dealWithShadowBossFightStuff() {
 		
 		// It's game time, bro!! turner!! wooo!
-		/*if(shadowElevatorStarted!=null && shadowElevatorStarted.isCompleted()) {
+		if(shadowBossFightStarted!=null && shadowBossFightStarted.isCompleted()) {
 
-			if(!shadowElevatorInitiated && zoneLoaded) {
+			if(!shadowBossFightInitiated && zoneLoaded) {
 				
 				// If it's the first time.
-				if(shadowElevatorFirstTime) {
+				if(shadowBossFightFirstTime) {
 					music.currMusic.fadeOut(5f);
-					shadowElevatorFirstTime = false;
-					playerOne.initiateShadowElevatorScene();
-					shadowElevatorInitiated = true;
+					shadowBossFightFirstTime = false;
+					playerOne.initiateShadowBossFightScene();
+					shadowBossFightInitiated = true;
 				}
 				else {
-					playerOne.initiateShadowElevatorScene();
+					playerOne.initiateShadowBossFightScene();
 					playerOne.setSequenceTo(10);
-					shadowElevatorInitiated = true;
+					shadowBossFightInitiated = true;
 				}
 			}
-		}*/
+		}
 		
 	}
 	
@@ -1262,7 +1276,7 @@ public class farmTomb extends zone {
 	@Override
 	public void update() {
 		dealWithRegionStuff();
-		dealWithShadowElevatorStuff();
+		dealWithShadowBossFightStuff();
 	}
 
 	// Get the player location in the zone.
