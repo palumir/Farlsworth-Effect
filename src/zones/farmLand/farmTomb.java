@@ -810,10 +810,12 @@ public class farmTomb extends zone {
 	
 	// Give bossFight eyes
 	public static void giveBossFightEyes() {
-		for(int i = 0; i < shadowBossFight.size(); i++) {
-			shadowBossFight.get(i).setEyeless(false);
-			shadowBossFight.get(i).setIgnoreIllumination(true);
-			shadowBossFight.get(i).setMoveSpeed(0.70f);
+		if(shadowBossFight!=null) {
+			for(int i = 0; i < shadowBossFight.size(); i++) {
+				shadowBossFight.get(i).setEyeless(false);
+				shadowBossFight.get(i).setIgnoreIllumination(true);
+				shadowBossFight.get(i).setMoveSpeed(0.70f);
+			}
 		}
 	}
 	
@@ -823,19 +825,19 @@ public class farmTomb extends zone {
 		// Play frantic music.
 		music m = music.startMusic(zoneMusicFrantic);
 		if(m!=null) m.stopOnDeath = true;
-		 
-		// Move the bossFight.
-		/*for(int i = 0; i < shadowBossFight.size(); i++) {
-			shadowBossFight.get(i).movingUp = true;
-		}*/
+		
+		bossFight = new shadowOfTheDenmother();
+		bossFight.startFight();
 	}
+	
+	static shadowOfTheDenmother bossFight;
 	
 	// Create shadow dude bossFight
 	public static void createShadowBossFightAroundPlayer(boolean eyeless) {
 		
 		if(!bossFightLoaded) {
 			// Left wall.
-			shadowBossFight = createRectangleOfShadows(13232 - 580-25, 
+			/*shadowBossFight = createRectangleOfShadows(13232 - 580-25, 
 													  1725-30 - 1500-1000, 
 													  13232 - 250-25,
 													  1725-30 + 600-1000, eyeless);
@@ -856,10 +858,7 @@ public class farmTomb extends zone {
 			shadowBossFight.addAll(createRectangleOfShadows(13232 - 220-25+1-25, 
 					  1725-30+200+3-92-2011-200, 
 					  13232 +250+25,
-					  1725-30 + 600-2000-200, eyeless));
-			
-			shadowOfTheDenmother s = new shadowOfTheDenmother(13395,343);
-			s.startFight();
+					  1725-30 + 600-2000-200, eyeless));*/
 			
 			/*
 			// First platform
@@ -1263,7 +1262,7 @@ public class farmTomb extends zone {
 				}
 				else {
 					playerOne.initiateShadowBossFightScene();
-					playerOne.setSequenceTo(10);
+					playerOne.setSequenceTo(11);
 					shadowBossFightInitiated = true;
 				}
 			}
