@@ -79,12 +79,13 @@ public class grave extends chunk {
 			setHitBoxAdjustmentY(-10);
 			setWidth(22);
 			setHeight(7);
-			setHitBoxAdjustmentX(-2);
+			setHitBoxAdjustmentX(2);
 		}
 		else {
 			setHitBoxAdjustmentY(0);
 			setHeight(DEFAULT_CHUNK_HEIGHT);
 			setWidth(DEFAULT_CHUNK_WIDTH);
+			setHitBoxAdjustmentX(2);
 		}
 		setInteractable(true);
 		setPassable(false);

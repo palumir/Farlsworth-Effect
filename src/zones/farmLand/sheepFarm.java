@@ -265,7 +265,7 @@ public class sheepFarm extends zone {
 		//loadFromSaveForTesting();
 		
 		// Spawn Farlsworth and fence
-		//spawnFarlsworthAndFence();
+		spawnFarlsworthAndFence();
 		
 		// Create terrain
 		//createTerrain();
@@ -326,12 +326,12 @@ public class sheepFarm extends zone {
 	// Spawn farlsworth and fence.
 	public void spawnFarlsworthAndFence() {
 		farlsworth sheepBoss = new farlsworth(411,-394);
-		if(!farlsworth.isFenceAttached.isCompleted()) {
+		/*if(!farlsworth.isFenceAttached.isCompleted()) {
 			farlsworthFence = makeFarlsworthFence(5,-406);
 		}
 		else {
 			farlsworthFence = null;
-		}
+		}*/
 	}
 	
 	// Spawn items
@@ -533,7 +533,7 @@ public class sheepFarm extends zone {
 	public void createGraveYard()  {
 		
 		// Tomb
-		new tomb(-4435, -5727, 0, farmTomb.getZone(),57,-6,"Right");
+		new tomb(-3460, -5803, 0, farmTomb.getZone(),57,-6,"Right");
 		
 		// Fence around tomb
 		/*spawnFence(null, 2216,-3990,2216,-3820); // Left fence

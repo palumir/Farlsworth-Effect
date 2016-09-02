@@ -143,12 +143,12 @@ public class storm extends atmosphericEffect {
 		if(fadeOver == 0) fadePercent = 1;
 	
 		// Do rain drops.
-		for(int i = 0; i < 2*fadePercent; i++) {
+		for(int i = 0; i < 6*fadePercent; i++) {
 			player currPlayer = player.getPlayer();
 			int middleX = currPlayer.getIntX() + getWidth()/2 - rainFall.getDefaultWidth()/2;
 			int middleY = currPlayer.getIntY() + getHeight()/2- rainFall.getDefaultHeight()/2;
-			int randomX = middleX - (utility.RNG.nextInt(gameCanvas.getDefaultWidth())) - gameCanvas.getDefaultWidth()*1/6;
-			int randomY = middleY - (utility.RNG.nextInt(gameCanvas.getDefaultHeight())) - gameCanvas.getDefaultHeight()*3/9;
+			int randomX = middleX - (utility.RNG.nextInt(gameCanvas.getDefaultWidth()*2)) + gameCanvas.getDefaultWidth()/2;
+			int randomY = middleY - (utility.RNG.nextInt(gameCanvas.getDefaultHeight()*2)) + gameCanvas.getDefaultHeight()/2;
 			rainFall f = new rainFall(randomX,randomY);
 		}
 	}

@@ -115,7 +115,8 @@ public class playerOne extends boss {
 			// Start of conversation.
 			startOfConversation = new textSeries(null, "Can you feel the shadows slinking around you?");
 			s = startOfConversation.addChild(null, "They are getting closer and closer.");
-			s = s.addChild(null, "Smell their aroma.");
+			s = s.addChild(null, "One may think so, but they are not his nor mine.");
+			s = s.addChild(null, "They are truly interesting.");
 			s = s.addChild(null, "Hearken their call.");
 			s = s.addChild(null, "Let them embrace you.");
 			s = s.addChild(null, "But do not let them consume you.");
@@ -176,7 +177,7 @@ public class playerOne extends boss {
 				sequencePart++;
 			}
 			if(sequencePart == 4 && interactSequence!=null && interactSequence.getTheText()!=null && interactSequence.getTheText().getTextOnPress()!=null &&
-					interactSequence.getTheText().getTextOnPress().contains("Smell")) {
+					interactSequence.getTheText().getTextOnPress().contains("his nor mine")) {
 				farmTomb.zoneFog.fadeTo(.6f, 1);
 				sequencePart++;
 			}

@@ -74,9 +74,11 @@ public class levelSave implements Serializable {
 				
 	public static ArrayList<String> dontSaveTheseThings = new ArrayList<String>() {{
 		add("units.bosses.playerOne");
+		add("units.bosses.farlsworth");
 		add("units.bosses.shadowOfTheDenmother");
 		add("doodads.tomb.stairsUp");
 		add("doodads.sheepFarm.caveEnterance");
+		add("doodads.general.questMark");
 		add("doodads.sheepFarm.tomb");
 		add("doodads.sheepFarm.horizontalGate");
 		add("units.developer");

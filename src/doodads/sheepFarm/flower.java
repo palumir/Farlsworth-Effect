@@ -72,6 +72,5 @@ public class flower extends chunk {
 		// Set fields.
 		flowerType = i;
 		setPassable(true);
-		backgroundDoodad = true;
 	}
 }

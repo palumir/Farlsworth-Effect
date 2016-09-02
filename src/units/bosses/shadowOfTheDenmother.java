@@ -105,7 +105,6 @@ public class shadowOfTheDenmother extends boss {
 	protected double rise = 0;
 	protected double run = 0;
 
-
 	//////////////////
 	//// METHODS /////
 	//////////////////

@@ -110,7 +110,7 @@ public class farmer extends unit {
 		s = s.addChild(null, "And my house.");
 		s = s.addChild(null, "And my fridge.");
 		s = s.addChild(null, "Actually, give me that back. I need that one.");
-		s = s.addChild(null, "Otherwise I can't heat up my poptarts.");
+		s = s.addChild(null, "Otherwise I can't heat up my toaster strudels.");
 		s = s.addChild(null, "Take this one instead.");
 		s = s.addChild(null, "Good luck.");
 		s.setEnd();
