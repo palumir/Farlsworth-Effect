@@ -215,34 +215,41 @@ public class playerOne extends boss {
 				saveState.setQuiet(false);
 				
 				// Wait a bit.
-				waitFor = 3f;
+				waitFor = 1f;
+				waitStart = time.getTime();
+				sequencePart++;
+			}
+			
+			if(sequencePart == 10 && time.getTime() - waitStart > waitFor*1000) {
+				// Chime
+				sound s = new sound(shadowOfTheDenmother.howl);
+				s.start();
+				
+				// Wait a bit.
+				waitFor = 4f;
 				waitStart = time.getTime();
 				sequencePart++;
 			}
 			
 			// Reveal elevator.
-			if(sequencePart == 10 && time.getTime() - waitStart > waitFor*1000) {
+			if(sequencePart == 11 && time.getTime() - waitStart > waitFor*1000) {
 				
 				// Create elevator and set fog.
 				if(interactSequence != null) {
 					interactSequence.setUnescapable(false);
 					interactSequence.toggleDisplay();
 				}
-				farmTomb.createShadowBossFightAroundPlayer(true);
+				farmTomb.createShadowBossFightAroundPlayer();
 				farmTomb.zoneFog.fadeTo(.3f, .2f);
 				
-				// Chime
-				sound s = new sound(shadowOfTheDenmother.howl);
-				s.start();
-				
 				// Wait for next chime.
-				waitFor = 3f;
+				waitFor = 1f;
 				waitStart = time.getTime();
 				sequencePart++;
 			}
 			
 			// Start fight
-			if(sequencePart == 11 && time.getTime() - waitStart > waitFor*1000) {
+			if(sequencePart == 12 && time.getTime() - waitStart > waitFor*1000) {
 				
 				// Show eyes of elevator.
 				farmTomb.startBossFight();

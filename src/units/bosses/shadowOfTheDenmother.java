@@ -36,7 +36,8 @@ public class shadowOfTheDenmother extends boss {
 	private static float DEFAULT_MOVESPEED_BETA = 2f;
 	
 	// How long to shadow puke for
-	private static float DEFAULT_PUKE_FOR = 2f;
+	private static float DEFAULT_PUKE_FOR = 1f;
+	private static int DEFAULT_PUKE_EVERY_BASE = 2;
 	
 	// How long does platform glow last for
 	private static float DEFAULT_PLATFORM_GLOW_LASTS_FOR = 10f;
@@ -111,15 +112,14 @@ public class shadowOfTheDenmother extends boss {
 	
 	public shadowOfTheDenmother() {
 		super(unitTypeRef, DEFAULT_UNIT_NAME, 0, 0);
-		
 		killsPlayer = true;
-	
 		spawnPlatforms();
 		addAnimations();
 	}
 	
 	// Add animations.
 	public void addAnimations() {
+		
 		// Deal with animations
 		animationPack unitTypeAnimations = new animationPack();
 		
@@ -176,7 +176,7 @@ public class shadowOfTheDenmother extends boss {
 		unitTypeAnimations.addAnimation(sleepingLeft);
 		
 		// Howling starting left.
-		animation howlingStartLeft = new animation("howlingStartLeft", DEFAULT_LEFTRIGHT_SPRITESHEET.getAnimation(7), 0, 3, 0.5f);
+		animation howlingStartLeft = new animation("howlingStartLeft", DEFAULT_LEFTRIGHT_SPRITESHEET.getAnimation(7), 0, 3, DEFAULT_PUKE_FOR/2);
 		unitTypeAnimations.addAnimation(howlingStartLeft);
 		
 		// Howling middle left.
@@ -184,19 +184,19 @@ public class shadowOfTheDenmother extends boss {
 		unitTypeAnimations.addAnimation(howlingLeft);
 		
 		// Howling end animation
-		animation howlingEndLeft = new animation("howlingEndLeft", DEFAULT_LEFTRIGHT_SPRITESHEET.getAnimation(7), 5, 9, 0.5f);
+		animation howlingEndLeft = new animation("howlingEndLeft", DEFAULT_LEFTRIGHT_SPRITESHEET.getAnimation(7), 5, 9, DEFAULT_PUKE_FOR/2);
 		unitTypeAnimations.addAnimation(howlingEndLeft);
 		
 		// Howling starting right
-		animation howlingStartRight = new animation("howlingStartRight", DEFAULT_LEFTRIGHT_SPRITESHEET.getAnimation(3), 0, 1, 0.5f);
+		animation howlingStartRight = new animation("howlingStartRight", DEFAULT_LEFTRIGHT_SPRITESHEET.getAnimation(3), 0, 3, DEFAULT_PUKE_FOR/2);
 		unitTypeAnimations.addAnimation(howlingStartRight);
 		
 		// Howling middle left.
-		animation howlingRight = new animation("howlingMiddleRight", DEFAULT_LEFTRIGHT_SPRITESHEET.getAnimation(3), 2, 2, DEFAULT_PUKE_FOR);
+		animation howlingRight = new animation("howlingMiddleRight", DEFAULT_LEFTRIGHT_SPRITESHEET.getAnimation(3), 4,4, DEFAULT_PUKE_FOR);
 		unitTypeAnimations.addAnimation(howlingRight);
 		
 		// Howling end animation
-		animation howlingEndRight = new animation("howlingEndRight", DEFAULT_LEFTRIGHT_SPRITESHEET.getAnimation(3), 3, 4, 0.5f);
+		animation howlingEndRight = new animation("howlingEndRight", DEFAULT_LEFTRIGHT_SPRITESHEET.getAnimation(3), 5, 9, DEFAULT_PUKE_FOR/2);
 		unitTypeAnimations.addAnimation(howlingEndRight);
 		
 		// Set animations.
@@ -254,6 +254,9 @@ public class shadowOfTheDenmother extends boss {
 		setStuck(true);
 		
 		// Jump there
+		sound s = new sound(bark);
+		s.setPosition(getIntX(), getIntY(), sound.DEFAULT_SOUND_RADIUS);
+		s.start();
 		jumpingToX = c.getIntX() + c.getWidth()/2 - getWidth()/2;
 		jumpingToY = c.getIntY() + c.getHeight()/2 - getHeight()/2;
 		
@@ -374,7 +377,7 @@ public class shadowOfTheDenmother extends boss {
 		if(recentlyCastAbilities == null) recentlyCastAbilities = new ArrayList<String>();
 	
 		String randomlySelectedAbility;
-		if(slashNumber < 5) {
+		if(slashNumber < DEFAULT_PUKE_EVERY_BASE) {
 			randomlySelectedAbility = "slashPlatform";
 			slashNumber++;
 		}
@@ -437,7 +440,7 @@ public class shadowOfTheDenmother extends boss {
 	public void slashTowardPlayer() {
 		faceTowardPlayer();
 		ArrayList<groundTile> nextPlatform = getClosestPlatformInDirection(getFacingDirection());
-		slashTo(nextPlatform.get(1).getIntX(), nextPlatform.get(1).getIntY() - getHeight() + 10);
+		if(nextPlatform != null) slashTo(nextPlatform.get(1).getIntX(), nextPlatform.get(1).getIntY() - getHeight() + 10);
 	}
 	
 	// Get current paltform
@@ -592,38 +595,33 @@ public class shadowOfTheDenmother extends boss {
 	}
 	
 	// List of shadow lines
-	private ArrayList<intTuple> lineSpawns;
-	private ArrayList<String> lineTypes;
-	private ArrayList<ArrayList<unit>> lines;
+	private ArrayList<Integer> lineSpawnsX = new ArrayList<Integer>();
+	private ArrayList<Integer> lineSpawnsY = new ArrayList<Integer>();
+	private ArrayList<String> lineTypes = new ArrayList<String>();
 	
 	// Spawn a shadow line at 
 	public void spawnShadowLineAt(String from, int x, int y) {
 		
-		// Deal with nulls.
-		if(lineSpawns == null) lineSpawns = new ArrayList<intTuple>();
-		if(lineTypes == null) lineTypes = new ArrayList<String>();
-		if(lines == null) lines = new ArrayList<ArrayList<unit>>();
-		
 		// Add a new line.
-		lineSpawns.add(new intTuple(x,y));
+		lineSpawnsX.add(x);
+		lineSpawnsY.add(y);
 		lineTypes.add(from);
-		lines.add(new ArrayList<unit>());
 	}
 	
 	// Spawn every.
-	private float spawnEvery = 0.2f;
+	private float spawnEvery = 0.1f;
 	private long lastShadowSpawn = 0;
 	
 	// Deal with lines
 	public void dealWithShadowLines() {
 		
 		// Spawn units and move them.
-		if(lineSpawns != null) {
+		if(lineSpawnsX != null) {
 			if(lastShadowSpawn == 0) lastShadowSpawn = time.getTime();
 			else if(time.getTime() - lastShadowSpawn > spawnEvery*1000) {
-				for(int i = 0; i < lineSpawns.size(); i++) {
-					shadowDude u = new shadowDude(lineSpawns.get(i).x, lineSpawns.get(i).y);
-					u.setMoveSpeed(2.5f);
+				for(int i = 0; i < lineSpawnsX.size(); i++) {
+					shadowDude u = new shadowDude(lineSpawnsX.get(i), lineSpawnsY.get(i));
+					u.setMoveSpeed(4f);
 					u.setDestroyTimer(30);
 					
 					if(lineTypes.get(i).equals("verticalDown")) {
@@ -645,26 +643,28 @@ public class shadowOfTheDenmother extends boss {
 		}
 	}
 	
-	// Mouth line number
-	public int mouthLineNumber = 0;
-	
 	// Spawn line at mouth.
 	public void spawnLineAtMouth() {
+		
 		if(facingDirection.equals("Left")) {
-			spawnShadowLineAt("horizontalLeft", getIntX()-10,getIntY());
-			mouthLineNumber = lines.size()-1;
+			spawnShadowLineAt("horizontalLeft", getIntX()-15,getIntY());
+			spawnShadowLineAt("verticalDown", getIntX()-15,getIntY());
+			spawnShadowLineAt("verticalUp", getIntX()-15,getIntY());
 		}
+		
 		if(facingDirection.equals("Right")) {
-			spawnShadowLineAt("horizontalRight", getIntX()+getWidth()+10,getIntY());
-			mouthLineNumber = lines.size()-1;
+			spawnShadowLineAt("horizontalRight", getIntX()+getWidth()+15-shadowDude.getDefaultWidth(),getIntY());
+			spawnShadowLineAt("verticalDown", getIntX()+getWidth()+15-shadowDude.getDefaultWidth(),getIntY());
+			spawnShadowLineAt("verticalUp", getIntX()+getWidth()+15-shadowDude.getDefaultWidth(),getIntY());
 		}
+		
 	}
 	
 	// Stop spawning line at mouth.
 	public void stopSpawningLineAtMouth() {
-		lines.remove(mouthLineNumber);
-		lineTypes.remove(mouthLineNumber);
-		lineSpawns.remove(mouthLineNumber);
+		lineTypes.clear();
+		lineSpawnsX.clear();
+		lineSpawnsY.clear();
 	}
 	
 	// Howl stuff
@@ -672,6 +672,7 @@ public class shadowOfTheDenmother extends boss {
 	private long startOfHowl = 0;
 	static String howl = "sounds/effects/bosses/shadowOfTheDenmother/spookyHowl1.wav";
 	private static String growl = "sounds/effects/bosses/shadowOfTheDenmother/spookyGrowl.wav";
+	private static String bark = "sounds/effects/bosses/shadowOfTheDenmother/wolfBark.wav";
 	
 	// Starthowl.
 	public void startHowl() {
@@ -724,7 +725,7 @@ public class shadowOfTheDenmother extends boss {
 	private ArrayList<ArrayList<groundTile>> platforms;
 	
 	// How often to cast claw ability.
-	private static float spawnClawPhase = 1.5f;
+	private static float spawnClawPhase = 0.75f;
 	
 	// Spawn platforms
 	public void spawnPlatforms() {
@@ -748,10 +749,10 @@ public class shadowOfTheDenmother extends boss {
 		}
 		
 		// Move wolfie and player to the middle.
-		player.getPlayer().setDoubleX(platforms.get(3*5 + 3).get(1).getIntX());
-		player.getPlayer().setDoubleY(platforms.get(3*5 + 3).get(1).getIntY()-player.getPlayer().getHeight());
-		setDoubleX(platforms.get(4*5 + 3).get(1).getIntX()-getWidth()/2 + platforms.get(4*5+3).get(1).getWidth()/2);
-		setDoubleY(platforms.get(4*5 + 3).get(1).getIntY()-getHeight());
+		player.getPlayer().setDoubleX(platforms.get(6*3 + 3).get(1).getIntX());
+		player.getPlayer().setDoubleY(platforms.get(6*3 + 3).get(1).getIntY()-player.getPlayer().getHeight());
+		setDoubleX(platforms.get(6*4 + 3).get(1).getIntX()-getWidth()/2 + platforms.get(4*5+3).get(1).getWidth()/2);
+		setDoubleY(platforms.get(6*4 + 3).get(1).getIntY()-getHeight());
 		faceTowardPlayer();
 	}
 

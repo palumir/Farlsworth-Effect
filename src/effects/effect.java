@@ -109,15 +109,21 @@ public abstract class effect extends drawnObject  {
 	@Override
 	public void update() {
 		
-		// Play animation.
-		if(getCurrentAnimation() != null) { 
-			getCurrentAnimation().playAnimation();
-			respondToFrame(getCurrentAnimation().getCurrentSprite());
-		}
+		// Destroy.
 		if(hasATimer && time.getTime() - timeStarted >= getAnimationDuration()*1000) {
 			this.destroy();
 		}
-		doSpecificEffectStuff();
+		
+		else {
+			
+			// Play animation.
+			if(getCurrentAnimation() != null) { 
+				getCurrentAnimation().playAnimation();
+				respondToFrame(getCurrentAnimation().getCurrentSprite());
+			}
+			
+			doSpecificEffectStuff();
+		}
 	}
 	
 	// Do specific effect stuff
