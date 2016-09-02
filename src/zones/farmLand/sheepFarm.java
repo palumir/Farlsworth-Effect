@@ -286,7 +286,7 @@ public class sheepFarm extends zone {
 		createItems();
 		
 		// Create graveyard
-		//createGraveYard();
+		createGraveYard();
 		
 		// Play fire sound
 		if(isOnFire != null && isOnFire.isCompleted()) {
@@ -528,12 +528,12 @@ public class sheepFarm extends zone {
 				System.out.println("new grave(" + (1196+ i*((2120-1196)/numCols)) + "," + (-3237 + j*((-2628+3237)/numRows)) + "," + 4 + ");");
 			}
 		}
-	}
+	}*/
 	
 	public void createGraveYard()  {
 		
 		// Tomb
-		new tomb(-879, -50, farmTomb.getZone(),57,-6,"Right");
+		new tomb(-4435, -5727, 0, farmTomb.getZone(),57,-6,"Right");
 		
 		// Fence around tomb
 		/*spawnFence(null, 2216,-3990,2216,-3820); // Left fence
@@ -546,7 +546,7 @@ public class sheepFarm extends zone {
 		c.setInteractable(false);
 		c = new flower(2396,-3902-20,7);
 		c.setInteractable(false);*/
-		
+	}
 	
 	public static ArrayList<chunk> makeFarlsworthFence(float atX, float atY) {
 		

@@ -107,6 +107,9 @@ public class unit extends drawnObject  {
 	// Check if something is stuck in pathfinding
 	protected boolean pathFindingStuck = false;
 	
+	// Destroy timer
+	private float destroyTimer = 0;
+	
 	// Combat
 	// Does the unit kill the player?
 	protected boolean killsPlayer = false;
@@ -160,6 +163,9 @@ public class unit extends drawnObject  {
 	
 	// Movement buffs/debuffs
 	private ArrayList<movementBuff> movementBuffs;
+	
+	// When did we spawn?
+	private long spawnTime = 0;
 	
 	// Movement
 	public float moveSpeed = DEFAULT_UNIT_MOVESPEED;
@@ -245,6 +251,8 @@ public class unit extends drawnObject  {
 		
 		// Add animation
 		move(0,0);
+		
+		spawnTime = time.getTime();
 	}
 	
 	// Copy Constructor
@@ -264,6 +272,8 @@ public class unit extends drawnObject  {
 		
 		// Add animation
 		move(0,0);
+		
+		spawnTime = time.getTime();
 	}
 	
 	// Make copy
@@ -289,11 +299,21 @@ public class unit extends drawnObject  {
 			return null;
 		}	
 	}
+	
+	// Possibly destroy
+	public void possiblyDestroy() {
+		
+		if(getDestroyTimer() != 0 && time.getTime() - spawnTime > getDestroyTimer()*1000) {
+			destroy();
+		}
+		
+	}
 
 	// Update unit
 	@Override
 	public void update() {	
 		if(!unitIsDead) {
+			possiblyDestroy();
 			hurtPeople(leniency);
 			doCommands();
 			gravity();
@@ -2119,6 +2139,14 @@ public class unit extends drawnObject  {
 
 	public void setMomentumY(float momentumY) {
 		this.momentumY = momentumY;
+	}
+
+	public float getDestroyTimer() {
+		return destroyTimer;
+	}
+
+	public void setDestroyTimer(float destroyTimer) {
+		this.destroyTimer = destroyTimer;
 	}
 	
 }

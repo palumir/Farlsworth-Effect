@@ -232,7 +232,7 @@ public class playerOne extends boss {
 				farmTomb.zoneFog.fadeTo(.3f, .2f);
 				
 				// Chime
-				sound s = new sound(bellToll);
+				sound s = new sound(shadowOfTheDenmother.howl);
 				s.start();
 				
 				// Wait for next chime.
@@ -241,20 +241,8 @@ public class playerOne extends boss {
 				sequencePart++;
 			}
 			
-			// Show eyes
+			// Start fight
 			if(sequencePart == 11 && time.getTime() - waitStart > waitFor*1000) {
-				
-				// Show eyes of elevator.
-				farmTomb.giveBossFightEyes();
-
-				// Wait for next chime.
-				waitFor = 3.16f;
-				waitStart = time.getTime();
-				sequencePart++;
-			}
-			
-			// Move elevator up.
-			if(sequencePart == 12 && time.getTime() - waitStart > waitFor*1000) {
 				
 				// Show eyes of elevator.
 				farmTomb.startBossFight();

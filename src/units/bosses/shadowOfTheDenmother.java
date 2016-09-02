@@ -6,15 +6,20 @@ import doodads.sheepFarm.clawMarkRed;
 import drawing.spriteSheet;
 import drawing.animation.animation;
 import drawing.animation.animationPack;
+import effects.effectTypes.platformGlow;
 import drawing.spriteSheet.spriteSheetInfo;
 import modes.mode;
 import sounds.sound;
 import terrain.chunk;
+import terrain.groundTile;
+import terrain.chunkTypes.tombEdge;
 import units.boss;
 import units.player;
+import units.unit;
 import units.unitType;
 import units.unitCommands.commands.slashCommand;
 import units.unitTypes.sheepFarm.wolf;
+import units.unitTypes.tomb.shadowDude;
 import utilities.intTuple;
 import utilities.time;
 import utilities.utility;
@@ -25,23 +30,33 @@ public class shadowOfTheDenmother extends boss {
 	private static String DEFAULT_UNIT_NAME = "Shadow of the Denmother";
 	
 	// Default jump speed
-	private static int DEFAULT_UNIT_JUMPSPEED = 8;
+	private static int DEFAULT_UNIT_JUMPSPEED = 14;
 	
 	// Beta stats
 	private static float DEFAULT_MOVESPEED_BETA = 2f;
+	
+	// How long to shadow puke for
+	private static float DEFAULT_PUKE_FOR = 2f;
+	
+	// How long does platform glow last for
+	private static float DEFAULT_PLATFORM_GLOW_LASTS_FOR = 10f;
+	
+	// Number of hits total
+	private static int numberOfHitsToDieTotal = 6;
+	private int numberOfHitsToDie = numberOfHitsToDieTotal;
 
 	// Unit sprite stuff.
 	private static spriteSheet DEFAULT_UPDOWN_SPRITESHEET = new spriteSheet(new spriteSheetInfo(
-			"images/units/animals/blackWolfUpDownAlpha.png", 
-			32, 
-			64,
+			"images/units/animals/blackWolfUpDown.png", 
+			64, 
+			128,
 			0,
 			0
 			));
 	private static spriteSheet DEFAULT_LEFTRIGHT_SPRITESHEET = new spriteSheet(new spriteSheetInfo(
-			"images/units/animals/blackWolfLeftRightAlpha.png",
-			64, 
-			32,
+			"images/units/animals/blackWolfLeftRight.png",
+			128, 
+			64,
 			0,
 			0
 			));
@@ -51,8 +66,8 @@ public class shadowOfTheDenmother extends boss {
 			new unitType(DEFAULT_UNIT_NAME,  // Name of unitType 
 					     null,
 					     null,
-					     25,
-					     25,
+					     100,
+					     60,
 					     DEFAULT_MOVESPEED_BETA, // Movespeed
 					     DEFAULT_UNIT_JUMPSPEED // Jump speed
 						);	
@@ -94,11 +109,12 @@ public class shadowOfTheDenmother extends boss {
 	//// METHODS /////
 	//////////////////
 	
-	public shadowOfTheDenmother(int newX, int newY) {
-		super(unitTypeRef, DEFAULT_UNIT_NAME, newX, newY);
+	public shadowOfTheDenmother() {
+		super(unitTypeRef, DEFAULT_UNIT_NAME, 0, 0);
 		
 		killsPlayer = true;
-		
+	
+		spawnPlatforms();
 		addAnimations();
 	}
 	
@@ -159,6 +175,30 @@ public class shadowOfTheDenmother extends boss {
 		animation sleepingLeft = new animation("sleepingLeft", DEFAULT_LEFTRIGHT_SPRITESHEET.getAnimation(4), 3, 3, 0.5f);
 		unitTypeAnimations.addAnimation(sleepingLeft);
 		
+		// Howling starting left.
+		animation howlingStartLeft = new animation("howlingStartLeft", DEFAULT_LEFTRIGHT_SPRITESHEET.getAnimation(7), 0, 3, 0.5f);
+		unitTypeAnimations.addAnimation(howlingStartLeft);
+		
+		// Howling middle left.
+		animation howlingLeft = new animation("howlingMiddleLeft", DEFAULT_LEFTRIGHT_SPRITESHEET.getAnimation(7), 4, 4, DEFAULT_PUKE_FOR);
+		unitTypeAnimations.addAnimation(howlingLeft);
+		
+		// Howling end animation
+		animation howlingEndLeft = new animation("howlingEndLeft", DEFAULT_LEFTRIGHT_SPRITESHEET.getAnimation(7), 5, 9, 0.5f);
+		unitTypeAnimations.addAnimation(howlingEndLeft);
+		
+		// Howling starting right
+		animation howlingStartRight = new animation("howlingStartRight", DEFAULT_LEFTRIGHT_SPRITESHEET.getAnimation(3), 0, 1, 0.5f);
+		unitTypeAnimations.addAnimation(howlingStartRight);
+		
+		// Howling middle left.
+		animation howlingRight = new animation("howlingMiddleRight", DEFAULT_LEFTRIGHT_SPRITESHEET.getAnimation(3), 2, 2, DEFAULT_PUKE_FOR);
+		unitTypeAnimations.addAnimation(howlingRight);
+		
+		// Howling end animation
+		animation howlingEndRight = new animation("howlingEndRight", DEFAULT_LEFTRIGHT_SPRITESHEET.getAnimation(3), 3, 4, 0.5f);
+		unitTypeAnimations.addAnimation(howlingEndRight);
+		
 		// Set animations.
 		setAnimations(unitTypeAnimations);
 	
@@ -171,7 +211,10 @@ public class shadowOfTheDenmother extends boss {
 		// No hitboxadjustment.
 		setHitBoxAdjustmentY(0);
 		setHitBoxAdjustmentX(0);
-		if(jumping || clawAttacking) {
+		if(howling) {
+			howl();
+		}
+		else if(jumping || clawAttacking) {
 			if(clawAttacking && !jumping) {
 				animate("standing" + getFacingDirection());
 			}
@@ -272,12 +315,6 @@ public class shadowOfTheDenmother extends boss {
 					startY = getDoubleY();
 				}
 				
-				// Charge units to position.
-				//chargeUnits();
-				
-				// Spawn rocks
-				//spawnTrail();
-				
 				setDoubleX(getDoubleX() + run);
 				setDoubleY(getDoubleY() + rise);
 				
@@ -318,34 +355,38 @@ public class shadowOfTheDenmother extends boss {
 	
 	// Sequence number for abilities
 	private int sequenceNumber = 0;
-	
+
 	// Casting special ability?
 	public String currentAbility = "";
 	public ArrayList<String> recentlyCastAbilities;
-	
-	// List of spots
-	private static ArrayList<String> abilityList = new ArrayList<String>() {{
-		add("shadowBombardmentTopLeft");
-		add("shadowBombardmentTopRight");
-	}};
 	
 	// Start fight
 	public void startFight() {
 		fightInProgress = true;
 	}
 	
+	// Slash number
+	int slashNumber = 0;
+	
 	// Randomly select an ability
 	public void randomlySelectAnAbility() {
 		// Select a random ability to cast.
 		if(recentlyCastAbilities == null) recentlyCastAbilities = new ArrayList<String>();
 	
-		String randomlySelectedAbility = "";
-		
-		// First ability.
-		if(recentlyCastAbilities.size() == 0) randomlySelectedAbility = abilityList.get(utility.RNG.nextInt(abilityList.size()));
+		String randomlySelectedAbility;
+		if(slashNumber < 5) {
+			randomlySelectedAbility = "slashPlatform";
+			slashNumber++;
+		}
 		else {
-			while(!randomlySelectedAbility.equals(recentlyCastAbilities.get(recentlyCastAbilities.size() - 1))) {
-				abilityList.get(utility.RNG.nextInt(abilityList.size()));
+			int random = utility.RNG.nextInt(2);
+			if(random==0) {
+				randomlySelectedAbility = "slashPlatform";
+				slashNumber++;
+			}
+			else {
+				slashNumber = 0;
+				randomlySelectedAbility = "shadowPuke";
 			}
 		}
 		
@@ -360,53 +401,359 @@ public class shadowOfTheDenmother extends boss {
 		// Select an ability if we need to cast one.
 		if(currentAbility.equals("")) randomlySelectAnAbility();
 		
-		// Cast abilities.
-		if(currentAbility.equals("shadowBombardmentTopLeft")) {
-			castShadowBombardment("topLeft");
+		if(currentAbility.equals("shadowPuke")) {
+			castShadowPuke();
+		}
+		
+		if(currentAbility.equals("slashPlatform")) {
+			castSlashPlatform();
 		}
 		
 	}
 	
-	// Cast shadow bombardment
-	public void castShadowBombardment(String where) {
+	// Cast slash platform
+	public void castSlashPlatform() {
+			
+		// Slash.
+		if(sequenceNumber == 0) {
+			slashTowardPlayer();
+			sequenceNumber++;
+		}
 		
-		// Top left bombardment.
+		// Land and face the player.
+		if(sequenceNumber == 1 && !clawAttacking) {
+			sequenceNumber++;
+			currentAbility = "";
+			sequenceNumber = 0;
 			
-			// Slash.
-			if(sequenceNumber == 0) {
-				if(where.equals("topLeft")) slashTo(13059,338);
-				if(where.equals("topRight")) slashTo(13388,338);
-				sequenceNumber++;
-			}
-			
-			// Land and face the player.
-			if(sequenceNumber == 1 && !clawAttacking) {
-				faceTowardPlayer();
-				sequenceNumber++;
-			}
-			
-			// Howl.
-			if(sequenceNumber == 2) {
+			// Make the platform unusable.
+			ArrayList<groundTile> currPlatform = getCurrentPlatform();
+			platformGlow e = new platformGlow(currPlatform.get(0).getIntX(),currPlatform.get(0).getIntY(),DEFAULT_PLATFORM_GLOW_LASTS_FOR);
+		}
 				
+	}
+	
+	// Slash toward player.
+	public void slashTowardPlayer() {
+		faceTowardPlayer();
+		ArrayList<groundTile> nextPlatform = getClosestPlatformInDirection(getFacingDirection());
+		slashTo(nextPlatform.get(1).getIntX(), nextPlatform.get(1).getIntY() - getHeight() + 10);
+	}
+	
+	// Get current paltform
+	public ArrayList<groundTile> getCurrentPlatform() {
+		ArrayList<groundTile> closestPlatform = platforms.get(0);
+		double closestDistance = Math.sqrt(Math.pow(platforms.get(0).get(1).getIntX() + platforms.get(0).get(1).getWidth()/2 - (getIntX() + getWidth()/2),2) + 
+									     Math.pow(platforms.get(0).get(1).getIntY() + platforms.get(0).get(1).getHeight()/2 - (getIntY() + getHeight()/2),2));
+		for(int i = 0; i < platforms.size(); i++) {
+			ArrayList<groundTile> currPlatform = platforms.get(i);
+			double distance = Math.sqrt(Math.pow(platforms.get(i).get(1).getIntX() + platforms.get(i).get(1).getWidth()/2 - (getIntX() + getWidth()/2),2) + 
+				     Math.pow(platforms.get(i).get(1).getIntY() + platforms.get(i).get(1).getHeight()/2 - (getIntY() + getHeight()/2),2));
+			if(distance < closestDistance) {
+				closestDistance = distance;
+				closestPlatform = currPlatform;
 			}
+		}
+		return closestPlatform;
+	}
+	
+	// Get closest platform to player
+	public ArrayList<groundTile> getClosestPlatformToPlayer() {
+		ArrayList<groundTile> closestPlatform = platforms.get(0);
+		double closestDistance = Math.sqrt(Math.pow(platforms.get(0).get(1).getIntX() + platforms.get(0).get(1).getWidth()/2 - (player.getPlayer().getIntX() + player.getPlayer().getWidth()/2),2) + 
+									     Math.pow(platforms.get(0).get(1).getIntY() + platforms.get(0).get(1).getHeight()/2 - (player.getPlayer().getIntY() + player.getPlayer().getHeight()/2),2));
+		for(int i = 0; i < platforms.size(); i++) {
+			ArrayList<groundTile> currPlatform = platforms.get(i);
+			double distance = Math.sqrt(Math.pow(platforms.get(i).get(1).getIntX() + platforms.get(i).get(1).getWidth()/2 - (player.getPlayer().getIntX() + player.getPlayer().getWidth()/2),2) + 
+				     Math.pow(platforms.get(i).get(1).getIntY() + platforms.get(i).get(1).getHeight()/2 - (player.getPlayer().getIntY() + player.getPlayer().getHeight()/2),2));
+			if(distance < closestDistance) {
+				closestDistance = distance;
+				closestPlatform = currPlatform;
+			}
+		}
+		return closestPlatform;
+	}
+	
+	// Get closest platform to from
+	public ArrayList<groundTile> getClosestPlatformToFrom(ArrayList<groundTile> to, ArrayList<ArrayList<groundTile>> from) {
+		ArrayList<groundTile> closestPlatform = from.get(0);
+		double closestDistance = Math.sqrt(Math.pow(from.get(0).get(1).getIntX() + from.get(0).get(1).getWidth()/2 - 
+												(to.get(1).getIntX() + to.get(1).getWidth()/2),2) + 
+									     Math.pow(from.get(0).get(1).getIntY() + from.get(0).get(1).getHeight()/2 - 
+									    		 (to.get(1).getIntY() + to.get(1).getHeight()/2),2));
+		for(int i = 0; i < from.size(); i++) {
+			ArrayList<groundTile> currPlatform = from.get(i);
+			double distance = Math.sqrt(Math.pow(from.get(i).get(1).getIntX() + from.get(i).get(1).getWidth()/2 - (to.get(1).getIntX() + to.get(1).getWidth()/2),2) + 
+				     Math.pow(from.get(i).get(1).getIntY() + from.get(i).get(1).getHeight()/2 - (to.get(1).getIntY() + to.get(1).getHeight()/2),2));
+			if(distance < closestDistance) {
+				closestDistance = distance;
+				closestPlatform = currPlatform;
+			}
+		}
+		return closestPlatform;
+	}
+	
+	// Get closest platform in direction.
+	public ArrayList<groundTile> getClosestPlatformInDirection(String direction) {
 		
+		/* COMMENTED OUT MOVES TOWARD THE PLAYER PLATFORM BY PLATFORM
+		 * ArrayList<groundTile> currentPlatform = getCurrentPlatform();
+		ArrayList<groundTile> playerPlatform = getClosestPlatformToPlayer();
+		
+		// Exclude current platform and all platforms behind 
+		ArrayList<ArrayList<groundTile>> outOfPlatforms = new ArrayList<ArrayList<groundTile>>();
+		for(int i = 0; i < platforms.size(); i++) {
+			if(direction.equals("Left") && platforms.get(i).get(0).getIntX() < currentPlatform.get(0).getIntX()) {
+				outOfPlatforms.add(platforms.get(i));
+			}
+			if(direction.equals("Right") && platforms.get(i).get(0).getIntX() > currentPlatform.get(0).getIntX() + currentPlatform.get(0).getWidth()) {
+				outOfPlatforms.add(platforms.get(i));
+			}
+		}
+		
+		// Select two closest platforms out of those platforms.
+		ArrayList<groundTile> firstPlatform = getClosestPlatformToFrom(currentPlatform, outOfPlatforms);
+		outOfPlatforms.remove(firstPlatform);
+		ArrayList<groundTile> secondPlatform = getClosestPlatformToFrom(currentPlatform, outOfPlatforms);
+		
+		double firstDistanceToPlayer = Math.sqrt(Math.pow(firstPlatform.get(1).getIntX() + firstPlatform.get(1).getWidth()/2 - 
+				(playerPlatform.get(1).getIntX() + playerPlatform.get(1).getWidth()/2),2) + 
+			     Math.pow(firstPlatform.get(1).getIntY() + firstPlatform.get(1).getHeight()/2 - 
+			    		 (playerPlatform.get(1).getIntY() + playerPlatform.get(1).getHeight()/2),2));
+		double secondDistanceToPlayer = Math.sqrt(Math.pow(secondPlatform.get(1).getIntX() + secondPlatform.get(1).getWidth()/2 - 
+				(playerPlatform.get(1).getIntX() + playerPlatform.get(1).getWidth()/2),2) + 
+			     Math.pow(secondPlatform.get(1).getIntY() + secondPlatform.get(1).getHeight()/2 - 
+			    		 (playerPlatform.get(1).getIntY() + playerPlatform.get(1).getHeight()/2),2));
+		if(firstDistanceToPlayer > secondDistanceToPlayer) {
+			return secondPlatform;
+		}
+		else {
+			return firstPlatform;
+		}*/
+		
+		ArrayList<groundTile> currentPlatform = getCurrentPlatform();
+		ArrayList<groundTile> playerPlatform = getClosestPlatformToPlayer();
+		
+		// Exclude current platform and all platforms behind 
+		ArrayList<ArrayList<groundTile>> outOfPlatforms = new ArrayList<ArrayList<groundTile>>();
+		for(int i = 0; i < platforms.size(); i++) {
+			if(direction.equals("Left") && platforms.get(i).get(0).getIntX() <= playerPlatform.get(0).getIntX()) {
+				outOfPlatforms.add(platforms.get(i));
+			}
+			if(direction.equals("Right") && platforms.get(i).get(0).getIntX() >= playerPlatform.get(0).getIntX() + currentPlatform.get(0).getWidth()) {
+				outOfPlatforms.add(platforms.get(i));
+			}
+		}
+		
+		// Select two closest platforms out of those platforms
+		ArrayList<ArrayList<groundTile>> platformsToChooseFrom = new ArrayList<ArrayList<groundTile>>();
+		for(int i = 0; i < 3 && 0 < outOfPlatforms.size(); i++) {
+			ArrayList<groundTile> currPlatform = getClosestPlatformToFrom(playerPlatform, outOfPlatforms);
+			platformsToChooseFrom.add(currPlatform);
+			outOfPlatforms.remove(currPlatform);
+		}
+		
+		if(platformsToChooseFrom.size() != 0) {
+			int random = utility.RNG.nextInt(platformsToChooseFrom.size());
+			return platformsToChooseFrom.get(random);
+		}
+		else {
+			return null;
+		}
+	}
+	
+	// Cast shadow bombardment
+	public void castShadowPuke() {
+			
+		// Slash.
+		if(sequenceNumber == 0) {
+			sequenceNumber++;
+		}
+		
+		// Land and face the player.
+		if(sequenceNumber == 1) {
+			faceTowardPlayer();
+			sequenceNumber++;
+		}
+		
+		// Howl (which makes dudes)
+		if(sequenceNumber == 2) {
+			startHowl();
+			sequenceNumber++;
+		}
+		
+		// Finish
+		if(sequenceNumber == 3 && !howling) {
+			sequenceNumber++;
+			currentAbility = "";
+			sequenceNumber = 0;
+		}
+				
+	}
+	
+	// List of shadow lines
+	private ArrayList<intTuple> lineSpawns;
+	private ArrayList<String> lineTypes;
+	private ArrayList<ArrayList<unit>> lines;
+	
+	// Spawn a shadow line at 
+	public void spawnShadowLineAt(String from, int x, int y) {
+		
+		// Deal with nulls.
+		if(lineSpawns == null) lineSpawns = new ArrayList<intTuple>();
+		if(lineTypes == null) lineTypes = new ArrayList<String>();
+		if(lines == null) lines = new ArrayList<ArrayList<unit>>();
+		
+		// Add a new line.
+		lineSpawns.add(new intTuple(x,y));
+		lineTypes.add(from);
+		lines.add(new ArrayList<unit>());
+	}
+	
+	// Spawn every.
+	private float spawnEvery = 0.2f;
+	private long lastShadowSpawn = 0;
+	
+	// Deal with lines
+	public void dealWithShadowLines() {
+		
+		// Spawn units and move them.
+		if(lineSpawns != null) {
+			if(lastShadowSpawn == 0) lastShadowSpawn = time.getTime();
+			else if(time.getTime() - lastShadowSpawn > spawnEvery*1000) {
+				for(int i = 0; i < lineSpawns.size(); i++) {
+					shadowDude u = new shadowDude(lineSpawns.get(i).x, lineSpawns.get(i).y);
+					u.setMoveSpeed(2.5f);
+					u.setDestroyTimer(30);
+					
+					if(lineTypes.get(i).equals("verticalDown")) {
+						u.setMovingDown(true);
+					}
+					if(lineTypes.get(i).equals("verticalUp")) {
+						u.setMovingUp(true);
+					}
+					if(lineTypes.get(i).equals("horizontalRight")) {
+						u.setMovingRight(true);
+					}
+					if(lineTypes.get(i).equals("horizontalLeft")) {
+						u.setMovingLeft(true);
+					}
+				}
+				
+				lastShadowSpawn = time.getTime();
+			}
+		}
+	}
+	
+	// Mouth line number
+	public int mouthLineNumber = 0;
+	
+	// Spawn line at mouth.
+	public void spawnLineAtMouth() {
+		if(facingDirection.equals("Left")) {
+			spawnShadowLineAt("horizontalLeft", getIntX()-10,getIntY());
+			mouthLineNumber = lines.size()-1;
+		}
+		if(facingDirection.equals("Right")) {
+			spawnShadowLineAt("horizontalRight", getIntX()+getWidth()+10,getIntY());
+			mouthLineNumber = lines.size()-1;
+		}
+	}
+	
+	// Stop spawning line at mouth.
+	public void stopSpawningLineAtMouth() {
+		lines.remove(mouthLineNumber);
+		lineTypes.remove(mouthLineNumber);
+		lineSpawns.remove(mouthLineNumber);
+	}
+	
+	// Howl stuff
+	private boolean howling = false;
+	private long startOfHowl = 0;
+	static String howl = "sounds/effects/bosses/shadowOfTheDenmother/spookyHowl1.wav";
+	private static String growl = "sounds/effects/bosses/shadowOfTheDenmother/spookyGrowl.wav";
+	
+	// Starthowl.
+	public void startHowl() {
+		
+		// Howl.
+		howling = true;
+		startOfHowl = time.getTime();
+	}
+	
+	// Deal with howling
+	public void howl() {
+		
+		// First start howling.
+		if(!getCurrentAnimation().getName().contains("howl")) {
+			animate("howlingStart" + getFacingDirection());
+			startOfHowl = time.getTime();
+		}
+		
+		// Move to middle of howl.
+		else if(getCurrentAnimation().getName().contains("howlingStart") &&
+				time.getTime() - startOfHowl >= getCurrentAnimation().getTimeToComplete()*1000) {
+			sound s = new sound(growl);
+			s.start();
+			animate("howlingMiddle" + getFacingDirection());
+			startOfHowl = time.getTime();
+			
+			// Spawn shadow dudes.
+			spawnLineAtMouth();
+		}
+		
+		// Move to end of howl.
+		else if(getCurrentAnimation().getName().contains("howlingMiddle") &&
+				time.getTime() - startOfHowl >= getCurrentAnimation().getTimeToComplete()*1000) {
+			animate("howlingEnd" + getFacingDirection());
+			startOfHowl = time.getTime();
+			stopSpawningLineAtMouth();
+		}
+		
+		
+		// Move to end of howl.
+		else if(getCurrentAnimation().getName().contains("howlingEnd") &&
+				time.getTime() - startOfHowl >= getCurrentAnimation().getTimeToComplete()*1000) {
+			howling = false;
+			startOfHowl = 0;
+		}
 	}
 	
 	// List of spots
-	private static ArrayList<intTuple> clawSpotsPlatformer = new ArrayList<intTuple>() {{
-		add(new intTuple(13223,233));
-		add(new intTuple(13059,338));
-		add(new intTuple(13388,338));
-		add(new intTuple(13225,430));
-		add(new intTuple(13061,521));
-		add(new intTuple(13387,521));
-		add(new intTuple(13224,612));
-	}};
+	private intTuple platformsStart = new intTuple(13000,233);
+	private ArrayList<ArrayList<groundTile>> platforms;
 	
 	// How often to cast claw ability.
-	private float clawToSpotAbilityEvery = 2f;
-	private double lastClawToSpotAbility = 0;
-	private static float spawnClawPhase = 2f;
+	private static float spawnClawPhase = 1.5f;
+	
+	// Spawn platforms
+	public void spawnPlatforms() {
+		
+		// Spawn platforms.
+		platforms = new ArrayList<ArrayList<groundTile>>();
+		for(int i = 0; i < 10; i++) {
+			for(int j = 0; j < 6; j++) {
+				platforms.add(new ArrayList<groundTile>());
+				for(int m = 0; m < 3; m++) {
+					groundTile tile;
+					if(j%2 != 0) {
+						tile = new tombEdge(platformsStart.x + i*200 + m*32, platformsStart.y + j*120, 0);
+					}
+					else {
+						tile = new tombEdge(platformsStart.x + i*200 + 100 + m*32, platformsStart.y + j*120, 0);
+					}
+					platforms.get(i*6 + j).add(tile);
+				}
+			}
+		}
+		
+		// Move wolfie and player to the middle.
+		player.getPlayer().setDoubleX(platforms.get(3*5 + 3).get(1).getIntX());
+		player.getPlayer().setDoubleY(platforms.get(3*5 + 3).get(1).getIntY()-player.getPlayer().getHeight());
+		setDoubleX(platforms.get(4*5 + 3).get(1).getIntX()-getWidth()/2 + platforms.get(4*5+3).get(1).getWidth()/2);
+		setDoubleY(platforms.get(4*5 + 3).get(1).getIntY()-getHeight());
+		faceTowardPlayer();
+	}
 
 	public void spawnClaw(int x, int y) {	
 		int spawnX = x;
@@ -422,6 +769,9 @@ public class shadowOfTheDenmother extends boss {
 		// Wolf jumping
 		dealWithJumping();
 		dealWithClawAttacks();
+		
+		// Abilities
+		dealWithShadowLines();
 		
 		// Only do fight things if the fight is in progress.
 		if(fightInProgress) {
