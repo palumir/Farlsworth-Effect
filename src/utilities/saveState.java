@@ -1,13 +1,16 @@
 package utilities;
 
+import java.awt.Point;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 
 import UI.tooltipString;
+import effects.effectTypes.savePoint;
 import interactions.event;
 import interactions.quest;
 import items.bottle;
@@ -49,9 +52,11 @@ public class saveState implements Serializable {
 	private inventory playerInventory;
 	private bottle equippedBottle;
 	
-	// Level and exp
-	private int playerLevel;
-	private int expIntoLevel;
+	// Last well coordinates
+	public Point lastWell;
+	
+	// Last save bottle coordinates
+	public Point lastSaveBottle;
 	
 	// Save quietly?
 	private static boolean quiet = false;
@@ -107,6 +112,35 @@ public class saveState implements Serializable {
 				objectStream.writeObject(s.getPlayerY());
 				objectStream.writeObject(s.getFacingDirection());
 				
+				// Last well position
+				Point lastWell = player.getPlayer().lastWell;
+				
+				if(lastWell == null) {
+					objectStream.writeObject(false);
+					objectStream.writeObject(0);
+					objectStream.writeObject(0);
+				}
+				else {
+					objectStream.writeObject(true);
+					objectStream.writeObject((int)lastWell.getX());
+					objectStream.writeObject((int)lastWell.getY());
+				}
+				
+				// Last well position
+				Point lastSaveBottle = player.getPlayer().lastSaveBottle;
+				
+				if(lastSaveBottle == null) {
+					objectStream.writeObject(false);
+					objectStream.writeObject(0);
+					objectStream.writeObject(0);
+				}
+				else {
+					objectStream.writeObject(true);
+					objectStream.writeObject((int)lastSaveBottle.getX());
+					objectStream.writeObject((int)lastSaveBottle.getY());
+				}
+				
+				
 				////////////////
 				/// EVENTS   ///
 				////////////////
@@ -134,33 +168,22 @@ public class saveState implements Serializable {
 					item currItem = s.getPlayerInventory().get(i);
 					
 					// Write the item name.
-					objectStream.writeObject(currItem.getName());
+					objectStream.writeObject(currItem.getClass().getName());
 					
-					// For each item, save a list of booleans.
+					// Save zone
+					objectStream.writeObject(currItem.discoverZone);
 					
-					// Write the length.
-					objectStream.writeObject(currItem.getSaveBooleans().size());
+					// Save position.
+					objectStream.writeObject(currItem.getIntX());
+					objectStream.writeObject(currItem.getIntY());
 					
-					// Write each boolean name and the boolean.
-					for(int j = 0; j < currItem.getSaveBooleans().size(); j++) {
-						objectStream.writeObject(currItem.getSaveBooleans().getName(j));
-						objectStream.writeObject(currItem.getSaveBooleans().getBool(j));
-					}
+					// Save the slot.
+					objectStream.writeObject(currItem.slot);
+					
+					// For bottles, save the charges.
+					if(currItem instanceof bottle) objectStream.writeObject(((bottle)currItem).getChargesLeft());
+					
 				}
-				
-				// Write equipped bottle to file.
-				if(s.getEquippedBottle() == null) {
-					objectStream.writeObject("None!");
-					objectStream.writeObject(0);
-				}
-				else {
-					objectStream.writeObject(s.getEquippedBottle().getName());
-					objectStream.writeObject(s.getEquippedBottle().getChargesLeft());
-				}
-				
-				// Write the level and exp into level.
-				objectStream.writeObject(s.getPlayerLevel());
-				objectStream.writeObject(s.getExpIntoLevel());
 				
 				//////////////////////
 				/// CURRENT QUESTS ///
@@ -202,6 +225,26 @@ public class saveState implements Serializable {
 			s.setPlayerY((int) objectStream.readObject());
 			s.setFacingDirection((String)objectStream.readObject());
 			
+			// Get the last well.
+			boolean isThereAWell = (boolean) objectStream.readObject();
+			if(isThereAWell) {
+				s.lastWell = new Point((int)objectStream.readObject(),(int)objectStream.readObject());
+			}
+			else {
+				objectStream.readObject();
+				objectStream.readObject();
+			}
+			
+			// Get the last bottle charge
+			boolean isThereASaveBottle = (boolean) objectStream.readObject();
+			if(isThereASaveBottle) {
+				s.lastSaveBottle = new Point((int)objectStream.readObject(),(int)objectStream.readObject());
+			}
+			else {
+				objectStream.readObject();
+				objectStream.readObject();
+			}
+			
 			//////////////
 			/// EVENTS ///
 			//////////////
@@ -229,45 +272,47 @@ public class saveState implements Serializable {
 			// Read the length of the coming array.
 			int j = (int)objectStream.readObject();
 			
-			// Read the inventory (names of items) to save file.
-			ArrayList<String> itemNames = new ArrayList<String>();
-			ArrayList<saveBooleanList> newList = new ArrayList<saveBooleanList>();
-			for(int i = 0; i < j; i++) {
-				itemNames.add((String)objectStream.readObject());
-				
-				// Read length of the saveBooleans list.
-				int newListSize = (int)objectStream.readObject();
-				saveBooleanList l = new saveBooleanList();
-				for(int n = 0; n < newListSize; n++) {
-					String getName = (String)objectStream.readObject();
-					boolean getBool = (boolean)objectStream.readObject();
-					l.add(getName, getBool);
-				}
-				newList.add(l);
-			}
-			
 			// Get the item pertaining to each name and add it to an array list.
 			inventory newInventory = new inventory();
-			for(int i = 0; i < itemNames.size(); i++) {
-				item.getItemByName(itemNames.get(i)).setSaveBooleans(newList.get(i));
-				newInventory.add(item.getItemByName(itemNames.get(i)));
+			for(int i = 0; i < j; i++) {
+				
+				// Write the item name.
+				String itemName = (String)objectStream.readObject();
+				
+				// Save zone
+				String discoverZone = (String)objectStream.readObject();
+				
+				// x and y
+				int x = (int)objectStream.readObject();
+				int y = (int)objectStream.readObject();
+			
+				Class<?> clazz = Class.forName(itemName);
+				Constructor<?> ctor = clazz.getConstructor(int.class, int.class);
+				Object object = ctor.newInstance(new Object[] { x,
+						y});
+				
+				// Save the slot.
+				int slot = (int)objectStream.readObject();
+				
+				// Add the slot and discover zone to the item.
+				item newItem = (item)object;
+				newItem.setDrawObject(false); // Don't draw objects on the floor if they're in our inventory.
+				newItem.inInventory = true; // Of course, we're loading it from the inventory.
+				newItem.slot = slot;
+				newItem.discoverZone = discoverZone;
+				
+				// Equip equipped items.
+				newInventory.equipItem(newItem, slot);
+				
+				// For bottles, save the charges.
+				if(newItem instanceof bottle) {
+					((bottle) newItem).setChargesLeft((int)(objectStream.readObject()));
+				}
+				
+				newInventory.add(newItem);
 				
 			}
 			s.setPlayerInventory(newInventory);
-			
-			// Write equipped bottle to file.
-			String equippedBottleName = (String)objectStream.readObject();
-			s.setEquippedBottle(((bottle)item.getItemByName(equippedBottleName)));
-			
-			// Set charges.
-			if(s.getEquippedBottle() != null) s.getEquippedBottle().setChargesLeft((int)objectStream.readObject());
-			else {
-				int placeHolder = (int)objectStream.readObject();
-			}
-			
-			// Get level and exp
-			s.setPlayerLevel((int)objectStream.readObject());
-			s.setExpIntoLevel((int)objectStream.readObject());
 			
 			//////////////
 			/// QUESTS ///
@@ -343,22 +388,6 @@ public class saveState implements Serializable {
 
 	public void setPlayerInventory(inventory playerInventory) {
 		this.playerInventory = playerInventory;
-	}
-
-	public int getPlayerLevel() {
-		return playerLevel;
-	}
-
-	public void setPlayerLevel(int playerLevel) {
-		this.playerLevel = playerLevel;
-	}
-
-	public int getExpIntoLevel() {
-		return expIntoLevel;
-	}
-
-	public void setExpIntoLevel(int expIntoLevel) {
-		this.expIntoLevel = expIntoLevel;
 	}
 
 	public bottle getEquippedBottle() {

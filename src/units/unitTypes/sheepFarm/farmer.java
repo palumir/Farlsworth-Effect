@@ -203,17 +203,19 @@ public class farmer extends unit {
 		// If we have reached the end of our quest conversation (and they clicked yes, of course, since it's all they can do.)
 		if(sequenceNumber == 0 && (interactSequence != null && !interactSequence.isButtonMode() && interactSequence.getTheText().getTextOnPress()!=null) &&
 				(interactSequence.getTheText().getTextOnPress().contains("key to his pen") && interactSequence.textScrollingFinished())) {
-			farmKey.keyRef.pickUp();
+			farmKey f = new farmKey(0,0);
+			f.pickUp();
 			sequenceNumber++;
 		}
 		if(sequenceNumber == 1 && (interactSequence != null && interactSequence.getTheText().getTextOnPress()!=null) &&
 				(interactSequence.getTheText().getTextOnPress().contains("give me that back") && interactSequence.textScrollingFinished())) {
-			farmKey.keyRef.drop();
+			player.getPlayer().getPlayerInventory().get("Farm Key").drop();
 			sequenceNumber++;
 		}
 		if(sequenceNumber == 2 && (interactSequence != null && interactSequence.getTheText().getTextOnPress()!=null) &&
 				(interactSequence.getTheText().getTextOnPress().contains("ake this") && interactSequence.textScrollingFinished())) {
-			farmGateKey.keyRef.pickUp();
+			farmGateKey f = new farmGateKey(0,0);
+			f.pickUp();
 			sequenceNumber++;
 		}
 		if(sequenceNumber == 3 && interactSequence != null && interactSequence.getTheText()!=null && interactSequence.getTheText().isEnd()) {

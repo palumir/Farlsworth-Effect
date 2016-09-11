@@ -19,7 +19,7 @@ public class groundTile extends chunk {
 	public static int DEFAULT_TILE_HEIGHT = 32;
 	
 	// Gather a list of all groundTiles.
-	public static CopyOnWriteArrayList<groundTile> groundTiles;
+	public static CopyOnWriteArrayList<chunk> groundTiles = new CopyOnWriteArrayList<chunk>();
 
 	// Constructor
 	public groundTile(chunkType c, int newX, int newY, int i) {
@@ -284,7 +284,6 @@ public class groundTile extends chunk {
 	
 	// Initiate
 	public static void initiate() {
-		groundTiles = new CopyOnWriteArrayList<groundTile>();
 	}
 	
 	// Respond to destroy

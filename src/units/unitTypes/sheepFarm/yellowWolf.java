@@ -161,40 +161,6 @@ public class yellowWolf extends wolf {
 
 	@Override
 	public void spawnTrail() {
-		// Spawn rocks
-		int stopAt = 10;
-		int howClose = (int) Math.sqrt(Math.pow(this.getIntX() - currClaw.getIntX(),2) + Math.pow(this.getIntY() - currClaw.getIntY(), 2));
-		
-		// If we have a list of trailSpawns, use that.
-		if(getTrailSpawns()!=null && getTrailSpawns().size() > 0) {
-			for(int i = 0; i < getTrailSpawns().size(); i++) {
-				if((Math.abs(getTrailSpawns().get(i).getX() - getIntX()) < getJumpSpeed()*3 && Math.abs(getTrailSpawns().get(i).getY() - getIntY()) < getJumpSpeed()*3)) {
-					explodingRock r = new explodingRock((int)getTrailSpawns().get(i).getX() - explodingRock.getDefaultWidth()/2 + this.getWidth()/2,
-							  (int)getTrailSpawns().get(i).getY() - darkHole.getDefaultHeight()/2 + this.getHeight()/2,
-							  false,
-							  howManyRockPiecesSpawn,
-							  DEFAULT_ROCK_PIECE_MOVESPEED,
-							  DEFAULT_ROCK_RADIUS,
-							  DEFAULT_ROCK_DAMAGE,
-							  DEFAULT_ROCK_DURATION);
-					r.setRockAngles(getRockAngles());
-				}
-			}
-		}
-		
-		// Otherwise, spawn every 
-		else if(time.getTime() - lastSpawnRock > getSpawnRockEvery()*1000 && (howClose > stopAt)) {
-			lastSpawnRock = time.getTime();
-			explodingRock r = new explodingRock(this.getIntX() + this.getWidth()/2 - explodingRock.getDefaultWidth()/2,
-					  this.getIntY() + this.getHeight()/2 - explodingRock.getDefaultHeight()/2,
-					  false,
-					  howManyRockPiecesSpawn,
-					  DEFAULT_ROCK_PIECE_MOVESPEED,
-					  DEFAULT_ROCK_RADIUS,
-					  DEFAULT_ROCK_DAMAGE,
-					  DEFAULT_ROCK_DURATION);
-			r.setRockAngles(getRockAngles());
-		}
 	}
 
 	@Override

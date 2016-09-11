@@ -1,6 +1,8 @@
 package zones;
 
+import java.awt.Point;
 import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import UI.tooltipString;
 import drawing.drawnObject;
@@ -10,10 +12,10 @@ import terrain.groundTile;
 import units.player;
 import utilities.intTuple;
 import utilities.saveState;
-import zones.farmLand.farmTomb;
 import zones.farmLand.forest;
-import zones.farmLand.sheepFarm;
 import zones.farmLand.spiderCave;
+import zones.farmTomb.farmTomb;
+import zones.sheepFarm.sheepFarm;
 
 public abstract class zone {
 	
@@ -69,26 +71,39 @@ public abstract class zone {
 	
 	// Switch zones.
 	public static void switchZones(player p, zone a, zone b, int x, int y, String direction) {	
-		// Save the player's progress before switching zones..
-		saveState.createSaveState();
 		
-		// Re-create the player in the new zone.
-		drawnObject.dontReloadTheseObjects = new ArrayList<drawnObject>();
-		music.endAll();
-		loadedOnce = false;
-		player.loadPlayer(player.getPlayer(), b, x, y, direction);
-		
-		// If we are going into the cave for the first time, display tooltip.
-		if(spiderCave.enteredSpiderCaveBefore != null && !spiderCave.enteredSpiderCaveBefore.isCompleted()) {
-			tooltipString t = new tooltipString("In platformer mode, press 'w' to jump.");
-			spiderCave.enteredSpiderCaveBefore.setCompleted(true);
-			saveState.setQuiet(true);
-			saveState.createSaveState();
-			saveState.setQuiet(false);
+		// If we are in the same zone, just move the player.
+		if(currentZone != null && currentZone.getName().equals(b.getName())) {
+			p.setDoubleX(x);
+			p.setDoubleY(y);
+			p.setFacingDirection(direction);
 		}
+		
+		// If we are leaving a zone into a new one
 		else {
-			// Save the player in the new zone.
+			// Save the player's progress before switching zones..
 			saveState.createSaveState();
+			
+			// Re-create the player in the new zone.
+			drawnObject.dontReloadTheseObjects = new ArrayList<drawnObject>();
+			music.endAll();
+			groundTile.groundTiles = new CopyOnWriteArrayList<chunk>();
+			loadedOnce = false;
+			player.loadPlayer(player.getPlayer(), b, x, y, direction);
+			
+			// If we are going into the cave for the first time, display tooltip.
+			if(spiderCave.enteredSpiderCaveBefore != null && !spiderCave.enteredSpiderCaveBefore.isCompleted()) {
+				tooltipString t = new tooltipString("In platformer mode, press 'w' to jump.");
+				spiderCave.enteredSpiderCaveBefore.setCompleted(true);
+				saveState.setQuiet(true);
+				saveState.createSaveState();
+				saveState.setQuiet(false);
+			}
+			else {
+				// Save the player in the new zone.
+				player.getPlayer().lastWell = new Point(x,y);
+				saveState.createSaveState();
+			}
 		}
 	}
 	

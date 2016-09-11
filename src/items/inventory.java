@@ -11,7 +11,6 @@ import UI.interfaceObject;
 import UI.tooltipString;
 import drawing.gameCanvas;
 import drawing.spriteSheet;
-import interactions.event;
 import sounds.sound;
 import units.player;
 import utilities.stringUtils;
@@ -34,7 +33,8 @@ public class inventory extends interfaceObject {
 	
 	// Strings.
 	public static String DEFAULT_EMPTY_SLOT = "Empty";
-	public static String DEFAULT_BOTTOM_TEXT = "Press \'e\' to equip";
+	public static String DEFAULT_EQUIP_TEXT = "Press \'e\' to equip";
+	public static String DEFAULT_UNEQUIP_TEXT = "Press \'e\' to unequip";
 	
 	// Colors
 	public static Color DEFAULT_SLOT_COLOR = new Color(52,41,36);
@@ -46,6 +46,25 @@ public class inventory extends interfaceObject {
 	//////////////
 	/// FIELDS ///
 	//////////////
+	
+	// List of active inventory slots
+	public static ArrayList<Integer> activeSlotKeys = new ArrayList<Integer>() {{
+		add(KeyEvent.VK_ENTER);
+		add(KeyEvent.VK_SPACE);
+		add(KeyEvent.VK_SHIFT);
+		add(KeyEvent.VK_1);
+		add(KeyEvent.VK_2);
+		add(KeyEvent.VK_3);
+		add(KeyEvent.VK_4);
+		add(KeyEvent.VK_5);
+		add(KeyEvent.VK_6);
+		add(KeyEvent.VK_7);
+		add(KeyEvent.VK_8);
+		add(KeyEvent.VK_9);
+		add(KeyEvent.VK_0);
+	}};
+	
+	public ArrayList<item> activeSlots = new ArrayList<item>();
 	
 	// The actual items
 	private ArrayList<item> items;
@@ -63,20 +82,12 @@ public class inventory extends interfaceObject {
 	private String unequipWeapon;
 	private String UIMove;
 	
-	// Tutorial messages
-	private static event pressEToEquip;
-	private static event pressEnterToUse;
-	
 	///////////////
 	/// METHODS ///
 	///////////////
 	public inventory() {
 		super(null, DEFAULT_INVENTORY_START_X, DEFAULT_INVENTORY_START_Y, 0, 0);
 		setItems(new ArrayList<item>());
-		
-		// Create the event
-		pressEnterToUse = new event("inventoryPressEnterToUseBottle");
-		pressEToEquip = new event("inventoryPressEToEquipTheBottle");
 		
 		// Set sounds.
 		openInventory = "sounds/effects/player/UI/openInventory.wav";
@@ -94,23 +105,10 @@ public class inventory extends interfaceObject {
 			// Stop the player
 			player.getPlayer().stop();
 			
-			// Set pressEToEquip to be true.
-			if(!pressEToEquip.isCompleted() && player.getPlayer().getPlayerInventory().hasItem("Save Bottle")) {
-				pressEToEquip.setCompleted(true);
-				tooltipString t = new tooltipString("Select the bottle then press 'e' to equip.");
-			}
-			
 			sound s = new sound(openInventory);
 			s.start();
 		}
-		else { 
-			
-			// Set pressSpaceToAttack to be true.
-			if(!pressEnterToUse.isCompleted() && player.getPlayer().getEquippedBottle() != null &&
-					player.getPlayer().getEquippedBottle().getName().equals("Save Bottle")) {
-				pressEnterToUse.setCompleted(true);
-				tooltipString t = new tooltipString("Press 'enter' to create a save point using the bottle.");
-			}
+		else {
 			
 			sound s = new sound(closeInventory);
 			s.start();
@@ -131,27 +129,35 @@ public class inventory extends interfaceObject {
 	
 	// Pickup an item into inventory.
 	public void pickUp(item i) {
-		if(!hasItem(i.getName())) {
+		if(!hasItem(i)) {
 			getItems().add(i);
 		}
 	}
 	
 	// Drop an item from inventory.
 	public void drop(item i) {
-		if(hasItem(i.getName())) {
+		if(hasItem(i)) {
 			getItems().remove(i);
 		}
 	}
 	
 	// Check if inventory has item with the same name.
-	public boolean hasItem(String i) {
+	public boolean hasItem(item i) {
 		if(getItems() != null) {
 			for(int j = 0; j < getItems().size(); j++) {
-				if(getItems().get(j) != null  && getItems().get(j).getName().equals(i)) return true;
+				if(getItems().get(j) != null  && 
+						getItems().get(j).getName().equals(i.getName()) &&
+						getItems().get(j).getIntX() == i.getIntX() &&
+						getItems().get(j).getIntY() == i.getIntY() &&
+						getItems().get(j).discoverZone.equals(i.discoverZone)) return true;
 			}
 		}
 		return false;
 	}
+	
+	// Waiting to equip item?
+	private boolean waitingToEquipItem = false;
+	private item itemToEquip;
 	
 	// Interact with the current selected item.
 	public void equipSelectedItem() {
@@ -164,28 +170,17 @@ public class inventory extends interfaceObject {
 				
 				// Get the item.
 				item i = getItems().get(selectedSlot);
-				player currPlayer = player.getPlayer();
 				
-				// Deal with bottles.
-				if(i instanceof bottle) {
+				// If the weapon is currently unequipped, equip it.
+				if(i.slot == KeyEvent.VK_WINDOWS) {
 					
-					// If the weapon is currently equipped, unequip it.
-					if(currPlayer.getEquippedBottle() != null && currPlayer.getEquippedBottle().getName().equals(i.getName())) {
-						// Unequip item
-						currPlayer.unequipBottle();
-						
-						// Play equip sound.
-						sound s = new sound(unequipWeapon);
-						s.start();
-					}
-					else {
-						// Equip item
-						i.getItemRef().equip();
-						
-						// Play equip sound.
-						sound s = new sound(equipWeapon);
-						s.start();
-					}
+					// Display a tooltip.
+					new tooltipString("Enter a slot to equip the item (enter, space, shift, 1-9).");
+					waitingToEquipItem = true;
+					itemToEquip = i;
+				}
+				else {
+					unequipItem(i);
 				}
 				
 			}
@@ -193,6 +188,41 @@ public class inventory extends interfaceObject {
 				// TODO: Play unequippable sound?
 			}
 		}
+	}
+	
+	// Unequip item
+	public void unequipItem(item i) {
+		
+		// Play equip sound.
+		sound s = new sound(unequipWeapon);
+		s.start();
+		
+		// Actually unequip it.
+		i.slot = KeyEvent.VK_WINDOWS;
+		activeSlots.remove(i);
+		
+		// Tooltip.
+		//new tooltipString("Item unequipped.");
+	}
+	
+	// Equip item to slot
+	public void equipItemToSlot(int key) {
+		
+		// Play equip sound.
+		sound s = new sound(equipWeapon);
+		s.start();
+		
+		// Equip it.
+		equipItem(itemToEquip,key);
+		
+		// Stop waiting.
+		waitingToEquipItem = false;
+	}
+	
+	// Actually equip item
+	public void equipItem(item i, int key) {
+		i.slot = key;
+		activeSlots.add(i);
 	}
 	
 	// Move the select around.
@@ -242,34 +272,48 @@ public class inventory extends interfaceObject {
 	
 	// Respond to key press.
 	public void respondToKeyPress(KeyEvent k) {
-		// Player presses i (inventory) key.
-		if(k.getKeyCode() == KeyEvent.VK_ESCAPE) { 
-			toggleDisplay();
-		}
 		
-		// Player presses left key.
-		if(k.getKeyCode() == KeyEvent.VK_A) { 
-			moveSelect("left");
+		if(waitingToEquipItem) {
+			
+			// We're good, equip the item.
+			if(activeSlotKeys.contains(k.getKeyCode())) {
+				equipItemToSlot(k.getKeyCode());
+			}
+			else {
+				new tooltipString("You didn't enter a correct slot. Quit joshing me hard.");
+				waitingToEquipItem = false;
+			}
 		}
-		
-		// Player presses right key.
-		if(k.getKeyCode() == KeyEvent.VK_D) { 
-			moveSelect("right");
-		}
-		
-		// Player presses up key
-		if(k.getKeyCode() == KeyEvent.VK_W) { 
-			moveSelect("up");
-		}
-		
-		// Player presses down key
-		if(k.getKeyCode() == KeyEvent.VK_S) { 
-			moveSelect("down");
-		}
-		
-		// Player presses e key.
-		if(k.getKeyCode() == KeyEvent.VK_E || k.getKeyCode() == KeyEvent.VK_SPACE || k.getKeyCode() == KeyEvent.VK_ENTER) { 
-			equipSelectedItem();
+		else { 
+			// Player presses i (inventory) key.
+			if(k.getKeyCode() == KeyEvent.VK_ESCAPE) { 
+				toggleDisplay();
+			}
+			
+			// Player presses left key.
+			if(k.getKeyCode() == KeyEvent.VK_A) { 
+				moveSelect("left");
+			}
+			
+			// Player presses right key.
+			if(k.getKeyCode() == KeyEvent.VK_D) { 
+				moveSelect("right");
+			}
+			
+			// Player presses up key
+			if(k.getKeyCode() == KeyEvent.VK_W) { 
+				moveSelect("up");
+			}
+			
+			// Player presses down key
+			if(k.getKeyCode() == KeyEvent.VK_S) { 
+				moveSelect("down");
+			}
+			
+			// Player presses e key.
+			if(k.getKeyCode() == KeyEvent.VK_E || k.getKeyCode() == KeyEvent.VK_SPACE || k.getKeyCode() == KeyEvent.VK_ENTER) { 
+				equipSelectedItem();
+			}
 		}
 	}
 
@@ -332,7 +376,7 @@ public class inventory extends interfaceObject {
 					if(x < getItems().size()) {
 						
 						// Draw the item, if it exists.
-						item currentItem = getItems().get(x).getItemRef();
+						item currentItem = getItems().get(x);
 						g.setColor(DEFAULT_TEXT_COLOR);
 						g.drawImage(currentItem.getImage(), 
 								(int)(gameCanvas.getScaleX()*(getIntX() + j*DEFAULT_SLOT_SIZE + DEFAULT_SLOT_SIZE/2 - currentItem.getImage().getWidth()/2 + adjustX)), 
@@ -371,10 +415,18 @@ public class inventory extends interfaceObject {
 								g.drawString("Saves game", 
 										(int)(gameCanvas.getScaleX()*(getIntX() + (int) (Math.sqrt(DEFAULT_INVENTORY_SIZE)*DEFAULT_SLOT_SIZE) + selectedSlotTextAdjustX + adjustX)) - g.getFontMetrics().stringWidth("Saves game")/2, 
 										(int)(gameCanvas.getScaleY()*(getIntY()+ 34 + adjustY + 48)));
-								
-								// Press e to equip.
-								g.drawString(DEFAULT_BOTTOM_TEXT, 
-										(int)(gameCanvas.getScaleX()*(getIntX() + selectedSlotTextAdjustX + (int) (Math.sqrt(DEFAULT_INVENTORY_SIZE)*DEFAULT_SLOT_SIZE) + adjustX)) - g.getFontMetrics().stringWidth(DEFAULT_BOTTOM_TEXT)/2, 
+							}
+							
+							// Press e to equip/dequip.
+							if(currentItem.equippable && 
+								!activeSlots.contains(currentItem)) {
+								g.drawString(DEFAULT_EQUIP_TEXT, 
+										(int)(gameCanvas.getScaleX()*(getIntX() + selectedSlotTextAdjustX + (int) (Math.sqrt(DEFAULT_INVENTORY_SIZE)*DEFAULT_SLOT_SIZE) + adjustX)) - g.getFontMetrics().stringWidth(DEFAULT_EQUIP_TEXT)/2, 
+										(int)(gameCanvas.getScaleY()*(getIntY()+ 34 + adjustY + 140)));
+							}
+							else if(currentItem.equippable && activeSlots.contains(currentItem)){
+								g.drawString(DEFAULT_UNEQUIP_TEXT, 
+										(int)(gameCanvas.getScaleX()*(getIntX() + selectedSlotTextAdjustX + (int) (Math.sqrt(DEFAULT_INVENTORY_SIZE)*DEFAULT_SLOT_SIZE) + adjustX)) - g.getFontMetrics().stringWidth(DEFAULT_UNEQUIP_TEXT)/2, 
 										(int)(gameCanvas.getScaleY()*(getIntY()+ 34 + adjustY + 140)));
 							}
 						}
@@ -428,8 +480,17 @@ public class inventory extends interfaceObject {
 		this.displayOn = displayOn;
 	}
 	
+	public item get(String i) {
+		if(getItems() != null) {
+			for(int j = 0; j < getItems().size(); j++) {
+				if(getItems().get(j) != null  && getItems().get(j).getName().equals(i)) return getItems().get(j);
+			}
+		}
+		return null;
+	}
+	
 	public item get(int i) {
-		return getItems().get(i).getItemRef();
+		return getItems().get(i);
 	}
 	
 	public int size() {

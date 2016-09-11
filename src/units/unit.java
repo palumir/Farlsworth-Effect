@@ -5,7 +5,7 @@ import java.awt.Graphics;
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 
-import UI.playerHealthBar;
+import UI.playerActionBar;
 import doodads.general.lightSource;
 import doodads.general.questMark;
 import drawing.drawnObject;
@@ -1613,7 +1613,7 @@ public class unit extends drawnObject  {
 			}
 			
 			// Draw the red.
-			g.setColor(playerHealthBar.DEFAULT_HEART_COLOR);
+			g.setColor(playerActionBar.DEFAULT_HEART_COLOR);
 			g.fillRect(getDrawX() + hpAdjustX,
 					   getDrawY() + hpAdjustY,
 					   (int)(gameCanvas.getScaleX()*DEFAULT_HEALTHBAR_WIDTH),
@@ -1627,7 +1627,7 @@ public class unit extends drawnObject  {
 					   (int)(gameCanvas.getScaleY()*DEFAULT_HEALTHBAR_HEIGHT));
 
 			// Draw border.
-			g.setColor(playerHealthBar.DEFAULT_BORDER_COLOR);
+			g.setColor(playerActionBar.DEFAULT_BORDER_COLOR);
 			g.drawRect(getDrawX() + hpAdjustX,
 					   getDrawY() + hpAdjustY,
 					   (int)(gameCanvas.getScaleX()*DEFAULT_HEALTHBAR_WIDTH),

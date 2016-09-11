@@ -26,21 +26,9 @@ public class farmKey extends key {
 			key.DEFAULT_SPRITE_ADJUSTMENT_Y
 			));
 	
-	public static key keyRef;
-	
 	///////////////
 	/// METHODS ///
 	///////////////
-	
-	// In inventory.
-	public farmKey() {
-		super(DEFAULT_KEY_NAME);
-	}
-	
-	// Get item ref.
-	public item getItemRef() {
-		return keyRef;
-	}
 	
 	// On floor.
 	public farmKey(int x, int y) {
@@ -55,10 +43,5 @@ public class farmKey extends key {
 	// Get the item ground image.
 	public BufferedImage getImage() {
 		return keySpriteSheetRef.getSprite(0, 0); // Full key.
-	}
-	
-	// Get weapon reference.
-	public static key getBottle() {
-		return keyRef;
 	}
 }

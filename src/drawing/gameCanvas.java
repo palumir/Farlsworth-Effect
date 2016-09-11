@@ -17,6 +17,7 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
+import UI.menu;
 import units.player;
 import utilities.time;
 import utilities.utility;
@@ -140,11 +141,21 @@ public class gameCanvas extends JComponent {
 
 			@Override
 			public void mousePressed(MouseEvent e) {
+				
+				// For menus
+				menu.mousePressed(e);
+				
+				// For developer mode.
 				if(player.getPlayer()!=null) player.getPlayer().mousePressed(e);
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
+				
+				// For menus
+				menu.mouseReleased(e);
+				
+				// For developer mode.
 				if(player.getPlayer()!=null) player.getPlayer().mouseReleased(e);
 			}
 
@@ -163,6 +174,7 @@ public class gameCanvas extends JComponent {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(DEFAULT_START_WIDTH, DEFAULT_START_HEIGHT);
 		frame.setContentPane(getGameCanvas());
+		frame.setResizable(false);
 		frame.setVisible(true);
 		
 		// Set width.

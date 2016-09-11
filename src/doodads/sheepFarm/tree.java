@@ -10,7 +10,7 @@ import utilities.time;
 import utilities.utility;
 import zones.zone;
 import zones.farmLand.forest;
-import zones.farmLand.sheepFarm;
+import zones.sheepFarm.sheepFarm;
 
 public class tree extends chunk {
 	

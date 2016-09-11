@@ -9,7 +9,7 @@ import terrain.chunk;
 import terrain.generalChunkType;
 import units.player;
 import units.bosses.farlsworth;
-import zones.farmLand.sheepFarm;
+import zones.sheepFarm.sheepFarm;
 
 public class horizontalGate extends chunk {
 	

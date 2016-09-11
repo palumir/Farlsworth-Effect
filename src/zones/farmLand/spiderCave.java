@@ -21,6 +21,7 @@ import units.unitTypes.spiderCave.spider;
 import units.unitTypes.spiderCave.webDoor;
 import utilities.intTuple;
 import zones.zone;
+import zones.sheepFarm.sheepFarm;
 
 public class spiderCave extends zone {
 	

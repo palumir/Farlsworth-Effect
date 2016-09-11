@@ -7,6 +7,7 @@ import UI.button;
 import UI.propertyEditBox;
 import drawing.drawnObject;
 import drawing.gameCanvas;
+import terrain.chunk;
 import units.unit;
 import units.unitCommand;
 import units.unitCommands.commandIndicator;
@@ -30,6 +31,7 @@ public class propertiesButton {
 		// Only show unit properties if one unit is selected
 		ArrayList<drawnObject> units = developer.getSelectedUnits();
 		ArrayList<drawnObject> unitCommands = developer.getSelectedUnitCommands();
+		ArrayList<drawnObject> chunks = developer.getSelectedChunks();
 			
 		////////////
 		/// Properties
@@ -123,15 +125,27 @@ public class propertiesButton {
 			if(containsWait) {
 				
 				// Wait time
-				button editMoveSpeedButton = new button("Wait Time","editProperties.waitTime",
+				button editWaitTimeButton = new button("Wait Time","editProperties.waitTime",
 						developer.editorMode.getIntX()+200,
 						developer.editorMode.getIntY()+3*developer.DEFAULT_BUTTON_HEIGHT*4/3 + editPropertiesButton.getChildren().size()*developer.DEFAULT_BUTTON_HEIGHT*4/3,
 						developer.DEFAULT_BUTTON_WIDTH,
 						developer.DEFAULT_BUTTON_HEIGHT);
-				editPropertiesButton.addChild(editMoveSpeedButton);
+				editPropertiesButton.addChild(editWaitTimeButton);
 				
 			}
 				
+		}
+		
+		// Add chunk stuff
+		else if(chunks != null) {
+			
+			// Passable
+			button editPassableButton = new button("Passable","editProperties.passable",
+					developer.editorMode.getIntX()+200,
+					developer.editorMode.getIntY()+3*developer.DEFAULT_BUTTON_HEIGHT*4/3 + editPropertiesButton.getChildren().size()*developer.DEFAULT_BUTTON_HEIGHT*4/3,
+					developer.DEFAULT_BUTTON_WIDTH,
+					developer.DEFAULT_BUTTON_HEIGHT);
+			editPropertiesButton.addChild(editPassableButton);
 		}
 		
 		// Add unit stuff.
@@ -197,6 +211,21 @@ public class propertiesButton {
 		
 	}
 	
+	public static void saveChunkProperties(String b, String value) {
+		
+		// waitTime
+		if(b.contains("editProperties.passable")) {
+			boolean newPassable = Boolean.parseBoolean(value);
+			for(int i = 0; i < saveThings.size(); i++) {
+				if(saveThings.get(i) instanceof chunk) { 
+					chunk c = (chunk)saveThings.get(i);
+					c.setPassable(newPassable);
+				}
+			}
+		}
+		
+	}
+	
 	public static void saveProperty(String b, String value) {
 		
 		// x value
@@ -219,6 +248,7 @@ public class propertiesButton {
 		
 		saveUnitProperties(b,value);
 		saveUnitCommandProperties(b,value);
+		saveChunkProperties(b,value);
 		
 	}
 	
@@ -264,7 +294,7 @@ public class propertiesButton {
 		}
 		
 		makeUnitPopUpBoxes(b);
-		
+		makeChunkPopUpBoxes(b);
 		makeUnitCommandPopUpBoxes(b);
 	}
 	
@@ -292,6 +322,17 @@ public class propertiesButton {
 			
 			saveThing = drawnObject.getTopLeftFrom(saveThings);
 			propertyEditBox p = new propertyEditBox(b.getButtonID(),b.getButtonID(), ((unit)saveThing).getJumpSpeed() + "");
+		}
+	}
+	
+	public static void makeChunkPopUpBoxes(button b) {
+		
+		// jumpSpeed
+		if(b.getButtonID().equals("editProperties.passable")) {
+			ArrayList<drawnObject> objects = developer.getSelectedChunks();
+			saveThings = new ArrayList<drawnObject>(developer.selectedThings);
+			saveThing = drawnObject.getTopLeftFrom(saveThings);
+			propertyEditBox p = new propertyEditBox(b.getButtonID(),b.getButtonID(), ((chunk)saveThing).isPassable() + "");
 		}
 	}
 	

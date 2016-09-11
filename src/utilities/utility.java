@@ -35,6 +35,9 @@ public abstract class utility {
 		// Tick timer
 		time.tickTimer();
 		
+		// Update the mouse tracker.
+		userMouseTracker.update();
+		
 		// Update interface objects (but not atmospheric effects)
 		if(interfaceObject.interfaceObjects != null) {
 			for(int i = 0; i < interfaceObject.interfaceObjects.size(); i++) {

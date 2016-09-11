@@ -14,10 +14,12 @@ import java.util.ArrayList;
 
 import UI.button;
 import UI.interfaceObject;
-import UI.playerHealthBar;
+import UI.playerActionBar;
 import UI.propertyEditBox;
 import UI.text;
 import UI.tooltipString;
+import UI.items.itemDiscover;
+import doodads.general.well;
 import doodads.sheepFarm.bone;
 import doodads.sheepFarm.bush;
 import doodads.sheepFarm.flower;
@@ -26,11 +28,12 @@ import doodads.sheepFarm.haystack;
 import doodads.sheepFarm.log;
 import doodads.sheepFarm.rock;
 import doodads.sheepFarm.tree;
-import doodads.sheepFarm.well;
 import doodads.tomb.wallTorch;
 import drawing.camera;
 import drawing.drawnObject;
 import drawing.gameCanvas;
+import effects.effectTypes.savePoint;
+import items.bottles.saveBottle;
 import modes.topDown;
 import terrain.chunk;
 import terrain.groundTile;
@@ -43,6 +46,7 @@ import units.unitCommands.positionedCommand;
 import utilities.levelSave;
 import utilities.mathUtils;
 import utilities.saveState;
+import utilities.userMouseTracker;
 import utilities.utility;
 import zones.zone;
 
@@ -84,10 +88,6 @@ public class developer extends player {
 	
 	// Current object class
 	public static String currentObjectClass;
-	
-	// Is left click held?
-	private static Point leftClickStartPoint;
-	static Point lastMousePos;
 	
 	// Are we selecting?
 	private static boolean selecting = false;
@@ -749,10 +749,6 @@ public class developer extends player {
 	// Update interface
 	public void updateInterface() {
 		
-		// Record mouse position.
-		Point p = gameCanvas.getGameCanvas().getMousePosition();
-		if(p!=null) lastMousePos = toInGamePos(p);
-		
 		// Update the editor mode.
 		if(levelName != null) displayFileName.setTheText("Level: " + levelName);
 		if(displayEditorMode != null) {
@@ -779,6 +775,19 @@ public class developer extends player {
 			ArrayList<drawnObject> units = new ArrayList<drawnObject>();
 			for(int i = 0; i < selectedThings.size(); i++) {
 				if(selectedThings.get(i) instanceof unit) units.add(selectedThings.get(i));
+			}
+			if(units.size() == 0) return null;
+			return units;
+		}
+		return null;
+	}
+	
+	// Get selected chunks
+	public static ArrayList<drawnObject> getSelectedChunks() {
+		if(selectedThings != null) {
+			ArrayList<drawnObject> units = new ArrayList<drawnObject>();
+			for(int i = 0; i < selectedThings.size(); i++) {
+				if(selectedThings.get(i) instanceof chunk) units.add(selectedThings.get(i));
 			}
 			if(units.size() == 0) return null;
 			return units;
@@ -815,7 +824,7 @@ public class developer extends player {
 		if(movingObject) {
 			
 			// In game point
-			Point inGamePointCurrent = lastMousePos;
+			Point inGamePointCurrent = userMouseTracker.lastMousePos;
 			
 			// Move all of our selected objects.
 			if(selectedThings!=null) {
@@ -855,10 +864,10 @@ public class developer extends player {
 		
 		// If we haven't touched a button.
 		if(touchedButton == null) {
-			leftClickStartPoint = toInGamePos(new Point(e.getX(), e.getY()));
+			userMouseTracker.leftClickStartPoint = userMouseTracker.toInGamePos(new Point(e.getX(), e.getY()));
 			
 			// In game point
-			Point inGamePoint = leftClickStartPoint;
+			Point inGamePoint = userMouseTracker.leftClickStartPoint;
 			
 			// Determine whether or not we are touching something.
 			ArrayList<drawnObject> touchedObjects  = drawnObject.getObjectsInRadius((int)inGamePoint.getX(), (int)inGamePoint.getY(), DEFAULT_CLICK_RADIUS);
@@ -1120,9 +1129,9 @@ public class developer extends player {
 	// Responding to mouse release
 	public static void devMouseReleased(MouseEvent e) {
 		
-		if(leftClickStartPoint!=null) {
-			Rectangle rect= new Rectangle(leftClickStartPoint);
-			rect.add(lastMousePos);
+		if(userMouseTracker.leftClickStartPoint!=null) {
+			Rectangle rect= new Rectangle(userMouseTracker.leftClickStartPoint);
+			rect.add(userMouseTracker.lastMousePos);
 			
 			// Deal with box selecting
 			if(selecting) {
@@ -1235,12 +1244,14 @@ public class developer extends player {
 	
 	// Draw unit particular stuff.
 	public void drawUnitSpecialStuff(Graphics g) {
-		unitCommandsAndHighlight.drawHighLightBox(g, selecting, lastMousePos, leftClickStartPoint);
+		unitCommandsAndHighlight.drawHighLightBox(g, selecting, userMouseTracker.lastMousePos, userMouseTracker.leftClickStartPoint);
 		unitCommandsAndHighlight.drawUnitCommands(g, selectedThings);
 	}
 	
 	// Set test mode.
 	public static void toggleTestMode() {
+		
+		groundTile.groundTiles.clear();
 		
 		// Test mode
 		if(player.isDeveloper()) {
@@ -1354,7 +1365,7 @@ public class developer extends player {
 				
 					// Player presses bar key
 					if(k.getKeyCode() == KeyEvent.VK_SPACE) {
-						spawningThings.spawnThing(editorType, currentObjectClass, lastMousePos, leftClickStartPoint, selecting);
+						spawningThings.spawnThing(editorType, currentObjectClass, userMouseTracker.lastMousePos, userMouseTracker.leftClickStartPoint, selecting);
 					}
 					
 					// Test level

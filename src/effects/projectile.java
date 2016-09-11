@@ -181,7 +181,7 @@ public abstract class projectile extends effect {
 		run = floatRun;
 	}
 	
-	// Update unit
+	// Update projectile
 	@Override
 	public void update() {
 		

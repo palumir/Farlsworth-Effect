@@ -36,7 +36,7 @@ public class fire extends effect {
 	public static String DEFAULT_EFFECT_NAME = "fire";
 	
 	// Effect sprite stuff.
-	private static String DEFAULT_EFFECT_SPRITESHEET = "images/effects/" + DEFAULT_EFFECT_NAME + ".png";
+	private static String DEFAULT_EFFECT_SPRITESHEET = "images/effects/weather/" + DEFAULT_EFFECT_NAME + ".png";
 	
 	// Duration
 	private static float DEFAULT_ANIMATION_DURATION = 1f;

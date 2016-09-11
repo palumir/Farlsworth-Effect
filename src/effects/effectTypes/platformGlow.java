@@ -46,13 +46,10 @@ public class platformGlow extends effect {
 	private static String DEFAULT_EFFECT_NAME = "platformGlow";
 	
 	// Effect sprite stuff.
-	private static String DEFAULT_EFFECT_SPRITESHEET = "images/effects/" + DEFAULT_EFFECT_NAME + ".png";
+	private static String DEFAULT_EFFECT_SPRITESHEET = "images/effects/bosses/wolfless/" + DEFAULT_EFFECT_NAME + ".png";
 	
 	// Duration
 	private static float DEFAULT_ANIMATION_DURATION = 10f; // multiple of 0.25f
-	
-	// Effect sound
-	protected String effectSound2 = "sounds/effects/combat/darkExplode.wav";
 	
 	// Damage
 	protected int DEFAULT_DAMAGE = 1;

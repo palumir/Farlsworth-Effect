@@ -70,17 +70,9 @@ public class firePit extends chunk {
 		startOfConversation = new textSeries(null, "A fire pit.");
 		
 		// If player doesn't have torch.
-		if(!player.getPlayer().getPlayerInventory().hasItem("Torch")) {
-			s = startOfConversation.addChild(null, "You have nothing to light.");
-			s = s.addChild(null, "You'd probably just set everything on fire anyway.");
-			s.setEnd();
-		}
-		else {
-			s = startOfConversation.addChild("Light torch", "You light the torch on fire.");
-			s.setEnd();
-			s = startOfConversation.addChild("Walk away", "It's for the best. Fire is dangerous.");
-			s.setEnd();
-		}
+		s = startOfConversation.addChild(null, "You have nothing to light.");
+		s = s.addChild(null, "You'd probably just set everything on fire anyway.");
+		s.setEnd();
 			
 		return new interactBox(startOfConversation, this);
 	}
