@@ -74,7 +74,8 @@ public class propertyEditBox extends interfaceObject  {
 		
 		// Number entered
 		if(Character.isDigit(k.getKeyChar()) 
-				|| k.getKeyCode() == KeyEvent.VK_MINUS) {
+				|| k.getKeyCode() == KeyEvent.VK_MINUS || 
+				Character.isAlphabetic((k.getKeyChar()))) {
 			setCurrentValue(getCurrentValue() + k.getKeyChar());
 		}
 		

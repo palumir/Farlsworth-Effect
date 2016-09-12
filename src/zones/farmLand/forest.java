@@ -96,17 +96,6 @@ public class forest extends zone {
 	}
 	
 	// Spawn grass from x to y.
-	public void spawnGrassRect(int x1, int y1, int x2, int y2) {
-		int numX = (x2 - x1)/grass.DEFAULT_CHUNK_WIDTH;
-		int numY = (y2 - y1)/grass.DEFAULT_CHUNK_HEIGHT;
-		for(int i = 0; i < numX; i++) {
-			for(int j = 0; j < numY; j++) {
-				grass.createChunk(i*grass.DEFAULT_CHUNK_WIDTH + x1, j*grass.DEFAULT_CHUNK_HEIGHT + y1);
-			}
-		}
-	}
-	
-	// Spawn grass from x to y.
 	public void spawnMountainRect(int x1, int y1, int x2, int y2) {
 		int numX = (x2 - x1)/cave.DEFAULT_CHUNK_WIDTH;
 		int numY = (y2 - y1)/cave.DEFAULT_CHUNK_HEIGHT;
@@ -264,13 +253,6 @@ public class forest extends zone {
 		// Rivers
 		spawnWaterRect(-3152+20,-5705+7,-2975,-538+150); // Vertical river
 		spawnWaterRect(-4984,61,318,184); // Horizontal river
-		
-		// Denmother area
-		spawnGrassRect(-4954+2,-5588+12+6,-3115,63); // Denmother's area on left.
-		spawnGrassRect(-3155,-548-31,-2900,60+32); // Grass bridge over river
-		
-		// Grass on right side (Final area)
-		spawnGrassRect(-2985-20,-5598+28,280,64); // Right
 	}
 	
 	// Denmother area

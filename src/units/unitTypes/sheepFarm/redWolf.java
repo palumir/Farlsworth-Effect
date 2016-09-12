@@ -116,7 +116,6 @@ public class redWolf extends wolf {
 		getAnimations().addAnimation(trailDown);
 		
 		changeCombat();
-		setJumpSpeed(1);
 		
 		setCanSlash(true);
 		

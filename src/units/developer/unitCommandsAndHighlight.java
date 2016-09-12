@@ -16,6 +16,7 @@ import units.unitCommands.positionedCommand;
 import units.unitCommands.positionedMovementCommand;
 import units.unitCommands.commands.waitCommand;
 import utilities.imageUtils;
+import utilities.userMouseTracker;
 
 public class unitCommandsAndHighlight {
 	
@@ -74,7 +75,7 @@ public class unitCommandsAndHighlight {
 								positionedMovementCommand p = (positionedMovementCommand)command;
 								
 								// Get the draw position
-								Point inGamePointP = drawnObject.toDrawPos(new Point((int)p.getX(),(int) p.getY()));
+								Point inGamePointP = userMouseTracker.toDrawPos(new Point((int)p.getX(),(int) p.getY()));
 								
 								// Draw from the spawn position to first command.
 								if(j == 0) {
@@ -84,7 +85,7 @@ public class unitCommandsAndHighlight {
 									// Get previous command point
 									positionedCommand prevCommand = u.getPreviousPosCommand(u.getRepeatCommands().size() - 1);
 									
-									Point inGamePointU = drawnObject.toDrawPos(new Point((int)prevCommand.getX(), (int)prevCommand.getY()));
+									Point inGamePointU = userMouseTracker.toDrawPos(new Point((int)prevCommand.getX(), (int)prevCommand.getY()));
 									
 									// Draw arrow
 									imageUtils.drawArrow(g,(int)inGamePointU.getX(), (int)inGamePointU.getY(), (int)inGamePointP.getX(),(int)inGamePointP.getY());
@@ -97,7 +98,7 @@ public class unitCommandsAndHighlight {
 									// Get previous command point
 									positionedCommand prevCommand = u.getPreviousPosCommand(j-1);
 									
-									Point inGamePointPrev = drawnObject.toDrawPos(new Point((int)prevCommand.getX(),(int) prevCommand.getY()));
+									Point inGamePointPrev = userMouseTracker.toDrawPos(new Point((int)prevCommand.getX(),(int) prevCommand.getY()));
 									
 									g.setColor(c);
 									imageUtils.drawArrow(g,(int)inGamePointPrev.getX(),(int)inGamePointPrev.getY(), (int)inGamePointP.getX(),(int)inGamePointP.getY());
@@ -127,8 +128,8 @@ public class unitCommandsAndHighlight {
 		// Draw the box.
 		if(selecting) {
 			
-			Rectangle rect= new Rectangle(drawnObject.toDrawPos(leftClickStartPoint));
-			rect.add(drawnObject.toDrawPos(lastMousePos));
+			Rectangle rect= new Rectangle(userMouseTracker.toDrawPos(leftClickStartPoint));
+			rect.add(userMouseTracker.toDrawPos(lastMousePos));
 
 			g.setColor(DEFAULT_HIGHLIGHT_COLOR);
 			g.drawRect(rect.x, rect.y, rect.width, rect.height);

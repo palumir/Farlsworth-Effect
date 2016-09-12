@@ -7,7 +7,7 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-import UI.playerHealthBar;
+import UI.playerActionBar;
 import drawing.drawnObject;
 import drawing.gameCanvas;
 import drawing.animation.animation;

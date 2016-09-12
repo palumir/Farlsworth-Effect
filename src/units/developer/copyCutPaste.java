@@ -6,6 +6,7 @@ import drawing.drawnObject;
 import terrain.chunk;
 import units.unit;
 import units.unitCommands.positionedCommand;
+import utilities.userMouseTracker;
 
 public class copyCutPaste {
 	
@@ -52,8 +53,8 @@ public class copyCutPaste {
 			for(int i = 0; i < copiedThings.size(); i++) {
 				drawnObject d = copiedThings.get(i);
 				drawnObject newThing = d.makeCopy();
-				newThing.setDoubleX(d.getRelativeX() + developer.lastMousePos.getX());
-				newThing.setDoubleY(d.getRelativeY() + developer.lastMousePos.getY());
+				newThing.setDoubleX(d.getRelativeX() + userMouseTracker.lastMousePos.getX());
+				newThing.setDoubleY(d.getRelativeY() + userMouseTracker.lastMousePos.getY());
 				newThings.add(newThing);
 			
 			}

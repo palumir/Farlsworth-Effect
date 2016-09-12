@@ -26,25 +26,18 @@ public class farmGateKey extends key {
 			key.DEFAULT_SPRITE_ADJUSTMENT_Y
 			));
 	
-	public static key keyRef;
-	
 	///////////////
 	/// METHODS ///
 	///////////////
 	
-	// In inventory.
-	public farmGateKey() {
-		super(DEFAULT_KEY_NAME);
-	}
-	
-	// Get item ref.
-	public item getItemRef() {
-		return keyRef;
-	}
-	
 	// On floor.
 	public farmGateKey(int x, int y) {
 		super(DEFAULT_KEY_NAME,x,y);
+		setStats();
+	}
+	
+	public void setStats() {
+		rarity = "Common";
 	}
 	
 	// React to being picked up.
@@ -55,10 +48,5 @@ public class farmGateKey extends key {
 	// Get the item ground image.
 	public BufferedImage getImage() {
 		return keySpriteSheetRef.getSprite(0, 0); // Full key.
-	}
-	
-	// Get weapon reference.
-	public static key getBottle() {
-		return keyRef;
 	}
 }

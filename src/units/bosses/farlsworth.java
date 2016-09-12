@@ -27,7 +27,7 @@ import utilities.saveState;
 import utilities.time;
 import zones.zone;
 import zones.farmLand.forest;
-import zones.farmLand.sheepFarm;
+import zones.sheepFarm.sheepFarm;
 
 public class farlsworth extends boss {
 	

@@ -73,7 +73,8 @@ public class levelSave implements Serializable {
 				}};
 				
 	public static ArrayList<String> dontSaveTheseThings = new ArrayList<String>() {{
-		add("units.bosses.playerOne");
+		add("units.bosses.fernando");
+		add("units.bosses.rodriguez");
 		add("units.bosses.farlsworth");
 		add("units.bosses.shadowOfTheDenmother");
 		add("doodads.tomb.stairsUp");
@@ -84,7 +85,6 @@ public class levelSave implements Serializable {
 		add("units.developer");
 		add("units.player");
 		add("doodads.general.invisibleLightSource");
-		add("terrain.chunkTypes.water");
 		add("units.developer.developer");
 		add("doodads.sheepFarm.clawMarkBlack");
 		add("doodads.sheepFarm.clawMarkRed");
@@ -96,6 +96,7 @@ public class levelSave implements Serializable {
 		add("moveSpeed");
 		add("jumpSpeed");
 	}};
+	
 
 	// Save the game.
 	public static void createSaveState(String fileName) {
@@ -163,6 +164,9 @@ public class levelSave implements Serializable {
 								
 								// Variations
 								objectStream.writeObject(((groundTile)object).getVariationI());
+								
+								// Passable?
+								objectStream.writeObject(((chunk)object).isPassable());
 							}
 							
 							///////////////////////////////
@@ -180,6 +184,9 @@ public class levelSave implements Serializable {
 								
 								// Variations
 								objectStream.writeObject(((chunk)object).getVariationI());
+								
+								// Passable?
+								objectStream.writeObject(((chunk)object).isPassable());
 							}
 							
 							///////////////////////////////
@@ -338,17 +345,25 @@ public class levelSave implements Serializable {
 					int x = (int)objectStream.readObject();
 					int y = (int)objectStream.readObject();
 					int j = (int)objectStream.readObject();
+					boolean passable = (boolean)objectStream.readObject();
 					
 					if(!dontSaveTheseThings.contains(objectClass)) {
-						Class<?> clazz = Class.forName(objectClass);
-						Constructor<?> ctor = clazz.getConstructor(int.class, int.class, int.class);
-						Object object = ctor.newInstance(new Object[] { x,
-								y,
-								j});
-						numObjects++;
-						
-						if(toCode) {
-							out.println("new " + objectClass + "(" + x + "," + y + "," + j + ");");
+						try {
+							Class<?> clazz = Class.forName(objectClass);
+							Constructor<?> ctor = clazz.getConstructor(int.class, int.class, int.class);
+							Object object = ctor.newInstance(new Object[] { x,
+									y,
+									j});
+							numObjects++;
+							((chunk)object).setPassable(passable);
+							
+							if(toCode) {
+								out.println("c = new " + objectClass + "(" + x + "," + y + "," + j + ");");
+								out.println("c.setPassable(" + passable + ");");
+							}
+						}
+						catch(Exception e) {
+							e.printStackTrace();
 						}
 					}
 				}
@@ -360,18 +375,26 @@ public class levelSave implements Serializable {
 					int x = (int)objectStream.readObject();
 					int y = (int)objectStream.readObject();
 					int j = (int)objectStream.readObject();
+					boolean passable = (boolean)objectStream.readObject();
 					
-					if(!dontSaveTheseThings.contains(objectClass)) {
-						Class<?> clazz = Class.forName(objectClass);
-						Constructor<?> ctor = clazz.getConstructor(int.class, int.class, int.class);
-						Object object = ctor.newInstance(new Object[] { x,
-								y,
-								j});
-						numObjects++;
-						
-						if(toCode) {
-							out.println("new " + objectClass + "(" + x + "," + y + "," + j + ");");
+					try {
+						if(!dontSaveTheseThings.contains(objectClass)) {
+							Class<?> clazz = Class.forName(objectClass);
+							Constructor<?> ctor = clazz.getConstructor(int.class, int.class, int.class);
+							Object object = ctor.newInstance(new Object[] { x,
+									y,
+									j});
+							numObjects++;
+							((chunk)object).setPassable(passable);
+							
+							if(toCode) {
+								out.println("c = new " + objectClass + "(" + x + "," + y + "," + j + ");");
+								out.println("c.setPassable(" + passable + ");");
+							}
 						}
+					}
+					catch(Exception e) {
+						e.printStackTrace();
 					}
 				}
 				

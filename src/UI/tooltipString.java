@@ -9,11 +9,12 @@ import java.awt.image.BufferedImage;
 
 import drawing.drawnObject;
 import drawing.gameCanvas;
+import effects.absolutePositionedEffect;
 import effects.effect;
 import effects.effectType;
 import utilities.time;
 
-public class tooltipString extends effect {
+public class tooltipString extends absolutePositionedEffect {
 	
 	////////////////
 	/// DEFAULTS ///

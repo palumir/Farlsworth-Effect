@@ -44,7 +44,7 @@ public class lightningStrike extends effect {
 	private static String DEFAULT_EFFECT_NAME = "lightningStrike";
 	
 	// Effect sprite stuff.
-	private static String DEFAULT_EFFECT_SPRITESHEET = "images/effects/lightning.png";
+	private static String DEFAULT_EFFECT_SPRITESHEET = "images/effects/weather/lightning.png";
 	
 	// Duration
 	private static float DEFAULT_ANIMATION_DURATION = 1f;

@@ -1,13 +1,17 @@
 package items.bottles;
 
+import java.awt.Point;
 import java.awt.image.BufferedImage;
 
 import UI.tooltipString;
 import drawing.spriteSheet;
 import drawing.spriteSheet.spriteSheetInfo;
+import effects.effectTypes.savePoint;
 import items.bottle;
 import items.item;
+import sounds.sound;
 import units.player;
+import utilities.saveState;
 
 public class saveBottle extends bottle {
 	////////////////
@@ -23,26 +27,16 @@ public class saveBottle extends bottle {
 	/// FIELDS ///
 	//////////////
 	public static spriteSheet bottleSpriteSheetRef = new spriteSheet(new spriteSheetInfo(
-			"images/doodads/items/bottle.png", 
+			"images/doodads/items/saveBottle.png", 
 			bottle.DEFAULT_SPRITE_WIDTH, 
 			bottle.DEFAULT_SPRITE_HEIGHT,
 			bottle.DEFAULT_SPRITE_ADJUSTMENT_X,
 			bottle.DEFAULT_SPRITE_ADJUSTMENT_Y
 			));
 	
-	public static bottle bottleRef;
-	
 	///////////////
 	/// METHODS ///
 	///////////////
-	
-	// In inventory.
-	public saveBottle() {
-		super(DEFAULT_BOTTLE_NAME);
-		
-		// Weapon stats.
-		setStats();
-	}
 	
 	// On floor.
 	public saveBottle(int x, int y) {
@@ -52,13 +46,11 @@ public class saveBottle extends bottle {
 		setStats();
 	}
 	
-	// Get item ref.
-	public item getItemRef() {
-		return bottleRef;
-	}
-	
 	// Set stats
 	public void setStats() {
+		
+		// Rarity
+		rarity = "Common";
 		
 		// Set item's stats
 		// Bottle charges.
@@ -66,12 +58,32 @@ public class saveBottle extends bottle {
 		setMaxCharges(DEFAULT_MAX_CHARGES);
 	}
 	
+	// Use charge.
+	@Override
+	public void useCharge() {
+		if(getChargesLeft() > 0) {
+			sound s = new sound(bottle.bottleDrink);
+			s.start();
+			setChargesLeft(getChargesLeft() - 1);
+			
+			// Set position to be last bottle charge.
+			player.getPlayer().lastSaveBottle = new Point(player.getPlayer().getIntX(), player.getPlayer().getIntY());
+			
+			// Put down indicator and destroy old one.
+			if(player.getPlayer().lastSaveBottleChargeIndicator != null) player.getPlayer().lastSaveBottleChargeIndicator.destroy();
+			player.getPlayer().lastSaveBottleChargeIndicator = new savePoint((int)player.getPlayer().lastSaveBottle.getX(),(int)player.getPlayer().lastSaveBottle.getY());
+			
+			// Save.
+			saveState.createSaveState();
+		}
+	}
+	
 	// React to being picked up.
 	@Override
 	public void reactToPickup() {
 		player currPlayer = player.getPlayer();
 		if(currPlayer != null) {
-			tooltipString t = new tooltipString("Press 'i' to open inventory.");
+			tooltipString t = new tooltipString("Press 'enter' to use a charge of the Save Bottle.");
 		}
 	}
 
@@ -89,10 +101,5 @@ public class saveBottle extends bottle {
 		else {
 			return bottleSpriteSheetRef.getSprite(3, 0); // Full bottle.
 		}
-	}
-	
-	// Get weapon reference.
-	public static bottle getBottle() {
-		return bottleRef;
 	}
 }

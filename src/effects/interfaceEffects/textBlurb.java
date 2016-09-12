@@ -35,7 +35,7 @@ public class textBlurb extends effect {
 	private static String DEFAULT_EFFECT_NAME = "textBlurb";
 	
 	// Effect sprite stuff.
-	private static String DEFAULT_EFFECT_SPRITESHEET = "images/effects/" + DEFAULT_EFFECT_NAME + ".png";
+	private static String DEFAULT_EFFECT_SPRITESHEET = "images/effects/interface/" + DEFAULT_EFFECT_NAME + ".png";
 	
 	// Duration
 	private static float DEFAULT_ANIMATION_DURATION = 3f; // multiple of 0.25f

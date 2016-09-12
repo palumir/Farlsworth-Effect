@@ -13,7 +13,6 @@ import terrain.chunk;
 import units.player;
 import units.unit;
 import units.unitType;
-import units.unitCommands.commands.placeSummonCommand;
 import units.unitCommands.commands.slashCommand;
 import utilities.intTuple;
 import utilities.time;
@@ -564,20 +563,6 @@ public abstract class wolf extends unit {
 
 		public void setClawAttackEvery(float clawAttackEvery) {
 			this.clawAttackEvery = clawAttackEvery;
-		}
-
-		public ArrayList<placeSummonCommand> getTrailSpawns() {
-			
-			// Go through repeat commands and get trailSpawns
-			ArrayList<placeSummonCommand> trailSpawns = new ArrayList<placeSummonCommand>();
-			
-			if(getRepeatCommands() != null) {
-				for(int i = 0; i < getRepeatCommands().size(); i++) {
-					if(getRepeatCommands().get(i) instanceof placeSummonCommand) trailSpawns.add((placeSummonCommand) getRepeatCommands().get(i));
-				}
-			}
-				
-			return trailSpawns;
 		}
 
 }

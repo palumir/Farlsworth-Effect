@@ -8,8 +8,10 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
-import UI.playerHealthBar;
+import UI.button;
+import UI.playerActionBar;
 import UI.tooltipString;
+import UI.menus.deathMenu;
 import doodads.sheepFarm.rock;
 import drawing.camera;
 import drawing.drawnObject;
@@ -18,6 +20,7 @@ import drawing.animation.animation;
 import drawing.animation.animationPack;
 import effects.effect;
 import effects.effectTypes.critBloodSquirt;
+import effects.effectTypes.savePoint;
 import effects.interfaceEffects.interactBlurb;
 import interactions.interactBox;
 import items.bottle;
@@ -28,6 +31,7 @@ import modes.platformer;
 import modes.topDown;
 import sounds.music;
 import units.developer.developer;
+import units.developer.propertiesButton;
 import utilities.saveState;
 import utilities.time;
 import utilities.utility;
@@ -112,6 +116,13 @@ public class player extends unit {
 	// Savestate we loaded from
 	public saveState playerSaveState;
 	
+	// Last well coordinates
+	public Point lastWell;
+	
+	// Last save bottle coordinates
+	public Point lastSaveBottle;
+	public savePoint lastSaveBottleChargeIndicator;
+	
 	// Player inventory
 	private inventory playerInventory = new inventory();
 	
@@ -119,7 +130,7 @@ public class player extends unit {
 	private bottle equippedBottle = null;
 	
 	// Player interface
-	private playerHealthBar healthBar;
+	private playerActionBar healthBar;
 
 	///////////////
 	/// METHODS ///
@@ -172,6 +183,9 @@ public class player extends unit {
 		
 		// Set player animations
 		setNoWeaponStats();
+		
+		// Set z.
+		setZ(1);
 	}
 	
 	// Set animations
@@ -313,16 +327,17 @@ public class player extends unit {
 					   getIntY() - getHitBoxAdjustmentY() + critBloodSquirt.getDefaultHeight()/2 - critBloodSquirt.getDefaultHeight()/2);
 		}
 	}
-	
+
 	// Kill player finally.
 	public void killPlayerFinally() {
-		music.playerDied();
-		main.restartGame("Death");
+		
+		// Create buttons to respawn at well or bottle.
+		new deathMenu();
 	}
 	
 	// Is player dead
 	public void isPlayerDead() {
-		if(unitIsDead && time.getTime() - unitDiedAt > deathAnimationLasts*1000) {
+		if(unitIsDead && time.getTime() - unitDiedAt >= deathAnimationLasts*1000) {
 			killPlayerFinally();
 		}
 	}
@@ -403,21 +418,29 @@ public class player extends unit {
 				
 				// These will be carried over.
 				if(alreadyPlayer.getEquippedBottle() != null)
-				loadedEquippedBottle = (bottle) alreadyPlayer.getEquippedBottle().getItemRef();
+				loadedEquippedBottle = (bottle) alreadyPlayer.getEquippedBottle();
 			}
 		}
 		
 		// Create the player. If we are a developer, give developer functions.
 		if(!isDeveloper()) {
 			thePlayer = new player(playerX, playerY, loadZone);
-			thePlayer.healthBar = new playerHealthBar(5,5);
+			thePlayer.healthBar = new playerActionBar(5,5);
 		}
 		else thePlayer = new developer(playerX, playerY, loadZone);
 		
 		// Set our fields
 		thePlayer.setFacingDirection(newFacingDirection);
 		thePlayer.setPlayerInventory(loadedInventory);
-		if(loadedEquippedBottle!=null) loadedEquippedBottle.equip();
+		if(s!=null) thePlayer.lastWell = s.lastWell;
+		
+		// If there's a bottleSave, put down the marker.
+		if(s!=null) {
+			thePlayer.lastSaveBottle = s.lastSaveBottle;
+			
+			// Create an indicator
+			if(s.lastSaveBottle != null) thePlayer.lastSaveBottleChargeIndicator = new savePoint((int)s.lastSaveBottle.getX(),(int)s.lastSaveBottle.getY());
+		}
 		
 		// Set that we have loaded the player once.
 		playerLoaded = true;
@@ -471,7 +494,6 @@ public class player extends unit {
 			if(interactBox.getCurrentDisplay() != null) {
 				interactBox.getCurrentDisplay().respondToKeyPress(k);
 			}
-			
 			// Player presses y key.
 			else if(k.getKeyCode() == KeyEvent.VK_Y) { 
 				developer.toggleTestMode();
@@ -485,6 +507,21 @@ public class player extends unit {
 			// Respond to inventory presses.
 			else if(playerInventory.isDisplayOn()) {
 				playerInventory.respondToKeyPress(k);
+			}
+			
+			// Respond to active item presses.
+			else if(playerInventory != null && 
+					playerInventory.activeSlots != null && 
+					inventory.activeSlotKeys.contains(k.getKeyCode())) {
+				
+				// Use the item for the key.
+				for(int i = 0; i < playerInventory.activeSlots.size(); i++) {
+					if(playerInventory.activeSlots.get(i).slot == k.getKeyCode()) {
+						playerInventory.activeSlots.get(i).use();
+						break;
+					}
+				}
+				
 			}
 			
 			// Respond to other presses (movement)
@@ -823,11 +860,11 @@ public class player extends unit {
 		}
 	}
 
-	public playerHealthBar getHealthBar() {
+	public playerActionBar getHealthBar() {
 		return healthBar;
 	}
 
-	public void setHealthBar(playerHealthBar healthBar) {
+	public void setHealthBar(playerActionBar healthBar) {
 		this.healthBar = healthBar;
 	}
 

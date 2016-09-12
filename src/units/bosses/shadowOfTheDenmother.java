@@ -1,8 +1,14 @@
 package units.bosses;
 
+import java.awt.AlphaComposite;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 import doodads.sheepFarm.clawMarkRed;
+import drawing.drawnObject;
+import drawing.gameCanvas;
 import drawing.spriteSheet;
 import drawing.animation.animation;
 import drawing.animation.animationPack;
@@ -18,7 +24,7 @@ import units.player;
 import units.unit;
 import units.unitType;
 import units.unitCommands.commands.slashCommand;
-import units.unitTypes.sheepFarm.wolf;
+import units.unitTypes.tomb.lightDude;
 import units.unitTypes.tomb.shadowDude;
 import utilities.intTuple;
 import utilities.time;
@@ -36,26 +42,19 @@ public class shadowOfTheDenmother extends boss {
 	private static float DEFAULT_MOVESPEED_BETA = 2f;
 	
 	// How long to shadow puke for
-	private static float DEFAULT_PUKE_FOR = 1f;
+	private float pukeFor = 1f;
 	private static int DEFAULT_PUKE_EVERY_BASE = 2;
 	
 	// How long does platform glow last for
-	private static float DEFAULT_PLATFORM_GLOW_LASTS_FOR = 10f;
+	private static float DEFAULT_PLATFORM_GLOW_LASTS_FOR = 15f;
 	
 	// Number of hits total
 	private static int numberOfHitsToDieTotal = 6;
 	private int numberOfHitsToDie = numberOfHitsToDieTotal;
 
 	// Unit sprite stuff.
-	private static spriteSheet DEFAULT_UPDOWN_SPRITESHEET = new spriteSheet(new spriteSheetInfo(
-			"images/units/animals/blackWolfUpDown.png", 
-			64, 
-			128,
-			0,
-			0
-			));
 	private static spriteSheet DEFAULT_LEFTRIGHT_SPRITESHEET = new spriteSheet(new spriteSheetInfo(
-			"images/units/animals/blackWolfLeftRight.png",
+			"images/units/bosses/wolfless/blackWolfLeftRight.png",
 			128, 
 			64,
 			0,
@@ -104,6 +103,11 @@ public class shadowOfTheDenmother extends boss {
 	protected boolean riseRunSet = false;
 	protected double rise = 0;
 	protected double run = 0;
+	
+	// Phase stuff
+	protected boolean shadowPuke = false;
+	protected boolean advancedShadowPuke = false;
+	protected float shadowDudeMoveSpeed = 4;
 
 	//////////////////
 	//// METHODS /////
@@ -112,8 +116,18 @@ public class shadowOfTheDenmother extends boss {
 	public shadowOfTheDenmother() {
 		super(unitTypeRef, DEFAULT_UNIT_NAME, 0, 0);
 		killsPlayer = true;
+		lineSpawnsX = new ArrayList<Integer>();
+		lineSpawnsY = new ArrayList<Integer>();
+		lineTypes = new ArrayList<String>();
+		
+		// Platforms
 		spawnPlatforms();
+		
+		// Frig you.
 		addAnimations();
+		
+		// Preload shadowDude stuff.
+		int widthOfShadowDude = shadowDude.getDefaultWidth();
 	}
 	
 	// Add animations.
@@ -125,14 +139,6 @@ public class shadowOfTheDenmother extends boss {
 		// Jumping left animation.
 		animation jumpingLeft = new animation("jumpingLeft", DEFAULT_LEFTRIGHT_SPRITESHEET.getAnimation(6), 4, 4, 1);
 		unitTypeAnimations.addAnimation(jumpingLeft);
-		
-		// Jumping down animation.
-		animation jumpingDown = new animation("jumpingDown", DEFAULT_UPDOWN_SPRITESHEET.getAnimation(3), 2, 2, 1);
-		unitTypeAnimations.addAnimation(jumpingDown);
-		
-		// Jumping up animation.
-		animation jumpingUp = new animation("jumpingUp", DEFAULT_UPDOWN_SPRITESHEET.getAnimation(3), 7, 7, 1);
-		unitTypeAnimations.addAnimation(jumpingUp);
 		
 		// Jumping right animation.
 		animation jumpingRight = new animation("jumpingRight", DEFAULT_LEFTRIGHT_SPRITESHEET.getAnimation(2), 4, 4, 1);
@@ -154,53 +160,45 @@ public class shadowOfTheDenmother extends boss {
 		animation runningRight = new animation("runningRight", DEFAULT_LEFTRIGHT_SPRITESHEET.getAnimation(1), 0, 4, 1f);
 		unitTypeAnimations.addAnimation(runningRight);
 		
-		// Standing up animation.
-		animation standingUp = new animation("standingUp", DEFAULT_UPDOWN_SPRITESHEET.getAnimation(4), 5, 5, 1);
-		unitTypeAnimations.addAnimation(standingUp);
-		
-		// Standing down animation.
-		animation standingDown = new animation("standingDown", DEFAULT_UPDOWN_SPRITESHEET.getAnimation(0), 0, 0, 1);
-		unitTypeAnimations.addAnimation(standingDown);
-		
-		// Running up animation.
-		animation runningUp = new animation("runningUp", DEFAULT_UPDOWN_SPRITESHEET.getAnimation(2), 5, 8, 1f);
-		unitTypeAnimations.addAnimation(runningUp);
-		
-		// Running down animation.
-		animation runningDown = new animation("runningDown", DEFAULT_UPDOWN_SPRITESHEET.getAnimation(2), 0, 3, 1f);
-		unitTypeAnimations.addAnimation(runningDown);
-		
 		// Sleeping animation
 		animation sleepingLeft = new animation("sleepingLeft", DEFAULT_LEFTRIGHT_SPRITESHEET.getAnimation(4), 3, 3, 0.5f);
 		unitTypeAnimations.addAnimation(sleepingLeft);
 		
 		// Howling starting left.
-		animation howlingStartLeft = new animation("howlingStartLeft", DEFAULT_LEFTRIGHT_SPRITESHEET.getAnimation(7), 0, 3, DEFAULT_PUKE_FOR/2);
+		animation howlingStartLeft = new animation("howlingStartLeft", DEFAULT_LEFTRIGHT_SPRITESHEET.getAnimation(7), 0, 3, pukeFor/2);
 		unitTypeAnimations.addAnimation(howlingStartLeft);
 		
 		// Howling middle left.
-		animation howlingLeft = new animation("howlingMiddleLeft", DEFAULT_LEFTRIGHT_SPRITESHEET.getAnimation(7), 4, 4, DEFAULT_PUKE_FOR);
+		animation howlingLeft = new animation("howlingMiddleLeft", DEFAULT_LEFTRIGHT_SPRITESHEET.getAnimation(7), 4, 4, pukeFor);
 		unitTypeAnimations.addAnimation(howlingLeft);
 		
 		// Howling end animation
-		animation howlingEndLeft = new animation("howlingEndLeft", DEFAULT_LEFTRIGHT_SPRITESHEET.getAnimation(7), 5, 9, DEFAULT_PUKE_FOR/2);
+		animation howlingEndLeft = new animation("howlingEndLeft", DEFAULT_LEFTRIGHT_SPRITESHEET.getAnimation(7), 5, 9, pukeFor/2);
 		unitTypeAnimations.addAnimation(howlingEndLeft);
 		
 		// Howling starting right
-		animation howlingStartRight = new animation("howlingStartRight", DEFAULT_LEFTRIGHT_SPRITESHEET.getAnimation(3), 0, 3, DEFAULT_PUKE_FOR/2);
+		animation howlingStartRight = new animation("howlingStartRight", DEFAULT_LEFTRIGHT_SPRITESHEET.getAnimation(3), 0, 3, pukeFor/2);
 		unitTypeAnimations.addAnimation(howlingStartRight);
 		
 		// Howling middle left.
-		animation howlingRight = new animation("howlingMiddleRight", DEFAULT_LEFTRIGHT_SPRITESHEET.getAnimation(3), 4,4, DEFAULT_PUKE_FOR);
+		animation howlingRight = new animation("howlingMiddleRight", DEFAULT_LEFTRIGHT_SPRITESHEET.getAnimation(3), 4,4, pukeFor);
 		unitTypeAnimations.addAnimation(howlingRight);
 		
 		// Howling end animation
-		animation howlingEndRight = new animation("howlingEndRight", DEFAULT_LEFTRIGHT_SPRITESHEET.getAnimation(3), 5, 9, DEFAULT_PUKE_FOR/2);
+		animation howlingEndRight = new animation("howlingEndRight", DEFAULT_LEFTRIGHT_SPRITESHEET.getAnimation(3), 5, 9, pukeFor/2);
 		unitTypeAnimations.addAnimation(howlingEndRight);
 		
+		// Attacking left animation.
+		animation trailLeft = new animation("trailLeft", DEFAULT_LEFTRIGHT_SPRITESHEET.getAnimation(8), 0, 0, 1);
+		unitTypeAnimations.addAnimation(trailLeft);
+		
+		// Attacking right animation.
+		animation trailRight = new animation("trailRight", DEFAULT_LEFTRIGHT_SPRITESHEET.getAnimation(9), 0, 0, 1);
+		unitTypeAnimations.addAnimation(trailRight);
+
 		// Set animations.
 		setAnimations(unitTypeAnimations);
-	
+		
 	}
 	
 	// Deal with animations.
@@ -210,9 +208,11 @@ public class shadowOfTheDenmother extends boss {
 		// No hitboxadjustment.
 		setHitBoxAdjustmentY(0);
 		setHitBoxAdjustmentX(0);
+		
 		if(howling) {
 			howl();
 		}
+		
 		else if(jumping || clawAttacking) {
 			if(clawAttacking && !jumping) {
 				animate("standing" + getFacingDirection());
@@ -221,9 +221,11 @@ public class shadowOfTheDenmother extends boss {
 				animate("jumping" + getFacingDirection());
 			}
 		}
+		
 		else if(isMoving()) {
 			animate("running" + getFacingDirection());
 		}
+		
 		else {
 			animate("standing" + getFacingDirection());
 		}
@@ -241,6 +243,12 @@ public class shadowOfTheDenmother extends boss {
 		startOfClawAttack = time.getTime();
 	}
 	
+	// Respond to destroy
+	@Override
+	public void respondToDestroy() {
+		if(currentLightDude != null) currentLightDude.destroy();
+	}
+	
 	// Claw destroy
 	public void clawDestroy() {
 		currClaw.destroy();
@@ -254,7 +262,6 @@ public class shadowOfTheDenmother extends boss {
 		
 		// Jump there
 		sound s = new sound(bark);
-		s.setPosition(getIntX(), getIntY(), sound.DEFAULT_SOUND_RADIUS);
 		s.start();
 		jumpingToX = c.getIntX() + c.getWidth()/2 - getWidth()/2;
 		jumpingToY = c.getIntY() + c.getHeight()/2 - getHeight()/2;
@@ -378,7 +385,7 @@ public class shadowOfTheDenmother extends boss {
 		String randomlySelectedAbility;
 		if(slashNumber < DEFAULT_PUKE_EVERY_BASE) {
 			randomlySelectedAbility = "slashPlatform";
-			slashNumber++;
+			if(shadowPuke) slashNumber++;
 		}
 		else {
 			int random = utility.RNG.nextInt(2);
@@ -428,18 +435,21 @@ public class shadowOfTheDenmother extends boss {
 			currentAbility = "";
 			sequenceNumber = 0;
 			
+			// Sound
+			sound s = new sound(land);
+			s.start();
+			
 			// Make the platform unusable.
 			ArrayList<groundTile> currPlatform = getCurrentPlatform();
 			platformGlow e = new platformGlow(currPlatform.get(0).getIntX(),currPlatform.get(0).getIntY(),DEFAULT_PLATFORM_GLOW_LASTS_FOR);
-		}
-				
+		}	
 	}
 	
 	// Slash toward player.
 	public void slashTowardPlayer() {
 		faceTowardPlayer();
 		ArrayList<groundTile> nextPlatform = getClosestPlatformInDirection(getFacingDirection());
-		if(nextPlatform != null) slashTo(nextPlatform.get(1).getIntX(), nextPlatform.get(1).getIntY() - getHeight() + 10);
+		if(nextPlatform != null) slashTo(nextPlatform.get(1).getIntX(), nextPlatform.get(1).getIntY() - getHeight()+10);
 	}
 	
 	// Get current paltform
@@ -498,41 +508,6 @@ public class shadowOfTheDenmother extends boss {
 	// Get closest platform in direction.
 	public ArrayList<groundTile> getClosestPlatformInDirection(String direction) {
 		
-		/* COMMENTED OUT MOVES TOWARD THE PLAYER PLATFORM BY PLATFORM
-		 * ArrayList<groundTile> currentPlatform = getCurrentPlatform();
-		ArrayList<groundTile> playerPlatform = getClosestPlatformToPlayer();
-		
-		// Exclude current platform and all platforms behind 
-		ArrayList<ArrayList<groundTile>> outOfPlatforms = new ArrayList<ArrayList<groundTile>>();
-		for(int i = 0; i < platforms.size(); i++) {
-			if(direction.equals("Left") && platforms.get(i).get(0).getIntX() < currentPlatform.get(0).getIntX()) {
-				outOfPlatforms.add(platforms.get(i));
-			}
-			if(direction.equals("Right") && platforms.get(i).get(0).getIntX() > currentPlatform.get(0).getIntX() + currentPlatform.get(0).getWidth()) {
-				outOfPlatforms.add(platforms.get(i));
-			}
-		}
-		
-		// Select two closest platforms out of those platforms.
-		ArrayList<groundTile> firstPlatform = getClosestPlatformToFrom(currentPlatform, outOfPlatforms);
-		outOfPlatforms.remove(firstPlatform);
-		ArrayList<groundTile> secondPlatform = getClosestPlatformToFrom(currentPlatform, outOfPlatforms);
-		
-		double firstDistanceToPlayer = Math.sqrt(Math.pow(firstPlatform.get(1).getIntX() + firstPlatform.get(1).getWidth()/2 - 
-				(playerPlatform.get(1).getIntX() + playerPlatform.get(1).getWidth()/2),2) + 
-			     Math.pow(firstPlatform.get(1).getIntY() + firstPlatform.get(1).getHeight()/2 - 
-			    		 (playerPlatform.get(1).getIntY() + playerPlatform.get(1).getHeight()/2),2));
-		double secondDistanceToPlayer = Math.sqrt(Math.pow(secondPlatform.get(1).getIntX() + secondPlatform.get(1).getWidth()/2 - 
-				(playerPlatform.get(1).getIntX() + playerPlatform.get(1).getWidth()/2),2) + 
-			     Math.pow(secondPlatform.get(1).getIntY() + secondPlatform.get(1).getHeight()/2 - 
-			    		 (playerPlatform.get(1).getIntY() + playerPlatform.get(1).getHeight()/2),2));
-		if(firstDistanceToPlayer > secondDistanceToPlayer) {
-			return secondPlatform;
-		}
-		else {
-			return firstPlatform;
-		}*/
-		
 		ArrayList<groundTile> currentPlatform = getCurrentPlatform();
 		ArrayList<groundTile> playerPlatform = getClosestPlatformToPlayer();
 		
@@ -542,7 +517,7 @@ public class shadowOfTheDenmother extends boss {
 			if(direction.equals("Left") && platforms.get(i).get(0).getIntX() <= playerPlatform.get(0).getIntX()) {
 				outOfPlatforms.add(platforms.get(i));
 			}
-			if(direction.equals("Right") && platforms.get(i).get(0).getIntX() >= playerPlatform.get(0).getIntX() + currentPlatform.get(0).getWidth()) {
+			if(direction.equals("Right") && platforms.get(i).get(0).getIntX() >= playerPlatform.get(0).getIntX()) {
 				outOfPlatforms.add(platforms.get(i));
 			}
 		}
@@ -580,7 +555,7 @@ public class shadowOfTheDenmother extends boss {
 		
 		// Howl (which makes dudes)
 		if(sequenceNumber == 2) {
-			startHowl();
+			if(shadowPuke) startHowl("shadowPuke");
 			sequenceNumber++;
 		}
 		
@@ -594,9 +569,9 @@ public class shadowOfTheDenmother extends boss {
 	}
 	
 	// List of shadow lines
-	private ArrayList<Integer> lineSpawnsX = new ArrayList<Integer>();
-	private ArrayList<Integer> lineSpawnsY = new ArrayList<Integer>();
-	private ArrayList<String> lineTypes = new ArrayList<String>();
+	private ArrayList<Integer> lineSpawnsX;
+	private ArrayList<Integer> lineSpawnsY;
+	private ArrayList<String> lineTypes;
 	
 	// Spawn a shadow line at 
 	public void spawnShadowLineAt(String from, int x, int y) {
@@ -616,11 +591,11 @@ public class shadowOfTheDenmother extends boss {
 		
 		// Spawn units and move them.
 		if(lineSpawnsX != null) {
-			if(lastShadowSpawn == 0) lastShadowSpawn = time.getTime();
-			else if(time.getTime() - lastShadowSpawn > spawnEvery*1000) {
+			//if(lastShadowSpawn == 0) lastShadowSpawn = time.getTime();
+			if(time.getTime() - lastShadowSpawn > spawnEvery*1000) {
 				for(int i = 0; i < lineSpawnsX.size(); i++) {
-					shadowDude u = new shadowDude(lineSpawnsX.get(i), lineSpawnsY.get(i));
-					u.setMoveSpeed(4f);
+					unit u = new shadowDude(lineSpawnsX.get(i), lineSpawnsY.get(i));
+					u.setMoveSpeed(shadowDudeMoveSpeed);
 					u.setDestroyTimer(30);
 					
 					if(lineTypes.get(i).equals("verticalDown")) {
@@ -647,14 +622,20 @@ public class shadowOfTheDenmother extends boss {
 		
 		if(facingDirection.equals("Left")) {
 			spawnShadowLineAt("horizontalLeft", getIntX()-15,getIntY());
-			spawnShadowLineAt("verticalDown", getIntX()-15,getIntY());
-			spawnShadowLineAt("verticalUp", getIntX()-15,getIntY());
+			
+			if(advancedShadowPuke) {
+				spawnShadowLineAt("verticalDown", getIntX()-15,getIntY());
+				spawnShadowLineAt("verticalUp", getIntX()-15,getIntY());
+			}
 		}
 		
 		if(facingDirection.equals("Right")) {
-			spawnShadowLineAt("horizontalRight", getIntX()+getWidth()+15-shadowDude.getDefaultWidth(),getIntY());
-			spawnShadowLineAt("verticalDown", getIntX()+getWidth()+15-shadowDude.getDefaultWidth(),getIntY());
-			spawnShadowLineAt("verticalUp", getIntX()+getWidth()+15-shadowDude.getDefaultWidth(),getIntY());
+			spawnShadowLineAt("horizontalRight", getIntX()+getWidth()+15-25,getIntY());
+			
+			if(advancedShadowPuke) {
+				spawnShadowLineAt("verticalDown", getIntX()+getWidth()+15-25,getIntY());
+				spawnShadowLineAt("verticalUp", getIntX()+getWidth()+15-25,getIntY());
+			}
 		}
 		
 	}
@@ -669,16 +650,24 @@ public class shadowOfTheDenmother extends boss {
 	// Howl stuff
 	private boolean howling = false;
 	private long startOfHowl = 0;
-	static String howl = "sounds/effects/bosses/shadowOfTheDenmother/spookyHowl1.wav";
+	static String howl = "sounds/effects/bosses/shadowOfTheDenmother/spookyHowl.wav";
 	private static String growl = "sounds/effects/bosses/shadowOfTheDenmother/spookyGrowl.wav";
 	private static String bark = "sounds/effects/bosses/shadowOfTheDenmother/wolfBark.wav";
+	private static String land = "sounds/effects/bosses/shadowOfTheDenmother/land.wav";
+	private static String scream = "sounds/effects/bosses/shadowOfTheDenmother/scream.wav";
+	private static String lightDudeBreak = "sounds/effects/bosses/shadowOfTheDenmother/lightDudeBreak.wav";
+
+	// Type of howl
+	private String typeOfHowl;
 	
 	// Starthowl.
-	public void startHowl() {
+	public void startHowl(String type) {
 		
 		// Howl.
+		typeOfHowl = type;
 		howling = true;
 		startOfHowl = time.getTime();
+		
 	}
 	
 	// Deal with howling
@@ -693,13 +682,16 @@ public class shadowOfTheDenmother extends boss {
 		// Move to middle of howl.
 		else if(getCurrentAnimation().getName().contains("howlingStart") &&
 				time.getTime() - startOfHowl >= getCurrentAnimation().getTimeToComplete()*1000) {
-			sound s = new sound(growl);
-			s.start();
+			
+			if(typeOfHowl.equals("shadowPuke")) {
+				sound s = new sound(growl);
+				s.start();
+			}
 			animate("howlingMiddle" + getFacingDirection());
 			startOfHowl = time.getTime();
 			
 			// Spawn shadow dudes.
-			spawnLineAtMouth();
+			if(typeOfHowl.equals("shadowPuke")) spawnLineAtMouth();
 		}
 		
 		// Move to end of howl.
@@ -707,9 +699,8 @@ public class shadowOfTheDenmother extends boss {
 				time.getTime() - startOfHowl >= getCurrentAnimation().getTimeToComplete()*1000) {
 			animate("howlingEnd" + getFacingDirection());
 			startOfHowl = time.getTime();
-			stopSpawningLineAtMouth();
+			if(typeOfHowl.equals("shadowPuke")) stopSpawningLineAtMouth();
 		}
-		
 		
 		// Move to end of howl.
 		else if(getCurrentAnimation().getName().contains("howlingEnd") &&
@@ -722,27 +713,40 @@ public class shadowOfTheDenmother extends boss {
 	// List of spots
 	private intTuple platformsStart = new intTuple(13000,233);
 	private ArrayList<ArrayList<groundTile>> platforms;
+	private ArrayList<ArrayList<groundTile>> insidePlatforms;
 	
 	// How often to cast claw ability.
-	private static float spawnClawPhase = 0.75f;
+	private float spawnClawPhase = 1.5f;
 	
 	// Spawn platforms
 	public void spawnPlatforms() {
 		
 		// Spawn platforms.
 		platforms = new ArrayList<ArrayList<groundTile>>();
-		for(int i = 0; i < 10; i++) {
+		insidePlatforms = new ArrayList<ArrayList<groundTile>>();
+		for(int i = 0; i < 6; i++) {
 			for(int j = 0; j < 6; j++) {
 				platforms.add(new ArrayList<groundTile>());
+				
+				if(i != 0 && i != 5 && j != 0 && j != 5) {
+					insidePlatforms.add(new ArrayList<groundTile>());
+				}
+				
 				for(int m = 0; m < 3; m++) {
 					groundTile tile;
 					if(j%2 != 0) {
-						tile = new tombEdge(platformsStart.x + i*200 + m*32, platformsStart.y + j*120, 0);
+						tile = new tombEdge(platformsStart.x + i*216 + m*32, platformsStart.y + j*120, 0);
 					}
 					else {
-						tile = new tombEdge(platformsStart.x + i*200 + 100 + m*32, platformsStart.y + j*120, 0);
+						tile = new tombEdge(platformsStart.x + i*216 + 108 + m*32, platformsStart.y + j*120, 0);
 					}
 					platforms.get(i*6 + j).add(tile);
+					
+					// Add to inside platforms.
+					if(i != 0 && i != 5 && j != 0 && j != 5) {	
+						insidePlatforms.get(insidePlatforms.size()-1).add(tile);
+					}
+					
 				}
 			}
 		}
@@ -754,6 +758,18 @@ public class shadowOfTheDenmother extends boss {
 		setDoubleY(platforms.get(6*4 + 3).get(1).getIntY()-getHeight());
 		faceTowardPlayer();
 	}
+	
+	@Override
+	public void hurtPeople(int leniency) {
+		player currPlayer = player.getPlayer();
+
+		// If someone is in the explosion radius, hurt.
+		if(currPlayer.isWithin(this.getIntX() + leniency, this.getIntY() + leniency, this.getIntX() + this.getWidth() - leniency, this.getIntY() + this.getHeight() - leniency) 
+					&& !currPlayer.isIlluminated() && !isIlluminated()) {
+				currPlayer.hurt(1, 1);
+		}
+		
+	}
 
 	public void spawnClaw(int x, int y) {	
 		int spawnX = x;
@@ -762,6 +778,183 @@ public class shadowOfTheDenmother extends boss {
 		faceTowardThing(currClaw);
 	}
 	
+	// Current light dude.
+	lightDude currentLightDude;
+	
+	// Get hurt by light.
+	public void getHurtByLight() {
+		
+		// Get hurt.
+		numberOfHitsToDie--;
+		sound s = new sound(lightDudeBreak);
+		s.start();
+		s = new sound(scream);
+		s.start();
+		
+		// Change phase.
+		if(numberOfHitsToDie==5) {
+			spawnClawPhase = 1.05f;
+			spawnEvery = 0.1f;
+			shadowDudeMoveSpeed = 4f;
+			pukeFor = 1f;
+			shadowPuke = true;
+		}
+		
+		if(numberOfHitsToDie==4) {
+			spawnClawPhase = 0.90f;
+			advancedShadowPuke = true;
+			spawnEvery = 0.09f;
+			shadowDudeMoveSpeed = 4.5f;
+			pukeFor = 0.85f;
+		}
+		
+		if(numberOfHitsToDie==3) {
+			spawnClawPhase = 0.75f;
+			spawnEvery = 0.08f;
+			shadowDudeMoveSpeed = 5f;
+			pukeFor = 0.7f;
+		}
+		
+		if(numberOfHitsToDie==2) {
+			spawnClawPhase = 0.6f;
+			spawnEvery = 0.07f;
+			shadowDudeMoveSpeed = 5.5f;
+			pukeFor = 0.55f;
+		}
+		
+		// Kill boss.
+		if(numberOfHitsToDie<=0) {
+			defeatBoss();
+		}
+	}
+	
+	// Defeat boss
+	public void defeatBoss() {
+		defeat();
+		die();
+	}
+	
+	// Deal with light dudes
+	public void dealWithLightDudes() {
+		
+		// Spawn a new one.
+		if(currentLightDude == null || !currentLightDude.isExists()) {
+			
+			ArrayList<ArrayList<groundTile>> chooseFrom = new ArrayList<ArrayList<groundTile>>(insidePlatforms);
+			int random = utility.RNG.nextInt(chooseFrom.size());
+			while(chooseFrom.get(random).get(1).isOnScreen()) {
+				chooseFrom.remove(random);
+				random = utility.RNG.nextInt(chooseFrom.size());
+			}
+			currentLightDude = new lightDude(chooseFrom.get(random).get(1).getIntX(), chooseFrom.get(random).get(1).getIntY() - lightDude.getDefaultHeight());
+			
+		}
+		
+		// Get hurt.
+		if(isIlluminated()) {
+			
+			currentLightDude.destroy();
+			getHurtByLight();
+			
+		}
+	}
+	
+	@Override
+	public void drawObject(Graphics g) {
+		drawUnitSpecialStuff(g);
+	}
+	
+	// Trail stuff.
+	private float trailInterval = 0.0125f;
+	private long lastTrail = 0;
+	private int trailLength = 20;
+	private ArrayList<intTuple> trail;
+	private ArrayList<BufferedImage> trailImage;
+	
+	@Override
+	public void drawUnitSpecialStuff(Graphics g) {
+		
+		// Of course only draw if the animation is not null.
+		if(getCurrentAnimation() != null) {
+			if(jumping) {
+				
+				// If it's empty, make it.
+				if(trail == null) trail = new ArrayList<intTuple>();
+				if(trailImage == null) trailImage = new ArrayList<BufferedImage>();
+				// If we've passed trailInterval seconds. Add a new intTuple to trail and remove oldest one.
+				if(time.getTime() - lastTrail > trailInterval*1000) {
+					lastTrail = time.getTime();
+					if(trail.size() >= trailLength) {
+						trailImage.remove(0);
+						trail.remove(0);
+					}
+					trailImage.add(getAnimations().getAnimation("jumping" + getFacingDirection()).getSprites().get(0));
+					trail.add(new intTuple(getIntX(),getIntY()));
+				}
+				
+				g.drawImage(getCurrentAnimation().getCurrentFrame(), 
+						getDrawX(), 
+						getDrawY(), 
+						(int)(gameCanvas.getScaleX()*getCurrentAnimation().getCurrentFrame().getWidth()), 
+						(int)(gameCanvas.getScaleY()*getCurrentAnimation().getCurrentFrame().getHeight()), 
+						null);
+				
+				// Draw trail.
+				for(int i = 0; i < trail.size(); i++) {
+					float alpha = ((float)i)/(float)trail.size();
+					Graphics2D g2d = (Graphics2D) g.create();
+					g2d.setComposite(AlphaComposite.SrcOver.derive(alpha*.3f));
+					g2d.drawImage(trailImage.get(i), 
+							drawnObject.calculateDrawX(this, trail.get(i).x), 
+							drawnObject.calculateDrawY(this, trail.get(i).y), 
+							(int)(gameCanvas.getScaleX()*trailImage.get(i).getWidth()), 
+							(int)(gameCanvas.getScaleY()*trailImage.get(i).getHeight()), 
+							null);
+				}
+			}
+			
+			else {
+				if(trail != null) {
+					
+					// If we've passed trailInterval seconds. Add a new intTuple to trail and remove oldest one.
+					if(time.getTime() - lastTrail > trailInterval*1000 && trail.size() > 0) {
+						lastTrail = time.getTime();
+						trail.remove(0);
+						trailImage.remove(0);
+					}
+				}
+				g.drawImage(getCurrentAnimation().getCurrentFrame(), 
+						getDrawX(), 
+						getDrawY(), 
+						(int)(gameCanvas.getScaleX()*getCurrentAnimation().getCurrentFrame().getWidth()), 
+						(int)(gameCanvas.getScaleY()*getCurrentAnimation().getCurrentFrame().getHeight()), 
+						null);
+				
+				if(trail != null) {
+					// Draw trail.
+					for(int i = 0; i < trail.size(); i++) {
+						float alpha = ((float)i)/(float)trail.size();
+						Graphics2D g2d = (Graphics2D) g.create();
+						g2d.setComposite(AlphaComposite.SrcOver.derive(alpha*.3f));
+						g2d.drawImage(trailImage.get(i), 
+								drawnObject.calculateDrawX(this, trail.get(i).x), 
+								drawnObject.calculateDrawY(this, trail.get(i).y), 
+								(int)(gameCanvas.getScaleX()*trailImage.get(i).getWidth()), 
+								(int)(gameCanvas.getScaleY()*trailImage.get(i).getHeight()), 
+								null);
+					}
+				}
+			}
+			// Of course only draw if the animation is not null.
+			g.drawImage(getCurrentAnimation().getCurrentFrame(), 
+					getDrawX(), 
+					getDrawY(), 
+					(int)(gameCanvas.getScaleX()*getCurrentAnimation().getCurrentFrame().getWidth()), 
+					(int)(gameCanvas.getScaleY()*getCurrentAnimation().getCurrentFrame().getHeight()), 
+					null);
+		}
+	}
+
 	// Update.
 	@Override
 	public void updateUnit() {
@@ -769,6 +962,9 @@ public class shadowOfTheDenmother extends boss {
 		// Wolf jumping
 		dealWithJumping();
 		dealWithClawAttacks();
+		
+		// Light dudes
+		dealWithLightDudes();
 		
 		// Abilities
 		dealWithShadowLines();

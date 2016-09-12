@@ -11,6 +11,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 import UI.interfaceObject;
 import UI.tooltipString;
+import effects.absolutePositionedEffect;
 import effects.effect;
 import effects.projectile;
 import effects.interfaceEffects.floatingString;
@@ -317,21 +318,6 @@ public abstract class drawnObject {
 	    return (cornerDistanceSQ <= Math.pow(radius,2));
 	}
 	
-	
-	// Convert drawn point to in game position.
-	public static Point toInGamePos(Point p) {
-		Point inGamePointCurrent = new Point(p.x + camera.getCurrent().getX() + camera.getCurrent().getAttachedUnit().getWidth()/2 - gameCanvas.getDefaultWidth()/2, 
-			      p.y + camera.getCurrent().getY() + camera.getCurrent().getAttachedUnit().getHeight()/2 - gameCanvas.getDefaultHeight()/2);
-		return inGamePointCurrent;
-	}
-	
-	// Convert point to draw position based on camera position.
-	public static Point toDrawPos(Point p) {
-		Point inGamePointCurrent = new Point(p.x - (camera.getCurrent().getX() + camera.getCurrent().getAttachedUnit().getWidth()/2 - gameCanvas.getDefaultWidth()/2), 
-			      p.y - (camera.getCurrent().getY() + camera.getCurrent().getAttachedUnit().getHeight()/2 - gameCanvas.getDefaultHeight()/2));
-		return inGamePointCurrent;
-	}
-	
 	// Get closest to
 	public drawnObject getClosestToFrom(ArrayList<drawnObject> checkObjects) {
 		drawnObject closestTo = null;
@@ -476,7 +462,7 @@ public abstract class drawnObject {
 				if(d.isDrawObject()) {
 
 					// Draw the object if it's on the screen.
-					if(d instanceof tooltipString ||
+					if(d instanceof absolutePositionedEffect ||
 						d instanceof interfaceObject ||
 					   d.isOnScreen()) {
 						d.drawObject(g);

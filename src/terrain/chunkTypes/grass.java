@@ -26,7 +26,7 @@ public class grass extends groundTile {
 	private static generalChunkType typeReference = new generalChunkType(DEFAULT_CHUNK_NAME, DEFAULT_CHUNK_SPRITESHEET, DEFAULT_CHUNK_WIDTH, DEFAULT_CHUNK_HEIGHT);  
 	
 	// Create function
-	public static chunk createChunk(int newX, int newY) {
+	public static chunk createChunk(int newX, int newY, int i) {
 		if(!zone.loadedOnce) {
 			chunk t = new grass(newX,newY);
 			t.setReloadObject(false);
