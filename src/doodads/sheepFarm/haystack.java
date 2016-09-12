@@ -129,7 +129,7 @@ public class haystack extends chunk {
 	public void doInteractStuff() {
 		
 		// If we have reached the end of a dialogue.
-		if(!setNextSearch && strange && interactSequence.getTheText().isEnd()) {
+		if(!setNextSearch && strange && interactSequence.getTextSeries().isEnd()) {
 			timesSearched++;
 			setNextSearch = true;
 		}

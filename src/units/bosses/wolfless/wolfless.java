@@ -1,4 +1,4 @@
-package units.bosses;
+package units.bosses.wolfless;
 
 import java.awt.AlphaComposite;
 import java.awt.Graphics;
@@ -30,10 +30,10 @@ import utilities.intTuple;
 import utilities.time;
 import utilities.utility;
 
-public class shadowOfTheDenmother extends boss {
+public class wolfless extends boss {
 	
 	// Default name.
-	private static String DEFAULT_UNIT_NAME = "Shadow of the Denmother";
+	private static String DEFAULT_UNIT_NAME = "(wolfless)";
 	
 	// Default jump speed
 	private static int DEFAULT_UNIT_JUMPSPEED = 14;
@@ -113,7 +113,7 @@ public class shadowOfTheDenmother extends boss {
 	//// METHODS /////
 	//////////////////
 	
-	public shadowOfTheDenmother() {
+	public wolfless() {
 		super(unitTypeRef, DEFAULT_UNIT_NAME, 0, 0);
 		killsPlayer = true;
 		lineSpawnsX = new ArrayList<Integer>();
@@ -650,7 +650,7 @@ public class shadowOfTheDenmother extends boss {
 	// Howl stuff
 	private boolean howling = false;
 	private long startOfHowl = 0;
-	static String howl = "sounds/effects/bosses/shadowOfTheDenmother/spookyHowl.wav";
+	public static String howl = "sounds/effects/bosses/shadowOfTheDenmother/spookyHowl.wav";
 	private static String growl = "sounds/effects/bosses/shadowOfTheDenmother/spookyGrowl.wav";
 	private static String bark = "sounds/effects/bosses/shadowOfTheDenmother/wolfBark.wav";
 	private static String land = "sounds/effects/bosses/shadowOfTheDenmother/land.wav";

@@ -1,4 +1,4 @@
-package units.unitTypes.sheepFarm;
+package units.characters.farmer;
 
 import UI.tooltipString;
 import interactions.interactBox;
@@ -11,6 +11,7 @@ import units.humanType;
 import units.player;
 import units.unit;
 import units.unitType;
+import units.unitTypes.sheepFarm.sheep;
 
 public class farmer extends unit {
 	
@@ -201,24 +202,24 @@ public class farmer extends unit {
 	public void doQuestStuff() {
 
 		// If we have reached the end of our quest conversation (and they clicked yes, of course, since it's all they can do.)
-		if(sequenceNumber == 0 && (interactSequence != null && !interactSequence.isButtonMode() && interactSequence.getTheText().getTextOnPress()!=null) &&
-				(interactSequence.getTheText().getTextOnPress().contains("key to his pen") && interactSequence.textScrollingFinished())) {
+		if(sequenceNumber == 0 && (interactSequence != null && !interactSequence.isButtonMode() && interactSequence.getTextSeries().getTextOnPress()!=null) &&
+				(interactSequence.getTextSeries().getTextOnPress().contains("key to his pen") && interactSequence.textScrollingFinished())) {
 			farmKey f = new farmKey(0,0);
 			f.pickUp();
 			sequenceNumber++;
 		}
-		if(sequenceNumber == 1 && (interactSequence != null && interactSequence.getTheText().getTextOnPress()!=null) &&
-				(interactSequence.getTheText().getTextOnPress().contains("give me that back") && interactSequence.textScrollingFinished())) {
+		if(sequenceNumber == 1 && (interactSequence != null && interactSequence.getTextSeries().getTextOnPress()!=null) &&
+				(interactSequence.getTextSeries().getTextOnPress().contains("give me that back") && interactSequence.textScrollingFinished())) {
 			player.getPlayer().getPlayerInventory().get("Farm Key").drop();
 			sequenceNumber++;
 		}
-		if(sequenceNumber == 2 && (interactSequence != null && interactSequence.getTheText().getTextOnPress()!=null) &&
-				(interactSequence.getTheText().getTextOnPress().contains("ake this") && interactSequence.textScrollingFinished())) {
+		if(sequenceNumber == 2 && (interactSequence != null && interactSequence.getTextSeries().getTextOnPress()!=null) &&
+				(interactSequence.getTextSeries().getTextOnPress().contains("ake this") && interactSequence.textScrollingFinished())) {
 			farmGateKey f = new farmGateKey(0,0);
 			f.pickUp();
 			sequenceNumber++;
 		}
-		if(sequenceNumber == 3 && interactSequence != null && interactSequence.getTheText()!=null && interactSequence.getTheText().isEnd()) {
+		if(sequenceNumber == 3 && interactSequence != null && interactSequence.getTextSeries()!=null && interactSequence.getTextSeries().isEnd()) {
 			farlsworthQuest.startQuest();
 			sequenceNumber++;
 		}
