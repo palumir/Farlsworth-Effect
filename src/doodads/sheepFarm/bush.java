@@ -114,9 +114,9 @@ public class bush extends chunk {
 		
 		// If they choose to eat a berry.
 		if(!hasEatenBerry && interactSequence != null 
-				&& interactSequence.getTheText().isEnd() 
-				&& interactSequence.getTheText().getButtonText() != null
-				&& interactSequence.getTheText().getButtonText().equals("Eat a berry")) {
+				&& interactSequence.getTextSeries().isEnd() 
+				&& interactSequence.getTextSeries().getButtonText() != null
+				&& interactSequence.getTextSeries().getButtonText().equals("Eat a berry")) {
 			int randomBetween = 20 - utility.RNG.nextInt(41);
 			
 			// Play sound
@@ -136,9 +136,9 @@ public class bush extends chunk {
 		// If we are the strange haystack and have searched 6 times, destroy it.
 		if((leverRevealed.isCompleted() && isSecretPassage) || 
 				(isSecretPassage && interactSequence != null 
-				&& interactSequence.getTheText().isEnd() 
-				&& interactSequence.getTheText().getButtonText() != null
-				&& interactSequence.getTheText().getButtonText().equals("Brush off leaves"))) {
+				&& interactSequence.getTextSeries().isEnd() 
+				&& interactSequence.getTextSeries().getButtonText() != null
+				&& interactSequence.getTextSeries().getButtonText().equals("Brush off leaves"))) {
 			
 			// Play sound
 			sound s = new sound(clearBush);

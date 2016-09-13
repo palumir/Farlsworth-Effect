@@ -24,7 +24,7 @@ import terrain.chunkTypes.grass;
 import terrain.chunkTypes.water;
 import units.player;
 import units.unit;
-import units.bosses.farlsworth;
+import units.characters.farlsworth.farlsworth;
 import utilities.intTuple;
 import utilities.time;
 import utilities.utility;

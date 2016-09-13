@@ -18,6 +18,7 @@ import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
 import UI.menu;
+import main.main;
 import units.player;
 import utilities.time;
 import utilities.utility;
@@ -79,7 +80,7 @@ public class gameCanvas extends JComponent {
 			    c.setBounds(b2.x,b2.y,(int)b2.width,(int)(b2.width*H/W));
 			    changeFrameSize = false;
 			}*/
-			utility.updateGame();
+			main.updateGame();
 		}
 	};
 

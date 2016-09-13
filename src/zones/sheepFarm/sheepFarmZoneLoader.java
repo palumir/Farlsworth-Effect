@@ -26835,7 +26835,7 @@ c = tree.createTree(819,-248,1);
 if(c!=null) c.setPassable(false);
 c = tree.createTree(-1092,-242,1);
 if(c!=null) c.setPassable(false);
-u = new units.unitTypes.sheepFarm.farmer(-711,-247);
+u = new units.characters.farmer.farmer(-711,-247);
 u.setMoveSpeed((float)1.0);
 u.jumpSpeed = (float)10.0;
 c = tree.createTree(562,-237,0);

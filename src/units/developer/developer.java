@@ -34,6 +34,7 @@ import drawing.drawnObject;
 import drawing.gameCanvas;
 import effects.effectTypes.savePoint;
 import items.bottles.saveBottle;
+import main.main;
 import modes.topDown;
 import terrain.chunk;
 import terrain.groundTile;
@@ -395,7 +396,7 @@ public class developer extends player {
 		///////// PAUSE /////
 		/////////////////////
 		if(b.getButtonID().contains("pause")) {
-			utility.toggleActions();
+			main.toggleActions();
 		}
 	}
 	

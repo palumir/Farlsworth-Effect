@@ -346,7 +346,7 @@ public class player extends unit {
 	public static player loadPlayer(player alreadyPlayer, zone z, int spawnX, int spawnY, String direction) {
 		
 		// Initiate all.
-		saveState s = utility.initiateAll();
+		saveState s = main.initiateAll();
 		
 		// The player, depending on whether or not we have a save file.
 		player thePlayer = loadPlayerSaveData(alreadyPlayer, s, z, spawnX, spawnY, direction);

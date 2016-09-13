@@ -90,9 +90,9 @@ public class lever extends chunk {
 		// On.
 		if(!on &&
 			interactSequence != null 
-			&& interactSequence.getTheText().isEnd() 
-			&& interactSequence.getTheText().getButtonText() != null
-			&& interactSequence.getTheText().getButtonText().equals("Switch lever on")) {
+			&& interactSequence.getTextSeries().isEnd() 
+			&& interactSequence.getTextSeries().getButtonText() != null
+			&& interactSequence.getTextSeries().getButtonText().equals("Switch lever on")) {
 			
 			// TODO: OPEN SECRET PASSAGE.
 			System.out.println("Open secret passage TODO:");
@@ -102,9 +102,9 @@ public class lever extends chunk {
 		// Off.
 		if(on &&
 			interactSequence != null 
-			&& interactSequence.getTheText().isEnd() 
-			&& interactSequence.getTheText().getButtonText() != null
-			&& interactSequence.getTheText().getButtonText().equals("Switch lever off")) {
+			&& interactSequence.getTextSeries().isEnd() 
+			&& interactSequence.getTextSeries().getButtonText() != null
+			&& interactSequence.getTextSeries().getButtonText().equals("Switch lever off")) {
 				
 			setOff();
 		}

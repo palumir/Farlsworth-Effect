@@ -2,11 +2,15 @@ package interactions;
 
 import java.util.ArrayList;
 
+import drawing.drawnObject;
+import units.unit;
+
 public class textSeries {
 
 	/////////////////////
 	////// FIELDS ///////
 	/////////////////////
+	private drawnObject whoIsTalking;
 	private String talker = null;
 	private String buttonText; // If there's no button, just display textOnPress and go next.
 	private String textOnPress;
@@ -96,5 +100,19 @@ public class textSeries {
 
 	public void setTalker(String talker) {
 		this.talker = talker;
+	}
+
+	
+	public void setWhoIsTalking(drawnObject newWhoIsTalking) {
+		whoIsTalking = newWhoIsTalking;
+		if(children != null) {
+			for(int i = 0; i < children.size(); i++) {
+				if(children.get(i).getWhoIsTalking() == null) children.get(i).setWhoIsTalking(newWhoIsTalking);
+			}
+		}
+	}
+
+	public drawnObject getWhoIsTalking() {
+		return whoIsTalking;
 	}
 }

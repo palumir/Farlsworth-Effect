@@ -11,6 +11,7 @@ import drawing.spriteSheet;
 import interactions.event;
 import items.bottleShards.speedBottleShard;
 import modes.platformer;
+import units.bosses.rodriguez.cinematics.farmTombCinematic;
 import sounds.music;
 import terrain.chunk;
 import terrain.atmosphericEffects.fog;
@@ -18,9 +19,9 @@ import terrain.chunkTypes.tomb;
 import terrain.chunkTypes.tombEdge;
 import units.player;
 import units.unit;
-import units.bosses.fernando;
-import units.bosses.rodriguez;
-import units.bosses.shadowOfTheDenmother;
+import units.bosses.fernando.fernando;
+import units.bosses.rodriguez.rodriguez;
+import units.bosses.wolfless.wolfless;
 import units.unitCommands.commandList;
 import units.unitCommands.commands.moveCommand;
 import units.unitCommands.commands.waitCommand;
@@ -168,12 +169,15 @@ public class farmTomb extends zone {
 		// BossFight not initiated
 		shadowBossFightInitiated = false;
 		
+		// Load stuff so the zone doesn't lag
+		preLoadStuff();
+		
 		// Load zone events.
 		loadZoneEvents();
 		
 		// Load the level save.
-		//farmTombZoneLoader loader = new farmTombZoneLoader();
-		//loader.loadSegments();
+		farmTombZoneLoader loader = new farmTombZoneLoader();
+		loader.loadSegments();
 
 		// Load zone items
 		loadItems();
@@ -196,6 +200,12 @@ public class farmTomb extends zone {
 		
 	}
 	
+	// PreloadStuff
+	public void preLoadStuff() {
+		int holder = fernando.getDefaultHeight();
+		holder = rodriguez.getDefaultHeight();
+	}
+	
 	// Load items
 	public void loadItems() {
 		new speedBottleShard(10619, 700);
@@ -207,8 +217,9 @@ public class farmTomb extends zone {
 	public void loadUnits() {
 		
 		// Load the villain player.
-		u = new fernando(Integer.MIN_VALUE,Integer.MIN_VALUE);
-		u = new rodriguez(7305,1818-50);
+		// Great gravekeeper.
+		//u = new fernando(Integer.MIN_VALUE,Integer.MIN_VALUE);
+		//u = new rodriguez(7305,1818-50);
 		
 		// Load shadow of denmother
 		//new shadowOfTheDenmother(13387,343);
@@ -437,14 +448,14 @@ public class farmTomb extends zone {
 		bossFight.startFight();
 	}
 	
-	static shadowOfTheDenmother bossFight;
+	static wolfless bossFight;
 	
 	// Create shadow dude bossFight
 	public static void createShadowBossFightAroundPlayer() {
 		
 		if(!bossFightLoaded) {
 		
-			bossFight = new shadowOfTheDenmother();
+			bossFight = new wolfless();
 			bossFightLoaded = true;
 		}
 	}
@@ -456,10 +467,20 @@ public class farmTomb extends zone {
 			shadowBossFightStarted.setCompleted(true);
 			shadowBossFightFirstTime = true;
 		}
-		if(currPlayer != null && currPlayer.isWithin(7040,1551,7101,1798) && fernandoRodriguezInteraction !=null && !fernandoRodriguezInteraction.isCompleted()) {
+		if(currPlayer != null && currPlayer.isWithin(7040,1551,7101,1798)) {
 			//fernandoRodriguezInteraction.setCompleted(true);
-			System.out.println("GO");
+			if(tombMiddleCinematic==null) startFernandoRodriguezInteraction();
 		}
+	}
+	
+	// The tomb cinematic in the middle
+	farmTombCinematic tombMiddleCinematic;
+	
+	public void startFernandoRodriguezInteraction() {
+		
+		// Start cinematic in the middle of the tomb.
+		tombMiddleCinematic = new farmTombCinematic();
+		tombMiddleCinematic.start();
 	}
 	
 	// Deal with shadow bossFight stuff

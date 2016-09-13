@@ -79,7 +79,7 @@ public class sheep extends unit {
 	private int hitTimes = 0;
 	
 	// Has the sheep been hit 10 times joke been done?
-	static event sheepHitABunchJoke;
+	public static event sheepHitABunchJoke;
 	
 	// AI movement.
 	private long AILastCheck = 0l; // milliseconds

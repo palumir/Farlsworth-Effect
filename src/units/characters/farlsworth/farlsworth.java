@@ -1,4 +1,4 @@
-package units.bosses;
+package units.characters.farlsworth;
 
 import java.util.ArrayList;
 
@@ -44,6 +44,9 @@ public class farlsworth extends boss {
 	////////////////
 	/// DEFAULTS ///
 	////////////////
+	
+	// Global
+	public static farlsworth farlsworth;
 	
 	// Default name.
 	private static String DEFAULT_UNIT_NAME = "Farlsworth";
@@ -412,11 +415,11 @@ public class farlsworth extends boss {
 				}
 				
 				// Pissy Farlsworth runs away first time.
-				if(sequencePart == 1 && !interactMoved && interactSequence != null && interactSequence.getTheText().isEnd() && interactTimes == 0) {
+				if(sequencePart == 1 && !interactMoved && interactSequence != null && interactSequence.getTextSeries().isEnd() && interactTimes == 0) {
 					
 					// What did you pick?
-					if(interactSequence.getTheText().getTextOnPress()!=null &&
-						interactSequence.getTheText().getTextOnPress().equals("Catch me if you can, bud.")) {
+					if(interactSequence.getTextSeries().getTextOnPress()!=null &&
+						interactSequence.getTextSeries().getTextOnPress().equals("Catch me if you can, bud.")) {
 						didYouTellHimAboutYourAdventure.setCompleted(true);
 					}
 					
@@ -451,14 +454,14 @@ public class farlsworth extends boss {
 				}
 				
 				// You lied to him.
-				if(interactSequence!=null && interactSequence.getTheText()!=null && interactSequence.getTheText().getTextOnPress()!=null &&
-						interactSequence.getTheText().getTextOnPress().contains("rhetorical question")) {
+				if(interactSequence!=null && interactSequence.getTextSeries()!=null && interactSequence.getTextSeries().getTextOnPress()!=null &&
+						interactSequence.getTextSeries().getTextOnPress().contains("rhetorical question")) {
 					didYouLieToHimAboutHavingTheKey.setCompleted(true);
 				}
 				
 				// Check if we need to do comedic timing.
-				if(sequencePart == 9 && !waiting && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getTextOnPress()!=null) &&
-						(interactSequence.getTheText().getTextOnPress().equals("I suppose I'll have to stay in the fence then."))) {
+				if(sequencePart == 9 && !waiting && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTextSeries().getTextOnPress()!=null) &&
+						(interactSequence.getTextSeries().getTextOnPress().equals("I suppose I'll have to stay in the fence then."))) {
 					waitStart = time.getTime();
 					waitFor = 2.5f;
 					waiting = true;
@@ -474,8 +477,8 @@ public class farlsworth extends boss {
 				}
 				
 				// Attach fence to him
-				if(!isFenceAttached.isCompleted() && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().isEnd() && interactSequence.getTheText().getTextOnPress()!=null) &&
-						(interactSequence.getTheText().getTextOnPress().equals("Catch me if you can."))) {
+				if(!isFenceAttached.isCompleted() && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTextSeries().isEnd() && interactSequence.getTextSeries().getTextOnPress()!=null) &&
+						(interactSequence.getTextSeries().getTextOnPress().equals("Catch me if you can."))) {
 					attachFence();
 					commandList commands = new commandList();
 					commands.add(new moveCommand(-7,-2219));
@@ -490,8 +493,8 @@ public class farlsworth extends boss {
 				}
 				
 				// Don't attach fence.
-				if(!isFenceAttached.isCompleted() && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().isEnd() && interactSequence.getTheText().getTextOnPress()!=null) &&
-						(interactSequence.getTheText().getTextOnPress().equals("Catch me if you can, I guess."))) {
+				if(!isFenceAttached.isCompleted() && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTextSeries().isEnd() && interactSequence.getTextSeries().getTextOnPress()!=null) &&
+						(interactSequence.getTextSeries().getTextOnPress().equals("Catch me if you can, I guess."))) {
 					sheepFarm.forestGate.open();
 					commandList commands = new commandList();
 					commands.add(new moveCommand(-7,-2219));
@@ -545,15 +548,15 @@ public class farlsworth extends boss {
 				}
 				
 				// Don't grab him
-				if(sequencePart == 2 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getTextOnPress()!=null) &&
-						(interactSequence.getTheText().getTextOnPress().equals("Time will tell."))) {
+				if(sequencePart == 2 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTextSeries().getTextOnPress()!=null) &&
+						(interactSequence.getTextSeries().getTextOnPress().equals("Time will tell."))) {
 					// Run away
 					sequencePart = 100; // Put the sequence on the last event.
 				}
 				
 				// Grab him
-				if(sequencePart == 2 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getTextOnPress()!=null) &&
-						(interactSequence.getTheText().getTextOnPress().equals("Hold your horses, buddy."))) {
+				if(sequencePart == 2 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTextSeries().getTextOnPress()!=null) &&
+						(interactSequence.getTextSeries().getTextOnPress().equals("Hold your horses, buddy."))) {
 					
 					// Move player and Farlsworth
 					sound s = new sound(bleet);
@@ -575,8 +578,8 @@ public class farlsworth extends boss {
 				}
 				
 				// Run at the end of the conversation
-				if(sequencePart == 4 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getTextOnPress()!=null) &&
-						(interactSequence.getTheText().getTextOnPress().equals("Frig you."))) {
+				if(sequencePart == 4 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTextSeries().getTextOnPress()!=null) &&
+						(interactSequence.getTextSeries().getTextOnPress().equals("Frig you."))) {
 					
 					// Run away
 					sequencePart = 100;
@@ -624,7 +627,7 @@ public class farlsworth extends boss {
 				
 				// Toggle between Farnsgurns and Ben talking
 				if(sequencePart>=1 && interactSequence!=null  && 
-						((interactSequence.getTheText().getTalker() != null && interactSequence.getTheText().getTalker().equals("Ben")) || sequencePart < 5)) {
+						((interactSequence.getTextSeries().getTalker() != null && interactSequence.getTextSeries().getTalker().equals("Ben")) || sequencePart < 5)) {
 					
 					// If we aren't attached to Ben, attach to him!
 					if(interactSequence.isButtonMode() == false && (interactSequence.getBlurb()==null || interactSequence.getBlurb().getAttachedObject() != ben)) {
@@ -661,8 +664,8 @@ public class farlsworth extends boss {
 				}
 				
 				// Set wait timer for comedic timing.
-				if(sequencePart == 2 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getTextOnPress()!=null) &&
-					(interactSequence.getTheText().getTextOnPress().equals("Baah."))) {
+				if(sequencePart == 2 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTextSeries().getTextOnPress()!=null) &&
+					(interactSequence.getTextSeries().getTextOnPress().equals("Baah."))) {
 					
 					// Wait.
 					waiting = true;
@@ -692,14 +695,14 @@ public class farlsworth extends boss {
 					interactSequence.setLocked(false);
 				}
 				
-				if(sequencePart == 5 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getTextOnPress()!=null) &&
-						(interactSequence.getTheText().getTextOnPress().contains("spoke sheep"))) {
+				if(sequencePart == 5 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTextSeries().getTextOnPress()!=null) &&
+						(interactSequence.getTextSeries().getTextOnPress().contains("spoke sheep"))) {
 					doYouSpeakSheep.setCompleted(true);
 				}
 				
 				// If we are moving forward to see who is talking.
-				if(sequencePart == 5 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getTextOnPress()!=null) &&
-						(interactSequence.getTheText().getTextOnPress().contains("talking to?"))) {
+				if(sequencePart == 5 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTextSeries().getTextOnPress()!=null) &&
+						(interactSequence.getTextSeries().getTextOnPress().contains("talking to?"))) {
 					
 					// Lock sequence for movement of Farlsworth.
 					interactSequence.setLocked(true);
@@ -737,8 +740,8 @@ public class farlsworth extends boss {
 				}
 				
 				// Make Ben leave.
-				if(sequencePart == 8 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getTextOnPress()!=null) &&
-						(interactSequence.getTheText().getTextOnPress().contains("Baaaah."))) {
+				if(sequencePart == 8 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTextSeries().getTextOnPress()!=null) &&
+						(interactSequence.getTextSeries().getTextOnPress().contains("Baaaah."))) {
 					commandList commands = new commandList();
 					commands.add(new moveCommand(-3554,-5461));
 					commands.add(new moveCommand(-4044,-5461));
@@ -790,8 +793,8 @@ public class farlsworth extends boss {
 				}
 				
 				// Run into the tomb.
-				if(sequencePart == 13 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTheText().getTextOnPress()!=null) &&
-						(interactSequence.getTheText().getTextOnPress().contains("ood luck"))) {
+				if(sequencePart == 13 && (interactSequence != null && interactSequence.isDisplayOn() && interactSequence.getTextSeries().getTextOnPress()!=null) &&
+						(interactSequence.getTextSeries().getTextOnPress().contains("ood luck"))) {
 					
 					// Bleet
 					sound s = new sound(bleet);
@@ -1175,6 +1178,8 @@ public class farlsworth extends boss {
 	// Constructor
 	public farlsworth(int newX, int newY) {
 		super(sheepType, "Farlsworth", newX, newY);
+		
+		farlsworth = this;
 		
 		// Facing direction.
 		facingDirection = "Up";

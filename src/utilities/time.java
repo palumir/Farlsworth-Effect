@@ -36,7 +36,7 @@ public class time extends utility {
 	private static String heartbeat = "sounds/effects/quicktime/heartbeat.wav";
 	
 	// Initiate timer.
-	static void initiate() {
+	public static void initiate() {
 		// Set the start time so we can figure
 		// out what the current game time is.
 		if(startTime == 0l) startTime = getCurrentUnixTime();

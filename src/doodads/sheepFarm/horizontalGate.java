@@ -8,7 +8,7 @@ import sounds.sound;
 import terrain.chunk;
 import terrain.generalChunkType;
 import units.player;
-import units.bosses.farlsworth;
+import units.characters.farlsworth.farlsworth;
 import zones.sheepFarm.sheepFarm;
 
 public class horizontalGate extends chunk {
@@ -219,9 +219,9 @@ public class horizontalGate extends chunk {
 		// Open gate?
 		if(!open 
 			&& interactSequence != null 
-			&& interactSequence.getTheText().getButtonText() != null
-			&& interactSequence.getTheText().getButtonText().equals("Open")
-			&& interactSequence.getTheText().isEnd()
+			&& interactSequence.getTextSeries().getButtonText() != null
+			&& interactSequence.getTextSeries().getButtonText().equals("Open")
+			&& interactSequence.getTextSeries().isEnd()
 			&& interactSequence.isDisplayOn()) {
 			if(!isForestGateAndUnopenable()) open();
 		}
@@ -229,9 +229,9 @@ public class horizontalGate extends chunk {
 		// Close gate?
 		if(open 
 			&& interactSequence != null 
-			&& interactSequence.getTheText().getButtonText() != null
-			&& interactSequence.getTheText().getButtonText().equals("Close")
-			&& interactSequence.getTheText().isEnd()
+			&& interactSequence.getTextSeries().getButtonText() != null
+			&& interactSequence.getTextSeries().getButtonText().equals("Close")
+			&& interactSequence.getTextSeries().isEnd()
 			&& interactSequence.isDisplayOn()) {
 				close();
 		}

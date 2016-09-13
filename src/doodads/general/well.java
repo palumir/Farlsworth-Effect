@@ -91,7 +91,7 @@ public class well extends chunk {
 		
 		if(interactSequence != null) {
 			// Save
-			if(!haveSaved && interactSequence.getTheText().getButtonText().equals("Yes")) {
+			if(!haveSaved && interactSequence.getTextSeries().getButtonText().equals("Yes")) {
 				
 				// Set the well to be the last well the player used.
 				player.getPlayer().lastWell = new Point(player.getPlayer().getIntX(), player.getPlayer().getIntY());
@@ -103,7 +103,7 @@ public class well extends chunk {
 			}
 			
 			// Don't save.
-			if(interactSequence.getTheText().getButtonText().equals("No")) {
+			if(interactSequence.getTextSeries().getButtonText().equals("No")) {
 				
 			}
 		}
