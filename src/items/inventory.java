@@ -145,12 +145,22 @@ public class inventory extends interfaceObject {
 	public boolean hasItem(item i) {
 		if(getItems() != null) {
 			for(int j = 0; j < getItems().size(); j++) {
-				if(getItems().get(j) != null  && 
+				if((getItems().get(j) != null  && 
 						getItems().get(j).getName().equals(i.getName()) &&
 						getItems().get(j).getIntX() == i.getIntX() &&
 						getItems().get(j).getIntY() == i.getIntY() &&
-						getItems().get(j).discoverZone.equals(i.discoverZone)) return true;
+						getItems().get(j).discoverZone.equals(i.discoverZone))) return true;
 			}
+		}
+		if((i instanceof bottleShard && 
+		containsBottleType(((bottleShard)i).getBottleType()))) return true;
+		return false;
+	}
+	
+	// Contains bottle type?
+	public boolean containsBottleType(Class c) {
+		for(int i = 0; i < getItems().size(); i++) {
+			if(items.get(i).getClass().equals(c)) return true;
 		}
 		return false;
 	}
@@ -412,8 +422,8 @@ public class inventory extends interfaceObject {
 								g.drawString("Max Charges: " + currentBottle.getMaxCharges(), 
 										(int)(gameCanvas.getScaleX()*(getIntX() + (int) (Math.sqrt(DEFAULT_INVENTORY_SIZE)*DEFAULT_SLOT_SIZE) + selectedSlotTextAdjustX + adjustX)) - g.getFontMetrics().stringWidth("Max Charges: " + currentBottle.getMaxCharges())/2, 
 										(int)(gameCanvas.getScaleY()*(getIntY()+ 34 + adjustY + 34)));
-								g.drawString("Saves game", 
-										(int)(gameCanvas.getScaleX()*(getIntX() + (int) (Math.sqrt(DEFAULT_INVENTORY_SIZE)*DEFAULT_SLOT_SIZE) + selectedSlotTextAdjustX + adjustX)) - g.getFontMetrics().stringWidth("Saves game")/2, 
+								if(currentBottle.description!=null) g.drawString(currentBottle.description, 
+										(int)(gameCanvas.getScaleX()*(getIntX() + (int) (Math.sqrt(DEFAULT_INVENTORY_SIZE)*DEFAULT_SLOT_SIZE) + selectedSlotTextAdjustX + adjustX)) - g.getFontMetrics().stringWidth(currentBottle.description)/2, 
 										(int)(gameCanvas.getScaleY()*(getIntY()+ 34 + adjustY + 48)));
 							}
 							

@@ -47,6 +47,9 @@ public abstract class item extends drawnObject {
 	// Properties
 	public ArrayList<String> properties;
 	
+	// Description
+	public String description;
+	
 	// Does the player actually own the item?
 	public boolean inInventory = false;
 	
@@ -108,6 +111,9 @@ public abstract class item extends drawnObject {
 		destroy();
 	}
 	
+	// Item discover.
+	itemDiscover discoverAnimation;
+	
 	// Pickup the item.
 	public void pickUp() {
 		if(player.getPlayer() != null) {
@@ -115,7 +121,7 @@ public abstract class item extends drawnObject {
 			// Display text. 
 			player currPlayer = player.getPlayer();
 
-			itemDiscover d = new itemDiscover(this,
+			discoverAnimation = new itemDiscover(this,
 					gameCanvas.getDefaultWidth()/2 - itemDiscover.getDefaultWidth()/2,
 					gameCanvas.getDefaultHeight()/2 - itemDiscover.getDefaultHeight()/2 + 80);
 			

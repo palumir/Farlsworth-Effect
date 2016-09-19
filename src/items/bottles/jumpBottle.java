@@ -7,28 +7,37 @@ import java.awt.image.BufferedImage;
 import UI.tooltipString;
 import drawing.spriteSheet;
 import drawing.spriteSheet.spriteSheetInfo;
+import effects.effect;
 import effects.effectTypes.savePoint;
+import effects.interfaceEffects.floatingString;
 import items.bottle;
 import items.item;
 import sounds.sound;
 import units.player;
 import utilities.saveState;
+import utilities.stringUtils;
 
-public class saveBottle extends bottle {
+public class jumpBottle extends bottle {
 	////////////////
 	/// DEFAULTS ///
 	////////////////
 	// Bottle name
-	public static String DEFAULT_BOTTLE_NAME = "Save Bottle";
+	public static String DEFAULT_BOTTLE_NAME = "Jump Bottle";
 	
 	// Bottle stats.
 	public static int DEFAULT_MAX_CHARGES = 3;
 	
+	// If bottle is in inventory., this is it.
+	public static jumpBottle bottleRef;
+	
 	//////////////
 	/// FIELDS ///
 	//////////////
+	// Already double jumped.
+	private boolean alreadyDoubleJumped = false;
+	
 	public static spriteSheet bottleSpriteSheetRef = new spriteSheet(new spriteSheetInfo(
-			"images/doodads/items/saveBottle.png", 
+			"images/doodads/items/jumpBottle.png", 
 			bottle.DEFAULT_SPRITE_WIDTH, 
 			bottle.DEFAULT_SPRITE_HEIGHT,
 			bottle.DEFAULT_SPRITE_ADJUSTMENT_X,
@@ -40,8 +49,10 @@ public class saveBottle extends bottle {
 	///////////////
 	
 	// On floor.
-	public saveBottle(int x, int y) {
+	public jumpBottle(int x, int y) {
 		super(DEFAULT_BOTTLE_NAME,x,y);
+		
+		bottleRef = this;
 		
 		// Weapon stats.
 		setStats();
@@ -51,8 +62,8 @@ public class saveBottle extends bottle {
 	public void setStats() {
 		
 		// Rarity
-		rarity = "Common";
-		description = "Saves game.";
+		rarity = "Rare";
+		description = "Double jump!";
 		
 		// Set item's stats
 		// Bottle charges.
@@ -64,20 +75,26 @@ public class saveBottle extends bottle {
 	@Override
 	public void useCharge() {
 		if(getChargesLeft() > 0) {
-			sound s = new sound(bottle.bottleDrink);
-			s.start();
-			setChargesLeft(getChargesLeft() - 1);
-			
-			// Set position to be last bottle charge.
-			player.getPlayer().lastSaveBottle = new Point(player.getPlayer().getIntX(), player.getPlayer().getIntY());
-			
-			// Put down indicator and destroy old one.
-			if(player.getPlayer().lastSaveBottleChargeIndicator != null) player.getPlayer().lastSaveBottleChargeIndicator.destroy();
-			savePoint.createSavePoint();
-			
-			// Save.
-			saveState.createSaveState();
+			if(!isAlreadyDoubleJumped()) {
+				sound s = new sound(bottle.bottleDrink);
+				s.start();
+				setChargesLeft(getChargesLeft() - 1);
+				doubleJump();
+			}
+			else {
+				player currPlayer = player.getPlayer();
+				effect e = new floatingString("On Cooldown", DEFAULT_DROP_COLOR, currPlayer.getIntX() + currPlayer.getWidth()/2, currPlayer.getIntY() + currPlayer.getHeight()/2, 1.3f);
+				e.setAnimationDuration(3f);
+			}
 		}
+	}
+	
+	// Doublejump
+	public void doubleJump() {
+		setAlreadyDoubleJumped(true);
+		player.getPlayer().setAlreadyJumped(true);
+		player.getPlayer().setJumping(true);
+		player.getPlayer().setFallSpeed(-player.getPlayer().getJumpSpeed());
 	}
 	
 	// React to being picked up.
@@ -85,8 +102,6 @@ public class saveBottle extends bottle {
 	public void reactToPickup() {
 		player currPlayer = player.getPlayer();
 		if(currPlayer != null) {
-			currPlayer.getPlayerInventory().equipItem(this, KeyEvent.VK_ENTER);
-			tooltipString t = new tooltipString("Press 'enter' to use a charge of the Save Bottle.");
 		}
 	}
 
@@ -104,5 +119,13 @@ public class saveBottle extends bottle {
 		else {
 			return bottleSpriteSheetRef.getSprite(3, 0); // Full bottle.
 		}
+	}
+
+	public boolean isAlreadyDoubleJumped() {
+		return alreadyDoubleJumped;
+	}
+
+	public void setAlreadyDoubleJumped(boolean alreadyDoubleJumped) {
+		this.alreadyDoubleJumped = alreadyDoubleJumped;
 	}
 }

@@ -160,7 +160,7 @@ public class redWolf extends wolf {
 	public void drawUnitSpecialStuff(Graphics g) {
 		// Of course only draw if the animation is not null.
 		if(getCurrentAnimation() != null) {
-			if(jumping) {
+			if(isJumping()) {
 				
 				// If it's empty, make it.
 				if(trail == null) trail = new ArrayList<intTuple>();

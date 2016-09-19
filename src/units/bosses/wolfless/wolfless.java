@@ -213,8 +213,8 @@ public class wolfless extends boss {
 			howl();
 		}
 		
-		else if(jumping || clawAttacking) {
-			if(clawAttacking && !jumping) {
+		else if(isJumping() || clawAttacking) {
+			if(clawAttacking && !isJumping()) {
 				animate("standing" + getFacingDirection());
 			}
 			else {
@@ -266,7 +266,7 @@ public class wolfless extends boss {
 		jumpingToX = c.getIntX() + c.getWidth()/2 - getWidth()/2;
 		jumpingToY = c.getIntY() + c.getHeight()/2 - getHeight()/2;
 		
-		jumping = true;
+		setJumping(true);
 		slashing = true;
 		hasSlashed = false;
 		riseRunSet = false;
@@ -303,7 +303,7 @@ public class wolfless extends boss {
 			player currPlayer = player.getPlayer();
 			
 			// Jump to the location.
-			if(jumping) {
+			if(isJumping()) {
 				
 				// Set rise/run
 				if(!riseRunSet) {
@@ -335,7 +335,7 @@ public class wolfless extends boss {
 						clawDestroy();
 					}
 					if(getAllCommands() != null && getAllCommands().size() > 0 && getAllCommands().get(0) instanceof slashCommand) currentCommandComplete = true;
-					jumping = false;
+					setJumping(false);
 					clawAttacking = false;
 					hasStartedJumping = false;
 				}
@@ -876,7 +876,7 @@ public class wolfless extends boss {
 		
 		// Of course only draw if the animation is not null.
 		if(getCurrentAnimation() != null) {
-			if(jumping) {
+			if(isJumping()) {
 				
 				// If it's empty, make it.
 				if(trail == null) trail = new ArrayList<intTuple>();

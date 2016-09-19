@@ -54,12 +54,12 @@ public abstract class bottleShard extends item {
 	public void reactToPickup() {
 		
 		// Remove all shards from inventory.
+		discoverAnimation.destroy();
 		player currPlayer = player.getPlayer();
 		int count = 0;
 		for(int i = 0; i < currPlayer.getPlayerInventory().size(); i++) {
 			item currItem = currPlayer.getPlayerInventory().get(i);
 			if(currItem.getName().equals(this.getName())) {
-				System.out.println("Go");
 				count++;
 			}
 		}
@@ -70,6 +70,8 @@ public abstract class bottleShard extends item {
 	}
 	
 	public abstract void buildBottle();
+	
+	public abstract Class getBottleType();
 
 	// Update.
 	@Override

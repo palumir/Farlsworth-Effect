@@ -10,6 +10,7 @@ import effects.effectTypes.savePoint;
 import items.bottle;
 import items.bottleShard;
 import items.item;
+import items.bottles.jumpBottle;
 import items.bottles.saveBottle;
 import sounds.sound;
 import units.player;
@@ -57,6 +58,11 @@ public class jumpBottleShard extends bottleShard {
 		rarity = "Rare";
 	}
 	
+	// Get bottle type
+	public Class getBottleType() {
+		return jumpBottle.class;
+	}
+	
 	// Set bottle
 	public void buildBottle() {
 		
@@ -71,7 +77,7 @@ public class jumpBottleShard extends bottleShard {
 		}
 		
 		// Give new saveBottle.
-		bottle b = new saveBottle(0,0);
+		bottle b = new jumpBottle(0,0);
 		b.pickUp();
 		
 	}

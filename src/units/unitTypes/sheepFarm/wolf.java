@@ -318,7 +318,7 @@ public abstract class wolf extends unit {
 				player currPlayer = player.getPlayer();
 				
 				// Jump to the location.
-				if(jumping) {
+				if(isJumping()) {
 					
 					// Set rise/run
 					if(!riseRunSet) {
@@ -356,7 +356,7 @@ public abstract class wolf extends unit {
 							clawDestroy();
 						}
 						if(getAllCommands() != null && getAllCommands().size() > 0 && getAllCommands().get(0) instanceof slashCommand) currentCommandComplete = true;
-						jumping = false;
+						setJumping(false);
 						clawAttacking = false;
 						hasStartedJumping = false;
 					}
@@ -404,7 +404,7 @@ public abstract class wolf extends unit {
 			jumpingToX = c.getIntX() + c.getWidth()/2 - getWidth()/2;
 			jumpingToY = c.getIntY() + c.getHeight()/2 - getHeight()/2;
 			
-			jumping = true;
+			setJumping(true);
 			slashing = true;
 			hasSlashed = false;
 			riseRunSet = false;
@@ -446,8 +446,8 @@ public abstract class wolf extends unit {
 			// No hitboxadjustment.
 			setHitBoxAdjustmentY(DEFAULT_PLATFORMER_ADJUSTMENT_Y);
 			setHitBoxAdjustmentX(0);
-			if(jumping || clawAttacking) {
-				if(clawAttacking && !jumping) {
+			if(isJumping() || clawAttacking) {
+				if(clawAttacking && !isJumping()) {
 					animate("standing" + getFacingDirection());
 				}
 				else {

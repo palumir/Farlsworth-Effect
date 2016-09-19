@@ -25,6 +25,7 @@ import effects.interfaceEffects.interactBlurb;
 import interactions.interactBox;
 import items.bottle;
 import items.inventory;
+import items.bottles.jumpBottle;
 import main.main;
 import modes.mode;
 import modes.platformer;
@@ -78,9 +79,6 @@ public class player extends unit {
 	// Default interact range.
 	private static int DEFAULT_INTERACT_RANGE = 30;
 	private static int DEFAULT_INTERACT_WIDTH = 20;
-	
-	// Default shield color
-	private Color DEFAULT_SHIELD_COLOR = Color.cyan;
 	
 	///////////////
 	/// GLOBALS ///
@@ -464,6 +462,13 @@ public class player extends unit {
 		setCurrentPlayer(this);
 	}
 	
+	// Respond to touchdown
+	public void respondToTouchDown() {
+		if(jumpBottle.bottleRef != null) {
+			jumpBottle.bottleRef.setAlreadyDoubleJumped(false);
+		}
+	}
+	
 	// Make the current player stop doing things
 	public void stop() {
 		stopMove("all");
@@ -783,15 +788,6 @@ public class player extends unit {
 		// Highlight box for telepathy
 		//drawHighLightBox(g);
 		
-		// Are we shielding and topDown
-		if(isShielding()) {
-			g.setColor(DEFAULT_SHIELD_COLOR);
-			if(getCurrentAnimation()!=null)
-			g.fillOval(getDrawX() - (int)(gameCanvas.getScaleX()*(- (getCurrentAnimation().getCurrentFrame().getWidth()/2 - getWidth()/2) - getHitBoxAdjustmentX())),
-					   ((getDrawY() + getHitBoxAdjustmentY() + getCurrentAnimation().getCurrentFrame().getHeight()/2 - getHeight()/2) + getHeight() - DEFAULT_PLATFORMER_HEIGHT), 
-					   (int)(gameCanvas.getScaleX()*DEFAULT_PLATFORMER_WIDTH),
-					   (int)(gameCanvas.getScaleY()*DEFAULT_PLATFORMER_HEIGHT));
-		}
 	}
 	
 	// Initiate does nothing.

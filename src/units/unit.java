@@ -159,7 +159,7 @@ public class unit extends drawnObject  {
 	// Gravity
 	public float jumpSpeed = DEFAULT_JUMPSPEED;
 	private float fallSpeed = 0;
-	protected boolean jumping = false;
+	private boolean jumping = false;
 	private boolean tryJump = false;
 	private boolean touchingGround = false;
 	private boolean inAir = true;
@@ -601,16 +601,16 @@ public class unit extends drawnObject  {
 		if(gravity && !isStuck()) {
 			
 			// Accelerate
-			if(fallSpeed < DEFAULT_GRAVITY_MAX_VELOCITY){
-				fallSpeed += DEFAULT_GRAVITY_ACCELERATION;
+			if(getFallSpeed() < DEFAULT_GRAVITY_MAX_VELOCITY){
+				setFallSpeed(getFallSpeed() + DEFAULT_GRAVITY_ACCELERATION);
 				if(!tryJump) {
 				}
 				else {
-					fallSpeed -= DEFAULT_JUMP_SHORTEN_ACCELERATION;
+					setFallSpeed(getFallSpeed() - DEFAULT_JUMP_SHORTEN_ACCELERATION);
 				}
 			}
 			
-			move(0,(int)fallSpeed);
+			move(0,(int)getFallSpeed());
 		}
 	}
 	
@@ -958,7 +958,7 @@ public class unit extends drawnObject  {
 	}
 	
 	// Jump only once.
-	boolean alreadyJumped = false;
+	private boolean alreadyJumped = false;
 	
 	// Start trying to jump.
 	public void startJump() {
@@ -967,17 +967,17 @@ public class unit extends drawnObject  {
 	
 	// Stop trying to jump
 	public void stopJump() {
-		alreadyJumped = false;
+		setAlreadyJumped(false);
 		tryJump = false;
 	}
 	
 	// Jump unit
 	public void jump() {
-		if(!alreadyJumped && !isStuck() && gravity && !jumping && tryJump && touchingGround) {
+		if(!isAlreadyJumped() && !isStuck() && gravity && !isJumping() && tryJump && touchingGround) {
 			// Accelerate upward.
-			alreadyJumped = true;
-			jumping = true;
-			fallSpeed = -getJumpSpeed();
+			setAlreadyJumped(true);
+			setJumping(true);
+			setFallSpeed(-getJumpSpeed());
 		}
 	}
 	
@@ -1320,15 +1320,15 @@ public class unit extends drawnObject  {
 	public void touchUp() {
 		
 		// If they've touched up, place them closer to the ground.
-		if(!zeroNextFallSpeed && fallSpeed < 0) {
-			chunk ground = chunk.getGroundChunk(this, (int)getDoubleX(), (int)(getDoubleY() + fallSpeed));
+		if(!zeroNextFallSpeed && getFallSpeed() < 0) {
+			chunk ground = chunk.getGroundChunk(this, (int)getDoubleX(), (int)(getDoubleY() + getFallSpeed()));
 			if(ground != null) {
-				fallSpeed = -(this.getIntY() - ground.getIntY() - ground.getHeight());
+				setFallSpeed(-(this.getIntY() - ground.getIntY() - ground.getHeight()));
 				zeroNextFallSpeed = true;
 			}
 		}
 		else {
-			fallSpeed = fallSpeed/2;
+			setFallSpeed(getFallSpeed()/2);
 			zeroNextFallSpeed = false;
 		}
 	
@@ -1338,19 +1338,25 @@ public class unit extends drawnObject  {
 	public void touchDown() {
 		
 		// Hold the fall speed but set the current to be 0.
-		float oldFallSpeed = fallSpeed;
-		fallSpeed = 0;
+		float oldFallSpeed = getFallSpeed();
+		setFallSpeed(0);
 		
 		// If they've touched down, place them closer to the ground.
 		chunk ground = chunk.getGroundChunk(this, (int)getDoubleX(), (int)(getDoubleY() + oldFallSpeed));
 		if(ground != null) {
-			fallSpeed = ground.getIntY() - (this.getIntY() + this.getHeight());
+			setFallSpeed(ground.getIntY() - (this.getIntY() + this.getHeight()));
 		}
 		
 		// They can jump again if they've touched down.
-		jumping = false;
+		setJumping(false);
 		touchingGround = true;
-		inAir = (fallSpeed != 0);
+		inAir = (getFallSpeed() != 0);
+		respondToTouchDown();
+	}
+	
+	// Respond to touchdown
+	public void respondToTouchDown() {
+		
 	}
 	
 	// Move function
@@ -1545,7 +1551,7 @@ public class unit extends drawnObject  {
 				}
 				animate("jumping" + face);
 			}
-			else if(!(alreadyJumped && tryJump && !movingHorizontally()) && ((isMoving() && isStuck()) || (!isStuck() && (!isMovingDown() || (isMovingLeft() || isMovingRight())) && isMoving()))) {
+			else if(!(isAlreadyJumped() && tryJump && !movingHorizontally()) && ((isMoving() && isStuck()) || (!isStuck() && (!isMovingDown() || (isMovingLeft() || isMovingRight())) && isMoving()))) {
 				
 				// If we are running.
 				animate("running" + getFacingDirection());
@@ -2156,6 +2162,30 @@ public class unit extends drawnObject  {
 
 	public void setNameColor(Color nameColor) {
 		this.nameColor = nameColor;
+	}
+
+	public boolean isAlreadyJumped() {
+		return alreadyJumped;
+	}
+
+	public void setAlreadyJumped(boolean alreadyJumped) {
+		this.alreadyJumped = alreadyJumped;
+	}
+
+	public boolean isJumping() {
+		return jumping;
+	}
+
+	public void setJumping(boolean jumping) {
+		this.jumping = jumping;
+	}
+
+	public float getFallSpeed() {
+		return fallSpeed;
+	}
+
+	public void setFallSpeed(float fallSpeed) {
+		this.fallSpeed = fallSpeed;
 	}
 	
 }
