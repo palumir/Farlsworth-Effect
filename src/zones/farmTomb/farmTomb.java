@@ -9,7 +9,7 @@ import doodads.tomb.wallTorch;
 import drawing.background;
 import drawing.spriteSheet;
 import interactions.event;
-import items.bottleShards.speedBottleShard;
+import items.bottleShards.jumpBottleShard;
 import modes.platformer;
 import units.bosses.rodriguez.cinematics.farmTombCinematic;
 import sounds.music;
@@ -208,9 +208,9 @@ public class farmTomb extends zone {
 	
 	// Load items
 	public void loadItems() {
-		new speedBottleShard(10619, 700);
-		new speedBottleShard(9535, 2333);
-		new speedBottleShard(6347, 1617);
+		new jumpBottleShard(10619, 700);
+		new jumpBottleShard(9535, 2333);
+		new jumpBottleShard(6347, 1617);
 	}
 	
 	// Load units

@@ -73,6 +73,7 @@ public class levelSave implements Serializable {
 				}};
 				
 	public static ArrayList<String> dontSaveTheseThings = new ArrayList<String>() {{
+		add("units.unitTypes.sheepFarm.farmer");
 		add("units.bosses.fernando");
 		add("units.bosses.rodriguez");
 		add("units.bosses.farlsworth");
@@ -490,6 +491,25 @@ public class levelSave implements Serializable {
 						}
 						
 						if(howManyCommands>0 && toCode) out.println("u.setRepeatCommands(commands);");
+					}
+					else {
+						objectStream.readObject();
+						objectStream.readObject();
+						// How many fields
+						int howManyFields = (int)objectStream.readObject();
+						
+						// Load the fields.
+						for(int j = 0; j < howManyFields; j++) {
+							objectStream.readObject();
+							objectStream.readObject();
+						}
+						
+						howManyFields = (int)objectStream.readObject();
+						// Load the fields.
+						for(int j = 0; j < howManyFields; j++) {
+							objectStream.readObject();
+							objectStream.readObject();
+						}
 					}
 				}
 				

@@ -24,7 +24,7 @@ public abstract class cinematic {
 	////////////////
 	
 	// Has the cinematic completed?
-	private event cinematicCompleted;
+	protected event cinematicCompleted;
 	
 	// Does it complete once?
 	private boolean completeOnce = true;
@@ -47,6 +47,9 @@ public abstract class cinematic {
 	// In progress?
 	private boolean inProgress = false;
 	
+	// Save?
+	protected boolean save = true;
+	
 	// Waiting.
 	private long waitStart = 0;
 	private float waitFor = 0;
@@ -66,7 +69,7 @@ public abstract class cinematic {
 		if(!completeOnce || !cinematicCompleted.isCompleted()) {
 			
 			// Report error if another cinematic is in progress.
-						if(currCinematic != null) System.err.println("Error: Another cinematic is currently in progress. Playing anyway.");
+			if(currCinematic != null) System.err.println("Error: Another cinematic is currently in progress. Playing anyway.");
 			
 			// Set current cinamatic.
 			currCinematic = this;
@@ -92,9 +95,11 @@ public abstract class cinematic {
 			cinematicCompleted.setCompleted(true);
 		
 			// Save by default.
-			saveState.setQuiet(true);
-			saveState.createSaveState();
-			saveState.setQuiet(false);
+			if(save) {
+				saveState.setQuiet(true);
+				saveState.createSaveState();
+				saveState.setQuiet(false);
+			}
 		}
 		
 		// Finish
@@ -125,6 +130,16 @@ public abstract class cinematic {
 	public void addTextSeries(String s, String y, drawnObject u) {
 		interactSequence.setGoNext(false);
 		textSeries series = new textSeries(s, y);
+		interactSequence.getTextSeries().addChild(series);
+		series.setWhoIsTalking(u);
+		if(s==null) interactSequence.goToNext();
+	}
+	
+	// Set next text
+	public void addTextSeries(String s, String y, drawnObject u, String choiceType) {
+		interactSequence.setGoNext(false);
+		textSeries series = new textSeries(s, y);
+		series.setChoiceType(choiceType);
 		interactSequence.getTextSeries().addChild(series);
 		series.setWhoIsTalking(u);
 		if(s==null) interactSequence.goToNext();

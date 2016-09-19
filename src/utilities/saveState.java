@@ -45,6 +45,10 @@ public class saveState implements Serializable {
 	private int playerX;
 	private int playerY;
 	
+	// Choices
+	private int chaosChoices;
+	private int orderChoices;
+	
 	// Facing position
 	private String facingDirection;
 	
@@ -111,6 +115,10 @@ public class saveState implements Serializable {
 				objectStream.writeObject(s.getPlayerX());
 				objectStream.writeObject(s.getPlayerY());
 				objectStream.writeObject(s.getFacingDirection());
+				
+				// Choices	
+				objectStream.writeObject(player.getPlayer().chaosChoices);
+				objectStream.writeObject(player.getPlayer().orderChoices);
 				
 				// Last well position
 				Point lastWell = player.getPlayer().lastWell;
@@ -224,6 +232,8 @@ public class saveState implements Serializable {
 			s.setPlayerX((int) objectStream.readObject());
 			s.setPlayerY((int) objectStream.readObject());
 			s.setFacingDirection((String)objectStream.readObject());
+			s.setChaosChoices(((int)objectStream.readObject()));
+			s.setOrderChoices(((int)objectStream.readObject()));
 			
 			// Get the last well.
 			boolean isThereAWell = (boolean) objectStream.readObject();
@@ -420,6 +430,22 @@ public class saveState implements Serializable {
 
 	public void setCurrentQuests(ArrayList<String> currentQuests) {
 		this.currentQuests = currentQuests;
+	}
+
+	public int getChaosChoices() {
+		return chaosChoices;
+	}
+
+	public void setChaosChoices(int chaosChoices) {
+		this.chaosChoices = chaosChoices;
+	}
+
+	public int getOrderChoices() {
+		return orderChoices;
+	}
+
+	public void setOrderChoices(int orderChoices) {
+		this.orderChoices = orderChoices;
 	}
 	
 }

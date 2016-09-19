@@ -10,17 +10,18 @@ import effects.effectTypes.savePoint;
 import items.bottle;
 import items.bottleShard;
 import items.item;
+import items.bottles.saveBottle;
 import sounds.sound;
 import units.player;
 import utilities.saveState;
 
-public class speedBottleShard extends bottleShard {
+public class jumpBottleShard extends bottleShard {
 	////////////////
 	/// DEFAULTS ///
 	////////////////
 	
 	// Bottle name
-	public static String DEFAULT_BOTTLE_NAME = "Speed Bottle Shard";
+	public static String DEFAULT_BOTTLE_NAME = "Jump Bottle Shard";
 	
 	//////////////
 	/// FIELDS ///
@@ -42,7 +43,7 @@ public class speedBottleShard extends bottleShard {
 	///////////////
 	
 	// On floor.
-	public speedBottleShard(int x, int y) {
+	public jumpBottleShard(int x, int y) {
 		super(DEFAULT_BOTTLE_NAME,x,y);
 		
 		// Weapon stats.
@@ -56,9 +57,23 @@ public class speedBottleShard extends bottleShard {
 		rarity = "Rare";
 	}
 	
-	// React to being picked up.
-	@Override
-	public void reactToPickup() {
+	// Set bottle
+	public void buildBottle() {
+		
+		// Remove all shards from inventory.
+		player currPlayer = player.getPlayer();
+		for(int i = 0; i < currPlayer.getPlayerInventory().size(); i++) {
+			item currItem = currPlayer.getPlayerInventory().get(i);
+			if(currItem instanceof jumpBottleShard) {
+				currPlayer.getPlayerInventory().remove(i);
+				i--;
+			}
+		}
+		
+		// Give new saveBottle.
+		bottle b = new saveBottle(0,0);
+		b.pickUp();
+		
 	}
 
 	// Get the item ground image.

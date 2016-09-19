@@ -427,7 +427,7 @@ public class farmTombCinematic extends cinematic {
 
 	@Override
 	public event isCompleted() {
-		return null;
+		return isCompleted;
 	}
 	
 }

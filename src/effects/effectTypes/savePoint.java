@@ -134,4 +134,14 @@ public class savePoint extends effect {
 		}
 	}
 
+	public static void createSavePoint() {
+		player.getPlayer().lastSaveBottleChargeIndicator = new savePoint(
+				(int)player.getPlayer().lastSaveBottle.getX(),
+				player.getPlayer().getIntY() - 
+				(
+				((int)player.getPlayer().lastSaveBottle.getY() + savePoint.DEFAULT_SPRITE_HEIGHT)
+				- (player.getPlayer().getIntY() + player.getPlayer().getHeight()))
+				);
+	}
+
 }

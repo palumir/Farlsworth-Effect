@@ -12,7 +12,7 @@ import drawing.gameCanvas;
 import drawing.spriteSheet;
 import effects.effect;
 import effects.interfaceEffects.floatingString;
-import items.bottleShards.speedBottleShard;
+import items.bottleShards.jumpBottleShard;
 import items.bottles.saveBottle;
 import items.keys.farmGateKey;
 import items.keys.farmKey;

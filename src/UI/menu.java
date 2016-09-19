@@ -57,12 +57,16 @@ public abstract class menu extends ArrayList<drawnObject> {
 		return null;
 	}
 	
+	// Respond to destroy
+	public void respondToDestroy() {}
+	
 	// Destroy
 	public void destroy() {
 		for(int i = 0; i < size(); i++) {
 			get(i).destroy();
 		}
 		listOfMenus.remove(this);
+		respondToDestroy();
 	}
 	
 }

@@ -501,6 +501,10 @@ public class inventory extends interfaceObject {
 		i.setUpItem();
 		getItems().add(i);
 	}
+	
+	public void remove(int i) {
+		getItems().remove(i);
+	}
 
 	public ArrayList<item> getItems() {
 		return items;

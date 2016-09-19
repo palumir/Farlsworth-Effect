@@ -1,6 +1,7 @@
 package items.bottles;
 
 import java.awt.Point;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 
 import UI.tooltipString;
@@ -71,7 +72,7 @@ public class saveBottle extends bottle {
 			
 			// Put down indicator and destroy old one.
 			if(player.getPlayer().lastSaveBottleChargeIndicator != null) player.getPlayer().lastSaveBottleChargeIndicator.destroy();
-			player.getPlayer().lastSaveBottleChargeIndicator = new savePoint((int)player.getPlayer().lastSaveBottle.getX(),(int)player.getPlayer().lastSaveBottle.getY());
+			savePoint.createSavePoint();
 			
 			// Save.
 			saveState.createSaveState();
@@ -83,6 +84,7 @@ public class saveBottle extends bottle {
 	public void reactToPickup() {
 		player currPlayer = player.getPlayer();
 		if(currPlayer != null) {
+			currPlayer.getPlayerInventory().equipItem(this, KeyEvent.VK_ENTER);
 			tooltipString t = new tooltipString("Press 'enter' to use a charge of the Save Bottle.");
 		}
 	}

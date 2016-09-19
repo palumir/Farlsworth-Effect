@@ -139,7 +139,14 @@ public class interactBox extends interfaceObject  {
 					
 					// Display the name of the person or thing talking/interacting
 					String theTalker = getTextSeries().getTalker();
-					if(getTextSeries().getWhoIsTalking() != null) theTalker = stringUtils.toTitleCase(getTextSeries().getWhoIsTalking().getName());
+					if(theTalker==null) theTalker="";
+					if(getTextSeries().getWhoIsTalking() != null && getTextSeries().getWhoIsTalking() instanceof unit) { 
+						theTalker = stringUtils.toTitleCase(getTextSeries().getWhoIsTalking().getName());
+						g.setColor(((unit)getTextSeries().getWhoIsTalking()).getNameColor());
+					}
+					else {
+						g.setColor(Color.BLACK);
+					}
 					g.drawString(theTalker,
 							(int)(gameCanvas.getScaleX()*getIntX()) + 
 							(int)(gameCanvas.getScaleX()*background.getWidth()/2) - 
@@ -147,13 +154,14 @@ public class interactBox extends interfaceObject  {
 							(int)(gameCanvas.getScaleY()*getIntY()) + 
 							(int)(gameCanvas.getScaleY()*background.getHeight()/5) + 
 							(int)(gameCanvas.getScaleY()*4));
+					g.setColor(Color.BLACK);
 				}
 				
 				// Set font.
 				g.setFont(DEFAULT_FONT);
 				
 				// Increase displayedText
-				if(displayedText.length() != getTextSeries().getTextOnPress().length()) {
+				if(getTextSeries().getTextOnPress() != null && displayedText.length() != getTextSeries().getTextOnPress().length()) {
 					displayIterator++;
 					if(displayIterator == DEFAULT_DISPLAY_FOR) {
 						displayIterator = 0;
@@ -165,7 +173,7 @@ public class interactBox extends interfaceObject  {
 				}
 				
 				// Draw the text.
-				g.drawString(displayedText,
+				if(getTextSeries().getTextOnPress() != null) g.drawString(displayedText,
 						(int)(gameCanvas.getScaleX()*getIntX()) + (int)(gameCanvas.getScaleX()*background.getWidth()/2) - g.getFontMetrics().stringWidth(getTextSeries().getTextOnPress())/2,
 					   (int)(gameCanvas.getScaleY()*(getIntY() + background.getHeight()/2 + 4)));
 			}
@@ -197,10 +205,30 @@ public class interactBox extends interfaceObject  {
 							g.setColor(DEFAULT_TEXT_COLOR);
 						}
 						
+						// First choice.
+						/*if(i==0) {
+							g.drawString(buttText,
+									   (int)((int)(gameCanvas.getScaleX()*(getIntX() + (2*(i+1))*percent*background.getWidth()/2)) - g.getFontMetrics().stringWidth(buttText)/2),
+									   (int)(gameCanvas.getScaleY()*(getIntY() + background.getHeight()/2 + 4)));
+						}
+						
+						// Second choice
+						if(i==1) {
+							
+						}*/
+						
 						// Draw text
 						g.drawString(buttText,
-							   (int) ((int)(gameCanvas.getScaleX()*(getIntX() + (2*(i+1))*percent*background.getWidth()/2)) - g.getFontMetrics().stringWidth(buttText)/2),
+							   (int)((int)(gameCanvas.getScaleX()*(getIntX() + (2*(i+1))*percent*background.getWidth()/2)) - g.getFontMetrics().stringWidth(buttText)/2),
 							   (int)(gameCanvas.getScaleY()*(getIntY() + background.getHeight()/2 + 4)));
+						
+						// Draw order/chaos TODO:PLACEHOLDER.
+						String type = getTextSeries().getChildren().get(i).getChoiceType();
+						if(type!=null) {
+							g.drawString(type,
+								   (int) ((int)(gameCanvas.getScaleX()*(getIntX() + (2*(i+1))*percent*background.getWidth()/2)) - g.getFontMetrics().stringWidth(type)/2),
+								   (int)(gameCanvas.getScaleY()*(getIntY() + background.getHeight()/2 + 15)));
+						}
 					}
 			}
 		}
@@ -318,6 +346,13 @@ public class interactBox extends interfaceObject  {
 		
 		// If we're in button mode.
 		else if(isButtonMode()) {
+			
+			// Increase player choices if we are making a chaos/order choice.
+			if(theText.getChildren().get(i).getChoiceType() == null); // Do nothing.
+			else if(theText.getChildren().get(i).getChoiceType().equals("Chaos"))
+				player.getPlayer().chaosChoices++;
+			else if(theText.getChildren().get(i).getChoiceType().equals("Order")) 
+				player.getPlayer().orderChoices++;
 			
 		
 			// Select the button.

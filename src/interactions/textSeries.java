@@ -14,6 +14,7 @@ public class textSeries {
 	private String talker = null;
 	private String buttonText; // If there's no button, just display textOnPress and go next.
 	private String textOnPress;
+	private String choiceType;
 	private textSeries parent = null;
 	private ArrayList<textSeries> children;
 	private textSeries end = null;
@@ -114,5 +115,13 @@ public class textSeries {
 
 	public drawnObject getWhoIsTalking() {
 		return whoIsTalking;
+	}
+
+	public String getChoiceType() {
+		return choiceType;
+	}
+
+	public void setChoiceType(String choiceType) {
+		this.choiceType = choiceType;
 	}
 }

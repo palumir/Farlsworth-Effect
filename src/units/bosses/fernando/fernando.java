@@ -75,7 +75,7 @@ public class fernando extends boss {
 	public static fernando fernando;
 	
 	// Scenes
-	private boolean shadowBossFightSceneInProgress = false; // TODO should be in gravekeeper.
+	private static boolean shadowBossFightSceneInProgress = false; // TODO should be in gravekeeper.
 	
 	///////////////
 	/// METHODS ///
@@ -350,7 +350,7 @@ public class fernando extends boss {
 	
 	// Initiate shadow elevator scene.
 	public static void initiateShadowBossFightScene() {
-		fernando.shadowBossFightSceneInProgress = true;
+		shadowBossFightSceneInProgress = true;
 	}
 	
 	// React to pain.

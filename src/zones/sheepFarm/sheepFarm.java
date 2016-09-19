@@ -46,6 +46,9 @@ import units.player;
 import units.unit;
 import units.unitCommand;
 import units.characters.farlsworth.farlsworth;
+import units.characters.farlsworth.cinematics.farmFenceCinematic;
+import units.characters.farlsworth.cinematics.farmIntroCinematic;
+import units.characters.farlsworth.cinematics.flowerFarmCinematic;
 import units.characters.farmer.farmer;
 import units.unitCommands.commandList;
 import units.unitCommands.commands.moveCommand;
@@ -91,6 +94,7 @@ public class sheepFarm extends zone {
 	public static event stormInProgress;
 	public static event isOnFire;
 	public static event distortedMusicPlaying;
+	public static event talkingGateJokeExperienced = new event("sheepFarmGateJokeExperienced");
 	
 	// Storm booleans
 	public static boolean stormStarted = false;
@@ -251,8 +255,8 @@ public class sheepFarm extends zone {
 		sheepFarmZoneLoader loader = new sheepFarmZoneLoader();
 		loader.loadSegments();
 		
-		// Spawn Farlsworth and fence
-		spawnFarlsworthAndFence();
+		// Spawn special stuff
+		spawnSpecialStuff();
 		
 		// Create items
 		createItems();
@@ -298,12 +302,27 @@ public class sheepFarm extends zone {
 	// Spawn farlsworth and fence.
 	public void spawnFarlsworthAndFence() {
 		farlsworth sheepBoss = new farlsworth(411,-394);
-		/*if(!farlsworth.isFenceAttached.isCompleted()) {
+		if(!farlsworth.isFenceAttached.isCompleted()) {
 			farlsworthFence = makeFarlsworthFence(5,-406);
 		}
 		else {
 			farlsworthFence = null;
-		}*/
+		}
+	}
+	
+	// Special chunks
+	public void spawnSpecialStuff() {
+		
+		// Spawn Farlsworth and fence
+		spawnFarlsworthAndFence();
+		
+		// Farmer
+		new farmer(-710,-256);
+		
+		// The silly haystack.
+		c = new doodads.sheepFarm.haystack(-294,-315,0);
+		c.setPassable(false);
+		((haystack)c).setStrange();
 	}
 	
 	// Spawn items
@@ -585,9 +604,41 @@ public class sheepFarm extends zone {
 		distortedMusicPlaying = new event("sheepFarmIsDistortedMusicPlaying");
 	}
 	
+	// Zone cinematics.
+	farmIntroCinematic farlsworthIntro;
+	farmFenceCinematic farlsworthFenceCinematic;
+	flowerFarmCinematic farlsworthFlowerCinematic;
+	
 	// Deal with the first well we encounters.
 	public void dealWithRegionStuff() {
 		player currPlayer = player.getPlayer();
+		
+		// First Farlsworth cinematic (intro)
+		if(currPlayer != null && currPlayer.isWithin(230,-458,433,-250) 
+				&& !farlsworthIntro.isCompleted.isCompleted()
+				&& (farlsworthIntro == null || !farlsworthIntro.isInProgress())) {
+			farlsworthIntro = new farmIntroCinematic();
+			farlsworthIntro.start();
+		}
+		
+		// Second Farlsworth cinematic (at the fence)
+		if(currPlayer != null && currPlayer.isWithin(-50, -453, 20, -300) 
+				&& !farlsworthFenceCinematic.isCompleted.isCompleted()
+				&& (farlsworthFenceCinematic == null || !farlsworthFenceCinematic.isInProgress())
+				&& farmIntroCinematic.isCompleted.isCompleted()) {
+			farlsworthFenceCinematic = new farmFenceCinematic();
+			farlsworthFenceCinematic.start();
+		}
+		
+		// Flower patch cinematic
+		if(currPlayer != null && currPlayer.isWithin(-1695,-5258,-1335,-4830)
+				&& !farlsworthFlowerCinematic.isCompleted.isCompleted()
+				&& (farlsworthFlowerCinematic == null || !farlsworthFlowerCinematic.isInProgress())
+				&& farmFenceCinematic.isCompleted.isCompleted()) {
+			farlsworthFlowerCinematic = new flowerFarmCinematic();
+			farlsworthFlowerCinematic.start();
+		}
+		
 		if(currPlayer != null && currPlayer.isWithin(-220,-2401,228,-2049) && wellTooltipLoaded != null && !wellTooltipLoaded.isCompleted()) {
 			wellTooltipLoaded.setCompleted(true);
 			tooltipString t = new tooltipString("Interact with a well to save the game.");
@@ -613,6 +664,8 @@ public class sheepFarm extends zone {
 			music.startMusic(zoneMusicDistorted);
 			distortedMusicPlaying.setCompleted(true);
 		}
+		
+		
 	}
 	
 	// Storm stuff

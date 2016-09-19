@@ -2,6 +2,7 @@ package zones.sheepFarm;
 
 import doodads.sheepFarm.tree;
 import terrain.chunkTypes.grass;
+import terrain.chunkTypes.wood;
 import units.unitCommands.commandList;
 import zones.zoneLoader;
 
@@ -14,267 +15,272 @@ public class sheepFarmZoneLoader extends zoneLoader {
 	// Load segments
 	@Override 
 	public void loadSegments() {
-////////////////////////
-////////SEGMENTS ARE:///
-////////////////////////
-addSegment0();
-addSegment1();
-addSegment2();
-addSegment3();
-addSegment4();
-addSegment5();
-addSegment6();
-addSegment7();
-addSegment8();
-addSegment9();
-addSegment10();
-addSegment11();
-addSegment12();
-addSegment13();
-addSegment14();
-addSegment15();
-addSegment16();
-addSegment17();
-addSegment18();
-addSegment19();
-addSegment20();
-addSegment21();
-addSegment22();
-addSegment23();
-addSegment24();
-addSegment25();
-addSegment26();
-addSegment27();
-addSegment28();
-addSegment29();
-addSegment30();
-addSegment31();
-addSegment32();
-addSegment33();
-addSegment34();
-addSegment35();
-addSegment36();
-addSegment37();
-addSegment38();
-addSegment39();
-addSegment40();
-addSegment41();
-addSegment42();
-addSegment43();
-addSegment44();
-addSegment45();
-addSegment46();
-addSegment47();
-addSegment48();
-addSegment49();
-addSegment50();
-addSegment51();
-addSegment52();
-addSegment53();
-addSegment54();
-addSegment55();
-addSegment56();
-addSegment57();
-addSegment58();
-addSegment59();
-addSegment60();
-addSegment61();
-addSegment62();
-addSegment63();
-addSegment64();
-addSegment65();
-addSegment66();
-addSegment67();
-addSegment68();
-addSegment69();
-addSegment70();
-addSegment71();
-addSegment72();
-addSegment73();
-addSegment74();
-addSegment75();
-addSegment76();
-addSegment77();
-addSegment78();
-addSegment79();
-addSegment80();
-addSegment81();
-addSegment82();
-addSegment83();
-addSegment84();
-addSegment85();
-addSegment86();
-addSegment87();
-addSegment88();
-addSegment89();
-addSegment90();
-addSegment91();
-addSegment92();
-addSegment93();
-addSegment94();
-addSegment95();
-addSegment96();
-addSegment97();
-addSegment98();
-addSegment99();
-addSegment100();
-addSegment101();
-addSegment102();
-addSegment103();
-addSegment104();
-addSegment105();
-addSegment106();
-addSegment107();
-addSegment108();
-addSegment109();
-addSegment110();
-addSegment111();
-addSegment112();
-addSegment113();
-addSegment114();
-addSegment115();
-addSegment116();
-addSegment117();
-addSegment118();
-addSegment119();
-addSegment120();
-addSegment121();
-addSegment122();
-addSegment123();
-addSegment124();
-addSegment125();
-addSegment126();
-addSegment127();
-addSegment128();
-addSegment129();
-addSegment130();
-addSegment131();
-addSegment132();
-addSegment133();
-addSegment134();
-addSegment135();
-addSegment136();
-addSegment137();
-addSegment138();
-addSegment139();
-addSegment140();
-addSegment141();
-addSegment142();
-addSegment143();
-addSegment144();
-addSegment145();
-addSegment146();
-addSegment147();
-addSegment148();
-addSegment149();
-addSegment150();
-addSegment151();
-addSegment152();
-addSegment153();
-addSegment154();
-addSegment155();
-addSegment156();
-addSegment157();
-addSegment158();
-addSegment159();
-addSegment160();
-addSegment161();
-addSegment162();
-addSegment163();
-addSegment164();
-addSegment165();
-addSegment166();
-addSegment167();
-addSegment168();
-addSegment169();
-addSegment170();
-addSegment171();
-addSegment172();
-addSegment173();
-addSegment174();
-addSegment175();
-addSegment176();
-addSegment177();
-addSegment178();
-addSegment179();
-addSegment180();
-addSegment181();
-addSegment182();
-addSegment183();
-addSegment184();
-addSegment185();
-addSegment186();
-addSegment187();
-addSegment188();
-addSegment189();
-addSegment190();
-addSegment191();
-addSegment192();
-addSegment193();
-addSegment194();
-addSegment195();
-addSegment196();
-addSegment197();
-addSegment198();
-addSegment199();
-addSegment200();
-addSegment201();
-addSegment202();
-addSegment203();
-addSegment204();
-addSegment205();
-addSegment206();
-addSegment207();
-addSegment208();
-addSegment209();
-addSegment210();
-addSegment211();
-addSegment212();
-addSegment213();
-addSegment214();
-addSegment215();
-addSegment216();
-addSegment217();
-addSegment218();
-addSegment219();
-addSegment220();
-addSegment221();
-addSegment222();
-addSegment223();
-addSegment224();
-addSegment225();
-addSegment226();
-addSegment227();
-addSegment228();
-addSegment229();
-addSegment230();
-addSegment231();
-addSegment232();
-addSegment233();
-addSegment234();
-addSegment235();
-addSegment236();
-addSegment237();
-addSegment238();
-addSegment239();
-addSegment240();
-addSegment241();
-addSegment242();
-addSegment243();
-addSegment244();
-addSegment245();
-addSegment246();
-addSegment247();
-addSegment248();
-addSegment249();
-addSegment250();
-addSegment251();
-addSegment252();
-addSegment253();
-addSegment254();
-addSegment255();
-
+		////////////////////////
+		////////SEGMENTS ARE:///
+		////////////////////////
+		addSegment0();
+		addSegment1();
+		addSegment2();
+		addSegment3();
+		addSegment4();
+		addSegment5();
+		addSegment6();
+		addSegment7();
+		addSegment8();
+		addSegment9();
+		addSegment10();
+		addSegment11();
+		addSegment12();
+		addSegment13();
+		addSegment14();
+		addSegment15();
+		addSegment16();
+		addSegment17();
+		addSegment18();
+		addSegment19();
+		addSegment20();
+		addSegment21();
+		addSegment22();
+		addSegment23();
+		addSegment24();
+		addSegment25();
+		addSegment26();
+		addSegment27();
+		addSegment28();
+		addSegment29();
+		addSegment30();
+		addSegment31();
+		addSegment32();
+		addSegment33();
+		addSegment34();
+		addSegment35();
+		addSegment36();
+		addSegment37();
+		addSegment38();
+		addSegment39();
+		addSegment40();
+		addSegment41();
+		addSegment42();
+		addSegment43();
+		addSegment44();
+		addSegment45();
+		addSegment46();
+		addSegment47();
+		addSegment48();
+		addSegment49();
+		addSegment50();
+		addSegment51();
+		addSegment52();
+		addSegment53();
+		addSegment54();
+		addSegment55();
+		addSegment56();
+		addSegment57();
+		addSegment58();
+		addSegment59();
+		addSegment60();
+		addSegment61();
+		addSegment62();
+		addSegment63();
+		addSegment64();
+		addSegment65();
+		addSegment66();
+		addSegment67();
+		addSegment68();
+		addSegment69();
+		addSegment70();
+		addSegment71();
+		addSegment72();
+		addSegment73();
+		addSegment74();
+		addSegment75();
+		addSegment76();
+		addSegment77();
+		addSegment78();
+		addSegment79();
+		addSegment80();
+		addSegment81();
+		addSegment82();
+		addSegment83();
+		addSegment84();
+		addSegment85();
+		addSegment86();
+		addSegment87();
+		addSegment88();
+		addSegment89();
+		addSegment90();
+		addSegment91();
+		addSegment92();
+		addSegment93();
+		addSegment94();
+		addSegment95();
+		addSegment96();
+		addSegment97();
+		addSegment98();
+		addSegment99();
+		addSegment100();
+		addSegment101();
+		addSegment102();
+		addSegment103();
+		addSegment104();
+		addSegment105();
+		addSegment106();
+		addSegment107();
+		addSegment108();
+		addSegment109();
+		addSegment110();
+		addSegment111();
+		addSegment112();
+		addSegment113();
+		addSegment114();
+		addSegment115();
+		addSegment116();
+		addSegment117();
+		addSegment118();
+		addSegment119();
+		addSegment120();
+		addSegment121();
+		addSegment122();
+		addSegment123();
+		addSegment124();
+		addSegment125();
+		addSegment126();
+		addSegment127();
+		addSegment128();
+		addSegment129();
+		addSegment130();
+		addSegment131();
+		addSegment132();
+		addSegment133();
+		addSegment134();
+		addSegment135();
+		addSegment136();
+		addSegment137();
+		addSegment138();
+		addSegment139();
+		addSegment140();
+		addSegment141();
+		addSegment142();
+		addSegment143();
+		addSegment144();
+		addSegment145();
+		addSegment146();
+		addSegment147();
+		addSegment148();
+		addSegment149();
+		addSegment150();
+		addSegment151();
+		addSegment152();
+		addSegment153();
+		addSegment154();
+		addSegment155();
+		addSegment156();
+		addSegment157();
+		addSegment158();
+		addSegment159();
+		addSegment160();
+		addSegment161();
+		addSegment162();
+		addSegment163();
+		addSegment164();
+		addSegment165();
+		addSegment166();
+		addSegment167();
+		addSegment168();
+		addSegment169();
+		addSegment170();
+		addSegment171();
+		addSegment172();
+		addSegment173();
+		addSegment174();
+		addSegment175();
+		addSegment176();
+		addSegment177();
+		addSegment178();
+		addSegment179();
+		addSegment180();
+		addSegment181();
+		addSegment182();
+		addSegment183();
+		addSegment184();
+		addSegment185();
+		addSegment186();
+		addSegment187();
+		addSegment188();
+		addSegment189();
+		addSegment190();
+		addSegment191();
+		addSegment192();
+		addSegment193();
+		addSegment194();
+		addSegment195();
+		addSegment196();
+		addSegment197();
+		addSegment198();
+		addSegment199();
+		addSegment200();
+		addSegment201();
+		addSegment202();
+		addSegment203();
+		addSegment204();
+		addSegment205();
+		addSegment206();
+		addSegment207();
+		addSegment208();
+		addSegment209();
+		addSegment210();
+		addSegment211();
+		addSegment212();
+		addSegment213();
+		addSegment214();
+		addSegment215();
+		addSegment216();
+		addSegment217();
+		addSegment218();
+		addSegment219();
+		addSegment220();
+		addSegment221();
+		addSegment222();
+		addSegment223();
+		addSegment224();
+		addSegment225();
+		addSegment226();
+		addSegment227();
+		addSegment228();
+		addSegment229();
+		addSegment230();
+		addSegment231();
+		addSegment232();
+		addSegment233();
+		addSegment234();
+		addSegment235();
+		addSegment236();
+		addSegment237();
+		addSegment238();
+		addSegment239();
+		addSegment240();
+		addSegment241();
+		addSegment242();
+		addSegment243();
+		addSegment244();
+		addSegment245();
+		addSegment246();
+		addSegment247();
+		addSegment248();
+		addSegment249();
+		addSegment250();
+		addSegment251();
+		addSegment252();
+		addSegment253();
+		addSegment254();
+		addSegment255();
+		addSegment256();
+		addSegment257();
+		addSegment258();
+		addSegment259();
+		addSegment260();
 	}
+	
 	public void addSegment0() {
 c = new terrain.chunkTypes.water(-779,46,0);
 if(c!=null) c.setPassable(true);
@@ -1041,805 +1047,793 @@ c = new terrain.chunkTypes.water(1136,148,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.water(1168,148,0);
 if(c!=null) c.setPassable(false);
-c = new terrain.chunkTypes.wood(-3856,-6814,0);
+c = wood.createChunk(-3856,-6814,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3984,-6814,0);
+c = wood.createChunk(-3984,-6814,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3952,-6814,0);
+c = wood.createChunk(-3952,-6814,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3920,-6814,0);
+c = wood.createChunk(-3920,-6814,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3888,-6814,0);
+c = wood.createChunk(-3888,-6814,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3984,-6782,0);
+c = wood.createChunk(-3984,-6782,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3952,-6782,0);
+c = wood.createChunk(-3952,-6782,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3920,-6782,0);
+c = wood.createChunk(-3920,-6782,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3888,-6782,0);
+c = wood.createChunk(-3888,-6782,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3856,-6782,0);
+c = wood.createChunk(-3856,-6782,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3797,-6764,0);
+c = wood.createChunk(-3797,-6764,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3769,-6764,0);
+c = wood.createChunk(-3769,-6764,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3824,-6764,0);
+c = wood.createChunk(-3824,-6764,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3033,-6763,0);
+c = wood.createChunk(-3033,-6763,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3001,-6763,0);
+c = wood.createChunk(-3001,-6763,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2969,-6763,0);
+c = wood.createChunk(-2969,-6763,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2937,-6763,0);
+c = wood.createChunk(-2937,-6763,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2905,-6763,0);
+c = wood.createChunk(-2905,-6763,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2873,-6763,0);
+c = wood.createChunk(-2873,-6763,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3984,-6750,0);
+c = wood.createChunk(-3984,-6750,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3952,-6750,0);
+c = wood.createChunk(-3952,-6750,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3920,-6750,0);
+c = wood.createChunk(-3920,-6750,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3888,-6750,0);
+c = wood.createChunk(-3888,-6750,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3856,-6750,0);
+c = wood.createChunk(-3856,-6750,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3769,-6732,0);
+c = wood.createChunk(-3769,-6732,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3033,-6731,0);
+c = wood.createChunk(-3033,-6731,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3001,-6731,0);
+c = wood.createChunk(-3001,-6731,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2969,-6731,0);
+c = wood.createChunk(-2969,-6731,0);
 if(c!=null) c.setPassable(true);
 }
 
 public void addSegment8() {
-c = new terrain.chunkTypes.wood(-2937,-6731,0);
+c = wood.createChunk(-2937,-6731,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2905,-6731,0);
+c = wood.createChunk(-2905,-6731,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2873,-6731,0);
+c = wood.createChunk(-2873,-6731,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3984,-6718,0);
+c = wood.createChunk(-3984,-6718,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3952,-6718,0);
+c = wood.createChunk(-3952,-6718,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3920,-6718,0);
+c = wood.createChunk(-3920,-6718,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3888,-6718,0);
+c = wood.createChunk(-3888,-6718,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3856,-6718,0);
+c = wood.createChunk(-3856,-6718,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3769,-6700,0);
+c = wood.createChunk(-3769,-6700,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3033,-6699,0);
+c = wood.createChunk(-3033,-6699,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3001,-6699,0);
+c = wood.createChunk(-3001,-6699,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2969,-6699,0);
+c = wood.createChunk(-2969,-6699,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2937,-6699,0);
+c = wood.createChunk(-2937,-6699,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2905,-6699,0);
+c = wood.createChunk(-2905,-6699,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2873,-6699,0);
+c = wood.createChunk(-2873,-6699,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-4080,-6696,0);
+c = wood.createChunk(-4080,-6696,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-4048,-6696,0);
+c = wood.createChunk(-4048,-6696,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-4016,-6696,0);
+c = wood.createChunk(-4016,-6696,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-4240,-6696,0);
+c = wood.createChunk(-4240,-6696,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3984,-6686,0);
+c = wood.createChunk(-3984,-6686,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3952,-6686,0);
+c = wood.createChunk(-3952,-6686,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3920,-6686,0);
+c = wood.createChunk(-3920,-6686,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3888,-6686,0);
+c = wood.createChunk(-3888,-6686,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3856,-6686,0);
+c = wood.createChunk(-3856,-6686,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3769,-6668,0);
+c = wood.createChunk(-3769,-6668,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3033,-6667,0);
+c = wood.createChunk(-3033,-6667,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3001,-6667,0);
+c = wood.createChunk(-3001,-6667,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2969,-6667,0);
+c = wood.createChunk(-2969,-6667,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2937,-6667,0);
+c = wood.createChunk(-2937,-6667,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2905,-6667,0);
+c = wood.createChunk(-2905,-6667,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2873,-6667,0);
+c = wood.createChunk(-2873,-6667,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3353,-6667,0);
+c = wood.createChunk(-3353,-6667,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3321,-6667,0);
+c = wood.createChunk(-3321,-6667,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3289,-6667,0);
+c = wood.createChunk(-3289,-6667,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3161,-6667,0);
+c = wood.createChunk(-3161,-6667,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3129,-6667,0);
+c = wood.createChunk(-3129,-6667,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3097,-6667,0);
+c = wood.createChunk(-3097,-6667,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3065,-6667,0);
+c = wood.createChunk(-3065,-6667,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3641,-6667,0);
+c = wood.createChunk(-3641,-6667,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3609,-6667,0);
+c = wood.createChunk(-3609,-6667,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3577,-6667,0);
+c = wood.createChunk(-3577,-6667,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3545,-6667,0);
+c = wood.createChunk(-3545,-6667,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3417,-6667,0);
+c = wood.createChunk(-3417,-6667,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3385,-6667,0);
+c = wood.createChunk(-3385,-6667,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3673,-6667,0);
+c = wood.createChunk(-3673,-6667,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3737,-6667,0);
+c = wood.createChunk(-3737,-6667,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3705,-6667,0);
+c = wood.createChunk(-3705,-6667,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-4080,-6664,0);
+c = wood.createChunk(-4080,-6664,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-4048,-6664,0);
+c = wood.createChunk(-4048,-6664,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-4016,-6664,0);
+c = wood.createChunk(-4016,-6664,0);
 if(c!=null) c.setPassable(true);
 }
 
 public void addSegment9() {
-c = new terrain.chunkTypes.wood(-4496,-6664,0);
+c = wood.createChunk(-4496,-6664,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-4464,-6664,0);
+c = wood.createChunk(-4464,-6664,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-4432,-6664,0);
+c = wood.createChunk(-4432,-6664,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-4400,-6664,0);
+c = wood.createChunk(-4400,-6664,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-4368,-6664,0);
+c = wood.createChunk(-4368,-6664,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-4336,-6664,0);
+c = wood.createChunk(-4336,-6664,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-4304,-6664,0);
+c = wood.createChunk(-4304,-6664,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-4272,-6664,0);
+c = wood.createChunk(-4272,-6664,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-4240,-6664,0);
+c = wood.createChunk(-4240,-6664,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-4208,-6664,0);
+c = wood.createChunk(-4208,-6664,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-4176,-6664,0);
+c = wood.createChunk(-4176,-6664,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-4144,-6664,0);
+c = wood.createChunk(-4144,-6664,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-4112,-6664,0);
+c = wood.createChunk(-4112,-6664,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3984,-6654,0);
+c = wood.createChunk(-3984,-6654,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3952,-6654,0);
+c = wood.createChunk(-3952,-6654,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3920,-6654,0);
+c = wood.createChunk(-3920,-6654,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3888,-6654,0);
+c = wood.createChunk(-3888,-6654,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3856,-6654,0);
+c = wood.createChunk(-3856,-6654,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3769,-6636,0);
+c = wood.createChunk(-3769,-6636,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3033,-6635,0);
+c = wood.createChunk(-3001,-6635,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3001,-6635,0);
+c = wood.createChunk(-3033,-6635,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2969,-6635,0);
+c = wood.createChunk(-2969,-6635,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2937,-6635,0);
+c = wood.createChunk(-2937,-6635,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2905,-6635,0);
+c = wood.createChunk(-2905,-6635,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2873,-6635,0);
+c = wood.createChunk(-2873,-6635,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3289,-6635,0);
+c = wood.createChunk(-3289,-6635,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3257,-6635,0);
+c = wood.createChunk(-3257,-6635,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3225,-6635,0);
+c = wood.createChunk(-3225,-6635,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3193,-6635,0);
+c = wood.createChunk(-3193,-6635,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3161,-6635,0);
+c = wood.createChunk(-3161,-6635,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3545,-6635,0);
+c = wood.createChunk(-3545,-6635,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3513,-6635,0);
+c = wood.createChunk(-3513,-6635,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3481,-6635,0);
+c = wood.createChunk(-3481,-6635,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3449,-6635,0);
+c = wood.createChunk(-3449,-6635,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3417,-6635,0);
+c = wood.createChunk(-3417,-6635,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3673,-6635,0);
+c = wood.createChunk(-3673,-6635,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3737,-6635,0);
+c = wood.createChunk(-3737,-6635,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3705,-6635,0);
+c = wood.createChunk(-3705,-6635,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-4080,-6632,0);
+c = wood.createChunk(-4080,-6632,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-4048,-6632,0);
+c = wood.createChunk(-4048,-6632,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-4016,-6632,0);
+c = wood.createChunk(-4016,-6632,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-4496,-6632,0);
+c = wood.createChunk(-4496,-6632,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3984,-6622,0);
+c = wood.createChunk(-3984,-6622,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3952,-6622,0);
+c = wood.createChunk(-3952,-6622,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3920,-6622,0);
+c = wood.createChunk(-3920,-6622,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3888,-6622,0);
+c = wood.createChunk(-3888,-6622,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3856,-6622,0);
+c = wood.createChunk(-3856,-6622,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3769,-6604,0);
+c = wood.createChunk(-3769,-6604,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3033,-6603,0);
+c = wood.createChunk(-2937,-6603,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3001,-6603,0);
+c = wood.createChunk(-3033,-6603,0);
 if(c!=null) c.setPassable(true);
 }
 
 public void addSegment10() {
-c = new terrain.chunkTypes.wood(-2969,-6603,0);
+c = wood.createChunk(-3001,-6603,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2937,-6603,0);
+c = wood.createChunk(-2969,-6603,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2905,-6603,0);
+c = wood.createChunk(-2905,-6603,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2873,-6603,0);
+c = wood.createChunk(-2873,-6603,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3353,-6603,0);
+c = wood.createChunk(-3353,-6603,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3321,-6603,0);
+c = wood.createChunk(-3321,-6603,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3289,-6603,0);
+c = wood.createChunk(-3289,-6603,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3161,-6603,0);
+c = wood.createChunk(-3161,-6603,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3129,-6603,0);
+c = wood.createChunk(-3129,-6603,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3097,-6603,0);
+c = wood.createChunk(-3097,-6603,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3065,-6603,0);
+c = wood.createChunk(-3065,-6603,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3641,-6603,0);
+c = wood.createChunk(-3641,-6603,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3609,-6603,0);
+c = wood.createChunk(-3609,-6603,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3577,-6603,0);
+c = wood.createChunk(-3577,-6603,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3545,-6603,0);
+c = wood.createChunk(-3545,-6603,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3417,-6603,0);
+c = wood.createChunk(-3417,-6603,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3385,-6603,0);
+c = wood.createChunk(-3385,-6603,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3673,-6603,0);
+c = wood.createChunk(-3673,-6603,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3737,-6603,0);
+c = wood.createChunk(-3737,-6603,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3705,-6603,0);
+c = wood.createChunk(-3705,-6603,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-4496,-6600,0);
+c = wood.createChunk(-4496,-6600,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3984,-6590,0);
+c = wood.createChunk(-3984,-6590,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3952,-6590,0);
+c = wood.createChunk(-3952,-6590,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3920,-6590,0);
+c = wood.createChunk(-3920,-6590,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3888,-6590,0);
+c = wood.createChunk(-3888,-6590,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3856,-6590,0);
+c = wood.createChunk(-3856,-6590,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3769,-6572,0);
+c = wood.createChunk(-3769,-6572,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3033,-6571,0);
+c = wood.createChunk(-3033,-6571,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2969,-6571,0);
+c = wood.createChunk(-4496,-6568,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-4496,-6568,0);
+c = wood.createChunk(-4464,-6568,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-4464,-6568,0);
+c = wood.createChunk(-4432,-6568,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-4432,-6568,0);
+c = wood.createChunk(-4400,-6568,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-4400,-6568,0);
+c = wood.createChunk(-4368,-6568,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-4368,-6568,0);
+c = wood.createChunk(-4336,-6568,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-4336,-6568,0);
+c = wood.createChunk(-4304,-6568,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-4304,-6568,0);
+c = wood.createChunk(-4272,-6568,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-4272,-6568,0);
+c = wood.createChunk(-4240,-6568,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-4240,-6568,0);
+c = wood.createChunk(-3984,-6558,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3984,-6558,0);
+c = wood.createChunk(-3952,-6558,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3952,-6558,0);
+c = wood.createChunk(-3920,-6558,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3920,-6558,0);
+c = wood.createChunk(-3888,-6558,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3888,-6558,0);
+c = wood.createChunk(-3856,-6558,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3856,-6558,0);
+c = wood.createChunk(-3769,-6540,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3769,-6540,0);
+c = wood.createChunk(-3033,-6539,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3033,-6539,0);
+c = wood.createChunk(-4240,-6536,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2969,-6539,0);
+c = wood.createChunk(-3984,-6526,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-4240,-6536,0);
+c = wood.createChunk(-3952,-6526,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3984,-6526,0);
+c = wood.createChunk(-3920,-6526,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3952,-6526,0);
+c = wood.createChunk(-3888,-6526,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3920,-6526,0);
+c = wood.createChunk(-3856,-6526,0);
 if(c!=null) c.setPassable(true);
 }
 
 public void addSegment11() {
-c = new terrain.chunkTypes.wood(-3888,-6526,0);
+c = wood.createChunk(-3823,-6508,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3856,-6526,0);
+c = wood.createChunk(-3796,-6508,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3823,-6508,0);
+c = wood.createChunk(-3769,-6508,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3796,-6508,0);
+c = wood.createChunk(-3033,-6507,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3769,-6508,0);
+c = wood.createChunk(-4240,-6504,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3033,-6507,0);
+c = wood.createChunk(-4272,-6503,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2969,-6507,0);
+c = wood.createChunk(-3984,-6494,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-4240,-6504,0);
+c = wood.createChunk(-3952,-6494,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-4272,-6503,0);
+c = wood.createChunk(-3920,-6494,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3984,-6494,0);
+c = wood.createChunk(-3888,-6494,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3952,-6494,0);
+c = wood.createChunk(-3856,-6494,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3920,-6494,0);
+c = wood.createChunk(-3033,-6475,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3888,-6494,0);
+c = wood.createChunk(-4240,-6472,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3856,-6494,0);
+c = wood.createChunk(-3984,-6462,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3033,-6475,0);
+c = wood.createChunk(-3952,-6462,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2969,-6475,0);
+c = wood.createChunk(-3920,-6462,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-4240,-6472,0);
+c = wood.createChunk(-3888,-6462,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3984,-6462,0);
+c = wood.createChunk(-3856,-6462,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3952,-6462,0);
+c = wood.createChunk(-3001,-6458,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3920,-6462,0);
+c = wood.createChunk(-3033,-6458,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3888,-6462,0);
+c = wood.createChunk(-2969,-6458,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3856,-6462,0);
+c = wood.createChunk(-2969,-6443,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3001,-6458,0);
+c = wood.createChunk(-4240,-6440,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3033,-6443,0);
+c = wood.createChunk(-2969,-6411,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2969,-6443,0);
+c = wood.createChunk(-4240,-6408,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-4240,-6440,0);
+c = wood.createChunk(-2969,-6379,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3033,-6411,0);
+c = wood.createChunk(-4240,-6376,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2969,-6411,0);
+c = wood.createChunk(-2969,-6347,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-4240,-6408,0);
+c = wood.createChunk(-4240,-6344,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3033,-6379,0);
+c = wood.createChunk(-3033,-6315,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2969,-6379,0);
+c = wood.createChunk(-3001,-6315,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-4240,-6376,0);
+c = wood.createChunk(-2969,-6315,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3033,-6347,0);
+c = wood.createChunk(-4240,-6312,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2969,-6347,0);
+c = wood.createChunk(-3033,-6283,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-4240,-6344,0);
+c = wood.createChunk(-3001,-6283,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3033,-6315,0);
+c = wood.createChunk(-2969,-6283,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3001,-6315,0);
+c = wood.createChunk(-4240,-6280,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2969,-6315,0);
+c = wood.createChunk(-3033,-6251,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-4240,-6312,0);
+c = wood.createChunk(-3001,-6251,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3033,-6283,0);
+c = wood.createChunk(-2969,-6251,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3001,-6283,0);
+c = wood.createChunk(-2424,-6249,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2969,-6283,0);
+c = wood.createChunk(-2392,-6249,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-4240,-6280,0);
+c = wood.createChunk(-2360,-6249,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3033,-6251,0);
+c = wood.createChunk(-2328,-6249,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3001,-6251,0);
+c = wood.createChunk(-2296,-6249,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2969,-6251,0);
+c = wood.createChunk(-2264,-6249,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2424,-6249,0);
+c = wood.createChunk(-2232,-6249,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2392,-6249,0);
+c = wood.createChunk(-2200,-6249,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2360,-6249,0);
+c = wood.createChunk(-2168,-6249,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2328,-6249,0);
+c = wood.createChunk(-2136,-6249,0);
 if(c!=null) c.setPassable(true);
 }
 
 public void addSegment12() {
-c = new terrain.chunkTypes.wood(-2296,-6249,0);
+c = wood.createChunk(-2104,-6249,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2264,-6249,0);
+c = wood.createChunk(-2072,-6249,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2232,-6249,0);
+c = wood.createChunk(-4336,-6248,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2200,-6249,0);
+c = wood.createChunk(-4304,-6248,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2168,-6249,0);
+c = wood.createChunk(-4272,-6248,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2136,-6249,0);
+c = wood.createChunk(-4240,-6248,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2104,-6249,0);
+c = wood.createChunk(-4368,-6248,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2072,-6249,0);
+c = wood.createChunk(-4400,-6248,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-4336,-6248,0);
+c = wood.createChunk(-3033,-6219,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-4304,-6248,0);
+c = wood.createChunk(-3001,-6219,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-4272,-6248,0);
+c = wood.createChunk(-2969,-6219,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-4240,-6248,0);
+c = wood.createChunk(-2424,-6217,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-4368,-6248,0);
+c = wood.createChunk(-2392,-6217,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-4400,-6248,0);
+c = wood.createChunk(-2360,-6217,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3033,-6219,0);
+c = wood.createChunk(-2328,-6217,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3001,-6219,0);
+c = wood.createChunk(-2296,-6217,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2969,-6219,0);
+c = wood.createChunk(-2264,-6217,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2424,-6217,0);
+c = wood.createChunk(-2232,-6217,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2392,-6217,0);
+c = wood.createChunk(-2200,-6217,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2360,-6217,0);
+c = wood.createChunk(-2168,-6217,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2328,-6217,0);
+c = wood.createChunk(-2136,-6217,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2296,-6217,0);
+c = wood.createChunk(-2104,-6217,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2264,-6217,0);
+c = wood.createChunk(-2072,-6217,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2232,-6217,0);
+c = wood.createChunk(-4336,-6216,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2200,-6217,0);
+c = wood.createChunk(-4368,-6216,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2168,-6217,0);
+c = wood.createChunk(-4400,-6216,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2136,-6217,0);
+c = wood.createChunk(-3000,-6187,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2104,-6217,0);
+c = wood.createChunk(-2424,-6185,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2072,-6217,0);
+c = wood.createChunk(-2392,-6185,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-4336,-6216,0);
+c = wood.createChunk(-2360,-6185,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-4368,-6216,0);
+c = wood.createChunk(-2328,-6185,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-4400,-6216,0);
+c = wood.createChunk(-2296,-6185,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3000,-6187,0);
+c = wood.createChunk(-2264,-6185,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2424,-6185,0);
+c = wood.createChunk(-2232,-6185,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2392,-6185,0);
+c = wood.createChunk(-2200,-6185,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2360,-6185,0);
+c = wood.createChunk(-2168,-6185,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2328,-6185,0);
+c = wood.createChunk(-2136,-6185,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2296,-6185,0);
+c = wood.createChunk(-2104,-6185,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2264,-6185,0);
+c = wood.createChunk(-2072,-6185,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2232,-6185,0);
+c = wood.createChunk(-4336,-6184,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2200,-6185,0);
+c = wood.createChunk(-4368,-6184,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2168,-6185,0);
+c = wood.createChunk(-4400,-6184,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2136,-6185,0);
+c = wood.createChunk(-3000,-6155,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2104,-6185,0);
+c = wood.createChunk(-2424,-6153,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2072,-6185,0);
+c = wood.createChunk(-2360,-6153,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-4336,-6184,0);
+c = wood.createChunk(-2136,-6153,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-4368,-6184,0);
+c = wood.createChunk(-2104,-6153,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-4400,-6184,0);
+c = wood.createChunk(-2072,-6153,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3000,-6155,0);
+c = wood.createChunk(-2392,-6153,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2424,-6153,0);
+c = wood.createChunk(-4336,-6152,0);
 if(c!=null) c.setPassable(true);
 }
 
 public void addSegment13() {
-c = new terrain.chunkTypes.wood(-2360,-6153,0);
+c = wood.createChunk(-4368,-6152,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2136,-6153,0);
+c = wood.createChunk(-4400,-6152,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2104,-6153,0);
+c = wood.createChunk(-3032,-6123,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2072,-6153,0);
+c = wood.createChunk(-2968,-6123,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2392,-6153,0);
+c = wood.createChunk(-3000,-6123,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-4336,-6152,0);
+c = wood.createChunk(-2424,-6121,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-4368,-6152,0);
+c = wood.createChunk(-2360,-6121,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-4400,-6152,0);
+c = wood.createChunk(-2136,-6121,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3032,-6123,0);
+c = wood.createChunk(-2104,-6121,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2968,-6123,0);
+c = wood.createChunk(-2072,-6121,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3000,-6123,0);
+c = wood.createChunk(-4336,-6120,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2424,-6121,0);
+c = wood.createChunk(-4368,-6120,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2360,-6121,0);
+c = wood.createChunk(-4400,-6120,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2136,-6121,0);
+c = wood.createChunk(-3032,-6091,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2104,-6121,0);
+c = wood.createChunk(-3000,-6091,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2072,-6121,0);
+c = wood.createChunk(-2968,-6091,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-4336,-6120,0);
+c = wood.createChunk(-2424,-6089,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-4368,-6120,0);
+c = wood.createChunk(-2360,-6089,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-4400,-6120,0);
+c = wood.createChunk(-2136,-6089,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3032,-6091,0);
+c = wood.createChunk(-2104,-6089,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3000,-6091,0);
+c = wood.createChunk(-2072,-6089,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2968,-6091,0);
+c = wood.createChunk(-4336,-6088,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2424,-6089,0);
+c = wood.createChunk(-4368,-6088,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2360,-6089,0);
+c = wood.createChunk(-4400,-6088,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2136,-6089,0);
+c = wood.createChunk(-3032,-6059,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2104,-6089,0);
+c = wood.createChunk(-2968,-6059,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2072,-6089,0);
+c = wood.createChunk(-3000,-6059,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-4336,-6088,0);
+c = wood.createChunk(-2424,-6057,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-4368,-6088,0);
+c = wood.createChunk(-2360,-6057,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-4400,-6088,0);
+c = wood.createChunk(-2136,-6057,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3032,-6059,0);
+c = wood.createChunk(-2104,-6057,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2968,-6059,0);
+c = wood.createChunk(-2072,-6057,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3000,-6059,0);
+c = wood.createChunk(-4336,-6056,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2424,-6057,0);
+c = wood.createChunk(-4368,-6056,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2360,-6057,0);
+c = wood.createChunk(-4400,-6056,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2136,-6057,0);
+c = wood.createChunk(-3000,-6027,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2104,-6057,0);
+c = wood.createChunk(-2136,-6025,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2072,-6057,0);
+c = wood.createChunk(-2104,-6025,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-4336,-6056,0);
+c = wood.createChunk(-2072,-6025,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-4368,-6056,0);
+c = wood.createChunk(-2424,-6025,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-4400,-6056,0);
+c = wood.createChunk(-2360,-6025,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3000,-6027,0);
+c = wood.createChunk(-4336,-6024,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2136,-6025,0);
+c = wood.createChunk(-4368,-6024,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2104,-6025,0);
+c = wood.createChunk(-4400,-6024,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2072,-6025,0);
+c = wood.createChunk(-3000,-5995,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2424,-6025,0);
+c = wood.createChunk(-2136,-5993,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2360,-6025,0);
+c = wood.createChunk(-2104,-5993,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-4336,-6024,0);
+c = wood.createChunk(-2072,-5993,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-4368,-6024,0);
+c = wood.createChunk(-2424,-5993,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-4400,-6024,0);
+c = wood.createChunk(-2360,-5993,0);
 if(c!=null) c.setPassable(true);
 }
 
 public void addSegment14() {
-c = new terrain.chunkTypes.wood(-3000,-5995,0);
+c = wood.createChunk(-4336,-5992,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2136,-5993,0);
+c = wood.createChunk(-4368,-5992,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2104,-5993,0);
-if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2072,-5993,0);
-if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2424,-5993,0);
-if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2360,-5993,0);
-if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-4336,-5992,0);
-if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-4368,-5992,0);
-if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-4400,-5992,0);
+c = wood.createChunk(-4400,-5992,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1240,-5981,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1208,-5981,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3032,-5963,0);
+c = wood.createChunk(-3032,-5963,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3000,-5963,0);
+c = wood.createChunk(-3000,-5963,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2968,-5963,0);
+c = wood.createChunk(-2968,-5963,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2136,-5961,0);
+c = wood.createChunk(-2136,-5961,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2104,-5961,0);
+c = wood.createChunk(-2104,-5961,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2072,-5961,0);
+c = wood.createChunk(-2072,-5961,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2424,-5961,0);
+c = wood.createChunk(-2424,-5961,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2360,-5961,0);
+c = wood.createChunk(-2360,-5961,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-4336,-5960,0);
+c = wood.createChunk(-4336,-5960,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-4368,-5960,0);
+c = wood.createChunk(-4368,-5960,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-4400,-5960,0);
+c = wood.createChunk(-4400,-5960,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1240,-5949,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1208,-5949,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3032,-5931,0);
+c = wood.createChunk(-3032,-5931,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3000,-5931,0);
+c = wood.createChunk(-3000,-5931,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2968,-5931,0);
+c = wood.createChunk(-2968,-5931,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2136,-5929,0);
+c = wood.createChunk(-2136,-5929,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2104,-5929,0);
+c = wood.createChunk(-2104,-5929,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2072,-5929,0);
+c = wood.createChunk(-2072,-5929,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2424,-5929,0);
+c = wood.createChunk(-2424,-5929,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2360,-5929,0);
+c = wood.createChunk(-2360,-5929,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-4336,-5928,0);
+c = wood.createChunk(-4336,-5928,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-4368,-5928,0);
+c = wood.createChunk(-4368,-5928,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-4400,-5928,0);
+c = wood.createChunk(-4400,-5928,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1240,-5917,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1208,-5917,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3032,-5899,0);
+c = wood.createChunk(-3032,-5899,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3000,-5899,0);
+c = wood.createChunk(-3000,-5899,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2968,-5899,0);
+c = wood.createChunk(-2968,-5899,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2136,-5897,0);
+c = wood.createChunk(-2136,-5897,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2104,-5897,0);
+c = wood.createChunk(-2104,-5897,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2072,-5897,0);
+c = wood.createChunk(-2072,-5897,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2424,-5897,0);
+c = wood.createChunk(-2424,-5897,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2392,-5897,0);
+c = wood.createChunk(-2392,-5897,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2360,-5897,0);
+c = wood.createChunk(-2360,-5897,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-4336,-5896,0);
+c = wood.createChunk(-4336,-5896,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-4368,-5896,0);
+c = wood.createChunk(-4368,-5896,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-4400,-5896,0);
+c = wood.createChunk(-4400,-5896,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1240,-5885,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-1208,-5885,0);
+if(c!=null) c.setPassable(true);
+c = wood.createChunk(-3032,-5867,0);
+if(c!=null) c.setPassable(true);
+c = wood.createChunk(-3000,-5867,0);
+if(c!=null) c.setPassable(true);
+c = wood.createChunk(-2968,-5867,0);
+if(c!=null) c.setPassable(true);
+c = wood.createChunk(-2136,-5865,0);
+if(c!=null) c.setPassable(true);
+c = wood.createChunk(-2104,-5865,0);
 if(c!=null) c.setPassable(true);
 }
 
 public void addSegment15() {
-c = grass.createChunk(-1208,-5885,0);
+c = wood.createChunk(-2072,-5865,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3032,-5867,0);
+c = wood.createChunk(-2424,-5865,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3000,-5867,0);
+c = wood.createChunk(-2392,-5865,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2968,-5867,0);
-if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2136,-5865,0);
-if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2104,-5865,0);
-if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2072,-5865,0);
-if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2424,-5865,0);
-if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2392,-5865,0);
-if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2360,-5865,0);
+c = wood.createChunk(-2360,-5865,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-4016,-5864,0);
 if(c!=null) c.setPassable(true);
@@ -1921,9 +1915,6 @@ c = grass.createChunk(-4144,-5864,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-4112,-5864,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment16() {
 c = grass.createChunk(-4080,-5864,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-4048,-5864,0);
@@ -1932,23 +1923,26 @@ c = grass.createChunk(-1240,-5853,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1208,-5853,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3032,-5835,0);
+c = wood.createChunk(-3032,-5835,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3000,-5835,0);
+c = wood.createChunk(-3000,-5835,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2968,-5835,0);
+}
+
+public void addSegment16() {
+c = wood.createChunk(-2968,-5835,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2136,-5833,0);
+c = wood.createChunk(-2136,-5833,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2104,-5833,0);
+c = wood.createChunk(-2104,-5833,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2072,-5833,0);
+c = wood.createChunk(-2072,-5833,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2424,-5833,0);
+c = wood.createChunk(-2424,-5833,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2392,-5833,0);
+c = wood.createChunk(-2392,-5833,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2360,-5833,0);
+c = wood.createChunk(-2360,-5833,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-4016,-5832,0);
 if(c!=null) c.setPassable(true);
@@ -2024,9 +2018,6 @@ c = grass.createChunk(-4240,-5832,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-4208,-5832,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment17() {
 c = grass.createChunk(-4176,-5832,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-4144,-5832,0);
@@ -2039,25 +2030,28 @@ c = grass.createChunk(-4048,-5832,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1240,-5821,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment17() {
 c = grass.createChunk(-1208,-5821,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3032,-5803,0);
+c = wood.createChunk(-3032,-5803,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3000,-5803,0);
+c = wood.createChunk(-3000,-5803,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2968,-5803,0);
+c = wood.createChunk(-2968,-5803,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2136,-5801,0);
+c = wood.createChunk(-2136,-5801,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2104,-5801,0);
+c = wood.createChunk(-2104,-5801,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2072,-5801,0);
+c = wood.createChunk(-2072,-5801,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2424,-5801,0);
+c = wood.createChunk(-2424,-5801,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2392,-5801,0);
+c = wood.createChunk(-2392,-5801,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2360,-5801,0);
+c = wood.createChunk(-2360,-5801,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-4016,-5800,0);
 if(c!=null) c.setPassable(true);
@@ -2127,9 +2121,6 @@ c = grass.createChunk(-4336,-5800,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-4304,-5800,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment18() {
 c = grass.createChunk(-4272,-5800,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-4240,-5800,0);
@@ -2142,6 +2133,9 @@ c = grass.createChunk(-4144,-5800,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-4112,-5800,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment18() {
 c = grass.createChunk(-4080,-5800,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-4048,-5800,0);
@@ -2150,23 +2144,23 @@ c = grass.createChunk(-1240,-5789,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1208,-5789,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3032,-5771,0);
+c = wood.createChunk(-3032,-5771,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3000,-5771,0);
+c = wood.createChunk(-3000,-5771,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2968,-5771,0);
+c = wood.createChunk(-2968,-5771,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2136,-5769,0);
+c = wood.createChunk(-2136,-5769,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2104,-5769,0);
+c = wood.createChunk(-2104,-5769,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2072,-5769,0);
+c = wood.createChunk(-2072,-5769,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2424,-5769,0);
+c = wood.createChunk(-2424,-5769,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2392,-5769,0);
+c = wood.createChunk(-2392,-5769,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2360,-5769,0);
+c = wood.createChunk(-2360,-5769,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-4016,-5768,0);
 if(c!=null) c.setPassable(true);
@@ -2230,9 +2224,6 @@ c = grass.createChunk(-4432,-5768,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-4400,-5768,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment19() {
 c = grass.createChunk(-4368,-5768,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-4336,-5768,0);
@@ -2245,6 +2236,9 @@ c = grass.createChunk(-4240,-5768,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-4208,-5768,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment19() {
 c = grass.createChunk(-4176,-5768,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-4144,-5768,0);
@@ -2259,23 +2253,23 @@ c = grass.createChunk(-1240,-5757,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1208,-5757,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3032,-5739,0);
+c = wood.createChunk(-3032,-5739,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3000,-5739,0);
+c = wood.createChunk(-3000,-5739,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2968,-5739,0);
+c = wood.createChunk(-2968,-5739,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2424,-5737,0);
+c = wood.createChunk(-2424,-5737,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2392,-5737,0);
+c = wood.createChunk(-2392,-5737,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2360,-5737,0);
+c = wood.createChunk(-2360,-5737,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2136,-5737,0);
+c = wood.createChunk(-2136,-5737,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2104,-5737,0);
+c = wood.createChunk(-2104,-5737,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2072,-5737,0);
+c = wood.createChunk(-2072,-5737,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-4016,-5736,0);
 if(c!=null) c.setPassable(true);
@@ -2333,9 +2327,6 @@ c = grass.createChunk(-4528,-5736,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-4496,-5736,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment20() {
 c = grass.createChunk(-4464,-5736,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-4432,-5736,0);
@@ -2348,6 +2339,9 @@ c = grass.createChunk(-4336,-5736,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-4304,-5736,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment20() {
 c = grass.createChunk(-4272,-5736,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-4240,-5736,0);
@@ -2368,23 +2362,23 @@ c = grass.createChunk(-1240,-5725,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1208,-5725,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3032,-5707,0);
+c = wood.createChunk(-3032,-5707,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3000,-5707,0);
+c = wood.createChunk(-3000,-5707,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2968,-5707,0);
+c = wood.createChunk(-2968,-5707,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2424,-5705,0);
+c = wood.createChunk(-2424,-5705,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2392,-5705,0);
+c = wood.createChunk(-2392,-5705,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2360,-5705,0);
+c = wood.createChunk(-2360,-5705,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2136,-5705,0);
+c = wood.createChunk(-2136,-5705,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2104,-5705,0);
+c = wood.createChunk(-2104,-5705,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2072,-5705,0);
+c = wood.createChunk(-2072,-5705,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-4016,-5704,0);
 if(c!=null) c.setPassable(true);
@@ -2436,9 +2430,6 @@ c = grass.createChunk(-4624,-5704,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-4592,-5704,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment21() {
 c = grass.createChunk(-4560,-5704,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-4528,-5704,0);
@@ -2451,6 +2442,9 @@ c = grass.createChunk(-4432,-5704,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-4400,-5704,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment21() {
 c = grass.createChunk(-4368,-5704,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-4336,-5704,0);
@@ -2477,23 +2471,23 @@ c = grass.createChunk(-1240,-5693,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1208,-5693,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3032,-5675,0);
+c = wood.createChunk(-3032,-5675,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3000,-5675,0);
+c = wood.createChunk(-3000,-5675,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2968,-5675,0);
+c = wood.createChunk(-2968,-5675,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2136,-5674,0);
+c = wood.createChunk(-2136,-5674,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2424,-5673,0);
+c = wood.createChunk(-2424,-5673,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2392,-5673,0);
+c = wood.createChunk(-2392,-5673,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2360,-5673,0);
+c = wood.createChunk(-2360,-5673,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2104,-5673,0);
+c = wood.createChunk(-2104,-5673,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2072,-5673,0);
+c = wood.createChunk(-2072,-5673,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-4016,-5672,0);
 if(c!=null) c.setPassable(true);
@@ -2539,9 +2533,6 @@ c = grass.createChunk(-3376,-5672,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-3360,-5672,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment22() {
 c = grass.createChunk(-3338,-5672,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-4624,-5672,0);
@@ -2554,6 +2545,9 @@ c = grass.createChunk(-4528,-5672,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-4496,-5672,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment22() {
 c = grass.createChunk(-4464,-5672,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-4432,-5672,0);
@@ -2586,23 +2580,23 @@ c = grass.createChunk(-1240,-5661,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1208,-5661,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3032,-5643,0);
+c = wood.createChunk(-3032,-5643,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3000,-5643,0);
+c = wood.createChunk(-3000,-5643,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2968,-5643,0);
+c = wood.createChunk(-2968,-5643,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2136,-5642,0);
+c = wood.createChunk(-2136,-5642,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2104,-5642,0);
+c = wood.createChunk(-2104,-5642,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2072,-5642,0);
+c = wood.createChunk(-2072,-5642,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2424,-5641,0);
+c = wood.createChunk(-2424,-5641,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2392,-5641,0);
+c = wood.createChunk(-2392,-5641,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2360,-5641,0);
+c = wood.createChunk(-2360,-5641,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-4016,-5640,0);
 if(c!=null) c.setPassable(true);
@@ -2642,9 +2636,6 @@ c = grass.createChunk(-3472,-5640,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-3440,-5640,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment23() {
 c = grass.createChunk(-3408,-5640,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-3376,-5640,0);
@@ -2657,6 +2648,9 @@ c = grass.createChunk(-4624,-5640,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-4592,-5640,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment23() {
 c = grass.createChunk(-4560,-5640,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-4528,-5640,0);
@@ -2707,23 +2701,23 @@ c = grass.createChunk(-1240,-5629,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1208,-5629,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3032,-5611,0);
+c = wood.createChunk(-3032,-5611,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3000,-5611,0);
+c = wood.createChunk(-3000,-5611,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2968,-5611,0);
+c = wood.createChunk(-2968,-5611,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2136,-5610,0);
+c = wood.createChunk(-2136,-5610,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2104,-5610,0);
+c = wood.createChunk(-2104,-5610,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2072,-5610,0);
+c = wood.createChunk(-2072,-5610,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2424,-5609,0);
+c = wood.createChunk(-2424,-5609,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2392,-5609,0);
+c = wood.createChunk(-2392,-5609,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2360,-5609,0);
+c = wood.createChunk(-2360,-5609,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-4016,-5608,0);
 if(c!=null) c.setPassable(true);
@@ -2745,9 +2739,6 @@ c = grass.createChunk(-3760,-5608,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-3728,-5608,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment24() {
 c = grass.createChunk(-3696,-5608,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-3664,-5608,0);
@@ -2760,6 +2751,9 @@ c = grass.createChunk(-3568,-5608,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-3536,-5608,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment24() {
 c = grass.createChunk(-3504,-5608,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-3472,-5608,0);
@@ -2830,28 +2824,25 @@ c = grass.createChunk(-1240,-5597,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1208,-5597,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3032,-5579,0);
+c = wood.createChunk(-3032,-5579,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3000,-5579,0);
+c = wood.createChunk(-3000,-5579,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2968,-5579,0);
+c = wood.createChunk(-2968,-5579,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2136,-5578,0);
+c = wood.createChunk(-2136,-5578,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2104,-5578,0);
+c = wood.createChunk(-2104,-5578,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2072,-5578,0);
+c = wood.createChunk(-2072,-5578,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1252,-5577,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2424,-5577,0);
+c = wood.createChunk(-2424,-5577,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2392,-5577,0);
+c = wood.createChunk(-2392,-5577,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment25() {
-c = new terrain.chunkTypes.wood(-2360,-5577,0);
+c = wood.createChunk(-2360,-5577,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-4016,-5576,0);
 if(c!=null) c.setPassable(true);
@@ -2863,6 +2854,9 @@ c = grass.createChunk(-3920,-5576,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-3888,-5576,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment25() {
 c = grass.createChunk(-3856,-5576,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-3824,-5576,0);
@@ -2951,9 +2945,6 @@ c = grass.createChunk(-1437,-5574,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1405,-5574,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment26() {
 c = grass.createChunk(-1373,-5574,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1341,-5574,0);
@@ -2966,27 +2957,30 @@ c = grass.createChunk(-1240,-5565,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1208,-5565,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3032,-5547,0);
+}
+
+public void addSegment26() {
+c = wood.createChunk(-3032,-5547,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3000,-5547,0);
+c = wood.createChunk(-3000,-5547,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2968,-5547,0);
+c = wood.createChunk(-2968,-5547,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2136,-5546,0);
+c = wood.createChunk(-2136,-5546,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2104,-5546,0);
+c = wood.createChunk(-2104,-5546,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2072,-5546,0);
+c = wood.createChunk(-2072,-5546,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1252,-5545,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1188,-5545,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2424,-5545,0);
+c = wood.createChunk(-2424,-5545,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2392,-5545,0);
+c = wood.createChunk(-2392,-5545,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2360,-5545,0);
+c = wood.createChunk(-2360,-5545,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-4016,-5544,0);
 if(c!=null) c.setPassable(true);
@@ -3054,9 +3048,6 @@ c = grass.createChunk(-4368,-5544,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-4336,-5544,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment27() {
 c = grass.createChunk(-4304,-5544,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-4272,-5544,0);
@@ -3069,6 +3060,9 @@ c = grass.createChunk(-4176,-5544,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-4144,-5544,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment27() {
 c = grass.createChunk(-4112,-5544,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-4080,-5544,0);
@@ -3113,23 +3107,23 @@ c = grass.createChunk(-1233,-5530,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1201,-5530,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3032,-5515,0);
+c = wood.createChunk(-3032,-5515,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3000,-5515,0);
+c = wood.createChunk(-3000,-5515,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2968,-5515,0);
+c = wood.createChunk(-2968,-5515,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2136,-5514,0);
+c = wood.createChunk(-2136,-5514,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2104,-5514,0);
+c = wood.createChunk(-2104,-5514,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2072,-5514,0);
+c = wood.createChunk(-2072,-5514,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2424,-5513,0);
+c = wood.createChunk(-2424,-5513,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2392,-5513,0);
+c = wood.createChunk(-2392,-5513,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2360,-5513,0);
+c = wood.createChunk(-2360,-5513,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-4016,-5512,0);
 if(c!=null) c.setPassable(true);
@@ -3157,9 +3151,6 @@ c = grass.createChunk(-3664,-5512,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-3632,-5512,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment28() {
 c = grass.createChunk(-3600,-5512,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-3568,-5512,0);
@@ -3172,6 +3163,9 @@ c = grass.createChunk(-3472,-5512,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-3440,-5512,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment28() {
 c = grass.createChunk(-3408,-5512,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-3376,-5512,0);
@@ -3250,31 +3244,31 @@ c = grass.createChunk(-1181,-5510,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1151,-5506,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3032,-5483,0);
+c = wood.createChunk(-3032,-5483,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3000,-5483,0);
+c = wood.createChunk(-3000,-5483,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2968,-5483,0);
+c = wood.createChunk(-2968,-5483,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2136,-5482,0);
+c = wood.createChunk(-2136,-5482,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2104,-5482,0);
+c = wood.createChunk(-2104,-5482,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment29() {
-c = new terrain.chunkTypes.wood(-2072,-5482,0);
+c = wood.createChunk(-2072,-5482,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2424,-5482,0);
+c = wood.createChunk(-2424,-5482,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2392,-5482,0);
+c = wood.createChunk(-2392,-5482,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2360,-5482,0);
+c = wood.createChunk(-2360,-5482,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-4016,-5480,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-3984,-5480,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment29() {
 c = grass.createChunk(-3952,-5480,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-3920,-5480,0);
@@ -3363,9 +3357,6 @@ c = grass.createChunk(-1565,-5478,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1533,-5478,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment30() {
 c = grass.createChunk(-1501,-5478,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1469,-5478,0);
@@ -3378,6 +3369,9 @@ c = grass.createChunk(-1373,-5478,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1341,-5478,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment30() {
 c = grass.createChunk(-1309,-5478,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1277,-5478,0);
@@ -3394,55 +3388,55 @@ c = grass.createChunk(-1117,-5478,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1085,-5478,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2424,-5451,0);
+c = wood.createChunk(-2424,-5451,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2392,-5451,0);
+c = wood.createChunk(-2392,-5451,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2776,-5451,0);
+c = wood.createChunk(-2776,-5451,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2744,-5451,0);
+c = wood.createChunk(-2744,-5451,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2712,-5451,0);
+c = wood.createChunk(-2712,-5451,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2680,-5451,0);
+c = wood.createChunk(-2680,-5451,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2648,-5451,0);
+c = wood.createChunk(-2648,-5451,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2616,-5451,0);
+c = wood.createChunk(-2616,-5451,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2584,-5451,0);
+c = wood.createChunk(-2584,-5451,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2552,-5451,0);
+c = wood.createChunk(-2552,-5451,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2520,-5451,0);
+c = wood.createChunk(-2520,-5451,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2488,-5451,0);
+c = wood.createChunk(-2488,-5451,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2456,-5451,0);
+c = wood.createChunk(-2456,-5451,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3032,-5451,0);
+c = wood.createChunk(-3032,-5451,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3000,-5451,0);
+c = wood.createChunk(-3000,-5451,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2968,-5451,0);
+c = wood.createChunk(-2968,-5451,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2936,-5451,0);
+c = wood.createChunk(-2936,-5451,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2904,-5451,0);
+c = wood.createChunk(-2904,-5451,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2872,-5451,0);
+c = wood.createChunk(-2872,-5451,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2840,-5451,0);
+c = wood.createChunk(-2840,-5451,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2808,-5451,0);
+c = wood.createChunk(-2808,-5451,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2360,-5451,0);
+c = wood.createChunk(-2360,-5451,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2136,-5450,0);
+c = wood.createChunk(-2136,-5450,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2104,-5450,0);
+c = wood.createChunk(-2104,-5450,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2072,-5450,0);
+c = wood.createChunk(-2072,-5450,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-4624,-5448,0);
 if(c!=null) c.setPassable(true);
@@ -3466,9 +3460,6 @@ c = grass.createChunk(-3760,-5448,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-3728,-5448,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment31() {
 c = grass.createChunk(-3696,-5448,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-3664,-5448,0);
@@ -3481,6 +3472,9 @@ c = grass.createChunk(-3568,-5448,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-3536,-5448,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment31() {
 c = grass.createChunk(-3504,-5448,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-3472,-5448,0);
@@ -3569,54 +3563,54 @@ c = grass.createChunk(-1085,-5446,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1053,-5446,0);
 if(c!=null) c.setPassable(true);
+c = grass.createChunk(-1661,-5445,0);
+if(c!=null) c.setPassable(true);
+c = wood.createChunk(-2424,-5419,0);
+if(c!=null) c.setPassable(true);
+c = wood.createChunk(-2392,-5419,0);
+if(c!=null) c.setPassable(true);
+c = wood.createChunk(-2360,-5419,0);
+if(c!=null) c.setPassable(true);
+c = wood.createChunk(-2776,-5419,0);
+if(c!=null) c.setPassable(true);
+c = wood.createChunk(-2744,-5419,0);
+if(c!=null) c.setPassable(true);
 }
 
 public void addSegment32() {
-c = grass.createChunk(-1661,-5445,0);
+c = wood.createChunk(-2712,-5419,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2424,-5419,0);
+c = wood.createChunk(-2680,-5419,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2392,-5419,0);
+c = wood.createChunk(-2648,-5419,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2360,-5419,0);
+c = wood.createChunk(-2616,-5419,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2776,-5419,0);
+c = wood.createChunk(-2584,-5419,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2744,-5419,0);
+c = wood.createChunk(-2552,-5419,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2712,-5419,0);
+c = wood.createChunk(-2520,-5419,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2680,-5419,0);
+c = wood.createChunk(-2488,-5419,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2648,-5419,0);
+c = wood.createChunk(-2456,-5419,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2616,-5419,0);
+c = wood.createChunk(-3032,-5419,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2584,-5419,0);
+c = wood.createChunk(-3000,-5419,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2552,-5419,0);
+c = wood.createChunk(-2968,-5419,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2520,-5419,0);
+c = wood.createChunk(-2936,-5419,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2488,-5419,0);
+c = wood.createChunk(-2904,-5419,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2456,-5419,0);
+c = wood.createChunk(-2872,-5419,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3032,-5419,0);
+c = wood.createChunk(-2840,-5419,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3000,-5419,0);
-if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2968,-5419,0);
-if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2936,-5419,0);
-if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2904,-5419,0);
-if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2872,-5419,0);
-if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2840,-5419,0);
-if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2808,-5419,0);
+c = wood.createChunk(-2808,-5419,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-2136,-5418,0);
 if(c!=null) c.setPassable(true);
@@ -3672,54 +3666,54 @@ c = grass.createChunk(-989,-5414,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-957,-5414,0);
 if(c!=null) c.setPassable(true);
+c = grass.createChunk(-1661,-5413,0);
+if(c!=null) c.setPassable(true);
+c = wood.createChunk(-2424,-5387,0);
+if(c!=null) c.setPassable(true);
+c = wood.createChunk(-2392,-5387,0);
+if(c!=null) c.setPassable(true);
+c = wood.createChunk(-2360,-5387,0);
+if(c!=null) c.setPassable(true);
+c = wood.createChunk(-2776,-5387,0);
+if(c!=null) c.setPassable(true);
+c = wood.createChunk(-2744,-5387,0);
+if(c!=null) c.setPassable(true);
 }
 
 public void addSegment33() {
-c = grass.createChunk(-1661,-5413,0);
+c = wood.createChunk(-2712,-5387,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2424,-5387,0);
+c = wood.createChunk(-2680,-5387,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2392,-5387,0);
+c = wood.createChunk(-2648,-5387,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2360,-5387,0);
+c = wood.createChunk(-2616,-5387,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2776,-5387,0);
+c = wood.createChunk(-2584,-5387,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2744,-5387,0);
+c = wood.createChunk(-2552,-5387,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2712,-5387,0);
+c = wood.createChunk(-2520,-5387,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2680,-5387,0);
+c = wood.createChunk(-2488,-5387,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2648,-5387,0);
+c = wood.createChunk(-2456,-5387,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2616,-5387,0);
+c = wood.createChunk(-3032,-5387,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2584,-5387,0);
+c = wood.createChunk(-3000,-5387,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2552,-5387,0);
+c = wood.createChunk(-2968,-5387,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2520,-5387,0);
+c = wood.createChunk(-2936,-5387,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2488,-5387,0);
+c = wood.createChunk(-2904,-5387,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2456,-5387,0);
+c = wood.createChunk(-2872,-5387,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3032,-5387,0);
+c = wood.createChunk(-2840,-5387,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-3000,-5387,0);
-if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2968,-5387,0);
-if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2936,-5387,0);
-if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2904,-5387,0);
-if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2872,-5387,0);
-if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2840,-5387,0);
-if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2808,-5387,0);
+c = wood.createChunk(-2808,-5387,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-2136,-5386,0);
 if(c!=null) c.setPassable(true);
@@ -3775,9 +3769,6 @@ c = grass.createChunk(-989,-5382,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-957,-5382,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment34() {
 c = grass.createChunk(-1661,-5381,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-969,-5379,0);
@@ -3790,6 +3781,9 @@ c = grass.createChunk(-2104,-5354,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-2072,-5354,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment34() {
 c = grass.createChunk(-2040,-5354,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-2168,-5354,0);
@@ -3878,9 +3872,6 @@ c = grass.createChunk(-1565,-5318,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1533,-5318,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment35() {
 c = grass.createChunk(-1501,-5318,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1469,-5318,0);
@@ -3893,6 +3884,9 @@ c = grass.createChunk(-1373,-5318,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1341,-5318,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment35() {
 c = grass.createChunk(-1309,-5318,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1277,-5318,0);
@@ -3923,27 +3917,27 @@ c = grass.createChunk(-1912,-5290,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-2296,-5290,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2264,-5290,0);
+c = wood.createChunk(-2264,-5290,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2232,-5290,0);
+c = wood.createChunk(-2232,-5290,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2200,-5290,0);
+c = wood.createChunk(-2200,-5290,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2168,-5290,0);
+c = wood.createChunk(-2168,-5290,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2136,-5290,0);
+c = wood.createChunk(-2136,-5290,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2104,-5290,0);
+c = wood.createChunk(-2104,-5290,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2072,-5290,0);
+c = wood.createChunk(-2072,-5290,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2040,-5290,0);
+c = wood.createChunk(-2040,-5290,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2008,-5290,0);
+c = wood.createChunk(-2008,-5290,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-1976,-5290,0);
+c = wood.createChunk(-1976,-5290,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-1944,-5290,0);
+c = wood.createChunk(-1944,-5290,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1693,-5286,0);
 if(c!=null) c.setPassable(true);
@@ -3981,9 +3975,6 @@ c = grass.createChunk(-1181,-5286,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1149,-5286,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment36() {
 c = grass.createChunk(-1117,-5286,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1085,-5286,0);
@@ -3996,6 +3987,9 @@ c = grass.createChunk(-989,-5286,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-925,-5285,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment36() {
 c = grass.createChunk(-893,-5285,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-861,-5285,0);
@@ -4026,27 +4020,27 @@ c = grass.createChunk(-1912,-5258,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-2296,-5258,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2264,-5258,0);
+c = wood.createChunk(-2264,-5258,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2232,-5258,0);
+c = wood.createChunk(-2232,-5258,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2200,-5258,0);
+c = wood.createChunk(-2200,-5258,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2168,-5258,0);
+c = wood.createChunk(-2168,-5258,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2136,-5258,0);
+c = wood.createChunk(-2136,-5258,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2104,-5258,0);
+c = wood.createChunk(-2104,-5258,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2072,-5258,0);
+c = wood.createChunk(-2072,-5258,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2040,-5258,0);
+c = wood.createChunk(-2040,-5258,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2008,-5258,0);
+c = wood.createChunk(-2008,-5258,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-1976,-5258,0);
+c = wood.createChunk(-1976,-5258,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-1944,-5258,0);
+c = wood.createChunk(-1944,-5258,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1693,-5254,0);
 if(c!=null) c.setPassable(true);
@@ -4084,9 +4078,6 @@ c = grass.createChunk(-1181,-5254,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1149,-5254,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment37() {
 c = grass.createChunk(-1117,-5254,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1085,-5254,0);
@@ -4099,6 +4090,9 @@ c = grass.createChunk(-989,-5254,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-957,-5254,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment37() {
 c = grass.createChunk(-925,-5254,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-893,-5254,0);
@@ -4129,27 +4123,27 @@ c = grass.createChunk(-1912,-5226,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-2296,-5226,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2264,-5226,0);
+c = wood.createChunk(-2264,-5226,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2232,-5226,0);
+c = wood.createChunk(-2232,-5226,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2200,-5226,0);
+c = wood.createChunk(-2200,-5226,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2168,-5226,0);
+c = wood.createChunk(-2168,-5226,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2136,-5226,0);
+c = wood.createChunk(-2136,-5226,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2104,-5226,0);
+c = wood.createChunk(-2104,-5226,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2072,-5226,0);
+c = wood.createChunk(-2072,-5226,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2040,-5226,0);
+c = wood.createChunk(-2040,-5226,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2008,-5226,0);
+c = wood.createChunk(-2008,-5226,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-1976,-5226,0);
+c = wood.createChunk(-1976,-5226,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-1944,-5226,0);
+c = wood.createChunk(-1944,-5226,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1693,-5222,0);
 if(c!=null) c.setPassable(true);
@@ -4187,9 +4181,6 @@ c = grass.createChunk(-1181,-5222,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1149,-5222,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment38() {
 c = grass.createChunk(-1117,-5222,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1085,-5222,0);
@@ -4202,6 +4193,9 @@ c = grass.createChunk(-989,-5222,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-957,-5222,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment38() {
 c = grass.createChunk(-925,-5222,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-893,-5222,0);
@@ -4232,27 +4226,27 @@ c = grass.createChunk(-1912,-5194,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-2296,-5194,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2264,-5194,0);
+c = wood.createChunk(-2264,-5194,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2232,-5194,0);
+c = wood.createChunk(-2232,-5194,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2200,-5194,0);
+c = wood.createChunk(-2200,-5194,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2168,-5194,0);
+c = wood.createChunk(-2168,-5194,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2136,-5194,0);
+c = wood.createChunk(-2136,-5194,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2104,-5194,0);
+c = wood.createChunk(-2104,-5194,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2072,-5194,0);
+c = wood.createChunk(-2072,-5194,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2040,-5194,0);
+c = wood.createChunk(-2040,-5194,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2008,-5194,0);
+c = wood.createChunk(-2008,-5194,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-1976,-5194,0);
+c = wood.createChunk(-1976,-5194,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-1944,-5194,0);
+c = wood.createChunk(-1944,-5194,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1693,-5190,0);
 if(c!=null) c.setPassable(true);
@@ -4290,9 +4284,6 @@ c = grass.createChunk(-1181,-5190,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1149,-5190,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment39() {
 c = grass.createChunk(-1117,-5190,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1085,-5190,0);
@@ -4305,6 +4296,9 @@ c = grass.createChunk(-989,-5190,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-957,-5190,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment39() {
 c = grass.createChunk(-925,-5190,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-893,-5190,0);
@@ -4335,27 +4329,27 @@ c = grass.createChunk(-1912,-5162,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-2296,-5162,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2264,-5162,0);
+c = wood.createChunk(-2264,-5162,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2232,-5162,0);
+c = wood.createChunk(-2232,-5162,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2200,-5162,0);
+c = wood.createChunk(-2200,-5162,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2168,-5162,0);
+c = wood.createChunk(-2168,-5162,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2136,-5162,0);
+c = wood.createChunk(-2136,-5162,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2104,-5162,0);
+c = wood.createChunk(-2104,-5162,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2072,-5162,0);
+c = wood.createChunk(-2072,-5162,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2040,-5162,0);
+c = wood.createChunk(-2040,-5162,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2008,-5162,0);
+c = wood.createChunk(-2008,-5162,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-1976,-5162,0);
+c = wood.createChunk(-1976,-5162,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-1944,-5162,0);
+c = wood.createChunk(-1944,-5162,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1693,-5158,0);
 if(c!=null) c.setPassable(true);
@@ -4393,9 +4387,6 @@ c = grass.createChunk(-1181,-5158,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1149,-5158,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment40() {
 c = grass.createChunk(-1117,-5158,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1085,-5158,0);
@@ -4408,6 +4399,9 @@ c = grass.createChunk(-989,-5158,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-957,-5158,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment40() {
 c = grass.createChunk(-925,-5158,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-893,-5158,0);
@@ -4438,27 +4432,27 @@ c = grass.createChunk(-1912,-5130,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-2296,-5130,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2264,-5130,0);
+c = wood.createChunk(-2264,-5130,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2232,-5130,0);
+c = wood.createChunk(-2232,-5130,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2200,-5130,0);
+c = wood.createChunk(-2200,-5130,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2168,-5130,0);
+c = wood.createChunk(-2168,-5130,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2136,-5130,0);
+c = wood.createChunk(-2136,-5130,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2104,-5130,0);
+c = wood.createChunk(-2104,-5130,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2072,-5130,0);
+c = wood.createChunk(-2072,-5130,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2040,-5130,0);
+c = wood.createChunk(-2040,-5130,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2008,-5130,0);
+c = wood.createChunk(-2008,-5130,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-1976,-5130,0);
+c = wood.createChunk(-1976,-5130,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-1944,-5130,0);
+c = wood.createChunk(-1944,-5130,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1693,-5126,0);
 if(c!=null) c.setPassable(true);
@@ -4496,9 +4490,6 @@ c = grass.createChunk(-1181,-5126,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1149,-5126,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment41() {
 c = grass.createChunk(-1117,-5126,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1085,-5126,0);
@@ -4511,6 +4502,9 @@ c = grass.createChunk(-989,-5126,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-957,-5126,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment41() {
 c = grass.createChunk(-925,-5126,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-893,-5126,0);
@@ -4541,27 +4535,27 @@ c = grass.createChunk(-1912,-5098,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-2296,-5098,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2264,-5098,0);
+c = wood.createChunk(-2264,-5098,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2232,-5098,0);
+c = wood.createChunk(-2232,-5098,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2200,-5098,0);
+c = wood.createChunk(-2200,-5098,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2168,-5098,0);
+c = wood.createChunk(-2168,-5098,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2136,-5098,0);
+c = wood.createChunk(-2136,-5098,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2104,-5098,0);
+c = wood.createChunk(-2104,-5098,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2072,-5098,0);
+c = wood.createChunk(-2072,-5098,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2040,-5098,0);
+c = wood.createChunk(-2040,-5098,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2008,-5098,0);
+c = wood.createChunk(-2008,-5098,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-1976,-5098,0);
+c = wood.createChunk(-1976,-5098,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-1944,-5098,0);
+c = wood.createChunk(-1944,-5098,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1693,-5094,0);
 if(c!=null) c.setPassable(true);
@@ -4599,9 +4593,6 @@ c = grass.createChunk(-1181,-5094,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1149,-5094,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment42() {
 c = grass.createChunk(-1117,-5094,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1085,-5094,0);
@@ -4614,6 +4605,9 @@ c = grass.createChunk(-989,-5094,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-957,-5094,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment42() {
 c = grass.createChunk(-925,-5094,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-893,-5094,0);
@@ -4644,27 +4638,27 @@ c = grass.createChunk(-1912,-5066,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-2296,-5066,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2264,-5066,0);
+c = wood.createChunk(-2264,-5066,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2232,-5066,0);
+c = wood.createChunk(-2232,-5066,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2200,-5066,0);
+c = wood.createChunk(-2200,-5066,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2168,-5066,0);
+c = wood.createChunk(-2168,-5066,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2136,-5066,0);
+c = wood.createChunk(-2136,-5066,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2104,-5066,0);
+c = wood.createChunk(-2104,-5066,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2072,-5066,0);
+c = wood.createChunk(-2072,-5066,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2040,-5066,0);
+c = wood.createChunk(-2040,-5066,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2008,-5066,0);
+c = wood.createChunk(-2008,-5066,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-1976,-5066,0);
+c = wood.createChunk(-1976,-5066,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-1944,-5066,0);
+c = wood.createChunk(-1944,-5066,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1693,-5062,0);
 if(c!=null) c.setPassable(true);
@@ -4702,9 +4696,6 @@ c = grass.createChunk(-1181,-5062,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1149,-5062,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment43() {
 c = grass.createChunk(-1117,-5062,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1085,-5062,0);
@@ -4717,6 +4708,9 @@ c = grass.createChunk(-989,-5062,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-957,-5062,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment43() {
 c = grass.createChunk(-925,-5062,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-893,-5062,0);
@@ -4747,27 +4741,27 @@ c = grass.createChunk(-1912,-5034,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-2296,-5034,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2264,-5034,0);
+c = wood.createChunk(-2264,-5034,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2232,-5034,0);
+c = wood.createChunk(-2232,-5034,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2200,-5034,0);
+c = wood.createChunk(-2200,-5034,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2168,-5034,0);
+c = wood.createChunk(-2168,-5034,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2136,-5034,0);
+c = wood.createChunk(-2136,-5034,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2104,-5034,0);
+c = wood.createChunk(-2104,-5034,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2072,-5034,0);
+c = wood.createChunk(-2072,-5034,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2040,-5034,0);
+c = wood.createChunk(-2040,-5034,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-2008,-5034,0);
+c = wood.createChunk(-2008,-5034,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-1976,-5034,0);
+c = wood.createChunk(-1976,-5034,0);
 if(c!=null) c.setPassable(true);
-c = new terrain.chunkTypes.wood(-1944,-5034,0);
+c = wood.createChunk(-1944,-5034,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1693,-5030,0);
 if(c!=null) c.setPassable(true);
@@ -4805,9 +4799,6 @@ c = grass.createChunk(-1181,-5030,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1149,-5030,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment44() {
 c = grass.createChunk(-1117,-5030,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1085,-5030,0);
@@ -4820,6 +4811,9 @@ c = grass.createChunk(-989,-5030,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-957,-5030,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment44() {
 c = grass.createChunk(-925,-5030,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-893,-5030,0);
@@ -4908,9 +4902,6 @@ c = grass.createChunk(-1245,-4998,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1213,-4998,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment45() {
 c = grass.createChunk(-1181,-4998,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1149,-4998,0);
@@ -4923,6 +4914,9 @@ c = grass.createChunk(-1053,-4998,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1021,-4998,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment45() {
 c = grass.createChunk(-989,-4998,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-957,-4998,0);
@@ -5011,9 +5005,6 @@ c = grass.createChunk(-1149,-4966,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1117,-4966,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment46() {
 c = grass.createChunk(-1085,-4966,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1053,-4966,0);
@@ -5026,6 +5017,9 @@ c = grass.createChunk(-957,-4966,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-925,-4966,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment46() {
 c = grass.createChunk(-893,-4966,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-861,-4966,0);
@@ -5114,9 +5108,6 @@ c = grass.createChunk(-1053,-4934,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1021,-4934,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment47() {
 c = grass.createChunk(-989,-4934,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-957,-4934,0);
@@ -5129,6 +5120,9 @@ c = grass.createChunk(-861,-4934,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-829,-4934,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment47() {
 c = grass.createChunk(-797,-4934,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-765,-4934,0);
@@ -5217,9 +5211,6 @@ c = grass.createChunk(-1213,-4902,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1181,-4902,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment48() {
 c = grass.createChunk(-1149,-4902,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1117,-4902,0);
@@ -5232,6 +5223,9 @@ c = grass.createChunk(-1021,-4902,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-989,-4902,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment48() {
 c = grass.createChunk(-957,-4902,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-925,-4902,0);
@@ -5320,9 +5314,6 @@ c = grass.createChunk(-1373,-4870,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1341,-4870,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment49() {
 c = grass.createChunk(-1309,-4870,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1277,-4870,0);
@@ -5335,6 +5326,9 @@ c = grass.createChunk(-1181,-4870,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1149,-4870,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment49() {
 c = grass.createChunk(-1117,-4870,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1085,-4870,0);
@@ -5423,9 +5417,6 @@ c = grass.createChunk(-1213,-4842,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1181,-4842,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment50() {
 c = grass.createChunk(-1149,-4842,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1117,-4842,0);
@@ -5438,6 +5429,9 @@ c = grass.createChunk(-1021,-4842,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-989,-4842,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment50() {
 c = grass.createChunk(-957,-4842,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-925,-4842,0);
@@ -5526,9 +5520,6 @@ c = grass.createChunk(-243,-4609,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-211,-4609,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment51() {
 c = grass.createChunk(-690,-4609,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-658,-4609,0);
@@ -5541,6 +5532,9 @@ c = grass.createChunk(-562,-4609,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-530,-4609,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment51() {
 c = grass.createChunk(-498,-4609,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-466,-4609,0);
@@ -5629,9 +5623,6 @@ c = grass.createChunk(-627,-4161,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-723,-4129,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment52() {
 c = grass.createChunk(-691,-4129,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-659,-4129,0);
@@ -5644,23 +5635,68 @@ c = grass.createChunk(-659,-4097,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-691,-4065,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment52() {
 c = grass.createChunk(-659,-4065,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-940,-4033,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-691,-4033,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-659,-4033,0);
 if(c!=null) c.setPassable(true);
+c = grass.createChunk(-819,-4001,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-851,-4001,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-787,-4001,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-755,-4001,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-723,-4001,0);
+if(c!=null) c.setPassable(true);
 c = grass.createChunk(-691,-4001,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-659,-4001,0);
 if(c!=null) c.setPassable(true);
-c = grass.createChunk(-691,-3969,0);
+c = grass.createChunk(-979,-4001,0);
 if(c!=null) c.setPassable(true);
-c = grass.createChunk(-659,-3969,0);
+c = grass.createChunk(-947,-4001,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-915,-4001,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-883,-4001,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-1010,-4001,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-1010,-3969,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-979,-3937,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-947,-3937,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-915,-3937,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-883,-3937,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-691,-3937,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-659,-3937,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-851,-3937,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-819,-3937,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-787,-3937,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-755,-3937,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-723,-3937,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-1010,-3937,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-940,-3906,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-691,-3905,0);
 if(c!=null) c.setPassable(true);
@@ -5670,15 +5706,15 @@ c = grass.createChunk(-691,-3873,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-659,-3873,0);
 if(c!=null) c.setPassable(true);
-c = grass.createChunk(-723,-3841,0);
-if(c!=null) c.setPassable(true);
 c = grass.createChunk(-691,-3841,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-659,-3841,0);
 if(c!=null) c.setPassable(true);
-c = grass.createChunk(-627,-3841,0);
-if(c!=null) c.setPassable(true);
 c = grass.createChunk(-723,-3809,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-691,-3809,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-659,-3809,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-627,-3809,0);
 if(c!=null) c.setPassable(true);
@@ -5688,20 +5724,23 @@ c = grass.createChunk(-627,-3777,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-723,-3745,0);
 if(c!=null) c.setPassable(true);
-c = grass.createChunk(-691,-3745,0);
-if(c!=null) c.setPassable(true);
-c = grass.createChunk(-659,-3745,0);
-if(c!=null) c.setPassable(true);
 c = grass.createChunk(-627,-3745,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-723,-3713,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-691,-3713,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-659,-3713,0);
 if(c!=null) c.setPassable(true);
+c = grass.createChunk(-627,-3713,0);
+if(c!=null) c.setPassable(true);
 c = grass.createChunk(-691,-3681,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-659,-3681,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment53() {
 c = grass.createChunk(-691,-3649,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-659,-3649,0);
@@ -5732,9 +5771,6 @@ c = grass.createChunk(-659,-3457,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-691,-3425,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment53() {
 c = grass.createChunk(-659,-3425,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-691,-3393,0);
@@ -5760,6 +5796,18 @@ if(c!=null) c.setPassable(true);
 c = grass.createChunk(-691,-3233,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-659,-3233,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-1404,-3201,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-1372,-3201,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-1340,-3201,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-1308,-3201,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-1276,-3201,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-1244,-3201,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1052,-3201,0);
 if(c!=null) c.setPassable(true);
@@ -5793,6 +5841,9 @@ c = grass.createChunk(-604,-3201,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-572,-3201,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment54() {
 c = grass.createChunk(-540,-3201,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-508,-3201,0);
@@ -5835,9 +5886,6 @@ c = grass.createChunk(68,-3201,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(100,-3201,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment54() {
 c = grass.createChunk(132,-3201,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(164,-3201,0);
@@ -5864,6 +5912,18 @@ c = grass.createChunk(-1116,-3201,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1084,-3201,0);
 if(c!=null) c.setPassable(true);
+c = grass.createChunk(-1404,-3169,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-1372,-3169,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-1340,-3169,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-1308,-3169,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-1276,-3169,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-1244,-3169,0);
+if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1052,-3169,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1020,-3169,0);
@@ -5884,6 +5944,9 @@ c = grass.createChunk(-796,-3169,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-764,-3169,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment55() {
 c = grass.createChunk(-732,-3169,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-700,-3169,0);
@@ -5938,9 +6001,6 @@ c = grass.createChunk(68,-3169,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(100,-3169,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment55() {
 c = grass.createChunk(132,-3169,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(164,-3169,0);
@@ -5967,6 +6027,18 @@ c = grass.createChunk(-1116,-3169,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1084,-3169,0);
 if(c!=null) c.setPassable(true);
+c = grass.createChunk(-1404,-3137,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-1372,-3137,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-1340,-3137,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-1308,-3137,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-1276,-3137,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-1244,-3137,0);
+if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1052,-3137,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1020,-3137,0);
@@ -5975,6 +6047,9 @@ c = grass.createChunk(-988,-3137,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-956,-3137,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment56() {
 c = grass.createChunk(-924,-3137,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-892,-3137,0);
@@ -6041,9 +6116,6 @@ c = grass.createChunk(68,-3137,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(100,-3137,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment56() {
 c = grass.createChunk(132,-3137,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(164,-3137,0);
@@ -6069,6 +6141,21 @@ if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1116,-3137,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1084,-3137,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-1404,-3105,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-1372,-3105,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-1340,-3105,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-1308,-3105,0);
+if(c!=null) c.setPassable(true);
+}
+
+public void addSegment57() {
+c = grass.createChunk(-1276,-3105,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-1244,-3105,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1052,-3105,0);
 if(c!=null) c.setPassable(true);
@@ -6144,9 +6231,6 @@ c = grass.createChunk(68,-3105,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(100,-3105,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment57() {
 c = grass.createChunk(132,-3105,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(164,-3105,0);
@@ -6169,9 +6253,24 @@ c = grass.createChunk(-1180,-3105,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1148,-3105,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment58() {
 c = grass.createChunk(-1116,-3105,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1084,-3105,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-1404,-3073,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-1372,-3073,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-1340,-3073,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-1308,-3073,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-1276,-3073,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-1244,-3073,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1052,-3073,0);
 if(c!=null) c.setPassable(true);
@@ -6247,9 +6346,6 @@ c = grass.createChunk(68,-3073,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(100,-3073,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment58() {
 c = grass.createChunk(132,-3073,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(164,-3073,0);
@@ -6260,6 +6356,9 @@ c = grass.createChunk(228,-3073,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(260,-3073,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment59() {
 c = grass.createChunk(292,-3073,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(324,-3073,0);
@@ -6275,6 +6374,18 @@ if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1116,-3073,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1084,-3073,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-1404,-3041,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-1372,-3041,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-1340,-3041,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-1308,-3041,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-1276,-3041,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-1244,-3041,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1052,-3041,0);
 if(c!=null) c.setPassable(true);
@@ -6348,11 +6459,11 @@ c = grass.createChunk(36,-3041,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(68,-3041,0);
 if(c!=null) c.setPassable(true);
-c = grass.createChunk(100,-3041,0);
-if(c!=null) c.setPassable(true);
 }
 
-public void addSegment59() {
+public void addSegment60() {
+c = grass.createChunk(100,-3041,0);
+if(c!=null) c.setPassable(true);
 c = grass.createChunk(132,-3041,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(164,-3041,0);
@@ -6378,6 +6489,18 @@ if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1116,-3041,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1084,-3041,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-1404,-3009,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-1372,-3009,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-1340,-3009,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-1308,-3009,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-1276,-3009,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-1244,-3009,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1052,-3009,0);
 if(c!=null) c.setPassable(true);
@@ -6439,6 +6562,9 @@ c = grass.createChunk(-156,-3009,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-124,-3009,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment61() {
 c = grass.createChunk(-92,-3009,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-60,-3009,0);
@@ -6453,9 +6579,6 @@ c = grass.createChunk(68,-3009,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(100,-3009,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment60() {
 c = grass.createChunk(132,-3009,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(164,-3009,0);
@@ -6481,6 +6604,18 @@ if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1116,-3009,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1084,-3009,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-1404,-2977,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-1372,-2977,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-1340,-2977,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-1308,-2977,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-1276,-2977,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-1244,-2977,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1052,-2977,0);
 if(c!=null) c.setPassable(true);
@@ -6530,6 +6665,9 @@ c = grass.createChunk(-348,-2977,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-316,-2977,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment62() {
 c = grass.createChunk(-284,-2977,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-252,-2977,0);
@@ -6556,9 +6694,6 @@ c = grass.createChunk(68,-2977,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(100,-2977,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment61() {
 c = grass.createChunk(132,-2977,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(164,-2977,0);
@@ -6584,6 +6719,18 @@ if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1116,-2977,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1084,-2977,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-1404,-2945,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-1372,-2945,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-1340,-2945,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-1308,-2945,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-1276,-2945,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-1244,-2945,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1052,-2945,0);
 if(c!=null) c.setPassable(true);
@@ -6621,6 +6768,9 @@ c = grass.createChunk(-540,-2945,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-508,-2945,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment63() {
 c = grass.createChunk(-476,-2945,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-444,-2945,0);
@@ -6659,9 +6809,6 @@ c = grass.createChunk(68,-2945,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(100,-2945,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment62() {
 c = grass.createChunk(132,-2945,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(164,-2945,0);
@@ -6688,6 +6835,18 @@ c = grass.createChunk(-1116,-2945,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1084,-2945,0);
 if(c!=null) c.setPassable(true);
+c = grass.createChunk(-1404,-2913,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-1372,-2913,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-1340,-2913,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-1308,-2913,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-1276,-2913,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-1244,-2913,0);
+if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1052,-2913,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1020,-2913,0);
@@ -6712,6 +6871,9 @@ c = grass.createChunk(-732,-2913,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-700,-2913,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment64() {
 c = grass.createChunk(-668,-2913,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-636,-2913,0);
@@ -6762,9 +6924,6 @@ c = grass.createChunk(68,-2913,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(100,-2913,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment63() {
 c = grass.createChunk(132,-2913,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(164,-2913,0);
@@ -6791,6 +6950,18 @@ c = grass.createChunk(-1116,-2913,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1084,-2913,0);
 if(c!=null) c.setPassable(true);
+c = grass.createChunk(-1404,-2881,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-1372,-2881,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-1340,-2881,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-1308,-2881,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-1276,-2881,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-1244,-2881,0);
+if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1052,-2881,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1020,-2881,0);
@@ -6803,6 +6974,9 @@ c = grass.createChunk(-924,-2881,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-892,-2881,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment65() {
 c = grass.createChunk(-860,-2881,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-828,-2881,0);
@@ -6865,9 +7039,6 @@ c = grass.createChunk(68,-2881,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(100,-2881,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment64() {
 c = grass.createChunk(132,-2881,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(164,-2881,0);
@@ -6894,6 +7065,21 @@ c = grass.createChunk(-1116,-2881,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1084,-2881,0);
 if(c!=null) c.setPassable(true);
+c = grass.createChunk(-1404,-2849,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-1372,-2849,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-1340,-2849,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-1308,-2849,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-1276,-2849,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-1244,-2849,0);
+if(c!=null) c.setPassable(true);
+}
+
+public void addSegment66() {
 c = grass.createChunk(-1052,-2849,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1020,-2849,0);
@@ -6968,9 +7154,6 @@ c = grass.createChunk(68,-2849,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(100,-2849,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment65() {
 c = grass.createChunk(132,-2849,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(164,-2849,0);
@@ -6996,6 +7179,21 @@ if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1116,-2849,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1084,-2849,0);
+if(c!=null) c.setPassable(true);
+}
+
+public void addSegment67() {
+c = grass.createChunk(-1404,-2817,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-1372,-2817,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-1340,-2817,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-1308,-2817,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-1276,-2817,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-1244,-2817,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1052,-2817,0);
 if(c!=null) c.setPassable(true);
@@ -7071,9 +7269,6 @@ c = grass.createChunk(68,-2817,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(100,-2817,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment66() {
 c = grass.createChunk(132,-2817,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(164,-2817,0);
@@ -7088,6 +7283,9 @@ c = grass.createChunk(292,-2817,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(324,-2817,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment68() {
 c = grass.createChunk(356,-2817,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(388,-2817,0);
@@ -7107,6 +7305,18 @@ if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1116,-2817,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1084,-2817,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-1404,-2785,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-1372,-2785,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-1340,-2785,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-1308,-2785,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-1276,-2785,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-1244,-2785,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1052,-2785,0);
 if(c!=null) c.setPassable(true);
@@ -7174,11 +7384,11 @@ c = grass.createChunk(-60,-2785,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-28,-2785,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment67() {
 c = grass.createChunk(4,-2785,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment69() {
 c = grass.createChunk(36,-2785,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(68,-2785,0);
@@ -7218,6 +7428,18 @@ if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1116,-2785,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1084,-2785,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-1404,-2753,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-1372,-2753,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-1340,-2753,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-1308,-2753,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-1276,-2753,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-1244,-2753,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1052,-2753,0);
 if(c!=null) c.setPassable(true);
@@ -7267,6 +7489,9 @@ c = grass.createChunk(-348,-2753,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-316,-2753,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment70() {
 c = grass.createChunk(-284,-2753,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-252,-2753,0);
@@ -7277,9 +7502,6 @@ c = grass.createChunk(-188,-2753,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-156,-2753,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment68() {
 c = grass.createChunk(-124,-2753,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-92,-2753,0);
@@ -7330,6 +7552,18 @@ c = grass.createChunk(-1116,-2753,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1084,-2753,0);
 if(c!=null) c.setPassable(true);
+c = grass.createChunk(-1404,-2721,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-1372,-2721,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-1340,-2721,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-1308,-2721,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-1276,-2721,0);
+if(c!=null) c.setPassable(true);
+c = grass.createChunk(-1244,-2721,0);
+if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1052,-2721,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1020,-2721,0);
@@ -7358,6 +7592,9 @@ c = grass.createChunk(-668,-2721,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-636,-2721,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment71() {
 c = grass.createChunk(-604,-2721,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-572,-2721,0);
@@ -7380,9 +7617,6 @@ c = grass.createChunk(-316,-2721,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-284,-2721,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment69() {
 c = grass.createChunk(-252,-2721,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-220,-2721,0);
@@ -7461,6 +7695,9 @@ c = grass.createChunk(-796,-2689,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-764,-2689,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment72() {
 c = grass.createChunk(-732,-2689,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-700,-2689,0);
@@ -7483,9 +7720,6 @@ c = grass.createChunk(-444,-2689,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-412,-2689,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment70() {
 c = grass.createChunk(-380,-2689,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-348,-2689,0);
@@ -7564,6 +7798,9 @@ c = grass.createChunk(-924,-2657,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-892,-2657,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment73() {
 c = grass.createChunk(-860,-2657,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-828,-2657,0);
@@ -7586,9 +7823,6 @@ c = grass.createChunk(-572,-2657,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-540,-2657,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment71() {
 c = grass.createChunk(-508,-2657,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-476,-2657,0);
@@ -7667,6 +7901,9 @@ c = grass.createChunk(-892,-2625,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-860,-2625,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment74() {
 c = grass.createChunk(-828,-2625,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-796,-2625,0);
@@ -7689,9 +7926,6 @@ c = grass.createChunk(-540,-2625,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-508,-2625,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment72() {
 c = grass.createChunk(-476,-2625,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-444,-2625,0);
@@ -7770,6 +8004,9 @@ c = grass.createChunk(-860,-2593,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-828,-2593,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment75() {
 c = grass.createChunk(-796,-2593,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-764,-2593,0);
@@ -7792,9 +8029,6 @@ c = grass.createChunk(-508,-2593,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-476,-2593,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment73() {
 c = grass.createChunk(-444,-2593,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-412,-2593,0);
@@ -7873,6 +8107,9 @@ c = grass.createChunk(-828,-2561,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-796,-2561,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment76() {
 c = grass.createChunk(-764,-2561,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-732,-2561,0);
@@ -7895,9 +8132,6 @@ c = grass.createChunk(-476,-2561,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-444,-2561,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment74() {
 c = grass.createChunk(-412,-2561,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-380,-2561,0);
@@ -7976,6 +8210,9 @@ c = grass.createChunk(-796,-2529,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-764,-2529,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment77() {
 c = grass.createChunk(-732,-2529,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-700,-2529,0);
@@ -7998,9 +8235,6 @@ c = grass.createChunk(-444,-2529,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-412,-2529,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment75() {
 c = grass.createChunk(-380,-2529,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-348,-2529,0);
@@ -8079,6 +8313,9 @@ c = grass.createChunk(-764,-2497,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-732,-2497,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment78() {
 c = grass.createChunk(-700,-2497,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-668,-2497,0);
@@ -8101,9 +8338,6 @@ c = grass.createChunk(-412,-2497,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-380,-2497,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment76() {
 c = grass.createChunk(-348,-2497,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-316,-2497,0);
@@ -8182,6 +8416,9 @@ c = grass.createChunk(-732,-2465,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-700,-2465,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment79() {
 c = grass.createChunk(-668,-2465,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-636,-2465,0);
@@ -8204,9 +8441,6 @@ c = grass.createChunk(-380,-2465,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-348,-2465,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment77() {
 c = grass.createChunk(-316,-2465,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-284,-2465,0);
@@ -8285,6 +8519,9 @@ c = grass.createChunk(-220,-2433,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-188,-2433,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment80() {
 c = grass.createChunk(-156,-2433,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-124,-2433,0);
@@ -8307,9 +8544,6 @@ c = grass.createChunk(132,-2433,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(164,-2433,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment78() {
 c = grass.createChunk(196,-2433,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(228,-2433,0);
@@ -8388,6 +8622,9 @@ c = grass.createChunk(292,-2401,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(324,-2401,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment81() {
 c = grass.createChunk(356,-2401,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(388,-2401,0);
@@ -8410,9 +8647,6 @@ c = grass.createChunk(-444,-2369,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-412,-2369,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment79() {
 c = grass.createChunk(-380,-2369,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-348,-2369,0);
@@ -8491,6 +8725,9 @@ c = grass.createChunk(-284,-2337,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-252,-2337,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment82() {
 c = grass.createChunk(-220,-2337,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-188,-2337,0);
@@ -8513,9 +8750,6 @@ c = grass.createChunk(68,-2337,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(100,-2337,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment80() {
 c = grass.createChunk(132,-2337,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(164,-2337,0);
@@ -8594,6 +8828,9 @@ c = grass.createChunk(228,-2305,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(260,-2305,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment83() {
 c = grass.createChunk(292,-2305,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(324,-2305,0);
@@ -8616,9 +8853,6 @@ c = grass.createChunk(-508,-2273,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-476,-2273,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment81() {
 c = grass.createChunk(-444,-2273,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-412,-2273,0);
@@ -8697,6 +8931,9 @@ c = grass.createChunk(-348,-2241,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-316,-2241,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment84() {
 c = grass.createChunk(-284,-2241,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-252,-2241,0);
@@ -8719,9 +8956,6 @@ c = grass.createChunk(4,-2241,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(36,-2241,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment82() {
 c = grass.createChunk(68,-2241,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(100,-2241,0);
@@ -8800,6 +9034,9 @@ c = grass.createChunk(164,-2209,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(196,-2209,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment85() {
 c = grass.createChunk(228,-2209,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(260,-2209,0);
@@ -8822,9 +9059,6 @@ c = grass.createChunk(516,-2209,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(548,-2209,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment83() {
 c = grass.createChunk(580,-2209,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(612,-2209,0);
@@ -8903,6 +9137,9 @@ c = grass.createChunk(452,-2177,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(484,-2177,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment86() {
 c = grass.createChunk(516,-2177,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(548,-2177,0);
@@ -8925,9 +9162,6 @@ c = grass.createChunk(-508,-2145,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-476,-2145,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment84() {
 c = grass.createChunk(-444,-2145,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-412,-2145,0);
@@ -9006,6 +9240,9 @@ c = grass.createChunk(-572,-2113,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-540,-2113,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment87() {
 c = grass.createChunk(-508,-2113,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-476,-2113,0);
@@ -9028,9 +9265,6 @@ c = grass.createChunk(-220,-2113,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-188,-2113,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment85() {
 c = grass.createChunk(-156,-2113,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-124,-2113,0);
@@ -9109,6 +9343,9 @@ c = grass.createChunk(-284,-2081,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-252,-2081,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment88() {
 c = grass.createChunk(-220,-2081,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-188,-2081,0);
@@ -9131,9 +9368,6 @@ c = grass.createChunk(68,-2081,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(100,-2081,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment86() {
 c = grass.createChunk(132,-2081,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(164,-2081,0);
@@ -9212,6 +9446,9 @@ c = grass.createChunk(4,-2049,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(36,-2049,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment89() {
 c = grass.createChunk(68,-2049,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(100,-2049,0);
@@ -9234,9 +9471,6 @@ c = grass.createChunk(356,-2049,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(388,-2049,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment87() {
 c = grass.createChunk(420,-2049,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(452,-2049,0);
@@ -9315,6 +9549,9 @@ c = grass.createChunk(292,-2017,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(324,-2017,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment90() {
 c = grass.createChunk(356,-2017,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(388,-2017,0);
@@ -9337,9 +9574,6 @@ c = grass.createChunk(644,-2017,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(676,-2017,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment88() {
 c = grass.createChunk(708,-2017,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-572,-1985,0);
@@ -9418,6 +9652,9 @@ c = grass.createChunk(580,-1985,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(612,-1985,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment91() {
 c = grass.createChunk(644,-1985,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(676,-1985,0);
@@ -9440,9 +9677,6 @@ c = grass.createChunk(-380,-1953,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-348,-1953,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment89() {
 c = grass.createChunk(-316,-1953,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-284,-1953,0);
@@ -9521,6 +9755,9 @@ c = grass.createChunk(-444,-1921,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-412,-1921,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment92() {
 c = grass.createChunk(-380,-1921,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-348,-1921,0);
@@ -9543,9 +9780,6 @@ c = grass.createChunk(-92,-1921,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-60,-1921,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment90() {
 c = grass.createChunk(-28,-1921,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(4,-1921,0);
@@ -9624,6 +9858,9 @@ c = grass.createChunk(-156,-1889,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-124,-1889,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment93() {
 c = grass.createChunk(-92,-1889,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-60,-1889,0);
@@ -9646,9 +9883,6 @@ c = grass.createChunk(196,-1889,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(228,-1889,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment91() {
 c = grass.createChunk(260,-1889,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(292,-1889,0);
@@ -9727,6 +9961,9 @@ c = grass.createChunk(132,-1857,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(164,-1857,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment94() {
 c = grass.createChunk(196,-1857,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(228,-1857,0);
@@ -9749,9 +9986,6 @@ c = grass.createChunk(484,-1857,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(516,-1857,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment92() {
 c = grass.createChunk(548,-1857,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(580,-1857,0);
@@ -9830,6 +10064,9 @@ c = grass.createChunk(420,-1825,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(452,-1825,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment95() {
 c = grass.createChunk(484,-1825,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(516,-1825,0);
@@ -9852,9 +10089,6 @@ c = grass.createChunk(-540,-1793,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-508,-1793,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment93() {
 c = grass.createChunk(-476,-1793,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-444,-1793,0);
@@ -9933,6 +10167,9 @@ c = grass.createChunk(708,-1793,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-572,-1761,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment96() {
 c = grass.createChunk(-540,-1761,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-508,-1761,0);
@@ -9955,9 +10192,6 @@ c = grass.createChunk(-252,-1761,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-220,-1761,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment94() {
 c = grass.createChunk(-188,-1761,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-156,-1761,0);
@@ -10036,6 +10270,9 @@ c = grass.createChunk(-316,-1729,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-284,-1729,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment97() {
 c = grass.createChunk(-252,-1729,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-220,-1729,0);
@@ -10058,9 +10295,6 @@ c = grass.createChunk(36,-1729,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(68,-1729,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment95() {
 c = grass.createChunk(100,-1729,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(132,-1729,0);
@@ -10139,6 +10373,9 @@ c = grass.createChunk(-28,-1697,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(4,-1697,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment98() {
 c = grass.createChunk(36,-1697,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(68,-1697,0);
@@ -10161,9 +10398,6 @@ c = grass.createChunk(324,-1697,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(356,-1697,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment96() {
 c = grass.createChunk(388,-1697,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(420,-1697,0);
@@ -10242,6 +10476,9 @@ c = grass.createChunk(260,-1665,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(292,-1665,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment99() {
 c = grass.createChunk(324,-1665,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(356,-1665,0);
@@ -10264,9 +10501,6 @@ c = grass.createChunk(612,-1665,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(644,-1665,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment97() {
 c = grass.createChunk(676,-1665,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(708,-1665,0);
@@ -10345,6 +10579,9 @@ c = grass.createChunk(548,-1633,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(580,-1633,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment100() {
 c = grass.createChunk(612,-1633,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(644,-1633,0);
@@ -10367,9 +10604,6 @@ c = grass.createChunk(-412,-1601,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-380,-1601,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment98() {
 c = grass.createChunk(-348,-1601,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-316,-1601,0);
@@ -10448,6 +10682,9 @@ c = grass.createChunk(-476,-1569,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-444,-1569,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment101() {
 c = grass.createChunk(-412,-1569,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-380,-1569,0);
@@ -10470,9 +10707,6 @@ c = grass.createChunk(-124,-1569,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-92,-1569,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment99() {
 c = grass.createChunk(-60,-1569,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-28,-1569,0);
@@ -10551,6 +10785,9 @@ c = grass.createChunk(-188,-1537,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-156,-1537,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment102() {
 c = grass.createChunk(-124,-1537,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-92,-1537,0);
@@ -10573,9 +10810,6 @@ c = grass.createChunk(164,-1537,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(196,-1537,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment100() {
 c = grass.createChunk(228,-1537,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(260,-1537,0);
@@ -10654,6 +10888,9 @@ c = grass.createChunk(100,-1505,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(132,-1505,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment103() {
 c = grass.createChunk(164,-1505,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(196,-1505,0);
@@ -10676,9 +10913,6 @@ c = grass.createChunk(452,-1505,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(484,-1505,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment101() {
 c = grass.createChunk(516,-1505,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(548,-1505,0);
@@ -10757,6 +10991,9 @@ c = grass.createChunk(388,-1473,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(420,-1473,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment104() {
 c = grass.createChunk(452,-1473,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(484,-1473,0);
@@ -10779,9 +11016,6 @@ c = grass.createChunk(-572,-1441,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-540,-1441,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment102() {
 c = grass.createChunk(-508,-1441,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-476,-1441,0);
@@ -10860,6 +11094,9 @@ c = grass.createChunk(676,-1441,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(708,-1441,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment105() {
 c = grass.createChunk(-572,-1409,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-540,-1409,0);
@@ -10882,9 +11119,6 @@ c = grass.createChunk(-284,-1409,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-252,-1409,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment103() {
 c = grass.createChunk(-220,-1409,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-188,-1409,0);
@@ -10963,6 +11197,9 @@ c = grass.createChunk(-348,-1377,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-316,-1377,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment106() {
 c = grass.createChunk(-284,-1377,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-252,-1377,0);
@@ -10985,9 +11222,6 @@ c = grass.createChunk(4,-1377,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(36,-1377,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment104() {
 c = grass.createChunk(68,-1377,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(100,-1377,0);
@@ -11066,6 +11300,9 @@ c = grass.createChunk(-60,-1345,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-28,-1345,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment107() {
 c = grass.createChunk(4,-1345,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(36,-1345,0);
@@ -11088,9 +11325,6 @@ c = grass.createChunk(292,-1345,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(324,-1345,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment105() {
 c = grass.createChunk(356,-1345,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(388,-1345,0);
@@ -11169,6 +11403,9 @@ c = grass.createChunk(228,-1313,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(260,-1313,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment108() {
 c = grass.createChunk(292,-1313,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(324,-1313,0);
@@ -11191,9 +11428,6 @@ c = grass.createChunk(580,-1313,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(612,-1313,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment106() {
 c = grass.createChunk(644,-1313,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(676,-1313,0);
@@ -11272,6 +11506,9 @@ c = grass.createChunk(516,-1281,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(548,-1281,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment109() {
 c = grass.createChunk(580,-1281,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(612,-1281,0);
@@ -11294,9 +11531,6 @@ c = grass.createChunk(-444,-1249,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-412,-1249,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment107() {
 c = grass.createChunk(-380,-1249,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-348,-1249,0);
@@ -11375,6 +11609,9 @@ c = grass.createChunk(-508,-1217,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-476,-1217,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment110() {
 c = grass.createChunk(-444,-1217,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-412,-1217,0);
@@ -11397,9 +11634,6 @@ c = grass.createChunk(-156,-1217,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-124,-1217,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment108() {
 c = grass.createChunk(-92,-1217,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-60,-1217,0);
@@ -11478,6 +11712,9 @@ c = grass.createChunk(-220,-1185,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-188,-1185,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment111() {
 c = grass.createChunk(-156,-1185,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-124,-1185,0);
@@ -11500,9 +11737,6 @@ c = grass.createChunk(132,-1185,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(164,-1185,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment109() {
 c = grass.createChunk(196,-1185,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(228,-1185,0);
@@ -11581,6 +11815,9 @@ c = grass.createChunk(68,-1153,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(100,-1153,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment112() {
 c = grass.createChunk(132,-1153,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(164,-1153,0);
@@ -11603,9 +11840,6 @@ c = grass.createChunk(420,-1153,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(452,-1153,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment110() {
 c = grass.createChunk(484,-1153,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(516,-1153,0);
@@ -11684,6 +11918,9 @@ c = grass.createChunk(356,-1121,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(388,-1121,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment113() {
 c = grass.createChunk(420,-1121,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(452,-1121,0);
@@ -11706,9 +11943,6 @@ c = grass.createChunk(708,-1121,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-572,-1089,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment111() {
 c = grass.createChunk(-540,-1089,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-508,-1089,0);
@@ -11787,6 +12021,9 @@ c = grass.createChunk(644,-1089,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(676,-1089,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment114() {
 c = grass.createChunk(708,-1089,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-572,-1057,0);
@@ -11809,9 +12046,6 @@ c = grass.createChunk(-316,-1057,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-284,-1057,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment112() {
 c = grass.createChunk(-252,-1057,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-220,-1057,0);
@@ -11890,6 +12124,9 @@ c = grass.createChunk(-380,-1025,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-348,-1025,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment115() {
 c = grass.createChunk(-316,-1025,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-284,-1025,0);
@@ -11912,9 +12149,6 @@ c = grass.createChunk(-28,-1025,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(4,-1025,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment113() {
 c = grass.createChunk(36,-1025,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(68,-1025,0);
@@ -11993,6 +12227,9 @@ c = grass.createChunk(-92,-993,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-60,-993,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment116() {
 c = grass.createChunk(-28,-993,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(4,-993,0);
@@ -12015,9 +12252,6 @@ c = grass.createChunk(260,-993,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(292,-993,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment114() {
 c = grass.createChunk(324,-993,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(356,-993,0);
@@ -12096,6 +12330,9 @@ c = grass.createChunk(196,-961,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(228,-961,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment117() {
 c = grass.createChunk(260,-961,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(292,-961,0);
@@ -12118,9 +12355,6 @@ c = grass.createChunk(548,-961,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(580,-961,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment115() {
 c = grass.createChunk(612,-961,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(644,-961,0);
@@ -12199,6 +12433,9 @@ c = grass.createChunk(292,-929,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(324,-929,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment118() {
 c = grass.createChunk(356,-929,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(388,-929,0);
@@ -12221,9 +12458,6 @@ c = grass.createChunk(644,-929,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(676,-929,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment116() {
 c = grass.createChunk(708,-929,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(740,-898,0);
@@ -12302,6 +12536,9 @@ c = grass.createChunk(-92,-897,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-60,-897,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment119() {
 c = grass.createChunk(-28,-897,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(4,-897,0);
@@ -12324,9 +12561,6 @@ c = grass.createChunk(260,-897,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(292,-897,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment117() {
 c = grass.createChunk(324,-897,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(356,-897,0);
@@ -12405,6 +12639,9 @@ c = grass.createChunk(-476,-865,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-444,-865,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment120() {
 c = grass.createChunk(-412,-865,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-380,-865,0);
@@ -12427,9 +12664,6 @@ c = grass.createChunk(-124,-865,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-92,-865,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment118() {
 c = grass.createChunk(-60,-865,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-28,-865,0);
@@ -12508,6 +12742,9 @@ c = grass.createChunk(-860,-833,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-828,-833,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment121() {
 c = grass.createChunk(-796,-833,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-764,-833,0);
@@ -12530,9 +12767,6 @@ c = grass.createChunk(-508,-833,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-476,-833,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment119() {
 c = grass.createChunk(-444,-833,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-412,-833,0);
@@ -12611,6 +12845,9 @@ c = grass.createChunk(-1372,-810,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1340,-810,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment122() {
 c = grass.createChunk(-1308,-810,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1276,-810,0);
@@ -12633,9 +12870,6 @@ c = grass.createChunk(772,-802,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(804,-802,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment120() {
 c = grass.createChunk(836,-802,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(868,-802,0);
@@ -12714,6 +12948,9 @@ c = grass.createChunk(36,-801,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(68,-801,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment123() {
 c = grass.createChunk(100,-801,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(132,-801,0);
@@ -12736,9 +12973,6 @@ c = grass.createChunk(388,-801,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(420,-801,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment121() {
 c = grass.createChunk(452,-801,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(484,-801,0);
@@ -12817,6 +13051,9 @@ c = grass.createChunk(-668,-769,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-636,-769,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment124() {
 c = grass.createChunk(-604,-769,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-572,-769,0);
@@ -12839,9 +13076,6 @@ c = grass.createChunk(-316,-769,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-284,-769,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment122() {
 c = grass.createChunk(-252,-769,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-220,-769,0);
@@ -12920,6 +13154,9 @@ c = grass.createChunk(-1180,-746,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1148,-746,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment125() {
 c = grass.createChunk(-1116,-746,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1084,-746,0);
@@ -12942,9 +13179,6 @@ c = grass.createChunk(-1020,-737,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-988,-737,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment123() {
 c = grass.createChunk(-956,-737,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-924,-737,0);
@@ -13023,6 +13257,9 @@ c = grass.createChunk(228,-737,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(260,-737,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment126() {
 c = grass.createChunk(292,-737,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(324,-737,0);
@@ -13045,9 +13282,6 @@ c = grass.createChunk(580,-737,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(612,-737,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment124() {
 c = grass.createChunk(644,-737,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(676,-737,0);
@@ -13126,6 +13360,9 @@ c = grass.createChunk(-476,-705,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-444,-705,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment127() {
 c = grass.createChunk(-412,-705,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-380,-705,0);
@@ -13148,9 +13385,6 @@ c = grass.createChunk(-124,-705,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-92,-705,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment125() {
 c = grass.createChunk(-60,-705,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-28,-705,0);
@@ -13229,6 +13463,9 @@ c = grass.createChunk(803,-675,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(835,-675,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment128() {
 c = grass.createChunk(867,-675,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(899,-675,0);
@@ -13251,9 +13488,6 @@ c = grass.createChunk(-892,-673,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-860,-673,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment126() {
 c = grass.createChunk(-828,-673,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-796,-673,0);
@@ -13332,6 +13566,9 @@ c = grass.createChunk(356,-673,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(388,-673,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment129() {
 c = grass.createChunk(420,-673,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(452,-673,0);
@@ -13354,9 +13591,6 @@ c = grass.createChunk(708,-673,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1372,-650,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment127() {
 c = grass.createChunk(-1340,-650,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1308,-650,0);
@@ -13435,6 +13669,9 @@ c = grass.createChunk(-412,-641,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-380,-641,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment130() {
 c = grass.createChunk(-348,-641,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-316,-641,0);
@@ -13457,9 +13694,6 @@ c = grass.createChunk(-60,-641,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-28,-641,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment128() {
 c = grass.createChunk(4,-641,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(36,-641,0);
@@ -13538,6 +13772,9 @@ c = grass.createChunk(867,-611,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(899,-611,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment131() {
 c = grass.createChunk(931,-611,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(963,-611,0);
@@ -13560,9 +13797,6 @@ c = grass.createChunk(-828,-609,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-796,-609,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment129() {
 c = grass.createChunk(-764,-609,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-732,-609,0);
@@ -13641,6 +13875,9 @@ c = grass.createChunk(420,-609,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(452,-609,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment132() {
 c = grass.createChunk(484,-609,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(516,-609,0);
@@ -13663,9 +13900,6 @@ c = grass.createChunk(-1340,-586,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1308,-586,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment130() {
 c = grass.createChunk(-1276,-586,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1244,-586,0);
@@ -13744,6 +13978,9 @@ c = grass.createChunk(-348,-577,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-316,-577,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment133() {
 c = grass.createChunk(-284,-577,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-252,-577,0);
@@ -13766,9 +14003,6 @@ c = grass.createChunk(4,-577,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(36,-577,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment131() {
 c = grass.createChunk(68,-577,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(100,-577,0);
@@ -13847,6 +14081,9 @@ c = grass.createChunk(931,-547,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(963,-547,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment134() {
 c = grass.createChunk(-1052,-545,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1020,-545,0);
@@ -13869,9 +14106,6 @@ c = grass.createChunk(-764,-545,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-732,-545,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment132() {
 c = grass.createChunk(-700,-545,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-668,-545,0);
@@ -13950,6 +14184,9 @@ c = grass.createChunk(484,-545,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(516,-545,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment135() {
 c = grass.createChunk(548,-545,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(580,-545,0);
@@ -13972,9 +14209,6 @@ c = grass.createChunk(-1276,-522,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1244,-522,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment133() {
 c = grass.createChunk(-1212,-522,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1180,-522,0);
@@ -14053,6 +14287,9 @@ c = grass.createChunk(-284,-513,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-252,-513,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment136() {
 c = grass.createChunk(-220,-513,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-188,-513,0);
@@ -14075,9 +14312,6 @@ c = grass.createChunk(68,-513,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(100,-513,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment134() {
 c = grass.createChunk(132,-513,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(164,-513,0);
@@ -14156,6 +14390,9 @@ c = grass.createChunk(963,-483,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1021,-481,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment137() {
 c = grass.createChunk(-989,-481,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-957,-481,0);
@@ -14178,9 +14415,6 @@ c = grass.createChunk(-701,-481,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-669,-481,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment135() {
 c = grass.createChunk(-637,-481,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-605,-481,0);
@@ -14259,6 +14493,9 @@ c = grass.createChunk(547,-481,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(579,-481,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment138() {
 c = grass.createChunk(611,-481,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(643,-481,0);
@@ -14281,9 +14518,6 @@ c = grass.createChunk(-1212,-458,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1180,-458,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment136() {
 c = grass.createChunk(-1148,-458,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1116,-458,0);
@@ -14362,6 +14596,9 @@ c = grass.createChunk(36,-457,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(68,-457,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment139() {
 c = grass.createChunk(100,-457,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(132,-457,0);
@@ -14384,9 +14621,6 @@ c = grass.createChunk(388,-457,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(420,-457,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment137() {
 c = grass.createChunk(452,-457,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(484,-451,0);
@@ -14465,6 +14699,9 @@ c = grass.createChunk(-764,-426,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-732,-426,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment140() {
 c = grass.createChunk(-700,-426,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-668,-426,0);
@@ -14487,9 +14724,6 @@ c = grass.createChunk(-412,-426,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-380,-426,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment138() {
 c = grass.createChunk(-348,-426,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-316,-426,0);
@@ -14568,6 +14802,9 @@ c = grass.createChunk(836,-419,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(868,-419,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment141() {
 c = grass.createChunk(900,-419,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(932,-419,0);
@@ -14590,9 +14827,6 @@ c = grass.createChunk(-1212,-394,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1180,-394,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment139() {
 c = grass.createChunk(-1148,-394,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1116,-394,0);
@@ -14671,6 +14905,9 @@ c = grass.createChunk(36,-394,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(68,-394,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment142() {
 c = grass.createChunk(100,-394,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(132,-394,0);
@@ -14693,9 +14930,6 @@ c = grass.createChunk(388,-394,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(420,-394,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment140() {
 c = grass.createChunk(452,-394,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(484,-387,0);
@@ -14774,6 +15008,9 @@ c = grass.createChunk(-764,-362,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-732,-362,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment143() {
 c = grass.createChunk(-700,-362,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-668,-362,0);
@@ -14796,9 +15033,6 @@ c = grass.createChunk(-412,-362,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-380,-362,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment141() {
 c = grass.createChunk(-348,-362,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-316,-362,0);
@@ -14877,6 +15111,9 @@ c = grass.createChunk(836,-355,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(868,-355,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment144() {
 c = grass.createChunk(900,-355,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(932,-355,0);
@@ -14899,9 +15136,6 @@ c = grass.createChunk(-1212,-330,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1180,-330,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment142() {
 c = grass.createChunk(-1148,-330,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1116,-330,0);
@@ -14980,6 +15214,9 @@ c = grass.createChunk(36,-330,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(68,-330,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment145() {
 c = grass.createChunk(100,-330,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(132,-330,0);
@@ -15002,9 +15239,6 @@ c = grass.createChunk(388,-330,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(420,-330,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment143() {
 c = grass.createChunk(452,-330,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(484,-323,0);
@@ -15083,6 +15317,9 @@ c = grass.createChunk(-764,-298,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-732,-298,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment146() {
 c = grass.createChunk(-700,-298,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-668,-298,0);
@@ -15105,9 +15342,6 @@ c = grass.createChunk(-412,-298,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-380,-298,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment144() {
 c = grass.createChunk(-348,-298,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-316,-298,0);
@@ -15186,6 +15420,9 @@ c = grass.createChunk(836,-291,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(868,-291,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment147() {
 c = grass.createChunk(900,-291,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(932,-291,0);
@@ -15208,9 +15445,6 @@ c = grass.createChunk(-1212,-266,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1180,-266,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment145() {
 c = grass.createChunk(-1148,-266,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1116,-266,0);
@@ -15289,6 +15523,9 @@ c = grass.createChunk(36,-266,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(68,-266,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment148() {
 c = grass.createChunk(100,-266,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(132,-266,0);
@@ -15311,9 +15548,6 @@ c = grass.createChunk(388,-266,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(420,-266,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment146() {
 c = grass.createChunk(452,-266,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(484,-259,0);
@@ -15392,6 +15626,9 @@ c = grass.createChunk(-764,-234,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-732,-234,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment149() {
 c = grass.createChunk(-700,-234,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-668,-234,0);
@@ -15414,9 +15651,6 @@ c = grass.createChunk(-412,-234,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-380,-234,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment147() {
 c = grass.createChunk(-348,-234,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-316,-234,0);
@@ -15495,6 +15729,9 @@ c = grass.createChunk(836,-227,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(868,-227,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment150() {
 c = grass.createChunk(900,-227,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(932,-227,0);
@@ -15517,9 +15754,6 @@ c = grass.createChunk(-1212,-202,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1180,-202,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment148() {
 c = grass.createChunk(-1148,-202,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1116,-202,0);
@@ -15598,6 +15832,9 @@ c = grass.createChunk(36,-202,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(68,-202,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment151() {
 c = grass.createChunk(100,-202,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(132,-202,0);
@@ -15620,9 +15857,6 @@ c = grass.createChunk(388,-202,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(420,-202,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment149() {
 c = grass.createChunk(452,-202,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(484,-195,0);
@@ -15701,6 +15935,9 @@ c = grass.createChunk(-764,-170,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-732,-170,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment152() {
 c = grass.createChunk(-700,-170,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-668,-170,0);
@@ -15723,9 +15960,6 @@ c = grass.createChunk(-412,-170,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-380,-170,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment150() {
 c = grass.createChunk(-348,-170,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-316,-170,0);
@@ -15804,6 +16038,9 @@ c = grass.createChunk(868,-163,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(900,-163,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment153() {
 c = grass.createChunk(932,-163,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(964,-163,0);
@@ -15826,9 +16063,6 @@ c = grass.createChunk(-1212,-138,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1180,-138,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment151() {
 c = grass.createChunk(-1148,-138,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1116,-138,0);
@@ -15907,6 +16141,9 @@ c = grass.createChunk(36,-138,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(68,-138,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment154() {
 c = grass.createChunk(100,-138,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(132,-138,0);
@@ -15929,9 +16166,6 @@ c = grass.createChunk(388,-138,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(420,-138,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment152() {
 c = grass.createChunk(452,-138,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(484,-131,0);
@@ -16010,6 +16244,9 @@ c = grass.createChunk(-764,-106,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-732,-106,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment155() {
 c = grass.createChunk(-700,-106,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-668,-106,0);
@@ -16032,9 +16269,6 @@ c = grass.createChunk(-412,-106,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-380,-106,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment153() {
 c = grass.createChunk(-348,-106,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-316,-106,0);
@@ -16113,6 +16347,9 @@ c = grass.createChunk(836,-99,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(868,-99,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment156() {
 c = grass.createChunk(900,-99,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(932,-99,0);
@@ -16135,9 +16372,6 @@ c = grass.createChunk(-1500,-74,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1468,-74,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment154() {
 c = grass.createChunk(-1436,-74,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1404,-74,0);
@@ -16216,6 +16450,9 @@ c = grass.createChunk(-252,-74,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-220,-74,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment157() {
 c = grass.createChunk(-188,-74,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-156,-74,0);
@@ -16238,9 +16475,6 @@ c = grass.createChunk(100,-74,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(132,-74,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment155() {
 c = grass.createChunk(164,-74,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(196,-74,0);
@@ -16319,6 +16553,9 @@ c = grass.createChunk(-1340,-42,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1308,-42,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment158() {
 c = grass.createChunk(-1276,-42,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1244,-42,0);
@@ -16341,9 +16578,6 @@ c = grass.createChunk(-988,-42,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-956,-42,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment156() {
 c = grass.createChunk(-924,-42,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-892,-42,0);
@@ -16422,6 +16656,9 @@ c = grass.createChunk(260,-42,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(292,-42,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment159() {
 c = grass.createChunk(324,-42,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(356,-42,0);
@@ -16444,9 +16681,6 @@ c = grass.createChunk(612,-35,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(644,-35,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment157() {
 c = grass.createChunk(676,-35,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(708,-35,0);
@@ -16525,6 +16759,9 @@ c = grass.createChunk(-860,-10,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-828,-10,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment160() {
 c = grass.createChunk(-796,-10,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-732,-10,0);
@@ -16547,9 +16784,6 @@ c = grass.createChunk(-476,-10,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-444,-10,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment158() {
 c = grass.createChunk(-412,-10,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-380,-10,0);
@@ -16628,6 +16862,9 @@ c = grass.createChunk(772,-3,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(804,-3,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment161() {
 c = grass.createChunk(836,-3,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(868,-3,0);
@@ -16650,9 +16887,6 @@ c = grass.createChunk(-1596,22,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1564,22,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment159() {
 c = grass.createChunk(-1532,22,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1500,22,0);
@@ -16731,6 +16965,9 @@ c = grass.createChunk(-892,22,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-860,22,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment162() {
 c = grass.createChunk(-828,22,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-796,22,0);
@@ -16753,9 +16990,6 @@ c = grass.createChunk(-508,22,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-476,22,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment160() {
 c = grass.createChunk(-444,22,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-412,22,0);
@@ -16834,6 +17068,9 @@ c = grass.createChunk(-1217,178,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1185,178,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment163() {
 c = grass.createChunk(-1153,178,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1121,178,0);
@@ -16856,9 +17093,6 @@ c = grass.createChunk(-865,178,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-833,178,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment161() {
 c = grass.createChunk(-801,178,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-769,178,0);
@@ -16937,6 +17171,9 @@ c = grass.createChunk(383,178,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(415,178,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment164() {
 c = grass.createChunk(447,178,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(479,178,0);
@@ -16959,9 +17196,6 @@ c = grass.createChunk(735,178,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(767,178,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment162() {
 c = grass.createChunk(799,178,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(831,178,0);
@@ -17040,6 +17274,9 @@ c = grass.createChunk(-833,210,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-801,210,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment165() {
 c = grass.createChunk(-769,210,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-737,210,0);
@@ -17062,9 +17299,6 @@ c = grass.createChunk(-481,210,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-449,210,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment163() {
 c = grass.createChunk(-417,210,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-385,210,0);
@@ -17143,6 +17377,9 @@ c = grass.createChunk(767,210,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(799,210,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment166() {
 c = grass.createChunk(831,210,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(863,210,0);
@@ -17165,9 +17402,6 @@ c = grass.createChunk(-1697,211,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1665,211,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment164() {
 c = grass.createChunk(-1633,211,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1601,211,0);
@@ -17246,6 +17480,9 @@ c = grass.createChunk(-449,242,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-417,242,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment167() {
 c = grass.createChunk(-385,242,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-353,242,0);
@@ -17268,9 +17505,6 @@ c = grass.createChunk(-97,242,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-65,242,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment165() {
 c = grass.createChunk(-33,242,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1,242,0);
@@ -17349,6 +17583,9 @@ c = grass.createChunk(-1665,243,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1633,243,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment168() {
 c = grass.createChunk(-1601,243,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1569,243,0);
@@ -17371,9 +17608,6 @@ c = grass.createChunk(-1313,274,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1281,274,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment166() {
 c = grass.createChunk(-1249,274,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1217,274,0);
@@ -17452,6 +17686,9 @@ c = grass.createChunk(-65,274,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-33,274,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment169() {
 c = grass.createChunk(-1,274,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(31,274,0);
@@ -17474,9 +17711,6 @@ c = grass.createChunk(287,274,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(319,274,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment167() {
 c = grass.createChunk(351,274,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(383,274,0);
@@ -17555,6 +17789,9 @@ c = grass.createChunk(-1281,306,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1249,306,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment170() {
 c = grass.createChunk(-1217,306,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1185,306,0);
@@ -17577,9 +17814,6 @@ c = grass.createChunk(-929,306,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-897,306,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment168() {
 c = grass.createChunk(-865,306,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-833,306,0);
@@ -17658,6 +17892,9 @@ c = grass.createChunk(319,306,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(351,306,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment171() {
 c = grass.createChunk(383,306,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(415,306,0);
@@ -17680,9 +17917,6 @@ c = grass.createChunk(671,306,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(703,306,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment169() {
 c = grass.createChunk(735,306,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(767,306,0);
@@ -17761,6 +17995,9 @@ c = grass.createChunk(-897,338,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-865,338,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment172() {
 c = grass.createChunk(-833,338,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-801,338,0);
@@ -17783,9 +18020,6 @@ c = grass.createChunk(-545,338,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-513,338,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment170() {
 c = grass.createChunk(-481,338,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-449,338,0);
@@ -17864,6 +18098,9 @@ c = grass.createChunk(703,338,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(735,338,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment173() {
 c = grass.createChunk(767,338,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(799,338,0);
@@ -17886,9 +18123,6 @@ c = grass.createChunk(-1761,339,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1729,339,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment171() {
 c = grass.createChunk(-1697,339,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1665,339,0);
@@ -17967,6 +18201,9 @@ c = grass.createChunk(-513,370,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-481,370,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment174() {
 c = grass.createChunk(-449,370,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-417,370,0);
@@ -17989,9 +18226,6 @@ c = grass.createChunk(-161,370,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-129,370,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment172() {
 c = grass.createChunk(-97,370,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-65,370,0);
@@ -18070,6 +18304,9 @@ c = grass.createChunk(-1729,371,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1697,371,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment175() {
 c = grass.createChunk(-1665,371,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1633,371,0);
@@ -18092,9 +18329,6 @@ c = grass.createChunk(-1377,402,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1345,402,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment173() {
 c = grass.createChunk(-1313,402,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1281,402,0);
@@ -18173,6 +18407,9 @@ c = grass.createChunk(-1729,403,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1697,403,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment176() {
 c = grass.createChunk(-1665,403,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1633,403,0);
@@ -18195,9 +18432,6 @@ c = grass.createChunk(-1377,434,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1345,434,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment174() {
 c = grass.createChunk(-1313,434,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1281,434,0);
@@ -18276,6 +18510,9 @@ c = grass.createChunk(-1729,435,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1697,435,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment177() {
 c = grass.createChunk(-1665,435,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1633,435,0);
@@ -18298,9 +18535,6 @@ c = grass.createChunk(-1377,466,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1345,466,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment175() {
 c = grass.createChunk(-1313,466,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1281,466,0);
@@ -18379,6 +18613,9 @@ c = grass.createChunk(-1729,467,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1697,467,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment178() {
 c = grass.createChunk(-1665,467,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1633,467,0);
@@ -18401,9 +18638,6 @@ c = grass.createChunk(-1377,498,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1345,498,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment176() {
 c = grass.createChunk(-1313,498,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1281,498,0);
@@ -18482,6 +18716,9 @@ c = grass.createChunk(-1729,499,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1697,499,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment179() {
 c = grass.createChunk(-1665,499,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1633,499,0);
@@ -18504,9 +18741,6 @@ c = grass.createChunk(-1377,530,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1345,530,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment177() {
 c = grass.createChunk(-1313,530,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1281,530,0);
@@ -18585,6 +18819,9 @@ c = grass.createChunk(-1729,531,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1697,531,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment180() {
 c = grass.createChunk(-1665,531,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1633,531,0);
@@ -18607,9 +18844,6 @@ c = grass.createChunk(-1377,562,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1345,562,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment178() {
 c = grass.createChunk(-1313,562,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1281,562,0);
@@ -18688,6 +18922,9 @@ c = grass.createChunk(-1729,563,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1697,563,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment181() {
 c = grass.createChunk(-1665,563,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1633,563,0);
@@ -18710,9 +18947,6 @@ c = grass.createChunk(-1377,594,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1345,594,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment179() {
 c = grass.createChunk(-1313,594,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1281,594,0);
@@ -18791,6 +19025,9 @@ c = grass.createChunk(-1729,595,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1697,595,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment182() {
 c = grass.createChunk(-1665,595,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1633,595,0);
@@ -18813,9 +19050,6 @@ c = grass.createChunk(-1377,626,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1345,626,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment180() {
 c = grass.createChunk(-1313,626,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1281,626,0);
@@ -18894,6 +19128,9 @@ c = grass.createChunk(-1729,627,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1697,627,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment183() {
 c = grass.createChunk(-1665,627,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1633,627,0);
@@ -18916,9 +19153,6 @@ c = grass.createChunk(-1377,658,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1345,658,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment181() {
 c = grass.createChunk(-1313,658,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1281,658,0);
@@ -18997,6 +19231,9 @@ c = grass.createChunk(-1729,659,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1697,659,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment184() {
 c = grass.createChunk(-1665,659,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1633,659,0);
@@ -19019,9 +19256,6 @@ c = grass.createChunk(-1377,690,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1345,690,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment182() {
 c = grass.createChunk(-1313,690,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1281,690,0);
@@ -19100,6 +19334,9 @@ c = grass.createChunk(-1729,691,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1697,691,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment185() {
 c = grass.createChunk(-1665,691,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1633,691,0);
@@ -19122,9 +19359,6 @@ c = grass.createChunk(-1377,722,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1345,722,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment183() {
 c = grass.createChunk(-1313,722,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1281,722,0);
@@ -19203,6 +19437,9 @@ c = grass.createChunk(-1729,723,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1697,723,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment186() {
 c = grass.createChunk(-1665,723,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1633,723,0);
@@ -19225,9 +19462,6 @@ c = grass.createChunk(-1377,754,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1345,754,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment184() {
 c = grass.createChunk(-1313,754,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1281,754,0);
@@ -19306,6 +19540,9 @@ c = grass.createChunk(-1729,755,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1697,755,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment187() {
 c = grass.createChunk(-1665,755,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1633,755,0);
@@ -19328,9 +19565,6 @@ c = grass.createChunk(-1377,786,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1345,786,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment185() {
 c = grass.createChunk(-1313,786,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1281,786,0);
@@ -19409,6 +19643,9 @@ c = grass.createChunk(-1729,787,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1697,787,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment188() {
 c = grass.createChunk(-1665,787,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1633,787,0);
@@ -19431,9 +19668,6 @@ c = grass.createChunk(-1377,818,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1345,818,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment186() {
 c = grass.createChunk(-1313,818,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1281,818,0);
@@ -19512,6 +19746,9 @@ c = grass.createChunk(-1729,819,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1697,819,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment189() {
 c = grass.createChunk(-1665,819,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1633,819,0);
@@ -19534,9 +19771,6 @@ c = grass.createChunk(-1377,850,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1345,850,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment187() {
 c = grass.createChunk(-1313,850,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1281,850,0);
@@ -19615,6 +19849,9 @@ c = grass.createChunk(-1729,851,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1697,851,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment190() {
 c = grass.createChunk(-1665,851,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1633,851,0);
@@ -19637,9 +19874,6 @@ c = grass.createChunk(-1377,882,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1345,882,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment188() {
 c = grass.createChunk(-1313,882,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1281,882,0);
@@ -19718,6 +19952,9 @@ c = grass.createChunk(-1281,914,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1249,914,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment191() {
 c = grass.createChunk(-1217,914,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-1185,914,0);
@@ -19740,9 +19977,6 @@ c = grass.createChunk(-929,914,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-897,914,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment189() {
 c = grass.createChunk(-865,914,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-833,914,0);
@@ -19821,6 +20055,9 @@ c = grass.createChunk(-833,946,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-801,946,0);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment192() {
 c = grass.createChunk(-769,946,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-737,946,0);
@@ -19843,9 +20080,6 @@ c = grass.createChunk(-481,946,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-449,946,0);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment190() {
 c = grass.createChunk(-417,946,0);
 if(c!=null) c.setPassable(true);
 c = grass.createChunk(-385,946,0);
@@ -19854,12 +20088,24 @@ c = grass.createChunk(-353,946,0);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.bridge(-766,20,0);
 if(c!=null) c.setPassable(true);
-u = new units.unitTypes.sheepFarm.redWolf(-3787,-6859);
+c = new doodads.sheepFarm.flower(-2951,-6931,1);
+if(c!=null) c.setPassable(true);
+c = tree.createTree(-2933,-6925,1);
+if(c!=null) c.setPassable(false);
+c = new doodads.sheepFarm.flower(-3899,-6923,6);
+if(c!=null) c.setPassable(true);
+c = new doodads.sheepFarm.bush(-2911,-6917,2);
+if(c!=null) c.setPassable(false);
+c = tree.createTree(-3845,-6897,1);
+if(c!=null) c.setPassable(false);
+c = new doodads.sheepFarm.bush(-3815,-6877,0);
+if(c!=null) c.setPassable(false);
+u = new units.unitTypes.sheepFarm.redWolf(-3807,-6859);
 u.setMoveSpeed((float)1.5);
 u.jumpSpeed = (float)9.0;
 commands = new commandList();
-commands.add(new units.unitCommands.commands.slashCommand(-3787.0,-6422.0));
-commands.add(new units.unitCommands.commands.slashCommand(-3787.0,-6859.0));
+commands.add(new units.unitCommands.commands.slashCommand(-3807.0,-6422.0));
+commands.add(new units.unitCommands.commands.slashCommand(-3807.0,-6859.0));
 u.setRepeatCommands(commands);
 u = new units.unitTypes.sheepFarm.redWolf(-3827,-6859);
 u.setMoveSpeed((float)1.5);
@@ -19868,22 +20114,31 @@ commands = new commandList();
 commands.add(new units.unitCommands.commands.slashCommand(-3827.0,-6422.0));
 commands.add(new units.unitCommands.commands.slashCommand(-3827.0,-6859.0));
 u.setRepeatCommands(commands);
-u = new units.unitTypes.sheepFarm.redWolf(-3807,-6859);
+u = new units.unitTypes.sheepFarm.redWolf(-3787,-6859);
 u.setMoveSpeed((float)1.5);
 u.jumpSpeed = (float)9.0;
 commands = new commandList();
-commands.add(new units.unitCommands.commands.slashCommand(-3807.0,-6422.0));
-commands.add(new units.unitCommands.commands.slashCommand(-3807.0,-6859.0));
+commands.add(new units.unitCommands.commands.slashCommand(-3787.0,-6422.0));
+commands.add(new units.unitCommands.commands.slashCommand(-3787.0,-6859.0));
 u.setRepeatCommands(commands);
-c = new doodads.general.well(-2952,-6676,0);
+c = new doodads.sheepFarm.bush(-3211,-6828,0);
 if(c!=null) c.setPassable(false);
-u = new units.unitTypes.sheepFarm.redWolf(-3858,-6672);
-u.setMoveSpeed((float)3.5);
-u.jumpSpeed = (float)8.0;
-commands = new commandList();
-commands.add(new units.unitCommands.commands.slashCommand(-3983.0,-6672.0));
-commands.add(new units.unitCommands.commands.slashCommand(-3858.0,-6672.0));
-u.setRepeatCommands(commands);
+c = tree.createTree(-2690,-6818,0);
+if(c!=null) c.setPassable(false);
+c = new doodads.sheepFarm.flower(-2655,-6815,2);
+if(c!=null) c.setPassable(true);
+c = tree.createTree(-3240,-6809,1);
+if(c!=null) c.setPassable(false);
+c = new doodads.sheepFarm.bush(-2731,-6804,2);
+if(c!=null) c.setPassable(false);
+c = new doodads.sheepFarm.flower(-4344,-6798,7);
+if(c!=null) c.setPassable(true);
+c = new doodads.sheepFarm.flower(-3244,-6797,4);
+if(c!=null) c.setPassable(true);
+c = tree.createTree(-4324,-6779,0);
+if(c!=null) c.setPassable(false);
+c = new doodads.sheepFarm.bush(-4297,-6768,0);
+if(c!=null) c.setPassable(false);
 u = new units.unitTypes.sheepFarm.yellowWolf(-3981,-6800);
 u.setMoveSpeed((float)1.5);
 u.jumpSpeed = (float)9.0;
@@ -19905,26 +20160,42 @@ commands = new commandList();
 commands.add(new units.unitCommands.commands.moveCommand(-3860.0,-6586.0));
 commands.add(new units.unitCommands.commands.moveCommand(-3861.0,-6800.0));
 u.setRepeatCommands(commands);
-u = new units.unitTypes.sheepFarm.yellowWolf(-4305,-6665);
+c = tree.createTree(-3658,-6727,1);
+if(c!=null) c.setPassable(false);
+u = new units.unitTypes.sheepFarm.redWolf(-4520,-6732);
 u.setMoveSpeed((float)2.0);
 u.jumpSpeed = (float)9.0;
 commands = new commandList();
-commands.add(new units.unitCommands.commands.moveCommand(-4115.0,-6665.0));
-commands.add(new units.unitCommands.commands.moveCommand(-4305.0,-6665.0));
+commands.add(new units.unitCommands.commands.slashCommand(-4520.0,-6567.0));
+commands.add(new units.unitCommands.commands.slashCommand(-4520.0,-6732.0));
 u.setRepeatCommands(commands);
-u = new units.unitTypes.sheepFarm.redWolf(-3552,-6666);
-u.setMoveSpeed((float)3.5);
-u.jumpSpeed = (float)8.0;
+u = new units.unitTypes.sheepFarm.redWolf(-4460,-6732);
+u.setMoveSpeed((float)2.0);
+u.jumpSpeed = (float)9.0;
 commands = new commandList();
-commands.add(new units.unitCommands.commands.slashCommand(-3418.0,-6666.0));
-commands.add(new units.unitCommands.commands.slashCommand(-3552.0,-6666.0));
+commands.add(new units.unitCommands.commands.slashCommand(-4460.0,-6567.0));
+commands.add(new units.unitCommands.commands.slashCommand(-4460.0,-6732.0));
 u.setRepeatCommands(commands);
-u = new units.unitTypes.sheepFarm.redWolf(-3293,-6666);
-u.setMoveSpeed((float)3.5);
-u.jumpSpeed = (float)8.0;
+u = new units.unitTypes.sheepFarm.redWolf(-4400,-6732);
+u.setMoveSpeed((float)2.0);
+u.jumpSpeed = (float)9.0;
 commands = new commandList();
-commands.add(new units.unitCommands.commands.slashCommand(-3159.0,-6666.0));
-commands.add(new units.unitCommands.commands.slashCommand(-3293.0,-6666.0));
+commands.add(new units.unitCommands.commands.slashCommand(-4400.0,-6567.0));
+commands.add(new units.unitCommands.commands.slashCommand(-4400.0,-6732.0));
+u.setRepeatCommands(commands);
+u = new units.unitTypes.sheepFarm.redWolf(-4340,-6732);
+u.setMoveSpeed((float)2.0);
+u.jumpSpeed = (float)9.0;
+commands = new commandList();
+commands.add(new units.unitCommands.commands.slashCommand(-4340.0,-6567.0));
+commands.add(new units.unitCommands.commands.slashCommand(-4340.0,-6732.0));
+u.setRepeatCommands(commands);
+u = new units.unitTypes.sheepFarm.redWolf(-4280,-6732);
+u.setMoveSpeed((float)2.0);
+u.jumpSpeed = (float)9.0;
+commands = new commandList();
+commands.add(new units.unitCommands.commands.slashCommand(-4280.0,-6567.0));
+commands.add(new units.unitCommands.commands.slashCommand(-4280.0,-6732.0));
 u.setRepeatCommands(commands);
 u = new units.unitTypes.sheepFarm.redWolf(-3480,-6732);
 u.setMoveSpeed((float)2.0);
@@ -19954,54 +20225,45 @@ commands = new commandList();
 commands.add(new units.unitCommands.commands.slashCommand(-3256.0,-6539.0));
 commands.add(new units.unitCommands.commands.slashCommand(-3256.0,-6732.0));
 u.setRepeatCommands(commands);
+c = new doodads.general.well(-2952,-6676,0);
+if(c!=null) c.setPassable(false);
+u = new units.unitTypes.sheepFarm.redWolf(-3858,-6672);
+u.setMoveSpeed((float)3.5);
+u.jumpSpeed = (float)8.0;
+commands = new commandList();
+commands.add(new units.unitCommands.commands.slashCommand(-3983.0,-6672.0));
+commands.add(new units.unitCommands.commands.slashCommand(-3858.0,-6672.0));
+u.setRepeatCommands(commands);
+u = new units.unitTypes.sheepFarm.yellowWolf(-4305,-6665);
+u.setMoveSpeed((float)2.0);
+u.jumpSpeed = (float)9.0;
+commands = new commandList();
+commands.add(new units.unitCommands.commands.moveCommand(-4115.0,-6665.0));
+commands.add(new units.unitCommands.commands.moveCommand(-4305.0,-6665.0));
+u.setRepeatCommands(commands);
+u = new units.unitTypes.sheepFarm.redWolf(-3552,-6666);
+u.setMoveSpeed((float)3.5);
+u.jumpSpeed = (float)8.0;
+commands = new commandList();
+commands.add(new units.unitCommands.commands.slashCommand(-3418.0,-6666.0));
+commands.add(new units.unitCommands.commands.slashCommand(-3552.0,-6666.0));
+u.setRepeatCommands(commands);
+}
+
+public void addSegment193() {
+u = new units.unitTypes.sheepFarm.redWolf(-3293,-6666);
+u.setMoveSpeed((float)3.5);
+u.jumpSpeed = (float)8.0;
+commands = new commandList();
+commands.add(new units.unitCommands.commands.slashCommand(-3159.0,-6666.0));
+commands.add(new units.unitCommands.commands.slashCommand(-3293.0,-6666.0));
+u.setRepeatCommands(commands);
 u = new units.unitTypes.sheepFarm.redWolf(-3858,-6638);
 u.setMoveSpeed((float)3.5);
 u.jumpSpeed = (float)8.0;
 commands = new commandList();
 commands.add(new units.unitCommands.commands.slashCommand(-3983.0,-6638.0));
 commands.add(new units.unitCommands.commands.slashCommand(-3858.0,-6638.0));
-u.setRepeatCommands(commands);
-u = new units.unitTypes.sheepFarm.redWolf(-4521,-6732);
-u.setMoveSpeed((float)2.0);
-u.jumpSpeed = (float)9.0;
-commands = new commandList();
-commands.add(new units.unitCommands.commands.slashCommand(-4521.0,-6567.0));
-commands.add(new units.unitCommands.commands.slashCommand(-4521.0,-6732.0));
-u.setRepeatCommands(commands);
-u = new units.unitTypes.sheepFarm.redWolf(-4421,-6732);
-u.setMoveSpeed((float)2.0);
-u.jumpSpeed = (float)9.0;
-commands = new commandList();
-commands.add(new units.unitCommands.commands.slashCommand(-4421.0,-6567.0));
-commands.add(new units.unitCommands.commands.slashCommand(-4421.0,-6732.0));
-u.setRepeatCommands(commands);
-u = new units.unitTypes.sheepFarm.redWolf(-4371,-6732);
-u.setMoveSpeed((float)2.0);
-u.jumpSpeed = (float)9.0;
-commands = new commandList();
-commands.add(new units.unitCommands.commands.slashCommand(-4371.0,-6567.0));
-commands.add(new units.unitCommands.commands.slashCommand(-4371.0,-6732.0));
-u.setRepeatCommands(commands);
-u = new units.unitTypes.sheepFarm.redWolf(-4471,-6732);
-u.setMoveSpeed((float)2.0);
-u.jumpSpeed = (float)9.0;
-commands = new commandList();
-commands.add(new units.unitCommands.commands.slashCommand(-4471.0,-6567.0));
-commands.add(new units.unitCommands.commands.slashCommand(-4471.0,-6732.0));
-u.setRepeatCommands(commands);
-u = new units.unitTypes.sheepFarm.redWolf(-4321,-6732);
-u.setMoveSpeed((float)2.0);
-u.jumpSpeed = (float)9.0;
-commands = new commandList();
-commands.add(new units.unitCommands.commands.slashCommand(-4321.0,-6567.0));
-commands.add(new units.unitCommands.commands.slashCommand(-4321.0,-6732.0));
-u.setRepeatCommands(commands);
-u = new units.unitTypes.sheepFarm.redWolf(-4271,-6732);
-u.setMoveSpeed((float)2.0);
-u.jumpSpeed = (float)9.0;
-commands = new commandList();
-commands.add(new units.unitCommands.commands.slashCommand(-4271.0,-6567.0));
-commands.add(new units.unitCommands.commands.slashCommand(-4271.0,-6732.0));
 u.setRepeatCommands(commands);
 u = new units.unitTypes.sheepFarm.redWolf(-3552,-6605);
 u.setMoveSpeed((float)3.5);
@@ -20017,62 +20279,70 @@ commands = new commandList();
 commands.add(new units.unitCommands.commands.slashCommand(-3159.0,-6605.0));
 commands.add(new units.unitCommands.commands.slashCommand(-3293.0,-6605.0));
 u.setRepeatCommands(commands);
+c = new doodads.sheepFarm.bush(-2676,-6583,1);
+if(c!=null) c.setPassable(false);
+c = tree.createTree(-2688,-6567,1);
+if(c!=null) c.setPassable(false);
+u = new units.unitTypes.sheepFarm.redWolf(-3031,-6571);
+u.setMoveSpeed((float)3.5);
+u.jumpSpeed = (float)8.0;
+commands = new commandList();
+commands.add(new units.unitCommands.commands.slashCommand(-3031.0,-6420.0));
+commands.add(new units.unitCommands.commands.slashCommand(-3031.0,-6571.0));
+u.setRepeatCommands(commands);
 c = tree.createTree(-2090,-6553,0);
 if(c!=null) c.setPassable(false);
-u = new units.unitTypes.sheepFarm.yellowWolf(-2966,-6309);
-u.setMoveSpeed((float)4.5);
-u.jumpSpeed = (float)9.0;
-commands = new commandList();
-commands.add(new units.unitCommands.commands.moveCommand(-2966.0,-6600.0));
-commands.add(new units.unitCommands.commands.moveCommand(-3030.0,-6600.0));
-commands.add(new units.unitCommands.commands.moveCommand(-3030.0,-6309.0));
-commands.add(new units.unitCommands.commands.moveCommand(-2966.0,-6309.0));
-u.setRepeatCommands(commands);
 c = tree.createTree(-2452,-6538,1);
 if(c!=null) c.setPassable(false);
-u = new units.unitTypes.sheepFarm.redWolf(-3982,-6549);
+u = new units.unitTypes.sheepFarm.redWolf(-3983,-6549);
 u.setMoveSpeed((float)3.5);
 u.jumpSpeed = (float)8.0;
 commands = new commandList();
 commands.add(new units.unitCommands.commands.slashCommand(-3858.0,-6550.0));
-commands.add(new units.unitCommands.commands.slashCommand(-3982.0,-6549.0));
+commands.add(new units.unitCommands.commands.slashCommand(-3983.0,-6549.0));
 u.setRepeatCommands(commands);
 c = new doodads.sheepFarm.bush(-2428,-6535,1);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.bush(-1922,-6535,1);
 if(c!=null) c.setPassable(false);
+c = new doodads.sheepFarm.flower(-2722,-6534,8);
+if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.rock(-2455,-6530,1);
 if(c!=null) c.setPassable(false);
-u = new units.unitTypes.sheepFarm.redWolf(-4180,-6535);
+u = new units.unitTypes.sheepFarm.redWolf(-4182,-6535);
 u.setMoveSpeed((float)2.0);
 u.jumpSpeed = (float)9.0;
 commands = new commandList();
-commands.add(new units.unitCommands.commands.slashCommand(-4300.0,-6535.0));
-commands.add(new units.unitCommands.commands.slashCommand(-4180.0,-6535.0));
+commands.add(new units.unitCommands.commands.slashCommand(-4302.0,-6535.0));
+commands.add(new units.unitCommands.commands.slashCommand(-4182.0,-6535.0));
 u.setRepeatCommands(commands);
-u = new units.unitTypes.sheepFarm.redWolf(-3074,-6532);
-u.setMoveSpeed((float)4.5);
-u.jumpSpeed = (float)8.0;
-commands = new commandList();
-commands.add(new units.unitCommands.commands.slashCommand(-2928.0,-6532.0));
-commands.add(new units.unitCommands.commands.slashCommand(-3074.0,-6532.0));
-u.setRepeatCommands(commands);
-u = new units.unitTypes.sheepFarm.redWolf(-3983,-6516);
+u = new units.unitTypes.sheepFarm.redWolf(-3984,-6516);
 u.setMoveSpeed((float)3.5);
 u.jumpSpeed = (float)8.0;
 commands = new commandList();
 commands.add(new units.unitCommands.commands.slashCommand(-3858.0,-6516.0));
-commands.add(new units.unitCommands.commands.slashCommand(-3983.0,-6516.0));
+commands.add(new units.unitCommands.commands.slashCommand(-3984.0,-6516.0));
 u.setRepeatCommands(commands);
-u = new units.unitTypes.sheepFarm.redWolf(-4180,-6485);
+c = new doodads.sheepFarm.flower(-4055,-6500,2);
+if(c!=null) c.setPassable(true);
+u = new units.unitTypes.sheepFarm.redWolf(-2969,-6500);
+u.setMoveSpeed((float)3.5);
+u.jumpSpeed = (float)8.0;
+commands = new commandList();
+commands.add(new units.unitCommands.commands.slashCommand(-2969.0,-6349.0));
+commands.add(new units.unitCommands.commands.slashCommand(-2969.0,-6500.0));
+u.setRepeatCommands(commands);
+c = tree.createTree(-4111,-6473,0);
+if(c!=null) c.setPassable(false);
+u = new units.unitTypes.sheepFarm.redWolf(-4182,-6460);
 u.setMoveSpeed((float)2.0);
 u.jumpSpeed = (float)9.0;
 commands = new commandList();
-commands.add(new units.unitCommands.commands.slashCommand(-4300.0,-6485.0));
-commands.add(new units.unitCommands.commands.slashCommand(-4180.0,-6485.0));
+commands.add(new units.unitCommands.commands.slashCommand(-4302.0,-6460.0));
+commands.add(new units.unitCommands.commands.slashCommand(-4182.0,-6460.0));
 u.setRepeatCommands(commands);
 u = new units.unitTypes.sheepFarm.yellowWolf(-4237,-6260);
-u.setMoveSpeed((float)2.0);
+u.setMoveSpeed((float)2.5);
 u.jumpSpeed = (float)9.0;
 commands = new commandList();
 commands.add(new units.unitCommands.commands.moveCommand(-4237.0,-6566.0));
@@ -20080,67 +20350,58 @@ commands.add(new units.unitCommands.commands.moveCommand(-4496.0,-6566.0));
 commands.add(new units.unitCommands.commands.moveCommand(-4237.0,-6566.0));
 commands.add(new units.unitCommands.commands.moveCommand(-4237.0,-6260.0));
 u.setRepeatCommands(commands);
-u = new units.unitTypes.sheepFarm.redWolf(-4180,-6435);
-u.setMoveSpeed((float)2.0);
-u.jumpSpeed = (float)9.0;
-commands = new commandList();
-commands.add(new units.unitCommands.commands.slashCommand(-4300.0,-6435.0));
-commands.add(new units.unitCommands.commands.slashCommand(-4180.0,-6435.0));
-u.setRepeatCommands(commands);
 c = new doodads.sheepFarm.log(-2207,-6410,0);
 if(c!=null) c.setPassable(true);
 c = tree.createTree(-2235,-6406,1);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.bush(-2264,-6393,2);
 if(c!=null) c.setPassable(false);
-u = new units.unitTypes.sheepFarm.redWolf(-4180,-6385);
+c = new doodads.sheepFarm.bush(-3374,-6387,1);
+if(c!=null) c.setPassable(false);
+u = new units.unitTypes.sheepFarm.redWolf(-4182,-6385);
 u.setMoveSpeed((float)2.0);
 u.jumpSpeed = (float)9.0;
 commands = new commandList();
-commands.add(new units.unitCommands.commands.slashCommand(-4300.0,-6385.0));
-commands.add(new units.unitCommands.commands.slashCommand(-4180.0,-6385.0));
+commands.add(new units.unitCommands.commands.slashCommand(-4302.0,-6385.0));
+commands.add(new units.unitCommands.commands.slashCommand(-4182.0,-6385.0));
 u.setRepeatCommands(commands);
-u = new units.unitTypes.sheepFarm.redWolf(-2928,-6374);
-u.setMoveSpeed((float)4.5);
-u.jumpSpeed = (float)8.0;
-commands = new commandList();
-commands.add(new units.unitCommands.commands.slashCommand(-3074.0,-6374.0));
-commands.add(new units.unitCommands.commands.slashCommand(-2928.0,-6374.0));
-u.setRepeatCommands(commands);
-u = new units.unitTypes.sheepFarm.yellowWolf(-3030,-6600);
-u.setMoveSpeed((float)4.5);
+c = tree.createTree(-3388,-6362,2);
+if(c!=null) c.setPassable(false);
+c = new doodads.sheepFarm.bush(-3662,-6361,1);
+if(c!=null) c.setPassable(false);
+c = new doodads.sheepFarm.flower(-4369,-6359,9);
+if(c!=null) c.setPassable(true);
+u = new units.unitTypes.sheepFarm.yellowWolf(-2966,-6309);
+u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)9.0;
 commands = new commandList();
+commands.add(new units.unitCommands.commands.moveCommand(-2966.0,-6460.0));
+commands.add(new units.unitCommands.commands.moveCommand(-3030.0,-6460.0));
 commands.add(new units.unitCommands.commands.moveCommand(-3030.0,-6309.0));
 commands.add(new units.unitCommands.commands.moveCommand(-2966.0,-6309.0));
-commands.add(new units.unitCommands.commands.moveCommand(-2966.0,-6600.0));
-commands.add(new units.unitCommands.commands.moveCommand(-3030.0,-6600.0));
 u.setRepeatCommands(commands);
-u = new units.unitTypes.sheepFarm.redWolf(-4180,-6335);
-u.setMoveSpeed((float)2.0);
-u.jumpSpeed = (float)9.0;
-commands = new commandList();
-commands.add(new units.unitCommands.commands.slashCommand(-4300.0,-6335.0));
-commands.add(new units.unitCommands.commands.slashCommand(-4180.0,-6335.0));
-u.setRepeatCommands(commands);
-u = new units.unitTypes.sheepFarm.redWolf(-4180,-6285);
-u.setMoveSpeed((float)2.0);
-u.jumpSpeed = (float)9.0;
-commands = new commandList();
-commands.add(new units.unitCommands.commands.slashCommand(-4300.0,-6285.0));
-commands.add(new units.unitCommands.commands.slashCommand(-4180.0,-6285.0));
-u.setRepeatCommands(commands);
-c = new doodads.sheepFarm.flower(-1138,-6224,2);
+c = new doodads.sheepFarm.flower(-3416,-6351,6);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment191() {
-u = new units.unitTypes.sheepFarm.redWolf(-4180,-6235);
+c = tree.createTree(-3626,-6345,1);
+if(c!=null) c.setPassable(false);
+c = new doodads.sheepFarm.bush(-2731,-6344,1);
+if(c!=null) c.setPassable(false);
+c = new doodads.sheepFarm.bush(-4433,-6340,1);
+if(c!=null) c.setPassable(false);
+c = tree.createTree(-4466,-6326,0);
+if(c!=null) c.setPassable(false);
+c = tree.createTree(-2762,-6323,0);
+if(c!=null) c.setPassable(false);
+c = new doodads.sheepFarm.flower(-3608,-6324,9);
+if(c!=null) c.setPassable(true);
+c = new doodads.sheepFarm.flower(-2788,-6305,6);
+if(c!=null) c.setPassable(true);
+u = new units.unitTypes.sheepFarm.redWolf(-4182,-6310);
 u.setMoveSpeed((float)2.0);
 u.jumpSpeed = (float)9.0;
 commands = new commandList();
-commands.add(new units.unitCommands.commands.slashCommand(-4300.0,-6235.0));
-commands.add(new units.unitCommands.commands.slashCommand(-4180.0,-6235.0));
+commands.add(new units.unitCommands.commands.slashCommand(-4302.0,-6310.0));
+commands.add(new units.unitCommands.commands.slashCommand(-4182.0,-6310.0));
 u.setRepeatCommands(commands);
 u = new units.unitTypes.sheepFarm.yellowWolf(-2327,-6246);
 u.setMoveSpeed((float)2.0);
@@ -20151,44 +20412,15 @@ commands.add(new units.unitCommands.commands.moveCommand(-2163.0,-6189.0));
 commands.add(new units.unitCommands.commands.moveCommand(-2163.0,-6246.0));
 commands.add(new units.unitCommands.commands.moveCommand(-2327.0,-6246.0));
 u.setRepeatCommands(commands);
-c = new doodads.sheepFarm.bush(-1420,-6168,1);
-if(c!=null) c.setPassable(false);
-c = new doodads.sheepFarm.flower(-1275,-6162,2);
+c = new doodads.sheepFarm.flower(-1138,-6224,2);
 if(c!=null) c.setPassable(true);
-c = tree.createTree(-1434,-6157,1);
-if(c!=null) c.setPassable(false);
-u = new units.unitTypes.sheepFarm.yellowWolf(-2358,-5894);
-u.setMoveSpeed((float)3.0);
+u = new units.unitTypes.sheepFarm.redWolf(-4182,-6225);
+u.setMoveSpeed((float)2.0);
 u.jumpSpeed = (float)9.0;
 commands = new commandList();
-commands.add(new units.unitCommands.commands.moveCommand(-2358.0,-6157.0));
-commands.add(new units.unitCommands.commands.moveCommand(-2422.0,-6157.0));
-commands.add(new units.unitCommands.commands.moveCommand(-2422.0,-5894.0));
-commands.add(new units.unitCommands.commands.moveCommand(-2358.0,-5894.0));
+commands.add(new units.unitCommands.commands.slashCommand(-4302.0,-6225.0));
+commands.add(new units.unitCommands.commands.slashCommand(-4182.0,-6225.0));
 u.setRepeatCommands(commands);
-c = new doodads.sheepFarm.flower(-1425,-6142,2);
-if(c!=null) c.setPassable(true);
-c = tree.createTree(-1026,-6129,2);
-if(c!=null) c.setPassable(false);
-c = new doodads.sheepFarm.flower(-1167,-6126,2);
-if(c!=null) c.setPassable(true);
-c = new doodads.sheepFarm.flower(-1058,-6121,2);
-if(c!=null) c.setPassable(true);
-c = new doodads.sheepFarm.bush(-1003,-6116,2);
-if(c!=null) c.setPassable(false);
-u = new units.unitTypes.sheepFarm.redWolf(-2176,-6117);
-u.setMoveSpeed((float)3.5);
-u.jumpSpeed = (float)8.0;
-commands = new commandList();
-commands.add(new units.unitCommands.commands.slashCommand(-2030.0,-6117.0));
-commands.add(new units.unitCommands.commands.slashCommand(-2176.0,-6117.0));
-u.setRepeatCommands(commands);
-c = new doodads.sheepFarm.bush(-2590,-6098,1);
-if(c!=null) c.setPassable(false);
-c = tree.createTree(-2576,-6088,1);
-if(c!=null) c.setPassable(false);
-c = new doodads.sheepFarm.bone(-2557,-6073,0);
-if(c!=null) c.setPassable(true);
 u = new units.unitTypes.sheepFarm.redWolf(-3010,-6188);
 u.setMoveSpeed((float)2.0);
 u.jumpSpeed = (float)8.0;
@@ -20203,13 +20435,65 @@ commands = new commandList();
 commands.add(new units.unitCommands.commands.slashCommand(-2990.0,-5995.0));
 commands.add(new units.unitCommands.commands.slashCommand(-2990.0,-6188.0));
 u.setRepeatCommands(commands);
-u = new units.unitTypes.sheepFarm.redWolf(-3074,-6091);
+c = new doodads.sheepFarm.bush(-1420,-6168,1);
+if(c!=null) c.setPassable(false);
+c = new doodads.sheepFarm.flower(-1275,-6162,2);
+if(c!=null) c.setPassable(true);
+c = tree.createTree(-1434,-6157,1);
+if(c!=null) c.setPassable(false);
+c = new doodads.sheepFarm.flower(-1425,-6142,2);
+if(c!=null) c.setPassable(true);
+c = tree.createTree(-1026,-6129,2);
+if(c!=null) c.setPassable(false);
+c = new doodads.sheepFarm.flower(-1167,-6126,2);
+if(c!=null) c.setPassable(true);
+}
+
+public void addSegment194() {
+c = new doodads.sheepFarm.flower(-1058,-6121,2);
+if(c!=null) c.setPassable(true);
+c = new doodads.sheepFarm.bush(-1003,-6116,2);
+if(c!=null) c.setPassable(false);
+c = new doodads.sheepFarm.bush(-2601,-6105,1);
+if(c!=null) c.setPassable(false);
+u = new units.unitTypes.sheepFarm.redWolf(-2176,-6117);
 u.setMoveSpeed((float)3.5);
 u.jumpSpeed = (float)8.0;
 commands = new commandList();
-commands.add(new units.unitCommands.commands.slashCommand(-2919.0,-6091.0));
-commands.add(new units.unitCommands.commands.slashCommand(-3074.0,-6091.0));
+commands.add(new units.unitCommands.commands.slashCommand(-2030.0,-6117.0));
+commands.add(new units.unitCommands.commands.slashCommand(-2176.0,-6117.0));
 u.setRepeatCommands(commands);
+c = tree.createTree(-3278,-6091,0);
+if(c!=null) c.setPassable(false);
+c = tree.createTree(-2576,-6088,1);
+if(c!=null) c.setPassable(false);
+u = new units.unitTypes.sheepFarm.redWolf(-2465,-6102);
+u.setMoveSpeed((float)3.5);
+u.jumpSpeed = (float)8.0;
+commands = new commandList();
+commands.add(new units.unitCommands.commands.slashCommand(-2319.0,-6102.0));
+commands.add(new units.unitCommands.commands.slashCommand(-2465.0,-6102.0));
+u.setRepeatCommands(commands);
+c = new doodads.sheepFarm.bone(-2557,-6073,0);
+if(c!=null) c.setPassable(true);
+u = new units.unitTypes.sheepFarm.yellowWolf(-3036,-6092);
+u.setMoveSpeed((float)1.5);
+u.jumpSpeed = (float)9.0;
+commands = new commandList();
+commands.add(new units.unitCommands.commands.moveCommand(-2958.0,-6092.0));
+commands.add(new units.unitCommands.commands.moveCommand(-3036.0,-6092.0));
+u.setRepeatCommands(commands);
+u = new units.unitTypes.sheepFarm.yellowWolf(-2422,-6157);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)9.0;
+commands = new commandList();
+commands.add(new units.unitCommands.commands.moveCommand(-2422.0,-5894.0));
+commands.add(new units.unitCommands.commands.moveCommand(-2358.0,-5894.0));
+commands.add(new units.unitCommands.commands.moveCommand(-2358.0,-6157.0));
+commands.add(new units.unitCommands.commands.moveCommand(-2422.0,-6157.0));
+u.setRepeatCommands(commands);
+c = new doodads.sheepFarm.flower(-3240,-6080,1);
+if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.log(-1860,-6075,0);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.log(-2585,-6074,0);
@@ -20220,7 +20504,7 @@ c = tree.createTree(-1886,-6063,0);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.flower(-1489,-6057,2);
 if(c!=null) c.setPassable(true);
-c = new doodads.sheepFarm.grave(-1222,-6039,1);
+c = new doodads.sheepFarm.grave(-1219,-6037,1);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.flower(-1098,-6020,2);
 if(c!=null) c.setPassable(true);
@@ -20234,6 +20518,8 @@ c = new doodads.sheepFarm.flower(-1241,-5990,2);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-1202,-5990,0);
 if(c!=null) c.setPassable(true);
+c = new doodads.sheepFarm.flower(-3868,-5989,10);
+if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-1215,-5987,5);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-1228,-5986,10);
@@ -20242,6 +20528,8 @@ c = new doodads.sheepFarm.flower(-1191,-5985,0);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-1241,-5984,0);
 if(c!=null) c.setPassable(true);
+c = tree.createTree(-3852,-5979,1);
+if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.flower(-1207,-5977,8);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-1197,-5976,6);
@@ -20256,12 +20544,23 @@ c = new doodads.sheepFarm.flower(-1194,-5962,1);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-1227,-5961,8);
 if(c!=null) c.setPassable(true);
+c = new doodads.sheepFarm.flower(-3432,-5961,10);
+if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-1207,-5958,6);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-1217,-5956,5);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-1239,-5955,1);
 if(c!=null) c.setPassable(true);
+u = new units.unitTypes.sheepFarm.yellowWolf(-2358,-5894);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)9.0;
+commands = new commandList();
+commands.add(new units.unitCommands.commands.moveCommand(-2358.0,-6157.0));
+commands.add(new units.unitCommands.commands.moveCommand(-2422.0,-6157.0));
+commands.add(new units.unitCommands.commands.moveCommand(-2422.0,-5894.0));
+commands.add(new units.unitCommands.commands.moveCommand(-2358.0,-5894.0));
+u.setRepeatCommands(commands);
 c = new doodads.sheepFarm.flower(-1194,-5951,9);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-1207,-5949,10);
@@ -20273,32 +20572,38 @@ commands = new commandList();
 commands.add(new units.unitCommands.commands.slashCommand(-2176.0,-5959.0));
 commands.add(new units.unitCommands.commands.slashCommand(-2030.0,-5959.0));
 u.setRepeatCommands(commands);
+c = tree.createTree(-4108,-5942,1);
+if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.flower(-1219,-5940,3);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-1202,-5940,1);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-1244,-5940,4);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment192() {
 c = new doodads.sheepFarm.flower(-1237,-5939,3);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-1193,-5939,5);
+if(c!=null) c.setPassable(true);
+}
+
+public void addSegment195() {
+c = new doodads.sheepFarm.flower(-4125,-5938,10);
+if(c!=null) c.setPassable(true);
+u = new units.unitTypes.sheepFarm.redWolf(-2319,-5944);
+u.setMoveSpeed((float)3.5);
+u.jumpSpeed = (float)8.0;
+commands = new commandList();
+commands.add(new units.unitCommands.commands.slashCommand(-2465.0,-5944.0));
+commands.add(new units.unitCommands.commands.slashCommand(-2319.0,-5944.0));
+u.setRepeatCommands(commands);
+c = tree.createTree(-3604,-5920,0);
+if(c!=null) c.setPassable(false);
+c = new doodads.sheepFarm.flower(-3639,-5922,10);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-1084,-5888,2);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-1319,-5887,2);
 if(c!=null) c.setPassable(true);
-u = new units.unitTypes.sheepFarm.yellowWolf(-2422,-6157);
-u.setMoveSpeed((float)3.0);
-u.jumpSpeed = (float)9.0;
-commands = new commandList();
-commands.add(new units.unitCommands.commands.moveCommand(-2422.0,-5894.0));
-commands.add(new units.unitCommands.commands.moveCommand(-2358.0,-5894.0));
-commands.add(new units.unitCommands.commands.moveCommand(-2358.0,-6157.0));
-commands.add(new units.unitCommands.commands.moveCommand(-2422.0,-6157.0));
-u.setRepeatCommands(commands);
 c = tree.createTree(-1486,-5873,0);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.bush(-2582,-5874,2);
@@ -20387,11 +20692,11 @@ c = new doodads.sheepFarm.fencePost(-4177,-5858,0);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.fenceBars(-4172,-5858,0);
 if(c!=null) c.setPassable(false);
-c = new doodads.sheepFarm.fencePost(-4149,-5858,0);
-if(c!=null) c.setPassable(false);
 }
 
-public void addSegment193() {
+public void addSegment196() {
+c = new doodads.sheepFarm.fencePost(-4149,-5858,0);
+if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.fenceBars(-4144,-5858,0);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.fencePost(-4121,-5858,0);
@@ -20486,19 +20791,21 @@ c = tree.createTree(-3160,-5858,0);
 if(c!=null) c.setPassable(false);
 c = tree.createTree(-2600,-5857,0);
 if(c!=null) c.setPassable(false);
+c = new doodads.sheepFarm.flower(-3182,-5855,3);
+if(c!=null) c.setPassable(true);
+c = new doodads.sheepFarm.flower(-962,-5854,2);
+if(c!=null) c.setPassable(true);
+}
+
+public void addSegment197() {
 c = new doodads.sheepFarm.bone(-3628,-5835,1);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.bush(-3145,-5845,1);
 if(c!=null) c.setPassable(false);
 c = tree.createTree(-930,-5835,1);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment194() {
 c = new doodads.sheepFarm.bush(-3673,-5835,1);
 if(c!=null) c.setPassable(false);
-c = new doodads.sheepFarm.flower(-958,-5836,2);
-if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.grave(-3779,-5824,2);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.grave(-3877,-5824,2);
@@ -20566,6 +20873,8 @@ c = tree.createTree(-3374,-5788,0);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.flower(-4588,-5791,2);
 if(c!=null) c.setPassable(true);
+c = new doodads.sheepFarm.flower(-4719,-5790,10);
+if(c!=null) c.setPassable(true);
 u = new units.unitTypes.sheepFarm.redWolf(-2176,-5801);
 u.setMoveSpeed((float)3.5);
 u.jumpSpeed = (float)8.0;
@@ -20573,6 +20882,8 @@ commands = new commandList();
 commands.add(new units.unitCommands.commands.slashCommand(-2030.0,-5801.0));
 commands.add(new units.unitCommands.commands.slashCommand(-2176.0,-5801.0));
 u.setRepeatCommands(commands);
+c = tree.createTree(-4758,-5784,1);
+if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.flower(-1436,-5787,2);
 if(c!=null) c.setPassable(true);
 c = tree.createTree(-3514,-5783,1);
@@ -20597,6 +20908,9 @@ c = new doodads.sheepFarm.rock(-2853,-5752,0);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.flower(-4571,-5746,5);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment198() {
 c = new doodads.sheepFarm.bush(-2925,-5743,1);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.statue(-3513,-5747,0);
@@ -20605,9 +20919,6 @@ c = new doodads.sheepFarm.statue(-3369,-5747,1);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.flower(-4454,-5743,7);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment195() {
 c = new doodads.sheepFarm.grave(-3823,-5732,2);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.flower(-4427,-5740,7);
@@ -20694,38 +21005,10 @@ c = new doodads.general.well(-4441,-5677,0);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.rock(-1952,-5680,0);
 if(c!=null) c.setPassable(false);
-u = new units.unitTypes.sheepFarm.yellowWolf(-2352,-5523);
-u.setMoveSpeed((float)1.8);
-u.jumpSpeed = (float)9.0;
-commands = new commandList();
-commands.add(new units.unitCommands.commands.moveCommand(-2352.0,-5773.0));
-commands.add(new units.unitCommands.commands.moveCommand(-2352.0,-5523.0));
-u.setRepeatCommands(commands);
-u = new units.unitTypes.sheepFarm.yellowWolf(-2432,-5523);
-u.setMoveSpeed((float)1.8);
-u.jumpSpeed = (float)9.0;
-commands = new commandList();
-commands.add(new units.unitCommands.commands.moveCommand(-2432.0,-5773.0));
-commands.add(new units.unitCommands.commands.moveCommand(-2432.0,-5523.0));
-u.setRepeatCommands(commands);
 c = new doodads.sheepFarm.flower(-4391,-5674,7);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-4288,-5670,3);
 if(c!=null) c.setPassable(true);
-u = new units.unitTypes.sheepFarm.redWolf(-2402,-5773);
-u.setMoveSpeed((float)2.0);
-u.jumpSpeed = (float)8.0;
-commands = new commandList();
-commands.add(new units.unitCommands.commands.slashCommand(-2402.0,-5523.0));
-commands.add(new units.unitCommands.commands.slashCommand(-2402.0,-5773.0));
-u.setRepeatCommands(commands);
-u = new units.unitTypes.sheepFarm.redWolf(-2382,-5773);
-u.setMoveSpeed((float)2.0);
-u.jumpSpeed = (float)8.0;
-commands = new commandList();
-commands.add(new units.unitCommands.commands.slashCommand(-2382.0,-5523.0));
-commands.add(new units.unitCommands.commands.slashCommand(-2382.0,-5773.0));
-u.setRepeatCommands(commands);
 u = new units.unitTypes.sheepFarm.redWolf(-2928,-5680);
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)8.0;
@@ -20735,7 +21018,7 @@ commands.add(new units.unitCommands.commands.slashCommand(-2928.0,-5680.0));
 u.setRepeatCommands(commands);
 }
 
-public void addSegment196() {
+public void addSegment199() {
 c = new doodads.sheepFarm.flower(-1291,-5667,2);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.grave(-3869,-5656,2);
@@ -20758,6 +21041,24 @@ c = new doodads.sheepFarm.grave(-4200,-5650,2);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.grave(-4088,-5650,2);
 if(c!=null) c.setPassable(false);
+u = new units.unitTypes.sheepFarm.yellowWolf(-3016,-5835);
+u.setMoveSpeed((float)3.3);
+u.jumpSpeed = (float)9.0;
+commands = new commandList();
+commands.add(new units.unitCommands.commands.moveCommand(-3020.0,-5523.0));
+commands.add(new units.unitCommands.commands.moveCommand(-2960.0,-5523.0));
+commands.add(new units.unitCommands.commands.moveCommand(-2960.0,-5835.0));
+commands.add(new units.unitCommands.commands.moveCommand(-3016.0,-5835.0));
+u.setRepeatCommands(commands);
+u = new units.unitTypes.sheepFarm.yellowWolf(-3033,-5835);
+u.setMoveSpeed((float)3.3);
+u.jumpSpeed = (float)9.0;
+commands = new commandList();
+commands.add(new units.unitCommands.commands.moveCommand(-3037.0,-5523.0));
+commands.add(new units.unitCommands.commands.moveCommand(-2977.0,-5523.0));
+commands.add(new units.unitCommands.commands.moveCommand(-2977.0,-5835.0));
+commands.add(new units.unitCommands.commands.moveCommand(-3033.0,-5835.0));
+u.setRepeatCommands(commands);
 c = tree.createTree(-3152,-5654,1);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.flower(-4579,-5657,0);
@@ -20832,13 +21133,13 @@ c = new doodads.sheepFarm.grave(-3643,-5597,1);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.grave(-3793,-5594,2);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment200() {
 c = new doodads.sheepFarm.bush(-2256,-5595,1);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.grave(-3976,-5575,2);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment197() {
 c = new doodads.sheepFarm.grave(-4032,-5575,2);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.grave(-3920,-5575,2);
@@ -20863,6 +21164,8 @@ c = new doodads.sheepFarm.grave(-3738,-5562,2);
 if(c!=null) c.setPassable(false);
 c = tree.createTree(-1475,-5564,0);
 if(c!=null) c.setPassable(false);
+c = new doodads.sheepFarm.flower(-3235,-5567,2);
+if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-952,-5561,2);
 if(c!=null) c.setPassable(true);
 c = tree.createTree(-1384,-5547,0);
@@ -20893,24 +21196,6 @@ c = new doodads.sheepFarm.flower(-4586,-5539,1);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-329,-5535,2);
 if(c!=null) c.setPassable(true);
-u = new units.unitTypes.sheepFarm.yellowWolf(-3016,-5835);
-u.setMoveSpeed((float)3.3);
-u.jumpSpeed = (float)9.0;
-commands = new commandList();
-commands.add(new units.unitCommands.commands.moveCommand(-3020.0,-5523.0));
-commands.add(new units.unitCommands.commands.moveCommand(-2960.0,-5523.0));
-commands.add(new units.unitCommands.commands.moveCommand(-2960.0,-5835.0));
-commands.add(new units.unitCommands.commands.moveCommand(-3016.0,-5835.0));
-u.setRepeatCommands(commands);
-u = new units.unitTypes.sheepFarm.yellowWolf(-3033,-5835);
-u.setMoveSpeed((float)3.3);
-u.jumpSpeed = (float)9.0;
-commands = new commandList();
-commands.add(new units.unitCommands.commands.moveCommand(-3037.0,-5523.0));
-commands.add(new units.unitCommands.commands.moveCommand(-2977.0,-5523.0));
-commands.add(new units.unitCommands.commands.moveCommand(-2977.0,-5835.0));
-commands.add(new units.unitCommands.commands.moveCommand(-3033.0,-5835.0));
-u.setRepeatCommands(commands);
 c = new doodads.sheepFarm.log(-2578,-5529,0);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.grave(-3694,-5520,0);
@@ -20931,6 +21216,34 @@ c = tree.createTree(-1275,-5518,2);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.bush(-2872,-5517,0);
 if(c!=null) c.setPassable(false);
+u = new units.unitTypes.sheepFarm.yellowWolf(-2352,-5523);
+u.setMoveSpeed((float)1.8);
+u.jumpSpeed = (float)9.0;
+commands = new commandList();
+commands.add(new units.unitCommands.commands.moveCommand(-2352.0,-5773.0));
+commands.add(new units.unitCommands.commands.moveCommand(-2352.0,-5523.0));
+u.setRepeatCommands(commands);
+u = new units.unitTypes.sheepFarm.yellowWolf(-2432,-5523);
+u.setMoveSpeed((float)1.8);
+u.jumpSpeed = (float)9.0;
+commands = new commandList();
+commands.add(new units.unitCommands.commands.moveCommand(-2432.0,-5773.0));
+commands.add(new units.unitCommands.commands.moveCommand(-2432.0,-5523.0));
+u.setRepeatCommands(commands);
+u = new units.unitTypes.sheepFarm.redWolf(-2402,-5773);
+u.setMoveSpeed((float)2.0);
+u.jumpSpeed = (float)8.0;
+commands = new commandList();
+commands.add(new units.unitCommands.commands.slashCommand(-2402.0,-5523.0));
+commands.add(new units.unitCommands.commands.slashCommand(-2402.0,-5773.0));
+u.setRepeatCommands(commands);
+u = new units.unitTypes.sheepFarm.redWolf(-2382,-5773);
+u.setMoveSpeed((float)2.0);
+u.jumpSpeed = (float)8.0;
+commands = new commandList();
+commands.add(new units.unitCommands.commands.slashCommand(-2382.0,-5523.0));
+commands.add(new units.unitCommands.commands.slashCommand(-2382.0,-5773.0));
+u.setRepeatCommands(commands);
 u = new units.unitTypes.sheepFarm.redWolf(-3074,-5522);
 u.setMoveSpeed((float)3.5);
 u.jumpSpeed = (float)8.0;
@@ -20948,6 +21261,9 @@ c = new doodads.sheepFarm.grave(-4144,-5500,2);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.grave(-4200,-5500,2);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment201() {
 c = new doodads.sheepFarm.grave(-4088,-5500,2);
 if(c!=null) c.setPassable(false);
 c = tree.createTree(-590,-5503,0);
@@ -20958,9 +21274,6 @@ c = new doodads.sheepFarm.flower(-3917,-5505,8);
 if(c!=null) c.setPassable(true);
 c = tree.createTree(-1244,-5498,1);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment198() {
 c = new doodads.sheepFarm.bush(-580,-5492,1);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.bush(-1294,-5490,1);
@@ -20980,10 +21293,14 @@ c = new doodads.sheepFarm.log(-1913,-5472,0);
 if(c!=null) c.setPassable(true);
 c = tree.createTree(-1177,-5470,2);
 if(c!=null) c.setPassable(false);
+c = tree.createTree(-4859,-5466,0);
+if(c!=null) c.setPassable(false);
 c = tree.createTree(-1609,-5465,0);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.verticalFence(-3309,-5510,1);
 if(c!=null) c.setPassable(false);
+c = new doodads.sheepFarm.flower(-4820,-5467,10);
+if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.verticalFence(-4625,-5509,1);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.bush(-1278,-5456,0);
@@ -21057,6 +21374,9 @@ c = new doodads.sheepFarm.fenceBars(-3696,-5424,0);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.fencePost(-3673,-5424,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment202() {
 c = new doodads.sheepFarm.fenceBars(-3668,-5424,0);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.fencePost(-3645,-5424,0);
@@ -21071,9 +21391,6 @@ c = new doodads.sheepFarm.fencePost(-3589,-5424,0);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.fenceBars(-3584,-5424,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment199() {
 c = new doodads.sheepFarm.fencePost(-3561,-5424,0);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.fenceBars(-3556,-5424,0);
@@ -21160,6 +21477,9 @@ c = new doodads.sheepFarm.fenceBars(-4508,-5424,0);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.fencePost(-4485,-5424,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment203() {
 c = new doodads.sheepFarm.fenceBars(-4480,-5424,0);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.fencePost(-4457,-5424,0);
@@ -21174,9 +21494,6 @@ c = new doodads.sheepFarm.fencePost(-4401,-5424,0);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.fenceBars(-4396,-5424,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment200() {
 c = new doodads.sheepFarm.fencePost(-4373,-5424,0);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.fenceBars(-4368,-5424,0);
@@ -21243,6 +21560,8 @@ c = tree.createTree(-1070,-5353,0);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.flower(-1121,-5352,2);
 if(c!=null) c.setPassable(true);
+c = tree.createTree(-3227,-5345,0);
+if(c!=null) c.setPassable(false);
 c = tree.createTree(-1668,-5340,1);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.bush(-344,-5336,0);
@@ -21263,12 +21582,17 @@ c = new doodads.sheepFarm.bush(-1648,-5316,1);
 if(c!=null) c.setPassable(false);
 c = tree.createTree(-1708,-5307,0);
 if(c!=null) c.setPassable(false);
+c = new doodads.sheepFarm.flower(-3982,-5303,10);
+if(c!=null) c.setPassable(true);
 c = tree.createTree(-1011,-5297,1);
 if(c!=null) c.setPassable(false);
 c = tree.createTree(-1614,-5297,2);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.bush(-1719,-5298,1);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment204() {
 c = new doodads.sheepFarm.flower(-425,-5299,2);
 if(c!=null) c.setPassable(true);
 c = tree.createTree(-955,-5295,2);
@@ -21287,9 +21611,6 @@ c = new doodads.sheepFarm.fenceBars(-605,-5274,0);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.fencePost(-1702,-5274,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment201() {
 c = new doodads.sheepFarm.fenceBars(-1697,-5274,0);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.fencePost(-1674,-5274,0);
@@ -21372,6 +21693,9 @@ c = new doodads.sheepFarm.fencePost(-1142,-5274,0);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.fenceBars(-1137,-5274,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment205() {
 c = new doodads.sheepFarm.fencePost(-1114,-5274,0);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.fenceBars(-1109,-5274,0);
@@ -21390,9 +21714,6 @@ c = new doodads.sheepFarm.fenceBars(-1025,-5274,0);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.fencePost(-1002,-5274,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment202() {
 c = new doodads.sheepFarm.fenceBars(-997,-5274,0);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.fencePost(-974,-5274,0);
@@ -21445,6 +21766,16 @@ c = new doodads.sheepFarm.fencePost(-638,-5274,0);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.fenceBars(-717,-5274,0);
 if(c!=null) c.setPassable(false);
+c = tree.createTree(-4491,-5272,1);
+if(c!=null) c.setPassable(false);
+c = new doodads.sheepFarm.flower(-4528,-5267,2);
+if(c!=null) c.setPassable(true);
+c = new doodads.sheepFarm.flower(-4168,-5263,2);
+if(c!=null) c.setPassable(true);
+c = new doodads.sheepFarm.flower(-3358,-5262,2);
+if(c!=null) c.setPassable(true);
+c = tree.createTree(-4055,-5256,0);
+if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.flower(-1695,-5258,7);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-1677,-5258,7);
@@ -21465,6 +21796,9 @@ c = new doodads.sheepFarm.flower(-1550,-5258,1);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-1532,-5258,1);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment206() {
 c = new doodads.sheepFarm.flower(-1514,-5258,1);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-1496,-5258,1);
@@ -21493,9 +21827,6 @@ c = new doodads.sheepFarm.flower(-1277,-5258,8);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-1259,-5258,8);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment203() {
 c = new doodads.sheepFarm.flower(-1241,-5258,8);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-1223,-5258,8);
@@ -21568,7 +21899,12 @@ c = new doodads.sheepFarm.flower(-616,-5258,10);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-598,-5258,10);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment207() {
 c = new doodads.sheepFarm.flower(-580,-5258,10);
+if(c!=null) c.setPassable(true);
+c = new doodads.sheepFarm.flower(-4480,-5244,10);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-1695,-5240,7);
 if(c!=null) c.setPassable(true);
@@ -21596,9 +21932,6 @@ c = new doodads.sheepFarm.flower(-1496,-5240,1);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-1478,-5240,1);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment204() {
 c = new doodads.sheepFarm.flower(-1460,-5240,1);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-1442,-5240,1);
@@ -21669,6 +22002,9 @@ c = new doodads.sheepFarm.flower(-832,-5240,10);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-814,-5240,10);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment208() {
 c = new doodads.sheepFarm.flower(-796,-5240,10);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-778,-5240,10);
@@ -21697,13 +22033,14 @@ c = new doodads.sheepFarm.flower(-580,-5240,10);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.verticalFence(-946,-5274,0);
 if(c!=null) c.setPassable(false);
+c = new doodads.sheepFarm.flower(-3586,-5230,2);
+if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.verticalFence(-554,-5272,1);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment205() {
 c = new doodads.sheepFarm.verticalFence(-1702,-5271,0);
 if(c!=null) c.setPassable(false);
+c = new doodads.sheepFarm.flower(-3730,-5226,2);
+if(c!=null) c.setPassable(true);
 c = tree.createTree(-2401,-5222,1);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.flower(-1695,-5222,7);
@@ -21768,6 +22105,9 @@ c = new doodads.sheepFarm.flower(-1151,-5222,8);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-1133,-5222,8);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment209() {
 c = new doodads.sheepFarm.flower(-1115,-5222,8);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-1097,-5222,8);
@@ -21802,9 +22142,6 @@ c = new doodads.sheepFarm.flower(-832,-5222,10);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-814,-5222,10);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment206() {
 c = new doodads.sheepFarm.flower(-796,-5222,10);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-778,-5222,10);
@@ -21830,6 +22167,12 @@ if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-598,-5222,10);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-580,-5222,10);
+if(c!=null) c.setPassable(true);
+c = tree.createTree(-3392,-5217,1);
+if(c!=null) c.setPassable(false);
+c = tree.createTree(-3667,-5213,0);
+if(c!=null) c.setPassable(false);
+c = new doodads.sheepFarm.flower(-3425,-5213,10);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-1295,-5208,1);
 if(c!=null) c.setPassable(true);
@@ -21865,6 +22208,9 @@ c = new doodads.sheepFarm.flower(-1025,-5208,1);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-1007,-5208,1);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment210() {
 c = new doodads.sheepFarm.flower(-989,-5208,1);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-971,-5208,1);
@@ -21905,9 +22251,6 @@ c = new doodads.sheepFarm.flower(-1406,-5204,1);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-1388,-5204,1);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment207() {
 c = new doodads.sheepFarm.flower(-1370,-5204,1);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-1352,-5204,1);
@@ -21956,6 +22299,10 @@ c = new doodads.sheepFarm.flower(-598,-5204,10);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-580,-5204,10);
 if(c!=null) c.setPassable(true);
+c = new doodads.sheepFarm.flower(-3787,-5198,10);
+if(c!=null) c.setPassable(true);
+c = new doodads.sheepFarm.flower(-4141,-5197,2);
+if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-1295,-5190,1);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-1277,-5190,1);
@@ -21964,6 +22311,9 @@ c = new doodads.sheepFarm.flower(-1259,-5190,1);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-1241,-5190,1);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment211() {
 c = new doodads.sheepFarm.flower(-1223,-5190,1);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-1205,-5190,1);
@@ -22008,9 +22358,6 @@ c = new doodads.sheepFarm.flower(-1605,-5186,7);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-1586,-5186,1);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment208() {
 c = new doodads.sheepFarm.flower(-1568,-5186,1);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-1550,-5186,1);
@@ -22067,6 +22414,9 @@ c = new doodads.sheepFarm.flower(-724,-5186,10);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-706,-5186,10);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment212() {
 c = new doodads.sheepFarm.flower(-688,-5186,10);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-670,-5186,10);
@@ -22080,6 +22430,8 @@ if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-598,-5186,10);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-580,-5186,10);
+if(c!=null) c.setPassable(true);
+c = new doodads.sheepFarm.flower(-4040,-5176,10);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-1295,-5172,1);
 if(c!=null) c.setPassable(true);
@@ -22111,9 +22463,6 @@ c = new doodads.sheepFarm.flower(-1061,-5172,1);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-1043,-5172,1);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment209() {
 c = new doodads.sheepFarm.flower(-1025,-5172,1);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-1007,-5172,1);
@@ -22168,6 +22517,9 @@ c = new doodads.sheepFarm.flower(-1352,-5168,1);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-1335,-5168,1);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment213() {
 c = new doodads.sheepFarm.flower(-940,-5168,10);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-922,-5168,10);
@@ -22214,9 +22566,6 @@ c = new doodads.sheepFarm.verticalFence(-1702,-5211,0);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.flower(-1295,-5158,7);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment210() {
 c = new doodads.sheepFarm.flower(-1277,-5158,7);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-1259,-5158,7);
@@ -22253,6 +22602,8 @@ c = new doodads.sheepFarm.flower(-989,-5158,7);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-971,-5158,7);
 if(c!=null) c.setPassable(true);
+c = new doodads.sheepFarm.flower(-3610,-5154,10);
+if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-1695,-5150,7);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-1677,-5150,7);
@@ -22269,6 +22620,9 @@ c = new doodads.sheepFarm.flower(-1586,-5150,1);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-1568,-5150,1);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment214() {
 c = new doodads.sheepFarm.flower(-1550,-5150,1);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-1532,-5150,1);
@@ -22317,9 +22671,6 @@ c = new doodads.sheepFarm.flower(-778,-5150,10);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-760,-5150,10);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment211() {
 c = new doodads.sheepFarm.flower(-742,-5150,10);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-724,-5150,10);
@@ -22372,6 +22723,9 @@ c = new doodads.sheepFarm.flower(-1061,-5140,7);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-1043,-5140,7);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment215() {
 c = new doodads.sheepFarm.flower(-1025,-5140,7);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-1007,-5140,7);
@@ -22420,9 +22774,6 @@ c = new doodads.sheepFarm.flower(-1388,-5132,1);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-1370,-5132,1);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment212() {
 c = new doodads.sheepFarm.flower(-1352,-5132,1);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-1334,-5132,1);
@@ -22475,6 +22826,9 @@ c = new doodads.sheepFarm.flower(-1295,-5122,7);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-1277,-5122,7);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment216() {
 c = new doodads.sheepFarm.flower(-1259,-5122,7);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-1241,-5122,7);
@@ -22523,9 +22877,6 @@ c = new doodads.sheepFarm.flower(-1641,-5114,7);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-1623,-5114,7);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment213() {
 c = new doodads.sheepFarm.flower(-1605,-5114,7);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-1586,-5114,1);
@@ -22578,6 +22929,9 @@ c = new doodads.sheepFarm.flower(-796,-5114,10);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-778,-5114,10);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment217() {
 c = new doodads.sheepFarm.flower(-760,-5114,10);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-742,-5114,10);
@@ -22626,9 +22980,6 @@ c = new doodads.sheepFarm.flower(-1151,-5108,6);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-1133,-5108,6);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment214() {
 c = new doodads.sheepFarm.flower(-1115,-5108,6);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-1097,-5108,6);
@@ -22681,6 +23032,9 @@ c = new doodads.sheepFarm.flower(-1496,-5096,1);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-1478,-5096,1);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment218() {
 c = new doodads.sheepFarm.flower(-1460,-5096,1);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-1442,-5096,1);
@@ -22729,9 +23083,6 @@ c = new doodads.sheepFarm.flower(-670,-5096,10);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-652,-5096,10);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment215() {
 c = new doodads.sheepFarm.flower(-634,-5096,10);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-616,-5096,10);
@@ -22784,6 +23135,9 @@ c = new doodads.sheepFarm.fenceBars(-4197,-5080,0);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.fencePost(-4174,-5080,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment219() {
 c = new doodads.sheepFarm.fenceBars(-4169,-5080,0);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.fencePost(-4146,-5080,0);
@@ -22832,9 +23186,6 @@ c = new doodads.sheepFarm.flower(-1025,-5090,6);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-1007,-5090,6);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment216() {
 c = new doodads.sheepFarm.flower(-989,-5090,6);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-971,-5090,6);
@@ -22887,6 +23238,9 @@ c = new doodads.sheepFarm.flower(-1352,-5078,1);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-1334,-5078,1);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment220() {
 c = new doodads.sheepFarm.flower(-940,-5078,10);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-922,-5078,10);
@@ -22935,9 +23289,6 @@ c = new doodads.sheepFarm.flower(-1223,-5072,6);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-1205,-5072,6);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment217() {
 c = new doodads.sheepFarm.flower(-1187,-5072,6);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-1169,-5072,6);
@@ -22990,6 +23341,9 @@ c = new doodads.sheepFarm.flower(-1568,-5060,1);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-1550,-5060,1);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment221() {
 c = new doodads.sheepFarm.flower(-1532,-5060,1);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-1514,-5060,1);
@@ -23038,9 +23392,6 @@ c = new doodads.sheepFarm.flower(-688,-5060,10);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-670,-5060,10);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment218() {
 c = new doodads.sheepFarm.flower(-652,-5060,10);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-634,-5060,10);
@@ -23093,6 +23444,9 @@ c = new doodads.sheepFarm.flower(-971,-5058,3);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.verticalFence(-554,-5098,1);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment222() {
 c = new doodads.sheepFarm.verticalFence(-946,-5094,0);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.verticalFence(-1702,-5091,0);
@@ -23141,9 +23495,6 @@ c = new doodads.sheepFarm.flower(-1605,-5042,7);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-940,-5042,10);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment219() {
 c = new doodads.sheepFarm.flower(-922,-5042,10);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-904,-5042,10);
@@ -23196,6 +23547,9 @@ c = new doodads.sheepFarm.flower(-1223,-5040,3);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-1205,-5040,3);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment223() {
 c = new doodads.sheepFarm.flower(-1187,-5040,3);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-1169,-5040,3);
@@ -23244,9 +23598,6 @@ c = new doodads.sheepFarm.flower(-1478,-5028,5);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-1460,-5028,5);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment220() {
 c = new doodads.sheepFarm.flower(-1442,-5028,5);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-1425,-5028,6);
@@ -23299,6 +23650,9 @@ c = new doodads.sheepFarm.flower(-742,-5024,10);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-724,-5024,10);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment224() {
 c = new doodads.sheepFarm.flower(-706,-5024,10);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-688,-5024,10);
@@ -23347,9 +23701,6 @@ c = new doodads.sheepFarm.flower(-1043,-5022,3);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-1025,-5022,3);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment221() {
 c = new doodads.sheepFarm.flower(-1007,-5022,3);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-989,-5022,3);
@@ -23402,6 +23753,9 @@ c = new doodads.sheepFarm.flower(-1187,-5008,9);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-1169,-5008,9);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment225() {
 c = new doodads.sheepFarm.flower(-1151,-5008,9);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-1133,-5008,9);
@@ -23450,9 +23804,6 @@ c = new doodads.sheepFarm.flower(-850,-5006,10);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-832,-5006,10);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment222() {
 c = new doodads.sheepFarm.flower(-814,-5006,10);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-796,-5006,10);
@@ -23505,6 +23856,9 @@ c = new doodads.sheepFarm.flower(-1442,-4992,5);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-1425,-4992,6);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment226() {
 c = new doodads.sheepFarm.flower(-1407,-4992,6);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-1389,-4992,6);
@@ -23553,9 +23907,6 @@ c = new doodads.sheepFarm.flower(-1007,-4990,9);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-989,-4990,9);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment223() {
 c = new doodads.sheepFarm.flower(-971,-4990,9);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-1624,-4988,7);
@@ -23608,6 +23959,9 @@ c = new doodads.sheepFarm.flower(-634,-4988,10);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-616,-4988,10);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment227() {
 c = new doodads.sheepFarm.flower(-598,-4988,10);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-580,-4988,10);
@@ -23656,9 +24010,6 @@ c = new doodads.sheepFarm.flower(-1259,-4972,9);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-1241,-4972,9);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment224() {
 c = new doodads.sheepFarm.flower(-1223,-4972,9);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-1205,-4972,9);
@@ -23711,6 +24062,9 @@ c = new doodads.sheepFarm.flower(-886,-4970,10);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-868,-4970,10);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment228() {
 c = new doodads.sheepFarm.flower(-850,-4970,10);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-832,-4970,10);
@@ -23759,9 +24113,6 @@ c = new doodads.sheepFarm.flower(-1187,-4958,5);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-1169,-4958,5);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment225() {
 c = new doodads.sheepFarm.flower(-1151,-4958,5);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-1133,-4958,5);
@@ -23814,6 +24165,9 @@ c = new doodads.sheepFarm.flower(-1353,-4956,6);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-1335,-4956,6);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment229() {
 c = new doodads.sheepFarm.flower(-1695,-4952,7);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-1677,-4952,7);
@@ -23862,9 +24216,6 @@ c = new doodads.sheepFarm.flower(-652,-4952,10);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-634,-4952,10);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment226() {
 c = new doodads.sheepFarm.flower(-616,-4952,10);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-598,-4952,10);
@@ -23917,6 +24268,9 @@ c = new doodads.sheepFarm.flower(-1695,-4938,3);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-1677,-4938,3);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment230() {
 c = new doodads.sheepFarm.flower(-1659,-4938,3);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-1641,-4938,3);
@@ -23965,9 +24319,6 @@ c = new doodads.sheepFarm.flower(-886,-4934,10);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-868,-4934,10);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment227() {
 c = new doodads.sheepFarm.flower(-850,-4934,10);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-832,-4934,10);
@@ -24020,6 +24371,9 @@ c = new doodads.sheepFarm.flower(-1169,-4922,5);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-1151,-4922,5);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment231() {
 c = new doodads.sheepFarm.flower(-1133,-4922,5);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-1115,-4922,5);
@@ -24068,9 +24422,6 @@ c = new doodads.sheepFarm.flower(-1478,-4920,5);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-1460,-4920,5);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment228() {
 c = new doodads.sheepFarm.flower(-1442,-4920,5);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-1425,-4920,6);
@@ -24123,6 +24474,9 @@ c = new doodads.sheepFarm.flower(-670,-4916,10);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-652,-4916,10);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment232() {
 c = new doodads.sheepFarm.flower(-634,-4916,10);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-616,-4916,10);
@@ -24171,9 +24525,6 @@ c = new doodads.sheepFarm.flower(-971,-4908,8);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-1695,-4902,3);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment229() {
 c = new doodads.sheepFarm.flower(-1677,-4902,3);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-1659,-4902,3);
@@ -24226,6 +24577,9 @@ c = new doodads.sheepFarm.flower(-868,-4898,10);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-850,-4898,10);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment233() {
 c = new doodads.sheepFarm.flower(-832,-4898,10);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-814,-4898,10);
@@ -24274,9 +24628,6 @@ c = new doodads.sheepFarm.flower(-1169,-4890,8);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-1151,-4890,8);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment230() {
 c = new doodads.sheepFarm.flower(-1133,-4890,8);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-1115,-4890,8);
@@ -24329,6 +24680,9 @@ c = new doodads.sheepFarm.flower(-1460,-4884,5);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-1442,-4884,5);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment234() {
 c = new doodads.sheepFarm.flower(-1425,-4884,6);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-1407,-4884,6);
@@ -24377,9 +24731,6 @@ c = new doodads.sheepFarm.flower(-670,-4880,10);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-652,-4880,10);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment231() {
 c = new doodads.sheepFarm.flower(-634,-4880,10);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-616,-4880,10);
@@ -24432,6 +24783,9 @@ c = new doodads.sheepFarm.flower(-1677,-4866,3);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-1659,-4866,3);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment235() {
 c = new doodads.sheepFarm.flower(-1641,-4866,3);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-1623,-4866,3);
@@ -24480,9 +24834,6 @@ c = new doodads.sheepFarm.flower(-868,-4862,10);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-850,-4862,10);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment232() {
 c = new doodads.sheepFarm.flower(-832,-4862,10);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-814,-4862,10);
@@ -24535,6 +24886,9 @@ c = new doodads.sheepFarm.flower(-1169,-4858,1);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-1151,-4858,1);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment236() {
 c = new doodads.sheepFarm.flower(-1133,-4858,1);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-1115,-4858,1);
@@ -24555,8 +24909,6 @@ c = new doodads.sheepFarm.flower(-989,-4858,1);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-971,-4858,1);
 if(c!=null) c.setPassable(true);
-c = tree.createTree(-354,-4853,1);
-if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.verticalFence(-554,-4896,1);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.flower(-1695,-4848,3);
@@ -24583,9 +24935,6 @@ c = new doodads.sheepFarm.flower(-1514,-4848,5);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-1496,-4848,5);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment233() {
 c = new doodads.sheepFarm.flower(-1478,-4848,5);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-1460,-4848,5);
@@ -24640,13 +24989,14 @@ c = new doodads.sheepFarm.flower(-652,-4844,10);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-634,-4844,10);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment237() {
 c = new doodads.sheepFarm.flower(-616,-4844,10);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-598,-4844,10);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-580,-4844,10);
-if(c!=null) c.setPassable(true);
-c = new doodads.sheepFarm.flower(-372,-4843,6);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-1295,-4840,1);
 if(c!=null) c.setPassable(true);
@@ -24686,9 +25036,6 @@ c = new doodads.sheepFarm.flower(-989,-4840,1);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-971,-4840,1);
 if(c!=null) c.setPassable(true);
-}
-
-public void addSegment234() {
 c = new doodads.sheepFarm.verticalFence(-1310,-4874,1);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.flower(-1695,-4830,3);
@@ -24745,6 +25092,9 @@ c = new doodads.sheepFarm.fencePost(-1646,-4818,0);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.fenceBars(-1641,-4818,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment238() {
 c = new doodads.sheepFarm.fencePost(-1618,-4818,0);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.fenceBars(-1613,-4818,0);
@@ -24789,9 +25139,6 @@ c = new doodads.sheepFarm.fencePost(-1338,-4818,0);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.fenceBars(-1333,-4818,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment235() {
 c = new doodads.sheepFarm.fencePost(-1310,-4818,0);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.fenceBars(-1305,-4818,0);
@@ -24848,6 +25195,9 @@ c = new doodads.sheepFarm.fencePost(-946,-4818,0);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.fenceBars(-941,-4818,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment239() {
 c = new doodads.sheepFarm.fencePost(-918,-4818,0);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.fenceBars(-913,-4818,0);
@@ -24892,20 +25242,21 @@ c = new doodads.sheepFarm.verticalFence(-4006,-4847,1);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.verticalFence(-4398,-4847,1);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment236() {
+c = tree.createTree(-325,-4792,1);
+if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.log(-2339,-4792,0);
 if(c!=null) c.setPassable(true);
 c = tree.createTree(-2396,-4789,2);
 if(c!=null) c.setPassable(false);
+c = new doodads.sheepFarm.flower(-343,-4782,6);
+if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.verticalFence(-4006,-4789,1);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.verticalFence(-4398,-4789,1);
 if(c!=null) c.setPassable(false);
 c = tree.createTree(-1529,-4697,1);
 if(c!=null) c.setPassable(false);
-c = tree.createTree(-1157,-4690,1);
+c = tree.createTree(-946,-4686,1);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.verticalFence(-4398,-4731,1);
 if(c!=null) c.setPassable(false);
@@ -24947,6 +25298,9 @@ c = new doodads.sheepFarm.fencePost(-4202,-4646,0);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.fenceBars(-4197,-4646,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment240() {
 c = new doodads.sheepFarm.fencePost(-4174,-4646,0);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.fenceBars(-4169,-4646,0);
@@ -24977,16 +25331,18 @@ c = new doodads.sheepFarm.fencePost(-4398,-4646,0);
 if(c!=null) c.setPassable(false);
 c = tree.createTree(-1929,-4650,1);
 if(c!=null) c.setPassable(false);
+c = tree.createTree(-1222,-4622,1);
+if(c!=null) c.setPassable(false);
 c = tree.createTree(-1719,-4606,2);
 if(c!=null) c.setPassable(false);
-u = new units.unitTypes.sheepFarm.yellowWolf(-369,-4449);
+u = new units.unitTypes.sheepFarm.yellowWolf(-369,-4610);
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)9.0;
 commands = new commandList();
-commands.add(new units.unitCommands.commands.moveCommand(-369.0,-4610.0));
-commands.add(new units.unitCommands.commands.moveCommand(-205.0,-4610.0));
-commands.add(new units.unitCommands.commands.moveCommand(-205.0,-4449.0));
 commands.add(new units.unitCommands.commands.moveCommand(-369.0,-4449.0));
+commands.add(new units.unitCommands.commands.moveCommand(-205.0,-4449.0));
+commands.add(new units.unitCommands.commands.moveCommand(-205.0,-4610.0));
+commands.add(new units.unitCommands.commands.moveCommand(-369.0,-4610.0));
 u.setRepeatCommands(commands);
 c = tree.createTree(-2263,-4596,0);
 if(c!=null) c.setPassable(false);
@@ -24997,8 +25353,35 @@ commands = new commandList();
 commands.add(new units.unitCommands.commands.moveCommand(-370.0,-4608.0));
 commands.add(new units.unitCommands.commands.moveCommand(-692.0,-4608.0));
 u.setRepeatCommands(commands);
-c = new doodads.sheepFarm.flower(-683,-4555,3);
+c = new doodads.sheepFarm.flower(-832,-4588,3);
 if(c!=null) c.setPassable(true);
+c = tree.createTree(77,-4528,0);
+if(c!=null) c.setPassable(false);
+c = new doodads.sheepFarm.flower(60,-4514,3);
+if(c!=null) c.setPassable(true);
+c = new doodads.sheepFarm.grave(156,-4495,0);
+if(c!=null) c.setPassable(false);
+c = tree.createTree(-333,-4493,1);
+if(c!=null) c.setPassable(false);
+c = tree.createTree(-1409,-4491,0);
+if(c!=null) c.setPassable(false);
+c = new doodads.sheepFarm.rock(152,-4496,0);
+if(c!=null) c.setPassable(false);
+c = new doodads.sheepFarm.bush(-571,-4484,0);
+if(c!=null) c.setPassable(false);
+c = new doodads.sheepFarm.flower(-521,-4485,8);
+if(c!=null) c.setPassable(true);
+c = new doodads.sheepFarm.flower(-310,-4479,9);
+if(c!=null) c.setPassable(true);
+u = new units.unitTypes.sheepFarm.yellowWolf(-369,-4449);
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)9.0;
+commands = new commandList();
+commands.add(new units.unitCommands.commands.moveCommand(-369.0,-4610.0));
+commands.add(new units.unitCommands.commands.moveCommand(-205.0,-4610.0));
+commands.add(new units.unitCommands.commands.moveCommand(-205.0,-4449.0));
+commands.add(new units.unitCommands.commands.moveCommand(-369.0,-4449.0));
+u.setRepeatCommands(commands);
 u = new units.unitTypes.sheepFarm.redWolf(-256,-4648);
 u.setMoveSpeed((float)1.5);
 u.jumpSpeed = (float)8.0;
@@ -25013,30 +25396,6 @@ commands = new commandList();
 commands.add(new units.unitCommands.commands.slashCommand(-325.0,-4405.0));
 commands.add(new units.unitCommands.commands.slashCommand(-325.0,-4648.0));
 u.setRepeatCommands(commands);
-c = tree.createTree(-1328,-4518,1);
-if(c!=null) c.setPassable(false);
-c = tree.createTree(-333,-4493,1);
-if(c!=null) c.setPassable(false);
-}
-
-public void addSegment237() {
-c = new doodads.sheepFarm.bush(-1107,-4483,0);
-if(c!=null) c.setPassable(false);
-c = new doodads.sheepFarm.flower(-1057,-4484,8);
-if(c!=null) c.setPassable(true);
-c = new doodads.sheepFarm.flower(-310,-4479,9);
-if(c!=null) c.setPassable(true);
-c = tree.createTree(-1467,-4463,0);
-if(c!=null) c.setPassable(false);
-u = new units.unitTypes.sheepFarm.yellowWolf(-369,-4610);
-u.setMoveSpeed((float)3.0);
-u.jumpSpeed = (float)9.0;
-commands = new commandList();
-commands.add(new units.unitCommands.commands.moveCommand(-369.0,-4449.0));
-commands.add(new units.unitCommands.commands.moveCommand(-205.0,-4449.0));
-commands.add(new units.unitCommands.commands.moveCommand(-205.0,-4610.0));
-commands.add(new units.unitCommands.commands.moveCommand(-369.0,-4610.0));
-u.setRepeatCommands(commands);
 u = new units.unitTypes.sheepFarm.yellowWolf(-692,-4352);
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)9.0;
@@ -25044,191 +25403,150 @@ commands = new commandList();
 commands.add(new units.unitCommands.commands.moveCommand(-370.0,-4352.0));
 commands.add(new units.unitCommands.commands.moveCommand(-692.0,-4352.0));
 u.setRepeatCommands(commands);
+c = new doodads.sheepFarm.flower(-902,-4332,5);
+if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-528,-4260,0);
 if(c!=null) c.setPassable(true);
-c = new doodads.sheepFarm.flower(-1007,-4258,5);
-if(c!=null) c.setPassable(true);
-u = new units.unitTypes.sheepFarm.redWolf(-577,-4229);
-u.setMoveSpeed((float)3.5);
+u = new units.unitTypes.sheepFarm.redWolf(-727,-4272);
+u.setMoveSpeed((float)2.0);
 u.jumpSpeed = (float)8.0;
 commands = new commandList();
-commands.add(new units.unitCommands.commands.slashCommand(-773.0,-4229.0));
-commands.add(new units.unitCommands.commands.slashCommand(-577.0,-4229.0));
+commands.add(new units.unitCommands.commands.slashCommand(-727.0,-4079.0));
+commands.add(new units.unitCommands.commands.slashCommand(-727.0,-4272.0));
 u.setRepeatCommands(commands);
-u = new units.unitTypes.sheepFarm.yellowWolf(-721,-4226);
+u = new units.unitTypes.sheepFarm.redWolf(-620,-4272);
+u.setMoveSpeed((float)2.0);
+u.jumpSpeed = (float)8.0;
+commands = new commandList();
+commands.add(new units.unitCommands.commands.slashCommand(-620.0,-4079.0));
+commands.add(new units.unitCommands.commands.slashCommand(-620.0,-4272.0));
+u.setRepeatCommands(commands);
+u = new units.unitTypes.sheepFarm.yellowWolf(-689,-4272);
+u.setMoveSpeed((float)1.75);
+u.jumpSpeed = (float)9.0;
+commands = new commandList();
+commands.add(new units.unitCommands.commands.moveCommand(-689.0,-4079.0));
+commands.add(new units.unitCommands.commands.moveCommand(-689.0,-4272.0));
+u.setRepeatCommands(commands);
+c = new doodads.sheepFarm.flower(-928,-4168,6);
+if(c!=null) c.setPassable(true);
+c = new doodads.sheepFarm.flower(-658,-4166,3);
+if(c!=null) c.setPassable(true);
+c = tree.createTree(-304,-4157,0);
+if(c!=null) c.setPassable(false);
+u = new units.unitTypes.sheepFarm.yellowWolf(-654,-4079);
+u.setMoveSpeed((float)1.75);
+u.jumpSpeed = (float)9.0;
+commands = new commandList();
+commands.add(new units.unitCommands.commands.moveCommand(-654.0,-4272.0));
+commands.add(new units.unitCommands.commands.moveCommand(-654.0,-4079.0));
+u.setRepeatCommands(commands);
+c = new doodads.sheepFarm.flower(-329,-4158,1);
+if(c!=null) c.setPassable(true);
+c = new doodads.sheepFarm.bush(-294,-4154,0);
+if(c!=null) c.setPassable(false);
+c = new doodads.sheepFarm.bush(-543,-4153,1);
+if(c!=null) c.setPassable(false);
+c = tree.createTree(-952,-4146,1);
+if(c!=null) c.setPassable(false);
+c = new doodads.sheepFarm.bush(-945,-4137,2);
+if(c!=null) c.setPassable(false);
+c = new doodads.cave.firePit(-1252,-4012,1);
+if(c!=null) c.setPassable(false);
+c = tree.createTree(-1258,-4005,1);
+if(c!=null) c.setPassable(false);
+}
+
+public void addSegment241() {
+c = new doodads.sheepFarm.flower(-397,-4005,8);
+if(c!=null) c.setPassable(true);
+u = new units.unitTypes.sheepFarm.yellowWolf(-1010,-3999);
+u.setMoveSpeed((float)3.5);
+u.jumpSpeed = (float)9.0;
+commands = new commandList();
+commands.add(new units.unitCommands.commands.moveCommand(-715.0,-3999.0));
+commands.add(new units.unitCommands.commands.moveCommand(-1010.0,-3999.0));
+u.setRepeatCommands(commands);
+c = new doodads.sheepFarm.bush(-1269,-3985,1);
+if(c!=null) c.setPassable(false);
+u = new units.unitTypes.sheepFarm.redWolf(-980,-4075);
+u.setMoveSpeed((float)2.0);
+u.jumpSpeed = (float)8.0;
+commands = new commandList();
+commands.add(new units.unitCommands.commands.slashCommand(-980.0,-3863.0));
+commands.add(new units.unitCommands.commands.slashCommand(-980.0,-4075.0));
+u.setRepeatCommands(commands);
+u = new units.unitTypes.sheepFarm.redWolf(-850,-4075);
+u.setMoveSpeed((float)2.0);
+u.jumpSpeed = (float)8.0;
+commands = new commandList();
+commands.add(new units.unitCommands.commands.slashCommand(-850.0,-3863.0));
+commands.add(new units.unitCommands.commands.slashCommand(-850.0,-4075.0));
+u.setRepeatCommands(commands);
+c = new doodads.sheepFarm.flower(-892,-3961,2);
+if(c!=null) c.setPassable(true);
+u = new units.unitTypes.sheepFarm.yellowWolf(-1010,-3937);
+u.setMoveSpeed((float)3.5);
+u.jumpSpeed = (float)9.0;
+commands = new commandList();
+commands.add(new units.unitCommands.commands.moveCommand(-715.0,-3937.0));
+commands.add(new units.unitCommands.commands.moveCommand(-1010.0,-3937.0));
+u.setRepeatCommands(commands);
+u = new units.unitTypes.sheepFarm.redWolf(-685,-3858);
+u.setMoveSpeed((float)2.0);
+u.jumpSpeed = (float)8.0;
+commands = new commandList();
+commands.add(new units.unitCommands.commands.slashCommand(-685.0,-3668.0));
+commands.add(new units.unitCommands.commands.slashCommand(-685.0,-3858.0));
+u.setRepeatCommands(commands);
+u = new units.unitTypes.sheepFarm.redWolf(-665,-3858);
+u.setMoveSpeed((float)2.0);
+u.jumpSpeed = (float)8.0;
+commands = new commandList();
+commands.add(new units.unitCommands.commands.slashCommand(-665.0,-3668.0));
+commands.add(new units.unitCommands.commands.slashCommand(-665.0,-3858.0));
+u.setRepeatCommands(commands);
+c = tree.createTree(-422,-3827,0);
+if(c!=null) c.setPassable(false);
+c = new doodads.sheepFarm.flower(-449,-3824,8);
+if(c!=null) c.setPassable(true);
+u = new units.unitTypes.sheepFarm.yellowWolf(-722,-3809);
 u.setMoveSpeed((float)3.2);
 u.jumpSpeed = (float)9.0;
 commands = new commandList();
-commands.add(new units.unitCommands.commands.moveCommand(-721.0,-4128.0));
-commands.add(new units.unitCommands.commands.moveCommand(-622.0,-4128.0));
-commands.add(new units.unitCommands.commands.moveCommand(-621.0,-4226.0));
-commands.add(new units.unitCommands.commands.moveCommand(-721.0,-4226.0));
+commands.add(new units.unitCommands.commands.moveCommand(-722.0,-3711.0));
+commands.add(new units.unitCommands.commands.moveCommand(-623.0,-3711.0));
+commands.add(new units.unitCommands.commands.moveCommand(-622.0,-3809.0));
+commands.add(new units.unitCommands.commands.moveCommand(-722.0,-3809.0));
 u.setRepeatCommands(commands);
-u = new units.unitTypes.sheepFarm.redWolf(-684,-4272);
-u.setMoveSpeed((float)2.0);
-u.jumpSpeed = (float)8.0;
-commands = new commandList();
-commands.add(new units.unitCommands.commands.slashCommand(-684.0,-4082.0));
-commands.add(new units.unitCommands.commands.slashCommand(-684.0,-4272.0));
-u.setRepeatCommands(commands);
-u = new units.unitTypes.sheepFarm.redWolf(-664,-4272);
-u.setMoveSpeed((float)2.0);
-u.jumpSpeed = (float)8.0;
-commands = new commandList();
-commands.add(new units.unitCommands.commands.slashCommand(-664.0,-4082.0));
-commands.add(new units.unitCommands.commands.slashCommand(-664.0,-4272.0));
-u.setRepeatCommands(commands);
-c = tree.createTree(-264,-4164,0);
-if(c!=null) c.setPassable(false);
-c = new doodads.sheepFarm.flower(-289,-4165,1);
+c = new doodads.sheepFarm.flower(-684,-3767,8);
 if(c!=null) c.setPassable(true);
-c = new doodads.sheepFarm.bush(-254,-4161,0);
-if(c!=null) c.setPassable(false);
-c = new doodads.sheepFarm.bush(-1134,-4144,1);
-if(c!=null) c.setPassable(false);
-c = new doodads.sheepFarm.flower(-1091,-4130,9);
+c = new doodads.sheepFarm.flower(-649,-3744,10);
 if(c!=null) c.setPassable(true);
-u = new units.unitTypes.sheepFarm.redWolf(-577,-4129);
-u.setMoveSpeed((float)4.0);
-u.jumpSpeed = (float)8.0;
-commands = new commandList();
-commands.add(new units.unitCommands.commands.slashCommand(-773.0,-4129.0));
-commands.add(new units.unitCommands.commands.slashCommand(-577.0,-4129.0));
-u.setRepeatCommands(commands);
-c = new doodads.sheepFarm.flower(-891,-4012,2);
+c = new doodads.sheepFarm.flower(-971,-3734,2);
 if(c!=null) c.setPassable(true);
-c = new doodads.sheepFarm.flower(-309,-3989,8);
+c = new doodads.sheepFarm.flower(-995,-3705,3);
 if(c!=null) c.setPassable(true);
-c = new doodads.sheepFarm.flower(-1073,-3977,6);
+c = tree.createTree(-1031,-3689,0);
+if(c!=null) c.setPassable(false);
+c = new doodads.sheepFarm.flower(-417,-3630,1);
 if(c!=null) c.setPassable(true);
-c = tree.createTree(-1097,-3955,1);
+c = new doodads.sheepFarm.bush(-470,-3624,1);
 if(c!=null) c.setPassable(false);
-c = new doodads.sheepFarm.bush(-1090,-3946,2);
+c = tree.createTree(-872,-3535,1);
 if(c!=null) c.setPassable(false);
-u = new units.unitTypes.sheepFarm.redWolf(-573,-3932);
-u.setMoveSpeed((float)3.5);
-u.jumpSpeed = (float)8.0;
-commands = new commandList();
-commands.add(new units.unitCommands.commands.slashCommand(-769.0,-3932.0));
-commands.add(new units.unitCommands.commands.slashCommand(-573.0,-3932.0));
-u.setRepeatCommands(commands);
-u = new units.unitTypes.sheepFarm.yellowWolf(-654,-3648);
-u.setMoveSpeed((float)2.4);
-u.jumpSpeed = (float)9.0;
-commands = new commandList();
-commands.add(new units.unitCommands.commands.moveCommand(-654.0,-3920.0));
-commands.add(new units.unitCommands.commands.moveCommand(-654.0,-3648.0));
-u.setRepeatCommands(commands);
-u = new units.unitTypes.sheepFarm.redWolf(-727,-3891);
-u.setMoveSpeed((float)2.0);
-u.jumpSpeed = (float)8.0;
-commands = new commandList();
-commands.add(new units.unitCommands.commands.slashCommand(-727.0,-3698.0));
-commands.add(new units.unitCommands.commands.slashCommand(-727.0,-3891.0));
-u.setRepeatCommands(commands);
-u = new units.unitTypes.sheepFarm.redWolf(-620,-3891);
-u.setMoveSpeed((float)2.0);
-u.jumpSpeed = (float)8.0;
-commands = new commandList();
-commands.add(new units.unitCommands.commands.slashCommand(-620.0,-3698.0));
-commands.add(new units.unitCommands.commands.slashCommand(-620.0,-3891.0));
-u.setRepeatCommands(commands);
-u = new units.unitTypes.sheepFarm.redWolf(-574,-3796);
-u.setMoveSpeed((float)3.5);
-u.jumpSpeed = (float)8.0;
-commands = new commandList();
-commands.add(new units.unitCommands.commands.slashCommand(-770.0,-3796.0));
-commands.add(new units.unitCommands.commands.slashCommand(-574.0,-3796.0));
-u.setRepeatCommands(commands);
-c = new doodads.sheepFarm.flower(-896,-3732,3);
+c = new doodads.sheepFarm.flower(-843,-3530,5);
 if(c!=null) c.setPassable(true);
-c = tree.createTree(-932,-3716,0);
+c = new doodads.sheepFarm.bush(-901,-3526,0);
 if(c!=null) c.setPassable(false);
-c = tree.createTree(-389,-3710,0);
+c = new doodads.sheepFarm.fencePost(-723,-3515,0);
 if(c!=null) c.setPassable(false);
-c = new doodads.sheepFarm.flower(-951,-3707,2);
-if(c!=null) c.setPassable(true);
-c = new doodads.sheepFarm.flower(-416,-3707,8);
-if(c!=null) c.setPassable(true);
-u = new units.unitTypes.sheepFarm.yellowWolf(-689,-3920);
-u.setMoveSpeed((float)2.4);
-u.jumpSpeed = (float)9.0;
-commands = new commandList();
-commands.add(new units.unitCommands.commands.moveCommand(-689.0,-3648.0));
-commands.add(new units.unitCommands.commands.moveCommand(-689.0,-3920.0));
-u.setRepeatCommands(commands);
-c = tree.createTree(-1282,-3655,0);
+c = new doodads.sheepFarm.fenceBars(-718,-3515,0);
 if(c!=null) c.setPassable(false);
-c = new doodads.sheepFarm.flower(-437,-3642,1);
-if(c!=null) c.setPassable(true);
-c = new doodads.sheepFarm.bush(-490,-3636,1);
+c = new doodads.sheepFarm.fenceBars(-624,-3515,0);
 if(c!=null) c.setPassable(false);
-c = new doodads.sheepFarm.fencePost(-751,-3606,0);
+c = new doodads.sheepFarm.fencePost(-601,-3515,0);
 if(c!=null) c.setPassable(false);
-c = new doodads.sheepFarm.fenceBars(-746,-3606,0);
-if(c!=null) c.setPassable(false);
-c = new doodads.sheepFarm.fencePost(-723,-3606,0);
-if(c!=null) c.setPassable(false);
-c = new doodads.sheepFarm.fenceBars(-718,-3606,0);
-if(c!=null) c.setPassable(false);
-c = new doodads.sheepFarm.fenceBars(-624,-3606,0);
-if(c!=null) c.setPassable(false);
-c = new doodads.sheepFarm.fencePost(-601,-3606,0);
-if(c!=null) c.setPassable(false);
-c = new doodads.sheepFarm.fenceBars(-596,-3606,0);
-if(c!=null) c.setPassable(false);
-c = new doodads.sheepFarm.fencePost(-573,-3606,0);
-if(c!=null) c.setPassable(false);
-c = new doodads.sheepFarm.verticalFence(-628,-3604,0);
-if(c!=null) c.setPassable(false);
-c = new doodads.sheepFarm.verticalFence(-695,-3604,0);
-if(c!=null) c.setPassable(false);
-c = tree.createTree(-921,-3513,1);
-if(c!=null) c.setPassable(false);
-u = new units.unitTypes.sheepFarm.redWolf(-573,-3518);
-u.setMoveSpeed((float)3.5);
-u.jumpSpeed = (float)8.0;
-commands = new commandList();
-commands.add(new units.unitCommands.commands.slashCommand(-769.0,-3518.0));
-commands.add(new units.unitCommands.commands.slashCommand(-573.0,-3518.0));
-u.setRepeatCommands(commands);
-c = new doodads.sheepFarm.flower(-892,-3508,5);
-if(c!=null) c.setPassable(true);
-}
-
-public void addSegment238() {
-c = new doodads.sheepFarm.bush(-950,-3504,0);
-if(c!=null) c.setPassable(false);
-c = new doodads.sheepFarm.verticalFence(-628,-3544,0);
-if(c!=null) c.setPassable(false);
-c = new doodads.sheepFarm.verticalFence(-695,-3544,0);
-if(c!=null) c.setPassable(false);
-c = new doodads.sheepFarm.verticalFence(-628,-3484,0);
-if(c!=null) c.setPassable(false);
-c = new doodads.sheepFarm.verticalFence(-695,-3484,0);
-if(c!=null) c.setPassable(false);
-c = tree.createTree(-437,-3416,1);
-if(c!=null) c.setPassable(false);
-c = new doodads.sheepFarm.flower(-417,-3405,4);
-if(c!=null) c.setPassable(true);
-c = new doodads.sheepFarm.verticalFence(-628,-3427,0);
-if(c!=null) c.setPassable(false);
-c = new doodads.sheepFarm.verticalFence(-695,-3427,0);
-if(c!=null) c.setPassable(false);
-u = new units.unitTypes.sheepFarm.redWolf(-574,-3382);
-u.setMoveSpeed((float)3.5);
-u.jumpSpeed = (float)8.0;
-commands = new commandList();
-commands.add(new units.unitCommands.commands.slashCommand(-770.0,-3382.0));
-commands.add(new units.unitCommands.commands.slashCommand(-574.0,-3382.0));
-u.setRepeatCommands(commands);
-u = new units.unitTypes.sheepFarm.yellowWolf(-659,-3518);
-u.setMoveSpeed((float)1.8);
-u.jumpSpeed = (float)8.0;
-commands = new commandList();
-commands.add(new units.unitCommands.commands.moveCommand(-659.0,-3246.0));
-commands.add(new units.unitCommands.commands.moveCommand(-659.0,-3518.0));
-u.setRepeatCommands(commands);
 u = new units.unitTypes.sheepFarm.redWolf(-689,-3246);
 u.setMoveSpeed((float)3.5);
 u.jumpSpeed = (float)8.0;
@@ -25236,26 +25554,63 @@ commands = new commandList();
 commands.add(new units.unitCommands.commands.slashCommand(-689.0,-3518.0));
 commands.add(new units.unitCommands.commands.slashCommand(-689.0,-3246.0));
 u.setRepeatCommands(commands);
+u = new units.unitTypes.sheepFarm.redWolf(-573,-3512);
+u.setMoveSpeed((float)3.5);
+u.jumpSpeed = (float)8.0;
+commands = new commandList();
+commands.add(new units.unitCommands.commands.slashCommand(-769.0,-3512.0));
+commands.add(new units.unitCommands.commands.slashCommand(-573.0,-3512.0));
+u.setRepeatCommands(commands);
+c = new doodads.sheepFarm.verticalFence(-628,-3513,0);
+if(c!=null) c.setPassable(false);
+c = new doodads.sheepFarm.verticalFence(-695,-3513,0);
+if(c!=null) c.setPassable(false);
+c = new doodads.sheepFarm.verticalFence(-628,-3484,0);
+if(c!=null) c.setPassable(false);
+c = new doodads.sheepFarm.verticalFence(-695,-3484,0);
+if(c!=null) c.setPassable(false);
+c = tree.createTree(-429,-3416,1);
+if(c!=null) c.setPassable(false);
+c = new doodads.sheepFarm.flower(-409,-3405,4);
+if(c!=null) c.setPassable(true);
+c = new doodads.sheepFarm.verticalFence(-628,-3427,0);
+if(c!=null) c.setPassable(false);
+c = new doodads.sheepFarm.verticalFence(-695,-3427,0);
+if(c!=null) c.setPassable(false);
+u = new units.unitTypes.sheepFarm.yellowWolf(-659,-3518);
+u.setMoveSpeed((float)1.8);
+u.jumpSpeed = (float)8.0;
+commands = new commandList();
+commands.add(new units.unitCommands.commands.moveCommand(-659.0,-3246.0));
+commands.add(new units.unitCommands.commands.moveCommand(-659.0,-3518.0));
+u.setRepeatCommands(commands);
+u = new units.unitTypes.sheepFarm.redWolf(-574,-3376);
+u.setMoveSpeed((float)3.5);
+u.jumpSpeed = (float)8.0;
+commands = new commandList();
+commands.add(new units.unitCommands.commands.slashCommand(-770.0,-3376.0));
+commands.add(new units.unitCommands.commands.slashCommand(-574.0,-3376.0));
+u.setRepeatCommands(commands);
 c = new doodads.sheepFarm.verticalFence(-628,-3367,0);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.verticalFence(-695,-3367,0);
 if(c!=null) c.setPassable(false);
-c = new doodads.sheepFarm.bush(-854,-3287,1);
+c = new doodads.sheepFarm.bush(-881,-3291,1);
 if(c!=null) c.setPassable(false);
-c = tree.createTree(-864,-3266,0);
+c = tree.createTree(-891,-3270,0);
 if(c!=null) c.setPassable(false);
-c = new doodads.sheepFarm.flower(-826,-3267,0);
+c = new doodads.sheepFarm.flower(-853,-3271,0);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.verticalFence(-628,-3307,0);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.verticalFence(-695,-3307,0);
 if(c!=null) c.setPassable(false);
-u = new units.unitTypes.sheepFarm.redWolf(-574,-3246);
+u = new units.unitTypes.sheepFarm.redWolf(-574,-3240);
 u.setMoveSpeed((float)3.5);
 u.jumpSpeed = (float)8.0;
 commands = new commandList();
-commands.add(new units.unitCommands.commands.slashCommand(-770.0,-3246.0));
-commands.add(new units.unitCommands.commands.slashCommand(-574.0,-3246.0));
+commands.add(new units.unitCommands.commands.slashCommand(-770.0,-3240.0));
+commands.add(new units.unitCommands.commands.slashCommand(-574.0,-3240.0));
 u.setRepeatCommands(commands);
 c = tree.createTree(-1083,-3204,1);
 if(c!=null) c.setPassable(false);
@@ -25265,6 +25620,9 @@ c = new doodads.sheepFarm.verticalFence(-695,-3247,0);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.flower(-893,-3202,1);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment242() {
 c = new doodads.sheepFarm.fencePost(-863,-3191,0);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.fenceBars(-858,-3191,0);
@@ -25317,9 +25675,6 @@ c = new doodads.sheepFarm.fencePost(-460,-3191,0);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.fencePost(-695,-3191,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment239() {
 c = new doodads.sheepFarm.flower(-1133,-3201,1);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.flower(-425,-3198,5);
@@ -25328,10 +25683,7 @@ c = tree.createTree(-1032,-3189,1);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.bush(-403,-3191,1);
 if(c!=null) c.setPassable(false);
-u = new units.unitTypes.tomb.lightDude(-950,-3195);
-u.setMoveSpeed((float)3.0);
-u.jumpSpeed = (float)10.0;
-c = new doodads.cave.firePit(-907,-3171,0);
+c = new doodads.cave.firePit(-907,-3171,1);
 if(c!=null) c.setPassable(false);
 c = tree.createTree(-1055,-3164,1);
 if(c!=null) c.setPassable(false);
@@ -25357,6 +25709,8 @@ c = new doodads.sheepFarm.flower(-999,-3095,1);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.verticalFence(-460,-3129,0);
 if(c!=null) c.setPassable(false);
+c = new doodads.sheepFarm.bush(-1245,-3084,1);
+if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.bush(-1024,-3083,1);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.fenceBars(-970,-3070,0);
@@ -25369,17 +25723,30 @@ c = new doodads.sheepFarm.fencePost(-919,-3070,0);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.fenceBars(-914,-3070,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment243() {
 c = new doodads.sheepFarm.fencePost(-891,-3070,0);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.fenceBars(-886,-3070,0);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.fencePost(-975,-3070,0);
 if(c!=null) c.setPassable(false);
-c = new doodads.sheepFarm.flower(-937,-3042,1);
+c = new doodads.sheepFarm.flower(-1202,-3070,9);
 if(c!=null) c.setPassable(true);
+c = new doodads.sheepFarm.bush(-221,-3034,2);
+if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.verticalFence(-460,-3069,0);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.verticalFence(-863,-3069,0);
+if(c!=null) c.setPassable(false);
+c = new doodads.sheepFarm.flower(-226,-3026,6);
+if(c!=null) c.setPassable(true);
+c = tree.createTree(202,-2993,1);
+if(c!=null) c.setPassable(false);
+c = new doodads.sheepFarm.flower(190,-2984,9);
+if(c!=null) c.setPassable(true);
+c = new doodads.sheepFarm.bush(214,-2974,2);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.verticalFence(-460,-3009,0);
 if(c!=null) c.setPassable(false);
@@ -25421,9 +25788,6 @@ c = new doodads.sheepFarm.fenceBars(-567,-2953,0);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.fencePost(-544,-2953,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment240() {
 c = new doodads.sheepFarm.fenceBars(-539,-2953,0);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.fencePost(-516,-2953,0);
@@ -25438,6 +25802,12 @@ c = new doodads.sheepFarm.fencePost(-628,-2953,0);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.fencePost(-460,-2953,0);
 if(c!=null) c.setPassable(false);
+c = new doodads.sheepFarm.bush(-10,-2929,1);
+if(c!=null) c.setPassable(false);
+c = new doodads.sheepFarm.bush(-607,-2922,1);
+if(c!=null) c.setPassable(false);
+c = new doodads.sheepFarm.flower(-1053,-2918,1);
+if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.verticalFence(-695,-2951,0);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.verticalFence(-628,-2951,0);
@@ -25454,6 +25824,11 @@ c = new doodads.sheepFarm.fencePost(-460,-2893,0);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.fenceBars(-455,-2893,0);
 if(c!=null) c.setPassable(false);
+c = tree.createTree(-1091,-2896,0);
+if(c!=null) c.setPassable(false);
+}
+
+public void addSegment244() {
 c = new doodads.sheepFarm.verticalFence(-695,-2891,1);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.verticalFence(-96,-2891,0);
@@ -25524,9 +25899,6 @@ c = new doodads.sheepFarm.fenceBars(-371,-2835,0);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.fencePost(-348,-2835,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment241() {
 c = new doodads.sheepFarm.fenceBars(-343,-2835,0);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.fencePost(-320,-2835,0);
@@ -25553,20 +25925,6 @@ c = new doodads.sheepFarm.fencePost(-628,-2835,0);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.fenceBars(-623,-2835,0);
 if(c!=null) c.setPassable(false);
-u = new units.unitTypes.sheepFarm.redWolf(-390,-2742);
-u.setMoveSpeed((float)3.5);
-u.jumpSpeed = (float)8.0;
-commands = new commandList();
-commands.add(new units.unitCommands.commands.slashCommand(-390.0,-2907.0));
-commands.add(new units.unitCommands.commands.slashCommand(-390.0,-2742.0));
-u.setRepeatCommands(commands);
-u = new units.unitTypes.sheepFarm.redWolf(-555,-2742);
-u.setMoveSpeed((float)3.5);
-u.jumpSpeed = (float)8.0;
-commands = new commandList();
-commands.add(new units.unitCommands.commands.slashCommand(-555.0,-2907.0));
-commands.add(new units.unitCommands.commands.slashCommand(-555.0,-2742.0));
-u.setRepeatCommands(commands);
 u = new units.unitTypes.sheepFarm.redWolf(-54,-2835);
 u.setMoveSpeed((float)3.5);
 u.jumpSpeed = (float)8.0;
@@ -25581,6 +25939,9 @@ commands = new commandList();
 commands.add(new units.unitCommands.commands.moveCommand(-310.0,-2823.0));
 commands.add(new units.unitCommands.commands.moveCommand(-625.0,-2823.0));
 u.setRepeatCommands(commands);
+}
+
+public void addSegment245() {
 u = new units.unitTypes.sheepFarm.redWolf(-54,-2809);
 u.setMoveSpeed((float)3.5);
 u.jumpSpeed = (float)8.0;
@@ -25652,9 +26013,6 @@ c = new doodads.sheepFarm.fencePost(-415,-2777,0);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.fenceBars(-410,-2777,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment242() {
 c = new doodads.sheepFarm.fencePost(-387,-2777,0);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.fenceBars(-382,-2777,0);
@@ -25695,6 +26053,11 @@ commands = new commandList();
 commands.add(new units.unitCommands.commands.slashCommand(-95.0,-2754.0));
 commands.add(new units.unitCommands.commands.slashCommand(101.0,-2754.0));
 u.setRepeatCommands(commands);
+}
+
+public void addSegment246() {
+c = new doodads.sheepFarm.flower(-814,-2741,3);
+if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.verticalFence(-275,-2775,1);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.verticalFence(-331,-2775,1);
@@ -25703,11 +26066,29 @@ c = new doodads.sheepFarm.verticalFence(44,-2775,0);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.verticalFence(-24,-2775,0);
 if(c!=null) c.setPassable(false);
+u = new units.unitTypes.sheepFarm.redWolf(-390,-2742);
+u.setMoveSpeed((float)3.5);
+u.jumpSpeed = (float)8.0;
+commands = new commandList();
+commands.add(new units.unitCommands.commands.slashCommand(-390.0,-2907.0));
+commands.add(new units.unitCommands.commands.slashCommand(-390.0,-2742.0));
+u.setRepeatCommands(commands);
+u = new units.unitTypes.sheepFarm.redWolf(-555,-2742);
+u.setMoveSpeed((float)3.5);
+u.jumpSpeed = (float)8.0;
+commands = new commandList();
+commands.add(new units.unitCommands.commands.slashCommand(-555.0,-2907.0));
+commands.add(new units.unitCommands.commands.slashCommand(-555.0,-2742.0));
+u.setRepeatCommands(commands);
 c = new doodads.sheepFarm.fenceBars(-326,-2719,0);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.fencePost(-303,-2719,0);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.fenceBars(-298,-2719,0);
+if(c!=null) c.setPassable(false);
+c = new doodads.sheepFarm.bush(-899,-2727,1);
+if(c!=null) c.setPassable(false);
+c = tree.createTree(-851,-2710,1);
 if(c!=null) c.setPassable(false);
 u = new units.unitTypes.sheepFarm.redWolf(101,-2720);
 u.setMoveSpeed((float)3.5);
@@ -25727,6 +26108,16 @@ commands = new commandList();
 commands.add(new units.unitCommands.commands.slashCommand(-95.0,-2652.0));
 commands.add(new units.unitCommands.commands.slashCommand(101.0,-2652.0));
 u.setRepeatCommands(commands);
+c = tree.createTree(248,-2629,0);
+if(c!=null) c.setPassable(false);
+c = new doodads.sheepFarm.flower(293,-2615,9);
+if(c!=null) c.setPassable(true);
+c = new doodads.sheepFarm.bush(230,-2612,2);
+if(c!=null) c.setPassable(false);
+c = new doodads.sheepFarm.verticalFence(44,-2655,0);
+if(c!=null) c.setPassable(false);
+c = new doodads.sheepFarm.verticalFence(-24,-2655,0);
+if(c!=null) c.setPassable(false);
 u = new units.unitTypes.sheepFarm.yellowWolf(-18,-2768);
 u.setMoveSpeed((float)1.5);
 u.jumpSpeed = (float)8.0;
@@ -25736,10 +26127,6 @@ commands.add(new units.unitCommands.commands.moveCommand(12.0,-2618.0));
 commands.add(new units.unitCommands.commands.moveCommand(12.0,-2768.0));
 commands.add(new units.unitCommands.commands.moveCommand(-18.0,-2768.0));
 u.setRepeatCommands(commands);
-c = new doodads.sheepFarm.verticalFence(44,-2655,0);
-if(c!=null) c.setPassable(false);
-c = new doodads.sheepFarm.verticalFence(-24,-2655,0);
-if(c!=null) c.setPassable(false);
 u = new units.unitTypes.sheepFarm.redWolf(101,-2618);
 u.setMoveSpeed((float)3.5);
 u.jumpSpeed = (float)8.0;
@@ -25747,9 +26134,15 @@ commands = new commandList();
 commands.add(new units.unitCommands.commands.slashCommand(-95.0,-2618.0));
 commands.add(new units.unitCommands.commands.slashCommand(101.0,-2618.0));
 u.setRepeatCommands(commands);
+c = new doodads.sheepFarm.flower(-541,-2574,2);
+if(c!=null) c.setPassable(true);
+c = tree.createTree(-521,-2559,1);
+if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.verticalFence(44,-2595,0);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.verticalFence(-24,-2595,0);
+if(c!=null) c.setPassable(false);
+c = new doodads.sheepFarm.bush(-512,-2541,1);
 if(c!=null) c.setPassable(false);
 u = new units.unitTypes.sheepFarm.redWolf(97,-2548);
 u.setMoveSpeed((float)3.5);
@@ -25758,6 +26151,8 @@ commands = new commandList();
 commands.add(new units.unitCommands.commands.slashCommand(-99.0,-2548.0));
 commands.add(new units.unitCommands.commands.slashCommand(97.0,-2548.0));
 u.setRepeatCommands(commands);
+c = new doodads.sheepFarm.flower(-242,-2511,6);
+if(c!=null) c.setPassable(true);
 u = new units.unitTypes.sheepFarm.redWolf(97,-2514);
 u.setMoveSpeed((float)3.5);
 u.jumpSpeed = (float)8.0;
@@ -25765,9 +26160,13 @@ commands = new commandList();
 commands.add(new units.unitCommands.commands.slashCommand(-99.0,-2514.0));
 commands.add(new units.unitCommands.commands.slashCommand(97.0,-2514.0));
 u.setRepeatCommands(commands);
+c = tree.createTree(-278,-2493,0);
+if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.verticalFence(44,-2535,0);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.verticalFence(-24,-2535,0);
+if(c!=null) c.setPassable(false);
+c = new doodads.sheepFarm.bush(-300,-2479,0);
 if(c!=null) c.setPassable(false);
 u = new units.unitTypes.sheepFarm.redWolf(97,-2480);
 u.setMoveSpeed((float)3.5);
@@ -25808,15 +26207,15 @@ c = new doodads.sheepFarm.fenceBars(-159,-2359,0);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.fencePost(-136,-2359,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment243() {
 c = new doodads.sheepFarm.fenceBars(-131,-2359,0);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.fencePost(-108,-2359,0);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.fenceBars(-103,-2359,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment247() {
 c = new doodads.sheepFarm.fencePost(-80,-2359,0);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.fenceBars(-75,-2359,0);
@@ -25859,7 +26258,17 @@ c = new doodads.sheepFarm.verticalFence(-192,-2297,0);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.verticalFence(212,-2297,0);
 if(c!=null) c.setPassable(false);
+c = tree.createTree(394,-2222,0);
+if(c!=null) c.setPassable(false);
 c = new doodads.general.well(-8,-2226,0);
+if(c!=null) c.setPassable(false);
+c = new doodads.sheepFarm.flower(371,-2222,5);
+if(c!=null) c.setPassable(true);
+c = tree.createTree(-376,-2216,0);
+if(c!=null) c.setPassable(false);
+c = new doodads.sheepFarm.bone(-389,-2205,5);
+if(c!=null) c.setPassable(true);
+c = new doodads.sheepFarm.bush(414,-2210,0);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.verticalFence(-192,-2237,0);
 if(c!=null) c.setPassable(false);
@@ -25873,6 +26282,10 @@ c = new doodads.sheepFarm.verticalFence(-192,-2117,0);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.verticalFence(212,-2117,0);
 if(c!=null) c.setPassable(false);
+c = tree.createTree(350,-2050,1);
+if(c!=null) c.setPassable(false);
+c = new doodads.sheepFarm.flower(372,-2042,1);
+if(c!=null) c.setPassable(true);
 c = tree.createTree(-290,-2031,0);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.verticalFence(-192,-2057,0);
@@ -25903,6 +26316,9 @@ c = tree.createTree(189,-1935,2);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.flower(313,-1935,9);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment248() {
 c = tree.createTree(-224,-1927,0);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.flower(528,-1930,0);
@@ -25911,9 +26327,6 @@ c = new doodads.sheepFarm.bush(343,-1924,1);
 if(c!=null) c.setPassable(false);
 c = tree.createTree(-297,-1915,1);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment244() {
 c = tree.createTree(188,-1914,1);
 if(c!=null) c.setPassable(false);
 c = tree.createTree(458,-1910,0);
@@ -25924,6 +26337,15 @@ c = tree.createTree(190,-1897,0);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.flower(-435,-1899,10);
 if(c!=null) c.setPassable(true);
+u = new units.unitTypes.sheepFarm.yellowWolf(96,-1898);
+u.setMoveSpeed((float)2.5);
+u.jumpSpeed = (float)8.0;
+commands = new commandList();
+commands.add(new units.unitCommands.commands.moveCommand(96.0,-1753.0));
+commands.add(new units.unitCommands.commands.moveCommand(-121.0,-1755.0));
+commands.add(new units.unitCommands.commands.moveCommand(-121.0,-1900.0));
+commands.add(new units.unitCommands.commands.moveCommand(96.0,-1898.0));
+u.setRepeatCommands(commands);
 c = tree.createTree(-203,-1881,1);
 if(c!=null) c.setPassable(false);
 c = tree.createTree(189,-1878,0);
@@ -25967,6 +26389,8 @@ c = new doodads.sheepFarm.bush(343,-1794,2);
 if(c!=null) c.setPassable(false);
 c = tree.createTree(-229,-1786,0);
 if(c!=null) c.setPassable(false);
+c = new doodads.sheepFarm.bush(-323,-1779,1);
+if(c!=null) c.setPassable(false);
 u = new units.unitTypes.sheepFarm.redWolf(-126,-1791);
 u.setMoveSpeed((float)3.5);
 u.jumpSpeed = (float)8.0;
@@ -25974,8 +26398,6 @@ commands = new commandList();
 commands.add(new units.unitCommands.commands.slashCommand(95.0,-1791.0));
 commands.add(new units.unitCommands.commands.slashCommand(-126.0,-1791.0));
 u.setRepeatCommands(commands);
-c = new doodads.sheepFarm.bush(-323,-1779,1);
-if(c!=null) c.setPassable(false);
 c = tree.createTree(167,-1775,0);
 if(c!=null) c.setPassable(false);
 c = tree.createTree(-286,-1774,1);
@@ -25998,15 +26420,6 @@ c = tree.createTree(439,-1748,2);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.flower(402,-1747,1);
 if(c!=null) c.setPassable(true);
-u = new units.unitTypes.sheepFarm.yellowWolf(96,-1898);
-u.setMoveSpeed((float)2.5);
-u.jumpSpeed = (float)8.0;
-commands = new commandList();
-commands.add(new units.unitCommands.commands.moveCommand(96.0,-1753.0));
-commands.add(new units.unitCommands.commands.moveCommand(-121.0,-1755.0));
-commands.add(new units.unitCommands.commands.moveCommand(-121.0,-1900.0));
-commands.add(new units.unitCommands.commands.moveCommand(96.0,-1898.0));
-u.setRepeatCommands(commands);
 c = tree.createTree(-220,-1740,1);
 if(c!=null) c.setPassable(false);
 c = tree.createTree(203,-1739,2);
@@ -26023,6 +26436,9 @@ c = new doodads.sheepFarm.flower(-479,-1697,5);
 if(c!=null) c.setPassable(true);
 c = tree.createTree(-258,-1690,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment249() {
 c = tree.createTree(226,-1689,0);
 if(c!=null) c.setPassable(false);
 c = tree.createTree(273,-1671,2);
@@ -26031,9 +26447,6 @@ c = tree.createTree(-255,-1670,2);
 if(c!=null) c.setPassable(false);
 c = tree.createTree(-369,-1660,2);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment245() {
 c = tree.createTree(-213,-1659,0);
 if(c!=null) c.setPassable(false);
 c = tree.createTree(-291,-1658,2);
@@ -26108,6 +26521,8 @@ c = tree.createTree(203,-1497,2);
 if(c!=null) c.setPassable(false);
 c = tree.createTree(-299,-1492,1);
 if(c!=null) c.setPassable(false);
+c = tree.createTree(574,-1485,1);
+if(c!=null) c.setPassable(false);
 u = new units.unitTypes.sheepFarm.redWolf(110,-1500);
 u.setMoveSpeed((float)3.5);
 u.jumpSpeed = (float)8.0;
@@ -26115,8 +26530,6 @@ commands = new commandList();
 commands.add(new units.unitCommands.commands.slashCommand(-131.0,-1500.0));
 commands.add(new units.unitCommands.commands.slashCommand(110.0,-1500.0));
 u.setRepeatCommands(commands);
-c = tree.createTree(574,-1485,1);
-if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.flower(359,-1487,2);
 if(c!=null) c.setPassable(true);
 c = tree.createTree(-192,-1482,0);
@@ -26131,6 +26544,9 @@ c = tree.createTree(205,-1462,1);
 if(c!=null) c.setPassable(false);
 c = tree.createTree(-213,-1457,1);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment250() {
 c = tree.createTree(167,-1455,0);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.bush(-390,-1454,0);
@@ -26139,9 +26555,6 @@ c = tree.createTree(-461,-1445,0);
 if(c!=null) c.setPassable(false);
 c = tree.createTree(-213,-1442,2);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment246() {
 c = tree.createTree(460,-1440,2);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.flower(-307,-1443,0);
@@ -26239,6 +26652,9 @@ c = tree.createTree(189,-1241,1);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.flower(-149,-1241,4);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment251() {
 c = tree.createTree(-224,-1229,1);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.flower(766,-1229,10);
@@ -26247,9 +26663,6 @@ c = tree.createTree(195,-1225,2);
 if(c!=null) c.setPassable(false);
 c = tree.createTree(496,-1219,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment247() {
 c = new doodads.sheepFarm.flower(-428,-1221,10);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.bush(510,-1216,1);
@@ -26308,6 +26721,15 @@ c = tree.createTree(195,-1099,1);
 if(c!=null) c.setPassable(false);
 c = tree.createTree(-372,-1089,0);
 if(c!=null) c.setPassable(false);
+u = new units.unitTypes.sheepFarm.yellowWolf(120,-1100);
+u.setMoveSpeed((float)2.5);
+u.jumpSpeed = (float)8.0;
+commands = new commandList();
+commands.add(new units.unitCommands.commands.moveCommand(120.0,-975.0));
+commands.add(new units.unitCommands.commands.moveCommand(-131.0,-975.0));
+commands.add(new units.unitCommands.commands.moveCommand(-131.0,-1100.0));
+commands.add(new units.unitCommands.commands.moveCommand(120.0,-1100.0));
+u.setRepeatCommands(commands);
 c = tree.createTree(-225,-1087,0);
 if(c!=null) c.setPassable(false);
 c = tree.createTree(-208,-1080,2);
@@ -26340,6 +26762,9 @@ c = tree.createTree(200,-1020,0);
 if(c!=null) c.setPassable(false);
 c = tree.createTree(-517,-1014,2);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment252() {
 c = tree.createTree(511,-1014,0);
 if(c!=null) c.setPassable(false);
 c = tree.createTree(-300,-1008,2);
@@ -26350,9 +26775,6 @@ c = new doodads.sheepFarm.flower(-417,-1010,10);
 if(c!=null) c.setPassable(true);
 c = tree.createTree(230,-1000,1);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment248() {
 c = tree.createTree(-212,-991,1);
 if(c!=null) c.setPassable(false);
 c = tree.createTree(219,-985,1);
@@ -26367,15 +26789,6 @@ c = tree.createTree(-237,-966,2);
 if(c!=null) c.setPassable(false);
 c = tree.createTree(286,-964,2);
 if(c!=null) c.setPassable(false);
-u = new units.unitTypes.sheepFarm.yellowWolf(120,-1100);
-u.setMoveSpeed((float)2.5);
-u.jumpSpeed = (float)8.0;
-commands = new commandList();
-commands.add(new units.unitCommands.commands.moveCommand(120.0,-975.0));
-commands.add(new units.unitCommands.commands.moveCommand(-131.0,-975.0));
-commands.add(new units.unitCommands.commands.moveCommand(-131.0,-1100.0));
-commands.add(new units.unitCommands.commands.moveCommand(120.0,-1100.0));
-u.setRepeatCommands(commands);
 c = new doodads.sheepFarm.flower(-148,-959,5);
 if(c!=null) c.setPassable(true);
 c = tree.createTree(233,-954,2);
@@ -26452,6 +26865,9 @@ c = tree.createTree(363,-792,0);
 if(c!=null) c.setPassable(false);
 c = tree.createTree(167,-785,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment253() {
 c = tree.createTree(-302,-771,2);
 if(c!=null) c.setPassable(false);
 c = tree.createTree(199,-770,1);
@@ -26460,9 +26876,6 @@ c = tree.createTree(586,-769,1);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.bush(379,-767,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment249() {
 c = tree.createTree(-207,-763,0);
 if(c!=null) c.setPassable(false);
 c = tree.createTree(-234,-758,0);
@@ -26560,6 +26973,9 @@ c = tree.createTree(167,-605,0);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.flower(521,-605,2);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment254() {
 c = tree.createTree(-982,-597,0);
 if(c!=null) c.setPassable(false);
 c = tree.createTree(-252,-596,0);
@@ -26568,9 +26984,6 @@ c = tree.createTree(-183,-593,0);
 if(c!=null) c.setPassable(false);
 c = tree.createTree(-213,-592,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment250() {
 c = new doodads.sheepFarm.flower(-714,-595,10);
 if(c!=null) c.setPassable(true);
 c = tree.createTree(205,-585,0);
@@ -26611,6 +27024,8 @@ c = tree.createTree(-1143,-528,0);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.flower(-509,-529,0);
 if(c!=null) c.setPassable(true);
+c = new doodads.sheepFarm.verticalFence(-870,-570,1);
+if(c!=null) c.setPassable(false);
 c = tree.createTree(-859,-522,1);
 if(c!=null) c.setPassable(false);
 c = tree.createTree(-1045,-517,2);
@@ -26627,9 +27042,15 @@ c = tree.createTree(790,-510,0);
 if(c!=null) c.setPassable(false);
 c = tree.createTree(-362,-509,1);
 if(c!=null) c.setPassable(false);
+c = tree.createTree(-884,-503,0);
+if(c!=null) c.setPassable(false);
+c = tree.createTree(-914,-503,2);
+if(c!=null) c.setPassable(false);
 c = tree.createTree(-741,-502,0);
 if(c!=null) c.setPassable(false);
 c = tree.createTree(-697,-500,2);
+if(c!=null) c.setPassable(false);
+c = tree.createTree(-570,-500,2);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.bush(-1162,-501,0);
 if(c!=null) c.setPassable(false);
@@ -26645,10 +27066,6 @@ c = tree.createTree(-824,-494,1);
 if(c!=null) c.setPassable(false);
 c = tree.createTree(211,-494,0);
 if(c!=null) c.setPassable(false);
-c = tree.createTree(-1250,-493,2);
-if(c!=null) c.setPassable(false);
-c = tree.createTree(-1200,-493,2);
-if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.flower(600,-494,6);
 if(c!=null) c.setPassable(true);
 c = new doodads.sheepFarm.bush(407,-492,2);
@@ -26659,9 +27076,10 @@ c = new doodads.sheepFarm.bush(-402,-490,0);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.flower(164,-490,8);
 if(c!=null) c.setPassable(true);
+}
+
+public void addSegment255() {
 c = tree.createTree(-658,-485,0);
-if(c!=null) c.setPassable(false);
-c = new doodads.sheepFarm.verticalFence(-867,-529,1);
 if(c!=null) c.setPassable(false);
 c = tree.createTree(-451,-482,1);
 if(c!=null) c.setPassable(false);
@@ -26671,14 +27089,17 @@ c = tree.createTree(281,-481,0);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.rock(244,-490,1);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment251() {
 c = tree.createTree(-345,-481,1);
+if(c!=null) c.setPassable(false);
+c = tree.createTree(-942,-481,2);
 if(c!=null) c.setPassable(false);
 c = tree.createTree(-526,-480,1);
 if(c!=null) c.setPassable(false);
+c = tree.createTree(-639,-479,2);
+if(c!=null) c.setPassable(false);
 c = tree.createTree(349,-479,2);
+if(c!=null) c.setPassable(false);
+c = tree.createTree(-1238,-478,2);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.flower(351,-482,4);
 if(c!=null) c.setPassable(true);
@@ -26692,13 +27113,11 @@ c = new doodads.sheepFarm.bush(-181,-475,1);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.flower(-333,-473,0);
 if(c!=null) c.setPassable(true);
-c = tree.createTree(-989,-469,1);
-if(c!=null) c.setPassable(false);
-c = tree.createTree(-947,-468,2);
-if(c!=null) c.setPassable(false);
 c = tree.createTree(314,-468,0);
 if(c!=null) c.setPassable(false);
 c = tree.createTree(419,-468,1);
+if(c!=null) c.setPassable(false);
+c = tree.createTree(-972,-467,1);
 if(c!=null) c.setPassable(false);
 c = tree.createTree(371,-467,1);
 if(c!=null) c.setPassable(false);
@@ -26708,21 +27127,13 @@ c = tree.createTree(-244,-466,2);
 if(c!=null) c.setPassable(false);
 c = tree.createTree(563,-466,1);
 if(c!=null) c.setPassable(false);
-c = tree.createTree(446,-464,0);
-if(c!=null) c.setPassable(false);
 c = tree.createTree(-305,-463,0);
-if(c!=null) c.setPassable(false);
-c = tree.createTree(-881,-462,0);
-if(c!=null) c.setPassable(false);
-c = tree.createTree(-911,-462,2);
 if(c!=null) c.setPassable(false);
 c = tree.createTree(-541,-461,2);
 if(c!=null) c.setPassable(false);
 c = tree.createTree(484,-461,1);
 if(c!=null) c.setPassable(false);
 c = tree.createTree(609,-460,1);
-if(c!=null) c.setPassable(false);
-c = tree.createTree(207,-459,1);
 if(c!=null) c.setPassable(false);
 c = tree.createTree(-465,-458,1);
 if(c!=null) c.setPassable(false);
@@ -26732,37 +27143,78 @@ c = tree.createTree(-510,-458,2);
 if(c!=null) c.setPassable(false);
 c = tree.createTree(529,-456,0);
 if(c!=null) c.setPassable(false);
-c = tree.createTree(-972,-452,0);
+c = tree.createTree(-991,-455,1);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.flower(903,-454,2);
 if(c!=null) c.setPassable(true);
-c = tree.createTree(-1010,-447,1);
+c = new doodads.sheepFarm.fencePost(-1039,-436,0);
+if(c!=null) c.setPassable(false);
+c = new doodads.sheepFarm.fencePost(-1039,-436,0);
+if(c!=null) c.setPassable(false);
+c = new doodads.sheepFarm.fencePost(-1039,-436,0);
+if(c!=null) c.setPassable(false);
+c = new doodads.sheepFarm.fencePost(-1039,-436,0);
+if(c!=null) c.setPassable(false);
+c = new doodads.sheepFarm.fencePost(-1039,-436,0);
+if(c!=null) c.setPassable(false);
+c = new doodads.sheepFarm.fencePost(-1039,-436,0);
+if(c!=null) c.setPassable(false);
+c = new doodads.sheepFarm.fencePost(-1039,-436,0);
+if(c!=null) c.setPassable(false);
+c = new doodads.sheepFarm.fencePost(-1039,-436,0);
+if(c!=null) c.setPassable(false);
+c = new doodads.sheepFarm.fencePost(-1039,-436,0);
+if(c!=null) c.setPassable(false);
+c = new doodads.sheepFarm.fencePost(-1039,-436,0);
+if(c!=null) c.setPassable(false);
+c = new doodads.sheepFarm.fencePost(-1039,-436,0);
+if(c!=null) c.setPassable(false);
+c = new doodads.sheepFarm.fencePost(-1039,-436,0);
+if(c!=null) c.setPassable(false);
+c = new doodads.sheepFarm.fencePost(-1039,-436,0);
+if(c!=null) c.setPassable(false);
+c = new doodads.sheepFarm.fencePost(-1039,-436,0);
+if(c!=null) c.setPassable(false);
+c = new doodads.sheepFarm.fencePost(-1039,-436,0);
+if(c!=null) c.setPassable(false);
+c = new doodads.sheepFarm.fencePost(-1039,-436,0);
+if(c!=null) c.setPassable(false);
+}
+
+public void addSegment256() {
+c = new doodads.sheepFarm.fencePost(-1039,-436,0);
+if(c!=null) c.setPassable(false);
+c = new doodads.sheepFarm.fencePost(-1039,-436,0);
+if(c!=null) c.setPassable(false);
+c = new doodads.sheepFarm.fencePost(-1039,-436,0);
+if(c!=null) c.setPassable(false);
+c = new doodads.sheepFarm.fencePost(-1039,-436,0);
+if(c!=null) c.setPassable(false);
+c = new doodads.sheepFarm.fencePost(-1039,-436,0);
+if(c!=null) c.setPassable(false);
+c = tree.createTree(-1019,-443,0);
 if(c!=null) c.setPassable(false);
 c = tree.createTree(616,-440,0);
 if(c!=null) c.setPassable(false);
-c = tree.createTree(-1034,-439,1);
+c = tree.createTree(-1041,-437,2);
 if(c!=null) c.setPassable(false);
 c = tree.createTree(538,-430,0);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.bush(-1316,-427,1);
 if(c!=null) c.setPassable(false);
-c = tree.createTree(-1052,-421,2);
-if(c!=null) c.setPassable(false);
-c = tree.createTree(-1209,-416,0);
+c = tree.createTree(-1165,-413,2);
 if(c!=null) c.setPassable(false);
 c = tree.createTree(-1349,-408,0);
 if(c!=null) c.setPassable(false);
-c = tree.createTree(-1069,-408,2);
-if(c!=null) c.setPassable(false);
 c = tree.createTree(553,-408,2);
 if(c!=null) c.setPassable(false);
-c = tree.createTree(-1136,-405,0);
+c = tree.createTree(-1053,-405,0);
 if(c!=null) c.setPassable(false);
 c = tree.createTree(556,-395,1);
 if(c!=null) c.setPassable(false);
 c = tree.createTree(638,-387,0);
 if(c!=null) c.setPassable(false);
-c = tree.createTree(-1075,-384,1);
+c = tree.createTree(-1069,-384,0);
 if(c!=null) c.setPassable(false);
 c = tree.createTree(563,-373,2);
 if(c!=null) c.setPassable(false);
@@ -26774,28 +27226,27 @@ c = tree.createTree(551,-358,1);
 if(c!=null) c.setPassable(false);
 c = tree.createTree(852,-356,1);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment252() {
-c = tree.createTree(-1092,-355,0);
-if(c!=null) c.setPassable(false);
 c = tree.createTree(772,-355,1);
+if(c!=null) c.setPassable(false);
+c = tree.createTree(-1082,-352,0);
 if(c!=null) c.setPassable(false);
 c = tree.createTree(-1096,-344,1);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.bush(698,-345,1);
 if(c!=null) c.setPassable(false);
+c = new doodads.sheepFarm.farmHouse(-648,-427,0);
+if(c!=null) c.setPassable(false);
 c = tree.createTree(-1197,-339,1);
 if(c!=null) c.setPassable(false);
 c = tree.createTree(558,-336,2);
 if(c!=null) c.setPassable(false);
-c = new doodads.sheepFarm.farmHouse(-650,-420,0);
+c = new doodads.sheepFarm.barn(-937,-422,0);
+if(c!=null) c.setPassable(false);
+c = new doodads.sheepFarm.haystack(-944,-341,1);
 if(c!=null) c.setPassable(false);
 c = tree.createTree(-1080,-329,1);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.bush(-510,-330,1);
-if(c!=null) c.setPassable(false);
-c = tree.createTree(-720,-325,0);
 if(c!=null) c.setPassable(false);
 c = tree.createTree(558,-325,0);
 if(c!=null) c.setPassable(false);
@@ -26807,13 +27258,9 @@ c = new doodads.sheepFarm.bush(-1200,-320,1);
 if(c!=null) c.setPassable(false);
 c = tree.createTree(-1097,-313,1);
 if(c!=null) c.setPassable(false);
-c = new doodads.sheepFarm.haystack(-929,-316,1);
-if(c!=null) c.setPassable(false);
-c = new doodads.sheepFarm.haystack(-294,-315,0);
+c = tree.createTree(-713,-302,0);
 if(c!=null) c.setPassable(false);
 c = tree.createTree(550,-300,1);
-if(c!=null) c.setPassable(false);
-c = new doodads.sheepFarm.barn(-982,-385,0);
 if(c!=null) c.setPassable(false);
 c = tree.createTree(550,-290,2);
 if(c!=null) c.setPassable(false);
@@ -26833,11 +27280,11 @@ c = tree.createTree(561,-251,1);
 if(c!=null) c.setPassable(false);
 c = tree.createTree(819,-248,1);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment257() {
 c = tree.createTree(-1092,-242,1);
 if(c!=null) c.setPassable(false);
-u = new units.characters.farmer.farmer(-711,-247);
-u.setMoveSpeed((float)1.0);
-u.jumpSpeed = (float)10.0;
 c = tree.createTree(562,-237,0);
 if(c!=null) c.setPassable(false);
 c = tree.createTree(759,-233,1);
@@ -26878,9 +27325,6 @@ c = new doodads.sheepFarm.flower(823,-130,1);
 if(c!=null) c.setPassable(true);
 c = tree.createTree(635,-123,2);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment253() {
 c = new doodads.sheepFarm.bush(-1046,-123,0);
 if(c!=null) c.setPassable(false);
 c = tree.createTree(566,-116,2);
@@ -26939,6 +27383,9 @@ c = new doodads.sheepFarm.bush(-1197,17,0);
 if(c!=null) c.setPassable(false);
 c = tree.createTree(633,19,1);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment258() {
 c = tree.createTree(559,23,0);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.bush(680,23,1);
@@ -26948,8 +27395,6 @@ if(c!=null) c.setPassable(false);
 c = tree.createTree(-1241,33,0);
 if(c!=null) c.setPassable(false);
 c = tree.createTree(-1077,34,1);
-if(c!=null) c.setPassable(false);
-c = new doodads.sheepFarm.fencePost(-776,43,0);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.flower(858,35,2);
 if(c!=null) c.setPassable(true);
@@ -26981,9 +27426,6 @@ c = tree.createTree(-620,220,2);
 if(c!=null) c.setPassable(false);
 c = tree.createTree(-1324,234,1);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment254() {
 c = tree.createTree(-1240,235,0);
 if(c!=null) c.setPassable(false);
 c = tree.createTree(-1440,235,0);
@@ -27044,6 +27486,9 @@ c = tree.createTree(-615,410,2);
 if(c!=null) c.setPassable(false);
 c = tree.createTree(-1335,415,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment259() {
 c = tree.createTree(-1378,415,0);
 if(c!=null) c.setPassable(false);
 c = tree.createTree(-608,425,2);
@@ -27084,9 +27529,6 @@ c = tree.createTree(-1210,555,2);
 if(c!=null) c.setPassable(false);
 c = tree.createTree(-1575,555,1);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment255() {
 c = tree.createTree(-1250,560,1);
 if(c!=null) c.setPassable(false);
 c = tree.createTree(-1325,560,2);
@@ -27147,6 +27589,9 @@ c = tree.createTree(-1265,615,0);
 if(c!=null) c.setPassable(false);
 c = new doodads.sheepFarm.bush(-1321,636,2);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment260() {
 c = new doodads.sheepFarm.bush(-979,636,1);
 if(c!=null) c.setPassable(false);
 c = tree.createTree(-1069,660,0);

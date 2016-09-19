@@ -1,5 +1,7 @@
 package units.characters.farmer;
 
+import java.awt.Color;
+
 import UI.tooltipString;
 import interactions.interactBox;
 import interactions.quest;
@@ -30,7 +32,7 @@ public class farmer extends unit {
 	////////////////
 	
 	// Default name.
-	private static String unitName = "Farmer";
+	private static String unitName = "Farmer Farmer";
 	
 	// Default movespeed.
 	private static int DEFAULT_FARMER_MOVESPEED = 1;
@@ -43,7 +45,7 @@ public class farmer extends unit {
 	
 	// The actual type.
 	private static unitType farmerType =
-			new humanType( "farmer",  // Name of unitType 
+			new humanType( "Farmer Farmer",  // Name of unitType 
 						 DEFAULT_FARMER_SPRITESHEET,
 					     DEFAULT_FARMER_MOVESPEED, // Movespeed
 					     DEFAULT_FARMER_JUMPSPEED // Jump speed
@@ -71,6 +73,9 @@ public class farmer extends unit {
 		
 		// Interactable.
 		setInteractable(true);
+		
+		// Name color
+		setNameColor(new Color(103,65,44));
 		
 		// Make adjustments on hitbox if we're in topDown.
 		// Set dimensions
@@ -166,7 +171,7 @@ public class farmer extends unit {
 		s.addChild(s);
 		
 		// Create the whole quest and add dialogue.
-		interactSequence = new interactBox(startOfConversation, this, true);
+		interactSequence = new interactBox(startOfConversation, this);
 		quest q = new quest(DEFAULT_QUEST_DESC, this, interactSequence);
 		
 		// If the quest is started, don't allow the person to do the whole dialogue.
@@ -191,6 +196,8 @@ public class farmer extends unit {
 				q.getDialogue().setTheText(startOfConversation);
 			}	
 		}
+		
+		interactSequence.getTextSeries().setWhoIsTalking(this);
 		
 		return q;
 	}

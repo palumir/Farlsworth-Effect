@@ -16,7 +16,7 @@ public class deathMenu extends UI.menu {
 	
 	// Buttons for death.
 	button respawnAtWell;
-	button respawnAtSaveBottle;
+	public button respawnAtSaveBottle;
 	
 	// Death menu
 	public deathMenu() {
@@ -29,18 +29,18 @@ public class deathMenu extends UI.menu {
 		menu = this;
 		
 		// Create buttons.
-		respawnAtWell = new button("Respawn at Last Save Point","respawnAtSaveBottle",
+		respawnAtSaveBottle = new button("Respawn at Last Save Point","respawnAtSaveBottle",
 				gameCanvas.getDefaultWidth()/2 - DEFAULT_BUTTON_WIDTH/2, 
 				gameCanvas.getDefaultHeight() - 300,
 				DEFAULT_BUTTON_WIDTH, 
 				DEFAULT_BUTTON_HEIGHT);
-		this.add(respawnAtWell);
-		respawnAtSaveBottle = new button("Respawn at Last Well","respawnAtWell",
+		this.add(respawnAtSaveBottle);
+		respawnAtWell = new button("Respawn at Last Well","respawnAtWell",
 				gameCanvas.getDefaultWidth()/2 - DEFAULT_BUTTON_WIDTH/2, 
 				gameCanvas.getDefaultHeight() - 230,
 				DEFAULT_BUTTON_WIDTH, 
 				DEFAULT_BUTTON_HEIGHT);
-		this.add(respawnAtSaveBottle);
+		this.add(respawnAtWell);
 	}
 	
 	// Select button
@@ -59,5 +59,6 @@ public class deathMenu extends UI.menu {
 		}
 		
 	}
+
 	
 }

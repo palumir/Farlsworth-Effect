@@ -113,6 +113,10 @@ public class player extends unit {
 	private String playerName = DEFAULT_PLAYER_NAME;
 	private zone currentZone = DEFAULT_ZONE;
 	
+	// Choices
+	public int chaosChoices = 0;
+	public int orderChoices = 0;
+	
 	// Savestate we loaded from
 	public saveState playerSaveState;
 	
@@ -130,7 +134,7 @@ public class player extends unit {
 	private bottle equippedBottle = null;
 	
 	// Player interface
-	private playerActionBar healthBar;
+	private playerActionBar actionBar;
 
 	///////////////
 	/// METHODS ///
@@ -425,21 +429,25 @@ public class player extends unit {
 		// Create the player. If we are a developer, give developer functions.
 		if(!isDeveloper()) {
 			thePlayer = new player(playerX, playerY, loadZone);
-			thePlayer.healthBar = new playerActionBar(5,5);
+			thePlayer.actionBar = new playerActionBar(5,5);
 		}
 		else thePlayer = new developer(playerX, playerY, loadZone);
 		
 		// Set our fields
 		thePlayer.setFacingDirection(newFacingDirection);
 		thePlayer.setPlayerInventory(loadedInventory);
-		if(s!=null) thePlayer.lastWell = s.lastWell;
 		
-		// If there's a bottleSave, put down the marker.
-		if(s!=null) {
+		// If there's a savestate.
+		if(s != null) {
+			thePlayer.chaosChoices = s.getChaosChoices();
+			thePlayer.orderChoices = s.getOrderChoices();
+			
+			thePlayer.lastWell = s.lastWell;
+			
 			thePlayer.lastSaveBottle = s.lastSaveBottle;
 			
 			// Create an indicator
-			if(s.lastSaveBottle != null) thePlayer.lastSaveBottleChargeIndicator = new savePoint((int)s.lastSaveBottle.getX(),(int)s.lastSaveBottle.getY());
+			if(s.lastSaveBottle != null) savePoint.createSavePoint();
 		}
 		
 		// Set that we have loaded the player once.
@@ -483,7 +491,7 @@ public class player extends unit {
 	
 	// Responding to key presses.
 	public void keyPressed(KeyEvent k) {
-		
+	
 		// Developer
 		if(isDeveloper()) {
 			((developer)(this)).devKeyPressed(k);
@@ -499,78 +507,82 @@ public class player extends unit {
 				developer.toggleTestMode();
 			}
 			
-			// Player presses i (inventory) key.
-			else if(k.getKeyCode() == KeyEvent.VK_I) { 
-				playerInventory.toggleDisplay();
-			}
-			
-			// Respond to inventory presses.
-			else if(playerInventory.isDisplayOn()) {
-				playerInventory.respondToKeyPress(k);
-			}
-			
-			// Respond to active item presses.
-			else if(playerInventory != null && 
-					playerInventory.activeSlots != null && 
-					inventory.activeSlotKeys.contains(k.getKeyCode())) {
-				
-				// Use the item for the key.
-				for(int i = 0; i < playerInventory.activeSlots.size(); i++) {
-					if(playerInventory.activeSlots.get(i).slot == k.getKeyCode()) {
-						playerInventory.activeSlots.get(i).use();
-						break;
-					}
-				}
-				
-			}
-			
-			// Respond to other presses (movement)
-			else {
-				// Shield on.
-				if(k.getKeyCode() == KeyEvent.VK_SHIFT) {
-					//shield(true);
-				}
-				
-				// Player presses left key.
-				if(k.getKeyCode() == KeyEvent.VK_A) { 
-					startMove("left");
-				}
-				
-				// Player presses right key.
-				if(k.getKeyCode() == KeyEvent.VK_D) { 
-					startMove("right");
-				}
-				
-				// Player presses up key, presumably to jump!
-				if(k.getKeyCode() == KeyEvent.VK_W) { 
-					if(mode.getCurrentMode() == platformer.name) {
-						startMove("up");
-						startJump();
-					}
-					else if(mode.getCurrentMode() == topDown.name) {
-						startMove("up");
-					}
-				}
-				
-				// Player presses down key
-				if(k.getKeyCode() == KeyEvent.VK_S) { 
-					if(mode.getCurrentMode() == platformer.name) {
-						startMove("down");
-					}
-					else if(mode.getCurrentMode() == topDown.name) {
-						startMove("down");
-					}
-				}
-				
+			else if(unitIsDead) { 
 				// Player presses bar key
 				if(k.getKeyCode() == KeyEvent.VK_ENTER) {
-					if(equippedBottle!=null) equippedBottle.useCharge();
+					if(deathMenu.menu != null && objects.contains(deathMenu.menu.respawnAtSaveBottle)) deathMenu.menu.selectButton(deathMenu.menu.respawnAtSaveBottle);
+				}
+			}
+			else {
+				
+				// Player presses i (inventory) key.
+				if(k.getKeyCode() == KeyEvent.VK_I) { 
+					playerInventory.toggleDisplay();
 				}
 				
+				// Respond to inventory presses.
+				else if(playerInventory.isDisplayOn()) {
+					playerInventory.respondToKeyPress(k);
+				}
 				
-				// Player presses e key
-				if(k.getKeyCode() == KeyEvent.VK_E) {
-					interact();
+				// Respond to active item presses.
+				else if(playerInventory != null && 
+						playerInventory.activeSlots != null && 
+						inventory.activeSlotKeys.contains(k.getKeyCode())) {
+					
+					// Use the item for the key.
+					for(int i = 0; i < playerInventory.activeSlots.size(); i++) {
+						if(playerInventory.activeSlots.get(i).slot == k.getKeyCode()) {
+							playerInventory.activeSlots.get(i).use();
+							break;
+						}
+					}
+					
+				}
+				
+				// Respond to other presses (movement)
+				else {
+					// Shield on.
+					if(k.getKeyCode() == KeyEvent.VK_SHIFT) {
+						//shield(true);
+					}
+					
+					// Player presses left key.
+					if(k.getKeyCode() == KeyEvent.VK_A) { 
+						startMove("left");
+					}
+					
+					// Player presses right key.
+					if(k.getKeyCode() == KeyEvent.VK_D) { 
+						startMove("right");
+					}
+					
+					// Player presses up key, presumably to jump!
+					if(k.getKeyCode() == KeyEvent.VK_W) { 
+						if(mode.getCurrentMode() == platformer.name) {
+							startMove("up");
+							startJump();
+						}
+						else if(mode.getCurrentMode() == topDown.name) {
+							startMove("up");
+						}
+					}
+					
+					// Player presses down key
+					if(k.getKeyCode() == KeyEvent.VK_S) { 
+						if(mode.getCurrentMode() == platformer.name) {
+							startMove("down");
+						}
+						else if(mode.getCurrentMode() == topDown.name) {
+							startMove("down");
+						}
+					}
+					
+					
+					// Player presses e key
+					if(k.getKeyCode() == KeyEvent.VK_E) {
+						interact();
+					}
 				}
 			}
 		}
@@ -861,11 +873,11 @@ public class player extends unit {
 	}
 
 	public playerActionBar getHealthBar() {
-		return healthBar;
+		return actionBar;
 	}
 
 	public void setHealthBar(playerActionBar healthBar) {
-		this.healthBar = healthBar;
+		this.actionBar = healthBar;
 	}
 
 	public static boolean isDeveloper() {

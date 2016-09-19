@@ -95,6 +95,9 @@ public class unit extends drawnObject  {
 	// The actual unit type.
 	private unitType typeOfUnit;
 	
+	// Color of name
+	private Color nameColor = Color.BLACK;
+	
 	// Width and height for topDown and platformer
 	protected int topDownWidth = 0;
 	protected int topDownHeight = 0;
@@ -201,7 +204,7 @@ public class unit extends drawnObject  {
 	protected int moveToY = 0;
 	
 	// Moving to a point?
-	protected boolean movingToAPoint = false;
+	private boolean movingToAPoint = false;
 	
 	// Units in attack range.
 	//protected ArrayList<unit> unitsInAttackRange;
@@ -995,7 +998,7 @@ public class unit extends drawnObject  {
 	
 	// Move to
 	public void moveTo(int newX, int newY) {
-		movingToAPoint = true;
+		setMovingToAPoint(true);
 		moveToX = newX;
 		moveToY = newY;
 		
@@ -1023,7 +1026,7 @@ public class unit extends drawnObject  {
 	
 	// Move towards a point
 	public void moveTowards() {
-		if(movingToAPoint) {
+		if(isMovingToAPoint()) {
 			if(Math.abs(moveToX - getDoubleX()) < getMoveSpeed() && Math.abs(moveToY - getDoubleY()) < getMoveSpeed()) {
 				
 				// If the next command is movement, move in that direction by
@@ -1070,7 +1073,7 @@ public class unit extends drawnObject  {
 				setDoubleY(moveToY);
 	
 				// Done moving to this point.
-				movingToAPoint = false;
+				setMovingToAPoint(false);
 			}
 			else {
 				// Set facing direction.
@@ -1747,7 +1750,7 @@ public class unit extends drawnObject  {
 	
 	// Combination of all movement functions boolean
 	public boolean isMoving() {
-		return movingVertically() || movingHorizontally() || movingToAPoint || followingUnit;
+		return movingVertically() || movingHorizontally() || isMovingToAPoint() || followingUnit;
 	}
 	
 	public void setCollision(boolean b) {
@@ -2137,6 +2140,22 @@ public class unit extends drawnObject  {
 
 	public void setDestroyTimer(float destroyTimer) {
 		this.destroyTimer = destroyTimer;
+	}
+
+	public boolean isMovingToAPoint() {
+		return movingToAPoint;
+	}
+
+	public void setMovingToAPoint(boolean movingToAPoint) {
+		this.movingToAPoint = movingToAPoint;
+	}
+
+	public Color getNameColor() {
+		return nameColor;
+	}
+
+	public void setNameColor(Color nameColor) {
+		this.nameColor = nameColor;
 	}
 	
 }

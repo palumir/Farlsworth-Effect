@@ -4,6 +4,7 @@ import modes.mode;
 import terrain.chunk;
 import terrain.generalChunkType;
 import terrain.groundTile;
+import utilities.utility;
 import zones.zone;
 
 public class grass extends groundTile {
@@ -28,7 +29,7 @@ public class grass extends groundTile {
 	// Create function
 	public static chunk createChunk(int newX, int newY, int i) {
 		if(!zone.loadedOnce) {
-			chunk t = new grass(newX,newY);
+			chunk t = new grass(newX,newY, utility.RNG.nextInt(typeReference.getChunkTypeSpriteSheet().getAnimation(0).size()));
 			t.setReloadObject(false);
 			return t;
 		}

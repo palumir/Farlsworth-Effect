@@ -118,6 +118,7 @@ public class horizontalGate extends chunk {
 				else if(isForestGateAndUnopenable() && !talkedToForestGateOnce) {
 					
 					if(interactTimes == 0) {
+						sheepFarm.talkingGateJokeExperienced.setCompleted(true);
 						s = startOfConversation.addChild("Open", "No.");
 						s.setTalker("Talking Gate");
 						s = s.addChild(null, "That's a pretty rude way to ask, don't you think?");

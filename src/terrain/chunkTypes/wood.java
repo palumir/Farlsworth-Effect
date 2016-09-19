@@ -1,9 +1,11 @@
 package terrain.chunkTypes;
 
+import terrain.chunk;
 import terrain.generalChunkType;
 import terrain.groundTile;
 import units.player;
 import utilities.time;
+import zones.zone;
 import effects.buff;
 import effects.buffs.slideEffect;
 
@@ -53,6 +55,18 @@ public class wood extends groundTile {
 			if(!containsSlide) { 
 				slideEffect s = new slideEffect(player.getPlayer()); 
 			}
+		}
+	}
+
+		// Create function
+	public static chunk createChunk(int newX, int newY, int i) {
+		if(!zone.loadedOnce) {
+			chunk t = new wood(newX,newY);
+			t.setReloadObject(false);
+			return t;
+		}
+		else {
+			return null;
 		}
 	}
 }

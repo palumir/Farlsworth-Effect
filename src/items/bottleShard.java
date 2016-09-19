@@ -3,6 +3,7 @@ package items;
 import UI.tooltipString;
 import drawing.spriteSheet;
 import interactions.event;
+import items.bottleShards.jumpBottleShard;
 import sounds.sound;
 import units.player;
 import utilities.saveState;
@@ -28,21 +29,12 @@ public abstract class bottleShard extends item {
 	// Does the player actually own the item?
 	public static boolean inInventory = false;
 	
+	// Total shards
+	public int totalShards = 3;
+	
 	///////////////
 	/// METHODS ///
 	///////////////
-	
-	// For bottle shard being in your inventory.
-	public bottleShard(String newName) {
-		super(newName,null,0,0,0,0);
-		
-		// It is, of course, equippable.
-		equippable = true;
-		
-		// Break up the spriteSheet. Assumed to be regular human character size, for now.
-		setDrawObject(false);
-		inInventory = false;
-	}
 	
 	// For bottle shard being in your floor
 	public bottleShard(String newName, int x, int y) {
@@ -57,6 +49,28 @@ public abstract class bottleShard extends item {
 		inInventory = false;
 	}
 	
+	// Respond to pickup
+	@Override
+	public void reactToPickup() {
+		
+		// Remove all shards from inventory.
+		player currPlayer = player.getPlayer();
+		int count = 0;
+		for(int i = 0; i < currPlayer.getPlayerInventory().size(); i++) {
+			item currItem = currPlayer.getPlayerInventory().get(i);
+			if(currItem.getName().equals(this.getName())) {
+				System.out.println("Go");
+				count++;
+			}
+		}
+		
+		if(count>=totalShards) {
+			this.buildBottle();
+		}
+	}
+	
+	public abstract void buildBottle();
+
 	// Update.
 	@Override
 	public void update() {

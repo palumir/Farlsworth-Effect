@@ -1,5 +1,6 @@
 package units.characters.farlsworth;
 
+import java.awt.Color;
 import java.util.ArrayList;
 
 import doodads.sheepFarm.fireLog;
@@ -19,6 +20,9 @@ import terrain.chunk;
 import units.boss;
 import units.player;
 import units.unitType;
+import units.characters.farlsworth.cinematics.farmFenceCinematic;
+import units.characters.farlsworth.cinematics.farmIntroCinematic;
+import units.characters.farlsworth.cinematics.flowerFarmCinematic;
 import units.unitCommands.commandList;
 import units.unitCommands.commands.moveCommand;
 import units.unitTypes.sheepFarm.sheep;
@@ -88,7 +92,7 @@ public class farlsworth extends boss {
 	private ArrayList<intTuple> p;
 	
 	// Sound.
-	private static String bleet = "sounds/effects/animals/sheep2.wav";
+	public static String bleet = "sounds/effects/animals/sheep2.wav";
 	private static String otherBleet = "sounds/effects/animals/sheep1.wav";
 	
 	// Are we in boss fight mode?
@@ -160,47 +164,10 @@ public class farlsworth extends boss {
 		textSeries startOfConversation = null;
 		
 		// Farlsworth in barn.
-		if(!pastSpawnFarm.isCompleted()) {
+		/*if(!pastSpawnFarm.isCompleted()) {
 			
 			// 0;
 			if(interactTimes == 0) {
-				// Start of conversation.
-				startOfConversation = new textSeries(null, "He's sent somebody to gather my wool, has he?");
-				s = startOfConversation.addChild(null, "Well ... ");
-				s = s.addChild(null, "Frig off.");
-				s = s.addChild(null, "You can't have it.");
-				s = s.addChild(null, "And don't try anything fishy, buddy.");
-				s = s.addChild(null, "This isn't my first rodeo.");
-				textSeries rodeo = s.addChild(null, "Why does farmer never try this himself?");
-				
-				// Give me your wool
-				textSeries giveMeYourWool = rodeo.addChild("\'Give me your wool\'", "Is that really all I'm good for these days?");
-				s =  giveMeYourWool.addChild(null, "My wool?");
-				s = s.addChild(null, "I don't think so, pal.");
-				s = s.addChild(null, "I will not be friggin objectified.");
-				s =  s.addChild(null, "You want my wool?");
-				s =  s.addChild(null, "Then you have to earn it.");
-				s =  s.addChild(null, "Come and get me.");
-				s.setEnd();
-				
-				// Farmer
-				textSeries farmer = rodeo.addChild("\'Isn't it \"the farmer\"?\'", "No, his name is actually Farmer.");
-				s = farmer.addChild(null, "And he wasn't even named that by his parents.");
-				s = s.addChild(null, "He got it changed to Farmer himself.");
-				s = s.addChild(null, "That man is extremely confusing.");
-				s = s.addChild(null, "I don't know what his problem is.");
-				s = s.addChild(null, "Or what your's is for that matter.");
-				textSeries whatDoYouWant = s.addChild(null, "What do you want?");
-				
-				whatDoYouWant.addChild(giveMeYourWool);
-				textSeries adventure = whatDoYouWant.addChild("\'I'm on an adventure\'", "An adventure, eh?");
-				s =  adventure.addChild(null, "Pfft. What would you know about adventures?");
-				s =  s.addChild(null, "I'm the king of adventures.");
-				s =  s.addChild(null, "Nobody does it better than ol' Farlsworth.");
-				s =  s.addChild(null, "You want an adventure?");
-				s =  s.addChild(null, "I'll show you a real adventure.");
-				s =  s.addChild(null, "Catch me if you can, bud.");
-				s.setEnd();
 			} 
 			
 			else {
@@ -375,7 +342,7 @@ public class farlsworth extends boss {
 				// Leave, lightning path, he likes you a little more.
 				
 			}
-		}
+		}*/
 		
 		return new interactBox(startOfConversation, this, true);
 	}
@@ -397,7 +364,7 @@ public class farlsworth extends boss {
 		player currPlayer = player.getPlayer();
 		
 		// Only do this stuff in the sheep farm. It's linear.
-		if(zone.getCurrentZone().getParentName().equals("farmLand")) {
+		/*if(zone.getCurrentZone().getParentName().equals("farmLand")) {
 			// If we are in the farm.
 			if(pastSpawnFarm != null && !pastSpawnFarm.isCompleted()) {
 				
@@ -1151,7 +1118,7 @@ public class farlsworth extends boss {
 					
 				}
 			}*/
-			else {	
+			/*else {	
 				// He's no longer in the zone.
 				if(sequencePart == 0 && (getAllCommands()==null || getAllCommands().size() == 0)) {
 					stopMove("all");
@@ -1159,7 +1126,7 @@ public class farlsworth extends boss {
 					setDoubleY(Integer.MIN_VALUE);
 				}
 			}
-		}
+		}*/
 	}
 	
 	// Interact with object. 
@@ -1180,6 +1147,8 @@ public class farlsworth extends boss {
 		super(sheepType, "Farlsworth", newX, newY);
 		
 		farlsworth = this;
+		
+		setNameColor(new Color(175,37,40));
 		
 		// Facing direction.
 		facingDirection = "Up";
@@ -1270,6 +1239,30 @@ public class farlsworth extends boss {
 		// If fence is attached, attach it
 		if(isFenceAttached.isCompleted()) {
 			attachFence();
+		}
+		
+		// Relocate Farlsworth
+		relocate();
+	}
+	
+	// Relocate
+	public void relocate() {
+		if(zone.getCurrentZone().getName().equals("sheepFarm")) {
+			if(!farmIntroCinematic.isCompleted.isCompleted()) {
+				// Leave him in his spawn spot.
+			}
+			else if(!farmFenceCinematic.isCompleted.isCompleted()) {
+				setDoubleX(5);
+				setDoubleY(-420);
+			}
+			else if(!flowerFarmCinematic.isCompleted.isCompleted()) {
+				setDoubleX(-1550);
+				setDoubleY(-5258+30);
+			}
+			else {
+				setDoubleX(-3463);
+				setDoubleY(-5550);
+			}
 		}
 	}
 	
