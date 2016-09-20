@@ -397,7 +397,7 @@ public class flowerFarmCinematic extends cinematic {
 		if(isSequence(numIfs++) && goNextTextSeries()) {
 			
 			// Set the next text and advance it.
-			addTextSeries(null, "Anyway ...", farlsworth);
+			addTextSeries(null, "Just be careful on this next area. It's pouring rain.", farlsworth);
 			farlsworth.setFacingDirection("Right");
 			advanceSequence();
 		}
@@ -405,15 +405,14 @@ public class flowerFarmCinematic extends cinematic {
 		if(isSequence(numIfs++) && goNextTextSeries()) {
 			
 			// Set the next text and advance it.
-			addTextSeries(null, "Be careful on this next area. It's pouring rain.", farlsworth);
-			farlsworth.setFacingDirection("Right");
+			addTextSeries(null, "The ground may get a bit slippery.", farlsworth);
 			advanceSequence();
 		}
 		
 		if(isSequence(numIfs++) && goNextTextSeries()) {
 			
 			// Set the next text and advance it.
-			addTextSeries(null, "It may get a bit slippery.", farlsworth);
+			addTextSeries(null, "Try not to die.", farlsworth);
 			advanceSequence();
 		}
 		
