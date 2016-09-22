@@ -1253,6 +1253,9 @@ public class developer extends player {
 	public static void toggleTestMode() {
 		
 		groundTile.groundTiles.clear();
+		drawnObject.objects.clear();
+		drawnObject.dontReloadTheseObjects.clear();
+		zone.loadedOnce = false;
 		
 		// Test mode
 		if(player.isDeveloper()) {

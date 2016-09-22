@@ -34,7 +34,7 @@ public class critBloodSquirt extends effect {
 	private static String DEFAULT_EFFECT_SPRITESHEET = "images/effects/combat/" + DEFAULT_EFFECT_NAME + ".png";
 	
 	// Duration
-	private static float DEFAULT_ANIMATION_DURATION = 0.35f;
+	private static float DEFAULT_ANIMATION_DURATION = 0.45f;
 	
 	// Effect sound
 	protected String effectSound1 = "sounds/effects/combat/splatter1.wav";

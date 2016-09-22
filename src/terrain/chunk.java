@@ -453,5 +453,6 @@ public class chunk extends drawnObject {
 	public void setChunkImage(BufferedImage chunkImage) {
 		this.chunkImage = chunkImage;
 	}
+
 	
 }

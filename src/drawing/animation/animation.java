@@ -78,9 +78,9 @@ public class animation {
 		
 		// Get the correct current frame.
 		if(startTime == 0) startTime = time.getTime();
-		int howMuchTimeHasElapsed = (int) (time.getTime() - startTime);
-		int howMuchTimePerFrame = (int) (getTimeToComplete()*1000/((endFrame + 1) - getStartFrame()));
-		float correctFrame = getStartFrame() + ((float)howMuchTimeHasElapsed)/((float)howMuchTimePerFrame);
+		double howMuchTimeHasElapsed = (double) (time.getTime() - startTime);
+		double howMuchTimePerFrame = (double) (getTimeToComplete()*1000/((endFrame + 1) - getStartFrame()));
+		double correctFrame = getStartFrame() + ((double)howMuchTimeHasElapsed)/((double)howMuchTimePerFrame);
 		if(correctFrame >= endFrame+1) {
 			startTime = time.getTime();
 			correctFrame = getStartFrame();

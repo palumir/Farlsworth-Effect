@@ -54,7 +54,6 @@ public abstract class bottleShard extends item {
 	public void reactToPickup() {
 		
 		// Remove all shards from inventory.
-		discoverAnimation.destroy();
 		player currPlayer = player.getPlayer();
 		int count = 0;
 		for(int i = 0; i < currPlayer.getPlayerInventory().size(); i++) {
@@ -65,6 +64,7 @@ public abstract class bottleShard extends item {
 		}
 		
 		if(count>=totalShards) {
+			discoverAnimation.destroy();
 			this.buildBottle();
 		}
 	}

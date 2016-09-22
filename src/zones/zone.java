@@ -6,6 +6,8 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 import UI.tooltipString;
 import drawing.drawnObject;
+import modes.platformer;
+import modes.topDown;
 import sounds.music;
 import terrain.chunk;
 import terrain.groundTile;
@@ -34,6 +36,9 @@ public abstract class zone {
 	
 	// Zone loaded?
 	protected boolean zoneLoaded = false;
+	
+	// Mode
+	private String mode;
 	
 	// Constructor
 	public zone(String newName, String parentName) {
@@ -139,6 +144,18 @@ public abstract class zone {
 	/////////////////////////
 	// Getters and setters //
 	/////////////////////////
+	
+	// Set mode
+	public void setMode(String s) {
+		if(s.equals("topDown")) {
+			topDown.setMode();
+		}
+		if(s.equals("platformer")) {
+			platformer.setMode();
+		}
+		
+		mode = s;
+	}
 	public static zone getCurrentZone() {
 		return currentZone;
 	}
@@ -166,4 +183,6 @@ public abstract class zone {
 	public void setParentName(String parentName) {
 		this.parentName = parentName;
 	}
+
+	public abstract String getMode();
 }

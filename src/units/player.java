@@ -144,6 +144,7 @@ public class player extends unit {
 		
 		// Set movespeed.
 		setMoveSpeed(DEFAULT_PLAYER_MOVESPEED);
+		setAllowSlowMovement(true);
 		
 		// Set sounds.
 		setAttackSound(DEFAULT_ATTACK_SOUND);
@@ -356,16 +357,6 @@ public class player extends unit {
 		// Load the player into the zone.
 		thePlayer.currentZone.loadZone();
 		
-		// Make adjustments on hitbox if we're in topDown.
-		if(mode.getCurrentMode().equals("topDown")) {
-			thePlayer.setHeight(DEFAULT_TOPDOWN_HEIGHT);
-			thePlayer.setHitBoxAdjustmentY(DEFAULT_TOPDOWN_ADJUSTMENT_Y);
-		}
-		else {
-			thePlayer.setHeight(DEFAULT_PLATFORMER_HEIGHT);
-			thePlayer.setHitBoxAdjustmentY(DEFAULT_PLATFORMER_ADJUSTMENT_Y);
-		}
-		
 		return thePlayer;
 	}
 	
@@ -424,6 +415,11 @@ public class player extends unit {
 			}
 		}
 		
+		// Preload the zone's mode.
+		if(loadZone != null) {
+			mode.setCurrentMode(loadZone.getMode());
+		}
+		
 		// Create the player. If we are a developer, give developer functions.
 		if(!isDeveloper()) {
 			thePlayer = new player(playerX, playerY, loadZone);
@@ -445,7 +441,15 @@ public class player extends unit {
 			thePlayer.lastSaveBottle = s.lastSaveBottle;
 			
 			// Create an indicator
-			if(s.lastSaveBottle != null) savePoint.createSavePoint();
+			if(s.lastSaveBottle != null) {
+				new savePoint(
+						(int)thePlayer.lastSaveBottle.getX(),
+						thePlayer.getIntY() - 
+						(
+						((int)thePlayer.lastSaveBottle.getY() + savePoint.DEFAULT_SPRITE_HEIGHT)
+						- (thePlayer.getIntY() + thePlayer.getHeight()))
+						);
+			}
 		}
 		
 		// Set that we have loaded the player once.
@@ -460,13 +464,6 @@ public class player extends unit {
 	// Make the player the main player.
 	public void makeCurrentPlayer() {
 		setCurrentPlayer(this);
-	}
-	
-	// Respond to touchdown
-	public void respondToTouchDown() {
-		if(jumpBottle.bottleRef != null) {
-			jumpBottle.bottleRef.setAlreadyDoubleJumped(false);
-		}
 	}
 	
 	// Make the current player stop doing things
@@ -548,9 +545,10 @@ public class player extends unit {
 				// Respond to other presses (movement)
 				else {
 					// Shield on.
-					if(k.getKeyCode() == KeyEvent.VK_SHIFT) {
-						//shield(true);
-					}
+					/*if(k.getKeyCode() == KeyEvent.VK_P) {
+						effect blood = new critBloodSquirt(getIntX() - critBloodSquirt.getDefaultWidth()/2 + topDownWidth/2,
+								   getIntY() - critBloodSquirt.getDefaultHeight()/2);
+					}*/
 					
 					// Player presses left key.
 					if(k.getKeyCode() == KeyEvent.VK_A) { 

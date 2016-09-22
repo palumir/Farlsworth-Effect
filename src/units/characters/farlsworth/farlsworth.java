@@ -20,9 +20,11 @@ import terrain.chunk;
 import units.boss;
 import units.player;
 import units.unitType;
+import units.characters.farlsworth.cinematics.beforeTombCinematic;
 import units.characters.farlsworth.cinematics.farmFenceCinematic;
 import units.characters.farlsworth.cinematics.farmIntroCinematic;
 import units.characters.farlsworth.cinematics.flowerFarmCinematic;
+import units.characters.farmer.cinematics.farmerIntroCinematic;
 import units.unitCommands.commandList;
 import units.unitCommands.commands.moveCommand;
 import units.unitTypes.sheepFarm.sheep;
@@ -60,6 +62,9 @@ public class farlsworth extends boss {
 	
 	// Default jump speed
 	private static int DEFAULT_UNIT_JUMPSPEED = 10;
+	
+	// Name color
+	private static Color DEFAULT_NAME_COLOR = new Color(51, 51, 51);
 	
 	// FARLSWORTH sprite stuff.
 	private static String DEFAULT_FARLSWORTH_SPRITESHEET = "images/units/animals/sheep.png";
@@ -118,41 +123,9 @@ public class farlsworth extends boss {
 	public static event pastTombExit;
 	private static event pastDenmother;
 	
-	// Events that make him like you more TODO:
-	private static event didYouTellHimAboutYourAdventure; // You didn't grab him twice.
-	private static event didYouLieToHimAboutHavingTheKey; // Did you lie to him about having the gate key?
-	private static event didYouOpenTheGateForHim; // Did you open the fence for him?
-	private static event didYouTryToGrabHim; // You tried to grab him at the flower field.
-	private static event doYouSpeakSheep; // Do you speak sheep?
-	private static event didYouSetTheForestOnFire; // Is the forest on fire?
-	
 	///////////////
 	/// METHODS ///
 	///////////////
-	
-	// Does Farlsworth like you? A function that determines if he does or not.
-	public boolean doesFarlsworthLikeYou() {
-		float numberOfDislikes = 0;
-		float numberOfPossibleDislikes = 0;
-		if(pastSpawnFarm.isCompleted()) {
-			if(didYouLieToHimAboutHavingTheKey.isCompleted()) numberOfDislikes++;
-			if(!didYouOpenTheGateForHim.isCompleted()) numberOfDislikes++;
-			if(!didYouTellHimAboutYourAdventure.isCompleted()) numberOfDislikes++;
-			numberOfPossibleDislikes += 3;
-		}
-		else return false;
-		if(pastFlowerPatch.isCompleted()) {
-			if(didYouTryToGrabHim.isCompleted()) numberOfDislikes++;
-			numberOfPossibleDislikes += 1;
-		}
-		if(pastTombEntrance.isCompleted()) {
-			if(doYouSpeakSheep.isCompleted()) if(numberOfDislikes>=1) numberOfDislikes--;
-		}
-		if(pastTombExit.isCompleted()) {
-			
-		}
-		return numberOfDislikes/numberOfPossibleDislikes <= .5f;
-	}
 	
 	// Create interact sequence
 	public interactBox makeNormalInteractSequence() {
@@ -1148,7 +1121,7 @@ public class farlsworth extends boss {
 		
 		farlsworth = this;
 		
-		setNameColor(new Color(175,37,40));
+		setNameColor(DEFAULT_NAME_COLOR);
 		
 		// Facing direction.
 		facingDirection = "Up";
@@ -1205,14 +1178,6 @@ public class farlsworth extends boss {
 		pastTombEntrance = new event("farlsworthPastTombEntrance");
 		pastTombExit = new event("farlsworthPastTombExit");
 		
-		// Good/bad events
-		didYouOpenTheGateForHim = new event("farlsworthDidYouOpenTheGateForHim");
-		didYouTryToGrabHim = new event("farlsworthDidYouTryToGrabHim");
-		didYouTellHimAboutYourAdventure = new event("farlsworthDidYouTellHimAboutYourAdventure");
-		didYouLieToHimAboutHavingTheKey = new event("farlsworthDidYouLieToHimAboutHavingTheKey");
-		doYouSpeakSheep = new event("farlsworthDoYouSpeakSheep");
-		didYouSetTheForestOnFire = new event("farlsworthDidYouSetTheForestOnFire");
-		
 		// If he's lost, don't spawn him in the farm.
 		if(pastSpawnFarm.isCompleted() && 
 		   player.getPlayer().getCurrentZone().getName().equals("sheepFarm")) {
@@ -1250,6 +1215,9 @@ public class farlsworth extends boss {
 		if(zone.getCurrentZone().getName().equals("sheepFarm")) {
 			if(!farmIntroCinematic.isCompleted.isCompleted()) {
 				// Leave him in his spawn spot.
+				if(farmerIntroCinematic.playerPressedNoABunch.isCompleted()) {
+					setFacingDirection("Left");
+				}
 			}
 			else if(!farmFenceCinematic.isCompleted.isCompleted()) {
 				setDoubleX(5);
@@ -1259,20 +1227,14 @@ public class farlsworth extends boss {
 				setDoubleX(-1550);
 				setDoubleY(-5258+30);
 			}
-			else {
+			else if(!beforeTombCinematic.isCompleted.isCompleted()) {
 				setDoubleX(-3463);
 				setDoubleY(-5550);
 			}
+			else {
+				destroy();
+			}
 		}
-	}
-	
-	// Print state of affairs with farlsworth
-	public void printFarlsworthEvents() {
-		System.out.println("farlsworthDidYouOpenTheGateForHim" + didYouOpenTheGateForHim.isCompleted());
-		System.out.println("farlsworthDidYouTryToGrabHim" + didYouTryToGrabHim.isCompleted());
-		System.out.println("didYouTellHimAboutYourAdventure" + didYouTellHimAboutYourAdventure.isCompleted());
-		System.out.println("didYouLieToHimAboutHavingTheKey" + didYouLieToHimAboutHavingTheKey.isCompleted());
-		System.out.println("didYouSpeakSheep" + doYouSpeakSheep.isCompleted());
 	}
 	
 	// React to pain.

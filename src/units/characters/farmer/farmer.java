@@ -13,7 +13,13 @@ import units.humanType;
 import units.player;
 import units.unit;
 import units.unitType;
+import units.characters.farlsworth.cinematics.beforeTombCinematic;
+import units.characters.farlsworth.cinematics.farmFenceCinematic;
+import units.characters.farlsworth.cinematics.farmIntroCinematic;
+import units.characters.farlsworth.cinematics.flowerFarmCinematic;
+import units.characters.farmer.cinematics.farmerIntroCinematic;
 import units.unitTypes.sheepFarm.sheep;
+import zones.zone;
 
 public class farmer extends unit {
 	
@@ -34,8 +40,14 @@ public class farmer extends unit {
 	// Default name.
 	private static String unitName = "Farmer Farmer";
 	
+	// Farmer
+	public static farmer farmer;
+	
 	// Default movespeed.
 	private static int DEFAULT_FARMER_MOVESPEED = 1;
+	
+	// Default name color
+	private static Color DEFAULT_NAME_COLOR = new Color(103,65,44);
 	
 	// Default jump speed
 	private static int DEFAULT_FARMER_JUMPSPEED = 10;
@@ -49,7 +61,7 @@ public class farmer extends unit {
 						 DEFAULT_FARMER_SPRITESHEET,
 					     DEFAULT_FARMER_MOVESPEED, // Movespeed
 					     DEFAULT_FARMER_JUMPSPEED // Jump speed
-						);	   
+						);
 	
 	//////////////
 	/// FIELDS ///
@@ -63,6 +75,7 @@ public class farmer extends unit {
 	
 	// Interact sequence
 	private interactBox interactSequence;
+
 	
 	///////////////
 	/// METHODS ///
@@ -71,11 +84,13 @@ public class farmer extends unit {
 	public farmer(int newX, int newY) {
 		super(farmerType, newX, newY);
 		
+		farmer = this;
+		
 		// Interactable.
 		setInteractable(true);
 		
 		// Name color
-		setNameColor(new Color(103,65,44));
+		setNameColor(DEFAULT_NAME_COLOR);
 		
 		// Make adjustments on hitbox if we're in topDown.
 		// Set dimensions
@@ -86,15 +101,104 @@ public class farmer extends unit {
 		topDownHeight = DEFAULT_TOPDOWN_HEIGHT;
 		topDownWidth = DEFAULT_TOPDOWN_WIDTH;
 		setHitBoxAdjustmentY(getDefaultHitBoxAdjustmentY());
-		setFacingDirection("Down");
+		farmer.setFacingDirection("Up");
 		
 		// Create quest.
-		farlsworthQuest = makeQuest();
-		if(!farlsworthQuest.isStarted()) hasQuest();
+		//farlsworthQuest = makeQuest();
+		//if(!farlsworthQuest.isStarted()) hasQuest();
+		relocate();
+	}
+	
+	// Create interact sequence
+	public interactBox makeNormalInteractSequence() {
+		
+		// Placeholder for each individual textSeries.
+		textSeries s;
+					
+		// Start of conversation.
+		textSeries startOfConversation = null;
+		
+		// If the person said no a bunch and the farmer was in Farlsworth's interaction.
+		if(farmerIntroCinematic.playerPressedNoABunch.isCompleted() && farmIntroCinematic.isCompleted.isCompleted()) {
+			if(farmFenceCinematic.fenceJokeExperienced.isCompleted()) {
+				startOfConversation = new textSeries(null, "I can't remember how to get back to my house from here.");
+				s = startOfConversation.addChild(null, "I usually walk along the fence.");
+				s = s.addChild(null, "I guess this is my house now.");
+				s.setEnd();
+			}
+			else {
+				startOfConversation = new textSeries(null, "You'd better go with him.");
+				s = startOfConversation.addChild(null, "But he did call you a dumby.");
+				s = s.addChild(null, "You should beat him up for that.");
+				s = s.addChild(null, "He's a sheep, you'd probably win.");
+				s = s.addChild(null, "Punch him right in the wool.");
+				s.setEnd();
+			}
+			
+		}
+		
+		else if(farmerIntroCinematic.isCompleted.isCompleted()) {
+			
+			if(sheep.sheepHitABunchJoke.isCompleted()) {
+				startOfConversation = new textSeries(null, "Why are you beating the turd out of my sheep?");
+				s = startOfConversation.addChild(null, "They're immortal. It's actually pretty annoying.");
+				s = s.addChild(null, "I can never have lamb for dinner.");
+				s = s.addChild(null, "But there's plenty of wool to go around.");
+				s = s.addChild(null, "So I guess that's pretty dope.");
+				s.setEnd();
+			}
+			else  {
+				if(farmIntroCinematic.isCompleted.isCompleted() && !farmFenceCinematic.isCompleted.isCompleted()) {
+					startOfConversation = new textSeries(null, "I think Frangurns needs to go to the bathroom.");
+					s = startOfConversation.addChild(null, "He's standing at the fence waiting for you.");
+					s = s.addChild(null, "Can you let him out for his potty break?");
+					s = s.addChild(null, "I can't do it because my pizza's almost ready.");
+					s.setEnd();
+				}	
+				
+				if(farmIntroCinematic.isCompleted.isCompleted() && farmFenceCinematic.isCompleted.isCompleted()) {
+					startOfConversation = new textSeries(null, "Farnsbirth darted off to the North.");
+					s = startOfConversation.addChild(null, "There's wolves in that direction!");
+					s = s.addChild(null, "You better go make sure he's okay.");
+					s = s.addChild(null, "I can't do it because I have a delicious pie baking.");
+					s.setEnd();
+				}	
+				
+				else {
+					startOfConversation = new textSeries(null, "Are you confused?");
+					s = startOfConversation.addChild(null, "Farnsgirth is in the pen to the East.");
+					s = s.addChild(null, "Please go get his wool for me.");
+					s = s.addChild(null, "I can't get it because I already asked you to.");
+					s = s.addChild(null, "So it would therefore be rude of me.");
+					s = s.addChild(null, "And I'm not rude. I'm chill.");
+					s.setEnd();
+				}
+			}	
+		}
+			
+		return new interactBox(startOfConversation, this);
+	}
+	
+	// Relocate
+	public void relocate() {
+		if(zone.getCurrentZone().getName().equals("sheepFarm")) {
+			if(farmerIntroCinematic.playerPressedNoABunch.isCompleted()) {
+				setDoubleX(260);
+				setDoubleY(-394);
+				setFacingDirection("Right");
+				
+				if(farmIntroCinematic.isCompleted.isCompleted()) {
+					setFacingDirection("Down");
+				}
+			}
+			else if(farmerIntroCinematic.isCompleted.isCompleted()) {
+				setFacingDirection("Down");
+			}
+		}
 	}
 	
 	// Create conversation
-	public quest makeQuest() {
+	/*public quest makeQuest() {
 		
 		// Description
 		String DEFAULT_QUEST_DESC = "Retrieve Farlsworth's wool";
@@ -103,9 +207,19 @@ public class farmer extends unit {
 		textSeries s;
 		
 		// Start of conversation.
-		textSeries startOfConversation = new textSeries(null, "<insert funny dialogue>");
-		s = startOfConversation.addChild(null, "<frig off for now>");
-		s = s.addChild(null, "<insert friggin pizza joke or something>");
+		textSeries startOfConversation = new textSeries(null, "Holy heck, where did you come from!?");
+		textSeries why = startOfConversation.addChild("'Why are you standing there?'", "I was trying to figure out which building is my house.");
+		s = why.addChild(null, "I know one thing for sure.");
+		s = why.addChild(null, "I know one thing for sure.");
+		s = s.addChild(null, "I'm pretty sure that's a squirrel house.");
+		
+		
+		
+		textSeries bridge = startOfConversation.addChild("'Over the bridge'", "There's a bridge in my farm?");
+		
+		
+		
+		s = why.addChild(null, "<insert friggin pizza joke or something>");
 		s = s.addChild(null, "Farlsworth should be on his own in the Eastern pen.");
 		textSeries question = s.addChild(null, "Can you grab his wool for me?");
 		
@@ -200,7 +314,7 @@ public class farmer extends unit {
 		interactSequence.getTextSeries().setWhoIsTalking(this);
 		
 		return q;
-	}
+	}*/
 	
 	// Sequence number
 	int sequenceNumber = 0;
@@ -232,12 +346,22 @@ public class farmer extends unit {
 		}
 	}
 	
+	// Farmer intro cinematic
+	farmerIntroCinematic intro;
+	
 	// Interact with object. Should be over-ridden.
 	public void interactWith() { 
-		if(!farlsworthQuest.completed())  {
-			farlsworthQuest = makeQuest();
+		// Tomb patch cinematic
+		if(!intro.isCompleted.isCompleted()
+				&& (intro == null || !intro.isInProgress())
+				&& !farmerIntroCinematic.isCompleted.isCompleted()) {
+			intro = new farmerIntroCinematic();
+			intro.start();
+		}
+		else {
 			faceTowardPlayer();
-			farlsworthQuest.getInteractBox().toggleDisplay();
+			interactSequence = makeNormalInteractSequence();
+			interactSequence.toggleDisplay();
 		}
 	}
 	

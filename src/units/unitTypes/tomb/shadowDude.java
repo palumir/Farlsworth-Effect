@@ -111,10 +111,6 @@ public class shadowDude extends unit {
 	float slowTo = 0.1f;
 	float hurtEvery = 0.05f;
 	
-	// How lenient are we in hurting people?
-	// How many units of space do we reduce the radius of pain by?
-	private static int leniency = 9;
-	
 	@Override
 	public void hurtPeople(int leniency) {
 		// If someone is in the explosion radius, hurt.

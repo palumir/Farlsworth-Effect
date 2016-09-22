@@ -22,6 +22,7 @@ public class farmFenceCinematic extends cinematic {
 	
 	// Event
 	public static event isCompleted = new event(MethodHandles.lookup().lookupClass().getName() + "isCompleted");
+	public static event fenceJokeExperienced = new event("farmFenceCinematicFenceJokeExperienced");
 
 	public farmFenceCinematic() {
 		super("farmFenceCinematic");
@@ -54,6 +55,13 @@ public class farmFenceCinematic extends cinematic {
 		
 		textSeries s;
 		int numIfs = 0;
+		
+		if(isSequence(numIfs++) && goNextTextSeries()) {
+			
+			// Set the next text and advance it.
+			addTextSeries(null, "I was trying to make a dramatic exit.", farlsworth);
+			advanceSequence();
+		}
 		
 		if(isSequence(numIfs++) && goNextTextSeries()) {
 			
@@ -122,19 +130,20 @@ public class farmFenceCinematic extends cinematic {
 			
 			if(isSequence(numIfs++)) {
 				farlsworth.setFacingDirection("Up");
-				waitFor(1f);
+				waitFor(1.4f);
 				advanceSequence();
 			}
 			
 			if(isSequence(numIfs++)) {
 				farlsworth.setFacingDirection("Down");
-				waitFor(1f);
+				waitFor(1.4f);
 				advanceSequence();
 			}
 			
 			if(isSequence(numIfs++) && goNextTextSeries()) {
 				addTextSeries(null, "Catch me if you can.",farlsworth);
 				farlsworth.attachFence();
+				fenceJokeExperienced.setCompleted(true);
 				runFarlsworthAway();
 				sequencePart = 100;
 			}

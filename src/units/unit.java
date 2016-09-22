@@ -116,7 +116,7 @@ public class unit extends drawnObject  {
 	// Combat
 	// Does the unit kill the player?
 	protected boolean killsPlayer = false;
-	
+
 	// Has the unit
 	protected boolean unitIsDead = false;
 	protected long unitDiedAt = 0;
@@ -164,6 +164,9 @@ public class unit extends drawnObject  {
 	private boolean touchingGround = false;
 	private boolean inAir = true;
 	
+	// Double jumping?
+	private boolean doubleJumping = false;
+	
 	// Movement buffs/debuffs
 	private ArrayList<movementBuff> movementBuffs;
 	
@@ -182,6 +185,10 @@ public class unit extends drawnObject  {
 	public boolean movingUp = false;
 	protected String facingDirection = DEFAULT_FACING_DIRECTION;
 	protected boolean collisionOn = true;
+	
+	// Slow movement
+	private boolean allowSlowMovement = false;
+	private int moveFrame = 0;
 	
 	// Movement for slippery stuff
 	private float movementAcceleration = 0;
@@ -331,13 +338,13 @@ public class unit extends drawnObject  {
 	}
 	
 	// Hurting people leniency
-	public static int leniency = 9;
+	public static int leniency = 8;
 	
 	// Hurt people, if we do.
 	public void hurtPeople(int leniency) {
 		if(killsPlayer) {
 			player currPlayer = player.getPlayer();
-			if(currPlayer.isWithin(this.getIntX() + leniency, this.getIntY() + leniency, this.getIntX() + this.getWidth() - leniency, this.getIntY() + this.getHeight() - leniency)) {
+			if(currPlayer.playerLoaded && currPlayer.isWithin(this.getIntX() + leniency, this.getIntY() + leniency, this.getIntX() + this.getWidth() - leniency, this.getIntY() + this.getHeight() - leniency)) {
 				currPlayer.hurt(1, 1);
 			}
 		}
@@ -603,7 +610,7 @@ public class unit extends drawnObject  {
 			// Accelerate
 			if(getFallSpeed() < DEFAULT_GRAVITY_MAX_VELOCITY){
 				setFallSpeed(getFallSpeed() + DEFAULT_GRAVITY_ACCELERATION);
-				if(!tryJump) {
+				if(!tryJump && !doubleJumping) {
 				}
 				else {
 					setFallSpeed(getFallSpeed() - DEFAULT_JUMP_SHORTEN_ACCELERATION);
@@ -1351,7 +1358,10 @@ public class unit extends drawnObject  {
 		setJumping(false);
 		touchingGround = true;
 		inAir = (getFallSpeed() != 0);
-		respondToTouchDown();
+		if(!inAir) {
+			doubleJumping = false;
+			respondToTouchDown();
+		}
 	}
 	
 	// Respond to touchdown
@@ -1424,6 +1434,13 @@ public class unit extends drawnObject  {
 				if(Math.abs(actualMoveY) > getMoveSpeed()) {
 					inAir = true;
 				}
+			}
+			
+			// Slow movement
+			if(allowSlowMovement && moveFrame<3 && (actualMoveY!=0||actualMoveX!=0)) {
+				moveFrame++;
+				actualMoveY /= (4-moveFrame);
+				actualMoveX /= (4-moveFrame);
 			}
 			
 			// Deal with animations.
@@ -1515,6 +1532,11 @@ public class unit extends drawnObject  {
 		if(direction=="vertical"){
 			setMovingUp(false);
 			setMovingDown(false);
+		}
+		
+		// First move frame is true since we stopped
+		if(!isMoving()) {
+			moveFrame = 0;
 		}
 	}
 	
@@ -1727,14 +1749,14 @@ public class unit extends drawnObject  {
 	public void hasQuest() {
 		int spawnX = (getIntX() + getWidth()/2) - questMark.DEFAULT_CHUNK_WIDTH/2;
 		int spawnY = (int)(getIntY() - 2.5f*questMark.DEFAULT_CHUNK_HEIGHT);
-		questIcon = new questMark(spawnX, spawnY, 0);
-		questIcon.attachToObject(this);
+		//questIcon = new questMark(spawnX, spawnY, 0);
+		//questIcon.attachToObject(this);
 	}
 	
 	// Set a unit to have a quest.
 	public void noQuest() {
 		if(questIcon != null) {
-			questIcon.destroy();
+		//	questIcon.destroy();
 		}
 	}
 	
@@ -2186,6 +2208,22 @@ public class unit extends drawnObject  {
 
 	public void setFallSpeed(float fallSpeed) {
 		this.fallSpeed = fallSpeed;
+	}
+
+	public boolean isDoubleJumping() {
+		return doubleJumping;
+	}
+
+	public void setDoubleJumping(boolean doubleJumping) {
+		this.doubleJumping = doubleJumping;
+	}
+
+	public boolean isAllowSlowMovement() {
+		return allowSlowMovement;
+	}
+
+	public void setAllowSlowMovement(boolean allowSlowMovement) {
+		this.allowSlowMovement = allowSlowMovement;
 	}
 	
 }

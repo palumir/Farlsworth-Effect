@@ -33,8 +33,6 @@ public class jumpBottle extends bottle {
 	//////////////
 	/// FIELDS ///
 	//////////////
-	// Already double jumped.
-	private boolean alreadyDoubleJumped = false;
 	
 	public static spriteSheet bottleSpriteSheetRef = new spriteSheet(new spriteSheetInfo(
 			"images/doodads/items/jumpBottle.png", 
@@ -75,25 +73,16 @@ public class jumpBottle extends bottle {
 	@Override
 	public void useCharge() {
 		if(getChargesLeft() > 0) {
-			if(!isAlreadyDoubleJumped()) {
-				sound s = new sound(bottle.bottleDrink);
-				s.start();
-				setChargesLeft(getChargesLeft() - 1);
-				doubleJump();
-			}
-			else {
-				player currPlayer = player.getPlayer();
-				effect e = new floatingString("On Cooldown", DEFAULT_DROP_COLOR, currPlayer.getIntX() + currPlayer.getWidth()/2, currPlayer.getIntY() + currPlayer.getHeight()/2, 1.3f);
-				e.setAnimationDuration(3f);
-			}
+			sound s = new sound(bottle.bottleDrink);
+			s.start();
+			setChargesLeft(getChargesLeft() - 1);
+			doubleJump();
 		}
 	}
 	
 	// Doublejump
 	public void doubleJump() {
-		setAlreadyDoubleJumped(true);
-		player.getPlayer().setAlreadyJumped(true);
-		player.getPlayer().setJumping(true);
+		player.getPlayer().touchDown();
 		player.getPlayer().setFallSpeed(-player.getPlayer().getJumpSpeed());
 	}
 	
@@ -119,13 +108,5 @@ public class jumpBottle extends bottle {
 		else {
 			return bottleSpriteSheetRef.getSprite(3, 0); // Full bottle.
 		}
-	}
-
-	public boolean isAlreadyDoubleJumped() {
-		return alreadyDoubleJumped;
-	}
-
-	public void setAlreadyDoubleJumped(boolean alreadyDoubleJumped) {
-		this.alreadyDoubleJumped = alreadyDoubleJumped;
 	}
 }
