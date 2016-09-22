@@ -6,7 +6,6 @@ import java.awt.Graphics;
 import drawing.gameCanvas;
 import drawing.animation.animation;
 import effects.effectTypes.rainFall;
-import effects.effectTypes.rainSplash;
 import sounds.sound;
 import units.player;
 import utilities.time;

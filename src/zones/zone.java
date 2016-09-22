@@ -6,6 +6,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 import UI.tooltipString;
 import drawing.drawnObject;
+import main.main;
 import modes.platformer;
 import modes.topDown;
 import sounds.music;
@@ -62,11 +63,6 @@ public abstract class zone {
 	public void loadZone() {
 		currentZone = this;
 		loadSpecificZoneStuff();
-		
-		// Sort chunks.
-		chunk.sortChunks();
-		groundTile.sortGroundTiles();
-		
 		loadedOnce = true;
 		zoneLoaded = true;
 	}

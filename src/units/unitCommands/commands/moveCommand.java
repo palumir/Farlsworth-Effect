@@ -1,7 +1,6 @@
 package units.unitCommands.commands;
 
 import units.unitCommand;
-import units.unitCommands.positionedCommand;
 import units.unitCommands.positionedMovementCommand;
 
 public class moveCommand extends positionedMovementCommand {

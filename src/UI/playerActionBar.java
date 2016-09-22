@@ -6,11 +6,9 @@ import java.awt.event.KeyEvent;
 
 import drawing.drawnObject;
 import drawing.gameCanvas;
-import interactions.quest;
 import items.bottle;
 import items.item;
 import units.player;
-import utilities.imageUtils;
 
 public class playerActionBar extends interfaceObject  {
 	

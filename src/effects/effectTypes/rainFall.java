@@ -1,14 +1,10 @@
 package effects.effectTypes;
 
-import drawing.gameCanvas;
 import drawing.spriteSheet;
 import drawing.spriteSheet.spriteSheetInfo;
 import effects.effect;
 import effects.effectType;
 import modes.mode;
-import units.player;
-import utilities.time;
-import utilities.utility;
 
 public class rainFall extends effect {
 	

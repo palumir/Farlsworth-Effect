@@ -2,11 +2,8 @@ package units.bosses.fernando;
 
 import java.util.ArrayList;
 
-import drawing.spriteSheet;
-import drawing.spriteSheet.spriteSheetInfo;
 import drawing.animation.animation;
 import drawing.animation.animationPack;
-import interactions.event;
 import interactions.interactBox;
 import interactions.textSeries;
 import modes.mode;

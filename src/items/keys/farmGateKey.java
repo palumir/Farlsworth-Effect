@@ -4,9 +4,7 @@ import java.awt.image.BufferedImage;
 
 import drawing.spriteSheet;
 import drawing.spriteSheet.spriteSheetInfo;
-import items.item;
 import items.key;
-import units.player;
 
 public class farmGateKey extends key {
 	////////////////

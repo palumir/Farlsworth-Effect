@@ -1,20 +1,14 @@
 package items.bottleShards;
 
-import java.awt.Point;
 import java.awt.image.BufferedImage;
 
-import UI.tooltipString;
 import drawing.spriteSheet;
 import drawing.spriteSheet.spriteSheetInfo;
-import effects.effectTypes.savePoint;
 import items.bottle;
 import items.bottleShard;
 import items.item;
 import items.bottles.jumpBottle;
-import items.bottles.saveBottle;
-import sounds.sound;
 import units.player;
-import utilities.saveState;
 
 public class jumpBottleShard extends bottleShard {
 	////////////////

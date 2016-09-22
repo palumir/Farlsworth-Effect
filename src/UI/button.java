@@ -6,10 +6,6 @@ import java.util.ArrayList;
 
 import drawing.drawnObject;
 import drawing.gameCanvas;
-import interactions.quest;
-import items.bottle;
-import units.player;
-import utilities.imageUtils;
 
 public class button extends interfaceObject  {
 	

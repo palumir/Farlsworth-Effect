@@ -2,8 +2,6 @@ package effects.buffs;
 
 import effects.buff;
 import effects.effectType;
-import terrain.groundTile;
-import terrain.atmosphericEffects.fog;
 import terrain.chunkTypes.wood;
 import units.player;
 import units.unit;

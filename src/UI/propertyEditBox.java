@@ -3,15 +3,10 @@ package UI;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
-import java.util.ArrayList;
 
 import drawing.drawnObject;
 import drawing.gameCanvas;
-import interactions.quest;
-import items.bottle;
-import units.player;
 import units.developer.developer;
-import utilities.imageUtils;
 import utilities.stringUtils;
 
 public class propertyEditBox extends interfaceObject  {

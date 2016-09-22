@@ -1,14 +1,10 @@
 package doodads.general;
 
-import interactions.event;
 import interactions.interactBox;
 import interactions.textSeries;
 import modes.mode;
-import sounds.sound;
 import terrain.chunk;
 import terrain.generalChunkType;
-import units.player;
-import utilities.utility;
 
 public class treasureChest extends chunk {
 	

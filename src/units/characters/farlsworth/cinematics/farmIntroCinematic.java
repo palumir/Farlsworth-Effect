@@ -1,17 +1,13 @@
 package units.characters.farlsworth.cinematics;
 
-import java.awt.Event;
 import java.lang.invoke.MethodHandles;
 
 import cinematics.cinematic;
 import interactions.event;
 import interactions.interactBox;
 import interactions.textSeries;
-import sounds.music;
 import sounds.sound;
 import units.player;
-import units.bosses.fernando.fernando;
-import units.bosses.rodriguez.rodriguez;
 import units.characters.farlsworth.farlsworth;
 import units.characters.farmer.cinematics.farmerIntroCinematic;
 import units.unitCommands.commandList;

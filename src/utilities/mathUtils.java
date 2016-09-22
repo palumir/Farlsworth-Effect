@@ -1,7 +1,5 @@
 package utilities;
 
-import drawing.drawnObject;
-
 public class mathUtils {
 	// Get angle between (in degrees) 
 	public static int getAngleBetween(int x1, int y1, int x2, int y2) {

@@ -1,7 +1,5 @@
 package units.unitCommands;
 
-import units.unitCommand;
-
 public abstract class positionedMovementCommand extends positionedCommand {
 	
 	// Constructor

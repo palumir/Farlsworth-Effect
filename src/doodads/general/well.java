@@ -11,7 +11,6 @@ import modes.mode;
 import sounds.sound;
 import terrain.chunk;
 import terrain.generalChunkType;
-import terrain.chunkTypes.water;
 import units.player;
 import utilities.saveState;
 

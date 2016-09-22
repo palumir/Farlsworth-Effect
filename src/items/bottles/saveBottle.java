@@ -9,7 +9,6 @@ import drawing.spriteSheet;
 import drawing.spriteSheet.spriteSheetInfo;
 import effects.effectTypes.savePoint;
 import items.bottle;
-import items.item;
 import sounds.sound;
 import units.player;
 import utilities.saveState;

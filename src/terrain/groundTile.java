@@ -1,15 +1,10 @@
 package terrain;
 
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import drawing.drawnObject;
 import modes.mode;
-import terrain.chunkTypes.wood;
-import utilities.intTuple;
-import zones.zone;
 
 // Something to differentiate doodads from simple tiles.
 public class groundTile extends chunk {

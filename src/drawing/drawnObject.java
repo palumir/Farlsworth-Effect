@@ -2,7 +2,6 @@ package drawing;
 
 import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -10,7 +9,6 @@ import java.util.Comparator;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import UI.interfaceObject;
-import UI.tooltipString;
 import effects.absolutePositionedEffect;
 import effects.effect;
 import effects.projectile;

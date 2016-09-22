@@ -3,15 +3,11 @@ package zones.farmTomb;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-import doodads.general.well;
 import doodads.tomb.stairsUp;
-import doodads.tomb.wallTorch;
 import drawing.background;
 import drawing.spriteSheet;
 import interactions.event;
 import items.bottleShards.jumpBottleShard;
-import modes.platformer;
-import units.bosses.rodriguez.cinematics.farmTombCinematic;
 import sounds.music;
 import terrain.chunk;
 import terrain.atmosphericEffects.fog;
@@ -21,18 +17,15 @@ import units.player;
 import units.unit;
 import units.bosses.fernando.fernando;
 import units.bosses.rodriguez.rodriguez;
+import units.bosses.rodriguez.cinematics.farmTombCinematic;
 import units.bosses.wolfless.wolfless;
 import units.unitCommands.commandList;
 import units.unitCommands.commands.moveCommand;
-import units.unitCommands.commands.waitCommand;
 import units.unitTypes.tomb.lightDude;
 import units.unitTypes.tomb.shadowDude;
 import utilities.intTuple;
-import utilities.levelSave;
-import utilities.saveState;
 import zones.zone;
 import zones.sheepFarm.sheepFarm;
-import zones.sheepFarm.sheepFarmZoneLoader;
 
 public class farmTomb extends zone {
 	

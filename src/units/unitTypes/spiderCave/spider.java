@@ -6,11 +6,8 @@ import drawing.animation.animation;
 import drawing.animation.animationPack;
 import modes.mode;
 import sounds.sound;
-import units.player;
 import units.unit;
 import units.unitType;
-import utilities.time;
-import utilities.utility;
 
 public class spider extends unit {
 	

@@ -1,9 +1,7 @@
 package doodads.sheepFarm;
 
 import interactions.interactBox;
-import interactions.textSeries;
 import modes.mode;
-import sounds.sound;
 import terrain.chunk;
 import terrain.generalChunkType;
 

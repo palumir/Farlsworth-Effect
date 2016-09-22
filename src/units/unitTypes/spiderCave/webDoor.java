@@ -8,7 +8,6 @@ import effects.effect;
 import effects.effectTypes.bloodSquirt;
 import effects.interfaceEffects.floatingString;
 import modes.mode;
-import units.player;
 import units.unit;
 import units.unitType;
 import utilities.utility;

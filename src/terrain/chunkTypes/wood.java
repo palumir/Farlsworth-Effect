@@ -1,14 +1,13 @@
 package terrain.chunkTypes;
 
+import drawing.drawnObject;
+import effects.buff;
+import effects.buffs.slideEffect;
 import terrain.chunk;
 import terrain.generalChunkType;
 import terrain.groundTile;
 import units.player;
-import utilities.time;
 import zones.zone;
-import drawing.drawnObject;
-import effects.buff;
-import effects.buffs.slideEffect;
 
 public class wood extends groundTile {
 	

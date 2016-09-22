@@ -1,21 +1,16 @@
 package units;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
-import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
-import UI.button;
 import UI.playerActionBar;
 import UI.tooltipString;
 import UI.menus.deathMenu;
-import doodads.sheepFarm.rock;
 import drawing.camera;
 import drawing.drawnObject;
-import drawing.gameCanvas;
 import drawing.animation.animation;
 import drawing.animation.animationPack;
 import effects.effect;
@@ -25,17 +20,13 @@ import effects.interfaceEffects.interactBlurb;
 import interactions.interactBox;
 import items.bottle;
 import items.inventory;
-import items.bottles.jumpBottle;
 import main.main;
 import modes.mode;
 import modes.platformer;
 import modes.topDown;
-import sounds.music;
 import units.developer.developer;
-import units.developer.propertiesButton;
 import utilities.saveState;
 import utilities.time;
-import utilities.utility;
 import zones.zone;
 
 public class player extends unit {
@@ -361,6 +352,7 @@ public class player extends unit {
 	}
 	
 	public static player loadPlayerSaveData(player alreadyPlayer, saveState s, zone z, int spawnX, int spawnY, String direction) {
+		
 		// Get player data from saveState.
 		// The player, depending on whether or not we have a save file.
 		player thePlayer;
@@ -374,7 +366,6 @@ public class player extends unit {
 		int playerY = 0;
 		String newFacingDirection = null;
 		inventory loadedInventory = new inventory(); // empty inventory
-		bottle loadedEquippedBottle = null;
 		
 		// If no zone is given and we don't have the save file. First time running game. 
 		if(z == null && s==null && alreadyPlayer == null) {
@@ -392,7 +383,6 @@ public class player extends unit {
 			playerY = s.getPlayerY();
 			newFacingDirection = s.getFacingDirection();
 			loadedInventory = s.getPlayerInventory();
-			loadedEquippedBottle = s.getEquippedBottle();
 		}
 		
 		// If the zone, z, is given, we should have all of these details.
@@ -408,10 +398,6 @@ public class player extends unit {
 				// Draw the carried over inventory.
 				loadedInventory = alreadyPlayer.getPlayerInventory();
 				drawnObject.objects.add(loadedInventory);
-				
-				// These will be carried over.
-				if(alreadyPlayer.getEquippedBottle() != null)
-				loadedEquippedBottle = (bottle) alreadyPlayer.getEquippedBottle();
 			}
 		}
 		
@@ -477,11 +463,6 @@ public class player extends unit {
 		
 		// Developer stuff
 		if(player.isDeveloper()) developer.devMousePressed(e);
-		
-		// Telepathy
-		else {
-			//playerMousePressed(e);
-		}
 	}
 	
 	// Responding to mouse release
@@ -515,7 +496,7 @@ public class player extends unit {
 					if(deathMenu.menu != null && objects.contains(deathMenu.menu.respawnAtSaveBottle)) deathMenu.menu.selectButton(deathMenu.menu.respawnAtSaveBottle);
 				}
 			}
-			else {
+			else if(zone.getCurrentZone()!=null && zone.getCurrentZone().isZoneLoaded() && playerLoaded) {
 				
 				// Player presses i (inventory) key.
 				if(k.getKeyCode() == KeyEvent.VK_I) { 

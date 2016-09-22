@@ -7,18 +7,14 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 import doodads.sheepFarm.clawMarkRed;
-import doodads.sheepFarm.clawMarkYellow;
 import drawing.drawnObject;
 import drawing.gameCanvas;
 import drawing.spriteSheet;
 import drawing.spriteSheet.spriteSheetInfo;
-import items.item;
 import drawing.animation.animation;
-import units.player;
 import units.unit;
 import units.unitType;
 import utilities.intTuple;
-import utilities.mathUtils;
 import utilities.time;
 import utilities.utility;
 

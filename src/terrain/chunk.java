@@ -11,8 +11,6 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 import drawing.drawnObject;
 import drawing.gameCanvas;
-import units.unit;
-import units.unitCommands.commandList;
 import utilities.intTuple;
 import utilities.utility;
 import zones.zone;
@@ -103,16 +101,6 @@ public class chunk extends drawnObject {
 	public void loadChunkStuff(chunkType c) {
 		// Set default passable
 		passable = DEFAULT_PASSABLE;
-		
-		// Remember our chunks.
-		if(!passable) {
-			impassableChunks.add(this);
-			
-			// If the zone is loaded, it's a new chunk, we need to resort this list.
-			//if(zone.getCurrentZone() != null && zone.getCurrentZone().isZoneLoaded()) {
-				sortChunks();
-			//}
-		}
 		
 		// Remember our chunks.
 		allChunks.add(this);
@@ -408,15 +396,13 @@ public class chunk extends drawnObject {
 			impassableChunks.remove(this);
 		}
 		
-		// Set passable.
-		passable = b;
-		
-		// Remember our chunks.
-		if(!passable) {
-			impassableChunks.add(this);
+		if(passable != b) {
+			// Set passable.
+			passable = b;
 			
-			// If the zone is loaded, it's a new chunk, we need to resort this list.
-			if(zone.getCurrentZone() != null && zone.getCurrentZone().isZoneLoaded()) {
+			// Remember our chunks.
+			if(!passable) {
+				impassableChunks.add(this);
 				sortChunks();
 			}
 		}

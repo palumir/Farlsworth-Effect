@@ -2,7 +2,6 @@ package units;
 
 import drawing.spriteSheet;
 import drawing.spriteSheet.spriteSheetInfo;
-import modes.mode;
 import drawing.animation.animation;
 import drawing.animation.animationPack;
 

@@ -9,7 +9,6 @@ import effects.projectiles.rockPiece;
 import modes.mode;
 import sounds.sound;
 import terrain.chunk;
-import utilities.utility;
 
 public class explodingRock extends effect {
 	

@@ -13,7 +13,6 @@ import drawing.gameCanvas;
 import drawing.animation.animation;
 import drawing.animation.animationPack;
 import effects.effect;
-import effects.projectile;
 import effects.buffs.movementBuff;
 import effects.effectTypes.bloodSquirt;
 import effects.effectTypes.critBloodSquirt;

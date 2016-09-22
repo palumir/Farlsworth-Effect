@@ -2,24 +2,15 @@ package units.bosses.rodriguez;
 
 import java.util.ArrayList;
 
-import drawing.spriteSheet;
-import drawing.spriteSheet.spriteSheetInfo;
 import drawing.animation.animation;
 import drawing.animation.animationPack;
-import interactions.event;
 import interactions.interactBox;
 import interactions.textSeries;
 import modes.mode;
-import sounds.sound;
 import units.boss;
 import units.humanType;
-import units.player;
 import units.unitType;
 import utilities.intTuple;
-import utilities.saveState;
-import utilities.stringUtils;
-import utilities.time;
-import zones.farmTomb.farmTomb;
 
 public class rodriguez extends boss {
 	

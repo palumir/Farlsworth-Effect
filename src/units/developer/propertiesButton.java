@@ -1,7 +1,6 @@
 package units.developer;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import UI.button;
 import UI.propertyEditBox;
@@ -12,7 +11,6 @@ import units.unit;
 import units.unitCommand;
 import units.unitCommands.commandIndicator;
 import units.unitCommands.commands.waitCommand;
-import utilities.utility;
 
 public class propertiesButton {
 	

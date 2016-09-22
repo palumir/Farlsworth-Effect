@@ -5,12 +5,7 @@ import java.util.ArrayList;
 import doodads.sheepFarm.clawMarkYellow;
 import drawing.spriteSheet;
 import drawing.spriteSheet.spriteSheetInfo;
-import effects.effectTypes.darkHole;
-import effects.effectTypes.explodingRock;
-import units.player;
 import units.unitType;
-import utilities.mathUtils;
-import utilities.time;
 import utilities.utility;
 
 public class yellowWolf extends wolf {
