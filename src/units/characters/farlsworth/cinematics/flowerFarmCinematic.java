@@ -25,7 +25,6 @@ public class flowerFarmCinematic extends cinematic {
 
 	public flowerFarmCinematic() {
 		super("flowerFarmCinematic");
-		save = false;
 	}
 	
 	farlsworth farlsworth;
@@ -139,7 +138,7 @@ public class flowerFarmCinematic extends cinematic {
 			player.getPlayer().setFacingDirection("Right");
 			farlsworth.setFacingDirection("Right");
 			farmer.setMoveSpeed(2);
-			farmer.moveTo(farmer.getIntX() - 65,farmer.getIntY());
+			farmer.moveTo(farmer.getIntX() - 100,farmer.getIntY());
 			advanceSequence();
 		}
 		
@@ -397,7 +396,7 @@ public class flowerFarmCinematic extends cinematic {
 		if(isSequence(numIfs++) && goNextTextSeries()) {
 			
 			// Set the next text and advance it.
-			addTextSeries(null, "Anyway ...", farlsworth);
+			addTextSeries(null, "Just be careful on this next area. It's pouring rain.", farlsworth);
 			farlsworth.setFacingDirection("Right");
 			advanceSequence();
 		}
@@ -405,15 +404,14 @@ public class flowerFarmCinematic extends cinematic {
 		if(isSequence(numIfs++) && goNextTextSeries()) {
 			
 			// Set the next text and advance it.
-			addTextSeries(null, "Be careful on this next area. It's pouring rain.", farlsworth);
-			farlsworth.setFacingDirection("Right");
+			addTextSeries(null, "The ground may get a bit slippery.", farlsworth);
 			advanceSequence();
 		}
 		
 		if(isSequence(numIfs++) && goNextTextSeries()) {
 			
 			// Set the next text and advance it.
-			addTextSeries(null, "It may get a bit slippery.", farlsworth);
+			addTextSeries(null, "Try not to die.", farlsworth);
 			advanceSequence();
 		}
 		
@@ -428,12 +426,14 @@ public class flowerFarmCinematic extends cinematic {
 		if(sequencePart==100 && farlsworth.getAllCommands()!=null && (farlsworth.getAllCommands().size() == 0)) {
 			farlsworth.setDoubleX(-3463);
 			farlsworth.setDoubleY(-5550);
+			stop();
 		}
 		
 	}
 	
 	// Run Farlsworth away
 	public void runFarlsworthAway() {
+		save = false;
 		farlsworth.setMoveSpeed(4.5f);
 		commandList commands = new commandList();
 		commands.add(new moveCommand(-1677,-4866));

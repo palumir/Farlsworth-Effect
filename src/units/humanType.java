@@ -2,6 +2,7 @@ package units;
 
 import drawing.spriteSheet;
 import drawing.spriteSheet.spriteSheetInfo;
+import modes.mode;
 import drawing.animation.animation;
 import drawing.animation.animationPack;
 
@@ -12,7 +13,7 @@ public class humanType extends unitType {
 	/////////////////////////
 	
 	// Default dimensions.
-	public static int DEFAULT_UNIT_WIDTH = 24;
+	public static int DEFAULT_UNIT_WIDTH = 20;
 	public static int DEFAULT_UNIT_HEIGHT = 20;
 	
 	// Default sprite stuff

@@ -46,6 +46,7 @@ import units.player;
 import units.unit;
 import units.unitCommand;
 import units.characters.farlsworth.farlsworth;
+import units.characters.farlsworth.cinematics.beforeTombCinematic;
 import units.characters.farlsworth.cinematics.farmFenceCinematic;
 import units.characters.farlsworth.cinematics.farmIntroCinematic;
 import units.characters.farlsworth.cinematics.flowerFarmCinematic;
@@ -75,6 +76,9 @@ public class sheepFarm extends zone {
 	// Static caller of the zone.
 	private static zone zoneReference;
 	
+	// Default zone mode
+	private String DEFAULT_ZONE_MODE = "topDown";
+	
 	// Zone music.
 	private static String zoneMusic = "sounds/music/farmLand/sheepFarm/forest.wav";
 	private static String zoneMusicDistorted = "sounds/music/farmLand/sheepFarm/forestDistorted.wav";
@@ -88,6 +92,7 @@ public class sheepFarm extends zone {
 	
 	// Forest gate
 	public static horizontalGate forestGate;
+	public static horizontalGate farlsworthGate;
 	
 	// Zone events.
 	public static event wellTooltipLoaded;
@@ -236,7 +241,7 @@ public class sheepFarm extends zone {
 	public void loadSpecificZoneStuff() {
 		
 		// Set the mode of the zone of course.
-		topDown.setMode();
+		setMode(DEFAULT_ZONE_MODE);
 		
 		// Set background
 		new rotatingBackground(DEFAULT_ZONE_BACKGROUND);
@@ -317,7 +322,7 @@ public class sheepFarm extends zone {
 		spawnFarlsworthAndFence();
 		
 		// Farmer
-		new farmer(-710,-256);
+		farmer farmer = new farmer(-710,-200);
 		
 		// The silly haystack.
 		c = new doodads.sheepFarm.haystack(-294,-315,0);
@@ -330,7 +335,6 @@ public class sheepFarm extends zone {
 		
 		// Spawn bottle.
 		bottle saveBottle = new saveBottle(-665,-3102);
-		//bottle saveBottle2 = new saveBottle(-665,-3140);
 		
 	}
 
@@ -390,7 +394,7 @@ public class sheepFarm extends zone {
 		farlsworthFence.add(c);
 		c = new fenceBarsSmall(adjustX + 37,adjustY + -436,0);
 		farlsworthFence.add(c);
-		forestGate = new horizontalGate("Forest Gate", "Not Fridge Key", adjustX + -13+fenceAdjustX/2,adjustY + -434,0);
+		forestGate = new horizontalGate("Forest Gate", "Not TV Key", adjustX + -13+fenceAdjustX/2,adjustY + -434,0);
 		farlsworthFence.add(forestGate);
 		
 		///////////////////////////////
@@ -406,7 +410,7 @@ public class sheepFarm extends zone {
 		farlsworthFence.add(c);
 		
 		// Gate.
-		horizontalGate farlsworthGate = new horizontalGate("Sheep Gate", "Not Fridge Key", adjustX + 412,adjustY + -15,0);
+		farlsworthGate = new horizontalGate("Sheep Gate", "Not TV Key", adjustX + 412,adjustY + -15,0);
 		farlsworthFence.add(farlsworthGate);
 		
 		// Right of gate
@@ -608,6 +612,7 @@ public class sheepFarm extends zone {
 	farmIntroCinematic farlsworthIntro;
 	farmFenceCinematic farlsworthFenceCinematic;
 	flowerFarmCinematic farlsworthFlowerCinematic;
+	beforeTombCinematic farlsworthTombCinematic;
 	
 	// Deal with the first well we encounters.
 	public void dealWithRegionStuff() {
@@ -637,6 +642,15 @@ public class sheepFarm extends zone {
 				&& farmFenceCinematic.isCompleted.isCompleted()) {
 			farlsworthFlowerCinematic = new flowerFarmCinematic();
 			farlsworthFlowerCinematic.start();
+		}
+		
+		// Tomb patch cinematic
+		if(currPlayer != null && currPlayer.isWithin(-3568,-5864,-3338,-5448)
+				&& !farlsworthTombCinematic.isCompleted.isCompleted()
+				&& (farlsworthTombCinematic == null || !farlsworthTombCinematic.isInProgress())
+				&& flowerFarmCinematic.isCompleted.isCompleted()) {
+			farlsworthTombCinematic = new beforeTombCinematic();
+			farlsworthTombCinematic.start();
 		}
 		
 		if(currPlayer != null && currPlayer.isWithin(-220,-2401,228,-2049) && wellTooltipLoaded != null && !wellTooltipLoaded.isCompleted()) {
@@ -715,6 +729,10 @@ public class sheepFarm extends zone {
 
 	public static void setZone(zone z) {
 		zoneReference = z;
+	}
+	
+	public String getMode() {
+		return DEFAULT_ZONE_MODE;
 	}
 	
 }

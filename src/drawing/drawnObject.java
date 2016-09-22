@@ -301,6 +301,11 @@ public abstract class drawnObject {
 		return x > this.getIntX() && x < this.getIntX() + this.getWidth() && y > this.getIntY() && y < this.getIntY() + this.getHeight();
 	}
 	
+
+	public boolean contains(int x, int y, int leniency) {
+		return x > this.getIntX() - leniency && x < this.getIntX() + this.getWidth() + leniency && y > this.getIntY() - leniency && y < this.getIntY() + this.getHeight() + leniency;
+	}
+	
 	// Get whether a object is within radius
 	public boolean isWithinRadius(int x, int y, int radius) {
 	    int circleDistanceX = Math.abs(x - (this.getIntX() + this.getWidth()/2));
@@ -502,13 +507,20 @@ public abstract class drawnObject {
 	// Returns a tuple containing pertaining to how much the object would
 	// be inside checkObject if moved to newX and newY. 0,0 otherwise.
 	public boolean collides(int newX, int newY, drawnObject checkObject) {
+		return collides(newX,newY,checkObject,0);
+		
+	}
+	
+	// Returns a tuple containing pertaining to how much the object would
+	// be inside checkObject if moved to newX and newY. 0,0 otherwise.
+	public boolean collides(int newX, int newY, drawnObject checkObject, int leniency) {
 		// Check each side.
 		boolean intercepts = false;
 		if(checkObject !=null) {
-			intercepts = newX < checkObject.getIntX() + checkObject.getWidth() && 
-								 newX + getWidth() > checkObject.getIntX() && 
-								 newY < checkObject.getIntY() + checkObject.getHeight() && 
-								 newY + getHeight() > checkObject.getIntY();
+			intercepts = newX < checkObject.getIntX() + checkObject.getWidth() + leniency && 
+						 newX + getWidth() > checkObject.getIntX() - leniency && 
+						 newY < checkObject.getIntY() + checkObject.getHeight() + leniency && 
+						 newY + getHeight() > checkObject.getIntY() - leniency;
 		}
 		return intercepts;
 	}

@@ -50,7 +50,8 @@ public class statue extends chunk {
 		// Statue of weeping woman
 		if(type == 1) {
 			startOfConversation = new textSeries(null, "A statue of a cloaked woman.");
-			s = startOfConversation.addChild(null, "She has no face, but it's clear she's mourning.");
+			s = startOfConversation.addChild(null, "Her face has been scratched off by vandals.");
+			s = s.addChild(null, "She was probably ugly or something.");
 			s.setEnd();
 		}
 		else {

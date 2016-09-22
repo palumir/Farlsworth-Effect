@@ -3,6 +3,7 @@ package interactions;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 
@@ -138,23 +139,22 @@ public class interactBox extends interfaceObject  {
 					g.setFont(DEFAULT_FONT_TITLE);
 					
 					// Display the name of the person or thing talking/interacting
+					Graphics2D g2 = (Graphics2D)g;
+					g2.setPaint(Color.BLACK);
 					String theTalker = getTextSeries().getTalker();
 					if(theTalker==null) theTalker="";
 					if(getTextSeries().getWhoIsTalking() != null && getTextSeries().getWhoIsTalking() instanceof unit) { 
 						theTalker = stringUtils.toTitleCase(getTextSeries().getWhoIsTalking().getName());
-						g.setColor(((unit)getTextSeries().getWhoIsTalking()).getNameColor());
+						g2.setPaint(((unit)getTextSeries().getWhoIsTalking()).getNameColor());
 					}
-					else {
-						g.setColor(Color.BLACK);
-					}
-					g.drawString(theTalker,
+					g2.drawString(theTalker,
 							(int)(gameCanvas.getScaleX()*getIntX()) + 
 							(int)(gameCanvas.getScaleX()*background.getWidth()/2) - 
 							g.getFontMetrics().stringWidth(theTalker)/2,
 							(int)(gameCanvas.getScaleY()*getIntY()) + 
 							(int)(gameCanvas.getScaleY()*background.getHeight()/5) + 
 							(int)(gameCanvas.getScaleY()*4));
-					g.setColor(Color.BLACK);
+					g2.setPaint(Color.BLACK);
 				}
 				
 				// Set font.

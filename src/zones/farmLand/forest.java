@@ -1219,4 +1219,8 @@ public class forest extends zone {
 		zoneReference = z;
 	}
 	
+	public String getMode() {
+		return "topDown";
+	}
+	
 }

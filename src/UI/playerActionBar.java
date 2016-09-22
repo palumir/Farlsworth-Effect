@@ -25,7 +25,6 @@ public class playerActionBar extends interfaceObject  {
 	public static Color DEFAULT_HEART_COLOR = Color.red;
 	public static Color DEFAULT_BORDER_COLOR = new Color(45,45,45);
 	public static Color DEFAULT_BOTTLE_COLOR = Color.white;
-	public static Color DEFAULT_QUEST_COLOR = Color.white;
 	public static Color DEFAULT_ENERGY_COLOR = Color.cyan;
 	
 	///////////////////////
@@ -106,19 +105,6 @@ public class playerActionBar extends interfaceObject  {
 			}
 		}
 		
-		// Draw quest UI
-		int questAdjustX = gameCanvas.getDefaultWidth() - gameCanvas.getDefaultWidth()/6;
-		int questAdjustY = gameCanvas.getDefaultHeight()/45;
-		
-		g.setColor(DEFAULT_QUEST_COLOR);
-		if(quest.getCurrentQuests()!=null) {
-			for(int i = 0; i < quest.getCurrentQuests().size(); i++) {
-				g.drawString("Quest: " + quest.getCurrentQuests().get(i),
-						(int)(gameCanvas.getScaleX()*(getIntX() + questAdjustX - g.getFontMetrics().stringWidth("Quest: " + quest.getCurrentQuests().get(i))/2)),
-						(int)(gameCanvas.getScaleY()*(getIntY() + questAdjustY + 5)));
-				questAdjustY += 15;
-			}
-		}
 	}
 	
 	// Update unit

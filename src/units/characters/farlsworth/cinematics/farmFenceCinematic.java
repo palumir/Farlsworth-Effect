@@ -58,6 +58,13 @@ public class farmFenceCinematic extends cinematic {
 		if(isSequence(numIfs++) && goNextTextSeries()) {
 			
 			// Set the next text and advance it.
+			addTextSeries(null, "I was trying to make a dramatic exit.", farlsworth);
+			advanceSequence();
+		}
+		
+		if(isSequence(numIfs++) && goNextTextSeries()) {
+			
+			// Set the next text and advance it.
 			addTextSeries(null, "But there appears to be a gate here.", farlsworth);
 			farlsworth.setMoveSpeed(2);
 			farlsworth.moveTo(farlsworth.getIntX(), farlsworth.getIntY() + 15);
@@ -122,13 +129,13 @@ public class farmFenceCinematic extends cinematic {
 			
 			if(isSequence(numIfs++)) {
 				farlsworth.setFacingDirection("Up");
-				waitFor(1f);
+				waitFor(1.4f);
 				advanceSequence();
 			}
 			
 			if(isSequence(numIfs++)) {
 				farlsworth.setFacingDirection("Down");
-				waitFor(1f);
+				waitFor(1.4f);
 				advanceSequence();
 			}
 			

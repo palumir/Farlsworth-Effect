@@ -7,6 +7,7 @@ import drawing.drawnObject;
 import drawing.gameCanvas;
 import drawing.animation.animation;
 import drawing.animation.animationPack;
+import effects.effectTypes.critBloodSquirt;
 import utilities.time;
 
 public abstract class effect extends drawnObject  { 
@@ -109,21 +110,18 @@ public abstract class effect extends drawnObject  {
 	@Override
 	public void update() {
 		
-		// Destroy.
-		if(hasATimer && time.getTime() - timeStarted >= getAnimationDuration()*1000) {
-			this.destroy();
+			
+		// Play animation.
+		if(getCurrentAnimation() != null) { 
+			// Destroy.
+			if(hasATimer && (time.getTime() - timeStarted >= getAnimationDuration()*1000)) {
+				this.destroy();
+			}
+			getCurrentAnimation().playAnimation();
+			respondToFrame(getCurrentAnimation().getCurrentSprite());
 		}
 		
-		else {
-			
-			// Play animation.
-			if(getCurrentAnimation() != null) { 
-				getCurrentAnimation().playAnimation();
-				respondToFrame(getCurrentAnimation().getCurrentSprite());
-			}
-			
-			doSpecificEffectStuff();
-		}
+		doSpecificEffectStuff();
 	}
 	
 	// Do specific effect stuff

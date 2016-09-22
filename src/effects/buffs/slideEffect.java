@@ -4,6 +4,7 @@ import effects.buff;
 import effects.effectType;
 import terrain.groundTile;
 import terrain.atmosphericEffects.fog;
+import terrain.chunkTypes.wood;
 import units.player;
 import units.unit;
 
@@ -75,7 +76,7 @@ public class slideEffect extends movementBuff {
 	// Remove effect if off wood.
 	@Override
 	public void update() {
-		if(!groundTile.isOnWood(player.getPlayer())) {
+		if(!wood.isOnWood(player.getPlayer())) {
 			removeEffect();
 		}
 	}

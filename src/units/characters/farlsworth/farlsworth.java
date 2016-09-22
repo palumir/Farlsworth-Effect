@@ -20,9 +20,11 @@ import terrain.chunk;
 import units.boss;
 import units.player;
 import units.unitType;
+import units.characters.farlsworth.cinematics.beforeTombCinematic;
 import units.characters.farlsworth.cinematics.farmFenceCinematic;
 import units.characters.farlsworth.cinematics.farmIntroCinematic;
 import units.characters.farlsworth.cinematics.flowerFarmCinematic;
+import units.characters.farmer.cinematics.farmerIntroCinematic;
 import units.unitCommands.commandList;
 import units.unitCommands.commands.moveCommand;
 import units.unitTypes.sheepFarm.sheep;
@@ -60,6 +62,9 @@ public class farlsworth extends boss {
 	
 	// Default jump speed
 	private static int DEFAULT_UNIT_JUMPSPEED = 10;
+	
+	// Name color
+	private static Color DEFAULT_NAME_COLOR = new Color(51, 51, 51);
 	
 	// FARLSWORTH sprite stuff.
 	private static String DEFAULT_FARLSWORTH_SPRITESHEET = "images/units/animals/sheep.png";
@@ -1148,7 +1153,7 @@ public class farlsworth extends boss {
 		
 		farlsworth = this;
 		
-		setNameColor(new Color(175,37,40));
+		setNameColor(DEFAULT_NAME_COLOR);
 		
 		// Facing direction.
 		facingDirection = "Up";
@@ -1250,6 +1255,9 @@ public class farlsworth extends boss {
 		if(zone.getCurrentZone().getName().equals("sheepFarm")) {
 			if(!farmIntroCinematic.isCompleted.isCompleted()) {
 				// Leave him in his spawn spot.
+				if(farmerIntroCinematic.playerPressedNoABunch.isCompleted()) {
+					setFacingDirection("Left");
+				}
 			}
 			else if(!farmFenceCinematic.isCompleted.isCompleted()) {
 				setDoubleX(5);
@@ -1259,9 +1267,12 @@ public class farlsworth extends boss {
 				setDoubleX(-1550);
 				setDoubleY(-5258+30);
 			}
-			else {
+			else if(!beforeTombCinematic.isCompleted.isCompleted()) {
 				setDoubleX(-3463);
 				setDoubleY(-5550);
+			}
+			else {
+				destroy();
 			}
 		}
 	}

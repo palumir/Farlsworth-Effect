@@ -50,6 +50,9 @@ public class farmTomb extends zone {
 	private static String zoneMusic = "sounds/music/farmLand/tomb/tomb.wav";
 	private static String zoneMusicFrantic = "sounds/music/farmLand/tomb/tombBossFight.wav";
 	
+	// Default zone mode
+	private static String DEFAULT_ZONE_MODE = "platformer";
+	
 	// References we will use throughout.
 	static unit u;
 	static chunk c;
@@ -160,7 +163,7 @@ public class farmTomb extends zone {
 		bossFightLoaded = false;
 		
 		// Set the mode of the zone of course.
-		platformer.setMode();
+		setMode(DEFAULT_ZONE_MODE);
 		
 		// Set the darkness.
 		zoneFog = new fog();
@@ -530,6 +533,10 @@ public class farmTomb extends zone {
 
 	public static void setZone(zone z) {
 		zoneReference = z;
+	}
+	
+	public String getMode() {
+		return DEFAULT_ZONE_MODE;
 	}
 	
 }

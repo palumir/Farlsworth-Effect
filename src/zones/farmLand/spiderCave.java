@@ -95,7 +95,7 @@ public class spiderCave extends zone {
 		
 		// Set the mode of the zone of course.
 		//topDown.setMode();
-		platformer.setMode();
+		setMode("topDown");
 		
 		// Background
 		background.setGameBackground(DEFAULT_ZONE_BACKGROUND);
@@ -232,6 +232,10 @@ public class spiderCave extends zone {
 
 	public static void setZone(zone z) {
 		zoneReference = z;
+	}
+	
+	public String getMode() {
+		return "platformer";
 	}
 	
 }
