@@ -7,6 +7,7 @@ import drawing.drawnObject;
 import drawing.gameCanvas;
 import drawing.animation.animation;
 import drawing.animation.animationPack;
+import effects.effectTypes.jumpBottleSplash;
 import utilities.time;
 
 public abstract class effect extends drawnObject  { 
@@ -33,7 +34,7 @@ public abstract class effect extends drawnObject  {
 	// Animation duration
 	protected long timeStarted = 0;
 	private float animationDuration = 0;
-	protected boolean hasATimer = true;
+	private boolean hasATimer = true;
 	
 	///////////////
 	/// METHODS ///
@@ -113,10 +114,9 @@ public abstract class effect extends drawnObject  {
 		// Play animation.
 		if(getCurrentAnimation() != null) { 
 			// Destroy.
-			if(hasATimer && (time.getTime() - timeStarted >= getAnimationDuration()*1000)) {
+			if(isHasATimer() && (time.getTime() - timeStarted >= getAnimationDuration()*1000)) {
 				this.destroy();
 			}
-			getCurrentAnimation().playAnimation();
 			respondToFrame(getCurrentAnimation().getCurrentSprite());
 		}
 		
@@ -143,7 +143,8 @@ public abstract class effect extends drawnObject  {
 		
 		// Of course only draw if the animation is not null.
 		if(getCurrentAnimation() != null) {
-			g.drawImage(getCurrentAnimation().getCurrentFrame(), 
+			
+			if(isExists()) g.drawImage(getCurrentAnimation().getCurrentFrame(), 
 					getDrawX(), 
 					getDrawY(), 
 					(int)(gameCanvas.getScaleX()*getObjectSpriteSheet().getSpriteWidth() + 1), 
@@ -187,5 +188,21 @@ public abstract class effect extends drawnObject  {
 
 	public void setAnimationDuration(float animationDuration) {
 		this.animationDuration = animationDuration;
+	}
+
+	public boolean isHasATimer() {
+		return hasATimer;
+	}
+
+	public void setHasATimer(boolean hasATimer) {
+		if(hasATimer == false) {
+			// Go through the animations and set them to repeat.
+			if(animations!=null) {
+				for(int i = 0; i < animations.size(); i++) {
+					animations.get(i).setRepeats(true);
+				}
+			}
+		}
+		this.hasATimer = hasATimer;
 	}
 }

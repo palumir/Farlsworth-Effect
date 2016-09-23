@@ -465,9 +465,10 @@ public abstract class drawnObject {
 				if(d.isDrawObject()) {
 
 					// Draw the object if it's on the screen.
-					if(d instanceof absolutePositionedEffect ||
+					if((d instanceof absolutePositionedEffect ||
 						d instanceof interfaceObject ||
-					   d.isOnScreen()) {
+						d.isOnScreen()) 
+						&& d.isExists()) {
 						d.drawObject(g);
 					}
 				}

@@ -3,7 +3,6 @@ package effects.buffs;
 import effects.buff;
 import effects.effectType;
 import terrain.chunkTypes.wood;
-import units.player;
 import units.unit;
 
 public class slideEffect extends movementBuff {
@@ -68,13 +67,13 @@ public class slideEffect extends movementBuff {
 	// Methods
 	public slideEffect(unit u) {
 		super(theEffectType, u, 1, DEFAULT_ANIMATION_DURATION);
-		hasATimer = false;
+		setHasATimer(false);
 	}
 	
 	// Remove effect if off wood.
 	@Override
 	public void update() {
-		if(!wood.isOnWood(player.getPlayer())) {
+		if(!wood.isOnWood(onUnit)) {
 			removeEffect();
 		}
 	}

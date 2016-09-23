@@ -127,7 +127,6 @@ public class bush extends chunk {
 				player.getPlayer().hurt(randomBetween*(-1), 1);
 			}
 			else {
-				player.getPlayer().heal(randomBetween);
 			}
 			hasEatenBerry = true;
 		}

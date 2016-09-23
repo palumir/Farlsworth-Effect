@@ -4,6 +4,8 @@ import java.awt.image.BufferedImage;
 
 import drawing.spriteSheet;
 import drawing.spriteSheet.spriteSheetInfo;
+import effects.buff;
+import effects.buffs.jumpBottleBuff;
 import items.bottle;
 import modes.mode;
 import sounds.sound;
@@ -76,8 +78,7 @@ public class jumpBottle extends bottle {
 	public void doubleJump() {
 		
 		if(mode.getCurrentMode().equals("platformer")) {
-			player.getPlayer().touchDown();
-			player.getPlayer().setFallSpeed(-player.getPlayer().getJumpSpeed());
+			buff b = new jumpBottleBuff(player.getPlayer());
 		}
 		if(mode.getCurrentMode().equals("topDown")) {
 			player.getPlayer().touchDown();

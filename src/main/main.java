@@ -75,9 +75,6 @@ public class main {
 				}
 			}
 		}
-		
-		
-		System.out.println("game started at: " + time.getTime());
 	}
 	
 	// Boolean

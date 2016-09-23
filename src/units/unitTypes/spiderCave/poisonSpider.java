@@ -133,7 +133,6 @@ public class poisonSpider extends unit {
 		
 		// Set combat stuff.
 		setCombatStuff();
-		setAttackSound(spiderAttack);
 		
 		// Event load.
 		projectileToolTipDisplayed = new event("Unit: projectileToolTipLoaded");
@@ -217,20 +216,7 @@ public class poisonSpider extends unit {
 	public void setCombatStuff() {
 		// Set to be attackable.
 		this.setKillable(true);
-		
-		// Wolf damage.
-		setAttackDamage(DEFAULT_ATTACK_DAMAGE);
-		setAttackTime(DEFAULT_ATTACK_TIME);
-		setAttackFrameStart(2);
-		setAttackFrameEnd(2);
-		setAttackWidth(DEFAULT_ATTACK_WIDTH);
-		setAttackLength(DEFAULT_ATTACK_LENGTH);
-		setBackSwing(DEFAULT_BACKSWING);
-		setCritChance(DEFAULT_CRIT_CHANCE);
-		setCritDamage(DEFAULT_CRIT_DAMAGE);
-		
-		// HP
-		setMaxHealthPoints(DEFAULT_HP);
+
 		setHealthPoints(DEFAULT_HP);
 		
 	}
@@ -251,22 +237,6 @@ public class poisonSpider extends unit {
 				player.getPlayer().getIntX()+player.getPlayer().getWidth()/2,
 				player.getPlayer().getIntY()+player.getPlayer().getHeight()/2,
 				DEFAULT_ATTACK_DAMAGE);
-	}
-	
-	// Start attacking.
-	@Override
-	public void attack() {
-		if(!isAttacking() && canAttack) {
-			
-			// Attack sound.
-			if(getAttackSound()!=null) {
-				sound s = new sound(getAttackSound());
-				s.setPosition(getIntX(), getIntY(), sound.DEFAULT_SOUND_RADIUS);
-				s.start();
-			}
-			setAttacking(true);
-			startAttackTime = time.getTime();
-		}
 	}
 	
 	// Do combat mechanics.
@@ -348,60 +318,6 @@ public class poisonSpider extends unit {
 		int playerX = currPlayer.getIntX();
 		int playerY = currPlayer.getIntY();
 		float howClose = (float) Math.sqrt((playerX - getIntX())*(playerX - getIntX()) + (playerY - getIntY())*(playerY - getIntY()));
-		
-		// Attack if we're in radius.
-		if(howClose < DEFAULT_ATTACK_RADIUS || aggrod) {
-			
-			// If we aggro
-			if(aggrod && !projectileToolTipDisplayed.isCompleted()) {
-				tooltipString t = new tooltipString("Time your attacks to reflect projectiles.");
-				projectileToolTipDisplayed.setCompleted(true);
-			}
-			
-			// If we're in attack range, attack.
-			if(isInAttackRange(currPlayer, DEFAULT_ATTACK_DIFFERENTIAL)) {
-				stopMove("all");
-				attack();
-				aggrod = true;
-			}
-			else {
-				
-				// Play aggrod sound on aggro.
-				if(!aggrod) {
-					sound s = new sound(spiderAggro);
-					s.setPosition(getIntX(), getIntY(), sound.DEFAULT_SOUND_RADIUS);
-					s.start();
-				}
-				
-				// Follow current player, set to aggro
-				aggrod = true;
-				if(isFollows()) follow(currPlayer);
-			}
-		}
-		else if(howClose > DEFAULT_DEAGGRO_RADIUS) {
-			aggrod = false;
-		}
-		
-		// Do movement if we're not aggrod.
-		if(!aggrod && isWanders()) {
-			// Move in a random direction every interval.
-			if(time.getTime() - AILastCheck > randomMove*1000) {
-				AILastCheck = time.getTime();
-				int random = utility.RNG.nextInt(4);
-				if(random==0) checkMovement("left");
-				if(random==1) checkMovement("right");
-				if(random==2) checkMovement("down");
-				if(random==3) checkMovement("up");
-				randomStop = 0.35f + utility.RNG.nextInt(4)*0.125f;
-			}
-			
-			// Stop after a fraction of a second
-			if(isMoving() && time.getTime() - AILastCheck > randomStop*1000) {
-				randomMove = 2.4f + utility.RNG.nextInt(9)*0.2f;
-				AILastCheck = time.getTime();
-				stopMove("all");
-			}
-		}
 	}
 	
 	///////////////////////////

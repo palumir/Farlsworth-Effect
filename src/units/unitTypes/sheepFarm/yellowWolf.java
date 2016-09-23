@@ -125,19 +125,6 @@ public class yellowWolf extends wolf {
 	public void setCombatStuff() {
 		// Set to be attackable.
 		this.setKillable(true);
-		
-		// Wolf damage.
-		setAttackFrameStart(2);
-		setAttackFrameEnd(3);
-		setAttackDamage(DEFAULT_ATTACK_DAMAGE);
-		setAttackTime(DEFAULT_ATTACK_TIME);
-		setAttackWidth(DEFAULT_ATTACK_WIDTH);
-		setAttackLength(DEFAULT_ATTACK_LENGTH);
-		setCritDamage(DEFAULT_CRIT_DAMAGE);
-		setCritChance(DEFAULT_CRIT_CHANCE);
-		
-		// HP
-		setMaxHealthPoints(DEFAULT_HP);
 		setHealthPoints(DEFAULT_HP);
 		
 	}

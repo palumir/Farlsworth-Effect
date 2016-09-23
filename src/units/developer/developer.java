@@ -87,7 +87,6 @@ public class developer extends player {
 		setKillable(false);
 		
 		// Give a million hp
-		healthPoints = Integer.MAX_VALUE;
 		moveSpeed = 10f;
 		
 		// Create dev interface

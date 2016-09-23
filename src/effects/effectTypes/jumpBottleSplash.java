@@ -6,20 +6,20 @@ import effects.effect;
 import effects.effectType;
 import modes.mode;
 
-public class lightningAboutToStrike extends effect {
+public class jumpBottleSplash extends effect {
 	
 	// Default dimensions.
-	public static int DEFAULT_SPRITE_WIDTH = 32;
-	public static int DEFAULT_SPRITE_HEIGHT = 32;
+	public static int DEFAULT_SPRITE_WIDTH = 15;
+	public static int DEFAULT_SPRITE_HEIGHT = 15;
 	
 	// Platformer real dimensions
-	public static int DEFAULT_PLATFORMER_HEIGHT = DEFAULT_SPRITE_HEIGHT;
-	public static int DEFAULT_PLATFORMER_WIDTH = DEFAULT_SPRITE_WIDTH;
+	public static int DEFAULT_PLATFORMER_HEIGHT = DEFAULT_SPRITE_WIDTH;
+	public static int DEFAULT_PLATFORMER_WIDTH = DEFAULT_SPRITE_HEIGHT;
 	public static int DEFAULT_PLATFORMER_ADJUSTMENT_Y = 0;
 	
 	// TopDown real dimensions
-	public static int DEFAULT_TOPDOWN_HEIGHT = DEFAULT_SPRITE_HEIGHT;
-	public static int DEFAULT_TOPDOWN_WIDTH = DEFAULT_SPRITE_WIDTH;
+	public static int DEFAULT_TOPDOWN_HEIGHT = 15;
+	public static int DEFAULT_TOPDOWN_WIDTH = 15;
 	public static int DEFAULT_TOPDOWN_ADJUSTMENT_Y = 0;
 	
 	////////////////
@@ -27,13 +27,13 @@ public class lightningAboutToStrike extends effect {
 	////////////////
 	
 	// Default name.
-	private static String DEFAULT_EFFECT_NAME = "lightningAboutToStrike";
+	private static String DEFAULT_EFFECT_NAME = "jumpBottleSplash";
 	
 	// Effect sprite stuff.
-	private static String DEFAULT_EFFECT_SPRITESHEET = "images/effects/weather/" + DEFAULT_EFFECT_NAME + ".png";
+	private static String DEFAULT_EFFECT_SPRITESHEET = "images/effects/bottleEffects/" + DEFAULT_EFFECT_NAME + ".png";
 	
 	// Duration
-	private static float DEFAULT_ANIMATION_DURATION = 0.15f;
+	private static float DEFAULT_ANIMATION_DURATION = 0.6f;
 	
 	// The actual type.
 	private static effectType theEffectType =
@@ -56,25 +56,21 @@ public class lightningAboutToStrike extends effect {
 	///////////////
 	/// METHODS ///
 	///////////////
-	
 	// Constructor
-	public lightningAboutToStrike(int newX, int newY) {
+	public jumpBottleSplash(int newX, int newY) {
 		super(theEffectType, newX, newY);
-
+		
 		// Make adjustments on hitbox if we're in topDown.
 		setHeight(getDefaultHeight());
 		setWidth(getDefaultWidth());
 		setHitBoxAdjustmentY(getDefaultHitBoxAdjustmentY());
-				
-		// Has no timer.
-		setHasATimer(false);
 
 	}
 	
 	///////////////////////////
 	/// GETTERS AND SETTERS ///
 	///////////////////////////
-
+	
 	// Get default width.
 	public static int getDefaultWidth() {
 		if(mode.getCurrentMode().equals("topDown")) {

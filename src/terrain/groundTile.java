@@ -26,7 +26,7 @@ public class groundTile extends chunk {
 	}
 	
 	// Leniency
-	static int leniency = -4;
+	static int leniency = -5;
 
 	// Is on ground tile?
 	public static boolean isOnGroundTile(drawnObject u) {

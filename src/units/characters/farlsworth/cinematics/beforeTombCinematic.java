@@ -33,12 +33,14 @@ public class beforeTombCinematic extends cinematic {
 	    
 	    // Create interactSequence (first thing he says to you)
 	    textSeries s = new textSeries(null, "Slippery, huh?");
-	    farlsworth = units.characters.farlsworth.farlsworth.farlsworth;
-	    farlsworth.setFacingDirection("Left");
-	    
-	    interactSequence = new interactBox(s, farlsworth);
-		interactSequence.setUnescapable(true);
-		interactSequence.toggleDisplay();
+	    if(units.characters.farlsworth.farlsworth.farlsworth!=null) {
+		    farlsworth = units.characters.farlsworth.farlsworth.farlsworth;
+		    farlsworth.setFacingDirection("Left");
+		    
+		    interactSequence = new interactBox(s, farlsworth);
+			interactSequence.setUnescapable(true);
+			interactSequence.toggleDisplay();
+	    }
 	}
 
 	@Override
@@ -222,7 +224,7 @@ public class beforeTombCinematic extends cinematic {
 		interactSequence.setUnescapable(false);
 		
 		// Set it to be completed as soon as he runs, instead of when he's teleported to flower farm.
-		cinematicCompleted.setCompleted(true);
+		isCompleted.setCompleted(true);
 		
 		// Save by default.
 		saveState.setQuiet(true);

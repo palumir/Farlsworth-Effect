@@ -133,15 +133,7 @@ public class farmerIntroCinematic extends cinematic {
 			
 			if(isSequence(numIfs++) && goNextTextSeries()) {
 				
-				addTextSeries(null, "He's my pet sheep.",farmer);
-				
-				// Set the next text and advance it.
-				advanceSequence();
-			}
-			
-			if(isSequence(numIfs++) && goNextTextSeries()) {
-				
-				addTextSeries(null, "And my best friend.",farmer);
+				addTextSeries(null, "He's my pet sheep. And my best friend.",farmer);
 				
 				// Set the next text and advance it.
 				advanceSequence();
@@ -425,7 +417,7 @@ public class farmerIntroCinematic extends cinematic {
 				
 				if(isSequence(numIfs++) && goNextTextSeries()) {
 					
-					addTextSeries(null, "He's a good quality sheep, you'll like him.",farmer);
+					addTextSeries(null, "He's a good quality sheep. Please?",farmer);
 					
 					// Set the next text and advance it.
 					advanceSequence();
@@ -436,25 +428,6 @@ public class farmerIntroCinematic extends cinematic {
 					// Move right.
 					addTextSeries("'No'", null,farmer);
 					addTextSeries("'Yes'", null,farmer);
-					interactSequence.goToNext();
-					
-					// Set the next text and advance it.
-					advanceSequence();
-				}
-				
-				if(isSequence(numIfs++) && goNextTextSeries()) {
-					
-					addTextSeries(null, "Just give it a try.",farmer);
-					
-					// Set the next text and advance it.
-					advanceSequence();
-				}
-				
-				if(isSequence(numIfs++) && goNextTextSeries()) {
-					
-					// Move right.
-					addTextSeries("'Yes'", null,farmer);
-					addTextSeries("'No'", null,farmer);
 					interactSequence.goToNext();
 					
 					// Set the next text and advance it.
@@ -510,7 +483,7 @@ public class farmerIntroCinematic extends cinematic {
 			
 			if(isSequence(numIfs++) && goNextTextSeries()) {
 				
-				addTextSeries(null, "The sheep house on the left...",farmer);
+				addTextSeries(null, "The sheep house on the left.",farmer);
 				farmer.moveTo(farmer.getIntX()-20, farmer.getIntY());
 				
 				// Set the next text and advance it.
@@ -562,20 +535,12 @@ public class farmerIntroCinematic extends cinematic {
 			
 			if(isSequence(numIfs++) && goNextTextSeries()) {
 				
-				addTextSeries(null, "He's my pet sheep.",farmer);
+				addTextSeries(null, "He's my pet sheep. And my best friend.",farmer);
 				
 				// Set the next text and advance it.
 				advanceSequence();
 			}
-			
-			if(isSequence(numIfs++) && goNextTextSeries()) {
-				
-				addTextSeries(null, "And my best friend.",farmer);
-				
-				// Set the next text and advance it.
-				advanceSequence();
-			}
-			
+
 			if(isSequence(numIfs++) && goNextTextSeries()) {
 				
 				addTextSeries(null, "Actually, it's about that time of day again.",farmer);
@@ -854,7 +819,7 @@ public class farmerIntroCinematic extends cinematic {
 				
 				if(isSequence(numIfs++) && goNextTextSeries()) {
 					
-					addTextSeries(null, "He's a good quality sheep, you'll like him.",farmer);
+					addTextSeries(null, "He's a good quality sheep. Please?",farmer);
 					
 					// Set the next text and advance it.
 					advanceSequence();
@@ -865,25 +830,6 @@ public class farmerIntroCinematic extends cinematic {
 					// Move right.
 					addTextSeries("'No'", null,farmer);
 					addTextSeries("'Yes'", null,farmer);
-					interactSequence.goToNext();
-					
-					// Set the next text and advance it.
-					advanceSequence();
-				}
-				
-				if(isSequence(numIfs++) && goNextTextSeries()) {
-					
-					addTextSeries(null, "Just give it a try.",farmer);
-					
-					// Set the next text and advance it.
-					advanceSequence();
-				}
-				
-				if(isSequence(numIfs++) && goNextTextSeries()) {
-					
-					// Move right.
-					addTextSeries("'Yes'", null,farmer);
-					addTextSeries("'No'", null,farmer);
 					interactSequence.goToNext();
 					
 					// Set the next text and advance it.

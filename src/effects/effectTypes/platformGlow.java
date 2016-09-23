@@ -108,7 +108,7 @@ public class platformGlow extends effect {
 	@Override
 	public void respondToFrame(int j) {
 		// If someone is in the explosion radius, hurt.
-		if(player.getPlayer().isWithin(getIntX(), getIntY()-5, getIntX()+getWidth(), getIntY()+getHeight())) {
+		if(player.getPlayer().isWithin(getIntX()+1, getIntY()-5, getIntX()+getWidth()-1, getIntY()+getHeight()-5)) {
 			player.getPlayer().hurt(damage, 1f);
 		}
 	}

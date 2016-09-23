@@ -1,5 +1,7 @@
 package effects;
 
+import java.util.ArrayList;
+
 import units.unit;
 
 public abstract class buff extends effect {
@@ -19,7 +21,20 @@ public abstract class buff extends effect {
 	// Respond to destruction
 	@Override
 	public void respondToDestroy() {
+		if(onUnit.getBuffs()!=null) onUnit.getBuffs().remove(this);
 		removeEffect();
+	}
+	
+	// Apply
+	public void apply() {
+		applyEffect();
+		if(onUnit.getBuffs() == null) onUnit.setBuffs(new ArrayList<buff>());
+		onUnit.getBuffs().add(this);
+	}
+	
+	// Remove
+	public void remove() {
+		destroy();
 	}
 	
 	// Apply effect.

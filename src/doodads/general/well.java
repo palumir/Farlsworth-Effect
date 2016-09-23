@@ -2,6 +2,7 @@ package doodads.general;
 
 import java.awt.Point;
 
+import effects.effectTypes.savePoint;
 import interactions.interactBox;
 import interactions.textSeries;
 import items.bottle;
@@ -98,6 +99,14 @@ public class well extends chunk {
 				// Save and refresh.
 				haveSaved = true;
 				interactSequence.toggleDisplay();
+				
+				// Destroy last bottle charge indicator because we saved at a well!
+				player.getPlayer().lastSaveBottle = null;
+				if(player.getPlayer().lastSaveBottleChargeIndicator!=null) {
+					player.getPlayer().lastSaveBottleChargeIndicator = null;
+				}
+				
+				// Refresh, of course
 				refreshPlayer("Save");
 			}
 			

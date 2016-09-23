@@ -75,7 +75,7 @@ public class fire extends effect {
 		setHitBoxAdjustmentY(getDefaultHitBoxAdjustmentY());
 		
 		// Has no timer.
-		hasATimer = false;
+		setHasATimer(false);
 
 	}
 	

@@ -16,6 +16,7 @@ import terrain.chunkTypes.tombEdge;
 import units.player;
 import units.unit;
 import units.bosses.fernando.fernando;
+import units.bosses.graveKeeper.cinematics.wolflessFightCinematic;
 import units.bosses.rodriguez.rodriguez;
 import units.bosses.rodriguez.cinematics.farmTombCinematic;
 import units.bosses.wolfless.wolfless;
@@ -464,7 +465,6 @@ public class farmTomb extends zone {
 			shadowBossFightFirstTime = true;
 		}
 		if(currPlayer != null && currPlayer.isWithin(7040,1551,7101,1798)) {
-			//fernandoRodriguezInteraction.setCompleted(true);
 			if(tombMiddleCinematic==null) startFernandoRodriguezInteraction();
 		}
 	}
@@ -491,12 +491,13 @@ public class farmTomb extends zone {
 				if(shadowBossFightFirstTime) {
 					music.currMusic.fadeOut(5f);
 					shadowBossFightFirstTime = false;
-					fernando.initiateShadowBossFightScene();
+					wolflessFightCinematic w = new wolflessFightCinematic();
+					w.start();
 					shadowBossFightInitiated = true;
 				}
 				else {
-					fernando.initiateShadowBossFightScene();
-					fernando.setSequenceTo(11);
+					//fernando.initiateShadowBossFightScene();
+					//fernando.setSequenceTo(11);
 					shadowBossFightInitiated = true;
 				}
 			}

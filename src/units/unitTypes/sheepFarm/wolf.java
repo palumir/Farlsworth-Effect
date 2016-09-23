@@ -158,55 +158,81 @@ public abstract class wolf extends unit {
 			animationPack unitTypeAnimations = new animationPack();
 			
 			// Jumping left animation.
-			animation jumpingLeft = new animation("jumpingLeft", leftRightSpriteSheet.getAnimation(6), 4, 4, 1);
+			animation jumpingLeft = new animation("jumpingLeft", leftRightSpriteSheet.getAnimation(6), 4, 4, 1){{
+				setRepeats(true);
+			}};
 			unitTypeAnimations.addAnimation(jumpingLeft);
 			
 			// Jumping down animation.
-			animation jumpingDown = new animation("jumpingDown", upDownSpriteSheet.getAnimation(3), 2, 2, 1);
+			animation jumpingDown = new animation("jumpingDown", upDownSpriteSheet.getAnimation(3), 2, 2, 1){{
+				setRepeats(true);
+			}};
 			unitTypeAnimations.addAnimation(jumpingDown);
 			
 			// Jumping up animation.
-			animation jumpingUp = new animation("jumpingUp", upDownSpriteSheet.getAnimation(3), 7, 7, 1);
+			animation jumpingUp = new animation("jumpingUp", upDownSpriteSheet.getAnimation(3), 7, 7, 1){{
+				setRepeats(true);
+			}};
 			unitTypeAnimations.addAnimation(jumpingUp);
 			
 			// Jumping right animation.
-			animation jumpingRight = new animation("jumpingRight", leftRightSpriteSheet.getAnimation(2), 4, 4, 1);
+			animation jumpingRight = new animation("jumpingRight", leftRightSpriteSheet.getAnimation(2), 4, 4, 1){{
+				setRepeats(true);
+			}};
 			unitTypeAnimations.addAnimation(jumpingRight);
 			
 			// Standing left animation.
-			animation standingLeft = new animation("standingLeft", leftRightSpriteSheet.getAnimation(5), 0, 0, 1);
+			animation standingLeft = new animation("standingLeft", leftRightSpriteSheet.getAnimation(5), 0, 0, 1){{
+				setRepeats(true);
+			}};
 			unitTypeAnimations.addAnimation(standingLeft);
 			
 			// Standing right animation.
-			animation standingRight = new animation("standingRight", leftRightSpriteSheet.getAnimation(3), 0, 0, 1);
+			animation standingRight = new animation("standingRight", leftRightSpriteSheet.getAnimation(3), 0, 0, 1){{
+				setRepeats(true);
+			}};
 			unitTypeAnimations.addAnimation(standingRight);
 			
 			// Running left animation.
-			animation runningLeft = new animation("runningLeft", leftRightSpriteSheet.getAnimation(5), 0, 4, 1f);
+			animation runningLeft = new animation("runningLeft", leftRightSpriteSheet.getAnimation(5), 0, 4, 1f){{
+				setRepeats(true);
+			}};
 			unitTypeAnimations.addAnimation(runningLeft);		
 			
 			// Running right animation.
-			animation runningRight = new animation("runningRight", leftRightSpriteSheet.getAnimation(1), 0, 4, 1f);
+			animation runningRight = new animation("runningRight", leftRightSpriteSheet.getAnimation(1), 0, 4, 1f){{
+				setRepeats(true);
+			}};
 			unitTypeAnimations.addAnimation(runningRight);
 			
 			// Standing up animation.
-			animation standingUp = new animation("standingUp", upDownSpriteSheet.getAnimation(4), 5, 5, 1);
+			animation standingUp = new animation("standingUp", upDownSpriteSheet.getAnimation(4), 5, 5, 1){{
+				setRepeats(true);
+			}};
 			unitTypeAnimations.addAnimation(standingUp);
 			
 			// Standing down animation.
-			animation standingDown = new animation("standingDown", upDownSpriteSheet.getAnimation(0), 0, 0, 1);
+			animation standingDown = new animation("standingDown", upDownSpriteSheet.getAnimation(0), 0, 0, 1){{
+				setRepeats(true);
+			}};
 			unitTypeAnimations.addAnimation(standingDown);
 			
 			// Running up animation.
-			animation runningUp = new animation("runningUp", upDownSpriteSheet.getAnimation(2), 5, 8, 1f);
+			animation runningUp = new animation("runningUp", upDownSpriteSheet.getAnimation(2), 5, 8, 1f){{
+				setRepeats(true);
+			}};
 			unitTypeAnimations.addAnimation(runningUp);
 			
 			// Running down animation.
-			animation runningDown = new animation("runningDown", upDownSpriteSheet.getAnimation(2), 0, 3, 1f);
+			animation runningDown = new animation("runningDown", upDownSpriteSheet.getAnimation(2), 0, 3, 1f){{
+				setRepeats(true);
+			}};
 			unitTypeAnimations.addAnimation(runningDown);
 			
 			// Sleeping animation
-			animation sleepingLeft = new animation("sleepingLeft", leftRightSpriteSheet.getAnimation(4), 3, 3, 0.5f);
+			animation sleepingLeft = new animation("sleepingLeft", leftRightSpriteSheet.getAnimation(4), 3, 3, 0.5f){{
+				setRepeats(true);
+			}};
 			unitTypeAnimations.addAnimation(sleepingLeft);
 			
 			// Set animations.
@@ -487,10 +513,6 @@ public abstract class wolf extends unit {
 			clawAttack(currPlayer);
 			*/
 			
-			// Even dosile wolves attack if provoked.
-			if(dosile && isInAttackRange(currPlayer, 0)) {
-				attack();
-			}
 		}
 		
 		///////////////////////////

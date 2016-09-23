@@ -754,6 +754,7 @@ public class wolfless extends boss {
 		// Move wolfie and player to the middle.
 		player.getPlayer().setDoubleX(platforms.get(6*3 + 3).get(1).getIntX());
 		player.getPlayer().setDoubleY(platforms.get(6*3 + 3).get(1).getIntY()-player.getPlayer().getHeight());
+		player.getPlayer().move(0, 0);
 		setDoubleX(platforms.get(6*4 + 3).get(1).getIntX()-getWidth()/2 + platforms.get(4*5+3).get(1).getWidth()/2);
 		setDoubleY(platforms.get(6*4 + 3).get(1).getIntY()-getHeight());
 		faceTowardPlayer();
@@ -793,7 +794,7 @@ public class wolfless extends boss {
 		
 		// Change phase.
 		if(numberOfHitsToDie==5) {
-			spawnClawPhase = 1.05f;
+			spawnClawPhase = .97f;
 			spawnEvery = 0.1f;
 			shadowDudeMoveSpeed = 4f;
 			pukeFor = 1f;
@@ -801,7 +802,7 @@ public class wolfless extends boss {
 		}
 		
 		if(numberOfHitsToDie==4) {
-			spawnClawPhase = 0.90f;
+			spawnClawPhase = 0.87f;
 			advancedShadowPuke = true;
 			spawnEvery = 0.09f;
 			shadowDudeMoveSpeed = 4.5f;
@@ -809,14 +810,14 @@ public class wolfless extends boss {
 		}
 		
 		if(numberOfHitsToDie==3) {
-			spawnClawPhase = 0.75f;
+			spawnClawPhase = 0.79f;
 			spawnEvery = 0.08f;
 			shadowDudeMoveSpeed = 5f;
 			pukeFor = 0.7f;
 		}
 		
 		if(numberOfHitsToDie==2) {
-			spawnClawPhase = 0.6f;
+			spawnClawPhase = 0.65f;
 			spawnEvery = 0.07f;
 			shadowDudeMoveSpeed = 5.5f;
 			pukeFor = 0.55f;

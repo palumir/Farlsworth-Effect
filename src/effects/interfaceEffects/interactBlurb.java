@@ -73,7 +73,7 @@ public class interactBlurb extends effect {
 		lastTime = time.getTime();
 		
 		// Duration
-		this.hasATimer = false;
+		this.setHasATimer(false);
 		
 		// Draw in front
 		this.forceInFront = true;
@@ -92,7 +92,9 @@ public class interactBlurb extends effect {
 				theEffectType.getEffectTypeSpriteSheet().getAnimation(0), 
 				4, 
 				4, 
-				1.5f); 
+				1.5f){{
+					setRepeats(true);
+				}}; 
 		animation endAnimation = new animation("endAnimation", 
 				theEffectType.getEffectTypeSpriteSheet().getAnimation(0), 
 				4, 
@@ -117,22 +119,14 @@ public class interactBlurb extends effect {
 	@Override
 	public void respondToFrame(int j) {
 		// We've played the start already.
-		if(playedOnce && j == 0 && !getCurrentAnimation().getName().equals("pulseAnimation")) {
+		if(time.getTime() - getCurrentAnimation().getStartTime() > getCurrentAnimation().getTimeToComplete()*1000
+				&& getCurrentAnimation().getName().equals("startAnimation")) {
 			setCurrentAnimation(animations.getAnimation("pulseAnimation"));
 		}
 		
-		// Set played once.
-		if(j >= 3 && !getCurrentAnimation().getName().equals("pulseAnimation")) {
-			lastTime = time.getTime();
-			playedOnce = true;
-		}
-		
-		// Play the second half of the animation.
-		if(j>=4) {
-		}
-		
 		// If we are done the end animation, die.
-		if(j>=8) {
+		if(time.getTime() - getCurrentAnimation().getStartTime() > getCurrentAnimation().getTimeToComplete()*1000
+				&& getCurrentAnimation().getName().equals("endAnimation")) {
 			if(getAttachedObject() != null) getAttachedObject().unnattachFromObject(this);
 			this.destroy();
 		}

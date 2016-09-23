@@ -4,28 +4,19 @@ import java.util.ArrayList;
 
 import utilities.utility;
 
-public class animationPack {
-	////////////////
-	//// FIELDS ////
-	////////////////
-	
-	// The animations and their names.
-	private ArrayList<animation> animations;
-	
+public class animationPack extends ArrayList<animation> {
 	///////////////
 	/// METHODS ///
 	///////////////
 	public animationPack() {
-		
-		// Initialize
-		setAnimations(new ArrayList<animation>());
+		super();
 	}
 	
 	public animationPack(animationPack animationsToSet) {
+		super();
 		// Initialize
-		setAnimations(new ArrayList<animation>());
-		for(int i = 0; i < animationsToSet.getAnimations().size(); i++) {
-			addAnimation(new animation(animationsToSet.getAnimations().get(i)));
+		for(int i = 0; i < animationsToSet.size(); i++) {
+			addAnimation(new animation(animationsToSet.get(i)));
 		}
 	}
 
@@ -33,34 +24,23 @@ public class animationPack {
 	/// GETTERS AND SETTERS ///
 	///////////////////////////
 	public void addAnimation(animation a) {
-		getAnimations().add(a);
+		this.add(a);
 	}
 	
 	// Select random animation
 	public animation selectRandomAnimation() {
-		int randomNum = utility.RNG.nextInt(getAnimations().size());
-		return getAnimations().get(randomNum);
+		int randomNum = utility.RNG.nextInt(this.size());
+		return this.get(randomNum);
 	}
 	
 	public animation getAnimation(String name) {
 		// Search for it in our animations
-		for(int i = 0; i < getAnimations().size(); i++) {
-			if(name.equals(getAnimations().get(i).getName())) return getAnimations().get(i);
+		for(int i = 0; i < this.size(); i++) {
+			if(name.equals(this.get(i).getName())) return this.get(i);
 		}
 		return null;
 	}
 
-	public boolean contains(animation trailRight) {
-		// TODO Auto-generated method stub
-		return false;
-	}
 
-	public ArrayList<animation> getAnimations() {
-		return animations;
-	}
-
-	public void setAnimations(ArrayList<animation> animations) {
-		this.animations = animations;
-	}
 	
 }

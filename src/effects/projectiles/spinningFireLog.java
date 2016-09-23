@@ -65,7 +65,7 @@ public class spinningFireLog extends projectile {
 		super(theEffectType, newX, newY, newMoveToX, newMoveToY, damage);
 		moveSpeed = DEFAULT_MOVESPEED;
 		collisionOn = true;
-		hasATimer = false;
+		setHasATimer(false);
 		setRiseRun();
 	}
 	

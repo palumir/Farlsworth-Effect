@@ -785,7 +785,8 @@ public class flowerFarmCinematic extends cinematic {
 		interactSequence.setUnescapable(false);
 		
 		// Set it to be completed as soon as he runs, instead of when he's teleported to flower farm.
-		cinematicCompleted.setCompleted(true);
+		isCompleted.setCompleted(true);
+		System.out.println(isCompleted.isCompleted());
 		
 		// Save by default.
 		saveState.setQuiet(true);

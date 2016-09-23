@@ -76,7 +76,7 @@ public class savePoint extends effect {
 		setHeight(getDefaultHeight());
 		setWidth(getDefaultWidth());
 		setHitBoxAdjustmentY(getDefaultHitBoxAdjustmentY());
-		hasATimer = false;
+		setHasATimer(false);
 
 	}
 	
