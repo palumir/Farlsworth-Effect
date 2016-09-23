@@ -1,7 +1,9 @@
 package items.bottles;
 
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 
+import UI.tooltipString;
 import drawing.spriteSheet;
 import drawing.spriteSheet.spriteSheetInfo;
 import effects.buff;
@@ -91,6 +93,8 @@ public class jumpBottle extends bottle {
 	public void reactToPickup() {
 		player currPlayer = player.getPlayer();
 		if(currPlayer != null) {
+			currPlayer.getPlayerInventory().equipItem(this, KeyEvent.VK_SPACE);
+			tooltipString t = new tooltipString("Press 'space' double jump with the Save Bottle.");
 		}
 	}
 

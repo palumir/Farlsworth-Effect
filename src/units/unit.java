@@ -289,7 +289,7 @@ public class unit extends drawnObject  {
 	}
 	
 	// Hurting people leniency
-	public static int leniency = 6;
+	public static int leniency = 7;
 	
 	// Hurt people, if we do.
 	public void hurtPeople(int leniency) {
@@ -1216,8 +1216,6 @@ public class unit extends drawnObject  {
 	
 	// Unit has touched up
 	public void touchUp() {
-		
-		System.out.println("touchedUp");
 		
 		// If they've touched up, place them closer to the ground.
 		if(!zeroNextFallSpeed && getFallSpeed() < 0) {

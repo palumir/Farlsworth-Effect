@@ -353,7 +353,7 @@ public class levelSave implements Serializable {
 							
 							if(toCode) {
 								out.println("c = new " + objectClass + "(" + x + "," + y + "," + j + ");");
-								out.println("c.setPassable(" + passable + ");");
+								out.println("if(c!=null) c.setPassable(" + passable + ");");
 							}
 						}
 						catch(Exception e) {
@@ -383,7 +383,7 @@ public class levelSave implements Serializable {
 							
 							if(toCode) {
 								out.println("c = new " + objectClass + "(" + x + "," + y + "," + j + ");");
-								out.println("c.setPassable(" + passable + ");");
+								out.println("if(c!=null) c.setPassable(" + passable + ");");
 							}
 						}
 					}

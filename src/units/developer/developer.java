@@ -1227,17 +1227,16 @@ public class developer extends player {
 	// Set test mode.
 	public static void toggleTestMode() {
 		
-		groundTile.groundTiles.clear();
-		drawnObject.objects.clear();
-		drawnObject.dontReloadTheseObjects.clear();
-		zone.loadedOnce = false;
-		
 		// Test mode
 		if(player.isDeveloper()) {
 			
 			// Save where we are.
 			saveState.createSaveState();	
 			levelSave.createSaveState("testLevelSave.temp");
+			groundTile.groundTiles.clear();
+			drawnObject.objects.clear();
+			drawnObject.dontReloadTheseObjects.clear();
+			zone.loadedOnce = false;
 			
 			// Development mode?
 			player.setDeveloper(false);
@@ -1254,6 +1253,10 @@ public class developer extends player {
 			// Save where we are.
 			saveState.createSaveState();	
 			levelSave.createSaveState("testLevelSave.temp");
+			groundTile.groundTiles.clear();
+			drawnObject.objects.clear();
+			drawnObject.dontReloadTheseObjects.clear();
+			zone.loadedOnce = false;
 						
 			// Development mode?
 			player.setDeveloper(true);

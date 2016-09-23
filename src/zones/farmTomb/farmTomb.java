@@ -8,6 +8,7 @@ import drawing.background;
 import drawing.spriteSheet;
 import interactions.event;
 import items.bottleShards.jumpBottleShard;
+import items.bottles.jumpBottle;
 import sounds.music;
 import terrain.chunk;
 import terrain.atmosphericEffects.fog;
@@ -173,8 +174,8 @@ public class farmTomb extends zone {
 		loadZoneEvents();
 		
 		// Load the level save.
-		farmTombZoneLoader loader = new farmTombZoneLoader();
-		loader.loadSegments();
+		//farmTombZoneLoader loader = new farmTombZoneLoader();
+		//loader.loadSegments();
 
 		// Load zone items
 		loadItems();
@@ -205,9 +206,7 @@ public class farmTomb extends zone {
 	
 	// Load items
 	public void loadItems() {
-		new jumpBottleShard(10619, 700);
-		new jumpBottleShard(9535, 2333);
-		new jumpBottleShard(6347, 1617);
+		jumpBottle b = new jumpBottle(2867, 1398+32);
 	}
 	
 	// Load units
@@ -399,7 +398,7 @@ public class farmTomb extends zone {
 		tombZoneEnterance.setZ(BACKGROUND_Z);
 		
 		// Secret chest stairs up to well.
-		stairsUp secretStairs = new stairsUp(9640,2314,0,farmTomb.getZone(),7534,1796,"Down");
+		stairsUp secretStairs = new stairsUp(11615,2314,0,farmTomb.getZone(),7534,1796,"Down");
 		secretStairs.setZ(BACKGROUND_Z);
 	}
 	
