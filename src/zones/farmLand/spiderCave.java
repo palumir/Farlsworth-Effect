@@ -11,7 +11,6 @@ import doodads.sheepFarm.caveEnterance;
 import drawing.background;
 import drawing.spriteSheet;
 import interactions.event;
-import modes.platformer;
 import sounds.music;
 import terrain.chunk;
 import terrain.chunkTypes.cave;

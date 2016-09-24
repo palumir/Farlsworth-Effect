@@ -1,11 +1,6 @@
 package items;
 
-import UI.tooltipString;
 import drawing.spriteSheet;
-import interactions.event;
-import sounds.sound;
-import units.player;
-import utilities.saveState;
 
 public abstract class bottle extends item {
 	////////////////

@@ -7,11 +7,10 @@ import java.awt.Graphics;
 import drawing.drawnObject;
 import drawing.gameCanvas;
 import drawing.spriteSheet;
+import drawing.spriteSheet.spriteSheetInfo;
 import drawing.animation.animation;
 import drawing.animation.animationPack;
-import drawing.spriteSheet.spriteSheetInfo;
 import effects.absolutePositionedEffect;
-import effects.effect;
 import effects.effectType;
 import items.item;
 import modes.mode;
@@ -108,7 +107,9 @@ public class itemDiscover extends absolutePositionedEffect {
 				getTypeOfEffect(i).getEffectTypeSpriteSheet().getAnimation(0), 
 				5, 
 				14, 
-				0.9f); 
+				0.9f){{
+					setRepeats(true);
+				}}; 
 		newAnimationPack.addAnimation(pulseAnimation);
 		animations = newAnimationPack;
 		
@@ -119,7 +120,7 @@ public class itemDiscover extends absolutePositionedEffect {
 		setHeight(getDefaultHeight());
 		setWidth(getDefaultWidth());
 		setHitBoxAdjustmentY(getDefaultHitBoxAdjustmentY());
-		hasATimer = false;
+		setHasATimer(false);
 		
 		// Draw above everything.
 		forceInFront = true;
@@ -174,7 +175,7 @@ public class itemDiscover extends absolutePositionedEffect {
 		// Of course only draw if the animation is not null.
 		if(getCurrentAnimation() != null) {
 			
-			float sizeMultiplier = (time.getTime() - timeStarted)/(getAnimations().getAnimation("spawnAnimation").getTimeToComplete()*1000);
+			double sizeMultiplier = (time.getTime() - timeStarted)/(getAnimations().getAnimation("spawnAnimation").getTimeToComplete()*1000);
 			if(sizeMultiplier > 1) sizeMultiplier = 1;
 			if(fadeOut) sizeMultiplier = 1 - (time.getTime() - timeStarted)/(getAnimations().getAnimation("spawnAnimation").getTimeToComplete()*1000);
 			if(sizeMultiplier < 0) sizeMultiplier = 0;
@@ -193,7 +194,7 @@ public class itemDiscover extends absolutePositionedEffect {
 					(int)(gameCanvas.getScaleY()*sizeMultiplier*item.getImage().getHeight()*1.5f + 1), 
 					null);
 			
-			Font font = drawnObject.DEFAULT_FONT_BOLD.deriveFont(drawnObject.DEFAULT_FONT_BOLD.getSize()*1.1f*sizeMultiplier);
+			Font font = drawnObject.DEFAULT_FONT_BOLD.deriveFont((float) (drawnObject.DEFAULT_FONT_BOLD.getSize()*1.1f*sizeMultiplier));
 			g.setFont(font);
 			g.setColor(DEFAULT_COLOR);
 			g.drawString(item.getName(), 
@@ -204,7 +205,7 @@ public class itemDiscover extends absolutePositionedEffect {
 							+ getCurrentAnimation().getCurrentFrame().getHeight()/2 
 							+ item.getImage().getHeight()*1.5f/2+3)*gameCanvas.getScaleY()));
 			
-			font = drawnObject.DEFAULT_FONT.deriveFont(drawnObject.DEFAULT_FONT.getSize()*1f*sizeMultiplier);
+			font = drawnObject.DEFAULT_FONT.deriveFont((float) (drawnObject.DEFAULT_FONT.getSize()*1f*sizeMultiplier));
 			g.setFont(font);
 			g.setColor(DEFAULT_COLOR);
 			g.drawString(item.rarity, 

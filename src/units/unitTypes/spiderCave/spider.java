@@ -6,11 +6,8 @@ import drawing.animation.animation;
 import drawing.animation.animationPack;
 import modes.mode;
 import sounds.sound;
-import units.player;
 import units.unit;
 import units.unitType;
-import utilities.time;
-import utilities.utility;
 
 public class spider extends unit {
 	
@@ -119,7 +116,6 @@ public class spider extends unit {
 		//showAttackRange();
 		// Set combat stuff.
 		setCombatStuff();
-		setAttackSound(spiderAttack);
 		
 		
 		// Deal with animations
@@ -201,20 +197,6 @@ public class spider extends unit {
 	public void setCombatStuff() {
 		// Set to be attackable.
 		this.setKillable(true);
-		
-		// Wolf damage.
-		setAttackDamage(DEFAULT_ATTACK_DAMAGE);
-		setAttackTime(DEFAULT_ATTACK_TIME);
-		setAttackFrameStart(2);
-		setAttackFrameEnd(2);
-		setAttackWidth(DEFAULT_ATTACK_WIDTH);
-		setAttackLength(DEFAULT_ATTACK_LENGTH);
-		setBackSwing(DEFAULT_BACKSWING);
-		setCritChance(DEFAULT_CRIT_CHANCE);
-		setCritDamage(DEFAULT_CRIT_DAMAGE);
-		
-		// HP
-		setMaxHealthPoints(DEFAULT_HP);
 		setHealthPoints(DEFAULT_HP);
 		
 	}

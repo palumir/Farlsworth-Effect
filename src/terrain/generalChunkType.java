@@ -4,7 +4,6 @@ import java.awt.image.BufferedImage;
 
 import drawing.spriteSheet;
 import drawing.spriteSheet.spriteSheetInfo;
-import utilities.utility;
 
 public class generalChunkType extends chunkType {
 	/////////////////////////

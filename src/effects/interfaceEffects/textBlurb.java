@@ -10,6 +10,7 @@ import drawing.animation.animationPack;
 import effects.effect;
 import effects.effectType;
 import modes.mode;
+import utilities.time;
 
 public class textBlurb extends effect {
 	
@@ -65,7 +66,7 @@ public class textBlurb extends effect {
 		super(theEffectType, newX, newY);
 		
 		// Duration
-		this.hasATimer = false;
+		this.setHasATimer(false);
 		
 		// Draw in front
 		this.forceInFront = true;
@@ -86,7 +87,9 @@ public class textBlurb extends effect {
 				theEffectType.getEffectTypeSpriteSheet().getAnimation(0), 
 				4, 
 				7, 
-				1.25f); 
+				1.25f){{
+					setRepeats(true);
+				}}; 
 		animation endAnimation = new animation("endAnimation", 
 				theEffectType.getEffectTypeSpriteSheet().getAnimation(0), 
 				8, 
@@ -111,21 +114,15 @@ public class textBlurb extends effect {
 	@Override
 	public void respondToFrame(int j) {
 		// We've played the start already.
-		if(playedOnce && j == 0 && !getCurrentAnimation().getName().equals("pulseAnimation")) {
+		if(time.getTime() - getCurrentAnimation().getStartTime() > getCurrentAnimation().getTimeToComplete()*1000
+				&& getCurrentAnimation().getName().equals("startAnimation")) {
 			setCurrentAnimation(animations.getAnimation("pulseAnimation"));
 		}
 		
-		// Set played once.
-		if(j >= 3 && !getCurrentAnimation().getName().equals("pulseAnimation")) {
-			playedOnce = true;
-		}
-		
-		// Play the second half of the animation.
-		if(j>=4) {
-		}
-		
 		// If we are done the end animation, die.
-		if(j>=11) {
+		if(time.getTime() - getCurrentAnimation().getStartTime() > getCurrentAnimation().getTimeToComplete()*1000
+				&& getCurrentAnimation().getName().equals("endAnimation")) {
+			if(getAttachedObject() != null) getAttachedObject().unnattachFromObject(this);
 			this.destroy();
 		}
 	}

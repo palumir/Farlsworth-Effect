@@ -3,11 +3,7 @@ package UI;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
-import UI.button;
 import drawing.drawnObject;
-import drawing.gameCanvas;
-import main.main;
-import sounds.music;
 
 public abstract class menu extends ArrayList<drawnObject> {
 	

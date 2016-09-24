@@ -4,21 +4,14 @@ import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
-import java.util.ArrayList;
 
-import UI.playerActionBar;
-import drawing.drawnObject;
 import drawing.gameCanvas;
 import drawing.animation.animation;
-import effects.buffs.darkSlow;
 import modes.mode;
 import units.humanType;
 import units.player;
 import units.unit;
 import units.unitType;
-import units.unitCommands.commandList;
-import utilities.intTuple;
 import utilities.time;
 
 public class shadowDude extends unit {
@@ -154,56 +147,6 @@ public class shadowDude extends unit {
 				g.drawString(getIntX() + "," + getIntY(),
 						   getDrawX(),
 						   getDrawY());
-			}
-			
-			// Show attack range.
-			if(showAttackRange && getCurrentAnimation() != null) {
-				int x1 = 0;
-				int x2 = 0;
-				int y1 = 0;
-				int y2 = 0;
-				
-				// Get the x and y of hitbox.
-				int hitBoxX = getDrawX() - (- (getCurrentAnimation().getCurrentFrame().getWidth()/2 - getWidth()/2) - getHitBoxAdjustmentX());
-				int hitBoxY = getDrawY() - (- (getCurrentAnimation().getCurrentFrame().getHeight()/2 - getHeight()/2) - getHitBoxAdjustmentY());
-				
-				// Get the box we will attack in if facing left.
-				if(facingDirection.equals("Left")) {
-					int heightMidPoint = hitBoxY + getHeight()/2;
-					y1 = heightMidPoint - getAttackWidth()/2;
-					y2 = heightMidPoint + getAttackWidth()/2;
-					x1 = hitBoxX - getAttackLength();
-					x2 = hitBoxX + getWidth() + 5;
-				}
-				
-				// Get the box we will attack in if facing right.
-				if(facingDirection.equals("Right")) {
-					int heightMidPoint = hitBoxY + getHeight()/2;
-					y1 = heightMidPoint - getAttackWidth()/2;
-					y2 = heightMidPoint + getAttackWidth()/2;
-					x1 = hitBoxX - 5;
-					x2 = hitBoxX + getWidth() + getAttackLength();
-				}
-				
-				// Get the box we will attack in facing up.
-				if(facingDirection.equals("Up")) {
-					int widthMidPoint = hitBoxX + getWidth()/2;
-					x1 = widthMidPoint - getAttackWidth()/2;
-					x2 = widthMidPoint + getAttackWidth()/2;
-					y1 = hitBoxY - getAttackLength();
-					y2 = hitBoxY + getHeight() + 5;
-				}
-				
-				// Get the box we will attack in facing down.
-				if(facingDirection.equals("Down")) {
-					int widthMidPoint = hitBoxX + getWidth()/2;
-					x1 = widthMidPoint - getAttackWidth()/2;
-					x2 = widthMidPoint + getAttackWidth()/2;
-					y1 = hitBoxY - 5;
-					y2 = hitBoxY + getHeight() + getAttackLength();
-				}
-				g.setColor(Color.blue);
-				g.drawRect((int)(gameCanvas.getScaleX()*x1),(int)(gameCanvas.getScaleY()*y1),(int)(gameCanvas.getScaleX()*x2-x1),(int)(gameCanvas.getScaleY()*y2-y1));
 			}
 			
 			// Draw the hitbox of the image in green.

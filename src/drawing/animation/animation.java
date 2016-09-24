@@ -20,8 +20,11 @@ public class animation {
 	private int endFrame;
 	
 	// The time it takes to complete the animation.
-	private float timeToComplete; // in seconds
+	private double timeToComplete; // in seconds
 	private long startTime; // in milliseconds
+	
+	// Repeats?
+	private boolean repeats = false;
 	
 	///////////////
 	/// METHODS ///
@@ -44,6 +47,7 @@ public class animation {
 		// Set the fields.
 		setTimeToComplete(animation.getTimeToComplete());
 		this.setStartFrame(animation.getStartFrame());
+		repeats = animation.repeats;
 		endFrame = animation.endFrame;
 		setName(animation.name);
 		setSprites(animation.sprites);
@@ -51,7 +55,7 @@ public class animation {
 
 	// Start animation
 	public void startAnimation() {
-		startTime = 0;
+		setStartTime(0);
 	}
 	
 	// Play animation.
@@ -77,16 +81,31 @@ public class animation {
 	public int getCurrentSprite() {
 		
 		// Get the correct current frame.
-		if(startTime == 0) startTime = time.getTime();
-		double howMuchTimeHasElapsed = (double) (time.getTime() - startTime);
+		if(getStartTime() == 0) setStartTime(time.getTime());
+		double howMuchTimeHasElapsed = (double) (time.getTime() - getStartTime());
 		double howMuchTimePerFrame = (double) (getTimeToComplete()*1000/((endFrame + 1) - getStartFrame()));
 		double correctFrame = getStartFrame() + ((double)howMuchTimeHasElapsed)/((double)howMuchTimePerFrame);
 		if(correctFrame >= endFrame+1) {
-			startTime = time.getTime();
-			correctFrame = getStartFrame();
+
+			// It's over but hasn't been destroyed yet by worker thread.
+			if(time.getTime() - getStartTime() >= timeToComplete*1000 && !repeats) correctFrame = endFrame;
+			
+			// Otherwise, just return the correct frame.
+			else {
+				setStartTime(time.getTime());
+				correctFrame = getStartFrame();
+			}
 		}
 		
 		return (int)correctFrame;
+	}
+	
+	public void setRepeats(boolean b) {
+		repeats = b;
+	}
+	
+	public boolean isRepeats() {
+		return repeats;
 	}
 
 	public int getStartFrame() {
@@ -105,11 +124,19 @@ public class animation {
 		this.sprites = sprites;
 	}
 
-	public float getTimeToComplete() {
+	public double getTimeToComplete() {
 		return timeToComplete;
 	}
 
-	public void setTimeToComplete(float timeToComplete) {
+	public void setTimeToComplete(double timeToComplete) {
 		this.timeToComplete = timeToComplete;
+	}
+
+	public long getStartTime() {
+		return startTime;
+	}
+
+	public void setStartTime(long startTime) {
+		this.startTime = startTime;
 	}
 }

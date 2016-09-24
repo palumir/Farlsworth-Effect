@@ -1,12 +1,7 @@
 package items;
 
-import UI.tooltipString;
 import drawing.spriteSheet;
-import interactions.event;
-import items.bottleShards.jumpBottleShard;
-import sounds.sound;
 import units.player;
-import utilities.saveState;
 
 public abstract class bottleShard extends item {
 	////////////////

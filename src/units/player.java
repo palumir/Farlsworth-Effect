@@ -1,41 +1,33 @@
 package units;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
-import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
-import UI.button;
 import UI.playerActionBar;
 import UI.tooltipString;
 import UI.menus.deathMenu;
-import doodads.sheepFarm.rock;
 import drawing.camera;
 import drawing.drawnObject;
-import drawing.gameCanvas;
 import drawing.animation.animation;
 import drawing.animation.animationPack;
 import effects.effect;
 import effects.effectTypes.critBloodSquirt;
+import effects.effectTypes.jumpBottleSplash;
 import effects.effectTypes.savePoint;
 import effects.interfaceEffects.interactBlurb;
 import interactions.interactBox;
 import items.bottle;
 import items.inventory;
-import items.bottles.jumpBottle;
 import main.main;
 import modes.mode;
 import modes.platformer;
 import modes.topDown;
-import sounds.music;
 import units.developer.developer;
-import units.developer.propertiesButton;
 import utilities.saveState;
 import utilities.time;
-import utilities.utility;
 import zones.zone;
 
 public class player extends unit {
@@ -146,9 +138,6 @@ public class player extends unit {
 		setMoveSpeed(DEFAULT_PLAYER_MOVESPEED);
 		setAllowSlowMovement(true);
 		
-		// Set sounds.
-		setAttackSound(DEFAULT_ATTACK_SOUND);
-		
 		// Set-up the camera.
 		camera c = new camera(this, 1);
 		camera.setCurrent(c);
@@ -172,8 +161,7 @@ public class player extends unit {
 		setKillable(true);
 		
 		// Define HP
-		healthPoints = DEFAULT_PLAYER_HP;
-		maxHealthPoints = DEFAULT_PLAYER_HP;
+		setHealthPoints(DEFAULT_PLAYER_HP);
 		
 		// Set dimensions
 		setHeight(getDefaultHeight());
@@ -185,96 +173,15 @@ public class player extends unit {
 		setHitBoxAdjustmentY(getDefaultHitBoxAdjustmentY());
 		
 		// Set player animations
-		setNoWeaponStats();
+		setAnimations();
 		
 		// Set z.
 		setZ(1);
 	}
 	
 	// Set animations
-	public void setNoWeaponStats() {
-		
-		// Damage
-		setAttackDamage(DEFAULT_ATTACK_DAMAGE);
-		
-		// Set attack sound
-		setAttackSound(DEFAULT_ATTACK_SOUND);
-		
-		// Attack time.
-		setAttackFrameStart(3);
-		setAttackFrameEnd(5);
-		setAttackTime(DEFAULT_ATTACK_TIME);
-		
-		// Attack range.
-		setAttackWidth(DEFAULT_ATTACK_WIDTH);
-		setAttackLength(DEFAULT_ATTACK_LENGTH);
-		
-		// Unit stats.
-		setAttackVariability(DEFAULT_ATTACK_VARIABILITY); // Percentage
-		setCritChance(DEFAULT_CRIT_CHANCE);
-		setCritDamage(DEFAULT_CRIT_DAMAGE);
-		
-		// Deal with animations
-		animationPack unitTypeAnimations = new animationPack();
-		
-		// Attacking left animation.
-		animation attackingLeft = new animation("attackingLeft", getObjectSpriteSheet().getAnimation(13), 0, 8, DEFAULT_ATTACK_TIME);
-		unitTypeAnimations.addAnimation(attackingLeft);
-		
-		// Attacking left animation.
-		animation attackingRight = new animation("attackingRight", getObjectSpriteSheet().getAnimation(15), 0, 8, DEFAULT_ATTACK_TIME);
-		unitTypeAnimations.addAnimation(attackingRight);
-		
-		// Attacking left animation.
-		animation attackingUp = new animation("attackingUp", getObjectSpriteSheet().getAnimation(12), 0, 8, DEFAULT_ATTACK_TIME);
-		unitTypeAnimations.addAnimation(attackingUp);
-		
-		// Attacking left animation.
-		animation attackingDown = new animation("attackingDown", getObjectSpriteSheet().getAnimation(14), 0, 8, DEFAULT_ATTACK_TIME);
-		unitTypeAnimations.addAnimation(attackingDown);
-		
-		// Jumping left animation.
-		animation jumpingLeft = new animation("jumpingLeft", getObjectSpriteSheet().getAnimation(1), 5, 5, 1);
-		unitTypeAnimations.addAnimation(jumpingLeft);
-		
-		// Jumping right animation.
-		animation jumpingRight = new animation("jumpingRight", getObjectSpriteSheet().getAnimation(3), 5, 5, 1);
-		unitTypeAnimations.addAnimation(jumpingRight);
-		
-		// Standing left animation.
-		animation standingLeft = new animation("standingLeft", getObjectSpriteSheet().getAnimation(9), 0, 0, 1);
-		unitTypeAnimations.addAnimation(standingLeft);
-		
-		// Standing up animation.
-		animation standingUp = new animation("standingUp", getObjectSpriteSheet().getAnimation(8), 0, 0, 1);
-		unitTypeAnimations.addAnimation(standingUp);
-		
-		// Standing right animation.
-		animation standingRight = new animation("standingRight", getObjectSpriteSheet().getAnimation(11), 0, 0, 1);
-		unitTypeAnimations.addAnimation(standingRight);
-		
-		// Standing down animation.
-		animation standingDown = new animation("standingDown", getObjectSpriteSheet().getAnimation(10), 0, 0, 1);
-		unitTypeAnimations.addAnimation(standingDown);
-		
-		// Running left animation.
-		animation runningLeft = new animation("runningLeft", getObjectSpriteSheet().getAnimation(9), 1, 8, 0.75f);
-		unitTypeAnimations.addAnimation(runningLeft);		
-		
-		// Running up animation.
-		animation runningUp = new animation("runningUp", getObjectSpriteSheet().getAnimation(8), 1, 8, 0.75f);
-		unitTypeAnimations.addAnimation(runningUp);
-		
-		// Running right animation.
-		animation runningRight = new animation("runningRight", getObjectSpriteSheet().getAnimation(11), 1, 8, 0.75f);
-		unitTypeAnimations.addAnimation(runningRight);
-		
-		// Running down animation.
-		animation runningDown = new animation("runningDown", getObjectSpriteSheet().getAnimation(10), 1, 8, 0.75f);
-		unitTypeAnimations.addAnimation(runningDown);
-		
-		// Set animations.
-		setAnimations(unitTypeAnimations);
+	public void setAnimations() {
+
 	}
 	
 	// React to pain.
@@ -309,14 +216,14 @@ public class player extends unit {
 	// Kill player.
 	public void killPlayer() {
 		
-		if(!unitIsDead) {
+		if(!isUnitIsDead()) {
 			
 			// Tell the player
 			tooltipString t = new tooltipString("You died.");
 			
 			// Tell the player death timer to start.
 			unitDiedAt = time.getTime();
-			unitIsDead = true;
+			setUnitIsDead(true);
 			
 			// Destroy player.
 			drawnObject.objects.remove(this);
@@ -340,7 +247,7 @@ public class player extends unit {
 	
 	// Is player dead
 	public void isPlayerDead() {
-		if(unitIsDead && time.getTime() - unitDiedAt >= deathAnimationLasts*1000) {
+		if(isUnitIsDead() && time.getTime() - unitDiedAt >= deathAnimationLasts*1000) {
 			killPlayerFinally();
 		}
 	}
@@ -361,6 +268,7 @@ public class player extends unit {
 	}
 	
 	public static player loadPlayerSaveData(player alreadyPlayer, saveState s, zone z, int spawnX, int spawnY, String direction) {
+		
 		// Get player data from saveState.
 		// The player, depending on whether or not we have a save file.
 		player thePlayer;
@@ -374,7 +282,6 @@ public class player extends unit {
 		int playerY = 0;
 		String newFacingDirection = null;
 		inventory loadedInventory = new inventory(); // empty inventory
-		bottle loadedEquippedBottle = null;
 		
 		// If no zone is given and we don't have the save file. First time running game. 
 		if(z == null && s==null && alreadyPlayer == null) {
@@ -392,7 +299,6 @@ public class player extends unit {
 			playerY = s.getPlayerY();
 			newFacingDirection = s.getFacingDirection();
 			loadedInventory = s.getPlayerInventory();
-			loadedEquippedBottle = s.getEquippedBottle();
 		}
 		
 		// If the zone, z, is given, we should have all of these details.
@@ -408,10 +314,6 @@ public class player extends unit {
 				// Draw the carried over inventory.
 				loadedInventory = alreadyPlayer.getPlayerInventory();
 				drawnObject.objects.add(loadedInventory);
-				
-				// These will be carried over.
-				if(alreadyPlayer.getEquippedBottle() != null)
-				loadedEquippedBottle = (bottle) alreadyPlayer.getEquippedBottle();
 			}
 		}
 		
@@ -442,7 +344,7 @@ public class player extends unit {
 			
 			// Create an indicator
 			if(s.lastSaveBottle != null) {
-				new savePoint(
+				thePlayer.lastSaveBottleChargeIndicator = new savePoint(
 						(int)thePlayer.lastSaveBottle.getX(),
 						thePlayer.getIntY() - 
 						(
@@ -477,11 +379,6 @@ public class player extends unit {
 		
 		// Developer stuff
 		if(player.isDeveloper()) developer.devMousePressed(e);
-		
-		// Telepathy
-		else {
-			//playerMousePressed(e);
-		}
 	}
 	
 	// Responding to mouse release
@@ -509,13 +406,13 @@ public class player extends unit {
 				developer.toggleTestMode();
 			}
 			
-			else if(unitIsDead) { 
+			else if(isUnitIsDead()) { 
 				// Player presses bar key
 				if(k.getKeyCode() == KeyEvent.VK_ENTER) {
 					if(deathMenu.menu != null && objects.contains(deathMenu.menu.respawnAtSaveBottle)) deathMenu.menu.selectButton(deathMenu.menu.respawnAtSaveBottle);
 				}
 			}
-			else {
+			else if(zone.getCurrentZone()!=null && zone.getCurrentZone().isZoneLoaded() && playerLoaded) {
 				
 				// Player presses i (inventory) key.
 				if(k.getKeyCode() == KeyEvent.VK_I) { 
@@ -545,10 +442,10 @@ public class player extends unit {
 				// Respond to other presses (movement)
 				else {
 					// Shield on.
-					/*if(k.getKeyCode() == KeyEvent.VK_P) {
-						effect blood = new critBloodSquirt(getIntX() - critBloodSquirt.getDefaultWidth()/2 + topDownWidth/2,
+					if(k.getKeyCode() == KeyEvent.VK_P) {
+						jumpBottleSplash e = new jumpBottleSplash(getIntX() - critBloodSquirt.getDefaultWidth()/2 + topDownWidth/2,
 								   getIntY() - critBloodSquirt.getDefaultHeight()/2);
-					}*/
+					}
 					
 					// Player presses left key.
 					if(k.getKeyCode() == KeyEvent.VK_A) { 
@@ -637,7 +534,7 @@ public class player extends unit {
 	// Remove the weapon.
 	public void unequipWeapon() {
 	
-		setNoWeaponStats();
+		setAnimations();
 	}
 	
 	// Show possible interactions

@@ -1,21 +1,17 @@
 package items.bottles;
 
-import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 
 import UI.tooltipString;
 import drawing.spriteSheet;
 import drawing.spriteSheet.spriteSheetInfo;
-import effects.effect;
-import effects.effectTypes.savePoint;
-import effects.interfaceEffects.floatingString;
+import effects.buff;
+import effects.buffs.jumpBottleBuff;
 import items.bottle;
-import items.item;
+import modes.mode;
 import sounds.sound;
 import units.player;
-import utilities.saveState;
-import utilities.stringUtils;
 
 public class jumpBottle extends bottle {
 	////////////////
@@ -82,8 +78,14 @@ public class jumpBottle extends bottle {
 	
 	// Doublejump
 	public void doubleJump() {
-		player.getPlayer().touchDown();
-		player.getPlayer().setFallSpeed(-player.getPlayer().getJumpSpeed());
+		
+		if(mode.getCurrentMode().equals("platformer")) {
+			buff b = new jumpBottleBuff(player.getPlayer());
+		}
+		if(mode.getCurrentMode().equals("topDown")) {
+			player.getPlayer().touchDown();
+			player.getPlayer().setFallSpeed(-player.getPlayer().getJumpSpeed());
+		}
 	}
 	
 	// React to being picked up.
@@ -91,6 +93,8 @@ public class jumpBottle extends bottle {
 	public void reactToPickup() {
 		player currPlayer = player.getPlayer();
 		if(currPlayer != null) {
+			currPlayer.getPlayerInventory().equipItem(this, KeyEvent.VK_SPACE);
+			tooltipString t = new tooltipString("Press 'space' double jump with the Save Bottle.");
 		}
 	}
 

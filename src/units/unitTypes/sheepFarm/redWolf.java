@@ -7,18 +7,14 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 import doodads.sheepFarm.clawMarkRed;
-import doodads.sheepFarm.clawMarkYellow;
 import drawing.drawnObject;
 import drawing.gameCanvas;
 import drawing.spriteSheet;
 import drawing.spriteSheet.spriteSheetInfo;
-import items.item;
 import drawing.animation.animation;
-import units.player;
 import units.unit;
 import units.unitType;
 import utilities.intTuple;
-import utilities.mathUtils;
 import utilities.time;
 import utilities.utility;
 
@@ -127,19 +123,6 @@ public class redWolf extends wolf {
 		
 		// Set to be attackable.
 		this.setKillable(true);
-		
-		// Wolf damage.
-		setAttackFrameStart(2);
-		setAttackFrameEnd(3);
-		setAttackDamage(DEFAULT_SLASH_DAMAGE);
-		setAttackTime(DEFAULT_ATTACK_TIME);
-		setAttackWidth(DEFAULT_ATTACK_WIDTH);
-		setAttackLength(DEFAULT_ATTACK_LENGTH);
-		setCritDamage(DEFAULT_CRIT_DAMAGE);
-		setCritChance(DEFAULT_CRIT_CHANCE);
-		
-		// HP
-		setMaxHealthPoints(DEFAULT_HP);
 		setHealthPoints(DEFAULT_HP);
 	}
 		

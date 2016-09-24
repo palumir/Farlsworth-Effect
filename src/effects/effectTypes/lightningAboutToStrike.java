@@ -67,7 +67,7 @@ public class lightningAboutToStrike extends effect {
 		setHitBoxAdjustmentY(getDefaultHitBoxAdjustmentY());
 				
 		// Has no timer.
-		hasATimer = false;
+		setHasATimer(false);
 
 	}
 	

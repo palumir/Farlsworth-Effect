@@ -1,12 +1,5 @@
 package effects.effectTypes;
 
-import java.awt.AlphaComposite;
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.util.ArrayList;
-
-import drawing.gameCanvas;
 import drawing.spriteSheet;
 import drawing.spriteSheet.spriteSheetInfo;
 import drawing.animation.animation;
@@ -14,10 +7,7 @@ import drawing.animation.animationPack;
 import effects.effect;
 import effects.effectType;
 import modes.mode;
-import sounds.sound;
 import units.player;
-import units.unit;
-import utilities.time;
 
 public class savePoint extends effect {
 	
@@ -86,7 +76,7 @@ public class savePoint extends effect {
 		setHeight(getDefaultHeight());
 		setWidth(getDefaultWidth());
 		setHitBoxAdjustmentY(getDefaultHitBoxAdjustmentY());
-		hasATimer = false;
+		setHasATimer(false);
 
 	}
 	

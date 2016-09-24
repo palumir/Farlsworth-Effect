@@ -2,53 +2,29 @@ package units.developer;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.io.File;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 
 import UI.button;
 import UI.interfaceObject;
-import UI.playerActionBar;
 import UI.propertyEditBox;
 import UI.text;
 import UI.tooltipString;
-import UI.items.itemDiscover;
-import doodads.general.well;
-import doodads.sheepFarm.bone;
-import doodads.sheepFarm.bush;
-import doodads.sheepFarm.flower;
-import doodads.sheepFarm.grave;
-import doodads.sheepFarm.haystack;
-import doodads.sheepFarm.log;
-import doodads.sheepFarm.rock;
-import doodads.sheepFarm.tree;
-import doodads.tomb.wallTorch;
-import drawing.camera;
 import drawing.drawnObject;
 import drawing.gameCanvas;
-import effects.effectTypes.savePoint;
-import items.bottles.saveBottle;
 import main.main;
-import modes.topDown;
 import terrain.chunk;
 import terrain.groundTile;
 import units.player;
 import units.unit;
-import units.unitCommand;
 import units.unitCommands.commandIndicator;
-import units.unitCommands.commandList;
-import units.unitCommands.positionedCommand;
 import utilities.levelSave;
-import utilities.mathUtils;
 import utilities.saveState;
 import utilities.userMouseTracker;
-import utilities.utility;
 import zones.zone;
 
 public class developer extends player {
@@ -111,7 +87,6 @@ public class developer extends player {
 		setKillable(false);
 		
 		// Give a million hp
-		healthPoints = Integer.MAX_VALUE;
 		moveSpeed = 10f;
 		
 		// Create dev interface
@@ -1252,17 +1227,16 @@ public class developer extends player {
 	// Set test mode.
 	public static void toggleTestMode() {
 		
-		groundTile.groundTiles.clear();
-		drawnObject.objects.clear();
-		drawnObject.dontReloadTheseObjects.clear();
-		zone.loadedOnce = false;
-		
 		// Test mode
 		if(player.isDeveloper()) {
 			
 			// Save where we are.
 			saveState.createSaveState();	
 			levelSave.createSaveState("testLevelSave.temp");
+			groundTile.groundTiles.clear();
+			drawnObject.objects.clear();
+			drawnObject.dontReloadTheseObjects.clear();
+			zone.loadedOnce = false;
 			
 			// Development mode?
 			player.setDeveloper(false);
@@ -1279,6 +1253,10 @@ public class developer extends player {
 			// Save where we are.
 			saveState.createSaveState();	
 			levelSave.createSaveState("testLevelSave.temp");
+			groundTile.groundTiles.clear();
+			drawnObject.objects.clear();
+			drawnObject.dontReloadTheseObjects.clear();
+			zone.loadedOnce = false;
 						
 			// Development mode?
 			player.setDeveloper(true);

@@ -2,24 +2,15 @@ package units.bosses.rodriguez;
 
 import java.util.ArrayList;
 
-import drawing.spriteSheet;
-import drawing.spriteSheet.spriteSheetInfo;
 import drawing.animation.animation;
 import drawing.animation.animationPack;
-import interactions.event;
 import interactions.interactBox;
 import interactions.textSeries;
 import modes.mode;
-import sounds.sound;
 import units.boss;
 import units.humanType;
-import units.player;
 import units.unitType;
 import utilities.intTuple;
-import utilities.saveState;
-import utilities.stringUtils;
-import utilities.time;
-import zones.farmTomb.farmTomb;
 
 public class rodriguez extends boss {
 	
@@ -115,68 +106,6 @@ public class rodriguez extends boss {
 		
 		// Set interactable.
 		setInteractable(true);
-		
-		// Deal with animations
-		animationPack unitTypeAnimations = new animationPack();
-		
-		// Attacking left animation.
-		animation attackingLeft = new animation("attackingLeft", getObjectSpriteSheet().getAnimation(13), 0, 8, DEFAULT_ATTACK_TIME);
-		unitTypeAnimations.addAnimation(attackingLeft);
-		
-		// Attacking left animation.
-		animation attackingRight = new animation("attackingRight", getObjectSpriteSheet().getAnimation(15), 0, 8, DEFAULT_ATTACK_TIME);
-		unitTypeAnimations.addAnimation(attackingRight);
-		
-		// Attacking left animation.
-		animation attackingUp = new animation("attackingUp", getObjectSpriteSheet().getAnimation(12), 0, 8, DEFAULT_ATTACK_TIME);
-		unitTypeAnimations.addAnimation(attackingUp);
-		
-		// Attacking left animation.
-		animation attackingDown = new animation("attackingDown", getObjectSpriteSheet().getAnimation(14), 0, 8, DEFAULT_ATTACK_TIME);
-		unitTypeAnimations.addAnimation(attackingDown);
-		
-		// Jumping left animation.
-		animation jumpingLeft = new animation("jumpingLeft", getObjectSpriteSheet().getAnimation(1), 5, 5, 1);
-		unitTypeAnimations.addAnimation(jumpingLeft);
-		
-		// Jumping right animation.
-		animation jumpingRight = new animation("jumpingRight", getObjectSpriteSheet().getAnimation(3), 5, 5, 1);
-		unitTypeAnimations.addAnimation(jumpingRight);
-		
-		// Standing left animation.
-		animation standingLeft = new animation("standingLeft", getObjectSpriteSheet().getAnimation(9), 0, 0, 1);
-		unitTypeAnimations.addAnimation(standingLeft);
-		
-		// Standing up animation.
-		animation standingUp = new animation("standingUp", getObjectSpriteSheet().getAnimation(8), 0, 0, 1);
-		unitTypeAnimations.addAnimation(standingUp);
-		
-		// Standing right animation.
-		animation standingRight = new animation("standingRight", getObjectSpriteSheet().getAnimation(11), 0, 0, 1);
-		unitTypeAnimations.addAnimation(standingRight);
-		
-		// Standing down animation.
-		animation standingDown = new animation("standingDown", getObjectSpriteSheet().getAnimation(10), 0, 0, 1);
-		unitTypeAnimations.addAnimation(standingDown);
-		
-		// Running left animation.
-		animation runningLeft = new animation("runningLeft", getObjectSpriteSheet().getAnimation(9), 1, 8, 0.75f);
-		unitTypeAnimations.addAnimation(runningLeft);		
-		
-		// Running up animation.
-		animation runningUp = new animation("runningUp", getObjectSpriteSheet().getAnimation(8), 1, 8, 0.75f);
-		unitTypeAnimations.addAnimation(runningUp);
-		
-		// Running right animation.
-		animation runningRight = new animation("runningRight", getObjectSpriteSheet().getAnimation(11), 1, 8, 0.75f);
-		unitTypeAnimations.addAnimation(runningRight);
-		
-		// Running down animation.
-		animation runningDown = new animation("runningDown", getObjectSpriteSheet().getAnimation(10), 1, 8, 0.75f);
-		unitTypeAnimations.addAnimation(runningDown);
-		
-		// Set animations.
-		setAnimations(unitTypeAnimations);
 		
 		// Load events
 		loadEvents();

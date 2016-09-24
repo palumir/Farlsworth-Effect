@@ -3,15 +3,12 @@ package zones.farmTomb;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-import doodads.general.well;
 import doodads.tomb.stairsUp;
-import doodads.tomb.wallTorch;
 import drawing.background;
 import drawing.spriteSheet;
 import interactions.event;
 import items.bottleShards.jumpBottleShard;
-import modes.platformer;
-import units.bosses.rodriguez.cinematics.farmTombCinematic;
+import items.bottles.jumpBottle;
 import sounds.music;
 import terrain.chunk;
 import terrain.atmosphericEffects.fog;
@@ -20,19 +17,17 @@ import terrain.chunkTypes.tombEdge;
 import units.player;
 import units.unit;
 import units.bosses.fernando.fernando;
+import units.bosses.graveKeeper.cinematics.wolflessFightCinematic;
 import units.bosses.rodriguez.rodriguez;
+import units.bosses.rodriguez.cinematics.farmTombCinematic;
 import units.bosses.wolfless.wolfless;
 import units.unitCommands.commandList;
 import units.unitCommands.commands.moveCommand;
-import units.unitCommands.commands.waitCommand;
 import units.unitTypes.tomb.lightDude;
 import units.unitTypes.tomb.shadowDude;
 import utilities.intTuple;
-import utilities.levelSave;
-import utilities.saveState;
 import zones.zone;
 import zones.sheepFarm.sheepFarm;
-import zones.sheepFarm.sheepFarmZoneLoader;
 
 public class farmTomb extends zone {
 	
@@ -211,9 +206,7 @@ public class farmTomb extends zone {
 	
 	// Load items
 	public void loadItems() {
-		new jumpBottleShard(10619, 700);
-		new jumpBottleShard(9535, 2333);
-		new jumpBottleShard(6347, 1617);
+		jumpBottle b = new jumpBottle(2867, 1398+32);
 	}
 	
 	// Load units
@@ -405,7 +398,7 @@ public class farmTomb extends zone {
 		tombZoneEnterance.setZ(BACKGROUND_Z);
 		
 		// Secret chest stairs up to well.
-		stairsUp secretStairs = new stairsUp(9640,2314,0,farmTomb.getZone(),7534,1796,"Down");
+		stairsUp secretStairs = new stairsUp(11615,2314,0,farmTomb.getZone(),7534,1796,"Down");
 		secretStairs.setZ(BACKGROUND_Z);
 	}
 	
@@ -471,7 +464,6 @@ public class farmTomb extends zone {
 			shadowBossFightFirstTime = true;
 		}
 		if(currPlayer != null && currPlayer.isWithin(7040,1551,7101,1798)) {
-			//fernandoRodriguezInteraction.setCompleted(true);
 			if(tombMiddleCinematic==null) startFernandoRodriguezInteraction();
 		}
 	}
@@ -498,12 +490,13 @@ public class farmTomb extends zone {
 				if(shadowBossFightFirstTime) {
 					music.currMusic.fadeOut(5f);
 					shadowBossFightFirstTime = false;
-					fernando.initiateShadowBossFightScene();
+					wolflessFightCinematic w = new wolflessFightCinematic();
+					w.start();
 					shadowBossFightInitiated = true;
 				}
 				else {
-					fernando.initiateShadowBossFightScene();
-					fernando.setSequenceTo(11);
+					//fernando.initiateShadowBossFightScene();
+					//fernando.setSequenceTo(11);
 					shadowBossFightInitiated = true;
 				}
 			}

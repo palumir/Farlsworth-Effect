@@ -2,6 +2,7 @@ package doodads.general;
 
 import java.awt.Point;
 
+import effects.effectTypes.savePoint;
 import interactions.interactBox;
 import interactions.textSeries;
 import items.bottle;
@@ -11,7 +12,6 @@ import modes.mode;
 import sounds.sound;
 import terrain.chunk;
 import terrain.generalChunkType;
-import terrain.chunkTypes.water;
 import units.player;
 import utilities.saveState;
 
@@ -99,6 +99,14 @@ public class well extends chunk {
 				// Save and refresh.
 				haveSaved = true;
 				interactSequence.toggleDisplay();
+				
+				// Destroy last bottle charge indicator because we saved at a well!
+				player.getPlayer().lastSaveBottle = null;
+				if(player.getPlayer().lastSaveBottleChargeIndicator!=null) {
+					player.getPlayer().lastSaveBottleChargeIndicator = null;
+				}
+				
+				// Refresh, of course
 				refreshPlayer("Save");
 			}
 			

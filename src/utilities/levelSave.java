@@ -1,6 +1,5 @@
 package utilities;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
@@ -10,15 +9,9 @@ import java.io.Serializable;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 import UI.tooltipString;
 import drawing.drawnObject;
-import interactions.event;
-import interactions.quest;
-import items.bottle;
-import items.inventory;
-import items.item;
 import terrain.chunk;
 import terrain.groundTile;
 import units.player;
@@ -360,7 +353,7 @@ public class levelSave implements Serializable {
 							
 							if(toCode) {
 								out.println("c = new " + objectClass + "(" + x + "," + y + "," + j + ");");
-								out.println("c.setPassable(" + passable + ");");
+								out.println("if(c!=null) c.setPassable(" + passable + ");");
 							}
 						}
 						catch(Exception e) {
@@ -390,7 +383,7 @@ public class levelSave implements Serializable {
 							
 							if(toCode) {
 								out.println("c = new " + objectClass + "(" + x + "," + y + "," + j + ");");
-								out.println("c.setPassable(" + passable + ");");
+								out.println("if(c!=null) c.setPassable(" + passable + ");");
 							}
 						}
 					}

@@ -9,7 +9,6 @@ import drawing.spriteSheet;
 import drawing.spriteSheet.spriteSheetInfo;
 import effects.effectTypes.savePoint;
 import items.bottle;
-import items.item;
 import sounds.sound;
 import units.player;
 import utilities.saveState;
@@ -51,7 +50,7 @@ public class saveBottle extends bottle {
 	public void setStats() {
 		
 		// Rarity
-		rarity = "Common";
+		rarity = "Legendary";
 		description = "Saves game.";
 		
 		// Set item's stats
@@ -86,7 +85,7 @@ public class saveBottle extends bottle {
 		player currPlayer = player.getPlayer();
 		if(currPlayer != null) {
 			currPlayer.getPlayerInventory().equipItem(this, KeyEvent.VK_ENTER);
-			tooltipString t = new tooltipString("Press 'enter' to use a charge of the Save Bottle.");
+			tooltipString t = new tooltipString("Press 'enter' save the game with the Save Bottle.");
 		}
 	}
 

@@ -12,8 +12,8 @@ import drawing.drawnObject;
 import drawing.gameCanvas;
 import drawing.animation.animation;
 import drawing.animation.animationPack;
+import effects.buff;
 import effects.effect;
-import effects.projectile;
 import effects.buffs.movementBuff;
 import effects.effectTypes.bloodSquirt;
 import effects.effectTypes.critBloodSquirt;
@@ -47,43 +47,19 @@ public class unit extends drawnObject  {
 	
 	// Default movespeed.
 	private static int DEFAULT_UNIT_MOVESPEED = 1;
-	public static int DEFAULT_MAX_MOVESPEED = 10;
 	
 	// Gravity defaults.
 	private static boolean DEFAULT_GRAVITY_STATE = false;
-	private static float DEFAULT_JUMP_SHORTEN_ACCELERATION = .37f;
-	private static float DEFAULT_GRAVITY_ACCELERATION = 0.43f + DEFAULT_JUMP_SHORTEN_ACCELERATION;
-	private static float DEFAULT_GRAVITY_MAX_VELOCITY = 20;
+	private static float DEFAULT_SHORT_JUMP_ACCEL = 0.42f + .37f;
+	private static float DEFAULT_LONG_JUMP_ACCEL = 0.43f;
+	private static float DEFAULT_GRAVITY_MAX_VELOCITY = 18f;
 	protected static float DEFAULT_JUMPSPEED = 11f;
 	
 	// Animation defaults.
 	private static String DEFAULT_FACING_DIRECTION = "Right";
 	
-	// Unit defaults.
-	protected static int DEFAULT_ATTACK_DAMAGE = 1;
-	protected static float DEFAULT_ATTACK_TIME = 0.44f;
-	protected static int DEFAULT_ATTACK_WIDTH = 35;
-	protected static int DEFAULT_ATTACK_LENGTH = 11;
-	protected static float DEFAULT_BACKSWING = 0.1f;
-	protected static float DEFAULT_CRIT_CHANCE = 0f;
-	protected static float DEFAULT_CRIT_DAMAGE = 4f;
-	protected static float DEFAULT_ATTACK_VARIABILITY = 0f; // How much the range of hits is. 5% both ways.
-	
-	// Combat defaults.
-	protected static int DEFAULT_HP = 10;
-	protected boolean showAttackRange = false;
-	
-	// Default healthbarsize
-	protected static int DEFAULT_HEALTHBAR_HEIGHT = 6;
-	protected static int DEFAULT_HEALTHBAR_WIDTH = 40;
-	
 	// Colors for combat.
-	protected static Color DEFAULT_DAMAGE_COLOR = Color.white;
-	protected static Color DEFAULT_CRIT_COLOR = Color.yellow;
 	protected static Color DEFAULT_HEAL_COLOR = Color.green;
-	
-	// Sounds
-	protected static int DEFAULT_ATTACK_SOUND_RADIUS = 1000;
 
 	////////////////
 	//// FIELDS ////
@@ -113,48 +89,20 @@ public class unit extends drawnObject  {
 	// Destroy timer
 	private float destroyTimer = 0;
 	
-	// Combat
+	// Health
+	private int healthPoints = 1;
+	
 	// Does the unit kill the player?
 	protected boolean killsPlayer = false;
 
 	// Has the unit
-	protected boolean unitIsDead = false;
+	private boolean unitIsDead = false;
 	protected long unitDiedAt = 0;
 	protected float deathAnimationLasts = 1f;
 	
-	// Health points
-	protected int maxHealthPoints = DEFAULT_HP;
-	protected int healthPoints = DEFAULT_HP;
-	
-	// Damage
-	private int attackDamage = DEFAULT_ATTACK_DAMAGE;
-	
-	// Attack time
-	private int attackFrameStart = 0;
-	private int attackFrameEnd = 0;
-	private float attackTime = DEFAULT_ATTACK_TIME;
-	protected float backSwing = DEFAULT_BACKSWING;
-	
-	// Attack range.
-	private int attackWidth = DEFAULT_ATTACK_WIDTH;
-	private int attackLength = DEFAULT_ATTACK_LENGTH;
-	
-	// Unit stats.
-	protected float attackMultiplier = 1f;
-	private float attackVariability = DEFAULT_ATTACK_VARIABILITY; // Percentage
-	private float critChance = DEFAULT_CRIT_CHANCE;
-	private float critDamage = DEFAULT_CRIT_DAMAGE;
-	
 	// Attacking/getting attacked mechanics
-	protected boolean canAttack = true; // backswing stuff.
 	private boolean killable = false;
 	protected boolean targetable = true;
-	private boolean attacking = false;
-	private boolean alreadyAttacked = false;
-	protected double startAttackTime = 0;
-	
-	// Combat sounds
-	private String attackSound;
 	
 	// Gravity
 	public float jumpSpeed = DEFAULT_JUMPSPEED;
@@ -166,6 +114,9 @@ public class unit extends drawnObject  {
 	
 	// Double jumping?
 	private boolean doubleJumping = false;
+	
+	// Buffs
+	private ArrayList<buff> buffs;
 	
 	// Movement buffs/debuffs
 	private ArrayList<movementBuff> movementBuffs;
@@ -322,7 +273,7 @@ public class unit extends drawnObject  {
 	// Update unit
 	@Override
 	public void update() {	
-		if(!unitIsDead) {
+		if(!isUnitIsDead()) {
 			possiblyDestroy();
 			hurtPeople(leniency);
 			doCommands();
@@ -338,7 +289,7 @@ public class unit extends drawnObject  {
 	}
 	
 	// Hurting people leniency
-	public static int leniency = 8;
+	public static int leniency = 7;
 	
 	// Hurt people, if we do.
 	public void hurtPeople(int leniency) {
@@ -584,16 +535,6 @@ public class unit extends drawnObject  {
 	public void reactToDeath() {
 	}
 	
-	// Heal unit.
-	public void heal(int i) {
-		if(healthPoints + i > maxHealthPoints) {
-			i = maxHealthPoints - healthPoints;
-			healthPoints = maxHealthPoints;
-		}
-		else healthPoints = healthPoints + i;
-		effect e = new floatingString("+" + i, DEFAULT_HEAL_COLOR, getIntX() + getWidth()/2, getIntY() + getHeight()/2, 1f);
-	}
-	
 	// Require units to have some sort of AI.
 	public void updateUnit() {
 	}
@@ -607,13 +548,26 @@ public class unit extends drawnObject  {
 	public void gravity() {
 		if(gravity && !isStuck()) {
 			
+			// Set touching ground.
+			touchingGround = chunk.impassableChunks != null && 
+					chunk.impassableChunks.size() > 0 &&
+					fallSpeed >= 0
+					&& chunk.getGroundChunk(this, (int)getDoubleX(), (int)(getDoubleY()+fallSpeed+1)) != null;
+			
 			// Accelerate
-			if(getFallSpeed() < DEFAULT_GRAVITY_MAX_VELOCITY){
-				setFallSpeed(getFallSpeed() + DEFAULT_GRAVITY_ACCELERATION);
+			if(getFallSpeed() < DEFAULT_GRAVITY_MAX_VELOCITY &&
+					!touchingGround) {
 				if(!tryJump && !doubleJumping) {
+					setFallSpeed(getFallSpeed() + DEFAULT_SHORT_JUMP_ACCEL);
 				}
 				else {
-					setFallSpeed(getFallSpeed() - DEFAULT_JUMP_SHORTEN_ACCELERATION);
+					// If we are jump shortening.
+					setFallSpeed(getFallSpeed() + DEFAULT_LONG_JUMP_ACCEL);
+				}
+				
+				// Correct
+				if(getFallSpeed() > DEFAULT_GRAVITY_MAX_VELOCITY) {
+					setFallSpeed(DEFAULT_GRAVITY_MAX_VELOCITY);
 				}
 			}
 			
@@ -780,54 +734,6 @@ public class unit extends drawnObject  {
 		allUnits = new ArrayList<unit>();
 	}
 	
-	// Is in attack range?
-	public boolean isInAttackRange(unit u, int differential) {
-		int x1 = 0;
-		int x2 = 0;
-		int y1 = 0;
-		int y2 = 0;
-		
-		// Get the box we will attack in if facing left.
-		if(facingDirection.equals("Left")) {
-			int heightMidPoint = getIntY() + getHeight()/2;
-			y1 = heightMidPoint - getAttackWidth()/2 + differential/2;
-			y2 = heightMidPoint + getAttackWidth()/2 - differential/2;
-			x1 = getIntX() - getAttackLength() + differential;
-			x2 = getIntX() + getWidth();
-		}
-		
-		// Get the box we will attack in if facing right.
-		if(facingDirection.equals("Right")) {
-			int heightMidPoint = getIntY() + getHeight()/2;
-			y1 = heightMidPoint - getAttackWidth()/2 + differential/2;
-			y2 = heightMidPoint + getAttackWidth()/2 - differential/2;
-			x1 = getIntX();
-			x2 = getIntX() + getWidth() + getAttackLength() - differential;
-		}
-		
-		// Get the box we will attack in facing up.
-		if(facingDirection.equals("Up")) {
-			int widthMidPoint = getIntX() + getWidth()/2;
-			x1 = widthMidPoint - getAttackWidth()/2 + differential/2;
-			x2 = widthMidPoint + getAttackWidth()/2 - differential/2;
-			y1 = getIntY() - getAttackLength() + differential;
-			y2 = getIntY() + getHeight();
-		}
-		
-		// Get the box we will attack in facing down.
-		if(facingDirection.equals("Down")) {
-			int widthMidPoint = getIntX() + getWidth()/2;
-			x1 = widthMidPoint - getAttackWidth()/2 + differential/2;
-			x2 = widthMidPoint + getAttackWidth()/2 - differential/2;
-			y1 = getIntY();
-			y2 = getIntY() + getHeight() + getAttackLength() - differential;
-		}
-		
-		ArrayList<unit> unitsInBox = getUnitsInBox(x1,y1,x2,y2);
-		if(unitsInBox == null) return false;
-		return unitsInBox.contains(u);
-	}
-	
 	// Get units in box.
 	public static ArrayList<unit> getUnitsInBox(int x1, int y1, int x2, int y2) {
 		ArrayList<unit> returnList = new ArrayList<unit>();
@@ -947,21 +853,6 @@ public class unit extends drawnObject  {
 	// React to pain.
 	public void reactToPain() {
 		
-	}
-	
-	// Start attacking.
-	public void attack() {
-		if(!isAttacking() && canAttack) {
-			
-			// Attack sound.
-			if(getAttackSound()!=null) {
-				sound s = new sound(getAttackSound());
-				s.setPosition(getIntX(), getIntY(), sound.DEFAULT_SOUND_RADIUS);
-				s.start();
-			}
-			setAttacking(true);
-			startAttackTime = time.getTime();
-		}
 	}
 	
 	// Jump only once.
@@ -1355,13 +1246,10 @@ public class unit extends drawnObject  {
 		}
 		
 		// They can jump again if they've touched down.
-		setJumping(false);
-		touchingGround = true;
-		inAir = (getFallSpeed() != 0);
-		if(!inAir) {
-			doubleJumping = false;
-			respondToTouchDown();
-		}
+		doubleJumping = false;
+		setInAir((getFallSpeed() != 0));
+		if(!inAir) setJumping(false);
+		respondToTouchDown();
 	}
 	
 	// Respond to touchdown
@@ -1425,22 +1313,17 @@ public class unit extends drawnObject  {
 					if(actualMoveX == 0) setMomentumY(0);
 				}
 				
-				// If we are moving in the y direction, but are not touching down.
-				else if(moveY > 0 && touchingGround) {
-					touchingGround = false;
-				}
-				
 				// Are we entering the air (by a significant amount?)
 				if(Math.abs(actualMoveY) > getMoveSpeed()) {
-					inAir = true;
+					setInAir(true);
 				}
 			}
 			
 			// Slow movement
-			if(allowSlowMovement && moveFrame<3 && (actualMoveY!=0||actualMoveX!=0)) {
+			if(allowSlowMovement && moveFrame<2 && (actualMoveY!=0||actualMoveX!=0)) {
 				moveFrame++;
-				actualMoveY /= (4-moveFrame);
-				actualMoveX /= (4-moveFrame);
+				if(mode.getCurrentMode().equals("topDown")) actualMoveY /= (3-moveFrame);
+				actualMoveX /= (3-moveFrame);
 			}
 			
 			// Deal with animations.
@@ -1545,11 +1428,7 @@ public class unit extends drawnObject  {
 		
 		// topDown mode movement animations.
 		if(mode.getCurrentMode().equals("topDown")) {
-			if(isAttacking() && !isAlreadyAttacked()) {
-				// Play animation.
-				animate("attacking" + facingDirection);
-			}
-			else if(isMoving()) {
+		    if(isMoving()) {
 				animate("running" + getFacingDirection());
 			}
 			else {
@@ -1559,11 +1438,7 @@ public class unit extends drawnObject  {
 		
 		// platformer movement animations.
 		if(mode.getCurrentMode().equals("platformer")) {
-			if(isAttacking() && !isAlreadyAttacked()) {
-				// Play animation.
-				animate("attacking" + facingDirection);
-			}
-			else if(inAir && !isStuck()) {
+			 if(!touchingGround && !isStuck()) {
 				String face;
 				if(getFacingDirection().equals("Up") || getFacingDirection().equals("Down")) {
 					face = "Right";
@@ -1626,45 +1501,6 @@ public class unit extends drawnObject  {
 					null);
 		}
 		
-		// Draw healthbar is hp is low.
-		if(healthPoints < maxHealthPoints && !(this instanceof player)) {
-			// % of HP left.
-			int healthChunkSize = (int)(((float)getHealthPoints()/(float)getMaxHealthPoints())*DEFAULT_HEALTHBAR_WIDTH);
-			
-			// Adjustment
-			int hpAdjustX;
-			int hpAdjustY;
-			if(getCurrentAnimation()!=null) {
-				hpAdjustX = (int) (gameCanvas.getScaleX()*(getCurrentAnimation().getCurrentFrame().getWidth()/2 - DEFAULT_HEALTHBAR_WIDTH/2));
-				hpAdjustY = -(int)(gameCanvas.getScaleY()*getCurrentAnimation().getCurrentFrame().getHeight()/2/3);
-			}
-			else {
-				hpAdjustX = (int) (gameCanvas.getScaleX()*(getObjectSpriteSheet().getSpriteWidth()/2 - DEFAULT_HEALTHBAR_WIDTH/2));
-				hpAdjustY = -(int)(gameCanvas.getScaleY()*getHeight()/3);
-			}
-			
-			// Draw the red.
-			g.setColor(playerActionBar.DEFAULT_HEART_COLOR);
-			g.fillRect(getDrawX() + hpAdjustX,
-					   getDrawY() + hpAdjustY,
-					   (int)(gameCanvas.getScaleX()*DEFAULT_HEALTHBAR_WIDTH),
-					   (int)(gameCanvas.getScaleY()*DEFAULT_HEALTHBAR_HEIGHT));
-			
-			// Draw the green chunks.
-			g.setColor(DEFAULT_HEAL_COLOR);
-			g.fillRect(getDrawX() + hpAdjustX,
-					   getDrawY() + hpAdjustY,
-					   (int)(gameCanvas.getScaleX()*healthChunkSize),
-					   (int)(gameCanvas.getScaleY()*DEFAULT_HEALTHBAR_HEIGHT));
-
-			// Draw border.
-			g.setColor(playerActionBar.DEFAULT_BORDER_COLOR);
-			g.drawRect(getDrawX() + hpAdjustX,
-					   getDrawY() + hpAdjustY,
-					   (int)(gameCanvas.getScaleX()*DEFAULT_HEALTHBAR_WIDTH),
-					   (int)(gameCanvas.getScaleY()*DEFAULT_HEALTHBAR_HEIGHT));
-		}
-		
 		// Draw the outskirts of the sprite.
 		if(showSpriteBox && getCurrentAnimation() != null) {
 			g.setColor(Color.red);
@@ -1682,55 +1518,6 @@ public class unit extends drawnObject  {
 					   getDrawY());
 		}
 		
-		// Show attack range.
-		if(showAttackRange && getCurrentAnimation() != null) {
-			int x1 = 0;
-			int x2 = 0;
-			int y1 = 0;
-			int y2 = 0;
-			
-			// Get the x and y of hitbox.
-			int hitBoxX = getDrawX() - (- (getCurrentAnimation().getCurrentFrame().getWidth()/2 - getWidth()/2) - getHitBoxAdjustmentX());
-			int hitBoxY = getDrawY() - (- (getCurrentAnimation().getCurrentFrame().getHeight()/2 - getHeight()/2) - getHitBoxAdjustmentY());
-			
-			// Get the box we will attack in if facing left.
-			if(facingDirection.equals("Left")) {
-				int heightMidPoint = hitBoxY + getHeight()/2;
-				y1 = heightMidPoint - getAttackWidth()/2;
-				y2 = heightMidPoint + getAttackWidth()/2;
-				x1 = hitBoxX - getAttackLength();
-				x2 = hitBoxX + getWidth() + 5;
-			}
-			
-			// Get the box we will attack in if facing right.
-			if(facingDirection.equals("Right")) {
-				int heightMidPoint = hitBoxY + getHeight()/2;
-				y1 = heightMidPoint - getAttackWidth()/2;
-				y2 = heightMidPoint + getAttackWidth()/2;
-				x1 = hitBoxX - 5;
-				x2 = hitBoxX + getWidth() + getAttackLength();
-			}
-			
-			// Get the box we will attack in facing up.
-			if(facingDirection.equals("Up")) {
-				int widthMidPoint = hitBoxX + getWidth()/2;
-				x1 = widthMidPoint - getAttackWidth()/2;
-				x2 = widthMidPoint + getAttackWidth()/2;
-				y1 = hitBoxY - getAttackLength();
-				y2 = hitBoxY + getHeight() + 5;
-			}
-			
-			// Get the box we will attack in facing down.
-			if(facingDirection.equals("Down")) {
-				int widthMidPoint = hitBoxX + getWidth()/2;
-				x1 = widthMidPoint - getAttackWidth()/2;
-				x2 = widthMidPoint + getAttackWidth()/2;
-				y1 = hitBoxY - 5;
-				y2 = hitBoxY + getHeight() + getAttackLength();
-			}
-			g.setColor(Color.blue);
-			g.drawRect((int)(gameCanvas.getScaleX()*x1),(int)(gameCanvas.getScaleY()*y1),(int)(gameCanvas.getScaleX()*x2-x1),(int)(gameCanvas.getScaleY()*y2-y1));
-		}
 		
 		// Draw the hitbox of the image in green.
 		if(showHitBox && getCurrentAnimation() != null) {
@@ -1823,50 +1610,6 @@ public class unit extends drawnObject  {
 		this.healthPoints = healthPoints;
 	}
 
-	public int getAttackDamage() {
-		return attackDamage;
-	}
-
-	public void setAttackDamage(int attackDamage) {
-		this.attackDamage = attackDamage;
-	}
-	
-	
-	public void showAttackRange() {
-		showAttackRange = true;
-	}
-
-	public float getAttackTime() {
-		return attackTime;
-	}
-
-	public void setAttackTime(float attackTime) {
-		this.attackTime = attackTime;
-	}
-
-	public int getAttackWidth() {
-		return attackWidth;
-	}
-
-	public void setAttackWidth(int attackWidth) {
-		this.attackWidth = attackWidth;
-	}
-
-	public int getAttackLength() {
-		return attackLength;
-	}
-
-	public void setAttackLength(int attackLength) {
-		this.attackLength = attackLength;
-	}
-
-	public int getMaxHealthPoints() {
-		return maxHealthPoints;
-	}
-
-	public void setMaxHealthPoints(int maxHealthPoints) {
-		this.maxHealthPoints = maxHealthPoints;
-	}
 
 	public float getMoveSpeed() {
 		return moveSpeed;
@@ -1879,8 +1622,8 @@ public class unit extends drawnObject  {
 	
 	public void fixAnimationsBasedOnMoveSpeed(float newSpeed) {
 		if(animations!=null) {
-			for(int i = 0; i < animations.getAnimations().size(); i++) {
-				animation currentAnimation = animations.getAnimations().get(i);
+			for(int i = 0; i < animations.size(); i++) {
+				animation currentAnimation = animations.get(i);
 				if(currentAnimation.getName().contains("running")) {
 					currentAnimation.setTimeToComplete((moveSpeed/newSpeed)*currentAnimation.getTimeToComplete());
 				}
@@ -1903,23 +1646,7 @@ public class unit extends drawnObject  {
 	public void setCurrentAnimation(animation currentAnimation) {
 		this.currentAnimation = currentAnimation;
 	}
-
-	public boolean isAttacking() {
-		return attacking;
-	}
-
-	public void setAttacking(boolean attacking) {
-		this.attacking = attacking;
-	}
-
-	public boolean isAlreadyAttacked() {
-		return alreadyAttacked;
-	}
-
-	public void setAlreadyAttacked(boolean alreadyAttacked) {
-		this.alreadyAttacked = alreadyAttacked;
-	}
-
+	
 	public boolean isTargetable() {
 		return targetable;
 	}
@@ -1942,38 +1669,6 @@ public class unit extends drawnObject  {
 
 	public void setTypeOfUnit(unitType typeOfUnit) {
 		this.typeOfUnit = typeOfUnit;
-	}
-
-	public float getBackSwing() {
-		return backSwing;
-	}
-
-	public void setBackSwing(float backSwing) {
-		this.backSwing = backSwing;
-	}
-
-	public float getCritChance() {
-		return critChance;
-	}
-
-	public void setCritChance(float critChance) {
-		this.critChance = critChance;
-	}
-
-	public float getCritDamage() {
-		return critDamage;
-	}
-
-	public void setCritDamage(float critDamage) {
-		this.critDamage = critDamage;
-	}
-
-	public float getAttackVariability() {
-		return attackVariability;
-	}
-
-	public void setAttackVariability(float attackVariability) {
-		this.attackVariability = attackVariability;
 	}
 
 	public boolean isStuck() {
@@ -2003,22 +1698,6 @@ public class unit extends drawnObject  {
 		this.shielding = shielding;
 	}
 
-	public int getAttackFrameEnd() {
-		return attackFrameEnd;
-	}
-
-	public void setAttackFrameEnd(int attackFrameEnd) {
-		this.attackFrameEnd = attackFrameEnd;
-	}
-
-	public int getAttackFrameStart() {
-		return attackFrameStart;
-	}
-
-	public void setAttackFrameStart(int attackFrameStart) {
-		this.attackFrameStart = attackFrameStart;
-	}
-
 	public ArrayList<movementBuff> getMovementBuffs() {
 		if(movementBuffs == null) movementBuffs = new ArrayList<movementBuff>();
 		return movementBuffs;
@@ -2034,14 +1713,6 @@ public class unit extends drawnObject  {
 
 	public void setUnitLocked(boolean unitLocked) {
 		this.unitLocked = unitLocked;
-	}
-
-	public String getAttackSound() {
-		return attackSound;
-	}
-
-	public void setAttackSound(String attackSound) {
-		this.attackSound = attackSound;
 	}
 
 	public boolean isMovingLeft() {
@@ -2224,6 +1895,30 @@ public class unit extends drawnObject  {
 
 	public void setAllowSlowMovement(boolean allowSlowMovement) {
 		this.allowSlowMovement = allowSlowMovement;
+	}
+
+	public boolean isUnitIsDead() {
+		return unitIsDead;
+	}
+
+	public void setUnitIsDead(boolean unitIsDead) {
+		this.unitIsDead = unitIsDead;
+	}
+
+	public ArrayList<buff> getBuffs() {
+		return buffs;
+	}
+
+	public void setBuffs(ArrayList<buff> buffs) {
+		this.buffs = buffs;
+	}
+
+	public boolean isInAir() {
+		return inAir;
+	}
+
+	public void setInAir(boolean inAir) {
+		this.inAir = inAir;
 	}
 	
 }

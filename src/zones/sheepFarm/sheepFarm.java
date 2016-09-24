@@ -249,16 +249,16 @@ public class sheepFarm extends zone {
 		// Load zone events.
 		loadZoneEvents();
 		
+		// Load the level save.
+		sheepFarmZoneLoader loader = new sheepFarmZoneLoader();
+		loader.loadSegments();
+		
 		// Storming?
 		if(stormInProgress.isCompleted()) {
 			zoneFog = new fog();
 			zoneFog.setTo(stormFogLevel);
 			storm s = new storm();
 		}
-		
-		// Load the level save.
-		sheepFarmZoneLoader loader = new sheepFarmZoneLoader();
-		loader.loadSegments();
 		
 		// Spawn special stuff
 		spawnSpecialStuff();
@@ -274,9 +274,6 @@ public class sheepFarm extends zone {
 			sound s = new sound(fire.forestFire);
 			s.start();
 		}
-		
-		// Spawn units
-		//spawnUnits();
 		
 		if(distortedMusicPlaying.isCompleted()) {
 			music.startMusic(zoneMusicDistorted); 

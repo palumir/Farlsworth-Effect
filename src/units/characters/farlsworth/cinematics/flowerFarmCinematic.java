@@ -1,22 +1,17 @@
 package units.characters.farlsworth.cinematics;
 
-import java.awt.Event;
 import java.lang.invoke.MethodHandles;
 
 import cinematics.cinematic;
 import interactions.event;
 import interactions.interactBox;
 import interactions.textSeries;
-import sounds.music;
 import sounds.sound;
 import units.player;
-import units.bosses.fernando.fernando;
-import units.bosses.rodriguez.rodriguez;
 import units.characters.farlsworth.farlsworth;
 import units.unitCommands.commandList;
 import units.unitCommands.commands.moveCommand;
 import utilities.saveState;
-import zones.sheepFarm.sheepFarm;
 
 public class flowerFarmCinematic extends cinematic {
 	
@@ -790,7 +785,8 @@ public class flowerFarmCinematic extends cinematic {
 		interactSequence.setUnescapable(false);
 		
 		// Set it to be completed as soon as he runs, instead of when he's teleported to flower farm.
-		cinematicCompleted.setCompleted(true);
+		isCompleted.setCompleted(true);
+		System.out.println(isCompleted.isCompleted());
 		
 		// Save by default.
 		saveState.setQuiet(true);

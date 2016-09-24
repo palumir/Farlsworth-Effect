@@ -3,7 +3,6 @@ package interactions;
 import java.util.ArrayList;
 
 import drawing.drawnObject;
-import units.unit;
 
 public class textSeries {
 

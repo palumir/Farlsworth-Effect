@@ -21,7 +21,6 @@ import UI.menu;
 import main.main;
 import units.player;
 import utilities.time;
-import utilities.utility;
 
 // The actual canvas the game is drawn on.
 public class gameCanvas extends JComponent {

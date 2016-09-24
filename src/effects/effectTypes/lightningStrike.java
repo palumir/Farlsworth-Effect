@@ -105,7 +105,7 @@ public class lightningStrike extends effect {
 		setDrawObject(false);
 		
 		// Has no timer.
-		hasATimer = false;
+		setHasATimer(false);
 		
 		// Force in front
 		//setForceInFront(true);
@@ -124,7 +124,7 @@ public class lightningStrike extends effect {
 		setDrawObject(false);
 		
 		// Has no timer.
-		hasATimer = false;
+		setHasATimer(false);
 		
 		// Muted.
 		this.muted = muted;

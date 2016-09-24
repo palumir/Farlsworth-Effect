@@ -9,7 +9,6 @@ import modes.mode;
 import sounds.sound;
 import terrain.chunk;
 import terrain.generalChunkType;
-import units.player;
 
 public class firePit extends chunk {
 	

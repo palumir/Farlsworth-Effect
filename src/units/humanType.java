@@ -2,7 +2,6 @@ package units;
 
 import drawing.spriteSheet;
 import drawing.spriteSheet.spriteSheetInfo;
-import modes.mode;
 import drawing.animation.animation;
 import drawing.animation.animationPack;
 
@@ -48,60 +47,64 @@ public class humanType extends unitType {
 		// Deal with animations
 		animationPack unitTypeAnimations = new animationPack();
 		
-		// Attacking left animation.
-		animation attackingLeft = new animation("attackingLeft", getUnitTypeSpriteSheet().getAnimation(13), 0, 5, unit.DEFAULT_ATTACK_TIME);
-		unitTypeAnimations.addAnimation(attackingLeft);
-		
-		// Attacking left animation.
-		animation attackingRight = new animation("attackingRight", getUnitTypeSpriteSheet().getAnimation(15), 0, 5, unit.DEFAULT_ATTACK_TIME);
-		unitTypeAnimations.addAnimation(attackingRight);
-		
-		// Attacking left animation.
-		animation attackingUp = new animation("attackingUp", getUnitTypeSpriteSheet().getAnimation(12), 0, 5, unit.DEFAULT_ATTACK_TIME);
-		unitTypeAnimations.addAnimation(attackingUp);
-		
-		// Attacking left animation.
-		animation attackingDown = new animation("attackingDown", getUnitTypeSpriteSheet().getAnimation(14), 0, 5, unit.DEFAULT_ATTACK_TIME);
-		unitTypeAnimations.addAnimation(attackingDown);
-		
 		// Jumping left animation.
-		animation jumpingLeft = new animation("jumpingLeft", getUnitTypeSpriteSheet().getAnimation(1), 5, 5, 1);
+		animation jumpingLeft = new animation("jumpingLeft", getUnitTypeSpriteSheet().getAnimation(1), 5, 5, 1){{
+			setRepeats(true);
+		}};
 		unitTypeAnimations.addAnimation(jumpingLeft);
 		
 		// Jumping right animation.
-		animation jumpingRight = new animation("jumpingRight", getUnitTypeSpriteSheet().getAnimation(3), 5, 5, 1);
+		animation jumpingRight = new animation("jumpingRight", getUnitTypeSpriteSheet().getAnimation(3), 5, 5, 1){{
+			setRepeats(true);
+		}};
 		unitTypeAnimations.addAnimation(jumpingRight);
 		
 		// Standing left animation.
-		animation standingLeft = new animation("standingLeft", getUnitTypeSpriteSheet().getAnimation(9), 0, 0, 1);
+		animation standingLeft = new animation("standingLeft", getUnitTypeSpriteSheet().getAnimation(9), 0, 0, 1){{
+			setRepeats(true);
+		}};
 		unitTypeAnimations.addAnimation(standingLeft);
 		
 		// Standing up animation.
-		animation standingUp = new animation("standingUp", getUnitTypeSpriteSheet().getAnimation(8), 0, 0, 1);
+		animation standingUp = new animation("standingUp", getUnitTypeSpriteSheet().getAnimation(8), 0, 0, 1){{
+			setRepeats(true);
+		}};
 		unitTypeAnimations.addAnimation(standingUp);
 		
 		// Standing right animation.
-		animation standingRight = new animation("standingRight", getUnitTypeSpriteSheet().getAnimation(11), 0, 0, 1);
+		animation standingRight = new animation("standingRight", getUnitTypeSpriteSheet().getAnimation(11), 0, 0, 1){{
+			setRepeats(true);
+		}};
 		unitTypeAnimations.addAnimation(standingRight);
 		
 		// Standing down animation.
-		animation standingDown = new animation("standingDown", getUnitTypeSpriteSheet().getAnimation(10), 0, 0, 1);
+		animation standingDown = new animation("standingDown", getUnitTypeSpriteSheet().getAnimation(10), 0, 0, 1){{
+			setRepeats(true);
+		}};
 		unitTypeAnimations.addAnimation(standingDown);
 		
 		// Running left animation.
-		animation runningLeft = new animation("runningLeft", getUnitTypeSpriteSheet().getAnimation(9), 1, 8, 0.75f);
+		animation runningLeft = new animation("runningLeft", getUnitTypeSpriteSheet().getAnimation(9), 1, 8, 0.75f){{
+			setRepeats(true);
+		}};
 		unitTypeAnimations.addAnimation(runningLeft);		
 		
 		// Running up animation.
-		animation runningUp = new animation("runningUp", getUnitTypeSpriteSheet().getAnimation(8), 1, 8, 0.75f);
+		animation runningUp = new animation("runningUp", getUnitTypeSpriteSheet().getAnimation(8), 1, 8, 0.75f){{
+			setRepeats(true);
+		}};
 		unitTypeAnimations.addAnimation(runningUp);
 		
 		// Running right animation.
-		animation runningRight = new animation("runningRight", getUnitTypeSpriteSheet().getAnimation(11), 1, 8, 0.75f);
+		animation runningRight = new animation("runningRight", getUnitTypeSpriteSheet().getAnimation(11), 1, 8, 0.75f){{
+			setRepeats(true);
+		}};
 		unitTypeAnimations.addAnimation(runningRight);
 		
 		// Running down animation.
-		animation runningDown = new animation("runningDown", getUnitTypeSpriteSheet().getAnimation(10), 1, 8, 0.75f);
+		animation runningDown = new animation("runningDown", getUnitTypeSpriteSheet().getAnimation(10), 1, 8, 0.75f){{
+			setRepeats(true);
+		}};
 		unitTypeAnimations.addAnimation(runningDown);
 		
 		// Set animations.

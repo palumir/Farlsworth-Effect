@@ -8,7 +8,6 @@ import doodads.general.well;
 import drawing.drawnObject;
 import drawing.gameCanvas;
 import interactions.interactBox;
-import sounds.music;
 import sounds.sound;
 import terrain.chunk;
 import terrain.region;
@@ -45,6 +44,8 @@ public class main {
 		// Create the player
 		//player.setDeveloper(true);
 		
+		initiateAll();
+		
 		// Create the player at the last bottle?
 		if(s!= null && s.equals("respawnAtWell")) {
 			player p = player.loadPlayer(null,null,0,0,"Up");
@@ -66,6 +67,7 @@ public class main {
 			}
 		
 			if(s.equals("respawnAtSaveBottle") || s.equals("respawnAtWell")) {
+	
 				
 				// Load zone if we're a developer
 				if(player.isDeveloper() && developer.levelName != null) {
@@ -99,6 +101,7 @@ public class main {
 				}
 			}
 		}
+			
 		
 		// If timer is going
 		if(!time.paused && !actionsPaused) {
@@ -128,7 +131,6 @@ public class main {
 			player currPlayer = player.getPlayer();
 			if(currPlayer != null) currPlayer.update();
 		}
-	
 	}
 	
 	// Pause actions
@@ -153,6 +155,7 @@ public class main {
 		unitType.initiate();
 		chunk.initiate();
 		zone.initiate(); 		
+		
 		// Load save state and return
 		saveState s = saveState.loadSaveState();
 		

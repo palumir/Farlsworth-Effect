@@ -2,10 +2,7 @@ package effects.buffs;
 
 import effects.buff;
 import effects.effectType;
-import terrain.groundTile;
-import terrain.atmosphericEffects.fog;
 import terrain.chunkTypes.wood;
-import units.player;
 import units.unit;
 
 public class slideEffect extends movementBuff {
@@ -40,7 +37,7 @@ public class slideEffect extends movementBuff {
 			onUnit.getMovementBuffs().add(this);
 			onUnit.setMovementAcceleration(DEFAULT_SLIDE_ACCELERATION);
 			unitMoveSpeed = onUnit.moveSpeed;
-			onUnit.moveSpeed = onUnit.moveSpeed + onUnit.moveSpeed*3/12;
+			onUnit.moveSpeed = onUnit.moveSpeed + onUnit.moveSpeed*8/12;
 			onUnit.setMomentumX(onUnit.getMomentumX()*3/8);
 			onUnit.setMomentumY(onUnit.getMomentumY()*3/8);
 		}
@@ -70,13 +67,13 @@ public class slideEffect extends movementBuff {
 	// Methods
 	public slideEffect(unit u) {
 		super(theEffectType, u, 1, DEFAULT_ANIMATION_DURATION);
-		hasATimer = false;
+		setHasATimer(false);
 	}
 	
 	// Remove effect if off wood.
 	@Override
 	public void update() {
-		if(!wood.isOnWood(player.getPlayer())) {
+		if(!wood.isOnWood(onUnit)) {
 			removeEffect();
 		}
 	}

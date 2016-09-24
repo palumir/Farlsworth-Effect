@@ -7,7 +7,6 @@ import drawing.drawnObject;
 import drawing.gameCanvas;
 import units.unit;
 import units.unitCommand;
-import units.unitCommands.commands.waitCommand;
 
 public class commandIndicator extends drawnObject {
 
