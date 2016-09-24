@@ -66,11 +66,8 @@ public class levelSave implements Serializable {
 				}};
 				
 	public static ArrayList<String> dontSaveTheseThings = new ArrayList<String>() {{
-		add("units.unitTypes.sheepFarm.farmer");
-		add("units.bosses.fernando");
-		add("units.bosses.rodriguez");
-		add("units.bosses.farlsworth");
-		add("units.bosses.shadowOfTheDenmother");
+		add("units.bosses");
+		add("units.characters");
 		add("doodads.tomb.stairsUp");
 		add("doodads.sheepFarm.caveEnterance");
 		add("doodads.general.questMark");
@@ -90,6 +87,14 @@ public class levelSave implements Serializable {
 		add("moveSpeed");
 		add("jumpSpeed");
 	}};
+	
+	// Don't save these contains
+	public static boolean dontSaveTheseContains(String s) {
+		for(int i = 0; i < dontSaveTheseThings.size(); i++) {
+			if(s.contains(dontSaveTheseThings.get(i))) return true;
+		}
+		return false;
+	}
 	
 
 	// Save the game.
@@ -119,7 +124,7 @@ public class levelSave implements Serializable {
 						if((currObj instanceof groundTile ||
 								currObj instanceof chunk  ||
 								currObj instanceof unit) &&
-								!dontSaveTheseThings.contains(currObj.getClass().getName())) {
+								!dontSaveTheseContains(currObj.getClass().getName())) {
 							objects.add(currObj);
 						}
 					}
@@ -341,7 +346,7 @@ public class levelSave implements Serializable {
 					int j = (int)objectStream.readObject();
 					boolean passable = (boolean)objectStream.readObject();
 					
-					if(!dontSaveTheseThings.contains(objectClass)) {
+					if(!dontSaveTheseContains(objectClass)) {
 						try {
 							Class<?> clazz = Class.forName(objectClass);
 							Constructor<?> ctor = clazz.getConstructor(int.class, int.class, int.class);
@@ -372,7 +377,7 @@ public class levelSave implements Serializable {
 					boolean passable = (boolean)objectStream.readObject();
 					
 					try {
-						if(!dontSaveTheseThings.contains(objectClass)) {
+						if(!dontSaveTheseContains(objectClass)) {
 							Class<?> clazz = Class.forName(objectClass);
 							Constructor<?> ctor = clazz.getConstructor(int.class, int.class, int.class);
 							Object object = ctor.newInstance(new Object[] { x,
@@ -395,7 +400,7 @@ public class levelSave implements Serializable {
 				// Unit
 				else if(typeOfObject.equals("unit")) {
 					
-					if(!dontSaveTheseThings.contains(objectClass)) {
+					if(!dontSaveTheseContains(objectClass)) {
 						
 						// Properties
 						int x = (int)objectStream.readObject();

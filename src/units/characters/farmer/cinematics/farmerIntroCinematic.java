@@ -38,7 +38,7 @@ public class farmerIntroCinematic extends cinematic {
 	    textSeries s = new textSeries(null, "Holy heck, where did you come from!?");
 	    farmer = units.characters.farmer.farmer.farmer;
 	    farlsworth = units.characters.farlsworth.farlsworth.farlsworth;
-	    farmer.setFacingDirection("Down");
+	    farmer.faceTowardPlayer();
 	    
 	    interactSequence = new interactBox(s, farmer);
 		interactSequence.setUnescapable(true);

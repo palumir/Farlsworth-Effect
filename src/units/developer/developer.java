@@ -93,6 +93,15 @@ public class developer extends player {
 		createDevInterface();
 	}
 	
+	// Do test stuff if we are a developer testing (in initiate)
+	public static void doTestStuff() {
+		groundTile.groundTiles.clear();
+		drawnObject.objects.clear();
+		objects.add(player.getPlayer());
+		drawnObject.dontReloadTheseObjects.clear();
+		if(levelName!=null) levelSave.loadSaveState("testLevelSave.temp");
+	}
+	
 	// Adjust X and Y
 	int adjustX = -150;
 	int adjustY = -150;
@@ -483,8 +492,19 @@ public class developer extends player {
 		
 		// Loading a level for the first time.
 		else {
-			// Create the player.
+
+			// Destroy everything.
+			groundTile.groundTiles.clear();
+			drawnObject.objects.clear();
+			drawnObject.dontReloadTheseObjects.clear();
+			
+			// Set the name to be null so it doesn't load a level from temp.
+			developer.levelName = null;
+			
+			// Load player.
 			player p = player.loadPlayer(null,null,0,0,"Up");
+			
+			// Set the new level name and load it.
 			String levelName = b.getButtonID().substring(b.getButtonID().indexOf('.')+1,b.getButtonID().length());
 			developer.levelName = levelName;
 			levelSave.loadSaveState(developer.levelName);
@@ -493,35 +513,47 @@ public class developer extends player {
 		
 		// LoadSave
 		if(b.getButtonID().contains("LoadSave.")) {
-		
-		// Save current level.
-		levelSave.createSaveState(developer.levelName);
-		
-		// Destroy all objects
-		drawnObject.destroyAll();
-		
-		// Create the player.
-		player p = player.loadPlayer(null,null,0,0,"Up");
-		
-		// Open the new one.
-		String levelName = b.getButtonID().substring(b.getButtonID().indexOf('.')+1,b.getButtonID().length());
-		developer.levelName = levelName;
-		levelSave.loadSaveState(developer.levelName);
+			
+			// Save current level.
+			levelSave.createSaveState(developer.levelName);
+			
+			// Destroy all objects
+			drawnObject.destroyAll();
+			groundTile.groundTiles.clear();
+			drawnObject.objects.clear();
+			drawnObject.dontReloadTheseObjects.clear();
+			
+			// Set the name to be null so it doesn't load a level from temp.
+			developer.levelName = null;
+			
+			// Create the player.
+			player p = player.loadPlayer(null,null,0,0,"Up");
+			
+			// Open the new one.
+			String levelName = b.getButtonID().substring(b.getButtonID().indexOf('.')+1,b.getButtonID().length());
+			developer.levelName = levelName;
+			levelSave.loadSaveState(developer.levelName);
 		}
 		
 		// LoadNotSave
 		if(b.getButtonID().contains("LoadNotSave.")) {
-		
-		// Destroy all objects
-		drawnObject.destroyAll();
-		
-		// Create the player.
-		player p = player.loadPlayer(null,null,0,0,"Up");
-		
-		// Open the new level.
-		String levelName = b.getButtonID().substring(b.getButtonID().indexOf('.')+1,b.getButtonID().length());
-		developer.levelName = levelName;
-		levelSave.loadSaveState(developer.levelName);
+			
+			// Destroy all objects
+			drawnObject.destroyAll();
+			groundTile.groundTiles.clear();
+			drawnObject.objects.clear();
+			drawnObject.dontReloadTheseObjects.clear();
+			
+			// Set the name to be null so it doesn't load a level from temp.
+			developer.levelName = null;
+			
+			// Create the player.
+			player p = player.loadPlayer(null,null,0,0,"Up");
+			
+			// Open the new level.
+			String levelName = b.getButtonID().substring(b.getButtonID().indexOf('.')+1,b.getButtonID().length());
+			developer.levelName = levelName;
+			levelSave.loadSaveState(developer.levelName);
 		}
 		
 		// Test level button
@@ -1233,9 +1265,11 @@ public class developer extends player {
 			// Save where we are.
 			saveState.createSaveState();	
 			levelSave.createSaveState("testLevelSave.temp");
+			
 			groundTile.groundTiles.clear();
 			drawnObject.objects.clear();
 			drawnObject.dontReloadTheseObjects.clear();
+			
 			zone.loadedOnce = false;
 			
 			// Development mode?
@@ -1244,8 +1278,6 @@ public class developer extends player {
 			// Create the player.
 			player p = player.loadPlayer(null,null,0,0,"Up");
 			
-			// Load savestate.
-			levelSave.loadSaveState("testLevelSave.temp");
 		}
 		
 		// Dev mode
@@ -1253,9 +1285,11 @@ public class developer extends player {
 			// Save where we are.
 			saveState.createSaveState();	
 			levelSave.createSaveState("testLevelSave.temp");
+			
 			groundTile.groundTiles.clear();
 			drawnObject.objects.clear();
 			drawnObject.dontReloadTheseObjects.clear();
+			
 			zone.loadedOnce = false;
 						
 			// Development mode?
@@ -1263,9 +1297,6 @@ public class developer extends player {
 			
 			// Create the player.
 			player p = player.loadPlayer(null,null,0,0,"Up");
-			
-			// Load savestate.
-			levelSave.loadSaveState("testLevelSave.temp");
 		}
 	}
 	

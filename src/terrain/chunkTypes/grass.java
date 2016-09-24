@@ -43,14 +43,14 @@ public class grass extends groundTile {
 	///////////////
 	// Constructor
 	public grass(int newX, int newY) {
-		super(typeReference, newX, newY,0);
+		super(typeReference, newX, newY,utility.RNG.nextInt(typeReference.getChunkTypeSpriteSheet().getAnimation(0).size()));
 		if(mode.getCurrentMode() == "topDown") this.setPassable(true);
 		else this.setPassable(false);
 	}
 	
 	// Constructor
 	public grass(int newX, int newY, int n) {
-		super(typeReference, newX, newY,n);
+		super(typeReference, newX, newY,utility.RNG.nextInt(typeReference.getChunkTypeSpriteSheet().getAnimation(0).size()));
 		if(mode.getCurrentMode() == "topDown") this.setPassable(true);
 		else this.setPassable(false);
 	}

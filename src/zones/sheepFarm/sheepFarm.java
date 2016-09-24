@@ -250,8 +250,8 @@ public class sheepFarm extends zone {
 		loadZoneEvents();
 		
 		// Load the level save.
-		sheepFarmZoneLoader loader = new sheepFarmZoneLoader();
-		loader.loadSegments();
+		//sheepFarmZoneLoader loader = new sheepFarmZoneLoader();
+		//loader.loadSegments();
 		
 		// Storming?
 		if(stormInProgress.isCompleted()) {
@@ -316,15 +316,25 @@ public class sheepFarm extends zone {
 	public void spawnSpecialStuff() {
 		
 		// Spawn Farlsworth and fence
-		spawnFarlsworthAndFence();
+		/*spawnFarlsworthAndFence();
+		
+		// Sheep!
+		u = new sheep(-378,-369);
+		((sheep)u).setMeanders(true);
+		u = new sheep(-150,-372);
+		((sheep)u).setMeanders(true);
+		u = new sheep(-129,-60);
+		((sheep)u).setMeanders(true);
+		u = new sheep(-372,-36);
+		((sheep)u).setMeanders(true);
 		
 		// Farmer
 		farmer farmer = new farmer(-710,-200);
 		
 		// The silly haystack.
-		c = new doodads.sheepFarm.haystack(-294,-315,0);
+		c = new doodads.sheepFarm.haystack(-195,-165,0);
 		c.setPassable(false);
-		((haystack)c).setStrange();
+		((haystack)c).setStrange();*/
 	}
 	
 	// Spawn items
@@ -417,178 +427,6 @@ public class sheepFarm extends zone {
 		return farlsworthFence;
 	}
 	
-	// Spawn area.
-	public void createSpawnArea()  {
-		
-		//////////////////
-		//// PENS  ///////
-		//////////////////
-
-		// Draw field on the left of spawn.
-		u = new sheep(-378,-369);
-		u = new sheep(-150,-372);
-		u = new sheep(-129,-60);
-		u = new sheep(-372,-36);
-		c = new haystack(-294,-315,0);
-		((haystack)c).setStrange(); // Add the funny interact sequence.
-		new haystack(-195,-165,0);
-		
-		// Make bridge
-		new bridgePole(-192+6-580,35-11,0);
-		new bridgePole(-140-2-580,35-10,0);
-		new bridge(-170-16-580,56-33,0);
-		
-		// Draw rocks behind spawn.
-		new rock(-24-550,75,0);
-		new rock(21-550,111,1);
-		new rock(-6-550,147,0);
-		
-		////////////////////////////
-		//// FARMHOUSE AREA  ///////
-		////////////////////////////
-		tree.createTree(-720,-325,0);
-		new farmHouse(-650,-420,0);
-		new barn(-950,-420,0);
-		farmer theFarmer = new farmer(-711,-247);
-		theFarmer.setFacingDirection("Down");
-		tree.createTree(-1017, -414, 1);
-		tree.createTree(-1011, 0, 0);
-		new haystack(-960,-351,1);
-		new haystack(-875,-351,1);
-		new bush(-1025,-130,0);
-		new bush(-909,-9,1);
-		new bush(-510,-330,1);
-		
-		/////////////////////////////////////
-		//// ARMORY/SHED/ACROSS RIVER ///////
-		/////////////////////////////////////
-		new blackSmith(-600-550,200,0);
-		tree.createTree(-135-550,186,1);
-		tree.createTree(-70-550,220,2);
-		new bush(-110-550,250,0);
-		tree.createTree(-120-550,280,1);
-		tree.createTree(-135-550,310,2);
-		tree.createTree(-70-550,340,0);
-		new bush(-90-550,360,1);
-		tree.createTree(-90-550,380,1);
-		tree.createTree(-65-550,410,2);
-		tree.createTree(-40-550,450,1);
-		tree.createTree(-99-550,212,0);
-		tree.createTree(-120-550,323,1);
-		tree.createTree(-58-550,425,2);
-		tree.createTree(-774-550,428,2);
-		tree.createTree(-693-550,314,1);
-		tree.createTree(-627-550,260,1);
-		
-		// Corner
-		tree.createTree(-60-550,480,2);
-		tree.createTree(-20-550,500,1);
-		tree.createTree(-55-550,525,2);
-		tree.createTree(-80-550,545,1);
-		tree.createTree(-100-550,570,1);
-		new bush(-142-550,360,2);
-		new bush(-250-550,465,0);
-		
-		// The bottom trees.
-		tree.createTree(-331-550,-462,0);
-		tree.createTree(-361-550,-462,2);
-		tree.createTree(-397-550,-468,2);
-		tree.createTree(-422-550,-452,0);
-		tree.createTree(-439-550,-469,1);
-		tree.createTree(-460-550,-447,1);
-		tree.createTree(-487-550,-465,2);
-		tree.createTree(-1003-550,-567,0);
-		tree.createTree(-993-550,-536,1);
-		tree.createTree(-1012-550,-520,0);
-		tree.createTree(-120-550,600,2);
-		tree.createTree(-145-550,580,0);
-		tree.createTree(-165-550,605,2);
-		tree.createTree(-195-550,585,1);
-		tree.createTree(-225-550,585,1);
-		tree.createTree(-240-550,610,0);
-		tree.createTree(-260-550,600,1);
-		tree.createTree(-285-550,575,2);
-		tree.createTree(-310-550,610,2);
-		tree.createTree(-330-550,565,2);
-		tree.createTree(-345-550,585,1);
-		tree.createTree(-375-550,615,0);
-		tree.createTree(-415-550,600,2);
-		tree.createTree(-445-550,575,0);
-		tree.createTree(-465-550,605,0);
-		tree.createTree(-490-550,585,1);
-		tree.createTree(-525-550,580,1);
-		tree.createTree(-550-550,615,2);
-		tree.createTree(-580-550,610,2);
-		tree.createTree(-610-550,580,1);
-		tree.createTree(-635-550,610,2);
-		tree.createTree(-665-550,580,1);
-		tree.createTree(-700-550,580,0);
-		tree.createTree(-715-550,615,0);
-		
-		// The left trees.
-		tree.createTree(-730-550,590,0);
-		tree.createTree(-700-550,560,1);
-		tree.createTree(-660-550,555,2);
-		tree.createTree(-685-550,530,0);
-		tree.createTree(-705-550,499,2);
-		tree.createTree(-735-550,476,1);
-		tree.createTree(-755-550,454,2);
-		tree.createTree(-785-550,415,0);
-		tree.createTree(-745-550,390,1);
-		tree.createTree(-710-550,360,0);
-		tree.createTree(-685-550,335,2);
-		tree.createTree(-655-550,300,1);
-		tree.createTree(-774-550,234,1);
-		tree.createTree(-670-550,275,2);
-		tree.createTree(-680-550,260,1);
-		tree.createTree(-690-550,235,0);
-		tree.createTree(-730-550,200,1);
-		new bush(-741-550,240,2);
-		new bush(-642-550,393,1);
-		
-		// Misc left trees beyond the line of trees that block you
-		tree.createTree(-850-550,590,0);
-		tree.createTree(-775-550,560,2);
-		tree.createTree(-1025-550,555,1);
-		tree.createTree(-855-550,530,2);
-		tree.createTree(-1200-550,499,1);
-		tree.createTree(-1100-550,476,1);
-		tree.createTree(-929-550,454,0);
-		tree.createTree(-828-550,415,0);
-		tree.createTree(-979-550,390,2);
-		tree.createTree(-1202-550,360,0);
-		tree.createTree(-827-550,335,2);
-		tree.createTree(-1209-550,300,1);
-		tree.createTree(-919-550,275,0);
-		tree.createTree(-929-550,260,2);
-		tree.createTree(-890-550,235,0);
-		tree.createTree(-950-550,200,2);
-		new bush(-921-550,510,1);
-		new bush(-771-550,636,2);
-		new bush(-795-550,201,0);
-		new rock(-891-550,312,1);
-		tree.createTree(-804-550,675,1);
-		
-		// Trees below bottom tree wall.
-		tree.createTree(-699-550,672,2);
-		tree.createTree(-660-550,770,1);
-		tree.createTree(-635-550,890,2);
-		tree.createTree(-580-550,840,1);
-		tree.createTree(-520-550,780,2);
-		tree.createTree(-480-550,827,1);
-		tree.createTree(-410-550,820,0);
-		tree.createTree(-385-550,890,0);
-		tree.createTree(-360-550,760,1);
-		tree.createTree(-519-550, 660, 0);
-		tree.createTree(-310-550,700,1);
-		tree.createTree(-280-550,792,0);
-		tree.createTree(-265-550,700,2);
-		tree.createTree(-200-550,679,0);
-		tree.createTree(-160-550,740,1);
-		new rock(-612-550,669,1);
-		new bush(-429-550,636,1);
-	}
-	
 	// Create zone events.
 	public void loadZoneEvents() {
 		
@@ -615,39 +453,41 @@ public class sheepFarm extends zone {
 	public void dealWithRegionStuff() {
 		player currPlayer = player.getPlayer();
 		
-		// First Farlsworth cinematic (intro)
-		if(currPlayer != null && currPlayer.isWithin(230,-458,433,-250) 
-				&& !farlsworthIntro.isCompleted.isCompleted()
-				&& (farlsworthIntro == null || !farlsworthIntro.isInProgress())) {
-			farlsworthIntro = new farmIntroCinematic();
-			farlsworthIntro.start();
-		}
-		
-		// Second Farlsworth cinematic (at the fence)
-		if(currPlayer != null && currPlayer.isWithin(-50, -453, 20, -300) 
-				&& !farlsworthFenceCinematic.isCompleted.isCompleted()
-				&& (farlsworthFenceCinematic == null || !farlsworthFenceCinematic.isInProgress())
-				&& farmIntroCinematic.isCompleted.isCompleted()) {
-			farlsworthFenceCinematic = new farmFenceCinematic();
-			farlsworthFenceCinematic.start();
-		}
-		
-		// Flower patch cinematic
-		if(currPlayer != null && currPlayer.isWithin(-1695,-5258,-1335,-4830)
-				&& !farlsworthFlowerCinematic.isCompleted.isCompleted()
-				&& (farlsworthFlowerCinematic == null || !farlsworthFlowerCinematic.isInProgress())
-				&& farmFenceCinematic.isCompleted.isCompleted()) {
-			farlsworthFlowerCinematic = new flowerFarmCinematic();
-			farlsworthFlowerCinematic.start();
-		}
-		
-		// Tomb patch cinematic
-		if(currPlayer != null && currPlayer.isWithin(-3568,-5864,-3338,-5448)
-				&& !farlsworthTombCinematic.isCompleted.isCompleted()
-				&& (farlsworthTombCinematic == null || !farlsworthTombCinematic.isInProgress())
-				&& flowerFarmCinematic.isCompleted.isCompleted()) {
-			farlsworthTombCinematic = new beforeTombCinematic();
-			farlsworthTombCinematic.start();
+		if(farlsworth.farlsworth != null) {
+			// First Farlsworth cinematic (intro)
+			if(currPlayer != null && currPlayer.isWithin(230,-458,433,-250) 
+					&& !farlsworthIntro.isCompleted.isCompleted()
+					&& (farlsworthIntro == null || !farlsworthIntro.isInProgress())) {
+				farlsworthIntro = new farmIntroCinematic();
+				farlsworthIntro.start();
+			}
+			
+			// Second Farlsworth cinematic (at the fence)
+			if(currPlayer != null && currPlayer.isWithin(-50, -453, 20, -300) 
+					&& !farlsworthFenceCinematic.isCompleted.isCompleted()
+					&& (farlsworthFenceCinematic == null || !farlsworthFenceCinematic.isInProgress())
+					&& farmIntroCinematic.isCompleted.isCompleted()) {
+				farlsworthFenceCinematic = new farmFenceCinematic();
+				farlsworthFenceCinematic.start();
+			}
+			
+			// Flower patch cinematic
+			if(currPlayer != null && currPlayer.isWithin(-1695,-5258,-1335,-4830)
+					&& !farlsworthFlowerCinematic.isCompleted.isCompleted()
+					&& (farlsworthFlowerCinematic == null || !farlsworthFlowerCinematic.isInProgress())
+					&& farmFenceCinematic.isCompleted.isCompleted()) {
+				farlsworthFlowerCinematic = new flowerFarmCinematic();
+				farlsworthFlowerCinematic.start();
+			}
+			
+			// Tomb patch cinematic
+			if(currPlayer != null && currPlayer.isWithin(-3568,-5864,-3338,-5448)
+					&& !farlsworthTombCinematic.isCompleted.isCompleted()
+					&& (farlsworthTombCinematic == null || !farlsworthTombCinematic.isInProgress())
+					&& flowerFarmCinematic.isCompleted.isCompleted()) {
+				farlsworthTombCinematic = new beforeTombCinematic();
+				farlsworthTombCinematic.start();
+			}
 		}
 		
 		if(currPlayer != null && currPlayer.isWithin(-220,-2401,228,-2049) && wellTooltipLoaded != null && !wellTooltipLoaded.isCompleted()) {

@@ -3,6 +3,7 @@ package terrain.chunkTypes;
 import terrain.chunk;
 import terrain.generalChunkType;
 import terrain.groundTile;
+import utilities.utility;
 import zones.zone;
 
 public class water extends groundTile {
@@ -30,14 +31,14 @@ public class water extends groundTile {
 	
 	// A tile of water.
 	public water(int newX, int newY) {
-		super(typeReference, newX, newY,0);
+		super(typeReference, newX, newY,utility.RNG.nextInt(typeReference.getChunkTypeSpriteSheet().getAnimation(0).size()));
 		this.setPassable(false);
 		backgroundDoodad = true;
 	}
 	
 	// A tile of water. Dumby constructor for adding water.
 	public water(int newX, int newY, int n) {
-		super(typeReference, newX, newY,n);
+		super(typeReference, newX, newY,utility.RNG.nextInt(typeReference.getChunkTypeSpriteSheet().getAnimation(0).size()));
 		this.setPassable(false);
 		backgroundDoodad = true;
 	}
@@ -45,7 +46,7 @@ public class water extends groundTile {
 	// Create function
 	public static chunk createChunk(int newX, int newY) {
 		if(!zone.loadedOnce) {
-			chunk t = new water(newX,newY);
+			chunk t = new water(newX,newY,utility.RNG.nextInt(typeReference.getChunkTypeSpriteSheet().getAnimation(0).size()));
 			t.setReloadObject(false);
 			return t;
 		}

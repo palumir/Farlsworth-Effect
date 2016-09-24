@@ -162,7 +162,7 @@ public class farmTomb extends zone {
 		
 		// Set the darkness.
 		zoneFog = new fog();
-		zoneFog.setTo(0.3f);//fog.setTo(0.75f);
+		zoneFog.setTo(0.3f);
 		
 		// BossFight not initiated
 		shadowBossFightInitiated = false;
@@ -174,8 +174,8 @@ public class farmTomb extends zone {
 		loadZoneEvents();
 		
 		// Load the level save.
-		farmTombZoneLoader loader = new farmTombZoneLoader();
-		loader.loadSegments();
+		//farmTombZoneLoader loader = new farmTombZoneLoader();
+		//loader.loadSegments();
 
 		// Load zone items
 		loadItems();
