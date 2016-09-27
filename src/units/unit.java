@@ -186,9 +186,6 @@ public class unit extends drawnObject  {
 	// What we are stuck on?
 	private drawnObject stuckOn = null;
 	
-	// If unit is locked, prohibit movement.
-	private boolean unitLocked = false;
-	
 	// What commands do we do?
 	private boolean canSlash = false;
 	private boolean canSlashSummon = false;
@@ -581,7 +578,6 @@ public class unit extends drawnObject  {
 		if(!gettingKnockedBack) {
 			oldCollision = collisionOn;
 			setCollisionOn(false);
-			setUnitLocked(true);
 			knockBackStart = time.getTime();
 			gettingKnockedBack = true;
 			this.knockTime = overTime;	
@@ -597,7 +593,6 @@ public class unit extends drawnObject  {
 	// Knockback.
 	public void knockBack(int knockX, int knockY, int knockRadius, float overTime, int knockSpeed) {
 		if(!gettingKnockedBack) {
-			setUnitLocked(true);
 			knockBackStart = time.getTime();
 			gettingKnockedBack = true;
 			this.knockTime = overTime;	
@@ -637,7 +632,6 @@ public class unit extends drawnObject  {
 			if(time.getTime() - knockBackStart > knockTime*1000) {
 				collisionOn = oldCollision;
 				gettingKnockedBack = false;
-				setUnitLocked(false);
 			}
 		}
 		
@@ -994,8 +988,8 @@ public class unit extends drawnObject  {
 	}
 	
 	// Moving rise/run.
-	private double rise = 0;
-	private double run = 0;
+	protected double rise = 0;
+	protected double run = 0;
 	
 	// Set rise run. 
 	public void setRiseRun() {
@@ -1039,6 +1033,9 @@ public class unit extends drawnObject  {
 		///////////////////////////////	
 		moveTowards();
 	}
+	
+	// Disabled movement?
+	private boolean stunned = false;
 	
 	// Move unit
 	public void moveUnit() {
@@ -1147,7 +1144,7 @@ public class unit extends drawnObject  {
 		else if(isMovingRight()) setFacingDirection("Right");
 		else if(isMovingLeft()) setFacingDirection("Left");
 
-		if(!isUnitLocked()) {
+		if(!isStunned()) {
 			// Move the unit
 			if(movingDiagonally()) {
 				move(moveX*(1f/1.3f), moveY*(1f/1.3f));
@@ -1236,21 +1233,24 @@ public class unit extends drawnObject  {
 	// Unit has touched down.
 	public void touchDown() {
 		
-		// Hold the fall speed but set the current to be 0.
-		float oldFallSpeed = getFallSpeed();
-		setFallSpeed(0);
-		
-		// If they've touched down, place them closer to the ground.
-		chunk ground = chunk.getGroundChunk(this, (int)getDoubleX(), (int)(getDoubleY() + oldFallSpeed));
-		if(ground != null) {
-			setFallSpeed(ground.getIntY() - (this.getIntY() + this.getHeight()));
+		if(mode.getCurrentMode().equals("platformer")) {
+			// Hold the fall speed but set the current to be 0.
+			float oldFallSpeed = getFallSpeed();
+			setFallSpeed(0);
+			
+			// If they've touched down, place them closer to the ground.
+			chunk ground = chunk.getGroundChunk(this, (int)getDoubleX(), (int)(getDoubleY() + oldFallSpeed));
+			if(ground != null) {
+				setFallSpeed(ground.getIntY() - (this.getIntY() + this.getHeight()));
+			}
+			
+			// They can jump again if they've touched down.
+			//if(doubleJumping) alreadyJumped = false;
+			doubleJumping = false;
+			setInAir((getFallSpeed() != 0));
+			if(!inAir) setJumping(false);
+			respondToTouchDown();
 		}
-		
-		// They can jump again if they've touched down.
-		doubleJumping = false;
-		setInAir((getFallSpeed() != 0));
-		if(!inAir) setJumping(false);
-		respondToTouchDown();
 	}
 	
 	// Respond to touchdown
@@ -1711,14 +1711,6 @@ public class unit extends drawnObject  {
 		this.movementBuffs = movementBuffs;
 	}
 
-	public boolean isUnitLocked() {
-		return unitLocked;
-	}
-
-	public void setUnitLocked(boolean unitLocked) {
-		this.unitLocked = unitLocked;
-	}
-
 	public boolean isMovingLeft() {
 		return movingLeft;
 	}
@@ -1923,6 +1915,14 @@ public class unit extends drawnObject  {
 
 	public void setInAir(boolean inAir) {
 		this.inAir = inAir;
+	}
+
+	public boolean isStunned() {
+		return stunned;
+	}
+
+	public void setStunned(boolean stunned) {
+		this.stunned = stunned;
 	}
 	
 }

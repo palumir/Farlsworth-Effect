@@ -124,6 +124,9 @@ public class player extends unit {
 	public Point lastSaveBottle;
 	public savePoint lastSaveBottleChargeIndicator;
 	
+	// Movement disabled?
+	public boolean movementDisabled = false;
+	
 	// Player inventory
 	private inventory playerInventory = new inventory();
 	
@@ -143,6 +146,7 @@ public class player extends unit {
 		
 		// Set movespeed.
 		setMoveSpeed(DEFAULT_PLAYER_MOVESPEED);
+		oldMoveSpeed=DEFAULT_PLAYER_MOVESPEED;
 		setAllowSlowMovement(true);
 		
 		// Set-up the camera.
@@ -203,10 +207,7 @@ public class player extends unit {
 	// Player AI controls the interface
 	public void updateUnit() {
 		
-		// TODO: dev stuff
-		if(drawnObject.dontReloadTheseObjects!=null); //System.out.println(drawnObject.dontReloadTheseObjects.size());
-		
-		dealWithJumping();
+		dealWithTopDownJumping();
 		showPossibleInteractions();
 		isPlayerDead();
 	}
@@ -459,37 +460,37 @@ public class player extends unit {
 						jumpBottleSplash e = new jumpBottleSplash(getIntX() - critBloodSquirt.getDefaultWidth()/2 + topDownWidth/2,
 								   getIntY() - critBloodSquirt.getDefaultHeight()/2);
 					}
-					
-					// Player presses left key.
-					if(k.getKeyCode() == KeyEvent.VK_A) { 
-						startMove("left");
+			
+				// Player presses left key.
+				if(k.getKeyCode() == KeyEvent.VK_A) { 
+					startMove("left");
+				}
+				
+				// Player presses right key.
+				if(k.getKeyCode() == KeyEvent.VK_D) { 
+					startMove("right");
+				}
+				
+				// Player presses up key, presumably to jump!
+				if(k.getKeyCode() == KeyEvent.VK_W) { 
+					if(mode.getCurrentMode() == platformer.name) {
+						startMove("up");
+						startJump();
 					}
-					
-					// Player presses right key.
-					if(k.getKeyCode() == KeyEvent.VK_D) { 
-						startMove("right");
+					else if(mode.getCurrentMode() == topDown.name) {
+						startMove("up");
 					}
-					
-					// Player presses up key, presumably to jump!
-					if(k.getKeyCode() == KeyEvent.VK_W) { 
-						if(mode.getCurrentMode() == platformer.name) {
-							startMove("up");
-							startJump();
-						}
-						else if(mode.getCurrentMode() == topDown.name) {
-							startMove("up");
-						}
+				}
+				
+				// Player presses down key
+				if(k.getKeyCode() == KeyEvent.VK_S) { 
+					if(mode.getCurrentMode() == platformer.name) {
+						startMove("down");
 					}
-					
-					// Player presses down key
-					if(k.getKeyCode() == KeyEvent.VK_S) { 
-						if(mode.getCurrentMode() == platformer.name) {
-							startMove("down");
-						}
-						else if(mode.getCurrentMode() == topDown.name) {
-							startMove("down");
-						}
+					else if(mode.getCurrentMode() == topDown.name) {
+						startMove("down");
 					}
+				}
 					
 					
 					// Player presses e key
@@ -716,18 +717,17 @@ public class player extends unit {
 	protected int jumpingToY = 0;
 	protected boolean hasSlashed = false;
 	protected boolean riseRunSet = false;
-	protected double rise = 0;
-	protected double run = 0;
 	
 	// Jumptime.
 	private long jumpStart = 0;
 	private float jumpTime = 0;
 	
 	// Deal with jumping for topDown
-	public void dealWithJumping() {
+	// TODO: make this more of an arch?
+	public void dealWithTopDownJumping() {
 			
 			// Jump to the location.
-			if(isJumping()) {
+			if(isJumping() && mode.getCurrentMode().equals("topDown")) {
 				
 				// Set rise/run
 				if(!riseRunSet) {
@@ -749,8 +749,14 @@ public class player extends unit {
 					startY = getDoubleY();
 				}
 				
-				setDoubleX(getDoubleX() + run);
-				setDoubleY(getDoubleY() + rise);
+				setStunned(true);
+				move(run,rise);
+				
+				// Move the camera if it's there.
+				if(attachedCamera != null) {
+					attachedCamera.setX((int)(getDoubleX() + run));
+					attachedCamera.setY((int)(getDoubleY() + rise));
+				}
 				
 				// Don't let him not move at all or leave region.
 				if(time.getTime() - jumpStart > jumpTime*1000) {
@@ -759,6 +765,10 @@ public class player extends unit {
 					collisionOn = true;
 					setJumping(false);
 					hasStartedJumping = false;
+					
+					// Set old movespeed.
+					setStunned(false);
+					moveSpeed = oldMoveSpeed;
 					
 					// Make player killable
 					targetable = true;
@@ -774,6 +784,12 @@ public class player extends unit {
 		
 		// When we started jumping.
 		jumpStart = time.getTime();
+		
+		// Turn off moving.
+		moveSpeed = 0;
+		setStunned(true);
+		setMomentumX(0);
+		setMomentumY(0);
 		
 		// Collision is off.
 		collisionOn = false;
