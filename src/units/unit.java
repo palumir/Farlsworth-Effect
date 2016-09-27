@@ -304,7 +304,7 @@ public class unit extends drawnObject  {
 	
 	// Has the unit left the map?
 	public boolean hasLeftMap() {
-		return zone.getCurrentZone() != null && zone.getCurrentZone().isZoneLoaded() && (!groundTile.isOnGroundTile(this) && mode.getCurrentMode().equals("topDown"));
+		return targetable && zone.getCurrentZone() != null && zone.getCurrentZone().isZoneLoaded() && (!groundTile.isOnGroundTile(this) && mode.getCurrentMode().equals("topDown"));
 	}
 	
 	// Check if united is illuminated

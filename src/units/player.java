@@ -754,9 +754,15 @@ public class player extends unit {
 				
 				// Don't let him not move at all or leave region.
 				if(time.getTime() - jumpStart > jumpTime*1000) {
+					
+					// Set collision back on.
 					collisionOn = true;
 					setJumping(false);
 					hasStartedJumping = false;
+					
+					// Make player killable
+					targetable = true;
+					forceInFront = false;
 				}
 			}
 			else {
@@ -771,6 +777,10 @@ public class player extends unit {
 		
 		// Collision is off.
 		collisionOn = false;
+		
+		// Make player unkillable
+		targetable = false;
+		forceInFront = true;
 		
 		// Jump there
 		jumpingToX = x;
