@@ -36,7 +36,7 @@ public class graveKeeper extends boss {
 	////////////////
 	
 	// Default name.
-	private static String DEFAULT_UNIT_NAME = "???????????";
+	private static String DEFAULT_UNIT_NAME = "Gravekeeper Brady";
 	
 	// Default movespeed.
 	private static float DEFAULT_UNIT_MOVESPEED = 3f;

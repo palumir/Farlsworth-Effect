@@ -250,6 +250,7 @@ public class sheepFarm extends zone {
 		loadZoneEvents();
 		
 		// Load the level save.
+		//levelSave.loadSaveState("sheepFarmLevel.save");
 		//sheepFarmZoneLoader loader = new sheepFarmZoneLoader();
 		//loader.loadSegments();
 		
@@ -261,7 +262,7 @@ public class sheepFarm extends zone {
 		}
 		
 		// Spawn special stuff
-		spawnSpecialStuff();
+		//spawnSpecialStuff();
 		
 		// Create items
 		createItems();
@@ -316,7 +317,7 @@ public class sheepFarm extends zone {
 	public void spawnSpecialStuff() {
 		
 		// Spawn Farlsworth and fence
-		/*spawnFarlsworthAndFence();
+		spawnFarlsworthAndFence();
 		
 		// Sheep!
 		u = new sheep(-378,-369);
@@ -334,7 +335,7 @@ public class sheepFarm extends zone {
 		// The silly haystack.
 		c = new doodads.sheepFarm.haystack(-195,-165,0);
 		c.setPassable(false);
-		((haystack)c).setStrange();*/
+		((haystack)c).setStrange();
 	}
 	
 	// Spawn items

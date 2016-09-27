@@ -59,14 +59,14 @@ public abstract class cinematic {
 	/////////////////////
 	public cinematic(String s) {
 		setName(s);
-		if(completeOnce) cinematicCompleted = isCompleted();
+		if(isCompleteOnce()) cinematicCompleted = isCompleted();
 	}
 	
 	// Start
 	public void start() {
 		
 		// If the cinematic isn't completed.
-		if(!completeOnce || !cinematicCompleted.isCompleted()) {
+		if(!isCompleteOnce() || !cinematicCompleted.isCompleted()) {
 			
 			// Report error if another cinematic is in progress.
 			if(currCinematic != null) System.err.println("Error: Another cinematic is currently in progress. Playing anyway.");
@@ -91,7 +91,7 @@ public abstract class cinematic {
 		currCinematic = null;
 		
 		// Save that the cinematic is completed.
-		if(completeOnce) {
+		if(isCompleteOnce()) {
 			cinematicCompleted.setCompleted(true);
 		
 			// Save by default.
@@ -197,5 +197,13 @@ public abstract class cinematic {
 	// Update current cinematic only.
 	public static void updateCurrentCinematic() {
 		if(currCinematic != null) currCinematic.update();
+	}
+
+	public boolean isCompleteOnce() {
+		return completeOnce;
+	}
+
+	public void setCompleteOnce(boolean completeOnce) {
+		this.completeOnce = completeOnce;
 	}
 }

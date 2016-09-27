@@ -193,7 +193,7 @@ public class farmTomb extends zone {
 		if(!shadowBossFightStarted.isCompleted()) { music.startMusic(zoneMusic);  }
 		else {
 			// Load bossFight
-			//createShadowBossFightAroundPlayer(true);
+			createShadowBossFightAroundPlayer();
 		}
 		
 	}
@@ -450,9 +450,8 @@ public class farmTomb extends zone {
 	public static void createShadowBossFightAroundPlayer() {
 		
 		if(!bossFightLoaded) {
-		
-			bossFight = new wolfless();
 			bossFightLoaded = true;
+			bossFight = new wolfless();
 		}
 	}
 	
@@ -495,8 +494,10 @@ public class farmTomb extends zone {
 					shadowBossFightInitiated = true;
 				}
 				else {
-					//fernando.initiateShadowBossFightScene();
-					//fernando.setSequenceTo(11);
+					wolflessFightCinematic w = new wolflessFightCinematic();
+					w.startBossImmediately = true;
+					w.start();
+					
 					shadowBossFightInitiated = true;
 				}
 			}

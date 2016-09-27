@@ -305,7 +305,7 @@ public class farmTombCinematic extends cinematic {
 			}
 			
 			if(isSequence(numIfs++) && goNextTextSeries()) {
-				addTextSeries(null, "By whatever means necessary, of course. <attacks>",rodriguez);
+				addTextSeries(null, "By whatever means necessary, of course.",rodriguez);
 				player.getPlayer().setFacingDirection("Right");
 				// Set the next text and advance it.
 				advanceSequence();

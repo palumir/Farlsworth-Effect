@@ -23,6 +23,9 @@ public class jumpBottle extends bottle {
 	// Bottle stats.
 	public static int DEFAULT_MAX_CHARGES = 3;
 	
+	// Jump in top Down. This might suck
+	public static int DEFAULT_JUMP_DISTANCE_TOPDOWN = 150;
+	
 	// If bottle is in inventory., this is it.
 	public static jumpBottle bottleRef;
 	
@@ -79,13 +82,10 @@ public class jumpBottle extends bottle {
 	// Doublejump
 	public void doubleJump() {
 		
-		if(mode.getCurrentMode().equals("platformer")) {
-			buff b = new jumpBottleBuff(player.getPlayer());
-		}
-		if(mode.getCurrentMode().equals("topDown")) {
-			player.getPlayer().touchDown();
-			player.getPlayer().setFallSpeed(-player.getPlayer().getJumpSpeed());
-		}
+		player currPlayer = player.getPlayer();
+		
+		// Platform
+		buff b = new jumpBottleBuff(player.getPlayer());
 	}
 	
 	// React to being picked up.
@@ -94,7 +94,7 @@ public class jumpBottle extends bottle {
 		player currPlayer = player.getPlayer();
 		if(currPlayer != null) {
 			currPlayer.getPlayerInventory().equipItem(this, KeyEvent.VK_SPACE);
-			tooltipString t = new tooltipString("Press 'space' double jump with the Save Bottle.");
+			tooltipString t = new tooltipString("Press 'space' double jump with the Jump Bottle.");
 		}
 	}
 

@@ -53,6 +53,18 @@ public class humanType extends unitType {
 		}};
 		unitTypeAnimations.addAnimation(jumpingLeft);
 		
+		// Jumping up animation.
+		animation jumpingUp = new animation("jumpingUp", getUnitTypeSpriteSheet().getAnimation(0), 5, 5, 1){{
+			setRepeats(true);
+		}};
+		unitTypeAnimations.addAnimation(jumpingUp);
+		
+		// Jumping down animation.
+		animation jumpingDown = new animation("jumpingDown", getUnitTypeSpriteSheet().getAnimation(2), 5, 5, 1){{
+			setRepeats(true);
+		}};
+		unitTypeAnimations.addAnimation(jumpingDown);
+		
 		// Jumping right animation.
 		animation jumpingRight = new animation("jumpingRight", getUnitTypeSpriteSheet().getAnimation(3), 5, 5, 1){{
 			setRepeats(true);

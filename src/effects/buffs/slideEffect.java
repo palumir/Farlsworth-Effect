@@ -37,7 +37,7 @@ public class slideEffect extends movementBuff {
 			onUnit.getMovementBuffs().add(this);
 			onUnit.setMovementAcceleration(DEFAULT_SLIDE_ACCELERATION);
 			unitMoveSpeed = onUnit.moveSpeed;
-			onUnit.moveSpeed = onUnit.moveSpeed + onUnit.moveSpeed*8/12;
+			onUnit.moveSpeed = onUnit.moveSpeed + onUnit.moveSpeed*6/12;
 			onUnit.setMomentumX(onUnit.getMomentumX()*3/8);
 			onUnit.setMomentumY(onUnit.getMomentumY()*3/8);
 		}

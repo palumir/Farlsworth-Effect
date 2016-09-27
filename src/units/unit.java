@@ -126,7 +126,6 @@ public class unit extends drawnObject  {
 	
 	// Movement
 	public float moveSpeed = DEFAULT_UNIT_MOVESPEED;
-	protected float currentMoveSpeed = 0;
 	protected float oldMoveSpeed = moveSpeed;
 	protected float baseMoveSpeed = DEFAULT_UNIT_MOVESPEED;
 	protected float baseMoveDuration = 0.75f;
@@ -203,6 +202,7 @@ public class unit extends drawnObject  {
 		super(u.getUnitTypeSpriteSheet(), u.getName(), newX, newY, u.getWidth(), u.getHeight());	
 		if(u.getAnimations()!=null) setAnimations(new animationPack(u.getAnimations()));
 		moveSpeed = u.getMoveSpeed();
+		oldMoveSpeed = moveSpeed;
 		baseMoveSpeed = u.getMoveSpeed();
 		setJumpSpeed(u.getJumpSpeed());
 		setTypeOfUnit(u);
@@ -221,6 +221,7 @@ public class unit extends drawnObject  {
 		super(u.getObjectSpriteSheet(), u.getName(), u.getIntX(), u.getIntX(), u.getWidth(), u.getHeight());	
 		if(u.getAnimations()!=null) setAnimations(new animationPack(u.getAnimations()));
 		moveSpeed = u.getMoveSpeed();
+		oldMoveSpeed = moveSpeed;
 		baseMoveSpeed = u.getMoveSpeed();
 		setJumpSpeed(u.getJumpSpeed());
 		setTypeOfUnit(u.getTypeOfUnit());
@@ -551,7 +552,7 @@ public class unit extends drawnObject  {
 			// Set touching ground.
 			touchingGround = chunk.impassableChunks != null && 
 					chunk.impassableChunks.size() > 0 &&
-					fallSpeed >= 0
+					fallSpeed >= -1
 					&& chunk.getGroundChunk(this, (int)getDoubleX(), (int)(getDoubleY()+fallSpeed+1)) != null;
 			
 			// Accelerate
@@ -1428,7 +1429,10 @@ public class unit extends drawnObject  {
 		
 		// topDown mode movement animations.
 		if(mode.getCurrentMode().equals("topDown")) {
-		    if(isMoving()) {
+			if(isJumping()) {
+				animate("jumping" + getFacingDirection());
+			}
+			else if(isMoving()) {
 				animate("running" + getFacingDirection());
 			}
 			else {

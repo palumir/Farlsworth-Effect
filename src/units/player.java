@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import UI.playerActionBar;
 import UI.tooltipString;
 import UI.menus.deathMenu;
+import doodads.sheepFarm.clawMarkRed;
 import drawing.camera;
 import drawing.drawnObject;
 import drawing.animation.animation;
@@ -25,7 +26,10 @@ import main.main;
 import modes.mode;
 import modes.platformer;
 import modes.topDown;
+import sounds.sound;
+import terrain.chunk;
 import units.developer.developer;
+import units.unitCommands.commands.slashCommand;
 import utilities.saveState;
 import utilities.time;
 import zones.zone;
@@ -202,6 +206,7 @@ public class player extends unit {
 		// TODO: dev stuff
 		if(drawnObject.dontReloadTheseObjects!=null); //System.out.println(drawnObject.dontReloadTheseObjects.size());
 		
+		dealWithJumping();
 		showPossibleInteractions();
 		isPlayerDead();
 	}
@@ -686,13 +691,107 @@ public class player extends unit {
 		}
 	}
 	
-	// Draw special stuff
+	// Claw attacking?
+	protected boolean hasClawSpawned = false;
+	protected boolean slashing = false;
+	protected long startOfClawAttack = 0;
+	private float spawnClawPhaseTime = .5f;
+	protected float clawAttackEveryBase = 3f;
+	private float clawAttackEvery = 0f;
+	protected long lastClawAttack = 0;
+	
+	// Claw
+	protected boolean hasStartedJumping = false;
+	
+	// Start rise and run
+	protected double startX = 0;
+	protected double startY = 0;
+	
+	// Claw attacking x and y
+	protected int clawAttackingX = 0;
+	protected int clawAttackingY = 0;
+	
+	// Jumping stuff
+	protected int jumpingToX = 0;
+	protected int jumpingToY = 0;
+	protected boolean hasSlashed = false;
+	protected boolean riseRunSet = false;
+	protected double rise = 0;
+	protected double run = 0;
+	
+	// Jumptime.
+	private long jumpStart = 0;
+	private float jumpTime = 0;
+	
+	// Deal with jumping for topDown
+	public void dealWithJumping() {
+			
+			// Jump to the location.
+			if(isJumping()) {
+				
+				// Set rise/run
+				if(!riseRunSet) {
+					riseRunSet = true;
+					float yDistance = (jumpingToY - getIntY());
+					float xDistance = (jumpingToX - getIntX());
+					float distanceXY = (float) Math.sqrt(yDistance * yDistance
+							+ xDistance * xDistance);
+					
+					rise = 0;
+					run = 0;
+					
+					if(distanceXY != 0) {
+						rise = ((yDistance/distanceXY)*getJumpSpeed());
+						run = ((xDistance/distanceXY)*getJumpSpeed());
+						jumpTime = distanceXY/(getJumpSpeed()*(1000/time.DEFAULT_TICK_RATE));
+					}
+					startX = getDoubleX();
+					startY = getDoubleY();
+				}
+				
+				setDoubleX(getDoubleX() + run);
+				setDoubleY(getDoubleY() + rise);
+				
+				// Don't let him not move at all or leave region.
+				if(time.getTime() - jumpStart > jumpTime*1000) {
+					collisionOn = true;
+					setJumping(false);
+					hasStartedJumping = false;
+				}
+			}
+			else {
+			}
+	}
+	
+	// Jump
+	public void slashTo(int x, int y) {
+		
+		// When we started jumping.
+		jumpStart = time.getTime();
+		
+		// Collision is off.
+		collisionOn = false;
+		
+		// Jump there
+		jumpingToX = x;
+		jumpingToY = y;
+		
+		// Setup for our jumping function.
+		setJumping(true);
+		slashing = true;
+		hasSlashed = false;
+		riseRunSet = false;
+	}
+	
+	// Get jump speed override
 	@Override
-	public void drawUnitSpecialStuff(Graphics g) {
-		
-		// Highlight box for telepathy
-		//drawHighLightBox(g);
-		
+	public float getJumpSpeed() {
+		if(mode.getCurrentMode().equals("topDown")) {
+			return jumpSpeed/2;
+		}
+		else {
+			return jumpSpeed;
+		}
 	}
 	
 	// Initiate does nothing.

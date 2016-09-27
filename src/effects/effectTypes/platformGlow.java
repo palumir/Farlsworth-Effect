@@ -92,11 +92,6 @@ public class platformGlow extends effect {
 		// Set the animation.
 		setCurrentAnimation(pulseAnimation);
 		
-		// Set sound.
-		/*sound s = new sound(effectSound2);
-		s.setPosition(getIntX(), getIntY(), sound.DEFAULT_SOUND_RADIUS);
-		s.start();*/
-		
 		// Make adjustments on hitbox if we're in topDown.
 		setHeight(getDefaultHeight());
 		setWidth(getDefaultWidth());
@@ -108,7 +103,7 @@ public class platformGlow extends effect {
 	@Override
 	public void respondToFrame(int j) {
 		// If someone is in the explosion radius, hurt.
-		if(player.getPlayer().isWithin(getIntX()+1, getIntY()-5, getIntX()+getWidth()-1, getIntY()+getHeight()-5)) {
+		if(player.getPlayer().isWithin(getIntX()+5, getIntY()-1, getIntX()+getWidth()-5, getIntY()+getHeight()-5)) {
 			player.getPlayer().hurt(damage, 1f);
 		}
 	}

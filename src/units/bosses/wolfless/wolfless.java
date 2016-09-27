@@ -27,6 +27,7 @@ import units.unitCommands.commands.slashCommand;
 import units.unitTypes.tomb.lightDude;
 import units.unitTypes.tomb.shadowDude;
 import utilities.intTuple;
+import utilities.mathUtils;
 import utilities.time;
 import utilities.utility;
 
@@ -36,17 +37,20 @@ public class wolfless extends boss {
 	private static String DEFAULT_UNIT_NAME = "(wolfless)";
 	
 	// Default jump speed
-	private static int DEFAULT_UNIT_JUMPSPEED = 14;
+	private static int DEFAULT_UNIT_JUMPSPEED = 13;
 	
 	// Beta stats
 	private static float DEFAULT_MOVESPEED_BETA = 2f;
 	
 	// How long to shadow puke for
 	private float pukeFor = 1f;
-	private static int DEFAULT_PUKE_EVERY_BASE = 2;
+	private static int DEFAULT_PUKE_EVERY_BASE = 1;
+	
+	// Puke every
+	private int pukeEvery = DEFAULT_PUKE_EVERY_BASE;
 	
 	// How long does platform glow last for
-	private static float DEFAULT_PLATFORM_GLOW_LASTS_FOR = 15f;
+	private static float DEFAULT_PLATFORM_GLOW_LASTS_FOR = 10f;
 	
 	// Number of hits total
 	private static int numberOfHitsToDieTotal = 6;
@@ -106,8 +110,10 @@ public class wolfless extends boss {
 	
 	// Phase stuff
 	protected boolean shadowPuke = false;
-	protected boolean advancedShadowPuke = false;
 	protected float shadowDudeMoveSpeed = 4;
+	
+	// Next abiltiy shadow puke?
+	protected boolean nextAbilityShadowPuke = false;
 
 	//////////////////
 	//// METHODS /////
@@ -118,7 +124,7 @@ public class wolfless extends boss {
 		killsPlayer = true;
 		lineSpawnsX = new ArrayList<Integer>();
 		lineSpawnsY = new ArrayList<Integer>();
-		lineTypes = new ArrayList<String>();
+		lineAngles = new ArrayList<Integer>();
 		
 		// Platforms
 		spawnPlatforms();
@@ -128,6 +134,9 @@ public class wolfless extends boss {
 		
 		// Preload shadowDude stuff.
 		int widthOfShadowDude = shadowDude.getDefaultWidth();
+		
+		forceInFront = true;
+		changePhase();
 	}
 	
 	// Add animations.
@@ -246,7 +255,12 @@ public class wolfless extends boss {
 	// Respond to destroy
 	@Override
 	public void respondToDestroy() {
-		if(currentLightDude != null) currentLightDude.destroy();
+		if(currentLightDudes != null) {
+			for(int i =0; i < currentLightDudes.size(); i++) {
+				currentLightDudes.get(i).destroy();
+			}
+		}
+		if(currClaw != null) currClaw.destroy();
 	}
 	
 	// Claw destroy
@@ -383,19 +397,19 @@ public class wolfless extends boss {
 		if(recentlyCastAbilities == null) recentlyCastAbilities = new ArrayList<String>();
 	
 		String randomlySelectedAbility;
-		if(slashNumber < DEFAULT_PUKE_EVERY_BASE) {
-			randomlySelectedAbility = "slashPlatform";
-			if(shadowPuke) slashNumber++;
+		if(nextAbilityShadowPuke) {
+			randomlySelectedAbility = "shadowPuke";
+			nextAbilityShadowPuke = false;
+			slashNumber = 0;
 		}
 		else {
-			int random = utility.RNG.nextInt(2);
-			if(random==0) {
+			if(slashNumber < pukeEvery) {
 				randomlySelectedAbility = "slashPlatform";
-				slashNumber++;
+				if(shadowPuke) slashNumber++;
 			}
 			else {
-				slashNumber = 0;
-				randomlySelectedAbility = "shadowPuke";
+				randomlySelectedAbility = "slashPlatform";
+				slashNumber++;
 			}
 		}
 		
@@ -420,36 +434,47 @@ public class wolfless extends boss {
 		
 	}
 	
+	boolean slashSuccess = false;
 	// Cast slash platform
 	public void castSlashPlatform() {
 			
 		// Slash.
 		if(sequenceNumber == 0) {
-			slashTowardPlayer();
+			slashSuccess = slashTowardPlayer();
 			sequenceNumber++;
 		}
 		
-		// Land and face the player.
-		if(sequenceNumber == 1 && !clawAttacking) {
-			sequenceNumber++;
-			currentAbility = "";
+		if(slashSuccess) {
+			
+			// Land and face the player.
+			if(sequenceNumber == 1 && !clawAttacking) {
+				sequenceNumber++;
+				currentAbility = "";
+				sequenceNumber = 0;
+				
+				// Sound
+				sound s = new sound(land);
+				s.start();
+				
+				// Make the platform unusable.
+				ArrayList<groundTile> currPlatform = getCurrentPlatform();
+				isInjured = false;
+				platformGlow e = new platformGlow(currPlatform.get(0).getIntX(),currPlatform.get(0).getIntY(),DEFAULT_PLATFORM_GLOW_LASTS_FOR);
+				slashSuccess = false;
+			}	
+		}
+		else {
 			sequenceNumber = 0;
-			
-			// Sound
-			sound s = new sound(land);
-			s.start();
-			
-			// Make the platform unusable.
-			ArrayList<groundTile> currPlatform = getCurrentPlatform();
-			platformGlow e = new platformGlow(currPlatform.get(0).getIntX(),currPlatform.get(0).getIntY(),DEFAULT_PLATFORM_GLOW_LASTS_FOR);
-		}	
+			currentAbility = "";
+		}
 	}
 	
 	// Slash toward player.
-	public void slashTowardPlayer() {
+	public boolean slashTowardPlayer() {
 		faceTowardPlayer();
 		ArrayList<groundTile> nextPlatform = getClosestPlatformInDirection(getFacingDirection());
 		if(nextPlatform != null) slashTo(nextPlatform.get(1).getIntX(), nextPlatform.get(1).getIntY() - getHeight()+10);
+		return nextPlatform != null;
 	}
 	
 	// Get current paltform
@@ -514,25 +539,40 @@ public class wolfless extends boss {
 		// Exclude current platform and all platforms behind 
 		ArrayList<ArrayList<groundTile>> outOfPlatforms = new ArrayList<ArrayList<groundTile>>();
 		for(int i = 0; i < platforms.size(); i++) {
-			if(direction.equals("Left") && platforms.get(i).get(0).getIntX() <= playerPlatform.get(0).getIntX()) {
+			if(direction.equals("Left") && platforms.get(i).get(0).getIntX() < currentPlatform.get(0).getIntX()) {
 				outOfPlatforms.add(platforms.get(i));
 			}
-			if(direction.equals("Right") && platforms.get(i).get(0).getIntX() >= playerPlatform.get(0).getIntX()) {
+			if(direction.equals("Right") && platforms.get(i).get(0).getIntX() > currentPlatform.get(0).getIntX()) {
 				outOfPlatforms.add(platforms.get(i));
 			}
 		}
 		
 		// Select two closest platforms out of those platforms
 		ArrayList<ArrayList<groundTile>> platformsToChooseFrom = new ArrayList<ArrayList<groundTile>>();
-		for(int i = 0; i < 3 && 0 < outOfPlatforms.size(); i++) {
-			ArrayList<groundTile> currPlatform = getClosestPlatformToFrom(playerPlatform, outOfPlatforms);
+		for(int i = 0; i < 2 && 0 < outOfPlatforms.size(); i++) {
+			ArrayList<groundTile> currPlatform = getClosestPlatformToFrom(currentPlatform, outOfPlatforms);
 			platformsToChooseFrom.add(currPlatform);
 			outOfPlatforms.remove(currPlatform);
 		}
 		
+		// Get the platform up.
+		ArrayList<groundTile> upPlatform = null;
+		for(int i = 0; i < platformsToChooseFrom.size(); i++) {
+			if(upPlatform==null) upPlatform = platformsToChooseFrom.get(i);
+			else if(upPlatform.get(0).getIntY() > platformsToChooseFrom.get(i).get(0).getIntY()) upPlatform = platformsToChooseFrom.get(i);
+		}
+		
+		// Get the platform down.
+		ArrayList<groundTile> downPlatform = null;
+		for(int i = 0; i < platformsToChooseFrom.size(); i++) {
+			if(downPlatform==null) downPlatform = platformsToChooseFrom.get(i);
+			else if(downPlatform.get(0).getIntY() < platformsToChooseFrom.get(i).get(0).getIntY()) downPlatform = platformsToChooseFrom.get(i);
+		}
+		
+		// Jump to the one closest to the player platform.
 		if(platformsToChooseFrom.size() != 0) {
-			int random = utility.RNG.nextInt(platformsToChooseFrom.size());
-			return platformsToChooseFrom.get(random);
+			if(currentPlatform.get(0).getIntY() <= playerPlatform.get(0).getIntY()) return downPlatform;
+			else return upPlatform;
 		}
 		else {
 			return null;
@@ -564,27 +604,29 @@ public class wolfless extends boss {
 			sequenceNumber++;
 			currentAbility = "";
 			sequenceNumber = 0;
-		}
-				
+		}	
 	}
 	
 	// List of shadow lines
 	private ArrayList<Integer> lineSpawnsX;
 	private ArrayList<Integer> lineSpawnsY;
-	private ArrayList<String> lineTypes;
+	private ArrayList<Integer> lineAngles;
 	
 	// Spawn a shadow line at 
-	public void spawnShadowLineAt(String from, int x, int y) {
+	public void spawnShadowLineAt(int angle, int x, int y) {
 		
 		// Add a new line.
 		lineSpawnsX.add(x);
 		lineSpawnsY.add(y);
-		lineTypes.add(from);
+		lineAngles.add(angle);
 	}
 	
 	// Spawn every.
 	private float spawnEvery = 0.1f;
 	private long lastShadowSpawn = 0;
+	
+	// How many extra lines
+	private int howManyExtraLines = 1;
 	
 	// Deal with lines
 	public void dealWithShadowLines() {
@@ -595,21 +637,14 @@ public class wolfless extends boss {
 			if(time.getTime() - lastShadowSpawn > spawnEvery*1000) {
 				for(int i = 0; i < lineSpawnsX.size(); i++) {
 					unit u = new shadowDude(lineSpawnsX.get(i), lineSpawnsY.get(i));
+					u.setForceInFront(true);
 					u.setMoveSpeed(shadowDudeMoveSpeed);
 					u.setDestroyTimer(30);
 					
-					if(lineTypes.get(i).equals("verticalDown")) {
-						u.setMovingDown(true);
-					}
-					if(lineTypes.get(i).equals("verticalUp")) {
-						u.setMovingUp(true);
-					}
-					if(lineTypes.get(i).equals("horizontalRight")) {
-						u.setMovingRight(true);
-					}
-					if(lineTypes.get(i).equals("horizontalLeft")) {
-						u.setMovingLeft(true);
-					}
+					// Calculate the new X and Y we need to knock them to, based off radius.;
+					int walkToX = (int) (getIntX() + (10000)*Math.cos(Math.toRadians(lineAngles.get(i)-90))); 
+					int walkToY = (int) (getIntY() + (10000)*Math.sin(Math.toRadians(lineAngles.get(i)-90)));
+					u.moveTo(walkToX, walkToY);
 				}
 				
 				lastShadowSpawn = time.getTime();
@@ -621,20 +656,27 @@ public class wolfless extends boss {
 	public void spawnLineAtMouth() {
 		
 		if(facingDirection.equals("Left")) {
-			spawnShadowLineAt("horizontalLeft", getIntX()-15,getIntY());
+			spawnShadowLineAt(0, getIntX()-15,getIntY());
+			spawnShadowLineAt(180, getIntX()-15,getIntY());
 			
-			if(advancedShadowPuke) {
-				spawnShadowLineAt("verticalDown", getIntX()-15,getIntY());
-				spawnShadowLineAt("verticalUp", getIntX()-15,getIntY());
+			int degreeChange = 180/(howManyExtraLines+1);
+			for(int i = 1; i <= howManyExtraLines; i++) {
+				spawnShadowLineAt(180 + degreeChange*i, getIntX()-15,getIntY());
+			}
+			for(int i = 1; i <= howManyExtraLines; i++) {
+				spawnShadowLineAt(degreeChange*i, getIntX()-15,getIntY());
 			}
 		}
 		
 		if(facingDirection.equals("Right")) {
-			spawnShadowLineAt("horizontalRight", getIntX()+getWidth()+15-25,getIntY());
-			
-			if(advancedShadowPuke) {
-				spawnShadowLineAt("verticalDown", getIntX()+getWidth()+15-25,getIntY());
-				spawnShadowLineAt("verticalUp", getIntX()+getWidth()+15-25,getIntY());
+			spawnShadowLineAt(0, getIntX()+getWidth()+15,getIntY());
+			spawnShadowLineAt(180, getIntX()+getWidth()+15,getIntY());
+			int degreeChange = 180/(howManyExtraLines+1);
+			for(int i = 1; i <= howManyExtraLines; i++) {
+				spawnShadowLineAt(degreeChange*i, getIntX()+getWidth()+15,getIntY());
+			}
+			for(int i = 1; i <= howManyExtraLines; i++) {
+				spawnShadowLineAt(180 + degreeChange*i, getIntX()+getWidth()+15,getIntY());
 			}
 		}
 		
@@ -642,7 +684,7 @@ public class wolfless extends boss {
 	
 	// Stop spawning line at mouth.
 	public void stopSpawningLineAtMouth() {
-		lineTypes.clear();
+		lineAngles.clear();
 		lineSpawnsX.clear();
 		lineSpawnsY.clear();
 	}
@@ -724,6 +766,11 @@ public class wolfless extends boss {
 		// Spawn platforms.
 		platforms = new ArrayList<ArrayList<groundTile>>();
 		insidePlatforms = new ArrayList<ArrayList<groundTile>>();
+		
+		// Get farthest X left and X right
+		int xLeft = Integer.MAX_VALUE;
+		int xRight = Integer.MIN_VALUE;
+		int floorY = Integer.MIN_VALUE;
 		for(int i = 0; i < 6; i++) {
 			for(int j = 0; j < 6; j++) {
 				platforms.add(new ArrayList<groundTile>());
@@ -735,11 +782,15 @@ public class wolfless extends boss {
 				for(int m = 0; m < 3; m++) {
 					groundTile tile;
 					if(j%2 != 0) {
-						tile = new tombEdge(platformsStart.x + i*216 + m*32, platformsStart.y + j*115, 0);
+						tile = new tombEdge(platformsStart.x + i*220 + m*32, platformsStart.y + j*105, 0);
 					}
 					else {
-						tile = new tombEdge(platformsStart.x + i*216 + 108 + m*32, platformsStart.y + j*115, 0);
+						tile = new tombEdge(platformsStart.x + i*220 + 110 + m*32, platformsStart.y + j*105, 0);
 					}
+					
+					if(tile.getIntX() > xRight) xRight = tile.getIntX();
+					if(tile.getIntX() < xLeft) xLeft = tile.getIntX();
+					if(tile.getIntY() > floorY) floorY = tile.getIntY();
 					platforms.get(i*6 + j).add(tile);
 					
 					// Add to inside platforms.
@@ -751,6 +802,12 @@ public class wolfless extends boss {
 			}
 		}
 		
+		// Spawn shadow dudes from xLeft to xRight (plus some)
+		for(int i = xLeft - 1000; i < xRight + 1000; i+=shadowDude.getDefaultWidth()) {
+			new shadowDude(i, floorY+300);
+		}
+		
+		
 		// Move wolfie and player to the middle.
 		player.getPlayer().setDoubleX(platforms.get(6*3 + 3).get(1).getIntX());
 		player.getPlayer().setDoubleY(platforms.get(6*3 + 3).get(1).getIntY()-player.getPlayer().getHeight());
@@ -760,68 +817,64 @@ public class wolfless extends boss {
 		faceTowardPlayer();
 	}
 	
+	// Is injured by light dude?
+	public boolean isInjured = false;
+	
 	@Override
 	public void hurtPeople(int leniency) {
-		player currPlayer = player.getPlayer();
-
 		// If someone is in the explosion radius, hurt.
-		if(currPlayer.isWithin(this.getIntX() + leniency, this.getIntY() + leniency, this.getIntX() + this.getWidth() - leniency, this.getIntY() + this.getHeight() - leniency) 
-					&& !currPlayer.isIlluminated() && !isIlluminated()) {
+			player currPlayer = player.getPlayer();
+			if(currPlayer.isWithin(this.getIntX() + leniency, this.getIntY() + leniency, this.getIntX() + this.getWidth() - leniency, this.getIntY() + this.getHeight() - leniency) 
+					&& ((!currPlayer.isIlluminated() && !isIlluminated() && !isInjured))) {
 				currPlayer.hurt(1, 1);
-		}
-		
+			}
 	}
 
 	public void spawnClaw(int x, int y) {	
 		int spawnX = x;
 		int spawnY = y;
 		currClaw = new clawMarkRed(spawnX,spawnY,0);
+		currClaw.setForceInFront(true);
 		faceTowardThing(currClaw);
 	}
 	
 	// Current light dude.
-	lightDude currentLightDude;
+	ArrayList<lightDude> currentLightDudes;
+	
+	public void changePhase() {
+		
+		// Change phase.
+		if(numberOfHitsToDie==numberOfHitsToDieTotal) {
+			spawnClawPhase = 0.7f;
+			spawnEvery = 0.1f;
+			shadowDudeMoveSpeed = 4f;
+			pukeFor = 1f;
+			shadowPuke = true;
+			pukeEvery = 1;
+			howManyExtraLines = 1;
+		}
+		else {
+			spawnClawPhase -= .10f;
+			spawnEvery -= 0.015f;
+			shadowDudeMoveSpeed += 0.3f;
+			pukeFor -= 0.15f;
+			howManyExtraLines++;
+		}
+		
+	}
 	
 	// Get hurt by light.
 	public void getHurtByLight() {
 		
 		// Get hurt.
 		numberOfHitsToDie--;
+		isInjured = true;
 		sound s = new sound(lightDudeBreak);
 		s.start();
 		s = new sound(scream);
 		s.start();
-		
-		// Change phase.
-		if(numberOfHitsToDie==5) {
-			spawnClawPhase = .97f;
-			spawnEvery = 0.1f;
-			shadowDudeMoveSpeed = 4f;
-			pukeFor = 1f;
-			shadowPuke = true;
-		}
-		
-		if(numberOfHitsToDie==4) {
-			spawnClawPhase = 0.87f;
-			advancedShadowPuke = true;
-			spawnEvery = 0.09f;
-			shadowDudeMoveSpeed = 4.5f;
-			pukeFor = 0.85f;
-		}
-		
-		if(numberOfHitsToDie==3) {
-			spawnClawPhase = 0.79f;
-			spawnEvery = 0.08f;
-			shadowDudeMoveSpeed = 5f;
-			pukeFor = 0.7f;
-		}
-		
-		if(numberOfHitsToDie==2) {
-			spawnClawPhase = 0.65f;
-			spawnEvery = 0.07f;
-			shadowDudeMoveSpeed = 5.5f;
-			pukeFor = 0.55f;
-		}
+		changePhase();
+		nextAbilityShadowPuke = true;
 		
 		// Kill boss.
 		if(numberOfHitsToDie<=0) {
@@ -838,25 +891,43 @@ public class wolfless extends boss {
 	// Deal with light dudes
 	public void dealWithLightDudes() {
 		
-		// Spawn a new one.
-		if(currentLightDude == null || !currentLightDude.isExists()) {
-			
-			ArrayList<ArrayList<groundTile>> chooseFrom = new ArrayList<ArrayList<groundTile>>(insidePlatforms);
-			int random = utility.RNG.nextInt(chooseFrom.size());
-			while(chooseFrom.get(random).get(1).isOnScreen()) {
-				chooseFrom.remove(random);
-				random = utility.RNG.nextInt(chooseFrom.size());
+		if(insidePlatforms!=null && insidePlatforms.size()!=0) {
+			// Spawn a new one.
+			if(currentLightDudes == null) currentLightDudes = new ArrayList<lightDude>();
+			if(currentLightDudes != null && currentLightDudes.size() < 1) {
+				
+				ArrayList<ArrayList<groundTile>> chooseFrom = new ArrayList<ArrayList<groundTile>>(insidePlatforms);
+				int random = utility.RNG.nextInt(chooseFrom.size());
+				while(chooseFrom.get(random).get(1).isOnScreen()) {
+					chooseFrom.remove(random);
+					random = utility.RNG.nextInt(chooseFrom.size());
+				}
+				currentLightDudes.add(new lightDude(chooseFrom.get(random).get(1).getIntX(), chooseFrom.get(random).get(1).getIntY() - lightDude.getDefaultHeight()));
+				
 			}
-			currentLightDude = new lightDude(chooseFrom.get(random).get(1).getIntX(), chooseFrom.get(random).get(1).getIntY() - lightDude.getDefaultHeight());
 			
-		}
-		
-		// Get hurt.
-		if(isIlluminated()) {
-			
-			currentLightDude.destroy();
-			getHurtByLight();
-			
+			// Get hurt.
+			if(isIlluminated()) {
+				
+				// Destroy the nearest light dudes
+				int closestVal = Integer.MAX_VALUE;
+				lightDude closestDude = null;
+				for(int i = 0; i < currentLightDudes.size(); i++) {
+					int distanceBetween = (int) Math.sqrt(Math.pow(currentLightDudes.get(i).getIntX() - getIntX(),2) + 
+							Math.pow(currentLightDudes.get(i).getIntY() - getIntY(),2));
+					if(distanceBetween < closestVal) {
+						closestVal = distanceBetween;
+						closestDude = currentLightDudes.get(i);
+					}
+				}
+				
+				// Remove him.
+				closestDude.destroy();
+				currentLightDudes.remove(closestDude);
+	
+				getHurtByLight();
+				
+			}
 		}
 	}
 	
@@ -946,6 +1017,7 @@ public class wolfless extends boss {
 					}
 				}
 			}
+			
 			// Of course only draw if the animation is not null.
 			g.drawImage(getCurrentAnimation().getCurrentFrame(), 
 					getDrawX(), 
