@@ -200,6 +200,12 @@ public class inventory extends interfaceObject {
 		}
 	}
 	
+	//testing
+	@Override
+	public void update() {
+		//System.out.println(isDisplayOn() && isDrawObject() && isExists());
+	}
+	
 	// Unequip item
 	public void unequipItem(item i) {
 		

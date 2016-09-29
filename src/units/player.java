@@ -128,7 +128,7 @@ public class player extends unit {
 	public boolean movementDisabled = false;
 	
 	// Player inventory
-	private inventory playerInventory = new inventory();
+	private inventory playerInventory;
 	
 	// Combat
 	private bottle equippedBottle = null;
@@ -188,11 +188,6 @@ public class player extends unit {
 		
 		// Set z.
 		setZ(1);
-		
-		// If we are in development mode and testing, do that stuff.
-		if(hasDeveloperPowers) {
-			developer.doTestStuff();
-		}
 	}
 	
 	// Set animations
@@ -282,6 +277,11 @@ public class player extends unit {
 	}
 	
 	public static player loadPlayerSaveData(player alreadyPlayer, saveState s, zone z, int spawnX, int spawnY, String direction) {
+
+		// If we are in development mode and testing, do that stuff.
+		if(hasDeveloperPowers) {
+			developer.doTestStuff();
+		}
 		
 		// Get player data from saveState.
 		// The player, depending on whether or not we have a save file.
@@ -295,7 +295,7 @@ public class player extends unit {
 		int playerX = 0;
 		int playerY = 0;
 		String newFacingDirection = null;
-		inventory loadedInventory = new inventory(); // empty inventory
+		inventory loadedInventory = null; // empty inventory
 		
 		// If no zone is given and we don't have the save file. First time running game. 
 		if(z == null && s==null && alreadyPlayer == null) {
@@ -343,9 +343,15 @@ public class player extends unit {
 		}
 		else thePlayer = new developer(playerX, playerY, loadZone);
 		
+		// If inventory isn't loaded make a new one.
+		if(loadedInventory == null) loadedInventory = new inventory();
+		
 		// Set our fields
 		thePlayer.setFacingDirection(newFacingDirection);
 		thePlayer.setPlayerInventory(loadedInventory);
+		
+		// Deal with an error from loading between dev and test.
+		if(!objects.contains(loadedInventory)) objects.add(loadedInventory);
 		
 		// If there's a savestate.
 		if(s != null) {

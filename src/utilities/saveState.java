@@ -188,7 +188,10 @@ public class saveState implements Serializable {
 					objectStream.writeObject(currItem.slot);
 					
 					// For bottles, save the charges.
-					if(currItem instanceof bottle) objectStream.writeObject(((bottle)currItem).getChargesLeft());
+					if(currItem instanceof bottle) {
+						objectStream.writeObject(((bottle)currItem).getChargesLeft());
+						objectStream.writeObject(((bottle)currItem).getMaxCharges());
+					}
 					
 				}
 				
@@ -316,6 +319,7 @@ public class saveState implements Serializable {
 				// For bottles, save the charges.
 				if(newItem instanceof bottle) {
 					((bottle) newItem).setChargesLeft((int)(objectStream.readObject()));
+					((bottle) newItem).setMaxCharges((int)(objectStream.readObject()));
 				}
 				
 				newInventory.add(newItem);
