@@ -1,6 +1,7 @@
 package units.characters.farlsworth;
 
 import java.awt.Color;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 import doodads.sheepFarm.fireLog;
@@ -60,6 +61,9 @@ public class farlsworth extends boss {
 	
 	// FARLSWORTH sprite stuff.
 	private static String DEFAULT_FARLSWORTH_SPRITESHEET = "images/units/animals/sheep.png";
+	
+	// Farlsworth dialogue box
+	private static BufferedImage DEFAULT_DIALOGUE_BOX = spriteSheet.getSpriteFromFilePath("images/units/dialogueBoxes/farlsworthBox.png");
 	
 	// The actual type.
 	private static unitType sheepType  =
@@ -127,7 +131,7 @@ public class farlsworth extends boss {
 		
 		// Start.
 		textSeries startOfConversation = null;
-		return new interactBox(startOfConversation, this, true);
+		return new interactBox(startOfConversation, this);
 	}
 	
 	// Booleans
@@ -253,6 +257,9 @@ public class farlsworth extends boss {
 				this.destroy(); // TODO: Destroy for now, but should move to next location.
 			}
 		}
+		
+		// Set dialogue box
+		setDialogueBox(DEFAULT_DIALOGUE_BOX);
 		
 		// Set dimensions
 		setHeight(getDefaultHeight());

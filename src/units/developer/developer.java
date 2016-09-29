@@ -97,7 +97,6 @@ public class developer extends player {
 	public static void doTestStuff() {
 		groundTile.groundTiles.clear();
 		drawnObject.objects.clear();
-		objects.add(player.getPlayer());
 		drawnObject.dontReloadTheseObjects.clear();
 		if(levelName!=null) levelSave.loadSaveState("testLevelSave.temp");
 	}

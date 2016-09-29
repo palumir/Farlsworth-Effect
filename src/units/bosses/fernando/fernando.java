@@ -84,7 +84,7 @@ public class fernando extends boss {
 		// Start.
 		textSeries startOfConversation = null;
 			
-		return new interactBox(startOfConversation, this, true);
+		return new interactBox(startOfConversation, this);
 	}
 	
 	// Booleans

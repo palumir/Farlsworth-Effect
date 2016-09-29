@@ -14,6 +14,7 @@ import effects.effect;
 import effects.projectile;
 import effects.interfaceEffects.floatingString;
 import effects.interfaceEffects.interactBlurb;
+import items.inventory;
 import items.item;
 import modes.mode;
 import terrain.chunk;
@@ -461,7 +462,6 @@ public abstract class drawnObject {
 			sortObjects();
 			for(int i = 0; i < objects.size(); i++) {
 				drawnObject d = objects.get(i);
-				
 				if(d.isDrawObject()) {
 
 					// Draw the object if it's on the screen.

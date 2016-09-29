@@ -65,7 +65,7 @@ public class treasureChest extends chunk {
 		s = startOfConversation.addChild(null, "I haven't implemented this yet. Fuck off.");
 		s.setEnd();
 			
-		return new interactBox(startOfConversation, this, false);
+		return new interactBox(startOfConversation, this);
 	}
 	
 	// Interact stuff.

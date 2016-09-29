@@ -198,12 +198,10 @@ public class horizontalGate extends chunk {
 			s.setEnd();
 		}
 		
-		boolean isUnit = false;
 		if(isForestGateAndUnopenable()) {
-			isUnit = true;
 		}
 		
-		return new interactBox(startOfConversation, this, isUnit);
+		return new interactBox(startOfConversation, this);
 	}
 	
 	// Is it the forest gate

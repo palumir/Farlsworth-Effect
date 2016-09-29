@@ -41,7 +41,7 @@ public class jumpBottleBuff extends buff {
 			jumpBottleSplash e = new jumpBottleSplash(randomX - jumpBottleSplash.DEFAULT_SPRITE_WIDTH/2, onUnit.getIntY() + onUnit.getHeight()-jumpBottleSplash.DEFAULT_SPRITE_HEIGHT/2);
 		}
 		else { 
-			jumpBottleSplash e = new jumpBottleSplash(onUnit.getIntX() + onUnit.getWidth()/2 + jumpBottleSplash.DEFAULT_SPRITE_WIDTH/2,-5 + onUnit.getIntY() + onUnit.getHeight()-jumpBottleSplash.DEFAULT_SPRITE_HEIGHT/2);
+			jumpBottleSplash e = new jumpBottleSplash(onUnit.getIntX() + onUnit.getWidth()/2 - jumpBottleSplash.DEFAULT_SPRITE_WIDTH/2,-5 + onUnit.getIntY() + onUnit.getHeight()-jumpBottleSplash.DEFAULT_SPRITE_HEIGHT/2);
 		}
 	}
 	
@@ -70,15 +70,28 @@ public class jumpBottleBuff extends buff {
 		
 		// Topdown
 		else {
+			
 			// Top down.
 			if(mode.getCurrentMode().equals("topDown")) {
-				if(u.getFacingDirection().equals("Left")) 
+				if(u.isMovingLeft() && u.isMovingUp()) 
+					u.slashTo((int) (u.getIntX()-jumpBottle.DEFAULT_JUMP_DISTANCE_TOPDOWN/1.4f),
+							(int) (u.getIntY()-jumpBottle.DEFAULT_JUMP_DISTANCE_TOPDOWN/1.4f));
+				else if(u.isMovingRight() && u.isMovingUp()) 
+					u.slashTo((int) (u.getIntX()+jumpBottle.DEFAULT_JUMP_DISTANCE_TOPDOWN/1.4f),
+							(int) (u.getIntY()-jumpBottle.DEFAULT_JUMP_DISTANCE_TOPDOWN/1.4f));
+				else if(u.isMovingRight() && u.isMovingDown()) 
+					u.slashTo((int) (u.getIntX()+jumpBottle.DEFAULT_JUMP_DISTANCE_TOPDOWN/1.4f),
+							(int) (u.getIntY()+jumpBottle.DEFAULT_JUMP_DISTANCE_TOPDOWN/1.4f));
+				else if(u.isMovingLeft() && u.isMovingDown()) 
+					u.slashTo((int) (u.getIntX()-jumpBottle.DEFAULT_JUMP_DISTANCE_TOPDOWN/1.4f),
+							(int) (u.getIntY()+jumpBottle.DEFAULT_JUMP_DISTANCE_TOPDOWN/1.4f));
+				else if(u.getFacingDirection().equals("Left")) 
 					u.slashTo(u.getIntX()-jumpBottle.DEFAULT_JUMP_DISTANCE_TOPDOWN,u.getIntY());
-				if(u.getFacingDirection().equals("Right")) 
+				else if(u.getFacingDirection().equals("Right")) 
 					u.slashTo(u.getIntX()+jumpBottle.DEFAULT_JUMP_DISTANCE_TOPDOWN,u.getIntY());
-				if(u.getFacingDirection().equals("Up")) 
+				else if(u.getFacingDirection().equals("Up")) 
 					u.slashTo(u.getIntX(),u.getIntY()-jumpBottle.DEFAULT_JUMP_DISTANCE_TOPDOWN);
-				if(u.getFacingDirection().equals("Down")) 
+				else if(u.getFacingDirection().equals("Down")) 
 					u.slashTo(u.getIntX(),u.getIntY()+jumpBottle.DEFAULT_JUMP_DISTANCE_TOPDOWN);
 			}
 		}
@@ -93,7 +106,7 @@ public class jumpBottleBuff extends buff {
 		
 		// Do the buff animation
 		animateBuff();
-		if(mode.getCurrentMode().equals("platform") && (onUnit.getFallSpeed() > 0 || !onUnit.isDoubleJumping() || onUnit.isUnitIsDead())) {
+		if(mode.getCurrentMode().equals("platformer") && (onUnit.getFallSpeed() > 0 || !onUnit.isDoubleJumping() || onUnit.isUnitIsDead())) {
 			destroy();
 		}
 		if(mode.getCurrentMode().equals("topDown") && (!onUnit.isJumping() || onUnit.isUnitIsDead())) {

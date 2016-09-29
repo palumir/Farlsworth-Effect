@@ -109,6 +109,12 @@ public class spawningThings {
 								j,
 								0});
 						drawnObject d = (drawnObject)(object);
+						int numI = d.getObjectSpriteSheet().getAnimation(0).size();
+						int randomI = utility.RNG.nextInt(numI);
+						
+						// Set the variation
+						((chunk)(d)).setVariationI(randomI);
+						((chunk)(d)).setChunkImage((d.getObjectSpriteSheet().getAnimation(0).get(randomI)));
 						if(objHeight == 0) objHeight = d.getHeight();
 						if(objWidth == 0) objWidth = d.getWidth();
 						j += objHeight;

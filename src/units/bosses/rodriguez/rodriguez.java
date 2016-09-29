@@ -75,7 +75,7 @@ public class rodriguez extends boss {
 		// Start.
 		textSeries startOfConversation = null;
 
-		return new interactBox(startOfConversation, this, true);
+		return new interactBox(startOfConversation, this);
 	}
 	
 	// Do interact stuff.

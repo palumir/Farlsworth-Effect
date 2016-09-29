@@ -147,7 +147,7 @@ public class firePit extends chunk {
 		playFireSound();
 		
 		// Add animation
-		fireAnimation = new animation("fire", typeReference.getChunkTypeSpriteSheet().getAnimation(0), 0, 3, 0.43f);
+		fireAnimation = new animation("fire", typeReference.getChunkTypeSpriteSheet().getAnimation(0), 0, 3, 0.43f){{setRepeats(true);}};
 		
 		// Interactable.
 		setInteractable(true);

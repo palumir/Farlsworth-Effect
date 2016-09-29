@@ -103,7 +103,7 @@ public class graveKeeper extends boss {
 		}*/
 			
 			
-		return new interactBox(startOfConversation, this, true);
+		return new interactBox(startOfConversation, this);
 	}
 	
 	// Booleans

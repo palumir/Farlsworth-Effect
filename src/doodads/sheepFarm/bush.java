@@ -106,7 +106,7 @@ public class bush extends chunk {
 			startOfConversation.setEnd();
 		}
 			
-		return new interactBox(startOfConversation, this, false);
+		return new interactBox(startOfConversation, this);
 	}
 	
 	// Interact stuff.

@@ -24,16 +24,16 @@ public class interactBox extends interfaceObject  {
 	///////////////////////
 	
 	// Background.
-    public static BufferedImage background = spriteSheet.getSpriteFromFilePath("images/interface/interactBox.png");
+    public static BufferedImage DEFAULT_BACKGROUND = spriteSheet.getSpriteFromFilePath("images/interface/interactBox.png");
     public static BufferedImage arrow = spriteSheet.getSpriteFromFilePath("images/interface/arrow.png");
+    
+	// Position
+	private static int DEFAULT_X = (int) (gameCanvas.getDefaultWidth()*0.5f) - DEFAULT_BACKGROUND.getWidth()/2;
+	private static int DEFAULT_Y = (int) (gameCanvas.getDefaultHeight()*0.80f) - DEFAULT_BACKGROUND.getHeight()/2;
     
     // Color
 	private Color DEFAULT_TEXT_COLOR = Color.black;
 	private Color DEFAULT_SELECTED_COLOR = new Color(100,48,38);
-	
-	// Position
-	private static int DEFAULT_X = (int) (gameCanvas.getDefaultWidth()*0.5f) - background.getWidth()/2;
-	private static int DEFAULT_Y = (int) (gameCanvas.getDefaultHeight()*0.80f) - background.getHeight()/2;
 	
 	// Text font.
 	private static Font DEFAULT_FONT = null;
@@ -42,9 +42,11 @@ public class interactBox extends interfaceObject  {
 	///////////////////////
 	////// FIELDS /////////
 	///////////////////////
+	
+	// Background
+	public BufferedImage background = DEFAULT_BACKGROUND;
     
     // Text to display and the color of the text.
-	private boolean isUnit = false;
 	private textSeries theText;
 	private String displayedText = "";
 	private int displayIterator = 0;
@@ -82,33 +84,26 @@ public class interactBox extends interfaceObject  {
 	public boolean textScrollingFinished() {
 		return displayedText.equals(theText.getTextOnPress());
 	}
-
-	// Constructor
-	public interactBox(textSeries newText, drawnObject newWhoIsTalking, boolean newIsUnit) {
-		super(null, DEFAULT_X, DEFAULT_Y, background.getWidth(), background.getHeight());	
-		
-		// Is unit.
-		isUnit = newIsUnit;
-		
-		// Set fields.
-		if(newText.getButtonText() != null) setButtonMode(true);
-		else textMode = true;
-		newText.setWhoIsTalking(newWhoIsTalking);
-		setTheText(newText);
-	}
 	
 	// Constructor
 	public interactBox(textSeries newText, drawnObject newWhoIsTalking) {
-		super(null, DEFAULT_X, DEFAULT_Y, background.getWidth(), background.getHeight());	
-		
-		// Is unit.
-		isUnit = false;
+		super(null, DEFAULT_X, DEFAULT_Y, DEFAULT_BACKGROUND.getWidth(), DEFAULT_BACKGROUND.getHeight());	
 		
 		// Set fields.
 		if(newText != null && newText.getButtonText() != null) setButtonMode(true);
 		else textMode = true;
 		newText.setWhoIsTalking(newWhoIsTalking);
 		setTheText(newText);
+		
+		// If there's a custom dialogue box, set our properties
+		if(newWhoIsTalking instanceof unit) {
+			unit u = (unit)newWhoIsTalking;
+			
+			if(u.getDialogueBox()!=null) {
+				setBackground();
+			}
+		}
+		
 	}
 	
 	// Draw the unit. 
@@ -132,9 +127,8 @@ public class interactBox extends interfaceObject  {
 			
 			// Text
 			if(textMode) {
-	
 				
-				if(isUnit || getTextSeries().getWhoIsTalking() != null) {
+				/*if(getTextSeries().getWhoIsTalking() != null) {
 					// Set font.
 					g.setFont(DEFAULT_FONT_TITLE);
 					
@@ -155,7 +149,7 @@ public class interactBox extends interfaceObject  {
 							(int)(gameCanvas.getScaleY()*background.getHeight()/5) + 
 							(int)(gameCanvas.getScaleY()*4));
 					g2.setPaint(Color.BLACK);
-				}
+				}*/
 				
 				// Set font.
 				g.setFont(DEFAULT_FONT);
@@ -231,6 +225,27 @@ public class interactBox extends interfaceObject  {
 						}
 					}
 			}
+		}
+	}
+	
+	// Set dialogue background
+	public void setBackground() {
+		if(!isButtonMode() &&
+				getTextSeries().getWhoIsTalking() != null 
+				&& getTextSeries().getWhoIsTalking() instanceof unit
+				&& ((unit)getTextSeries().getWhoIsTalking()).getDialogueBox() != null) {
+			background = ((unit)getTextSeries().getWhoIsTalking()).getDialogueBox();
+			setDoubleX((int) (gameCanvas.getDefaultWidth()*0.5f) - background.getWidth()/2);
+			setDoubleY((int) (gameCanvas.getDefaultHeight()*0.80f) - background.getHeight()/2);
+			setWidth(background.getWidth());
+			setHeight(background.getHeight());
+		}
+		else {
+			background = DEFAULT_BACKGROUND;
+			setDoubleX((int) (gameCanvas.getDefaultWidth()*0.5f) - background.getWidth()/2);
+			setDoubleY((int) (gameCanvas.getDefaultHeight()*0.80f) - background.getHeight()/2);
+			setWidth(background.getWidth());
+			setHeight(background.getHeight());
 		}
 	}
 	
@@ -371,6 +386,8 @@ public class interactBox extends interfaceObject  {
 			selectedButton = 0;
 			goNext = true;
 		}
+		
+		setBackground();
 	}
 	
 	// Go to next

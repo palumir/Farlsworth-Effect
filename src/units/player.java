@@ -124,8 +124,11 @@ public class player extends unit {
 	public Point lastSaveBottle;
 	public savePoint lastSaveBottleChargeIndicator;
 	
+	// Movement disabled?
+	public boolean movementDisabled = false;
+	
 	// Player inventory
-	private inventory playerInventory = new inventory();
+	private inventory playerInventory;
 	
 	// Combat
 	private bottle equippedBottle = null;
@@ -143,6 +146,7 @@ public class player extends unit {
 		
 		// Set movespeed.
 		setMoveSpeed(DEFAULT_PLAYER_MOVESPEED);
+		oldMoveSpeed=DEFAULT_PLAYER_MOVESPEED;
 		setAllowSlowMovement(true);
 		
 		// Set-up the camera.
@@ -184,11 +188,6 @@ public class player extends unit {
 		
 		// Set z.
 		setZ(1);
-		
-		// If we are in development mode and testing, do that stuff.
-		if(hasDeveloperPowers) {
-			developer.doTestStuff();
-		}
 	}
 	
 	// Set animations
@@ -203,10 +202,7 @@ public class player extends unit {
 	// Player AI controls the interface
 	public void updateUnit() {
 		
-		// TODO: dev stuff
-		if(drawnObject.dontReloadTheseObjects!=null); //System.out.println(drawnObject.dontReloadTheseObjects.size());
-		
-		dealWithJumping();
+		dealWithTopDownJumping();
 		showPossibleInteractions();
 		isPlayerDead();
 	}
@@ -281,6 +277,11 @@ public class player extends unit {
 	}
 	
 	public static player loadPlayerSaveData(player alreadyPlayer, saveState s, zone z, int spawnX, int spawnY, String direction) {
+
+		// If we are in development mode and testing, do that stuff.
+		if(hasDeveloperPowers) {
+			developer.doTestStuff();
+		}
 		
 		// Get player data from saveState.
 		// The player, depending on whether or not we have a save file.
@@ -294,7 +295,7 @@ public class player extends unit {
 		int playerX = 0;
 		int playerY = 0;
 		String newFacingDirection = null;
-		inventory loadedInventory = new inventory(); // empty inventory
+		inventory loadedInventory = null; // empty inventory
 		
 		// If no zone is given and we don't have the save file. First time running game. 
 		if(z == null && s==null && alreadyPlayer == null) {
@@ -342,9 +343,15 @@ public class player extends unit {
 		}
 		else thePlayer = new developer(playerX, playerY, loadZone);
 		
+		// If inventory isn't loaded make a new one.
+		if(loadedInventory == null) loadedInventory = new inventory();
+		
 		// Set our fields
 		thePlayer.setFacingDirection(newFacingDirection);
 		thePlayer.setPlayerInventory(loadedInventory);
+		
+		// Deal with an error from loading between dev and test.
+		if(!objects.contains(loadedInventory)) objects.add(loadedInventory);
 		
 		// If there's a savestate.
 		if(s != null) {
@@ -459,37 +466,37 @@ public class player extends unit {
 						jumpBottleSplash e = new jumpBottleSplash(getIntX() - critBloodSquirt.getDefaultWidth()/2 + topDownWidth/2,
 								   getIntY() - critBloodSquirt.getDefaultHeight()/2);
 					}
-					
-					// Player presses left key.
-					if(k.getKeyCode() == KeyEvent.VK_A) { 
-						startMove("left");
+			
+				// Player presses left key.
+				if(k.getKeyCode() == KeyEvent.VK_A) { 
+					startMove("left");
+				}
+				
+				// Player presses right key.
+				if(k.getKeyCode() == KeyEvent.VK_D) { 
+					startMove("right");
+				}
+				
+				// Player presses up key, presumably to jump!
+				if(k.getKeyCode() == KeyEvent.VK_W) { 
+					if(mode.getCurrentMode() == platformer.name) {
+						startMove("up");
+						startJump();
 					}
-					
-					// Player presses right key.
-					if(k.getKeyCode() == KeyEvent.VK_D) { 
-						startMove("right");
+					else if(mode.getCurrentMode() == topDown.name) {
+						startMove("up");
 					}
-					
-					// Player presses up key, presumably to jump!
-					if(k.getKeyCode() == KeyEvent.VK_W) { 
-						if(mode.getCurrentMode() == platformer.name) {
-							startMove("up");
-							startJump();
-						}
-						else if(mode.getCurrentMode() == topDown.name) {
-							startMove("up");
-						}
+				}
+				
+				// Player presses down key
+				if(k.getKeyCode() == KeyEvent.VK_S) { 
+					if(mode.getCurrentMode() == platformer.name) {
+						startMove("down");
 					}
-					
-					// Player presses down key
-					if(k.getKeyCode() == KeyEvent.VK_S) { 
-						if(mode.getCurrentMode() == platformer.name) {
-							startMove("down");
-						}
-						else if(mode.getCurrentMode() == topDown.name) {
-							startMove("down");
-						}
+					else if(mode.getCurrentMode() == topDown.name) {
+						startMove("down");
 					}
+				}
 					
 					
 					// Player presses e key
@@ -716,18 +723,17 @@ public class player extends unit {
 	protected int jumpingToY = 0;
 	protected boolean hasSlashed = false;
 	protected boolean riseRunSet = false;
-	protected double rise = 0;
-	protected double run = 0;
 	
 	// Jumptime.
 	private long jumpStart = 0;
 	private float jumpTime = 0;
 	
 	// Deal with jumping for topDown
-	public void dealWithJumping() {
+	// TODO: make this more of an arch?
+	public void dealWithTopDownJumping() {
 			
 			// Jump to the location.
-			if(isJumping()) {
+			if(isJumping() && mode.getCurrentMode().equals("topDown")) {
 				
 				// Set rise/run
 				if(!riseRunSet) {
@@ -749,8 +755,14 @@ public class player extends unit {
 					startY = getDoubleY();
 				}
 				
-				setDoubleX(getDoubleX() + run);
-				setDoubleY(getDoubleY() + rise);
+				setStunned(true);
+				move(run,rise);
+				
+				// Move the camera if it's there.
+				if(attachedCamera != null) {
+					attachedCamera.setX((int)(getDoubleX() + run));
+					attachedCamera.setY((int)(getDoubleY() + rise));
+				}
 				
 				// Don't let him not move at all or leave region.
 				if(time.getTime() - jumpStart > jumpTime*1000) {
@@ -759,6 +771,10 @@ public class player extends unit {
 					collisionOn = true;
 					setJumping(false);
 					hasStartedJumping = false;
+					
+					// Set old movespeed.
+					setStunned(false);
+					moveSpeed = oldMoveSpeed;
 					
 					// Make player killable
 					targetable = true;
@@ -774,6 +790,12 @@ public class player extends unit {
 		
 		// When we started jumping.
 		jumpStart = time.getTime();
+		
+		// Turn off moving.
+		moveSpeed = 0;
+		setStunned(true);
+		setMomentumX(0);
+		setMomentumY(0);
 		
 		// Collision is off.
 		collisionOn = false;

@@ -44,14 +44,22 @@ public class main {
 		// Create the player
 		//player.setDeveloper(true);
 		
-		initiateAll();
+		///initiateAll();
 		
 		// Create the player at the last bottle?
 		if(s!= null && s.equals("respawnAtWell")) {
 			player p = player.loadPlayer(null,null,0,0,"Up");
 			p.lastSaveBottle = null;
-			p.setDoubleX(p.lastWell.getX());
-			p.setDoubleY(p.lastWell.getY());
+			
+			// If they skipped a well.
+			if(p.lastWell == null) {
+			}
+			
+			// Nice, there's a well.
+			else {
+				p.setDoubleX(p.lastWell.getX());
+				p.setDoubleY(p.lastWell.getY());
+			}
 			well.refreshPlayer("respawnAtWell");
 		}
 		else {

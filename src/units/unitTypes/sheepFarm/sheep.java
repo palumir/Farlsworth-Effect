@@ -128,7 +128,7 @@ public class sheep extends unit {
 		}
 		interactTimes++;
 			
-		return new interactBox(startOfConversation, this, true);
+		return new interactBox(startOfConversation, this);
 	}
 	
 	// Interact with object. 
