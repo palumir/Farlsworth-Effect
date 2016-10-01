@@ -167,15 +167,24 @@ public class saveState implements Serializable {
 				/////////////////
 				// Write the length of the coming array.
 				int inventorySize = 0;
-				if(s.getPlayerInventory() != null) inventorySize = s.getPlayerInventory().size();
+				if(s.getPlayerInventory() != null) inventorySize = s.getPlayerInventory().getPickedUpItems().size();
 				objectStream.writeObject(inventorySize); 
 				
 				// Write the inventory (names of items) to save file.
 				for(int i = 0; i < inventorySize; i++) {
-					item currItem = s.getPlayerInventory().get(i);
+					item currItem = s.getPlayerInventory().getPickedUpItems().get(i);
 					
 					// Write the item name.
 					objectStream.writeObject(currItem.getClass().getName());
+					
+					// Write object's quality
+					objectStream.writeObject(currItem.quality);
+					
+					// Write if it's in inventory or not
+					objectStream.writeObject(currItem.inInventory);
+					
+					// Write if it's picked up or not.
+					objectStream.writeObject(currItem.pickedUpItem);
 					
 					// Save zone
 					objectStream.writeObject(currItem.discoverZone);
@@ -291,6 +300,15 @@ public class saveState implements Serializable {
 				// Write the item name.
 				String itemName = (String)objectStream.readObject();
 				
+				// Quality
+				String quality = (String)objectStream.readObject();
+				
+				// Get whether it's in inventory or not.
+				boolean inInventory = (boolean)objectStream.readObject();
+				
+				// Get whether it's picked up or not.
+				boolean pickedUpItem = (boolean)objectStream.readObject();
+				
 				// Save zone
 				String discoverZone = (String)objectStream.readObject();
 				
@@ -312,6 +330,9 @@ public class saveState implements Serializable {
 				newItem.inInventory = true; // Of course, we're loading it from the inventory.
 				newItem.slot = slot;
 				newItem.discoverZone = discoverZone;
+				newItem.pickedUpItem = pickedUpItem;
+				newItem.inInventory = inInventory;
+				newItem.quality = quality;
 				
 				// Equip equipped items.
 				newInventory.equipItem(newItem, slot);
@@ -322,7 +343,13 @@ public class saveState implements Serializable {
 					((bottle) newItem).setMaxCharges((int)(objectStream.readObject()));
 				}
 				
-				newInventory.add(newItem);
+				if(inInventory) {
+					newInventory.add(newItem);
+				}
+				
+				if(pickedUpItem) {
+					newInventory.getPickedUpItems().add(newItem);
+				}
 				
 			}
 			s.setPlayerInventory(newInventory);

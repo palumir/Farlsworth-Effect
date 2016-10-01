@@ -59,7 +59,7 @@ public class jumpBottle extends bottle {
 	public void setStats() {
 		
 		// Rarity
-		rarity = "Rare";
+		quality = "Good";
 		description = "Double jump!";
 		
 		// Set item's stats

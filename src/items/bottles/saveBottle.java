@@ -50,7 +50,7 @@ public class saveBottle extends bottle {
 	public void setStats() {
 		
 		// Rarity
-		rarity = "Legendary";
+		quality = "Legit";
 		description = "Saves game.";
 		
 		// Set item's stats

@@ -32,4 +32,6 @@ public abstract class unitCommand {
 	public void setName(String name) {
 		this.name = name;
 	}
+
+	public abstract void execute(unit u);
 }

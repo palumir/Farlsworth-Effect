@@ -49,7 +49,7 @@ public class jumpBottleShard extends bottleShard {
 	public void setStats() {
 		
 		// Rarity
-		rarity = "Rare";
+		quality = "Rare";
 	}
 	
 	// Get bottle type

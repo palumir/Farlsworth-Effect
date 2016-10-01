@@ -9,6 +9,7 @@ import drawing.spriteSheet;
 import interactions.event;
 import items.bottleShards.jumpBottleShard;
 import items.bottles.jumpBottle;
+import items.other.bottleExpander;
 import sounds.music;
 import terrain.chunk;
 import terrain.atmosphericEffects.fog;
@@ -42,8 +43,8 @@ public class farmTomb extends zone {
 	private static BufferedImage DEFAULT_ZONE_BACKGROUND = spriteSheet.getSpriteFromFilePath("images/terrain/backgrounds/tombBackground.png");
 	
 	// Zone music.
-	private static String zoneMusic = "sounds/music/farmLand/tomb/tomb.wav";
-	private static String zoneMusicFrantic = "sounds/music/farmLand/tomb/tombBossFight.wav";
+	public static String zoneMusic = "sounds/music/farmLand/tomb/tomb.wav";
+	public static String zoneMusicFrantic = "sounds/music/farmLand/tomb/tombBossFight.wav";
 	
 	// Default zone mode
 	private static String DEFAULT_ZONE_MODE = "platformer";
@@ -192,8 +193,18 @@ public class farmTomb extends zone {
 		// Play zone music.
 		if(!shadowBossFightStarted.isCompleted()) { music.startMusic(zoneMusic);  }
 		else {
-			// Load bossFight
-			createShadowBossFightAroundPlayer();
+			if(player.getPlayer().isWithin((int)player.getPlayer().lastWell.getX()-200, 
+					(int)player.getPlayer().lastWell.getY()-200, 
+					(int)player.getPlayer().lastWell.getX()+250, 
+					(int)player.getPlayer().lastWell.getY()+250)) {
+				shadowBossFightStarted.setCompleted(false);
+				shadowBossFightFirstTime = true;
+				music.startMusic(zoneMusic); 
+			}
+			else {
+				// Load bossFight
+				createShadowBossFightAroundPlayer();
+			}
 		}
 		
 	}
@@ -202,23 +213,19 @@ public class farmTomb extends zone {
 	public void preLoadStuff() {
 		int holder = fernando.getDefaultHeight();
 		holder = rodriguez.getDefaultHeight();
+		holder = wolfless.leniency;
 	}
 	
 	// Load items
 	public void loadItems() {
 		jumpBottle b = new jumpBottle(2867, 1398+32);
+		bottleExpander exp = new bottleExpander(11498,2333);
+		exp.quality = "Good";
 	}
 	
 	// Load units
 	public void loadUnits() {
-		
-		// Load the villain player.
-		// Great gravekeeper.
-		//u = new fernando(Integer.MIN_VALUE,Integer.MIN_VALUE);
-		//u = new rodriguez(7305,1818-50);
-		
-		// Load shadow of denmother
-		//new shadowOfTheDenmother(13387,343);
+
 	}
 	
 	// Load zone events.
@@ -394,11 +401,11 @@ public class farmTomb extends zone {
 		/////////////////////////
 		
 		// Entrance
-		stairsUp tombZoneEnterance = new stairsUp(30,-8,0,sheepFarm.getZone(),-3442, -5682,"Down");
+		stairsUp tombZoneEnterance = new stairsUp(30,-8,sheepFarm.getZone(),-3442, -5682,"Down");
 		tombZoneEnterance.setZ(BACKGROUND_Z);
 		
 		// Secret chest stairs up to well.
-		stairsUp secretStairs = new stairsUp(11615,2314,0,farmTomb.getZone(),7534,1796,"Down");
+		stairsUp secretStairs = new stairsUp(11615,2314,farmTomb.getZone(),11629,1670,"Right");
 		secretStairs.setZ(BACKGROUND_Z);
 	}
 	

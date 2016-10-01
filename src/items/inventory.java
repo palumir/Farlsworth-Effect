@@ -34,6 +34,7 @@ public class inventory extends interfaceObject {
 	// Strings.
 	public static String DEFAULT_EMPTY_SLOT = "Empty";
 	public static String DEFAULT_EQUIP_TEXT = "Press \'e\' to equip";
+	public static String DEFAULT_USE_TEXT = "Press \'e\' to use";
 	public static String DEFAULT_UNEQUIP_TEXT = "Press \'e\' to unequip";
 	
 	// Colors
@@ -67,7 +68,8 @@ public class inventory extends interfaceObject {
 	public ArrayList<item> activeSlots = new ArrayList<item>();
 	
 	// The actual items
-	private ArrayList<item> items;
+	private ArrayList<item> items; // Items we own.
+	private ArrayList<item> pickedUpItems; // Items we have picked up before.
 	
 	// Selected slot
 	private int selectedSlot = 0;
@@ -88,6 +90,7 @@ public class inventory extends interfaceObject {
 	public inventory() {
 		super(null, DEFAULT_INVENTORY_START_X, DEFAULT_INVENTORY_START_Y, 0, 0);
 		setItems(new ArrayList<item>());
+		setPickedUpItems(new ArrayList<item>());
 		
 		// Set sounds.
 		openInventory = "sounds/effects/player/UI/openInventory.wav";
@@ -131,6 +134,7 @@ public class inventory extends interfaceObject {
 	public void pickUp(item i) {
 		if(!hasItem(i)) {
 			getItems().add(i);
+			getPickedUpItems().add(i);
 		}
 	}
 	
@@ -144,12 +148,12 @@ public class inventory extends interfaceObject {
 	// Check if inventory has item with the same name.
 	public boolean hasItem(item i) {
 		if(getItems() != null) {
-			for(int j = 0; j < getItems().size(); j++) {
-				if((getItems().get(j) != null  && 
-						getItems().get(j).getName().equals(i.getName()) &&
-						getItems().get(j).getIntX() == i.getIntX() &&
-						getItems().get(j).getIntY() == i.getIntY() &&
-						getItems().get(j).discoverZone.equals(i.discoverZone))) return true;
+			for(int j = 0; j < pickedUpItems.size(); j++) {
+				if((pickedUpItems.get(j) != null  && 
+						pickedUpItems.get(j).getName().equals(i.getName()) &&
+						pickedUpItems.get(j).getIntX() == i.getIntX() &&
+						pickedUpItems.get(j).getIntY() == i.getIntY() &&
+						pickedUpItems.get(j).discoverZone.equals(i.discoverZone))) return true;
 			}
 		}
 		if((i instanceof bottleShard && 
@@ -166,6 +170,7 @@ public class inventory extends interfaceObject {
 	}
 	
 	// Waiting to equip item?
+	private boolean waitingToUseitem = false;
 	private boolean waitingToEquipItem = false;
 	private item itemToEquip;
 	
@@ -173,13 +178,13 @@ public class inventory extends interfaceObject {
 	public void equipSelectedItem() {
 		
 		// We aren't trying to equip nothing.
-		if(selectedSlot < getItems().size()) {
+		if(getSelectedSlot() < getItems().size()) {
 			
 			// Make sure it's equippable.
-			if(getItems().get(selectedSlot).equippable) {
+			if(getItems().get(getSelectedSlot()).equippable) {
 				
 				// Get the item.
-				item i = getItems().get(selectedSlot);
+				item i = getItems().get(getSelectedSlot());
 				
 				// If the weapon is currently unequipped, equip it.
 				if(i.slot == KeyEvent.VK_WINDOWS) {
@@ -193,6 +198,11 @@ public class inventory extends interfaceObject {
 					unequipItem(i);
 				}
 				
+			}
+			else if(getItems().get(getSelectedSlot()).usedOnItems) {
+				new tooltipString("Select an item to use the " + getItems().get(getSelectedSlot()).getName() + " on.");
+				waitingToUseitem = true;
+				itemToEquip = getItems().get(getSelectedSlot());
 			}
 			else {
 				// TODO: Play unequippable sound?
@@ -246,42 +256,42 @@ public class inventory extends interfaceObject {
 		
 		// Left
 		if(direction=="left") {
-			if(selectedSlot==0 ||
-			(selectedSlot)/Math.sqrt(DEFAULT_INVENTORY_SIZE)==(int)((selectedSlot+1)/Math.sqrt(DEFAULT_INVENTORY_SIZE)));
+			if(getSelectedSlot()==0 ||
+			(getSelectedSlot())/Math.sqrt(DEFAULT_INVENTORY_SIZE)==(int)((getSelectedSlot()+1)/Math.sqrt(DEFAULT_INVENTORY_SIZE)));
 			else {
 				sound s = new sound(UIMove);
 				s.start();
-				selectedSlot--;
+				setSelectedSlot(getSelectedSlot() - 1);
 			}
 		}
 		
 		// Right
 		if(direction=="right") {
-			if((selectedSlot+1)/Math.sqrt(DEFAULT_INVENTORY_SIZE)==(int)((selectedSlot+1)/Math.sqrt(DEFAULT_INVENTORY_SIZE)));
+			if((getSelectedSlot()+1)/Math.sqrt(DEFAULT_INVENTORY_SIZE)==(int)((getSelectedSlot()+1)/Math.sqrt(DEFAULT_INVENTORY_SIZE)));
 			else {
 				sound s = new sound(UIMove);
 				s.start();
-				selectedSlot++;
+				setSelectedSlot(getSelectedSlot() + 1);
 			}
 		}
 		
 		// Up
 		if(direction=="up") {
-			if(selectedSlot-Math.sqrt(DEFAULT_INVENTORY_SIZE) < 0);
+			if(getSelectedSlot()-Math.sqrt(DEFAULT_INVENTORY_SIZE) < 0);
 			else {
 				sound s = new sound(UIMove);
 				s.start();
-				selectedSlot -= Math.sqrt(DEFAULT_INVENTORY_SIZE);
+				setSelectedSlot((int) (getSelectedSlot() - Math.sqrt(DEFAULT_INVENTORY_SIZE)));
 			}
 		}
 		
 		// Down
 		if(direction=="down") {
-			if(selectedSlot + Math.sqrt(DEFAULT_INVENTORY_SIZE) >= DEFAULT_INVENTORY_SIZE);
+			if(getSelectedSlot() + Math.sqrt(DEFAULT_INVENTORY_SIZE) >= DEFAULT_INVENTORY_SIZE);
 			else {
 				sound s = new sound(UIMove);
 				s.start();
-				selectedSlot += Math.sqrt(DEFAULT_INVENTORY_SIZE);
+				setSelectedSlot((int) (getSelectedSlot() + Math.sqrt(DEFAULT_INVENTORY_SIZE)));
 			}
 		}
 	}
@@ -328,7 +338,17 @@ public class inventory extends interfaceObject {
 			
 			// Player presses e key.
 			if(k.getKeyCode() == KeyEvent.VK_E || k.getKeyCode() == KeyEvent.VK_SPACE || k.getKeyCode() == KeyEvent.VK_ENTER) { 
-				equipSelectedItem();
+				if(waitingToUseitem) {
+					
+					// We're good, equip the item.
+					if(itemToEquip.usedOnItems) {
+						itemToEquip.use();
+						waitingToEquipItem = false;
+					}
+				}
+				else {
+					equipSelectedItem();
+				}
 			}
 		}
 	}
@@ -377,7 +397,7 @@ public class inventory extends interfaceObject {
 							(int)(gameCanvas.getScaleY()*(DEFAULT_SLOT_SIZE))-1);
 					
 					// If the slot is selected, then mark it.
-					if(selectedSlot == i*Math.sqrt(DEFAULT_INVENTORY_SIZE) + j) {
+					if(getSelectedSlot() == i*Math.sqrt(DEFAULT_INVENTORY_SIZE) + j) {
 						
 						// Draw the yellow background for the selected slot.
 						g.setColor(DEFAULT_SELECTED_SLOT_COLOR);
@@ -405,7 +425,7 @@ public class inventory extends interfaceObject {
 						g.setColor(DEFAULT_SLOT_COLOR);
 						
 						
-						if(selectedSlot == i*Math.sqrt(DEFAULT_INVENTORY_SIZE) + j) {
+						if(getSelectedSlot() == i*Math.sqrt(DEFAULT_INVENTORY_SIZE) + j) {
 							
 							// Selected slot text adjustment
 							int selectedSlotTextAdjustX = 45;
@@ -419,18 +439,28 @@ public class inventory extends interfaceObject {
 							// Draw weapon information.
 							g.setFont(DEFAULT_FONT);
 							
+							int drawYAt = 20;
+							g.drawString("Quality: " + currentItem.quality, 
+									(int)(gameCanvas.getScaleX()*(getIntX() + (int) (Math.sqrt(DEFAULT_INVENTORY_SIZE)*DEFAULT_SLOT_SIZE) + selectedSlotTextAdjustX + adjustX)) - g.getFontMetrics().stringWidth("Quality: " + currentItem.quality)/2, 
+									(int)(gameCanvas.getScaleY()*(getIntY()+ 34 + adjustY + 20)));
+							
 							// Draw bottle information.
 							if(currentItem instanceof bottle) {
 								bottle currentBottle = (bottle)currentItem;
+								drawYAt+=14;
 								g.drawString("Charges: " + currentBottle.getChargesLeft(), 
 										(int)(gameCanvas.getScaleX()*(getIntX() + (int) (Math.sqrt(DEFAULT_INVENTORY_SIZE)*DEFAULT_SLOT_SIZE) + selectedSlotTextAdjustX + adjustX)) - g.getFontMetrics().stringWidth("Charges: " + currentBottle.getChargesLeft())/2, 
-										(int)(gameCanvas.getScaleY()*(getIntY()+ 34 + adjustY + 20)));
+										(int)(gameCanvas.getScaleY()*(getIntY()+ 34 + adjustY + drawYAt)));
+								drawYAt+=14;
 								g.drawString("Max Charges: " + currentBottle.getMaxCharges(), 
 										(int)(gameCanvas.getScaleX()*(getIntX() + (int) (Math.sqrt(DEFAULT_INVENTORY_SIZE)*DEFAULT_SLOT_SIZE) + selectedSlotTextAdjustX + adjustX)) - g.getFontMetrics().stringWidth("Max Charges: " + currentBottle.getMaxCharges())/2, 
-										(int)(gameCanvas.getScaleY()*(getIntY()+ 34 + adjustY + 34)));
-								if(currentBottle.description!=null) g.drawString(currentBottle.description, 
+										(int)(gameCanvas.getScaleY()*(getIntY()+ 34 + adjustY + drawYAt)));
+								if(currentBottle.description!=null) {
+									drawYAt+=14;
+									g.drawString(currentBottle.description, 
 										(int)(gameCanvas.getScaleX()*(getIntX() + (int) (Math.sqrt(DEFAULT_INVENTORY_SIZE)*DEFAULT_SLOT_SIZE) + selectedSlotTextAdjustX + adjustX)) - g.getFontMetrics().stringWidth(currentBottle.description)/2, 
-										(int)(gameCanvas.getScaleY()*(getIntY()+ 34 + adjustY + 48)));
+										(int)(gameCanvas.getScaleY()*(getIntY()+ 34 + adjustY + drawYAt)));
+								}
 							}
 							
 							// Press e to equip/dequip.
@@ -528,5 +558,21 @@ public class inventory extends interfaceObject {
 
 	public void setItems(ArrayList<item> items) {
 		this.items = items;
+	}
+
+	public int getSelectedSlot() {
+		return selectedSlot;
+	}
+
+	public void setSelectedSlot(int selectedSlot) {
+		this.selectedSlot = selectedSlot;
+	}
+
+	public ArrayList<item> getPickedUpItems() {
+		return pickedUpItems;
+	}
+
+	public void setPickedUpItems(ArrayList<item> pickedUpItems) {
+		this.pickedUpItems = pickedUpItems;
 	}
 }

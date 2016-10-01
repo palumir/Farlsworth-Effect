@@ -1,8 +1,10 @@
 package units.characters.farmer;
 
 import java.awt.Color;
+import java.awt.image.BufferedImage;
 
 import UI.tooltipString;
+import drawing.spriteSheet;
 import interactions.interactBox;
 import interactions.quest;
 import interactions.textSeries;
@@ -53,6 +55,9 @@ public class farmer extends unit {
 	// farmer sprite stuff.
 	private static String DEFAULT_FARMER_SPRITESHEET = "images/units/humanoid/farmer.png";
 	
+	// Farmer
+	private static BufferedImage DEFAULT_DIALOGUE_BOX = spriteSheet.getSpriteFromFilePath("images/units/dialogueBoxes/farmerBox.png");
+	
 	// The actual type.
 	private static unitType farmerType =
 			new humanType( "Farmer Farmer",  // Name of unitType 
@@ -83,6 +88,7 @@ public class farmer extends unit {
 		super(farmerType, newX, newY);
 		
 		farmer = this;
+		setDialogueBox(DEFAULT_DIALOGUE_BOX);
 		
 		// Interactable.
 		setInteractable(true);

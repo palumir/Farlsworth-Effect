@@ -348,7 +348,7 @@ public class wolfless extends boss {
 						setDoubleY(jumpingToY);
 						clawDestroy();
 					}
-					if(getAllCommands() != null && getAllCommands().size() > 0 && getAllCommands().get(0) instanceof slashCommand) currentCommandComplete = true;
+					if(getAllCommands() != null && getAllCommands().size() > 0 && getAllCommands().get(0) instanceof slashCommand) setCurrentCommandComplete(true);
 					setJumping(false);
 					clawAttacking = false;
 					hasStartedJumping = false;
@@ -421,15 +421,18 @@ public class wolfless extends boss {
 	// Cast fight abilities
 	public void castAbilities() {
 		
-		// Select an ability if we need to cast one.
-		if(currentAbility.equals("")) randomlySelectAnAbility();
-		
-		if(currentAbility.equals("shadowPuke")) {
-			castShadowPuke();
-		}
-		
-		if(currentAbility.equals("slashPlatform")) {
-			castSlashPlatform();
+		if(!player.getPlayer().isUnitIsDead()) {
+			
+			// Select an ability if we need to cast one.
+			if(currentAbility.equals("")) randomlySelectAnAbility();
+			
+			if(currentAbility.equals("shadowPuke")) {
+				castShadowPuke();
+			}
+			
+			if(currentAbility.equals("slashPlatform")) {
+				castSlashPlatform();
+			}
 		}
 		
 	}
@@ -569,8 +572,26 @@ public class wolfless extends boss {
 			else if(downPlatform.get(0).getIntY() < platformsToChooseFrom.get(i).get(0).getIntY()) downPlatform = platformsToChooseFrom.get(i);
 		}
 		
-		// Jump to the one closest to the player platform.
+		// Jump to the one closest to the player platform (within the same distance)
 		if(platformsToChooseFrom.size() != 0) {
+			
+			// If one is way further away, jump to the closer one.
+			if(Math.sqrt(Math.pow(upPlatform.get(0).getIntY() - currentPlatform.get(0).getIntY(),2)
+					+ Math.pow(upPlatform.get(0).getIntX() - currentPlatform.get(0).getIntX(),2))
+					>  
+					Math.sqrt(Math.pow(downPlatform.get(0).getIntY() - currentPlatform.get(0).getIntY(),2)
+					+ Math.pow(downPlatform.get(0).getIntX() - currentPlatform.get(0).getIntX(),2)) + 10) {
+				return downPlatform;
+			}
+			if(Math.sqrt(Math.pow(upPlatform.get(0).getIntY() - currentPlatform.get(0).getIntY(),2)
+					+ Math.pow(upPlatform.get(0).getIntX() - currentPlatform.get(0).getIntX(),2) + 10)
+					<
+					Math.sqrt(Math.pow(downPlatform.get(0).getIntY() - currentPlatform.get(0).getIntY(),2)
+					+ Math.pow(downPlatform.get(0).getIntX() - currentPlatform.get(0).getIntX(),2))) {
+				return upPlatform;
+			}
+			
+			// Otherwise jump to the one closer to the player.
 			if(currentPlatform.get(0).getIntY() <= playerPlatform.get(0).getIntY()) return downPlatform;
 			else return upPlatform;
 		}
@@ -696,7 +717,7 @@ public class wolfless extends boss {
 	private static String growl = "sounds/effects/bosses/shadowOfTheDenmother/spookyGrowl.wav";
 	private static String bark = "sounds/effects/bosses/shadowOfTheDenmother/wolfBark.wav";
 	private static String land = "sounds/effects/bosses/shadowOfTheDenmother/land.wav";
-	private static String scream = "sounds/effects/bosses/shadowOfTheDenmother/scream.wav";
+	public static String scream = "sounds/effects/bosses/shadowOfTheDenmother/scream.wav";
 	private static String lightDudeBreak = "sounds/effects/bosses/shadowOfTheDenmother/lightDudeBreak.wav";
 
 	// Type of howl
@@ -845,7 +866,7 @@ public class wolfless extends boss {
 		
 		// Change phase.
 		if(numberOfHitsToDie==numberOfHitsToDieTotal) {
-			spawnClawPhase = 0.7f;
+			spawnClawPhase = 0.65f;
 			spawnEvery = 0.1f;
 			shadowDudeMoveSpeed = 4f;
 			pukeFor = 1f;
@@ -854,7 +875,7 @@ public class wolfless extends boss {
 			howManyExtraLines = 1;
 		}
 		else {
-			spawnClawPhase -= .10f;
+			spawnClawPhase -= .07f;
 			spawnEvery -= 0.015f;
 			shadowDudeMoveSpeed += 0.3f;
 			pukeFor -= 0.15f;

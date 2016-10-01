@@ -98,7 +98,7 @@ public class farmFenceCinematic extends cinematic {
 		if(goNextTextSeries() && choiceIs("'Yes'")) {
 			
 			if(isSequence(numIfs++) && goNextTextSeries()) {
-				sheepFarm.forestGate.open();
+				sheepFarm.forestGate.forceOpenWithSound();
 				addTextSeries(null, "Uh... thanks.",farlsworth);
 				advanceSequence();
 			}

@@ -29,9 +29,6 @@ public abstract class drawnObject {
 	////////////////
 	/// DEFAULTS ///
 	////////////////
-	
-	// Are chunks important?
-	public static boolean reloadTheFollowingObjects = true;
 
 	// Font
 	public static String DEFAULT_FONT_NAME = "SansSerif";
@@ -253,7 +250,6 @@ public abstract class drawnObject {
 		setWidth(newWidth);
 		setHeight(newHeight);
 		addObject(this);
-		setReloadObject(reloadTheFollowingObjects);
 	}
 	
 	// Get drawnObjects in box.

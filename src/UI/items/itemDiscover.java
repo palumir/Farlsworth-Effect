@@ -128,10 +128,10 @@ public class itemDiscover extends absolutePositionedEffect {
 	
 	// Get type of effect
 	public static effectType getTypeOfEffect(item i) {
-		if(i.rarity.equals("Legendary")) {
+		if(i.quality.equals("Legit")) {
 			return legendaryEffectType;
 		}
-		else if(i.rarity.equals("Rare")) {
+		else if(i.quality.equals("Good")) {
 			return rareEffectType;
 		}
 		else {
@@ -208,10 +208,10 @@ public class itemDiscover extends absolutePositionedEffect {
 			font = drawnObject.DEFAULT_FONT.deriveFont((float) (drawnObject.DEFAULT_FONT.getSize()*1f*sizeMultiplier));
 			g.setFont(font);
 			g.setColor(DEFAULT_COLOR);
-			g.drawString(item.rarity, 
+			g.drawString(item.quality, 
 					(int)((getIntX() 
 							+ getCurrentAnimation().getCurrentFrame().getWidth()/2)*gameCanvas.getScaleX()
-							- g.getFontMetrics().stringWidth(item.rarity)/2), 
+							- g.getFontMetrics().stringWidth(item.quality)/2), 
 					(int)((getIntY()
 							+ getCurrentAnimation().getCurrentFrame().getHeight()/2 
 							+ item.getImage().getHeight()*1.5f/2 + 14)*gameCanvas.getScaleY()));

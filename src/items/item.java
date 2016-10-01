@@ -49,11 +49,17 @@ public abstract class item extends drawnObject {
 	// Does the player actually own the item?
 	public boolean inInventory = false;
 	
+	// Is the item picked up before?
+	public boolean pickedUpItem = false;
+	
 	// Is it equippable?
 	public boolean equippable = false;
 	
+	// Consumable
+	public boolean usedOnItems = false;
+	
 	// Item rarity.
-	public String rarity = "Common";
+	public String quality = "Alright";
 	
 	// The zone the item was discovered in.
 	public String discoverZone = "None"; // Defaults to not a zone.
@@ -136,6 +142,7 @@ public abstract class item extends drawnObject {
 		// Stop drawing the weapon on the ground.
 		setDrawObject(false);
 		inInventory = true;
+		pickedUpItem = true;
 		destroy();
 	}
 	

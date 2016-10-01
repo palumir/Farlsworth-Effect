@@ -356,16 +356,12 @@ public class unit extends drawnObject  {
 	//// ISSUING COMMANDS ////
 	//////////////////////////
 	
-	// Wait command
-	private float waitFor = 0;
-	private long waitStart = 0;
-	
 	// Store the commands we need to issue.
 	private commandList allCommands; // Current commands we will issue. This list gets slowly reduced as commands get issued.
 	private commandList repeatCommands; // List of commands we will repeat. List is never reduced, since it needs to repeat.
 	
 	// Is the current command complete?
-	protected boolean currentCommandComplete = false;
+	private boolean currentCommandComplete = false;
 	
 	// Repeat commands
 	public void repeatCommands(commandList c) {
@@ -386,82 +382,7 @@ public class unit extends drawnObject  {
 			
 			// Get the current command because we have to do shit with it.
 			unitCommand currentCommand = getAllCommands().get(0);
-			
-			// Deal with each command type.
-			// AKA, don't move to the next command on a move command
-			// if we are still moving, etc.
-			if(currentCommand instanceof moveCommand) {
-				
-				// Only move to the next command when applicable.
-				if(currentCommand.isIssued()) {
-				
-					// If we have stopped moving. This command is done.
-					if(!isMoving()) {
-						getAllCommands().remove(0);
-						doCommands();
-					}
-				}
-				
-				// Issue the command if it hasn't yet been issued.
-				else {
-					currentCommand.setIssued(true);
-					moveCommand moveCommand = (moveCommand) currentCommand;
-					moveTo((int)moveCommand.getX(), (int)moveCommand.getY());
-				}
-			}
-			
-			else if(currentCommand instanceof waitCommand) {
-				
-				// Only move to the next command when applicable.
-				if(currentCommand.isIssued()) {
-					
-					// Time has elapsed. This command is done.
-					if(waitStart!=0 && time.getTime() - waitStart > waitFor*1000) { 
-						waitStart = 0;
-						getAllCommands().remove(0);
-						doCommands();
-					}
-				}
-				
-				// Issue the command if it hasn't yet been issued.
-				else {
-					currentCommand.setIssued(true);
-					waitCommand waitCommand = (waitCommand) currentCommand;
-					waitFor = (float)waitCommand.getHowLong();
-					waitStart = time.getTime();
-				}
-				
-			}
-			
-			else if(currentCommand instanceof slashCommand) {
-				
-				// Only move to the next command when applicable.
-				if(currentCommand.isIssued()) {
-					
-					// Slash is over. This command is done.
-					if(currentCommandComplete) { 
-						getAllCommands().remove(0);
-						doCommands();
-					}
-				}
-				
-				// Issue the command if it hasn't yet been issued.
-				else {
-					currentCommand.setIssued(true);
-					currentCommandComplete = false;
-					slashCommand slashCommand = (slashCommand)currentCommand;
-					slashTo((int)slashCommand.getX(), (int)slashCommand.getY());
-				}
-
-			}
-			
-			else {
-				// Unknown command issued. Skip it.
-				currentCommand.setIssued(true);
-				currentCommandComplete = true;
-				getAllCommands().remove(0);
-				doCommands();
-			}
+			currentCommand.execute(this);
 		}
 		
 		// Otherwise, the allCommands queue is empty.
@@ -483,7 +404,7 @@ public class unit extends drawnObject  {
 	
 	// Regular units do not slash.
 	public void slashTo(int x, int y) {
-		currentCommandComplete = true;
+		setCurrentCommandComplete(true);
 	}
 	
 	// Move in place.
@@ -1935,6 +1856,14 @@ public class unit extends drawnObject  {
 
 	public void setDialogueBox(BufferedImage dialogueBox) {
 		this.dialogueBox = dialogueBox;
+	}
+
+	public boolean isCurrentCommandComplete() {
+		return currentCommandComplete;
+	}
+
+	public void setCurrentCommandComplete(boolean currentCommandComplete) {
+		this.currentCommandComplete = currentCommandComplete;
 	}
 	
 }

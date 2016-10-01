@@ -38,8 +38,8 @@ public class stairsUp extends chunk {
 	///////////////
 	
 	// Constructor
-	public stairsUp(int newX, int newY, int i, zone newZone, int newSpawnX, int newSpawnY, String direction) {
-		super(typeReference, newX, newY, i, 0);
+	public stairsUp(int newX, int newY, zone newZone, int newSpawnX, int newSpawnY, String direction) {
+		super(typeReference, newX, newY, 0, 0);
 		toZone = newZone;
 		spawnDirection = direction;
 		spawnX = newSpawnX;

@@ -201,7 +201,6 @@ public class player extends unit {
 
 	// Player AI controls the interface
 	public void updateUnit() {
-		
 		dealWithTopDownJumping();
 		showPossibleInteractions();
 		isPlayerDead();

@@ -379,7 +379,7 @@ public abstract class wolf extends unit {
 							setDoubleY(jumpingToY);
 							clawDestroy();
 						}
-						if(getAllCommands() != null && getAllCommands().size() > 0 && getAllCommands().get(0) instanceof slashCommand) currentCommandComplete = true;
+						if(getAllCommands() != null && getAllCommands().size() > 0 && getAllCommands().get(0) instanceof slashCommand) setCurrentCommandComplete(true);
 						setJumping(false);
 						clawAttacking = false;
 						hasStartedJumping = false;

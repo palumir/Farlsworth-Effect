@@ -263,6 +263,25 @@ public class horizontalGate extends chunk {
 	}
 	
 	// Force gate open, no matter what.
+	public void forceOpenWithSound() {
+		
+		// Set that the gate has been opened before.
+		hasBeenOpened.setCompleted(true);
+		isOpen.setCompleted(true);
+		setShowInteractable(false);
+		
+		// Play sound
+		sound s = new sound(openGate);
+		s.setPosition(this.getIntX(), this.getIntY(), sound.DEFAULT_SOUND_RADIUS);
+		s.start();
+		
+		// Open gate.
+		setPassable(true);
+		setChunkImage(typeReference.getChunkImage(1, 0));
+		open = true;
+	}
+	
+	// Force gate open, no matter what.
 	public void forceOpen() {
 		
 		// Set that the gate has been opened before.
