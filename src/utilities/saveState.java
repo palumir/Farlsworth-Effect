@@ -1,6 +1,7 @@
 package utilities;
 
 import java.awt.Point;
+import java.awt.event.KeyEvent;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
@@ -177,6 +178,9 @@ public class saveState implements Serializable {
 					// Write the item name.
 					objectStream.writeObject(currItem.getClass().getName());
 					
+					// Write object's upgrade leve.
+					objectStream.writeObject(currItem.upgradeLevel);
+					
 					// Write object's quality
 					objectStream.writeObject(currItem.quality);
 					
@@ -300,6 +304,9 @@ public class saveState implements Serializable {
 				// Write the item name.
 				String itemName = (String)objectStream.readObject();
 				
+				// Update level
+				int upgradeLevel = (int)objectStream.readObject();
+				
 				// Quality
 				String quality = (String)objectStream.readObject();
 				
@@ -333,9 +340,10 @@ public class saveState implements Serializable {
 				newItem.pickedUpItem = pickedUpItem;
 				newItem.inInventory = inInventory;
 				newItem.quality = quality;
+				newItem.upgradeLevel = upgradeLevel;
 				
 				// Equip equipped items.
-				newInventory.equipItem(newItem, slot);
+				if(newItem.slot != null && slot != KeyEvent.VK_WINDOWS) newInventory.equipItem(newItem, slot);
 				
 				// For bottles, save the charges.
 				if(newItem instanceof bottle) {

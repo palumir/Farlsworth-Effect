@@ -147,7 +147,7 @@ public class developer extends player {
 		File[] listOfFiles = folder.listFiles();
 	    for (int i = 0; i < listOfFiles.length; i++) {
 	      if (listOfFiles[i].isFile()) {
-	    	  System.err.println("There's a file in the base doodads folder!");
+	    	  //System.err.println("There's a file in the base doodads folder!");
 	      } else if (listOfFiles[i].isDirectory()) {
 	    	  File subFolder = new File("src/doodads/" + listOfFiles[i].getName());
 	    	  File[] subListOfFiles = subFolder.listFiles();

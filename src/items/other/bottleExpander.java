@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 import UI.tooltipString;
 import drawing.spriteSheet;
 import drawing.spriteSheet.spriteSheetInfo;
+import interactions.event;
 import items.bottle;
 import items.bottleShard;
 import items.item;
@@ -16,15 +17,13 @@ public class bottleExpander extends item {
 	////////////////
 	
 	// Default sprite stuff
-	public static int DEFAULT_SPRITE_WIDTH = 20;
-	public static int DEFAULT_SPRITE_HEIGHT = 29;
-	protected static int DEFAULT_SPRITE_ADJUSTMENT_X = 0;
-	protected static int DEFAULT_SPRITE_ADJUSTMENT_Y = 0;
+	public static int DEFAULT_SPRITE_WIDTH = 25;
+	public static int DEFAULT_SPRITE_HEIGHT = 13;
 	
 	public static spriteSheet bottleSpriteSheetRef = new spriteSheet(new spriteSheetInfo(
-			"images/doodads/items/bottleShard.png", 
-			bottleShard.DEFAULT_SPRITE_WIDTH, 
-			bottleShard.DEFAULT_SPRITE_HEIGHT,
+			"images/doodads/items/bottleExpander.png", 
+			DEFAULT_SPRITE_WIDTH, 
+			DEFAULT_SPRITE_HEIGHT,
 			0,
 			0
 			));
@@ -38,6 +37,9 @@ public class bottleExpander extends item {
 	
 	// Does the player actually own the item?
 	public static boolean inInventory = false;
+	
+	// Event
+	public static event bottleExpanderFirstTime = new event("bottleExpanderFirstTime");
 	
 	///////////////
 	/// METHODS ///
@@ -55,6 +57,12 @@ public class bottleExpander extends item {
 		usedOnItems = true;
 	}
 	
+	// React to pickup
+	@Override
+	public void reactToPickup() {
+		new tooltipString("Press 'i' to open inventory.");
+	}
+	
 	// Use
 	@Override
 	public void use() {
@@ -65,17 +73,21 @@ public class bottleExpander extends item {
 		// Is the quality incorrect?
 		if(!quality.equals(useOnItem.quality)) {
 			new tooltipString("This can only be used to upgrade " + quality + " bottles.");
+			player.getPlayer().getPlayerInventory().setWaitingToUseitem(false);
 		}
 		
 		// Make sure it's a bottle.
 		else if(useOnItem instanceof bottle) {
 			this.drop();
+			useOnItem.upgrade();
 			((bottle)useOnItem).setMaxCharges(((bottle)useOnItem).getMaxCharges() + 1);
+			player.getPlayer().getPlayerInventory().setWaitingToUseitem(false);
 		}
 		
 		// Not a bottle, you dinky!
 		else {
 			new tooltipString("This Bottle Expander only works on a bottle, you dinky!");
+			player.getPlayer().getPlayerInventory().setWaitingToUseitem(false);
 		}
 	}
 

@@ -250,7 +250,7 @@ public class sheepFarm extends zone {
 		loadZoneEvents();
 		
 		// Load the level save.
-		//levelSave.loadSaveState("sheepFarmLevel.save");
+		levelSave.loadSaveState("sheepFarmLevel.save");
 		//sheepFarmZoneLoader loader = new sheepFarmZoneLoader();
 		//loader.loadSegments();
 		
@@ -258,11 +258,11 @@ public class sheepFarm extends zone {
 		if(stormInProgress.isCompleted()) {
 			zoneFog = new fog();
 			zoneFog.setTo(stormFogLevel);
-			storm s = new storm(); 
+			storm s = new storm();  
 		}
 		
 		// Spawn special stuff
-		//spawnSpecialStuff();
+		spawnSpecialStuff();
 		
 		// Create items
 		createItems();
@@ -402,7 +402,7 @@ public class sheepFarm extends zone {
 		farlsworthFence.add(c);
 		c = new fenceBarsSmall(adjustX + 37,adjustY + -436,0);
 		farlsworthFence.add(c);
-		forestGate = new horizontalGate("Forest Gate", "Not TV Key", adjustX + -13+fenceAdjustX/2,adjustY + -434,0);
+		forestGate = new horizontalGate("Not TV Key", adjustX + -13+fenceAdjustX/2,adjustY + -434);
 		farlsworthFence.add(forestGate);
 		
 		///////////////////////////////
@@ -418,7 +418,7 @@ public class sheepFarm extends zone {
 		farlsworthFence.add(c);
 		
 		// Gate.
-		farlsworthGate = new horizontalGate("Sheep Gate", "Not TV Key", adjustX + 412,adjustY + -15,0);
+		farlsworthGate = new horizontalGate("Not TV Key", adjustX + 412,adjustY + -15);
 		farlsworthFence.add(farlsworthGate);
 		
 		// Right of gate

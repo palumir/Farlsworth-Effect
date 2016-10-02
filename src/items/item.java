@@ -150,6 +150,14 @@ public abstract class item extends drawnObject {
 	public void reactToPickup() {
 	}
 	
+	// Upgrade
+	public int upgradeLevel = 0;
+	
+	// Update
+	public void upgrade() {
+		upgradeLevel++;
+	}
+	
 	// Use item
 	public void use() {
 		

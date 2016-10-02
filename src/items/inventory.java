@@ -11,6 +11,8 @@ import UI.interfaceObject;
 import UI.tooltipString;
 import drawing.gameCanvas;
 import drawing.spriteSheet;
+import items.bottles.jumpBottle;
+import items.bottles.saveBottle;
 import sounds.sound;
 import units.player;
 import utilities.stringUtils;
@@ -170,7 +172,7 @@ public class inventory extends interfaceObject {
 	}
 	
 	// Waiting to equip item?
-	private boolean waitingToUseitem = false;
+	private boolean waitingToUseItem = false;
 	private boolean waitingToEquipItem = false;
 	private item itemToEquip;
 	
@@ -189,10 +191,19 @@ public class inventory extends interfaceObject {
 				// If the weapon is currently unequipped, equip it.
 				if(i.slot == KeyEvent.VK_WINDOWS) {
 					
-					// Display a tooltip.
-					new tooltipString("Enter a slot to equip the item (enter, space, shift, 1-9).");
-					waitingToEquipItem = true;
-					itemToEquip = i;
+					// Special cases for these bottles.
+					if(i instanceof jumpBottle && countBottles() < 3) {
+						equipItem(i, KeyEvent.VK_SPACE);
+					}
+					else if(i instanceof saveBottle && countBottles() < 3) {
+						equipItem(i, KeyEvent.VK_ENTER);
+					}
+					else {
+						// Display a tooltip.
+						new tooltipString("Enter a slot to equip the item (enter, space, shift, 1-9).");
+						setWaitingToEquipItem(true);
+						itemToEquip = i;
+					}
 				}
 				else {
 					unequipItem(i);
@@ -201,7 +212,7 @@ public class inventory extends interfaceObject {
 			}
 			else if(getItems().get(getSelectedSlot()).usedOnItems) {
 				new tooltipString("Select an item to use the " + getItems().get(getSelectedSlot()).getName() + " on.");
-				waitingToUseitem = true;
+				setWaitingToUseitem(true);
 				itemToEquip = getItems().get(getSelectedSlot());
 			}
 			else {
@@ -213,7 +224,6 @@ public class inventory extends interfaceObject {
 	//testing
 	@Override
 	public void update() {
-		//System.out.println(isDisplayOn() && isDrawObject() && isExists());
 	}
 	
 	// Unequip item
@@ -228,7 +238,7 @@ public class inventory extends interfaceObject {
 		activeSlots.remove(i);
 		
 		// Tooltip.
-		//new tooltipString("Item unequipped.");
+		new tooltipString(i.getName() + " unequipped.");
 	}
 	
 	// Equip item to slot
@@ -242,13 +252,34 @@ public class inventory extends interfaceObject {
 		equipItem(itemToEquip,key);
 		
 		// Stop waiting.
-		waitingToEquipItem = false;
+		setWaitingToEquipItem(false);
+	}
+	
+	// Count bottles
+	public int countBottles() {
+		int count = 0;
+		for(int i = 0; i < items.size(); i++) {
+			if(items.get(i) instanceof bottle) count++;
+		}
+		return count;
 	}
 	
 	// Actually equip item
 	public void equipItem(item i, int key) {
+		// Check active slots and unequip anything with the same slot.
+		for(int j = 0; j < activeSlots.size(); j++) {
+			if(activeSlots.get(j).slot == key) {
+				activeSlots.get(j).slot = KeyEvent.VK_WINDOWS;
+				activeSlots.remove(j);
+				j--;
+			}
+		}
+		
 		i.slot = key;
 		activeSlots.add(i);
+		
+		// Tooltip.
+		new tooltipString(i.getName() + " equipped.");
 	}
 	
 	// Move the select around.
@@ -299,7 +330,7 @@ public class inventory extends interfaceObject {
 	// Respond to key press.
 	public void respondToKeyPress(KeyEvent k) {
 		
-		if(waitingToEquipItem) {
+		if(isWaitingToEquipItem()) {
 			
 			// We're good, equip the item.
 			if(activeSlotKeys.contains(k.getKeyCode())) {
@@ -307,7 +338,7 @@ public class inventory extends interfaceObject {
 			}
 			else {
 				new tooltipString("You didn't enter a correct slot. Quit joshing me hard.");
-				waitingToEquipItem = false;
+				setWaitingToEquipItem(false);
 			}
 		}
 		else { 
@@ -338,12 +369,12 @@ public class inventory extends interfaceObject {
 			
 			// Player presses e key.
 			if(k.getKeyCode() == KeyEvent.VK_E || k.getKeyCode() == KeyEvent.VK_SPACE || k.getKeyCode() == KeyEvent.VK_ENTER) { 
-				if(waitingToUseitem) {
+				if(isWaitingToUseitem()) {
 					
 					// We're good, equip the item.
 					if(itemToEquip.usedOnItems) {
 						itemToEquip.use();
-						waitingToEquipItem = false;
+						setWaitingToEquipItem(false);
 					}
 				}
 				else {
@@ -433,6 +464,7 @@ public class inventory extends interfaceObject {
 							// Draw the item information on the right
 							g.setFont(DEFAULT_FONT_TITLE);
 							String itemName = stringUtils.toTitleCase(currentItem.getName());
+							if(currentItem.upgradeLevel > 0) itemName += " +" + currentItem.upgradeLevel;
 							g.drawString(itemName, (int)(gameCanvas.getScaleX()*(getIntX() + (int) (Math.sqrt(DEFAULT_INVENTORY_SIZE)*DEFAULT_SLOT_SIZE) + selectedSlotTextAdjustX + adjustX)) - g.getFontMetrics().stringWidth(itemName)/2, 
 									(int)(gameCanvas.getScaleY()*(getIntY()+ 34 + adjustY)));
 							
@@ -473,6 +505,11 @@ public class inventory extends interfaceObject {
 							else if(currentItem.equippable && activeSlots.contains(currentItem)){
 								g.drawString(DEFAULT_UNEQUIP_TEXT, 
 										(int)(gameCanvas.getScaleX()*(getIntX() + selectedSlotTextAdjustX + (int) (Math.sqrt(DEFAULT_INVENTORY_SIZE)*DEFAULT_SLOT_SIZE) + adjustX)) - g.getFontMetrics().stringWidth(DEFAULT_UNEQUIP_TEXT)/2, 
+										(int)(gameCanvas.getScaleY()*(getIntY()+ 34 + adjustY + 140)));
+							}
+							else if(currentItem.usedOnItems){
+								g.drawString(DEFAULT_USE_TEXT, 
+										(int)(gameCanvas.getScaleX()*(getIntX() + selectedSlotTextAdjustX + (int) (Math.sqrt(DEFAULT_INVENTORY_SIZE)*DEFAULT_SLOT_SIZE) + adjustX)) - g.getFontMetrics().stringWidth(DEFAULT_USE_TEXT)/2, 
 										(int)(gameCanvas.getScaleY()*(getIntY()+ 34 + adjustY + 140)));
 							}
 						}
@@ -574,5 +611,21 @@ public class inventory extends interfaceObject {
 
 	public void setPickedUpItems(ArrayList<item> pickedUpItems) {
 		this.pickedUpItems = pickedUpItems;
+	}
+
+	public boolean isWaitingToEquipItem() {
+		return waitingToEquipItem;
+	}
+
+	public void setWaitingToEquipItem(boolean waitingToEquipItem) {
+		this.waitingToEquipItem = waitingToEquipItem;
+	}
+
+	public boolean isWaitingToUseitem() {
+		return waitingToUseItem;
+	}
+
+	public void setWaitingToUseitem(boolean waitingToUseitem) {
+		this.waitingToUseItem = waitingToUseitem;
 	}
 }

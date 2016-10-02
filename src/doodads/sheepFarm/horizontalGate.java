@@ -1,5 +1,6 @@
 package doodads.sheepFarm;
 
+import doodads.openable;
 import interactions.event;
 import interactions.interactBox;
 import interactions.textSeries;
@@ -11,7 +12,7 @@ import units.player;
 import units.characters.farlsworth.farlsworth;
 import zones.sheepFarm.sheepFarm;
 
-public class horizontalGate extends chunk {
+public class horizontalGate extends openable {
 	
 	////////////////
 	/// DEFAULTS ///
@@ -48,10 +49,6 @@ public class horizontalGate extends chunk {
 	private int interactTimes = 0;
 	private boolean screamingJoke = false;
 	
-	// Event on whether or not the gate is open.
-	private event hasBeenOpened;
-	private event isOpen;
-	
 	// The actual type.
 	private static generalChunkType typeReference = new generalChunkType(DEFAULT_CHUNK_NAME, DEFAULT_CHUNK_SPRITESHEET, DEFAULT_CHUNK_WIDTH, DEFAULT_CHUNK_HEIGHT);  
 	
@@ -59,15 +56,11 @@ public class horizontalGate extends chunk {
 	/// METHODS ///
 	///////////////
 	// Constructor
-	public horizontalGate(String newGateName, String newKeyName, int newX, int newY, int i) {
-		super(typeReference, newX, newY, i, 0);
+	public horizontalGate(String newKeyName, int newX, int newY) {
+		super(typeReference, newKeyName, newX, newY);
 		
 		// Key name.
 		keyName = newKeyName;
-		
-		// Event for gate open.
-		isOpen = new event(newGateName + "isOpen");
-		hasBeenOpened = new event(newGateName + "hasBeenOpened");
 		
 		// Check if we have save data on the gate.
 		if(isOpen.isCompleted()) {
@@ -76,9 +69,6 @@ public class horizontalGate extends chunk {
 		else {
 			setPassable(false);
 		}
-		
-		// Set gate name.
-		uniqueGateName = newGateName;
 		
 		if(mode.getCurrentMode().equals("topDown")) {
 			setHitBoxAdjustmentY(14);
@@ -89,7 +79,6 @@ public class horizontalGate extends chunk {
 			setHeight(DEFAULT_CHUNK_HEIGHT);
 			setWidth(DEFAULT_CHUNK_WIDTH);
 		}
-		if(i==1) setPassable(true);
 		setInteractable(true);
 	}
 	
@@ -211,104 +200,10 @@ public class horizontalGate extends chunk {
 				&& farlsworth.pastSpawnFarm != null && !farlsworth.pastSpawnFarm.isCompleted()
 				&& player.getPlayer() != null && player.getPlayer().getPlayerInventory().hasKey(keyName);
 	}
-	
-	// Interact stuff.
-	public void doInteractStuff() {
-		
-		// Open gate?
-		if(!open 
-			&& interactSequence != null 
-			&& interactSequence.getTextSeries().getButtonText() != null
-			&& interactSequence.getTextSeries().getButtonText().equals("Open")
-			&& interactSequence.getTextSeries().isEnd()
-			&& interactSequence.isDisplayOn()) {
-			if(!isForestGateAndUnopenable()) open();
-		}
-			
-		// Close gate?
-		if(open 
-			&& interactSequence != null 
-			&& interactSequence.getTextSeries().getButtonText() != null
-			&& interactSequence.getTextSeries().getButtonText().equals("Close")
-			&& interactSequence.getTextSeries().isEnd()
-			&& interactSequence.isDisplayOn()) {
-				close();
-		}
-	}
-	
-	// Update
+
 	@Override
-	public void update() {
-		doInteractStuff();
-	}
-	
-	// Interact with object. Should be over-ridden.
-	public void interactWith() { 
-		interactSequence = makeNormalInteractSequence();
-		interactSequence.toggleDisplay();
-	}
-	
-	// Open the gate
-	public void open() {
-		if(hasBeenOpened.isCompleted() || (player.getPlayer() != null && player.getPlayer().getPlayerInventory().hasKey(keyName))) {
-			
-			// Play sound
-			sound s = new sound(openGate);
-			s.setPosition(this.getIntX(), this.getIntY(), sound.DEFAULT_SOUND_RADIUS);
-			s.start();
-			
-			// Open gate.
-			forceOpen();
-		}
-	}
-	
-	// Force gate open, no matter what.
-	public void forceOpenWithSound() {
-		
-		// Set that the gate has been opened before.
-		hasBeenOpened.setCompleted(true);
-		isOpen.setCompleted(true);
-		setShowInteractable(false);
-		
-		// Play sound
-		sound s = new sound(openGate);
-		s.setPosition(this.getIntX(), this.getIntY(), sound.DEFAULT_SOUND_RADIUS);
-		s.start();
-		
-		// Open gate.
-		setPassable(true);
-		setChunkImage(typeReference.getChunkImage(1, 0));
-		open = true;
-	}
-	
-	// Force gate open, no matter what.
-	public void forceOpen() {
-		
-		// Set that the gate has been opened before.
-		hasBeenOpened.setCompleted(true);
-		isOpen.setCompleted(true);
-		setShowInteractable(false);
-		
-		// Open gate.
-		setPassable(true);
-		setChunkImage(typeReference.getChunkImage(1, 0));
-		open = true;
-	}
-	
-	// Close the gate
-	public void close() {
-		
-		// Set that the gate is closed.
-		isOpen.setCompleted(false);
-		setShowInteractable(true);
-		
-		// Play sound
-		sound s = new sound(closeGate);
-		s.start();
-		
-		// Close the gate.
-		setPassable(false);
-		setChunkImage(typeReference.getChunkImage(0, 0));
-		open = false;
+	public generalChunkType getTypeReference() {
+		// TODO Auto-generated method stub
+		return typeReference;
 	}
 }
