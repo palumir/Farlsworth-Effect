@@ -163,6 +163,19 @@ public abstract class cinematic {
 		return choiceIs;
 	}
 	
+	// Choice is
+	public boolean choiceIs(String s, int numTimes) {
+		if(choiceArray == null) choiceArray = new ArrayList<String>();
+		boolean choiceIs = choiceArray.contains(s) || !interactSequence.isButtonMode() && s.equals(interactSequence.getTextSeries().getButtonText());
+		if(choiceIs && !choiceArray.contains(s)) choiceArray.add(s);
+		int count = 0;
+		for(int i = 0; i < choiceArray.size(); i++) {
+			if(choiceArray.get(i).equals(s)) count++;
+		}
+		return count >= numTimes;
+	}
+	
+	
 	// Advance sequence
 	public void advanceSequence() {
 		sequencePart++;

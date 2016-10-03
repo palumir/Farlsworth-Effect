@@ -27,6 +27,7 @@ import units.unitCommands.commands.moveCommand;
 import units.unitTypes.tomb.lightDude;
 import units.unitTypes.tomb.shadowDude;
 import utilities.intTuple;
+import utilities.levelSave;
 import zones.zone;
 import zones.sheepFarm.sheepFarm;
 
@@ -173,6 +174,8 @@ public class farmTomb extends zone {
 		
 		// Load zone events.
 		loadZoneEvents();
+		
+		levelSave.loadSaveState("actualTombLevel.save");
 		
 		// Load the level save.
 		//farmTombZoneLoader loader = new farmTombZoneLoader();

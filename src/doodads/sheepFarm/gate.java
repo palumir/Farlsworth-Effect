@@ -12,14 +12,14 @@ import units.player;
 import units.characters.farlsworth.farlsworth;
 import zones.sheepFarm.sheepFarm;
 
-public class horizontalGate extends openable {
+public class gate extends openable {
 	
 	////////////////
 	/// DEFAULTS ///
 	////////////////
 	
 	// Default name.
-	private static String DEFAULT_CHUNK_NAME = "horizontalGate";
+	private static String DEFAULT_CHUNK_NAME = "gate";
 	
 	// Sprite stuff.
 	private static String DEFAULT_CHUNK_SPRITESHEET = "images/doodads/farmLand/sheepFarm/"+ DEFAULT_CHUNK_NAME + ".png";
@@ -56,7 +56,7 @@ public class horizontalGate extends openable {
 	/// METHODS ///
 	///////////////
 	// Constructor
-	public horizontalGate(String newKeyName, int newX, int newY) {
+	public gate(String newKeyName, int newX, int newY) {
 		super(typeReference, newKeyName, newX, newY);
 		
 		// Key name.

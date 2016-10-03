@@ -2,7 +2,6 @@ package units.unitTypes.sheepFarm;
 
 import java.util.ArrayList;
 
-import doodads.sheepFarm.clawMarkYellow;
 import drawing.spriteSheet;
 import drawing.spriteSheet.spriteSheetInfo;
 import units.unitType;
@@ -136,9 +135,6 @@ public class yellowWolf extends wolf {
 	
 	// Spawn claw
 	public void spawnClaw(int x, int y) {
-		int spawnX = x;
-		int spawnY = y;
-		currClaw = new clawMarkYellow(spawnX,spawnY,0);
 	}
 
 	@Override

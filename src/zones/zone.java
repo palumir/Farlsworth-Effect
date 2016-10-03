@@ -18,6 +18,7 @@ import utilities.saveState;
 import zones.farmLand.forest;
 import zones.farmLand.spiderCave;
 import zones.farmTomb.farmTomb;
+import zones.sheepFarm.farmerHouse;
 import zones.sheepFarm.sheepFarm;
 
 public abstract class zone {
@@ -124,7 +125,12 @@ public abstract class zone {
 		
 		// Sheep Farms
 		sheepFarm.setZone(new sheepFarm());
+		farmerHouse.setZone(new farmerHouse());
+		
+		// Farm tomb
 		farmTomb.setZone(new farmTomb());
+		
+		// Old zones.
 		forest.setZone(new forest());
 		spiderCave.setZone(new spiderCave());
 	}

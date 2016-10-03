@@ -73,7 +73,7 @@ public class slideEffect extends movementBuff {
 	// Remove effect if off wood.
 	@Override
 	public void update() {
-		if(!wood.isOnWood(onUnit)) {
+		if(!wood.isOnWood(onUnit) && !onUnit.isInAir()) {
 			removeEffect();
 		}
 	}

@@ -160,7 +160,7 @@ public class farmer extends unit {
 					s.setEnd();
 				}	
 				
-				if(farmIntroCinematic.isCompleted.isCompleted() && farmFenceCinematic.isCompleted.isCompleted()) {
+				else if(farmIntroCinematic.isCompleted.isCompleted() && farmFenceCinematic.isCompleted.isCompleted()) {
 					startOfConversation = new textSeries(null, "Farnsbirth darted off to the North.");
 					s = startOfConversation.addChild(null, "There's wolves in that direction!");
 					s = s.addChild(null, "You better go make sure he's okay.");

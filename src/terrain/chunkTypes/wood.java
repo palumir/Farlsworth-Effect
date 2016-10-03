@@ -3,6 +3,7 @@ package terrain.chunkTypes;
 import drawing.drawnObject;
 import effects.buff;
 import effects.buffs.slideEffect;
+import modes.mode;
 import terrain.chunk;
 import terrain.generalChunkType;
 import terrain.groundTile;
@@ -46,7 +47,8 @@ public class wood extends groundTile {
 	// TODO: TESTING SLIDE EFFECT 
 	@Override
 	public void update() {
-		if(player.getPlayer().isWithin(this.getIntX(),this.getIntY(),this.getIntX()+this.getWidth(),this.getIntY()+this.getHeight())) {
+		if(player.getPlayer().isWithin(this.getIntX(),this.getIntY(),this.getIntX()+this.getWidth(),this.getIntY()+this.getHeight())
+				|| (mode.getCurrentMode().equals("platformer") && player.getPlayer().isWithin(this.getIntX(),this.getIntY()-10,this.getIntX()+this.getWidth(),this.getIntY()+this.getHeight()))) {
 			boolean containsSlide = false;
 			for(int i = 0; i < player.getPlayer().getMovementBuffs().size(); i++) {
 				buff b = player.getPlayer().getMovementBuffs().get(i);
@@ -128,7 +130,10 @@ public class wood extends groundTile {
 		// Check between our interval
 		for(;i1 <= i2; i1++) {
 			chunk currChunk = groundTiles.get(i1);
-			if(u.collides(u.getIntX(), u.getIntY(),currChunk) && currChunk instanceof wood) tX = true;
+			if(mode.getCurrentMode().equals("topDown")) if(u.collides(u.getIntX(), u.getIntY(),currChunk) && currChunk instanceof wood) tX = true;
+			
+			// TODO: doesnt work for platformer
+			if(mode.getCurrentMode().equals("platformer")) if(u.collides(u.getIntX(), u.getIntY()+10,currChunk) && currChunk instanceof wood) tX = true;
 		}
 		
 		if(tX) return true;

@@ -12,6 +12,7 @@ import doodads.sheepFarm.bridge;
 import doodads.sheepFarm.bridgePole;
 import doodads.sheepFarm.bush;
 import doodads.sheepFarm.clawMarkRed;
+import doodads.sheepFarm.door;
 import doodads.sheepFarm.farmHouse;
 import doodads.sheepFarm.fenceBars;
 import doodads.sheepFarm.fenceBarsSmall;
@@ -19,7 +20,7 @@ import doodads.sheepFarm.fencePost;
 import doodads.sheepFarm.flower;
 import doodads.sheepFarm.grave;
 import doodads.sheepFarm.haystack;
-import doodads.sheepFarm.horizontalGate;
+import doodads.sheepFarm.gate;
 import doodads.sheepFarm.rock;
 import doodads.sheepFarm.statue;
 import doodads.sheepFarm.tomb;
@@ -91,8 +92,8 @@ public class sheepFarm extends zone {
 	static chunk c;
 	
 	// Forest gate
-	public static horizontalGate forestGate;
-	public static horizontalGate farlsworthGate;
+	public static gate forestGate;
+	public static gate farlsworthGate;
 	
 	// Zone events.
 	public static event wellTooltipLoaded;
@@ -336,6 +337,9 @@ public class sheepFarm extends zone {
 		c = new doodads.sheepFarm.haystack(-195,-165,0);
 		c.setPassable(false);
 		((haystack)c).setStrange();
+		
+		// Doors.
+		c = new door(null, -599,-373, farmerHouse.getZone(), -93,957, "Right");
 	}
 	
 	// Spawn items
@@ -402,7 +406,7 @@ public class sheepFarm extends zone {
 		farlsworthFence.add(c);
 		c = new fenceBarsSmall(adjustX + 37,adjustY + -436,0);
 		farlsworthFence.add(c);
-		forestGate = new horizontalGate("Not TV Key", adjustX + -13+fenceAdjustX/2,adjustY + -434);
+		forestGate = new gate("Not TV Key", adjustX + -13+fenceAdjustX/2,adjustY + -434);
 		farlsworthFence.add(forestGate);
 		
 		///////////////////////////////
@@ -418,7 +422,7 @@ public class sheepFarm extends zone {
 		farlsworthFence.add(c);
 		
 		// Gate.
-		farlsworthGate = new horizontalGate("Not TV Key", adjustX + 412,adjustY + -15);
+		farlsworthGate = new gate("Not TV Key", adjustX + 412,adjustY + -15);
 		farlsworthFence.add(farlsworthGate);
 		
 		// Right of gate

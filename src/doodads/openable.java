@@ -39,7 +39,7 @@ public abstract class openable extends chunk {
 		super(typeReference, newX, newY, 0, 0);
 		
 		// Key name.
-		keyName = newKeyName;
+		setKeyName(newKeyName);
 		
 		// Event for gate open.
 		isOpen = new event("openable" + newKeyName + newX + newY + "isOpen");
@@ -64,11 +64,11 @@ public abstract class openable extends chunk {
 		// Start of conversation.
 		textSeries startOfConversation = null;
 			
-		if(!open) {
+		if(!isOpen()) {
 			startOfConversation = new textSeries("StartWithButtons", "StartWithButtons");
 			startOfConversation.setTalker("");
 			
-			if((player.getPlayer() != null && player.getPlayer().getPlayerInventory().hasKey(keyName)) || hasBeenOpened.isCompleted()) {
+			if((player.getPlayer() != null && player.getPlayer().getPlayerInventory().hasKey(getKeyName())) || hasBeenOpened.isCompleted() || keyName==null) {
 				s = startOfConversation.addChild("Open", "You open it.");	
 			}
 			else {
@@ -91,7 +91,7 @@ public abstract class openable extends chunk {
 	public void doInteractStuff() {
 		
 		// Open gate?
-		if(!open 
+		if(!isOpen() 
 			&& interactSequence != null 
 			&& interactSequence.getTextSeries().getButtonText() != null
 			&& interactSequence.getTextSeries().getButtonText().equals("Open")
@@ -101,7 +101,7 @@ public abstract class openable extends chunk {
 		}
 			
 		// Close gate?
-		if(open 
+		if(isOpen() 
 			&& interactSequence != null 
 			&& interactSequence.getTextSeries().getButtonText() != null
 			&& interactSequence.getTextSeries().getButtonText().equals("Close")
@@ -125,7 +125,7 @@ public abstract class openable extends chunk {
 	
 	// Open the gate
 	public void open() {
-		if(hasBeenOpened.isCompleted() || (player.getPlayer() != null && player.getPlayer().getPlayerInventory().hasKey(keyName))) {
+		if(hasBeenOpened.isCompleted() || keyName == null || (player.getPlayer() != null && player.getPlayer().getPlayerInventory().hasKey(getKeyName()))) {
 			
 			// Play sound
 			sound s = new sound(openGate);
@@ -153,7 +153,7 @@ public abstract class openable extends chunk {
 		// Open gate.
 		setPassable(true);
 		setChunkImage(getTypeReference().getChunkImage(1, 0));
-		open = true;
+		setOpen(true);
 	}
 	
 	// Force gate open, no matter what.
@@ -167,7 +167,7 @@ public abstract class openable extends chunk {
 		// Open gate.
 		setPassable(true);
 		setChunkImage(getTypeReference().getChunkImage(1, 0));
-		open = true;
+		setOpen(true);
 	}
 	
 	// Close the gate
@@ -184,8 +184,24 @@ public abstract class openable extends chunk {
 		// Close the gate.
 		setPassable(false);
 		setChunkImage(getTypeReference().getChunkImage(0, 0));
-		open = false;
+		setOpen(false);
 	}
 	
 	public abstract generalChunkType getTypeReference();
+
+	public String getKeyName() {
+		return keyName;
+	}
+
+	public void setKeyName(String keyName) {
+		this.keyName = keyName;
+	}
+
+	public boolean isOpen() {
+		return open;
+	}
+
+	public void setOpen(boolean open) {
+		this.open = open;
+	}
 }

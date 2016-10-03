@@ -427,7 +427,7 @@ public class player extends unit {
 			
 			else if(isUnitIsDead()) { 
 				// Player presses bar key
-				if(k.getKeyCode() == KeyEvent.VK_ENTER) {
+				if(k.getKeyCode() == KeyEvent.VK_ENTER || k.getKeyCode() == KeyEvent.VK_SPACE || k.getKeyCode() == KeyEvent.VK_E)  {
 					if(deathMenu.menu != null && objects.contains(deathMenu.menu.respawnAtSaveBottle)) deathMenu.menu.selectButton(deathMenu.menu.respawnAtSaveBottle);
 				}
 			}

@@ -7,7 +7,6 @@ import doodads.cave.firePit;
 import doodads.cave.webMedium;
 import doodads.cave.webSmall;
 import doodads.cave.webTiny;
-import doodads.sheepFarm.caveEnterance;
 import drawing.background;
 import drawing.spriteSheet;
 import interactions.event;
@@ -145,10 +144,6 @@ public class spiderCave extends zone {
 		////////////////
 		// FIRST Area //
 		////////////////
-		
-		// Entrance
-		caveEnterance spiderCaveEnterance = new caveEnterance(30,-15,0, sheepFarm.getZone(),-1762+52,-4070+90,"Down");
-		spiderCaveEnterance.setZ(BACKGROUND_Z);
 		
 		// First patch of webs.
 		c = new webSmall(200+110,-81,0);

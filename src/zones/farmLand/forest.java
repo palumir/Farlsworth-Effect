@@ -5,7 +5,7 @@ import doodads.sheepFarm.bone;
 import doodads.sheepFarm.fenceBars;
 import doodads.sheepFarm.fencePost;
 import doodads.sheepFarm.flower;
-import doodads.sheepFarm.horizontalGate;
+import doodads.sheepFarm.gate;
 import doodads.sheepFarm.tree;
 import doodads.sheepFarm.verticalFence;
 import drawing.background;
@@ -47,7 +47,7 @@ public class forest extends zone {
 	static chunk c;
 	
 	// Forest gate
-	public static horizontalGate forestGate;
+	public static gate forestGate;
 	
 	// Zone events.
 	public static event wellTooltipLoaded;

@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-import doodads.sheepFarm.fireLog;
 import drawing.spriteSheet;
 import drawing.spriteSheet.spriteSheetInfo;
 import drawing.animation.animation;
@@ -357,28 +356,6 @@ public class farlsworth extends boss {
 			for(int i = 0; i < attachedFence.size(); i++) {
 				attachedFence.get(i).setDoubleX(attachedFence.get(i).getDoubleX() + moveX);
 				attachedFence.get(i).setDoubleY(attachedFence.get(i).getDoubleY() + moveY);
-			}
-		}
-		
-		// Move the log.
-		if(attachedLog != null) {
-			attachedLog.setForceInFront(false);
-			if(facingDirection.equals("Left")) {
-				attachedLog.setDoubleX((int)getDoubleX() - fireLog.DEFAULT_CHUNK_WIDTH/2-5);
-				attachedLog.setDoubleY((int)getDoubleY()-7);
-			}
-			if(facingDirection.equals("Right")) {
-				attachedLog.setDoubleX((int)getDoubleX() + getWidth() - fireLog.DEFAULT_CHUNK_WIDTH/2+5);
-				attachedLog.setDoubleY((int)getDoubleY()-7);
-			}
-			if(facingDirection.equals("Down")) {
-				attachedLog.setDoubleX((int)getDoubleX() - fireLog.DEFAULT_CHUNK_WIDTH/2+10);
-				attachedLog.setDoubleY(getDoubleY()+1);
-				attachedLog.setForceInFront(true);
-			}
-			if(facingDirection.equals("Up")) {
-				attachedLog.setDoubleX((int)getDoubleX() - fireLog.DEFAULT_CHUNK_WIDTH/2+10);
-				attachedLog.setDoubleY((int)getDoubleY() - fireLog.DEFAULT_CHUNK_HEIGHT);
 			}
 		}
 	}

@@ -44,12 +44,6 @@ public class bush extends chunk {
 	// Has eaten berry?
 	private boolean hasEatenBerry = false;
 	
-	// Is the bush a secret?
-	private boolean isSecretPassage = false;
-	
-	// Is the lever revealed?
-	private static event leverRevealed = new event("leverRevealed");
-	
 	///////////////
 	/// METHODS ///
 	///////////////
@@ -83,14 +77,7 @@ public class bush extends chunk {
 					
 		// Start of conversation.
 		textSeries startOfConversation = null;
-		if(isSecretPassage()) {
-			// Start of conversation.
-			startOfConversation = new textSeries(null, "There appears to be something hidden under this bush.");
-				
-			s = startOfConversation.addChild("Brush off leaves", "You brush away the leaves, revealing a lever..");
-			s.setEnd();
-		}	
-		else if(bushType == 1) {
+		if(bushType == 1) {
 			// Start of conversation.
 			startOfConversation = new textSeries(null, "It's a bush filled with some unknown berries.");
 				
@@ -130,27 +117,6 @@ public class bush extends chunk {
 			}
 			hasEatenBerry = true;
 		}
-		
-		// If it's a secret bush with the lever.
-		// If we are the strange haystack and have searched 6 times, destroy it.
-		if((leverRevealed.isCompleted() && isSecretPassage) || 
-				(isSecretPassage && interactSequence != null 
-				&& interactSequence.getTextSeries().isEnd() 
-				&& interactSequence.getTextSeries().getButtonText() != null
-				&& interactSequence.getTextSeries().getButtonText().equals("Brush off leaves"))) {
-			
-			// Play sound
-			sound s = new sound(clearBush);
-			s.setPosition(getIntX(), getIntY(), sound.DEFAULT_SOUND_RADIUS);
-			s.start();
-			
-			// Spawn a lever.
-			lever l = new lever(getIntX(), getIntY(), 0);
-			leverRevealed.setCompleted(true);
-			
-			// Destroy this.
-			this.destroy();
-		}
 	}
 	
 	// Update
@@ -164,13 +130,5 @@ public class bush extends chunk {
 		hasEatenBerry = false;
 		interactSequence = makeNormalInteractSequence();
 		interactSequence.toggleDisplay();
-	}
-
-	public boolean isSecretPassage() {
-		return isSecretPassage;
-	}
-
-	public void setSecretPassage(boolean isSecretPassage) {
-		this.isSecretPassage = isSecretPassage;
 	}
 }
