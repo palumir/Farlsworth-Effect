@@ -338,8 +338,10 @@ public class sheepFarm extends zone {
 		c.setPassable(false);
 		((haystack)c).setStrange();
 		
+		// TODO: set to have a key for testing purposes. So tehy don't spawn in the farmer's house test zone
+		// and get fucked
 		// Doors.
-		c = new door(null, -599,-373, farmerHouse.getZone(), -93,957, "Right");
+		c = new door("CHANGE THIS TO NULL", -599,-373, farmerHouse.getZone(), -93,957, "Right");
 	}
 	
 	// Spawn items

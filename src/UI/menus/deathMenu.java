@@ -29,7 +29,7 @@ public class deathMenu extends UI.menu {
 		menu = this;
 		
 		// Create buttons.
-		respawnAtSaveBottle = new button("Respawn at Last Save Point (Enter)","respawnAtSaveBottle",
+		respawnAtSaveBottle = new button("Respawn at Last Save Point (Press E)","respawnAtSaveBottle",
 				gameCanvas.getDefaultWidth()/2 - (DEFAULT_BUTTON_WIDTH+100)/2, 
 				gameCanvas.getDefaultHeight() - 300,
 				(DEFAULT_BUTTON_WIDTH+100), 
