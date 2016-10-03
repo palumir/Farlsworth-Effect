@@ -5516,12 +5516,6 @@ c = new terrain.chunkTypes.tomb(2618,1231,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(2618,1263,0);
 if(c!=null) c.setPassable(false);
-c = new terrain.chunkTypes.tomb(2618,1295,0);
-if(c!=null) c.setPassable(false);
-c = new terrain.chunkTypes.tomb(2618,1327,0);
-if(c!=null) c.setPassable(false);
-c = new terrain.chunkTypes.tomb(2618,1359,0);
-if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(2650,1135,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(2650,1167,0);
@@ -5531,12 +5525,6 @@ if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(2650,1231,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(2650,1263,0);
-if(c!=null) c.setPassable(false);
-c = new terrain.chunkTypes.tomb(2650,1295,0);
-if(c!=null) c.setPassable(false);
-c = new terrain.chunkTypes.tomb(2650,1327,0);
-if(c!=null) c.setPassable(false);
-c = new terrain.chunkTypes.tomb(2650,1359,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(2810,1135,0);
 if(c!=null) c.setPassable(false);
@@ -5558,9 +5546,6 @@ c = new terrain.chunkTypes.tomb(2170,1127,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(2202,1063,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment54() {
 c = new terrain.chunkTypes.tomb(2202,1095,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(2202,1127,0);
@@ -5573,6 +5558,9 @@ c = new terrain.chunkTypes.tomb(2234,1127,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(2266,1063,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment54() {
 c = new terrain.chunkTypes.tomb(2266,1095,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(2266,1127,0);
@@ -5661,9 +5649,6 @@ c = new terrain.chunkTypes.tomb(2425,1685,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(2425,1717,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment55() {
 c = new terrain.chunkTypes.tomb(2425,1749,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(2425,1781,0);
@@ -5676,6 +5661,9 @@ c = new terrain.chunkTypes.tomb(2457,1653,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(2457,1685,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment55() {
 c = new terrain.chunkTypes.tomb(2457,1717,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(2457,1749,0);
@@ -5764,9 +5752,6 @@ c = new terrain.chunkTypes.tomb(2649,1717,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(2649,1749,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment56() {
 c = new terrain.chunkTypes.tomb(2649,1781,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(2649,1813,0);
@@ -5779,6 +5764,9 @@ c = new terrain.chunkTypes.tomb(2681,1685,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(2681,1717,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment56() {
 c = new terrain.chunkTypes.tomb(2681,1749,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(2681,1781,0);
@@ -5867,9 +5855,6 @@ c = new terrain.chunkTypes.tombEdge(3856,1830,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tombEdge(3888,1830,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment57() {
 c = new terrain.chunkTypes.tombEdge(3920,1830,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tombEdge(4038,1723,0);
@@ -5882,6 +5867,9 @@ c = new terrain.chunkTypes.tombEdge(4134,1723,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tombEdge(4166,1723,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment57() {
 c = new terrain.chunkTypes.tombEdge(4198,1723,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tombEdge(4230,1723,0);
@@ -5970,9 +5958,6 @@ c = new terrain.chunkTypes.tomb(379,2036,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(379,2068,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment58() {
 c = new terrain.chunkTypes.tomb(379,2100,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(379,2132,0);
@@ -5985,6 +5970,9 @@ c = new terrain.chunkTypes.tomb(411,1940,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(411,1972,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment58() {
 c = new terrain.chunkTypes.tomb(411,2004,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(411,2036,0);
@@ -6073,9 +6061,6 @@ c = new terrain.chunkTypes.tomb(571,1908,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(571,1940,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment59() {
 c = new terrain.chunkTypes.tomb(571,1972,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(571,2004,0);
@@ -6088,6 +6073,9 @@ c = new terrain.chunkTypes.tomb(571,2100,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(571,2132,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment59() {
 c = new terrain.chunkTypes.tomb(603,1876,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(603,1908,0);
@@ -6176,9 +6164,6 @@ c = new terrain.chunkTypes.tomb(731,2068,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(731,2100,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment60() {
 c = new terrain.chunkTypes.tomb(731,2132,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(763,1876,0);
@@ -6191,6 +6176,9 @@ c = new terrain.chunkTypes.tomb(763,1972,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(763,2004,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment60() {
 c = new terrain.chunkTypes.tomb(763,2036,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(763,2068,0);
@@ -6279,9 +6267,6 @@ c = new terrain.chunkTypes.tomb(923,1940,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(923,1972,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment61() {
 c = new terrain.chunkTypes.tomb(923,2004,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(923,2036,0);
@@ -6294,6 +6279,9 @@ c = new terrain.chunkTypes.tomb(923,2132,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(955,1876,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment61() {
 c = new terrain.chunkTypes.tomb(955,1908,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(955,1940,0);
@@ -6382,9 +6370,6 @@ c = new terrain.chunkTypes.tomb(1083,2100,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(1083,2132,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment62() {
 c = new terrain.chunkTypes.tomb(1115,1876,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(1115,1908,0);
@@ -6397,6 +6382,9 @@ c = new terrain.chunkTypes.tomb(1115,2004,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(1115,2036,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment62() {
 c = new terrain.chunkTypes.tomb(1115,2068,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(1115,2100,0);
@@ -6485,9 +6473,6 @@ c = new terrain.chunkTypes.tomb(1275,1972,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(1275,2004,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment63() {
 c = new terrain.chunkTypes.tomb(1275,2036,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(1275,2068,0);
@@ -6500,6 +6485,9 @@ c = new terrain.chunkTypes.tomb(1307,1876,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(1307,1908,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment63() {
 c = new terrain.chunkTypes.tomb(1307,1940,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(1307,1972,0);
@@ -6588,9 +6576,6 @@ c = new terrain.chunkTypes.tomb(1435,2132,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(1467,1876,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment64() {
 c = new terrain.chunkTypes.tomb(1467,1908,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(1467,1940,0);
@@ -6603,6 +6588,9 @@ c = new terrain.chunkTypes.tomb(1467,2036,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(1467,2068,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment64() {
 c = new terrain.chunkTypes.tomb(1467,2100,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(1467,2132,0);
@@ -6691,9 +6679,6 @@ c = new terrain.chunkTypes.tomb(1627,2004,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(1627,2036,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment65() {
 c = new terrain.chunkTypes.tomb(1627,2068,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(1627,2100,0);
@@ -6706,6 +6691,9 @@ c = new terrain.chunkTypes.tomb(1659,1908,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(1659,1940,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment65() {
 c = new terrain.chunkTypes.tomb(1659,1972,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(1659,2004,0);
@@ -6794,9 +6782,6 @@ c = new terrain.chunkTypes.tomb(1819,1876,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(1819,1908,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment66() {
 c = new terrain.chunkTypes.tomb(1819,1940,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(1819,1972,0);
@@ -6809,6 +6794,9 @@ c = new terrain.chunkTypes.tomb(1819,2068,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(1819,2100,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment66() {
 c = new terrain.chunkTypes.tomb(1819,2132,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(1851,1876,0);
@@ -6897,9 +6885,6 @@ c = new terrain.chunkTypes.tomb(1979,2036,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(1979,2068,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment67() {
 c = new terrain.chunkTypes.tomb(1979,2100,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(1979,2132,0);
@@ -6912,6 +6897,9 @@ c = new terrain.chunkTypes.tomb(2011,1940,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(2011,1972,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment67() {
 c = new terrain.chunkTypes.tomb(2011,2004,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(2011,2036,0);
@@ -7000,9 +6988,6 @@ c = new terrain.chunkTypes.tomb(2171,1908,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(2171,1940,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment68() {
 c = new terrain.chunkTypes.tomb(2171,1972,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(2171,2004,0);
@@ -7015,6 +7000,9 @@ c = new terrain.chunkTypes.tomb(2171,2100,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(2171,2132,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment68() {
 c = new terrain.chunkTypes.tomb(2203,1876,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(2203,1908,0);
@@ -7103,9 +7091,6 @@ c = new terrain.chunkTypes.tomb(2331,2068,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(2331,2100,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment69() {
 c = new terrain.chunkTypes.tomb(2331,2132,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(2363,1876,0);
@@ -7118,6 +7103,9 @@ c = new terrain.chunkTypes.tomb(2363,1972,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(2363,2004,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment69() {
 c = new terrain.chunkTypes.tomb(2363,2036,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(2363,2068,0);
@@ -7206,9 +7194,6 @@ c = new terrain.chunkTypes.tomb(2523,1908,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(2523,1940,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment70() {
 c = new terrain.chunkTypes.tomb(2523,1972,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(2523,2004,0);
@@ -7221,6 +7206,9 @@ c = new terrain.chunkTypes.tomb(2523,2100,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(2523,2132,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment70() {
 c = new terrain.chunkTypes.tomb(2523,2164,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(2555,1876,0);
@@ -7309,9 +7297,6 @@ c = new terrain.chunkTypes.tomb(-66,2073,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(-66,2105,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment71() {
 c = new terrain.chunkTypes.tomb(-66,2137,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(-34,2009,0);
@@ -7324,6 +7309,9 @@ c = new terrain.chunkTypes.tomb(-34,2105,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(-34,2137,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment71() {
 c = new terrain.chunkTypes.tomb(-2,2009,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(-2,2041,0);
@@ -7412,9 +7400,6 @@ c = new terrain.chunkTypes.tomb(254,2073,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(254,2105,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment72() {
 c = new terrain.chunkTypes.tomb(254,2137,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(286,2009,0);
@@ -7427,6 +7412,9 @@ c = new terrain.chunkTypes.tomb(286,2105,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(286,2137,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment72() {
 c = new terrain.chunkTypes.tomb(318,2009,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(318,2041,0);
@@ -7515,9 +7503,6 @@ c = new terrain.chunkTypes.tomb(2617,2163,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(2649,2035,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment73() {
 c = new terrain.chunkTypes.tomb(2649,2067,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(2649,2099,0);
@@ -7530,6 +7515,9 @@ c = new terrain.chunkTypes.tomb(2681,2035,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tombEdge(4006,1723,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment73() {
 c = new terrain.chunkTypes.tombEdge(4550,1723,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tombEdge(4582,1723,0);
@@ -7618,9 +7606,6 @@ c = new terrain.chunkTypes.tombEdge(5024,1671,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tombEdge(5094,1626,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment74() {
 c = new terrain.chunkTypes.tombEdge(5126,1626,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tombEdge(5219,1691,0);
@@ -7633,6 +7618,9 @@ c = new terrain.chunkTypes.tombEdge(5387,1630,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tombEdge(5441,1578,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment74() {
 c = new terrain.chunkTypes.tombEdge(5473,1578,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tombEdge(5562,1532,0);
@@ -7721,9 +7709,6 @@ c = new terrain.chunkTypes.tomb(4214,2007,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(4246,2007,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment75() {
 c = new terrain.chunkTypes.tomb(4278,2007,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(4310,2007,0);
@@ -7736,6 +7721,9 @@ c = new terrain.chunkTypes.tomb(4406,2007,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(4438,2007,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment75() {
 c = new terrain.chunkTypes.tomb(4470,2007,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(4502,2007,0);
@@ -7824,9 +7812,6 @@ c = new terrain.chunkTypes.tomb(6202,1581,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(6234,1581,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment76() {
 c = new terrain.chunkTypes.tomb(6266,1581,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(6266,1613,0);
@@ -7839,6 +7824,9 @@ c = new terrain.chunkTypes.tomb(4447,826,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(4447,858,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment76() {
 c = new terrain.chunkTypes.tomb(4447,890,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(4447,922,0);
@@ -7927,9 +7915,6 @@ c = new terrain.chunkTypes.tomb(4543,1082,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(4543,1114,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment77() {
 c = new terrain.chunkTypes.tomb(4543,1146,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(4575,794,0);
@@ -7942,6 +7927,9 @@ c = new terrain.chunkTypes.tomb(4575,890,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(4575,922,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment77() {
 c = new terrain.chunkTypes.tomb(4575,954,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(4575,986,0);
@@ -8030,9 +8018,6 @@ c = new terrain.chunkTypes.tomb(4671,1146,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(4703,794,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment78() {
 c = new terrain.chunkTypes.tomb(4703,826,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(4703,858,0);
@@ -8045,6 +8030,9 @@ c = new terrain.chunkTypes.tomb(4703,954,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(4703,986,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment78() {
 c = new terrain.chunkTypes.tomb(4703,1018,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(4703,1050,0);
@@ -8133,9 +8121,6 @@ c = new terrain.chunkTypes.tomb(4831,826,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(4831,858,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment79() {
 c = new terrain.chunkTypes.tomb(4831,890,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(4831,922,0);
@@ -8148,6 +8133,9 @@ c = new terrain.chunkTypes.tomb(4831,1018,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(4831,1050,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment79() {
 c = new terrain.chunkTypes.tomb(4831,1082,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(4831,1114,0);
@@ -8236,9 +8224,6 @@ c = new terrain.chunkTypes.tomb(4959,890,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(4959,922,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment80() {
 c = new terrain.chunkTypes.tomb(4959,954,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(4959,986,0);
@@ -8251,6 +8236,9 @@ c = new terrain.chunkTypes.tomb(4959,1082,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(4959,1114,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment80() {
 c = new terrain.chunkTypes.tomb(4959,1146,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(4991,794,0);
@@ -8339,9 +8327,6 @@ c = new terrain.chunkTypes.tomb(5087,954,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(5087,986,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment81() {
 c = new terrain.chunkTypes.tomb(5087,1018,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(5087,1050,0);
@@ -8354,6 +8339,9 @@ c = new terrain.chunkTypes.tomb(5087,1146,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(5119,794,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment81() {
 c = new terrain.chunkTypes.tomb(5119,826,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(5119,858,0);
@@ -8442,9 +8430,6 @@ c = new terrain.chunkTypes.tomb(5215,1018,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(5215,1050,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment82() {
 c = new terrain.chunkTypes.tomb(5215,1082,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(5215,1114,0);
@@ -8457,6 +8442,9 @@ c = new terrain.chunkTypes.tomb(5247,826,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(5247,858,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment82() {
 c = new terrain.chunkTypes.tomb(5247,890,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(5247,922,0);
@@ -8545,9 +8533,6 @@ c = new terrain.chunkTypes.tomb(5343,1082,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(5343,1114,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment83() {
 c = new terrain.chunkTypes.tomb(5343,1146,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(5375,794,0);
@@ -8560,6 +8545,9 @@ c = new terrain.chunkTypes.tomb(5375,890,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(5375,922,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment83() {
 c = new terrain.chunkTypes.tomb(5375,954,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(5375,986,0);
@@ -8648,9 +8636,6 @@ c = new terrain.chunkTypes.tomb(5471,1146,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(5503,794,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment84() {
 c = new terrain.chunkTypes.tomb(5503,826,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(5503,858,0);
@@ -8663,6 +8648,9 @@ c = new terrain.chunkTypes.tomb(5503,954,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(5503,986,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment84() {
 c = new terrain.chunkTypes.tomb(5503,1018,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(5503,1050,0);
@@ -8751,9 +8739,6 @@ c = new terrain.chunkTypes.tomb(5631,826,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(5631,858,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment85() {
 c = new terrain.chunkTypes.tomb(5631,890,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(5631,922,0);
@@ -8766,6 +8751,9 @@ c = new terrain.chunkTypes.tomb(5631,1018,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(5631,1050,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment85() {
 c = new terrain.chunkTypes.tomb(5631,1082,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(5631,1114,0);
@@ -8854,9 +8842,6 @@ c = new terrain.chunkTypes.tomb(5759,890,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(5759,922,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment86() {
 c = new terrain.chunkTypes.tomb(5759,954,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(5759,986,0);
@@ -8869,6 +8854,9 @@ c = new terrain.chunkTypes.tomb(5759,1082,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(5759,1114,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment86() {
 c = new terrain.chunkTypes.tomb(5759,1146,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(5791,794,0);
@@ -8957,9 +8945,6 @@ c = new terrain.chunkTypes.tomb(5887,954,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(5887,986,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment87() {
 c = new terrain.chunkTypes.tomb(5887,1018,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(5887,1050,0);
@@ -8972,6 +8957,9 @@ c = new terrain.chunkTypes.tomb(5887,1146,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(5919,794,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment87() {
 c = new terrain.chunkTypes.tomb(5919,826,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(5919,858,0);
@@ -9060,9 +9048,6 @@ c = new terrain.chunkTypes.tomb(6015,1018,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(6015,1050,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment88() {
 c = new terrain.chunkTypes.tomb(6015,1082,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(6015,1114,0);
@@ -9075,6 +9060,9 @@ c = new terrain.chunkTypes.tomb(6047,826,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(6047,858,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment88() {
 c = new terrain.chunkTypes.tomb(6047,890,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(6047,922,0);
@@ -9163,9 +9151,6 @@ c = new terrain.chunkTypes.tomb(6143,1082,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(6143,1114,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment89() {
 c = new terrain.chunkTypes.tomb(6143,1146,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(6175,794,0);
@@ -9178,6 +9163,9 @@ c = new terrain.chunkTypes.tomb(6175,890,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(6175,922,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment89() {
 c = new terrain.chunkTypes.tomb(6175,954,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(6175,986,0);
@@ -9266,9 +9254,6 @@ c = new terrain.chunkTypes.tomb(6271,1146,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(6303,794,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment90() {
 c = new terrain.chunkTypes.tomb(6303,826,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(6303,858,0);
@@ -9281,6 +9266,9 @@ c = new terrain.chunkTypes.tomb(6303,954,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(6303,986,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment90() {
 c = new terrain.chunkTypes.tomb(6303,1018,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(6303,1050,0);
@@ -9369,9 +9357,6 @@ c = new terrain.chunkTypes.tomb(6471,2194,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(6471,2226,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment91() {
 c = new terrain.chunkTypes.tomb(6471,2258,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(6471,2290,0);
@@ -9384,6 +9369,9 @@ c = new terrain.chunkTypes.tomb(6503,2098,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(6503,2130,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment91() {
 c = new terrain.chunkTypes.tomb(6503,2162,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(6503,2194,0);
@@ -9472,9 +9460,6 @@ c = new terrain.chunkTypes.tomb(6695,2290,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(6695,2322,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment92() {
 c = new terrain.chunkTypes.tomb(6695,2354,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(6727,2066,0);
@@ -9487,6 +9472,9 @@ c = new terrain.chunkTypes.tomb(6727,2162,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(6727,2194,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment92() {
 c = new terrain.chunkTypes.tomb(6727,2226,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(6727,2258,0);
@@ -9575,9 +9563,6 @@ c = new terrain.chunkTypes.tombEdge(6983,1843,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tombEdge(7015,1843,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment93() {
 c = new terrain.chunkTypes.tombEdge(7047,1843,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tombEdge(7079,1843,0);
@@ -9590,6 +9575,9 @@ c = new terrain.chunkTypes.tombEdge(7175,1843,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tombEdge(7207,1843,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment93() {
 c = new terrain.chunkTypes.tombEdge(7239,1843,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tombEdge(7271,1843,0);
@@ -9678,9 +9666,6 @@ c = new terrain.chunkTypes.tomb(6887,2131,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(6887,2163,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment94() {
 c = new terrain.chunkTypes.tomb(6887,2195,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(6887,2227,0);
@@ -9693,6 +9678,9 @@ c = new terrain.chunkTypes.tomb(6887,2323,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(6887,2355,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment94() {
 c = new terrain.chunkTypes.tomb(6919,1875,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(6919,1907,0);
@@ -9781,9 +9769,6 @@ c = new terrain.chunkTypes.tomb(6983,2195,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(6983,2227,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment95() {
 c = new terrain.chunkTypes.tomb(6983,2259,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(6983,2291,0);
@@ -9796,6 +9781,9 @@ c = new terrain.chunkTypes.tomb(7015,1875,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(7015,1907,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment95() {
 c = new terrain.chunkTypes.tomb(7015,1939,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(7015,1971,0);
@@ -9884,9 +9872,6 @@ c = new terrain.chunkTypes.tomb(7079,2259,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(7079,2291,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment96() {
 c = new terrain.chunkTypes.tomb(7079,2323,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(7079,2355,0);
@@ -9899,6 +9884,9 @@ c = new terrain.chunkTypes.tomb(7111,1939,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(7111,1971,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment96() {
 c = new terrain.chunkTypes.tomb(7111,2003,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(7111,2035,0);
@@ -9987,9 +9975,6 @@ c = new terrain.chunkTypes.tomb(7175,2323,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(7175,2355,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment97() {
 c = new terrain.chunkTypes.tomb(7207,1875,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(7207,1907,0);
@@ -10002,6 +9987,9 @@ c = new terrain.chunkTypes.tomb(7207,2003,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(7207,2035,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment97() {
 c = new terrain.chunkTypes.tomb(7207,2067,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(7207,2099,0);
@@ -10090,9 +10078,6 @@ c = new terrain.chunkTypes.tombEdge(5283,1691,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tombEdge(7303,1843,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment98() {
 c = new terrain.chunkTypes.tombEdge(7335,1843,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tombEdge(7367,1843,0);
@@ -10105,6 +10090,9 @@ c = new terrain.chunkTypes.tombEdge(7528,1843,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tombEdge(7559,1843,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment98() {
 c = new terrain.chunkTypes.tombEdge(7591,1843,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tombEdge(7623,1843,0);
@@ -10193,9 +10181,6 @@ c = new terrain.chunkTypes.tomb(7367,2067,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(7367,2099,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment99() {
 c = new terrain.chunkTypes.tomb(7367,2131,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(7367,2163,0);
@@ -10208,6 +10193,9 @@ c = new terrain.chunkTypes.tomb(7367,2259,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(7367,2291,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment99() {
 c = new terrain.chunkTypes.tomb(7367,2323,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(7367,2355,0);
@@ -10296,9 +10284,6 @@ c = new terrain.chunkTypes.tomb(7528,2125,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(7559,1875,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment100() {
 c = new terrain.chunkTypes.tomb(7559,1907,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(7559,1939,0);
@@ -10311,6 +10296,9 @@ c = new terrain.chunkTypes.tomb(7559,2035,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(7559,2067,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment100() {
 c = new terrain.chunkTypes.tomb(7559,2099,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(7559,2125,0);
@@ -10399,9 +10387,6 @@ c = new terrain.chunkTypes.tombEdge(8007,1843,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tombEdge(8039,1843,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment101() {
 c = new terrain.chunkTypes.tombEdge(8071,1843,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tombEdge(8103,1843,0);
@@ -10414,6 +10399,9 @@ c = new terrain.chunkTypes.tombEdge(8487,1843,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tombEdge(8519,1843,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment101() {
 c = new terrain.chunkTypes.tombEdge(8551,1843,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tombEdge(8583,1843,0);
@@ -10502,9 +10490,6 @@ c = new terrain.chunkTypes.tombEdge(8839,1843,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tombEdge(8839,1620,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment102() {
 c = new terrain.chunkTypes.tombEdge(8871,1620,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tombEdge(8775,1652,0);
@@ -10517,6 +10502,9 @@ c = new terrain.chunkTypes.tombEdge(8743,1747,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tombEdge(8775,1747,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment102() {
 c = new terrain.chunkTypes.tomb(7815,1811,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(7815,1843,0);
@@ -10605,9 +10593,6 @@ c = new terrain.chunkTypes.tombEdge(8199,1779,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tombEdge(8231,1779,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment103() {
 c = new terrain.chunkTypes.tombEdge(8263,1779,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tombEdge(8295,1779,0);
@@ -10620,6 +10605,9 @@ c = new terrain.chunkTypes.tombEdge(8391,1779,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tombEdge(8423,1779,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment103() {
 c = new terrain.chunkTypes.tombEdge(8455,1779,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(8903,1684,0);
@@ -10708,9 +10696,6 @@ c = new terrain.chunkTypes.tomb(9511,1427,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(9511,1459,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment104() {
 c = new terrain.chunkTypes.tomb(9511,1491,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(9511,1523,0);
@@ -10723,6 +10708,9 @@ c = new terrain.chunkTypes.tomb(9511,1619,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(9511,1651,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment104() {
 c = new terrain.chunkTypes.tomb(9511,1683,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(9511,1715,0);
@@ -10811,9 +10799,6 @@ c = new terrain.chunkTypes.tombEdge(9543,1843,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tombEdge(9575,1843,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment105() {
 c = new terrain.chunkTypes.tombEdge(9607,1843,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tombEdge(9639,1843,0);
@@ -10826,6 +10811,9 @@ c = new terrain.chunkTypes.tombEdge(9735,1843,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tombEdge(9511,1203,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment105() {
 c = new terrain.chunkTypes.tombEdge(9575,1363,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tombEdge(9639,1363,0);
@@ -10914,9 +10902,6 @@ c = new terrain.chunkTypes.tomb(9767,1523,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(9767,1555,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment106() {
 c = new terrain.chunkTypes.tomb(9767,1587,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(9767,1619,0);
@@ -10929,6 +10914,9 @@ c = new terrain.chunkTypes.tomb(9767,1715,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(9767,1747,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment106() {
 c = new terrain.chunkTypes.tomb(9799,1139,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(9799,1171,0);
@@ -11017,9 +11005,6 @@ c = new terrain.chunkTypes.tomb(10119,1747,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tombEdge(10055,1651,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment107() {
 c = new terrain.chunkTypes.tombEdge(10087,1651,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tombEdge(10119,1651,0);
@@ -11032,6 +11017,9 @@ c = new terrain.chunkTypes.tombEdge(10215,1651,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tombEdge(10247,1651,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment107() {
 c = new terrain.chunkTypes.tombEdge(10215,1749,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tombEdge(10247,1749,0);
@@ -11120,9 +11108,6 @@ c = new terrain.chunkTypes.tombEdge(10951,1749,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tombEdge(10855,1651,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment108() {
 c = new terrain.chunkTypes.tombEdge(10887,1651,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tombEdge(10855,1843,0);
@@ -11135,6 +11120,9 @@ c = new terrain.chunkTypes.tombEdge(10951,1843,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tombEdge(10983,1843,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment108() {
 c = new terrain.chunkTypes.tombEdge(11015,1843,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tombEdge(11047,1843,0);
@@ -11223,9 +11211,6 @@ c = new terrain.chunkTypes.tomb(11655,1779,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(11655,1811,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment109() {
 c = new terrain.chunkTypes.tomb(11655,1843,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(11687,1747,0);
@@ -11238,6 +11223,9 @@ c = new terrain.chunkTypes.tomb(11687,1843,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(11719,1747,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment109() {
 c = new terrain.chunkTypes.tomb(11719,1779,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(11719,1811,0);
@@ -11326,9 +11314,6 @@ c = new terrain.chunkTypes.tomb(10343,1811,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(10343,1843,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment110() {
 c = new terrain.chunkTypes.tomb(10375,1779,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(10375,1811,0);
@@ -11341,6 +11326,9 @@ c = new terrain.chunkTypes.tomb(10407,1811,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(10407,1843,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment110() {
 c = new terrain.chunkTypes.tomb(10439,1779,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(10439,1811,0);
@@ -11429,9 +11417,6 @@ c = new terrain.chunkTypes.tomb(11079,1651,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(10983,1682,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment111() {
 c = new terrain.chunkTypes.tomb(10983,1714,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(10983,1746,0);
@@ -11444,6 +11429,9 @@ c = new terrain.chunkTypes.tomb(11015,1746,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(10983,1749,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment111() {
 c = new terrain.chunkTypes.tomb(11015,1749,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tombEdge(10631,1843,0);
@@ -11532,9 +11520,6 @@ c = new terrain.chunkTypes.tomb(7747,2061,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(7747,2093,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment112() {
 c = new terrain.chunkTypes.tomb(7747,2125,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(7779,1869,0);
@@ -11547,6 +11532,9 @@ c = new terrain.chunkTypes.tomb(7779,1965,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(7779,1997,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment112() {
 c = new terrain.chunkTypes.tomb(7779,2029,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(7779,2061,0);
@@ -11635,9 +11623,6 @@ c = new terrain.chunkTypes.tomb(7939,1933,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(7939,1965,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment113() {
 c = new terrain.chunkTypes.tomb(7939,1997,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(7939,2029,0);
@@ -11650,6 +11635,9 @@ c = new terrain.chunkTypes.tomb(7939,2125,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(7971,1869,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment113() {
 c = new terrain.chunkTypes.tomb(7971,1901,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(7971,1933,0);
@@ -11738,9 +11726,6 @@ c = new terrain.chunkTypes.tomb(8099,2093,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(8099,2125,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment114() {
 c = new terrain.chunkTypes.tomb(8131,1869,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(8131,1901,0);
@@ -11753,6 +11738,9 @@ c = new terrain.chunkTypes.tomb(8131,1997,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(8131,2029,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment114() {
 c = new terrain.chunkTypes.tomb(8131,2061,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(8131,2093,0);
@@ -11841,9 +11829,6 @@ c = new terrain.chunkTypes.tomb(8291,1965,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(8291,1997,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment115() {
 c = new terrain.chunkTypes.tomb(8291,2029,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(8291,2061,0);
@@ -11856,6 +11841,9 @@ c = new terrain.chunkTypes.tomb(8323,1869,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(8323,1901,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment115() {
 c = new terrain.chunkTypes.tomb(8323,1933,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(8323,1965,0);
@@ -11944,9 +11932,6 @@ c = new terrain.chunkTypes.tomb(8451,2125,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(8483,1869,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment116() {
 c = new terrain.chunkTypes.tomb(8483,1901,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(8483,1933,0);
@@ -11959,6 +11944,9 @@ c = new terrain.chunkTypes.tomb(8483,2029,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(8483,2061,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment116() {
 c = new terrain.chunkTypes.tomb(8483,2093,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(8483,2125,0);
@@ -12047,9 +12035,6 @@ c = new terrain.chunkTypes.tomb(8643,1997,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(8643,2029,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment117() {
 c = new terrain.chunkTypes.tomb(8643,2061,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(8643,2093,0);
@@ -12062,6 +12047,9 @@ c = new terrain.chunkTypes.tomb(8675,1901,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(8675,1933,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment117() {
 c = new terrain.chunkTypes.tomb(8675,1965,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(8675,1997,0);
@@ -12150,9 +12138,6 @@ c = new terrain.chunkTypes.tomb(8835,1869,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(8835,1901,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment118() {
 c = new terrain.chunkTypes.tomb(8835,1933,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(8835,1965,0);
@@ -12165,6 +12150,9 @@ c = new terrain.chunkTypes.tomb(8835,2061,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(8835,2093,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment118() {
 c = new terrain.chunkTypes.tomb(8835,2125,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(8867,1869,0);
@@ -12253,9 +12241,6 @@ c = new terrain.chunkTypes.tomb(8995,2029,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(8995,2061,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment119() {
 c = new terrain.chunkTypes.tomb(8995,2093,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(8995,2125,0);
@@ -12268,6 +12253,9 @@ c = new terrain.chunkTypes.tomb(9027,1933,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(9027,1965,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment119() {
 c = new terrain.chunkTypes.tomb(9027,1997,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(9027,2029,0);
@@ -12356,9 +12344,6 @@ c = new terrain.chunkTypes.tomb(9187,1901,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(9187,1933,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment120() {
 c = new terrain.chunkTypes.tomb(9187,1965,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(9187,1997,0);
@@ -12371,6 +12356,9 @@ c = new terrain.chunkTypes.tomb(9187,2093,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(9187,2125,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment120() {
 c = new terrain.chunkTypes.tomb(9219,1869,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(9219,1901,0);
@@ -12459,9 +12447,6 @@ c = new terrain.chunkTypes.tomb(9347,2061,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(9347,2093,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment121() {
 c = new terrain.chunkTypes.tomb(9347,2125,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(9379,1869,0);
@@ -12474,6 +12459,9 @@ c = new terrain.chunkTypes.tomb(9379,1965,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(9379,1997,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment121() {
 c = new terrain.chunkTypes.tomb(9379,2029,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(9379,2061,0);
@@ -12562,9 +12550,6 @@ c = new terrain.chunkTypes.tomb(9539,1933,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(9539,1965,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment122() {
 c = new terrain.chunkTypes.tomb(9539,1997,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(9539,2029,0);
@@ -12577,6 +12562,9 @@ c = new terrain.chunkTypes.tomb(9539,2125,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(9571,1869,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment122() {
 c = new terrain.chunkTypes.tomb(9571,1901,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(9571,1933,0);
@@ -12665,9 +12653,6 @@ c = new terrain.chunkTypes.tomb(9699,2093,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(9699,2125,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment123() {
 c = new terrain.chunkTypes.tomb(9731,1869,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(9731,1901,0);
@@ -12680,6 +12665,9 @@ c = new terrain.chunkTypes.tomb(9731,1997,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(9731,2029,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment123() {
 c = new terrain.chunkTypes.tomb(9731,2061,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(9731,2093,0);
@@ -12768,9 +12756,6 @@ c = new terrain.chunkTypes.tomb(9891,1965,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(9891,1997,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment124() {
 c = new terrain.chunkTypes.tomb(9891,2029,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(9891,2061,0);
@@ -12783,6 +12768,9 @@ c = new terrain.chunkTypes.tomb(9923,1869,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(9923,1901,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment124() {
 c = new terrain.chunkTypes.tomb(9923,1933,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(9923,1965,0);
@@ -12871,9 +12859,6 @@ c = new terrain.chunkTypes.tomb(10051,2125,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(10083,1869,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment125() {
 c = new terrain.chunkTypes.tomb(10083,1901,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(10083,1933,0);
@@ -12886,6 +12871,9 @@ c = new terrain.chunkTypes.tomb(10083,2029,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(10083,2061,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment125() {
 c = new terrain.chunkTypes.tomb(10083,2093,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(10083,2125,0);
@@ -12974,9 +12962,6 @@ c = new terrain.chunkTypes.tomb(10243,1997,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(10243,2029,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment126() {
 c = new terrain.chunkTypes.tomb(10243,2061,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(10243,2093,0);
@@ -12989,6 +12974,9 @@ c = new terrain.chunkTypes.tomb(10275,1901,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(10275,1933,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment126() {
 c = new terrain.chunkTypes.tomb(10275,1965,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(10275,1997,0);
@@ -13077,9 +13065,6 @@ c = new terrain.chunkTypes.tomb(10435,1869,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(10435,1901,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment127() {
 c = new terrain.chunkTypes.tomb(10435,1933,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(10435,1965,0);
@@ -13092,6 +13077,9 @@ c = new terrain.chunkTypes.tomb(10435,2061,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(10435,2093,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment127() {
 c = new terrain.chunkTypes.tomb(10435,2125,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(10467,1869,0);
@@ -13180,9 +13168,6 @@ c = new terrain.chunkTypes.tomb(10595,2029,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(10595,2061,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment128() {
 c = new terrain.chunkTypes.tomb(10595,2093,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(10595,2125,0);
@@ -13195,6 +13180,9 @@ c = new terrain.chunkTypes.tomb(10627,1933,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(10627,1965,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment128() {
 c = new terrain.chunkTypes.tomb(10627,1997,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(10627,2029,0);
@@ -13283,9 +13271,6 @@ c = new terrain.chunkTypes.tomb(10787,1901,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(10787,1933,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment129() {
 c = new terrain.chunkTypes.tomb(10787,1965,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(10787,1997,0);
@@ -13298,6 +13283,9 @@ c = new terrain.chunkTypes.tomb(10787,2093,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(10787,2125,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment129() {
 c = new terrain.chunkTypes.tomb(10819,1869,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(10819,1901,0);
@@ -13386,9 +13374,6 @@ c = new terrain.chunkTypes.tomb(10947,2061,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(10947,2093,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment130() {
 c = new terrain.chunkTypes.tomb(10947,2125,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(10979,1869,0);
@@ -13401,6 +13386,9 @@ c = new terrain.chunkTypes.tomb(10979,1965,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(10979,1997,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment130() {
 c = new terrain.chunkTypes.tomb(10979,2029,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(10979,2061,0);
@@ -13489,9 +13477,6 @@ c = new terrain.chunkTypes.tomb(11139,1933,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(11139,1965,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment131() {
 c = new terrain.chunkTypes.tomb(11139,1997,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(11139,2029,0);
@@ -13504,6 +13489,9 @@ c = new terrain.chunkTypes.tomb(11139,2125,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(11171,1869,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment131() {
 c = new terrain.chunkTypes.tomb(11171,1901,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(11171,1933,0);
@@ -13592,9 +13580,6 @@ c = new terrain.chunkTypes.tomb(11299,2093,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(11299,2125,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment132() {
 c = new terrain.chunkTypes.tomb(11331,1869,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(11331,1901,0);
@@ -13607,6 +13592,9 @@ c = new terrain.chunkTypes.tomb(11331,1997,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(11331,2029,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment132() {
 c = new terrain.chunkTypes.tomb(11331,2061,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(11331,2093,0);
@@ -13695,9 +13683,6 @@ c = new terrain.chunkTypes.tomb(11491,1965,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(11491,1997,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment133() {
 c = new terrain.chunkTypes.tomb(11491,2029,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(11491,2061,0);
@@ -13710,6 +13695,9 @@ c = new terrain.chunkTypes.tomb(11523,1869,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(11523,1901,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment133() {
 c = new terrain.chunkTypes.tomb(11523,1933,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(11523,1965,0);
@@ -13798,9 +13786,6 @@ c = new terrain.chunkTypes.tomb(11651,2125,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(11683,1869,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment134() {
 c = new terrain.chunkTypes.tomb(11683,1901,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(11683,1933,0);
@@ -13813,6 +13798,9 @@ c = new terrain.chunkTypes.tomb(11683,2029,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(11683,2061,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment134() {
 c = new terrain.chunkTypes.tomb(11683,2093,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(11683,2125,0);
@@ -13901,9 +13889,6 @@ c = new terrain.chunkTypes.tomb(11496,2581,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(11496,2613,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment135() {
 c = new terrain.chunkTypes.tomb(11496,2645,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(11496,2677,0);
@@ -13916,6 +13901,9 @@ c = new terrain.chunkTypes.tomb(11528,2421,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(11528,2453,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment135() {
 c = new terrain.chunkTypes.tomb(11528,2485,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(11528,2517,0);
@@ -14004,9 +13992,6 @@ c = new terrain.chunkTypes.tomb(11656,2421,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(11656,2453,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment136() {
 c = new terrain.chunkTypes.tomb(11656,2485,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(11656,2517,0);
@@ -14019,6 +14004,9 @@ c = new terrain.chunkTypes.tomb(11656,2613,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(11656,2645,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment136() {
 c = new terrain.chunkTypes.tomb(11656,2677,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(11656,2709,0);
@@ -14107,9 +14095,6 @@ c = new terrain.chunkTypes.tombEdge(12076,1715,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tombEdge(12108,1715,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment137() {
 c = new terrain.chunkTypes.tombEdge(12140,1715,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tombEdge(12172,1715,0);
@@ -14122,6 +14107,9 @@ c = new terrain.chunkTypes.tombEdge(12268,1715,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tombEdge(12300,1715,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment137() {
 c = new terrain.chunkTypes.tombEdge(12332,1715,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tombEdge(12364,1715,0);
@@ -14210,9 +14198,6 @@ c = new terrain.chunkTypes.tombEdge(13676,1715,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tombEdge(13708,1715,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment138() {
 c = new terrain.chunkTypes.tombEdge(13740,1715,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tombEdge(13772,1715,0);
@@ -14225,6 +14210,9 @@ c = new terrain.chunkTypes.tombEdge(13868,1715,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tombEdge(13900,1715,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment138() {
 c = new terrain.chunkTypes.tombEdge(13932,1715,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tombEdge(13964,1715,0);
@@ -14313,9 +14301,6 @@ c = new terrain.chunkTypes.tombEdge(15276,1715,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tombEdge(15308,1715,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment139() {
 c = new terrain.chunkTypes.tombEdge(15340,1715,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tombEdge(15372,1715,0);
@@ -14328,6 +14313,9 @@ c = new terrain.chunkTypes.tomb(11852,1811,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(11852,1843,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment139() {
 c = new terrain.chunkTypes.tomb(11852,1875,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(11852,1907,0);
@@ -14416,9 +14404,6 @@ c = new terrain.chunkTypes.tomb(11884,2227,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(11884,2259,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment140() {
 c = new terrain.chunkTypes.tomb(11884,2291,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(11884,2323,0);
@@ -14431,6 +14416,9 @@ c = new terrain.chunkTypes.tomb(11884,2419,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(11884,2451,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment140() {
 c = new terrain.chunkTypes.tomb(11884,2483,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(11884,2515,0);
@@ -14519,9 +14507,6 @@ c = new terrain.chunkTypes.tomb(11948,1843,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(11948,1875,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment141() {
 c = new terrain.chunkTypes.tomb(11948,1907,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(11948,1939,0);
@@ -14534,6 +14519,9 @@ c = new terrain.chunkTypes.tomb(11948,2035,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(11948,2067,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment141() {
 c = new terrain.chunkTypes.tomb(11948,2099,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(11948,2131,0);
@@ -14622,9 +14610,6 @@ c = new terrain.chunkTypes.tomb(11980,2451,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(11980,2483,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment142() {
 c = new terrain.chunkTypes.tomb(11980,2515,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(11980,2547,0);
@@ -14637,6 +14622,9 @@ c = new terrain.chunkTypes.tomb(11980,2643,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(11980,2675,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment142() {
 c = new terrain.chunkTypes.tomb(11980,2707,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(12012,1747,0);
@@ -14725,9 +14713,6 @@ c = new terrain.chunkTypes.tomb(12044,2067,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(12044,2099,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment143() {
 c = new terrain.chunkTypes.tomb(12044,2131,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(12044,2163,0);
@@ -14740,6 +14725,9 @@ c = new terrain.chunkTypes.tomb(12044,2259,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(12044,2291,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment143() {
 c = new terrain.chunkTypes.tomb(12044,2323,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(12044,2355,0);
@@ -14828,9 +14816,6 @@ c = new terrain.chunkTypes.tomb(12076,2675,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(12076,2707,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment144() {
 c = new terrain.chunkTypes.tomb(12108,1747,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(12108,1779,0);
@@ -14843,6 +14828,9 @@ c = new terrain.chunkTypes.tomb(12108,1875,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(12108,1907,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment144() {
 c = new terrain.chunkTypes.tomb(12108,1939,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(12108,1971,0);
@@ -14931,9 +14919,6 @@ c = new terrain.chunkTypes.tomb(12204,1779,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(12204,1811,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment145() {
 c = new terrain.chunkTypes.tomb(12204,1843,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(12204,1875,0);
@@ -14946,6 +14931,9 @@ c = new terrain.chunkTypes.tomb(12204,1971,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(12236,1747,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment145() {
 c = new terrain.chunkTypes.tomb(12236,1779,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(12236,1811,0);
@@ -15034,9 +15022,6 @@ c = new terrain.chunkTypes.tomb(12396,1843,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(12396,1875,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment146() {
 c = new terrain.chunkTypes.tomb(12396,1907,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(12396,1939,0);
@@ -15049,6 +15034,9 @@ c = new terrain.chunkTypes.tomb(12428,1779,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(12428,1811,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment146() {
 c = new terrain.chunkTypes.tomb(12428,1843,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(12428,1875,0);
@@ -15137,9 +15125,6 @@ c = new terrain.chunkTypes.tomb(12588,1907,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(12588,1939,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment147() {
 c = new terrain.chunkTypes.tomb(12588,1971,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(12620,1747,0);
@@ -15152,6 +15137,9 @@ c = new terrain.chunkTypes.tomb(12620,1843,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(12620,1875,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment147() {
 c = new terrain.chunkTypes.tomb(12620,1907,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(12620,1939,0);
@@ -15240,9 +15228,6 @@ c = new terrain.chunkTypes.tomb(12780,1971,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(12812,1747,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment148() {
 c = new terrain.chunkTypes.tomb(12812,1779,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(12812,1811,0);
@@ -15255,6 +15240,9 @@ c = new terrain.chunkTypes.tomb(12812,1907,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(12812,1939,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment148() {
 c = new terrain.chunkTypes.tomb(12812,1971,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(12844,1747,0);
@@ -15343,9 +15331,6 @@ c = new terrain.chunkTypes.tomb(13004,1779,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(13004,1811,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment149() {
 c = new terrain.chunkTypes.tomb(13004,1843,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(13004,1875,0);
@@ -15358,6 +15343,9 @@ c = new terrain.chunkTypes.tomb(13004,1971,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(13036,1747,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment149() {
 c = new terrain.chunkTypes.tomb(13036,1779,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(13036,1811,0);
@@ -15446,9 +15434,6 @@ c = new terrain.chunkTypes.tomb(13196,1843,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(13196,1875,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment150() {
 c = new terrain.chunkTypes.tomb(13196,1907,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(13196,1939,0);
@@ -15461,6 +15446,9 @@ c = new terrain.chunkTypes.tomb(13228,1779,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(13228,1811,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment150() {
 c = new terrain.chunkTypes.tomb(13228,1843,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(13228,1875,0);
@@ -15549,9 +15537,6 @@ c = new terrain.chunkTypes.tomb(13388,1907,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(13388,1939,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment151() {
 c = new terrain.chunkTypes.tomb(13388,1971,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(13420,1747,0);
@@ -15564,6 +15549,9 @@ c = new terrain.chunkTypes.tomb(13420,1843,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(13420,1875,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment151() {
 c = new terrain.chunkTypes.tomb(13420,1907,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(13420,1939,0);
@@ -15652,9 +15640,6 @@ c = new terrain.chunkTypes.tomb(13580,1971,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(13612,1747,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment152() {
 c = new terrain.chunkTypes.tomb(13612,1779,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(13612,1811,0);
@@ -15667,6 +15652,9 @@ c = new terrain.chunkTypes.tomb(13612,1907,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(13612,1939,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment152() {
 c = new terrain.chunkTypes.tomb(13612,1971,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(13644,1747,0);
@@ -15755,9 +15743,6 @@ c = new terrain.chunkTypes.tomb(13804,1779,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(13804,1811,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment153() {
 c = new terrain.chunkTypes.tomb(13804,1843,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(13804,1875,0);
@@ -15770,6 +15755,9 @@ c = new terrain.chunkTypes.tomb(13804,1971,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(13836,1747,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment153() {
 c = new terrain.chunkTypes.tomb(13836,1779,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(13836,1811,0);
@@ -15858,9 +15846,6 @@ c = new terrain.chunkTypes.tomb(13996,1843,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(13996,1875,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment154() {
 c = new terrain.chunkTypes.tomb(13996,1907,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(13996,1939,0);
@@ -15873,6 +15858,9 @@ c = new terrain.chunkTypes.tomb(14028,1779,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(14028,1811,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment154() {
 c = new terrain.chunkTypes.tomb(14028,1843,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(14028,1875,0);
@@ -15961,9 +15949,6 @@ c = new terrain.chunkTypes.tomb(14188,1907,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(14188,1939,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment155() {
 c = new terrain.chunkTypes.tomb(14188,1971,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(14220,1747,0);
@@ -15976,6 +15961,9 @@ c = new terrain.chunkTypes.tomb(14220,1843,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(14220,1875,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment155() {
 c = new terrain.chunkTypes.tomb(14220,1907,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(14220,1939,0);
@@ -16064,9 +16052,6 @@ c = new terrain.chunkTypes.tomb(14380,1971,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(14412,1747,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment156() {
 c = new terrain.chunkTypes.tomb(14412,1779,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(14412,1811,0);
@@ -16079,6 +16064,9 @@ c = new terrain.chunkTypes.tomb(14412,1907,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(14412,1939,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment156() {
 c = new terrain.chunkTypes.tomb(14412,1971,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(14444,1747,0);
@@ -16167,9 +16155,6 @@ c = new terrain.chunkTypes.tomb(14604,1779,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(14604,1811,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment157() {
 c = new terrain.chunkTypes.tomb(14604,1843,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(14604,1875,0);
@@ -16182,6 +16167,9 @@ c = new terrain.chunkTypes.tomb(14604,1971,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(14636,1747,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment157() {
 c = new terrain.chunkTypes.tomb(14636,1779,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(14636,1811,0);
@@ -16270,9 +16258,6 @@ c = new terrain.chunkTypes.tomb(14796,1843,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(14796,1875,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment158() {
 c = new terrain.chunkTypes.tomb(14796,1907,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(14796,1939,0);
@@ -16285,6 +16270,9 @@ c = new terrain.chunkTypes.tomb(14828,1779,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(14828,1811,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment158() {
 c = new terrain.chunkTypes.tomb(14828,1843,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(14828,1875,0);
@@ -16373,9 +16361,6 @@ c = new terrain.chunkTypes.tomb(14988,1907,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(14988,1939,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment159() {
 c = new terrain.chunkTypes.tomb(14988,1971,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(15020,1747,0);
@@ -16388,6 +16373,9 @@ c = new terrain.chunkTypes.tomb(15020,1843,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(15020,1875,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment159() {
 c = new terrain.chunkTypes.tomb(15020,1907,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(15020,1939,0);
@@ -16476,9 +16464,6 @@ c = new terrain.chunkTypes.tomb(15180,1971,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(15212,1747,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment160() {
 c = new terrain.chunkTypes.tomb(15212,1779,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(15212,1811,0);
@@ -16491,6 +16476,9 @@ c = new terrain.chunkTypes.tomb(15212,1907,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(15212,1939,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment160() {
 c = new terrain.chunkTypes.tomb(15212,1971,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(15244,1747,0);
@@ -16579,9 +16567,6 @@ c = new terrain.chunkTypes.tomb(12140,2035,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(12140,2067,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment161() {
 c = new terrain.chunkTypes.tomb(12140,2099,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(12140,2131,0);
@@ -16594,6 +16579,9 @@ c = new terrain.chunkTypes.tomb(12140,2227,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(12140,2259,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment161() {
 c = new terrain.chunkTypes.tomb(12140,2291,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(12140,2323,0);
@@ -16682,9 +16670,6 @@ c = new terrain.chunkTypes.tomb(2712,2197,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(2712,2229,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment162() {
 c = new terrain.chunkTypes.tomb(2712,2261,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(2712,2293,0);
@@ -16697,6 +16682,9 @@ c = new terrain.chunkTypes.tomb(2744,2133,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(2744,2165,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment162() {
 c = new terrain.chunkTypes.tomb(2744,2197,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(2744,2229,0);
@@ -16785,9 +16773,6 @@ c = new terrain.chunkTypes.tomb(2904,2261,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(2904,2293,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment163() {
 c = new terrain.chunkTypes.tomb(2936,2069,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(2936,2101,0);
@@ -16800,6 +16785,9 @@ c = new terrain.chunkTypes.tomb(2936,2197,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(2936,2229,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment163() {
 c = new terrain.chunkTypes.tomb(2936,2261,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(2936,2293,0);
@@ -16888,9 +16876,6 @@ c = new terrain.chunkTypes.tomb(3128,2069,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(3128,2101,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment164() {
 c = new terrain.chunkTypes.tomb(3128,2133,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(3128,2165,0);
@@ -16903,6 +16888,9 @@ c = new terrain.chunkTypes.tomb(3128,2261,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(3128,2293,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment164() {
 c = new terrain.chunkTypes.tomb(3160,2069,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(3160,2101,0);
@@ -16991,9 +16979,6 @@ c = new terrain.chunkTypes.tomb(3320,2101,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(3320,2133,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment165() {
 c = new terrain.chunkTypes.tomb(3320,2165,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(3320,2197,0);
@@ -17006,6 +16991,9 @@ c = new terrain.chunkTypes.tomb(3320,2293,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(3352,2037,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment165() {
 c = new terrain.chunkTypes.tomb(3352,2069,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(3352,2101,0);
@@ -17094,9 +17082,6 @@ c = new terrain.chunkTypes.tomb(3480,2261,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(3480,2293,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment166() {
 c = new terrain.chunkTypes.tomb(3512,2037,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(3512,2069,0);
@@ -17109,6 +17094,9 @@ c = new terrain.chunkTypes.tomb(3512,2165,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(3512,2197,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment166() {
 c = new terrain.chunkTypes.tomb(3512,2229,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(3512,2261,0);
@@ -17197,9 +17185,6 @@ c = new terrain.chunkTypes.tomb(3672,2133,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(3672,2165,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment167() {
 c = new terrain.chunkTypes.tomb(3672,2197,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(3672,2229,0);
@@ -17212,6 +17197,9 @@ c = new terrain.chunkTypes.tomb(3704,2037,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(3704,2069,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment167() {
 c = new terrain.chunkTypes.tomb(3704,2101,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(3704,2133,0);
@@ -17300,9 +17288,6 @@ c = new terrain.chunkTypes.tomb(3832,2293,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(3864,2037,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment168() {
 c = new terrain.chunkTypes.tomb(3864,2069,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(3864,2101,0);
@@ -17315,6 +17300,9 @@ c = new terrain.chunkTypes.tomb(3864,2197,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(3864,2229,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment168() {
 c = new terrain.chunkTypes.tomb(3864,2261,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(3864,2293,0);
@@ -17403,9 +17391,6 @@ c = new terrain.chunkTypes.tomb(4024,2165,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(4024,2197,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment169() {
 c = new terrain.chunkTypes.tomb(4024,2229,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(4024,2261,0);
@@ -17418,6 +17403,9 @@ c = new terrain.chunkTypes.tomb(4056,2069,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(4056,2101,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment169() {
 c = new terrain.chunkTypes.tomb(4056,2133,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(4056,2165,0);
@@ -17506,9 +17494,6 @@ c = new terrain.chunkTypes.tomb(4216,2037,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(4216,2069,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment170() {
 c = new terrain.chunkTypes.tomb(4216,2101,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(4216,2133,0);
@@ -17521,6 +17506,9 @@ c = new terrain.chunkTypes.tomb(4216,2229,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(4216,2261,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment170() {
 c = new terrain.chunkTypes.tomb(4216,2293,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(4248,2037,0);
@@ -17609,9 +17597,6 @@ c = new terrain.chunkTypes.tomb(4376,2197,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(4376,2229,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment171() {
 c = new terrain.chunkTypes.tomb(4376,2261,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(4376,2293,0);
@@ -17624,6 +17609,9 @@ c = new terrain.chunkTypes.tomb(4408,2101,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(4408,2133,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment171() {
 c = new terrain.chunkTypes.tomb(4408,2165,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(4408,2197,0);
@@ -17712,9 +17700,6 @@ c = new terrain.chunkTypes.tomb(4568,2069,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(4568,2101,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment172() {
 c = new terrain.chunkTypes.tomb(4568,2133,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(4568,2165,0);
@@ -17727,6 +17712,9 @@ c = new terrain.chunkTypes.tomb(4568,2261,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(4568,2293,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment172() {
 c = new terrain.chunkTypes.tomb(4600,2037,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(4600,2069,0);
@@ -17815,9 +17803,6 @@ c = new terrain.chunkTypes.tomb(4728,2229,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(4728,2261,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment173() {
 c = new terrain.chunkTypes.tomb(4728,2293,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(4760,2037,0);
@@ -17830,6 +17815,9 @@ c = new terrain.chunkTypes.tomb(4760,2133,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(4760,2165,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment173() {
 c = new terrain.chunkTypes.tomb(4760,2197,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(4760,2229,0);
@@ -17918,9 +17906,6 @@ c = new terrain.chunkTypes.tomb(4920,2197,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(4920,2229,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment174() {
 c = new terrain.chunkTypes.tomb(4920,2261,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(4920,2293,0);
@@ -17933,6 +17918,9 @@ c = new terrain.chunkTypes.tomb(4950,2127,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(4950,2159,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment174() {
 c = new terrain.chunkTypes.tomb(4950,2191,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(4950,2223,0);
@@ -18021,9 +18009,6 @@ c = new terrain.chunkTypes.tomb(5110,2095,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(5110,2127,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment175() {
 c = new terrain.chunkTypes.tomb(5110,2159,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(5110,2191,0);
@@ -18036,6 +18021,9 @@ c = new terrain.chunkTypes.tomb(5110,2287,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(5110,2319,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment175() {
 c = new terrain.chunkTypes.tomb(5142,2063,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(5142,2095,0);
@@ -18124,9 +18112,6 @@ c = new terrain.chunkTypes.tomb(5270,2255,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(5270,2287,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment176() {
 c = new terrain.chunkTypes.tomb(5270,2319,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(5302,2063,0);
@@ -18139,6 +18124,9 @@ c = new terrain.chunkTypes.tomb(5302,2159,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(5302,2191,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment176() {
 c = new terrain.chunkTypes.tomb(5302,2223,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(5302,2255,0);
@@ -18227,9 +18215,6 @@ c = new terrain.chunkTypes.tomb(5462,2127,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(5462,2159,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment177() {
 c = new terrain.chunkTypes.tomb(5462,2191,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(5462,2223,0);
@@ -18242,6 +18227,9 @@ c = new terrain.chunkTypes.tomb(5462,2319,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(5494,2063,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment177() {
 c = new terrain.chunkTypes.tomb(5494,2095,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(5494,2127,0);
@@ -18330,9 +18318,6 @@ c = new terrain.chunkTypes.tomb(5622,2287,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(5622,2319,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment178() {
 c = new terrain.chunkTypes.tomb(5654,2063,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(5654,2095,0);
@@ -18345,6 +18330,9 @@ c = new terrain.chunkTypes.tomb(5654,2191,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(5654,2223,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment178() {
 c = new terrain.chunkTypes.tomb(5654,2255,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(5654,2287,0);
@@ -18433,9 +18421,6 @@ c = new terrain.chunkTypes.tomb(5814,2159,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(5814,2191,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment179() {
 c = new terrain.chunkTypes.tomb(5814,2223,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(5814,2255,0);
@@ -18448,6 +18433,9 @@ c = new terrain.chunkTypes.tomb(5846,2063,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(5846,2095,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment179() {
 c = new terrain.chunkTypes.tomb(5846,2127,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(5846,2159,0);
@@ -18536,9 +18524,6 @@ c = new terrain.chunkTypes.tomb(5974,2319,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(6006,2063,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment180() {
 c = new terrain.chunkTypes.tomb(6006,2095,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(6006,2127,0);
@@ -18551,6 +18536,9 @@ c = new terrain.chunkTypes.tomb(6006,2223,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(6006,2255,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment180() {
 c = new terrain.chunkTypes.tomb(6006,2287,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(6006,2319,0);
@@ -18639,9 +18627,6 @@ c = new terrain.chunkTypes.tomb(6166,2191,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(6166,2223,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment181() {
 c = new terrain.chunkTypes.tomb(6166,2255,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(6166,2287,0);
@@ -18654,6 +18639,9 @@ c = new terrain.chunkTypes.tomb(6198,2095,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(6198,2127,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment181() {
 c = new terrain.chunkTypes.tomb(6198,2159,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(6198,2191,0);
@@ -18742,9 +18730,6 @@ c = new terrain.chunkTypes.tomb(6358,2063,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(6358,2095,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment182() {
 c = new terrain.chunkTypes.tomb(6358,2127,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(6358,2159,0);
@@ -18757,6 +18742,9 @@ c = new terrain.chunkTypes.tomb(6358,2255,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(6358,2287,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment182() {
 c = new terrain.chunkTypes.tomb(6358,2319,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(6390,2063,0);
@@ -18845,9 +18833,6 @@ c = new terrain.chunkTypes.tomb(3337,2038,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(2681,1970,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment183() {
 c = new terrain.chunkTypes.tomb(3287,2039,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tombEdge(3287,2007,0);
@@ -18860,6 +18845,9 @@ c = new terrain.chunkTypes.tomb(2713,1756,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(2713,1788,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment183() {
 c = new terrain.chunkTypes.tomb(2713,1820,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(2713,1852,0);
@@ -18948,9 +18936,6 @@ c = new terrain.chunkTypes.tomb(2840,1820,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(2840,1852,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment184() {
 c = new terrain.chunkTypes.tomb(2840,1884,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(2840,1916,0);
@@ -18963,6 +18948,9 @@ c = new terrain.chunkTypes.tomb(2840,2012,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(2872,1788,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment184() {
 c = new terrain.chunkTypes.tomb(2872,1820,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(2872,1852,0);
@@ -19051,9 +19039,6 @@ c = new terrain.chunkTypes.tomb(6407,2258,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(6407,2290,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment185() {
 c = new terrain.chunkTypes.tomb(6407,2322,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tombEdge(5692,1550,0);
@@ -19066,6 +19051,9 @@ c = new terrain.chunkTypes.tomb(6375,1938,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(6375,1970,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment185() {
 c = new terrain.chunkTypes.tomb(6375,2002,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(6375,2034,0);
@@ -19154,9 +19142,6 @@ c = new terrain.chunkTypes.tomb(6663,2002,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(6663,2034,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment186() {
 c = new terrain.chunkTypes.tomb(6695,1874,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(6695,1906,0);
@@ -19169,6 +19154,9 @@ c = new terrain.chunkTypes.tomb(6695,2002,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(6695,2034,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment186() {
 c = new terrain.chunkTypes.tomb(6727,1874,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(6727,1906,0);
@@ -19257,9 +19245,6 @@ c = new terrain.chunkTypes.tomb(6343,2638,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(6343,2670,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment187() {
 c = new terrain.chunkTypes.tomb(6375,2350,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(6375,2382,0);
@@ -19272,6 +19257,9 @@ c = new terrain.chunkTypes.tomb(6375,2478,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(6375,2510,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment187() {
 c = new terrain.chunkTypes.tomb(6375,2542,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(6375,2574,0);
@@ -19360,9 +19348,6 @@ c = new terrain.chunkTypes.tomb(6503,2478,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(6503,2510,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment188() {
 c = new terrain.chunkTypes.tomb(6503,2542,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(6503,2574,0);
@@ -19375,6 +19360,9 @@ c = new terrain.chunkTypes.tomb(6503,2670,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(6535,2350,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment188() {
 c = new terrain.chunkTypes.tomb(6535,2382,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(6535,2414,0);
@@ -19463,9 +19451,6 @@ c = new terrain.chunkTypes.tomb(6643,2528,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(6643,2560,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment189() {
 c = new terrain.chunkTypes.tomb(6643,2592,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(6643,2624,0);
@@ -19478,6 +19463,9 @@ c = new terrain.chunkTypes.tomb(6675,2432,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(6675,2464,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment189() {
 c = new terrain.chunkTypes.tomb(6675,2496,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(6675,2528,0);
@@ -19566,9 +19554,6 @@ c = new terrain.chunkTypes.tomb(6835,2400,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(6835,2432,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment190() {
 c = new terrain.chunkTypes.tomb(6835,2464,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(6835,2496,0);
@@ -19581,6 +19566,9 @@ c = new terrain.chunkTypes.tomb(6835,2592,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(6835,2624,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment190() {
 c = new terrain.chunkTypes.tomb(6867,2368,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(6867,2400,0);
@@ -19669,9 +19657,6 @@ c = new terrain.chunkTypes.tomb(6280,2350,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(6280,2382,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment191() {
 c = new terrain.chunkTypes.tomb(6280,2414,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(6280,2446,0);
@@ -19684,6 +19669,9 @@ c = new terrain.chunkTypes.tomb(6280,2542,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(6280,2574,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment191() {
 c = new terrain.chunkTypes.tomb(6280,2606,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(6280,2638,0);
@@ -19772,9 +19760,6 @@ c = new terrain.chunkTypes.tombEdge(8456,2361,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tombEdge(8488,2361,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment192() {
 c = new terrain.chunkTypes.tombEdge(8520,2361,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tombEdge(8552,2361,0);
@@ -19787,6 +19772,9 @@ c = new terrain.chunkTypes.tombEdge(8648,2361,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tombEdge(8680,2361,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment192() {
 c = new terrain.chunkTypes.tombEdge(8712,2361,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tombEdge(8744,2361,0);
@@ -19875,9 +19863,6 @@ c = new terrain.chunkTypes.tomb(7528,2553,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(7528,2585,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment193() {
 c = new terrain.chunkTypes.tomb(7528,2617,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(7528,2649,0);
@@ -19890,6 +19875,9 @@ c = new terrain.chunkTypes.tomb(7560,2457,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(7560,2489,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment193() {
 c = new terrain.chunkTypes.tomb(7560,2521,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(7560,2553,0);
@@ -19978,9 +19966,6 @@ c = new terrain.chunkTypes.tomb(7720,2425,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(7720,2457,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment194() {
 c = new terrain.chunkTypes.tomb(7720,2489,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(7720,2521,0);
@@ -19993,6 +19978,9 @@ c = new terrain.chunkTypes.tomb(7720,2617,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(7720,2649,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment194() {
 c = new terrain.chunkTypes.tomb(7752,2393,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(7752,2425,0);
@@ -20081,9 +20069,6 @@ c = new terrain.chunkTypes.tomb(7880,2585,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(7880,2617,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment195() {
 c = new terrain.chunkTypes.tomb(7880,2649,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(7912,2393,0);
@@ -20096,6 +20081,9 @@ c = new terrain.chunkTypes.tomb(7912,2489,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(7912,2521,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment195() {
 c = new terrain.chunkTypes.tomb(7912,2553,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(7912,2585,0);
@@ -20184,9 +20172,6 @@ c = new terrain.chunkTypes.tomb(8072,2457,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(8072,2489,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment196() {
 c = new terrain.chunkTypes.tomb(8072,2521,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(8072,2553,0);
@@ -20199,6 +20184,9 @@ c = new terrain.chunkTypes.tomb(8072,2649,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(8104,2393,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment196() {
 c = new terrain.chunkTypes.tomb(8104,2425,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(8104,2457,0);
@@ -20287,9 +20275,6 @@ c = new terrain.chunkTypes.tomb(8232,2617,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(8232,2649,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment197() {
 c = new terrain.chunkTypes.tomb(8264,2393,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(8264,2425,0);
@@ -20302,6 +20287,9 @@ c = new terrain.chunkTypes.tomb(8264,2521,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(8264,2553,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment197() {
 c = new terrain.chunkTypes.tomb(8264,2585,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(8264,2617,0);
@@ -20390,9 +20378,6 @@ c = new terrain.chunkTypes.tomb(8424,2489,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(8424,2521,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment198() {
 c = new terrain.chunkTypes.tomb(8424,2553,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(8424,2585,0);
@@ -20405,6 +20390,9 @@ c = new terrain.chunkTypes.tomb(8456,2393,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(8456,2425,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment198() {
 c = new terrain.chunkTypes.tomb(8456,2457,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(8456,2489,0);
@@ -20493,9 +20481,6 @@ c = new terrain.chunkTypes.tomb(8584,2649,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(8616,2393,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment199() {
 c = new terrain.chunkTypes.tomb(8616,2425,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(8616,2457,0);
@@ -20508,6 +20493,9 @@ c = new terrain.chunkTypes.tomb(8616,2553,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(8616,2585,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment199() {
 c = new terrain.chunkTypes.tomb(8616,2617,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(8616,2649,0);
@@ -20596,9 +20584,6 @@ c = new terrain.chunkTypes.tomb(8776,2521,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(8776,2553,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment200() {
 c = new terrain.chunkTypes.tomb(8776,2585,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(8776,2617,0);
@@ -20611,6 +20596,9 @@ c = new terrain.chunkTypes.tomb(8808,2425,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(8808,2457,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment200() {
 c = new terrain.chunkTypes.tomb(8808,2489,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(8808,2521,0);
@@ -20699,9 +20687,6 @@ c = new terrain.chunkTypes.tomb(8968,2393,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(8968,2425,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment201() {
 c = new terrain.chunkTypes.tomb(8968,2457,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(8968,2489,0);
@@ -20714,6 +20699,9 @@ c = new terrain.chunkTypes.tomb(8968,2585,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(8968,2617,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment201() {
 c = new terrain.chunkTypes.tomb(8968,2649,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(9000,2393,0);
@@ -20802,9 +20790,6 @@ c = new terrain.chunkTypes.tomb(9128,2553,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(9128,2585,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment202() {
 c = new terrain.chunkTypes.tomb(9128,2617,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(9128,2649,0);
@@ -20817,6 +20802,9 @@ c = new terrain.chunkTypes.tomb(9160,2457,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(9160,2489,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment202() {
 c = new terrain.chunkTypes.tomb(9160,2521,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(9160,2553,0);
@@ -20905,9 +20893,6 @@ c = new terrain.chunkTypes.tomb(9320,2425,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(9320,2457,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment203() {
 c = new terrain.chunkTypes.tomb(9320,2489,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(9320,2521,0);
@@ -20920,6 +20905,9 @@ c = new terrain.chunkTypes.tomb(9320,2617,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(9320,2649,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment203() {
 c = new terrain.chunkTypes.tomb(9352,2393,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(9352,2425,0);
@@ -21008,9 +20996,6 @@ c = new terrain.chunkTypes.tomb(9896,2585,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(9896,2617,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment204() {
 c = new terrain.chunkTypes.tomb(9896,2649,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(9928,2393,0);
@@ -21023,6 +21008,9 @@ c = new terrain.chunkTypes.tomb(9928,2489,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(9928,2521,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment204() {
 c = new terrain.chunkTypes.tomb(9928,2553,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(9928,2585,0);
@@ -21111,9 +21099,6 @@ c = new terrain.chunkTypes.tomb(10120,2553,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(10120,2585,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment205() {
 c = new terrain.chunkTypes.tomb(10120,2617,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(10120,2649,0);
@@ -21126,6 +21111,9 @@ c = new terrain.chunkTypes.tomb(10152,2585,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(10152,2617,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment205() {
 c = new terrain.chunkTypes.tomb(10152,2649,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(10184,2521,0);
@@ -21214,9 +21202,6 @@ c = new terrain.chunkTypes.tomb(10376,2617,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(10376,2649,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment206() {
 c = new terrain.chunkTypes.tomb(10408,2393,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(10408,2425,0);
@@ -21229,6 +21214,9 @@ c = new terrain.chunkTypes.tomb(10408,2521,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(10408,2553,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment206() {
 c = new terrain.chunkTypes.tomb(10408,2585,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(10408,2617,0);
@@ -21317,9 +21305,6 @@ c = new terrain.chunkTypes.tomb(10568,2489,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(10568,2521,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment207() {
 c = new terrain.chunkTypes.tomb(10568,2553,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(10568,2585,0);
@@ -21332,6 +21317,9 @@ c = new terrain.chunkTypes.tomb(10600,2393,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(10600,2425,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment207() {
 c = new terrain.chunkTypes.tomb(10600,2457,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(10600,2489,0);
@@ -21420,9 +21408,6 @@ c = new terrain.chunkTypes.tomb(10728,2649,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(10760,2393,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment208() {
 c = new terrain.chunkTypes.tomb(10760,2425,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(10760,2457,0);
@@ -21435,6 +21420,9 @@ c = new terrain.chunkTypes.tomb(10760,2553,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(10760,2585,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment208() {
 c = new terrain.chunkTypes.tomb(10760,2617,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(10760,2649,0);
@@ -21523,9 +21511,6 @@ c = new terrain.chunkTypes.tomb(10920,2521,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(10920,2553,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment209() {
 c = new terrain.chunkTypes.tomb(10920,2585,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(10920,2617,0);
@@ -21538,6 +21523,9 @@ c = new terrain.chunkTypes.tomb(10952,2425,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(10952,2457,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment209() {
 c = new terrain.chunkTypes.tomb(10952,2489,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(10952,2521,0);
@@ -21626,9 +21614,6 @@ c = new terrain.chunkTypes.tomb(11112,2393,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(11112,2425,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment210() {
 c = new terrain.chunkTypes.tomb(11112,2457,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(11112,2489,0);
@@ -21641,6 +21626,9 @@ c = new terrain.chunkTypes.tomb(11112,2585,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(11112,2617,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment210() {
 c = new terrain.chunkTypes.tomb(11112,2649,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(11144,2393,0);
@@ -21729,9 +21717,6 @@ c = new terrain.chunkTypes.tomb(11272,2553,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(11272,2585,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment211() {
 c = new terrain.chunkTypes.tomb(11272,2617,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(11272,2649,0);
@@ -21744,6 +21729,9 @@ c = new terrain.chunkTypes.tomb(11304,2457,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(11304,2489,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment211() {
 c = new terrain.chunkTypes.tomb(11304,2521,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(11304,2553,0);
@@ -21832,9 +21820,6 @@ c = new terrain.chunkTypes.tomb(11464,2425,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(11464,2457,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment212() {
 c = new terrain.chunkTypes.tomb(11464,2489,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(11464,2521,0);
@@ -21847,6 +21832,9 @@ c = new terrain.chunkTypes.tomb(11464,2617,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(11464,2649,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment212() {
 c = new terrain.chunkTypes.tomb(7175,2387,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(7175,2419,0);
@@ -21935,9 +21923,6 @@ c = new terrain.chunkTypes.tomb(7303,2579,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(7303,2611,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment213() {
 c = new terrain.chunkTypes.tomb(7303,2643,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(7335,2387,0);
@@ -21950,6 +21935,9 @@ c = new terrain.chunkTypes.tomb(7335,2483,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(7335,2515,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment213() {
 c = new terrain.chunkTypes.tomb(7335,2547,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(7335,2579,0);
@@ -22038,9 +22026,6 @@ c = new terrain.chunkTypes.tombEdge(8018,2288,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tombEdge(8725,2298,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment214() {
 c = new terrain.chunkTypes.tomb(9064,2361,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(9160,2361,0);
@@ -22053,6 +22038,9 @@ c = new terrain.chunkTypes.tombEdge(9160,2329,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tombEdge(9256,2329,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment214() {
 c = new terrain.chunkTypes.tombEdge(5444,1935,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tombEdge(5901,1952,0);
@@ -22141,9 +22129,6 @@ c = new terrain.chunkTypes.tombEdge(10131,1313,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tombEdge(10236,1212,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment215() {
 c = new terrain.chunkTypes.tombEdge(10346,1121,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tombEdge(10447,1027,0);
@@ -22156,6 +22141,9 @@ c = new terrain.chunkTypes.tombEdge(10546,725,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tombEdge(10578,725,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment215() {
 c = new terrain.chunkTypes.tombEdge(10610,725,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tombEdge(10642,725,0);
@@ -22244,9 +22232,6 @@ c = new terrain.chunkTypes.tomb(7186,2669,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(7186,2701,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment216() {
 c = new terrain.chunkTypes.tomb(7186,2733,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(7186,2765,0);
@@ -22259,6 +22244,9 @@ c = new terrain.chunkTypes.tomb(7218,2669,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(7218,2701,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment216() {
 c = new terrain.chunkTypes.tomb(7218,2733,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(7218,2765,0);
@@ -22347,9 +22335,6 @@ c = new terrain.chunkTypes.tomb(7442,2733,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(7442,2765,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment217() {
 c = new terrain.chunkTypes.tomb(7442,2797,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(7442,2829,0);
@@ -22362,6 +22347,9 @@ c = new terrain.chunkTypes.tomb(7474,2733,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(7474,2765,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment217() {
 c = new terrain.chunkTypes.tomb(7474,2797,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(7474,2829,0);
@@ -22450,9 +22438,6 @@ c = new terrain.chunkTypes.tomb(7698,2797,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(7698,2829,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment218() {
 c = new terrain.chunkTypes.tomb(7730,2669,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(7730,2701,0);
@@ -22465,6 +22450,9 @@ c = new terrain.chunkTypes.tomb(7730,2797,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(7730,2829,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment218() {
 c = new terrain.chunkTypes.tomb(7762,2669,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(7762,2701,0);
@@ -22553,9 +22541,6 @@ c = new terrain.chunkTypes.tomb(6662,2656,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(6694,2656,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment219() {
 c = new terrain.chunkTypes.tomb(6726,2656,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(6758,2656,0);
@@ -22568,6 +22553,9 @@ c = new terrain.chunkTypes.tomb(6854,2656,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(6882,2654,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment219() {
 c = new terrain.chunkTypes.tomb(6882,2686,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(6914,2654,0);
@@ -22656,9 +22644,6 @@ c = new terrain.chunkTypes.tomb(2529,967,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(2529,999,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment220() {
 c = new terrain.chunkTypes.tomb(2529,1031,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(2561,967,0);
@@ -22671,6 +22656,9 @@ c = new terrain.chunkTypes.tomb(2593,967,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(2593,999,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment220() {
 c = new terrain.chunkTypes.tomb(2593,1031,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(2625,967,0);
@@ -22759,9 +22747,6 @@ c = new terrain.chunkTypes.tomb(2490,935,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(2522,775,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment221() {
 c = new terrain.chunkTypes.tomb(2522,807,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(2522,839,0);
@@ -22774,6 +22759,9 @@ c = new terrain.chunkTypes.tomb(2522,935,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(2554,775,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment221() {
 c = new terrain.chunkTypes.tomb(2554,807,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(2554,839,0);
@@ -22862,9 +22850,6 @@ c = new terrain.chunkTypes.tombEdge(3356,1410,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tombEdge(3321,1310,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment222() {
 c = new terrain.chunkTypes.tombEdge(3286,1210,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tombEdge(3356,1210,0);
@@ -22877,6 +22862,9 @@ c = new terrain.chunkTypes.tomb(2618,455,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(2618,487,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment222() {
 c = new terrain.chunkTypes.tomb(2618,519,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(2618,551,0);
@@ -22965,9 +22953,6 @@ c = new terrain.chunkTypes.tomb(2746,455,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(2746,487,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment223() {
 c = new terrain.chunkTypes.tomb(2746,519,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(2746,551,0);
@@ -22980,6 +22965,9 @@ c = new terrain.chunkTypes.tomb(2746,647,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(2746,679,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment223() {
 c = new terrain.chunkTypes.tomb(2746,711,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(2746,743,0);
@@ -23068,9 +23056,6 @@ c = new terrain.chunkTypes.tomb(11770,2517,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(11770,2549,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment224() {
 c = new terrain.chunkTypes.tomb(11770,2581,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(11770,2613,0);
@@ -23083,6 +23068,9 @@ c = new terrain.chunkTypes.tomb(11770,2709,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(11802,2421,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment224() {
 c = new terrain.chunkTypes.tomb(11802,2453,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(11802,2485,0);
@@ -23171,9 +23159,6 @@ c = new terrain.chunkTypes.tombEdge(10536,2361,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tombEdge(10568,2361,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment225() {
 c = new terrain.chunkTypes.tombEdge(10600,2361,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tombEdge(10632,2361,0);
@@ -23186,6 +23171,9 @@ c = new terrain.chunkTypes.tombEdge(10728,2361,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tombEdge(10760,2361,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment225() {
 c = new terrain.chunkTypes.tombEdge(10792,2361,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tombEdge(10824,2361,0);
@@ -23274,9 +23262,6 @@ c = new terrain.chunkTypes.tomb(2777,871,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(2777,903,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment226() {
 c = new terrain.chunkTypes.tomb(2777,935,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(2777,967,0);
@@ -23289,6 +23274,9 @@ c = new terrain.chunkTypes.tomb(2810,1391,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(2810,1423,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment226() {
 c = new terrain.chunkTypes.tomb(2712,1737,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(2744,1737,0);
@@ -23377,9 +23365,6 @@ c = new terrain.chunkTypes.tomb(6459,858,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(6459,890,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment227() {
 c = new terrain.chunkTypes.tomb(6459,922,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(6459,954,0);
@@ -23392,6 +23377,9 @@ c = new terrain.chunkTypes.tomb(6459,1050,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(6459,1082,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment227() {
 c = new terrain.chunkTypes.tomb(6459,1114,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(6459,1146,0);
@@ -23480,9 +23468,6 @@ c = new terrain.chunkTypes.tomb(6587,922,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(6587,954,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment228() {
 c = new terrain.chunkTypes.tomb(6587,986,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(6587,1018,0);
@@ -23495,6 +23480,9 @@ c = new terrain.chunkTypes.tomb(6587,1114,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(6587,1146,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment228() {
 c = new terrain.chunkTypes.tomb(6619,794,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(6619,826,0);
@@ -23583,9 +23571,6 @@ c = new terrain.chunkTypes.tomb(6715,986,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(6715,1018,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment229() {
 c = new terrain.chunkTypes.tomb(6715,1050,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(6715,1082,0);
@@ -23598,6 +23583,9 @@ c = new terrain.chunkTypes.tomb(6747,794,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(6747,826,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment229() {
 c = new terrain.chunkTypes.tomb(6747,858,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(6747,890,0);
@@ -23686,9 +23674,6 @@ c = new terrain.chunkTypes.tomb(6843,1050,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(6843,1082,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment230() {
 c = new terrain.chunkTypes.tomb(6843,1114,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(6843,1146,0);
@@ -23701,6 +23686,9 @@ c = new terrain.chunkTypes.tomb(6875,858,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(6875,890,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment230() {
 c = new terrain.chunkTypes.tomb(6875,922,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(6875,954,0);
@@ -23789,9 +23777,6 @@ c = new terrain.chunkTypes.tomb(11047,1364,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(11047,1396,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment231() {
 c = new terrain.chunkTypes.tomb(11047,1428,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(11047,1460,0);
@@ -23804,6 +23789,9 @@ c = new terrain.chunkTypes.tomb(11079,1428,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(11079,1460,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment231() {
 c = new terrain.chunkTypes.tombEdge(10983,1332,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tombEdge(11015,1332,0);
@@ -23892,9 +23880,6 @@ c = new terrain.chunkTypes.tomb(9378,2827,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(9378,2859,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment232() {
 c = new terrain.chunkTypes.tomb(9378,2891,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(9378,2923,0);
@@ -23907,6 +23892,9 @@ c = new terrain.chunkTypes.tomb(9378,3019,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(9410,2667,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment232() {
 c = new terrain.chunkTypes.tomb(9410,2699,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(9410,2731,0);
@@ -23995,9 +23983,6 @@ c = new terrain.chunkTypes.tomb(9506,2891,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(9506,2923,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment233() {
 c = new terrain.chunkTypes.tomb(9506,2955,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(9506,2987,0);
@@ -24010,6 +23995,9 @@ c = new terrain.chunkTypes.tomb(9538,2699,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(9538,2731,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment233() {
 c = new terrain.chunkTypes.tomb(9538,2763,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(9538,2795,0);
@@ -24098,9 +24086,6 @@ c = new terrain.chunkTypes.tomb(9634,2955,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(9634,2987,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment234() {
 c = new terrain.chunkTypes.tomb(9634,3019,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(9666,2667,0);
@@ -24113,6 +24098,9 @@ c = new terrain.chunkTypes.tomb(9666,2763,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(9666,2795,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment234() {
 c = new terrain.chunkTypes.tomb(9666,2827,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(9666,2859,0);
@@ -24201,9 +24189,6 @@ c = new terrain.chunkTypes.tomb(9762,3019,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(9794,2667,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment235() {
 c = new terrain.chunkTypes.tomb(9794,2699,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(9794,2731,0);
@@ -24216,6 +24201,9 @@ c = new terrain.chunkTypes.tomb(9794,2827,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(9794,2859,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment235() {
 c = new terrain.chunkTypes.tomb(9794,2891,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(9794,2923,0);
@@ -24304,9 +24292,6 @@ c = new terrain.chunkTypes.tomb(9922,2699,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(9922,2731,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment236() {
 c = new terrain.chunkTypes.tomb(9922,2763,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(9922,2795,0);
@@ -24319,6 +24304,9 @@ c = new terrain.chunkTypes.tomb(9922,2891,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(9922,2923,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment236() {
 c = new terrain.chunkTypes.tomb(9922,2955,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(9922,2987,0);
@@ -24407,9 +24395,6 @@ c = new terrain.chunkTypes.tomb(9255,2863,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(9287,2671,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment237() {
 c = new terrain.chunkTypes.tomb(9287,2703,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(9287,2735,0);
@@ -24422,6 +24407,9 @@ c = new terrain.chunkTypes.tomb(9287,2831,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(9287,2863,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment237() {
 c = new terrain.chunkTypes.tomb(9319,2671,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(9319,2703,0);
@@ -24510,9 +24498,6 @@ c = new terrain.chunkTypes.tomb(10040,2681,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(10040,2713,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment238() {
 c = new terrain.chunkTypes.tomb(10040,2745,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(10040,2777,0);
@@ -24525,6 +24510,9 @@ c = new terrain.chunkTypes.tomb(10040,2873,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(10072,2681,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment238() {
 c = new terrain.chunkTypes.tomb(10072,2713,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(10072,2745,0);
@@ -24613,9 +24601,6 @@ c = new terrain.chunkTypes.tomb(10264,2713,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(10264,2745,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment239() {
 c = new terrain.chunkTypes.tomb(10264,2777,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(10264,2809,0);
@@ -24628,6 +24613,9 @@ c = new terrain.chunkTypes.tomb(10296,2681,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(10296,2713,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment239() {
 c = new terrain.chunkTypes.tomb(10296,2745,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(10296,2777,0);
@@ -24716,9 +24704,6 @@ c = new terrain.chunkTypes.tomb(10488,2745,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(10488,2777,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment240() {
 c = new terrain.chunkTypes.tomb(10488,2809,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(10488,2841,0);
@@ -24731,6 +24716,9 @@ c = new terrain.chunkTypes.tomb(10520,2713,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(10520,2745,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment240() {
 c = new terrain.chunkTypes.tomb(10520,2777,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(10520,2809,0);
@@ -24819,9 +24807,6 @@ c = new terrain.chunkTypes.tomb(10351,2923,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(10351,2955,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment241() {
 c = new terrain.chunkTypes.tomb(10383,2891,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(10383,2923,0);
@@ -24834,6 +24819,9 @@ c = new terrain.chunkTypes.tomb(10415,2923,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(10415,2955,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment241() {
 c = new terrain.chunkTypes.tomb(10581,2678,0);
 if(c!=null) c.setPassable(false);
 c = new terrain.chunkTypes.tomb(10581,2710,0);
@@ -24932,9 +24920,6 @@ commands = new commandList();
 commands.add(new units.unitCommands.commands.moveCommand(320.0,393.0));
 commands.add(new units.unitCommands.commands.moveCommand(26.0,393.0));
 u.setRepeatCommands(commands);
-}
-
-public void addSegment242() {
 u = new units.unitTypes.tomb.shadowDude(26,343);
 u.setMoveSpeed((float)1.75);
 u.jumpSpeed = (float)10.0;
@@ -24973,6 +24958,9 @@ u.setRepeatCommands(commands);
 u = new units.unitTypes.tomb.shadowDude(60,794);
 u.setMoveSpeed((float)1.75);
 u.jumpSpeed = (float)10.0;
+}
+
+public void addSegment242() {
 u = new units.unitTypes.tomb.shadowDude(60,744);
 u.setMoveSpeed((float)1.75);
 u.jumpSpeed = (float)10.0;
@@ -25473,9 +25461,6 @@ commands = new commandList();
 commands.add(new units.unitCommands.commands.moveCommand(710.0,1800.0));
 commands.add(new units.unitCommands.commands.moveCommand(710.0,1390.0));
 u.setRepeatCommands(commands);
-}
-
-public void addSegment243() {
 u = new units.unitTypes.tomb.shadowDude(740,1390);
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
@@ -25518,6 +25503,9 @@ commands = new commandList();
 commands.add(new units.unitCommands.commands.moveCommand(890.0,1800.0));
 commands.add(new units.unitCommands.commands.moveCommand(890.0,1390.0));
 u.setRepeatCommands(commands);
+}
+
+public void addSegment243() {
 u = new units.unitTypes.tomb.shadowDude(920,1390);
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
@@ -25826,9 +25814,6 @@ commands = new commandList();
 commands.add(new units.unitCommands.commands.moveCommand(2210.0,1800.0));
 commands.add(new units.unitCommands.commands.moveCommand(2210.0,1390.0));
 u.setRepeatCommands(commands);
-}
-
-public void addSegment244() {
 u = new units.unitTypes.tomb.shadowDude(2240,1390);
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
@@ -25871,6 +25856,9 @@ commands = new commandList();
 commands.add(new units.unitCommands.commands.moveCommand(2390.0,1800.0));
 commands.add(new units.unitCommands.commands.moveCommand(2390.0,1390.0));
 u.setRepeatCommands(commands);
+}
+
+public void addSegment244() {
 u = new units.unitTypes.tomb.shadowDude(2717,1622);
 u.setMoveSpeed((float)3.2);
 u.jumpSpeed = (float)10.0;
@@ -26511,9 +26499,6 @@ commands = new commandList();
 commands.add(new units.unitCommands.commands.moveCommand(5850.0,1495.0));
 commands.add(new units.unitCommands.commands.moveCommand(5850.0,1180.0));
 u.setRepeatCommands(commands);
-}
-
-public void addSegment245() {
 u = new units.unitTypes.tomb.shadowDude(5910,1180);
 u.setMoveSpeed((float)5.5);
 u.jumpSpeed = (float)10.0;
@@ -26556,6 +26541,9 @@ commands = new commandList();
 commands.add(new units.unitCommands.commands.moveCommand(6060.0,1495.0));
 commands.add(new units.unitCommands.commands.moveCommand(6060.0,1180.0));
 u.setRepeatCommands(commands);
+}
+
+public void addSegment245() {
 u = new units.unitTypes.tomb.shadowDude(6090,1180);
 u.setMoveSpeed((float)5.5);
 u.jumpSpeed = (float)10.0;
@@ -28336,9 +28324,6 @@ commands.add(new units.unitCommands.commands.moveCommand(9521.0,846.0));
 commands.add(new units.unitCommands.commands.moveCommand(9321.0,846.0));
 commands.add(new units.unitCommands.commands.moveCommand(9121.0,846.0));
 u.setRepeatCommands(commands);
-}
-
-public void addSegment246() {
 u = new units.unitTypes.tomb.shadowDude(9121,1646);
 u.setMoveSpeed((float)2.0);
 u.jumpSpeed = (float)10.0;
@@ -28657,6 +28642,9 @@ commands.add(new units.unitCommands.commands.moveCommand(10721.0,846.0));
 commands.add(new units.unitCommands.commands.moveCommand(10521.0,846.0));
 commands.add(new units.unitCommands.commands.moveCommand(10321.0,846.0));
 u.setRepeatCommands(commands);
+}
+
+public void addSegment246() {
 u = new units.unitTypes.tomb.shadowDude(10321,1646);
 u.setMoveSpeed((float)2.0);
 u.jumpSpeed = (float)10.0;
@@ -30989,9 +30977,6 @@ commands.add(new units.unitCommands.commands.moveCommand(10321.0,946.0));
 commands.add(new units.unitCommands.commands.moveCommand(10121.0,946.0));
 commands.add(new units.unitCommands.commands.moveCommand(9921.0,946.0));
 u.setRepeatCommands(commands);
-}
-
-public void addSegment247() {
 u = new units.unitTypes.tomb.shadowDude(9921,1746);
 u.setMoveSpeed((float)2.0);
 u.jumpSpeed = (float)10.0;
@@ -31310,6 +31295,9 @@ commands.add(new units.unitCommands.commands.moveCommand(11521.0,946.0));
 commands.add(new units.unitCommands.commands.moveCommand(11321.0,946.0));
 commands.add(new units.unitCommands.commands.moveCommand(11121.0,946.0));
 u.setRepeatCommands(commands);
+}
+
+public void addSegment247() {
 u = new units.unitTypes.tomb.shadowDude(11121,1746);
 u.setMoveSpeed((float)2.0);
 u.jumpSpeed = (float)10.0;
@@ -32860,9 +32848,6 @@ commands = new commandList();
 commands.add(new units.unitCommands.commands.moveCommand(8776.0,1796.0));
 commands.add(new units.unitCommands.commands.moveCommand(8776.0,1603.0));
 u.setRepeatCommands(commands);
-}
-
-public void addSegment248() {
 u = new units.unitTypes.tomb.shadowDude(9065,1666);
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
@@ -32881,6 +32866,9 @@ u.jumpSpeed = (float)10.0;
 u = new units.unitTypes.tomb.shadowDude(9185,1666);
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
+}
+
+public void addSegment248() {
 u = new units.unitTypes.tomb.shadowDude(9209,1666);
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
@@ -33073,9 +33061,6 @@ u.jumpSpeed = (float)10.0;
 u = new units.unitTypes.tomb.shadowDude(11833,2376);
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
-}
-
-public void addSegment249() {
 u = new units.unitTypes.tomb.shadowDude(26,144);
 u.setMoveSpeed((float)1.75);
 u.jumpSpeed = (float)10.0;
@@ -33118,6 +33103,9 @@ commands = new commandList();
 commands.add(new units.unitCommands.commands.moveCommand(3220.0,1988.0));
 commands.add(new units.unitCommands.commands.moveCommand(2966.0,1988.0));
 u.setRepeatCommands(commands);
+}
+
+public void addSegment249() {
 u = new units.unitTypes.tomb.shadowDude(3031,1937);
 u.setMoveSpeed((float)2.5);
 u.jumpSpeed = (float)10.0;
@@ -33298,9 +33286,6 @@ u.jumpSpeed = (float)10.0;
 u = new units.unitTypes.tomb.shadowDude(5674,2017);
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
-}
-
-public void addSegment250() {
 u = new units.unitTypes.tomb.shadowDude(5698,2017);
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
@@ -33319,6 +33304,9 @@ u.jumpSpeed = (float)10.0;
 u = new units.unitTypes.tomb.shadowDude(5818,2017);
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
+}
+
+public void addSegment250() {
 u = new units.unitTypes.tomb.shadowDude(5842,2017);
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
@@ -33486,9 +33474,6 @@ c = new doodads.general.well(7612,1808,0);
 if(c!=null) c.setPassable(false);
 c = new doodads.general.well(11682,1681,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment251() {
 u = new units.unitTypes.tomb.shadowDude(9185,1356);
 u.setMoveSpeed((float)3.7);
 u.jumpSpeed = (float)10.0;
@@ -33539,6 +33524,9 @@ commands.add(new units.unitCommands.commands.moveCommand(5812.0,1980.0));
 commands.add(new units.unitCommands.commands.moveCommand(5812.0,1900.0));
 commands.add(new units.unitCommands.commands.moveCommand(5812.0,1820.0));
 u.setRepeatCommands(commands);
+}
+
+public void addSegment251() {
 u = new units.unitTypes.tomb.shadowDude(5812,1980);
 u.setMoveSpeed((float)2.5);
 u.jumpSpeed = (float)10.0;
@@ -33835,9 +33823,6 @@ u.jumpSpeed = (float)10.0;
 u = new units.unitTypes.tomb.shadowDude(7626,2264);
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
-}
-
-public void addSegment252() {
 u = new units.unitTypes.tomb.shadowDude(7626,2314);
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
@@ -33856,6 +33841,9 @@ u.jumpSpeed = (float)10.0;
 u = new units.unitTypes.tomb.shadowDude(7666,2164);
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
+}
+
+public void addSegment252() {
 u = new units.unitTypes.tomb.shadowDude(7666,2214);
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
@@ -33988,9 +33976,6 @@ u.jumpSpeed = (float)10.0;
 u = new units.unitTypes.tomb.shadowDude(7886,2164);
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
-}
-
-public void addSegment253() {
 u = new units.unitTypes.tomb.shadowDude(7886,2214);
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
@@ -34009,6 +33994,9 @@ u.jumpSpeed = (float)10.0;
 u = new units.unitTypes.tomb.shadowDude(7906,2264);
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
+}
+
+public void addSegment253() {
 u = new units.unitTypes.tomb.shadowDude(7906,2314);
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
@@ -34141,9 +34129,6 @@ u.jumpSpeed = (float)10.0;
 u = new units.unitTypes.tomb.shadowDude(8186,2164);
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
-}
-
-public void addSegment254() {
 u = new units.unitTypes.tomb.shadowDude(8186,2214);
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
@@ -34162,6 +34147,9 @@ u.jumpSpeed = (float)10.0;
 u = new units.unitTypes.tomb.shadowDude(8206,2264);
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
+}
+
+public void addSegment254() {
 u = new units.unitTypes.tomb.shadowDude(8206,2314);
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
@@ -34294,9 +34282,6 @@ u.jumpSpeed = (float)10.0;
 u = new units.unitTypes.tomb.shadowDude(8486,2264);
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
-}
-
-public void addSegment255() {
 u = new units.unitTypes.tomb.shadowDude(8486,2314);
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
@@ -34315,6 +34300,9 @@ u.jumpSpeed = (float)10.0;
 u = new units.unitTypes.tomb.shadowDude(8526,2164);
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
+}
+
+public void addSegment255() {
 u = new units.unitTypes.tomb.shadowDude(8526,2214);
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
@@ -34447,9 +34435,6 @@ u.jumpSpeed = (float)10.0;
 u = new units.unitTypes.tomb.shadowDude(8766,2164);
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
-}
-
-public void addSegment256() {
 u = new units.unitTypes.tomb.shadowDude(8766,2214);
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
@@ -34468,6 +34453,9 @@ u.jumpSpeed = (float)10.0;
 u = new units.unitTypes.tomb.shadowDude(8786,2314);
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
+}
+
+public void addSegment256() {
 u = new units.unitTypes.tomb.shadowDude(8806,2214);
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
@@ -34600,9 +34588,6 @@ u.jumpSpeed = (float)10.0;
 u = new units.unitTypes.tomb.shadowDude(9206,2164);
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
-}
-
-public void addSegment257() {
 u = new units.unitTypes.tomb.shadowDude(9206,2214);
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
@@ -34621,6 +34606,9 @@ u.jumpSpeed = (float)10.0;
 u = new units.unitTypes.tomb.shadowDude(9246,2164);
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
+}
+
+public void addSegment257() {
 u = new units.unitTypes.tomb.shadowDude(9246,2214);
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
@@ -34753,9 +34741,6 @@ u.jumpSpeed = (float)10.0;
 u = new units.unitTypes.tomb.lightDude(9583,2398);
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
-}
-
-public void addSegment258() {
 u = new units.unitTypes.tomb.lightDude(9625,2549);
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
@@ -34774,6 +34759,9 @@ u.jumpSpeed = (float)10.0;
 u = new units.unitTypes.tomb.lightDude(9841,2356);
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
+}
+
+public void addSegment258() {
 u = new units.unitTypes.tomb.lightDude(9895,2309);
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
@@ -34906,9 +34894,6 @@ u.jumpSpeed = (float)10.0;
 u = new units.unitTypes.tomb.shadowDude(9587,2214);
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
-}
-
-public void addSegment259() {
 u = new units.unitTypes.tomb.shadowDude(9587,2264);
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
@@ -34927,6 +34912,9 @@ u.jumpSpeed = (float)10.0;
 u = new units.unitTypes.tomb.shadowDude(9587,2514);
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
+}
+
+public void addSegment259() {
 u = new units.unitTypes.tomb.shadowDude(9587,2564);
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
@@ -35059,9 +35047,6 @@ u.jumpSpeed = (float)10.0;
 u = new units.unitTypes.tomb.shadowDude(9687,2514);
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
-}
-
-public void addSegment260() {
 u = new units.unitTypes.tomb.shadowDude(9687,2564);
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
@@ -35080,6 +35065,9 @@ u.jumpSpeed = (float)10.0;
 u = new units.unitTypes.tomb.shadowDude(9707,2314);
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
+}
+
+public void addSegment260() {
 u = new units.unitTypes.tomb.shadowDude(9707,2364);
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
@@ -35212,9 +35200,6 @@ u.jumpSpeed = (float)10.0;
 u = new units.unitTypes.tomb.shadowDude(9787,2514);
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
-}
-
-public void addSegment261() {
 u = new units.unitTypes.tomb.shadowDude(9787,2564);
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
@@ -35233,6 +35218,9 @@ u.jumpSpeed = (float)10.0;
 u = new units.unitTypes.tomb.shadowDude(9807,2314);
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
+}
+
+public void addSegment261() {
 u = new units.unitTypes.tomb.shadowDude(9807,2364);
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
@@ -35365,9 +35353,6 @@ u.jumpSpeed = (float)10.0;
 u = new units.unitTypes.tomb.shadowDude(9907,2314);
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
-}
-
-public void addSegment262() {
 u = new units.unitTypes.tomb.shadowDude(9927,2164);
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
@@ -35386,6 +35371,9 @@ u.jumpSpeed = (float)10.0;
 u = new units.unitTypes.tomb.shadowDude(10080,2475);
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
+}
+
+public void addSegment262() {
 u = new units.unitTypes.tomb.shadowDude(10100,2475);
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
@@ -35598,9 +35586,6 @@ commands = new commandList();
 commands.add(new units.unitCommands.commands.moveCommand(10553.0,2520.0));
 commands.add(new units.unitCommands.commands.moveCommand(10553.0,2305.0));
 u.setRepeatCommands(commands);
-}
-
-public void addSegment263() {
 u = new units.unitTypes.tomb.shadowDude(10593,2155);
 u.setMoveSpeed((float)4.0);
 u.jumpSpeed = (float)10.0;
@@ -35643,6 +35628,9 @@ commands = new commandList();
 commands.add(new units.unitCommands.commands.moveCommand(10613.0,2370.0));
 commands.add(new units.unitCommands.commands.moveCommand(10613.0,2155.0));
 u.setRepeatCommands(commands);
+}
+
+public void addSegment263() {
 u = new units.unitTypes.tomb.shadowDude(10613,2205);
 u.setMoveSpeed((float)4.0);
 u.jumpSpeed = (float)10.0;
@@ -35951,9 +35939,6 @@ commands = new commandList();
 commands.add(new units.unitCommands.commands.moveCommand(11293.0,2520.0));
 commands.add(new units.unitCommands.commands.moveCommand(11293.0,2305.0));
 u.setRepeatCommands(commands);
-}
-
-public void addSegment264() {
 u = new units.unitTypes.tomb.shadowDude(11273,2155);
 u.setMoveSpeed((float)4.0);
 u.jumpSpeed = (float)10.0;
@@ -35996,6 +35981,9 @@ commands = new commandList();
 commands.add(new units.unitCommands.commands.moveCommand(11333.0,2520.0));
 commands.add(new units.unitCommands.commands.moveCommand(11333.0,2305.0));
 u.setRepeatCommands(commands);
+}
+
+public void addSegment264() {
 u = new units.unitTypes.tomb.shadowDude(11353,2305);
 u.setMoveSpeed((float)4.0);
 u.jumpSpeed = (float)10.0;
