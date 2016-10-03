@@ -1,8 +1,10 @@
 package items;
 
+import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -117,6 +119,8 @@ public class inventory extends interfaceObject {
 			
 			sound s = new sound(closeInventory);
 			s.start();
+			setWaitingToEquipItem(false);
+			setWaitingToUseItem(false);
 		}
 	}
 	
@@ -174,7 +178,7 @@ public class inventory extends interfaceObject {
 	// Waiting to equip item?
 	private boolean waitingToUseItem = false;
 	private boolean waitingToEquipItem = false;
-	private item itemToEquip;
+	private item itemToEquipOrUse;
 	
 	// Interact with the current selected item.
 	public void equipSelectedItem() {
@@ -202,7 +206,7 @@ public class inventory extends interfaceObject {
 						// Display a tooltip.
 						new tooltipString("Enter a slot to equip the item (enter, space, shift, 1-9).");
 						setWaitingToEquipItem(true);
-						itemToEquip = i;
+						itemToEquipOrUse = i;
 					}
 				}
 				else {
@@ -212,8 +216,8 @@ public class inventory extends interfaceObject {
 			}
 			else if(getItems().get(getSelectedSlot()).usedOnItems) {
 				new tooltipString("Select an item to use the " + getItems().get(getSelectedSlot()).getName() + " on.");
-				setWaitingToUseitem(true);
-				itemToEquip = getItems().get(getSelectedSlot());
+				setWaitingToUseItem(true);
+				itemToEquipOrUse = getItems().get(getSelectedSlot());
 			}
 			else {
 				// TODO: Play unequippable sound?
@@ -249,7 +253,7 @@ public class inventory extends interfaceObject {
 		s.start();
 		
 		// Equip it.
-		equipItem(itemToEquip,key);
+		equipItem(itemToEquipOrUse,key);
 		
 		// Stop waiting.
 		setWaitingToEquipItem(false);
@@ -369,11 +373,11 @@ public class inventory extends interfaceObject {
 			
 			// Player presses e key.
 			if(k.getKeyCode() == KeyEvent.VK_E || k.getKeyCode() == KeyEvent.VK_SPACE || k.getKeyCode() == KeyEvent.VK_ENTER) { 
-				if(isWaitingToUseitem()) {
+				if(isWaitingToUseItem()) {
 					
 					// We're good, equip the item.
-					if(itemToEquip.usedOnItems) {
-						itemToEquip.use();
+					if(itemToEquipOrUse.usedOnItems) {
+						itemToEquipOrUse.use();
 						setWaitingToEquipItem(false);
 					}
 				}
@@ -442,10 +446,24 @@ public class inventory extends interfaceObject {
 					// Draw the item, if it exists.
 					if(x < getItems().size()) {
 						
+						float alpha = 1;
+						if(waitingToUseItem) {
+							
+							// If it's an item we can use an item on.
+							if(itemToEquipOrUse.isItemWeCanUseOn(getItems().get(x))) alpha = 1;
+							
+							// Otherwise, fade it out.
+							else alpha = 0.2f;
+							
+						}
+						
+						Graphics2D g2d = (Graphics2D) g.create();
+						g2d.setComposite(AlphaComposite.SrcOver.derive(alpha));
+						
 						// Draw the item, if it exists.
 						item currentItem = getItems().get(x);
-						g.setColor(DEFAULT_TEXT_COLOR);
-						g.drawImage(currentItem.getImage(), 
+						g2d.setColor(DEFAULT_TEXT_COLOR);
+						g2d.drawImage(currentItem.getImage(), 
 								(int)(gameCanvas.getScaleX()*(getIntX() + j*DEFAULT_SLOT_SIZE + DEFAULT_SLOT_SIZE/2 - currentItem.getImage().getWidth()/2 + adjustX)), 
 								(int)(gameCanvas.getScaleY()*(getIntY() + i*DEFAULT_SLOT_SIZE + DEFAULT_SLOT_SIZE/2 - currentItem.getImage().getHeight()/2 + adjustY)), 
 								(int)(gameCanvas.getScaleX()*(currentItem.getImage().getWidth())), 
@@ -621,11 +639,11 @@ public class inventory extends interfaceObject {
 		this.waitingToEquipItem = waitingToEquipItem;
 	}
 
-	public boolean isWaitingToUseitem() {
+	public boolean isWaitingToUseItem() {
 		return waitingToUseItem;
 	}
 
-	public void setWaitingToUseitem(boolean waitingToUseitem) {
-		this.waitingToUseItem = waitingToUseitem;
+	public void setWaitingToUseItem(boolean waitingToUseItem) {
+		this.waitingToUseItem = waitingToUseItem;
 	}
 }

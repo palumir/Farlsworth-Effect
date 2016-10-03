@@ -73,7 +73,11 @@ public class bottleExpander extends item {
 		// Is the quality incorrect?
 		if(!quality.equals(useOnItem.quality)) {
 			new tooltipString("This can only be used to upgrade " + quality + " bottles.");
-			player.getPlayer().getPlayerInventory().setWaitingToUseitem(false);
+		}
+		
+		// Stop waiting to use.
+		else if(useOnItem instanceof bottleExpander) {
+			player.getPlayer().getPlayerInventory().setWaitingToUseItem(false);
 		}
 		
 		// Make sure it's a bottle.
@@ -81,14 +85,20 @@ public class bottleExpander extends item {
 			this.drop();
 			useOnItem.upgrade();
 			((bottle)useOnItem).setMaxCharges(((bottle)useOnItem).getMaxCharges() + 1);
-			player.getPlayer().getPlayerInventory().setWaitingToUseitem(false);
+			player.getPlayer().getPlayerInventory().setWaitingToUseItem(false);
+			new tooltipString(useOnItem.getName() + " has been expanded.");
 		}
 		
 		// Not a bottle, you dinky!
 		else {
 			new tooltipString("This Bottle Expander only works on a bottle, you dinky!");
-			player.getPlayer().getPlayerInventory().setWaitingToUseitem(false);
 		}
+	}
+	
+	// Is it an item we can use this on?
+	@Override
+	public boolean isItemWeCanUseOn(item i) {
+		return i instanceof bottle && quality.equals(i.quality);
 	}
 
 	@Override

@@ -146,6 +146,11 @@ public abstract class item extends drawnObject {
 		destroy();
 	}
 	
+	// Is it an item we can use this on?
+	public boolean isItemWeCanUseOn(item i) {
+		return false;
+	}
+	
 	// React to pickup
 	public void reactToPickup() {
 	}
