@@ -348,6 +348,7 @@ public class levelSave implements Serializable {
 					
 					if(!dontSaveTheseContains(objectClass)) {
 						try {
+							if(objectClass.equals("terrain.chunkTypes.wood")) objectClass = "terrain.chunkTypes.mud";
 							Class<?> clazz = Class.forName(objectClass);
 							Constructor<?> ctor = clazz.getConstructor(int.class, int.class, int.class);
 							Object object = ctor.newInstance(new Object[] { x,

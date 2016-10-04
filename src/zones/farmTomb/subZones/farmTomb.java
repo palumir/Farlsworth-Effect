@@ -1,4 +1,4 @@
-package zones.farmTomb;
+package zones.farmTomb.subZones;
 
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -29,7 +29,7 @@ import units.unitTypes.tomb.shadowDude;
 import utilities.intTuple;
 import utilities.levelSave;
 import zones.zone;
-import zones.sheepFarm.sheepFarm;
+import zones.sheepFarm.subZones.sheepFarm;
 
 public class farmTomb extends zone {
 	

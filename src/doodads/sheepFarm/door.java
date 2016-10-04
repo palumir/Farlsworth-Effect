@@ -11,7 +11,7 @@ import terrain.generalChunkType;
 import units.player;
 import units.characters.farlsworth.farlsworth;
 import zones.zone;
-import zones.sheepFarm.sheepFarm;
+import zones.sheepFarm.subZones.sheepFarm;
 
 public class door extends openable {
 	

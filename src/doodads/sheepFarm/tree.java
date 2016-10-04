@@ -9,8 +9,8 @@ import terrain.generalChunkType;
 import utilities.time;
 import utilities.utility;
 import zones.zone;
-import zones.farmLand.forest;
-import zones.sheepFarm.sheepFarm;
+import zones.sheepFarm.subZones.sheepFarm;
+import zones.unused.forest;
 
 public class tree extends chunk {
 	

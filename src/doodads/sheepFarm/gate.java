@@ -10,7 +10,7 @@ import terrain.chunk;
 import terrain.generalChunkType;
 import units.player;
 import units.characters.farlsworth.farlsworth;
-import zones.sheepFarm.sheepFarm;
+import zones.sheepFarm.subZones.sheepFarm;
 
 public class gate extends openable {
 	

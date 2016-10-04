@@ -1,4 +1,4 @@
-package zones.farmLand;
+package zones.unused;
 
 import java.awt.image.BufferedImage;
 
@@ -19,7 +19,7 @@ import units.unitTypes.spiderCave.spider;
 import units.unitTypes.spiderCave.webDoor;
 import utilities.intTuple;
 import zones.zone;
-import zones.sheepFarm.sheepFarm;
+import zones.sheepFarm.subZones.sheepFarm;
 
 public class spiderCave extends zone {
 	

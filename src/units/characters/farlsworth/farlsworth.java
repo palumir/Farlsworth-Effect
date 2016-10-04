@@ -25,7 +25,7 @@ import units.characters.farmer.cinematics.farmerIntroCinematic;
 import units.unitTypes.sheepFarm.sheep;
 import utilities.intTuple;
 import zones.zone;
-import zones.sheepFarm.sheepFarm;
+import zones.sheepFarm.subZones.sheepFarm;
 
 public class farlsworth extends boss {
 	

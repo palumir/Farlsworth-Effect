@@ -585,7 +585,7 @@ public class farmIntroCinematic extends cinematic {
 					
 					if(isSequence(numIfs++) && goNextTextSeries()) {
 						addTextSeries(null, "What a ludicrous request.",farlsworth);
-						waitFor(3f);
+						waitFor(2f);
 						
 						// Set the next text and advance it.
 						advanceSequence();

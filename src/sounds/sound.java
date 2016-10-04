@@ -43,7 +43,7 @@ public class sound extends Thread {
     private boolean loop = false;
     
     // Default sound radius
-    public static int DEFAULT_SOUND_RADIUS = 1800;
+    public static int DEFAULT_SOUND_RADIUS = 1700;
 
     enum Position { 
         LEFT, RIGHT, NORMAL
@@ -54,6 +54,7 @@ public class sound extends Thread {
     	setFileName(s.getFileName());
     	curPosition = Position.NORMAL;
     	allSounds.add(this);
+    	this.loop = s.loop;
     	this.x = s.x;
     	this.y = s.y;
     	this.radius = s.radius;

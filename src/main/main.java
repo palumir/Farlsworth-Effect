@@ -44,8 +44,6 @@ public class main {
 		// Create the player
 		//player.setDeveloper(true);
 		
-		///initiateAll();
-		
 		// Create the player at the last bottle?
 		if(s!= null && s.equals("respawnAtWell")) {
 			player p = player.loadPlayer(null,null,0,0,"Up");
@@ -57,10 +55,10 @@ public class main {
 			
 			// Nice, there's a well.
 			else {
+				well.refreshPlayer("respawnAtWell");
 				p.setDoubleX(p.lastWell.getX());
 				p.setDoubleY(p.lastWell.getY());
 			}
-			well.refreshPlayer("respawnAtWell");
 		}
 		else {
 			player p = player.loadPlayer(null,null,0,0,"Up");

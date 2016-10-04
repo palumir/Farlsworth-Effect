@@ -1,6 +1,9 @@
 package zones;
 
 import java.awt.Point;
+import java.io.File;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -15,11 +18,11 @@ import terrain.groundTile;
 import units.player;
 import utilities.intTuple;
 import utilities.saveState;
-import zones.farmLand.forest;
-import zones.farmLand.spiderCave;
-import zones.farmTomb.farmTomb;
-import zones.sheepFarm.farmerHouse;
-import zones.sheepFarm.sheepFarm;
+import zones.farmTomb.subZones.farmTomb;
+import zones.sheepFarm.subZones.farmerHouse;
+import zones.sheepFarm.subZones.sheepFarm;
+import zones.unused.forest;
+import zones.unused.spiderCave;
 
 public abstract class zone {
 	
@@ -123,16 +126,48 @@ public abstract class zone {
 	// Initiate zones.
 	public static void initiate() {
 		
+		// Create a zone reference in every zone.
+		File folder = new File("src/zones");
+		File[] listOfFiles = folder.listFiles();
+		for (int i = 0; i < listOfFiles.length; i++) {
+			if (listOfFiles[i].isDirectory()) {
+				File subFolder = new File("src/zones/" + listOfFiles[i].getName());
+				File[] subListOfFiles = subFolder.listFiles();
+				for (int j = 0; j < subListOfFiles.length; j++) {
+					if (subListOfFiles[j].isDirectory() && subListOfFiles[j].getName().equals("subZones")) {
+						File subZones = new File("src/zones/" + listOfFiles[i].getName() + "/subZones");
+						File[] subZoneFiles = subZones.listFiles();
+						if (subZoneFiles != null) {
+							for (int b = 0; b < subZoneFiles.length; b++) {
+								File currZone = subZoneFiles[b];
+								if (currZone.isFile()) {
+
+									// Create zone reference.
+									Class<?> clazz;
+									try {
+										clazz = Class.forName("zones." + listOfFiles[i].getName() + ".subZones."
+												+ currZone.getName().replace(".java", ""));
+										Constructor<?> ctor = clazz.getConstructor();
+										zone object = (zone) ctor.newInstance(new Object[] {});
+										Method method = clazz.getMethod("setZone", zone.class);
+										method.invoke(null, object);
+									} catch (Exception e) {
+										e.printStackTrace();
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+
 		// Sheep Farms
-		sheepFarm.setZone(new sheepFarm());
+		/*sheepFarm.setZone(new sheepFarm());
 		farmerHouse.setZone(new farmerHouse());
 		
 		// Farm tomb
-		farmTomb.setZone(new farmTomb());
-		
-		// Old zones.
-		forest.setZone(new forest());
-		spiderCave.setZone(new spiderCave());
+		farmTomb.setZone(new farmTomb());*/
 	}
 	
 	// Get the player location in the zone.

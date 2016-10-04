@@ -6,11 +6,11 @@ import effects.effect;
 import effects.effectType;
 import modes.mode;
 
-public class rainFall extends effect {
+public class mudSplash extends effect {
 	
 	// Default dimensions.
-	public static int DEFAULT_SPRITE_WIDTH = 39;
-	public static int DEFAULT_SPRITE_HEIGHT = 64;
+	public static int DEFAULT_SPRITE_WIDTH = 15;
+	public static int DEFAULT_SPRITE_HEIGHT = 15;
 	
 	// Platformer real dimensions
 	public static int DEFAULT_PLATFORMER_HEIGHT = DEFAULT_SPRITE_WIDTH;
@@ -18,20 +18,16 @@ public class rainFall extends effect {
 	public static int DEFAULT_PLATFORMER_ADJUSTMENT_Y = 0;
 	
 	// TopDown real dimensions
-	public static int DEFAULT_TOPDOWN_HEIGHT = 39;
-	public static int DEFAULT_TOPDOWN_WIDTH = 64;
+	public static int DEFAULT_TOPDOWN_HEIGHT = 15;
+	public static int DEFAULT_TOPDOWN_WIDTH = 15;
 	public static int DEFAULT_TOPDOWN_ADJUSTMENT_Y = 0;
-	
-	// Fall speed default
-	public static int FALL_VALUE_X = 5;
-	public static int FALL_VALUE_Y = 9;
 	
 	////////////////
 	/// DEFAULTS ///
 	////////////////
 	
 	// Default name.
-	private static String DEFAULT_EFFECT_NAME = "rainFall";
+	private static String DEFAULT_EFFECT_NAME = "mudSplash";
 	
 	// Effect sprite stuff.
 	private static String DEFAULT_EFFECT_SPRITESHEET = "images/effects/weather/" + DEFAULT_EFFECT_NAME + ".png";
@@ -61,35 +57,20 @@ public class rainFall extends effect {
 	/// METHODS ///
 	///////////////
 	// Constructor
-	public rainFall(int newX, int newY) {
+	public mudSplash(int newX, int newY) {
 		super(theEffectType, newX, newY);
-		
-		// Force in front
-		forceInFront = true;
 		
 		// Make adjustments on hitbox if we're in topDown.
 		setHeight(getDefaultHeight());
 		setWidth(getDefaultWidth());
 		setHitBoxAdjustmentY(getDefaultHitBoxAdjustmentY());
+		setBackgroundDoodad(true);
 
 	}
 	
 	///////////////////////////
 	/// GETTERS AND SETTERS ///
 	///////////////////////////
-	
-	// Move the rain as if it's falling.
-	@Override
-	public void doSpecificEffectStuff() {
-		setDoubleY(getDoubleY() + FALL_VALUE_Y);
-		setDoubleX(getDoubleX() + FALL_VALUE_X);
-	}
-	
-	// Respond to destroy by creating a rain explode effect.
-	@Override 
-	public void respondToDestroy() {
-		rainSplash r = new rainSplash(this.getIntX() + this.getWidth()/2-rainSplash.getDefaultWidth()/2,this.getIntY() + this.getHeight()-rainSplash.getDefaultHeight()/2);
-	}
 	
 	// Get default width.
 	public static int getDefaultWidth() {

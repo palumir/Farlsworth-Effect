@@ -33,7 +33,7 @@ public class rainSplash extends effect {
 	private static String DEFAULT_EFFECT_SPRITESHEET = "images/effects/weather/" + DEFAULT_EFFECT_NAME + ".png";
 	
 	// Duration
-	private static float DEFAULT_ANIMATION_DURATION = 0.6f;
+	private static float DEFAULT_ANIMATION_DURATION = 0.65f;
 	
 	// The actual type.
 	private static effectType theEffectType =

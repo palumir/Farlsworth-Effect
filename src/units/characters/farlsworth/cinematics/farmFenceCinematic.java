@@ -12,7 +12,7 @@ import units.characters.farlsworth.farlsworth;
 import units.unitCommands.commandList;
 import units.unitCommands.commands.moveCommand;
 import utilities.saveState;
-import zones.sheepFarm.sheepFarm;
+import zones.sheepFarm.subZones.sheepFarm;
 
 public class farmFenceCinematic extends cinematic {
 	

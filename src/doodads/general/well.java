@@ -7,6 +7,7 @@ import interactions.interactBox;
 import interactions.textSeries;
 import items.bottle;
 import items.item;
+import items.bottles.saveBottle;
 import main.main;
 import modes.mode;
 import sounds.sound;
@@ -70,7 +71,11 @@ public class well extends chunk {
 		textSeries startOfConversation = new textSeries("StartWithButtons", "StartWithButtons");
 		
 		// Save and reset.
-		textSeries saveGame = startOfConversation.addChild("Save game", "Are you sure you want to save?");
+		textSeries saveGame = null;
+		if(!player.getPlayer().getPlayerInventory().containsBottleType(saveBottle.class)) saveGame = startOfConversation.addChild("Save game", "Are you sure you want to save?");
+		else {
+			saveGame = startOfConversation.addChild("Save and refill bottles", "Are you sure you want to save and refill bottles?");
+		}
 		
 		// Cancel
 		textSeries cancel = startOfConversation.addChild("Cancel", "The game was not saved.");
