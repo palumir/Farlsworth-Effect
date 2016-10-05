@@ -57,7 +57,7 @@ public class well extends chunk {
 		else {
 			setHitBoxAdjustmentY(0);
 			setHeight(DEFAULT_CHUNK_HEIGHT);
-			setWidth(DEFAULT_CHUNK_WIDTH);
+			setWidth(43);
 		}
 	}
 	
@@ -135,11 +135,20 @@ public class well extends chunk {
 		}
 		
 		if(reason.equals("respawnAtWell")) {
+			
+			// Clear last save.
+			player.getPlayer().lastSaveBottle = null;
+			if(player.getPlayer().lastSaveBottleChargeIndicator!=null) {
+				player.getPlayer().lastSaveBottleChargeIndicator.destroy();
+				player.getPlayer().lastSaveBottleChargeIndicator = null;
+			}
+			
 			saveState.setQuiet(true);
 			saveState.createSaveState();
 			saveState.setQuiet(false);
-			main.restartGame("None");
 		}
+		
+		// Saving at well.
 		else {
 			saveState.createSaveState();
 			main.restartGame(reason);

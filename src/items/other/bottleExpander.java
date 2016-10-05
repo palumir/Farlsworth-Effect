@@ -9,6 +9,7 @@ import interactions.event;
 import items.bottle;
 import items.bottleShard;
 import items.item;
+import sounds.sound;
 import units.player;
 
 public class bottleExpander extends item {
@@ -27,6 +28,8 @@ public class bottleExpander extends item {
 			0,
 			0
 			));
+	
+	public static String hammerSound = "sounds/effects/items/bottleExpand.wav";
 
 	//////////////
 	/// FIELDS ///
@@ -82,17 +85,29 @@ public class bottleExpander extends item {
 		
 		// Make sure it's a bottle.
 		else if(useOnItem instanceof bottle) {
-			this.drop();
-			useOnItem.upgrade();
-			((bottle)useOnItem).setMaxCharges(((bottle)useOnItem).getMaxCharges() + 1);
-			player.getPlayer().getPlayerInventory().setWaitingToUseItem(false);
-			new tooltipString(useOnItem.getName() + " has been expanded.");
+			upgradeBottle((bottle)useOnItem);
 		}
 		
 		// Not a bottle, you dinky!
 		else {
 			new tooltipString("This Bottle Expander only works on a bottle, you dinky!");
 		}
+	}
+	
+	public void upgradeBottle(bottle useOnItem) {
+		
+		// Drop it obviously.
+		this.dropSilent();
+		
+		// Play upgrade sound.
+		sound s = new sound(hammerSound);
+		s.start();
+		
+		// Upgrade the bottle
+		useOnItem.upgrade();
+		
+		// Player is no longer waiting to use bottle expander, of course.
+		player.getPlayer().getPlayerInventory().setWaitingToUseItem(false);
 	}
 	
 	// Is it an item we can use this on?

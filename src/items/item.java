@@ -91,6 +91,20 @@ public abstract class item extends drawnObject {
 	public abstract BufferedImage getImage();
 	
 	// Pickup the item.
+	public void dropSilent() {
+		if(player.getPlayer() != null) {
+			
+			// At least add the item to the player's inventory.
+			player.getPlayer().getPlayerInventory().drop(this);
+			
+		}
+		
+		// Stop drawing the weapon on the ground.
+		inInventory = false;
+		destroy();
+	}
+	
+	// Pickup the item.
 	public void drop() {
 		if(player.getPlayer() != null) {
 		
@@ -99,8 +113,6 @@ public abstract class item extends drawnObject {
 			effect e = new floatingString("-" + stringUtils.toTitleCase(getName()), DEFAULT_DROP_COLOR, currPlayer.getIntX() + currPlayer.getWidth()/2, currPlayer.getIntY() + currPlayer.getHeight()/2, 1.3f);
 			e.setAnimationDuration(3f);
 			
-			// At least add the item to the player's inventory.
-			player.getPlayer().getPlayerInventory().drop(this);
 			
 		}
 		
@@ -108,9 +120,7 @@ public abstract class item extends drawnObject {
 		sound s = new sound(pickUpSound);
 		s.start();
 		
-		// Stop drawing the weapon on the ground.
-		inInventory = false;
-		destroy();
+		dropSilent();
 	}
 	
 	// Item discover.

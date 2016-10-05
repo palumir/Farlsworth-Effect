@@ -1,5 +1,6 @@
 package items;
 
+import UI.tooltipString;
 import drawing.spriteSheet;
 
 public abstract class bottle extends item {
@@ -60,6 +61,14 @@ public abstract class bottle extends item {
 		// It is, of course, equippable.
 		equippable = true;
 		inInventory = false;
+	}
+	
+	// Update
+	@Override
+	public void upgrade() {
+		upgradeLevel++;
+		this.setMaxCharges(this.getMaxCharges() + 1);
+		new tooltipString(this.getName() + " has been expanded.");
 	}
 	
 	// Use charge.

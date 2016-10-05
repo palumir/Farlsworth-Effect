@@ -85,7 +85,7 @@ public class saveBottle extends bottle {
 		player currPlayer = player.getPlayer();
 		if(currPlayer != null) {
 			currPlayer.getPlayerInventory().equipItem(this, KeyEvent.VK_ENTER);
-			tooltipString t = new tooltipString("Press 'enter' save the game with the Save Bottle.");
+			tooltipString t = new tooltipString("Press 'enter' to use a charge of the Save Bottle.");
 		}
 	}
 

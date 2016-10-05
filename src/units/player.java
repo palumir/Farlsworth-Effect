@@ -201,6 +201,7 @@ public class player extends unit {
 
 	// Player AI controls the interface
 	public void updateUnit() {
+		//if(lastWell!=null)System.out.println(lastWell.getX() + " " + lastWell.getY());
 		dealWithTopDownJumping();
 		showPossibleInteractions();
 		isPlayerDead();

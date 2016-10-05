@@ -47,7 +47,6 @@ public class main {
 		// Create the player at the last bottle?
 		if(s!= null && s.equals("respawnAtWell")) {
 			player p = player.loadPlayer(null,null,0,0,"Up");
-			p.lastSaveBottle = null;
 			
 			// If they skipped a well.
 			if(p.lastWell == null) {
