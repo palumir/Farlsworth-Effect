@@ -10,7 +10,7 @@ import java.io.Serializable;
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 
-import UI.tooltipString;
+import effects.interfaceEffects.tooltipString;
 import interactions.event;
 import interactions.quest;
 import items.bottle;
@@ -60,7 +60,7 @@ public class saveState implements Serializable {
 	public Point lastWell;
 	
 	// Last save bottle coordinates
-	public Point lastSaveBottle;
+	public ArrayList<Point> lastSaveBottles;
 	
 	// Save quietly?
 	private static boolean quiet = false;
@@ -134,18 +134,16 @@ public class saveState implements Serializable {
 					objectStream.writeObject((int)lastWell.getY());
 				}
 				
-				// Last well position
-				Point lastSaveBottle = player.getPlayer().lastSaveBottle;
-				
-				if(lastSaveBottle == null) {
-					objectStream.writeObject(false);
-					objectStream.writeObject(0);
-					objectStream.writeObject(0);
-				}
-				else {
-					objectStream.writeObject(true);
-					objectStream.writeObject((int)lastSaveBottle.getX());
-					objectStream.writeObject((int)lastSaveBottle.getY());
+				// Last save bottle
+				ArrayList<Point> lastSaveBottles = player.getPlayer().lastSaveBottles;
+				if(lastSaveBottles == null) objectStream.writeObject(0);
+				else { 
+					objectStream.writeObject(lastSaveBottles.size());
+					
+					for(int i = 0; i < lastSaveBottles.size(); i++) {
+						objectStream.writeObject((int)lastSaveBottles.get(i).getX());
+						objectStream.writeObject((int)lastSaveBottles.get(i).getY());
+					}
 				}
 				
 				
@@ -261,13 +259,10 @@ public class saveState implements Serializable {
 			}
 			
 			// Get the last bottle charge
-			boolean isThereASaveBottle = (boolean) objectStream.readObject();
-			if(isThereASaveBottle) {
-				s.lastSaveBottle = new Point((int)objectStream.readObject(),(int)objectStream.readObject());
-			}
-			else {
-				objectStream.readObject();
-				objectStream.readObject();
+			int howManySaveBottles = (int) objectStream.readObject();
+			s.lastSaveBottles = new ArrayList<Point>();
+			for(int i = 0; i < howManySaveBottles; i++) {
+				s.lastSaveBottles.add(new Point((int)objectStream.readObject(),(int)objectStream.readObject()));
 			}
 			
 			//////////////

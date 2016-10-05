@@ -1,4 +1,4 @@
-package UI;
+package effects.interfaceEffects;
 
 import java.awt.AlphaComposite;
 import java.awt.Color;
@@ -48,6 +48,7 @@ public class tooltipString extends absolutePositionedEffect {
 	//////////////
 	public String text;
 	public Color color;
+	public boolean fadingOut = false;
 	
 	///////////////
 	/// METHODS ///
@@ -70,6 +71,13 @@ public class tooltipString extends absolutePositionedEffect {
 		forceInFront = true;
 	}
 	
+	// Fadeout
+	public void fadeOut() {
+		fadingOut = true;
+		timeStarted = (long) (time.getTime() - 0.95f*getAnimationDuration()*1000);
+		setHasATimer(true);
+	}
+	
 	// Draw the object.
 	@Override
 	public void drawObject(Graphics g2) {
@@ -84,10 +92,13 @@ public class tooltipString extends absolutePositionedEffect {
 		if(timeThatHasPassed/getAnimationDuration() < 0.05f) {
 			alpha = 20f*(timeThatHasPassed/getAnimationDuration());
 		}
-		if(timeThatHasPassed/getAnimationDuration() > 0.95f) {
+		if(timeThatHasPassed/getAnimationDuration() > 0.95f && isHasATimer()) {
 			alpha = 20f*(1f - (timeThatHasPassed/getAnimationDuration()));
 		}
-		if(alpha < 0) alpha = 0;
+		if(alpha < 0) {
+			alpha = 0;
+			this.destroy();
+		}
 		if(alpha > 1) alpha = 1;
 		Color newColor = new Color(DEFAULT_COLOR.getRed()/255f, DEFAULT_COLOR.getGreen()/255f, DEFAULT_COLOR.getBlue()/255f, alpha); //Black 
 		Font font = drawnObject.DEFAULT_FONT.deriveFont(drawnObject.DEFAULT_FONT.getSize()*DEFAULT_TEXT_SIZE);

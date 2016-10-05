@@ -33,7 +33,7 @@ public abstract class bottleShard extends item {
 	
 	// For bottle shard being in your floor
 	public bottleShard(String newName, int x, int y) {
-		super(newName,null,x,y,0,0);
+		super(newName,x,y);
 		
 		// Set the width and height.
 		setWidth(getImage().getWidth());

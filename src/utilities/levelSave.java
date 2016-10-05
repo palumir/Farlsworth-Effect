@@ -10,8 +10,8 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 
-import UI.tooltipString;
 import drawing.drawnObject;
+import effects.interfaceEffects.tooltipString;
 import terrain.chunk;
 import terrain.groundTile;
 import units.player;

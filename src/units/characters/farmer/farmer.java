@@ -3,8 +3,8 @@ package units.characters.farmer;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 
-import UI.tooltipString;
 import drawing.spriteSheet;
+import effects.interfaceEffects.tooltipString;
 import interactions.interactBox;
 import interactions.quest;
 import interactions.textSeries;

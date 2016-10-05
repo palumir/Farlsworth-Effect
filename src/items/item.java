@@ -11,6 +11,7 @@ import drawing.drawnObject;
 import drawing.gameCanvas;
 import drawing.spriteSheet;
 import effects.effect;
+import effects.effectTypes.itemGlow;
 import effects.interfaceEffects.floatingString;
 import sounds.sound;
 import units.player;
@@ -66,17 +67,24 @@ public abstract class item extends drawnObject {
 	
 	// Slot the item is equipped in (if possible)
 	public Integer slot = KeyEvent.VK_WINDOWS; // Defaults to something that's not a key. Hahahaha.
+
+	// Item glow
+	private itemGlow glow;
 	
 	///////////////
 	/// METHODS ///
 	///////////////
-	public item(String newName, spriteSheet newSpriteSheet, int newX, int newY, int newWidth, int newHeight) {
-		super(newSpriteSheet,newName, newX,newY,newWidth,newHeight);
+	public item(String newName, int newX, int newY) {
+		super(null,newName, newX,newY,0,0);
+		
+		// Set width and height.
+		setWidth(getImage().getWidth());
+		setHeight(getImage().getHeight());
 		
 		// Set discover zone.
 		if(zone.getCurrentZone() != null) discoverZone = zone.getCurrentZone().getName();
-		
-		// Break up the spriteSheet. Assumed to be regular human character size, for now.
+
+		// Don't draw the object if it's in the inventory.
 		if(player.getPlayer()!=null) {
 			if(player.getPlayer().getPlayerInventory().hasItem(this)) {
 				setDrawObject(false);
@@ -85,6 +93,16 @@ public abstract class item extends drawnObject {
 		else setDrawObject(true);
 		
 		allItems.add(this);
+
+		//forceInFront = true;
+	}
+	
+	// Create glow
+	public void createGlow() {
+		if(isDrawObject() && isExists()) {
+			glow = new itemGlow(this, getIntX() + getImage().getWidth()/2 - itemGlow.DEFAULT_WIDTH/2, getIntY() + getImage().getHeight()/2 - itemGlow.DEFAULT_HEIGHT/2);
+			glow.setBackgroundDoodad(true);
+		}
 	}
 	
 	// Get the item's image.
@@ -128,10 +146,8 @@ public abstract class item extends drawnObject {
 	
 	// Pickup the item.
 	public void pickUp() {
-		if(player.getPlayer() != null) {
 		
-			// Display text. 
-			player currPlayer = player.getPlayer();
+		if(player.getPlayer() != null) {
 
 			discoverAnimation = new itemDiscover(this,
 					gameCanvas.getDefaultWidth()/2 - itemDiscover.getDefaultWidth()/2,
@@ -159,6 +175,15 @@ public abstract class item extends drawnObject {
 	// Is it an item we can use this on?
 	public boolean isItemWeCanUseOn(item i) {
 		return false;
+	}
+	
+	// Respond to destroy
+	@Override
+	public void respondToDestroy() {
+		if(glow !=null) {
+			glow.destroy();
+			glow = null;
+		}
 	}
 	
 	// React to pickup

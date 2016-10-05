@@ -2,9 +2,9 @@ package items.other;
 
 import java.awt.image.BufferedImage;
 
-import UI.tooltipString;
 import drawing.spriteSheet;
 import drawing.spriteSheet.spriteSheetInfo;
+import effects.interfaceEffects.tooltipString;
 import interactions.event;
 import items.bottle;
 import items.bottleShard;
@@ -50,7 +50,7 @@ public class bottleExpander extends item {
 	
 	// For weapon being in your floor
 	public bottleExpander(int x, int y) {
-		super("Bottle Expander",null,x,y,0,0);
+		super("Bottle Expander",x,y);
 		
 		// Set the width and height.
 		setWidth(getImage().getWidth());
@@ -58,6 +58,8 @@ public class bottleExpander extends item {
 		
 		// It is, of course, equippable.
 		usedOnItems = true;
+		
+		createGlow();
 	}
 	
 	// React to pickup

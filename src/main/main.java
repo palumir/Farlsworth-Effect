@@ -1,12 +1,12 @@
 package main;
 
 import UI.interfaceObject;
-import UI.tooltipString;
 import cinematics.cinematic;
 import doodads.general.lightSource;
 import doodads.general.well;
 import drawing.drawnObject;
 import drawing.gameCanvas;
+import effects.interfaceEffects.tooltipString;
 import interactions.interactBox;
 import sounds.sound;
 import terrain.chunk;

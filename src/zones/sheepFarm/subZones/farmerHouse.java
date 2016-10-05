@@ -3,7 +3,6 @@ import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-import UI.tooltipString;
 import doodads.sheepFarm.barn;
 import doodads.sheepFarm.blackSmith;
 import doodads.sheepFarm.bridge;
@@ -24,6 +23,7 @@ import drawing.background;
 import drawing.spriteSheet;
 import drawing.backgrounds.rotatingBackground;
 import effects.effectTypes.fire;
+import effects.interfaceEffects.tooltipString;
 import interactions.event;
 import items.bottle;
 import items.bottles.saveBottle;

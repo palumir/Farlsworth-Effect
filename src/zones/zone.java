@@ -7,8 +7,8 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import UI.tooltipString;
 import drawing.drawnObject;
+import effects.interfaceEffects.tooltipString;
 import main.main;
 import modes.platformer;
 import modes.topDown;

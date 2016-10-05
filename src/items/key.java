@@ -30,7 +30,7 @@ public abstract class key extends item {
 	
 	// For weapon being in your inventory.
 	public key(String newName) {
-		super(newName,null,0,0,0,0);
+		super(newName,0,0);
 		
 		// It is, of course, non-equippable.
 		equippable = false;
@@ -42,7 +42,7 @@ public abstract class key extends item {
 	
 	// For weapon being in your floor
 	public key(String newName, int x, int y) {
-		super(newName,null,x,y,0,0);
+		super(newName,x,y);
 		
 		// Set the width and height.
 		setWidth(getImage().getWidth());

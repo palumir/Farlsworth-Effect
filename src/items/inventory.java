@@ -10,9 +10,9 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 import UI.interfaceObject;
-import UI.tooltipString;
 import drawing.gameCanvas;
 import drawing.spriteSheet;
+import effects.interfaceEffects.tooltipString;
 import items.bottles.jumpBottle;
 import items.bottles.saveBottle;
 import sounds.sound;

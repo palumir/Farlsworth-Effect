@@ -3,7 +3,6 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import UI.tooltipString;
 import doodads.cave.firePit;
 import doodads.general.well;
 import doodads.sheepFarm.barn;
@@ -30,6 +29,7 @@ import drawing.background;
 import drawing.spriteSheet;
 import drawing.backgrounds.rotatingBackground;
 import effects.effectTypes.fire;
+import effects.interfaceEffects.tooltipString;
 import interactions.event;
 import items.bottle;
 import items.item;
@@ -253,7 +253,7 @@ public class sheepFarm extends zone {
 		loadZoneEvents();
 		
 		// Load the level save.
-		levelSave.loadSaveState("sheepFarmLevel.save");
+		//levelSave.loadSaveState("sheepFarmLevel.save");
 		//sheepFarmZoneLoader loader = new sheepFarmZoneLoader();
 		//loader.loadSegments();
 		
@@ -265,7 +265,7 @@ public class sheepFarm extends zone {
 		}
 		
 		// Spawn special stuff
-		spawnSpecialStuff();
+		//spawnSpecialStuff();
 		
 		// Create items
 		createItems();
@@ -516,9 +516,10 @@ public class sheepFarm extends zone {
 			tooltipString t = new tooltipString("Interact with a well to save the game.");
 		}
 		
-		if(currPlayer != null && currPlayer.isWithin(-717,-3646,-630,-3552) && useSaveBottle != null && !useSaveBottle.isCompleted()) {
+		if(currPlayer != null && currPlayer.isWithin(-718,-3959,-630,-3800) && useSaveBottle != null && !useSaveBottle.isCompleted()
+				&& player.getPlayer().lastSaveBottles!=null && player.getPlayer().lastSaveBottles.size() < 2) {
 			useSaveBottle.setCompleted(true);
-			tooltipString t = new tooltipString("hey remember 2 use save botle its rly good");
+			tooltipString t = new tooltipString("Use the Save Bottle to avoid having to re-do difficult areas.");
 		}
 		
 		if(currPlayer != null && currPlayer.isWithin(-1116,-490,-444,54) && eToInteract != null && !eToInteract.isCompleted()) {
