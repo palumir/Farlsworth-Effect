@@ -13,6 +13,7 @@ import drawing.spriteSheet;
 import effects.effect;
 import effects.effectTypes.itemGlow;
 import effects.interfaceEffects.floatingString;
+import modes.mode;
 import sounds.sound;
 import units.player;
 import utilities.saveBooleanList;
@@ -101,7 +102,10 @@ public abstract class item extends drawnObject {
 	public void createGlow() {
 		if(isDrawObject() && isExists()) {
 			glow = new itemGlow(this, getIntX() + getImage().getWidth()/2 - itemGlow.DEFAULT_WIDTH/2, getIntY() + getImage().getHeight()/2 - itemGlow.DEFAULT_HEIGHT/2);
-			glow.setBackgroundDoodad(true);
+			if(mode.getCurrentMode().equals("topDown")) glow.setBackgroundDoodad(true);
+			else {
+				this.setForceInFront(true);
+			}
 		}
 	}
 	
