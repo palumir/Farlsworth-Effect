@@ -233,6 +233,13 @@ public class player extends unit {
 			// Tell the player
 			tooltipString t = new tooltipString("You died.");
 			
+			// Close current box.
+			if(interactBox.getCurrentDisplay()!=null) {
+				interactBox.getCurrentDisplay().setDisplayOn(false);
+				interactBox.getCurrentDisplay().destroy();
+				interactBox.setCurrentDisplay(null);
+			}
+			
 			// Tell the player death timer to start.
 			unitDiedAt = time.getTime();
 			setUnitIsDead(true);
@@ -368,13 +375,7 @@ public class player extends unit {
 			
 			// Create an indicator
 			if(s.lastSaveBottles != null && s.lastSaveBottles.size() > 0) {
-				thePlayer.lastSaveBottleChargeIndicator = new savePoint(
-						(int)thePlayer.lastSaveBottles.get(thePlayer.lastSaveBottles.size()-1).getX(),
-						thePlayer.getIntY() - 
-						(
-						((int)thePlayer.lastSaveBottles.get(thePlayer.lastSaveBottles.size()-1).getY() + savePoint.DEFAULT_SPRITE_HEIGHT)
-						- (thePlayer.getIntY() + thePlayer.getHeight()))
-						);
+				savePoint.createSavePoint(thePlayer);
 			}
 		}
 		
