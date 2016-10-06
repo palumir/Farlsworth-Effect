@@ -1,4 +1,4 @@
-package zones.farmTomb;
+package zones.farmTomb.subZones;
 
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -29,7 +29,7 @@ import units.unitTypes.tomb.shadowDude;
 import utilities.intTuple;
 import utilities.levelSave;
 import zones.zone;
-import zones.sheepFarm.sheepFarm;
+import zones.sheepFarm.subZones.sheepFarm;
 
 public class farmTomb extends zone {
 	
@@ -175,7 +175,7 @@ public class farmTomb extends zone {
 		// Load zone events.
 		loadZoneEvents();
 		
-		levelSave.loadSaveState("actualTombLevel.save");
+		//levelSave.loadSaveState("actualTombLevel.save");
 		
 		// Load the level save.
 		//farmTombZoneLoader loader = new farmTombZoneLoader();
@@ -223,7 +223,7 @@ public class farmTomb extends zone {
 	public void loadItems() {
 		jumpBottle b = new jumpBottle(2867, 1398+32);
 		bottleExpander exp = new bottleExpander(11498,2333);
-		exp.quality = "Good";
+		exp.quality = "Alright";
 	}
 	
 	// Load units

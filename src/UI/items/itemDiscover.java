@@ -53,7 +53,7 @@ public class itemDiscover extends absolutePositionedEffect {
 	private item item;
 	
 	// The actual type.
-	private static effectType commonEffectType =
+	public static effectType commonEffectType =
 			new effectType(DEFAULT_EFFECT_NAME,
 					new spriteSheet(new spriteSheetInfo(
 							DEFAULT_EFFECT_SPRITESHEET_COMMON, 
@@ -63,7 +63,7 @@ public class itemDiscover extends absolutePositionedEffect {
 							0
 							)),
 							DEFAULT_ANIMATION_DURATION);	
-	private static effectType rareEffectType =
+	public static effectType rareEffectType =
 			new effectType(DEFAULT_EFFECT_NAME,
 					new spriteSheet(new spriteSheetInfo(
 							DEFAULT_EFFECT_SPRITESHEET_RARE, 
@@ -73,7 +73,7 @@ public class itemDiscover extends absolutePositionedEffect {
 							0
 							)),
 							DEFAULT_ANIMATION_DURATION);	
-	private static effectType legendaryEffectType =
+	public static effectType legendaryEffectType =
 			new effectType(DEFAULT_EFFECT_NAME,
 					new spriteSheet(new spriteSheetInfo(
 							DEFAULT_EFFECT_SPRITESHEET_LEGENDARY, 
@@ -194,7 +194,7 @@ public class itemDiscover extends absolutePositionedEffect {
 					(int)(gameCanvas.getScaleY()*sizeMultiplier*item.getImage().getHeight()*1.5f + 1), 
 					null);
 			
-			Font font = drawnObject.DEFAULT_FONT_BOLD.deriveFont((float) (drawnObject.DEFAULT_FONT_BOLD.getSize()*1.1f*sizeMultiplier));
+			Font font = drawnObject.DEFAULT_FONT_BOLD.deriveFont((float) (drawnObject.DEFAULT_FONT_BOLD.getSize()*1.05f*sizeMultiplier));
 			g.setFont(font);
 			g.setColor(DEFAULT_COLOR);
 			g.drawString(item.getName(), 
@@ -203,9 +203,9 @@ public class itemDiscover extends absolutePositionedEffect {
 							- g.getFontMetrics().stringWidth(item.getName())/2), 
 					(int)((getIntY()
 							+ getCurrentAnimation().getCurrentFrame().getHeight()/2 
-							+ item.getImage().getHeight()*1.5f/2+3)*gameCanvas.getScaleY()));
+							+ item.getImage().getHeight()*1.5f/2+5)*gameCanvas.getScaleY()));
 			
-			font = drawnObject.DEFAULT_FONT.deriveFont((float) (drawnObject.DEFAULT_FONT.getSize()*1f*sizeMultiplier));
+			/*font = drawnObject.DEFAULT_FONT.deriveFont((float) (drawnObject.DEFAULT_FONT.getSize()*1f*sizeMultiplier));
 			g.setFont(font);
 			g.setColor(DEFAULT_COLOR);
 			g.drawString(item.quality, 
@@ -214,7 +214,7 @@ public class itemDiscover extends absolutePositionedEffect {
 							- g.getFontMetrics().stringWidth(item.quality)/2), 
 					(int)((getIntY()
 							+ getCurrentAnimation().getCurrentFrame().getHeight()/2 
-							+ item.getImage().getHeight()*1.5f/2 + 14)*gameCanvas.getScaleY()));
+							+ item.getImage().getHeight()*1.5f/2 + 14)*gameCanvas.getScaleY()));*/
 		}
 	}
 	

@@ -14,7 +14,7 @@ import units.characters.farmer.cinematics.farmerIntroCinematic;
 import units.unitCommands.commandList;
 import units.unitCommands.commands.moveCommand;
 import utilities.saveState;
-import zones.farmTomb.farmTomb;
+import zones.farmTomb.subZones.farmTomb;
 
 public class wolflessFightCinematic extends cinematic {
 	

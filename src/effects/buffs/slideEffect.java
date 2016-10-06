@@ -2,8 +2,13 @@ package effects.buffs;
 
 import effects.buff;
 import effects.effectType;
-import terrain.chunkTypes.wood;
+import effects.effectTypes.mudSplash;
+import effects.effectTypes.mudSplash;
+import modes.mode;
+import terrain.chunkTypes.mud;
 import units.unit;
+import utilities.time;
+import utilities.utility;
 
 public class slideEffect extends movementBuff {
 	
@@ -62,6 +67,7 @@ public class slideEffect extends movementBuff {
 			onUnit.setMovementAcceleration(0);
 			onUnit.moveSpeed = unitMoveSpeed;
 		}
+		
 	}
 	
 	// Methods
@@ -70,11 +76,34 @@ public class slideEffect extends movementBuff {
 		setHasATimer(false);
 	}
 	
+	// Don't do it that often
+	long lastMud = 0;
+	float mudEvery = 0.04f;
+	
+	public void animateBuff() {
+		
+		if(time.getTime() - lastMud > mudEvery*1000) {
+			lastMud = time.getTime();
+			if(Math.abs(onUnit.getMomentumX()) > 0.2f || Math.abs(onUnit.getMomentumY()) > 0.2f) {
+				// Put particles at the bottom of the buff.
+				int randomX = onUnit.getIntX() + utility.RNG.nextInt(onUnit.getWidth());
+				if(mode.getCurrentMode().equals("platformer")) {
+					//mudSplash e = new mudSplash(randomX - mudSplash.DEFAULT_SPRITE_WIDTH/2, onUnit.getIntY() + onUnit.getHeight()-mudSplash.DEFAULT_SPRITE_HEIGHT/2);
+				}
+				else { 
+					mudSplash e = new mudSplash(onUnit.getIntX() + onUnit.getWidth()/2 - mudSplash.DEFAULT_SPRITE_WIDTH/2 + 1 - utility.RNG.nextInt(3),-5 + onUnit.getIntY() + onUnit.getHeight()-mudSplash.DEFAULT_SPRITE_HEIGHT/2 + 1 - utility.RNG.nextInt(3));
+				}
+			}
+		}
+	}
+	
 	// Remove effect if off wood.
 	@Override
 	public void update() {
-		if(!wood.isOnWood(onUnit) && !onUnit.isInAir()) {
-			removeEffect();
+		boolean onMud = mud.isOnMud(onUnit);
+		if(onMud && !mud.isOnNonMud(onUnit)) animateBuff();
+		if(onUnit.isUnitIsDead() || (!onMud && (!onUnit.isInAir() ||  mode.getCurrentMode().equals("topDown")))) {
+			destroy();
 		}
 	}
 	

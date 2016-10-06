@@ -17,7 +17,7 @@ import units.unitCommands.commands.jumpCommand;
 import units.unitCommands.commands.moveCommand;
 import utilities.saveState;
 import utilities.time;
-import zones.farmTomb.farmTomb;
+import zones.farmTomb.subZones.farmTomb;
 
 public class farmTombCinematic extends cinematic {
 	

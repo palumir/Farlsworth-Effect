@@ -6,8 +6,8 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.util.ArrayList;
 
-import UI.tooltipString;
 import drawing.drawnObject;
+import effects.interfaceEffects.tooltipString;
 import units.unit;
 import units.unitCommand;
 import units.unitCommands.commandIndicator;

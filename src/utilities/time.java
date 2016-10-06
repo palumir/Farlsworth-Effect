@@ -6,6 +6,7 @@ import java.util.Date;
 
 import javax.swing.Timer;
 
+import sounds.music;
 import sounds.sound;
 
 public class time extends utility {
@@ -76,8 +77,15 @@ public class time extends utility {
 			if(soundsToPlay!=null) {
 				for(int i = 0; i < soundsToPlay.size(); i++) {
 					sound currSound = soundsToPlay.get(i);
-					sound s = new sound(currSound);
-					s.start();
+					
+					if(currSound instanceof music) {
+						music.endAll();
+						music.startMusic(currSound.getFileName());
+					}
+					else {
+						sound s = new sound(currSound);
+						s.start();
+					}
 				}
 			}
 		}

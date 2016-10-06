@@ -7,6 +7,7 @@ import interactions.interactBox;
 import interactions.textSeries;
 import items.bottle;
 import items.item;
+import items.bottles.saveBottle;
 import main.main;
 import modes.mode;
 import sounds.sound;
@@ -56,7 +57,7 @@ public class well extends chunk {
 		else {
 			setHitBoxAdjustmentY(0);
 			setHeight(DEFAULT_CHUNK_HEIGHT);
-			setWidth(DEFAULT_CHUNK_WIDTH);
+			setWidth(43);
 		}
 	}
 	
@@ -70,7 +71,16 @@ public class well extends chunk {
 		textSeries startOfConversation = new textSeries("StartWithButtons", "StartWithButtons");
 		
 		// Save and reset.
-		textSeries saveGame = startOfConversation.addChild("Save game", "Are you sure you want to save?");
+		textSeries saveGame = null;
+		if(!player.getPlayer().getPlayerInventory().containsBottleType(saveBottle.class)) saveGame = startOfConversation.addChild("Save game", "Are you sure you want to save?");
+		else {
+			if(player.getPlayer().getPlayerInventory().getItems().size() == 1) {
+				saveGame = startOfConversation.addChild("Save and refill Save Bottle", "Are you sure you want to save and refill your Save Bottle?");
+			}
+			else {
+				saveGame = startOfConversation.addChild("Save and refill bottles", "Are you sure you want to save and refill bottles?");
+			}
+		}
 		
 		// Cancel
 		textSeries cancel = startOfConversation.addChild("Cancel", "The game was not saved.");
@@ -101,7 +111,7 @@ public class well extends chunk {
 				interactSequence.toggleDisplay();
 				
 				// Destroy last bottle charge indicator because we saved at a well!
-				player.getPlayer().lastSaveBottle = null;
+				if(player.getPlayer().lastSaveBottles != null) player.getPlayer().lastSaveBottles.clear();
 				if(player.getPlayer().lastSaveBottleChargeIndicator!=null) {
 					player.getPlayer().lastSaveBottleChargeIndicator = null;
 				}
@@ -130,11 +140,20 @@ public class well extends chunk {
 		}
 		
 		if(reason.equals("respawnAtWell")) {
+			
+			// Clear last save.
+			player.getPlayer().lastSaveBottles.clear();
+			if(player.getPlayer().lastSaveBottleChargeIndicator!=null) {
+				player.getPlayer().lastSaveBottleChargeIndicator.destroy();
+				player.getPlayer().lastSaveBottleChargeIndicator = null;
+			}
+			
 			saveState.setQuiet(true);
 			saveState.createSaveState();
 			saveState.setQuiet(false);
-			main.restartGame("None");
 		}
+		
+		// Saving at well.
 		else {
 			saveState.createSaveState();
 			main.restartGame(reason);

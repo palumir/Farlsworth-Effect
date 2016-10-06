@@ -7,7 +7,6 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import UI.playerActionBar;
-import UI.tooltipString;
 import UI.menus.deathMenu;
 import doodads.sheepFarm.clawMarkRed;
 import drawing.camera;
@@ -19,6 +18,7 @@ import effects.effectTypes.critBloodSquirt;
 import effects.effectTypes.jumpBottleSplash;
 import effects.effectTypes.savePoint;
 import effects.interfaceEffects.interactBlurb;
+import effects.interfaceEffects.tooltipString;
 import interactions.interactBox;
 import items.bottle;
 import items.inventory;
@@ -102,6 +102,10 @@ public class player extends unit {
 			     (int) unit.DEFAULT_JUMPSPEED // Jump speed
 				);	   
 	
+	
+	// Tutorial stuff
+	private static tooltipString useWASD;
+	
 	////////////////
 	//// FIELDS ////
 	////////////////
@@ -121,7 +125,7 @@ public class player extends unit {
 	public Point lastWell;
 	
 	// Last save bottle coordinates
-	public Point lastSaveBottle;
+	public ArrayList<Point> lastSaveBottles;
 	public savePoint lastSaveBottleChargeIndicator;
 	
 	// Movement disabled?
@@ -201,6 +205,7 @@ public class player extends unit {
 
 	// Player AI controls the interface
 	public void updateUnit() {
+		//if(lastWell!=null)System.out.println(lastWell.getX() + " " + lastWell.getY());
 		dealWithTopDownJumping();
 		showPossibleInteractions();
 		isPlayerDead();
@@ -209,7 +214,6 @@ public class player extends unit {
 	// Deal with player being alive or dead.
 	@Override
 	public void aliveOrDead() {
-		
 		// Kill the player if they've left the map.
 		if(hasLeftMap()) {
 			if(isKillable()) killPlayer();
@@ -302,7 +306,8 @@ public class player extends unit {
 			playerX = loadZone.getDefaultLocation().x;
 			playerY = loadZone.getDefaultLocation().y;
 			newFacingDirection = "Right";
-			tooltipString t = new tooltipString("Use 'wasd' to move.");
+			useWASD = new tooltipString("Use 'wasd' to move.");
+			useWASD.setHasATimer(false);
 		}
 		
 		// If we have the savestate.
@@ -359,15 +364,15 @@ public class player extends unit {
 			
 			thePlayer.lastWell = s.lastWell;
 			
-			thePlayer.lastSaveBottle = s.lastSaveBottle;
+			thePlayer.lastSaveBottles = s.lastSaveBottles;
 			
 			// Create an indicator
-			if(s.lastSaveBottle != null) {
+			if(s.lastSaveBottles != null && s.lastSaveBottles.size() > 0) {
 				thePlayer.lastSaveBottleChargeIndicator = new savePoint(
-						(int)thePlayer.lastSaveBottle.getX(),
+						(int)thePlayer.lastSaveBottles.get(thePlayer.lastSaveBottles.size()-1).getX(),
 						thePlayer.getIntY() - 
 						(
-						((int)thePlayer.lastSaveBottle.getY() + savePoint.DEFAULT_SPRITE_HEIGHT)
+						((int)thePlayer.lastSaveBottles.get(thePlayer.lastSaveBottles.size()-1).getY() + savePoint.DEFAULT_SPRITE_HEIGHT)
 						- (thePlayer.getIntY() + thePlayer.getHeight()))
 						);
 			}
@@ -469,11 +474,13 @@ public class player extends unit {
 				// Player presses left key.
 				if(k.getKeyCode() == KeyEvent.VK_A) { 
 					startMove("left");
+					if(useWASD!=null && !useWASD.fadingOut) useWASD.fadeOut();
 				}
 				
 				// Player presses right key.
 				if(k.getKeyCode() == KeyEvent.VK_D) { 
 					startMove("right");
+					if(useWASD!=null && !useWASD.fadingOut) useWASD.fadeOut();
 				}
 				
 				// Player presses up key, presumably to jump!
@@ -484,6 +491,7 @@ public class player extends unit {
 					}
 					else if(mode.getCurrentMode() == topDown.name) {
 						startMove("up");
+						if(useWASD!=null && !useWASD.fadingOut) useWASD.fadeOut();
 					}
 				}
 				
@@ -494,9 +502,9 @@ public class player extends unit {
 					}
 					else if(mode.getCurrentMode() == topDown.name) {
 						startMove("down");
+						if(useWASD!=null && !useWASD.fadingOut) useWASD.fadeOut();
 					}
 				}
-					
 					
 					// Player presses e key
 					if(k.getKeyCode() == KeyEvent.VK_E) {

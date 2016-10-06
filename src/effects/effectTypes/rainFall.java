@@ -88,7 +88,7 @@ public class rainFall extends effect {
 	// Respond to destroy by creating a rain explode effect.
 	@Override 
 	public void respondToDestroy() {
-		rainSplash r = new rainSplash(this.getIntX() + this.getWidth()/2,this.getIntY() + this.getHeight()-10);
+		rainSplash r = new rainSplash(this.getIntX() + this.getWidth()/2-rainSplash.getDefaultWidth()/2,this.getIntY() + this.getHeight()-rainSplash.getDefaultHeight()/2);
 	}
 	
 	// Get default width.

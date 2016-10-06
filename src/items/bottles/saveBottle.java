@@ -4,10 +4,10 @@ import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 
-import UI.tooltipString;
 import drawing.spriteSheet;
 import drawing.spriteSheet.spriteSheetInfo;
 import effects.effectTypes.savePoint;
+import effects.interfaceEffects.tooltipString;
 import items.bottle;
 import sounds.sound;
 import units.player;
@@ -22,6 +22,9 @@ public class saveBottle extends bottle {
 	
 	// Bottle stats.
 	public static int DEFAULT_MAX_CHARGES = 3;
+	
+	// Tutorial stuff
+	public static tooltipString enterToUse;
 	
 	//////////////
 	/// FIELDS ///
@@ -44,13 +47,15 @@ public class saveBottle extends bottle {
 		
 		// Weapon stats.
 		setStats();
+		
+		createGlow();
 	}
 	
 	// Set stats
 	public void setStats() {
 		
 		// Rarity
-		quality = "Legit";
+		quality = "Good";
 		description = "Saves game.";
 		
 		// Set item's stats
@@ -63,12 +68,18 @@ public class saveBottle extends bottle {
 	@Override
 	public void useCharge() {
 		if(getChargesLeft() > 0) {
+			
+			// Destroy tutorial text.
+			if(enterToUse!=null && !enterToUse.fadingOut) {
+				enterToUse.fadeOut();
+			}
+			
 			sound s = new sound(bottle.bottleDrink);
 			s.start();
 			setChargesLeft(getChargesLeft() - 1);
 			
 			// Set position to be last bottle charge.
-			player.getPlayer().lastSaveBottle = new Point(player.getPlayer().getIntX(), player.getPlayer().getIntY());
+			player.getPlayer().lastSaveBottles.add(new Point(player.getPlayer().getIntX(), player.getPlayer().getIntY()));
 			
 			// Put down indicator and destroy old one.
 			if(player.getPlayer().lastSaveBottleChargeIndicator != null) player.getPlayer().lastSaveBottleChargeIndicator.destroy();
@@ -85,7 +96,8 @@ public class saveBottle extends bottle {
 		player currPlayer = player.getPlayer();
 		if(currPlayer != null) {
 			currPlayer.getPlayerInventory().equipItem(this, KeyEvent.VK_ENTER);
-			tooltipString t = new tooltipString("Press 'enter' save the game with the Save Bottle.");
+			enterToUse = new tooltipString("Press 'enter' to use a charge of the Save Bottle.");
+			enterToUse.setHasATimer(false);
 		}
 	}
 

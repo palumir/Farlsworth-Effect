@@ -35,7 +35,7 @@ public class farmGateKey extends key {
 	}
 	
 	public void setStats() {
-		quality = "Common";
+		quality = "Alright";
 	}
 	
 	// React to being picked up.

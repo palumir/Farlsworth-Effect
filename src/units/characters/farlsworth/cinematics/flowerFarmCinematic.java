@@ -6,6 +6,7 @@ import cinematics.cinematic;
 import interactions.event;
 import interactions.interactBox;
 import interactions.textSeries;
+import sounds.music;
 import sounds.sound;
 import units.player;
 import units.characters.farlsworth.farlsworth;
@@ -13,6 +14,7 @@ import units.unitCommands.commandList;
 import units.unitCommands.commands.moveCommand;
 import utilities.saveState;
 import utilities.time;
+import zones.sheepFarm.subZones.sheepFarm;
 
 public class flowerFarmCinematic extends cinematic {
 	
@@ -21,6 +23,7 @@ public class flowerFarmCinematic extends cinematic {
 
 	public flowerFarmCinematic() {
 		super("flowerFarmCinematic");
+		save = false;
 	}
 	
 	farlsworth farlsworth;
@@ -192,7 +195,7 @@ public class flowerFarmCinematic extends cinematic {
 		if(isSequence(numIfs++) && goNextTextSeries()) {
 			
 			// Set the next text and advance it.
-			addTextSeries(null, "I think ancient aliens put us here as a test.", farmer);
+			addTextSeries(null, "I think ancient aliens put us here as an experiment.", farmer);
 			advanceSequence();
 		}
 		
@@ -236,44 +239,45 @@ public class flowerFarmCinematic extends cinematic {
 		if(isSequence(numIfs++) && goNextTextSeries()) {
 			
 			// Set the next text and advance it.
-			addTextSeries(null, "There are far, FAR worse ones that exist.", farlsworth);
+			addTextSeries(null, "I've seen far, FAR worse.", farlsworth);
 			advanceSequence();
 		}
 		
 		if(isSequence(numIfs++) && goNextTextSeries()) {
 			
 			// Set the next text and advance it.
-			addTextSeries(null, "That's what I meant when I said the world is being torn apart.", farlsworth);
+			addTextSeries(null, "Earlier, when I said the world is being torn apart ...", farlsworth);
 			advanceSequence();
 		}
 		
 		if(isSequence(numIfs++) && goNextTextSeries()) {
 			
 			// Set the next text and advance it.
-			addTextSeries(null, "I meant that supernatural Disruptions are destroying reality.", farlsworth);
+			addTextSeries(null, "I meant that these Disruptions are slowly destroying reality.", farlsworth);
 			advanceSequence();
 		}
 		
 		if(isSequence(numIfs++) && goNextTextSeries()) {
 			
 			// Set the next text and advance it.
-			addTextSeries(null, "This farm's pretty dope. But not as dope as mine.", farmer);
+			addTextSeries(null, "I'm having a great time hanging out with you guys.", farmer);
 			advanceSequence();
 		}
 		
 		if(isSequence(numIfs++) && goNextTextSeries()) {
 			
 			// Set the next text and advance it.
-			addTextSeries(null, "What do you guys think?", farmer);
+			addTextSeries(null, "Isn't this farm dope?", farmer);
 			advanceSequence();
 		}
 		
 		if(isSequence(numIfs++) && goNextTextSeries()) {
 			
 			// Move right.
+			music.endAll();
 			time.setTimeSpeed(0.1f);
-			addTextSeries("Ignore Farmer", null,farlsworth, "Order");
-			addTextSeries("Don't ignore Farmer", null,farlsworth,"Chaos");
+			addTextSeries("Ignore Farmer", null,farmer, "Order");
+			addTextSeries("Don't ignore Farmer", null,farmer,"Chaos");
 			interactSequence.goToNext();
 			
 			// Set the next text and advance it.
@@ -283,6 +287,7 @@ public class flowerFarmCinematic extends cinematic {
 		if(goNextTextSeries() && choiceIs("Don't ignore Farmer")) {
 			
 			if(isSequence(numIfs++) && goNextTextSeries()) {
+				music.startMusic(sheepFarm.getZoneMusicDistorted());
 				// Set the next text and advance it.
 				addTextSeries(null, "This farm doesn't even have sheep!", farmer);
 				sound sound = new sound(cheering);
@@ -330,22 +335,15 @@ public class flowerFarmCinematic extends cinematic {
 			if(isSequence(numIfs++) && goNextTextSeries()) {
 				
 				// Set the next text and advance it.
-				addTextSeries(null, "I'm friggin done!", farlsworth);
-				farlsworth.setFacingDirection("Left");
-				advanceSequence();
-			}
-			
-			if(isSequence(numIfs++) && goNextTextSeries()) {
-				
-				// Set the next text and advance it.
-				addTextSeries(null, "Frig you both!", farlsworth);
+				addTextSeries(null, "I'M FRIGGIN DONE!", farlsworth);
 				runFarlsworthAwayFarmer();
+				farlsworth.setFacingDirection("Left");
 				advanceSequence();
 			}
 			
 			///// THIS IS BROKEN AT THIS POINT!!! FRIGINN FIX 'ER
 			
-			if(isSequence(numIfs++) && farlsworth.getAllCommands()!=null && (farlsworth.getAllCommands().size() == 0)) {
+			if(sequencePart >= numIfs && !farlsworth.isOnScreen() && farlsworth.getAllCommands()!=null && (farlsworth.getAllCommands().size() == 0)) {
 				farlsworth.setDoubleX(-3463);
 				farlsworth.setDoubleY(-5550);
 			}
@@ -353,22 +351,70 @@ public class flowerFarmCinematic extends cinematic {
 			if(isSequence(numIfs++) && goNextTextSeries()) {
 				
 				// Set the next text and advance it.
-				addTextSeries(null, "He must have had to go potty really bad.", farmer);
+				addTextSeries(null, "Wow, he darted real fast.", farmer);
 				player.getPlayer().setFacingDirection("Right");
 				advanceSequence();
+			}
+			
+			if(isSequence(numIfs++) && goNextTextSeries()) {
+				
+				// Set the next text and advance it.
+				addTextSeries(null, "He must have had to go potty really bad.", farmer);
+				advanceSequence();
+			}
+			
+			if(isSequence(numIfs++) && goNextTextSeries()) {
+				
+				// Set the next text and advance it.
+				addTextSeries(null, "Do you think sheeps doody the same as people?", farmer);
+				advanceSequence();
+			}
+			
+			if(isSequence(numIfs++) && goNextTextSeries()) {
+				
+				// Set the next text and advance it.
+				addTextSeries(null, "I mean, birds do wizz and doody at the same time.", farmer);
+				runFarmerAway();
+				advanceSequence();
+			}
+			
+			if(isSequence(numIfs++) && goNextTextSeries()) {
+				
+				// Set the next text and advance it.
+				addTextSeries(null, "I'm gonna go check with my other sheep.",farmer);
+				advanceSequence();
+			}
+			
+			if(sequencePart >= numIfs && !farmer.isOnScreen() && farmer.isExists()) {
+				stop();
+				farmer.destroy();
 			}
 			
 		}
 	
 		if(goNextTextSeries() && choiceIs("Ignore Farmer")) {
+			
+			if(isSequence(numIfs++) && goNextTextSeries()) {
+				
+				time.setTimeSpeed(1f);
+				// Set the next text and advance it.
+				addTextSeries(null, "I'm gonna go eat Captain Crunch and watch cartoons.", farmer);
+				sound sound = new sound(booing);
+				sound.start();
+				farmer.moveTo(farmer.getIntX(), farmer.getIntY()+500);
+				advanceSequence();
+			}
+			
+			if(sequencePart >= numIfs && !farmer.isOnScreen() && farmer.isExists()) {
+				farmer.destroy();
+			}
 		
 			if(isSequence(numIfs++) && goNextTextSeries()) {
 				
 				// Set the next text and advance it.
 				time.setTimeSpeed(1f);
 				addTextSeries(null, "But I can't just accept that Disruptions are happening.", farlsworth);
-				sound sound = new sound(booing);
-				sound.start();
+				farlsworth.moveTo(farlsworth.getIntX()-20, farlsworth.getIntY());
 				player.getPlayer().setFacingDirection("Left");
 				advanceSequence();
 			}
@@ -390,7 +436,8 @@ public class flowerFarmCinematic extends cinematic {
 			if(isSequence(numIfs++) && goNextTextSeries()) {
 				
 				// Set the next text and advance it.
-				addTextSeries(null, "I can't just let it get destroyed because I'm comfortable.", farlsworth);
+				addTextSeries(null, "I can't just let it get destroyed because I'm comfy.", farlsworth);
+				farlsworth.moveTo(farlsworth.getIntX()+20, farlsworth.getIntY());
 				advanceSequence();
 			}
 			
@@ -400,84 +447,13 @@ public class flowerFarmCinematic extends cinematic {
 				addTextSeries(null, "There isn't any other reality we can go to.", farlsworth);
 				advanceSequence();
 			}
-					
-			if(isSequence(numIfs++) && goNextTextSeries()) {
-				
-				// Set the next text and advance it.
-				player.getPlayer().setFacingDirection("Right");
-				addTextSeries(null, "I'm having a great time hanging out with you guys.", farmer);
-				advanceSequence();
-			}
 			
 			if(isSequence(numIfs++) && goNextTextSeries()) {
 				
 				// Set the next text and advance it.
-				addTextSeries(null, "But nobody seems to care, let alone notice.", farlsworth);
+				addTextSeries(null, "And we can't lose anymore good people.", farlsworth);
 				player.getPlayer().setFacingDirection("Left");
-				advanceSequence();
-			}
-			
-			if(isSequence(numIfs++) && goNextTextSeries()) {
-				
-				// Set the next text and advance it.
-				addTextSeries(null, "If only I knew what was causing these Disruptions.", farlsworth);
-				advanceSequence();
-			}
-			
-			if(isSequence(numIfs++) && goNextTextSeries()) {
-				
-				// Set the next text and advance it.
-				addTextSeries(null, "I would do whatever it takes to stop them from happening.", farlsworth);
-				advanceSequence();
-			}
-			
-			if(isSequence(numIfs++) && goNextTextSeries()) {
-				
-				// Set the next text and advance it.
-				addTextSeries(null, "But things just aren't that simple.", farlsworth);
-				advanceSequence();
-			}
-	
-			if(isSequence(numIfs++) && goNextTextSeries()) {
-				
-				// Set the next text and advance it.
-				addTextSeries(null, "I'm going to go eat Captain Crunch and watch cartoons.", farmer);
-				player.getPlayer().setFacingDirection("Right");
-				farmer.moveTo(farmer.getIntX(), farmer.getIntY()+500);
-				advanceSequence();
-			}
-			
-			if(sequencePart >= 20 && !farmer.isOnScreen()) {
-				farmer.destroy();
-			}
-			
-			if(isSequence(numIfs++) && goNextTextSeries()) {
-				
-				// Set the next text and advance it.
-				addTextSeries(null, "We can't lose anymore good people.", farlsworth);
-				player.getPlayer().setFacingDirection("Left");
-				farlsworth.moveTo(farlsworth.getIntX()-20, farlsworth.getIntY());
-				advanceSequence();
-			}
-			
-			if(isSequence(numIfs++) && goNextTextSeries()) {
-				
-				// Set the next text and advance it.
-				addTextSeries(null, "I can't.", farlsworth);
-				advanceSequence();
-			}
-			
-			if(isSequence(numIfs++) && goNextTextSeries()) {
-				
-				// Set the next text and advance it.
-				addTextSeries(null, "Uh ...", farlsworth);
-				advanceSequence();
-			}
-			
-			if(isSequence(numIfs++) && goNextTextSeries()) {
-				
-				// Set the next text and advance it.
-				addTextSeries(null, "I just can't, okay?", farlsworth);
+				farlsworth.moveTo(farlsworth.getIntX(), farlsworth.getIntY()+20);
 				advanceSequence();
 			}
 			
@@ -492,14 +468,14 @@ public class flowerFarmCinematic extends cinematic {
 			if(isSequence(numIfs++) && goNextTextSeries()) {
 				
 				// Set the next text and advance it.
-				addTextSeries(null, "The ground may get a bit slippery.", farlsworth);
+				addTextSeries(null, "The mud may get a bit slippery.", farlsworth);
 				advanceSequence();
 			}
 			
 			if(isSequence(numIfs++) && goNextTextSeries()) {
 				
 				// Set the next text and advance it.
-				addTextSeries(null, "Try not to die so much.", farlsworth);
+				addTextSeries(null, "Try not to die too much.", farlsworth);
 				advanceSequence();
 			}
 			
@@ -518,6 +494,24 @@ public class flowerFarmCinematic extends cinematic {
 			stop();
 		}
 		
+	}
+	
+	// Run farmer away
+	public void runFarmerAway() {
+		farmer.setMoveSpeed(4);
+		farmer.moveTo(farmer.getIntX()+100, farmer.getIntY()+500);
+		advanceSequence();
+		interactSequence.getTextSeries().setEnd();
+		interactSequence.setLocked(false);
+		interactSequence.setUnescapable(false);
+		
+		// Set it to be completed as soon as he runs, instead of when he's teleported to flower farm.
+		isCompleted.setCompleted(true);
+		
+		// Save by default.
+		saveState.setQuiet(true);
+		saveState.createSaveState();
+		saveState.setQuiet(false);
 	}
 	
 	// Run Farlsworth away
@@ -545,6 +539,7 @@ public class flowerFarmCinematic extends cinematic {
 	
 	// Run Farlsworth away
 	public void runFarlsworthAway() {
+		music.currMusic.fadeOut(3f);
 		save = false;
 		farlsworth.setMoveSpeed(4.5f);
 		commandList commands = new commandList();

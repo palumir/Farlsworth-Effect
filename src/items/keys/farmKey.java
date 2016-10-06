@@ -31,6 +31,7 @@ public class farmKey extends key {
 	// On floor.
 	public farmKey(int x, int y) {
 		super(DEFAULT_KEY_NAME,x,y);
+		quality = "Alright";
 	}
 	
 	// React to being picked up.

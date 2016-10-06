@@ -3,11 +3,11 @@ package items.bottles;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 
-import UI.tooltipString;
 import drawing.spriteSheet;
 import drawing.spriteSheet.spriteSheetInfo;
 import effects.buff;
 import effects.buffs.jumpBottleBuff;
+import effects.interfaceEffects.tooltipString;
 import items.bottle;
 import modes.mode;
 import sounds.sound;
@@ -53,13 +53,15 @@ public class jumpBottle extends bottle {
 		
 		// Weapon stats.
 		setStats();
+		
+		createGlow();
 	}
 	
 	// Set stats
 	public void setStats() {
 		
 		// Rarity
-		quality = "Good";
+		quality = "Alright";
 		description = "Double jump!";
 		
 		// Set item's stats

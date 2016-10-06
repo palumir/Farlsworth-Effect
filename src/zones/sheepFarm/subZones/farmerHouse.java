@@ -1,8 +1,8 @@
-package zones.testZone;
+package zones.sheepFarm.subZones;
+import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-import UI.tooltipString;
 import doodads.sheepFarm.barn;
 import doodads.sheepFarm.blackSmith;
 import doodads.sheepFarm.bridge;
@@ -19,9 +19,11 @@ import doodads.sheepFarm.rock;
 import doodads.sheepFarm.tomb;
 import doodads.sheepFarm.tree;
 import doodads.sheepFarm.verticalFence;
+import drawing.background;
 import drawing.spriteSheet;
 import drawing.backgrounds.rotatingBackground;
 import effects.effectTypes.fire;
+import effects.interfaceEffects.tooltipString;
 import interactions.event;
 import items.bottle;
 import items.bottles.saveBottle;
@@ -47,9 +49,9 @@ import utilities.saveState;
 import utilities.time;
 import utilities.utility;
 import zones.zone;
-import zones.farmTomb.farmTomb;
+import zones.farmTomb.subZones.farmTomb;
 
-public class testZone extends zone {
+public class farmerHouse extends zone {
 	
 	//////////////////////////////////
 	// FIELDS, GLOBALS, CONSTRUCTOR //
@@ -59,40 +61,23 @@ public class testZone extends zone {
 	private static zone zoneReference;
 	
 	// Default zone mode
-	private String DEFAULT_ZONE_MODE = "topDown";
+	private String DEFAULT_ZONE_MODE = "platformer";
 	
 	// References we will use throughout.
 	static unit u;
 	static chunk c;
 	
 	// Defaults
-	public static intTuple DEFAULT_SPAWN_TUPLE = new intTuple(-1115,391);
+	public static intTuple DEFAULT_SPAWN_TUPLE = new intTuple(0,0);
 	
 	// Constructor
-	public testZone() {
-		super("testZone", "farmLand");
+	public farmerHouse() {
+		super("farmerHouse", "farmLand");
 	}
 	
 	///////////////////////////////
 	// SPAWN PATTERNS/GENERATORS //
 	///////////////////////////////
-	
-	// Spawn water from x to y.
-	public void spawnPassableWaterRect(int x1, int y1, int x2, int y2) {
-		int numX = (x2 - x1)/water.DEFAULT_CHUNK_WIDTH;
-		int numY = (y2 - y1)/water.DEFAULT_CHUNK_HEIGHT;
-		for(int i = 0; i < numX; i++) {
-			for(int j = 0; j < numY; j++) {
-				c = water.createChunk(i*water.DEFAULT_CHUNK_WIDTH + x1, j*water.DEFAULT_CHUNK_HEIGHT + y1);
-				if(c!=null) {
-					c.setInteractable(false);
-					c.setPassable(true);
-				}
-			}
-		}
-	}
-
-	
 	private static BufferedImage DEFAULT_ZONE_BACKGROUND = spriteSheet.getSpriteFromFilePath("images/terrain/backgrounds/spinningFarmBackground.png");
 	
 	/////////////////
@@ -104,10 +89,12 @@ public class testZone extends zone {
 		// Set the mode of the zone of course.
 		setMode(DEFAULT_ZONE_MODE);
 		
-		levelSave.loadSaveState("sheepFarmLevel.save");
+		// Load from save.
+		levelSave.loadSaveState("farmerHouse.save");
 		
 		// Set background
-		new rotatingBackground(DEFAULT_ZONE_BACKGROUND);
+		background b = new background(null);
+		b.setColor(Color.BLACK);
 
 	}
 

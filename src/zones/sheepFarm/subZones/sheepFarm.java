@@ -1,9 +1,8 @@
-package zones.sheepFarm;
+package zones.sheepFarm.subZones;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import UI.tooltipString;
 import doodads.cave.firePit;
 import doodads.general.well;
 import doodads.sheepFarm.barn;
@@ -30,6 +29,7 @@ import drawing.background;
 import drawing.spriteSheet;
 import drawing.backgrounds.rotatingBackground;
 import effects.effectTypes.fire;
+import effects.interfaceEffects.tooltipString;
 import interactions.event;
 import items.bottle;
 import items.item;
@@ -66,7 +66,7 @@ import utilities.saveState;
 import utilities.time;
 import utilities.utility;
 import zones.zone;
-import zones.farmTomb.farmTomb;
+import zones.farmTomb.subZones.farmTomb;
 
 public class sheepFarm extends zone {
 	
@@ -81,7 +81,7 @@ public class sheepFarm extends zone {
 	private String DEFAULT_ZONE_MODE = "topDown";
 	
 	// Zone music.
-	private static String zoneMusic = "sounds/music/farmLand/sheepFarm/forest.wav";
+	public static String zoneMusic = "sounds/music/farmLand/sheepFarm/forest.wav";
 	private static String zoneMusicDistorted = "sounds/music/farmLand/sheepFarm/forestDistorted.wav";
 	
 	// Static fence so farlsworth can be attached to it.
@@ -96,6 +96,8 @@ public class sheepFarm extends zone {
 	public static gate farlsworthGate;
 	
 	// Zone events.
+	public static event eToInteract;
+	public static event useSaveBottle;
 	public static event wellTooltipLoaded;
 	public static event stormInProgress;
 	public static event isOnFire;
@@ -251,7 +253,7 @@ public class sheepFarm extends zone {
 		loadZoneEvents();
 		
 		// Load the level save.
-		levelSave.loadSaveState("sheepFarmLevel.save");
+		//levelSave.loadSaveState("sheepFarmLevel.save");
 		//sheepFarmZoneLoader loader = new sheepFarmZoneLoader();
 		//loader.loadSegments();
 		
@@ -263,7 +265,7 @@ public class sheepFarm extends zone {
 		}
 		
 		// Spawn special stuff
-		spawnSpecialStuff();
+		//spawnSpecialStuff();
 		
 		// Create items
 		createItems();
@@ -277,18 +279,20 @@ public class sheepFarm extends zone {
 			s.start();
 		}
 		
-		if(distortedMusicPlaying.isCompleted()) {
-			music.startMusic(zoneMusicDistorted); 
-		}
-		else {
-			
-			// Deal with possible saving issue
-			if(music.currMusic != null && !music.currMusic.getFileName().contains(zoneMusic)) {
-				music.endAll();
+		if(!flowerFarmCinematic.isCompleted.isCompleted()) {
+			if(distortedMusicPlaying.isCompleted()) {
+				music.startMusic(getZoneMusicDistorted()); 
 			}
-			
-			// Play regular zone music. 
-			music.startMusic(zoneMusic); 
+			else {
+				
+				// Deal with possible saving issue
+				if(music.currMusic != null && !music.currMusic.getFileName().contains(zoneMusic)) {
+					music.endAll();
+				}
+				
+				// Play regular zone music. 
+				music.startMusic(zoneMusic); 
+			}
 		}
 		
 	}
@@ -338,10 +342,14 @@ public class sheepFarm extends zone {
 		c.setPassable(false);
 		((haystack)c).setStrange();
 		
-		// TODO: set to have a key for testing purposes. So tehy don't spawn in the farmer's house test zone
-		// and get fucked
-		// Doors.
-		c = new door("CHANGE THIS TO NULL", -599,-373, farmerHouse.getZone(), -93,957, "Right");
+		// Farmer house
+		c = new door("No Key Yet", -599,-373, farmerHouse.getZone(), -93,957, "Right");
+		
+		// Barn
+		c = new door("No Key Yet", -793,-370, farmerHouse.getZone(), -93,957, "Right");
+		
+		// Flower farm
+		c = new door("No Key Yet", -1438,-5460, farmerHouse.getZone(), -93,957, "Right");
 	}
 	
 	// Spawn items
@@ -437,6 +445,12 @@ public class sheepFarm extends zone {
 	// Create zone events.
 	public void loadZoneEvents() {
 		
+		// Use WASD
+		eToInteract = new event("useWASDToMoveToolTip");
+		
+		// Use save bottle
+		useSaveBottle = new event("rememberToUseSaveBottleYouDinky");
+		
 		// Well and attack tooltips.
 		wellTooltipLoaded = new event("sheepFarmWellTooltipLoaded");
 		
@@ -502,6 +516,17 @@ public class sheepFarm extends zone {
 			tooltipString t = new tooltipString("Interact with a well to save the game.");
 		}
 		
+		if(currPlayer != null && currPlayer.isWithin(-718,-3959,-630,-3800) && useSaveBottle != null && !useSaveBottle.isCompleted()
+				&& player.getPlayer().lastSaveBottles!=null && player.getPlayer().lastSaveBottles.size() < 2) {
+			useSaveBottle.setCompleted(true);
+			tooltipString t = new tooltipString("Use the Save Bottle to avoid having to re-do difficult areas.");
+		}
+		
+		if(currPlayer != null && currPlayer.isWithin(-1116,-490,-444,54) && eToInteract != null && !eToInteract.isCompleted()) {
+			eToInteract.setCompleted(true);
+			tooltipString t = new tooltipString("Press 'e' to interact with something.");
+		}
+		
 		// Fog at black flower area
 		if(stormInProgress != null && !stormInProgress.isCompleted() && currPlayer != null && currPlayer.isWithin(-1719,-5298,-1314,-4818)) {
 			if(zoneFog == null) zoneFog = new fog();
@@ -519,11 +544,9 @@ public class sheepFarm extends zone {
 			
 			// Change music to distorted
 			music.endAll();
-			music.startMusic(zoneMusicDistorted);
+			music.startMusic(getZoneMusicDistorted());
 			distortedMusicPlaying.setCompleted(true);
 		}
-		
-		
 	}
 	
 	// Storm stuff
@@ -577,6 +600,14 @@ public class sheepFarm extends zone {
 	
 	public String getMode() {
 		return DEFAULT_ZONE_MODE;
+	}
+
+	public static String getZoneMusicDistorted() {
+		return zoneMusicDistorted;
+	}
+
+	public static void setZoneMusicDistorted(String zoneMusicDistorted) {
+		sheepFarm.zoneMusicDistorted = zoneMusicDistorted;
 	}
 	
 }

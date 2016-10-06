@@ -17,7 +17,7 @@ import utilities.intTuple;
 import utilities.saveState;
 import utilities.stringUtils;
 import utilities.time;
-import zones.farmTomb.farmTomb;
+import zones.farmTomb.subZones.farmTomb;
 
 public class fernando extends boss {
 	

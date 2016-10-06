@@ -43,13 +43,15 @@ public class jumpBottleShard extends bottleShard {
 		
 		// Weapon stats.
 		setStats();
+		
+		createGlow();
 	}
 	
 	// Set stats
 	public void setStats() {
 		
 		// Rarity
-		quality = "Rare";
+		quality = "Alright";
 	}
 	
 	// Get bottle type

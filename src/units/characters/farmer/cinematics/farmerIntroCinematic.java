@@ -13,7 +13,7 @@ import units.characters.farlsworth.farlsworth;
 import units.unitCommands.commandList;
 import units.unitCommands.commands.moveCommand;
 import utilities.saveState;
-import zones.sheepFarm.sheepFarm;
+import zones.sheepFarm.subZones.sheepFarm;
 
 public class farmerIntroCinematic extends cinematic {
 	
@@ -224,7 +224,6 @@ public class farmerIntroCinematic extends cinematic {
 				if(isSequence(numIfs++) && goNextTextSeries()) {
 					
 					addTextSeries(null, "Wait, actually give me that one back.",farmer);
-					player.getPlayer().getPlayerInventory().get("Farm Key").drop();
 					
 					// Set the next text and advance it.
 					advanceSequence();
@@ -232,6 +231,7 @@ public class farmerIntroCinematic extends cinematic {
 				
 				if(isSequence(numIfs++) && goNextTextSeries()) {
 					
+					player.getPlayer().getPlayerInventory().get("Farm Key").drop();
 					addTextSeries(null, "Otherwise I can't watch Rugrats.",farmer);
 					
 					// Set the next text and advance it.

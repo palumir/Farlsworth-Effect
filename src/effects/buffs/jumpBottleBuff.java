@@ -5,7 +5,7 @@ import effects.effectType;
 import effects.effectTypes.jumpBottleSplash;
 import items.bottles.jumpBottle;
 import modes.mode;
-import terrain.chunkTypes.wood;
+import terrain.chunkTypes.mud;
 import units.player;
 import units.unit;
 import utilities.time;

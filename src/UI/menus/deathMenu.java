@@ -2,8 +2,10 @@ package UI.menus;
 
 import UI.button;
 import drawing.gameCanvas;
+import items.bottles.saveBottle;
 import main.main;
 import sounds.music;
+import units.player;
 
 public class deathMenu extends UI.menu {
 	
@@ -35,12 +37,14 @@ public class deathMenu extends UI.menu {
 				(DEFAULT_BUTTON_WIDTH+100), 
 				DEFAULT_BUTTON_HEIGHT);
 		this.add(respawnAtSaveBottle);
-		respawnAtWell = new button("Respawn at Last Well","respawnAtWell",
+		if(player.getPlayer().lastWell != null && player.getPlayer().getPlayerInventory().containsBottleType(saveBottle.class)) { 
+			respawnAtWell = new button("Respawn at Last Well","respawnAtWell",
 				gameCanvas.getDefaultWidth()/2 - (DEFAULT_BUTTON_WIDTH+100)/2, 
 				gameCanvas.getDefaultHeight() - 230,
 				(DEFAULT_BUTTON_WIDTH+100), 
 				DEFAULT_BUTTON_HEIGHT);
-		this.add(respawnAtWell);
+			this.add(respawnAtWell);
+		}
 	}
 	
 	// Select button

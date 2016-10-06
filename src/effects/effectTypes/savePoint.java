@@ -126,10 +126,10 @@ public class savePoint extends effect {
 
 	public static void createSavePoint() {
 		player.getPlayer().lastSaveBottleChargeIndicator = new savePoint(
-				(int)player.getPlayer().lastSaveBottle.getX(),
+				(int)player.getPlayer().lastSaveBottles.get(player.getPlayer().lastSaveBottles.size()-1).getX(),
 				player.getPlayer().getIntY() - 
 				(
-				((int)player.getPlayer().lastSaveBottle.getY() + savePoint.DEFAULT_SPRITE_HEIGHT)
+				((int)player.getPlayer().lastSaveBottles.get(player.getPlayer().lastSaveBottles.size()-1).getY() + savePoint.DEFAULT_SPRITE_HEIGHT)
 				- (player.getPlayer().getIntY() + player.getPlayer().getHeight()))
 				);
 	}

@@ -1,6 +1,7 @@
 package items;
 
 import drawing.spriteSheet;
+import effects.interfaceEffects.tooltipString;
 
 public abstract class bottle extends item {
 	////////////////
@@ -39,7 +40,7 @@ public abstract class bottle extends item {
 	
 	// For weapon being in your inventory.
 	public bottle(String newName) {
-		super(newName,null,0,0,0,0);
+		super(newName,0,0);
 		
 		// It is, of course, equippable.
 		equippable = true;
@@ -51,7 +52,7 @@ public abstract class bottle extends item {
 	
 	// For weapon being in your floor
 	public bottle(String newName, int x, int y) {
-		super(newName,null,x,y,0,0);
+		super(newName,x,y);
 		
 		// Set the width and height.
 		setWidth(getImage().getWidth());
@@ -60,6 +61,14 @@ public abstract class bottle extends item {
 		// It is, of course, equippable.
 		equippable = true;
 		inInventory = false;
+	}
+	
+	// Update
+	@Override
+	public void upgrade() {
+		upgradeLevel++;
+		this.setMaxCharges(this.getMaxCharges() + 1);
+		new tooltipString(this.getName() + " has been expanded.");
 	}
 	
 	// Use charge.

@@ -4,8 +4,8 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.lang.reflect.Constructor;
 
-import UI.tooltipString;
 import drawing.drawnObject;
+import effects.interfaceEffects.tooltipString;
 import terrain.chunk;
 import terrain.groundTile;
 import units.unitCommand;
