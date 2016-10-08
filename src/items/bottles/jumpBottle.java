@@ -6,7 +6,7 @@ import java.awt.image.BufferedImage;
 import drawing.spriteSheet;
 import drawing.spriteSheet.spriteSheetInfo;
 import effects.buff;
-import effects.buffs.jumpBottleBuff;
+import effects.buffs.pushBottleBuff;
 import effects.interfaceEffects.tooltipString;
 import items.bottle;
 import modes.mode;
@@ -87,7 +87,7 @@ public class jumpBottle extends bottle {
 		player currPlayer = player.getPlayer();
 		
 		// Platform
-		buff b = new jumpBottleBuff(player.getPlayer());
+		buff b = new pushBottleBuff(player.getPlayer());
 	}
 	
 	// React to being picked up.

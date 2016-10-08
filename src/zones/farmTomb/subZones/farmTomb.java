@@ -175,7 +175,7 @@ public class farmTomb extends zone {
 		// Load zone events.
 		loadZoneEvents();
 		
-		//levelSave.loadSaveState("actualTombLevel.save");
+		levelSave.loadSaveState("actualTombLevel.save");
 		
 		// Load the level save.
 		//farmTombZoneLoader loader = new farmTombZoneLoader();

@@ -265,7 +265,7 @@ public class sheepFarm extends zone {
 		}
 		
 		// Spawn special stuff
-		//spawnSpecialStuff();
+		spawnSpecialStuff();
 		
 		// Create items
 		createItems();

@@ -67,7 +67,7 @@ public class unit extends drawnObject  {
 	////////////////
 	
 	// State of gravity
-	private static boolean gravity = DEFAULT_GRAVITY_STATE;
+	private boolean gravity = DEFAULT_GRAVITY_STATE;
 	
 	// The actual unit type.
 	private unitType typeOfUnit;
@@ -194,6 +194,9 @@ public class unit extends drawnObject  {
 	private boolean canSlash = false;
 	private boolean canSlashSummon = false;
 	
+	// Pushing
+	private boolean pushing = false;
+	
 	///////////////
 	/// METHODS ///
 	///////////////
@@ -202,6 +205,12 @@ public class unit extends drawnObject  {
 	public unit(unitType u, int newX, int newY) {
 		super(u.getUnitTypeSpriteSheet(), u.getName(), newX, newY, u.getWidth(), u.getHeight());	
 		if(u.getAnimations()!=null) setAnimations(new animationPack(u.getAnimations()));
+		
+		// Set gravity state based on mode.
+		if(mode.getCurrentMode().equals("platformer")) gravity = true;
+		else gravity = false;
+		
+		// Set values.
 		moveSpeed = u.getMoveSpeed();
 		oldMoveSpeed = moveSpeed;
 		baseMoveSpeed = u.getMoveSpeed();
@@ -463,13 +472,13 @@ public class unit extends drawnObject  {
 	}
 	
 	// Set gravity on or off.
-	public static void setGravity(boolean b) {
+	public void setGravity(boolean b) {
 		gravity = b;
 	}
 	
 	// Provide gravity
 	public void gravity() {
-		if(gravity && !isStuck()) {
+		if(isGravity() && !isStuck()) {
 			
 			// Set touching ground.
 			touchingGround = chunk.impassableChunks != null && 
@@ -791,7 +800,7 @@ public class unit extends drawnObject  {
 	
 	// Jump unit
 	public void jump() {
-		if(!isAlreadyJumped() && !isStuck() && gravity && !isJumping() && tryJump && touchingGround) {
+		if(!isAlreadyJumped() && !isStuck() && isGravity() && !isJumping() && tryJump && touchingGround) {
 			// Accelerate upward.
 			setAlreadyJumped(true);
 			setJumping(true);
@@ -1218,7 +1227,7 @@ public class unit extends drawnObject  {
 					pathFindingStuck = true;
 				
 					// If gravity is on and is the terrain loaded?
-					if (gravity && zone.getCurrentZone() != null && zone.getCurrentZone().isZoneLoaded()) { 
+					if (isGravity() && zone.getCurrentZone() != null && zone.getCurrentZone().isZoneLoaded()) { 
 						// We touch down
 						if(moveY >= 0) {
 							touchDown();
@@ -1354,7 +1363,7 @@ public class unit extends drawnObject  {
 		
 		// topDown mode movement animations.
 		if(mode.getCurrentMode().equals("topDown")) {
-			if(isJumping()) {
+			if(isJumping() || pushing) {
 				animate("jumping" + getFacingDirection());
 			}
 			else if(isMoving()) {
@@ -1367,7 +1376,7 @@ public class unit extends drawnObject  {
 		
 		// platformer movement animations.
 		if(mode.getCurrentMode().equals("platformer")) {
-			 if(!touchingGround && !isStuck()) {
+			 if((!touchingGround && !isStuck()) || pushing) {
 				String face;
 				if(getFacingDirection().equals("Up") || getFacingDirection().equals("Down")) {
 					face = "Right";
@@ -1864,6 +1873,18 @@ public class unit extends drawnObject  {
 
 	public void setCurrentCommandComplete(boolean currentCommandComplete) {
 		this.currentCommandComplete = currentCommandComplete;
+	}
+
+	public boolean isGravity() {
+		return gravity;
+	}
+
+	public boolean isPushing() {
+		return pushing;
+	}
+
+	public void setPushing(boolean pushing) {
+		this.pushing = pushing;
 	}
 	
 }

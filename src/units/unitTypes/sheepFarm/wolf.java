@@ -29,8 +29,8 @@ public abstract class wolf extends unit {
 		public static int DEFAULT_SPRITE_ADJUSTMENT_X = 0;
 		
 		// TopDown real dimensions
-		public static int DEFAULT_TOPDOWN_HEIGHT = 25;
-		public static int DEFAULT_TOPDOWN_WIDTH = 25;
+		public static int DEFAULT_TOPDOWN_HEIGHT = 24;
+		public static int DEFAULT_TOPDOWN_WIDTH = 24;
 		public static int DEFAULT_TOPDOWN_ADJUSTMENT_Y = 0;
 		
 		// Default don't attack for
