@@ -13,12 +13,12 @@ import modes.mode;
 import sounds.sound;
 import units.player;
 
-public class jumpBottle extends bottle {
+public class pushBottle extends bottle {
 	////////////////
 	/// DEFAULTS ///
 	////////////////
 	// Bottle name
-	public static String DEFAULT_BOTTLE_NAME = "Jump Bottle";
+	public static String DEFAULT_BOTTLE_NAME = "Push Bottle";
 	
 	// Bottle stats.
 	public static int DEFAULT_MAX_CHARGES = 3;
@@ -27,7 +27,7 @@ public class jumpBottle extends bottle {
 	public static int DEFAULT_JUMP_DISTANCE_TOPDOWN = 150;
 	
 	// If bottle is in inventory., this is it.
-	public static jumpBottle bottleRef;
+	public static pushBottle bottleRef;
 	
 	//////////////
 	/// FIELDS ///
@@ -46,7 +46,7 @@ public class jumpBottle extends bottle {
 	///////////////
 	
 	// On floor.
-	public jumpBottle(int x, int y) {
+	public pushBottle(int x, int y) {
 		super(DEFAULT_BOTTLE_NAME,x,y);
 		
 		bottleRef = this;
@@ -62,7 +62,7 @@ public class jumpBottle extends bottle {
 		
 		// Rarity
 		quality = "Alright";
-		description = "Double jump!";
+		description = "Push yourself!";
 		
 		// Set item's stats
 		// Bottle charges.
@@ -96,7 +96,7 @@ public class jumpBottle extends bottle {
 		player currPlayer = player.getPlayer();
 		if(currPlayer != null) {
 			currPlayer.getPlayerInventory().equipItem(this, KeyEvent.VK_SPACE);
-			tooltipString t = new tooltipString("Press 'space' double jump with the Jump Bottle.");
+			tooltipString t = new tooltipString("Press 'space' to push yourself with the Push Bottle.");
 		}
 	}
 

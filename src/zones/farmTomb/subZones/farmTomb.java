@@ -8,7 +8,7 @@ import drawing.background;
 import drawing.spriteSheet;
 import interactions.event;
 import items.bottleShards.jumpBottleShard;
-import items.bottles.jumpBottle;
+import items.bottles.pushBottle;
 import items.other.bottleExpander;
 import sounds.music;
 import terrain.chunk;
@@ -28,6 +28,7 @@ import units.unitTypes.tomb.lightDude;
 import units.unitTypes.tomb.shadowDude;
 import utilities.intTuple;
 import utilities.levelSave;
+import utilities.saveState;
 import zones.zone;
 import zones.sheepFarm.subZones.sheepFarm;
 
@@ -175,7 +176,7 @@ public class farmTomb extends zone {
 		// Load zone events.
 		loadZoneEvents();
 		
-		levelSave.loadSaveState("actualTombLevel.save");
+		//levelSave.loadSaveState("actualTombLevel.save");
 		
 		// Load the level save.
 		//farmTombZoneLoader loader = new farmTombZoneLoader();
@@ -193,6 +194,9 @@ public class farmTomb extends zone {
 		// Spawn area.
 		createNonEditorChunks();
 		
+		System.out.println("zone loaded!!");
+		System.out.println("X: " + player.getPlayer().getIntX());
+		
 		// Play zone music.
 		if(!shadowBossFightStarted.isCompleted()) { music.startMusic(zoneMusic);  }
 		else {
@@ -200,11 +204,16 @@ public class farmTomb extends zone {
 					(int)player.getPlayer().lastWell.getY()-200, 
 					(int)player.getPlayer().lastWell.getX()+250, 
 					(int)player.getPlayer().lastWell.getY()+250)) {
+				System.out.println("GO");
 				shadowBossFightStarted.setCompleted(false);
 				shadowBossFightFirstTime = true;
 				music.startMusic(zoneMusic); 
+				saveState.setQuiet(true);
+				saveState.createSaveState();
+				saveState.setQuiet(false);
 			}
 			else {
+				System.out.println("GO2");
 				// Load bossFight
 				createShadowBossFightAroundPlayer();
 			}
@@ -221,7 +230,7 @@ public class farmTomb extends zone {
 	
 	// Load items
 	public void loadItems() {
-		jumpBottle b = new jumpBottle(2867, 1398+32);
+		pushBottle b = new pushBottle(2867, 1398+32);
 		bottleExpander exp = new bottleExpander(11498,2333);
 		exp.quality = "Alright";
 	}

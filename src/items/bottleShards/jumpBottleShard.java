@@ -7,7 +7,7 @@ import drawing.spriteSheet.spriteSheetInfo;
 import items.bottle;
 import items.bottleShard;
 import items.item;
-import items.bottles.jumpBottle;
+import items.bottles.pushBottle;
 import units.player;
 
 public class jumpBottleShard extends bottleShard {
@@ -56,7 +56,7 @@ public class jumpBottleShard extends bottleShard {
 	
 	// Get bottle type
 	public Class getBottleType() {
-		return jumpBottle.class;
+		return pushBottle.class;
 	}
 	
 	// Set bottle
@@ -73,7 +73,7 @@ public class jumpBottleShard extends bottleShard {
 		}
 		
 		// Give new saveBottle.
-		bottle b = new jumpBottle(0,0);
+		bottle b = new pushBottle(0,0);
 		b.pickUp();
 		
 	}

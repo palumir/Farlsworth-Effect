@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import UI.playerActionBar;
 import UI.menus.deathMenu;
+import doodads.general.well;
 import doodads.sheepFarm.clawMarkRed;
 import drawing.camera;
 import drawing.drawnObject;
@@ -204,6 +205,7 @@ public class player extends unit {
 
 	// Player AI controls the interface
 	public void updateUnit() {
+		//System.out.println(isTouchingGround());
 		//if(lastWell!=null)System.out.println(lastWell.getX() + " " + lastWell.getY());
 		dealWithPushBottling();
 		showPossibleInteractions();
@@ -271,13 +273,13 @@ public class player extends unit {
 	}
 	
 	// Load player.
-	public static player loadPlayer(player alreadyPlayer, zone z, int spawnX, int spawnY, String direction) {
+	public static player loadPlayer(player alreadyPlayer, zone z, int spawnX, int spawnY, String direction, String whereToSpawn) {
 		
 		// Initiate all.
 		saveState s = main.initiateAll();
 		
 		// The player, depending on whether or not we have a save file.
-		player thePlayer = loadPlayerSaveData(alreadyPlayer, s, z, spawnX, spawnY, direction);
+		player thePlayer = loadPlayerSaveData(alreadyPlayer, s, z, spawnX, spawnY, direction, whereToSpawn);
 		
 		// Load the player into the zone.
 		thePlayer.currentZone.loadZone();
@@ -285,7 +287,7 @@ public class player extends unit {
 		return thePlayer;
 	}
 	
-	public static player loadPlayerSaveData(player alreadyPlayer, saveState s, zone z, int spawnX, int spawnY, String direction) {
+	public static player loadPlayerSaveData(player alreadyPlayer, saveState s, zone z, int spawnX, int spawnY, String direction, String whereToSpawn) {
 
 		// If we are in development mode and testing, do that stuff.
 		if(hasDeveloperPowers) {
@@ -375,6 +377,19 @@ public class player extends unit {
 			// Create an indicator
 			if(s.lastSaveBottles != null && s.lastSaveBottles.size() > 0) {
 				savePoint.createSavePoint(thePlayer);
+			}
+			
+			// If we are trying to respawn at a well.
+			if(whereToSpawn.equals("respawnAtWell")) {
+				if(thePlayer.lastWell == null) {
+				}
+				
+				// Nice, there's a well.
+				else {
+					well.refreshPlayer("respawnAtWell");
+					thePlayer.setDoubleX(thePlayer.lastWell.getX());
+					thePlayer.setDoubleY(thePlayer.lastWell.getY());
+				}
 			}
 		}
 		

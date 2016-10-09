@@ -3,7 +3,7 @@ package effects.buffs;
 import effects.buff;
 import effects.effectType;
 import effects.effectTypes.jumpBottleSplash;
-import items.bottles.jumpBottle;
+import items.bottles.pushBottle;
 import modes.mode;
 import terrain.chunkTypes.mud;
 import units.player;
@@ -74,25 +74,25 @@ public class jumpBottleBuff extends buff {
 			// Top down.
 			if(mode.getCurrentMode().equals("topDown")) {
 				if(u.isMovingLeft() && u.isMovingUp()) 
-					u.slashTo((int) (u.getIntX()-jumpBottle.DEFAULT_JUMP_DISTANCE_TOPDOWN/1.4f),
-							(int) (u.getIntY()-jumpBottle.DEFAULT_JUMP_DISTANCE_TOPDOWN/1.4f));
+					u.slashTo((int) (u.getIntX()-pushBottle.DEFAULT_JUMP_DISTANCE_TOPDOWN/1.4f),
+							(int) (u.getIntY()-pushBottle.DEFAULT_JUMP_DISTANCE_TOPDOWN/1.4f));
 				else if(u.isMovingRight() && u.isMovingUp()) 
-					u.slashTo((int) (u.getIntX()+jumpBottle.DEFAULT_JUMP_DISTANCE_TOPDOWN/1.4f),
-							(int) (u.getIntY()-jumpBottle.DEFAULT_JUMP_DISTANCE_TOPDOWN/1.4f));
+					u.slashTo((int) (u.getIntX()+pushBottle.DEFAULT_JUMP_DISTANCE_TOPDOWN/1.4f),
+							(int) (u.getIntY()-pushBottle.DEFAULT_JUMP_DISTANCE_TOPDOWN/1.4f));
 				else if(u.isMovingRight() && u.isMovingDown()) 
-					u.slashTo((int) (u.getIntX()+jumpBottle.DEFAULT_JUMP_DISTANCE_TOPDOWN/1.4f),
-							(int) (u.getIntY()+jumpBottle.DEFAULT_JUMP_DISTANCE_TOPDOWN/1.4f));
+					u.slashTo((int) (u.getIntX()+pushBottle.DEFAULT_JUMP_DISTANCE_TOPDOWN/1.4f),
+							(int) (u.getIntY()+pushBottle.DEFAULT_JUMP_DISTANCE_TOPDOWN/1.4f));
 				else if(u.isMovingLeft() && u.isMovingDown()) 
-					u.slashTo((int) (u.getIntX()-jumpBottle.DEFAULT_JUMP_DISTANCE_TOPDOWN/1.4f),
-							(int) (u.getIntY()+jumpBottle.DEFAULT_JUMP_DISTANCE_TOPDOWN/1.4f));
+					u.slashTo((int) (u.getIntX()-pushBottle.DEFAULT_JUMP_DISTANCE_TOPDOWN/1.4f),
+							(int) (u.getIntY()+pushBottle.DEFAULT_JUMP_DISTANCE_TOPDOWN/1.4f));
 				else if(u.getFacingDirection().equals("Left")) 
-					u.slashTo(u.getIntX()-jumpBottle.DEFAULT_JUMP_DISTANCE_TOPDOWN,u.getIntY());
+					u.slashTo(u.getIntX()-pushBottle.DEFAULT_JUMP_DISTANCE_TOPDOWN,u.getIntY());
 				else if(u.getFacingDirection().equals("Right")) 
-					u.slashTo(u.getIntX()+jumpBottle.DEFAULT_JUMP_DISTANCE_TOPDOWN,u.getIntY());
+					u.slashTo(u.getIntX()+pushBottle.DEFAULT_JUMP_DISTANCE_TOPDOWN,u.getIntY());
 				else if(u.getFacingDirection().equals("Up")) 
-					u.slashTo(u.getIntX(),u.getIntY()-jumpBottle.DEFAULT_JUMP_DISTANCE_TOPDOWN);
+					u.slashTo(u.getIntX(),u.getIntY()-pushBottle.DEFAULT_JUMP_DISTANCE_TOPDOWN);
 				else if(u.getFacingDirection().equals("Down")) 
-					u.slashTo(u.getIntX(),u.getIntY()+jumpBottle.DEFAULT_JUMP_DISTANCE_TOPDOWN);
+					u.slashTo(u.getIntX(),u.getIntY()+pushBottle.DEFAULT_JUMP_DISTANCE_TOPDOWN);
 			}
 		}
 		

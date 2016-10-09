@@ -3,7 +3,7 @@ package effects.buffs;
 import effects.buff;
 import effects.effectType;
 import effects.effectTypes.items.pushBottleSplash;
-import items.bottles.jumpBottle;
+import items.bottles.pushBottle;
 import modes.mode;
 import terrain.chunkTypes.mud;
 import units.player;
@@ -63,25 +63,25 @@ public class pushBottleBuff extends buff {
 		
 		// But allow the jump
 		if(mode.getCurrentMode().equals("topDown") && u.isMovingLeft() && u.isMovingUp()) 
-			u.slashTo((int) (u.getIntX()-jumpBottle.DEFAULT_JUMP_DISTANCE_TOPDOWN/1.4f),
-					(int) (u.getIntY()-jumpBottle.DEFAULT_JUMP_DISTANCE_TOPDOWN/1.4f));
+			u.slashTo((int) (u.getIntX()-pushBottle.DEFAULT_JUMP_DISTANCE_TOPDOWN/1.4f),
+					(int) (u.getIntY()-pushBottle.DEFAULT_JUMP_DISTANCE_TOPDOWN/1.4f));
 		else if(mode.getCurrentMode().equals("topDown") && u.isMovingRight() && u.isMovingUp()) 
-			u.slashTo((int) (u.getIntX()+jumpBottle.DEFAULT_JUMP_DISTANCE_TOPDOWN/1.4f),
-					(int) (u.getIntY()-jumpBottle.DEFAULT_JUMP_DISTANCE_TOPDOWN/1.4f));
+			u.slashTo((int) (u.getIntX()+pushBottle.DEFAULT_JUMP_DISTANCE_TOPDOWN/1.4f),
+					(int) (u.getIntY()-pushBottle.DEFAULT_JUMP_DISTANCE_TOPDOWN/1.4f));
 		else if(mode.getCurrentMode().equals("topDown") && u.isMovingRight() && u.isMovingDown()) 
-			u.slashTo((int) (u.getIntX()+jumpBottle.DEFAULT_JUMP_DISTANCE_TOPDOWN/1.4f),
-					(int) (u.getIntY()+jumpBottle.DEFAULT_JUMP_DISTANCE_TOPDOWN/1.4f));
+			u.slashTo((int) (u.getIntX()+pushBottle.DEFAULT_JUMP_DISTANCE_TOPDOWN/1.4f),
+					(int) (u.getIntY()+pushBottle.DEFAULT_JUMP_DISTANCE_TOPDOWN/1.4f));
 		else if(mode.getCurrentMode().equals("topDown") && u.isMovingLeft() && u.isMovingDown()) 
-			u.slashTo((int) (u.getIntX()-jumpBottle.DEFAULT_JUMP_DISTANCE_TOPDOWN/1.4f),
-					(int) (u.getIntY()+jumpBottle.DEFAULT_JUMP_DISTANCE_TOPDOWN/1.4f));
+			u.slashTo((int) (u.getIntX()-pushBottle.DEFAULT_JUMP_DISTANCE_TOPDOWN/1.4f),
+					(int) (u.getIntY()+pushBottle.DEFAULT_JUMP_DISTANCE_TOPDOWN/1.4f));
 		else if(u.getFacingDirection().equals("Left")) 
-			u.slashTo(u.getIntX()-jumpBottle.DEFAULT_JUMP_DISTANCE_TOPDOWN,u.getIntY());
+			u.slashTo(u.getIntX()-pushBottle.DEFAULT_JUMP_DISTANCE_TOPDOWN,u.getIntY());
 		else if(u.getFacingDirection().equals("Right")) 
-			u.slashTo(u.getIntX()+jumpBottle.DEFAULT_JUMP_DISTANCE_TOPDOWN,u.getIntY());
+			u.slashTo(u.getIntX()+pushBottle.DEFAULT_JUMP_DISTANCE_TOPDOWN,u.getIntY());
 		else if(u.getFacingDirection().equals("Up")) 
-			u.slashTo(u.getIntX(),u.getIntY()-jumpBottle.DEFAULT_JUMP_DISTANCE_TOPDOWN);
+			u.slashTo(u.getIntX(),u.getIntY()-pushBottle.DEFAULT_JUMP_DISTANCE_TOPDOWN);
 		else if(u.getFacingDirection().equals("Down")) 
-			u.slashTo(u.getIntX(),u.getIntY()+jumpBottle.DEFAULT_JUMP_DISTANCE_TOPDOWN);
+			u.slashTo(u.getIntX(),u.getIntY()+pushBottle.DEFAULT_JUMP_DISTANCE_TOPDOWN);
 		
 		// Destroy so we don't animate twice.
 		if(alreadyEffected) this.destroy();

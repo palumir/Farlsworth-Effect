@@ -481,14 +481,14 @@ public class unit extends drawnObject  {
 		if(isGravity() && !isStuck()) {
 			
 			// Set touching ground.
-			touchingGround = chunk.impassableChunks != null && 
+			setTouchingGround(chunk.impassableChunks != null && 
 					chunk.impassableChunks.size() > 0 &&
-					fallSpeed >= -1
-					&& chunk.getGroundChunk(this, (int)getDoubleX(), (int)(getDoubleY()+fallSpeed+1)) != null;
+					fallSpeed >= 0
+					&& chunk.getGroundChunk(this, (int)getDoubleX(), (int)(getDoubleY()+fallSpeed+1)) != null);
 			
 			// Accelerate
 			if(getFallSpeed() < DEFAULT_GRAVITY_MAX_VELOCITY &&
-					!touchingGround) {
+					!isTouchingGround()) {
 				if(!tryJump && !doubleJumping) {
 					setFallSpeed(getFallSpeed() + DEFAULT_SHORT_JUMP_ACCEL);
 				}
@@ -800,7 +800,8 @@ public class unit extends drawnObject  {
 	
 	// Jump unit
 	public void jump() {
-		if(!isAlreadyJumped() && !isStuck() && isGravity() && !isJumping() && tryJump && touchingGround) {
+		if(!isAlreadyJumped() && !isStuck() && isGravity() && tryJump && 
+				(isTouchingGround() || (fallSpeed < 3 && !isJumping()))) { // Fallspeed < 3 gives leniency in jumping off edges.
 			// Accelerate upward.
 			setAlreadyJumped(true);
 			setJumping(true);
@@ -1167,6 +1168,7 @@ public class unit extends drawnObject  {
 	// Unit has touched down.
 	public void touchDown() {
 		
+		
 		if(mode.getCurrentMode().equals("platformer")) {
 			// Hold the fall speed but set the current to be 0.
 			float oldFallSpeed = getFallSpeed();
@@ -1228,13 +1230,14 @@ public class unit extends drawnObject  {
 				
 					// If gravity is on and is the terrain loaded?
 					if (isGravity() && zone.getCurrentZone() != null && zone.getCurrentZone().isZoneLoaded()) { 
+						
 						// We touch down
-						if(moveY >= 0) {
+						if(moveY>=0) {
 							touchDown();
 						}
 						
-						// We touch up
-						if(moveY <= 0) {
+						if(moveY<=0) {
+							// We touch up
 							touchUp();
 						}
 					
@@ -1376,7 +1379,7 @@ public class unit extends drawnObject  {
 		
 		// platformer movement animations.
 		if(mode.getCurrentMode().equals("platformer")) {
-			 if((!touchingGround && !isStuck()) || pushing) {
+			 if((!isTouchingGround() && !isStuck()) || pushing) {
 				String face;
 				if(getFacingDirection().equals("Up") || getFacingDirection().equals("Down")) {
 					face = "Right";
@@ -1885,6 +1888,14 @@ public class unit extends drawnObject  {
 
 	public void setPushing(boolean pushing) {
 		this.pushing = pushing;
+	}
+
+	public boolean isTouchingGround() {
+		return touchingGround;
+	}
+
+	public void setTouchingGround(boolean touchingGround) {
+		this.touchingGround = touchingGround;
 	}
 	
 }
