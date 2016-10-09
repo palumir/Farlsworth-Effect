@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import UI.playerActionBar;
 import UI.menus.deathMenu;
+import doodads.general.well;
 import doodads.sheepFarm.clawMarkRed;
 import drawing.camera;
 import drawing.drawnObject;
@@ -15,8 +16,8 @@ import drawing.animation.animation;
 import drawing.animation.animationPack;
 import effects.effect;
 import effects.effectTypes.critBloodSquirt;
-import effects.effectTypes.jumpBottleSplash;
-import effects.effectTypes.savePoint;
+import effects.effectTypes.items.pushBottleSplash;
+import effects.effectTypes.items.savePoint;
 import effects.interfaceEffects.interactBlurb;
 import effects.interfaceEffects.tooltipString;
 import interactions.interactBox;
@@ -51,7 +52,7 @@ public class player extends unit {
 	
 	// Platformer and topDown default adjustment
 	private static int DEFAULT_PLATFORMER_ADJUSTMENT_Y = 6;
-	private static int DEFAULT_TOPDOWN_ADJUSTMENT_Y = 20;
+	private static int DEFAULT_TOPDOWN_ADJUSTMENT_Y = 18;
 	
 	// Default name.
 	private static String DEFAULT_PLAYER_NAME = "IanRetard";
@@ -147,7 +148,6 @@ public class player extends unit {
 	// Constructor
 	public player(int newX, int newY, zone z) {
 		super(playerType, newX, newY);
-		
 		// Set movespeed.
 		setMoveSpeed(DEFAULT_PLAYER_MOVESPEED);
 		oldMoveSpeed=DEFAULT_PLAYER_MOVESPEED;
@@ -205,8 +205,9 @@ public class player extends unit {
 
 	// Player AI controls the interface
 	public void updateUnit() {
+		//System.out.println(isTouchingGround());
 		//if(lastWell!=null)System.out.println(lastWell.getX() + " " + lastWell.getY());
-		dealWithTopDownJumping();
+		dealWithPushBottling();
 		showPossibleInteractions();
 		isPlayerDead();
 	}
@@ -272,13 +273,13 @@ public class player extends unit {
 	}
 	
 	// Load player.
-	public static player loadPlayer(player alreadyPlayer, zone z, int spawnX, int spawnY, String direction) {
+	public static player loadPlayer(player alreadyPlayer, zone z, int spawnX, int spawnY, String direction, String whereToSpawn) {
 		
 		// Initiate all.
 		saveState s = main.initiateAll();
 		
 		// The player, depending on whether or not we have a save file.
-		player thePlayer = loadPlayerSaveData(alreadyPlayer, s, z, spawnX, spawnY, direction);
+		player thePlayer = loadPlayerSaveData(alreadyPlayer, s, z, spawnX, spawnY, direction, whereToSpawn);
 		
 		// Load the player into the zone.
 		thePlayer.currentZone.loadZone();
@@ -286,7 +287,7 @@ public class player extends unit {
 		return thePlayer;
 	}
 	
-	public static player loadPlayerSaveData(player alreadyPlayer, saveState s, zone z, int spawnX, int spawnY, String direction) {
+	public static player loadPlayerSaveData(player alreadyPlayer, saveState s, zone z, int spawnX, int spawnY, String direction, String whereToSpawn) {
 
 		// If we are in development mode and testing, do that stuff.
 		if(hasDeveloperPowers) {
@@ -376,6 +377,19 @@ public class player extends unit {
 			// Create an indicator
 			if(s.lastSaveBottles != null && s.lastSaveBottles.size() > 0) {
 				savePoint.createSavePoint(thePlayer);
+			}
+			
+			// If we are trying to respawn at a well.
+			if(whereToSpawn.equals("respawnAtWell")) {
+				if(thePlayer.lastWell == null) {
+				}
+				
+				// Nice, there's a well.
+				else {
+					well.refreshPlayer("respawnAtWell");
+					thePlayer.setDoubleX(thePlayer.lastWell.getX());
+					thePlayer.setDoubleY(thePlayer.lastWell.getY());
+				}
 			}
 		}
 		
@@ -468,7 +482,7 @@ public class player extends unit {
 				else {
 					// Shield on.
 					if(k.getKeyCode() == KeyEvent.VK_P) {
-						jumpBottleSplash e = new jumpBottleSplash(getIntX() - critBloodSquirt.getDefaultWidth()/2 + topDownWidth/2,
+						pushBottleSplash e = new pushBottleSplash(getIntX() - critBloodSquirt.getDefaultWidth()/2 + topDownWidth/2,
 								   getIntY() - critBloodSquirt.getDefaultHeight()/2);
 					}
 			
@@ -731,17 +745,20 @@ public class player extends unit {
 	protected int jumpingToY = 0;
 	protected boolean hasSlashed = false;
 	protected boolean riseRunSet = false;
+
+	// Previous gravity state
+	private Boolean prevGravityState = null;
 	
-	// Jumptime.
-	private long jumpStart = 0;
-	private float jumpTime = 0;
+	// pushTime.
+	private long pushStart = 0;
+	private float pushTime = 0;
 	
 	// Deal with jumping for topDown
 	// TODO: make this more of an arch?
-	public void dealWithTopDownJumping() {
+	public void dealWithPushBottling() {
 			
-			// Jump to the location.
-			if(isJumping() && mode.getCurrentMode().equals("topDown")) {
+			// Push to the location.
+			if(isPushing()) {
 				
 				// Set rise/run
 				if(!riseRunSet) {
@@ -757,7 +774,7 @@ public class player extends unit {
 					if(distanceXY != 0) {
 						rise = ((yDistance/distanceXY)*getJumpSpeed());
 						run = ((xDistance/distanceXY)*getJumpSpeed());
-						jumpTime = distanceXY/(getJumpSpeed()*(1000/time.DEFAULT_TICK_RATE));
+						pushTime = distanceXY/(getJumpSpeed()*(1000/time.DEFAULT_TICK_RATE));
 					}
 					startX = getDoubleX();
 					startY = getDoubleY();
@@ -766,26 +783,19 @@ public class player extends unit {
 				setStunned(true);
 				move(run,rise);
 				
-				// Move the camera if it's there.
-				if(attachedCamera != null) {
-					attachedCamera.setX((int)(getDoubleX() + run));
-					attachedCamera.setY((int)(getDoubleY() + rise));
-				}
-				
 				// Don't let him not move at all or leave region.
-				if(time.getTime() - jumpStart > jumpTime*1000) {
+				if(time.getTime() - pushStart > pushTime*1000) {
 					
-					// Set collision back on.
-					collisionOn = true;
-					setJumping(false);
-					hasStartedJumping = false;
+					// Turn gravity back on
+					setGravity(prevGravityState);
+					prevGravityState = null;
+					setPushing(false);
 					
 					// Set old movespeed.
 					setStunned(false);
 					moveSpeed = oldMoveSpeed;
 					
 					// Make player killable
-					targetable = true;
 					forceInFront = false;
 				}
 			}
@@ -797,19 +807,21 @@ public class player extends unit {
 	public void slashTo(int x, int y) {
 		
 		// When we started jumping.
-		jumpStart = time.getTime();
+		pushStart = time.getTime();
 		
 		// Turn off moving.
 		moveSpeed = 0;
 		setStunned(true);
 		setMomentumX(0);
 		setMomentumY(0);
+		setFallSpeed(0);
+		if(prevGravityState == null) prevGravityState = isGravity();
+		setGravity(false);
 		
 		// Collision is off.
-		collisionOn = false;
+		//collisionOn = false;
 		
 		// Make player unkillable
-		targetable = false;
 		forceInFront = true;
 		
 		// Jump there
@@ -817,7 +829,7 @@ public class player extends unit {
 		jumpingToY = y;
 		
 		// Setup for our jumping function.
-		setJumping(true);
+		setPushing(true);
 		slashing = true;
 		hasSlashed = false;
 		riseRunSet = false;

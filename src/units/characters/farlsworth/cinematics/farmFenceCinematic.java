@@ -6,6 +6,7 @@ import cinematics.cinematic;
 import interactions.event;
 import interactions.interactBox;
 import interactions.textSeries;
+import sounds.music;
 import sounds.sound;
 import units.player;
 import units.characters.farlsworth.farlsworth;
@@ -33,6 +34,9 @@ public class farmFenceCinematic extends cinematic {
 	    // Lock the player's movement.
 	    player.getPlayer().stopMove("all");
 	    
+	    // Fade music out
+	    music.currMusic.fadeOut(2f);
+	    
 	    // Create interactSequence (first thing he says to you)
 	    textSeries s = new textSeries(null, "Uh, this is a kind of awkward ...");
 	    farlsworth = units.characters.farlsworth.farlsworth.farlsworth;
@@ -53,6 +57,9 @@ public class farmFenceCinematic extends cinematic {
 		int numIfs = 0;
 		
 		if(isSequence(numIfs++) && goNextTextSeries()) {
+			
+			// Play our farm music
+			music.startMusic(sheepFarm.farmMusic);
 			
 			// Set the next text and advance it.
 			addTextSeries(null, "I was trying to make a dramatic exit.", farlsworth);
@@ -100,6 +107,7 @@ public class farmFenceCinematic extends cinematic {
 			if(isSequence(numIfs++) && goNextTextSeries()) {
 				sheepFarm.forestGate.forceOpenWithSound();
 				addTextSeries(null, "Uh... thanks.",farlsworth);
+				music.currMusic.fadeOut(2f);
 				advanceSequence();
 			}
 			
@@ -119,6 +127,7 @@ public class farmFenceCinematic extends cinematic {
 			}
 
 			if(isSequence(numIfs++) && goNextTextSeries()) {
+				music.currMusic.fadeOut(2f);
 				addTextSeries(null, "I guess I'll have to stay inside the fence then.",farlsworth);
 				waitFor(1f);
 				advanceSequence();
@@ -157,6 +166,10 @@ public class farmFenceCinematic extends cinematic {
 	
 	// Run Farlsworth away
 	public void runFarlsworthAway() {
+		// Play our farm music
+		music.endAll();
+		music.startMusic(sheepFarm.forestMusic);
+		
 		farlsworth.setMoveSpeed(4.5f);
 		commandList commands = new commandList();
 		commands.add(new moveCommand(-7,-2219));

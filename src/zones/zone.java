@@ -94,7 +94,7 @@ public abstract class zone {
 			music.endAll();
 			groundTile.groundTiles = new CopyOnWriteArrayList<chunk>();
 			loadedOnce = false;
-			player.loadPlayer(player.getPlayer(), b, x, y, direction);
+			player.loadPlayer(player.getPlayer(), b, x, y, direction, "spawnAnywhere");
 			
 			// If we are going into the cave for the first time, display tooltip.
 			if(spiderCave.enteredSpiderCaveBefore != null && !spiderCave.enteredSpiderCaveBefore.isCompleted()) {

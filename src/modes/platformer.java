@@ -10,6 +10,5 @@ public class platformer extends mode {
 	// Set the mode.
 	public static void setMode() {
 		mode.setCurrentMode(name);
-		unit.setGravity(true);
 	}
 }

@@ -8,7 +8,7 @@ import drawing.background;
 import drawing.spriteSheet;
 import interactions.event;
 import items.bottleShards.jumpBottleShard;
-import items.bottles.jumpBottle;
+import items.bottles.pushBottle;
 import items.other.bottleExpander;
 import sounds.music;
 import terrain.chunk;
@@ -28,6 +28,7 @@ import units.unitTypes.tomb.lightDude;
 import units.unitTypes.tomb.shadowDude;
 import utilities.intTuple;
 import utilities.levelSave;
+import utilities.saveState;
 import zones.zone;
 import zones.sheepFarm.subZones.sheepFarm;
 
@@ -203,6 +204,9 @@ public class farmTomb extends zone {
 				shadowBossFightStarted.setCompleted(false);
 				shadowBossFightFirstTime = true;
 				music.startMusic(zoneMusic); 
+				saveState.setQuiet(true);
+				saveState.createSaveState();
+				saveState.setQuiet(false);
 			}
 			else {
 				// Load bossFight
@@ -221,7 +225,7 @@ public class farmTomb extends zone {
 	
 	// Load items
 	public void loadItems() {
-		jumpBottle b = new jumpBottle(2867, 1398+32);
+		pushBottle b = new pushBottle(2867, 1398+32);
 		bottleExpander exp = new bottleExpander(11498,2333);
 		exp.quality = "Alright";
 	}

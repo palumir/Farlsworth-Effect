@@ -6,7 +6,7 @@ import java.awt.image.BufferedImage;
 
 import drawing.spriteSheet;
 import drawing.spriteSheet.spriteSheetInfo;
-import effects.effectTypes.savePoint;
+import effects.effectTypes.items.savePoint;
 import effects.interfaceEffects.tooltipString;
 import items.bottle;
 import sounds.sound;

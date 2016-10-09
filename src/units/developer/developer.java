@@ -501,7 +501,7 @@ public class developer extends player {
 			developer.levelName = null;
 			
 			// Load player.
-			player p = player.loadPlayer(null,null,0,0,"Up");
+			player p = player.loadPlayer(null,null,0,0,"Up","Any");
 			
 			// Set the new level name and load it.
 			String levelName = b.getButtonID().substring(b.getButtonID().indexOf('.')+1,b.getButtonID().length());
@@ -526,7 +526,7 @@ public class developer extends player {
 			developer.levelName = null;
 			
 			// Create the player.
-			player p = player.loadPlayer(null,null,0,0,"Up");
+			player p = player.loadPlayer(null,null,0,0,"Up","Any");
 			
 			// Open the new one.
 			String levelName = b.getButtonID().substring(b.getButtonID().indexOf('.')+1,b.getButtonID().length());
@@ -547,7 +547,7 @@ public class developer extends player {
 			developer.levelName = null;
 			
 			// Create the player.
-			player p = player.loadPlayer(null,null,0,0,"Up");
+			player p = player.loadPlayer(null,null,0,0,"Up","Any");
 			
 			// Open the new level.
 			String levelName = b.getButtonID().substring(b.getButtonID().indexOf('.')+1,b.getButtonID().length());
@@ -1275,7 +1275,7 @@ public class developer extends player {
 			player.setDeveloper(false);
 			
 			// Create the player.
-			player p = player.loadPlayer(null,null,0,0,"Up");
+			player p = player.loadPlayer(null,null,0,0,"Up","Any");
 			
 		}
 		
@@ -1295,7 +1295,7 @@ public class developer extends player {
 			player.setDeveloper(true);
 			
 			// Create the player.
-			player p = player.loadPlayer(null,null,0,0,"Up");
+			player p = player.loadPlayer(null,null,0,0,"Up","Any");
 		}
 	}
 	

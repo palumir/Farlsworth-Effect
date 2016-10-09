@@ -13,7 +13,7 @@ import UI.interfaceObject;
 import drawing.gameCanvas;
 import drawing.spriteSheet;
 import effects.interfaceEffects.tooltipString;
-import items.bottles.jumpBottle;
+import items.bottles.pushBottle;
 import items.bottles.saveBottle;
 import sounds.sound;
 import units.player;
@@ -196,7 +196,7 @@ public class inventory extends interfaceObject {
 				if(i.slot == KeyEvent.VK_WINDOWS) {
 					
 					// Special cases for these bottles.
-					if(i instanceof jumpBottle && countBottles() < 3) {
+					if(i instanceof pushBottle && countBottles() < 3) {
 						equipItem(i, KeyEvent.VK_SPACE);
 					}
 					else if(i instanceof saveBottle && countBottles() < 3) {
