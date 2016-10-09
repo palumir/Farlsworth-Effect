@@ -6,12 +6,14 @@ import cinematics.cinematic;
 import interactions.event;
 import interactions.interactBox;
 import interactions.textSeries;
+import sounds.music;
 import sounds.sound;
 import units.player;
 import units.characters.farlsworth.farlsworth;
 import units.characters.farmer.cinematics.farmerIntroCinematic;
 import units.unitCommands.commandList;
 import units.unitCommands.commands.moveCommand;
+import zones.sheepFarm.subZones.sheepFarm;
 
 public class farmIntroCinematic extends cinematic {
 	
@@ -531,6 +533,7 @@ public class farmIntroCinematic extends cinematic {
 					}
 					
 					if(isSequence(numIfs++) && goNextTextSeries()) {
+						music.currMusic.fadeOut(2f);
 						addTextSeries(null, "Well, you're in for quite the adventure, then.",farlsworth);
 						
 						// Set the next text and advance it.
@@ -607,6 +610,7 @@ public class farmIntroCinematic extends cinematic {
 					}
 					
 					if(isSequence(numIfs++) && goNextTextSeries()) {
+						music.currMusic.fadeOut(2f);
 						addTextSeries(null, "Let's have some fun with this, then.",farlsworth);
 						
 						// Set the next text and advance it.
@@ -683,6 +687,8 @@ public class farmIntroCinematic extends cinematic {
 				}
 				
 				if(isSequence(numIfs++) && goNextTextSeries()) {
+					
+					music.currMusic.fadeOut(2f);
 					addTextSeries(null, "Let's have some fun with this, then.",farlsworth);
 					
 					// Set the next text and advance it.
@@ -708,6 +714,8 @@ public class farmIntroCinematic extends cinematic {
 	
 	// Run Farlsworth away
 	public void runFarlsworthAway() {
+		music.endAll();
+		music.startMusic(sheepFarm.forestMusic);
 		farlsworth.setMoveSpeed(4.5f);
 		commandList commands = new commandList();
 		commands.add(new moveCommand(425,farlsworth.getIntY()));

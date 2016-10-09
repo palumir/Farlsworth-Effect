@@ -81,8 +81,8 @@ public class sheepFarm extends zone {
 	private String DEFAULT_ZONE_MODE = "topDown";
 	
 	// Zone music.
-	public static String zoneMusic = "sounds/music/farmLand/sheepFarm/forest.wav";
-	private static String zoneMusicDistorted = "sounds/music/farmLand/sheepFarm/forestDistorted.wav";
+	public static String forestMusic = "sounds/music/farmLand/sheepFarm/forest.wav";
+	public static String farmMusic = "sounds/music/farmLand/sheepFarm/farm.wav";
 	
 	// Static fence so farlsworth can be attached to it.
 	public static ArrayList<chunk> farlsworthFence;
@@ -101,7 +101,6 @@ public class sheepFarm extends zone {
 	public static event wellTooltipLoaded;
 	public static event stormInProgress;
 	public static event isOnFire;
-	public static event distortedMusicPlaying;
 	public static event talkingGateJokeExperienced = new event("sheepFarmGateJokeExperienced");
 	
 	// Storm booleans
@@ -253,7 +252,7 @@ public class sheepFarm extends zone {
 		loadZoneEvents();
 		
 		// Load the level save.
-		//levelSave.loadSaveState("sheepFarmLevel.save");
+		levelSave.loadSaveState("sheepFarmLevel.save");
 		//sheepFarmZoneLoader loader = new sheepFarmZoneLoader();
 		//loader.loadSegments();
 		
@@ -265,7 +264,7 @@ public class sheepFarm extends zone {
 		}
 		
 		// Spawn special stuff
-		//spawnSpecialStuff();
+		spawnSpecialStuff();
 		
 		// Create items
 		createItems();
@@ -280,18 +279,11 @@ public class sheepFarm extends zone {
 		}
 		
 		if(!flowerFarmCinematic.isCompleted.isCompleted()) {
-			if(distortedMusicPlaying.isCompleted()) {
-				music.startMusic(getZoneMusicDistorted()); 
+			if(farmIntroCinematic.isCompleted.isCompleted()) {
+				music.startMusic(forestMusic); 
 			}
 			else {
-				
-				// Deal with possible saving issue
-				if(music.currMusic != null && !music.currMusic.getFileName().contains(zoneMusic)) {
-					music.endAll();
-				}
-				
-				// Play regular zone music. 
-				music.startMusic(zoneMusic); 
+				music.startMusic(farmMusic);
 			}
 		}
 		
@@ -354,10 +346,8 @@ public class sheepFarm extends zone {
 	
 	// Spawn items
 	public void createItems() {
-		
 		// Spawn bottle.
 		bottle saveBottle = new saveBottle(-665,-3102);
-		
 	}
 
 	
@@ -459,9 +449,6 @@ public class sheepFarm extends zone {
 		
 		// Is the zone on fire?
 		isOnFire = new event("forestIsOnFire");
-		
-		// Is distorted music playing?
-		distortedMusicPlaying = new event("sheepFarmIsDistortedMusicPlaying");
 	}
 	
 	// Zone cinematics.
@@ -474,7 +461,7 @@ public class sheepFarm extends zone {
 	public void dealWithRegionStuff() {
 		player currPlayer = player.getPlayer();
 		
-		if(farlsworth.farlsworth != null) {
+		if(farlsworth.farlsworth != null && zoneLoaded) {
 			// First Farlsworth cinematic (intro)
 			if(currPlayer != null && currPlayer.isWithin(230,-458,433,-250) 
 					&& !farlsworthIntro.isCompleted.isCompleted()
@@ -538,15 +525,6 @@ public class sheepFarm extends zone {
 			saveState.createSaveState();
 			saveState.setQuiet(false);
 		}
-		
-		// Distorted revealed?
-		if(distortedMusicPlaying != null && !distortedMusicPlaying.isCompleted()&& currPlayer != null && currPlayer.isWithin(-863,-3191,-460,-2953)) {
-			
-			// Change music to distorted
-			music.endAll();
-			music.startMusic(getZoneMusicDistorted());
-			distortedMusicPlaying.setCompleted(true);
-		}
 	}
 	
 	// Storm stuff
@@ -600,14 +578,6 @@ public class sheepFarm extends zone {
 	
 	public String getMode() {
 		return DEFAULT_ZONE_MODE;
-	}
-
-	public static String getZoneMusicDistorted() {
-		return zoneMusicDistorted;
-	}
-
-	public static void setZoneMusicDistorted(String zoneMusicDistorted) {
-		sheepFarm.zoneMusicDistorted = zoneMusicDistorted;
 	}
 	
 }

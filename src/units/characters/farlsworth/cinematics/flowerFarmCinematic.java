@@ -287,7 +287,7 @@ public class flowerFarmCinematic extends cinematic {
 		if(goNextTextSeries() && choiceIs("Don't ignore Farmer")) {
 			
 			if(isSequence(numIfs++) && goNextTextSeries()) {
-				music.startMusic(sheepFarm.getZoneMusicDistorted());
+				music.startMusic(sheepFarm.forestMusic);
 				// Set the next text and advance it.
 				addTextSeries(null, "This farm doesn't even have sheep!", farmer);
 				sound sound = new sound(cheering);
