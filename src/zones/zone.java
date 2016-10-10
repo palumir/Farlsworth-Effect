@@ -96,19 +96,9 @@ public abstract class zone {
 			loadedOnce = false;
 			player.loadPlayer(player.getPlayer(), b, x, y, direction, "spawnAnywhere");
 			
-			// If we are going into the cave for the first time, display tooltip.
-			if(spiderCave.enteredSpiderCaveBefore != null && !spiderCave.enteredSpiderCaveBefore.isCompleted()) {
-				tooltipString t = new tooltipString("In platformer mode, press 'w' to jump.");
-				spiderCave.enteredSpiderCaveBefore.setCompleted(true);
-				saveState.setQuiet(true);
-				saveState.createSaveState();
-				saveState.setQuiet(false);
-			}
-			else {
-				// Save the player in the new zone.
-				player.getPlayer().lastWell = new Point(x,y);
-				saveState.createSaveState();
-			}
+			// Save the player in the new zone.
+			player.getPlayer().lastWell = new Point(x,y);
+			saveState.createSaveState();
 		}
 	}
 	
