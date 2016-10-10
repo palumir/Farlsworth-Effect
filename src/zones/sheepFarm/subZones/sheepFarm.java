@@ -86,7 +86,6 @@ public class sheepFarm extends zone {
 	
 	// Static fence so farlsworth can be attached to it.
 	public static ArrayList<chunk> farlsworthFence;
-	
 	// References we will use throughout.
 	static unit u;
 	static chunk c;
@@ -102,6 +101,7 @@ public class sheepFarm extends zone {
 	public static event stormInProgress;
 	public static event isOnFire;
 	public static event talkingGateJokeExperienced = new event("sheepFarmGateJokeExperienced");
+	public static event musicOff = new event("sheepFarmMusicOff");
 	
 	// Storm booleans
 	public static boolean stormStarted = false;
@@ -278,7 +278,7 @@ public class sheepFarm extends zone {
 			s.start();
 		}
 		
-		if(!flowerFarmCinematic.isCompleted.isCompleted()) {
+		if(!musicOff.isCompleted()) {
 			if(farmIntroCinematic.isCompleted.isCompleted()) {
 				music.startMusic(forestMusic); 
 			}
@@ -406,7 +406,7 @@ public class sheepFarm extends zone {
 		farlsworthFence.add(c);
 		c = new fenceBarsSmall(adjustX + 37,adjustY + -436,0);
 		farlsworthFence.add(c);
-		forestGate = new gate("Not TV Key", adjustX + -13+fenceAdjustX/2,adjustY + -434);
+		forestGate = new gate("Farm Key", adjustX + -13+fenceAdjustX/2,adjustY + -434);
 		farlsworthFence.add(forestGate);
 		
 		///////////////////////////////
@@ -422,7 +422,7 @@ public class sheepFarm extends zone {
 		farlsworthFence.add(c);
 		
 		// Gate.
-		farlsworthGate = new gate("Not TV Key", adjustX + 412,adjustY + -15);
+		farlsworthGate = new gate("Farm Key", adjustX + 412,adjustY + -15);
 		farlsworthFence.add(farlsworthGate);
 		
 		// Right of gate

@@ -58,11 +58,9 @@ public class farmFenceCinematic extends cinematic {
 		
 		if(isSequence(numIfs++) && goNextTextSeries()) {
 			
-			// Play our farm music
-			music.startMusic(sheepFarm.farmMusic);
-			
 			// Set the next text and advance it.
 			addTextSeries(null, "I was trying to make a dramatic exit.", farlsworth);
+			farlsworth.moveTo(farlsworth.getIntX(), farlsworth.getIntY() + 15);
 			advanceSequence();
 		}
 		
@@ -71,7 +69,7 @@ public class farmFenceCinematic extends cinematic {
 			// Set the next text and advance it.
 			addTextSeries(null, "But there appears to be a gate here.", farlsworth);
 			farlsworth.setMoveSpeed(2);
-			farlsworth.moveTo(farlsworth.getIntX(), farlsworth.getIntY() + 15);
+			farlsworth.setFacingDirection("Up");
 			advanceSequence();
 		}
 		
@@ -108,6 +106,7 @@ public class farmFenceCinematic extends cinematic {
 				sheepFarm.forestGate.forceOpenWithSound();
 				addTextSeries(null, "Uh... thanks.",farlsworth);
 				music.currMusic.fadeOut(2f);
+				sheepFarm.musicOff.setCompleted(true);
 				advanceSequence();
 			}
 			

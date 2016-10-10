@@ -68,7 +68,6 @@ public class sheep extends unit {
 	
 	// Sounds
 	private static String bleet1 = "sounds/effects/animals/sheep1.wav";
-	private static String bleet2 = "sounds/effects/animals/sheep2.wav";
 	private int bleetRadius = 1200;
 	
 	//////////////
@@ -106,6 +105,11 @@ public class sheep extends unit {
 	
 		// Placeholder for each individual textSeries.
 		textSeries s;
+		
+		// Bah
+		sound bleet = new sound(bleet1);
+		bleet.setPosition(getIntX(), getIntY(), bleetRadius);
+		bleet.start();
 		
 		// Default
 		textSeries startOfConversation = new textSeries(null, "Bah.");
@@ -312,17 +316,9 @@ public class sheep extends unit {
 				randomBleet = newRandomBleetInterval;
 				
 				// Play a random baaaah
-				int random = utility.RNG.nextInt(2);
-				if(random==0) {
 					sound s = new sound(bleet1);
 					s.setPosition(getIntX(), getIntY(), bleetRadius);
 					s.start();
-				}
-				if(random==1) {
-					sound s = new sound(bleet2);
-					s.setPosition(getIntX(), getIntY(), bleetRadius);
-					s.start();
-				}
 			}
 			
 			// Move SHEEP in a random direction every interval.

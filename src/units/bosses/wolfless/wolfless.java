@@ -824,7 +824,7 @@ public class wolfless extends boss {
 		}
 		
 		// Spawn shadow dudes from xLeft to xRight (plus some)
-		for(int i = xLeft - 1000; i < xRight + 1000; i+=shadowDude.getDefaultWidth()) {
+		for(int i = xLeft -1500; i < xRight + 1500; i+=shadowDude.getDefaultWidth()) {
 			new shadowDude(i, floorY+300);
 		}
 		

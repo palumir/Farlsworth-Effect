@@ -414,6 +414,10 @@ public class farmTomb extends zone {
 		// Secret chest stairs up to well.
 		stairsUp secretStairs = new stairsUp(11615,2314,farmTomb.getZone(),11629,1670,"Right");
 		secretStairs.setZ(BACKGROUND_Z);
+		
+		// Secret stairs to start
+		stairsUp secretStairs2 = new stairsUp(12052,2314,farmTomb.getZone(),70,-6,"Right");
+		secretStairs.setZ(BACKGROUND_Z);
 	}
 	
 	// Spawn a rectangle of shadow dudes

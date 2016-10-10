@@ -132,7 +132,7 @@ public class farmer extends unit {
 			}
 			else {
 				startOfConversation = new textSeries(null, "You'd better go with him.");
-				s = startOfConversation.addChild(null, "But he did call you a dumby.");
+				s = startOfConversation.addChild(null, "But he did call you a dumbo.");
 				s = s.addChild(null, "You should beat him up for that.");
 				s = s.addChild(null, "He's a sheep, you'd probably win.");
 				s = s.addChild(null, "Punch him right in the wool.");

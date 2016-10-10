@@ -125,14 +125,6 @@ public class farmerIntroCinematic extends cinematic {
 			
 			if(isSequence(numIfs++) && goNextTextSeries()) {
 				
-				addTextSeries(null, "Have you met him yet?",farmer);
-				
-				// Set the next text and advance it.
-				advanceSequence();
-			}
-			
-			if(isSequence(numIfs++) && goNextTextSeries()) {
-				
 				addTextSeries(null, "He's my pet sheep. And my best friend.",farmer);
 				
 				// Set the next text and advance it.
@@ -149,7 +141,7 @@ public class farmerIntroCinematic extends cinematic {
 			
 			if(isSequence(numIfs++) && goNextTextSeries()) {
 				
-				addTextSeries(null, "I need to collect his wool!",farmer);
+				addTextSeries(null, "His wool is ready to be collected!",farmer);
 				
 				// Set the next text and advance it.
 				advanceSequence();
@@ -157,7 +149,7 @@ public class farmerIntroCinematic extends cinematic {
 			
 			if(isSequence(numIfs++) && goNextTextSeries()) {
 				
-				addTextSeries(null, "Would you mind doing that for me?",farmer);
+				addTextSeries(null, "Could you collect his wool for me?",farmer);
 				
 				// Set the next text and advance it.
 				advanceSequence();
@@ -192,58 +184,6 @@ public class farmerIntroCinematic extends cinematic {
 					farmKey f = new farmKey(0,0);
 					f.pickUp();
 					yesHasBeenSaid = true;
-					
-					// Set the next text and advance it.
-					advanceSequence();
-				}
-				
-				if(isSequence(numIfs++) && goNextTextSeries()) {
-					
-					addTextSeries(null, "And my barn.",farmer);
-					
-					// Set the next text and advance it.
-					advanceSequence();
-				}
-				
-				if(isSequence(numIfs++) && goNextTextSeries()) {
-					
-					addTextSeries(null, "And my house.",farmer);
-					
-					// Set the next text and advance it.
-					advanceSequence();
-				}
-				
-				if(isSequence(numIfs++) && goNextTextSeries()) {
-					
-					addTextSeries(null, "And my TV.",farmer);
-					
-					// Set the next text and advance it.
-					advanceSequence();
-				}
-				
-				if(isSequence(numIfs++) && goNextTextSeries()) {
-					
-					addTextSeries(null, "Wait, actually give me that one back.",farmer);
-					
-					// Set the next text and advance it.
-					advanceSequence();
-				}
-				
-				if(isSequence(numIfs++) && goNextTextSeries()) {
-					
-					player.getPlayer().getPlayerInventory().get("Farm Key").drop();
-					addTextSeries(null, "Otherwise I can't watch Rugrats.",farmer);
-					
-					// Set the next text and advance it.
-					advanceSequence();
-				}
-				
-				if(isSequence(numIfs++) && goNextTextSeries()) {
-					
-					addTextSeries(null, "Take this one instead.",farmer);
-					
-					farmGateKey f = new farmGateKey(0,0);
-					f.pickUp();
 					
 					// Set the next text and advance it.
 					advanceSequence();
@@ -387,45 +327,6 @@ public class farmerIntroCinematic extends cinematic {
 				if(isSequence(numIfs++) && goNextTextSeries()) {
 					
 					// Move right.
-					addTextSeries("'Yes'", null,farmer);
-					addTextSeries("'No'", null,farmer);
-					interactSequence.goToNext();
-					
-					// Set the next text and advance it.
-					advanceSequence();
-				}
-				
-				
-				if(isSequence(numIfs++) && goNextTextSeries()) {
-					
-					addTextSeries(null, "Oh, alright.",farmer);
-					
-					// Set the next text and advance it.
-					advanceSequence();
-				}
-				
-				if(isSequence(numIfs++) && goNextTextSeries()) {
-					
-					// Move right.
-					addTextSeries("'Yes'", null,farmer);
-					addTextSeries("'No'", null,farmer);
-					interactSequence.goToNext();
-					
-					// Set the next text and advance it.
-					advanceSequence();
-				}
-				
-				if(isSequence(numIfs++) && goNextTextSeries()) {
-					
-					addTextSeries(null, "He's a good quality sheep. Please?",farmer);
-					
-					// Set the next text and advance it.
-					advanceSequence();
-				}
-				
-				if(isSequence(numIfs++) && goNextTextSeries()) {
-					
-					// Move right.
 					addTextSeries("'No'", null,farmer);
 					addTextSeries("'Yes'", null,farmer);
 					interactSequence.goToNext();
@@ -510,25 +411,9 @@ public class farmerIntroCinematic extends cinematic {
 			
 			if(isSequence(numIfs++) && goNextTextSeries()) {
 				
-				addTextSeries(null, "Thirst world problems, right?",farmer);
-				
-				farmer.moveTo(farmer.getIntX(), farmer.getIntY()+20);
-				// Set the next text and advance it.
-				advanceSequence();
-			}
-			
-			if(isSequence(numIfs++) && goNextTextSeries()) {
-				
 				addTextSeries(null, "Farlsworth usually figures these things out for me.",farmer);
 				
-				// Set the next text and advance it.
-				advanceSequence();
-			}
-			
-		if(isSequence(numIfs++) && goNextTextSeries()) {
-				
-				addTextSeries(null, "Have you met him yet?",farmer);
-				
+				farmer.moveTo(farmer.getIntX(), farmer.getIntY()+20);
 				// Set the next text and advance it.
 				advanceSequence();
 			}
@@ -551,7 +436,7 @@ public class farmerIntroCinematic extends cinematic {
 			
 			if(isSequence(numIfs++) && goNextTextSeries()) {
 				
-				addTextSeries(null, "I need to collect his wool!",farmer);
+				addTextSeries(null, "His wool is ready to be collected!",farmer);
 				
 				// Set the next text and advance it.
 				advanceSequence();
@@ -559,7 +444,7 @@ public class farmerIntroCinematic extends cinematic {
 			
 			if(isSequence(numIfs++) && goNextTextSeries()) {
 				
-				addTextSeries(null, "Would you mind doing that for me?",farmer);
+				addTextSeries(null, "Could you collect his wool for me?",farmer);
 				
 				// Set the next text and advance it.
 				advanceSequence();
@@ -594,58 +479,6 @@ public class farmerIntroCinematic extends cinematic {
 					farmKey f = new farmKey(0,0);
 					f.pickUp();
 					yesHasBeenSaid = true;
-					
-					// Set the next text and advance it.
-					advanceSequence();
-				}
-				
-				if(isSequence(numIfs++) && goNextTextSeries()) {
-					
-					addTextSeries(null, "And my barn.",farmer);
-					
-					// Set the next text and advance it.
-					advanceSequence();
-				}
-				
-				if(isSequence(numIfs++) && goNextTextSeries()) {
-					
-					addTextSeries(null, "And my house.",farmer);
-					
-					// Set the next text and advance it.
-					advanceSequence();
-				}
-				
-				if(isSequence(numIfs++) && goNextTextSeries()) {
-					
-					addTextSeries(null, "And my TV.",farmer);
-					
-					// Set the next text and advance it.
-					advanceSequence();
-				}
-				
-				if(isSequence(numIfs++) && goNextTextSeries()) {
-					
-					addTextSeries(null, "Wait, actually give me that one back.",farmer);
-					player.getPlayer().getPlayerInventory().get("Farm Key").drop();
-					
-					// Set the next text and advance it.
-					advanceSequence();
-				}
-				
-				if(isSequence(numIfs++) && goNextTextSeries()) {
-					
-					addTextSeries(null, "Otherwise I can't watch Rugrats.",farmer);
-					
-					// Set the next text and advance it.
-					advanceSequence();
-				}
-				
-				if(isSequence(numIfs++) && goNextTextSeries()) {
-					
-					addTextSeries(null, "Take this one instead.",farmer);
-					
-					farmGateKey f = new farmGateKey(0,0);
-					f.pickUp();
 					
 					// Set the next text and advance it.
 					advanceSequence();
@@ -781,45 +614,6 @@ public class farmerIntroCinematic extends cinematic {
 				if(isSequence(numIfs++) && goNextTextSeries()) {
 					
 					addTextSeries(null, "Wait, did you say yes that time?",farmer);
-					
-					// Set the next text and advance it.
-					advanceSequence();
-				}
-				
-				if(isSequence(numIfs++) && goNextTextSeries()) {
-					
-					// Move right.
-					addTextSeries("'Yes'", null,farmer);
-					addTextSeries("'No'", null,farmer);
-					interactSequence.goToNext();
-					
-					// Set the next text and advance it.
-					advanceSequence();
-				}
-				
-				
-				if(isSequence(numIfs++) && goNextTextSeries()) {
-					
-					addTextSeries(null, "Oh, alright.",farmer);
-					
-					// Set the next text and advance it.
-					advanceSequence();
-				}
-				
-				if(isSequence(numIfs++) && goNextTextSeries()) {
-					
-					// Move right.
-					addTextSeries("'Yes'", null,farmer);
-					addTextSeries("'No'", null,farmer);
-					interactSequence.goToNext();
-					
-					// Set the next text and advance it.
-					advanceSequence();
-				}
-				
-				if(isSequence(numIfs++) && goNextTextSeries()) {
-					
-					addTextSeries(null, "He's a good quality sheep. Please?",farmer);
 					
 					// Set the next text and advance it.
 					advanceSequence();
