@@ -116,6 +116,8 @@ public class sheepFarm extends zone {
 	// Constructor
 	public sheepFarm() {
 		super("sheepFarm", "farmLand");
+		zoneMusics.add(forestMusic);
+		zoneMusics.add(farmMusic);
 	}
 	
 	///////////////////////////////
@@ -277,7 +279,10 @@ public class sheepFarm extends zone {
 			sound s = new sound(fire.forestFire);
 			s.start();
 		}
-		
+	}
+	
+	// Play music
+	public static void playMusic() {
 		if(!musicOff.isCompleted()) {
 			if(farmIntroCinematic.isCompleted.isCompleted()) {
 				music.startMusic(forestMusic); 
@@ -286,7 +291,6 @@ public class sheepFarm extends zone {
 				music.startMusic(farmMusic);
 			}
 		}
-		
 	}
 	
 	// Load from save
@@ -335,7 +339,7 @@ public class sheepFarm extends zone {
 		((haystack)c).setStrange();
 		
 		// Farmer house
-		c = new door("No Key Yet", -599,-373, farmerHouse.getZone(), -93,957, "Right");
+		c = new door(null, -599,-373, farmerHouse.getZone(), -93+20,957+5, "Right");
 		
 		// Barn
 		c = new door("No Key Yet", -793,-370, farmerHouse.getZone(), -93,957, "Right");

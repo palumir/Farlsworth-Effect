@@ -80,6 +80,8 @@ public class farmTomb extends zone {
 	// Constructor
 	public farmTomb() {
 		super("farmTombEasy", "farmLand");
+		zoneMusics.add(zoneMusic);
+		zoneMusics.add(zoneMusicFrantic);
 	}
 		
 	///////////////////////////////
