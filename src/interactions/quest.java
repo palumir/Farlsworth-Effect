@@ -45,8 +45,8 @@ public class quest extends text {
 		super(newText, DEFAULT_X, DEFAULT_Y, DEFAULT_QUEST_COLOR);
 		
 		// Load events.
-		completed = new event("Quest:" + newText + "completed");
-		started = new event("Quest:" + newText + "started");
+		completed = event.createEvent("Quest:" + newText + "completed");
+		started = event.createEvent("Quest:" + newText + "started");
 		
 		// Set fields.
 		questGiver = giver;

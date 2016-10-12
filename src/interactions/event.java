@@ -1,47 +1,47 @@
 package interactions;
 
 import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.locks.Lock;
 
 public class event {
 	
 	// All events
-	public static ArrayList<event> loadedEvents = new ArrayList<event>();
+	public static CopyOnWriteArrayList<event> loadedEvents = new CopyOnWriteArrayList<event>();
 	
 	// Is the event done?
-	private boolean completed = false;
+	private boolean completed;
 	
 	// Name of the event.
 	private String name; // unique
 	
 	// Constructor
-	public event(String newName) {
+	private event(String newName) {
 		
 		// Initialize fields.
 		name = newName;
+		completed = false;
+		loadedEvents.add(this);
+
+	}
+	
+	// Create an event
+	public static event createEvent(String newName) {	
 		
-		// If the gag is loaded, set it's data.
-		int i = 0;
-		if(loadedEvents != null) {
-			
-			// Go through the list and return the gag with the same name.
-			while(i < loadedEvents.size()) {
-				if(loadedEvents.get(i).getName().equals(newName)) {
-					setCompleted(loadedEvents.get(i).isCompleted());
-					loadedEvents.remove(i);
-				}
-				else {
-					i++;
-				}
+		// Go through the list and return the event with the same name.
+		for(int i = 0; i < loadedEvents.size(); i++) {
+			if(loadedEvents.get(i).getName().equals(newName)) {
+				return loadedEvents.get(i);
 			}
 		}
-		loadedEvents.add(this);
+		
+		return new event(newName);
 	}
 	
 	public static void printAllEvents() {
 		if(loadedEvents != null)
 		System.out.println("=====================================================");
 		for(int i = 0; i < loadedEvents.size(); i++) {
-			if(loadedEvents.get(i).name.contains("projectile"))
 			System.out.println("Event: " + loadedEvents.get(i).getName() + " is set to: " + loadedEvents.get(i).completed);
 		}
 		System.out.println("=====================================================");

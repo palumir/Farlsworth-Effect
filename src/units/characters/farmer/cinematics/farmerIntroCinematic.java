@@ -18,8 +18,8 @@ import zones.sheepFarm.subZones.sheepFarm;
 public class farmerIntroCinematic extends cinematic {
 	
 	// Event
-	public static event isCompleted = new event(MethodHandles.lookup().lookupClass().getName() + "isCompleted");
-	public static event playerPressedNoABunch = new event("farmerIntroCinematicPlayerPresseNoABunch");
+	public static event isCompleted = event.createEvent(MethodHandles.lookup().lookupClass().getName() + "isCompleted");
+	public static event playerPressedNoABunch = event.createEvent("farmerIntroCinematicPlayerPresseNoABunch");
 
 	public farmerIntroCinematic() {
 		super("farmerIntroCinematic");
@@ -672,7 +672,7 @@ public class farmerIntroCinematic extends cinematic {
 		interactSequence.setUnescapable(false);
 		
 		// Set it to be completed as soon as he runs, instead of when he's teleported to flower farm.
-		cinematicCompleted.setCompleted(true);
+		isCompleted.setCompleted(true);
 		playerPressedNoABunch.setCompleted(true);
 		
 		// Save by default.

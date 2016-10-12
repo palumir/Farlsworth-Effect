@@ -18,8 +18,8 @@ import zones.sheepFarm.subZones.sheepFarm;
 public class farmFenceCinematic extends cinematic {
 	
 	// Event
-	public static event isCompleted = new event(MethodHandles.lookup().lookupClass().getName() + "isCompleted");
-	public static event fenceJokeExperienced = new event("farmFenceCinematicFenceJokeExperienced");
+	public static event isCompleted = event.createEvent(MethodHandles.lookup().lookupClass().getName() + "isCompleted");
+	public static event fenceJokeExperienced = event.createEvent("farmFenceCinematicFenceJokeExperienced");
 
 	public farmFenceCinematic() {
 		super("farmFenceCinematic");
@@ -106,7 +106,6 @@ public class farmFenceCinematic extends cinematic {
 				sheepFarm.forestGate.forceOpenWithSound();
 				addTextSeries(null, "Uh... thanks.",farlsworth);
 				music.currMusic.fadeOut(2f);
-				sheepFarm.musicOff.setCompleted(true);
 				advanceSequence();
 			}
 			
@@ -183,7 +182,7 @@ public class farmFenceCinematic extends cinematic {
 		interactSequence.setUnescapable(false);
 		
 		// Set it to be completed as soon as he runs, instead of when he's teleported to flower farm.
-		cinematicCompleted.setCompleted(true);
+		isCompleted.setCompleted(true);
 		
 		// Save by default.
 		saveState.setQuiet(true);

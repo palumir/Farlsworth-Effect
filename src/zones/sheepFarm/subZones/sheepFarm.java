@@ -100,8 +100,8 @@ public class sheepFarm extends zone {
 	public static event wellTooltipLoaded;
 	public static event stormInProgress;
 	public static event isOnFire;
-	public static event talkingGateJokeExperienced = new event("sheepFarmGateJokeExperienced");
-	public static event musicOff = new event("sheepFarmMusicOff");
+	public static event talkingGateJokeExperienced = event.createEvent("sheepFarmGateJokeExperienced");
+	public static event musicOff = event.createEvent("sheepFarmMusicOff");
 	
 	// Storm booleans
 	public static boolean stormStarted = false;
@@ -279,6 +279,8 @@ public class sheepFarm extends zone {
 			sound s = new sound(fire.forestFire);
 			s.start();
 		}
+		
+		playMusic();
 	}
 	
 	// Play music
@@ -440,19 +442,19 @@ public class sheepFarm extends zone {
 	public void loadZoneEvents() {
 		
 		// Use WASD
-		eToInteract = new event("useWASDToMoveToolTip");
+		eToInteract = event.createEvent("useWASDToMoveToolTip");
 		
 		// Use save bottle
-		useSaveBottle = new event("rememberToUseSaveBottleYouDinky");
+		useSaveBottle = event.createEvent("rememberToUseSaveBottleYouDinky");
 		
 		// Well and attack tooltips.
-		wellTooltipLoaded = new event("sheepFarmWellTooltipLoaded");
+		wellTooltipLoaded = event.createEvent("sheepFarmWellTooltipLoaded");
 		
 		// Storm stuff
-		stormInProgress = new event("sheepFarmStormInProgress");
+		stormInProgress = event.createEvent("sheepFarmStormInProgress");
 		
 		// Is the zone on fire?
-		isOnFire = new event("forestIsOnFire");
+		isOnFire = event.createEvent("forestIsOnFire");
 	}
 	
 	// Zone cinematics.

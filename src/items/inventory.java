@@ -233,16 +233,18 @@ public class inventory extends interfaceObject {
 	// Unequip item
 	public void unequipItem(item i) {
 		
-		// Play equip sound.
-		sound s = new sound(unequipWeapon);
-		s.start();
-		
-		// Actually unequip it.
-		i.slot = KeyEvent.VK_WINDOWS;
-		activeSlots.remove(i);
-		
-		// Tooltip.
-		new tooltipString(i.getName() + " unequipped.");
+		if(i.slot != KeyEvent.VK_WINDOWS) {
+			// Play equip sound.
+			sound s = new sound(unequipWeapon);
+			s.start();
+			
+			// Actually unequip it.
+			i.slot = KeyEvent.VK_WINDOWS;
+			activeSlots.remove(i);
+			
+			// Tooltip.
+			new tooltipString(i.getName() + " unequipped.");
+		}
 	}
 	
 	// Equip item to slot
@@ -582,9 +584,9 @@ public class inventory extends interfaceObject {
 	}
 	
 	public item get(String i) {
-		if(getItems() != null) {
-			for(int j = 0; j < getItems().size(); j++) {
-				if(getItems().get(j) != null  && getItems().get(j).getName().equals(i)) return getItems().get(j);
+		if(pickedUpItems != null) {
+			for(int j = 0; j < pickedUpItems.size(); j++) {
+				if(pickedUpItems.get(j) != null  && pickedUpItems.get(j).getName().equals(i)) return pickedUpItems.get(j);
 			}
 		}
 		return null;

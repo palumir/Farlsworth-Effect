@@ -115,7 +115,7 @@ public class spiderCave extends zone {
 	public void loadZoneEvents() {
 		
 		// Have we entered the cave before?
-		enteredSpiderCaveBefore = new event("enteredSpiderCaveBefore");
+		enteredSpiderCaveBefore = event.createEvent("enteredSpiderCaveBefore");
 	}
 	
 	//////////////////////

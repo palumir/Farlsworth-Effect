@@ -212,8 +212,8 @@ public class gate extends openable {
 
 	// Is it the forest gate
 	public boolean isForestGateAndUnopenable() {
-		return sheepFarm.forestGate != null && this.equals(sheepFarm.forestGate) && farlsworth.pastSpawnFarm != null
-				&& !farlsworth.pastSpawnFarm.isCompleted() && player.getPlayer() != null
+		return sheepFarm.forestGate != null && this.equals(sheepFarm.forestGate) &&
+				 player.getPlayer() != null
 				&& player.getPlayer().getPlayerInventory().hasKey(keyName);
 	}
 

@@ -8,9 +8,12 @@ import drawing.spriteSheet;
 import drawing.spriteSheet.spriteSheetInfo;
 import effects.effectTypes.items.savePoint;
 import effects.interfaceEffects.tooltipString;
+import interactions.interactBox;
+import interactions.textSeries;
 import items.bottle;
 import sounds.sound;
 import units.player;
+import units.characters.farlsworth.farlsworth;
 import utilities.saveState;
 
 public class saveBottle extends bottle {
@@ -90,14 +93,40 @@ public class saveBottle extends bottle {
 		}
 	}
 	
+	// Note attached
+	private boolean noteAttached = false;
+	
+	// Attach note.
+	public void attachFarlsworthNote() {
+		noteAttached = true;
+	}
+	
 	// React to being picked up.
 	@Override
 	public void reactToPickup() {
 		player currPlayer = player.getPlayer();
 		if(currPlayer != null) {
-			currPlayer.getPlayerInventory().equipItem(this, KeyEvent.VK_ENTER);
-			enterToUse = new tooltipString("Press 'enter' to use a charge of the Save Bottle.");
-			enterToUse.setHasATimer(false);
+			
+			if(noteAttached) {
+				currPlayer.getPlayerInventory().equipItem(this, KeyEvent.VK_ENTER);
+				
+				textSeries s = new textSeries(null, "There is a note attached to the bottle.");
+			    interactBox interactSequence = new interactBox(s, this);
+				interactSequence.toggleDisplay();
+				
+				textSeries read = s.addChild(new textSeries("Read note", "\"You suck\" - your's truly, Farlsworth."));
+				read.setChoiceType("Order");
+				read.setEnd();
+				
+				textSeries dontRead = s.addChild(new textSeries("Don't read note", "It was probably something dumb anyway."));
+				dontRead.setChoiceType("Chaos");
+				dontRead.setEnd();
+			}
+			else {
+				currPlayer.getPlayerInventory().equipItem(this, KeyEvent.VK_ENTER);
+				enterToUse = new tooltipString("Press 'enter' to use a charge of the Save Bottle.");
+				enterToUse.setHasATimer(false);
+			}
 		}
 	}
 

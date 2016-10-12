@@ -42,7 +42,7 @@ public class bottleExpander extends item {
 	public static boolean inInventory = false;
 	
 	// Event
-	public static event bottleExpanderFirstTime = new event("bottleExpanderFirstTime");
+	public static event bottleExpanderFirstTime = event.createEvent("bottleExpanderFirstTime");
 	
 	///////////////
 	/// METHODS ///

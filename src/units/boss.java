@@ -24,7 +24,7 @@ public class boss extends unit {
 		setDisplayName(newDisplayName);
 		
 		// Load the event
-		bossCompleted = new event(newDisplayName + "bossCompleted");
+		bossCompleted = event.createEvent(newDisplayName + "bossCompleted");
 		
 		if(bossCompleted.isCompleted()) this.destroy();
 	}
