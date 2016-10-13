@@ -18,7 +18,7 @@ import zones.sheepFarm.subZones.sheepFarm;
 public class farmIntroCinematic extends cinematic {
 	
 	// Event
-	public static event isCompleted = new event(MethodHandles.lookup().lookupClass().getName() + "isCompleted");
+	public static event isCompleted = event.createEvent(MethodHandles.lookup().lookupClass().getName() + "isCompleted");
 	
 	// lol!
 	private static String laughtrack = "sounds/effects/characters/farlsworth/laughTrack.wav";
@@ -213,7 +213,7 @@ public class farmIntroCinematic extends cinematic {
 				}
 				
 				if(isSequence(numIfs++) && goNextTextSeries()) {
-					addTextSeries(null, "Not that it would stop a real adventurer!",farlsworth);
+					addTextSeries(null, "Not that danger would stop a real adventurer!",farlsworth);
 					
 					music.currMusic.fadeOut(2f);
 					// Set the next text and advance it.
@@ -280,11 +280,21 @@ public class farmIntroCinematic extends cinematic {
 				}
 				
 				if(isSequence(numIfs++) && goNextTextSeries()) {
-					addTextSeries(null, "Although, you're a pretty weird looking sheep.",farlsworth);
+					addTextSeries(null, "Although... ",farlsworth);
 					
 					// Set the next text and advance it.
 					advanceSequence();
 				}
+				
+				
+				
+				if(isSequence(numIfs++) && goNextTextSeries()) {
+					addTextSeries(null, "You're a pretty weird looking sheep.",farlsworth);
+					
+					// Set the next text and advance it.
+					advanceSequence();
+				}
+				
 				
 				if(isSequence(numIfs++) && goNextTextSeries()) {
 					addTextSeries(null, "And I don't like weird looking sheep in my pen.",farlsworth);
@@ -336,7 +346,7 @@ public class farmIntroCinematic extends cinematic {
 					}
 					
 					if(isSequence(numIfs++) && goNextTextSeries()) {
-						addTextSeries(null, "Not that it would stop a real adventurer!",farlsworth);
+						addTextSeries(null, "Not that danger would stop a real adventurer!",farlsworth);
 						music.currMusic.fadeOut(2f);
 						
 						// Set the next text and advance it.

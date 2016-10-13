@@ -42,8 +42,8 @@ public abstract class openable extends chunk {
 		setKeyName(newKeyName);
 		
 		// Event for gate open.
-		isOpen = new event("openable" + newKeyName + newX + newY + "isOpen");
-		hasBeenOpened = new event("openable" + newKeyName + newX + newY + "hasBeenOpened");
+		isOpen = event.createEvent("openable" + newKeyName + newX + newY + "isOpen");
+		hasBeenOpened = event.createEvent("openable" + newKeyName + newX + newY + "hasBeenOpened");
 		
 		// Check if we have save data on the gate.
 		if(isOpen.isCompleted()) {

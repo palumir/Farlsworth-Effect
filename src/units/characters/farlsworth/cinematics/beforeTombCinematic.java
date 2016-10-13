@@ -18,7 +18,7 @@ import zones.sheepFarm.subZones.sheepFarm;
 public class beforeTombCinematic extends cinematic {
 	
 	// Event
-	public static event isCompleted = new event(MethodHandles.lookup().lookupClass().getName() + "isCompleted");
+	public static event isCompleted = event.createEvent(MethodHandles.lookup().lookupClass().getName() + "isCompleted");
 
 	public beforeTombCinematic() {
 		super("beforeTombCinematic");
@@ -207,11 +207,24 @@ public class beforeTombCinematic extends cinematic {
 			
 			// Set the next text and advance it.
 			addTextSeries(null, "See you on the other side, dildo!", farlsworth);
-			sequencePart=100;
+			
+			if(choiceIs("'Easy'")) {
+				farlsworth.giveBottleBackEventually.setCompleted(true);
+				sequencePart=100;
+			}
+			else sequencePart = 101;
 			runFarlsworthAway();
 		}
 		
-		if(sequencePart == 100 && farlsworth.getAllCommands()!=null && (farlsworth.getAllCommands().size() == 0)) {
+		if(sequencePart == 100 && farlsworth.getAllCommands().size() == 1) {
+			
+			// Set the next text and advance it.
+			farlsworth.putItemInMouth(player.getPlayer().getPlayerInventory().get("Save Bottle"));
+			sequencePart=101;
+		}
+		
+		if(sequencePart == 101 && farlsworth.getAllCommands()!=null && (farlsworth.getAllCommands().size() == 0)) {
+			
 			farlsworth.destroy();
 			stop();
 		}
@@ -222,6 +235,7 @@ public class beforeTombCinematic extends cinematic {
 		
 		farlsworth.setMoveSpeed(4.5f);
 		commandList commands = new commandList();
+		commands.add(new moveCommand(-3463, -5550));
 		commands.add(new moveCommand(-3420,-5803));
 		farlsworth.doCommandsOnce(commands);
 		sound s = new sound(farlsworth.bleet);

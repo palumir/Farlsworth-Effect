@@ -19,7 +19,7 @@ import zones.sheepFarm.subZones.sheepFarm;
 public class flowerFarmCinematic extends cinematic {
 	
 	// Event
-	public static event isCompleted = new event(MethodHandles.lookup().lookupClass().getName() + "isCompleted");
+	public static event isCompleted = event.createEvent(MethodHandles.lookup().lookupClass().getName() + "isCompleted");
 
 	public flowerFarmCinematic() {
 		super("flowerFarmCinematic");
@@ -218,29 +218,12 @@ public class flowerFarmCinematic extends cinematic {
 		
 	}
 	
-	// Run farmer away
-	public void runFarmerAway() {
-		farmer.setMoveSpeed(4);
-		farmer.moveTo(farmer.getIntX()+100, farmer.getIntY()+500);
-		advanceSequence();
-		interactSequence.getTextSeries().setEnd();
-		interactSequence.setLocked(false);
-		interactSequence.setUnescapable(false);
-		
-		// Set it to be completed as soon as he runs, instead of when he's teleported to flower farm.
-		isCompleted.setCompleted(true);
-		
-		// Save by default.
-		saveState.setQuiet(true);
-		saveState.createSaveState();
-		saveState.setQuiet(false);
-	}
-	
-
-	
 	// Run Farlsworth away
 	public void runFarlsworthAway() {
+		event.printAllEvents();
+		
 		save = false;
+		
 		farlsworth.setMoveSpeed(6f);
 		commandList commands = new commandList();
 		commands.add(new moveCommand(-1677,-4866));

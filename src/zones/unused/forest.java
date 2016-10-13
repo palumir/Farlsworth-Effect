@@ -979,10 +979,10 @@ public class forest extends zone {
 	public void loadZoneEvents() {
 		
 		// Storm stuff
-		stormInProgress = new event("sheepFarmStormInProgress");
+		stormInProgress = event.createEvent("sheepFarmStormInProgress");
 		
 		// Is the zone on fire?
-		isOnFire = new event("forestIsOnFire");
+		isOnFire = event.createEvent("forestIsOnFire");
 	}
 	
 	// Deal with the first well we encounters.
@@ -1064,7 +1064,7 @@ public class forest extends zone {
 		
 		// Only do this if the player is actually past the part. TODO: needs to be changed to only
 		// be done if they are not on the fire path.
-		if(farlsworth.pastTombExit != null && farlsworth.pastTombExit.isCompleted()) {
+		if(true) {
 			
 			///////////////////////////
 			// FIRST LIGHTNING AREA  //

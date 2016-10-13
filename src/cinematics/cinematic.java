@@ -23,9 +23,6 @@ public abstract class cinematic {
 	//// FIELDS ////
 	////////////////
 	
-	// Has the cinematic completed?
-	protected event cinematicCompleted;
-	
 	// Does it complete once?
 	private boolean completeOnce = true;
 	
@@ -59,14 +56,13 @@ public abstract class cinematic {
 	/////////////////////
 	public cinematic(String s) {
 		setName(s);
-		if(isCompleteOnce()) cinematicCompleted = isCompleted();
 	}
 	
 	// Start
 	public void start() {
 		
 		// If the cinematic isn't completed.
-		if(!isCompleteOnce() || !cinematicCompleted.isCompleted()) {
+		if(!isCompleteOnce() || !isCompleted().isCompleted()) {
 			
 			// Report error if another cinematic is in progress.
 			if(currCinematic != null) System.err.println("Error: Another cinematic is currently in progress. Playing anyway.");
@@ -85,6 +81,7 @@ public abstract class cinematic {
 	
 	// Stop
 	public void stop() {
+	
 		
 		// Set in progress and current cinematic.
 		setInProgress(false);
@@ -92,7 +89,7 @@ public abstract class cinematic {
 		
 		// Save that the cinematic is completed.
 		if(isCompleteOnce()) {
-			cinematicCompleted.setCompleted(true);
+			isCompleted().setCompleted(true);
 		
 			// Save by default.
 			if(save) {

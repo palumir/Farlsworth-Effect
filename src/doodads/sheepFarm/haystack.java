@@ -80,7 +80,7 @@ public class haystack extends chunk {
 	public interactBox makeStrangeInteractSequence() {
 		
 		// Load the gag.
-		if(needleJoke == null) needleJoke = new event("needleJoke"); // Needle joke experienced.
+		if(needleJoke == null) needleJoke = event.createEvent("needleJoke"); // Needle joke experienced.
 		
 		// Placeholder for each individual textSeries.
 		textSeries s;

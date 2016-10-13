@@ -300,13 +300,17 @@ public class unit extends drawnObject  {
 	}
 	
 	// Hurting people leniency
-	public static int leniency = 7;
+	public static int leniency = 6;
 	
 	// Hurt people, if we do.
 	public void hurtPeople(int leniency) {
 		if(killsPlayer) {
 			player currPlayer = player.getPlayer();
-			if(currPlayer.playerLoaded && currPlayer.isWithin(this.getIntX() + leniency, this.getIntY() + leniency, this.getIntX() + this.getWidth() - leniency, this.getIntY() + this.getHeight() - leniency)) {
+			if(currPlayer.playerLoaded && currPlayer.isWithin(
+					this.getIntX() + getWidth()/2 - getKillWidth()/2 + leniency, 
+					this.getIntY() + getHeight()/2 - getKillHeight()/2  + leniency, 
+					this.getIntX() + getWidth()/2 + getKillWidth()/2 - leniency, 
+					this.getIntY() + getHeight()/2 + getKillHeight()/2 - leniency)) {
 				currPlayer.hurt(1, 1);
 			}
 		}
@@ -1502,6 +1506,14 @@ public class unit extends drawnObject  {
 	public boolean movingVertically() {
 		boolean movingUpAndDown = isMovingUp() && isMovingDown();
 		return (isMovingUp() || isMovingDown()) && !movingUpAndDown;
+	}
+	
+	public int getKillWidth() {
+		return getWidth();
+	}
+	
+	public int getKillHeight() {
+		return getHeight();
 	}
 	
 	// Combination of all movement functions boolean

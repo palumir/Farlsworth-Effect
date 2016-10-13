@@ -31,9 +31,6 @@ public abstract class bottle extends item {
 	// Sound.
 	public static String bottleDrink = "sounds/effects/player/UI/bottleDrink.wav";
 	
-	// Does the player actually own the item?
-	public static boolean inInventory = false;
-	
 	///////////////
 	/// METHODS ///
 	///////////////

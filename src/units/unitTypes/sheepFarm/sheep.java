@@ -154,7 +154,7 @@ public class sheep extends unit {
 		setSmallObject(true);
 		
 		// Sheep joke
-		sheepHitABunchJoke = new event("sheepHitABunchOfTimesJoke");
+		sheepHitABunchJoke = event.createEvent("sheepHitABunchOfTimesJoke");
 	
 		// Deal with animations
 		animationPack unitTypeAnimations = new animationPack();

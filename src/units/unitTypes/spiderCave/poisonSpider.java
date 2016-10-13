@@ -135,7 +135,7 @@ public class poisonSpider extends unit {
 		setCombatStuff();
 		
 		// Event load.
-		projectileToolTipDisplayed = new event("Unit: projectileToolTipLoaded");
+		projectileToolTipDisplayed = event.createEvent("Unit: projectileToolTipLoaded");
 		
 		// Deal with animations
 		animationPack unitTypeAnimations = new animationPack();

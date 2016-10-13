@@ -9,6 +9,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import effects.interfaceEffects.tooltipString;
 import interactions.event;
@@ -66,7 +67,7 @@ public class saveState implements Serializable {
 	private static boolean quiet = false;
 	
 	// Events
-	private ArrayList<event> allEvents;
+	private CopyOnWriteArrayList<event> allEvents;
 	
 	// Quests
 	private ArrayList<String> currentQuests;
@@ -278,7 +279,7 @@ public class saveState implements Serializable {
 			for(int i = 0; i < eventsSize; i++) {
 				String theName = (String)objectStream.readObject();
 				boolean completed = (boolean)objectStream.readObject();
-				event g = new event(theName);
+				event g = event.createEvent(theName);
 				g.setCompleted(completed);
 				newEvents.add(g);
 			}
@@ -441,11 +442,11 @@ public class saveState implements Serializable {
 		this.equippedBottle = equippedBottle;
 	}
 
-	public ArrayList<event> getAllEvents() {
+	public CopyOnWriteArrayList<event> getAllEvents() {
 		return allEvents;
 	}
 
-	public void setAllEvents(ArrayList<event> allEvents) {
+	public void setAllEvents(CopyOnWriteArrayList<event> allEvents) {
 		this.allEvents = allEvents;
 	}
 

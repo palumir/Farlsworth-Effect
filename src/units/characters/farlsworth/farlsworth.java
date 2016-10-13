@@ -15,6 +15,7 @@ import interactions.event;
 import interactions.interactBox;
 import interactions.textSeries;
 import items.item;
+import items.bottles.saveBottle;
 import modes.mode;
 import terrain.chunk;
 import units.boss;
@@ -67,6 +68,9 @@ public class farlsworth extends boss {
 	// Farlsworth dialogue box
 	private static BufferedImage DEFAULT_DIALOGUE_BOX = spriteSheet.getSpriteFromFilePath("images/units/dialogueBoxes/farlsworthBox.png");
 	
+	// Give bottle back eventually joke (can't figure out where to put this)
+	public static event giveBottleBackEventually = event.createEvent("tombGiveBottleBackEventuallyJoke");
+	
 	// The actual type.
 	private static unitType sheepType  =
 			new unitType(DEFAULT_UNIT_NAME,  // Name of unitType 
@@ -108,26 +112,10 @@ public class farlsworth extends boss {
 	
 	// Events
 	public static event isFenceAttached;
-	public static event pastSpawnFarm;
-	private static event pastFlowerPatch;
-	private static event pastTombEntrance;
-	public static event pastTombExit;
-	private static event pastDenmother;
 	
 	///////////////
 	/// METHODS ///
 	///////////////
-	
-	// Create interact sequence
-	public interactBox makeNormalInteractSequence() {
-	
-		// Placeholder for each individual textSeries.
-		textSeries s = null;
-		
-		// Start.
-		textSeries startOfConversation = null;
-		return new interactBox(startOfConversation, this);
-	}
 	
 	// Booleans
 	private boolean movedFromFence = false;
@@ -149,12 +137,10 @@ public class farlsworth extends boss {
 	
 	// Interact with object. 
 	public void interactWith() { 
-		if(interactSequence == null || (interactSequence != null && !interactSequence.isUnescapable())) {
-			faceTowardPlayer();
-			interactSequence = makeNormalInteractSequence();
-			interactSequence.toggleDisplay();
-		}
 	}
+	
+	// Death counter
+	private static int deathCounter = 0;
 
 	///////////////
 	/// METHODS ///
@@ -162,6 +148,28 @@ public class farlsworth extends boss {
 	// Constructor
 	public farlsworth(int newX, int newY) {
 		super(sheepType, "Farlsworth", newX, newY);
+		
+		// Death counter
+		if(zone.getCurrentZone().getName().equals("farmTomb") && giveBottleBackEventually.isCompleted()) {
+			saveBottle bottle = (saveBottle)player.getPlayer().getPlayerInventory().get("Save Bottle");
+			
+			if(!bottle.inInventory) {
+				if(bottle!=null) {
+					if(deathCounter < 3) {
+						player.getPlayer().getPlayerInventory().get("Save Bottle").setDoubleX(2564+15);
+						player.getPlayer().getPlayerInventory().get("Save Bottle").setDoubleY(1582+13);
+					}
+					else {
+						player.getPlayer().getPlayerInventory().get("Save Bottle").setDoubleX(370);
+						player.getPlayer().getPlayerInventory().get("Save Bottle").setDoubleY(215);
+					}
+					bottle.undestroy();
+					bottle.attachFarlsworthNote();
+					
+				}
+			}
+			deathCounter++;
+		}
 		
 		farlsworth = this;
 		
@@ -231,26 +239,7 @@ public class farlsworth extends boss {
 		setAnimations(unitTypeAnimations);
 		
 		// Get whether or not he's lost.
-		isFenceAttached = new event("farlsworthFenceAttached");
-		pastSpawnFarm = new event("farlsworthRan");
-		pastDenmother = new event("farlsworthPastDenmother");
-		pastFlowerPatch = new event("farlsworthPastFlowerPatch");
-		pastTombEntrance = new event("farlsworthPastTombEntrance");
-		pastTombExit = new event("farlsworthPastTombExit");
-		
-		// If he's lost, don't spawn him in the farm.
-		if(pastSpawnFarm.isCompleted() && 
-		   player.getPlayer().getCurrentZone().getName().equals("sheepFarm")) {
-			
-			// If we aren't past Denmother, spawn Farlsworth there.
-			if(!pastDenmother.isCompleted()) {
-			}
-			
-			// Despawn, we've done all the Farlsworth stuff for the zone.
-			else {
-				this.destroy(); // TODO: Destroy for now, but should move to next location.
-			}
-		}
+		isFenceAttached = event.createEvent("farlsworthFenceAttached");
 		
 		// Set dialogue box
 		setDialogueBox(DEFAULT_DIALOGUE_BOX);
@@ -283,6 +272,8 @@ public class farlsworth extends boss {
 			attachedItem = i;
 			
 			// Drop it obviously.
+			i.destroy();
+			i.setDrawObject(false);
 			i.dropSilent();
 			player.getPlayer().getPlayerInventory().unequipItem(i);
 		}
@@ -376,11 +367,9 @@ public class farlsworth extends boss {
 	// React to pain.
 	public void reactToPain() {
 	}
-	
+
 	// Farlsworth AI
 	public void updateUnit() {
-		//printFarlsworthEvents();
-		
 		// Stuff to do in non-boss fight mode.
 		if(!bossFight) {
 			doInteractStuff();

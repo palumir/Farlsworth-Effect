@@ -100,8 +100,8 @@ public class sheepFarm extends zone {
 	public static event wellTooltipLoaded;
 	public static event stormInProgress;
 	public static event isOnFire;
-	public static event talkingGateJokeExperienced = new event("sheepFarmGateJokeExperienced");
-	public static event musicOff = new event("sheepFarmMusicOff");
+	public static event talkingGateJokeExperienced = event.createEvent("sheepFarmGateJokeExperienced");
+	public static event musicOff = event.createEvent("sheepFarmMusicOff");
 	
 	// Storm booleans
 	public static boolean stormStarted = false;
@@ -116,6 +116,8 @@ public class sheepFarm extends zone {
 	// Constructor
 	public sheepFarm() {
 		super("sheepFarm", "farmLand");
+		zoneMusics.add(forestMusic);
+		zoneMusics.add(farmMusic);
 	}
 	
 	///////////////////////////////
@@ -189,7 +191,7 @@ public class sheepFarm extends zone {
 	}
 
 	
-	// Spawn wood from x to y. TODO: JUST WORKS FOR VERTICAL
+	// Spawn wood from x to y.
 	public static ArrayList<chunk> spawnFence(ArrayList<chunk> chunkList, int x1, int y1, int x2, int y2) {
 		
 		// Arraylist for return
@@ -252,7 +254,7 @@ public class sheepFarm extends zone {
 		loadZoneEvents();
 		
 		// Load the level save.
-		levelSave.loadSaveState("sheepFarmLevel.save");
+		//levelSave.loadSaveState("sheepFarmLevel.save");
 		//sheepFarmZoneLoader loader = new sheepFarmZoneLoader();
 		//loader.loadSegments();
 		
@@ -264,7 +266,7 @@ public class sheepFarm extends zone {
 		}
 		
 		// Spawn special stuff
-		spawnSpecialStuff();
+		//spawnSpecialStuff();
 		
 		// Create items
 		createItems();
@@ -278,6 +280,11 @@ public class sheepFarm extends zone {
 			s.start();
 		}
 		
+		playMusic();
+	}
+	
+	// Play music
+	public static void playMusic() {
 		if(!musicOff.isCompleted()) {
 			if(farmIntroCinematic.isCompleted.isCompleted()) {
 				music.startMusic(forestMusic); 
@@ -286,7 +293,6 @@ public class sheepFarm extends zone {
 				music.startMusic(farmMusic);
 			}
 		}
-		
 	}
 	
 	// Load from save
@@ -335,7 +341,7 @@ public class sheepFarm extends zone {
 		((haystack)c).setStrange();
 		
 		// Farmer house
-		c = new door("No Key Yet", -599,-373, farmerHouse.getZone(), -93,957, "Right");
+		c = new door(null, -599,-373, farmerHouse.getZone(), -93+20,957+5, "Right");
 		
 		// Barn
 		c = new door("No Key Yet", -793,-370, farmerHouse.getZone(), -93,957, "Right");
@@ -436,19 +442,19 @@ public class sheepFarm extends zone {
 	public void loadZoneEvents() {
 		
 		// Use WASD
-		eToInteract = new event("useWASDToMoveToolTip");
+		eToInteract = event.createEvent("useWASDToMoveToolTip");
 		
 		// Use save bottle
-		useSaveBottle = new event("rememberToUseSaveBottleYouDinky");
+		useSaveBottle = event.createEvent("rememberToUseSaveBottleYouDinky");
 		
 		// Well and attack tooltips.
-		wellTooltipLoaded = new event("sheepFarmWellTooltipLoaded");
+		wellTooltipLoaded = event.createEvent("sheepFarmWellTooltipLoaded");
 		
 		// Storm stuff
-		stormInProgress = new event("sheepFarmStormInProgress");
+		stormInProgress = event.createEvent("sheepFarmStormInProgress");
 		
 		// Is the zone on fire?
-		isOnFire = new event("forestIsOnFire");
+		isOnFire = event.createEvent("forestIsOnFire");
 	}
 	
 	// Zone cinematics.
@@ -538,7 +544,7 @@ public class sheepFarm extends zone {
 			if(time.getTime() - stormStartTime > howManySecondsUntilStorm*1000) {
 				startStormFromFog = false;
 				stormStarted = true;
-				storm s = new storm(3f);
+				storm s = new storm(5f);
 			}
 		}
 	}

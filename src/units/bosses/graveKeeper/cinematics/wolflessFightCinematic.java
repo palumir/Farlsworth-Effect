@@ -19,7 +19,7 @@ import zones.farmTomb.subZones.farmTomb;
 public class wolflessFightCinematic extends cinematic {
 	
 	// Event
-	public static event isCompleted = new event(MethodHandles.lookup().lookupClass().getName() + "isCompleted");
+	public static event isCompleted = event.createEvent(MethodHandles.lookup().lookupClass().getName() + "isCompleted");
 	
 	public wolflessFightCinematic() {
 		super("wolflessFightCinematic");

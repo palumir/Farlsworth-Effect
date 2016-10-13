@@ -45,6 +45,10 @@ public abstract class zone {
 	// Mode
 	private String mode;
 	
+	
+	// Zone musics
+	public ArrayList<String> zoneMusics = new ArrayList<String>();
+	
 	// Constructor
 	public zone(String newName, String parentName) {
 		
@@ -91,14 +95,16 @@ public abstract class zone {
 			
 			// Re-create the player in the new zone.
 			drawnObject.dontReloadTheseObjects = new ArrayList<drawnObject>();
-			music.endAll();
+			if(music.currMusic != null && !b.zoneMusics.contains(music.currMusic.getFileName())) music.endAll();
 			groundTile.groundTiles = new CopyOnWriteArrayList<chunk>();
 			loadedOnce = false;
 			player.loadPlayer(player.getPlayer(), b, x, y, direction, "spawnAnywhere");
 			
 			// Save the player in the new zone.
 			player.getPlayer().lastWell = new Point(x,y);
+			saveState.setQuiet(true);
 			saveState.createSaveState();
+			saveState.setQuiet(false);
 		}
 	}
 	

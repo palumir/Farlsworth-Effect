@@ -17,11 +17,9 @@ import terrain.chunkTypes.tomb;
 import terrain.chunkTypes.tombEdge;
 import units.player;
 import units.unit;
-import units.bosses.fernando.fernando;
 import units.bosses.graveKeeper.cinematics.wolflessFightCinematic;
-import units.bosses.rodriguez.rodriguez;
-import units.bosses.rodriguez.cinematics.farmTombCinematic;
 import units.bosses.wolfless.wolfless;
+import units.characters.farlsworth.farlsworth;
 import units.unitCommands.commandList;
 import units.unitCommands.commands.moveCommand;
 import units.unitTypes.tomb.lightDude;
@@ -79,7 +77,9 @@ public class farmTomb extends zone {
 	
 	// Constructor
 	public farmTomb() {
-		super("farmTombEasy", "farmLand");
+		super("farmTomb", "farmLand");
+		zoneMusics.add(zoneMusic);
+		zoneMusics.add(zoneMusicFrantic);
 	}
 		
 	///////////////////////////////
@@ -218,9 +218,7 @@ public class farmTomb extends zone {
 	
 	// PreloadStuff
 	public void preLoadStuff() {
-		int holder = fernando.getDefaultHeight();
-		holder = rodriguez.getDefaultHeight();
-		holder = wolfless.leniency;
+		int holder = wolfless.leniency;
 	}
 	
 	// Load items
@@ -232,20 +230,21 @@ public class farmTomb extends zone {
 	
 	// Load units
 	public void loadUnits() {
-
+		farlsworth f = new farlsworth(Integer.MIN_VALUE, Integer.MIN_VALUE);
+		f.setGravity(false);
 	}
 	
 	// Load zone events.
 	public void loadZoneEvents() {
 		
 		// Have we entered the dirt before?
-		enteredtombZoneBefore = new event("enteredtombZoneBefore");
+		enteredtombZoneBefore = event.createEvent("enteredtombZoneBefore");
 		
 		// Has the BossFight started?
-		shadowBossFightStarted = new event("tombZoneShadowBossFightStarted");
+		shadowBossFightStarted = event.createEvent("tombZoneShadowBossFightStarted");
 		
 		// Have we interacted with these two yet?
-		fernandoRodriguezInteraction = new event("tombZoneFernandoRodriguezInteraction");
+		fernandoRodriguezInteraction = event.createEvent("tombZoneFernandoRodriguezInteraction");
 	}
 	
 	
@@ -480,20 +479,8 @@ public class farmTomb extends zone {
 			shadowBossFightStarted.setCompleted(true);
 			shadowBossFightFirstTime = true;
 		}
-		if(currPlayer != null && currPlayer.isWithin(7040,1551,7101,1798)) {
-			if(tombMiddleCinematic==null) startFernandoRodriguezInteraction();
-		}
 	}
 	
-	// The tomb cinematic in the middle
-	farmTombCinematic tombMiddleCinematic;
-	
-	public void startFernandoRodriguezInteraction() {
-		
-		// Start cinematic in the middle of the tomb.
-		tombMiddleCinematic = new farmTombCinematic();
-		tombMiddleCinematic.start();
-	}
 	
 	// Deal with shadow bossFight stuff
 	public void dealWithShadowBossFightStuff() {

@@ -19,6 +19,7 @@ import doodads.sheepFarm.rock;
 import doodads.sheepFarm.tomb;
 import doodads.sheepFarm.tree;
 import doodads.sheepFarm.verticalFence;
+import doodads.tomb.stairsUp;
 import drawing.background;
 import drawing.spriteSheet;
 import drawing.backgrounds.rotatingBackground;
@@ -73,6 +74,8 @@ public class farmerHouse extends zone {
 	// Constructor
 	public farmerHouse() {
 		super("farmerHouse", "farmLand");
+		zoneMusics.add(sheepFarm.forestMusic);
+		zoneMusics.add(sheepFarm.farmMusic);
 	}
 	
 	///////////////////////////////
@@ -89,12 +92,16 @@ public class farmerHouse extends zone {
 		// Set the mode of the zone of course.
 		setMode(DEFAULT_ZONE_MODE);
 		
+		loadSpecialStuff();
 		// Load from save.
 		levelSave.loadSaveState("farmerHouse.save");
 		
 		// Set background
-		background b = new background(null);
-		b.setColor(Color.BLACK);
+		new background(null);
+		background.setColor(Color.BLACK);
+		
+		// Play music
+		sheepFarm.playMusic();
 
 	}
 
@@ -102,7 +109,10 @@ public class farmerHouse extends zone {
 	// INDIVIDUAL AREAS //
 	//////////////////////
 	
-
+	public void loadSpecialStuff() {
+		stairsUp tombZoneEnterance = new stairsUp(-105,960,sheepFarm.getZone(),-593,-373+60,"Down");
+		tombZoneEnterance.setZ(-100);
+	}
 
 
 	
