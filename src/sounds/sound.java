@@ -49,6 +49,10 @@ public class sound extends Thread {
         LEFT, RIGHT, NORMAL
     };
     
+	
+	// Restart on death?
+	public boolean stopOnDeath = false;
+    
     // Copy constructor
     public sound(sound s) {
     	setFileName(s.getFileName());
@@ -235,7 +239,7 @@ public class sound extends Thread {
     public static void initiate() {
     	if(allSounds != null) {
     		for(int i = 0; i < allSounds.size(); i++) {
-    			if(!(allSounds.get(i) instanceof music)) {
+    			if(!(allSounds.get(i) instanceof music) && allSounds.get(i).stopOnDeath) {
     				if(allSounds.get(i) != null) allSounds.get(i).stopRequested = true;
     				allSounds.remove(i);
     				i--;

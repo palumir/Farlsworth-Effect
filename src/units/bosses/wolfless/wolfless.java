@@ -550,6 +550,14 @@ public class wolfless extends boss {
 			}
 		}
 		
+		// If there's no platforms in front try behind ones. (glitch fix)
+		if(outOfPlatforms.size()==0) {
+			for(int i = 0; i < platforms.size(); i++) {
+				outOfPlatforms.add(platforms.get(i));
+			}
+			outOfPlatforms.remove(currentPlatform);
+		}
+		
 		// Select two closest platforms out of those platforms
 		ArrayList<ArrayList<groundTile>> platformsToChooseFrom = new ArrayList<ArrayList<groundTile>>();
 		for(int i = 0; i < 2 && 0 < outOfPlatforms.size(); i++) {
@@ -792,6 +800,7 @@ public class wolfless extends boss {
 		int xLeft = Integer.MAX_VALUE;
 		int xRight = Integer.MIN_VALUE;
 		int floorY = Integer.MIN_VALUE;
+		int roofY = Integer.MAX_VALUE;
 		for(int i = 0; i < 6; i++) {
 			for(int j = 0; j < 6; j++) {
 				platforms.add(new ArrayList<groundTile>());
@@ -812,6 +821,7 @@ public class wolfless extends boss {
 					if(tile.getIntX() > xRight) xRight = tile.getIntX();
 					if(tile.getIntX() < xLeft) xLeft = tile.getIntX();
 					if(tile.getIntY() > floorY) floorY = tile.getIntY();
+					if(tile.getIntY() < roofY) roofY = tile.getIntY();
 					platforms.get(i*6 + j).add(tile);
 					
 					// Add to inside platforms.
@@ -823,11 +833,7 @@ public class wolfless extends boss {
 			}
 		}
 		
-		// Spawn shadow dudes from xLeft to xRight (plus some)
-		for(int i = xLeft -1500; i < xRight + 1500; i+=shadowDude.getDefaultWidth()) {
-			new shadowDude(i, floorY+300);
-		}
-		
+		spawnShadowCage(xLeft, xRight, floorY, roofY);
 		
 		// Move wolfie and player to the middle.
 		player.getPlayer().setDoubleX(platforms.get(6*3 + 3).get(1).getIntX());
@@ -836,6 +842,41 @@ public class wolfless extends boss {
 		setDoubleX(platforms.get(6*4 + 3).get(1).getIntX()-getWidth()/2 + platforms.get(4*5+3).get(1).getWidth()/2);
 		setDoubleY(platforms.get(6*4 + 3).get(1).getIntY()-getHeight());
 		faceTowardPlayer();
+	}
+	
+	ArrayList<shadowDude> shadowCage;
+	
+	public void spawnShadowCage(int xLeft, int xRight, int floorY, int roofY) {
+		
+		shadowCage = new ArrayList<shadowDude>();
+		
+		// Spawn shadow floor
+		for(int i = xLeft -200; i < xRight + 200; i+=shadowDude.getDefaultWidth()) {
+			for(int j = 0; j < 7; j++) {
+				shadowCage.add(new shadowDude(i, floorY+225+j*shadowDude.getDefaultHeight()));
+			}
+		}
+		
+		// Spawn roof
+		for(int i = xLeft -200; i < xRight + 200; i+=shadowDude.getDefaultWidth()) {
+			for(int j = 0; j < 7; j++) {
+				shadowCage.add(new shadowDude(i, roofY - 300 - j*shadowDude.getDefaultHeight()));
+			}
+		}
+		
+		// Spawn left wall.
+		for(int i = roofY - 600; i < floorY + 600; i+=shadowDude.getDefaultHeight()) {
+			for(int j = 0; j < 17; j++) {
+				shadowCage.add(new shadowDude(xLeft-200-j*shadowDude.getDefaultWidth(), i));
+			}
+		}
+		
+		// Spawn right wall.
+		for(int i = roofY - 600; i < floorY + 600; i+=shadowDude.getDefaultHeight()) {
+			for(int j = 0; j < 17; j++) {
+				shadowCage.add(new shadowDude(xRight+200-14+j*shadowDude.getDefaultWidth(), i));
+			}
+		}
 	}
 	
 	// Is injured by light dude?
@@ -919,9 +960,10 @@ public class wolfless extends boss {
 				
 				ArrayList<ArrayList<groundTile>> chooseFrom = new ArrayList<ArrayList<groundTile>>(insidePlatforms);
 				int random = utility.RNG.nextInt(chooseFrom.size());
-				while(chooseFrom.get(random).get(1).isOnScreen()) {
+				while(chooseFrom.get(random).size() > 1 && chooseFrom.get(random).get(1).isOnScreen()) {
 					chooseFrom.remove(random);
-					random = utility.RNG.nextInt(chooseFrom.size());
+					if(chooseFrom.size()==0) break;
+					else random = utility.RNG.nextInt(chooseFrom.size());
 				}
 				currentLightDudes.add(new lightDude(chooseFrom.get(random).get(1).getIntX(), chooseFrom.get(random).get(1).getIntY() - lightDude.getDefaultHeight()));
 				

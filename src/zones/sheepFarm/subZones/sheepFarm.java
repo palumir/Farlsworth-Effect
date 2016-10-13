@@ -254,7 +254,7 @@ public class sheepFarm extends zone {
 		loadZoneEvents();
 		
 		// Load the level save.
-		//levelSave.loadSaveState("sheepFarmLevel.save");
+		levelSave.loadSaveState("sheepFarmLevel.save");
 		//sheepFarmZoneLoader loader = new sheepFarmZoneLoader();
 		//loader.loadSegments();
 		
@@ -266,7 +266,7 @@ public class sheepFarm extends zone {
 		}
 		
 		// Spawn special stuff
-		//spawnSpecialStuff();
+		spawnSpecialStuff();
 		
 		// Create items
 		createItems();
@@ -413,6 +413,7 @@ public class sheepFarm extends zone {
 		c = new fenceBarsSmall(adjustX + 37,adjustY + -436,0);
 		farlsworthFence.add(c);
 		forestGate = new gate("Farm Key", adjustX + -13+fenceAdjustX/2,adjustY + -434);
+		forestGate.setDialogueBox(gate.DEFAULT_DIALOGUE_BOX);
 		farlsworthFence.add(forestGate);
 		
 		///////////////////////////////

@@ -236,7 +236,7 @@ public class beforeTombCinematic extends cinematic {
 		farlsworth.setMoveSpeed(4.5f);
 		commandList commands = new commandList();
 		commands.add(new moveCommand(-3463, -5550));
-		commands.add(new moveCommand(-3420,-5803));
+		commands.add(new moveCommand(-3440,-5750));
 		farlsworth.doCommandsOnce(commands);
 		sound s = new sound(farlsworth.bleet);
 		s.setPosition(farlsworth.getIntX(), farlsworth.getIntY(), sound.DEFAULT_SOUND_RADIUS);

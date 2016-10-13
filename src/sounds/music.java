@@ -15,9 +15,6 @@ public class music extends sound {
 	
 	// Current music.
 	public static music currMusic;
-	
-	// Restart on death?
-	public boolean stopOnDeath = false;
 
 	// Music constructor.
 	public music(String soundFile) {

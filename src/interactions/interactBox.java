@@ -96,12 +96,9 @@ public class interactBox extends interfaceObject  {
 		setTheText(newText);
 		
 		// If there's a custom dialogue box, set our properties
-		if(newWhoIsTalking instanceof unit) {
-			unit u = (unit)newWhoIsTalking;
 			
-			if(u.getDialogueBox()!=null) {
-				setBackground();
-			}
+		if(newWhoIsTalking.getDialogueBox()!=null) {
+			setBackground();
 		}
 		
 	}
@@ -232,9 +229,8 @@ public class interactBox extends interfaceObject  {
 	public void setBackground() {
 		if(!isButtonMode() &&
 				getTextSeries().getWhoIsTalking() != null 
-				&& getTextSeries().getWhoIsTalking() instanceof unit
-				&& ((unit)getTextSeries().getWhoIsTalking()).getDialogueBox() != null) {
-			background = ((unit)getTextSeries().getWhoIsTalking()).getDialogueBox();
+				&& (getTextSeries().getWhoIsTalking()).getDialogueBox() != null) {
+			background = getTextSeries().getWhoIsTalking().getDialogueBox();
 			setDoubleX((int) (gameCanvas.getDefaultWidth()*0.5f) - background.getWidth()/2);
 			setDoubleY((int) (gameCanvas.getDefaultHeight()*0.80f) - background.getHeight()/2);
 			setWidth(background.getWidth());

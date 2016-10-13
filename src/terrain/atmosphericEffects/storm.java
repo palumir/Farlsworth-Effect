@@ -34,9 +34,20 @@ public class storm extends atmosphericEffect {
 		stormStart = time.getTime();
 		
 		// Play rain.
-		sound s = new sound(rainSound);
-		s.setLoop(true);
-		s.start();
+		boolean alreadyPlaying = false;
+		if(sound.getAllPlaying() != null) {
+			for(int i = 0; i < sound.getAllPlaying().size(); i++) {
+				if(sound.getAllPlaying().get(i).getFileName().contains("rain.wav"))  {
+					alreadyPlaying = true;
+					break;
+				}
+			}
+		}
+		if(!alreadyPlaying) {
+			sound s = new sound(rainSound);
+			s.setLoop(true);
+			s.start();
+		}
 		
 		// Be behind fog.
 		setZ(-5);
@@ -51,10 +62,21 @@ public class storm extends atmosphericEffect {
 		this.fadeOver = fadeOver;
 		
 		// Play rain
-		sound s = new sound(rainSound);
-		s.setLoop(true);
-		s.fadeIn(fadeOver);
-		s.start();
+		boolean alreadyPlaying = false;
+		if(sound.getAllPlaying() != null) {
+			for(int i = 0; i < sound.getAllPlaying().size(); i++) {
+				if(sound.getAllPlaying().get(i).getFileName().contains("rain.wav"))  {
+					alreadyPlaying = true;
+					break;
+				}
+			}
+		}
+		if(!alreadyPlaying) {
+			sound s = new sound(rainSound);
+			s.setLoop(true);
+			s.fadeIn(fadeOver);
+			s.start();
+		}
 		
 		// Be behind fog.
 		setZ(-5);

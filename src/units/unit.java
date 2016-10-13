@@ -75,9 +75,6 @@ public class unit extends drawnObject  {
 	// Color of name
 	private Color nameColor = Color.BLACK;
 	
-	// Default textBox.
-	private BufferedImage dialogueBox = null;
-	
 	// Width and height for topDown and platformer
 	protected int topDownWidth = 0;
 	protected int topDownHeight = 0;
@@ -1872,14 +1869,6 @@ public class unit extends drawnObject  {
 
 	public void setStunned(boolean stunned) {
 		this.stunned = stunned;
-	}
-
-	public BufferedImage getDialogueBox() {
-		return dialogueBox;
-	}
-
-	public void setDialogueBox(BufferedImage dialogueBox) {
-		this.dialogueBox = dialogueBox;
 	}
 
 	public boolean isCurrentCommandComplete() {

@@ -142,8 +142,8 @@ public abstract class drawnObject {
 							    		
 							    		
 								    // Draw units closer to the camera first.
-								    if(d1.getIntY() + Math.min(d1.getWidth(), d1.getHeight()) > d2.getIntY() + Math.min(d2.getWidth(), d2.getHeight())) return 4;
-								    else if(d1.getIntY() + Math.min(d1.getWidth(), d1.getHeight()) < d2.getIntY() + Math.min(d2.getWidth(), d2.getHeight())) return -4;
+								    if(d1.getIntY() + d1.getHeight() > d2.getIntY() + d2.getHeight()) return 4;
+								    else if(d1.getIntY() + d1.getHeight() < d2.getIntY() + d2.getHeight()) return -4;
 								    else return 0;
 							    }
 					    	}
@@ -216,6 +216,9 @@ public abstract class drawnObject {
 	private BufferedImage objectImage;
 	private int hitBoxAdjustmentX;
 	private int hitBoxAdjustmentY;
+	
+	// Default textBox.
+	private BufferedImage dialogueBox = null;
 	
 	// Camera attached to the object,
 	protected camera attachedCamera = null;
@@ -877,6 +880,14 @@ public abstract class drawnObject {
 
 	public int getSpawnedAtX() {
 		return spawnedAtX;
+	}
+
+	public BufferedImage getDialogueBox() {
+		return dialogueBox;
+	}
+
+	public void setDialogueBox(BufferedImage dialogueBox) {
+		this.dialogueBox = dialogueBox;
 	}
 
 	public void setSpawnedAtX(int spawnedAtX) {

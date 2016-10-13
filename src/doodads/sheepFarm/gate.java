@@ -1,6 +1,9 @@
 package doodads.sheepFarm;
 
+import java.awt.image.BufferedImage;
+
 import doodads.openable;
+import drawing.spriteSheet;
 import interactions.event;
 import interactions.interactBox;
 import interactions.textSeries;
@@ -28,6 +31,9 @@ public class gate extends openable {
 	// Dimensions
 	public static int DEFAULT_CHUNK_WIDTH = 46;
 	public static int DEFAULT_CHUNK_HEIGHT = 34;
+	
+	// Farlsworth dialogue box
+	public static BufferedImage DEFAULT_DIALOGUE_BOX = spriteSheet.getSpriteFromFilePath("images/units/dialogueBoxes/talkingFenceBox.png");
 
 	// Key name.
 	private String keyName;

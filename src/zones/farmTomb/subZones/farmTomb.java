@@ -175,8 +175,7 @@ public class farmTomb extends zone {
 		
 		// Load zone events.
 		loadZoneEvents();
-		
-		//levelSave.loadSaveState("actualTombLevel.save");
+		levelSave.loadSaveState("actualTombLevel.save");
 		
 		// Load the level save.
 		//farmTombZoneLoader loader = new farmTombZoneLoader();
@@ -411,12 +410,12 @@ public class farmTomb extends zone {
 		tombZoneEnterance.setZ(BACKGROUND_Z);
 		
 		// Secret chest stairs up to well.
-		stairsUp secretStairs = new stairsUp(11615,2314,farmTomb.getZone(),11629,1670,"Right");
+		stairsUp secretStairs = new stairsUp(11615,2314,farmTomb.getZone(),11629,1670-2,"Right");
 		secretStairs.setZ(BACKGROUND_Z);
 		
 		// Secret stairs to start
 		stairsUp secretStairs2 = new stairsUp(12052,2314,farmTomb.getZone(),70,-6,"Right");
-		secretStairs.setZ(BACKGROUND_Z);
+		secretStairs2.setZ(BACKGROUND_Z);
 	}
 	
 	// Spawn a rectangle of shadow dudes
