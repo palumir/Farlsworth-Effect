@@ -23,7 +23,7 @@ public class sound extends Thread {
 
     private Position curPosition;
 
-    private final int EXTERNAL_BUFFER_SIZE = 1024; // 128Kb DEFAULT
+    private final int EXTERNAL_BUFFER_SIZE = 512; // 128Kb DEFAULT
     
     // Where to play and at what radius.
     private int radius = 0; 
@@ -35,7 +35,7 @@ public class sound extends Thread {
     private float soundVolume = DEFAULT_SOUND_VOLUME;
     private float volume = 1f;
     protected boolean stopRequested = false;
-    private long soundStart = 0;
+    private Long soundStart;
     private float fadeOver = 0;
     private long fadeOutStart = 0;
     
@@ -89,6 +89,8 @@ public class sound extends Thread {
     }
 
     public void run() { 
+    	
+    	if(soundStart == null) soundStart = time.getTime();
 
         File soundFile = new File(getFileName());
         if (!soundFile.exists()) { 

@@ -191,7 +191,7 @@ public class sheepFarm extends zone {
 	}
 
 	
-	// Spawn wood from x to y. TODO: JUST WORKS FOR VERTICAL
+	// Spawn wood from x to y.
 	public static ArrayList<chunk> spawnFence(ArrayList<chunk> chunkList, int x1, int y1, int x2, int y2) {
 		
 		// Arraylist for return
@@ -254,7 +254,7 @@ public class sheepFarm extends zone {
 		loadZoneEvents();
 		
 		// Load the level save.
-		levelSave.loadSaveState("sheepFarmLevel.save");
+		//levelSave.loadSaveState("sheepFarmLevel.save");
 		//sheepFarmZoneLoader loader = new sheepFarmZoneLoader();
 		//loader.loadSegments();
 		
@@ -266,7 +266,7 @@ public class sheepFarm extends zone {
 		}
 		
 		// Spawn special stuff
-		spawnSpecialStuff();
+		//spawnSpecialStuff();
 		
 		// Create items
 		createItems();
@@ -544,7 +544,7 @@ public class sheepFarm extends zone {
 			if(time.getTime() - stormStartTime > howManySecondsUntilStorm*1000) {
 				startStormFromFog = false;
 				stormStarted = true;
-				storm s = new storm(3f);
+				storm s = new storm(5f);
 			}
 		}
 	}

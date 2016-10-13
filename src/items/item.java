@@ -190,6 +190,11 @@ public abstract class item extends drawnObject {
 		}
 	}
 	
+	@Override
+	public void respondToUndestroy() {
+		createGlow();
+	}
+	
 	// React to pickup
 	public void reactToPickup() {
 	}

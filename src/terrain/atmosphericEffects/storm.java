@@ -127,7 +127,7 @@ public class storm extends atmosphericEffect {
 	}
 	
 	long lastRainSound = 0;
-	String rainSound = "sounds/effects/weather/rain.wav";
+	public static String rainSound = "sounds/effects/weather/rain.wav";
 	
 	// How often to make rainsplash
 	float howOftenToRainSplash = 0.015f;

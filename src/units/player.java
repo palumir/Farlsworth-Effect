@@ -29,6 +29,7 @@ import modes.platformer;
 import modes.topDown;
 import sounds.sound;
 import terrain.chunk;
+import terrain.atmosphericEffects.storm;
 import units.developer.developer;
 import units.unitCommands.commands.slashCommand;
 import utilities.saveState;
@@ -482,8 +483,9 @@ public class player extends unit {
 				else {
 					// Shield on.
 					if(k.getKeyCode() == KeyEvent.VK_P) {
-						pushBottleSplash e = new pushBottleSplash(getIntX() - critBloodSquirt.getDefaultWidth()/2 + topDownWidth/2,
-								   getIntY() - critBloodSquirt.getDefaultHeight()/2);
+						sound s = new sound(storm.rainSound);
+						s.fadeIn(2);
+						s.start();
 					}
 			
 				// Player presses left key.

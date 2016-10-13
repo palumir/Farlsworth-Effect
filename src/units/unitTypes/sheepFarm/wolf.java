@@ -29,9 +29,9 @@ public abstract class wolf extends unit {
 		public static int DEFAULT_SPRITE_ADJUSTMENT_X = 0;
 		
 		// TopDown real dimensions
-		public static int DEFAULT_TOPDOWN_HEIGHT = 24;
-		public static int DEFAULT_TOPDOWN_WIDTH = 24;
-		public static int DEFAULT_TOPDOWN_ADJUSTMENT_Y = 0;
+		public static int DEFAULT_TOPDOWN_WIDTH = 18;
+		public static int DEFAULT_TOPDOWN_LENGTH = 35;
+		public static int DEFAULT_TOPDOWN_ADJUSTMENT_Y = 6;
 		
 		// Default don't attack for
 		public static float DEFAULT_DONT_ATTACK_FOR = 0f;
@@ -55,14 +55,14 @@ public abstract class wolf extends unit {
 				32, 
 				64,
 				0,
-				DEFAULT_TOPDOWN_ADJUSTMENT_Y
+				0
 				));
 		private static spriteSheet DEFAULT_LEFTRIGHT_SPRITESHEET = new spriteSheet(new spriteSheetInfo(
 				"images/units/animals/wolfLeftRight.png",
 				64, 
 				32,
 				0,
-				DEFAULT_TOPDOWN_ADJUSTMENT_Y
+				0
 				));
 		
 		// Spritesheets
@@ -147,9 +147,8 @@ public abstract class wolf extends unit {
 			setWidth(getDefaultWidth());
 			platformerHeight = DEFAULT_PLATFORMER_HEIGHT;
 			platformerWidth = DEFAULT_PLATFORMER_WIDTH;
-			topDownHeight = DEFAULT_TOPDOWN_HEIGHT;
+			topDownHeight = DEFAULT_TOPDOWN_WIDTH;
 			topDownWidth = DEFAULT_TOPDOWN_WIDTH;
-			setHitBoxAdjustmentY(getDefaultHitBoxAdjustmentY());
 		}
 		
 		// Add animations.
@@ -529,25 +528,59 @@ public abstract class wolf extends unit {
 			}
 		}
 		
-		// Get default height.
-		public static int getDefaultHeight() {
+		// Get hitboxadjustment
+		@Override
+		public int getHitBoxAdjustmentY() {
 			if(mode.getCurrentMode().equals("topDown")) {
-				return DEFAULT_TOPDOWN_HEIGHT;
+				if(getFacingDirection().equals("Right") || getFacingDirection().equals("Left")) {
+					return DEFAULT_TOPDOWN_ADJUSTMENT_Y;
+				}
+				else {
+					return DEFAULT_TOPDOWN_ADJUSTMENT_Y;
+				}
+			}
+			else {
+				return 0;
+			}
+		}
+		
+		// Get width override.
+		@Override
+		public int getWidth() {
+			if(mode.getCurrentMode().equals("topDown")) {
+				if(getFacingDirection().equals("Right") || getFacingDirection().equals("Left")) {
+					return DEFAULT_TOPDOWN_LENGTH;
+				}
+				else {
+					return DEFAULT_TOPDOWN_WIDTH;
+				}
+			}
+			else {
+				return DEFAULT_PLATFORMER_WIDTH;
+			}
+		}
+		
+		// Get width override.
+		@Override
+		public int getHeight() {
+			if(mode.getCurrentMode().equals("topDown")) {
+				if(getFacingDirection().equals("Right") || getFacingDirection().equals("Left")) {
+					return DEFAULT_TOPDOWN_WIDTH;
+				}
+				else {
+					return DEFAULT_TOPDOWN_LENGTH;
+				}
 			}
 			else {
 				return DEFAULT_PLATFORMER_HEIGHT;
 			}
 		}
 		
-		// Get default hitbox adjustment Y.
-		public static int getDefaultHitBoxAdjustmentY() {
-			if(mode.getCurrentMode().equals("topDown")) {
-				return DEFAULT_TOPDOWN_ADJUSTMENT_Y;
-			}
-			else {
-				return DEFAULT_PLATFORMER_ADJUSTMENT_Y;
-			}
+		// Get default height.
+		public static int getDefaultHeight() {
+			return DEFAULT_PLATFORMER_HEIGHT;
 		}
+		
 		
 		public abstract void setAlphaAnimations();
 		

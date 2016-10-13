@@ -140,7 +140,7 @@ public class farlsworth extends boss {
 	}
 	
 	// Death counter
-	private int deathCounter = 0;
+	private static int deathCounter = 0;
 
 	///////////////
 	/// METHODS ///
@@ -152,21 +152,21 @@ public class farlsworth extends boss {
 		// Death counter
 		if(zone.getCurrentZone().getName().equals("farmTomb") && giveBottleBackEventually.isCompleted()) {
 			saveBottle bottle = (saveBottle)player.getPlayer().getPlayerInventory().get("Save Bottle");
-			if(bottle!=null) {
-				System.out.println("Happened");
-				if(deathCounter < 3) {
-					player.getPlayer().getPlayerInventory().get("Save Bottle").setDoubleX(2564);
-					player.getPlayer().getPlayerInventory().get("Save Bottle").setDoubleY(1582);
+			
+			if(!bottle.inInventory) {
+				if(bottle!=null) {
+					if(deathCounter < 3) {
+						player.getPlayer().getPlayerInventory().get("Save Bottle").setDoubleX(2564+15);
+						player.getPlayer().getPlayerInventory().get("Save Bottle").setDoubleY(1582+13);
+					}
+					else {
+						player.getPlayer().getPlayerInventory().get("Save Bottle").setDoubleX(370);
+						player.getPlayer().getPlayerInventory().get("Save Bottle").setDoubleY(215);
+					}
+					bottle.undestroy();
+					bottle.attachFarlsworthNote();
+					
 				}
-				else {
-					player.getPlayer().getPlayerInventory().get("Save Bottle").setDoubleX(2564);
-					player.getPlayer().getPlayerInventory().get("Save Bottle").setDoubleY(1582);
-				}
-				objects.add(bottle);
-				bottle.setExists(true);
-				bottle.setDrawObject(true);
-				bottle.attachFarlsworthNote();
-				
 			}
 			deathCounter++;
 		}
@@ -367,26 +367,9 @@ public class farlsworth extends boss {
 	// React to pain.
 	public void reactToPain() {
 	}
-	
-	// Jokes
-	public void doJokes() {
-		doGiveBottleBackJoke();
-	}
-	
-	
-	// Bottle back joke
-	public void doGiveBottleBackJoke() {
-		if(deathCounter>3) {
-			giveBottleBackEventually.setCompleted(false);
-			
-			// TODO: move bottle to in front of the player.
-		}
-	}
-	
+
 	// Farlsworth AI
 	public void updateUnit() {
-		//printFarlsworthEvents();
-		doJokes();
 		// Stuff to do in non-boss fight mode.
 		if(!bossFight) {
 			doInteractStuff();

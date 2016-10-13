@@ -138,6 +138,7 @@ public class inventory extends interfaceObject {
 	
 	// Pickup an item into inventory.
 	public void pickUp(item i) {
+		if(pickedUpItems.contains(i)) pickedUpItems.remove(i);
 		if(!hasItem(i)) {
 			getItems().add(i);
 			getPickedUpItems().add(i);

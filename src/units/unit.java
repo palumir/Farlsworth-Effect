@@ -300,7 +300,7 @@ public class unit extends drawnObject  {
 	}
 	
 	// Hurting people leniency
-	public static int leniency = 7;
+	public static int leniency = 6;
 	
 	// Hurt people, if we do.
 	public void hurtPeople(int leniency) {

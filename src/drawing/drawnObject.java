@@ -142,8 +142,8 @@ public abstract class drawnObject {
 							    		
 							    		
 								    // Draw units closer to the camera first.
-								    if(d1.getIntY() + d1.getHeight() > d2.getIntY() + d2.getHeight()) return 4;
-								    else if(d1.getIntY() + d1.getHeight() < d2.getIntY() + d2.getHeight()) return -4;
+								    if(d1.getIntY() + Math.min(d1.getWidth(), d1.getHeight()) > d2.getIntY() + Math.min(d2.getWidth(), d2.getHeight())) return 4;
+								    else if(d1.getIntY() + Math.min(d1.getWidth(), d1.getHeight()) < d2.getIntY() + Math.min(d2.getWidth(), d2.getHeight())) return -4;
 								    else return 0;
 							    }
 					    	}
@@ -540,6 +540,19 @@ public abstract class drawnObject {
 	
 	// Draw object.
 	public abstract void drawObject(Graphics g);
+	
+	// Undestroy
+	public void undestroy() {
+		setExists(true);
+		objects.add(this);
+		setDrawObject(true);
+		respondToUndestroy();
+	}
+	
+	// Respond to undestroy TODO: this isn't defined for a bunch of things
+	public void respondToUndestroy() {
+		
+	}
 	
 	// Destroy an object.
 	public void destroy() {

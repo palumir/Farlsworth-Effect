@@ -53,14 +53,14 @@ public class redWolf extends wolf {
 			32, 
 			64,
 			0,
-			DEFAULT_TOPDOWN_ADJUSTMENT_Y
+			0
 			));
 	private static spriteSheet DEFAULT_LEFTRIGHT_SPRITESHEET = new spriteSheet(new spriteSheetInfo(
 			"images/units/animals/redWolfLeftRight.png",
 			64, 
 			32,
 			0,
-			DEFAULT_TOPDOWN_ADJUSTMENT_Y
+			0
 			));
 	
 	// The actual type.
@@ -69,7 +69,7 @@ public class redWolf extends wolf {
 					     null,
 					     null,
 					     DEFAULT_TOPDOWN_WIDTH,
-					     DEFAULT_TOPDOWN_HEIGHT,
+					     DEFAULT_TOPDOWN_WIDTH,
 					     DEFAULT_MOVESPEED_BETA, // Movespeed
 					     DEFAULT_UNIT_JUMPSPEED // Jump speed
 						);	
@@ -80,7 +80,7 @@ public class redWolf extends wolf {
 					     null,
 					     null,
 					     DEFAULT_TOPDOWN_WIDTH,
-					     DEFAULT_TOPDOWN_HEIGHT,
+					     DEFAULT_TOPDOWN_WIDTH,
 					     DEFAULT_MOVESPEED_BETA, // Movespeed
 					     DEFAULT_UNIT_JUMPSPEED // Jump speed
 						);	
@@ -303,14 +303,14 @@ public class redWolf extends wolf {
 				32, 
 				64,
 				0,
-				DEFAULT_TOPDOWN_ADJUSTMENT_Y
+				0
 				));
 		leftRightSpriteSheet = new spriteSheet(new spriteSheetInfo(
 				"images/units/animals/redWolfLeftRightAlpha.png", 
 				64, 
 				32,
 				0,
-				DEFAULT_TOPDOWN_ADJUSTMENT_Y
+				0
 				));
 		addAnimations();
 		

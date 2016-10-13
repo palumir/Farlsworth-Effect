@@ -281,7 +281,7 @@ public class interactBox extends interfaceObject  {
 			if(getBlurb()!=null) getBlurb().end();
 			
 			// Set that the objest is not being interacted.
-			getTextSeries().getWhoIsTalking().setBeingInteracted(false);
+			if(getTextSeries().getWhoIsTalking()!=null) getTextSeries().getWhoIsTalking().setBeingInteracted(false);
 		}
 		if(getCurrentDisplay() != this) {
 			setCurrentDisplay(this);
