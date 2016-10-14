@@ -44,7 +44,7 @@ public class water extends groundTile {
 	}
 	
 	// Create function
-	public static chunk createChunk(int newX, int newY) {
+	public static chunk createChunk(int newX, int newY, int rando) {
 		if(!zone.loadedOnce) {
 			chunk t = new water(newX,newY,utility.RNG.nextInt(typeReference.getChunkTypeSpriteSheet().getAnimation(0).size()));
 			t.setReloadObject(false);

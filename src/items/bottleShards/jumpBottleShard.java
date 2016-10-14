@@ -43,8 +43,6 @@ public class jumpBottleShard extends bottleShard {
 		
 		// Weapon stats.
 		setStats();
-		
-		createGlow();
 	}
 	
 	// Set stats

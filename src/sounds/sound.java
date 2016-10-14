@@ -227,11 +227,11 @@ public class sound extends Thread {
     }
     
     public static void stopAllSounds() {
-		for(int i = 0; i < allSounds.size(); i++) {
-				if(allSounds.get(0) != null) {
-					allSounds.get(0).stopRequested = true;
-					allSounds.remove(0);
-				}
+		while(allSounds.size()!=0) {
+			if(allSounds.get(0) != null) {
+				allSounds.get(0).stopRequested = true;
+				allSounds.remove(0);
+			}
 		}
 		if(allSounds == null) allSounds = new ArrayList<sound>();
     }

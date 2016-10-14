@@ -522,7 +522,7 @@ public abstract class wolf extends unit {
 		@Override
 		public int getKillWidth() {
 			if(getFacingDirection().equals("Left") || getFacingDirection().equals("Right")) {
-				return getWidth() + 30;
+				return getWidth() + 26;
 			}
 			else {
 				return getWidth();
@@ -533,7 +533,7 @@ public abstract class wolf extends unit {
 		@Override
 		public int getKillHeight() {
 			if(getFacingDirection().equals("Up") || getFacingDirection().equals("Down")) {
-				return getHeight() + 30;
+				return getHeight() + 26;
 			}
 			else {
 				return getHeight();

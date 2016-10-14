@@ -53,8 +53,6 @@ public class pushBottle extends bottle {
 		
 		// Weapon stats.
 		setStats();
-		
-		createGlow();
 	}
 	
 	// Set stats

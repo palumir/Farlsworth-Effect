@@ -15,6 +15,7 @@ import drawing.animation.animation;
 import drawing.animation.animationPack;
 import effects.effectTypes.platformGlow;
 import modes.mode;
+import sounds.music;
 import sounds.sound;
 import terrain.chunk;
 import terrain.groundTile;
@@ -53,7 +54,7 @@ public class wolfless extends boss {
 	private static float DEFAULT_PLATFORM_GLOW_LASTS_FOR = 10f;
 	
 	// Number of hits total
-	private static int numberOfHitsToDieTotal = 6;
+	private static int numberOfHitsToDieTotal = 6; // 6
 	private int numberOfHitsToDie = numberOfHitsToDieTotal;
 
 	// Unit sprite stuff.
@@ -204,6 +205,14 @@ public class wolfless extends boss {
 		// Attacking right animation.
 		animation trailRight = new animation("trailRight", DEFAULT_LEFTRIGHT_SPRITESHEET.getAnimation(9), 0, 0, 1);
 		unitTypeAnimations.addAnimation(trailRight);
+		
+		// Attacking left animation.
+		animation sleepLeft = new animation("sleepLeft", DEFAULT_LEFTRIGHT_SPRITESHEET.getAnimation(4), 3, 3, 1);
+		unitTypeAnimations.addAnimation(sleepLeft);
+		
+		// Attacking right animation.
+		animation sleepRight = new animation("sleepRight", DEFAULT_LEFTRIGHT_SPRITESHEET.getAnimation(0), 3, 3, 1);
+		unitTypeAnimations.addAnimation(sleepRight);
 
 		// Set animations.
 		setAnimations(unitTypeAnimations);
@@ -220,6 +229,10 @@ public class wolfless extends boss {
 		
 		if(howling) {
 			howl();
+		}
+		
+		else if(sleeping) {
+			animateSleeping();
 		}
 		
 		else if(isJumping() || clawAttacking) {
@@ -434,10 +447,10 @@ public class wolfless extends boss {
 				castSlashPlatform();
 			}
 		}
-		
 	}
 	
 	boolean slashSuccess = false;
+	
 	// Cast slash platform
 	public void castSlashPlatform() {
 			
@@ -726,6 +739,7 @@ public class wolfless extends boss {
 	private static String bark = "sounds/effects/bosses/shadowOfTheDenmother/wolfBark.wav";
 	private static String land = "sounds/effects/bosses/shadowOfTheDenmother/land.wav";
 	public static String scream = "sounds/effects/bosses/shadowOfTheDenmother/scream.wav";
+	public static String screamDeath = "sounds/effects/bosses/shadowOfTheDenmother/screamDead.wav";
 	private static String lightDudeBreak = "sounds/effects/bosses/shadowOfTheDenmother/lightDudeBreak.wav";
 
 	// Type of howl
@@ -739,6 +753,13 @@ public class wolfless extends boss {
 		howling = true;
 		startOfHowl = time.getTime();
 		
+	}
+	
+	// Sleeping
+	public void animateSleeping() {
+		if(sleeping) {
+			animate("sleep" + getFacingDirection());
+		}
 	}
 	
 	// Deal with howling
@@ -933,15 +954,34 @@ public class wolfless extends boss {
 		isInjured = true;
 		sound s = new sound(lightDudeBreak);
 		s.start();
-		s = new sound(scream);
-		s.start();
 		changePhase();
 		nextAbilityShadowPuke = true;
 		
 		// Kill boss.
 		if(numberOfHitsToDie<=0) {
-			defeatBoss();
+			s = new sound(screamDeath);
+			s.start();
+			music.currMusic.fadeOut(2f);
+			fakeDeath();
 		}
+		else {
+			s = new sound(scream);
+			s.start();
+		}
+	}
+	
+	private boolean fakingDeath = false;
+	
+	// Fake death
+	public void fakeDeath() {
+		fakingDeath = true;
+		sleep();
+	}
+	
+	private boolean sleeping = false;
+	
+	public void sleep() {
+		sleeping = true;
 	}
 	
 	// Defeat boss
@@ -953,7 +993,7 @@ public class wolfless extends boss {
 	// Deal with light dudes
 	public void dealWithLightDudes() {
 		
-		if(insidePlatforms!=null && insidePlatforms.size()!=0) {
+		if(insidePlatforms!=null && insidePlatforms.size()!=0 && numberOfHitsToDie > 0) {
 			// Spawn a new one.
 			if(currentLightDudes == null) currentLightDudes = new ArrayList<lightDude>();
 			if(currentLightDudes != null && currentLightDudes.size() < 1) {
@@ -1106,7 +1146,7 @@ public class wolfless extends boss {
 		dealWithShadowLines();
 		
 		// Only do fight things if the fight is in progress.
-		if(fightInProgress) {
+		if(fightInProgress && !fakingDeath) {
 			castAbilities();
 		}
 	}

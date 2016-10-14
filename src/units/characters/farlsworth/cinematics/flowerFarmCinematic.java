@@ -220,7 +220,6 @@ public class flowerFarmCinematic extends cinematic {
 	
 	// Run Farlsworth away
 	public void runFarlsworthAway() {
-		event.printAllEvents();
 		
 		save = false;
 		
