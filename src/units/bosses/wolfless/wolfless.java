@@ -54,7 +54,7 @@ public class wolfless extends boss {
 	private static float DEFAULT_PLATFORM_GLOW_LASTS_FOR = 10f;
 	
 	// Number of hits total
-	private static int numberOfHitsToDieTotal = 6; // 6
+	private static int numberOfHitsToDieTotal = 1; // 6
 	private int numberOfHitsToDie = numberOfHitsToDieTotal;
 
 	// Unit sprite stuff.
@@ -740,6 +740,7 @@ public class wolfless extends boss {
 	private static String land = "sounds/effects/bosses/shadowOfTheDenmother/land.wav";
 	public static String scream = "sounds/effects/bosses/shadowOfTheDenmother/scream.wav";
 	public static String screamDeath = "sounds/effects/bosses/shadowOfTheDenmother/screamDead.wav";
+	private static String bellToll = "sounds/effects/horror/bellToll.wav";
 	private static String lightDudeBreak = "sounds/effects/bosses/shadowOfTheDenmother/lightDudeBreak.wav";
 
 	// Type of howl
@@ -874,28 +875,28 @@ public class wolfless extends boss {
 		// Spawn shadow floor
 		for(int i = xLeft -200; i < xRight + 200; i+=shadowDude.getDefaultWidth()) {
 			for(int j = 0; j < 7; j++) {
-				shadowCage.add(new shadowDude(i, floorY+225+j*shadowDude.getDefaultHeight()));
+				shadowCage.add(new shadowDude(i, floorY+225+j*shadowDude.getDefaultHeight()){{setEyeless(true);}});
 			}
 		}
 		
 		// Spawn roof
 		for(int i = xLeft -200; i < xRight + 200; i+=shadowDude.getDefaultWidth()) {
 			for(int j = 0; j < 7; j++) {
-				shadowCage.add(new shadowDude(i, roofY - 300 - j*shadowDude.getDefaultHeight()));
+				shadowCage.add(new shadowDude(i, roofY - 300 - j*shadowDude.getDefaultHeight()){{setEyeless(true);}});
 			}
 		}
 		
 		// Spawn left wall.
 		for(int i = roofY - 600; i < floorY + 600; i+=shadowDude.getDefaultHeight()) {
 			for(int j = 0; j < 17; j++) {
-				shadowCage.add(new shadowDude(xLeft-200-j*shadowDude.getDefaultWidth(), i));
+				shadowCage.add(new shadowDude(xLeft-200-j*shadowDude.getDefaultWidth(), i){{setEyeless(true);}});
 			}
 		}
 		
 		// Spawn right wall.
 		for(int i = roofY - 600; i < floorY + 600; i+=shadowDude.getDefaultHeight()) {
 			for(int j = 0; j < 17; j++) {
-				shadowCage.add(new shadowDude(xRight+200-14+j*shadowDude.getDefaultWidth(), i));
+				shadowCage.add(new shadowDude(xRight+200-14+j*shadowDude.getDefaultWidth(), i){{setEyeless(true);}});
 			}
 		}
 	}
@@ -970,10 +971,46 @@ public class wolfless extends boss {
 		}
 	}
 	
+	// Wait
+	private long waitStart = 0;
+	private float waitFor = 0;
+	
+	private void fakingDeathScene() {
+		
+		// Dead, wait.
+		if(sequenceNumber==0) {
+			waitStart = time.getTime();
+			waitFor = 8f;
+			sequenceNumber++;
+		}
+		
+		// First bell toll.
+		if(sequenceNumber==1 && time.getTime() - waitStart > waitFor*1000) {
+			sound s = new sound(bellToll);
+			s.start();
+			sequenceNumber++;
+			waitStart = time.getTime();
+			waitFor = 3f;
+		}
+		
+		// Second bell toll
+		if(sequenceNumber==2 && time.getTime() - waitStart > waitFor*1000) {
+			sequenceNumber++;
+			waitStart = time.getTime();
+			waitFor = 3.2f;
+		}
+		
+		// Third bell toll.
+		if(sequenceNumber==3 && time.getTime() - waitStart > waitFor*1000) {
+			sequenceNumber++;
+		}
+	}
+	
 	private boolean fakingDeath = false;
 	
 	// Fake death
 	public void fakeDeath() {
+		sequenceNumber = 0;
 		fakingDeath = true;
 		sleep();
 	}
@@ -1148,6 +1185,11 @@ public class wolfless extends boss {
 		// Only do fight things if the fight is in progress.
 		if(fightInProgress && !fakingDeath) {
 			castAbilities();
+		}
+		
+		// Faking death scene.
+		if(fakingDeath) {
+			fakingDeathScene();
 		}
 	}
 	
