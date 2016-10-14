@@ -30,7 +30,7 @@ import utilities.saveState;
 import zones.zone;
 import zones.sheepFarm.subZones.sheepFarm;
 
-public class farmTomb extends zone {
+public class bossFightZone extends zone {
 	
 	//////////////////////////////////
 	// FIELDS, GLOBALS, CONSTRUCTOR //
@@ -69,17 +69,19 @@ public class farmTomb extends zone {
 	
 	 // BossFight loaded?
 	static boolean bossFightLoaded = false;
-	
-	// Zone fog
-	public static fog zoneFog;
-	
+
 	// Constructor
-	public farmTomb() {
-		super("farmTomb", "farmLand");
+	public bossFightZone() {
+		super("bossFightZone", "farmLand");
 		zoneMusics.add(zoneMusic);
 		zoneMusics.add(zoneMusicFrantic);
 	}
 		
+	///////////////////////////////
+	// SPAWN PATTERNS/GENERATORS //
+	///////////////////////////////
+	
+	
 	/////////////////
 	// ZONE LOADER //
 	/////////////////
@@ -93,26 +95,24 @@ public class farmTomb extends zone {
 		setMode(DEFAULT_ZONE_MODE);
 		
 		// Set the darkness.
-		zoneFog = new fog();
-		zoneFog.setTo(0.3f);
+		farmTomb.zoneFog = new fog();
+		farmTomb.zoneFog.setTo(0.3f);
+		
+		// Events
+		loadZoneEvents();
 		
 		// BossFight not initiated
 		shadowBossFightInitiated = false;
 		
 		// Load stuff so the zone doesn't lag
 		preLoadStuff();
-		
-		// Load zone events.
-		loadZoneEvents();
-		
-		// Don't load!
-		boolean loadStuff = true;
+				
+		// Background
+		background.setGameBackground(DEFAULT_ZONE_BACKGROUND);
 		
 		// Play zone music.
 		if(!shadowBossFightStarted.isCompleted()) { music.startMusic(zoneMusic);  }
 		else {
-			
-			// TODO: fix this
 			if(player.getPlayer().isWithin((int)player.getPlayer().lastWell.getX()-200, 
 					(int)player.getPlayer().lastWell.getY()-200, 
 					(int)player.getPlayer().lastWell.getX()+250, 
@@ -125,32 +125,9 @@ public class farmTomb extends zone {
 				saveState.setQuiet(false);
 			}
 			else {
-				// Switch to boss fight zone.
-				//loadStuff = false;
-				//zone.switchZones(player.getPlayer(), player.getPlayer().getCurrentZone(), bossFightZone.getZone(), 0, 0, "Right");
-				
-				createShadowBossFightAroundPlayer(); // TODO: just this for now. Working on zone swapping to make load time faster.
+				// Load bossFight
+				//createShadowBossFightAroundPlayer();
 			}
-		}
-		
-		if(loadStuff) {
-			levelSave.loadSaveState("actualTombLevel.save");
-			
-			// Load the level save.
-			//farmTombZoneLoader loader = new farmTombZoneLoader();
-			//loader.loadSegments();
-	
-			// Load zone items
-			loadItems();
-			
-			// Load units
-			loadUnits();
-					
-			// Background
-			background.setGameBackground(DEFAULT_ZONE_BACKGROUND);
-			
-			// Spawn area.
-			createNonEditorChunks();
 		}
 		
 	}
@@ -160,19 +137,6 @@ public class farmTomb extends zone {
 		int holder = wolfless.leniency;
 	}
 	
-	// Load items
-	public void loadItems() {
-		pushBottle b = new pushBottle(2867, 1398+32);
-		bottleExpander exp = new bottleExpander(11498,2333);
-		exp.quality = "Alright";
-	}
-	
-	// Load units
-	public void loadUnits() {
-		farlsworth f = new farlsworth(Integer.MIN_VALUE, Integer.MIN_VALUE);
-		f.setGravity(false);
-	}
-	
 	// Load zone events.
 	public void loadZoneEvents() {
 		
@@ -180,30 +144,13 @@ public class farmTomb extends zone {
 		shadowBossFightStarted = event.createEvent("tombZoneShadowBossFightStarted");
 	}
 	
-	
 	//////////////////////
 	// INDIVIDUAL AREAS //
 	//////////////////////
-	
-	public void createNonEditorChunks() {
+	public void createTerrain() {
 		
-		/////////////////////////
-		//////// ENTRANCE ///////
-		/////////////////////////
-		
-		// Entrance
-		stairsUp tombZoneEnterance = new stairsUp(30,-8,sheepFarm.getZone(),-3442, -5682,"Down");
-		tombZoneEnterance.setZ(BACKGROUND_Z);
-		
-		// Secret chest stairs up to well.
-		stairsUp secretStairs = new stairsUp(11615,2314,farmTomb.getZone(),11629,1670-2,"Right");
-		secretStairs.setZ(BACKGROUND_Z);
-		
-		// Secret stairs to start
-		stairsUp secretStairs2 = new stairsUp(12052,2314,farmTomb.getZone(),70,-6,"Right");
-		secretStairs2.setZ(BACKGROUND_Z);
 	}
-	
+
 	
 /////////////////////////////
 //////SHADOW ELEVATOR //////
@@ -230,40 +177,17 @@ public class farmTomb extends zone {
 		}
 	}
 	
-	// Deal with the first well we encounters.
-	public void dealWithRegionStuff() {
-		player currPlayer = player.getPlayer();
-		if(currPlayer != null && currPlayer.isWithin(13232,1000,13232+1500,1800) && shadowBossFightStarted!=null && !shadowBossFightStarted.isCompleted()) {
-			shadowBossFightStarted.setCompleted(true);
-			shadowBossFightFirstTime = true;
-		}
-	}
-	
 	
 	// Deal with shadow bossFight stuff
 	public void dealWithShadowBossFightStuff() {
 		
 		// It's game time, bro!! turner!! wooo!
-		if(shadowBossFightStarted!=null && shadowBossFightStarted.isCompleted()) {
-
-			if(!shadowBossFightInitiated && zoneLoaded) {
+		if(!shadowBossFightInitiated && zoneLoaded) {
+				wolflessFightCinematic w = new wolflessFightCinematic();
+				w.startBossImmediately = true;
+				w.start();
 				
-				// If it's the first time.
-				if(shadowBossFightFirstTime) {
-					music.currMusic.fadeOut(5f);
-					shadowBossFightFirstTime = false;
-					wolflessFightCinematic w = new wolflessFightCinematic();
-					w.start();
-					shadowBossFightInitiated = true;
-				}
-				else {
-					wolflessFightCinematic w = new wolflessFightCinematic();
-					w.startBossImmediately = true;
-					w.start();
-					
-					shadowBossFightInitiated = true;
-				}
-			}
+				shadowBossFightInitiated = true;
 		}
 		
 	}
@@ -272,7 +196,6 @@ public class farmTomb extends zone {
 	// zone specific units. 
 	@Override
 	public void update() {
-		dealWithRegionStuff();
 		dealWithShadowBossFightStuff();
 	}
 
