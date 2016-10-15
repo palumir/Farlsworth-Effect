@@ -272,6 +272,22 @@ public class inventory extends interfaceObject {
 	}
 	
 	// Actually equip item
+	public void equipItemSilent(item i, int key) {
+		// Check active slots and unequip anything with the same slot.
+		for(int j = 0; j < activeSlots.size(); j++) {
+			if(activeSlots.get(j).slot == key) {
+				activeSlots.get(j).slot = KeyEvent.VK_WINDOWS;
+				activeSlots.remove(j);
+				j--;
+			}
+		}
+		
+		i.slot = key;
+		activeSlots.add(i);
+		
+	}
+	
+	// Actually equip item
 	public void equipItem(item i, int key) {
 		// Check active slots and unequip anything with the same slot.
 		for(int j = 0; j < activeSlots.size(); j++) {

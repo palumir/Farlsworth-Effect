@@ -87,7 +87,7 @@ public class developer extends player {
 		setKillable(false);
 		
 		// Give a million hp
-		moveSpeed = 10f;
+		moveSpeed = 50f;
 		
 		// Create dev interface
 		createDevInterface();
@@ -95,10 +95,12 @@ public class developer extends player {
 	
 	// Do test stuff if we are a developer testing (in initiate)
 	public static void doTestStuff() {
-		groundTile.groundTiles.clear();
-		drawnObject.objects.clear();
-		drawnObject.dontReloadTheseObjects.clear();
-		if(levelName!=null) levelSave.loadSaveState("testLevelSave.temp");
+		if(levelName!=null) {
+			groundTile.groundTiles.clear();
+			drawnObject.objects.clear();
+			drawnObject.dontReloadTheseObjects.clear();
+			levelSave.loadSaveState("testLevelSave.temp");
+		}
 	}
 	
 	// Adjust X and Y

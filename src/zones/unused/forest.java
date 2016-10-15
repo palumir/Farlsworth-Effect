@@ -110,7 +110,7 @@ public class forest extends zone {
 		int numY = (y2 - y1)/water.DEFAULT_CHUNK_HEIGHT;
 		for(int i = 0; i < numX; i++) {
 			for(int j = 0; j < numY; j++) {
-				water.createChunk(i*water.DEFAULT_CHUNK_WIDTH + x1, j*water.DEFAULT_CHUNK_HEIGHT + y1);
+				water.createChunk(i*water.DEFAULT_CHUNK_WIDTH + x1, j*water.DEFAULT_CHUNK_HEIGHT + y1,0);
 			}
 		}
 	}
@@ -121,7 +121,7 @@ public class forest extends zone {
 		int numY = (y2 - y1)/water.DEFAULT_CHUNK_HEIGHT;
 		for(int i = 0; i < numX; i++) {
 			for(int j = 0; j < numY; j++) {
-				c = water.createChunk(i*water.DEFAULT_CHUNK_WIDTH + x1, j*water.DEFAULT_CHUNK_HEIGHT + y1);
+				c = water.createChunk(i*water.DEFAULT_CHUNK_WIDTH + x1, j*water.DEFAULT_CHUNK_HEIGHT + y1,0);
 				if(c!=null) c.setPassable(true);
 			}
 		}

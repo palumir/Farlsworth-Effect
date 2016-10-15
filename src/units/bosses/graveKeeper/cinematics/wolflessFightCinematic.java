@@ -55,7 +55,7 @@ public class wolflessFightCinematic extends cinematic {
 			    // Lock the player's movement.
 			    player.getPlayer().stopMove("all");
 			    
-			    s = new textSeries(null, "DO NOT let them CORRUPT you.");
+			    s = new textSeries(null, "<placeholder dialogue 1>");
 			    interactSequence = new interactBox(s, graveKeeper);
 				interactSequence.setUnescapable(true);
 			    interactSequence.toggleDisplay();
@@ -67,14 +67,14 @@ public class wolflessFightCinematic extends cinematic {
 				
 				// Set the next text and advance it.
 				farmTomb.zoneFog.fadeTo(0.4f, 1);
-				addTextSeries(null, "YOU don't have to DECIDE.", graveKeeper);
+				addTextSeries(null, "<placeholder dialogue 2>", graveKeeper);
 				advanceSequence();
 			}
 			
 			if(isSequence(numIfs++) && goNextTextSeries()) {
 				
 				// Set the next text and advance it.
-				addTextSeries(null, "YOU can just DIG.", graveKeeper);
+				addTextSeries(null, "<placeholder dialogue 3>", graveKeeper);
 				advanceSequence();
 			}
 			
@@ -82,14 +82,14 @@ public class wolflessFightCinematic extends cinematic {
 				
 				// Set the next text and advance it.
 				farmTomb.zoneFog.fadeTo(0.5f, 1);
-				addTextSeries(null, "Just DIG and never stop DIGGING.", graveKeeper);
+				addTextSeries(null, "<placeholder dialogue 4>", graveKeeper);
 				advanceSequence();
 			}
 			
 			if(isSequence(numIfs++) && goNextTextSeries()) {
 				
 				// Set the next text and advance it.
-				addTextSeries(null, "WHY...? PLEASE stop SCREAMING at me.", graveKeeper);
+				addTextSeries(null, "<placeholder dialogue 5>", graveKeeper);
 				advanceSequence();
 			}
 			
@@ -97,21 +97,21 @@ public class wolflessFightCinematic extends cinematic {
 				
 				// Set the next text and advance it.
 				farmTomb.zoneFog.fadeTo(0.6f, 1);
-				addTextSeries(null, "I AM TRYING TO SPEAK WITH HER.", graveKeeper);
+				addTextSeries(null, "<placeholder dialogue 6>", graveKeeper);
 				advanceSequence();
 			}
 			
 			if(isSequence(numIfs++) && goNextTextSeries()) {
 				
 				// Set the next text and advance it.
-				addTextSeries(null, "WHY ARE YOU MAKING THIS SO HARD!?", graveKeeper);
+				addTextSeries(null, "<fart>", graveKeeper);
 				advanceSequence();
 			}
 			
 			if(isSequence(numIfs++) && goNextTextSeries()) {
 				
 				// Set the next text and advance it.
-				addTextSeries(null, "I'm sorry. I'm so sorry... WE did this to you.", graveKeeper);
+				addTextSeries(null, "<placeholder dialogue sex position>", graveKeeper);
 				farmTomb.zoneFog.fadeTo(0.7f, 1);
 				advanceSequence();
 			}
@@ -119,14 +119,14 @@ public class wolflessFightCinematic extends cinematic {
 			if(isSequence(numIfs++) && goNextTextSeries()) {
 				
 				// Set the next text and advance it.
-				addTextSeries(null, "No, no, NO. NO, NO, NO NO NO NO!", graveKeeper);
+				addTextSeries(null, "<placeholder dialogue 70>", graveKeeper);
 				advanceSequence();
 			}
 			
 			if(isSequence(numIfs++) && goNextTextSeries()) {
 				
 				// Set the next text and advance it.
-				addTextSeries(null, "THEY DID IT. THEY DID IT! NOT ME.", graveKeeper);
+				addTextSeries(null, "<placeholder dialogue 71>", graveKeeper);
 				farmTomb.zoneFog.fadeTo(0.8f, 1);
 				advanceSequence();
 			}
@@ -134,14 +134,14 @@ public class wolflessFightCinematic extends cinematic {
 			if(isSequence(numIfs++) && goNextTextSeries()) {
 				
 				// Set the next text and advance it.
-				addTextSeries(null, "I HAVE TO DIG. I JUST HAVE TO KEEP DIGGING.", graveKeeper);
+				addTextSeries(null, "<placeholder dialogue 72>", graveKeeper);
 				advanceSequence();
 			}
 			
 			if(isSequence(numIfs++) && goNextTextSeries()) {
 				
 				// Set the next text and advance it.
-				addTextSeries(null, "WHY YOU WON'T STOP SCREAMING? I'M TIRED OF HEARING YOU.", graveKeeper);
+				addTextSeries(null, "<placeholder dialogue 74>", graveKeeper);
 				farmTomb.zoneFog.fadeTo(0.9f, 1);
 				advanceSequence();
 			}
@@ -149,7 +149,7 @@ public class wolflessFightCinematic extends cinematic {
 			if(isSequence(numIfs++) && goNextTextSeries()) {
 				
 				// Set the next text and advance it.
-				addTextSeries(null, "BE GONE. Get OUT. GET OUT OF MY HEAD!", graveKeeper);
+				addTextSeries(null, "<placeholder dialogue 75>", graveKeeper);
 				advanceSequence();
 			}
 			
@@ -157,7 +157,7 @@ public class wolflessFightCinematic extends cinematic {
 				
 				// Set the next text and advance it.
 				farmTomb.zoneFog.fadeTo(1f, 1);
-				addTextSeries(null, "PLEASE, please... just LEAVE ME ALONE.", graveKeeper);
+				addTextSeries(null, "<placeholder dialogue 76>", graveKeeper);
 				advanceSequence();
 			}
 			
@@ -165,7 +165,7 @@ public class wolflessFightCinematic extends cinematic {
 				
 				// Set the next text and advance it.
 				farmTomb.zoneFog.fadeTo(1f, 1);
-				addTextSeries(null, "GET OUT OF MY HEAD.", graveKeeper);
+				addTextSeries(null, "<placeholder dialogue 77>", graveKeeper);
 				advanceSequence();
 			}
 			

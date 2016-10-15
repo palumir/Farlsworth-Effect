@@ -339,7 +339,7 @@ public class saveState implements Serializable {
 				newItem.upgradeLevel = upgradeLevel;
 				
 				// Equip equipped items.
-				if(newItem.slot != null && slot != KeyEvent.VK_WINDOWS) newInventory.equipItem(newItem, slot);
+				if(newItem.slot != null && slot != KeyEvent.VK_WINDOWS) newInventory.equipItemSilent(newItem, slot);
 				
 				// For bottles, save the charges.
 				if(newItem instanceof bottle) {

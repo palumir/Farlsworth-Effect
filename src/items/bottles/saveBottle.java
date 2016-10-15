@@ -50,8 +50,6 @@ public class saveBottle extends bottle {
 		
 		// Weapon stats.
 		setStats();
-		
-		createGlow();
 	}
 	
 	// Set stats
@@ -124,7 +122,7 @@ public class saveBottle extends bottle {
 			}
 			else {
 				currPlayer.getPlayerInventory().equipItem(this, KeyEvent.VK_ENTER);
-				enterToUse = new tooltipString("Press 'enter' to use a charge of the Save Bottle.");
+				enterToUse = new tooltipString("Use a charge of the Save Bottle by pressing 'enter'.");
 				enterToUse.setHasATimer(false);
 			}
 		}

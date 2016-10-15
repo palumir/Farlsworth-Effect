@@ -87,10 +87,12 @@ public class button extends interfaceObject  {
 	
 	// Get button at
 	public static button getButtonAt(int x, int y) {
-		for(int i = 0; i < interfaceObjects.size(); i++) {
-			drawnObject d = interfaceObjects.get(i);
-			if(d instanceof button && ((button)d).isButtonWithinRadius(x,y, touchRadius) && d.isDrawObject()) {
-				return (button)d;
+		if(interfaceObjects!=null) {
+			for(int i = 0; i < interfaceObjects.size(); i++) {
+				drawnObject d = interfaceObjects.get(i);
+				if(d instanceof button && ((button)d).isButtonWithinRadius(x,y, touchRadius) && d.isDrawObject()) {
+					return (button)d;
+				}
 			}
 		}
 		return null;

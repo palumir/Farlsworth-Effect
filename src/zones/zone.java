@@ -13,6 +13,7 @@ import main.main;
 import modes.platformer;
 import modes.topDown;
 import sounds.music;
+import sounds.sound;
 import terrain.chunk;
 import terrain.groundTile;
 import units.player;
@@ -95,6 +96,7 @@ public abstract class zone {
 			
 			// Re-create the player in the new zone.
 			drawnObject.dontReloadTheseObjects = new ArrayList<drawnObject>();
+			sound.stopAllSounds();
 			if(music.currMusic != null && !b.zoneMusics.contains(music.currMusic.getFileName())) music.endAll();
 			groundTile.groundTiles = new CopyOnWriteArrayList<chunk>();
 			loadedOnce = false;

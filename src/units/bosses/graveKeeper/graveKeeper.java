@@ -1,7 +1,9 @@
 package units.bosses.graveKeeper;
 
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
+import drawing.spriteSheet;
 import drawing.animation.animation;
 import drawing.animation.animationPack;
 import interactions.interactBox;
@@ -70,6 +72,9 @@ public class graveKeeper extends boss {
 	
 	// Current player one.
 	public static graveKeeper graveKeeper;
+	
+	// Farlsworth dialogue box
+	private static BufferedImage DEFAULT_DIALOGUE_BOX = spriteSheet.getSpriteFromFilePath("images/units/dialogueBoxes/gravekeeperBox.png");
 	
 	///////////////
 	/// METHODS ///
@@ -253,6 +258,8 @@ public class graveKeeper extends boss {
 	// Constructor
 	public graveKeeper(int newX, int newY) {
 		super(unitType, "Farlsworth", newX, newY);
+		
+		setDialogueBox(DEFAULT_DIALOGUE_BOX);
 
 		// He has no collision
 		collisionOn = true;

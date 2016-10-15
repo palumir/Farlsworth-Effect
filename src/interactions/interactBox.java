@@ -216,9 +216,9 @@ public class interactBox extends interfaceObject  {
 						// Draw order/chaos TODO:PLACEHOLDER.
 						String type = getTextSeries().getChildren().get(i).getChoiceType();
 						if(type!=null) {
-							g.drawString(type,
+							/*g.drawString(type,
 								   (int) ((int)(gameCanvas.getScaleX()*(getIntX() + (2*(i+1))*percent*background.getWidth()/2)) - g.getFontMetrics().stringWidth(type)/2),
-								   (int)(gameCanvas.getScaleY()*(getIntY() + background.getHeight()/2 + 15)));
+								   (int)(gameCanvas.getScaleY()*(getIntY() + background.getHeight()/2 + 15)));*/
 						}
 					}
 			}

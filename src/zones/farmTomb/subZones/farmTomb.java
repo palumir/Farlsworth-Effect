@@ -28,6 +28,7 @@ import utilities.intTuple;
 import utilities.levelSave;
 import utilities.saveState;
 import zones.zone;
+import zones.farmTomb.farmTombZoneLoader;
 import zones.sheepFarm.subZones.sheepFarm;
 
 public class farmTomb extends zone {
@@ -129,12 +130,12 @@ public class farmTomb extends zone {
 				//loadStuff = false;
 				//zone.switchZones(player.getPlayer(), player.getPlayer().getCurrentZone(), bossFightZone.getZone(), 0, 0, "Right");
 				
-				createShadowBossFightAroundPlayer(); // TODO: just this for now. Working on zone swapping to make load time faster.
+				createShadowBossFightAroundPlayer(); 
 			}
 		}
 		
 		if(loadStuff) {
-			levelSave.loadSaveState("actualTombLevel.save");
+			//levelSave.loadSaveState("actualTombLevel.save");
 			
 			// Load the level save.
 			//farmTombZoneLoader loader = new farmTombZoneLoader();

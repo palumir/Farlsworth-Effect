@@ -10,6 +10,7 @@ import drawing.spriteSheet;
 import drawing.spriteSheet.spriteSheetInfo;
 import drawing.animation.animation;
 import drawing.animation.animationPack;
+import effects.effectTypes.itemGlow;
 import effects.projectiles.spinningFireLog;
 import interactions.event;
 import interactions.interactBox;
@@ -156,14 +157,17 @@ public class farlsworth extends boss {
 			if(!bottle.inInventory) {
 				if(bottle!=null) {
 					if(deathCounter < 3) {
-						player.getPlayer().getPlayerInventory().get("Save Bottle").setDoubleX(2564+15);
-						player.getPlayer().getPlayerInventory().get("Save Bottle").setDoubleY(1582+13);
+						bottle.setDoubleX(2564+15);
+						bottle.setDoubleY(1582+13);
 					}
 					else {
-						player.getPlayer().getPlayerInventory().get("Save Bottle").setDoubleX(370);
-						player.getPlayer().getPlayerInventory().get("Save Bottle").setDoubleY(215);
+
+						bottle.setDoubleX(370);
+						bottle.setDoubleY(215);
 					}
+					bottle.setForceInFront(true);
 					bottle.undestroy();
+					bottle.setGlow(new itemGlow(bottle, getIntX() + (int)bottle.getImage().getWidth()/2 - itemGlow.DEFAULT_WIDTH/2, getIntY() + (int)bottle.getImage().getHeight()/2 - itemGlow.DEFAULT_HEIGHT/2));
 					bottle.attachFarlsworthNote();
 					
 				}

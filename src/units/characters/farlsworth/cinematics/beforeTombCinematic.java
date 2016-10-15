@@ -96,7 +96,7 @@ public class beforeTombCinematic extends cinematic {
 			}
 			
 			if(isSequence(numIfs++) && goNextTextSeries()) {
-				addTextSeries(null, "You're a friggin cheater!",farlsworth);
+				addTextSeries(null, "You're a friggin cheater.",farlsworth);
 				farlsworth.moveTo(-3463, -5550);
 				advanceSequence();
 			}
@@ -121,14 +121,7 @@ public class beforeTombCinematic extends cinematic {
 		if(isSequence(numIfs++) && goNextTextSeries()) {
 			
 			// Set the next text and advance it.
-			addTextSeries(null, "Let's hope you don't end up in one of these graves!", farlsworth);
-			advanceSequence();
-		}
-		
-		if(isSequence(numIfs++) && goNextTextSeries()) {
-			
-			// Set the next text and advance it.
-			addTextSeries(null, "Hey, maybe these people are all wolf victims.", farlsworth);
+			addTextSeries(null, "Hey, I wonder if these graves are all wolf victims.", farlsworth);
 			advanceSequence();
 		}
 		

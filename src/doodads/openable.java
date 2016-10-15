@@ -72,7 +72,7 @@ public abstract class openable extends chunk {
 				s = startOfConversation.addChild("Open", "You open it.");	
 			}
 			else {
-				s = startOfConversation.addChild("Open", "You don't have the key.");
+				s = startOfConversation.addChild("Open", "It's locked.");
 			}
 			
 			s.setEnd();

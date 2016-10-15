@@ -227,26 +227,17 @@ public class sound extends Thread {
     }
     
     public static void stopAllSounds() {
-		for(int i = 0; i < allSounds.size(); i++) {
-				if(allSounds.get(0) != null) {
-					allSounds.get(0).stopRequested = true;
-					allSounds.remove(0);
-				}
+		while(allSounds.size()!=0) {
+			if(allSounds.get(0) != null) {
+				allSounds.get(0).stopRequested = true;
+				allSounds.remove(0);
+			}
 		}
 		if(allSounds == null) allSounds = new ArrayList<sound>();
     }
     
     public static void initiate() {
-    	if(allSounds != null) {
-    		for(int i = 0; i < allSounds.size(); i++) {
-    			if(!(allSounds.get(i) instanceof music) && allSounds.get(i).stopOnDeath) {
-    				if(allSounds.get(i) != null) allSounds.get(i).stopRequested = true;
-    				allSounds.remove(i);
-    				i--;
-    			}
-    		}
-    	}
-    	if(allSounds == null) allSounds = new ArrayList<sound>();
+    	allSounds = new ArrayList<sound>();
     }
 
 	public boolean isLoop() {

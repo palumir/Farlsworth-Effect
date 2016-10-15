@@ -34,6 +34,7 @@ import interactions.event;
 import items.bottle;
 import items.item;
 import items.bottles.saveBottle;
+import items.other.bottleExpander;
 import modes.topDown;
 import sounds.music;
 import sounds.sound;
@@ -67,6 +68,7 @@ import utilities.time;
 import utilities.utility;
 import zones.zone;
 import zones.farmTomb.subZones.farmTomb;
+import zones.sheepFarm.sheepFarmZoneLoader;
 
 public class sheepFarm extends zone {
 	
@@ -119,77 +121,6 @@ public class sheepFarm extends zone {
 		zoneMusics.add(forestMusic);
 		zoneMusics.add(farmMusic);
 	}
-	
-	///////////////////////////////
-	// SPAWN PATTERNS/GENERATORS //
-	///////////////////////////////
-	
-	// Spawn grass from x to y.
-	public void spawnForestMeta(int x1, int y1, int x2, int y2) {	
-		for(int i = x1; i < x2; i = i += flower.DEFAULT_SPRITE_WIDTH) {
-			for(int j = y1; j < y2; j += flower.DEFAULT_SPRITE_HEIGHT) {
-				int spawnTree = utility.RNG.nextInt(200);
-				int diffX = utility.RNG.nextInt(60);
-				int diffY = utility.RNG.nextInt(60);
-				int t = utility.RNG.nextInt(5);
-				if(spawnTree<1) {
-					System.out.println("new flower(" + (i+diffX) + "," + (j+diffY) + "," + t + ");");
-					new flower(i+diffX,j+diffY,t);
-				}
-			}
-		}
-	}
-	
-	// Spawn grass from x to y.
-	public void spawnMountainRect(int x1, int y1, int x2, int y2) {
-		int numX = (x2 - x1)/cave.DEFAULT_CHUNK_WIDTH;
-		int numY = (y2 - y1)/cave.DEFAULT_CHUNK_HEIGHT;
-		for(int i = 0; i < numX; i++) {
-			for(int j = 0; j < numY; j++) {
-				c = cave.createChunk(i*cave.DEFAULT_CHUNK_WIDTH + x1, j*cave.DEFAULT_CHUNK_HEIGHT + y1);
-				if(c!=null) c.setPassable(false);
-			}
-		}
-	}
-	
-	// Spawn water from x to y.
-	public void spawnWaterRect(int x1, int y1, int x2, int y2) {
-		int numX = (x2 - x1)/water.DEFAULT_CHUNK_WIDTH;
-		int numY = (y2 - y1)/water.DEFAULT_CHUNK_HEIGHT;
-		for(int i = 0; i < numX; i++) {
-			for(int j = 0; j < numY; j++) {
-				water.createChunk(i*water.DEFAULT_CHUNK_WIDTH + x1, j*water.DEFAULT_CHUNK_HEIGHT + y1);
-			}
-		}
-	}
-	
-	// Spawn water from x to y.
-	public void spawnPassableWaterRect(int x1, int y1, int x2, int y2) {
-		int numX = (x2 - x1)/water.DEFAULT_CHUNK_WIDTH;
-		int numY = (y2 - y1)/water.DEFAULT_CHUNK_HEIGHT;
-		for(int i = 0; i < numX; i++) {
-			for(int j = 0; j < numY; j++) {
-				c = water.createChunk(i*water.DEFAULT_CHUNK_WIDTH + x1, j*water.DEFAULT_CHUNK_HEIGHT + y1);
-				if(c!=null) {
-					c.setInteractable(false);
-					c.setPassable(true);
-				}
-			}
-		}
-	}
-	
-	// Spawn wood from x to y.
-	public void spawnFlowerRect(int x1, int y1, int x2, int y2, int r) {
-		int numX = (x2 - x1)/flower.DEFAULT_SPRITE_WIDTH;
-		int numY = (y2 - y1)/flower.DEFAULT_SPRITE_HEIGHT;
-		for(int i = 0; i < numX; i++) {
-			for(int j = 0; j < numY; j++) {
-				//int rand = utility.RNG.nextInt(r+1);
-				new flower(i*flower.DEFAULT_SPRITE_WIDTH + x1, j*flower.DEFAULT_SPRITE_WIDTH + y1, r);
-			}
-		}
-	}
-
 	
 	// Spawn wood from x to y.
 	public static ArrayList<chunk> spawnFence(ArrayList<chunk> chunkList, int x1, int y1, int x2, int y2) {
@@ -254,7 +185,7 @@ public class sheepFarm extends zone {
 		loadZoneEvents();
 		
 		// Load the level save.
-		levelSave.loadSaveState("sheepFarmLevel.save");
+		//levelSave.loadSaveState("sheepFarmLevel.save");
 		//sheepFarmZoneLoader loader = new sheepFarmZoneLoader();
 		//loader.loadSegments();
 		
@@ -266,13 +197,13 @@ public class sheepFarm extends zone {
 		}
 		
 		// Spawn special stuff
-		spawnSpecialStuff();
+		//spawnSpecialStuff();
 		
 		// Create items
 		createItems();
 		
 		// Create graveyard
-		createGraveYard();
+		//createGraveYard();
 		
 		// Play fire sound
 		if(isOnFire != null && isOnFire.isCompleted()) {
@@ -341,7 +272,7 @@ public class sheepFarm extends zone {
 		((haystack)c).setStrange();
 		
 		// Farmer house
-		c = new door(null, -599,-373, farmerHouse.getZone(), -93+20,957+5, "Right");
+		c = new door("No Key Yet", -599,-373, farmerHouse.getZone(), -93+20,957+5, "Right");
 		
 		// Barn
 		c = new door("No Key Yet", -793,-370, farmerHouse.getZone(), -93,957, "Right");
@@ -354,6 +285,10 @@ public class sheepFarm extends zone {
 	public void createItems() {
 		// Spawn bottle.
 		bottle saveBottle = new saveBottle(-665,-3102);
+		
+		// Spawn bottle expander
+		bottleExpander b = new bottleExpander(-1217, -6530);
+		b.quality = "Alright";
 	}
 
 	

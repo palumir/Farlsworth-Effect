@@ -103,12 +103,13 @@ public class shadowDude extends unit {
 	int damage = 1;
 	float slowTo = 0.1f;
 	float hurtEvery = 0.05f;
+	int shadowDudeLeniency = 4;
 	
 	@Override
 	public void hurtPeople(int leniency) {
 		// If someone is in the explosion radius, hurt.
 			player currPlayer = player.getPlayer();
-			if(currPlayer.isWithin(this.getIntX() + leniency, this.getIntY() + leniency, this.getIntX() + this.getWidth() - leniency, this.getIntY() + this.getHeight() - leniency) 
+			if(currPlayer.isWithin(this.getIntX() + shadowDudeLeniency, this.getIntY() + shadowDudeLeniency, this.getIntX() + this.getWidth() - shadowDudeLeniency, this.getIntY() + this.getHeight() - shadowDudeLeniency) 
 					&& ((!currPlayer.isIlluminated() && !illuminated) || isIgnoreIllumination())) {
 				currPlayer.hurt(damage, 1);
 			}

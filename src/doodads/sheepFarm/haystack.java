@@ -88,36 +88,22 @@ public class haystack extends chunk {
 		// Start of conversation.
 		textSeries startOfConversation = new textSeries("StartWithButtons", "StartWithButtons");
 		
-		if(timesSearched == 0) {
-			s = startOfConversation.addChild("Search", "You search through the haystack ...");
-			s = s.addChild(null, "... you find a needle.");
-		}
-		else if(timesSearched == 1) {
-			s = startOfConversation.addChild("Search", "You search the haystack ...");
-			s = s.addChild(null, "You find another needle.");
-		}
-		else if(timesSearched == 2) {
-			s = startOfConversation.addChild("Search", "You search the haystack ...");
-			s = s.addChild(null, "You find two needles.");
-		}
-		else if(timesSearched == 3) {
-			s = startOfConversation.addChild("Search", "You shove your fist into the haystack ...");
-			s = s.addChild(null, "You pull out a handful of needles.");
-			s = s.addChild(null, "A needle pricks you in the hand.");
-			s = s.addChild(null, "It draws blood.");
-			s = s.addChild(null, "You have hemophilia. ");
-			s = s.addChild(null, "You feel light headed and your legs begin to tremble.");
-			s = s.addChild(null, "Just kidding, you're fine.");
-			s = s.addChild(null, "It's just a game.");
-		}
-		else if(timesSearched == 4) {
-			s = startOfConversation.addChild("Search", "You search the haystack ...");
-			s = s.addChild(null, "You can't actually find any hay. Only needles.");
-		}
-		else {
-			s = startOfConversation.addChild("Brush off hay", "You brush off the hay ...");
-			s = s.addChild(null, "It's a stack of needles under some hay.");
-		}
+		s = startOfConversation.addChild("Search", "You search through the haystack ...");
+		s = s.addChild(null, "... you find a needle.");
+		s = s.addChild("Search Again", "You search the haystack ...");
+		s = s.addChild(null, "You find two needles.");
+		s = s.addChild("Search Again", "You shove your fist into the haystack ...");
+		s = s.addChild(null, "You pull out a handful of needles.");
+		s = s.addChild(null, "A needle pricks you in the hand.");
+		s = s.addChild(null, "It draws blood.");
+		s = s.addChild(null, "You have hemophilia and lack proper blood-clotting proteins.");
+		s = s.addChild(null, "You feel light headed and your legs begin to tremble.");
+		s = s.addChild(null, "Just kidding, you're fine.");
+		s = s.addChild(null, "It's just a game.");
+		s = s.addChild("Search Again", "You search the haystack ...");
+		s = s.addChild(null, "You can't actually find any hay. Only needles.");
+		s = s.addChild("Brush off hay", "You brush off the hay ...");
+		s = s.addChild(null, "It's a stack of needles under some hay.");
 
 		// Set each to the end.
 		s.setEnd();
@@ -127,15 +113,10 @@ public class haystack extends chunk {
 	
 	// Interact stuff.
 	public void doInteractStuff() {
-		
-		// If we have reached the end of a dialogue.
-		if(!setNextSearch && strange && interactSequence.getTextSeries().isEnd()) {
-			timesSearched++;
-			setNextSearch = true;
-		}
+
 
 		// If we are the strange haystack and have searched 6 times, destroy it.
-		if(strange && (needleJoke.isCompleted() || timesSearched >= 6)) {
+		if(strange && (needleJoke.isCompleted() || interactSequence.getTextSeries().isEnd())) {
 			
 			// Spawn a needleStack.
 			needlestack n = new needlestack(getIntX(), getIntY(), 0);

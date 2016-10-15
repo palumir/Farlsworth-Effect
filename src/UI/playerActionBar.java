@@ -6,6 +6,7 @@ import java.awt.event.KeyEvent;
 
 import drawing.drawnObject;
 import drawing.gameCanvas;
+import interactions.quest;
 import items.bottle;
 import items.item;
 import units.player;
@@ -100,6 +101,17 @@ public class playerActionBar extends interfaceObject  {
 				
 				activeAdjustX += 0;
 				activeAdjustY += 30;
+			}
+			
+			// Draw quest UI
+			int questAdjustX = gameCanvas.getDefaultWidth()-15;
+			int questAdjustY = gameCanvas.getDefaultHeight()/45;
+			
+			g.setColor(Color.WHITE);
+			if(quest.getCurrentQuests()!=null) {
+				g.drawString("The Farlsworth Effect - Pre-alpha",
+						(int)(gameCanvas.getScaleX()*(getIntX() + questAdjustX - g.getFontMetrics().stringWidth("The Farlsworth Effect - Pre-alpha"))),
+						(int)(gameCanvas.getScaleY()*(getIntY() + questAdjustY + 5)));
 			}
 		}
 		

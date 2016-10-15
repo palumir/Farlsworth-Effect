@@ -94,15 +94,19 @@ public abstract class item extends drawnObject {
 		else setDrawObject(true);
 		
 		allItems.add(this);
-
-		//forceInFront = true;
 	}
 	
 	// Create glow
 	public void createGlow() {
-		if(isDrawObject() && isExists()) {
-			glow = new itemGlow(this, getIntX() + getImage().getWidth()/2 - itemGlow.DEFAULT_WIDTH/2, getIntY() + getImage().getHeight()/2 - itemGlow.DEFAULT_HEIGHT/2);
-			if(mode.getCurrentMode().equals("topDown")) glow.setBackgroundDoodad(true);
+		if(player.getPlayer() != null && 
+				player.getPlayer().getPlayerInventory()!=null && 
+				!player.getPlayer().getPlayerInventory().hasItem(this) && 
+				!inInventory &&
+				!pickedUpItem &&
+				isDrawObject() && 
+				isExists()) {
+			setGlow(new itemGlow(this, getIntX() + getImage().getWidth()/2 - itemGlow.DEFAULT_WIDTH/2, getIntY() + getImage().getHeight()/2 - itemGlow.DEFAULT_HEIGHT/2));
+			if(mode.getCurrentMode().equals("topDown")) getGlow().setBackgroundDoodad(true);
 			else {
 				this.setForceInFront(true);
 			}
@@ -134,8 +138,6 @@ public abstract class item extends drawnObject {
 			player currPlayer = player.getPlayer();
 			effect e = new floatingString("-" + stringUtils.toTitleCase(getName()), DEFAULT_DROP_COLOR, currPlayer.getIntX() + currPlayer.getWidth()/2, currPlayer.getIntY() + currPlayer.getHeight()/2, 1.3f);
 			e.setAnimationDuration(3f);
-			
-			
 		}
 		
 		// Play sound.
@@ -184,9 +186,9 @@ public abstract class item extends drawnObject {
 	// Respond to destroy
 	@Override
 	public void respondToDestroy() {
-		if(glow !=null) {
-			glow.destroy();
-			glow = null;
+		if(getGlow() !=null) {
+			getGlow().destroy();
+			setGlow(null);
 		}
 	}
 	
@@ -216,9 +218,30 @@ public abstract class item extends drawnObject {
 	@Override
 	public void update() {
 		
+		
 		// Only allow pick-up for drawn items.
 		if(this.isDrawObject() && this.collides(this.getIntX(), this.getIntY(), player.getPlayer())) {
 			pickUp();
+		}
+		
+		dealWithGlow();
+	}
+	
+	// Deal with glow.
+	public void dealWithGlow() {
+		
+		// Destroy glow if it's picked up
+		if(isDrawObject() && isExists()) {
+			if(glow==null) createGlow();
+		}
+		else {
+			if(glow!=null) {glow.destroy(); glow=null;}
+		}
+		
+		// Keep glow attached to item.
+		if(glow!=null) {
+			glow.setDoubleX(getIntX() + getImage().getWidth()/2 - itemGlow.DEFAULT_WIDTH/2);
+			glow.setDoubleY(getIntY() + getImage().getHeight()/2 - itemGlow.DEFAULT_HEIGHT/2);
 		}
 	}
 	
@@ -254,5 +277,13 @@ public abstract class item extends drawnObject {
 	}
 
 	public void setUpItem() {
+	}
+
+	public itemGlow getGlow() {
+		return glow;
+	}
+
+	public void setGlow(itemGlow glow) {
+		this.glow = glow;
 	}
 }

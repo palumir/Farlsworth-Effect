@@ -58,8 +58,6 @@ public class bottleExpander extends item {
 		
 		// It is, of course, equippable.
 		usedOnItems = true;
-		
-		createGlow();
 	}
 	
 	// React to pickup
