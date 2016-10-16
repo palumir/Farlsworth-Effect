@@ -163,7 +163,7 @@ public class farmTomb extends zone {
 	
 	// Load items
 	public void loadItems() {
-		pushBottle b = new pushBottle(2867, 1398+32);
+		pushBottle b = new pushBottle(2740, 1347);
 		bottleExpander exp = new bottleExpander(11498,2333);
 		exp.quality = "Alright";
 	}
