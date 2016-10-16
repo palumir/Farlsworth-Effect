@@ -20,6 +20,7 @@ import units.unitCommand;
 import units.unitCommands.commandList;
 import units.unitCommands.positionedCommand;
 import units.unitCommands.commands.waitCommand;
+import units.unitTypes.sheepFarm.blackWolf;
 
 public class levelSave implements Serializable {
 	
@@ -84,6 +85,7 @@ public class levelSave implements Serializable {
 	
 	// Save fields for units
 	public static ArrayList<String> saveTheseUnitFields = new ArrayList<String>() {{
+		add("facingDirection");
 		add("moveSpeed");
 		add("jumpSpeed");
 	}};
@@ -215,9 +217,18 @@ public class levelSave implements Serializable {
 									}
 								}
 								else {
+									
+									// Special case for blackWolves.
+									if(u instanceof blackWolf) {
+										objectStream.writeObject(object.getSpawnedAtX());
+										objectStream.writeObject(object.getSpawnedAtY());
+									}
+									
 									// Otherwise, spawn where it currently is in editor.
-									objectStream.writeObject(object.getIntX());
-									objectStream.writeObject(object.getIntY());
+									else {
+										objectStream.writeObject(object.getIntX());
+										objectStream.writeObject(object.getIntY());
+									}
 								}
 								
 								// Save fields.

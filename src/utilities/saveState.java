@@ -4,11 +4,13 @@ import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import effects.interfaceEffects.tooltipString;
@@ -18,6 +20,8 @@ import items.bottle;
 import items.inventory;
 import items.item;
 import units.player;
+import units.unit;
+import units.unitTypes.sheepFarm.blackWolf;
 
 public class saveState implements Serializable {
 	
@@ -57,6 +61,9 @@ public class saveState implements Serializable {
 	private inventory playerInventory;
 	private bottle equippedBottle;
 	
+	// Important units
+	private ArrayList<HashMap<Object, Object>> importantUnits = new ArrayList<HashMap<Object, Object>>();
+	
 	// Last well coordinates
 	public Point lastWell;
 	
@@ -79,6 +86,93 @@ public class saveState implements Serializable {
 	// Constructor
 	public saveState() {
 		// Does nothing.
+	}
+	
+	// Save important units
+	public static ArrayList<HashMap<Object, Object>> loadImportantUnits(ObjectInputStream objectStream) throws IOException, ClassNotFoundException {
+		
+		ArrayList<HashMap<Object, Object>> importantUnits = new ArrayList<HashMap<Object, Object>>();
+		
+		// Read how many important units we have saved.
+		int howMany = (int)objectStream.readObject();
+		
+		for(int i = 0; i < howMany; i++) {
+			
+			// Write the name of the thing.
+			String unitName = (String)objectStream.readObject();
+			
+			// Write where it is
+			String zoneName = (String)objectStream.readObject();
+			int spawnedAtX = (int)objectStream.readObject();
+			int spawnedAtY = (int)objectStream.readObject();
+			
+			// Add these things to the hashmap.
+			importantUnits.add(new HashMap<Object,Object>());
+			importantUnits.get(i).put("unitName", unitName);
+			importantUnits.get(i).put("zoneName", zoneName);
+			importantUnits.get(i).put("spawnedAtX", spawnedAtX);
+			importantUnits.get(i).put("spawnedAtY", spawnedAtY);
+			
+			if(unitName.contains("blackWolf")) {
+				
+				// Write happiness to file.
+				boolean isHappy = (boolean)objectStream.readObject();
+				importantUnits.get(i).put("happy", isHappy);
+				
+				// Where are we sleeping?
+				int x = (int)objectStream.readObject();
+				int y = (int)objectStream.readObject();
+				importantUnits.get(i).put("x", x);
+				importantUnits.get(i).put("y", y);
+			}
+		}
+		
+		return importantUnits;
+	}
+	
+	// Save important units
+	public static void saveImportantUnits(ObjectOutputStream objectStream) throws IOException {
+		
+		ArrayList<unit> importantUnits = new ArrayList<unit>();
+		
+		if(unit.getAllUnits()!=null) {
+			for(int i = 0; i < unit.getAllUnits().size(); i++) {
+				
+				unit currentUnit = unit.getAllUnits().get(i);
+				
+				// Important cases
+				if(currentUnit.isSaveFields()) {
+					importantUnits.add(currentUnit);
+				}
+			}
+		}
+		
+		// Write how many important units we have saved.
+		objectStream.writeObject(importantUnits.size());
+		
+		for(int i = 0; i < importantUnits.size(); i++) {
+			
+			unit currentUnit = importantUnits.get(i);
+			
+			// Write the name of the thing.
+			objectStream.writeObject(currentUnit.getClass().getName());
+			
+			// Write where it is
+			objectStream.writeObject(currentUnit.getZoneName());
+			objectStream.writeObject(currentUnit.getSpawnedAtX());
+			objectStream.writeObject(currentUnit.getSpawnedAtY());
+			
+			if(currentUnit instanceof blackWolf) {
+				blackWolf b = (blackWolf)currentUnit;
+				
+				// Write happiness to file.
+				objectStream.writeObject(b.isHappy());
+				
+				// Where are we sleeping?
+				objectStream.writeObject(currentUnit.getIntX());
+				objectStream.writeObject(currentUnit.getIntY());
+			}
+		}
 	}
 	
 	// Save the game.
@@ -110,6 +204,9 @@ public class saveState implements Serializable {
 				// Open the streams.
 				FileOutputStream fileStream = new FileOutputStream(DEFAULT_SAVE_FILENAME);   
 				ObjectOutputStream objectStream = new ObjectOutputStream(fileStream);  
+				
+				// Save all units
+				saveImportantUnits(objectStream);
 				
 				// Write the save state to the file.
 				objectStream.writeObject(s.getZoneName());
@@ -240,6 +337,9 @@ public class saveState implements Serializable {
 			
 			// Create a new saveState
 			saveState s = new saveState();
+			
+			// Okay buddy, let's set some fucking guidelines here!
+			unit.setSavedUnits(loadImportantUnits(objectStream));
 			
 			// Write the objects to our fields.
 			s.setZoneName((String) objectStream.readObject());

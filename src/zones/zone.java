@@ -91,12 +91,16 @@ public abstract class zone {
 		
 		// If we are leaving a zone into a new one
 		else {
+			
 			// Save the player's progress before switching zones..
 			saveState.createSaveState();
 			
 			// Re-create the player in the new zone.
 			drawnObject.dontReloadTheseObjects = new ArrayList<drawnObject>();
-			sound.stopAllSounds();
+			
+			// Deal with sounds
+			sound.stopSounds();
+			sound.stopAmbience();
 			if(music.currMusic != null && !b.zoneMusics.contains(music.currMusic.getFileName())) music.endAll();
 			groundTile.groundTiles = new CopyOnWriteArrayList<chunk>();
 			loadedOnce = false;

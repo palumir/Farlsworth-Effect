@@ -73,7 +73,7 @@ public class farmerHouse extends zone {
 	
 	// Constructor
 	public farmerHouse() {
-		super("farmerHouse", "farmLand");
+		super("farmerHouse", "sheepFarm");
 		zoneMusics.add(sheepFarm.forestMusic);
 		zoneMusics.add(sheepFarm.farmMusic);
 	}

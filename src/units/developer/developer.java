@@ -87,7 +87,7 @@ public class developer extends player {
 		setKillable(false);
 		
 		// Give a million hp
-		moveSpeed = 50f;
+		moveSpeed = 10f;
 		
 		// Create dev interface
 		createDevInterface();
@@ -852,6 +852,8 @@ public class developer extends player {
 						selectedThings.get(i).setDoubleX(inGamePointCurrent.getX() - selectedThings.get(i).getRelativeX());
 						selectedThings.get(i).setDoubleY(inGamePointCurrent.getY() - selectedThings.get(i).getRelativeY());
 						if(selectedThings.get(i) instanceof unit) {
+							selectedThings.get(i).setSpawnedAtX((int) (inGamePointCurrent.getX() - selectedThings.get(i).getRelativeX()));
+							selectedThings.get(i).setSpawnedAtY((int) (inGamePointCurrent.getY() - selectedThings.get(i).getRelativeY()));
 							((unit)(selectedThings.get(i))).setRiseRun();
 						}
 					}

@@ -3,12 +3,14 @@ package doodads.cave;
 import java.awt.image.BufferedImage;
 
 import drawing.animation.animation;
+import effects.buffs.onFireEffect;
 import interactions.interactBox;
 import interactions.textSeries;
 import modes.mode;
 import sounds.sound;
 import terrain.chunk;
 import terrain.generalChunkType;
+import units.player;
 
 public class firePit extends chunk {
 	
@@ -69,15 +71,37 @@ public class firePit extends chunk {
 		startOfConversation = new textSeries(null, "A fire pit.");
 		
 		// If player doesn't have torch.
-		s = startOfConversation.addChild(null, "You have nothing to light.");
-		s = s.addChild(null, "You'd probably just set everything on fire anyway.");
-		s.setEnd();
+		textSeries set = startOfConversation.addChild("Set yourself on fire", "Are you sure? Being on fire tends to kill people.");
+		textSeries dont  = startOfConversation.addChild("Leave it alone", "It's probably poisonous anyway.");
+		dont.setEnd();
+		
+		textSeries youSure = set.addChild("Do it anyway", "You set yourself on fire.");
+		youSure.setEnd();
+		dont = set.addChild("Don't do it", "It's probably poisonous anyway.");
+		dont.setEnd();
 			
 		return new interactBox(startOfConversation, this);
 	}
 	
+	// Set player on fire
+	public void setPlayerOnFire() {
+		onFireEffect b = new onFireEffect(player.getPlayer());
+	}
+	
+	// Already done.
+	boolean alreadyDone = false;
+	
 	// Interact stuff.
 	public void doInteractStuff() {
+		
+		// DO IT.
+		if(interactSequence !=null 
+				&& interactSequence.getTextSeries().getButtonText() != null 
+				&& interactSequence.getTextSeries().getButtonText().contains("Do it anyway")
+				&& !alreadyDone) {
+			alreadyDone = true;
+			setPlayerOnFire();
+		}
 	}
 	
 	// Update
@@ -97,6 +121,7 @@ public class firePit extends chunk {
 	
 	// Interact with object. Should be over-ridden.
 	public void interactWith() { 
+		alreadyDone = false;
 		interactSequence = makeNormalInteractSequence();
 		interactSequence.toggleDisplay();
 	}

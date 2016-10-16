@@ -149,6 +149,14 @@ public class propertiesButton {
 		// Add unit stuff.
 		else if(units != null) {
 			
+			// Facing direction
+			button editFacingDirectionButton = new button("Facing Direction","editProperties.facingDirection",
+					developer.editorMode.getIntX()+200,
+					developer.editorMode.getIntY()+3*developer.DEFAULT_BUTTON_HEIGHT*4/3 + editPropertiesButton.getChildren().size()*developer.DEFAULT_BUTTON_HEIGHT*4/3,
+					developer.DEFAULT_BUTTON_WIDTH,
+					developer.DEFAULT_BUTTON_HEIGHT);
+			editPropertiesButton.addChild(editFacingDirectionButton);
+			
 			// Movespeed.
 			button editMoveSpeedButton = new button("Movespeed","editProperties.moveSpeed",
 					developer.editorMode.getIntX()+200,
@@ -168,6 +176,16 @@ public class propertiesButton {
 	}
 	
 	public static void saveUnitProperties(String b, String value) {
+		
+		// facingDirection
+		if(b.contains("editProperties.facingDirection")) {
+			String newDirection = value;
+			for(int i = 0; i < saveThings.size(); i++) {
+				if(saveThings.get(i) instanceof unit) { 
+					((unit) saveThings.get(i)).setFacingDirection(newDirection);
+				}
+			}
+		}
 		
 		// moveSpeed
 		if(b.contains("editProperties.moveSpeed")) {
@@ -297,6 +315,18 @@ public class propertiesButton {
 	}
 	
 	public static void makeUnitPopUpBoxes(button b) {
+		
+		// facingDirection
+		if(b.getButtonID().equals("editProperties.facingDirection")) {
+			ArrayList<drawnObject> objects = developer.getSelectedUnits();
+			saveThings = new ArrayList<drawnObject>(developer.selectedThings);
+			if(objects != null && objects.size() > 0 && developer.containsUnitCommand()) {
+				saveThings.removeAll(objects);
+			}
+			
+			saveThing = drawnObject.getTopLeftFrom(saveThings);
+			propertyEditBox p = new propertyEditBox(b.getButtonID(),b.getButtonID(), ((unit)saveThing).getFacingDirection());
+		}
 		
 		// moveSpeed
 		if(b.getButtonID().equals("editProperties.moveSpeed")) {

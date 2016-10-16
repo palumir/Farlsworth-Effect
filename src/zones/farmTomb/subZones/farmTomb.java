@@ -76,7 +76,7 @@ public class farmTomb extends zone {
 	
 	// Constructor
 	public farmTomb() {
-		super("farmTomb", "farmLand");
+		super("farmTomb", "farmTomb");
 		zoneMusics.add(zoneMusic);
 		zoneMusics.add(zoneMusicFrantic);
 	}

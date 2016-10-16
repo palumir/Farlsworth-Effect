@@ -45,6 +45,7 @@ public class storm extends atmosphericEffect {
 		}
 		if(!alreadyPlaying) {
 			sound s = new sound(rainSound);
+			s.setAmbience(true);
 			s.setLoop(true);
 			s.start();
 		}

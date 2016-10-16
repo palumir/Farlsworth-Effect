@@ -9,6 +9,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import doodads.sheepFarm.bone;
 import drawing.drawnObject;
 import drawing.gameCanvas;
 import utilities.intTuple;
@@ -363,6 +364,11 @@ public class chunk extends drawnObject {
 	
 	// Initiate chunks
 	public static void initiate() {
+		
+		// Initiate subchunks.
+		bone.initiate();
+		
+		// Initiate chunks
 		allChunks = new ArrayList<chunk>();
 		groundTile.initiate();
 	}

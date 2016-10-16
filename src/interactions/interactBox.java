@@ -15,7 +15,6 @@ import effects.interfaceEffects.textBlurb;
 import sounds.sound;
 import units.player;
 import units.unit;
-import utilities.stringUtils;
 
 public class interactBox extends interfaceObject  {
 	
@@ -51,6 +50,9 @@ public class interactBox extends interfaceObject  {
 	private String displayedText = "";
 	private int displayIterator = 0;
 	private float DEFAULT_DISPLAY_FOR = 2; // Frames
+	
+	// Not talking
+	private boolean notTalking = false;
 	
 	// Go next
 	private boolean goNext = false;
@@ -260,7 +262,7 @@ public class interactBox extends interfaceObject  {
 		setDisplayOn(!isDisplayOn());
 		if(isDisplayOn()) {
 			
-			if(getTextSeries().getWhoIsTalking() instanceof unit) {
+			if(getTextSeries().getWhoIsTalking() instanceof unit && !isNotTalking()) {
 				
 				// Create a blurb effect on who is talking
 				setBlurb(new textBlurb(getTextSeries().getWhoIsTalking().getIntX()-textBlurb.getDefaultWidth(),getTextSeries().getWhoIsTalking().getIntY()-getTextSeries().getWhoIsTalking().getHitBoxAdjustmentY()-textBlurb.getDefaultWidth()));
@@ -338,7 +340,7 @@ public class interactBox extends interfaceObject  {
 			// Otherwise, there will be buttons to select from. Go to button mode.
 			else {
 				
-				if(getTextSeries().getWhoIsTalking() instanceof unit) {
+				if(getTextSeries().getWhoIsTalking() instanceof unit && !isNotTalking()) {
 					
 					// Create a blurb effect on who is talking
 					if(getBlurb()!=null) getBlurb().end();
@@ -369,7 +371,7 @@ public class interactBox extends interfaceObject  {
 			// Select the button.
 			theText = theText.getChildren().get(i);
 			
-			if(getTextSeries().getWhoIsTalking() instanceof unit) {
+			if(getTextSeries().getWhoIsTalking() instanceof unit && !isNotTalking()) {
 				
 				// Send textblurb back to who is speaking.
 				if(getBlurb()!=null) getBlurb().end();
@@ -526,6 +528,14 @@ public class interactBox extends interfaceObject  {
 
 	public void setGoNext(boolean goNext) {
 		this.goNext = goNext;
+	}
+
+	public boolean isNotTalking() {
+		return notTalking;
+	}
+
+	public void setNotTalking(boolean notTalking) {
+		this.notTalking = notTalking;
 	}
 	
 }

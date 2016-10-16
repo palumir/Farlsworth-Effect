@@ -23,7 +23,7 @@ public class bush extends chunk {
 	private static String DEFAULT_CHUNK_SPRITESHEET = "images/doodads/farmLand/sheepFarm/"+ DEFAULT_CHUNK_NAME + ".png";
 	
 	// Sound
-	private String eating = "sounds/effects/doodads/eating.wav";
+	public static String eating = "sounds/effects/doodads/eating.wav";
 	public static String clearBush = "sounds/effects/doodads/bush.wav";
 	
 	// Bushtype

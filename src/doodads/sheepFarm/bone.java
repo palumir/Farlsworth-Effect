@@ -1,6 +1,8 @@
 package doodads.sheepFarm;
 
 
+import java.util.ArrayList;
+
 import interactions.interactBox;
 import interactions.textSeries;
 import modes.mode;
@@ -24,14 +26,24 @@ public class bone extends chunk {
 	public static int DEFAULT_CHUNK_WIDTH = 32;
 	public static int DEFAULT_CHUNK_HEIGHT = 32;
 	
-	// RandomNum
-	private int randomNum;
-	
 	// Interactsequence.
 	private interactBox interactSequence;
 	
 	// The actual type.
 	private static generalChunkType typeReference = new generalChunkType(DEFAULT_CHUNK_NAME, DEFAULT_CHUNK_SPRITESHEET, DEFAULT_CHUNK_WIDTH, DEFAULT_CHUNK_HEIGHT); 
+	
+	// Bone list
+	public static ArrayList<bone> bones;
+	
+	// Num bones
+	public static int numBones = 0;
+	public int boneNumber;
+	
+	// Initiate bones
+	public static void initiate() {
+		numBones = 0;
+		bones = new ArrayList<bone>();
+	}
 	
 	///////////////
 	/// METHODS ///
@@ -50,48 +62,31 @@ public class bone extends chunk {
 			setWidth(DEFAULT_CHUNK_WIDTH);
 		}
 		// Do a random interaction.
-		randomNum = utility.RNG.nextInt(6);
 		setInteractable(true);
 		setPassable(true);
+		bones.add(this);
+		boneNumber = numBones;
+		numBones++;
 	}
 	
 	// Create interact sequence
 		public interactBox makeNormalInteractSequence() {
-			
-			// Placeholder for each individual textSeries.
-			textSeries s;
 						
 			// Start of conversation.
 			textSeries startOfConversation = null;
 			
-				
-			if(randomNum == 0) {
-				startOfConversation = new textSeries(null, "Bone appetit.");
+			if(boneNumber == 0) {
+				startOfConversation = new textSeries(null, "10/10, would bone.");
 				startOfConversation.setEnd();
 			}
 			
-			if(randomNum == 1) {
+			else if(boneNumber == 1) {
 				startOfConversation = new textSeries(null, "This guy met a ruff end.");
 				startOfConversation.setEnd();
 			}
 			
-			if(randomNum == 2) {
-				startOfConversation = new textSeries(null, "This dude must have barked up the wrong tree.");
-				startOfConversation.setEnd();
-			}
-			
-			if(randomNum == 3) {
-				startOfConversation = new textSeries(null, "A bone. It's bone dry.");
-				startOfConversation.setEnd();
-			}
-			
-			if(randomNum == 4) {
-				startOfConversation = new textSeries(null, "Some bones. That's about it. It's nothing humerus.");
-				startOfConversation.setEnd();
-			}
-			
-			if(randomNum == 5) {
-				startOfConversation = new textSeries(null, "What are you ... Sherlock Bones?");
+			else {
+				startOfConversation = new textSeries(null, "Bone appetit.");
 				startOfConversation.setEnd();
 			}
 			

@@ -117,7 +117,7 @@ public class sheepFarm extends zone {
 	
 	// Constructor
 	public sheepFarm() {
-		super("sheepFarm", "farmLand");
+		super("sheepFarm", "sheepFarm");
 		zoneMusics.add(forestMusic);
 		zoneMusics.add(farmMusic);
 	}
@@ -203,7 +203,7 @@ public class sheepFarm extends zone {
 		createItems();
 		
 		// Create graveyard
-		//createGraveYard();
+		createGraveYard();
 		
 		// Play fire sound
 		if(isOnFire != null && isOnFire.isCompleted()) {
@@ -284,7 +284,7 @@ public class sheepFarm extends zone {
 	// Spawn items
 	public void createItems() {
 		// Spawn bottle.
-		bottle saveBottle = new saveBottle(-665,-3102);
+		bottle saveBottle = new saveBottle(-5,-1293);
 		
 		// Spawn bottle expander
 		bottleExpander b = new bottleExpander(-1217, -6530);

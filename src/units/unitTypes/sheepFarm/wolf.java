@@ -153,6 +153,7 @@ public abstract class wolf extends unit {
 		
 		// Add animations.
 		public void addAnimations() {
+			
 			// Deal with animations
 			animationPack unitTypeAnimations = new animationPack();
 			
@@ -229,10 +230,28 @@ public abstract class wolf extends unit {
 			unitTypeAnimations.addAnimation(runningDown);
 			
 			// Sleeping animation
-			animation sleepingLeft = new animation("sleepingLeft", leftRightSpriteSheet.getAnimation(4), 3, 3, 0.5f){{
+			animation sleepingStartLeft = new animation("sleepingStartLeft", leftRightSpriteSheet.getAnimation(4), 0, 2, 0.3f){{
+				setRepeats(false);
+			}};
+			unitTypeAnimations.addAnimation(sleepingStartLeft);
+			
+			// Sleeping animation
+			animation sleepingLoopLeft = new animation("sleepingLoopLeft", leftRightSpriteSheet.getAnimation(4), 3,3, 0.5f){{
 				setRepeats(true);
 			}};
-			unitTypeAnimations.addAnimation(sleepingLeft);
+			unitTypeAnimations.addAnimation(sleepingLoopLeft);
+			
+			// Sleeping animation
+			animation sleepingStartRight = new animation("sleepingStartRight", leftRightSpriteSheet.getAnimation(0), 0, 2, 0.3f){{
+				setRepeats(false);
+			}};
+			unitTypeAnimations.addAnimation(sleepingStartRight);
+			
+			// Sleeping animation
+			animation sleepingLoopRight = new animation("sleepingLoopRight", leftRightSpriteSheet.getAnimation(0), 3,3, 0.5f){{
+				setRepeats(true);
+			}};
+			unitTypeAnimations.addAnimation(sleepingLoopRight);
 			
 			// Set animations.
 			setAnimations(unitTypeAnimations);
@@ -522,10 +541,21 @@ public abstract class wolf extends unit {
 		@Override
 		public int getKillWidth() {
 			if(getFacingDirection().equals("Left") || getFacingDirection().equals("Right")) {
-				return getWidth() + 26;
+				return getWidth() + 36;
 			}
 			else {
-				return getWidth();
+				return getWidth()+4;
+			}
+		}
+		
+		// Wolf kill width and height changes based on how they're facing
+		@Override
+		public int getKillAdjustY() {
+			if(getFacingDirection().equals("Left") || getFacingDirection().equals("Right")) {
+				return 5;
+			}
+			else {
+				return 0;
 			}
 		}
 		
@@ -536,7 +566,7 @@ public abstract class wolf extends unit {
 				return getHeight() + 26;
 			}
 			else {
-				return getHeight();
+				return getHeight() - 2;
 			}
 		}
 		

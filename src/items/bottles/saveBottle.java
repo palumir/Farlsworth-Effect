@@ -122,7 +122,7 @@ public class saveBottle extends bottle {
 			}
 			else {
 				currPlayer.getPlayerInventory().equipItem(this, KeyEvent.VK_ENTER);
-				enterToUse = new tooltipString("Use a charge of the Save Bottle by pressing 'enter'.");
+				enterToUse = new tooltipString("Pressing 'Enter' creates a save point with the Save Bottle.");
 				enterToUse.setHasATimer(false);
 			}
 		}

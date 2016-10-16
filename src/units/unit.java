@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import UI.playerActionBar;
 import doodads.general.lightSource;
@@ -31,6 +32,7 @@ import units.unitCommands.positionedMovementCommand;
 import units.unitCommands.commands.moveCommand;
 import units.unitCommands.commands.slashCommand;
 import units.unitCommands.commands.waitCommand;
+import units.unitTypes.sheepFarm.blackWolf;
 import utilities.intTuple;
 import utilities.mathUtils;
 import utilities.time;
@@ -61,6 +63,9 @@ public class unit extends drawnObject  {
 	
 	// Colors for combat.
 	protected static Color DEFAULT_HEAL_COLOR = Color.green;
+	
+	// Important units
+	private static ArrayList<HashMap<Object,Object>> savedUnits;
 
 	////////////////
 	//// FIELDS ////
@@ -68,6 +73,9 @@ public class unit extends drawnObject  {
 	
 	// State of gravity
 	private boolean gravity = DEFAULT_GRAVITY_STATE;
+	
+	// Save?
+	private boolean saveFields = false;
 	
 	// The actual unit type.
 	private unitType typeOfUnit;
@@ -170,6 +178,9 @@ public class unit extends drawnObject  {
 	// Next point.
 	private intTuple currPoint;
 	
+	// Zone
+	private String zoneName = "None";
+	
 	// Knockbacks
 	private long knockBackStart = 0;
 	private boolean gettingKnockedBack = false;
@@ -203,6 +214,8 @@ public class unit extends drawnObject  {
 		super(u.getUnitTypeSpriteSheet(), u.getName(), newX, newY, u.getWidth(), u.getHeight());	
 		if(u.getAnimations()!=null) setAnimations(new animationPack(u.getAnimations()));
 		
+		if(zone.getCurrentZone()!=null) setZoneName(zone.getCurrentZone().getName());
+		
 		// Set gravity state based on mode.
 		if(mode.getCurrentMode().equals("platformer")) gravity = true;
 		else gravity = false;
@@ -221,6 +234,9 @@ public class unit extends drawnObject  {
 		move(0,0);
 		
 		spawnTime = time.getTime();
+		
+		// Look through important units to see if we exist in it.
+		setImportantStuffFromSave();
 	}
 	
 	// Copy Constructor
@@ -233,6 +249,8 @@ public class unit extends drawnObject  {
 		setJumpSpeed(u.getJumpSpeed());
 		setTypeOfUnit(u.getTypeOfUnit());
 		
+		if(zone.getCurrentZone()!=null) setZoneName(zone.getCurrentZone().getName());
+		
 		// Copy the repeatCommands
 		repeatCommands(new commandList(u.getRepeatCommands()));
 		
@@ -243,6 +261,14 @@ public class unit extends drawnObject  {
 		move(0,0);
 		
 		spawnTime = time.getTime();
+		
+		// Look through important units to see if we exist in it.
+		setImportantStuffFromSave();
+	}
+	
+	// Override this for units that need to save.
+	public void setImportantStuffFromSave() {
+		
 	}
 	
 	// Make copy
@@ -305,9 +331,9 @@ public class unit extends drawnObject  {
 			player currPlayer = player.getPlayer();
 			if(currPlayer.playerLoaded && currPlayer.isWithin(
 					this.getIntX() + getWidth()/2 - getKillWidth()/2 + leniency, 
-					this.getIntY() + getHeight()/2 - getKillHeight()/2  + leniency, 
+					this.getIntY() + getHeight()/2 - getKillHeight()/2  + leniency + getKillAdjustY(), 
 					this.getIntX() + getWidth()/2 + getKillWidth()/2 - leniency, 
-					this.getIntY() + getHeight()/2 + getKillHeight()/2 - leniency)) {
+					this.getIntY() + getHeight()/2 + getKillHeight()/2 - leniency + getKillAdjustY())) {
 				currPlayer.hurt(1, 1);
 			}
 		}
@@ -816,6 +842,7 @@ public class unit extends drawnObject  {
 		// Set following
 		followingUnit = true;
 		followedUnit = u;
+		movingToAPoint = true;
 	}
 	
 	// Unfollow
@@ -823,6 +850,7 @@ public class unit extends drawnObject  {
 		stopMove("all");
 		followingUnit = false;
 		followedUnit = null;
+		movingToAPoint = false;
 	}
 	
 	// Move to
@@ -857,46 +885,6 @@ public class unit extends drawnObject  {
 	public void moveTowards() {
 		if(isMovingToAPoint()) {
 			if(Math.abs(moveToX - getDoubleX()) < getMoveSpeed() && Math.abs(moveToY - getDoubleY()) < getMoveSpeed()) {
-				
-				// If the next command is movement, move in that direction by
-				// whatever we overshoot our point by.
-				
-				/*if(nextCommandIsMovement()) {
-					
-					// Get the differences
-					double diffX = moveToX - getDoubleX();
-					double diffY = moveToY - getDoubleY();
-					double distanceBetween = (float) Math.sqrt(diffY * diffY
-							+ diffX * diffX);
-					
-					// Check if we overshot
-					boolean overShot = (diffX > 0 && run > 0) || (diffX < 0 && run < 0) || (diffY > 0 && rise > 0) || (diffY < 0 && rise < 0);
-					
-					// If we overshot, move in the direction we are going to go
-					// next by how much we overshot.
-					if(overShot) {
-						
-						System.out.println("Overshot");
-						
-						setDoubleX(moveToX);
-						setDoubleY(moveToY);
-						
-						moveCommand command = (moveCommand)getNextCommand();
-						
-						double yDistance = (command.getY() - getIntY());
-						double xDistance = (command.getX() - getIntX());
-						double distanceXY = (float) Math.sqrt(yDistance * yDistance
-									+ xDistance * xDistance);
-						
-						// Calculate rise values.
-						double floatRise = ((yDistance/distanceXY)*(float)distanceBetween);
-						
-						// Calculate run values.
-						double floatRun = ((xDistance/distanceXY)*(float)distanceBetween);
-						
-						move(floatRun,floatRise);
-					}
-				}*/
 				
 				setDoubleX(moveToX);
 				setDoubleY(moveToY);
@@ -1513,6 +1501,10 @@ public class unit extends drawnObject  {
 		return getHeight();
 	}
 	
+	public int getKillAdjustY() {
+		return 0;
+	}
+	
 	// Combination of all movement functions boolean
 	public boolean isMoving() {
 		return movingVertically() || movingHorizontally() || isMovingToAPoint() || followingUnit;
@@ -1897,6 +1889,30 @@ public class unit extends drawnObject  {
 
 	public void setTouchingGround(boolean touchingGround) {
 		this.touchingGround = touchingGround;
+	}
+
+	public boolean isSaveFields() {
+		return saveFields;
+	}
+
+	public void setSaveFields(boolean saveFields) {
+		this.saveFields = saveFields;
+	}
+
+	public String getZoneName() {
+		return zoneName;
+	}
+
+	public void setZoneName(String zoneName) {
+		this.zoneName = zoneName;
+	}
+
+	public static ArrayList<HashMap<Object,Object>> getSavedUnits() {
+		return savedUnits;
+	}
+
+	public static void setSavedUnits(ArrayList<HashMap<Object,Object>> savedUnits) {
+		unit.savedUnits = savedUnits;
 	}
 	
 }

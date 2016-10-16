@@ -149,6 +149,7 @@ public class player extends unit {
 	// Constructor
 	public player(int newX, int newY, zone z) {
 		super(playerType, newX, newY);
+		
 		// Set movespeed.
 		setMoveSpeed(DEFAULT_PLAYER_MOVESPEED);
 		oldMoveSpeed=DEFAULT_PLAYER_MOVESPEED;
@@ -632,11 +633,10 @@ public class player extends unit {
 			ArrayList<drawnObject> interactObjects = new ArrayList<drawnObject>();
 			if(possibleInteractObjects!=null)
 			for(int i = 0; i < possibleInteractObjects.size(); i++) 
-				if(possibleInteractObjects.get(i).canInteract()) 
+				if(possibleInteractObjects.get(i).canInteract() && possibleInteractObjects.get(i).isDrawObject()) 
 					interactObjects.add(possibleInteractObjects.get(i));
 			
 			// Put an interact blurb on the closest object.
-			
 			drawnObject d = getClosestToFrom(interactObjects);
 			if(d != null && !d.isBeingInteracted() && d.isShowInteractable()) {
 				interactBlurb iBlurb = d.getAttachedInteractBlurb();

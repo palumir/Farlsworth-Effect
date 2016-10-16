@@ -2,6 +2,7 @@ package sounds;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
@@ -17,7 +18,7 @@ import utilities.time;
 
 public class sound extends Thread { 
 	
-	private static ArrayList<sound> allSounds;
+	private static CopyOnWriteArrayList<sound> allSounds;
 
     private String fileName;
 
@@ -42,6 +43,9 @@ public class sound extends Thread {
     // Loop?
     private boolean loop = false;
     
+    // Ambience?
+    private boolean ambience = false;
+    
     // Default sound radius
     public static int DEFAULT_SOUND_RADIUS = 1700;
 
@@ -63,6 +67,8 @@ public class sound extends Thread {
     	this.y = s.y;
     	this.radius = s.radius;
     	this.volume = s.volume;
+    	this.ambience = s.ambience;
+    	allSounds.add(this);
     }
 
     public sound(String wavfile) { 
@@ -211,7 +217,7 @@ public class sound extends Thread {
             }
             auline.drain();
             auline.close();
-            allSounds.remove(this);
+            if(allSounds.contains(this)) allSounds.remove(this);
         } 
 
     }
@@ -226,18 +232,43 @@ public class sound extends Thread {
     	y = newY;
     }
     
-    public static void stopAllSounds() {
-		while(allSounds.size()!=0) {
-			if(allSounds.get(0) != null) {
-				allSounds.get(0).stopRequested = true;
-				allSounds.remove(0);
+    public static void stopSounds() {
+		if(allSounds == null) allSounds = new CopyOnWriteArrayList<sound>();
+		for(int i = 0; i < allSounds.size(); i++) {
+			if(allSounds.get(i) != null && !allSounds.get(i).isAmbience() && !(allSounds.get(i) instanceof music)) {
+				allSounds.get(i).stopRequested = true;
+				allSounds.remove(i);
+				i--;
 			}
 		}
-		if(allSounds == null) allSounds = new ArrayList<sound>();
+    }
+    
+    public static void stopAmbience() {
+		if(allSounds == null) allSounds = new CopyOnWriteArrayList<sound>();
+		for(int i = 0; i < allSounds.size(); i++) {
+			if(allSounds.get(i) != null && allSounds.get(i).isAmbience() && !(allSounds.get(i) instanceof music)) {
+				allSounds.get(i).stopRequested = true;
+				allSounds.remove(i);
+				i--;
+			}
+		}
+    }
+    
+    public static void stopMusic() {
+		if(allSounds == null) allSounds = new CopyOnWriteArrayList<sound>();
+		for(int i = 0; i < allSounds.size(); i++) {
+			if(allSounds.get(i) != null && allSounds.get(i) instanceof music) {
+				allSounds.get(i).stopRequested = true;
+				allSounds.remove(i);
+				i--;
+			}
+		}
     }
     
     public static void initiate() {
-    	allSounds = new ArrayList<sound>();
+		
+		// Stop all sounds on player creation
+		sound.stopSounds();
     }
 
 	public boolean isLoop() {
@@ -254,5 +285,13 @@ public class sound extends Thread {
 
 	public void setFileName(String filename) {
 		this.fileName = filename;
+	}
+
+	public boolean isAmbience() {
+		return ambience;
+	}
+
+	public void setAmbience(boolean ambience) {
+		this.ambience = ambience;
 	}
 }

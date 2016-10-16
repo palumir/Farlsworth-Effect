@@ -70,10 +70,10 @@ public class time extends utility {
 	public static void setTimeSpeed(float f) {
 		if(f < 1) {
 			soundsToPlay = sound.getAllPlaying();
-			sound.stopAllSounds();
+			sound.stopSounds();
 		}
 		if(f == 1) {
-			sound.stopAllSounds();
+			sound.stopSounds();
 			if(soundsToPlay!=null) {
 				for(int i = 0; i < soundsToPlay.size(); i++) {
 					sound currSound = soundsToPlay.get(i);
