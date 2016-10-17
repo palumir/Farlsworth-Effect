@@ -183,6 +183,7 @@ public class propertiesButton {
 			for(int i = 0; i < saveThings.size(); i++) {
 				if(saveThings.get(i) instanceof unit) { 
 					((unit) saveThings.get(i)).setFacingDirection(newDirection);
+					((unit) saveThings.get(i)).setFirstFacingDirection(newDirection);
 				}
 			}
 		}

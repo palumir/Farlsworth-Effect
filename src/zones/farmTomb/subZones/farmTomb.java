@@ -159,12 +159,13 @@ public class farmTomb extends zone {
 	// PreloadStuff
 	public void preLoadStuff() {
 		int holder = wolfless.leniency;
+		holder = shadowDude.getDefaultHeight();
 	}
 	
 	// Load items
 	public void loadItems() {
-		pushBottle b = new pushBottle(2740, 1347);
-		bottleExpander exp = new bottleExpander(11498,2333);
+		pushBottle b = new pushBottle(-11, 815);
+		bottleExpander exp = new bottleExpander(6526,2325);
 		exp.quality = "Alright";
 	}
 	
@@ -193,16 +194,13 @@ public class farmTomb extends zone {
 		/////////////////////////
 		
 		// Entrance
-		stairsUp tombZoneEnterance = new stairsUp(30,-8,sheepFarm.getZone(),-3442, -5682,"Down");
+		stairsUp tombZoneEnterance = new stairsUp(30,-8,sheepFarm.getZone(),-1529, -3108,"Down");
 		tombZoneEnterance.setZ(BACKGROUND_Z);
 		
 		// Secret chest stairs up to well.
-		stairsUp secretStairs = new stairsUp(11615,2314,farmTomb.getZone(),11629,1670-2,"Right");
+		stairsUp secretStairs = new stairsUp(6677,2315,farmTomb.getZone(),2656,1797,"Right");
 		secretStairs.setZ(BACKGROUND_Z);
 		
-		// Secret stairs to start
-		stairsUp secretStairs2 = new stairsUp(12052,2314,farmTomb.getZone(),70,-6,"Right");
-		secretStairs2.setZ(BACKGROUND_Z);
 	}
 	
 	
@@ -234,7 +232,7 @@ public class farmTomb extends zone {
 	// Deal with the first well we encounters.
 	public void dealWithRegionStuff() {
 		player currPlayer = player.getPlayer();
-		if(currPlayer != null && currPlayer.isWithin(13232,1000,13232+1500,1800) && shadowBossFightStarted!=null && !shadowBossFightStarted.isCompleted()) {
+		if(currPlayer != null && currPlayer.isWithin(3026,1359,3522,1845) && shadowBossFightStarted!=null && !shadowBossFightStarted.isCompleted()) {
 			shadowBossFightStarted.setCompleted(true);
 			shadowBossFightFirstTime = true;
 		}

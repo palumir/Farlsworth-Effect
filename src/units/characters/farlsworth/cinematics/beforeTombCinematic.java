@@ -97,7 +97,7 @@ public class beforeTombCinematic extends cinematic {
 			
 			if(isSequence(numIfs++) && goNextTextSeries()) {
 				addTextSeries(null, "You're a friggin cheater.",farlsworth);
-				farlsworth.moveTo(-3463, -5550);
+				farlsworth.moveTo(-1512, -3011);
 				advanceSequence();
 			}
 			
@@ -107,7 +107,7 @@ public class beforeTombCinematic extends cinematic {
 			}
 			
 			if(isSequence(numIfs++) && !farlsworth.isMoving()) {
-				farlsworth.moveTo(farlsworth.getIntX()-25, -5550);
+				farlsworth.moveTo(farlsworth.getIntX()-25, -3011);
 				advanceSequence();
 			}
 			
@@ -228,8 +228,8 @@ public class beforeTombCinematic extends cinematic {
 		
 		farlsworth.setMoveSpeed(4.5f);
 		commandList commands = new commandList();
-		commands.add(new moveCommand(-3463, -5550));
-		commands.add(new moveCommand(-3440,-5750));
+		commands.add(new moveCommand(-1512, -3011));
+		commands.add(new moveCommand(-1535,-3200));
 		farlsworth.doCommandsOnce(commands);
 		sound s = new sound(farlsworth.bleet);
 		s.setPosition(farlsworth.getIntX(), farlsworth.getIntY(), sound.DEFAULT_SOUND_RADIUS);

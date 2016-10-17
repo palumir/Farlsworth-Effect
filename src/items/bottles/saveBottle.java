@@ -70,11 +70,6 @@ public class saveBottle extends bottle {
 	public void useCharge() {
 		if(getChargesLeft() > 0) {
 			
-			// Destroy tutorial text.
-			if(enterToUse!=null && !enterToUse.fadingOut) {
-				enterToUse.fadeOut();
-			}
-			
 			sound s = new sound(bottle.bottleDrink);
 			s.start();
 			setChargesLeft(getChargesLeft() - 1);
@@ -88,6 +83,12 @@ public class saveBottle extends bottle {
 			
 			// Save.
 			saveState.createSaveState();
+			
+			// Destroy tutorial text.
+			if(enterToUse!=null && !enterToUse.fadingOut) {
+				enterToUse.fadeOut();
+				new tooltipString("2 charges of Save Bottle remaining. Use them wisely!");
+			}
 		}
 	}
 	
@@ -122,7 +123,7 @@ public class saveBottle extends bottle {
 			}
 			else {
 				currPlayer.getPlayerInventory().equipItem(this, KeyEvent.VK_ENTER);
-				enterToUse = new tooltipString("Pressing 'Enter' creates a save point with the Save Bottle.");
+				enterToUse = new tooltipString("Press 'Enter' to create a save point with the Save Bottle.");
 				enterToUse.setHasATimer(false);
 			}
 		}

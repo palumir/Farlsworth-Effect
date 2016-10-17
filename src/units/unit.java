@@ -33,6 +33,7 @@ import units.unitCommands.commands.moveCommand;
 import units.unitCommands.commands.slashCommand;
 import units.unitCommands.commands.waitCommand;
 import units.unitTypes.sheepFarm.blackWolf;
+import units.unitTypes.tomb.shadowDude;
 import utilities.intTuple;
 import utilities.mathUtils;
 import utilities.time;
@@ -202,6 +203,9 @@ public class unit extends drawnObject  {
 	private boolean canSlash = false;
 	private boolean canSlashSummon = false;
 	
+	// First facing direction
+	private String firstFacingDirection;
+	
 	// Pushing
 	private boolean pushing = false;
 	
@@ -239,33 +243,6 @@ public class unit extends drawnObject  {
 		setImportantStuffFromSave();
 	}
 	
-	// Copy Constructor
-	public unit(unit u) {
-		super(u.getObjectSpriteSheet(), u.getName(), u.getIntX(), u.getIntX(), u.getWidth(), u.getHeight());	
-		if(u.getAnimations()!=null) setAnimations(new animationPack(u.getAnimations()));
-		moveSpeed = u.getMoveSpeed();
-		oldMoveSpeed = moveSpeed;
-		baseMoveSpeed = u.getMoveSpeed();
-		setJumpSpeed(u.getJumpSpeed());
-		setTypeOfUnit(u.getTypeOfUnit());
-		
-		if(zone.getCurrentZone()!=null) setZoneName(zone.getCurrentZone().getName());
-		
-		// Copy the repeatCommands
-		repeatCommands(new commandList(u.getRepeatCommands()));
-		
-		// Add to list
-		getAllUnits().add(this);
-		
-		// Add animation
-		move(0,0);
-		
-		spawnTime = time.getTime();
-		
-		// Look through important units to see if we exist in it.
-		setImportantStuffFromSave();
-	}
-	
 	// Override this for units that need to save.
 	public void setImportantStuffFromSave() {
 		
@@ -283,6 +260,7 @@ public class unit extends drawnObject  {
 			
 			unit d = (unit)object;
 			d.setMoveSpeed(this.getMoveSpeed());
+			d.setStuck(this.isStuck());
 			
 			// Copy the repeatCommands
 			if(this.getRepeatCommands() != null) d.repeatCommands(new commandList(this.getRepeatCommands()));
@@ -1514,6 +1492,7 @@ public class unit extends drawnObject  {
 		setCollisionOn(b);
 	}
 	public String getFacingDirection() {
+		if(facingDirection==null) return "Right";
 		return facingDirection;
 	}
 
@@ -1526,6 +1505,7 @@ public class unit extends drawnObject  {
 			if(r==3) facingDirection = "Left";
 		}
 		this.facingDirection = facingDirection;
+		if(getFirstFacingDirection()==null) setFirstFacingDirection(facingDirection);
 	}
 
 	public animationPack getAnimations() {
@@ -1913,6 +1893,14 @@ public class unit extends drawnObject  {
 
 	public static void setSavedUnits(ArrayList<HashMap<Object,Object>> savedUnits) {
 		unit.savedUnits = savedUnits;
+	}
+
+	public String getFirstFacingDirection() {
+		return firstFacingDirection;
+	}
+
+	public void setFirstFacingDirection(String firstFacingDirection) {
+		this.firstFacingDirection = firstFacingDirection;
 	}
 	
 }

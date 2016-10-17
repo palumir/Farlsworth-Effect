@@ -67,6 +67,7 @@ public class bone extends chunk {
 		bones.add(this);
 		boneNumber = numBones;
 		numBones++;
+		if(numBones>2) numBones = 0;
 	}
 	
 	// Create interact sequence

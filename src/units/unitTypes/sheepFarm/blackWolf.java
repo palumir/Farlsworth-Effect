@@ -427,7 +427,7 @@ public class blackWolf extends wolf {
 	}
 	
 	// Default bone radius
-	public int BONE_RADIUS = 20;
+	public int BONE_RADIUS = 10;
 	
 	// Near bone
 	public bone nearBone() {
@@ -454,12 +454,12 @@ public class blackWolf extends wolf {
 			sound s = new sound(bush.eating);
 			s.setPosition(getIntX(), getIntY(), sound.DEFAULT_SOUND_RADIUS);
 			s.start();
-			if(getFacingDirection().equals("Up")) setFacingDirection("Left");
-			if(getFacingDirection().equals("Down")) setFacingDirection("Right");
 			addAnimations();
 			unfollow();
-			setInteractable(true);
 		}
+		if(getFacingDirection().equals("Up")) setFacingDirection("Left");
+		if(getFacingDirection().equals("Down")) setFacingDirection("Right");
+		setInteractable(true);
 		startSleepAnimation();
 	}
 	
@@ -476,13 +476,11 @@ public class blackWolf extends wolf {
 	}
 	
 	// Defaults
-	public int DEFAULT_AGGRO_RADIUS = 200;
+	public int DEFAULT_AGGRO_RADIUS = 180;
 	
 	// Consume bone
 	public void consumeBone(bone b) {
-		if(!happy) {
-			happyDog();
-		}
+		happyDog();
 		b.setDrawObject(false);
 	}
 	

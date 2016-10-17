@@ -74,11 +74,11 @@ public class well extends chunk {
 		textSeries saveGame = null;
 		if(!player.getPlayer().getPlayerInventory().containsBottleType(saveBottle.class)) saveGame = startOfConversation.addChild("Save game", "Are you sure you want to save?");
 		else {
-			if(player.getPlayer().getPlayerInventory().getItems().size() == 1) {
+			if(player.getPlayer().getPlayerInventory().countBottles() == 1) {
 				saveGame = startOfConversation.addChild("Save and refill Save Bottle", "Are you sure you want to save and refill your Save Bottle?");
 			}
 			else {
-				saveGame = startOfConversation.addChild("Save and refill bottles", "Are you sure you want to save and refill bottles?");
+				saveGame = startOfConversation.addChild("Save and refill ALL bottles", "Are you sure you want to save and refill ALL bottles?");
 			}
 		}
 		

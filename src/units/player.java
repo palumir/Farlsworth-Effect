@@ -392,6 +392,9 @@ public class player extends unit {
 					thePlayer.setDoubleX(thePlayer.lastWell.getX());
 					thePlayer.setDoubleY(thePlayer.lastWell.getY());
 				}
+				saveState.setQuiet(true);
+				saveState.createSaveState();
+				saveState.setQuiet(false);
 			}
 		}
 		
@@ -711,7 +714,7 @@ public class player extends unit {
 		ArrayList<drawnObject> interactObjects = new ArrayList<drawnObject>();
 		if(possibleInteractObjects!=null)
 		for(int i = 0; i < possibleInteractObjects.size(); i++) 
-			if(possibleInteractObjects.get(i).canInteract()) 
+			if(possibleInteractObjects.get(i).canInteract() && possibleInteractObjects.get(i).isDrawObject()) 
 				interactObjects.add(possibleInteractObjects.get(i));
 
 		// Interact with the first thing.

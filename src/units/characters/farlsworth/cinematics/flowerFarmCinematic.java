@@ -190,7 +190,7 @@ public class flowerFarmCinematic extends cinematic {
 			if(isSequence(numIfs++) && goNextTextSeries()) {
 				
 				// Set the next text and advance it.
-				addTextSeries(null, "Just kidding, your mojo's a load of bumbo.", farlsworth);
+				addTextSeries(null, "Just kidding, you have no mojo to lose.", farlsworth);
 				advanceSequence();
 			}
 			
@@ -210,7 +210,9 @@ public class flowerFarmCinematic extends cinematic {
 			}
 		}
 		
-		if(sequencePart==100 && farlsworth.getAllCommands()!=null && (farlsworth.getAllCommands().size() == 0)) {
+		if(sequencePart==100 && 
+				(!farlsworth.isOnScreen() || 
+				(farlsworth.getAllCommands()!=null && (farlsworth.getAllCommands().size() == 0)))) {
 			farlsworth.setDoubleX(-3463);
 			farlsworth.setDoubleY(-5550);
 			stop();
@@ -225,10 +227,9 @@ public class flowerFarmCinematic extends cinematic {
 		
 		farlsworth.setMoveSpeed(6f);
 		commandList commands = new commandList();
-		commands.add(new moveCommand(-1677,-4866));
-		commands.add(new moveCommand(-2108,-4866));
-		commands.add(new moveCommand(-2108,-6223));
-		commands.add(new moveCommand(-2108,-6223));
+		commands.add(new moveCommand(-1965,-3844));
+		commands.add(new moveCommand(-2640,-3827));
+		commands.add(new moveCommand(-2640,-3827));
 		farlsworth.doCommandsOnce(commands);
 		sound s = new sound(farlsworth.bleet);
 		s.setPosition(farlsworth.getIntX(), farlsworth.getIntY(), sound.DEFAULT_SOUND_RADIUS);

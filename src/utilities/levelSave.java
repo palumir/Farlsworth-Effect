@@ -245,7 +245,8 @@ public class levelSave implements Serializable {
 										Field f = clazz.getDeclaredField(currFieldName);
 										f.setAccessible(true);
 										objectStream.writeObject(currFieldName);
-										objectStream.writeObject(f.get(u));
+										if(currFieldName.equals("facingDirection")) objectStream.writeObject(u.getFirstFacingDirection());
+										else objectStream.writeObject(f.get(u));
 									}
 									
 									// Field doesn't exist, just add a dumby variable.
@@ -451,6 +452,13 @@ public class levelSave implements Serializable {
 									u.setMoveSpeed((float)val);
 									if(toCode) {
 										out.println("u.setMoveSpeed(" + "(float)" + val + ");");
+									}
+								}
+								
+								else if(currFieldName.equals("facingDirection")) {
+									u.setFacingDirection((String)val);
+									if(toCode) {
+										out.println("u.setFacingDirection(" + "(String)" + val + ");");
 									}
 								}
 								

@@ -155,8 +155,8 @@ public class farmFenceCinematic extends cinematic {
 		
 		if(sequencePart == 100 && farlsworth.getAllCommands()!=null && (farlsworth.getAllCommands().size() == 0)) {
 			farlsworth.destroyFence();
-			farlsworth.setDoubleX(-1550);
-			farlsworth.setDoubleY(-5258+30);
+			farlsworth.setDoubleX(-1857);
+			farlsworth.setDoubleY(-4186);
 			stop();
 		}
 		

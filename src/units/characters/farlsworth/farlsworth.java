@@ -157,8 +157,8 @@ public class farlsworth extends boss {
 			if(!bottle.inInventory) {
 				if(bottle!=null) {
 					if(deathCounter < 3) {
-						bottle.setDoubleX(2564+15);
-						bottle.setDoubleY(1582+13);
+						bottle.setDoubleX(216);
+						bottle.setDoubleY(815);
 					}
 					else {
 
@@ -355,12 +355,12 @@ public class farlsworth extends boss {
 				setDoubleY(-420);
 			}
 			else if(!flowerFarmCinematic.isCompleted.isCompleted()) {
-				setDoubleX(-1550);
-				setDoubleY(-5258+30);
+				setDoubleX(-1857);
+				setDoubleY(-4186);
 			}
 			else if(!beforeTombCinematic.isCompleted.isCompleted()) {
-				setDoubleX(-3463);
-				setDoubleY(-5550);
+				setDoubleX(-1542);
+				setDoubleY(-3046);
 			}
 			else {
 				destroy();

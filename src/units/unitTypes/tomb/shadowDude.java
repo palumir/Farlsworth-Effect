@@ -74,6 +74,7 @@ public class shadowDude extends unit {
 	// Constructor
 	public shadowDude(int newX, int newY) {
 		super(shadowType, newX, newY);
+		
 		// Make unkillable
 		setKillable(false);
 		setTargetable(false);
@@ -91,6 +92,7 @@ public class shadowDude extends unit {
 		topDownWidth = DEFAULT_TOPDOWN_WIDTH;
 		setHitBoxAdjustmentY(getDefaultHitBoxAdjustmentY());
 		
+		move(0,0);
 	}
 	
 	// React to pain.
@@ -117,7 +119,6 @@ public class shadowDude extends unit {
 
 	// Does nothing yet.
 	public void updateUnit() {
-	
 		// Illumination stuff
 		illuminated = isIlluminated();
 		if(illuminated) {
@@ -205,7 +206,7 @@ public class shadowDude extends unit {
 				faded = shadowFadedType.getAnimations().getAnimation("standing" + getFacingDirection());
 			}
 			
-			if(!isEyeless()) g2d.drawImage(faded.getCurrentFrame(), 
+			if(!isEyeless() && faded != null) g2d.drawImage(faded.getCurrentFrame(), 
 					getDrawX(), 
 					getDrawY(), 
 					(int)(gameCanvas.getScaleX()*faded.getCurrentFrame().getWidth()), 

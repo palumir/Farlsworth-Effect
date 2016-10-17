@@ -284,10 +284,10 @@ public class sheepFarm extends zone {
 	// Spawn items
 	public void createItems() {
 		// Spawn bottle.
-		bottle saveBottle = new saveBottle(-5,-1293);
+		bottle saveBottle = new saveBottle(0,-1293);
 		
 		// Spawn bottle expander
-		bottleExpander b = new bottleExpander(-1217, -6530);
+		bottleExpander b = new bottleExpander(-1530+8, -5514+15);
 		b.quality = "Alright";
 	}
 
@@ -295,7 +295,7 @@ public class sheepFarm extends zone {
 	public void createGraveYard()  {
 		
 		// Tomb
-		new tomb(-3460, -5803, 0, farmTomb.getZone(),70,-6,"Right");
+		new tomb(-1548, -3235, 0, farmTomb.getZone(),70,-6,"Right");
 	}
 	
 	public static ArrayList<chunk> makeFarlsworthFence(float atX, float atY) {
@@ -422,7 +422,7 @@ public class sheepFarm extends zone {
 			}
 			
 			// Flower patch cinematic
-			if(currPlayer != null && currPlayer.isWithin(-1695,-5258,-1335,-4830)
+			if(currPlayer != null && currPlayer.isWithin(-2028,-4262,-1619,-3782)
 					&& !farlsworthFlowerCinematic.isCompleted.isCompleted()
 					&& (farlsworthFlowerCinematic == null || !farlsworthFlowerCinematic.isInProgress())
 					&& farmFenceCinematic.isCompleted.isCompleted()) {
@@ -431,7 +431,7 @@ public class sheepFarm extends zone {
 			}
 			
 			// Tomb patch cinematic
-			if(currPlayer != null && currPlayer.isWithin(-3568,-5864,-3338,-5448)
+			if(currPlayer != null && currPlayer.isWithin(-1670,-3259,-1418,-2825)
 					&& !farlsworthTombCinematic.isCompleted.isCompleted()
 					&& (farlsworthTombCinematic == null || !farlsworthTombCinematic.isInProgress())
 					&& flowerFarmCinematic.isCompleted.isCompleted()) {
@@ -440,16 +440,16 @@ public class sheepFarm extends zone {
 			}
 		}
 		
-		if(currPlayer != null && currPlayer.isWithin(-220,-2401,228,-2049) && wellTooltipLoaded != null && !wellTooltipLoaded.isCompleted()) {
+		if(currPlayer != null && currPlayer.isWithin(-863,-2175,-460,-1937) && wellTooltipLoaded != null && !wellTooltipLoaded.isCompleted()) {
 			wellTooltipLoaded.setCompleted(true);
-			tooltipString t = new tooltipString("Interact with a well to save the game.");
+			tooltipString t = new tooltipString("Interact with a well to fill bottles and the save game.");
 		}
 		
-		if(currPlayer != null && currPlayer.isWithin(-718,-3959,-630,-3800) && useSaveBottle != null && !useSaveBottle.isCompleted()
+		/*if(currPlayer != null && currPlayer.isWithin(-718,-3959,-630,-3800) && useSaveBottle != null && !useSaveBottle.isCompleted()
 				&& player.getPlayer().lastSaveBottles!=null && player.getPlayer().lastSaveBottles.size() < 2) {
 			useSaveBottle.setCompleted(true);
 			tooltipString t = new tooltipString("Use the Save Bottle to avoid having to re-do difficult areas.");
-		}
+		}*/
 		
 		if(currPlayer != null && currPlayer.isWithin(-1116,-490,-444,54) && eToInteract != null && !eToInteract.isCompleted()) {
 			eToInteract.setCompleted(true);
@@ -457,7 +457,7 @@ public class sheepFarm extends zone {
 		}
 		
 		// Fog at black flower area
-		if(stormInProgress != null && !stormInProgress.isCompleted() && currPlayer != null && currPlayer.isWithin(-1719,-5298,-1314,-4818)) {
+		if(stormInProgress != null && !stormInProgress.isCompleted() && currPlayer != null && currPlayer.isWithin(-863,-2175,-460,-1937)) {
 			if(zoneFog == null) zoneFog = new fog();
 			zoneFog.fadeTo(stormFogLevel, 1f);
 			stormInProgress.setCompleted(true);
