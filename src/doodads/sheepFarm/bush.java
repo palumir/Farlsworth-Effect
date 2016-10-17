@@ -90,7 +90,9 @@ public class bush extends chunk {
 		else {
 			// Start of conversation.
 			startOfConversation = new textSeries(null, "It's just a regular bush.");
-			startOfConversation.setEnd();
+			s = startOfConversation.addChild(null, "Except in a video game.");
+			s = s.addChild(null, "I don't really like games.");
+			s.setEnd();
 		}
 			
 		return new interactBox(startOfConversation, this);

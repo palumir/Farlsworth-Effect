@@ -71,14 +71,11 @@ public class firePit extends chunk {
 		startOfConversation = new textSeries(null, "A fire pit.");
 		
 		// If player doesn't have torch.
-		textSeries set = startOfConversation.addChild("Set yourself on fire", "Are you sure? Being on fire tends to kill people.");
+		textSeries set = startOfConversation.addChild("Set something on fire", "You light yourself on fire.");
+		set.setEnd();
 		textSeries dont  = startOfConversation.addChild("Leave it alone", "It's probably poisonous anyway.");
 		dont.setEnd();
 		
-		textSeries youSure = set.addChild("Do it anyway", "You set yourself on fire.");
-		youSure.setEnd();
-		dont = set.addChild("Don't do it", "It's probably poisonous anyway.");
-		dont.setEnd();
 			
 		return new interactBox(startOfConversation, this);
 	}
@@ -97,7 +94,7 @@ public class firePit extends chunk {
 		// DO IT.
 		if(interactSequence !=null 
 				&& interactSequence.getTextSeries().getButtonText() != null 
-				&& interactSequence.getTextSeries().getButtonText().contains("Do it anyway")
+				&& interactSequence.getTextSeries().getButtonText().contains("Set something on fire")
 				&& !alreadyDone) {
 			alreadyDone = true;
 			setPlayerOnFire();
