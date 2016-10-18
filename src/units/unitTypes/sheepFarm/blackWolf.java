@@ -187,8 +187,11 @@ public class blackWolf extends wolf {
 					if(map.get("spawnedAtX").equals(getSpawnedAtX()) &&
 					  map.get("spawnedAtY").equals(getSpawnedAtY())) {
 						happy = (boolean)map.get("happy");
-						setDoubleX((int)map.get("x"));
-						setDoubleY((int)map.get("y"));
+						
+						if(happy) {
+							setDoubleX((int)map.get("x"));
+							setDoubleY((int)map.get("y"));
+						}
 					}
 				}
 			}
@@ -427,7 +430,7 @@ public class blackWolf extends wolf {
 	}
 	
 	// Default bone radius
-	public int BONE_RADIUS = 10;
+	public int BONE_RADIUS = 20;
 	
 	// Near bone
 	public bone nearBone() {
@@ -457,6 +460,7 @@ public class blackWolf extends wolf {
 			addAnimations();
 			unfollow();
 		}
+		killsPlayer = false;
 		if(getFacingDirection().equals("Up")) setFacingDirection("Left");
 		if(getFacingDirection().equals("Down")) setFacingDirection("Right");
 		setInteractable(true);
@@ -546,6 +550,7 @@ public class blackWolf extends wolf {
 					s.start();
 					addAngryAnimations();
 				}
+				killsPlayer = true;
 				this.follow(player.getPlayer());
 			}
 			if(player.getPlayer().isUnitIsDead()) {

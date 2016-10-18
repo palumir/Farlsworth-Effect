@@ -278,7 +278,7 @@ public class sheepFarm extends zone {
 		c = new door("No Key Yet", -793,-370, farmerHouse.getZone(), -93,957, "Right");
 		
 		// Flower farm
-		c = new door("No Key Yet", -1438,-5460, farmerHouse.getZone(), -93,957, "Right");
+		c = new door("No Key Yet", -1747,-4424, farmerHouse.getZone(), -93,957, "Right");
 	}
 	
 	// Spawn items
