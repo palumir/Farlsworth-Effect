@@ -113,7 +113,6 @@ public class sheep extends unit {
 		
 		// Default
 		textSeries startOfConversation = new textSeries(null, "Bah.");
-		startOfConversation.setEnd();
 		
 		// Sheep getting hit joke.
 		if(hitTimes >= 10 && !sheepHitABunchJoke.isCompleted()) {
@@ -128,9 +127,13 @@ public class sheep extends unit {
 		int random = utility.RNG.nextInt(7);
 		if(interactTimes > 5 && random == 0) {
 			startOfConversation = new textSeries(null, "Frig off.");
-			startOfConversation.setEnd();
 		}
 		interactTimes++;
+		
+		textSeries punch = startOfConversation.addChild("Punch","You punch the sheep. It explodes.");
+		punch.setEnd();
+		textSeries dontPunch = startOfConversation.addChild("Do nothing","You do nothing. The sheep looks pleased.");
+		dontPunch.setEnd();
 			
 		return new interactBox(startOfConversation, this);
 	}
@@ -289,6 +292,15 @@ public class sheep extends unit {
 	
 	// Deal with getting hit joke.
 	public void dealWithGettingHitJoke() {
+		
+		// Explode.
+		if(interactSequence !=null 
+				&& interactSequence.getTextSeries().getButtonText() != null 
+				&& interactSequence.getTextSeries().getButtonText().contains("Punch")) {
+			this.die();
+		}
+		
+		
 		if(hitTimes >= 10 && !sheepHitABunchJoke.isCompleted()) {
 			
 			// Open interactbox.
