@@ -135,7 +135,7 @@ public class farmTomb extends zone {
 		}
 		
 		if(loadStuff) {
-			levelSave.loadSaveState("actualTombLevel.save");
+			//levelSave.loadSaveState("actualTombLevel.save");
 			
 			// Load the level save.
 			//farmTombZoneLoader loader = new farmTombZoneLoader();
@@ -164,7 +164,7 @@ public class farmTomb extends zone {
 	
 	// Load items
 	public void loadItems() {
-		pushBottle b = new pushBottle(-11, 815);
+		pushBottle b = new pushBottle(70, 815);
 		bottleExpander exp = new bottleExpander(6526,2325);
 		exp.quality = "Alright";
 	}

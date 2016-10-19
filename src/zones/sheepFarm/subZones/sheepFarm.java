@@ -185,7 +185,7 @@ public class sheepFarm extends zone {
 		loadZoneEvents();
 		
 		// Load the level save.
-		levelSave.loadSaveState("sheepFarmLevel.save");
+		//levelSave.loadSaveState("sheepFarmLevel.save");
 		//sheepFarmZoneLoader loader = new sheepFarmZoneLoader();
 		//loader.loadSegments();
 		
@@ -197,7 +197,7 @@ public class sheepFarm extends zone {
 		}
 		
 		// Spawn special stuff
-		spawnSpecialStuff();
+		//spawnSpecialStuff();
 		
 		// Create items
 		createItems();
