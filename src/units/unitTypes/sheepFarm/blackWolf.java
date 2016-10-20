@@ -171,11 +171,16 @@ public class blackWolf extends wolf {
 		setSaveFields(true);
 		setCanSlash(true);
 		
+		if(happy) {
+			startSleepLoop();
+		}
 	}
 	
 	// Set important stuff from save.
 	@Override
 	public void setImportantStuffFromSave() {
+		happy = false;
+		
 		if(unit.getSavedUnits() != null) {
 			for(int i = 0; i < unit.getSavedUnits().size(); i++) {
 				HashMap<Object,Object> map = unit.getSavedUnits().get(i);
@@ -192,6 +197,8 @@ public class blackWolf extends wolf {
 							setDoubleX((int)map.get("x"));
 							setDoubleY((int)map.get("y"));
 						}
+						//System.out.println("WOLFIE " + this);
+						break;
 					}
 				}
 			}
@@ -276,15 +283,8 @@ public class blackWolf extends wolf {
 		}};
 		unitTypeAnimations.addAnimation(runningDown);
 		
-		// Sleeping animation
-		animation sleepingLeft = new animation("sleepingLeft", DEFAULT_LEFTRIGHT_SPRITESHEET_ANGRY.getAnimation(4), 3, 3, 0.5f){{
-			setRepeats(true);
-		}};
-		unitTypeAnimations.addAnimation(sleepingLeft);
-		
 		// Set animations.
 		setAnimations(unitTypeAnimations);
-	
 	}
 
 	// Combat defaults.
@@ -448,7 +448,7 @@ public class blackWolf extends wolf {
 	}
 	
 	// Happy?
-	private boolean happy = false;
+	private boolean happy;
 	
 	// Happy dog
 	public void happyDog() {
@@ -467,6 +467,15 @@ public class blackWolf extends wolf {
 		startSleepAnimation();
 	}
 	
+	// Start sleep loop
+	public void startSleepLoop() {
+		if(getFacingDirection().equals("Up")) setFacingDirection("Left");
+		if(getFacingDirection().equals("Down")) setFacingDirection("Right");
+		sleepStart = time.getTime() - getAnimations().getAnimation("sleepingStart" + getFacingDirection()).getTimeToComplete()*1000;
+		sleepPlaying = true;
+		animate("sleepingLoop" + getFacingDirection());
+	}
+	
 	// Sleep animation playing?
 	private boolean sleepPlaying = false;
 	
@@ -474,9 +483,11 @@ public class blackWolf extends wolf {
 	private double sleepStart = time.getTime();
 	
 	public void startSleepAnimation() {
-		sleepPlaying = true;
-		sleepStart = time.getTime();
-		animate("sleepingStart" + getFacingDirection());
+		if(getCurrentAnimation()!=null && !getCurrentAnimation().getName().contains("sleeping")) {
+			sleepPlaying = true;
+			sleepStart = time.getTime();
+			animate("sleepingStart" + getFacingDirection());
+		}
 	}
 	
 	// Defaults

@@ -392,9 +392,6 @@ public class player extends unit {
 					thePlayer.setDoubleX(thePlayer.lastWell.getX());
 					thePlayer.setDoubleY(thePlayer.lastWell.getY());
 				}
-				saveState.setQuiet(true);
-				saveState.createSaveState();
-				saveState.setQuiet(false);
 			}
 		}
 		
@@ -664,64 +661,71 @@ public class player extends unit {
 		
 	}
 	
+	// Spawn delay on react
+	private float spawnInteractDelay = 1f;
+	
 	// Interact in front of the player.
 	public void interact() {
-		int x1 = 0;
-		int x2 = 0;
-		int y1 = 0;
-		int y2 = 0;
 		
-		// Get the box we will attack in if facing left.
-		if(getFacingDirection().equals("Left")) {
-			int heightMidPoint = getIntY() + getHeight()/2;
-			y1 = heightMidPoint - DEFAULT_INTERACT_WIDTH/2;
-			y2 = heightMidPoint + DEFAULT_INTERACT_WIDTH/2;
-			x1 = getIntX() - DEFAULT_INTERACT_RANGE;
-			x2 = getIntX() + getWidth();
-		}
-		
-		// Get the box we will attack in if facing right.
-		if(getFacingDirection().equals("Right")) {
-			int heightMidPoint = getIntY() + getHeight()/2;
-			y1 = heightMidPoint - DEFAULT_INTERACT_WIDTH/2;
-			y2 = heightMidPoint + DEFAULT_INTERACT_WIDTH/2;
-			x1 = getIntX();
-			x2 = getIntX() + getWidth() + DEFAULT_INTERACT_RANGE;
-		}
-		
-		// Get the box we will attack in facing up.
-		if(getFacingDirection().equals("Up")) {
-			int widthMidPoint = getIntX() + getWidth()/2;
-			x1 = widthMidPoint - DEFAULT_INTERACT_WIDTH/2;
-			x2 = widthMidPoint + DEFAULT_INTERACT_WIDTH/2;
-			y1 = getIntY() - DEFAULT_INTERACT_RANGE;
-			y2 = getIntY() + getHeight();
-		}
-		
-		// Get the box we will attack in facing down.
-		if(getFacingDirection().equals("Down")) {
-			int widthMidPoint = getIntX() + getWidth()/2;
-			x1 = widthMidPoint - DEFAULT_INTERACT_WIDTH/2;
-			x2 = widthMidPoint + DEFAULT_INTERACT_WIDTH/2;
-			y1 = getIntY();
-			y2 = getIntY() + getHeight() + DEFAULT_INTERACT_RANGE;
-		}
-		
-		// Get the units in the box around the front of the player.
-		ArrayList<drawnObject> possibleInteractObjects = getObjectsInBox(x1,y1,x2,y2);
-		
-		// Get the ones we can actually interact with.
-		ArrayList<drawnObject> interactObjects = new ArrayList<drawnObject>();
-		if(possibleInteractObjects!=null)
-		for(int i = 0; i < possibleInteractObjects.size(); i++) 
-			if(possibleInteractObjects.get(i).canInteract() && possibleInteractObjects.get(i).isDrawObject()) 
-				interactObjects.add(possibleInteractObjects.get(i));
-
-		// Interact with the first thing.
-		if(interactObjects!=null && interactObjects.size() != 0) {
-			interactBlurb iBlurb = interactObjects.get(0).getAttachedInteractBlurb();
-			if(iBlurb != null) iBlurb.end();
-			getClosestToFrom(interactObjects).interactWith();
+		if(time.getTime() - main.getRestartedAt() > spawnInteractDelay*1000) {
+			// Only allow interactions if it's a few seconds after they spawned.
+			int x1 = 0;
+			int x2 = 0;
+			int y1 = 0;
+			int y2 = 0;
+			
+			// Get the box we will attack in if facing left.
+			if(getFacingDirection().equals("Left")) {
+				int heightMidPoint = getIntY() + getHeight()/2;
+				y1 = heightMidPoint - DEFAULT_INTERACT_WIDTH/2;
+				y2 = heightMidPoint + DEFAULT_INTERACT_WIDTH/2;
+				x1 = getIntX() - DEFAULT_INTERACT_RANGE;
+				x2 = getIntX() + getWidth();
+			}
+			
+			// Get the box we will attack in if facing right.
+			if(getFacingDirection().equals("Right")) {
+				int heightMidPoint = getIntY() + getHeight()/2;
+				y1 = heightMidPoint - DEFAULT_INTERACT_WIDTH/2;
+				y2 = heightMidPoint + DEFAULT_INTERACT_WIDTH/2;
+				x1 = getIntX();
+				x2 = getIntX() + getWidth() + DEFAULT_INTERACT_RANGE;
+			}
+			
+			// Get the box we will attack in facing up.
+			if(getFacingDirection().equals("Up")) {
+				int widthMidPoint = getIntX() + getWidth()/2;
+				x1 = widthMidPoint - DEFAULT_INTERACT_WIDTH/2;
+				x2 = widthMidPoint + DEFAULT_INTERACT_WIDTH/2;
+				y1 = getIntY() - DEFAULT_INTERACT_RANGE;
+				y2 = getIntY() + getHeight();
+			}
+			
+			// Get the box we will attack in facing down.
+			if(getFacingDirection().equals("Down")) {
+				int widthMidPoint = getIntX() + getWidth()/2;
+				x1 = widthMidPoint - DEFAULT_INTERACT_WIDTH/2;
+				x2 = widthMidPoint + DEFAULT_INTERACT_WIDTH/2;
+				y1 = getIntY();
+				y2 = getIntY() + getHeight() + DEFAULT_INTERACT_RANGE;
+			}
+			
+			// Get the units in the box around the front of the player.
+			ArrayList<drawnObject> possibleInteractObjects = getObjectsInBox(x1,y1,x2,y2);
+			
+			// Get the ones we can actually interact with.
+			ArrayList<drawnObject> interactObjects = new ArrayList<drawnObject>();
+			if(possibleInteractObjects!=null)
+			for(int i = 0; i < possibleInteractObjects.size(); i++) 
+				if(possibleInteractObjects.get(i).canInteract() && possibleInteractObjects.get(i).isDrawObject()) 
+					interactObjects.add(possibleInteractObjects.get(i));
+	
+			// Interact with the first thing.
+			if(interactObjects!=null && interactObjects.size() != 0) {
+				interactBlurb iBlurb = interactObjects.get(0).getAttachedInteractBlurb();
+				if(iBlurb != null) iBlurb.end();
+				getClosestToFrom(interactObjects).interactWith();
+			}
 		}
 	}
 	

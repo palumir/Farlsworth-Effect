@@ -47,7 +47,7 @@ public class wolflessFightCinematic extends cinematic {
 		
 		if(!startBossImmediately) {
 			if(isSequence(numIfs++)) {
-				waitFor(4f);
+				waitFor(2f);
 				advanceSequence();
 			}
 			if(isSequence(numIfs++)) {
