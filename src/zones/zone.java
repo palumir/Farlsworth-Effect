@@ -70,8 +70,19 @@ public abstract class zone {
 	
 	// Load the zone.
 	public void loadZone() {
+		
+		// Set zone at start because loading takes forever.
 		currentZone = this;
+		
+		// Call specific zone loading stuff.
 		loadSpecificZoneStuff();
+		
+		// Save one the zone is loaded.
+		saveState.setQuiet(true);
+		saveState.createSaveState();
+		saveState.setQuiet(false);
+		
+		// Set these things.
 		loadedOnce = true;
 		zoneLoaded = true;
 	}

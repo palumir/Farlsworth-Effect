@@ -27,6 +27,9 @@ import zones.zone;
 // The class that initiates the program.
 public class main {
 	
+	// Restarted at
+	private static long restartedAt = 0;
+	
 	// The actual function that initiates the program.
 	public static void main(String[] args) {
 		
@@ -69,6 +72,8 @@ public class main {
 				}
 			}
 		}
+		
+		setRestartedAt(time.getTime());
 	}
 	
 	// Boolean
@@ -154,5 +159,13 @@ public class main {
 		saveState s = saveState.loadSaveState();
 		
 		return s;
+	}
+
+	public static long getRestartedAt() {
+		return restartedAt;
+	}
+
+	public static void setRestartedAt(long restartedAt) {
+		main.restartedAt = restartedAt;
 	}
 }

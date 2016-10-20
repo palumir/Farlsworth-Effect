@@ -148,9 +148,13 @@ public class well extends chunk {
 				player.getPlayer().lastSaveBottleChargeIndicator = null;
 			}
 			
+			// Comment this in to make black wolves respawn at their original spot
+			// on respawn at well.
+			/*
 			saveState.setQuiet(true);
 			saveState.createSaveState();
 			saveState.setQuiet(false);
+			*/
 		}
 		
 		// Saving at well.
