@@ -1211,11 +1211,13 @@ public class unit extends drawnObject  {
 					}
 					
 					// Don't move the object.
-					if(xyCollide.y!=0) actualMoveY = 0;
+					if(xyCollide.y!=0) {
+						actualMoveY = 0;
+					}
 					if(leftRegion.y!=0) actualMoveY = 0;
 					
 					// If we hit something stop momentum
-					if(actualMoveX == 0) setMomentumY(0);
+					if(actualMoveY == 0) setMomentumY(0);
 				}
 				
 				// Are we entering the air (by a significant amount?)
