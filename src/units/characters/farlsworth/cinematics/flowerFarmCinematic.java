@@ -39,8 +39,13 @@ public class flowerFarmCinematic extends cinematic {
 	    player.getPlayer().stopMove("all");
 	    
 	    // Create interactSequence (first thing he says to you)
-	    textSeries s = new textSeries(null, "How about these wolves, eh?");
+	    textSeries s = new textSeries(null, "These wolves are a bunch of friggin pricks, eh?");
 	    farlsworth = units.characters.farlsworth.farlsworth.farlsworth;
+	    
+		farlsworth.setMoveSpeed(2);
+		
+		// Set the next text and advance it.
+		farlsworth.setFacingDirection("Right");
 	    
 	    interactSequence = new interactBox(s, farlsworth);
 		interactSequence.setUnescapable(true);
@@ -56,16 +61,6 @@ public class flowerFarmCinematic extends cinematic {
 		
 		textSeries s;
 		int numIfs = 0;
-		
-		if(isSequence(numIfs++) && goNextTextSeries()) {
-			
-			farlsworth.setMoveSpeed(2);
-			
-			// Set the next text and advance it.
-			addTextSeries(null, "They're a bunch of friggin pricks, aren't they?", farlsworth);
-			farlsworth.setFacingDirection("Right");
-			advanceSequence();
-		}
 		
 		if(isSequence(numIfs++) && goNextTextSeries()) {
 			
@@ -190,7 +185,7 @@ public class flowerFarmCinematic extends cinematic {
 			if(isSequence(numIfs++) && goNextTextSeries()) {
 				
 				// Set the next text and advance it.
-				addTextSeries(null, "Just kidding, you have no mojo to lose.", farlsworth);
+				addTextSeries(null, "Just kidding, you don't have any mojo.", farlsworth);
 				advanceSequence();
 			}
 			

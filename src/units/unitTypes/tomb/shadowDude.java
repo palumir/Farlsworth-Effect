@@ -91,8 +91,8 @@ public class shadowDude extends unit {
 		topDownHeight = DEFAULT_TOPDOWN_HEIGHT;
 		topDownWidth = DEFAULT_TOPDOWN_WIDTH;
 		setHitBoxAdjustmentY(getDefaultHitBoxAdjustmentY());
-		
-		move(0,0);
+		facingDirection = "Right";
+		setCurrentAnimation(getAnimations().getAnimation("standingRight"));
 	}
 	
 	// React to pain.

@@ -58,8 +58,8 @@ public class beforeTombCinematic extends cinematic {
 		if(isSequence(numIfs++) && goNextTextSeries()) {
 			
 			// Move right.
-			addTextSeries("'Hard'", null,farlsworth, "Order");
 			addTextSeries("'Easy'", null,farlsworth,"Chaos");
+			addTextSeries("'Hard'", null,farlsworth, "Order");
 			interactSequence.goToNext();
 			
 			// Set the next text and advance it.
@@ -111,60 +111,85 @@ public class beforeTombCinematic extends cinematic {
 				advanceSequence();
 			}
 			
-			if(isSequence(numIfs++) && goNextTextSeries()) {
-				addTextSeries(null, "That's why it was easy, you ding-dong.",farlsworth);
-				advanceSequence();
-			}
-			
 		}
 		
 		if(isSequence(numIfs++) && goNextTextSeries()) {
 			
 			// Set the next text and advance it.
-			addTextSeries(null, "Hey, I wonder if these graves are all wolf victims.", farlsworth);
+			addTextSeries(null, "But that bottle's not filled with water.", farlsworth);
 			advanceSequence();
 		}
 		
 		if(isSequence(numIfs++) && goNextTextSeries()) {
 			
 			// Set the next text and advance it.
-			addTextSeries(null, "Just kidding, it's actually much worse than that.", farlsworth);
-			advanceSequence();
-		}
-		
-		
-		if(isSequence(numIfs++) && goNextTextSeries()) {
-			
-			// Set the next text and advance it.
-			addTextSeries(null, "An old buddy of mine used to take care of this place.", farlsworth);
+			addTextSeries(null, "It's friggin poison.", farlsworth);
 			advanceSequence();
 		}
 		
 		if(isSequence(numIfs++) && goNextTextSeries()) {
 			
 			// Set the next text and advance it.
-			addTextSeries(null, "He was getting real bored of digging graves.", farlsworth);
+			addTextSeries(null, "Well, not literally poison.", farlsworth);
 			advanceSequence();
 		}
 		
 		if(isSequence(numIfs++) && goNextTextSeries()) {
 			
 			// Set the next text and advance it.
-			addTextSeries(null, "And I think it got to his head a bit.", farlsworth);
+			addTextSeries(null, "But I'm sick of people relying on it these days.", farlsworth);
 			advanceSequence();
 		}
 		
 		if(isSequence(numIfs++) && goNextTextSeries()) {
 			
 			// Set the next text and advance it.
-			addTextSeries(null, "He eventually started building a tomb.", farlsworth);
+			addTextSeries(null, "You know, an old buddy of mine got hooked on that stuff.", farlsworth);
+			farlsworth.moveTo(farlsworth.getIntX()+1, farlsworth.getIntY());
 			advanceSequence();
 		}
 		
 		if(isSequence(numIfs++) && goNextTextSeries()) {
 			
 			// Set the next text and advance it.
-			addTextSeries(null, "The tomb of a psycho gravekeeper. Spooky, isn't it?", farlsworth);
+			addTextSeries(null, "He used to watch over this graveyard, actually.", farlsworth);
+			advanceSequence();
+		}
+		
+		if(isSequence(numIfs++) && goNextTextSeries()) {
+			
+			// Set the next text and advance it.
+			addTextSeries(null, "That is, until he got addicted to that filth.", farlsworth);
+			advanceSequence();
+		}
+		
+		if(isSequence(numIfs++) && goNextTextSeries()) {
+			
+			// Set the next text and advance it.
+			addTextSeries(null, "Before long, he lost his mind completely.", farlsworth);
+			advanceSequence();
+		}
+		
+		if(isSequence(numIfs++) && goNextTextSeries()) {
+			
+			// Set the next text and advance it.
+			addTextSeries(null, "And that's when he started building the tomb.", farlsworth);
+			farlsworth.setFacingDirection("Up");
+			advanceSequence();
+		}
+		
+		if(isSequence(numIfs++) && goNextTextSeries()) {
+			
+			// Set the next text and advance it.
+			addTextSeries(null, "The tomb of a psycho gravekeeper...", farlsworth);
+			advanceSequence();
+		}
+		
+		if(isSequence(numIfs++) && goNextTextSeries()) {
+			
+			// Set the next text and advance it.
+			addTextSeries(null, "Spooky, isn't it?", farlsworth);
+			farlsworth.setFacingDirection("Left");
 			advanceSequence();
 		}
 		

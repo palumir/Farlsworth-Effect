@@ -38,7 +38,7 @@ public class farmFenceCinematic extends cinematic {
 	    music.currMusic.fadeOut(2f);
 	    
 	    // Create interactSequence (first thing he says to you)
-	    textSeries s = new textSeries(null, "Uh, this is a kind of awkward ...");
+	    textSeries s = new textSeries(null, "Uh, this is kind of awkward ...");
 	    farlsworth = units.characters.farlsworth.farlsworth.farlsworth;
 	    
 	    interactSequence = new interactBox(s, farlsworth);

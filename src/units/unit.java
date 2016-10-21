@@ -1491,9 +1491,16 @@ public class unit extends drawnObject  {
 	public void setCollision(boolean b) {
 		setCollisionOn(b);
 	}
+	
 	public String getFacingDirection() {
-		if(facingDirection==null) return "Right";
-		return facingDirection;
+		
+		if(facingDirection!=null && !facingDirection.equals("null") ) {
+			return facingDirection;
+		}
+		
+		else {
+			return "Right";
+		}
 	}
 
 	public void setFacingDirection(String facingDirection) {

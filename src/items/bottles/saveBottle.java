@@ -113,7 +113,8 @@ public class saveBottle extends bottle {
 			    interactBox interactSequence = new interactBox(s, this);
 				interactSequence.toggleDisplay();
 				
-				textSeries read = s.addChild(new textSeries("Read", "\"You're trash\" - love, Farlsworth."));
+				textSeries fart = s.addChild(new textSeries("Read", "\"Pick your boogers.\""));
+				textSeries read = fart.addChild(new textSeries("Wait a second, I read that wrong the first time", "\"Pick your poison\" - with love, Farlsworth."));
 				read.setChoiceType("Order");
 				read.setEnd();
 				

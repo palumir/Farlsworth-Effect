@@ -182,9 +182,25 @@ public class farmIntroCinematic extends cinematic {
 				
 				if(isSequence(numIfs++) && goNextTextSeries()) {
 					addTextSeries(null, "Catch me if you can, dumbo!",farlsworth);
-					runFarlsworthAway();
+					runFarlsworthAwayDontEnd();
 					// Set the next text and advance it.
 					advanceSequence();
+				}
+				
+				if(isSequence(numIfs++) && goNextTextSeries()) {
+					addTextSeries(null, "Holy schnikes! He really darted.",farmer);
+					// Set the next text and advance it.
+					advanceSequence();
+				}
+			
+				if(isSequence(numIfs++) && goNextTextSeries()) {
+					addTextSeries(null, "You'd better go catch him.",farmer);
+					// Set the next text and advance it.
+					advanceSequence();
+					interactSequence.getTextSeries().setEnd();
+					interactSequence.setLocked(false);
+					interactSequence.setUnescapable(false);
+					stop();
 				}
 			}
 			
@@ -427,6 +443,22 @@ public class farmIntroCinematic extends cinematic {
 				}
 			}
 		}
+	}
+	
+	// Run Farlsworth away
+	public void runFarlsworthAwayDontEnd() {
+		music.endAll();
+		music.startMusic(sheepFarm.forestMusic);
+		farlsworth.setMoveSpeed(4.5f);
+		commandList commands = new commandList();
+		commands.add(new moveCommand(425,farlsworth.getIntY()));
+		commands.add(new moveCommand(425,-70));
+		commands.add(new moveCommand(425,5));
+		commands.add(new moveCommand(5,-1));
+		commands.add(new moveCommand(5,-420));
+		farlsworth.doCommandsOnce(commands);
+		sound s = new sound(farlsworth.bleet);
+		s.setPosition(farlsworth.getIntX(), farlsworth.getIntY(), sound.DEFAULT_SOUND_RADIUS);
 	}
 	
 	// Run Farlsworth away

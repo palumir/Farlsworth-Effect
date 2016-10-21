@@ -190,6 +190,7 @@ addSegment171();
 addSegment172();
 addSegment173();
 addSegment174();
+addSegment175();
 
 	}
 
@@ -3649,8 +3650,6 @@ c = tombEdge.createChunk(987,1108,0);
 if(c!=null) c.setPassable(false);
 c = tombEdge.createChunk(1019,1108,0);
 if(c!=null) c.setPassable(false);
-c = tombEdge.createChunk(481,1359,0);
-if(c!=null) c.setPassable(false);
 c = tombEdge.createChunk(513,1359,0);
 if(c!=null) c.setPassable(false);
 c = tombEdge.createChunk(545,1359,0);
@@ -3693,11 +3692,11 @@ c = tombEdge.createChunk(1121,1359,0);
 if(c!=null) c.setPassable(false);
 c = tombEdge.createChunk(1153,1359,0);
 if(c!=null) c.setPassable(false);
+c = tomb.createChunk(1185,879,0);
+if(c!=null) c.setPassable(false);
 }
 
 public void addSegment34() {
-c = tomb.createChunk(1185,879,0);
-if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1185,911,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1185,943,0);
@@ -3796,11 +3795,11 @@ c = tomb.createChunk(1281,879,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1281,911,0);
 if(c!=null) c.setPassable(false);
+c = tomb.createChunk(1281,943,0);
+if(c!=null) c.setPassable(false);
 }
 
 public void addSegment35() {
-c = tomb.createChunk(1281,943,0);
-if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1281,975,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1281,1007,0);
@@ -3899,11 +3898,11 @@ c = tomb.createChunk(1377,943,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1377,975,0);
 if(c!=null) c.setPassable(false);
+c = tomb.createChunk(1377,1007,0);
+if(c!=null) c.setPassable(false);
 }
 
 public void addSegment36() {
-c = tomb.createChunk(1377,1007,0);
-if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1377,1039,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1377,1071,0);
@@ -4002,11 +4001,11 @@ c = tomb.createChunk(1473,1007,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1473,1039,0);
 if(c!=null) c.setPassable(false);
+c = tomb.createChunk(1473,1071,0);
+if(c!=null) c.setPassable(false);
 }
 
 public void addSegment37() {
-c = tomb.createChunk(1473,1071,0);
-if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1473,1103,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1473,1135,0);
@@ -4105,11 +4104,11 @@ c = tomb.createChunk(858,683,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(858,715,0);
 if(c!=null) c.setPassable(false);
+c = tomb.createChunk(858,747,0);
+if(c!=null) c.setPassable(false);
 }
 
 public void addSegment38() {
-c = tomb.createChunk(858,747,0);
-if(c!=null) c.setPassable(false);
 c = tomb.createChunk(858,779,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(858,811,0);
@@ -4208,11 +4207,11 @@ c = tomb.createChunk(1050,555,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1050,587,0);
 if(c!=null) c.setPassable(false);
+c = tomb.createChunk(1050,619,0);
+if(c!=null) c.setPassable(false);
 }
 
 public void addSegment39() {
-c = tomb.createChunk(1050,619,0);
-if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1050,651,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1050,683,0);
@@ -4311,11 +4310,11 @@ c = tomb.createChunk(1210,747,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1210,779,0);
 if(c!=null) c.setPassable(false);
+c = tomb.createChunk(1242,555,0);
+if(c!=null) c.setPassable(false);
 }
 
 public void addSegment40() {
-c = tomb.createChunk(1242,555,0);
-if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1242,587,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1242,619,0);
@@ -4414,11 +4413,11 @@ c = tomb.createChunk(1434,555,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1434,587,0);
 if(c!=null) c.setPassable(false);
+c = tomb.createChunk(1434,619,0);
+if(c!=null) c.setPassable(false);
 }
 
 public void addSegment41() {
-c = tomb.createChunk(1434,619,0);
-if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1434,651,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1434,683,0);
@@ -4517,11 +4516,11 @@ c = tomb.createChunk(1313,906,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1345,714,0);
 if(c!=null) c.setPassable(false);
+c = tomb.createChunk(1345,746,0);
+if(c!=null) c.setPassable(false);
 }
 
 public void addSegment42() {
-c = tomb.createChunk(1345,746,0);
-if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1345,778,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1345,810,0);
@@ -4618,30 +4617,28 @@ c = tombEdge.createChunk(1690,1845,0);
 if(c!=null) c.setPassable(false);
 c = tombEdge.createChunk(1722,1845,0);
 if(c!=null) c.setPassable(false);
-c = tombEdge.createChunk(506,1624,0);
+c = tombEdge.createChunk(546,1603,0);
+if(c!=null) c.setPassable(false);
+c = tombEdge.createChunk(616,1678,0);
 if(c!=null) c.setPassable(false);
 }
 
 public void addSegment43() {
-c = tombEdge.createChunk(579,1545,0);
+c = tombEdge.createChunk(720,1575,0);
 if(c!=null) c.setPassable(false);
-c = tombEdge.createChunk(661,1630,0);
+c = tombEdge.createChunk(804,1655,0);
 if(c!=null) c.setPassable(false);
-c = tombEdge.createChunk(769,1549,0);
+c = tombEdge.createChunk(892,1734,0);
 if(c!=null) c.setPassable(false);
-c = tombEdge.createChunk(846,1628,0);
+c = tombEdge.createChunk(1001,1673,0);
 if(c!=null) c.setPassable(false);
-c = tombEdge.createChunk(927,1729,0);
+c = tombEdge.createChunk(1090,1592,0);
 if(c!=null) c.setPassable(false);
-c = tombEdge.createChunk(1031,1673,0);
+c = tombEdge.createChunk(1220,1592,0);
 if(c!=null) c.setPassable(false);
-c = tombEdge.createChunk(1120,1592,0);
+c = tombEdge.createChunk(1312,1486,0);
 if(c!=null) c.setPassable(false);
-c = tombEdge.createChunk(1235,1592,0);
-if(c!=null) c.setPassable(false);
-c = tombEdge.createChunk(1327,1486,0);
-if(c!=null) c.setPassable(false);
-c = tombEdge.createChunk(1395,1594,0);
+c = tombEdge.createChunk(1380,1594,0);
 if(c!=null) c.setPassable(false);
 c = tombEdge.createChunk(1754,1845,0);
 if(c!=null) c.setPassable(false);
@@ -4681,7 +4678,7 @@ c = tombEdge.createChunk(2362,1845,0);
 if(c!=null) c.setPassable(false);
 c = tombEdge.createChunk(2394,1845,0);
 if(c!=null) c.setPassable(false);
-c = tombEdge.createChunk(1530,1594,0);
+c = tombEdge.createChunk(1515,1594,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1537,801,0);
 if(c!=null) c.setPassable(false);
@@ -4723,13 +4720,13 @@ c = tomb.createChunk(1569,961,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1569,993,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment44() {
 c = tomb.createChunk(1569,1025,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1569,1057,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment44() {
 c = tomb.createChunk(1569,1089,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1569,1121,0);
@@ -4826,13 +4823,13 @@ c = tomb.createChunk(1697,897,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1697,929,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment45() {
 c = tomb.createChunk(1697,961,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1697,993,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment45() {
 c = tomb.createChunk(1697,1025,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1697,1057,0);
@@ -4929,13 +4926,13 @@ c = tomb.createChunk(1825,833,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1825,865,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment46() {
 c = tomb.createChunk(1825,897,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1825,929,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment46() {
 c = tomb.createChunk(1825,961,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1825,993,0);
@@ -5032,13 +5029,13 @@ c = tomb.createChunk(1921,1185,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1953,801,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment47() {
 c = tomb.createChunk(1953,833,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1953,865,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment47() {
 c = tomb.createChunk(1953,897,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1953,929,0);
@@ -5135,13 +5132,13 @@ c = tomb.createChunk(2049,1121,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2049,1153,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment48() {
 c = tomb.createChunk(2049,1185,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2081,865,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment48() {
 c = tomb.createChunk(2081,897,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2081,929,0);
@@ -5238,13 +5235,13 @@ c = tomb.createChunk(1914,1263,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1914,1295,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment49() {
 c = tomb.createChunk(1914,1327,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1914,1359,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment49() {
 c = tomb.createChunk(1946,1199,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1946,1231,0);
@@ -5341,13 +5338,13 @@ c = tomb.createChunk(2170,1263,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2170,1295,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment50() {
 c = tomb.createChunk(2170,1327,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2170,1359,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment50() {
 c = tomb.createChunk(2202,1135,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2202,1167,0);
@@ -5444,13 +5441,13 @@ c = tomb.createChunk(2362,1327,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2362,1359,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment51() {
 c = tomb.createChunk(2394,1231,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2394,1263,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment51() {
 c = tomb.createChunk(2394,1295,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2394,1327,0);
@@ -5547,13 +5544,13 @@ c = tomb.createChunk(347,1908,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(347,1940,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment52() {
 c = tomb.createChunk(347,1972,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(347,2004,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment52() {
 c = tomb.createChunk(347,2036,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(347,2068,0);
@@ -5650,13 +5647,13 @@ c = tomb.createChunk(539,1972,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(539,2004,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment53() {
 c = tomb.createChunk(539,2036,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(539,2068,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment53() {
 c = tomb.createChunk(539,2100,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(539,2132,0);
@@ -5753,13 +5750,13 @@ c = tomb.createChunk(731,2036,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(731,2068,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment54() {
 c = tomb.createChunk(731,2100,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(731,2132,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment54() {
 c = tomb.createChunk(763,1908,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(763,1940,0);
@@ -5856,13 +5853,13 @@ c = tomb.createChunk(923,2100,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(923,2132,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment55() {
 c = tomb.createChunk(955,1908,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(955,1940,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment55() {
 c = tomb.createChunk(955,1972,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(955,2004,0);
@@ -5959,13 +5956,13 @@ c = tomb.createChunk(1147,1908,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1147,1940,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment56() {
 c = tomb.createChunk(1147,1972,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1147,2004,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment56() {
 c = tomb.createChunk(1147,2036,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1147,2068,0);
@@ -6062,13 +6059,13 @@ c = tomb.createChunk(1339,1972,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1339,2004,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment57() {
 c = tomb.createChunk(1339,2036,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1339,2068,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment57() {
 c = tomb.createChunk(1339,2100,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1339,2132,0);
@@ -6165,13 +6162,13 @@ c = tomb.createChunk(1531,2036,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1531,2068,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment58() {
 c = tomb.createChunk(1531,2100,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1531,2132,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment58() {
 c = tomb.createChunk(1563,1908,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1563,1940,0);
@@ -6268,13 +6265,13 @@ c = tomb.createChunk(1723,1972,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1723,2004,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment59() {
 c = tomb.createChunk(1723,2036,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1723,2068,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment59() {
 c = tomb.createChunk(1723,2100,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1723,2132,0);
@@ -6371,13 +6368,13 @@ c = tomb.createChunk(1883,2132,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1915,1876,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment60() {
 c = tomb.createChunk(1915,1908,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1915,1940,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment60() {
 c = tomb.createChunk(1915,1972,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1915,2004,0);
@@ -6474,13 +6471,13 @@ c = tomb.createChunk(2075,2004,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2075,2036,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment61() {
 c = tomb.createChunk(2075,2068,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2075,2100,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment61() {
 c = tomb.createChunk(2075,2132,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2107,1876,0);
@@ -6577,13 +6574,13 @@ c = tomb.createChunk(2331,1876,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2331,1908,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment62() {
 c = tomb.createChunk(2331,1940,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2331,1972,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment62() {
 c = tomb.createChunk(2331,2004,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2331,2036,0);
@@ -6680,13 +6677,13 @@ c = tomb.createChunk(-34,2009,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(-34,2041,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment63() {
 c = tomb.createChunk(-34,2073,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(-34,2105,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment63() {
 c = tomb.createChunk(-34,2137,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(-2,2009,0);
@@ -6783,13 +6780,13 @@ c = tomb.createChunk(286,2009,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(286,2041,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment64() {
 c = tomb.createChunk(286,2073,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(286,2105,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment64() {
 c = tomb.createChunk(286,2137,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(318,2009,0);
@@ -6886,13 +6883,13 @@ c = tomb.createChunk(2684,2069,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2684,2101,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment65() {
 c = tomb.createChunk(2684,2127,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2716,1877,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment65() {
 c = tomb.createChunk(2716,1909,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2716,1941,0);
@@ -6989,13 +6986,13 @@ c = tomb.createChunk(2872,1935,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2872,1967,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment66() {
 c = tomb.createChunk(2872,1999,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2872,2031,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment66() {
 c = tomb.createChunk(2872,2063,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2872,2095,0);
@@ -7092,13 +7089,13 @@ c = tomb.createChunk(3032,2095,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(3032,2127,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment67() {
 c = tomb.createChunk(3064,1871,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(3064,1903,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment67() {
 c = tomb.createChunk(3064,1935,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(3064,1967,0);
@@ -7195,13 +7192,13 @@ c = tomb.createChunk(3224,1967,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(3224,1999,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment68() {
 c = tomb.createChunk(3224,2031,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(3224,2063,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment68() {
 c = tomb.createChunk(3224,2095,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(3224,2127,0);
@@ -7298,13 +7295,13 @@ c = tomb.createChunk(3384,2127,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(3416,1871,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment69() {
 c = tomb.createChunk(3416,1903,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(3416,1935,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment69() {
 c = tomb.createChunk(3416,1967,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(3416,1999,0);
@@ -7401,13 +7398,13 @@ c = tomb.createChunk(3576,1999,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(3576,2031,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment70() {
 c = tomb.createChunk(3576,2063,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(3576,2095,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment70() {
 c = tomb.createChunk(3576,2127,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(3608,1871,0);
@@ -7504,13 +7501,13 @@ c = tomb.createChunk(3768,1871,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(3768,1903,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment71() {
 c = tomb.createChunk(3768,1935,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(3768,1967,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment71() {
 c = tomb.createChunk(3768,1999,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(3768,2031,0);
@@ -7607,13 +7604,13 @@ c = tomb.createChunk(3928,2031,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(3928,2063,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment72() {
 c = tomb.createChunk(3928,2095,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(3928,2127,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment72() {
 c = tomb.createChunk(3960,1871,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(3960,1903,0);
@@ -7710,13 +7707,13 @@ c = tomb.createChunk(4120,1903,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(4120,1935,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment73() {
 c = tomb.createChunk(4120,1967,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(4120,1999,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment73() {
 c = tomb.createChunk(4120,2031,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(4120,2063,0);
@@ -7813,13 +7810,13 @@ c = tomb.createChunk(4280,2063,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(4280,2095,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment74() {
 c = tomb.createChunk(4280,2127,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(4312,1871,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment74() {
 c = tomb.createChunk(4312,1903,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(4312,1935,0);
@@ -7916,13 +7913,13 @@ c = tomb.createChunk(4472,1935,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(4472,1967,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment75() {
 c = tomb.createChunk(4472,1999,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(4472,2031,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment75() {
 c = tomb.createChunk(4472,2063,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(4472,2095,0);
@@ -8019,13 +8016,13 @@ c = tomb.createChunk(4632,2095,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(4632,2127,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment76() {
 c = tomb.createChunk(4664,1871,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(4664,1903,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment76() {
 c = tomb.createChunk(4664,1935,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(4664,1967,0);
@@ -8122,13 +8119,13 @@ c = tomb.createChunk(4824,1967,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(4824,1999,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment77() {
 c = tomb.createChunk(4824,2031,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(4824,2063,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment77() {
 c = tomb.createChunk(4824,2095,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(4824,2127,0);
@@ -8225,13 +8222,13 @@ c = tomb.createChunk(4984,2127,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5016,1871,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment78() {
 c = tomb.createChunk(5016,1903,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5016,1935,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment78() {
 c = tomb.createChunk(5016,1967,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5016,1999,0);
@@ -8328,13 +8325,13 @@ c = tomb.createChunk(5176,1999,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5176,2031,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment79() {
 c = tomb.createChunk(5176,2063,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5176,2095,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment79() {
 c = tomb.createChunk(5176,2127,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5208,1871,0);
@@ -8431,13 +8428,13 @@ c = tomb.createChunk(5368,1871,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5368,1903,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment80() {
 c = tomb.createChunk(5368,1935,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5368,1967,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment80() {
 c = tomb.createChunk(5368,1999,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5368,2031,0);
@@ -8534,13 +8531,13 @@ c = tomb.createChunk(5528,2031,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5528,2063,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment81() {
 c = tomb.createChunk(5528,2095,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5528,2127,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment81() {
 c = tomb.createChunk(5560,1871,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5560,1903,0);
@@ -8637,13 +8634,13 @@ c = tomb.createChunk(5720,1903,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5720,1935,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment82() {
 c = tomb.createChunk(5720,1967,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5720,1999,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment82() {
 c = tomb.createChunk(5720,2031,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5720,2063,0);
@@ -8740,13 +8737,13 @@ c = tomb.createChunk(5880,2063,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5880,2095,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment83() {
 c = tomb.createChunk(5880,2127,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5912,1871,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment83() {
 c = tomb.createChunk(5912,1903,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5912,1935,0);
@@ -8843,13 +8840,13 @@ c = tomb.createChunk(6072,1935,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6072,1967,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment84() {
 c = tomb.createChunk(6072,1999,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6072,2031,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment84() {
 c = tomb.createChunk(6072,2063,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6072,2095,0);
@@ -8946,13 +8943,13 @@ c = tomb.createChunk(6232,2095,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6232,2127,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment85() {
 c = tomb.createChunk(6264,1871,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6264,1903,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment85() {
 c = tomb.createChunk(6264,1935,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6264,1967,0);
@@ -9049,13 +9046,13 @@ c = tomb.createChunk(6424,1967,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6424,1999,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment86() {
 c = tomb.createChunk(6424,2031,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6424,2063,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment86() {
 c = tomb.createChunk(6424,2095,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6424,2127,0);
@@ -9152,13 +9149,13 @@ c = tomb.createChunk(6584,2127,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6616,1871,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment87() {
 c = tomb.createChunk(6616,1903,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6616,1935,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment87() {
 c = tomb.createChunk(6616,1967,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6616,1999,0);
@@ -9255,13 +9252,13 @@ c = tomb.createChunk(6776,1999,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6776,2031,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment88() {
 c = tomb.createChunk(6776,2063,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6776,2095,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment88() {
 c = tomb.createChunk(6776,2127,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6808,1871,0);
@@ -9358,13 +9355,13 @@ c = tomb.createChunk(6653,2455,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6653,2487,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment89() {
 c = tomb.createChunk(6653,2519,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6653,2551,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment89() {
 c = tomb.createChunk(6653,2583,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6653,2615,0);
@@ -9461,13 +9458,13 @@ c = tomb.createChunk(6781,2647,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6781,2679,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment90() {
 c = tomb.createChunk(6781,2711,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6813,2391,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment90() {
 c = tomb.createChunk(6813,2423,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6813,2455,0);
@@ -9564,13 +9561,13 @@ c = tombEdge.createChunk(3197,2363,0);
 if(c!=null) c.setPassable(false);
 c = tombEdge.createChunk(3229,2363,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment91() {
 c = tombEdge.createChunk(3261,2363,0);
 if(c!=null) c.setPassable(false);
 c = tombEdge.createChunk(3293,2363,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment91() {
 c = tombEdge.createChunk(3325,2363,0);
 if(c!=null) c.setPassable(false);
 c = tombEdge.createChunk(3357,2363,0);
@@ -9667,13 +9664,13 @@ c = tomb.createChunk(2589,2523,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2589,2555,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment92() {
 c = tomb.createChunk(2589,2587,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2589,2619,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment92() {
 c = tomb.createChunk(2589,2651,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2621,2395,0);
@@ -9770,13 +9767,13 @@ c = tomb.createChunk(2781,2555,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2781,2587,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment93() {
 c = tomb.createChunk(2781,2619,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2781,2651,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment93() {
 c = tomb.createChunk(2749,2395,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2813,2523,0);
@@ -9873,13 +9870,13 @@ c = tomb.createChunk(2973,2651,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(3005,2395,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment94() {
 c = tomb.createChunk(3005,2427,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(3005,2459,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment94() {
 c = tomb.createChunk(3005,2491,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(3005,2523,0);
@@ -9976,13 +9973,13 @@ c = tomb.createChunk(3165,2523,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(3165,2555,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment95() {
 c = tomb.createChunk(3165,2587,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(3165,2619,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment95() {
 c = tomb.createChunk(3165,2651,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(3197,2395,0);
@@ -10079,13 +10076,13 @@ c = tomb.createChunk(3357,2395,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(3357,2427,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment96() {
 c = tomb.createChunk(3357,2459,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(3357,2491,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment96() {
 c = tomb.createChunk(3357,2523,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(3357,2555,0);
@@ -10182,13 +10179,13 @@ c = tomb.createChunk(3517,2555,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(3517,2587,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment97() {
 c = tomb.createChunk(3517,2619,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(3517,2651,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment97() {
 c = tomb.createChunk(3549,2395,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(3549,2427,0);
@@ -10285,13 +10282,13 @@ c = tomb.createChunk(3709,2427,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(3709,2459,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment98() {
 c = tomb.createChunk(3709,2491,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(3709,2523,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment98() {
 c = tomb.createChunk(3709,2555,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(3709,2587,0);
@@ -10388,13 +10385,13 @@ c = tomb.createChunk(3869,2587,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(3869,2619,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment99() {
 c = tomb.createChunk(3869,2651,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(3901,2395,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment99() {
 c = tomb.createChunk(3901,2427,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(3901,2459,0);
@@ -10491,13 +10488,13 @@ c = tomb.createChunk(4061,2459,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(4061,2491,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment100() {
 c = tomb.createChunk(4061,2523,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(4061,2555,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment100() {
 c = tomb.createChunk(4061,2587,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(4061,2619,0);
@@ -10594,13 +10591,13 @@ c = tomb.createChunk(4221,2619,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(4221,2651,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment101() {
 c = tomb.createChunk(4253,2395,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(4253,2427,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment101() {
 c = tomb.createChunk(4253,2459,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(4253,2491,0);
@@ -10697,13 +10694,13 @@ c = tomb.createChunk(4413,2491,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(4413,2523,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment102() {
 c = tomb.createChunk(4413,2555,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(4413,2587,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment102() {
 c = tomb.createChunk(4413,2619,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(4413,2651,0);
@@ -10800,13 +10797,13 @@ c = tomb.createChunk(4989,2651,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5021,2395,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment103() {
 c = tomb.createChunk(5021,2427,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5021,2459,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment103() {
 c = tomb.createChunk(5021,2491,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5021,2523,0);
@@ -10903,13 +10900,13 @@ c = tomb.createChunk(5213,2619,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5213,2651,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment104() {
 c = tomb.createChunk(5245,2523,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5245,2555,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment104() {
 c = tomb.createChunk(5245,2587,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5245,2619,0);
@@ -11006,13 +11003,13 @@ c = tomb.createChunk(5501,2395,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5501,2427,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment105() {
 c = tomb.createChunk(5501,2459,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5501,2491,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment105() {
 c = tomb.createChunk(5501,2523,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5501,2555,0);
@@ -11109,13 +11106,13 @@ c = tomb.createChunk(5661,2555,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5661,2587,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment106() {
 c = tomb.createChunk(5661,2619,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5661,2651,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment106() {
 c = tomb.createChunk(5693,2395,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5693,2427,0);
@@ -11212,13 +11209,13 @@ c = tomb.createChunk(5853,2427,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5853,2459,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment107() {
 c = tomb.createChunk(5853,2491,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5853,2523,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment107() {
 c = tomb.createChunk(5853,2555,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5853,2587,0);
@@ -11315,13 +11312,13 @@ c = tomb.createChunk(6013,2587,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6013,2619,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment108() {
 c = tomb.createChunk(6013,2651,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6045,2395,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment108() {
 c = tomb.createChunk(6045,2427,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6045,2459,0);
@@ -11418,13 +11415,13 @@ c = tomb.createChunk(6205,2459,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6205,2491,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment109() {
 c = tomb.createChunk(6205,2523,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6205,2555,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment109() {
 c = tomb.createChunk(6205,2587,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6205,2619,0);
@@ -11521,13 +11518,13 @@ c = tomb.createChunk(6365,2619,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6365,2651,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment110() {
 c = tomb.createChunk(6397,2395,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6397,2427,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment110() {
 c = tomb.createChunk(6397,2459,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6397,2491,0);
@@ -11624,13 +11621,13 @@ c = tomb.createChunk(6557,2491,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6557,2523,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment111() {
 c = tomb.createChunk(6557,2555,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6557,2587,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment111() {
 c = tomb.createChunk(6557,2619,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6557,2651,0);
@@ -11727,13 +11724,13 @@ c = tomb.createChunk(6779,2269,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6779,2301,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment112() {
 c = tomb.createChunk(6779,2333,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6779,2365,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment112() {
 c = tomb.createChunk(6748,2158,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6780,2158,0);
@@ -11830,13 +11827,13 @@ c = tomb.createChunk(2567,2831,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2599,2671,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment113() {
 c = tomb.createChunk(2599,2703,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2599,2735,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment113() {
 c = tomb.createChunk(2599,2767,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2599,2799,0);
@@ -11933,13 +11930,13 @@ c = tomb.createChunk(2855,2703,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2855,2735,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment114() {
 c = tomb.createChunk(2855,2767,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2855,2799,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment114() {
 c = tomb.createChunk(2855,2831,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2887,2671,0);
@@ -12036,13 +12033,13 @@ c = tomb.createChunk(6747,2154,0);
 if(c!=null) c.setPassable(false);
 c = tombEdge.createChunk(4989,2363,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment115() {
 c = tombEdge.createChunk(5021,2363,0);
 if(c!=null) c.setPassable(false);
 c = tombEdge.createChunk(5053,2363,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment115() {
 c = tombEdge.createChunk(5085,2363,0);
 if(c!=null) c.setPassable(false);
 c = tombEdge.createChunk(5117,2363,0);
@@ -12139,13 +12136,13 @@ c = tomb.createChunk(6875,890,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6875,922,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment116() {
 c = tomb.createChunk(6875,954,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6875,986,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment116() {
 c = tomb.createChunk(6875,1018,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6875,1050,0);
@@ -12242,13 +12239,13 @@ c = tomb.createChunk(4471,2765,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(4471,2797,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment117() {
 c = tomb.createChunk(4471,2829,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(4471,2861,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment117() {
 c = tomb.createChunk(4471,2893,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(4471,2925,0);
@@ -12345,13 +12342,13 @@ c = tomb.createChunk(4599,2829,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(4599,2861,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment118() {
 c = tomb.createChunk(4599,2893,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(4599,2925,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment118() {
 c = tomb.createChunk(4599,2957,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(4599,2989,0);
@@ -12448,13 +12445,13 @@ c = tomb.createChunk(4727,2893,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(4727,2925,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment119() {
 c = tomb.createChunk(4727,2957,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(4727,2989,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment119() {
 c = tomb.createChunk(4727,3021,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(4759,2669,0);
@@ -12551,13 +12548,13 @@ c = tomb.createChunk(4855,2957,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(4855,2989,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment120() {
 c = tomb.createChunk(4855,3021,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(4887,2669,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment120() {
 c = tomb.createChunk(4887,2701,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(4887,2733,0);
@@ -12654,13 +12651,13 @@ c = tomb.createChunk(4983,3021,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5015,2669,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment121() {
 c = tomb.createChunk(5015,2701,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5015,2733,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment121() {
 c = tomb.createChunk(5015,2765,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5015,2797,0);
@@ -12757,13 +12754,13 @@ c = tomb.createChunk(4348,2801,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(4348,2833,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment122() {
 c = tomb.createChunk(4348,2865,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(4380,2673,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment122() {
 c = tomb.createChunk(4380,2705,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(4380,2737,0);
@@ -12860,13 +12857,13 @@ c = tomb.createChunk(4411,2925,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(4411,2957,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment123() {
 c = tomb.createChunk(5133,2683,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5133,2715,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment123() {
 c = tomb.createChunk(5133,2747,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5133,2779,0);
@@ -12963,13 +12960,13 @@ c = tomb.createChunk(5325,2875,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5357,2683,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment124() {
 c = tomb.createChunk(5357,2715,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5357,2747,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment124() {
 c = tomb.createChunk(5357,2779,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5357,2811,0);
@@ -13066,13 +13063,13 @@ c = tomb.createChunk(5581,2683,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5581,2715,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment125() {
 c = tomb.createChunk(5581,2747,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5581,2779,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment125() {
 c = tomb.createChunk(5581,2811,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5581,2843,0);
@@ -13169,13 +13166,13 @@ c = tomb.createChunk(5412,2957,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5444,2893,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment126() {
 c = tomb.createChunk(5444,2925,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5444,2957,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment126() {
 c = tomb.createChunk(5476,2893,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5476,2925,0);
@@ -13272,13 +13269,13 @@ c = tomb.createChunk(2845,2159,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2845,2191,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment127() {
 c = tomb.createChunk(2845,2223,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2845,2255,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment127() {
 c = tombEdge.createChunk(4957,2490,0);
 if(c!=null) c.setPassable(false);
 c = tombEdge.createChunk(4900,2371,0);
@@ -13375,13 +13372,13 @@ c = tomb.createChunk(1632,1327,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1632,1359,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment128() {
 c = tomb.createChunk(1664,1167,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1664,1199,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment128() {
 c = tomb.createChunk(1664,1231,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1664,1263,0);
@@ -13478,13 +13475,13 @@ c = tomb.createChunk(492,1889,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(524,1889,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment129() {
 c = tomb.createChunk(556,1889,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(588,1889,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment129() {
 c = tomb.createChunk(620,1889,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(652,1889,0);
@@ -13581,13 +13578,13 @@ c = tomb.createChunk(2011,2291,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2011,2323,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment130() {
 c = tomb.createChunk(2011,2355,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2011,2387,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment130() {
 c = tomb.createChunk(2043,2163,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2043,2195,0);
@@ -13684,13 +13681,13 @@ c = tomb.createChunk(2267,2355,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2267,2387,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment131() {
 c = tomb.createChunk(2299,2163,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2299,2195,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment131() {
 c = tomb.createChunk(2299,2227,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2299,2259,0);
@@ -13787,13 +13784,13 @@ c = tomb.createChunk(1803,2189,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1803,2221,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment132() {
 c = tomb.createChunk(1803,2253,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1803,2285,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment132() {
 c = tomb.createChunk(1803,2317,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1803,2349,0);
@@ -13890,13 +13887,13 @@ c = tomb.createChunk(1899,2349,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1899,2381,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment133() {
 c = tomb.createChunk(1899,2413,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1899,2445,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment133() {
 c = tomb.createChunk(1899,2477,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1899,2509,0);
@@ -13993,13 +13990,13 @@ c = tomb.createChunk(2022,2509,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2022,2541,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment134() {
 c = tomb.createChunk(2022,2573,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2022,2605,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment134() {
 c = tomb.createChunk(2022,2637,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2054,2413,0);
@@ -14096,13 +14093,13 @@ c = tomb.createChunk(2214,2573,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2214,2605,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment135() {
 c = tomb.createChunk(2214,2637,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2246,2413,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment135() {
 c = tomb.createChunk(2246,2445,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2246,2477,0);
@@ -14199,13 +14196,13 @@ c = tomb.createChunk(2406,2637,0);
 if(c!=null) c.setPassable(false);
 c = tombEdge.createChunk(2426,1845,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment136() {
 c = tombEdge.createChunk(2458,1845,0);
 if(c!=null) c.setPassable(false);
 c = tombEdge.createChunk(2490,1845,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment136() {
 c = tomb.createChunk(2490,1867,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2490,1899,0);
@@ -14302,13 +14299,13 @@ c = tomb.createChunk(2475,2299,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2475,2331,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment137() {
 c = tomb.createChunk(2475,2363,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2475,2395,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment137() {
 c = tomb.createChunk(2475,2427,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2475,2459,0);
@@ -14405,13 +14402,13 @@ c = tombEdge.createChunk(3010,1845,0);
 if(c!=null) c.setPassable(false);
 c = tombEdge.createChunk(3042,1845,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment138() {
 c = tombEdge.createChunk(3074,1845,0);
 if(c!=null) c.setPassable(false);
 c = tombEdge.createChunk(3106,1845,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment138() {
 c = tombEdge.createChunk(3138,1845,0);
 if(c!=null) c.setPassable(false);
 c = tombEdge.createChunk(3170,1845,0);
@@ -14508,13 +14505,13 @@ c = tombEdge.createChunk(4610,1845,0);
 if(c!=null) c.setPassable(false);
 c = tombEdge.createChunk(4642,1845,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment139() {
 c = tombEdge.createChunk(4674,1845,0);
 if(c!=null) c.setPassable(false);
 c = tombEdge.createChunk(4706,1845,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment139() {
 c = tombEdge.createChunk(4738,1845,0);
 if(c!=null) c.setPassable(false);
 c = tombEdge.createChunk(4770,1845,0);
@@ -14611,13 +14608,13 @@ c = tombEdge.createChunk(6210,1845,0);
 if(c!=null) c.setPassable(false);
 c = tombEdge.createChunk(6242,1845,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment140() {
 c = tombEdge.createChunk(6274,1845,0);
 if(c!=null) c.setPassable(false);
 c = tombEdge.createChunk(6306,1845,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment140() {
 c = tombEdge.createChunk(6338,1845,0);
 if(c!=null) c.setPassable(false);
 c = tombEdge.createChunk(6370,1845,0);
@@ -14714,13 +14711,13 @@ c = tomb.createChunk(2711,1263,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2711,1295,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment141() {
 c = tomb.createChunk(2711,1327,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2711,1359,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment141() {
 c = tomb.createChunk(2743,1231,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2743,1263,0);
@@ -14817,13 +14814,13 @@ c = tomb.createChunk(2994,1295,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2994,1327,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment142() {
 c = tomb.createChunk(2994,1359,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(3026,1231,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment142() {
 c = tomb.createChunk(3026,1263,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(3026,1295,0);
@@ -14920,13 +14917,13 @@ c = tomb.createChunk(3313,1231,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(3313,1263,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment143() {
 c = tomb.createChunk(3313,1295,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(3313,1327,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment143() {
 c = tomb.createChunk(3313,1359,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(3345,1231,0);
@@ -15023,13 +15020,13 @@ c = tomb.createChunk(3598,1263,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(3598,1295,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment144() {
 c = tomb.createChunk(3598,1327,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(3598,1359,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment144() {
 c = tomb.createChunk(3630,1231,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(3630,1263,0);
@@ -15126,13 +15123,13 @@ c = tomb.createChunk(2468,2746,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2468,2778,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment145() {
 c = tomb.createChunk(2468,2810,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2159,2657,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment145() {
 c = tomb.createChunk(2159,2689,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2159,2721,0);
@@ -15229,13 +15226,13 @@ c = tomb.createChunk(6871,1866,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6871,1898,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment146() {
 c = tomb.createChunk(6871,1930,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6871,1962,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment146() {
 c = tomb.createChunk(6871,1994,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6871,2026,0);
@@ -15332,13 +15329,13 @@ c = tomb.createChunk(6903,1642,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6903,1674,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment147() {
 c = tomb.createChunk(6903,1706,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6903,1738,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment147() {
 c = tomb.createChunk(6903,1770,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6903,1802,0);
@@ -15435,13 +15432,13 @@ c = tomb.createChunk(6935,1418,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6935,1450,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment148() {
 c = tomb.createChunk(6935,1482,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6935,1514,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment148() {
 c = tomb.createChunk(6935,1546,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6935,1578,0);
@@ -15538,13 +15535,13 @@ c = tomb.createChunk(6967,1194,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6967,1226,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment149() {
 c = tomb.createChunk(6967,1258,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6967,1290,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment149() {
 c = tomb.createChunk(6967,1322,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6967,1354,0);
@@ -15641,13 +15638,13 @@ c = tomb.createChunk(6999,970,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6999,1002,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment150() {
 c = tomb.createChunk(6999,1034,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6999,1066,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment150() {
 c = tomb.createChunk(6999,1098,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6999,1130,0);
@@ -15744,13 +15741,13 @@ c = tomb.createChunk(7031,746,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(7031,778,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment151() {
 c = tomb.createChunk(7031,810,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(7031,842,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment151() {
 c = tomb.createChunk(7031,874,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(7031,906,0);
@@ -15847,13 +15844,13 @@ c = tomb.createChunk(7031,2346,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(7031,2378,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment152() {
 c = tomb.createChunk(7031,2410,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(7031,2442,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment152() {
 c = tomb.createChunk(7031,2474,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(7031,2506,0);
@@ -15950,13 +15947,13 @@ c = tomb.createChunk(7063,2122,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(7063,2154,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment153() {
 c = tomb.createChunk(7063,2186,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(7063,2218,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment153() {
 c = tomb.createChunk(7063,2250,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(7063,2282,0);
@@ -16053,13 +16050,13 @@ c = tomb.createChunk(7095,1898,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(7095,1930,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment154() {
 c = tomb.createChunk(7095,1962,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(7095,1994,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment154() {
 c = tomb.createChunk(7095,2026,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(7095,2058,0);
@@ -16156,13 +16153,13 @@ c = tomb.createChunk(7127,1674,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(7127,1706,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment155() {
 c = tomb.createChunk(7127,1738,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(7127,1770,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment155() {
 c = tomb.createChunk(7127,1802,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(7127,1834,0);
@@ -16259,13 +16256,13 @@ c = tomb.createChunk(7159,1450,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(7159,1482,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment156() {
 c = tomb.createChunk(7159,1514,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(7159,1546,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment156() {
 c = tomb.createChunk(7159,1578,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(7159,1610,0);
@@ -16362,13 +16359,13 @@ c = tomb.createChunk(7191,1226,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(7191,1258,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment157() {
 c = tomb.createChunk(7191,1290,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(7191,1322,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment157() {
 c = tomb.createChunk(7191,1354,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(7191,1386,0);
@@ -16465,13 +16462,13 @@ c = tomb.createChunk(7223,1002,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(7223,1034,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment158() {
 c = tomb.createChunk(7223,1066,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(7223,1098,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment158() {
 c = tomb.createChunk(7223,1130,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(7223,1162,0);
@@ -16568,13 +16565,13 @@ c = tomb.createChunk(6840,2270,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6840,2302,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment159() {
 c = tomb.createChunk(6840,2334,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6840,2366,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment159() {
 c = tomb.createChunk(6840,2398,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6840,2430,0);
@@ -16671,13 +16668,13 @@ c = tomb.createChunk(6959,2755,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6959,2787,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment160() {
 c = tomb.createChunk(6959,2819,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6991,2563,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment160() {
 c = tomb.createChunk(6991,2595,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6991,2627,0);
@@ -16774,13 +16771,13 @@ c = tomb.createChunk(7151,2627,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(7151,2659,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment161() {
 c = tomb.createChunk(7151,2691,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(7151,2723,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment161() {
 c = tomb.createChunk(7151,2755,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(7151,2787,0);
@@ -16841,17 +16838,21 @@ c = tomb.createChunk(7247,2787,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(7247,2819,0);
 if(c!=null) c.setPassable(false);
+c = tombEdge.createChunk(460,1533,0);
+if(c!=null) c.setPassable(false);
 c = new doodads.tomb.wallTorch(255,369,0);
 if(c!=null) c.setPassable(true);
-c = new doodads.tomb.wallTorch(780,1483,0);
+c = new doodads.tomb.wallTorch(732,1503,0);
 if(c!=null) c.setPassable(true);
-c = new doodads.tomb.wallTorch(1044,1520,0);
+c = new doodads.tomb.wallTorch(1014,1520,0);
 if(c!=null) c.setPassable(true);
 c = new doodads.tomb.wallTorch(3700,2266,0);
 if(c!=null) c.setPassable(true);
-c = new doodads.tomb.wallTorch(839,1281,0);
+c = new doodads.tomb.wallTorch(821,1288,0);
 if(c!=null) c.setPassable(true);
-c = new doodads.tomb.wallTorch(1247,1520,0);
+c = new doodads.tomb.wallTorch(1232,1520,0);
+if(c!=null) c.setPassable(true);
+c = new doodads.tomb.wallTorch(573,971,0);
 if(c!=null) c.setPassable(true);
 u = new units.unitTypes.tomb.shadowDude(26,194);
 u.setFacingDirection((String)"Right");
@@ -17304,65 +17305,17 @@ commands.add(new units.unitCommands.commands.moveCommand(1150.0,1063.0));
 commands.add(new units.unitCommands.commands.moveCommand(1150.0,1188.0));
 commands.add(new units.unitCommands.commands.moveCommand(1150.0,1313.0));
 u.setRepeatCommands(commands);
-u = new units.unitTypes.tomb.shadowDude(644,1063);
-u.setFacingDirection((String)"Right");
-u.setMoveSpeed((float)1.3);
-u.jumpSpeed = (float)10.0;
-u = new units.unitTypes.tomb.shadowDude(644,1013);
-u.setFacingDirection((String)"Right");
-u.setMoveSpeed((float)2.0);
-u.jumpSpeed = (float)10.0;
-u = new units.unitTypes.tomb.shadowDude(644,963);
-u.setFacingDirection((String)"Right");
-u.setMoveSpeed((float)1.75);
-u.jumpSpeed = (float)10.0;
-u = new units.unitTypes.tomb.shadowDude(644,913);
-u.setFacingDirection((String)"Right");
-u.setMoveSpeed((float)1.75);
-u.jumpSpeed = (float)10.0;
-u = new units.unitTypes.tomb.shadowDude(644,863);
-u.setFacingDirection((String)"Right");
-u.setMoveSpeed((float)1.75);
-u.jumpSpeed = (float)10.0;
-u = new units.unitTypes.tomb.shadowDude(896,1063);
-u.setFacingDirection((String)"Right");
-u.setMoveSpeed((float)1.3);
-u.jumpSpeed = (float)10.0;
-u = new units.unitTypes.tomb.shadowDude(896,1013);
-u.setFacingDirection((String)"Right");
-u.setMoveSpeed((float)2.0);
-u.jumpSpeed = (float)10.0;
-u = new units.unitTypes.tomb.shadowDude(896,963);
-u.setFacingDirection((String)"Right");
-u.setMoveSpeed((float)2.0);
-u.jumpSpeed = (float)10.0;
-u = new units.unitTypes.tomb.shadowDude(896,913);
-u.setFacingDirection((String)"Right");
-u.setMoveSpeed((float)1.75);
-u.jumpSpeed = (float)10.0;
-u = new units.unitTypes.tomb.shadowDude(896,863);
-u.setFacingDirection((String)"Right");
-u.setMoveSpeed((float)1.75);
-u.jumpSpeed = (float)10.0;
-u = new units.unitTypes.tomb.lightDude(550,983);
-u.setFacingDirection((String)"Right");
-u.setMoveSpeed((float)1.2);
+u = new units.unitTypes.tomb.shadowDude(530,1390);
+u.setFacingDirection((String)"Down");
+u.setMoveSpeed((float)2.9);
 u.jumpSpeed = (float)10.0;
 commands = new commandList();
-commands.add(new units.unitCommands.commands.moveCommand(645.0,983.0));
-commands.add(new units.unitCommands.commands.moveCommand(550.0,983.0));
-u.setRepeatCommands(commands);
-u = new units.unitTypes.tomb.lightDude(900,855);
-u.setFacingDirection((String)"Left");
-u.setMoveSpeed((float)2.0);
-u.jumpSpeed = (float)10.0;
-commands = new commandList();
-commands.add(new units.unitCommands.commands.moveCommand(899.0,982.0));
-commands.add(new units.unitCommands.commands.moveCommand(900.0,855.0));
+commands.add(new units.unitCommands.commands.moveCommand(530.0,1800.0));
+commands.add(new units.unitCommands.commands.moveCommand(530.0,1390.0));
 u.setRepeatCommands(commands);
 u = new units.unitTypes.tomb.shadowDude(560,1390);
 u.setFacingDirection((String)"Down");
-u.setMoveSpeed((float)3.0);
+u.setMoveSpeed((float)2.9);
 u.jumpSpeed = (float)10.0;
 commands = new commandList();
 commands.add(new units.unitCommands.commands.moveCommand(560.0,1800.0));
@@ -17370,7 +17323,7 @@ commands.add(new units.unitCommands.commands.moveCommand(560.0,1390.0));
 u.setRepeatCommands(commands);
 u = new units.unitTypes.tomb.shadowDude(590,1390);
 u.setFacingDirection((String)"Down");
-u.setMoveSpeed((float)3.0);
+u.setMoveSpeed((float)2.9);
 u.jumpSpeed = (float)10.0;
 commands = new commandList();
 commands.add(new units.unitCommands.commands.moveCommand(590.0,1800.0));
@@ -17378,7 +17331,7 @@ commands.add(new units.unitCommands.commands.moveCommand(590.0,1390.0));
 u.setRepeatCommands(commands);
 u = new units.unitTypes.tomb.shadowDude(620,1390);
 u.setFacingDirection((String)"Down");
-u.setMoveSpeed((float)3.0);
+u.setMoveSpeed((float)2.9);
 u.jumpSpeed = (float)10.0;
 commands = new commandList();
 commands.add(new units.unitCommands.commands.moveCommand(620.0,1800.0));
@@ -17386,7 +17339,7 @@ commands.add(new units.unitCommands.commands.moveCommand(620.0,1390.0));
 u.setRepeatCommands(commands);
 u = new units.unitTypes.tomb.shadowDude(650,1390);
 u.setFacingDirection((String)"Down");
-u.setMoveSpeed((float)3.0);
+u.setMoveSpeed((float)2.9);
 u.jumpSpeed = (float)10.0;
 commands = new commandList();
 commands.add(new units.unitCommands.commands.moveCommand(650.0,1800.0));
@@ -17394,7 +17347,7 @@ commands.add(new units.unitCommands.commands.moveCommand(650.0,1390.0));
 u.setRepeatCommands(commands);
 u = new units.unitTypes.tomb.shadowDude(680,1390);
 u.setFacingDirection((String)"Down");
-u.setMoveSpeed((float)3.0);
+u.setMoveSpeed((float)2.9);
 u.jumpSpeed = (float)10.0;
 commands = new commandList();
 commands.add(new units.unitCommands.commands.moveCommand(680.0,1800.0));
@@ -17402,7 +17355,7 @@ commands.add(new units.unitCommands.commands.moveCommand(680.0,1390.0));
 u.setRepeatCommands(commands);
 u = new units.unitTypes.tomb.shadowDude(710,1390);
 u.setFacingDirection((String)"Down");
-u.setMoveSpeed((float)3.0);
+u.setMoveSpeed((float)2.9);
 u.jumpSpeed = (float)10.0;
 commands = new commandList();
 commands.add(new units.unitCommands.commands.moveCommand(710.0,1800.0));
@@ -17410,7 +17363,7 @@ commands.add(new units.unitCommands.commands.moveCommand(710.0,1390.0));
 u.setRepeatCommands(commands);
 u = new units.unitTypes.tomb.shadowDude(740,1390);
 u.setFacingDirection((String)"Down");
-u.setMoveSpeed((float)3.0);
+u.setMoveSpeed((float)2.9);
 u.jumpSpeed = (float)10.0;
 commands = new commandList();
 commands.add(new units.unitCommands.commands.moveCommand(740.0,1800.0));
@@ -17418,7 +17371,7 @@ commands.add(new units.unitCommands.commands.moveCommand(740.0,1390.0));
 u.setRepeatCommands(commands);
 u = new units.unitTypes.tomb.shadowDude(770,1390);
 u.setFacingDirection((String)"Down");
-u.setMoveSpeed((float)3.0);
+u.setMoveSpeed((float)2.9);
 u.jumpSpeed = (float)10.0;
 commands = new commandList();
 commands.add(new units.unitCommands.commands.moveCommand(770.0,1800.0));
@@ -17426,7 +17379,7 @@ commands.add(new units.unitCommands.commands.moveCommand(770.0,1390.0));
 u.setRepeatCommands(commands);
 u = new units.unitTypes.tomb.shadowDude(800,1390);
 u.setFacingDirection((String)"Down");
-u.setMoveSpeed((float)3.0);
+u.setMoveSpeed((float)2.9);
 u.jumpSpeed = (float)10.0;
 commands = new commandList();
 commands.add(new units.unitCommands.commands.moveCommand(800.0,1800.0));
@@ -17434,7 +17387,7 @@ commands.add(new units.unitCommands.commands.moveCommand(800.0,1390.0));
 u.setRepeatCommands(commands);
 u = new units.unitTypes.tomb.shadowDude(830,1390);
 u.setFacingDirection((String)"Down");
-u.setMoveSpeed((float)3.0);
+u.setMoveSpeed((float)2.9);
 u.jumpSpeed = (float)10.0;
 commands = new commandList();
 commands.add(new units.unitCommands.commands.moveCommand(830.0,1800.0));
@@ -17442,7 +17395,7 @@ commands.add(new units.unitCommands.commands.moveCommand(830.0,1390.0));
 u.setRepeatCommands(commands);
 u = new units.unitTypes.tomb.shadowDude(860,1390);
 u.setFacingDirection((String)"Down");
-u.setMoveSpeed((float)3.0);
+u.setMoveSpeed((float)2.9);
 u.jumpSpeed = (float)10.0;
 commands = new commandList();
 commands.add(new units.unitCommands.commands.moveCommand(860.0,1800.0));
@@ -17450,7 +17403,7 @@ commands.add(new units.unitCommands.commands.moveCommand(860.0,1390.0));
 u.setRepeatCommands(commands);
 u = new units.unitTypes.tomb.shadowDude(890,1390);
 u.setFacingDirection((String)"Down");
-u.setMoveSpeed((float)3.0);
+u.setMoveSpeed((float)2.9);
 u.jumpSpeed = (float)10.0;
 commands = new commandList();
 commands.add(new units.unitCommands.commands.moveCommand(890.0,1800.0));
@@ -17458,7 +17411,7 @@ commands.add(new units.unitCommands.commands.moveCommand(890.0,1390.0));
 u.setRepeatCommands(commands);
 u = new units.unitTypes.tomb.shadowDude(920,1390);
 u.setFacingDirection((String)"Down");
-u.setMoveSpeed((float)3.0);
+u.setMoveSpeed((float)2.9);
 u.jumpSpeed = (float)10.0;
 commands = new commandList();
 commands.add(new units.unitCommands.commands.moveCommand(920.0,1800.0));
@@ -17466,7 +17419,7 @@ commands.add(new units.unitCommands.commands.moveCommand(920.0,1390.0));
 u.setRepeatCommands(commands);
 u = new units.unitTypes.tomb.shadowDude(950,1390);
 u.setFacingDirection((String)"Down");
-u.setMoveSpeed((float)3.0);
+u.setMoveSpeed((float)2.9);
 u.jumpSpeed = (float)10.0;
 commands = new commandList();
 commands.add(new units.unitCommands.commands.moveCommand(950.0,1800.0));
@@ -17474,7 +17427,7 @@ commands.add(new units.unitCommands.commands.moveCommand(950.0,1390.0));
 u.setRepeatCommands(commands);
 u = new units.unitTypes.tomb.shadowDude(980,1390);
 u.setFacingDirection((String)"Down");
-u.setMoveSpeed((float)3.0);
+u.setMoveSpeed((float)2.9);
 u.jumpSpeed = (float)10.0;
 commands = new commandList();
 commands.add(new units.unitCommands.commands.moveCommand(980.0,1800.0));
@@ -17482,7 +17435,7 @@ commands.add(new units.unitCommands.commands.moveCommand(980.0,1390.0));
 u.setRepeatCommands(commands);
 u = new units.unitTypes.tomb.shadowDude(1010,1390);
 u.setFacingDirection((String)"Down");
-u.setMoveSpeed((float)3.0);
+u.setMoveSpeed((float)2.9);
 u.jumpSpeed = (float)10.0;
 commands = new commandList();
 commands.add(new units.unitCommands.commands.moveCommand(1010.0,1800.0));
@@ -17490,7 +17443,7 @@ commands.add(new units.unitCommands.commands.moveCommand(1010.0,1390.0));
 u.setRepeatCommands(commands);
 u = new units.unitTypes.tomb.shadowDude(1040,1390);
 u.setFacingDirection((String)"Down");
-u.setMoveSpeed((float)3.0);
+u.setMoveSpeed((float)2.9);
 u.jumpSpeed = (float)10.0;
 commands = new commandList();
 commands.add(new units.unitCommands.commands.moveCommand(1040.0,1800.0));
@@ -17498,7 +17451,7 @@ commands.add(new units.unitCommands.commands.moveCommand(1040.0,1390.0));
 u.setRepeatCommands(commands);
 u = new units.unitTypes.tomb.shadowDude(1070,1390);
 u.setFacingDirection((String)"Down");
-u.setMoveSpeed((float)3.0);
+u.setMoveSpeed((float)2.9);
 u.jumpSpeed = (float)10.0;
 commands = new commandList();
 commands.add(new units.unitCommands.commands.moveCommand(1070.0,1800.0));
@@ -17506,7 +17459,7 @@ commands.add(new units.unitCommands.commands.moveCommand(1070.0,1390.0));
 u.setRepeatCommands(commands);
 u = new units.unitTypes.tomb.shadowDude(1100,1390);
 u.setFacingDirection((String)"Down");
-u.setMoveSpeed((float)3.0);
+u.setMoveSpeed((float)2.9);
 u.jumpSpeed = (float)10.0;
 commands = new commandList();
 commands.add(new units.unitCommands.commands.moveCommand(1100.0,1800.0));
@@ -17514,7 +17467,7 @@ commands.add(new units.unitCommands.commands.moveCommand(1100.0,1390.0));
 u.setRepeatCommands(commands);
 u = new units.unitTypes.tomb.shadowDude(1130,1390);
 u.setFacingDirection((String)"Down");
-u.setMoveSpeed((float)3.0);
+u.setMoveSpeed((float)2.9);
 u.jumpSpeed = (float)10.0;
 commands = new commandList();
 commands.add(new units.unitCommands.commands.moveCommand(1130.0,1800.0));
@@ -17522,7 +17475,7 @@ commands.add(new units.unitCommands.commands.moveCommand(1130.0,1390.0));
 u.setRepeatCommands(commands);
 u = new units.unitTypes.tomb.shadowDude(1160,1390);
 u.setFacingDirection((String)"Down");
-u.setMoveSpeed((float)3.0);
+u.setMoveSpeed((float)2.9);
 u.jumpSpeed = (float)10.0;
 commands = new commandList();
 commands.add(new units.unitCommands.commands.moveCommand(1160.0,1800.0));
@@ -17530,7 +17483,7 @@ commands.add(new units.unitCommands.commands.moveCommand(1160.0,1390.0));
 u.setRepeatCommands(commands);
 u = new units.unitTypes.tomb.shadowDude(1190,1390);
 u.setFacingDirection((String)"Down");
-u.setMoveSpeed((float)3.0);
+u.setMoveSpeed((float)2.9);
 u.jumpSpeed = (float)10.0;
 commands = new commandList();
 commands.add(new units.unitCommands.commands.moveCommand(1190.0,1800.0));
@@ -17538,18 +17491,15 @@ commands.add(new units.unitCommands.commands.moveCommand(1190.0,1390.0));
 u.setRepeatCommands(commands);
 u = new units.unitTypes.tomb.shadowDude(1220,1390);
 u.setFacingDirection((String)"Down");
-u.setMoveSpeed((float)3.0);
+u.setMoveSpeed((float)2.9);
 u.jumpSpeed = (float)10.0;
 commands = new commandList();
 commands.add(new units.unitCommands.commands.moveCommand(1220.0,1800.0));
 commands.add(new units.unitCommands.commands.moveCommand(1220.0,1390.0));
 u.setRepeatCommands(commands);
-}
-
-public void addSegment163() {
 u = new units.unitTypes.tomb.shadowDude(1250,1390);
 u.setFacingDirection((String)"Down");
-u.setMoveSpeed((float)3.0);
+u.setMoveSpeed((float)2.9);
 u.jumpSpeed = (float)10.0;
 commands = new commandList();
 commands.add(new units.unitCommands.commands.moveCommand(1250.0,1800.0));
@@ -17557,7 +17507,7 @@ commands.add(new units.unitCommands.commands.moveCommand(1250.0,1390.0));
 u.setRepeatCommands(commands);
 u = new units.unitTypes.tomb.shadowDude(1280,1390);
 u.setFacingDirection((String)"Down");
-u.setMoveSpeed((float)3.0);
+u.setMoveSpeed((float)2.9);
 u.jumpSpeed = (float)10.0;
 commands = new commandList();
 commands.add(new units.unitCommands.commands.moveCommand(1280.0,1800.0));
@@ -17565,7 +17515,7 @@ commands.add(new units.unitCommands.commands.moveCommand(1280.0,1390.0));
 u.setRepeatCommands(commands);
 u = new units.unitTypes.tomb.shadowDude(1310,1390);
 u.setFacingDirection((String)"Down");
-u.setMoveSpeed((float)3.0);
+u.setMoveSpeed((float)2.9);
 u.jumpSpeed = (float)10.0;
 commands = new commandList();
 commands.add(new units.unitCommands.commands.moveCommand(1310.0,1800.0));
@@ -17573,7 +17523,7 @@ commands.add(new units.unitCommands.commands.moveCommand(1310.0,1390.0));
 u.setRepeatCommands(commands);
 u = new units.unitTypes.tomb.shadowDude(1340,1390);
 u.setFacingDirection((String)"Down");
-u.setMoveSpeed((float)3.0);
+u.setMoveSpeed((float)2.9);
 u.jumpSpeed = (float)10.0;
 commands = new commandList();
 commands.add(new units.unitCommands.commands.moveCommand(1340.0,1800.0));
@@ -17581,7 +17531,7 @@ commands.add(new units.unitCommands.commands.moveCommand(1340.0,1390.0));
 u.setRepeatCommands(commands);
 u = new units.unitTypes.tomb.shadowDude(1370,1390);
 u.setFacingDirection((String)"Down");
-u.setMoveSpeed((float)3.0);
+u.setMoveSpeed((float)2.9);
 u.jumpSpeed = (float)10.0;
 commands = new commandList();
 commands.add(new units.unitCommands.commands.moveCommand(1370.0,1800.0));
@@ -17589,7 +17539,7 @@ commands.add(new units.unitCommands.commands.moveCommand(1370.0,1390.0));
 u.setRepeatCommands(commands);
 u = new units.unitTypes.tomb.shadowDude(1400,1390);
 u.setFacingDirection((String)"Down");
-u.setMoveSpeed((float)3.0);
+u.setMoveSpeed((float)2.9);
 u.jumpSpeed = (float)10.0;
 commands = new commandList();
 commands.add(new units.unitCommands.commands.moveCommand(1400.0,1800.0));
@@ -17597,7 +17547,7 @@ commands.add(new units.unitCommands.commands.moveCommand(1400.0,1390.0));
 u.setRepeatCommands(commands);
 u = new units.unitTypes.tomb.shadowDude(1430,1390);
 u.setFacingDirection((String)"Down");
-u.setMoveSpeed((float)3.0);
+u.setMoveSpeed((float)2.9);
 u.jumpSpeed = (float)10.0;
 commands = new commandList();
 commands.add(new units.unitCommands.commands.moveCommand(1430.0,1800.0));
@@ -17605,7 +17555,7 @@ commands.add(new units.unitCommands.commands.moveCommand(1430.0,1390.0));
 u.setRepeatCommands(commands);
 u = new units.unitTypes.tomb.shadowDude(1460,1390);
 u.setFacingDirection((String)"Down");
-u.setMoveSpeed((float)3.0);
+u.setMoveSpeed((float)2.9);
 u.jumpSpeed = (float)10.0;
 commands = new commandList();
 commands.add(new units.unitCommands.commands.moveCommand(1460.0,1800.0));
@@ -17613,7 +17563,7 @@ commands.add(new units.unitCommands.commands.moveCommand(1460.0,1390.0));
 u.setRepeatCommands(commands);
 u = new units.unitTypes.tomb.shadowDude(1490,1390);
 u.setFacingDirection((String)"Down");
-u.setMoveSpeed((float)3.0);
+u.setMoveSpeed((float)2.9);
 u.jumpSpeed = (float)10.0;
 commands = new commandList();
 commands.add(new units.unitCommands.commands.moveCommand(1490.0,1800.0));
@@ -17621,19 +17571,11 @@ commands.add(new units.unitCommands.commands.moveCommand(1490.0,1390.0));
 u.setRepeatCommands(commands);
 u = new units.unitTypes.tomb.shadowDude(1520,1390);
 u.setFacingDirection((String)"Down");
-u.setMoveSpeed((float)3.0);
+u.setMoveSpeed((float)2.9);
 u.jumpSpeed = (float)10.0;
 commands = new commandList();
 commands.add(new units.unitCommands.commands.moveCommand(1520.0,1800.0));
 commands.add(new units.unitCommands.commands.moveCommand(1520.0,1390.0));
-u.setRepeatCommands(commands);
-u = new units.unitTypes.tomb.shadowDude(1550,1390);
-u.setFacingDirection((String)"Down");
-u.setMoveSpeed((float)3.0);
-u.jumpSpeed = (float)10.0;
-commands = new commandList();
-commands.add(new units.unitCommands.commands.moveCommand(1550.0,1800.0));
-commands.add(new units.unitCommands.commands.moveCommand(1550.0,1390.0));
 u.setRepeatCommands(commands);
 u = new units.unitTypes.tomb.shadowDude(26,144);
 u.setFacingDirection((String)"Right");
@@ -17643,6 +17585,9 @@ commands = new commandList();
 commands.add(new units.unitCommands.commands.moveCommand(320.0,144.0));
 commands.add(new units.unitCommands.commands.moveCommand(26.0,144.0));
 u.setRepeatCommands(commands);
+}
+
+public void addSegment163() {
 u = new units.unitTypes.tomb.shadowDude(2555,2384);
 u.setFacingDirection((String)"Right");
 u.setMoveSpeed((float)3.0);
@@ -17819,9 +17764,6 @@ u = new units.unitTypes.tomb.shadowDude(3061,2169);
 u.setFacingDirection((String)"Right");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
-}
-
-public void addSegment164() {
 u = new units.unitTypes.tomb.shadowDude(3061,2219);
 u.setFacingDirection((String)"Right");
 u.setMoveSpeed((float)3.0);
@@ -17870,6 +17812,9 @@ u = new units.unitTypes.tomb.shadowDude(3181,2319);
 u.setFacingDirection((String)"Right");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
+}
+
+public void addSegment164() {
 u = new units.unitTypes.tomb.shadowDude(3201,2169);
 u.setFacingDirection((String)"Right");
 u.setMoveSpeed((float)3.0);
@@ -18022,9 +17967,6 @@ u = new units.unitTypes.tomb.shadowDude(3461,2319);
 u.setFacingDirection((String)"Right");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
-}
-
-public void addSegment165() {
 u = new units.unitTypes.tomb.shadowDude(3481,2169);
 u.setFacingDirection((String)"Right");
 u.setMoveSpeed((float)3.0);
@@ -18073,6 +18015,9 @@ u = new units.unitTypes.tomb.shadowDude(3521,2319);
 u.setFacingDirection((String)"Right");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
+}
+
+public void addSegment165() {
 u = new units.unitTypes.tomb.shadowDude(3541,2169);
 u.setFacingDirection((String)"Right");
 u.setMoveSpeed((float)3.0);
@@ -18225,9 +18170,6 @@ u = new units.unitTypes.tomb.shadowDude(3721,2219);
 u.setFacingDirection((String)"Right");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
-}
-
-public void addSegment166() {
 u = new units.unitTypes.tomb.shadowDude(3721,2269);
 u.setFacingDirection((String)"Right");
 u.setMoveSpeed((float)3.0);
@@ -18276,6 +18218,9 @@ u = new units.unitTypes.tomb.shadowDude(3781,2219);
 u.setFacingDirection((String)"Right");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
+}
+
+public void addSegment166() {
 u = new units.unitTypes.tomb.shadowDude(3781,2269);
 u.setFacingDirection((String)"Right");
 u.setMoveSpeed((float)3.0);
@@ -18428,9 +18373,6 @@ u = new units.unitTypes.tomb.shadowDude(4141,2219);
 u.setFacingDirection((String)"Right");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
-}
-
-public void addSegment167() {
 u = new units.unitTypes.tomb.shadowDude(4141,2269);
 u.setFacingDirection((String)"Right");
 u.setMoveSpeed((float)3.0);
@@ -18479,6 +18421,9 @@ u = new units.unitTypes.tomb.shadowDude(4221,2219);
 u.setFacingDirection((String)"Right");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
+}
+
+public void addSegment167() {
 u = new units.unitTypes.tomb.shadowDude(4221,2269);
 u.setFacingDirection((String)"Right");
 u.setMoveSpeed((float)3.0);
@@ -18631,9 +18576,6 @@ u = new units.unitTypes.tomb.shadowDude(4461,2169);
 u.setFacingDirection((String)"Right");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
-}
-
-public void addSegment168() {
 u = new units.unitTypes.tomb.shadowDude(4461,2219);
 u.setFacingDirection((String)"Right");
 u.setMoveSpeed((float)3.0);
@@ -18682,6 +18624,9 @@ u = new units.unitTypes.tomb.shadowDude(4521,2169);
 u.setFacingDirection((String)"Right");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
+}
+
+public void addSegment168() {
 u = new units.unitTypes.tomb.shadowDude(4521,2219);
 u.setFacingDirection((String)"Right");
 u.setMoveSpeed((float)3.0);
@@ -18834,9 +18779,6 @@ u = new units.unitTypes.tomb.shadowDude(4682,2219);
 u.setFacingDirection((String)"Right");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
-}
-
-public void addSegment169() {
 u = new units.unitTypes.tomb.shadowDude(4682,2519);
 u.setFacingDirection((String)"Right");
 u.setMoveSpeed((float)3.0);
@@ -18885,6 +18827,9 @@ u = new units.unitTypes.tomb.shadowDude(4742,2169);
 u.setFacingDirection((String)"Right");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
+}
+
+public void addSegment169() {
 u = new units.unitTypes.tomb.shadowDude(4742,2219);
 u.setFacingDirection((String)"Right");
 u.setMoveSpeed((float)3.0);
@@ -19037,9 +18982,6 @@ u = new units.unitTypes.tomb.shadowDude(4862,2169);
 u.setFacingDirection((String)"Right");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
-}
-
-public void addSegment170() {
 u = new units.unitTypes.tomb.shadowDude(4862,2219);
 u.setFacingDirection((String)"Right");
 u.setMoveSpeed((float)3.0);
@@ -19088,6 +19030,9 @@ u = new units.unitTypes.tomb.shadowDude(4902,2519);
 u.setFacingDirection((String)"Right");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
+}
+
+public void addSegment170() {
 u = new units.unitTypes.tomb.shadowDude(4902,2619);
 u.setFacingDirection((String)"Right");
 u.setMoveSpeed((float)3.0);
@@ -19268,9 +19213,6 @@ commands = new commandList();
 commands.add(new units.unitCommands.commands.moveCommand(5700.0,2512.0));
 commands.add(new units.unitCommands.commands.moveCommand(5700.0,2297.0));
 u.setRepeatCommands(commands);
-}
-
-public void addSegment171() {
 u = new units.unitTypes.tomb.shadowDude(5720,2297);
 u.setFacingDirection((String)"Down");
 u.setMoveSpeed((float)3.5);
@@ -19367,6 +19309,9 @@ commands = new commandList();
 commands.add(new units.unitCommands.commands.moveCommand(5940.0,2362.0));
 commands.add(new units.unitCommands.commands.moveCommand(5940.0,2147.0));
 u.setRepeatCommands(commands);
+}
+
+public void addSegment171() {
 u = new units.unitTypes.tomb.shadowDude(5960,2147);
 u.setFacingDirection((String)"Down");
 u.setMoveSpeed((float)3.5);
@@ -19585,9 +19530,6 @@ u = new units.unitTypes.tomb.shadowDude(4822,2569);
 u.setFacingDirection((String)"Right");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
-}
-
-public void addSegment172() {
 u = new units.unitTypes.tomb.shadowDude(4842,2569);
 u.setFacingDirection((String)"Right");
 u.setMoveSpeed((float)3.0);
@@ -19617,338 +19559,341 @@ u.setFacingDirection((String)"Right");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
 u = new units.unitTypes.tomb.shadowDude(96,888);
-u.setFacingDirection((String)null);
+u.setFacingDirection((String)"null");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
 u = new units.unitTypes.tomb.shadowDude(116,888);
-u.setFacingDirection((String)null);
+u.setFacingDirection((String)"null");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
 u = new units.unitTypes.tomb.shadowDude(136,888);
-u.setFacingDirection((String)null);
+u.setFacingDirection((String)"null");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
 u = new units.unitTypes.tomb.shadowDude(156,888);
-u.setFacingDirection((String)null);
+u.setFacingDirection((String)"null");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
 u = new units.unitTypes.tomb.shadowDude(176,888);
-u.setFacingDirection((String)null);
+u.setFacingDirection((String)"null");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
+}
+
+public void addSegment172() {
 u = new units.unitTypes.tomb.shadowDude(196,888);
-u.setFacingDirection((String)null);
+u.setFacingDirection((String)"null");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
-c = new doodads.general.well(268,808,0);
+c = new doodads.general.well(268,806,0);
 if(c!=null) c.setPassable(false);
-u = new units.unitTypes.tomb.shadowDude(630,1163);
-u.setFacingDirection((String)null);
+u = new units.unitTypes.tomb.shadowDude(650,1163);
+u.setFacingDirection((String)"null");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
-u = new units.unitTypes.tomb.shadowDude(630,1213);
-u.setFacingDirection((String)null);
+u = new units.unitTypes.tomb.shadowDude(650,1213);
+u.setFacingDirection((String)"null");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
-u = new units.unitTypes.tomb.shadowDude(630,1313);
-u.setFacingDirection((String)null);
+u = new units.unitTypes.tomb.shadowDude(650,1313);
+u.setFacingDirection((String)"null");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
-u = new units.unitTypes.tomb.shadowDude(698,1163);
-u.setFacingDirection((String)null);
+u = new units.unitTypes.tomb.shadowDude(718,1163);
+u.setFacingDirection((String)"null");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
-u = new units.unitTypes.tomb.shadowDude(698,1213);
-u.setFacingDirection((String)null);
+u = new units.unitTypes.tomb.shadowDude(718,1213);
+u.setFacingDirection((String)"null");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
-u = new units.unitTypes.tomb.shadowDude(698,1313);
-u.setFacingDirection((String)null);
+u = new units.unitTypes.tomb.shadowDude(718,1313);
+u.setFacingDirection((String)"null");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
-u = new units.unitTypes.tomb.lightDude(573,1217);
+u = new units.unitTypes.tomb.lightDude(593,1217);
 u.setFacingDirection((String)"Right");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
 commands = new commandList();
-commands.add(new units.unitCommands.commands.moveCommand(742.0,1217.0));
-commands.add(new units.unitCommands.commands.moveCommand(573.0,1217.0));
+commands.add(new units.unitCommands.commands.moveCommand(762.0,1217.0));
+commands.add(new units.unitCommands.commands.moveCommand(593.0,1217.0));
 u.setRepeatCommands(commands);
-u = new units.unitTypes.tomb.shadowDude(630,1263);
-u.setFacingDirection((String)null);
+u = new units.unitTypes.tomb.shadowDude(650,1263);
+u.setFacingDirection((String)"null");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
-u = new units.unitTypes.tomb.shadowDude(698,1263);
-u.setFacingDirection((String)null);
+u = new units.unitTypes.tomb.shadowDude(718,1263);
+u.setFacingDirection((String)"null");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
-u = new units.unitTypes.tomb.lightDude(1390,1552);
+u = new units.unitTypes.tomb.lightDude(1376,1552);
 u.setFacingDirection((String)"Right");
-u.setMoveSpeed((float)1.2);
+u.setMoveSpeed((float)1.3);
 u.jumpSpeed = (float)10.0;
 commands = new commandList();
-commands.add(new units.unitCommands.commands.moveCommand(1538.0,1552.0));
-commands.add(new units.unitCommands.commands.moveCommand(1390.0,1552.0));
+commands.add(new units.unitCommands.commands.moveCommand(1530.0,1552.0));
+commands.add(new units.unitCommands.commands.moveCommand(1376.0,1552.0));
 u.setRepeatCommands(commands);
-c = new doodads.general.well(386,1499,0);
+c = new doodads.general.well(382,1502,0);
 if(c!=null) c.setPassable(false);
 u = new units.unitTypes.tomb.shadowDude(346,1842);
-u.setFacingDirection((String)null);
+u.setFacingDirection((String)"null");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
 u = new units.unitTypes.tomb.shadowDude(366,1842);
-u.setFacingDirection((String)null);
+u.setFacingDirection((String)"null");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
 u = new units.unitTypes.tomb.shadowDude(386,1842);
-u.setFacingDirection((String)null);
+u.setFacingDirection((String)"null");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
 u = new units.unitTypes.tomb.shadowDude(406,1842);
-u.setFacingDirection((String)null);
+u.setFacingDirection((String)"null");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
 u = new units.unitTypes.tomb.shadowDude(426,1842);
-u.setFacingDirection((String)null);
+u.setFacingDirection((String)"null");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
 u = new units.unitTypes.tomb.shadowDude(446,1842);
-u.setFacingDirection((String)null);
+u.setFacingDirection((String)"null");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
 u = new units.unitTypes.tomb.shadowDude(466,1842);
-u.setFacingDirection((String)null);
+u.setFacingDirection((String)"null");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
 u = new units.unitTypes.tomb.shadowDude(486,1842);
-u.setFacingDirection((String)null);
+u.setFacingDirection((String)"null");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
 u = new units.unitTypes.tomb.shadowDude(506,1842);
-u.setFacingDirection((String)null);
+u.setFacingDirection((String)"null");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
 u = new units.unitTypes.tomb.shadowDude(526,1842);
-u.setFacingDirection((String)null);
+u.setFacingDirection((String)"null");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
 u = new units.unitTypes.tomb.shadowDude(546,1842);
-u.setFacingDirection((String)null);
+u.setFacingDirection((String)"null");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
 u = new units.unitTypes.tomb.shadowDude(566,1842);
-u.setFacingDirection((String)null);
+u.setFacingDirection((String)"null");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
 u = new units.unitTypes.tomb.shadowDude(586,1842);
-u.setFacingDirection((String)null);
+u.setFacingDirection((String)"null");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
 u = new units.unitTypes.tomb.shadowDude(606,1842);
-u.setFacingDirection((String)null);
+u.setFacingDirection((String)"null");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
 u = new units.unitTypes.tomb.shadowDude(626,1842);
-u.setFacingDirection((String)null);
+u.setFacingDirection((String)"null");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
 u = new units.unitTypes.tomb.shadowDude(646,1842);
-u.setFacingDirection((String)null);
+u.setFacingDirection((String)"null");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
 u = new units.unitTypes.tomb.shadowDude(666,1842);
-u.setFacingDirection((String)null);
+u.setFacingDirection((String)"null");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
 u = new units.unitTypes.tomb.shadowDude(686,1842);
-u.setFacingDirection((String)null);
+u.setFacingDirection((String)"null");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
 u = new units.unitTypes.tomb.shadowDude(706,1842);
-u.setFacingDirection((String)null);
+u.setFacingDirection((String)"null");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
 u = new units.unitTypes.tomb.shadowDude(726,1842);
-u.setFacingDirection((String)null);
+u.setFacingDirection((String)"null");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
 u = new units.unitTypes.tomb.shadowDude(746,1842);
-u.setFacingDirection((String)null);
+u.setFacingDirection((String)"null");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
 u = new units.unitTypes.tomb.shadowDude(766,1842);
-u.setFacingDirection((String)null);
+u.setFacingDirection((String)"null");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
 u = new units.unitTypes.tomb.shadowDude(786,1842);
-u.setFacingDirection((String)null);
+u.setFacingDirection((String)"null");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
 u = new units.unitTypes.tomb.shadowDude(806,1842);
-u.setFacingDirection((String)null);
+u.setFacingDirection((String)"null");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
 u = new units.unitTypes.tomb.shadowDude(826,1842);
-u.setFacingDirection((String)null);
+u.setFacingDirection((String)"null");
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(846,1842);
+u.setFacingDirection((String)"null");
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(866,1842);
+u.setFacingDirection((String)"null");
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(886,1842);
+u.setFacingDirection((String)"null");
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(906,1842);
+u.setFacingDirection((String)"null");
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(926,1842);
+u.setFacingDirection((String)"null");
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(946,1842);
+u.setFacingDirection((String)"null");
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(966,1842);
+u.setFacingDirection((String)"null");
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(986,1842);
+u.setFacingDirection((String)"null");
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(1006,1842);
+u.setFacingDirection((String)"null");
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(1026,1842);
+u.setFacingDirection((String)"null");
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(1046,1842);
+u.setFacingDirection((String)"null");
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(1066,1842);
+u.setFacingDirection((String)"null");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
 }
 
 public void addSegment173() {
-u = new units.unitTypes.tomb.shadowDude(846,1842);
-u.setFacingDirection((String)null);
-u.setMoveSpeed((float)3.0);
-u.jumpSpeed = (float)10.0;
-u = new units.unitTypes.tomb.shadowDude(866,1842);
-u.setFacingDirection((String)null);
-u.setMoveSpeed((float)3.0);
-u.jumpSpeed = (float)10.0;
-u = new units.unitTypes.tomb.shadowDude(886,1842);
-u.setFacingDirection((String)null);
-u.setMoveSpeed((float)3.0);
-u.jumpSpeed = (float)10.0;
-u = new units.unitTypes.tomb.shadowDude(906,1842);
-u.setFacingDirection((String)null);
-u.setMoveSpeed((float)3.0);
-u.jumpSpeed = (float)10.0;
-u = new units.unitTypes.tomb.shadowDude(926,1842);
-u.setFacingDirection((String)null);
-u.setMoveSpeed((float)3.0);
-u.jumpSpeed = (float)10.0;
-u = new units.unitTypes.tomb.shadowDude(946,1842);
-u.setFacingDirection((String)null);
-u.setMoveSpeed((float)3.0);
-u.jumpSpeed = (float)10.0;
-u = new units.unitTypes.tomb.shadowDude(966,1842);
-u.setFacingDirection((String)null);
-u.setMoveSpeed((float)3.0);
-u.jumpSpeed = (float)10.0;
-u = new units.unitTypes.tomb.shadowDude(986,1842);
-u.setFacingDirection((String)null);
-u.setMoveSpeed((float)3.0);
-u.jumpSpeed = (float)10.0;
-u = new units.unitTypes.tomb.shadowDude(1006,1842);
-u.setFacingDirection((String)null);
-u.setMoveSpeed((float)3.0);
-u.jumpSpeed = (float)10.0;
-u = new units.unitTypes.tomb.shadowDude(1026,1842);
-u.setFacingDirection((String)null);
-u.setMoveSpeed((float)3.0);
-u.jumpSpeed = (float)10.0;
-u = new units.unitTypes.tomb.shadowDude(1046,1842);
-u.setFacingDirection((String)null);
-u.setMoveSpeed((float)3.0);
-u.jumpSpeed = (float)10.0;
-u = new units.unitTypes.tomb.shadowDude(1066,1842);
-u.setFacingDirection((String)null);
-u.setMoveSpeed((float)3.0);
-u.jumpSpeed = (float)10.0;
 u = new units.unitTypes.tomb.shadowDude(1086,1842);
-u.setFacingDirection((String)null);
+u.setFacingDirection((String)"null");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
 u = new units.unitTypes.tomb.shadowDude(1106,1842);
-u.setFacingDirection((String)null);
+u.setFacingDirection((String)"null");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
 u = new units.unitTypes.tomb.shadowDude(1126,1842);
-u.setFacingDirection((String)null);
+u.setFacingDirection((String)"null");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
 u = new units.unitTypes.tomb.shadowDude(1146,1842);
-u.setFacingDirection((String)null);
+u.setFacingDirection((String)"null");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
 u = new units.unitTypes.tomb.shadowDude(1166,1842);
-u.setFacingDirection((String)null);
+u.setFacingDirection((String)"null");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
 u = new units.unitTypes.tomb.shadowDude(1186,1842);
-u.setFacingDirection((String)null);
+u.setFacingDirection((String)"null");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
 u = new units.unitTypes.tomb.shadowDude(1206,1842);
-u.setFacingDirection((String)null);
+u.setFacingDirection((String)"null");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
 u = new units.unitTypes.tomb.shadowDude(1226,1842);
-u.setFacingDirection((String)null);
+u.setFacingDirection((String)"null");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
 u = new units.unitTypes.tomb.shadowDude(1246,1842);
-u.setFacingDirection((String)null);
+u.setFacingDirection((String)"null");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
 u = new units.unitTypes.tomb.shadowDude(1266,1842);
-u.setFacingDirection((String)null);
+u.setFacingDirection((String)"null");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
 u = new units.unitTypes.tomb.shadowDude(1286,1842);
-u.setFacingDirection((String)null);
+u.setFacingDirection((String)"null");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
 u = new units.unitTypes.tomb.shadowDude(1306,1842);
-u.setFacingDirection((String)null);
+u.setFacingDirection((String)"null");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
 u = new units.unitTypes.tomb.shadowDude(1326,1842);
-u.setFacingDirection((String)null);
+u.setFacingDirection((String)"null");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
 u = new units.unitTypes.tomb.shadowDude(1346,1842);
-u.setFacingDirection((String)null);
+u.setFacingDirection((String)"null");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
 u = new units.unitTypes.tomb.shadowDude(1366,1842);
-u.setFacingDirection((String)null);
+u.setFacingDirection((String)"null");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
 u = new units.unitTypes.tomb.shadowDude(1386,1842);
-u.setFacingDirection((String)null);
+u.setFacingDirection((String)"null");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
 u = new units.unitTypes.tomb.shadowDude(1406,1842);
-u.setFacingDirection((String)null);
+u.setFacingDirection((String)"null");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
 u = new units.unitTypes.tomb.shadowDude(1426,1842);
-u.setFacingDirection((String)null);
+u.setFacingDirection((String)"null");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
 u = new units.unitTypes.tomb.shadowDude(1446,1842);
-u.setFacingDirection((String)null);
+u.setFacingDirection((String)"null");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
 u = new units.unitTypes.tomb.shadowDude(1466,1842);
-u.setFacingDirection((String)null);
+u.setFacingDirection((String)"null");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
 u = new units.unitTypes.tomb.shadowDude(1486,1842);
-u.setFacingDirection((String)null);
+u.setFacingDirection((String)"null");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
 u = new units.unitTypes.tomb.shadowDude(1506,1842);
-u.setFacingDirection((String)null);
+u.setFacingDirection((String)"null");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
 u = new units.unitTypes.tomb.shadowDude(1526,1842);
-u.setFacingDirection((String)null);
+u.setFacingDirection((String)"null");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
 u = new units.unitTypes.tomb.shadowDude(1546,1842);
-u.setFacingDirection((String)null);
+u.setFacingDirection((String)"null");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
 u = new units.unitTypes.tomb.shadowDude(1566,1842);
-u.setFacingDirection((String)null);
+u.setFacingDirection((String)"null");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
 u = new units.unitTypes.tomb.shadowDude(1586,1842);
-u.setFacingDirection((String)null);
+u.setFacingDirection((String)"null");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
 u = new units.unitTypes.tomb.shadowDude(1606,1842);
-u.setFacingDirection((String)null);
+u.setFacingDirection((String)"null");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
 u = new units.unitTypes.tomb.shadowDude(1800,1650);
@@ -20039,9 +19984,6 @@ commands = new commandList();
 commands.add(new units.unitCommands.commands.moveCommand(1880.0,1915.0));
 commands.add(new units.unitCommands.commands.moveCommand(1880.0,1700.0));
 u.setRepeatCommands(commands);
-}
-
-public void addSegment174() {
 u = new units.unitTypes.tomb.shadowDude(1860,1800);
 u.setFacingDirection((String)"Down");
 u.setMoveSpeed((float)3.5);
@@ -20138,6 +20080,9 @@ commands = new commandList();
 commands.add(new units.unitCommands.commands.moveCommand(1960.0,1965.0));
 commands.add(new units.unitCommands.commands.moveCommand(1960.0,1750.0));
 u.setRepeatCommands(commands);
+}
+
+public void addSegment174() {
 u = new units.unitTypes.tomb.shadowDude(1960,1800);
 u.setFacingDirection((String)"Down");
 u.setMoveSpeed((float)3.5);
@@ -20323,32 +20268,269 @@ commands.add(new units.unitCommands.commands.moveCommand(2060.0,2015.0));
 commands.add(new units.unitCommands.commands.moveCommand(2060.0,1800.0));
 u.setRepeatCommands(commands);
 u = new units.unitTypes.tomb.shadowDude(2170,2218);
-u.setFacingDirection((String)null);
+u.setFacingDirection((String)"null");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
 u = new units.unitTypes.tomb.shadowDude(2194,2218);
-u.setFacingDirection((String)null);
+u.setFacingDirection((String)"null");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
 u = new units.unitTypes.tomb.shadowDude(2218,2218);
-u.setFacingDirection((String)null);
+u.setFacingDirection((String)"null");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(1550,1390);
+u.setFacingDirection((String)"Down");
+u.setMoveSpeed((float)2.9);
+u.jumpSpeed = (float)10.0;
+commands = new commandList();
+commands.add(new units.unitCommands.commands.moveCommand(1550.0,1800.0));
+commands.add(new units.unitCommands.commands.moveCommand(1550.0,1390.0));
+u.setRepeatCommands(commands);
 u = new units.unitTypes.tomb.shadowDude(1580,1390);
 u.setFacingDirection((String)"Down");
-u.setMoveSpeed((float)3.0);
+u.setMoveSpeed((float)2.9);
 u.jumpSpeed = (float)10.0;
 commands = new commandList();
 commands.add(new units.unitCommands.commands.moveCommand(1580.0,1800.0));
 commands.add(new units.unitCommands.commands.moveCommand(1580.0,1390.0));
 u.setRepeatCommands(commands);
-u = new units.unitTypes.tomb.shadowDude(1610,1390);
-u.setFacingDirection((String)"Down");
+u = new units.unitTypes.tomb.shadowDude(527,863);
+u.setFacingDirection((String)"null");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(527,913);
+u.setFacingDirection((String)"null");
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(527,963);
+u.setFacingDirection((String)"null");
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(527,1013);
+u.setFacingDirection((String)"null");
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(547,863);
+u.setFacingDirection((String)"null");
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(547,913);
+u.setFacingDirection((String)"null");
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(547,963);
+u.setFacingDirection((String)"null");
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(547,1013);
+u.setFacingDirection((String)"null");
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(567,863);
+u.setFacingDirection((String)"null");
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(567,913);
+u.setFacingDirection((String)"null");
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(567,963);
+u.setFacingDirection((String)"null");
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(567,1013);
+u.setFacingDirection((String)"null");
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(587,863);
+u.setFacingDirection((String)"null");
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(587,913);
+u.setFacingDirection((String)"null");
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(587,963);
+u.setFacingDirection((String)"null");
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(587,1013);
+u.setFacingDirection((String)"null");
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(607,863);
+u.setFacingDirection((String)"null");
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(607,913);
+u.setFacingDirection((String)"null");
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(607,963);
+u.setFacingDirection((String)"null");
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(607,1013);
+u.setFacingDirection((String)"null");
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.lightDude(821,863);
+u.setFacingDirection((String)"Down");
+u.setMoveSpeed((float)1.5);
+u.jumpSpeed = (float)10.0;
 commands = new commandList();
-commands.add(new units.unitCommands.commands.moveCommand(1610.0,1800.0));
-commands.add(new units.unitCommands.commands.moveCommand(1610.0,1390.0));
+commands.add(new units.unitCommands.commands.moveCommand(821.0,989.0));
+commands.add(new units.unitCommands.commands.moveCommand(821.0,863.0));
+u.setRepeatCommands(commands);
+u = new units.unitTypes.tomb.lightDude(887,863);
+u.setFacingDirection((String)"Down");
+u.setMoveSpeed((float)1.5);
+u.jumpSpeed = (float)10.0;
+commands = new commandList();
+commands.add(new units.unitCommands.commands.moveCommand(887.0,989.0));
+commands.add(new units.unitCommands.commands.moveCommand(887.0,863.0));
 u.setRepeatCommands(commands);
 }
+
+public void addSegment175() {
+u = new units.unitTypes.tomb.shadowDude(814,863);
+u.setFacingDirection((String)"null");
+u.setMoveSpeed((float)1.5);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(819,925);
+u.setFacingDirection((String)"null");
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(814,963);
+u.setFacingDirection((String)"null");
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(814,1013);
+u.setFacingDirection((String)"null");
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(834,863);
+u.setFacingDirection((String)"null");
+u.setMoveSpeed((float)1.5);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(834,913);
+u.setFacingDirection((String)"null");
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(834,963);
+u.setFacingDirection((String)"null");
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(834,1013);
+u.setFacingDirection((String)"null");
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(854,863);
+u.setFacingDirection((String)"null");
+u.setMoveSpeed((float)1.5);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(854,913);
+u.setFacingDirection((String)"null");
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(854,963);
+u.setFacingDirection((String)"null");
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(854,1013);
+u.setFacingDirection((String)"null");
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(874,863);
+u.setFacingDirection((String)"null");
+u.setMoveSpeed((float)1.5);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(874,913);
+u.setFacingDirection((String)"null");
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(874,963);
+u.setFacingDirection((String)"null");
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(874,1013);
+u.setFacingDirection((String)"null");
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(894,863);
+u.setFacingDirection((String)"null");
+u.setMoveSpeed((float)1.5);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(894,913);
+u.setFacingDirection((String)"null");
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(894,963);
+u.setFacingDirection((String)"null");
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(894,1013);
+u.setFacingDirection((String)"null");
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.lightDude(854,863);
+u.setFacingDirection((String)"Down");
+u.setMoveSpeed((float)1.5);
+u.jumpSpeed = (float)10.0;
+commands = new commandList();
+commands.add(new units.unitCommands.commands.moveCommand(854.0,989.0));
+commands.add(new units.unitCommands.commands.moveCommand(854.0,863.0));
+u.setRepeatCommands(commands);
+u = new units.unitTypes.tomb.shadowDude(527,1063);
+u.setFacingDirection((String)"null");
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(547,1063);
+u.setFacingDirection((String)"null");
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(567,1063);
+u.setFacingDirection((String)"null");
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(587,1063);
+u.setFacingDirection((String)"null");
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(607,1063);
+u.setFacingDirection((String)"null");
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(814,1063);
+u.setFacingDirection((String)"null");
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(834,1063);
+u.setFacingDirection((String)"null");
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(854,1063);
+u.setFacingDirection((String)"null");
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(874,1063);
+u.setFacingDirection((String)"null");
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(894,1063);
+u.setFacingDirection((String)"null");
+u.setMoveSpeed((float)3.0);
+u.jumpSpeed = (float)10.0;
+u = new units.unitTypes.tomb.shadowDude(499,1390);
+u.setFacingDirection((String)"Down");
+u.setMoveSpeed((float)2.9);
+u.jumpSpeed = (float)10.0;
+commands = new commandList();
+commands.add(new units.unitCommands.commands.moveCommand(499.0,1800.0));
+commands.add(new units.unitCommands.commands.moveCommand(499.0,1390.0));
+u.setRepeatCommands(commands);
+}
+
+
 }

@@ -7,6 +7,7 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 import doodads.sheepFarm.clawMarkRed;
+import doodads.tomb.stairsUp;
 import drawing.drawnObject;
 import drawing.gameCanvas;
 import drawing.spriteSheet;
@@ -31,6 +32,8 @@ import utilities.intTuple;
 import utilities.mathUtils;
 import utilities.time;
 import utilities.utility;
+import zones.endZone.subZones.endZone;
+import zones.sheepFarm.subZones.sheepFarm;
 
 public class wolfless extends boss {
 	
@@ -54,7 +57,7 @@ public class wolfless extends boss {
 	private static float DEFAULT_PLATFORM_GLOW_LASTS_FOR = 10f;
 	
 	// Number of hits total
-	private static int numberOfHitsToDieTotal = 6; // 6
+	private static int numberOfHitsToDieTotal = 4; // 6
 	private int numberOfHitsToDie = numberOfHitsToDieTotal;
 
 	// Unit sprite stuff.
@@ -929,7 +932,7 @@ public class wolfless extends boss {
 		
 		// Change phase.
 		if(numberOfHitsToDie==numberOfHitsToDieTotal) {
-			spawnClawPhase = 0.65f;
+			spawnClawPhase = 0.6f;
 			spawnEvery = 0.1f;
 			shadowDudeMoveSpeed = 4f;
 			pukeFor = 1f;
@@ -938,13 +941,12 @@ public class wolfless extends boss {
 			howManyExtraLines = 1;
 		}
 		else {
-			spawnClawPhase -= .07f;
+			spawnClawPhase -= .09f;
 			spawnEvery -= 0.015f;
 			shadowDudeMoveSpeed += 0.3f;
 			pukeFor -= 0.15f;
 			howManyExtraLines++;
 		}
-		
 	}
 	
 	// Get hurt by light.
@@ -963,7 +965,8 @@ public class wolfless extends boss {
 			s = new sound(screamDeath);
 			s.start();
 			music.currMusic.fadeOut(2f);
-			fakeDeath();
+			defeatBoss();
+			//fakeDeath();
 		}
 		else {
 			s = new sound(scream);
@@ -1023,6 +1026,14 @@ public class wolfless extends boss {
 	
 	// Defeat boss
 	public void defeatBoss() {
+		stairsUp bossExit = new stairsUp(getCurrentPlatform().get(1).getIntX(),
+				getCurrentPlatform().get(1).getIntY()-43,
+				endZone.getZone(),
+				-1529, 
+				-3108,
+				"Right");
+		bossExit.setZ(-100);
+		
 		defeat();
 		die();
 	}

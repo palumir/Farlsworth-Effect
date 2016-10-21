@@ -20,7 +20,7 @@ public class stairsUp extends chunk {
 	
 	// Dimensions
 	private static int DEFAULT_CHUNK_WIDTH = 43;
-	private static int DEFAULT_CHUNK_HEIGHT = 57;
+	public static int DEFAULT_CHUNK_HEIGHT = 57;
 	
 	// The actual type.
 	private static generalChunkType typeReference = new generalChunkType(DEFAULT_CHUNK_NAME, DEFAULT_CHUNK_SPRITESHEET, DEFAULT_CHUNK_WIDTH, DEFAULT_CHUNK_HEIGHT);  

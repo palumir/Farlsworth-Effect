@@ -458,7 +458,7 @@ public class levelSave implements Serializable {
 								else if(currFieldName.equals("facingDirection")) {
 									u.setFacingDirection((String)val);
 									if(toCode) {
-										out.println("u.setFacingDirection(" + "(String)" + val + ");");
+										out.println("u.setFacingDirection(" + "(String)\"" + val + "\");");
 									}
 								}
 								

@@ -197,7 +197,6 @@ public class blackWolf extends wolf {
 							setDoubleX((int)map.get("x"));
 							setDoubleY((int)map.get("y"));
 						}
-						//System.out.println("WOLFIE " + this);
 						break;
 					}
 				}
