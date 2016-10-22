@@ -45,7 +45,7 @@ public class shadowDude extends unit {
 	private float fadeTime = .25f;
 	
 	// Eyeless?
-	private boolean eyeless = false;
+	public boolean eyeless = false;
 	
 	// Ignores illumination?
 	private boolean ignoreIllumination = false;

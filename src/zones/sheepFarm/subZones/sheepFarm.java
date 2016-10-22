@@ -463,9 +463,6 @@ public class sheepFarm extends zone {
 			stormInProgress.setCompleted(true);
 			stormStartTime = time.getTime();
 			startStormFromFog = true;
-			saveState.setQuiet(true);
-			saveState.createSaveState();
-			saveState.setQuiet(false);
 		}
 	}
 	
