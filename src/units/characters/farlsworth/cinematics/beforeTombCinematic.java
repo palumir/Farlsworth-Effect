@@ -116,7 +116,7 @@ public class beforeTombCinematic extends cinematic {
 		if(isSequence(numIfs++) && goNextTextSeries()) {
 			
 			// Set the next text and advance it.
-			addTextSeries(null, "But that bottle's not filled with water.", farlsworth);
+			addTextSeries(null, "That bottle's not filled with water.", farlsworth);
 			advanceSequence();
 		}
 		
@@ -152,7 +152,7 @@ public class beforeTombCinematic extends cinematic {
 		if(isSequence(numIfs++) && goNextTextSeries()) {
 			
 			// Set the next text and advance it.
-			addTextSeries(null, "He used to watch over this graveyard, actually.", farlsworth);
+			addTextSeries(null, "He used to watch over this graveyard.", farlsworth);
 			advanceSequence();
 		}
 		
