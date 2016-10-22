@@ -965,8 +965,8 @@ public class wolfless extends boss {
 			s = new sound(screamDeath);
 			s.start();
 			music.currMusic.fadeOut(2f);
-			defeatBoss();
-			//fakeDeath();
+			//defeatBoss();
+			fakeDeath();
 		}
 		else {
 			s = new sound(scream);
@@ -989,6 +989,9 @@ public class wolfless extends boss {
 		
 		// First bell toll.
 		if(sequenceNumber==1 && time.getTime() - waitStart > waitFor*1000) {
+			for(int i = 0; i < shadowCage.size(); i++) {
+				shadowCage.get(i).eyeless = false;
+			}
 			sound s = new sound(bellToll);
 			s.start();
 			sequenceNumber++;
@@ -998,6 +1001,9 @@ public class wolfless extends boss {
 		
 		// Second bell toll
 		if(sequenceNumber==2 && time.getTime() - waitStart > waitFor*1000) {
+			for(int i = 0; i < shadowCage.size(); i++) {
+				shadowCage.get(i).movingUp = true;
+			}
 			sequenceNumber++;
 			waitStart = time.getTime();
 			waitFor = 3.2f;

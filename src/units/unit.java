@@ -1177,7 +1177,7 @@ public class unit extends drawnObject  {
 				// Set to not be stuck.
 				pathFindingStuck = false;
 				
-				// Check if it collides with a chunk in the x or y plane.
+				// Check if it collides with a chunkwa in the x or y plane.
 				intTuple xyCollide = chunk.collidesWith(this, (int)(getDoubleX() + moveX), (int)(getDoubleY() + moveY));
 				intTuple leftRegion = region.leftRegion(this, (int)(getDoubleX() + moveX),(int)(getDoubleY() + moveY));
 				if(xyCollide.x != 0 || leftRegion.x != 0 /*|| leftMap.x != 0*/) {
