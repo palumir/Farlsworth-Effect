@@ -85,6 +85,9 @@ public class wolfless extends boss {
 	///// FIELDS ////
 	/////////////////
 	
+	// Phase
+	private int phase = 1; // Start in phase 1
+	
 	// Claw attacking?
 	protected boolean clawAttacking = false;
 	protected boolean hasClawSpawned = false;
@@ -491,7 +494,13 @@ public class wolfless extends boss {
 	// Slash toward player.
 	public boolean slashTowardPlayer() {
 		faceTowardPlayer();
-		ArrayList<groundTile> nextPlatform = getClosestPlatformInDirection(getFacingDirection());
+		ArrayList<groundTile> nextPlatform = null;
+		if(phase == 1) {
+			nextPlatform = getClosestPlatformInDirection(getFacingDirection());
+		}
+		else {
+			nextPlatform = getClosestPlatformToPlayer(getFacingDirection());
+		}
 		if(nextPlatform != null) slashTo(nextPlatform.get(1).getIntX(), nextPlatform.get(1).getIntY() - getHeight()+10);
 		return nextPlatform != null;
 	}
@@ -547,6 +556,81 @@ public class wolfless extends boss {
 			}
 		}
 		return closestPlatform;
+	}
+	
+	// Get closest platform in direction.
+	public ArrayList<groundTile> getClosestPlatformToPlayer(String direction) {
+		
+		ArrayList<groundTile> currentPlatform = getCurrentPlatform();
+		ArrayList<groundTile> playerPlatform = getClosestPlatformToPlayer();
+		
+		// Exclude current platform and all platforms behind 
+		ArrayList<ArrayList<groundTile>> outOfPlatforms = new ArrayList<ArrayList<groundTile>>();
+		for(int i = 0; i < platforms.size(); i++) {
+			if(direction.equals("Left") && platforms.get(i).get(0).getIntX() < currentPlatform.get(0).getIntX()) {
+				outOfPlatforms.add(platforms.get(i));
+			}
+			if(direction.equals("Right") && platforms.get(i).get(0).getIntX() > currentPlatform.get(0).getIntX()) {
+				outOfPlatforms.add(platforms.get(i));
+			}
+		}
+		
+		// If there's no platforms in front try behind ones. (glitch fix)
+		if(outOfPlatforms.size()==0) {
+			for(int i = 0; i < platforms.size(); i++) {
+				outOfPlatforms.add(platforms.get(i));
+			}
+			outOfPlatforms.remove(currentPlatform);
+		}
+		
+		// Select two closest platforms out of those platforms
+		ArrayList<ArrayList<groundTile>> platformsToChooseFrom = new ArrayList<ArrayList<groundTile>>();
+		for(int i = 0; i < 2 && 0 < outOfPlatforms.size(); i++) {
+			ArrayList<groundTile> currPlatform = getClosestPlatformToFrom(currentPlatform, outOfPlatforms);
+			platformsToChooseFrom.add(currPlatform);
+			outOfPlatforms.remove(currPlatform);
+		}
+		
+		// Get the platform up.
+		ArrayList<groundTile> upPlatform = null;
+		for(int i = 0; i < platformsToChooseFrom.size(); i++) {
+			if(upPlatform==null) upPlatform = platformsToChooseFrom.get(i);
+			else if(upPlatform.get(0).getIntY() > platformsToChooseFrom.get(i).get(0).getIntY()) upPlatform = platformsToChooseFrom.get(i);
+		}
+		
+		// Get the platform down.
+		ArrayList<groundTile> downPlatform = null;
+		for(int i = 0; i < platformsToChooseFrom.size(); i++) {
+			if(downPlatform==null) downPlatform = platformsToChooseFrom.get(i);
+			else if(downPlatform.get(0).getIntY() < platformsToChooseFrom.get(i).get(0).getIntY()) downPlatform = platformsToChooseFrom.get(i);
+		}
+		
+		// Jump to the one closest to the player platform (within the same distance)
+		if(platformsToChooseFrom.size() != 0) {
+			
+			// If one is way further away, jump to the closer one.
+			if(Math.sqrt(Math.pow(upPlatform.get(0).getIntY() - currentPlatform.get(0).getIntY(),2)
+					+ Math.pow(upPlatform.get(0).getIntX() - currentPlatform.get(0).getIntX(),2))
+					>  
+					Math.sqrt(Math.pow(downPlatform.get(0).getIntY() - currentPlatform.get(0).getIntY(),2)
+					+ Math.pow(downPlatform.get(0).getIntX() - currentPlatform.get(0).getIntX(),2)) + 10) {
+				return downPlatform;
+			}
+			if(Math.sqrt(Math.pow(upPlatform.get(0).getIntY() - currentPlatform.get(0).getIntY(),2)
+					+ Math.pow(upPlatform.get(0).getIntX() - currentPlatform.get(0).getIntX(),2) + 10)
+					<
+					Math.sqrt(Math.pow(downPlatform.get(0).getIntY() - currentPlatform.get(0).getIntY(),2)
+					+ Math.pow(downPlatform.get(0).getIntX() - currentPlatform.get(0).getIntX(),2))) {
+				return upPlatform;
+			}
+			
+			// Otherwise jump to the one closer to the player.
+			if(currentPlatform.get(0).getIntY() <= playerPlatform.get(0).getIntY()) return downPlatform;
+			else return upPlatform;
+		}
+		else {
+			return null;
+		}
 	}
 	
 	// Get closest platform in direction.
@@ -783,6 +867,10 @@ public class wolfless extends boss {
 				sound s = new sound(growl);
 				s.start();
 			}
+			else {
+				sound s = new sound(howl);
+				s.start();
+			}
 			animate("howlingMiddle" + getFacingDirection());
 			startOfHowl = time.getTime();
 			
@@ -810,6 +898,8 @@ public class wolfless extends boss {
 	private intTuple platformsStart = new intTuple(13000,233);
 	private ArrayList<ArrayList<groundTile>> platforms;
 	private ArrayList<ArrayList<groundTile>> insidePlatforms;
+	private ArrayList<ArrayList<groundTile>> platformsPhase2;
+	private ArrayList<ArrayList<groundTile>> insidePlatformsPhase2;
 	
 	// How often to cast claw ability.
 	private float spawnClawPhase = 1.5f;
@@ -858,6 +948,38 @@ public class wolfless extends boss {
 			}
 		}
 		
+		// Spawn above platforms.
+		platformsPhase2 = new ArrayList<ArrayList<groundTile>>();
+		insidePlatformsPhase2 = new ArrayList<ArrayList<groundTile>>();
+		
+		for(int i = 0; i < 6; i++) {
+			for(int j = 0; j < 6; j++) {
+				platformsPhase2.add(new ArrayList<groundTile>());
+				
+				if(i != 0 && i != 5 && j != 0 && j != 5) {
+					insidePlatformsPhase2.add(new ArrayList<groundTile>());
+				}
+				
+				for(int m = 0; m < 3; m++) {
+					groundTile tile;
+					if(j%2 != 0) {
+						tile = new tombEdge(platformsStart.x + i*220 + m*32, platformsStart.y - 640 + j*105, 0);
+					}
+					else {
+						tile = new tombEdge(platformsStart.x + i*220 + 110 + m*32, platformsStart.y - 640 + j*105, 0);
+					}
+					
+					platformsPhase2.get(i*6 + j).add(tile);
+					
+					// Add to inside platforms.
+					if(i != 0 && i != 5 && j != 0 && j != 5) {	
+						insidePlatformsPhase2.get(insidePlatformsPhase2.size()-1).add(tile);
+					}
+					
+				}
+			}
+		}
+
 		spawnShadowCage(xLeft, xRight, floorY, roofY);
 		
 		// Move wolfie and player to the middle.
@@ -875,31 +997,33 @@ public class wolfless extends boss {
 		
 		shadowCage = new ArrayList<shadowDude>();
 		
+		int xChange = 6;
+		
 		// Spawn shadow floor
-		for(int i = xLeft -200; i < xRight + 200; i+=shadowDude.getDefaultWidth()) {
+		for(int i = xLeft -200+xChange; i < xRight + 200; i+=shadowDude.getDefaultWidth()) {
 			for(int j = 0; j < 7; j++) {
-				shadowCage.add(new shadowDude(i, floorY+225+j*shadowDude.getDefaultHeight()){{setEyeless(true);}});
+				shadowCage.add(new shadowDude(i, floorY+23+32+j*shadowDude.getDefaultHeight()){{setEyeless(true);}});
 			}
 		}
 		
 		// Spawn roof
-		for(int i = xLeft -200; i < xRight + 200; i+=shadowDude.getDefaultWidth()) {
+		for(int i = xLeft -200+xChange; i < xRight + 200; i+=shadowDude.getDefaultWidth()) {
 			for(int j = 0; j < 7; j++) {
-				shadowCage.add(new shadowDude(i, roofY - 300 - j*shadowDude.getDefaultHeight()){{setEyeless(true);}});
+				shadowCage.add(new shadowDude(i, roofY - 170 - j*shadowDude.getDefaultHeight()){{setEyeless(true);}});
 			}
 		}
 		
 		// Spawn left wall.
-		for(int i = roofY - 600; i < floorY + 600; i+=shadowDude.getDefaultHeight()) {
+		for(int i = roofY - 470; i < floorY + 450; i+=shadowDude.getDefaultHeight()) {
 			for(int j = 0; j < 17; j++) {
-				shadowCage.add(new shadowDude(xLeft-200-j*shadowDude.getDefaultWidth(), i){{setEyeless(true);}});
+				shadowCage.add(new shadowDude(xLeft-shadowDude.getDefaultWidth()+xChange-20-j*shadowDude.getDefaultWidth(), i){{setEyeless(true);}});
 			}
 		}
 		
 		// Spawn right wall.
-		for(int i = roofY - 600; i < floorY + 600; i+=shadowDude.getDefaultHeight()) {
+		for(int i = roofY - 470; i < floorY + 450; i+=shadowDude.getDefaultHeight()) {
 			for(int j = 0; j < 17; j++) {
-				shadowCage.add(new shadowDude(xRight+200-14+j*shadowDude.getDefaultWidth(), i){{setEyeless(true);}});
+				shadowCage.add(new shadowDude(xRight+40+shadowDude.getDefaultWidth()+xChange-14+j*shadowDude.getDefaultWidth(), i){{setEyeless(true);}});
 			}
 		}
 	}
@@ -983,7 +1107,7 @@ public class wolfless extends boss {
 		// Dead, wait.
 		if(sequenceNumber==0) {
 			waitStart = time.getTime();
-			waitFor = 8f;
+			waitFor = 7f;
 			sequenceNumber++;
 		}
 		
@@ -991,6 +1115,7 @@ public class wolfless extends boss {
 		if(sequenceNumber==1 && time.getTime() - waitStart > waitFor*1000) {
 			for(int i = 0; i < shadowCage.size(); i++) {
 				shadowCage.get(i).eyeless = false;
+				shadowCage.get(i).moveSpeed = 0.75f;
 			}
 			sound s = new sound(bellToll);
 			s.start();
@@ -1012,6 +1137,18 @@ public class wolfless extends boss {
 		// Third bell toll.
 		if(sequenceNumber==3 && time.getTime() - waitStart > waitFor*1000) {
 			sequenceNumber++;
+			waitStart = time.getTime();
+			waitFor = 2f;
+			sleeping = false;
+			startHowl("Respawn");
+		}
+		
+		// After howl is over.
+		if(sequenceNumber == 4 && !howling) {
+			platforms.addAll(platformsPhase2);	
+			phase = 2;
+			fakingDeath = false;
+			sequenceNumber = 0;
 		}
 	}
 	
