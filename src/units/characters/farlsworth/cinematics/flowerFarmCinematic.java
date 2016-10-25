@@ -81,7 +81,7 @@ public class flowerFarmCinematic extends cinematic {
 		if(isSequence(numIfs++) && goNextTextSeries()) {
 			
 			// Set the next text and advance it.
-			addTextSeries(null, "These days things are either disappearing or slowly getting worse.", farlsworth);
+			addTextSeries(null, "Things are either disappearing or slowly getting worse.", farlsworth);
 			advanceSequence();
 		}
 		
