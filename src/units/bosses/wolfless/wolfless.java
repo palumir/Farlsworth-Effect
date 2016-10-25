@@ -46,6 +46,9 @@ public class wolfless extends boss {
 	// Beta stats
 	private static float DEFAULT_MOVESPEED_BETA = 2f;
 	
+	// Default movespeed of shadows
+	private float DEFAULT_SHADOWCAGE_MOVESPEED = 0.75f;
+	
 	// How long to shadow puke for
 	private float pukeFor = 1f;
 	private static int DEFAULT_PUKE_EVERY_BASE = 1;
@@ -990,6 +993,7 @@ public class wolfless extends boss {
 		// First bell toll.
 		if(sequenceNumber==1 && time.getTime() - waitStart > waitFor*1000) {
 			for(int i = 0; i < shadowCage.size(); i++) {
+				shadowCage.get(i).setMoveSpeed(DEFAULT_SHADOWCAGE_MOVESPEED);
 				shadowCage.get(i).eyeless = false;
 			}
 			sound s = new sound(bellToll);
