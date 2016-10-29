@@ -255,6 +255,12 @@ public abstract class drawnObject {
 		addObject(this);
 	}
 	
+	// Distance from another drawn object
+	public double distanceFrom(drawnObject d) {
+		return Math.sqrt(Math.pow(this.getIntX() + this.getWidth()/2 - (d.getIntX() + d.getWidth()/2),2) + 
+			     Math.pow(this.getIntY() + this.getHeight()/2 - (d.getIntY() + d.getHeight()/2),2));
+	}
+	
 	// Get drawnObjects in box.
 	public static ArrayList<drawnObject> getObjectsInBox(int x1, int y1, int x2, int y2) {
 		ArrayList<drawnObject> returnList = new ArrayList<drawnObject>();

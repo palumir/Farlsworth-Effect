@@ -16,6 +16,7 @@ import drawing.animation.animation;
 import drawing.animation.animationPack;
 import effects.effect;
 import effects.effectTypes.critBloodSquirt;
+import effects.effectTypes.platformExplode;
 import effects.effectTypes.items.pushBottleSplash;
 import effects.effectTypes.items.savePoint;
 import effects.interfaceEffects.interactBlurb;
@@ -482,11 +483,9 @@ public class player extends unit {
 				
 				// Respond to other presses (movement)
 				else {
-					// Shield on.
+					// TODO: TESTING PURPOSES
 					if(k.getKeyCode() == KeyEvent.VK_P) {
-						sound s = new sound(storm.rainSound);
-						s.fadeIn(2);
-						s.start();
+						
 					}
 			
 				// Player presses left key.

@@ -89,13 +89,13 @@ public class sound extends Thread {
     // Fade out
     public void fadeOut(float f) {
     	setLoop(false);
-    	fadeOver = f;
-    	fadeOutStart = time.getTime();
+    	setFadeOver(f);
+    	setFadeOutStart(time.getTime());
     }
     
     // Fade out
     public void fadeIn(float f) {
-    	fadeOver = f;
+    	setFadeOver(f);
     }
 
     public void run() { 
@@ -173,12 +173,12 @@ public class sound extends Thread {
             	
         		// Fade in.
             	float fadePercent = 1;
-        		if(fadeOver != 0) fadePercent = ((time.getTime() - soundStart + 1)/(fadeOver*1000));
+        		if(getFadeOver() != 0) fadePercent = ((time.getTime() - soundStart + 1)/(getFadeOver()*1000));
         		if(fadePercent > 1) fadePercent = 1;
         		
         		// Fade out
-        		if(fadeOutStart != 0) {
-        			fadePercent = (1 - (time.getTime() - fadeOutStart + 1)/(fadeOver*1000));
+        		if(getFadeOutStart() != 0) {
+        			fadePercent = (1 - (time.getTime() - getFadeOutStart() + 1)/(getFadeOver()*1000));
             		if(fadePercent > 1) fadePercent = 1;
             		if(fadePercent < 0) {
             			stopRequested = true;
@@ -293,5 +293,21 @@ public class sound extends Thread {
 
 	public void setAmbience(boolean ambience) {
 		this.ambience = ambience;
+	}
+
+	public float getFadeOver() {
+		return fadeOver;
+	}
+
+	public void setFadeOver(float fadeOver) {
+		this.fadeOver = fadeOver;
+	}
+
+	public long getFadeOutStart() {
+		return fadeOutStart;
+	}
+
+	public void setFadeOutStart(long fadeOutStart) {
+		this.fadeOutStart = fadeOutStart;
 	}
 }
