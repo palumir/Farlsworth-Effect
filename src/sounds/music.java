@@ -2,6 +2,8 @@ package sounds;
 
 import java.util.ArrayList;
 
+import utilities.time;
+
 public class music extends sound {
 	
 	// Defaults.
@@ -48,6 +50,14 @@ public class music extends sound {
 		
 		// Add to all music.
 		allMusic.add(this);
+	}
+	
+	// Fadeout
+	public void fadeOut(float f) {
+		if(currMusic.getFileName().equals(this.getFileName()))  currMusic = null;
+    	setLoop(false);
+    	setFadeOver(f);
+    	setFadeOutStart(time.getTime());
 	}
 	
 	// Factory constructor

@@ -78,6 +78,7 @@ public class lightDude extends unit {
 		light = new invisibleLightSource(newX + getWidth()/2 - invisibleLightSource.DEFAULT_SPRITE_WIDTH/2, 
 				newY + getHeight()/2 - invisibleLightSource.DEFAULT_SPRITE_HEIGHT/2 - getHitBoxAdjustmentY());
 		light.setLightRadius(45);
+		//light.attachToObject(this);
 		
 	}
 	
