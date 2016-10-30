@@ -28,6 +28,7 @@ import utilities.intTuple;
 import utilities.levelSave;
 import utilities.saveState;
 import zones.zone;
+import zones.endZone.subZones.endZone;
 import zones.farmTomb.farmTombZoneLoader;
 import zones.sheepFarm.subZones.sheepFarm;
 
@@ -60,6 +61,7 @@ public class farmTomb extends zone {
 	
 	// Zone events.
 	public static event shadowBossFightStarted;
+	public static event shadowBossFightFinished;
 	public static boolean shadowBossFightFirstTime;
 	
 	// Initiated?
@@ -113,7 +115,6 @@ public class farmTomb extends zone {
 		if(!shadowBossFightStarted.isCompleted()) { music.startMusic(zoneMusic);  }
 		else {
 			
-			// TODO: fix this
 			if(player.getPlayer().isWithin((int)player.getPlayer().lastWell.getX()-200, 
 					(int)player.getPlayer().lastWell.getY()-200, 
 					(int)player.getPlayer().lastWell.getX()+250, 
@@ -180,6 +181,9 @@ public class farmTomb extends zone {
 		
 		// Has the BossFight started?
 		shadowBossFightStarted = event.createEvent("tombZoneShadowBossFightStarted");
+		
+		// Has the BossFight ended?
+		shadowBossFightFinished = event.createEvent("tombZoneShadowBossFightFinished");
 	}
 	
 	
@@ -200,6 +204,15 @@ public class farmTomb extends zone {
 		// Secret chest stairs up to well.
 		stairsUp secretStairs = new stairsUp(6677,2315,farmTomb.getZone(),2656,1797,"Right");
 		secretStairs.setZ(BACKGROUND_Z);
+		
+		// Exit
+		stairsUp bossExit = new stairsUp(6769,
+				1797,
+				endZone.getZone(),
+				-1529, 
+				-3108,
+				"Right");
+		bossExit.setZ(-100);
 		
 	}
 	
@@ -232,7 +245,7 @@ public class farmTomb extends zone {
 	// Deal with the first well we encounters.
 	public void dealWithRegionStuff() {
 		player currPlayer = player.getPlayer();
-		if(currPlayer != null && currPlayer.isWithin(3026,1359,3522,1845) && shadowBossFightStarted!=null && !shadowBossFightStarted.isCompleted()) {
+		if(currPlayer != null && currPlayer.isWithin(3026,1359,3522,1845) && shadowBossFightStarted!=null && !shadowBossFightStarted.isCompleted() && !shadowBossFightFinished.isCompleted()) {
 			shadowBossFightStarted.setCompleted(true);
 			shadowBossFightFirstTime = true;
 		}

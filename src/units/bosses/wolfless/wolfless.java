@@ -187,7 +187,7 @@ public class wolfless extends boss {
 		unitTypeAnimations.addAnimation(sleepingLeft);
 		
 		// Howling starting left.
-		animation howlingStartLeft = new animation("howlingStartLeft", DEFAULT_LEFTRIGHT_SPRITESHEET.getAnimation(7), 0, 3, pukeFor/2);
+		animation howlingStartLeft = new animation("howlingStartLeft", DEFAULT_LEFTRIGHT_SPRITESHEET.getAnimation(7), 0, 3, pukeFor/2) {{ setRepeats(false); }};
 		unitTypeAnimations.addAnimation(howlingStartLeft);
 		
 		// Howling middle left.
@@ -195,19 +195,19 @@ public class wolfless extends boss {
 		unitTypeAnimations.addAnimation(howlingLeft);
 		
 		// Howling end animation
-		animation howlingEndLeft = new animation("howlingEndLeft", DEFAULT_LEFTRIGHT_SPRITESHEET.getAnimation(7), 5, 9, pukeFor/2);
+		animation howlingEndLeft = new animation("howlingEndLeft", DEFAULT_LEFTRIGHT_SPRITESHEET.getAnimation(7), 5, 9, pukeFor/2) {{ setRepeats(false); }};
 		unitTypeAnimations.addAnimation(howlingEndLeft);
 		
 		// Howling starting right
-		animation howlingStartRight = new animation("howlingStartRight", DEFAULT_LEFTRIGHT_SPRITESHEET.getAnimation(3), 0, 3, pukeFor/2);
+		animation howlingStartRight = new animation("howlingStartRight", DEFAULT_LEFTRIGHT_SPRITESHEET.getAnimation(3), 0, 3, pukeFor/2) {{ setRepeats(false); }};
 		unitTypeAnimations.addAnimation(howlingStartRight);
 		
 		// Howling middle left.
-		animation howlingRight = new animation("howlingMiddleRight", DEFAULT_LEFTRIGHT_SPRITESHEET.getAnimation(3), 4,4, pukeFor);
+		animation howlingRight = new animation("howlingMiddleRight", DEFAULT_LEFTRIGHT_SPRITESHEET.getAnimation(3), 4,4, pukeFor) ;
 		unitTypeAnimations.addAnimation(howlingRight);
 		
 		// Howling end animation
-		animation howlingEndRight = new animation("howlingEndRight", DEFAULT_LEFTRIGHT_SPRITESHEET.getAnimation(3), 5, 9, pukeFor/2);
+		animation howlingEndRight = new animation("howlingEndRight", DEFAULT_LEFTRIGHT_SPRITESHEET.getAnimation(3), 5, 9, pukeFor/2) {{ setRepeats(false); }};
 		unitTypeAnimations.addAnimation(howlingEndRight);
 		
 		// Attacking left animation.
@@ -724,23 +724,49 @@ public class wolfless extends boss {
 	// How many extra lines
 	private int howManyExtraLines = 1;
 	
+	int x = 0;
+	
 	// Deal with lines
 	public void dealWithShadowLines() {
 		
 		// Spawn units and move them.
 		if(lineSpawnsX != null) {
-			//if(lastShadowSpawn == 0) lastShadowSpawn = time.getTime();
+			if(lastShadowSpawn == 0) lastShadowSpawn = time.getTime();
 			if(time.getTime() - lastShadowSpawn > spawnEvery*1000) {
 				for(int i = 0; i < lineSpawnsX.size(); i++) {
-					unit u = new shadowDude(lineSpawnsX.get(i), lineSpawnsY.get(i));
-					u.setForceInFront(true);
-					u.setMoveSpeed(shadowDudeMoveSpeed);
-					u.setDestroyTimer(30);
-					
-					// Calculate the new X and Y we need to knock them to, based off radius.;
-					int walkToX = (int) (getIntX() + (10000)*Math.cos(Math.toRadians(lineAngles.get(i)-90))); 
-					int walkToY = (int) (getIntY() + (10000)*Math.sin(Math.toRadians(lineAngles.get(i)-90)));
-					u.moveTo(walkToX, walkToY);
+					unit u = null;
+					if(typeOfHowl.equals("shadowPuke")) {
+						u = new shadowDude(lineSpawnsX.get(i), lineSpawnsY.get(i));
+						u.setDestroyTimer(30);
+					}
+					else if(typeOfHowl.equals("shadowPukeAlternating25")) {
+						if(x%25 == 0 && x!=0) {
+							u = new lightDude(lineSpawnsX.get(i), lineSpawnsY.get(i));
+						}
+						else {
+							u = new shadowDude(lineSpawnsX.get(i), lineSpawnsY.get(i));
+						}
+						x++;
+						u.setDestroyTimer(10);
+					}
+					else if(typeOfHowl.equals("shadowPukeAlternating10")) {
+						if(x%10 == 0) {
+							u = new lightDude(lineSpawnsX.get(i), lineSpawnsY.get(i));
+						}
+						else {
+							u = new shadowDude(lineSpawnsX.get(i), lineSpawnsY.get(i));
+						}
+						x++;
+						u.setDestroyTimer(10);
+					}
+					if(u!=null) {
+						u.setForceInFront(true);
+						u.setMoveSpeed(shadowDudeMoveSpeed);
+						// Calculate the new X and Y we need to knock them to, based off radius.;
+						int walkToX = (int) (getIntX() + (10000)*Math.cos(Math.toRadians(lineAngles.get(i)-90))); 
+						int walkToY = (int) (getIntY() + (10000)*Math.sin(Math.toRadians(lineAngles.get(i)-90)));
+						u.moveTo(walkToX, walkToY);
+					}
 				}
 				
 				lastShadowSpawn = time.getTime();
@@ -775,7 +801,6 @@ public class wolfless extends boss {
 				spawnShadowLineAt(180 + degreeChange*i, getIntX()+getWidth()+15,getIntY());
 			}
 		}
-		
 	}
 	
 	// Stop spawning line at mouth.
@@ -802,8 +827,6 @@ public class wolfless extends boss {
 	
 	// Starthowl.
 	public void startHowl(String type) {
-		
-		// Howl.
 		typeOfHowl = type;
 		howling = true;
 		startOfHowl = time.getTime();
@@ -842,7 +865,7 @@ public class wolfless extends boss {
 			startOfHowl = time.getTime();
 			
 			// Spawn shadow dudes.
-			if(typeOfHowl.equals("shadowPuke")) spawnLineAtMouth();
+			if(typeOfHowl.contains("shadowPuke")) spawnLineAtMouth();
 		}
 		
 		// Move to end of howl.
@@ -856,6 +879,10 @@ public class wolfless extends boss {
 		// Move to end of howl.
 		else if(getCurrentAnimation().getName().contains("howlingEnd") &&
 				time.getTime() - startOfHowl >= getCurrentAnimation().getTimeToComplete()*1000) {
+			// Howl.
+			lineAngles.clear();
+			lineSpawnsX.clear();
+			lineSpawnsY.clear();
 			howling = false;
 			startOfHowl = 0;
 		}
@@ -1028,7 +1055,6 @@ public class wolfless extends boss {
 			spawnClawPhase = 0.6f;
 			spawnEvery = 0.1f;
 			shadowDudeMoveSpeed = 4f;
-			pukeFor = 1f;
 			shadowPuke = true;
 			pukeEvery = 1;
 			howManyExtraLines = 1;
@@ -1037,7 +1063,6 @@ public class wolfless extends boss {
 			spawnClawPhase -= .09f;
 			spawnEvery -= 0.015f;
 			shadowDudeMoveSpeed += 0.3f;
-			pukeFor -= 0.15f;
 			howManyExtraLines++;
 		}
 	}
@@ -1125,6 +1150,9 @@ public class wolfless extends boss {
 		}
 	}
 	
+	// Light fog from death
+	terrain.atmosphericEffects.lightFog lightFog;
+	
 	private void reallyDyingScene(){
 		
 		// Get hurt
@@ -1133,30 +1161,70 @@ public class wolfless extends boss {
 			for(int i = 0; i < shadowCage.size(); i++) {
 				shadowCage.get(i).stopMove("all");
 			}
+			music.currMusic.fadeOut(10f);
 			setFacingDirection("Right");
 			sound s = new sound(lightDudeBreak);
+			s.start();
 			howManyExtraLines = 50;
-			s.start();
-			s = new sound(screamDeath);
-			s.start();
-			startHowl("shadowPuke");
 			sequenceNumber++;
 		}
-		if(sequenceNumber==1 && !howling) {
+		if(sequenceNumber==1) {
 			setFacingDirection("Left");
-			sound s = new sound(screamDeath);
-			s.start();
-			startHowl("shadowPuke");
+			waitFor = 0.4f;
+			waitStart = time.getTime();
 			sequenceNumber++;
 		}
-		if(sequenceNumber==2 && !howling) {
+		if(sequenceNumber==2 && time.getTime() - waitStart > waitFor*1000) {
+			lightFog = new terrain.atmosphericEffects.lightFog();
+			sound s = new sound(scream);
+			s.start();
+			startHowl("shadowPukeAlternating25");
+			sequenceNumber++;
+		}
+		if(sequenceNumber==3 && getCurrentAnimation().getName().contains("howlingMiddle")) {
+			lightFog.fadeTo(0.33f, 2);
+			sequenceNumber++;
+		}
+		if(sequenceNumber==4 && !howling) {
 			setFacingDirection("Right");
-			sound s = new sound(screamDeath);
-			s.start();
-			startHowl("shadowPuke");
+			waitFor = 0.4f;
+			waitStart = time.getTime();
 			sequenceNumber++;
 		}
-		if(sequenceNumber==3 && !howling) {
+		if(sequenceNumber==5 && time.getTime() - waitStart > waitFor*1000) {
+			sound s = new sound(scream);
+			s.start();
+			startHowl("shadowPukeAlternating25");
+			sequenceNumber++;
+		}
+		if(sequenceNumber==6 && getCurrentAnimation().getName().contains("howlingMiddle")) {
+			lightFog.fadeTo(0.66f, 2);
+			sequenceNumber++;
+		}
+		if(sequenceNumber==7 && !howling) {
+			setFacingDirection("Left");
+			waitFor = 0.4f;
+			waitStart = time.getTime();
+			sequenceNumber++;
+		}
+		if(sequenceNumber==8 && time.getTime() - waitStart > waitFor*1000) {
+			sound s = new sound(screamDeath);
+			s.start();
+			startHowl("shadowPukeAlternating25");
+			sequenceNumber++;
+		}
+		if(sequenceNumber==9 && getCurrentAnimation().getName().contains("howlingMiddle")) {
+			lightFog.fadeTo(1f, 2);
+			waitFor = 4f;
+			waitStart = time.getTime();
+			sequenceNumber++;
+		}
+		if(sequenceNumber==10 && !howling && time.getTime() - waitStart > waitFor*1000) {
+			player.getPlayer().setDoubleX(6528);
+			player.getPlayer().setDoubleY(1799);
+			farmTomb.shadowBossFightStarted.setCompleted(false);
+			farmTomb.shadowBossFightFinished.setCompleted(true);
+			lightFog.fadeTo(0, 4f);
 			defeatBoss();
 		}
 	}
@@ -1184,14 +1252,6 @@ public class wolfless extends boss {
 	
 	// Defeat boss
 	public void defeatBoss() {
-		stairsUp bossExit = new stairsUp(getCurrentPlatform().get(1).getIntX(),
-				getCurrentPlatform().get(1).getIntY()-43,
-				endZone.getZone(),
-				-1529, 
-				-3108,
-				"Right");
-		bossExit.setZ(-100);
-		
 		defeat();
 		die();
 	}
@@ -1208,7 +1268,7 @@ public class wolfless extends boss {
 					
 					ArrayList<ArrayList<groundTile>> chooseFrom = new ArrayList<ArrayList<groundTile>>(insidePlatforms);
 					int random = utility.RNG.nextInt(chooseFrom.size());
-					while(chooseFrom.get(random).size() > 1 && chooseFrom.get(random).get(1).isOnScreen()) {
+					while(chooseFrom.get(random).size() > 1 && chooseFrom.get(random).get(1).isOnScreen() && chooseFrom.get(random).get(0).isOnScreen() && chooseFrom.get(random).get(2).isOnScreen()) {
 						chooseFrom.remove(random);
 						if(chooseFrom.size()==0) break;
 						else random = utility.RNG.nextInt(chooseFrom.size());
@@ -1353,6 +1413,12 @@ public class wolfless extends boss {
 	// Update.
 	@Override
 	public void updateUnit() {
+		
+		// Change pukefor
+		if(getAnimations()!=null && getAnimations().getAnimation("howlingMiddleLeft") != null) {
+			getAnimations().getAnimation("howlingMiddleLeft").setTimeToComplete(pukeFor);
+			getAnimations().getAnimation("howlingMiddleRight").setTimeToComplete(pukeFor);
+		}
 		
 		// Wolf jumping
 		dealWithJumping();
