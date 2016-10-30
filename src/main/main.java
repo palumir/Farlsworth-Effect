@@ -145,8 +145,7 @@ public class main {
 		sound.initiate();
 		drawnObject.initiate();
 		interfaceObject.initiate();
-		fog.initiate();
-		storm.initiate();
+		atmosphericEffect.initiate();
 		interactBox.initiate();
 		region.initiate();
 		lightSource.initiate();
