@@ -17908,17 +17908,6 @@ u = new units.unitTypes.tomb.shadowDude(2603,2384);
 u.setFacingDirection((String)"Right");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
-u = new units.unitTypes.tomb.lightDude(3070,2320);
-u.setFacingDirection((String)"Left");
-u.setMoveSpeed((float)2.0);
-u.jumpSpeed = (float)10.0;
-commands = new commandList();
-commands.add(new units.unitCommands.commands.moveCommand(2948.0,2320.0));
-commands.add(new units.unitCommands.commands.moveCommand(3070.0,2320.0));
-u.setRepeatCommands(commands);
-}
-
-public void addSegment168() {
 u = new units.unitTypes.tomb.lightDude(3311,2320);
 u.setFacingDirection((String)"Right");
 u.setMoveSpeed((float)1.5);
@@ -17927,6 +17916,9 @@ commands = new commandList();
 commands.add(new units.unitCommands.commands.moveCommand(3149.0,2320.0));
 commands.add(new units.unitCommands.commands.moveCommand(3311.0,2320.0));
 u.setRepeatCommands(commands);
+}
+
+public void addSegment168() {
 u = new units.unitTypes.tomb.lightDude(3429,2320);
 u.setFacingDirection((String)"Left");
 u.setMoveSpeed((float)1.5);
@@ -18139,13 +18131,13 @@ u = new units.unitTypes.tomb.shadowDude(3201,2319);
 u.setFacingDirection((String)"Right");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
-}
-
-public void addSegment169() {
 u = new units.unitTypes.tomb.shadowDude(3221,2169);
 u.setFacingDirection((String)"Right");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
+}
+
+public void addSegment169() {
 u = new units.unitTypes.tomb.shadowDude(3221,2219);
 u.setFacingDirection((String)"Right");
 u.setMoveSpeed((float)3.0);
@@ -18342,13 +18334,13 @@ u = new units.unitTypes.tomb.shadowDude(3541,2319);
 u.setFacingDirection((String)"Right");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
-}
-
-public void addSegment170() {
 u = new units.unitTypes.tomb.shadowDude(3561,2169);
 u.setFacingDirection((String)"Right");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
+}
+
+public void addSegment170() {
 u = new units.unitTypes.tomb.shadowDude(3561,2219);
 u.setFacingDirection((String)"Right");
 u.setMoveSpeed((float)3.0);
@@ -18545,13 +18537,13 @@ u = new units.unitTypes.tomb.shadowDude(3801,2219);
 u.setFacingDirection((String)"Right");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
-}
-
-public void addSegment171() {
 u = new units.unitTypes.tomb.shadowDude(3801,2269);
 u.setFacingDirection((String)"Right");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
+}
+
+public void addSegment171() {
 u = new units.unitTypes.tomb.shadowDude(3801,2319);
 u.setFacingDirection((String)"Right");
 u.setMoveSpeed((float)3.0);
@@ -18748,13 +18740,13 @@ u = new units.unitTypes.tomb.shadowDude(4241,2269);
 u.setFacingDirection((String)"Right");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
-}
-
-public void addSegment172() {
 u = new units.unitTypes.tomb.shadowDude(4261,2169);
 u.setFacingDirection((String)"Right");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
+}
+
+public void addSegment172() {
 u = new units.unitTypes.tomb.shadowDude(4261,2219);
 u.setFacingDirection((String)"Right");
 u.setMoveSpeed((float)3.0);
@@ -18951,13 +18943,13 @@ u = new units.unitTypes.tomb.shadowDude(4541,2169);
 u.setFacingDirection((String)"Right");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
-}
-
-public void addSegment173() {
 u = new units.unitTypes.tomb.shadowDude(4541,2219);
 u.setFacingDirection((String)"Right");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
+}
+
+public void addSegment173() {
 u = new units.unitTypes.tomb.shadowDude(4541,2269);
 u.setFacingDirection((String)"Right");
 u.setMoveSpeed((float)3.0);
@@ -19154,13 +19146,13 @@ u = new units.unitTypes.tomb.shadowDude(4742,2619);
 u.setFacingDirection((String)"Right");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
-}
-
-public void addSegment174() {
 u = new units.unitTypes.tomb.shadowDude(4762,2169);
 u.setFacingDirection((String)"Right");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
+}
+
+public void addSegment174() {
 u = new units.unitTypes.tomb.shadowDude(4762,2219);
 u.setFacingDirection((String)"Right");
 u.setMoveSpeed((float)3.0);
@@ -19357,13 +19349,13 @@ u = new units.unitTypes.tomb.shadowDude(4942,2519);
 u.setFacingDirection((String)"Right");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
-}
-
-public void addSegment175() {
 u = new units.unitTypes.tomb.shadowDude(4942,2619);
 u.setFacingDirection((String)"Right");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
+}
+
+public void addSegment175() {
 u = new units.unitTypes.tomb.shadowDude(4962,2519);
 u.setFacingDirection((String)"Right");
 u.setMoveSpeed((float)3.0);
@@ -19652,9 +19644,6 @@ commands = new commandList();
 commands.add(new units.unitCommands.commands.moveCommand(6200.0,2512.0));
 commands.add(new units.unitCommands.commands.moveCommand(6200.0,2297.0));
 u.setRepeatCommands(commands);
-}
-
-public void addSegment176() {
 u = new units.unitTypes.tomb.shadowDude(6220,2297);
 u.setFacingDirection((String)"Down");
 u.setMoveSpeed((float)3.5);
@@ -19663,6 +19652,9 @@ commands = new commandList();
 commands.add(new units.unitCommands.commands.moveCommand(6220.0,2512.0));
 commands.add(new units.unitCommands.commands.moveCommand(6220.0,2297.0));
 u.setRepeatCommands(commands);
+}
+
+public void addSegment176() {
 u = new units.unitTypes.tomb.shadowDude(6200,2147);
 u.setFacingDirection((String)"Down");
 u.setMoveSpeed((float)3.5);
@@ -19903,13 +19895,13 @@ u = new units.unitTypes.tomb.shadowDude(650,1213);
 u.setFacingDirection((String)"null");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
-}
-
-public void addSegment177() {
 u = new units.unitTypes.tomb.shadowDude(650,1313);
 u.setFacingDirection((String)"null");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
+}
+
+public void addSegment177() {
 u = new units.unitTypes.tomb.shadowDude(718,1163);
 u.setFacingDirection((String)"null");
 u.setMoveSpeed((float)3.0);
@@ -20112,13 +20104,13 @@ u = new units.unitTypes.tomb.shadowDude(1146,1842);
 u.setFacingDirection((String)"null");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
-}
-
-public void addSegment178() {
 u = new units.unitTypes.tomb.shadowDude(1166,1842);
 u.setFacingDirection((String)"null");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
+}
+
+public void addSegment178() {
 u = new units.unitTypes.tomb.shadowDude(1186,1842);
 u.setFacingDirection((String)"null");
 u.setMoveSpeed((float)3.0);
@@ -20423,9 +20415,6 @@ commands = new commandList();
 commands.add(new units.unitCommands.commands.moveCommand(1980.0,1965.0));
 commands.add(new units.unitCommands.commands.moveCommand(1980.0,1750.0));
 u.setRepeatCommands(commands);
-}
-
-public void addSegment179() {
 u = new units.unitTypes.tomb.shadowDude(1980,1800);
 u.setFacingDirection((String)"Down");
 u.setMoveSpeed((float)3.5);
@@ -20434,6 +20423,9 @@ commands = new commandList();
 commands.add(new units.unitCommands.commands.moveCommand(1980.0,2015.0));
 commands.add(new units.unitCommands.commands.moveCommand(1980.0,1800.0));
 u.setRepeatCommands(commands);
+}
+
+public void addSegment179() {
 u = new units.unitTypes.tomb.shadowDude(2000,1800);
 u.setFacingDirection((String)"Down");
 u.setMoveSpeed((float)3.5);
@@ -20718,13 +20710,13 @@ u = new units.unitTypes.tomb.shadowDude(814,1013);
 u.setFacingDirection((String)"null");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
-}
-
-public void addSegment180() {
 u = new units.unitTypes.tomb.shadowDude(834,863);
 u.setFacingDirection((String)"null");
 u.setMoveSpeed((float)1.5);
 u.jumpSpeed = (float)10.0;
+}
+
+public void addSegment180() {
 u = new units.unitTypes.tomb.shadowDude(834,913);
 u.setFacingDirection((String)"null");
 u.setMoveSpeed((float)3.0);
@@ -20840,6 +20832,14 @@ u.jumpSpeed = (float)10.0;
 commands = new commandList();
 commands.add(new units.unitCommands.commands.moveCommand(499.0,1800.0));
 commands.add(new units.unitCommands.commands.moveCommand(499.0,1390.0));
+u.setRepeatCommands(commands);
+u = new units.unitTypes.tomb.lightDude(2919,2320);
+u.setFacingDirection((String)"Right");
+u.setMoveSpeed((float)1.5);
+u.jumpSpeed = (float)10.0;
+commands = new commandList();
+commands.add(new units.unitCommands.commands.moveCommand(3081.0,2320.0));
+commands.add(new units.unitCommands.commands.moveCommand(2919.0,2320.0));
 u.setRepeatCommands(commands);
 }
 
