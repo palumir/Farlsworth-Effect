@@ -78,16 +78,17 @@ public class lightDude extends unit {
 		light = new invisibleLightSource(newX + getWidth()/2 - invisibleLightSource.DEFAULT_SPRITE_WIDTH/2, 
 				newY + getHeight()/2 - invisibleLightSource.DEFAULT_SPRITE_HEIGHT/2 - getHitBoxAdjustmentY());
 		light.setLightRadius(45);
-		//light.attachToObject(this);
-		
+		light.setDoubleX(getDoubleX());
+		light.setDoubleY(getDoubleY() + getHitBoxAdjustmentY()/2+10);
+		light.attachToObject(this);
 	}
 	
 	// Do unit specific movement.
 	@Override
 	public void unitSpecificMovement(double moveX, double moveY) {
 		if(light != null) {
-			light.setDoubleX(getDoubleX() + moveX);
-			light.setDoubleY(getDoubleY() + getHitBoxAdjustmentY() + moveY);
+			//light.setDoubleX(getDoubleX() + moveX);
+			//light.setDoubleY(getDoubleY() + getHitBoxAdjustmentY() + moveY);
 		}
 	}
 	
