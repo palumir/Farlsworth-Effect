@@ -994,28 +994,28 @@ public class wolfless extends boss {
 		// Spawn shadow floor
 		for(int i = xLeft -200+xChange; i < xRight + 200; i+=shadowDude.getDefaultWidth()) {
 			for(int j = 0; j < 7; j++) {
-				shadowCage.add(new shadowDude(i, floorY+23+32+j*shadowDude.getDefaultHeight()){{setEyeless(true);}});
+				shadowCage.add(new shadowDude(i, floorY+23+32+j*shadowDude.getDefaultHeight()){{setEyeless(true); setFacingDirection("Down");}});
 			}
 		}
 		
 		// Spawn roof
 		for(int i = xLeft -200+xChange; i < xRight + 200; i+=shadowDude.getDefaultWidth()) {
 			for(int j = 0; j < 7; j++) {
-				shadowCage.add(new shadowDude(i, roofY - 170 - j*shadowDude.getDefaultHeight()){{setEyeless(true);}});
+				shadowCage.add(new shadowDude(i, roofY - 170 - j*shadowDude.getDefaultHeight()){{setEyeless(true); setFacingDirection("Down");}});
 			}
 		}
 		
 		// Spawn left wall.
 		for(int i = roofY - 470; i < floorY + 400; i+=shadowDude.getDefaultHeight()) {
 			for(int j = 0; j < 17; j++) {
-				shadowCage.add(new shadowDude(xLeft-shadowDude.getDefaultWidth()+xChange-20-j*shadowDude.getDefaultWidth(), i){{setEyeless(true);}});
+				shadowCage.add(new shadowDude(xLeft-shadowDude.getDefaultWidth()+xChange-20-j*shadowDude.getDefaultWidth(), i){{setEyeless(true); setFacingDirection("Down");}});
 			}
 		}
 		
 		// Spawn right wall.
 		for(int i = roofY - 470; i < floorY + 400; i+=shadowDude.getDefaultHeight()) {
 			for(int j = 0; j < 17; j++) {
-				shadowCage.add(new shadowDude(xRight+40+shadowDude.getDefaultWidth()+xChange-14+j*shadowDude.getDefaultWidth(), i){{setEyeless(true);}});
+				shadowCage.add(new shadowDude(xRight+40+shadowDude.getDefaultWidth()+xChange-14+j*shadowDude.getDefaultWidth(), i){{setEyeless(true); setFacingDirection("Down");}});
 			}
 		}
 	}
@@ -1228,13 +1228,14 @@ public class wolfless extends boss {
 			tooltipString t = new tooltipString("Boss defeated.");
 			t.setAnimationDuration(6f);
 			defeatBoss();
+			music.startMusic(farmTomb.zoneMusic);
 		}
 	}
 	
 	private String currentlyDoing = "";
 	
 	// Fake death
-	public void fakeDeath() {
+public void fakeDeath() {
 		sequenceNumber = 0;
 		currentlyDoing = "fakingDeath";
 		sleep();

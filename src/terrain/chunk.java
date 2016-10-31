@@ -12,6 +12,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import doodads.sheepFarm.bone;
 import drawing.drawnObject;
 import drawing.gameCanvas;
+import units.unit;
 import utilities.intTuple;
 import utilities.utility;
 import zones.zone;
@@ -53,6 +54,9 @@ public class chunk extends drawnObject {
 	
 	// The image of the chunk.
 	private BufferedImage chunkImage;
+	
+	// Short
+	private boolean shortChunk = false;
 	
 	// Is the chunk passable or impassable?
 	private boolean passable;
@@ -283,8 +287,10 @@ public class chunk extends drawnObject {
 		// Check between our interval
 		for(;i1 <= i2; i1++) {
 			chunk currChunk = impassableChunks.get(i1);
-			if(u.collides(newX, u.getIntY(),currChunk)) tX = true;
-			if(u.collides(u.getIntX(), newY,currChunk)) tY = true;
+			if(u.collides(newX, u.getIntY(),currChunk)
+					&& !(u instanceof unit && ((unit)u).isFloating() && impassableChunks.get(i1).isShortChunk())) tX = true;
+			if(u.collides(u.getIntX(), newY,currChunk)
+					&& !(u instanceof unit && ((unit)u).isFloating() && impassableChunks.get(i1).isShortChunk())) tY = true;
 		}
 		
 		// Make an intTuple for the return.
@@ -444,6 +450,14 @@ public class chunk extends drawnObject {
 
 	public void setChunkImage(BufferedImage chunkImage) {
 		this.chunkImage = chunkImage;
+	}
+
+	public boolean isShortChunk() {
+		return shortChunk;
+	}
+
+	public void setShortChunk(boolean shortChunk) {
+		this.shortChunk = shortChunk;
 	}
 
 	

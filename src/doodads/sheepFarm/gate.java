@@ -72,6 +72,7 @@ public class gate extends openable {
 			setHeight(DEFAULT_CHUNK_HEIGHT);
 			setWidth(DEFAULT_CHUNK_WIDTH);
 		}
+		setShortChunk(true);
 		setInteractable(true);
 	}
 
