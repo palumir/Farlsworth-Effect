@@ -25,9 +25,6 @@ public class slideEffect extends movementBuff {
 	// Fields
 	private static float DEFAULT_SLIDE_ACCELERATION = 0.1f;
 	
-	// Save the moveSpeed
-	private static float unitMoveSpeed = 0;
-	
 	@Override
 	public void applyEffect() {
 		boolean noSlideBuffs = true;
@@ -41,7 +38,6 @@ public class slideEffect extends movementBuff {
 		if(noSlideBuffs) {
 			onUnit.getMovementBuffs().add(this);
 			onUnit.setMovementAcceleration(DEFAULT_SLIDE_ACCELERATION);
-			unitMoveSpeed = onUnit.moveSpeed;
 			onUnit.moveSpeed = onUnit.moveSpeed + onUnit.moveSpeed*6/12;
 			onUnit.setMomentumX(onUnit.getMomentumX()*3/8);
 			onUnit.setMomentumY(onUnit.getMomentumY()*3/8);
@@ -65,7 +61,7 @@ public class slideEffect extends movementBuff {
 		}
 		if(noSlideBuffs) {
 			onUnit.setMovementAcceleration(0);
-			onUnit.moveSpeed = unitMoveSpeed;
+			onUnit.moveSpeed = onUnit.getBaseMoveSpeed();
 		}
 		
 	}

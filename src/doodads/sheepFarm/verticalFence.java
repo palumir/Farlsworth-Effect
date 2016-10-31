@@ -38,6 +38,7 @@ public class verticalFence extends chunk {
 			setHeight(DEFAULT_CHUNK_HEIGHT);
 			setWidth(DEFAULT_CHUNK_WIDTH);
 		}
+		setShortChunk(true);
 		setPassable(false);
 	}
 }

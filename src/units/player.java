@@ -153,7 +153,6 @@ public class player extends unit {
 		
 		// Set movespeed.
 		setMoveSpeed(DEFAULT_PLAYER_MOVESPEED);
-		oldMoveSpeed=DEFAULT_PLAYER_MOVESPEED;
 		setAllowSlowMovement(true);
 		
 		// Set-up the camera.
@@ -800,11 +799,9 @@ public class player extends unit {
 					setPushing(false);
 					
 					// Set old movespeed.
+					setFloating(false);
 					setStunned(false);
-					moveSpeed = oldMoveSpeed;
 					
-					// Make player killable
-					forceInFront = false;
 				}
 			}
 			else {
@@ -818,7 +815,6 @@ public class player extends unit {
 		pushStart = time.getTime();
 		
 		// Turn off moving.
-		moveSpeed = 0;
 		setStunned(true);
 		setMomentumX(0);
 		setMomentumY(0);
@@ -827,10 +823,7 @@ public class player extends unit {
 		setGravity(false);
 		
 		// Collision is off.
-		//collisionOn = false;
-		
-		// Make player unkillable
-		forceInFront = true;
+		setFloating(true);
 		
 		// Jump there
 		jumpingToX = x;

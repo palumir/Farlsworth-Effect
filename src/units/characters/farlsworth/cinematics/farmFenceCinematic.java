@@ -105,7 +105,6 @@ public class farmFenceCinematic extends cinematic {
 			if(isSequence(numIfs++) && goNextTextSeries()) {
 				sheepFarm.forestGate.forceOpenWithSound();
 				addTextSeries(null, "Uh... thanks.",farlsworth);
-				music.currMusic.fadeOut(2f);
 				advanceSequence();
 			}
 			
@@ -125,7 +124,6 @@ public class farmFenceCinematic extends cinematic {
 			}
 
 			if(isSequence(numIfs++) && goNextTextSeries()) {
-				music.currMusic.fadeOut(2f);
 				addTextSeries(null, "I guess I'll have to stay inside the fence then.",farlsworth);
 				waitFor(1f);
 				advanceSequence();

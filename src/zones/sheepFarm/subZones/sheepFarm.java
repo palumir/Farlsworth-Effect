@@ -186,8 +186,8 @@ public class sheepFarm extends zone {
 		
 		// Load the level save.
 		//levelSave.loadSaveState("sheepFarmLevel.save");
-		sheepFarmZoneLoader loader = new sheepFarmZoneLoader();
-		loader.loadSegments();
+		//sheepFarmZoneLoader loader = new sheepFarmZoneLoader();
+		//loader.loadSegments();
 		
 		// Storming?
 		if(stormInProgress.isCompleted()) {

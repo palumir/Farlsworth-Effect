@@ -17,6 +17,7 @@ import drawing.animation.animation;
 import drawing.animation.animationPack;
 import effects.effectTypes.platformExplode;
 import effects.effectTypes.platformGlow;
+import effects.interfaceEffects.tooltipString;
 import modes.mode;
 import sounds.music;
 import sounds.sound;
@@ -993,28 +994,28 @@ public class wolfless extends boss {
 		// Spawn shadow floor
 		for(int i = xLeft -200+xChange; i < xRight + 200; i+=shadowDude.getDefaultWidth()) {
 			for(int j = 0; j < 7; j++) {
-				shadowCage.add(new shadowDude(i, floorY+23+32+j*shadowDude.getDefaultHeight()){{setEyeless(true);}});
+				shadowCage.add(new shadowDude(i, floorY+23+32+j*shadowDude.getDefaultHeight()){{setEyeless(true); setFacingDirection("Down");}});
 			}
 		}
 		
 		// Spawn roof
 		for(int i = xLeft -200+xChange; i < xRight + 200; i+=shadowDude.getDefaultWidth()) {
 			for(int j = 0; j < 7; j++) {
-				shadowCage.add(new shadowDude(i, roofY - 170 - j*shadowDude.getDefaultHeight()){{setEyeless(true);}});
+				shadowCage.add(new shadowDude(i, roofY - 170 - j*shadowDude.getDefaultHeight()){{setEyeless(true); setFacingDirection("Down");}});
 			}
 		}
 		
 		// Spawn left wall.
 		for(int i = roofY - 470; i < floorY + 400; i+=shadowDude.getDefaultHeight()) {
 			for(int j = 0; j < 17; j++) {
-				shadowCage.add(new shadowDude(xLeft-shadowDude.getDefaultWidth()+xChange-20-j*shadowDude.getDefaultWidth(), i){{setEyeless(true);}});
+				shadowCage.add(new shadowDude(xLeft-shadowDude.getDefaultWidth()+xChange-20-j*shadowDude.getDefaultWidth(), i){{setEyeless(true); setFacingDirection("Down");}});
 			}
 		}
 		
 		// Spawn right wall.
 		for(int i = roofY - 470; i < floorY + 400; i+=shadowDude.getDefaultHeight()) {
 			for(int j = 0; j < 17; j++) {
-				shadowCage.add(new shadowDude(xRight+40+shadowDude.getDefaultWidth()+xChange-14+j*shadowDude.getDefaultWidth(), i){{setEyeless(true);}});
+				shadowCage.add(new shadowDude(xRight+40+shadowDude.getDefaultWidth()+xChange-14+j*shadowDude.getDefaultWidth(), i){{setEyeless(true); setFacingDirection("Down");}});
 			}
 		}
 	}
@@ -1083,7 +1084,6 @@ public class wolfless extends boss {
 			s = new sound(screamDeath);
 			s.start();
 			if(music.currMusic!=null) music.currMusic.fadeOut(2f);
-			//defeatBoss();
 			fakeDeath();
 		}
 		else {
@@ -1170,7 +1170,7 @@ public class wolfless extends boss {
 		}
 		if(sequenceNumber==1) {
 			setFacingDirection("Left");
-			waitFor = 0.4f;
+			waitFor = 0.1f;
 			waitStart = time.getTime();
 			sequenceNumber++;
 		}
@@ -1225,14 +1225,17 @@ public class wolfless extends boss {
 			farmTomb.shadowBossFightStarted.setCompleted(false);
 			farmTomb.shadowBossFightFinished.setCompleted(true);
 			lightFog.fadeTo(0, 4f);
+			tooltipString t = new tooltipString("Boss defeated.");
+			t.setAnimationDuration(6f);
 			defeatBoss();
+			music.startMusic(farmTomb.zoneMusic);
 		}
 	}
 	
 	private String currentlyDoing = "";
 	
 	// Fake death
-	public void fakeDeath() {
+public void fakeDeath() {
 		sequenceNumber = 0;
 		currentlyDoing = "fakingDeath";
 		sleep();

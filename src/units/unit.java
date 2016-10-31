@@ -75,6 +75,9 @@ public class unit extends drawnObject  {
 	// State of gravity
 	private boolean gravity = DEFAULT_GRAVITY_STATE;
 	
+	// Invulnerable to rift
+	private boolean floating = false;
+	
 	// Save?
 	private boolean saveFields = false;
 	
@@ -137,7 +140,7 @@ public class unit extends drawnObject  {
 	// Movement
 	public float moveSpeed = DEFAULT_UNIT_MOVESPEED;
 	protected float oldMoveSpeed = moveSpeed;
-	protected float baseMoveSpeed = DEFAULT_UNIT_MOVESPEED;
+	private Float baseMoveSpeed = null;
 	protected float baseMoveDuration = 0.75f;
 	private boolean movingLeft = false;
 	private boolean movingRight = false;
@@ -227,7 +230,6 @@ public class unit extends drawnObject  {
 		// Set values.
 		moveSpeed = u.getMoveSpeed();
 		oldMoveSpeed = moveSpeed;
-		baseMoveSpeed = u.getMoveSpeed();
 		setJumpSpeed(u.getJumpSpeed());
 		setTypeOfUnit(u);
 		
@@ -319,7 +321,7 @@ public class unit extends drawnObject  {
 	
 	// Has the unit left the map?
 	public boolean hasLeftMap() {
-		return targetable && zone.getCurrentZone() != null && zone.getCurrentZone().isZoneLoaded() && (!groundTile.isOnGroundTile(this) && mode.getCurrentMode().equals("topDown"));
+		return !isFloating() && targetable && zone.getCurrentZone() != null && zone.getCurrentZone().isZoneLoaded() && (!groundTile.isOnGroundTile(this) && mode.getCurrentMode().equals("topDown"));
 	}
 	
 	// Check if united is illuminated
@@ -1547,6 +1549,7 @@ public class unit extends drawnObject  {
 	}
 
 	public void setMoveSpeed(float f) {
+		if(baseMoveSpeed == null) baseMoveSpeed = f;
 		fixAnimationsBasedOnMoveSpeed(f);
 		this.moveSpeed = f;
 	}
@@ -1910,6 +1913,22 @@ public class unit extends drawnObject  {
 
 	public void setFirstFacingDirection(String firstFacingDirection) {
 		this.firstFacingDirection = firstFacingDirection;
+	}
+
+	public boolean isFloating() {
+		return floating;
+	}
+
+	public void setFloating(boolean invulnerableToRift) {
+		this.floating = invulnerableToRift;
+	}
+
+	public float getBaseMoveSpeed() {
+		return baseMoveSpeed;
+	}
+
+	public void setBaseMoveSpeed(float baseMoveSpeed) {
+		this.baseMoveSpeed = baseMoveSpeed;
 	}
 	
 }
