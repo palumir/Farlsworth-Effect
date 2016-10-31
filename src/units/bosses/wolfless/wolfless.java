@@ -17,6 +17,7 @@ import drawing.animation.animation;
 import drawing.animation.animationPack;
 import effects.effectTypes.platformExplode;
 import effects.effectTypes.platformGlow;
+import effects.interfaceEffects.tooltipString;
 import modes.mode;
 import sounds.music;
 import sounds.sound;
@@ -1083,7 +1084,6 @@ public class wolfless extends boss {
 			s = new sound(screamDeath);
 			s.start();
 			if(music.currMusic!=null) music.currMusic.fadeOut(2f);
-			//defeatBoss();
 			fakeDeath();
 		}
 		else {
@@ -1170,7 +1170,7 @@ public class wolfless extends boss {
 		}
 		if(sequenceNumber==1) {
 			setFacingDirection("Left");
-			waitFor = 0.4f;
+			waitFor = 0.1f;
 			waitStart = time.getTime();
 			sequenceNumber++;
 		}
@@ -1225,6 +1225,8 @@ public class wolfless extends boss {
 			farmTomb.shadowBossFightStarted.setCompleted(false);
 			farmTomb.shadowBossFightFinished.setCompleted(true);
 			lightFog.fadeTo(0, 4f);
+			tooltipString t = new tooltipString("Boss defeated.");
+			t.setAnimationDuration(6f);
 			defeatBoss();
 		}
 	}

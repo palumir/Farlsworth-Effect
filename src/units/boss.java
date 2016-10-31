@@ -32,7 +32,9 @@ public class boss extends unit {
 	// Defeat
 	public void defeat() {
 		setCompleted(true);
+		saveState.setQuiet(true);
 		saveState.createSaveState();
+		saveState.setQuiet(false);
 	}
 
 

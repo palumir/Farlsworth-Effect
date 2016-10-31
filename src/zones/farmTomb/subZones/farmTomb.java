@@ -168,6 +168,8 @@ public class farmTomb extends zone {
 		pushBottle b = new pushBottle(70, 815);
 		bottleExpander exp = new bottleExpander(6526,2325);
 		exp.quality = "Alright";
+		bottleExpander exp2 = new bottleExpander(6640,1817);
+		exp2.quality = "Good";
 	}
 	
 	// Load units
