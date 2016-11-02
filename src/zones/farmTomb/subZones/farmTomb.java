@@ -219,8 +219,8 @@ public class farmTomb extends zone {
 		stairsUp bossExit = new stairsUp(6769,
 				1797,
 				endZone.getZone(),
-				-1529, 
-				-3108,
+				-1706, 
+				-3183,
 				"Right");
 		bossExit.setZ(-100);
 		
