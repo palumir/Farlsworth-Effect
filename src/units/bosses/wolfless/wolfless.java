@@ -64,7 +64,7 @@ public class wolfless extends boss {
 	private static float DEFAULT_PLATFORM_GLOW_LASTS_FOR = 10f;
 	
 	// Number of hits total
-	private static int numberOfHitsToDieTotal = 1; // 6
+	private static int numberOfHitsToDieTotal = 4; // 6
 	private int numberOfHitsToDie = numberOfHitsToDieTotal;
 
 	// Unit sprite stuff.
