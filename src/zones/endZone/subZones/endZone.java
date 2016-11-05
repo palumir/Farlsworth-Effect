@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
+import doodads.sheepFarm.tomb;
 import doodads.tomb.stairsUp;
 import drawing.background;
 import drawing.spriteSheet;
@@ -14,7 +15,6 @@ import items.other.bottleExpander;
 import sounds.music;
 import terrain.chunk;
 import terrain.atmosphericEffects.fog;
-import terrain.chunkTypes.tomb;
 import terrain.chunkTypes.tombEdge;
 import units.player;
 import units.unit;
@@ -30,6 +30,7 @@ import utilities.levelSave;
 import utilities.saveState;
 import zones.zone;
 import zones.farmTomb.farmTombZoneLoader;
+import zones.farmTomb.subZones.farmTomb;
 import zones.sheepFarm.subZones.sheepFarm;
 
 public class endZone extends zone {
@@ -42,7 +43,7 @@ public class endZone extends zone {
 	private static zone zoneReference;
 	
 	// Default zone mode
-	private static String DEFAULT_ZONE_MODE = "platformer";
+	private static String DEFAULT_ZONE_MODE = "topDown";
 	
 	// References we will use throughout.
 	static unit u;
@@ -70,13 +71,16 @@ public class endZone extends zone {
 		// Set the mode of the zone of course.
 		setMode(DEFAULT_ZONE_MODE);
 		
-		levelSave.loadSaveState("testLevel.save");
+		new tomb(-1726, -3292, 0, farmTomb.getZone(),6730,1798,"Left");
 		
 		// Load stuff so the zone doesn't lag
 		preLoadStuff();
 		
 		// Load zone events.
 		loadZoneEvents();
+		
+		// Endzone
+		levelSave.loadSaveState("endZoneLevel.save");
 		
 		new background(null);
 		background.setColor(Color.BLACK);
