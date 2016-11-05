@@ -44,8 +44,16 @@ public class endSign extends chunk {
 					
 		// Start of conversation.
 		textSeries startOfConversation = null;
-		startOfConversation = new textSeries(null, "A grave.");
-		s = startOfConversation.addChild(null, "You might need one of these soon if you're not careful.");
+		startOfConversation = new textSeries(null, "This is the end of the demo.");
+		s = startOfConversation.addChild("'Really?'", "Yeah, but you can check \"The Farlsworth Effect\" on Kickstarter.");
+		s = s.addChild(null, "If you enjoyed the demo, show it to your homies.");
+		s = s.addChild(null, "If you feel like playing more...");
+		s = s.addChild(null, "There's 2 secret items hidden in the demo.");
+		s = s.addChild("'Wow!'", "Hey man, relax it's not that exciting.");
+		s = s.addChild("'Don't tell me how to live my life'", "What?");
+		s = s.addChild("'You aren't my real dad'", "What's going on right now? Go Kickstart my game.");
+		s = s.addChild("'I don't even like video games'", "You're friggin rude bud. Frig you.");
+		s = s.addChild("'Go frig yourself'", "Whatever man, I'll friggin Kickstart my own game.");
 		s.setEnd();
 		
 		return new interactBox(startOfConversation, this);
@@ -76,8 +84,9 @@ public class endSign extends chunk {
 		//showHitBox();
 		//showUnitPosition();
 		if(mode.getCurrentMode().equals("topDown")) {
-			setHitBoxAdjustmentY(-10);
-			setHeight(7);
+			setHitBoxAdjustmentY(10);
+			setHeight(9);
+			setWidth(DEFAULT_CHUNK_WIDTH-4);
 		}
 		else {
 			setHitBoxAdjustmentY(0);

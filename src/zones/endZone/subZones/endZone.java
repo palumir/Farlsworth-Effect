@@ -80,7 +80,7 @@ public class endZone extends zone {
 		loadZoneEvents();
 		
 		// Endzone
-		levelSave.loadSaveState("endZoneLevel.save");
+		//levelSave.loadSaveState("endZoneLevel.save");
 		
 		new background(null);
 		background.setColor(Color.BLACK);
