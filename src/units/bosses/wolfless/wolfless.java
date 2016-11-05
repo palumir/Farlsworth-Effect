@@ -7,7 +7,6 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 import doodads.sheepFarm.clawMarkRed;
-import doodads.tomb.stairsUp;
 import doodads.tomb.wallTorch;
 import drawing.drawnObject;
 import drawing.gameCanvas;
@@ -32,12 +31,9 @@ import units.unitCommands.commands.slashCommand;
 import units.unitTypes.tomb.lightDude;
 import units.unitTypes.tomb.shadowDude;
 import utilities.intTuple;
-import utilities.mathUtils;
 import utilities.time;
 import utilities.utility;
-import zones.endZone.subZones.endZone;
 import zones.farmTomb.subZones.farmTomb;
-import zones.sheepFarm.subZones.sheepFarm;
 
 public class wolfless extends boss {
 	
@@ -64,7 +60,7 @@ public class wolfless extends boss {
 	private static float DEFAULT_PLATFORM_GLOW_LASTS_FOR = 10f;
 	
 	// Number of hits total
-	private static int numberOfHitsToDieTotal = 1; // 6
+	private static int numberOfHitsToDieTotal = 4; // 4
 	private int numberOfHitsToDie = numberOfHitsToDieTotal;
 
 	// Unit sprite stuff.
@@ -368,6 +364,8 @@ public class wolfless extends boss {
 						ArrayList<groundTile> currentPlatform = getCurrentPlatform();
 						platformExplode p = new platformExplode(currentPlatform.get(0).getIntX(), currentPlatform.get(0).getIntY());
 						platforms.remove(currentPlatform);
+						sound s = new sound(platformExplode);
+						s.start();
 						if(currGlow !=null) { 
 							currGlow.destroy(); 
 							currGlow = null;
@@ -814,6 +812,7 @@ public class wolfless extends boss {
 	// Howl stuff
 	private boolean howling = false;
 	private long startOfHowl = 0;
+	public static String platformExplode = "sounds/effects/bosses/shadowOfTheDenmother/platformVanish.wav";
 	public static String howl = "sounds/effects/bosses/shadowOfTheDenmother/spookyHowl.wav";
 	private static String growl = "sounds/effects/bosses/shadowOfTheDenmother/spookyGrowl.wav";
 	private static String bark = "sounds/effects/bosses/shadowOfTheDenmother/wolfBark.wav";

@@ -4,7 +4,6 @@ import drawing.spriteSheet;
 import drawing.spriteSheet.spriteSheetInfo;
 import drawing.animation.animation;
 import drawing.animation.animationPack;
-import effects.interfaceEffects.tooltipString;
 import effects.projectiles.poisonBall;
 import interactions.event;
 import modes.mode;
@@ -12,8 +11,6 @@ import sounds.sound;
 import units.player;
 import units.unit;
 import units.unitType;
-import utilities.time;
-import utilities.utility;
 
 public class poisonSpider extends unit {
 	

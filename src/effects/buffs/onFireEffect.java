@@ -1,17 +1,11 @@
 package effects.buffs;
 
 import effects.buff;
-import effects.effectTypes.fire;
 import effects.effectType;
-import effects.effectTypes.mudSplash;
-import effects.effectTypes.mudSplash;
-import modes.mode;
+import effects.effectTypes.fire;
 import sounds.sound;
-import terrain.chunkTypes.mud;
-import units.player;
 import units.unit;
 import utilities.time;
-import utilities.utility;
 
 public class onFireEffect extends movementBuff {
 	

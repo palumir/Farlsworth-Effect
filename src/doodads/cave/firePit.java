@@ -182,6 +182,7 @@ public class firePit extends chunk {
 	// Override chunkImage so we can do an animation
 	@Override
 	public BufferedImage getChunkImage() {
+		if(fireAnimation==null) return null;
 		return fireAnimation.getCurrentFrame();
 	}
 }

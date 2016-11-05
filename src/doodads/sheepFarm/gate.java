@@ -4,15 +4,11 @@ import java.awt.image.BufferedImage;
 
 import doodads.openable;
 import drawing.spriteSheet;
-import interactions.event;
 import interactions.interactBox;
 import interactions.textSeries;
 import modes.mode;
-import sounds.sound;
-import terrain.chunk;
 import terrain.generalChunkType;
 import units.player;
-import units.characters.farlsworth.farlsworth;
 import zones.sheepFarm.subZones.sheepFarm;
 
 public class gate extends openable {

@@ -9,7 +9,6 @@ import effects.buff;
 import effects.buffs.pushBottleBuff;
 import effects.interfaceEffects.tooltipString;
 import items.bottle;
-import modes.mode;
 import sounds.sound;
 import units.player;
 

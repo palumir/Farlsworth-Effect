@@ -8,8 +8,6 @@ import java.util.ArrayList;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import drawing.drawnObject;
-import effects.interfaceEffects.tooltipString;
-import main.main;
 import modes.platformer;
 import modes.topDown;
 import sounds.music;
@@ -19,10 +17,7 @@ import terrain.groundTile;
 import units.player;
 import utilities.intTuple;
 import utilities.saveState;
-import zones.farmTomb.subZones.farmTomb;
 import zones.sheepFarm.subZones.sheepFarm;
-import zones.unused.forest;
-import zones.unused.spiderCave;
 
 public abstract class zone {
 	

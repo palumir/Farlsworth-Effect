@@ -1,7 +1,5 @@
 package modes;
 
-import units.unit;
-
 public class platformer extends mode {
 
 	// Fields

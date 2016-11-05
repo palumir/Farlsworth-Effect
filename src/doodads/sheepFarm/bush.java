@@ -1,6 +1,5 @@
 package doodads.sheepFarm;
 
-import interactions.event;
 import interactions.interactBox;
 import interactions.textSeries;
 import modes.mode;

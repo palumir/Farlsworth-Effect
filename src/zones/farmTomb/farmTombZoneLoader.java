@@ -191,10 +191,13 @@ addSegment172();
 addSegment173();
 addSegment174();
 addSegment175();
-
+addSegment176();
+addSegment177();
+addSegment178();
+addSegment179();
+addSegment180();
 	}
-
-	public void addSegment0() {
+public void addSegment0() {
 c = tomb.createChunk(-389,-280,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(-389,-248,0);
@@ -1229,12 +1232,6 @@ c = tomb.createChunk(40,-506,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(40,-474,0);
 if(c!=null) c.setPassable(false);
-c = tomb.createChunk(40,-442,0);
-if(c!=null) c.setPassable(false);
-c = tomb.createChunk(40,-410,0);
-if(c!=null) c.setPassable(false);
-c = tomb.createChunk(40,-378,0);
-if(c!=null) c.setPassable(false);
 c = tomb.createChunk(40,-346,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(40,-314,0);
@@ -1244,12 +1241,6 @@ if(c!=null) c.setPassable(false);
 c = tomb.createChunk(72,-506,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(72,-474,0);
-if(c!=null) c.setPassable(false);
-c = tomb.createChunk(72,-442,0);
-if(c!=null) c.setPassable(false);
-c = tomb.createChunk(72,-410,0);
-if(c!=null) c.setPassable(false);
-c = tomb.createChunk(72,-378,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(72,-346,0);
 if(c!=null) c.setPassable(false);
@@ -1261,12 +1252,6 @@ c = tomb.createChunk(104,-506,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(104,-474,0);
 if(c!=null) c.setPassable(false);
-c = tomb.createChunk(104,-442,0);
-if(c!=null) c.setPassable(false);
-c = tomb.createChunk(104,-410,0);
-if(c!=null) c.setPassable(false);
-c = tomb.createChunk(104,-378,0);
-if(c!=null) c.setPassable(false);
 c = tomb.createChunk(104,-346,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(104,-314,0);
@@ -1277,33 +1262,9 @@ c = tomb.createChunk(136,-506,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(136,-474,0);
 if(c!=null) c.setPassable(false);
-c = tomb.createChunk(136,-442,0);
-if(c!=null) c.setPassable(false);
-c = tomb.createChunk(136,-410,0);
-if(c!=null) c.setPassable(false);
-c = tomb.createChunk(136,-378,0);
-if(c!=null) c.setPassable(false);
-c = tomb.createChunk(136,-346,0);
-if(c!=null) c.setPassable(false);
-c = tomb.createChunk(136,-314,0);
-if(c!=null) c.setPassable(false);
-c = tomb.createChunk(136,-282,0);
-if(c!=null) c.setPassable(false);
 c = tomb.createChunk(168,-506,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(168,-474,0);
-if(c!=null) c.setPassable(false);
-c = tomb.createChunk(168,-442,0);
-if(c!=null) c.setPassable(false);
-c = tomb.createChunk(168,-410,0);
-if(c!=null) c.setPassable(false);
-c = tomb.createChunk(168,-378,0);
-if(c!=null) c.setPassable(false);
-c = tomb.createChunk(168,-346,0);
-if(c!=null) c.setPassable(false);
-c = tomb.createChunk(168,-314,0);
-if(c!=null) c.setPassable(false);
-c = tomb.createChunk(168,-282,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(200,-506,0);
 if(c!=null) c.setPassable(false);
@@ -1325,9 +1286,6 @@ c = tomb.createChunk(232,-506,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(232,-474,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment11() {
 c = tomb.createChunk(232,-442,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(232,-410,0);
@@ -1370,6 +1328,9 @@ c = tomb.createChunk(296,-346,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(296,-314,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment11() {
 c = tomb.createChunk(296,-282,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(328,-506,0);
@@ -1428,9 +1389,6 @@ c = tomb.createChunk(424,-442,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(424,-410,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment12() {
 c = tomb.createChunk(424,-378,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(424,-346,0);
@@ -1473,6 +1431,9 @@ c = tomb.createChunk(410,-21,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(410,11,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment12() {
 c = tomb.createChunk(410,43,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(410,75,0);
@@ -1531,9 +1492,6 @@ c = tomb.createChunk(442,-437,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(442,-405,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment13() {
 c = tomb.createChunk(442,-373,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(442,-341,0);
@@ -1576,6 +1534,9 @@ c = tomb.createChunk(442,235,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(442,267,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment13() {
 c = tomb.createChunk(442,299,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(442,331,0);
@@ -1634,9 +1595,6 @@ c = tomb.createChunk(474,-181,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(474,-149,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment14() {
 c = tomb.createChunk(474,-117,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(474,-85,0);
@@ -1679,6 +1637,9 @@ c = tomb.createChunk(474,491,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(474,523,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment14() {
 c = tomb.createChunk(474,555,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(474,587,0);
@@ -1737,9 +1698,6 @@ c = tomb.createChunk(506,75,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(506,107,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment15() {
 c = tomb.createChunk(506,139,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(506,171,0);
@@ -1782,6 +1740,9 @@ c = tomb.createChunk(506,747,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(506,779,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment15() {
 c = tomb.createChunk(506,811,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(538,-501,0);
@@ -1840,9 +1801,6 @@ c = tomb.createChunk(538,331,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(538,363,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment16() {
 c = tomb.createChunk(538,395,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(538,427,0);
@@ -1885,6 +1843,9 @@ c = tomb.createChunk(570,-341,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(570,-309,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment16() {
 c = tomb.createChunk(570,-277,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(570,-245,0);
@@ -1943,9 +1904,6 @@ c = tomb.createChunk(570,587,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(570,619,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment17() {
 c = tomb.createChunk(570,651,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(570,683,0);
@@ -1988,6 +1946,9 @@ c = tomb.createChunk(602,-85,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(602,-53,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment17() {
 c = tomb.createChunk(602,-21,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(602,11,0);
@@ -2046,9 +2007,6 @@ c = tomb.createChunk(634,-501,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(634,-469,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment18() {
 c = tomb.createChunk(634,-437,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(634,-405,0);
@@ -2091,6 +2049,9 @@ c = tomb.createChunk(634,171,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(634,203,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment18() {
 c = tomb.createChunk(634,235,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(634,267,0);
@@ -2149,9 +2110,6 @@ c = tomb.createChunk(666,-245,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(666,-213,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment19() {
 c = tomb.createChunk(666,-181,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(666,-149,0);
@@ -2194,6 +2152,9 @@ c = tomb.createChunk(666,427,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(666,459,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment19() {
 c = tomb.createChunk(666,491,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(666,523,0);
@@ -2252,9 +2213,6 @@ c = tomb.createChunk(698,11,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(698,43,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment20() {
 c = tomb.createChunk(698,75,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(698,107,0);
@@ -2297,6 +2255,9 @@ c = tomb.createChunk(698,683,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(698,715,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment20() {
 c = tomb.createChunk(698,747,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(698,779,0);
@@ -2355,9 +2316,6 @@ c = tombEdge.createChunk(155,40,0);
 if(c!=null) c.setPassable(false);
 c = tombEdge.createChunk(187,40,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment21() {
 c = tombEdge.createChunk(219,40,0);
 if(c!=null) c.setPassable(false);
 c = tombEdge.createChunk(251,40,0);
@@ -2400,6 +2358,9 @@ c = tombEdge.createChunk(59,440,0);
 if(c!=null) c.setPassable(false);
 c = tombEdge.createChunk(91,440,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment21() {
 c = tombEdge.createChunk(123,440,0);
 if(c!=null) c.setPassable(false);
 c = tombEdge.createChunk(155,440,0);
@@ -2458,9 +2419,6 @@ c = tomb.createChunk(-389,903,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(-389,935,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment22() {
 c = tomb.createChunk(-389,967,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(-389,999,0);
@@ -2503,6 +2461,9 @@ c = tomb.createChunk(-325,935,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(-325,967,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment22() {
 c = tomb.createChunk(-325,999,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(-325,1031,0);
@@ -2561,9 +2522,6 @@ c = tomb.createChunk(-229,903,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(-229,935,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment23() {
 c = tomb.createChunk(-229,967,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(-229,999,0);
@@ -2606,6 +2564,9 @@ c = tomb.createChunk(-165,935,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(-165,967,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment23() {
 c = tomb.createChunk(-165,999,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(-165,1031,0);
@@ -2664,9 +2625,6 @@ c = tomb.createChunk(-69,903,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(-69,935,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment24() {
 c = tomb.createChunk(-69,967,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(-69,999,0);
@@ -2709,6 +2667,9 @@ c = tomb.createChunk(-69,1575,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(-69,1607,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment24() {
 c = tomb.createChunk(-69,1639,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(-69,1671,0);
@@ -2767,9 +2728,6 @@ c = tomb.createChunk(-37,1351,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(-37,1383,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment25() {
 c = tomb.createChunk(-37,1415,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(-37,1447,0);
@@ -2812,6 +2770,9 @@ c = tomb.createChunk(-5,871,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(-5,903,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment25() {
 c = tomb.createChunk(-5,935,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(-5,967,0);
@@ -2870,9 +2831,6 @@ c = tomb.createChunk(-5,1799,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(-5,1831,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment26() {
 c = tomb.createChunk(-5,1863,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(-5,1895,0);
@@ -2915,6 +2873,9 @@ c = tomb.createChunk(27,1415,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(27,1447,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment26() {
 c = tomb.createChunk(27,1479,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(27,1511,0);
@@ -2973,9 +2934,6 @@ c = tomb.createChunk(59,1191,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(59,1223,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment27() {
 c = tomb.createChunk(59,1255,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(59,1287,0);
@@ -3018,6 +2976,9 @@ c = tomb.createChunk(59,1863,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(59,1895,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment27() {
 c = tomb.createChunk(59,1927,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(59,1959,0);
@@ -3076,9 +3037,6 @@ c = tomb.createChunk(91,1639,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(91,1671,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment28() {
 c = tomb.createChunk(91,1703,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(91,1735,0);
@@ -3121,6 +3079,9 @@ c = tomb.createChunk(123,1223,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(123,1255,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment28() {
 c = tomb.createChunk(123,1287,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(123,1319,0);
@@ -3179,9 +3140,6 @@ c = tomb.createChunk(155,1063,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(155,1095,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment29() {
 c = tomb.createChunk(155,1127,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(155,1159,0);
@@ -3224,6 +3182,9 @@ c = tomb.createChunk(155,1735,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(155,1767,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment29() {
 c = tomb.createChunk(155,1799,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(155,1831,0);
@@ -3282,9 +3243,6 @@ c = tomb.createChunk(187,1575,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(187,1607,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment30() {
 c = tomb.createChunk(187,1639,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(187,1671,0);
@@ -3327,6 +3285,9 @@ c = tomb.createChunk(219,1159,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(219,1191,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment30() {
 c = tomb.createChunk(219,1223,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(219,1255,0);
@@ -3385,9 +3346,6 @@ c = tomb.createChunk(219,935,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(251,967,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment31() {
 c = tomb.createChunk(251,999,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(251,1031,0);
@@ -3430,6 +3388,9 @@ c = tomb.createChunk(251,1607,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(251,1639,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment31() {
 c = tomb.createChunk(251,1671,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(251,1703,0);
@@ -3488,9 +3449,6 @@ c = tomb.createChunk(283,1383,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(283,1415,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment32() {
 c = tomb.createChunk(283,1447,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(283,1479,0);
@@ -3533,6 +3491,9 @@ c = tomb.createChunk(315,903,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(315,935,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment32() {
 c = tomb.createChunk(315,967,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(315,999,0);
@@ -3591,9 +3552,6 @@ c = tomb.createChunk(315,1831,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(315,1863,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment33() {
 c = tomb.createChunk(315,1895,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(315,1927,0);
@@ -3636,6 +3594,9 @@ c = tombEdge.createChunk(763,1108,0);
 if(c!=null) c.setPassable(false);
 c = tombEdge.createChunk(795,1108,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment33() {
 c = tombEdge.createChunk(827,1108,0);
 if(c!=null) c.setPassable(false);
 c = tombEdge.createChunk(859,1108,0);
@@ -3694,9 +3655,6 @@ c = tombEdge.createChunk(1153,1359,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1185,879,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment34() {
 c = tomb.createChunk(1185,911,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1185,943,0);
@@ -3739,6 +3697,9 @@ c = tomb.createChunk(1217,1007,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1217,1039,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment34() {
 c = tomb.createChunk(1217,1071,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1217,1103,0);
@@ -3797,9 +3758,6 @@ c = tomb.createChunk(1281,911,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1281,943,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment35() {
 c = tomb.createChunk(1281,975,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1281,1007,0);
@@ -3842,6 +3800,9 @@ c = tomb.createChunk(1313,1071,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1313,1103,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment35() {
 c = tomb.createChunk(1313,1135,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1313,1167,0);
@@ -3900,9 +3861,6 @@ c = tomb.createChunk(1377,975,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1377,1007,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment36() {
 c = tomb.createChunk(1377,1039,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1377,1071,0);
@@ -3945,6 +3903,9 @@ c = tomb.createChunk(1409,1135,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1409,1167,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment36() {
 c = tomb.createChunk(1409,1199,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1409,1231,0);
@@ -4003,9 +3964,6 @@ c = tomb.createChunk(1473,1039,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1473,1071,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment37() {
 c = tomb.createChunk(1473,1103,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1473,1135,0);
@@ -4048,6 +4006,9 @@ c = tomb.createChunk(1505,1199,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1505,1231,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment37() {
 c = tomb.createChunk(1505,1263,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1505,1295,0);
@@ -4106,9 +4067,6 @@ c = tomb.createChunk(858,715,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(858,747,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment38() {
 c = tomb.createChunk(858,779,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(858,811,0);
@@ -4151,6 +4109,9 @@ c = tomb.createChunk(922,811,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(954,555,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment38() {
 c = tomb.createChunk(954,587,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(954,619,0);
@@ -4209,9 +4170,6 @@ c = tomb.createChunk(1050,587,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1050,619,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment39() {
 c = tomb.createChunk(1050,651,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1050,683,0);
@@ -4254,6 +4212,9 @@ c = tomb.createChunk(1114,683,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1114,715,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment39() {
 c = tomb.createChunk(1114,747,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1114,779,0);
@@ -4312,9 +4273,6 @@ c = tomb.createChunk(1210,779,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1242,555,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment40() {
 c = tomb.createChunk(1242,587,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1242,619,0);
@@ -4357,6 +4315,9 @@ c = tomb.createChunk(1306,683,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1306,715,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment40() {
 c = tomb.createChunk(1306,747,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1306,779,0);
@@ -4415,9 +4376,6 @@ c = tomb.createChunk(1434,587,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1434,619,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment41() {
 c = tomb.createChunk(1434,651,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1434,683,0);
@@ -4460,6 +4418,9 @@ c = tomb.createChunk(1185,906,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1217,714,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment41() {
 c = tomb.createChunk(1217,746,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1217,778,0);
@@ -4518,9 +4479,6 @@ c = tomb.createChunk(1345,714,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1345,746,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment42() {
 c = tomb.createChunk(1345,778,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1345,810,0);
@@ -4563,6 +4521,9 @@ c = tomb.createChunk(1441,714,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1441,746,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment42() {
 c = tomb.createChunk(1441,778,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1441,810,0);
@@ -4621,9 +4582,6 @@ c = tombEdge.createChunk(546,1603,0);
 if(c!=null) c.setPassable(false);
 c = tombEdge.createChunk(616,1678,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment43() {
 c = tombEdge.createChunk(720,1575,0);
 if(c!=null) c.setPassable(false);
 c = tombEdge.createChunk(804,1655,0);
@@ -4666,6 +4624,9 @@ c = tombEdge.createChunk(2106,1845,0);
 if(c!=null) c.setPassable(false);
 c = tombEdge.createChunk(2138,1845,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment43() {
 c = tombEdge.createChunk(2235,1845,0);
 if(c!=null) c.setPassable(false);
 c = tombEdge.createChunk(2266,1845,0);
@@ -4724,9 +4685,6 @@ c = tomb.createChunk(1569,1025,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1569,1057,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment44() {
 c = tomb.createChunk(1569,1089,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1569,1121,0);
@@ -4769,6 +4727,9 @@ c = tomb.createChunk(1633,865,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1633,897,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment44() {
 c = tomb.createChunk(1633,929,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1633,961,0);
@@ -4827,9 +4788,6 @@ c = tomb.createChunk(1697,961,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1697,993,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment45() {
 c = tomb.createChunk(1697,1025,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1697,1057,0);
@@ -4872,6 +4830,9 @@ c = tomb.createChunk(1761,801,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1761,833,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment45() {
 c = tomb.createChunk(1761,865,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1761,897,0);
@@ -4930,9 +4891,6 @@ c = tomb.createChunk(1825,897,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1825,929,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment46() {
 c = tomb.createChunk(1825,961,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1825,993,0);
@@ -4975,6 +4933,9 @@ c = tomb.createChunk(1857,1153,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1857,1185,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment46() {
 c = tomb.createChunk(1889,801,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1889,833,0);
@@ -5033,9 +4994,6 @@ c = tomb.createChunk(1953,833,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1953,865,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment47() {
 c = tomb.createChunk(1953,897,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1953,929,0);
@@ -5078,6 +5036,9 @@ c = tomb.createChunk(1985,1089,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1985,1121,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment47() {
 c = tomb.createChunk(1985,1153,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1985,1185,0);
@@ -5136,9 +5097,6 @@ c = tomb.createChunk(2049,1185,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2081,865,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment48() {
 c = tomb.createChunk(2081,897,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2081,929,0);
@@ -5181,6 +5139,9 @@ c = tomb.createChunk(2113,1153,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2113,1185,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment48() {
 c = tomb.createChunk(2145,865,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2145,897,0);
@@ -5239,9 +5200,6 @@ c = tomb.createChunk(1914,1327,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1914,1359,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment49() {
 c = tomb.createChunk(1946,1199,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1946,1231,0);
@@ -5284,6 +5242,9 @@ c = tomb.createChunk(2042,1231,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2042,1263,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment49() {
 c = tomb.createChunk(2042,1295,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2042,1327,0);
@@ -5342,9 +5303,6 @@ c = tomb.createChunk(2170,1327,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2170,1359,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment50() {
 c = tomb.createChunk(2202,1135,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2202,1167,0);
@@ -5387,6 +5345,9 @@ c = tomb.createChunk(2266,1231,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2266,1263,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment50() {
 c = tomb.createChunk(2266,1295,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2266,1327,0);
@@ -5445,9 +5406,6 @@ c = tomb.createChunk(2394,1231,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2394,1263,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment51() {
 c = tomb.createChunk(2394,1295,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2394,1327,0);
@@ -5490,6 +5448,9 @@ c = tomb.createChunk(2522,1263,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2522,1295,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment51() {
 c = tomb.createChunk(2522,1327,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2522,1359,0);
@@ -5548,9 +5509,6 @@ c = tomb.createChunk(347,1972,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(347,2004,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment52() {
 c = tomb.createChunk(347,2036,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(347,2068,0);
@@ -5593,6 +5551,9 @@ c = tomb.createChunk(411,2132,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(443,1908,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment52() {
 c = tomb.createChunk(443,1940,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(443,1972,0);
@@ -5651,9 +5612,6 @@ c = tomb.createChunk(539,2036,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(539,2068,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment53() {
 c = tomb.createChunk(539,2100,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(539,2132,0);
@@ -5696,6 +5654,9 @@ c = tomb.createChunk(635,1940,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(635,1972,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment53() {
 c = tomb.createChunk(635,2004,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(635,2036,0);
@@ -5754,9 +5715,6 @@ c = tomb.createChunk(731,2100,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(731,2132,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment54() {
 c = tomb.createChunk(763,1908,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(763,1940,0);
@@ -5799,6 +5757,9 @@ c = tomb.createChunk(827,2004,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(827,2036,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment54() {
 c = tomb.createChunk(827,2068,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(827,2100,0);
@@ -5857,9 +5818,6 @@ c = tomb.createChunk(955,1908,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(955,1940,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment55() {
 c = tomb.createChunk(955,1972,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(955,2004,0);
@@ -5902,6 +5860,9 @@ c = tomb.createChunk(1019,2068,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1019,2100,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment55() {
 c = tomb.createChunk(1019,2132,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1051,1908,0);
@@ -5960,9 +5921,6 @@ c = tomb.createChunk(1147,1972,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1147,2004,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment56() {
 c = tomb.createChunk(1147,2036,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1147,2068,0);
@@ -6005,6 +5963,9 @@ c = tomb.createChunk(1211,2132,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1243,1908,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment56() {
 c = tomb.createChunk(1243,1940,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1243,1972,0);
@@ -6063,9 +6024,6 @@ c = tomb.createChunk(1339,2036,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1339,2068,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment57() {
 c = tomb.createChunk(1339,2100,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1339,2132,0);
@@ -6108,6 +6066,9 @@ c = tomb.createChunk(1435,1940,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1435,1972,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment57() {
 c = tomb.createChunk(1435,2004,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1435,2036,0);
@@ -6166,9 +6127,6 @@ c = tomb.createChunk(1531,2100,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1531,2132,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment58() {
 c = tomb.createChunk(1563,1908,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1563,1940,0);
@@ -6211,6 +6169,9 @@ c = tomb.createChunk(1627,1972,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1627,2004,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment58() {
 c = tomb.createChunk(1627,2036,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1627,2068,0);
@@ -6269,9 +6230,6 @@ c = tomb.createChunk(1723,2036,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1723,2068,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment59() {
 c = tomb.createChunk(1723,2100,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1723,2132,0);
@@ -6314,6 +6272,9 @@ c = tomb.createChunk(1787,2132,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1819,1876,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment59() {
 c = tomb.createChunk(1819,1908,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1819,1940,0);
@@ -6372,9 +6333,6 @@ c = tomb.createChunk(1915,1908,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1915,1940,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment60() {
 c = tomb.createChunk(1915,1972,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1915,2004,0);
@@ -6417,6 +6375,9 @@ c = tomb.createChunk(1979,2004,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1979,2036,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment60() {
 c = tomb.createChunk(1979,2068,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1979,2100,0);
@@ -6475,9 +6436,6 @@ c = tomb.createChunk(2075,2068,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2075,2100,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment61() {
 c = tomb.createChunk(2075,2132,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2107,1876,0);
@@ -6520,6 +6478,9 @@ c = tomb.createChunk(2235,1876,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2235,1908,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment61() {
 c = tomb.createChunk(2235,1940,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2235,1972,0);
@@ -6578,9 +6539,6 @@ c = tomb.createChunk(2331,1940,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2331,1972,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment62() {
 c = tomb.createChunk(2331,2004,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2331,2036,0);
@@ -6623,6 +6581,9 @@ c = tomb.createChunk(2395,2036,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2395,2068,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment62() {
 c = tomb.createChunk(2395,2100,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2395,2132,0);
@@ -6681,9 +6642,6 @@ c = tomb.createChunk(-34,2073,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(-34,2105,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment63() {
 c = tomb.createChunk(-34,2137,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(-2,2009,0);
@@ -6726,6 +6684,9 @@ c = tomb.createChunk(94,2105,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(94,2137,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment63() {
 c = tomb.createChunk(126,2009,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(126,2041,0);
@@ -6784,9 +6745,6 @@ c = tomb.createChunk(286,2073,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(286,2105,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment64() {
 c = tomb.createChunk(286,2137,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(318,2009,0);
@@ -6829,6 +6787,9 @@ c = tomb.createChunk(2492,2293,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2492,2325,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment64() {
 c = tomb.createChunk(2492,2357,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2621,1877,0);
@@ -6887,9 +6848,6 @@ c = tomb.createChunk(2684,2127,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2716,1877,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment65() {
 c = tomb.createChunk(2716,1909,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2716,1941,0);
@@ -6932,6 +6890,9 @@ c = tomb.createChunk(2780,1941,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2780,1973,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment65() {
 c = tomb.createChunk(2780,2005,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2780,2037,0);
@@ -6990,9 +6951,6 @@ c = tomb.createChunk(2872,1999,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2872,2031,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment66() {
 c = tomb.createChunk(2872,2063,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2872,2095,0);
@@ -7035,6 +6993,9 @@ c = tomb.createChunk(2936,2095,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2936,2127,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment66() {
 c = tomb.createChunk(2968,1871,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2968,1903,0);
@@ -7093,9 +7054,6 @@ c = tomb.createChunk(3064,1871,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(3064,1903,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment67() {
 c = tomb.createChunk(3064,1935,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(3064,1967,0);
@@ -7138,6 +7096,9 @@ c = tomb.createChunk(3128,1967,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(3128,1999,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment67() {
 c = tomb.createChunk(3128,2031,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(3128,2063,0);
@@ -7196,9 +7157,6 @@ c = tomb.createChunk(3224,2031,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(3224,2063,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment68() {
 c = tomb.createChunk(3224,2095,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(3224,2127,0);
@@ -7241,6 +7199,9 @@ c = tomb.createChunk(3288,2127,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(3320,1871,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment68() {
 c = tomb.createChunk(3320,1903,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(3320,1935,0);
@@ -7299,9 +7260,6 @@ c = tomb.createChunk(3416,1903,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(3416,1935,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment69() {
 c = tomb.createChunk(3416,1967,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(3416,1999,0);
@@ -7344,6 +7302,9 @@ c = tomb.createChunk(3480,1999,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(3480,2031,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment69() {
 c = tomb.createChunk(3480,2063,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(3480,2095,0);
@@ -7402,9 +7363,6 @@ c = tomb.createChunk(3576,2063,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(3576,2095,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment70() {
 c = tomb.createChunk(3576,2127,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(3608,1871,0);
@@ -7447,6 +7405,9 @@ c = tomb.createChunk(3672,1871,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(3672,1903,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment70() {
 c = tomb.createChunk(3672,1935,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(3672,1967,0);
@@ -7505,9 +7466,6 @@ c = tomb.createChunk(3768,1935,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(3768,1967,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment71() {
 c = tomb.createChunk(3768,1999,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(3768,2031,0);
@@ -7550,6 +7508,9 @@ c = tomb.createChunk(3832,2031,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(3832,2063,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment71() {
 c = tomb.createChunk(3832,2095,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(3832,2127,0);
@@ -7608,9 +7569,6 @@ c = tomb.createChunk(3928,2095,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(3928,2127,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment72() {
 c = tomb.createChunk(3960,1871,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(3960,1903,0);
@@ -7653,6 +7611,9 @@ c = tomb.createChunk(4024,1903,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(4024,1935,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment72() {
 c = tomb.createChunk(4024,1967,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(4024,1999,0);
@@ -7711,9 +7672,6 @@ c = tomb.createChunk(4120,1967,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(4120,1999,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment73() {
 c = tomb.createChunk(4120,2031,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(4120,2063,0);
@@ -7756,6 +7714,9 @@ c = tomb.createChunk(4184,2063,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(4184,2095,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment73() {
 c = tomb.createChunk(4184,2127,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(4216,1871,0);
@@ -7814,9 +7775,6 @@ c = tomb.createChunk(4280,2127,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(4312,1871,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment74() {
 c = tomb.createChunk(4312,1903,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(4312,1935,0);
@@ -7859,6 +7817,9 @@ c = tomb.createChunk(4376,1935,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(4376,1967,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment74() {
 c = tomb.createChunk(4376,1999,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(4376,2031,0);
@@ -7917,9 +7878,6 @@ c = tomb.createChunk(4472,1999,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(4472,2031,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment75() {
 c = tomb.createChunk(4472,2063,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(4472,2095,0);
@@ -7962,6 +7920,9 @@ c = tomb.createChunk(4536,2095,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(4536,2127,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment75() {
 c = tomb.createChunk(4568,1871,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(4568,1903,0);
@@ -8020,9 +7981,6 @@ c = tomb.createChunk(4664,1871,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(4664,1903,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment76() {
 c = tomb.createChunk(4664,1935,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(4664,1967,0);
@@ -8065,6 +8023,9 @@ c = tomb.createChunk(4728,1967,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(4728,1999,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment76() {
 c = tomb.createChunk(4728,2031,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(4728,2063,0);
@@ -8123,9 +8084,6 @@ c = tomb.createChunk(4824,2031,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(4824,2063,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment77() {
 c = tomb.createChunk(4824,2095,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(4824,2127,0);
@@ -8168,6 +8126,9 @@ c = tomb.createChunk(4888,2127,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(4920,1871,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment77() {
 c = tomb.createChunk(4920,1903,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(4920,1935,0);
@@ -8226,9 +8187,6 @@ c = tomb.createChunk(5016,1903,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5016,1935,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment78() {
 c = tomb.createChunk(5016,1967,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5016,1999,0);
@@ -8271,6 +8229,9 @@ c = tomb.createChunk(5080,1999,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5080,2031,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment78() {
 c = tomb.createChunk(5080,2063,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5080,2095,0);
@@ -8329,9 +8290,6 @@ c = tomb.createChunk(5176,2063,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5176,2095,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment79() {
 c = tomb.createChunk(5176,2127,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5208,1871,0);
@@ -8374,6 +8332,9 @@ c = tomb.createChunk(5272,1871,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5272,1903,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment79() {
 c = tomb.createChunk(5272,1935,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5272,1967,0);
@@ -8432,9 +8393,6 @@ c = tomb.createChunk(5368,1935,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5368,1967,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment80() {
 c = tomb.createChunk(5368,1999,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5368,2031,0);
@@ -8477,6 +8435,9 @@ c = tomb.createChunk(5432,2031,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5432,2063,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment80() {
 c = tomb.createChunk(5432,2095,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5432,2127,0);
@@ -8535,9 +8496,6 @@ c = tomb.createChunk(5528,2095,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5528,2127,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment81() {
 c = tomb.createChunk(5560,1871,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5560,1903,0);
@@ -8580,6 +8538,9 @@ c = tomb.createChunk(5624,1903,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5624,1935,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment81() {
 c = tomb.createChunk(5624,1967,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5624,1999,0);
@@ -8638,9 +8599,6 @@ c = tomb.createChunk(5720,1967,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5720,1999,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment82() {
 c = tomb.createChunk(5720,2031,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5720,2063,0);
@@ -8683,6 +8641,9 @@ c = tomb.createChunk(5784,2063,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5784,2095,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment82() {
 c = tomb.createChunk(5784,2127,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5816,1871,0);
@@ -8741,9 +8702,6 @@ c = tomb.createChunk(5880,2127,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5912,1871,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment83() {
 c = tomb.createChunk(5912,1903,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5912,1935,0);
@@ -8778,14 +8736,6 @@ c = tomb.createChunk(5944,2095,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5944,2127,0);
 if(c!=null) c.setPassable(false);
-c = tomb.createChunk(5976,1871,0);
-if(c!=null) c.setPassable(false);
-c = tomb.createChunk(5976,1903,0);
-if(c!=null) c.setPassable(false);
-c = tomb.createChunk(5976,1935,0);
-if(c!=null) c.setPassable(false);
-c = tomb.createChunk(5976,1967,0);
-if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5976,1999,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5976,2031,0);
@@ -8794,19 +8744,10 @@ c = tomb.createChunk(5976,2063,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5976,2095,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment83() {
 c = tomb.createChunk(5976,2127,0);
-if(c!=null) c.setPassable(false);
-c = tomb.createChunk(6008,1871,0);
-if(c!=null) c.setPassable(false);
-c = tomb.createChunk(6008,1903,0);
-if(c!=null) c.setPassable(false);
-c = tomb.createChunk(6008,1935,0);
-if(c!=null) c.setPassable(false);
-c = tomb.createChunk(6008,1967,0);
-if(c!=null) c.setPassable(false);
-c = tomb.createChunk(6008,1999,0);
-if(c!=null) c.setPassable(false);
-c = tomb.createChunk(6008,2031,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6008,2063,0);
 if(c!=null) c.setPassable(false);
@@ -8814,74 +8755,23 @@ c = tomb.createChunk(6008,2095,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6008,2127,0);
 if(c!=null) c.setPassable(false);
-c = tomb.createChunk(6040,1871,0);
-if(c!=null) c.setPassable(false);
-c = tomb.createChunk(6040,1903,0);
-if(c!=null) c.setPassable(false);
-c = tomb.createChunk(6040,1935,0);
-if(c!=null) c.setPassable(false);
-c = tomb.createChunk(6040,1967,0);
-if(c!=null) c.setPassable(false);
-c = tomb.createChunk(6040,1999,0);
-if(c!=null) c.setPassable(false);
-c = tomb.createChunk(6040,2031,0);
-if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6040,2063,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6040,2095,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6040,2127,0);
 if(c!=null) c.setPassable(false);
-c = tomb.createChunk(6072,1871,0);
-if(c!=null) c.setPassable(false);
-c = tomb.createChunk(6072,1903,0);
-if(c!=null) c.setPassable(false);
-c = tomb.createChunk(6072,1935,0);
-if(c!=null) c.setPassable(false);
-c = tomb.createChunk(6072,1967,0);
-if(c!=null) c.setPassable(false);
-c = tomb.createChunk(6072,1999,0);
-if(c!=null) c.setPassable(false);
-c = tomb.createChunk(6072,2031,0);
-if(c!=null) c.setPassable(false);
-}
-
-public void addSegment84() {
 c = tomb.createChunk(6072,2063,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6072,2095,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6072,2127,0);
 if(c!=null) c.setPassable(false);
-c = tomb.createChunk(6104,1871,0);
-if(c!=null) c.setPassable(false);
-c = tomb.createChunk(6104,1903,0);
-if(c!=null) c.setPassable(false);
-c = tomb.createChunk(6104,1935,0);
-if(c!=null) c.setPassable(false);
-c = tomb.createChunk(6104,1967,0);
-if(c!=null) c.setPassable(false);
-c = tomb.createChunk(6104,1999,0);
-if(c!=null) c.setPassable(false);
-c = tomb.createChunk(6104,2031,0);
-if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6104,2063,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6104,2095,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6104,2127,0);
-if(c!=null) c.setPassable(false);
-c = tomb.createChunk(6136,1871,0);
-if(c!=null) c.setPassable(false);
-c = tomb.createChunk(6136,1903,0);
-if(c!=null) c.setPassable(false);
-c = tomb.createChunk(6136,1935,0);
-if(c!=null) c.setPassable(false);
-c = tomb.createChunk(6136,1967,0);
-if(c!=null) c.setPassable(false);
-c = tomb.createChunk(6136,1999,0);
-if(c!=null) c.setPassable(false);
-c = tomb.createChunk(6136,2031,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6136,2063,0);
 if(c!=null) c.setPassable(false);
@@ -8947,9 +8837,6 @@ c = tomb.createChunk(6264,1871,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6264,1903,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment85() {
 c = tomb.createChunk(6264,1935,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6264,1967,0);
@@ -8960,6 +8847,9 @@ c = tomb.createChunk(6264,2031,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6264,2063,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment84() {
 c = tomb.createChunk(6264,2095,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6264,2127,0);
@@ -9050,9 +8940,6 @@ c = tomb.createChunk(6424,2031,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6424,2063,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment86() {
 c = tomb.createChunk(6424,2095,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6424,2127,0);
@@ -9063,6 +8950,9 @@ c = tomb.createChunk(6456,1903,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6456,1935,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment85() {
 c = tomb.createChunk(6456,1967,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6456,1999,0);
@@ -9153,9 +9043,6 @@ c = tomb.createChunk(6616,1903,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6616,1935,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment87() {
 c = tomb.createChunk(6616,1967,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6616,1999,0);
@@ -9166,6 +9053,9 @@ c = tomb.createChunk(6616,2063,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6616,2095,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment86() {
 c = tomb.createChunk(6616,2127,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6648,1871,0);
@@ -9256,9 +9146,6 @@ c = tomb.createChunk(6776,2063,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6776,2095,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment88() {
 c = tomb.createChunk(6776,2127,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6808,1871,0);
@@ -9269,6 +9156,9 @@ c = tomb.createChunk(6808,1935,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6808,1967,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment87() {
 c = tomb.createChunk(6808,1999,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6808,2031,0);
@@ -9359,9 +9249,6 @@ c = tomb.createChunk(6653,2519,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6653,2551,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment89() {
 c = tomb.createChunk(6653,2583,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6653,2615,0);
@@ -9372,6 +9259,9 @@ c = tomb.createChunk(6653,2679,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6653,2711,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment88() {
 c = tomb.createChunk(6685,2391,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6685,2423,0);
@@ -9462,9 +9352,6 @@ c = tomb.createChunk(6781,2711,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6813,2391,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment90() {
 c = tomb.createChunk(6813,2423,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6813,2455,0);
@@ -9475,6 +9362,9 @@ c = tomb.createChunk(6813,2519,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6813,2551,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment89() {
 c = tomb.createChunk(6813,2583,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6813,2615,0);
@@ -9565,9 +9455,6 @@ c = tombEdge.createChunk(3261,2363,0);
 if(c!=null) c.setPassable(false);
 c = tombEdge.createChunk(3293,2363,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment91() {
 c = tombEdge.createChunk(3325,2363,0);
 if(c!=null) c.setPassable(false);
 c = tombEdge.createChunk(3357,2363,0);
@@ -9578,6 +9465,9 @@ c = tombEdge.createChunk(3421,2363,0);
 if(c!=null) c.setPassable(false);
 c = tombEdge.createChunk(3453,2363,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment90() {
 c = tombEdge.createChunk(3485,2363,0);
 if(c!=null) c.setPassable(false);
 c = tombEdge.createChunk(3517,2363,0);
@@ -9668,9 +9558,6 @@ c = tomb.createChunk(2589,2587,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2589,2619,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment92() {
 c = tomb.createChunk(2589,2651,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2621,2395,0);
@@ -9681,6 +9568,9 @@ c = tomb.createChunk(2621,2459,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2621,2491,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment91() {
 c = tomb.createChunk(2621,2523,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2621,2555,0);
@@ -9771,9 +9661,6 @@ c = tomb.createChunk(2781,2619,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2781,2651,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment93() {
 c = tomb.createChunk(2749,2395,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2813,2523,0);
@@ -9784,6 +9671,9 @@ c = tomb.createChunk(2813,2587,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2813,2619,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment92() {
 c = tomb.createChunk(2813,2651,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2845,2523,0);
@@ -9874,9 +9764,6 @@ c = tomb.createChunk(3005,2427,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(3005,2459,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment94() {
 c = tomb.createChunk(3005,2491,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(3005,2523,0);
@@ -9887,6 +9774,9 @@ c = tomb.createChunk(3005,2587,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(3005,2619,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment93() {
 c = tomb.createChunk(3005,2651,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(3037,2395,0);
@@ -9977,9 +9867,6 @@ c = tomb.createChunk(3165,2587,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(3165,2619,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment95() {
 c = tomb.createChunk(3165,2651,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(3197,2395,0);
@@ -9990,6 +9877,9 @@ c = tomb.createChunk(3197,2459,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(3197,2491,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment94() {
 c = tomb.createChunk(3197,2523,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(3197,2555,0);
@@ -10080,9 +9970,6 @@ c = tomb.createChunk(3357,2459,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(3357,2491,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment96() {
 c = tomb.createChunk(3357,2523,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(3357,2555,0);
@@ -10093,6 +9980,9 @@ c = tomb.createChunk(3357,2619,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(3357,2651,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment95() {
 c = tomb.createChunk(3389,2395,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(3389,2427,0);
@@ -10183,9 +10073,6 @@ c = tomb.createChunk(3517,2619,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(3517,2651,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment97() {
 c = tomb.createChunk(3549,2395,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(3549,2427,0);
@@ -10196,6 +10083,9 @@ c = tomb.createChunk(3549,2491,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(3549,2523,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment96() {
 c = tomb.createChunk(3549,2555,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(3549,2587,0);
@@ -10286,9 +10176,6 @@ c = tomb.createChunk(3709,2491,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(3709,2523,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment98() {
 c = tomb.createChunk(3709,2555,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(3709,2587,0);
@@ -10299,6 +10186,9 @@ c = tomb.createChunk(3709,2651,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(3741,2395,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment97() {
 c = tomb.createChunk(3741,2427,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(3741,2459,0);
@@ -10389,9 +10279,6 @@ c = tomb.createChunk(3869,2651,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(3901,2395,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment99() {
 c = tomb.createChunk(3901,2427,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(3901,2459,0);
@@ -10402,6 +10289,9 @@ c = tomb.createChunk(3901,2523,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(3901,2555,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment98() {
 c = tomb.createChunk(3901,2587,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(3901,2619,0);
@@ -10492,9 +10382,6 @@ c = tomb.createChunk(4061,2523,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(4061,2555,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment100() {
 c = tomb.createChunk(4061,2587,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(4061,2619,0);
@@ -10505,6 +10392,9 @@ c = tomb.createChunk(4093,2395,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(4093,2427,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment99() {
 c = tomb.createChunk(4093,2459,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(4093,2491,0);
@@ -10595,9 +10485,6 @@ c = tomb.createChunk(4253,2395,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(4253,2427,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment101() {
 c = tomb.createChunk(4253,2459,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(4253,2491,0);
@@ -10608,6 +10495,9 @@ c = tomb.createChunk(4253,2555,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(4253,2587,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment100() {
 c = tomb.createChunk(4253,2619,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(4253,2651,0);
@@ -10698,9 +10588,6 @@ c = tomb.createChunk(4413,2555,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(4413,2587,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment102() {
 c = tomb.createChunk(4413,2619,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(4413,2651,0);
@@ -10711,6 +10598,9 @@ c = tomb.createChunk(4445,2427,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(4445,2459,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment101() {
 c = tomb.createChunk(4445,2491,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(4445,2523,0);
@@ -10801,9 +10691,6 @@ c = tomb.createChunk(5021,2427,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5021,2459,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment103() {
 c = tomb.createChunk(5021,2491,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5021,2523,0);
@@ -10814,6 +10701,9 @@ c = tomb.createChunk(5021,2587,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5021,2619,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment102() {
 c = tomb.createChunk(5021,2651,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5053,2395,0);
@@ -10904,9 +10794,6 @@ c = tomb.createChunk(5245,2523,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5245,2555,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment104() {
 c = tomb.createChunk(5245,2587,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5245,2619,0);
@@ -10917,6 +10804,9 @@ c = tomb.createChunk(5277,2523,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5277,2555,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment103() {
 c = tomb.createChunk(5277,2587,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5277,2619,0);
@@ -11007,9 +10897,6 @@ c = tomb.createChunk(5501,2459,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5501,2491,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment105() {
 c = tomb.createChunk(5501,2523,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5501,2555,0);
@@ -11020,6 +10907,9 @@ c = tomb.createChunk(5501,2619,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5501,2651,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment104() {
 c = tomb.createChunk(5533,2395,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5533,2427,0);
@@ -11110,9 +11000,6 @@ c = tomb.createChunk(5661,2619,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5661,2651,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment106() {
 c = tomb.createChunk(5693,2395,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5693,2427,0);
@@ -11123,6 +11010,9 @@ c = tomb.createChunk(5693,2491,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5693,2523,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment105() {
 c = tomb.createChunk(5693,2555,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5693,2587,0);
@@ -11213,9 +11103,6 @@ c = tomb.createChunk(5853,2491,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5853,2523,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment107() {
 c = tomb.createChunk(5853,2555,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5853,2587,0);
@@ -11226,6 +11113,9 @@ c = tomb.createChunk(5853,2651,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5885,2395,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment106() {
 c = tomb.createChunk(5885,2427,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5885,2459,0);
@@ -11316,9 +11206,6 @@ c = tomb.createChunk(6013,2651,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6045,2395,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment108() {
 c = tomb.createChunk(6045,2427,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6045,2459,0);
@@ -11329,6 +11216,9 @@ c = tomb.createChunk(6045,2523,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6045,2555,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment107() {
 c = tomb.createChunk(6045,2587,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6045,2619,0);
@@ -11419,9 +11309,6 @@ c = tomb.createChunk(6205,2523,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6205,2555,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment109() {
 c = tomb.createChunk(6205,2587,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6205,2619,0);
@@ -11432,6 +11319,9 @@ c = tomb.createChunk(6237,2395,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6237,2427,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment108() {
 c = tomb.createChunk(6237,2459,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6237,2491,0);
@@ -11522,9 +11412,6 @@ c = tomb.createChunk(6397,2395,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6397,2427,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment110() {
 c = tomb.createChunk(6397,2459,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6397,2491,0);
@@ -11535,6 +11422,9 @@ c = tomb.createChunk(6397,2555,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6397,2587,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment109() {
 c = tomb.createChunk(6397,2619,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6397,2651,0);
@@ -11625,9 +11515,6 @@ c = tomb.createChunk(6557,2555,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6557,2587,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment111() {
 c = tomb.createChunk(6557,2619,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6557,2651,0);
@@ -11638,6 +11525,9 @@ c = tomb.createChunk(2492,2421,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2492,2453,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment110() {
 c = tomb.createChunk(2492,2485,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2492,2517,0);
@@ -11728,9 +11618,6 @@ c = tomb.createChunk(6779,2333,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6779,2365,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment112() {
 c = tomb.createChunk(6748,2158,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6780,2158,0);
@@ -11741,6 +11628,9 @@ c = tomb.createChunk(6795,2205,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6795,2237,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment111() {
 c = tomb.createChunk(6795,2269,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6795,2301,0);
@@ -11831,9 +11721,6 @@ c = tomb.createChunk(2599,2703,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2599,2735,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment113() {
 c = tomb.createChunk(2599,2767,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2599,2799,0);
@@ -11844,6 +11731,9 @@ c = tomb.createChunk(2631,2671,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2631,2703,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment112() {
 c = tomb.createChunk(2631,2735,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2631,2767,0);
@@ -11934,9 +11824,6 @@ c = tomb.createChunk(2855,2767,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2855,2799,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment114() {
 c = tomb.createChunk(2855,2831,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2887,2671,0);
@@ -11947,6 +11834,9 @@ c = tomb.createChunk(2887,2735,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2887,2767,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment113() {
 c = tomb.createChunk(2887,2799,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2887,2831,0);
@@ -12037,9 +11927,6 @@ c = tombEdge.createChunk(5021,2363,0);
 if(c!=null) c.setPassable(false);
 c = tombEdge.createChunk(5053,2363,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment115() {
 c = tombEdge.createChunk(5085,2363,0);
 if(c!=null) c.setPassable(false);
 c = tombEdge.createChunk(5117,2363,0);
@@ -12050,6 +11937,9 @@ c = tombEdge.createChunk(5469,2363,0);
 if(c!=null) c.setPassable(false);
 c = tombEdge.createChunk(5501,2363,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment114() {
 c = tombEdge.createChunk(5533,2363,0);
 if(c!=null) c.setPassable(false);
 c = tombEdge.createChunk(5565,2363,0);
@@ -12140,9 +12030,6 @@ c = tomb.createChunk(6875,954,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6875,986,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment116() {
 c = tomb.createChunk(6875,1018,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6875,1050,0);
@@ -12153,6 +12040,9 @@ c = tomb.createChunk(6875,1114,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6875,1146,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment115() {
 c = tomb.createChunk(6907,794,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6907,826,0);
@@ -12243,9 +12133,6 @@ c = tomb.createChunk(4471,2829,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(4471,2861,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment117() {
 c = tomb.createChunk(4471,2893,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(4471,2925,0);
@@ -12256,6 +12143,9 @@ c = tomb.createChunk(4471,2989,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(4471,3021,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment116() {
 c = tomb.createChunk(4503,2669,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(4503,2701,0);
@@ -12346,9 +12236,6 @@ c = tomb.createChunk(4599,2893,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(4599,2925,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment118() {
 c = tomb.createChunk(4599,2957,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(4599,2989,0);
@@ -12359,6 +12246,9 @@ c = tomb.createChunk(4631,2669,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(4631,2701,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment117() {
 c = tomb.createChunk(4631,2733,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(4631,2765,0);
@@ -12449,9 +12339,6 @@ c = tomb.createChunk(4727,2957,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(4727,2989,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment119() {
 c = tomb.createChunk(4727,3021,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(4759,2669,0);
@@ -12462,6 +12349,9 @@ c = tomb.createChunk(4759,2733,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(4759,2765,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment118() {
 c = tomb.createChunk(4759,2797,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(4759,2829,0);
@@ -12552,9 +12442,6 @@ c = tomb.createChunk(4855,3021,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(4887,2669,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment120() {
 c = tomb.createChunk(4887,2701,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(4887,2733,0);
@@ -12565,6 +12452,9 @@ c = tomb.createChunk(4887,2797,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(4887,2829,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment119() {
 c = tomb.createChunk(4887,2861,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(4887,2893,0);
@@ -12655,9 +12545,6 @@ c = tomb.createChunk(5015,2701,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5015,2733,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment121() {
 c = tomb.createChunk(5015,2765,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5015,2797,0);
@@ -12668,6 +12555,9 @@ c = tomb.createChunk(5015,2861,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5015,2893,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment120() {
 c = tomb.createChunk(5015,2925,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5015,2957,0);
@@ -12758,9 +12648,6 @@ c = tomb.createChunk(4348,2865,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(4380,2673,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment122() {
 c = tomb.createChunk(4380,2705,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(4380,2737,0);
@@ -12771,6 +12658,9 @@ c = tomb.createChunk(4380,2801,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(4380,2833,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment121() {
 c = tomb.createChunk(4380,2865,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(4412,2673,0);
@@ -12861,9 +12751,6 @@ c = tomb.createChunk(5133,2683,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5133,2715,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment123() {
 c = tomb.createChunk(5133,2747,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5133,2779,0);
@@ -12874,6 +12761,9 @@ c = tomb.createChunk(5133,2843,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5133,2875,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment122() {
 c = tomb.createChunk(5165,2683,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5165,2715,0);
@@ -12964,9 +12854,6 @@ c = tomb.createChunk(5357,2715,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5357,2747,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment124() {
 c = tomb.createChunk(5357,2779,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5357,2811,0);
@@ -12977,6 +12864,9 @@ c = tomb.createChunk(5357,2875,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5389,2683,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment123() {
 c = tomb.createChunk(5389,2715,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5389,2747,0);
@@ -13067,9 +12957,6 @@ c = tomb.createChunk(5581,2747,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5581,2779,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment125() {
 c = tomb.createChunk(5581,2811,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5581,2843,0);
@@ -13080,6 +12967,9 @@ c = tomb.createChunk(5613,2683,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5613,2715,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment124() {
 c = tomb.createChunk(5613,2747,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5613,2779,0);
@@ -13170,9 +13060,6 @@ c = tomb.createChunk(5444,2925,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5444,2957,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment126() {
 c = tomb.createChunk(5476,2893,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5476,2925,0);
@@ -13183,6 +13070,9 @@ c = tomb.createChunk(5508,2893,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5508,2925,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment125() {
 c = tomb.createChunk(5508,2957,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(5674,2680,0);
@@ -13273,9 +13163,6 @@ c = tomb.createChunk(2845,2223,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2845,2255,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment127() {
 c = tombEdge.createChunk(4957,2490,0);
 if(c!=null) c.setPassable(false);
 c = tombEdge.createChunk(4900,2371,0);
@@ -13286,6 +13173,9 @@ c = tomb.createChunk(91,702,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(91,734,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment126() {
 c = tomb.createChunk(123,670,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(123,702,0);
@@ -13376,9 +13266,6 @@ c = tomb.createChunk(1664,1167,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1664,1199,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment128() {
 c = tomb.createChunk(1664,1231,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1664,1263,0);
@@ -13389,6 +13276,9 @@ c = tomb.createChunk(1664,1327,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1664,1359,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment127() {
 c = tomb.createChunk(1696,1167,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1696,1199,0);
@@ -13479,9 +13369,6 @@ c = tomb.createChunk(556,1889,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(588,1889,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment129() {
 c = tomb.createChunk(620,1889,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(652,1889,0);
@@ -13492,6 +13379,9 @@ c = tomb.createChunk(716,1889,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(748,1889,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment128() {
 c = tomb.createChunk(780,1889,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(812,1889,0);
@@ -13582,9 +13472,6 @@ c = tomb.createChunk(2011,2355,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2011,2387,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment130() {
 c = tomb.createChunk(2043,2163,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2043,2195,0);
@@ -13595,6 +13482,9 @@ c = tomb.createChunk(2043,2259,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2043,2291,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment129() {
 c = tomb.createChunk(2043,2323,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2043,2355,0);
@@ -13685,9 +13575,6 @@ c = tomb.createChunk(2299,2163,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2299,2195,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment131() {
 c = tomb.createChunk(2299,2227,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2299,2259,0);
@@ -13698,6 +13585,9 @@ c = tomb.createChunk(2299,2323,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2299,2355,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment130() {
 c = tomb.createChunk(2299,2387,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2331,2163,0);
@@ -13788,9 +13678,6 @@ c = tomb.createChunk(1803,2253,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1803,2285,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment132() {
 c = tomb.createChunk(1803,2317,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1803,2349,0);
@@ -13801,6 +13688,9 @@ c = tomb.createChunk(1803,2413,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1803,2445,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment131() {
 c = tomb.createChunk(1803,2477,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1803,2509,0);
@@ -13891,9 +13781,6 @@ c = tomb.createChunk(1899,2413,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1899,2445,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment133() {
 c = tomb.createChunk(1899,2477,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1899,2509,0);
@@ -13904,6 +13791,9 @@ c = tomb.createChunk(1899,2573,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1899,2605,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment132() {
 c = tomb.createChunk(1931,2157,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(1931,2189,0);
@@ -13994,9 +13884,6 @@ c = tomb.createChunk(2022,2573,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2022,2605,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment134() {
 c = tomb.createChunk(2022,2637,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2054,2413,0);
@@ -14007,6 +13894,9 @@ c = tomb.createChunk(2054,2477,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2054,2509,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment133() {
 c = tomb.createChunk(2054,2541,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2054,2573,0);
@@ -14097,9 +13987,6 @@ c = tomb.createChunk(2214,2637,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2246,2413,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment135() {
 c = tomb.createChunk(2246,2445,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2246,2477,0);
@@ -14110,6 +13997,9 @@ c = tomb.createChunk(2246,2541,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2246,2573,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment134() {
 c = tomb.createChunk(2246,2605,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2246,2637,0);
@@ -14200,9 +14090,6 @@ c = tombEdge.createChunk(2458,1845,0);
 if(c!=null) c.setPassable(false);
 c = tombEdge.createChunk(2490,1845,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment136() {
 c = tomb.createChunk(2490,1867,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2490,1899,0);
@@ -14213,6 +14100,9 @@ c = tomb.createChunk(2490,1963,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2490,1995,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment135() {
 c = tomb.createChunk(2411,2139,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2411,2171,0);
@@ -14303,9 +14193,6 @@ c = tomb.createChunk(2475,2363,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2475,2395,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment137() {
 c = tomb.createChunk(2475,2427,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2475,2459,0);
@@ -14316,6 +14203,9 @@ c = tomb.createChunk(2475,2523,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2475,2555,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment136() {
 c = tomb.createChunk(2475,2587,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2475,2619,0);
@@ -14406,9 +14296,6 @@ c = tombEdge.createChunk(3074,1845,0);
 if(c!=null) c.setPassable(false);
 c = tombEdge.createChunk(3106,1845,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment138() {
 c = tombEdge.createChunk(3138,1845,0);
 if(c!=null) c.setPassable(false);
 c = tombEdge.createChunk(3170,1845,0);
@@ -14419,6 +14306,9 @@ c = tombEdge.createChunk(3234,1845,0);
 if(c!=null) c.setPassable(false);
 c = tombEdge.createChunk(3266,1845,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment137() {
 c = tombEdge.createChunk(3298,1845,0);
 if(c!=null) c.setPassable(false);
 c = tombEdge.createChunk(3330,1845,0);
@@ -14509,9 +14399,6 @@ c = tombEdge.createChunk(4674,1845,0);
 if(c!=null) c.setPassable(false);
 c = tombEdge.createChunk(4706,1845,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment139() {
 c = tombEdge.createChunk(4738,1845,0);
 if(c!=null) c.setPassable(false);
 c = tombEdge.createChunk(4770,1845,0);
@@ -14522,6 +14409,9 @@ c = tombEdge.createChunk(4834,1845,0);
 if(c!=null) c.setPassable(false);
 c = tombEdge.createChunk(4866,1845,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment138() {
 c = tombEdge.createChunk(4898,1845,0);
 if(c!=null) c.setPassable(false);
 c = tombEdge.createChunk(4930,1845,0);
@@ -14590,17 +14480,7 @@ c = tombEdge.createChunk(5922,1845,0);
 if(c!=null) c.setPassable(false);
 c = tombEdge.createChunk(5954,1845,0);
 if(c!=null) c.setPassable(false);
-c = tombEdge.createChunk(5986,1845,0);
-if(c!=null) c.setPassable(false);
-c = tombEdge.createChunk(6018,1845,0);
-if(c!=null) c.setPassable(false);
-c = tombEdge.createChunk(6050,1845,0);
-if(c!=null) c.setPassable(false);
-c = tombEdge.createChunk(6082,1845,0);
-if(c!=null) c.setPassable(false);
-c = tombEdge.createChunk(6114,1845,0);
-if(c!=null) c.setPassable(false);
-c = tombEdge.createChunk(6146,1845,0);
+c = tombEdge.createChunk(6167,1845,0);
 if(c!=null) c.setPassable(false);
 c = tombEdge.createChunk(6178,1845,0);
 if(c!=null) c.setPassable(false);
@@ -14612,9 +14492,6 @@ c = tombEdge.createChunk(6274,1845,0);
 if(c!=null) c.setPassable(false);
 c = tombEdge.createChunk(6306,1845,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment140() {
 c = tombEdge.createChunk(6338,1845,0);
 if(c!=null) c.setPassable(false);
 c = tombEdge.createChunk(6370,1845,0);
@@ -14635,6 +14512,9 @@ c = tombEdge.createChunk(6594,1845,0);
 if(c!=null) c.setPassable(false);
 c = tombEdge.createChunk(6626,1845,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment139() {
 c = tombEdge.createChunk(6658,1845,0);
 if(c!=null) c.setPassable(false);
 c = tombEdge.createChunk(6690,1845,0);
@@ -14715,9 +14595,6 @@ c = tomb.createChunk(2711,1327,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2711,1359,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment141() {
 c = tomb.createChunk(2743,1231,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2743,1263,0);
@@ -14738,6 +14615,9 @@ c = tomb.createChunk(2774,1263,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2774,1295,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment140() {
 c = tomb.createChunk(2774,1327,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2774,1359,0);
@@ -14818,9 +14698,6 @@ c = tomb.createChunk(2994,1359,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(3026,1231,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment142() {
 c = tomb.createChunk(3026,1263,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(3026,1295,0);
@@ -14841,6 +14718,9 @@ c = tomb.createChunk(3058,1359,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(3090,1231,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment141() {
 c = tomb.createChunk(3090,1263,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(3090,1295,0);
@@ -14921,9 +14801,6 @@ c = tomb.createChunk(3313,1295,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(3313,1327,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment143() {
 c = tomb.createChunk(3313,1359,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(3345,1231,0);
@@ -14944,6 +14821,9 @@ c = tomb.createChunk(3377,1295,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(3377,1327,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment142() {
 c = tomb.createChunk(3377,1359,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(3409,1231,0);
@@ -15024,9 +14904,6 @@ c = tomb.createChunk(3598,1327,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(3598,1359,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment144() {
 c = tomb.createChunk(3630,1231,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(3630,1263,0);
@@ -15047,6 +14924,9 @@ c = tomb.createChunk(2276,2682,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2276,2714,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment143() {
 c = tomb.createChunk(2276,2746,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2276,2778,0);
@@ -15127,9 +15007,6 @@ c = tomb.createChunk(2468,2810,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2159,2657,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment145() {
 c = tomb.createChunk(2159,2689,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2159,2721,0);
@@ -15150,6 +15027,9 @@ c = tomb.createChunk(2255,2657,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(2255,2689,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment144() {
 c = tomb.createChunk(2255,2721,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6871,746,0);
@@ -15230,9 +15110,6 @@ c = tomb.createChunk(6871,1930,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6871,1962,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment146() {
 c = tomb.createChunk(6871,1994,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6871,2026,0);
@@ -15253,6 +15130,9 @@ c = tomb.createChunk(6871,2250,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6871,2282,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment145() {
 c = tomb.createChunk(6871,2314,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6871,2346,0);
@@ -15333,9 +15213,6 @@ c = tomb.createChunk(6903,1706,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6903,1738,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment147() {
 c = tomb.createChunk(6903,1770,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6903,1802,0);
@@ -15356,6 +15233,9 @@ c = tomb.createChunk(6903,2026,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6903,2058,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment146() {
 c = tomb.createChunk(6903,2090,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6903,2122,0);
@@ -15436,9 +15316,6 @@ c = tomb.createChunk(6935,1482,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6935,1514,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment148() {
 c = tomb.createChunk(6935,1546,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6935,1578,0);
@@ -15459,6 +15336,9 @@ c = tomb.createChunk(6935,1802,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6935,1834,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment147() {
 c = tomb.createChunk(6935,1866,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6935,1898,0);
@@ -15539,9 +15419,6 @@ c = tomb.createChunk(6967,1258,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6967,1290,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment149() {
 c = tomb.createChunk(6967,1322,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6967,1354,0);
@@ -15562,6 +15439,9 @@ c = tomb.createChunk(6967,1578,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6967,1610,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment148() {
 c = tomb.createChunk(6967,1642,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6967,1674,0);
@@ -15642,9 +15522,6 @@ c = tomb.createChunk(6999,1034,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6999,1066,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment150() {
 c = tomb.createChunk(6999,1098,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6999,1130,0);
@@ -15665,6 +15542,9 @@ c = tomb.createChunk(6999,1354,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6999,1386,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment149() {
 c = tomb.createChunk(6999,1418,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6999,1450,0);
@@ -15745,9 +15625,6 @@ c = tomb.createChunk(7031,810,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(7031,842,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment151() {
 c = tomb.createChunk(7031,874,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(7031,906,0);
@@ -15768,6 +15645,9 @@ c = tomb.createChunk(7031,1130,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(7031,1162,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment150() {
 c = tomb.createChunk(7031,1194,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(7031,1226,0);
@@ -15848,9 +15728,6 @@ c = tomb.createChunk(7031,2410,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(7031,2442,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment152() {
 c = tomb.createChunk(7031,2474,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(7031,2506,0);
@@ -15871,6 +15748,9 @@ c = tomb.createChunk(7063,906,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(7063,938,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment151() {
 c = tomb.createChunk(7063,970,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(7063,1002,0);
@@ -15951,9 +15831,6 @@ c = tomb.createChunk(7063,2186,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(7063,2218,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment153() {
 c = tomb.createChunk(7063,2250,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(7063,2282,0);
@@ -15974,6 +15851,9 @@ c = tomb.createChunk(7063,2506,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(7063,2538,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment152() {
 c = tomb.createChunk(7095,746,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(7095,778,0);
@@ -16054,9 +15934,6 @@ c = tomb.createChunk(7095,1962,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(7095,1994,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment154() {
 c = tomb.createChunk(7095,2026,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(7095,2058,0);
@@ -16077,6 +15954,9 @@ c = tomb.createChunk(7095,2282,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(7095,2314,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment153() {
 c = tomb.createChunk(7095,2346,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(7095,2378,0);
@@ -16157,9 +16037,6 @@ c = tomb.createChunk(7127,1738,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(7127,1770,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment155() {
 c = tomb.createChunk(7127,1802,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(7127,1834,0);
@@ -16180,6 +16057,9 @@ c = tomb.createChunk(7127,2058,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(7127,2090,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment154() {
 c = tomb.createChunk(7127,2122,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(7127,2154,0);
@@ -16260,9 +16140,6 @@ c = tomb.createChunk(7159,1514,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(7159,1546,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment156() {
 c = tomb.createChunk(7159,1578,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(7159,1610,0);
@@ -16283,6 +16160,9 @@ c = tomb.createChunk(7159,1834,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(7159,1866,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment155() {
 c = tomb.createChunk(7159,1898,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(7159,1930,0);
@@ -16363,9 +16243,6 @@ c = tomb.createChunk(7191,1290,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(7191,1322,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment157() {
 c = tomb.createChunk(7191,1354,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(7191,1386,0);
@@ -16386,6 +16263,9 @@ c = tomb.createChunk(7191,1610,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(7191,1642,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment156() {
 c = tomb.createChunk(7191,1674,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(7191,1706,0);
@@ -16466,9 +16346,6 @@ c = tomb.createChunk(7223,1066,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(7223,1098,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment158() {
 c = tomb.createChunk(7223,1130,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(7223,1162,0);
@@ -16489,6 +16366,9 @@ c = tomb.createChunk(7223,1386,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(7223,1418,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment157() {
 c = tomb.createChunk(7223,1450,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(7223,1482,0);
@@ -16569,9 +16449,6 @@ c = tomb.createChunk(6840,2334,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6840,2366,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment159() {
 c = tomb.createChunk(6840,2398,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6840,2430,0);
@@ -16592,6 +16469,9 @@ c = tomb.createChunk(6840,2654,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6840,2686,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment158() {
 c = tomb.createChunk(6840,2718,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6840,2750,0);
@@ -16672,9 +16552,6 @@ c = tomb.createChunk(6959,2819,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6991,2563,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment160() {
 c = tomb.createChunk(6991,2595,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(6991,2627,0);
@@ -16695,6 +16572,9 @@ c = tomb.createChunk(7023,2563,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(7023,2595,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment159() {
 c = tomb.createChunk(7023,2627,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(7023,2659,0);
@@ -16775,9 +16655,6 @@ c = tomb.createChunk(7151,2691,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(7151,2723,0);
 if(c!=null) c.setPassable(false);
-}
-
-public void addSegment161() {
 c = tomb.createChunk(7151,2755,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(7151,2787,0);
@@ -16798,6 +16675,9 @@ c = tomb.createChunk(7183,2723,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(7183,2755,0);
 if(c!=null) c.setPassable(false);
+}
+
+public void addSegment160() {
 c = tomb.createChunk(7183,2787,0);
 if(c!=null) c.setPassable(false);
 c = tomb.createChunk(7183,2819,0);
@@ -16839,6 +16719,636 @@ if(c!=null) c.setPassable(false);
 c = tomb.createChunk(7247,2819,0);
 if(c!=null) c.setPassable(false);
 c = tombEdge.createChunk(460,1533,0);
+if(c!=null) c.setPassable(false);
+c = tombEdge.createChunk(6008,2054,0);
+if(c!=null) c.setPassable(false);
+c = tombEdge.createChunk(6040,2054,0);
+if(c!=null) c.setPassable(false);
+c = tombEdge.createChunk(6072,2054,0);
+if(c!=null) c.setPassable(false);
+c = tombEdge.createChunk(6104,2054,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(6167,1877,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(6167,1909,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(5976,1871,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(5976,1903,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(5976,1935,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(5976,1967,0);
+if(c!=null) c.setPassable(false);
+c = tombEdge.createChunk(5976,1845,0);
+if(c!=null) c.setPassable(false);
+c = tombEdge.createChunk(6072,1936,0);
+if(c!=null) c.setPassable(false);
+c = tombEdge.createChunk(6104,1936,0);
+if(c!=null) c.setPassable(false);
+c = tombEdge.createChunk(6136,2054,0);
+if(c!=null) c.setPassable(false);
+c = tombEdge.createChunk(6136,1936,0);
+if(c!=null) c.setPassable(false);
+c = tombEdge.createChunk(40,-366,0);
+if(c!=null) c.setPassable(false);
+c = tombEdge.createChunk(72,-366,0);
+if(c!=null) c.setPassable(false);
+c = tombEdge.createChunk(104,-366,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(-369,-792,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(-369,-760,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(-369,-728,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(-369,-696,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(-369,-664,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(-369,-632,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(-369,-600,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(-369,-568,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(-369,-536,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(-337,-792,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(-337,-760,0);
+if(c!=null) c.setPassable(false);
+}
+
+public void addSegment161() {
+c = tomb.createChunk(-337,-728,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(-337,-696,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(-337,-664,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(-337,-632,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(-337,-600,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(-337,-568,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(-337,-536,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(-305,-792,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(-305,-760,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(-305,-728,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(-305,-696,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(-305,-664,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(-305,-632,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(-305,-600,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(-305,-568,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(-305,-536,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(-273,-792,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(-273,-760,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(-273,-728,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(-273,-696,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(-273,-664,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(-273,-632,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(-273,-600,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(-273,-568,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(-273,-536,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(-241,-792,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(-241,-760,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(-241,-728,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(-241,-696,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(-241,-664,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(-241,-632,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(-241,-600,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(-241,-568,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(-241,-536,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(-209,-792,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(-209,-760,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(-209,-728,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(-209,-696,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(-209,-664,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(-209,-632,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(-209,-600,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(-209,-568,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(-209,-536,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(-177,-792,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(-177,-760,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(-177,-728,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(-177,-696,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(-177,-664,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(-177,-632,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(-177,-600,0);
+if(c!=null) c.setPassable(false);
+}
+
+public void addSegment162() {
+c = tomb.createChunk(-177,-568,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(-177,-536,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(-145,-792,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(-145,-760,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(-145,-728,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(-145,-696,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(-145,-664,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(-145,-632,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(-145,-600,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(-145,-568,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(-145,-536,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(-113,-792,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(-113,-760,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(-113,-728,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(-113,-696,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(-113,-664,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(-113,-632,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(-113,-600,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(-113,-568,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(-113,-536,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(-81,-792,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(-81,-760,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(-81,-728,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(-81,-696,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(-81,-664,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(-81,-632,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(-81,-600,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(-81,-568,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(-81,-536,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(-49,-792,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(-49,-760,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(-49,-728,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(-49,-696,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(-49,-664,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(-49,-632,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(-49,-600,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(-49,-568,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(-49,-536,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(-17,-792,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(-17,-760,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(-17,-728,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(-17,-696,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(-17,-664,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(-17,-632,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(-17,-600,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(-17,-568,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(-17,-536,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(15,-792,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(15,-760,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(15,-728,0);
+if(c!=null) c.setPassable(false);
+}
+
+public void addSegment163() {
+c = tomb.createChunk(15,-696,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(15,-664,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(15,-632,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(15,-600,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(15,-568,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(15,-536,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(47,-792,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(47,-760,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(47,-728,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(47,-696,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(47,-664,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(47,-632,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(47,-600,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(47,-568,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(47,-536,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(79,-792,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(79,-760,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(79,-728,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(79,-696,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(79,-664,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(79,-632,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(79,-600,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(79,-568,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(79,-536,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(111,-792,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(111,-760,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(111,-728,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(111,-696,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(111,-664,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(111,-632,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(111,-600,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(111,-568,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(111,-536,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(143,-792,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(143,-760,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(143,-728,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(143,-696,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(143,-664,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(143,-632,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(143,-600,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(143,-568,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(143,-536,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(175,-792,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(175,-760,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(175,-728,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(175,-696,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(175,-664,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(175,-632,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(175,-600,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(175,-568,0);
+if(c!=null) c.setPassable(false);
+}
+
+public void addSegment164() {
+c = tomb.createChunk(175,-536,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(207,-792,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(207,-760,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(207,-728,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(207,-696,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(207,-664,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(207,-632,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(207,-600,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(207,-568,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(207,-536,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(239,-792,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(239,-760,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(239,-728,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(239,-696,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(239,-664,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(239,-632,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(239,-600,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(239,-568,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(239,-536,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(271,-792,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(271,-760,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(271,-728,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(271,-696,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(271,-664,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(271,-632,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(271,-600,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(271,-568,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(271,-536,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(303,-792,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(303,-760,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(303,-728,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(303,-696,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(303,-664,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(303,-632,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(303,-600,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(303,-568,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(303,-536,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(335,-792,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(335,-760,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(335,-728,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(335,-696,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(335,-664,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(335,-632,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(335,-600,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(335,-568,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(335,-536,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(367,-792,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(367,-760,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(367,-728,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(367,-696,0);
+if(c!=null) c.setPassable(false);
+}
+
+public void addSegment165() {
+c = tomb.createChunk(367,-664,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(367,-632,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(367,-600,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(367,-568,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(367,-536,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(399,-792,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(399,-760,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(399,-728,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(399,-696,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(399,-664,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(399,-632,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(399,-600,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(399,-568,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(399,-536,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(427,-780,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(427,-748,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(427,-716,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(427,-684,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(427,-652,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(427,-620,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(427,-588,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(427,-556,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(427,-524,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(459,-780,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(459,-748,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(459,-716,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(459,-684,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(459,-652,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(459,-620,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(459,-588,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(459,-556,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(459,-524,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(491,-780,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(491,-748,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(491,-716,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(491,-684,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(491,-652,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(491,-620,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(491,-588,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(491,-556,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(491,-524,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(523,-780,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(523,-748,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(523,-716,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(523,-684,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(523,-652,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(523,-620,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(523,-588,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(523,-556,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(523,-524,0);
+if(c!=null) c.setPassable(false);
+}
+
+public void addSegment166() {
+c = tomb.createChunk(555,-780,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(555,-748,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(555,-716,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(555,-684,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(555,-652,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(555,-620,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(555,-588,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(555,-556,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(555,-524,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(587,-780,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(587,-748,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(587,-716,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(587,-684,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(587,-652,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(587,-620,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(587,-588,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(587,-556,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(587,-524,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(619,-780,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(619,-748,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(619,-716,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(619,-684,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(619,-652,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(619,-620,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(619,-588,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(619,-556,0);
+if(c!=null) c.setPassable(false);
+c = tomb.createChunk(619,-524,0);
 if(c!=null) c.setPassable(false);
 c = new doodads.tomb.wallTorch(255,369,0);
 if(c!=null) c.setPassable(true);
@@ -16942,9 +17452,6 @@ commands.add(new units.unitCommands.commands.moveCommand(400.0,1313.0));
 commands.add(new units.unitCommands.commands.moveCommand(400.0,1188.0));
 commands.add(new units.unitCommands.commands.moveCommand(400.0,1063.0));
 u.setRepeatCommands(commands);
-}
-
-public void addSegment162() {
 u = new units.unitTypes.tomb.shadowDude(400,1188);
 u.setFacingDirection((String)"Right");
 u.setMoveSpeed((float)1.3);
@@ -17041,6 +17548,9 @@ commands.add(new units.unitCommands.commands.moveCommand(775.0,1313.0));
 commands.add(new units.unitCommands.commands.moveCommand(650.0,1313.0));
 commands.add(new units.unitCommands.commands.moveCommand(525.0,1313.0));
 u.setRepeatCommands(commands);
+}
+
+public void addSegment167() {
 u = new units.unitTypes.tomb.shadowDude(650,1063);
 u.setFacingDirection((String)"Right");
 u.setMoveSpeed((float)1.3);
@@ -17585,9 +18095,6 @@ commands = new commandList();
 commands.add(new units.unitCommands.commands.moveCommand(320.0,144.0));
 commands.add(new units.unitCommands.commands.moveCommand(26.0,144.0));
 u.setRepeatCommands(commands);
-}
-
-public void addSegment163() {
 u = new units.unitTypes.tomb.shadowDude(2555,2384);
 u.setFacingDirection((String)"Right");
 u.setMoveSpeed((float)3.0);
@@ -17600,14 +18107,6 @@ u = new units.unitTypes.tomb.shadowDude(2603,2384);
 u.setFacingDirection((String)"Right");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
-u = new units.unitTypes.tomb.lightDude(3070,2320);
-u.setFacingDirection((String)"Left");
-u.setMoveSpeed((float)2.0);
-u.jumpSpeed = (float)10.0;
-commands = new commandList();
-commands.add(new units.unitCommands.commands.moveCommand(2948.0,2320.0));
-commands.add(new units.unitCommands.commands.moveCommand(3070.0,2320.0));
-u.setRepeatCommands(commands);
 u = new units.unitTypes.tomb.lightDude(3311,2320);
 u.setFacingDirection((String)"Right");
 u.setMoveSpeed((float)1.5);
@@ -17616,6 +18115,9 @@ commands = new commandList();
 commands.add(new units.unitCommands.commands.moveCommand(3149.0,2320.0));
 commands.add(new units.unitCommands.commands.moveCommand(3311.0,2320.0));
 u.setRepeatCommands(commands);
+}
+
+public void addSegment168() {
 u = new units.unitTypes.tomb.lightDude(3429,2320);
 u.setFacingDirection((String)"Left");
 u.setMoveSpeed((float)1.5);
@@ -17624,13 +18126,13 @@ commands = new commandList();
 commands.add(new units.unitCommands.commands.moveCommand(3591.0,2320.0));
 commands.add(new units.unitCommands.commands.moveCommand(3429.0,2320.0));
 u.setRepeatCommands(commands);
-u = new units.unitTypes.tomb.lightDude(3768,2253);
+u = new units.unitTypes.tomb.lightDude(3768,2240);
 u.setFacingDirection((String)"Right");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
 commands = new commandList();
-commands.add(new units.unitCommands.commands.moveCommand(3928.0,2253.0));
-commands.add(new units.unitCommands.commands.moveCommand(3768.0,2253.0));
+commands.add(new units.unitCommands.commands.moveCommand(3928.0,2240.0));
+commands.add(new units.unitCommands.commands.moveCommand(3768.0,2240.0));
 u.setRepeatCommands(commands);
 u = new units.unitTypes.tomb.lightDude(4104,2263);
 u.setFacingDirection((String)"Right");
@@ -17812,9 +18314,6 @@ u = new units.unitTypes.tomb.shadowDude(3181,2319);
 u.setFacingDirection((String)"Right");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
-}
-
-public void addSegment164() {
 u = new units.unitTypes.tomb.shadowDude(3201,2169);
 u.setFacingDirection((String)"Right");
 u.setMoveSpeed((float)3.0);
@@ -17835,6 +18334,9 @@ u = new units.unitTypes.tomb.shadowDude(3221,2169);
 u.setFacingDirection((String)"Right");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
+}
+
+public void addSegment169() {
 u = new units.unitTypes.tomb.shadowDude(3221,2219);
 u.setFacingDirection((String)"Right");
 u.setMoveSpeed((float)3.0);
@@ -18015,9 +18517,6 @@ u = new units.unitTypes.tomb.shadowDude(3521,2319);
 u.setFacingDirection((String)"Right");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
-}
-
-public void addSegment165() {
 u = new units.unitTypes.tomb.shadowDude(3541,2169);
 u.setFacingDirection((String)"Right");
 u.setMoveSpeed((float)3.0);
@@ -18038,6 +18537,9 @@ u = new units.unitTypes.tomb.shadowDude(3561,2169);
 u.setFacingDirection((String)"Right");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
+}
+
+public void addSegment170() {
 u = new units.unitTypes.tomb.shadowDude(3561,2219);
 u.setFacingDirection((String)"Right");
 u.setMoveSpeed((float)3.0);
@@ -18218,9 +18720,6 @@ u = new units.unitTypes.tomb.shadowDude(3781,2219);
 u.setFacingDirection((String)"Right");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
-}
-
-public void addSegment166() {
 u = new units.unitTypes.tomb.shadowDude(3781,2269);
 u.setFacingDirection((String)"Right");
 u.setMoveSpeed((float)3.0);
@@ -18241,6 +18740,9 @@ u = new units.unitTypes.tomb.shadowDude(3801,2269);
 u.setFacingDirection((String)"Right");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
+}
+
+public void addSegment171() {
 u = new units.unitTypes.tomb.shadowDude(3801,2319);
 u.setFacingDirection((String)"Right");
 u.setMoveSpeed((float)3.0);
@@ -18421,9 +18923,6 @@ u = new units.unitTypes.tomb.shadowDude(4221,2219);
 u.setFacingDirection((String)"Right");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
-}
-
-public void addSegment167() {
 u = new units.unitTypes.tomb.shadowDude(4221,2269);
 u.setFacingDirection((String)"Right");
 u.setMoveSpeed((float)3.0);
@@ -18444,6 +18943,9 @@ u = new units.unitTypes.tomb.shadowDude(4261,2169);
 u.setFacingDirection((String)"Right");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
+}
+
+public void addSegment172() {
 u = new units.unitTypes.tomb.shadowDude(4261,2219);
 u.setFacingDirection((String)"Right");
 u.setMoveSpeed((float)3.0);
@@ -18624,9 +19126,6 @@ u = new units.unitTypes.tomb.shadowDude(4521,2169);
 u.setFacingDirection((String)"Right");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
-}
-
-public void addSegment168() {
 u = new units.unitTypes.tomb.shadowDude(4521,2219);
 u.setFacingDirection((String)"Right");
 u.setMoveSpeed((float)3.0);
@@ -18647,6 +19146,9 @@ u = new units.unitTypes.tomb.shadowDude(4541,2219);
 u.setFacingDirection((String)"Right");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
+}
+
+public void addSegment173() {
 u = new units.unitTypes.tomb.shadowDude(4541,2269);
 u.setFacingDirection((String)"Right");
 u.setMoveSpeed((float)3.0);
@@ -18827,9 +19329,6 @@ u = new units.unitTypes.tomb.shadowDude(4742,2169);
 u.setFacingDirection((String)"Right");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
-}
-
-public void addSegment169() {
 u = new units.unitTypes.tomb.shadowDude(4742,2219);
 u.setFacingDirection((String)"Right");
 u.setMoveSpeed((float)3.0);
@@ -18850,6 +19349,9 @@ u = new units.unitTypes.tomb.shadowDude(4762,2169);
 u.setFacingDirection((String)"Right");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
+}
+
+public void addSegment174() {
 u = new units.unitTypes.tomb.shadowDude(4762,2219);
 u.setFacingDirection((String)"Right");
 u.setMoveSpeed((float)3.0);
@@ -19030,9 +19532,6 @@ u = new units.unitTypes.tomb.shadowDude(4902,2519);
 u.setFacingDirection((String)"Right");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
-}
-
-public void addSegment170() {
 u = new units.unitTypes.tomb.shadowDude(4902,2619);
 u.setFacingDirection((String)"Right");
 u.setMoveSpeed((float)3.0);
@@ -19053,6 +19552,9 @@ u = new units.unitTypes.tomb.shadowDude(4942,2619);
 u.setFacingDirection((String)"Right");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
+}
+
+public void addSegment175() {
 u = new units.unitTypes.tomb.shadowDude(4962,2519);
 u.setFacingDirection((String)"Right");
 u.setMoveSpeed((float)3.0);
@@ -19309,9 +19811,6 @@ commands = new commandList();
 commands.add(new units.unitCommands.commands.moveCommand(5940.0,2362.0));
 commands.add(new units.unitCommands.commands.moveCommand(5940.0,2147.0));
 u.setRepeatCommands(commands);
-}
-
-public void addSegment171() {
 u = new units.unitTypes.tomb.shadowDude(5960,2147);
 u.setFacingDirection((String)"Down");
 u.setMoveSpeed((float)3.5);
@@ -19352,6 +19851,9 @@ commands = new commandList();
 commands.add(new units.unitCommands.commands.moveCommand(6220.0,2512.0));
 commands.add(new units.unitCommands.commands.moveCommand(6220.0,2297.0));
 u.setRepeatCommands(commands);
+}
+
+public void addSegment176() {
 u = new units.unitTypes.tomb.shadowDude(6200,2147);
 u.setFacingDirection((String)"Down");
 u.setMoveSpeed((float)3.5);
@@ -19578,9 +20080,6 @@ u = new units.unitTypes.tomb.shadowDude(176,888);
 u.setFacingDirection((String)"null");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
-}
-
-public void addSegment172() {
 u = new units.unitTypes.tomb.shadowDude(196,888);
 u.setFacingDirection((String)"null");
 u.setMoveSpeed((float)3.0);
@@ -19599,6 +20098,9 @@ u = new units.unitTypes.tomb.shadowDude(650,1313);
 u.setFacingDirection((String)"null");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
+}
+
+public void addSegment177() {
 u = new units.unitTypes.tomb.shadowDude(718,1163);
 u.setFacingDirection((String)"null");
 u.setMoveSpeed((float)3.0);
@@ -19785,9 +20287,6 @@ u = new units.unitTypes.tomb.shadowDude(1066,1842);
 u.setFacingDirection((String)"null");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
-}
-
-public void addSegment173() {
 u = new units.unitTypes.tomb.shadowDude(1086,1842);
 u.setFacingDirection((String)"null");
 u.setMoveSpeed((float)3.0);
@@ -19808,6 +20307,9 @@ u = new units.unitTypes.tomb.shadowDude(1166,1842);
 u.setFacingDirection((String)"null");
 u.setMoveSpeed((float)3.0);
 u.jumpSpeed = (float)10.0;
+}
+
+public void addSegment178() {
 u = new units.unitTypes.tomb.shadowDude(1186,1842);
 u.setFacingDirection((String)"null");
 u.setMoveSpeed((float)3.0);
@@ -20080,9 +20582,6 @@ commands = new commandList();
 commands.add(new units.unitCommands.commands.moveCommand(1960.0,1965.0));
 commands.add(new units.unitCommands.commands.moveCommand(1960.0,1750.0));
 u.setRepeatCommands(commands);
-}
-
-public void addSegment174() {
 u = new units.unitTypes.tomb.shadowDude(1960,1800);
 u.setFacingDirection((String)"Down");
 u.setMoveSpeed((float)3.5);
@@ -20123,6 +20622,9 @@ commands = new commandList();
 commands.add(new units.unitCommands.commands.moveCommand(1980.0,2015.0));
 commands.add(new units.unitCommands.commands.moveCommand(1980.0,1800.0));
 u.setRepeatCommands(commands);
+}
+
+public void addSegment179() {
 u = new units.unitTypes.tomb.shadowDude(2000,1800);
 u.setFacingDirection((String)"Down");
 u.setMoveSpeed((float)3.5);
@@ -20391,9 +20893,6 @@ commands = new commandList();
 commands.add(new units.unitCommands.commands.moveCommand(887.0,989.0));
 commands.add(new units.unitCommands.commands.moveCommand(887.0,863.0));
 u.setRepeatCommands(commands);
-}
-
-public void addSegment175() {
 u = new units.unitTypes.tomb.shadowDude(814,863);
 u.setFacingDirection((String)"null");
 u.setMoveSpeed((float)1.5);
@@ -20414,6 +20913,9 @@ u = new units.unitTypes.tomb.shadowDude(834,863);
 u.setFacingDirection((String)"null");
 u.setMoveSpeed((float)1.5);
 u.jumpSpeed = (float)10.0;
+}
+
+public void addSegment180() {
 u = new units.unitTypes.tomb.shadowDude(834,913);
 u.setFacingDirection((String)"null");
 u.setMoveSpeed((float)3.0);
@@ -20529,6 +21031,14 @@ u.jumpSpeed = (float)10.0;
 commands = new commandList();
 commands.add(new units.unitCommands.commands.moveCommand(499.0,1800.0));
 commands.add(new units.unitCommands.commands.moveCommand(499.0,1390.0));
+u.setRepeatCommands(commands);
+u = new units.unitTypes.tomb.lightDude(2919,2320);
+u.setFacingDirection((String)"Right");
+u.setMoveSpeed((float)1.5);
+u.jumpSpeed = (float)10.0;
+commands = new commandList();
+commands.add(new units.unitCommands.commands.moveCommand(3081.0,2320.0));
+commands.add(new units.unitCommands.commands.moveCommand(2919.0,2320.0));
 u.setRepeatCommands(commands);
 }
 

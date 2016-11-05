@@ -7,7 +7,6 @@ import drawing.drawnObject;
 import drawing.gameCanvas;
 import drawing.animation.animation;
 import drawing.animation.animationPack;
-import effects.effectTypes.items.pushBottleSplash;
 import utilities.time;
 
 public abstract class effect extends drawnObject  { 

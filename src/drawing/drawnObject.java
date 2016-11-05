@@ -14,7 +14,6 @@ import effects.effect;
 import effects.projectile;
 import effects.interfaceEffects.floatingString;
 import effects.interfaceEffects.interactBlurb;
-import items.inventory;
 import items.item;
 import modes.mode;
 import terrain.chunk;

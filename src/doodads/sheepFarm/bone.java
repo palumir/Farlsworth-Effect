@@ -8,7 +8,6 @@ import interactions.textSeries;
 import modes.mode;
 import terrain.chunk;
 import terrain.generalChunkType;
-import utilities.utility;
 
 public class bone extends chunk {
 	

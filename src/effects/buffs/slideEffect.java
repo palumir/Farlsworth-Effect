@@ -3,7 +3,6 @@ package effects.buffs;
 import effects.buff;
 import effects.effectType;
 import effects.effectTypes.mudSplash;
-import effects.effectTypes.mudSplash;
 import modes.mode;
 import terrain.chunkTypes.mud;
 import units.unit;

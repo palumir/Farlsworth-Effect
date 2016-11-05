@@ -6,14 +6,12 @@ import cinematics.cinematic;
 import interactions.event;
 import interactions.interactBox;
 import interactions.textSeries;
-import sounds.music;
 import sounds.sound;
 import units.player;
 import units.characters.farlsworth.farlsworth;
 import units.unitCommands.commandList;
 import units.unitCommands.commands.moveCommand;
 import utilities.saveState;
-import zones.sheepFarm.subZones.sheepFarm;
 
 public class beforeTombCinematic extends cinematic {
 	

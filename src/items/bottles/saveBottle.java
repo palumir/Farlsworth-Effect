@@ -13,7 +13,6 @@ import interactions.textSeries;
 import items.bottle;
 import sounds.sound;
 import units.player;
-import units.characters.farlsworth.farlsworth;
 import utilities.saveState;
 
 public class saveBottle extends bottle {

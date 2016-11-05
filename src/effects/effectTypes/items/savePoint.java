@@ -1,8 +1,5 @@
 package effects.effectTypes.items;
 
-import java.awt.Point;
-
-import doodads.general.well;
 import drawing.spriteSheet;
 import drawing.spriteSheet.spriteSheetInfo;
 import drawing.animation.animation;
@@ -10,13 +7,8 @@ import drawing.animation.animationPack;
 import effects.effect;
 import effects.effectType;
 import interactions.interactBox;
-import interactions.textSeries;
-import items.bottle;
-import items.bottles.saveBottle;
 import modes.mode;
-import sounds.sound;
 import units.player;
-import utilities.saveState;
 
 public class savePoint extends effect {
 	

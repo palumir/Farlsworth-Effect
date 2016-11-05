@@ -9,10 +9,6 @@ import interactions.textSeries;
 import sounds.sound;
 import units.player;
 import units.bosses.wolfless.wolfless;
-import units.characters.farlsworth.farlsworth;
-import units.characters.farmer.cinematics.farmerIntroCinematic;
-import units.unitCommands.commandList;
-import units.unitCommands.commands.moveCommand;
 import utilities.saveState;
 import zones.farmTomb.subZones.farmTomb;
 
