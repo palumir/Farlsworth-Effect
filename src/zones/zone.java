@@ -20,7 +20,6 @@ import units.player;
 import utilities.intTuple;
 import utilities.saveState;
 import zones.farmTomb.subZones.farmTomb;
-import zones.sheepFarm.subZones.farmerHouse;
 import zones.sheepFarm.subZones.sheepFarm;
 import zones.unused.forest;
 import zones.unused.spiderCave;

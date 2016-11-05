@@ -5,14 +5,10 @@ import java.util.Arrays;
 
 import doodads.cave.firePit;
 import doodads.general.well;
-import doodads.sheepFarm.barn;
-import doodads.sheepFarm.blackSmith;
 import doodads.sheepFarm.bridge;
 import doodads.sheepFarm.bridgePole;
 import doodads.sheepFarm.bush;
 import doodads.sheepFarm.clawMarkRed;
-import doodads.sheepFarm.door;
-import doodads.sheepFarm.farmHouse;
 import doodads.sheepFarm.fenceBars;
 import doodads.sheepFarm.fenceBarsSmall;
 import doodads.sheepFarm.fencePost;
@@ -272,13 +268,13 @@ public class sheepFarm extends zone {
 		((haystack)c).setStrange();
 		
 		// Farmer house
-		c = new door("No Key Yet", -599,-373, farmerHouse.getZone(), -93+20,957+5, "Right");
+		/*c = new door("No Key Yet", -599,-373, farmerHouse.getZone(), -93+20,957+5, "Right");
 		
 		// Barn
 		c = new door("No Key Yet", -793,-370, farmerHouse.getZone(), -93,957, "Right");
 		
 		// Flower farm
-		c = new door("No Key Yet", -1747,-4424, farmerHouse.getZone(), -93,957, "Right");
+		c = new door("No Key Yet", -1747,-4424, farmerHouse.getZone(), -93,957, "Right");*/
 	}
 	
 	// Spawn items
