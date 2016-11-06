@@ -1,31 +1,24 @@
 package zones.farmTomb.subZones;
 
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
 
 import doodads.tomb.stairsUp;
 import drawing.background;
 import drawing.spriteSheet;
 import interactions.event;
-import items.bottleShards.jumpBottleShard;
 import items.bottles.pushBottle;
 import items.other.bottleExpander;
 import sounds.music;
 import terrain.chunk;
 import terrain.atmosphericEffects.fog;
-import terrain.chunkTypes.tomb;
-import terrain.chunkTypes.tombEdge;
 import units.player;
 import units.unit;
 import units.bosses.graveKeeper.cinematics.wolflessFightCinematic;
 import units.bosses.wolfless.wolfless;
 import units.characters.farlsworth.farlsworth;
 import units.unitCommands.commandList;
-import units.unitCommands.commands.moveCommand;
-import units.unitTypes.tomb.lightDude;
 import units.unitTypes.tomb.shadowDude;
 import utilities.intTuple;
-import utilities.levelSave;
 import utilities.saveState;
 import zones.zone;
 import zones.endZone.subZones.endZone;
@@ -139,8 +132,8 @@ public class farmTomb extends zone {
 			//levelSave.loadSaveState("actualTombLevel.save");
 			
 			// Load the level save.
-			//farmTombZoneLoader loader = new farmTombZoneLoader();
-			//loader.loadSegments();
+			farmTombZoneLoader loader = new farmTombZoneLoader();
+			loader.loadSegments();
 	
 			// Load zone items
 			loadItems();

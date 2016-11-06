@@ -1,21 +1,14 @@
 package effects.effectTypes;
 
 import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics;
 
-import drawing.drawnObject;
-import drawing.gameCanvas;
 import drawing.spriteSheet;
 import drawing.spriteSheet.spriteSheetInfo;
 import drawing.animation.animation;
 import drawing.animation.animationPack;
-import effects.absolutePositionedEffect;
 import effects.effect;
 import effects.effectType;
 import items.item;
-import modes.mode;
-import utilities.time;
 
 public class itemGlow extends effect {
 	// Default dimensions.

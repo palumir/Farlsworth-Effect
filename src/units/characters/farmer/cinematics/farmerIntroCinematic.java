@@ -6,7 +6,6 @@ import cinematics.cinematic;
 import interactions.event;
 import interactions.interactBox;
 import interactions.textSeries;
-import items.keys.farmGateKey;
 import items.keys.farmKey;
 import units.player;
 import units.characters.farlsworth.farlsworth;
@@ -218,7 +217,7 @@ public class farmerIntroCinematic extends cinematic {
 					
 			if(isSequence(numIfs++) && goNextTextSeries()) {
 				
-				addTextSeries(null, "I can't figure out which building is my house.",farmer);
+				addTextSeries(null, "I swear my house was here just a second ago.",farmer);
 				farmer.moveTo(farmer.getIntX(), farmer.getIntY()-20);
 				
 				// Set the next text and advance it.
@@ -227,31 +226,16 @@ public class farmerIntroCinematic extends cinematic {
 			
 			if(isSequence(numIfs++) && goNextTextSeries()) {
 				
-				addTextSeries(null, "I know it's definitely not the middle one.",farmer);
-
+				addTextSeries(null, "But that's a squirrel house.",farmer);
+				
+				farmer.moveTo(farmer.getIntX(), farmer.getIntY()-10);
 				// Set the next text and advance it.
 				advanceSequence();
 			}
 			
 			if(isSequence(numIfs++) && goNextTextSeries()) {
 				
-				addTextSeries(null, "That's a squirrel house.",farmer);
-				
-				// Set the next text and advance it.
-				advanceSequence();
-			}
-			
-			if(isSequence(numIfs++) && goNextTextSeries()) {
-				
-				addTextSeries(null, "So by process of elimination my house is either...",farmer);
-				
-				// Set the next text and advance it.
-				advanceSequence();
-			}
-			
-			if(isSequence(numIfs++) && goNextTextSeries()) {
-				
-				addTextSeries(null, "The sheep house on the left.",farmer);
+				addTextSeries(null, "That's a sheep food house.",farmer);
 				farmer.moveTo(farmer.getIntX()-20, farmer.getIntY());
 				
 				// Set the next text and advance it.
@@ -260,7 +244,7 @@ public class farmerIntroCinematic extends cinematic {
 			
 			if(isSequence(numIfs++) && goNextTextSeries()) {
 				
-				addTextSeries(null, "Or my house on the right.",farmer);
+				addTextSeries(null, "And that's a delicious berry house.",farmer);
 				farmer.moveTo(farmer.getIntX()+20, farmer.getIntY());
 				
 				// Set the next text and advance it.
@@ -269,8 +253,24 @@ public class farmerIntroCinematic extends cinematic {
 			
 			if(isSequence(numIfs++) && goNextTextSeries()) {
 				
-				addTextSeries(null, "But I don't know which one.",farmer);
+				addTextSeries(null, "None of them are dang Farmer houses.",farmer);
+				
+				// Set the next text and advance it.
+				advanceSequence();
+			}
+			
+			if(isSequence(numIfs++) && goNextTextSeries()) {
+				
+				addTextSeries(null, "Where am I going to sleep tonight? With my sheep?",farmer);
 				farmer.setFacingDirection("Down");
+				
+				// Set the next text and advance it.
+				advanceSequence();
+			}
+			
+			if(isSequence(numIfs++) && goNextTextSeries()) {
+				
+				addTextSeries(null, "They'll nibble on me. I can't sleep while being nibbled.",farmer);
 				
 				// Set the next text and advance it.
 				advanceSequence();
@@ -287,7 +287,7 @@ public class farmerIntroCinematic extends cinematic {
 			
 			if(isSequence(numIfs++) && goNextTextSeries()) {
 				
-				addTextSeries(null, "He's my pet sheep. And my best friend.",farmer);
+				addTextSeries(null, "He's my favorite sheep. And my best friend.",farmer);
 				
 				// Set the next text and advance it.
 				advanceSequence();

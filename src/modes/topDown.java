@@ -1,7 +1,5 @@
 package modes;
 
-import units.unit;
-
 public class topDown extends mode {
 
 	// Fields

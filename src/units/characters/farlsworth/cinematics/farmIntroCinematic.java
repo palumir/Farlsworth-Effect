@@ -171,9 +171,23 @@ public class farmIntroCinematic extends cinematic {
 					// Set the next text and advance it.
 					advanceSequence();
 				}
+				
+				if(isSequence(numIfs++) && goNextTextSeries()) {
+					addTextSeries(null, "But hey, I get it. Nobody likes being bored.",farlsworth);
+					
+					// Set the next text and advance it.
+					advanceSequence();
+				}
+				
+				if(isSequence(numIfs++) && goNextTextSeries()) {
+					addTextSeries(null, "You know what cures boredom?",farlsworth);
+					
+					// Set the next text and advance it.
+					advanceSequence();
+				}
 			
 				if(isSequence(numIfs++) && goNextTextSeries()) {
-					addTextSeries(null, "But, since you're bored, how about we have some fun?",farlsworth);
+					addTextSeries(null, "A nice, friendly game of catch the sheep.",farlsworth);
 					music.currMusic.fadeOut(2f);
 					
 					// Set the next text and advance it.
@@ -182,26 +196,11 @@ public class farmIntroCinematic extends cinematic {
 				
 				if(isSequence(numIfs++) && goNextTextSeries()) {
 					addTextSeries(null, "Catch me if you can, dumbo!",farlsworth);
-					runFarlsworthAwayDontEnd();
+					runFarlsworthAway();
 					// Set the next text and advance it.
 					advanceSequence();
 				}
 				
-				if(isSequence(numIfs++) && goNextTextSeries()) {
-					addTextSeries(null, "Holy schnikes! He really darted.",farmer);
-					// Set the next text and advance it.
-					advanceSequence();
-				}
-			
-				if(isSequence(numIfs++) && goNextTextSeries()) {
-					addTextSeries(null, "You'd better go catch him.",farmer);
-					// Set the next text and advance it.
-					advanceSequence();
-					interactSequence.getTextSeries().setEnd();
-					interactSequence.setLocked(false);
-					interactSequence.setUnescapable(false);
-					stop();
-				}
 			}
 			
 			// Looking for an adventure CHOICE

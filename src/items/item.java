@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import UI.items.itemDiscover;
 import drawing.drawnObject;
 import drawing.gameCanvas;
-import drawing.spriteSheet;
 import effects.effect;
 import effects.effectTypes.itemGlow;
 import effects.interfaceEffects.floatingString;

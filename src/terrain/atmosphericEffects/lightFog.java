@@ -7,7 +7,6 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-import doodads.general.lightSource;
 import drawing.drawnObject;
 import drawing.gameCanvas;
 import utilities.time;

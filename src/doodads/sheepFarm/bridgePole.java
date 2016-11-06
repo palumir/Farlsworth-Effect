@@ -31,7 +31,8 @@ public class bridgePole extends chunk {
 		super(typeReference, newX, newY, i, 0);
 		if(mode.getCurrentMode().equals("topDown")) {
 			setHitBoxAdjustmentY(8);
-			setHeight(6);
+			setHeight(10);
+			setWidth(5);
 		}
 		else {
 			setHitBoxAdjustmentY(0);

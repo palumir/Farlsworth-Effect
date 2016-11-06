@@ -1,67 +1,39 @@
 package zones.sheepFarm.subZones;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import java.util.Arrays;
 
-import doodads.cave.firePit;
-import doodads.general.well;
-import doodads.sheepFarm.bridge;
-import doodads.sheepFarm.bridgePole;
-import doodads.sheepFarm.bush;
-import doodads.sheepFarm.clawMarkRed;
 import doodads.sheepFarm.fenceBars;
 import doodads.sheepFarm.fenceBarsSmall;
 import doodads.sheepFarm.fencePost;
-import doodads.sheepFarm.flower;
-import doodads.sheepFarm.grave;
-import doodads.sheepFarm.haystack;
 import doodads.sheepFarm.gate;
-import doodads.sheepFarm.rock;
-import doodads.sheepFarm.statue;
+import doodads.sheepFarm.haystack;
 import doodads.sheepFarm.tomb;
-import doodads.sheepFarm.tree;
 import doodads.sheepFarm.verticalFence;
-import drawing.background;
 import drawing.spriteSheet;
 import drawing.backgrounds.rotatingBackground;
 import effects.effectTypes.fire;
 import effects.interfaceEffects.tooltipString;
 import interactions.event;
 import items.bottle;
-import items.item;
 import items.bottles.saveBottle;
 import items.other.bottleExpander;
-import modes.topDown;
 import sounds.music;
 import sounds.sound;
 import terrain.chunk;
 import terrain.atmosphericEffects.fog;
 import terrain.atmosphericEffects.storm;
-import terrain.chunkTypes.cave;
-import terrain.chunkTypes.grass;
-import terrain.chunkTypes.water;
 import units.player;
 import units.unit;
-import units.unitCommand;
 import units.characters.farlsworth.farlsworth;
 import units.characters.farlsworth.cinematics.beforeTombCinematic;
 import units.characters.farlsworth.cinematics.farmFenceCinematic;
 import units.characters.farlsworth.cinematics.farmIntroCinematic;
 import units.characters.farlsworth.cinematics.flowerFarmCinematic;
 import units.characters.farmer.farmer;
-import units.unitCommands.commandList;
-import units.unitCommands.commands.moveCommand;
-import units.unitCommands.commands.slashCommand;
-import units.unitCommands.commands.waitCommand;
-import units.unitTypes.sheepFarm.redWolf;
 import units.unitTypes.sheepFarm.sheep;
-import units.unitTypes.sheepFarm.wolf;
-import units.unitTypes.sheepFarm.yellowWolf;
 import utilities.intTuple;
 import utilities.levelSave;
-import utilities.saveState;
 import utilities.time;
-import utilities.utility;
 import zones.zone;
 import zones.farmTomb.subZones.farmTomb;
 import zones.sheepFarm.sheepFarmZoneLoader;
@@ -182,8 +154,8 @@ public class sheepFarm extends zone {
 		
 		// Load the level save.
 		//levelSave.loadSaveState("sheepFarmLevel.save");
-		//sheepFarmZoneLoader loader = new sheepFarmZoneLoader();
-		//loader.loadSegments();
+		sheepFarmZoneLoader loader = new sheepFarmZoneLoader();
+		loader.loadSegments();
 		
 		// Storming?
 		if(stormInProgress.isCompleted()) {
@@ -193,7 +165,7 @@ public class sheepFarm extends zone {
 		}
 		
 		// Spawn special stuff
-		//spawnSpecialStuff();
+		spawnSpecialStuff();
 		
 		// Create items
 		createItems();

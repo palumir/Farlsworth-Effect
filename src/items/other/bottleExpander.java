@@ -7,7 +7,6 @@ import drawing.spriteSheet.spriteSheetInfo;
 import effects.interfaceEffects.tooltipString;
 import interactions.event;
 import items.bottle;
-import items.bottleShard;
 import items.item;
 import sounds.sound;
 import units.player;

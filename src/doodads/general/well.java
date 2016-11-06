@@ -2,7 +2,6 @@ package doodads.general;
 
 import java.awt.Point;
 
-import effects.effectTypes.items.savePoint;
 import interactions.interactBox;
 import interactions.textSeries;
 import items.bottle;

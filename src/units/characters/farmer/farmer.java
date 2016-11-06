@@ -125,9 +125,9 @@ public class farmer extends unit {
 		// If the person said no a bunch and the farmer was in Farlsworth's interaction.
 		if(farmerIntroCinematic.playerPressedNoABunch.isCompleted() && farmIntroCinematic.isCompleted.isCompleted()) {
 			if(farmFenceCinematic.fenceJokeExperienced.isCompleted()) {
-				startOfConversation = new textSeries(null, "I can't remember how to get back to my house from here.");
+				startOfConversation = new textSeries(null, "I can't remember how to get back to my spot from here.");
 				s = startOfConversation.addChild(null, "I usually walk along the fence.");
-				s = s.addChild(null, "I guess this is my house now.");
+				s = s.addChild(null, "I guess this is my spot now.");
 				s.setEnd();
 			}
 			else {

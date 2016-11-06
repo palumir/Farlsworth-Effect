@@ -4,13 +4,9 @@ import doodads.cave.webDoorDoodad;
 import drawing.spriteSheet;
 import drawing.spriteSheet.spriteSheetInfo;
 import drawing.animation.animationPack;
-import effects.effect;
-import effects.effectTypes.bloodSquirt;
-import effects.interfaceEffects.floatingString;
 import modes.mode;
 import units.unit;
 import units.unitType;
-import utilities.utility;
 
 public class webDoor extends unit {
 	

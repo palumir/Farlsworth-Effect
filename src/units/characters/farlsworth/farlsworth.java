@@ -14,7 +14,6 @@ import effects.effectTypes.itemGlow;
 import effects.projectiles.spinningFireLog;
 import interactions.event;
 import interactions.interactBox;
-import interactions.textSeries;
 import items.item;
 import items.bottles.saveBottle;
 import modes.mode;

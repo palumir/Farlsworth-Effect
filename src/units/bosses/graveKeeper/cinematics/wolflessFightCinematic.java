@@ -9,10 +9,6 @@ import interactions.textSeries;
 import sounds.sound;
 import units.player;
 import units.bosses.wolfless.wolfless;
-import units.characters.farlsworth.farlsworth;
-import units.characters.farmer.cinematics.farmerIntroCinematic;
-import units.unitCommands.commandList;
-import units.unitCommands.commands.moveCommand;
 import utilities.saveState;
 import zones.farmTomb.subZones.farmTomb;
 
@@ -55,7 +51,7 @@ public class wolflessFightCinematic extends cinematic {
 			    // Lock the player's movement.
 			    player.getPlayer().stopMove("all");
 			    
-			    s = new textSeries(null, "That's a good dog...");
+			    s = new textSeries(null, "Wow!!! That's a good boy!!");
 			    interactSequence = new interactBox(s, graveKeeper);
 				interactSequence.setUnescapable(true);
 			    interactSequence.toggleDisplay();
@@ -67,7 +63,7 @@ public class wolflessFightCinematic extends cinematic {
 			if(isSequence(numIfs++) && goNextTextSeries()) {
 				
 				// Set the next text and advance it.
-				addTextSeries(null, "Whose a big beautiful baby boy?", graveKeeper);
+				addTextSeries(null, "Whose a BIG BEAUTIFUL baby boy?", graveKeeper);
 				farmTomb.zoneFog.fadeTo(0.5f, 1);
 				advanceSequence();
 			}
@@ -76,14 +72,14 @@ public class wolflessFightCinematic extends cinematic {
 				
 				// Set the next text and advance it.
 				farmTomb.zoneFog.fadeTo(0.6f, 1);
-				addTextSeries(null, "NO. No growling!", graveKeeper);
+				addTextSeries(null, "NO. No growling at daddy!", graveKeeper);
 				advanceSequence();
 			}
 			
 			if(isSequence(numIfs++) && goNextTextSeries()) {
 				
 				// Set the next text and advance it.
-				addTextSeries(null, "You'll get your dinner soon.", graveKeeper);
+				addTextSeries(null, "Are you a HUNGRY BOY??", graveKeeper);
 				farmTomb.zoneFog.fadeTo(0.7f, 1);
 				advanceSequence();
 			}
@@ -99,15 +95,17 @@ public class wolflessFightCinematic extends cinematic {
 			if(isSequence(numIfs++) && goNextTextSeries()) {
 				
 				// Set the next text and advance it.
-				addTextSeries(null, "I told you to sit. Settle down, boy.", graveKeeper);
+				addTextSeries(null, "...", graveKeeper);
+				sound s2 = new sound(wolfless.howl);
 				farmTomb.zoneFog.fadeTo(0.9f, 1);
+				s2.start();
 				advanceSequence();
 			}
 			
 			if(isSequence(numIfs++) && goNextTextSeries()) {
 				
 				// Set the next text and advance it.
-				addTextSeries(null, "Oh, is there somebody here?", graveKeeper);
+				addTextSeries(null, "SIT DOWN OR I'LL TEAR OFF YOUR TOES!", graveKeeper);
 				farmTomb.zoneFog.fadeTo(1f, 1);
 				advanceSequence();
 			}
@@ -115,25 +113,40 @@ public class wolflessFightCinematic extends cinematic {
 			if(isSequence(numIfs++) && goNextTextSeries()) {
 				
 				// Set the next text and advance it.
-				addTextSeries(null, "I hope this one gets out alive.", graveKeeper);
+				addTextSeries(null, "Huh?", graveKeeper);
 				advanceSequence();
 			}
 			
 			if(isSequence(numIfs++) && goNextTextSeries()) {
 				
 				// Set the next text and advance it.
-				addTextSeries(null, "But it might be too late.", graveKeeper);
+				addTextSeries(null, "What is it, boy?", graveKeeper);
 				advanceSequence();
 			}
 			
 			if(isSequence(numIfs++) && goNextTextSeries()) {
-				sound sound = new sound(wolfless.howl);
-				sound.start();
 				
-				// Wait a bit.
-				waitFor(4f);
+				// Set the next text and advance it.
+				addTextSeries(null, "Is there somebody here?", graveKeeper);
+				farmTomb.zoneFog.fadeTo(1f, 1);
 				advanceSequence();
 			}
+			
+			if(isSequence(numIfs++) && goNextTextSeries()) {
+				
+				// Set the next text and advance it.
+				addTextSeries(null, "Ah, looks like dinner is early!!!", graveKeeper);
+				advanceSequence();
+			}
+			
+			if(isSequence(numIfs++) && goNextTextSeries()) {
+				// Set the next text and advance it.
+				addTextSeries(null, "Dig in, boy.", graveKeeper);
+				
+				// Wait a bit.
+				advanceSequence();
+			}
+			
 			
 			// Reveal boss.
 			if(isSequence(numIfs++) && goNextTextSeries()) {

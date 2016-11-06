@@ -15,7 +15,6 @@ import drawing.gameCanvas;
 import units.unit;
 import utilities.intTuple;
 import utilities.utility;
-import zones.zone;
 
 public class chunk extends drawnObject {
 	////////////////

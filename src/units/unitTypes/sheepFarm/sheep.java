@@ -297,9 +297,9 @@ public class sheep extends unit {
 		if(interactSequence !=null 
 				&& interactSequence.getTextSeries().getButtonText() != null 
 				&& interactSequence.getTextSeries().getButtonText().contains("Punch")) {
+			interactSequence.toggleDisplay();
 			this.die();
 		}
-		
 		
 		if(hitTimes >= 10 && !sheepHitABunchJoke.isCompleted()) {
 			

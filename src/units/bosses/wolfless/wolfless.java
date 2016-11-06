@@ -7,7 +7,6 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 import doodads.sheepFarm.clawMarkRed;
-import doodads.tomb.stairsUp;
 import doodads.tomb.wallTorch;
 import drawing.drawnObject;
 import drawing.gameCanvas;
@@ -32,12 +31,9 @@ import units.unitCommands.commands.slashCommand;
 import units.unitTypes.tomb.lightDude;
 import units.unitTypes.tomb.shadowDude;
 import utilities.intTuple;
-import utilities.mathUtils;
 import utilities.time;
 import utilities.utility;
-import zones.endZone.subZones.endZone;
 import zones.farmTomb.subZones.farmTomb;
-import zones.sheepFarm.subZones.sheepFarm;
 
 public class wolfless extends boss {
 	
@@ -368,6 +364,8 @@ public class wolfless extends boss {
 						ArrayList<groundTile> currentPlatform = getCurrentPlatform();
 						platformExplode p = new platformExplode(currentPlatform.get(0).getIntX(), currentPlatform.get(0).getIntY());
 						platforms.remove(currentPlatform);
+						sound s = new sound(platformExplode);
+						s.start();
 						if(currGlow !=null) { 
 							currGlow.destroy(); 
 							currGlow = null;
@@ -814,9 +812,10 @@ public class wolfless extends boss {
 	// Howl stuff
 	private boolean howling = false;
 	private long startOfHowl = 0;
+	public static String platformExplode = "sounds/effects/bosses/shadowOfTheDenmother/platformVanish.wav";
 	public static String howl = "sounds/effects/bosses/shadowOfTheDenmother/spookyHowl.wav";
 	private static String growl = "sounds/effects/bosses/shadowOfTheDenmother/spookyGrowl.wav";
-	private static String bark = "sounds/effects/bosses/shadowOfTheDenmother/wolfBark.wav";
+	public static String bark = "sounds/effects/bosses/shadowOfTheDenmother/wolfBark.wav";
 	private static String land = "sounds/effects/bosses/shadowOfTheDenmother/land.wav";
 	public static String scream = "sounds/effects/bosses/shadowOfTheDenmother/scream.wav";
 	public static String screamDeath = "sounds/effects/bosses/shadowOfTheDenmother/screamDead.wav";
@@ -1228,6 +1227,7 @@ public class wolfless extends boss {
 			tooltipString t = new tooltipString("Boss defeated.");
 			t.setAnimationDuration(6f);
 			defeatBoss();
+			player.getPlayer().setTargetable(true);
 			music.startMusic(farmTomb.zoneMusic);
 		}
 	}
@@ -1245,6 +1245,7 @@ public void fakeDeath() {
 	public void reallyDie() {
 		sequenceNumber = 0;
 		currentlyDoing = "reallyDying";
+		player.getPlayer().setTargetable(false);
 	}
 	
 	private boolean sleeping = false;

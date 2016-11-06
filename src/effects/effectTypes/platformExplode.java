@@ -7,7 +7,6 @@ import drawing.animation.animationPack;
 import effects.effect;
 import effects.effectType;
 import modes.mode;
-import units.player;
 
 public class platformExplode extends effect {
 	

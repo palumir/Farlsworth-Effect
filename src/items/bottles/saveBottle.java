@@ -3,6 +3,7 @@ package items.bottles;
 import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 import drawing.spriteSheet;
 import drawing.spriteSheet.spriteSheetInfo;
@@ -13,7 +14,6 @@ import interactions.textSeries;
 import items.bottle;
 import sounds.sound;
 import units.player;
-import units.characters.farlsworth.farlsworth;
 import utilities.saveState;
 
 public class saveBottle extends bottle {
@@ -75,6 +75,7 @@ public class saveBottle extends bottle {
 			setChargesLeft(getChargesLeft() - 1);
 			
 			// Set position to be last bottle charge.
+			if(player.getPlayer().lastSaveBottles == null) player.getPlayer().lastSaveBottles = new ArrayList<Point>();
 			player.getPlayer().lastSaveBottles.add(new Point(player.getPlayer().getIntX(), player.getPlayer().getIntY()));
 			
 			// Put down indicator and destroy old one.
